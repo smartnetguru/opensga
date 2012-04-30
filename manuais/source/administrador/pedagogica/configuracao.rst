@@ -1,0 +1,1 @@
+﻿=======================================Configuração inicial do OpenSGA=======================================.. todo::   Adicionar instruções sobre as configurações básicas do Sistema 
