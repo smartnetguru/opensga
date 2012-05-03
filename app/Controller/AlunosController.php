@@ -221,8 +221,6 @@ class AlunosController extends AppController {
 				
             					/**
 								 * Pega os dados da matricula e realiza a matricula
-								 * @TODO Mudar o ano lectivo para algo mais serio :)
-								 * @Todo O turno e o nivel tambem ainda esta weak
 								 */                    
 								 $data_matricula['aluno_id']= $this->Aluno->getInsertID();
 								 $data_matricula['curso_id'] = $this->data['Aluno']['curso_id'];
@@ -239,7 +237,7 @@ class AlunosController extends AppController {
 								 if($Matricula->save($matricula_gravar)){
 									  $this->loadModel('Pagamento');
 									  
-                                      $this->Pagamento->gerarPagamentos($this->Session->read('SGAConfig.anolectivo_id'),$this->Aluno->getLastInsertID(),$this->Session->read('semestre'));
+                                      $this->Pagamento->gerarPagamentos($this->Session->read('SGAConfig.anolectivo_id'),$this->Aluno->getLastInsertID(),$this->Session->read('SGAConfig.semestre'));
     								  $this->Session->setFlash('Aluno Registrado com sucesso</p><p>A matricula do aluno foi registrada com sucesso','flashok');
 									  $this->redirect(array('controller'=>'inscricaos','action' => 'inscrever',  $this->Aluno->getInsertID(),$Matricula->getInsertID()));
 									  
@@ -289,7 +287,7 @@ class AlunosController extends AppController {
 		}
 		if (empty($this->data)) {
 			$this->data = $this->Aluno->read(null, $id);
-			$logmv->logUpdate(7,$this->Session->read('Auth.User.id'),$id,$this->data["Aluno"]["name"]);
+			
 		}
 		$users = $this->Aluno->User->find('list');
 		$paises = $this->Aluno->Paise->find('list');
@@ -301,7 +299,8 @@ class AlunosController extends AppController {
 		$areatrabalhos = $this->Aluno->Areatrabalho->find('list');
 		$generos = $this->Aluno->Genero->find('list');
 		$cidadenascimentos = $this->Aluno->CidadeNascimento->find('list');
-		$this->set(compact('users', 'Paises', 'Cidades', 'Provincias', 'Documentos', 'tg0010areatrabalhos','generos','cidadenascimentos','proveniencianomes','provenienciacidades'));
+        $turnos = $this->Aluno->Matricula->Turno->find('list');
+		$this->set(compact('users', 'Paises', 'Cidades', 'Provincias', 'Documentos', 'areatrabalhos','generos','cidadenascimentos','proveniencianomes','provenienciacidades','turnos'));
 	}
 
 
