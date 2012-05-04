@@ -50,7 +50,15 @@ class TurmatipoavaliacaosController extends AppController {
 		$tipoavaliacao = $this->Turmatipoavaliacao->Tipoavaliacao->find('list');
        	$this->set(compact('t0010turma', 't0015tipoavaliacao'));
 	}
-
+    /**
+     *Adiciona uma nova avaliacao a turma
+     * Verifica a Ordem e os pesos das avaliacaos de acordo com as avaliacoes previamente registradas nesta turma
+     * @todo Optimizar esta funcao para a versao 2 do Cake
+     * @todo Ver os pesos das avaliacoes
+     * @todo Ver as ordens das avaliacoes
+     * @todo testar tudo
+     * @param type $turma_id 
+     */
 	function add($turma_id) {
 		if (!empty($this->data)) {
 			$tta = $this->data;
@@ -67,9 +75,10 @@ class TurmatipoavaliacaosController extends AppController {
 
 	
 		var_dump($turma_id);
-		$turmas = $this->Turmatipoavaliacao->Turma->find('list');
+        $this->Turmatipoavaliacao->Turma->recursive = -1;
+		$turma = $this->Turmatipoavaliacao->Turma->findById($turma_id);
 		$tipoavaliacaos = $this->Turmatipoavaliacao->Tipoavaliacao->find('list');
-		$this->set(compact('t0010turmas', 'tipoavaliacaos'));
+		$this->set(compact('turma', 'tipoavaliacaos'));
 	}
 
 	function edit($id = null) {
