@@ -25,7 +25,7 @@
  * @license       GNU Affero General Public License
  * 
  */
- 
+ App::uses('Sanitize', 'Utility');
  
 class AlunosController extends AppController {
 
@@ -49,10 +49,10 @@ class AlunosController extends AppController {
 		$this->Aluno->recursive = 0;
 		
               
-                
+        
                 $conditions = array();
-                $conditions['limit']=mysql_real_escape_string( $_GET['iDisplayLength'] );
-                $conditions['offset']=mysql_real_escape_string( $_GET['iDisplayStart'] );
+                $conditions['limit']=Sanitize::escape( $_GET['iDisplayLength'] );
+                $conditions['offset']=Sanitize::escape( $_GET['iDisplayStart'] );
                 $alunos = $this->Aluno->find('all',$conditions);
                 $alunos_count = $this->Aluno->find('count');
                 $alunos_count_filter = $this->Aluno->find('count',$conditions);

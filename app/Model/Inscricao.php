@@ -109,7 +109,18 @@ class Inscricao extends AppModel {
 			$resultado = $this->query($query);
 			return $resultado;				
 		}
-	
+        
+        /**
+         * Verifica se um aluno pode se inscrever na cadeira em questao
+         */
+        function validaInscricao($inscricao_data){
+            $this->recursive = -1;
+            $turma = $this->find('first',array('conditions'=>array('turma_id'=>$inscricao_data['Inscricao']['turma_id'],'aluno_id'=>$inscricao_data['Inscricao']['aluno_id'],'matricula_id'=>$inscricao_data['Inscricao']['matricula_id'])));
+            if(!$turma){
+                return true;
+            }
+            return FALSE;
+        }
 
 		
 

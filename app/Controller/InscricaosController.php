@@ -275,12 +275,18 @@ class InscricaosController extends AppController {
             $matricula_id = $this->request->data['Inscricao']['matricula_id'];
             
 			foreach($this->request->data['Inscricao']['disciplinas'] as $k=>$v){
-                debug($v);
-                $this->Inscricao->create();
-                $inscricao_save = array('Inscricao'=>array('aluno_id'=>$aluno_id,'turma_id'=>$v,'estadoinscricao_id'=>1,'matricula_id'=>$matricula_id,'data'=>date('Y-m-d')));
                 
-					
-					$this->Inscricao->save($inscricao_save);	
+                $this->Inscricao->create();
+                
+                $inscricao_save = array('Inscricao'=>array('aluno_id'=>$aluno_id,'turma_id'=>$v,'estadoinscricao_id'=>1,'matricula_id'=>$matricula_id,'data'=>date('Y-m-d')));
+                    
+					if($this->Inscricao->validaInscricao($inscricao_save)){
+                        $this->Inscricao->save($inscricao_save);	
+                    }
+					else{
+                        $turma = $this->Inscricao->Turma->findById($v);
+                        $this->Session->setFlash(sprintf(__('Este aluno nao pode ser inscrito na turma %s. Provavelmente ja esta inscrito.',true),$turma['Turma']['name']),'default',array('class'=>'alert error'),$turma['Turma']['id']);
+                    }
 			}	
 			
 			
