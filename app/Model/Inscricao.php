@@ -24,6 +24,7 @@
  * @since         OpenSGA v 0.10.0.0
  * @license       GNU Affero General Public License
  * 
+ * 
  */
  
  
@@ -121,7 +122,19 @@ class Inscricao extends AppModel {
             }
             return FALSE;
         }
-
+        
+       /* var $validate = array
+(
+    'first_column' => array
+    (
+        'unique' => array
+        (
+            'rule' => array('checkUnique', array('first_column', 'second_column', 'third_column')),
+            'message' => 'Your input violates a unique key constraint, check your input and try again.',
+        )
+    ),
+);
+*/
 		
 
 }

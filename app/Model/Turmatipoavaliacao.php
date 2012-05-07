@@ -47,5 +47,21 @@ class Turmatipoavaliacao extends AppModel {
 			'order' => ''
 		)
 	);
+    
+	var $hasMany = array(
+		'Avaliacao' => array(
+			'className' => 'Avaliacao',
+			'foreignKey' => 'turmatipoavaliacao_id',
+			'dependent' => false,
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'exclusive' => '',
+			'finderQuery' => '',
+			'counterQuery' => ''
+		)
+	);    
 }
 ?>

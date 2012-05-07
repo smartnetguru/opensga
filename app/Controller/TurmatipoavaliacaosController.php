@@ -35,24 +35,62 @@ class TurmatipoavaliacaosController extends AppController {
 		$this->Turmatipoavaliacao->recursive = 0;
 		$this->set('turmatipoavaliacaos', $this->paginate());
 	}
-
+    
+    /**
+     *Mostra o formulario para que se possa introduzir as notas dos estudantes
+     * @param type $id 
+     * @todo verificar se o find de inscricoes apenas retorna 1 avaliacao, rerente a este tipo de avaliacao
+     */
 	function view($id = null) {
 		if (!$id) {
 			$this->Session->setFlash('Invalido %s', 'flasherror');
 			$this->redirect(array('action' => 'index'));
 		}
-		$this->set('t0018turmatipoavaliacao', $this->Turmatipoavaliacao->read(null, $id));
+        if ($this->request->is('post') || $this->request->is('put')) {
+            foreach($this->request->data['Avaliacao'] as $avaliacao){
+                
+                $avaliacao['data']=date('Y-m-d');
+                $avaliacao_find = $this->Turmatipoavaliacao->Avaliacao->find('first',array('conditions'=>array('Avaliacao.inscricao_id'=>$avaliacao['inscricao_id'],'Avaliacao.turmatipoavaliacao_id'=>$avaliacao['turmatipoavaliacao_id'])));
+                if($avaliacao_find){
+                    $this->Turmatipoavaliacao->Avaliacao->id = $avaliacao_find['Avaliacao']['id'];
+                    $this->Turmatipoavaliacao->Avaliacao->save($avaliacao);
+                }
+                else{
+                    $this->Turmatipoavaliacao->Avaliacao->create();
+                    $this->Turmatipoavaliacao->Avaliacao->save($avaliacao);
+                }
+                
+            }
+        }
+        
+        $turmatipoavaliacao = $this->Turmatipoavaliacao->read(null, $id);
+        $this->Turmatipoavaliacao->Turma->Inscricao->contain(
+                array(
+                    'Aluno',
+                    'Turma',
+                    'Avaliacao'=>array(
+                        'conditions'=>array('Avaliacao.turmatipoavaliacao_id'=>$id)
+                    )
+                )
+        );
+        $inscricoes = $this->Turmatipoavaliacao->Turma->Inscricao->find('all',array('conditions'=>array('Inscricao.turma_id'=>$turmatipoavaliacao['Turma']['id'])));
+        
+        $avaliacoes = $this->Turmatipoavaliacao->Avaliacao->find('all',array('conditions'=>array('Avaliacao.turmatipoavaliacao_id'=>$id)));
+        
+		$this->set('turmatipoavaliacao', $turmatipoavaliacao);
                 if (empty($this->data)) {
 			$this->data = $this->Turmatipoavaliacao->read(null, $id);
 		}
 
 		$turma = $this->Turmatipoavaliacao->Turma->find('list');
 		$tipoavaliacao = $this->Turmatipoavaliacao->Tipoavaliacao->find('list');
-       	$this->set(compact('t0010turma', 't0015tipoavaliacao'));
+       	$this->set(compact('turma', 'tipoavaliacao','inscricoes','avaliacoes'));
 	}
     /**
      *Adiciona uma nova avaliacao a turma
+     * 
      * Verifica a Ordem e os pesos das avaliacaos de acordo com as avaliacoes previamente registradas nesta turma
+     * 
      * @todo Optimizar esta funcao para a versao 2 do Cake
      * @todo Ver os pesos das avaliacoes
      * @todo Ver as ordens das avaliacoes
@@ -60,10 +98,13 @@ class TurmatipoavaliacaosController extends AppController {
      * @param type $turma_id 
      */
 	function add($turma_id) {
-		if (!empty($this->data)) {
-			$tta = $this->data;
+		if ($this->request->is('post')) {
+			$tta = $this->request->data;
 			$tta['Turmatipoavaliacao']['turma_id']=$turma_id;
+            $tta['Turmatipoavaliacao']['estado']=1;
 			
+            //Precisamos verificar se o peso total nao ultrapassa 100%
+            $pesos = $this->Turmatipoavaliacao->find('first',array('fields'=>array('SUM(Turmatipoavaliacao.peso)')));
 			$this->Turmatipoavaliacao->create();
 			if ($this->Turmatipoavaliacao->save($tta)) {
 				$this->Session->setFlash(__('Avaliacao Adicionada com sucesso'),'flashok');
@@ -74,7 +115,8 @@ class TurmatipoavaliacaosController extends AppController {
 		}
 
 	
-		var_dump($turma_id);
+		$pesos = $this->Turmatipoavaliacao->find('all',array('fields'=>array('SUM(Turmatipoavaliacao.peso)')));
+        debug($pesos);
         $this->Turmatipoavaliacao->Turma->recursive = -1;
 		$turma = $this->Turmatipoavaliacao->Turma->findById($turma_id);
 		$tipoavaliacaos = $this->Turmatipoavaliacao->Tipoavaliacao->find('list');
