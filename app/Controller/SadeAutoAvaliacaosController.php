@@ -105,4 +105,49 @@ class SadeAutoAvaliacaosController extends AppController {
 		$this->Session->setFlash(__('Sade auto avaliacao was not deleted'));
 		$this->redirect(array('action' => 'index'));
 	}
+    
+    /**
+     * Pagina de Auto-Avaliação do Docente
+     */
+    public function docente(){
+        if($this->request->is('post') || $this->request->is('put')){
+            $user_id  =$this->Session->read('Auth.User.id');
+            $entidade = $this->SadeAutoAvaliacao->Entidade->find('first',array('conditions'=>array('Entidade.user_id'=>$user_id)));
+            $respostas  = $this->request->data['SadeAutoAvaliacao'];
+            
+            
+            foreach($respostas as $k=>$v){
+                $sade_parametro = $this->SadeAutoAvaliacao->SadeParametro->find('first',array('conditions'=>array('SadeParametro.codigo'=>$k)));
+                $sade_auto_avaliacao = array();
+                $sade_auto_avaliacao['resposta']=$v['resposta'];
+                $sade_auto_avaliacao['entidade_id']=$entidade['Entidade']['id'];
+                $sade_auto_avaliacao['sade_parametro_id']=$k;
+                $sade_auto_avaliacao['data']=date('Y-m-d');
+                $sade_auto_avaliacao['anolectivo_id']=$this->Session->read('SGAConfig.anolectivo_id');
+                $sade_auto_avaliacao['semestrelectivo_id']=$this->Session->read('SGAConfig.semestrelectivo_id');
+                
+                if($v['resposta']>=$sade_parametro['SadeParametro']['quantidade_padrao']){
+                    $sade_auto_avaliacao['pontos_obtidos']=$sade_parametro['SadeParametro']['pontos_padrao'];
+                }
+                else{
+                    $sade_auto_avaliacao['pontos_obtidos']=0;
+                }
+                debug($sade_auto_avaliacao);
+            }
+            
+            debug($sa);
+            die(debug($this->request->data));
+        }
+    }
+    public function assistente(){
+        
+    }
+    
+    public function investigador(){
+        
+    }
+    
+    public function update_form(){
+        debug($this->request->data);
+    }
 }
