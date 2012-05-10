@@ -78,7 +78,7 @@ class AlunosController extends AppController {
 	}
         
         
-	function view($id = null){
+	function perfil($id = null){
 	        App::Import('Model','Matricula');
 	        $Matricula = new Matricula;			
 		if (!$id) {

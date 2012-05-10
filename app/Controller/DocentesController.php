@@ -8,7 +8,7 @@ class DocentesController extends AppController {
 		$this->set('docentes', $this->paginate());
 	}
 
-	function view($id = null) {
+	function perfil($id = null) {
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid docente', true));
 			$this->redirect(array('action' => 'index'));
