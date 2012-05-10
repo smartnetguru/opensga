@@ -205,7 +205,11 @@ class AlunosController extends AppController {
                         $this->Aluno->User->save($dados);
                         $dados['Aluno']['user_id'] = $this->Aluno->User->getLastInsertID();
                         //$this->data['Aluno']['foto'] = $this->data['Aluno']['codigo'].".jpg";
+                        $entidade_data = array('Entidade'=>$dados['Aluno']);
+                        $this->Aluno->Entidade->create();
+                        $this->Aluno->Entidade->save($entidade_data);
                         
+                        $dados['Aluno']['entidade_id'] = $this->Aluno->Entidade->getLastInsertID();
                         /**
                          * Garantindo que escola numca seja null
                          * @todo Mais tarde remover isso

@@ -46,6 +46,13 @@ class Aluno extends AppModel {
 			'fields' => '',
 			'order' => ''
 		),
+        'Entidade' => array(
+			'className' => 'Entidade',
+			'foreignKey' => 'entidade_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
+		),
 		'Cidade' => array(
 			'className' => 'Cidade',
 			'foreignKey' => 'cidade_id',
