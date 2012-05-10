@@ -6,3 +6,4 @@ Disallow: nbproject
 Disallow: doc/
 Disallow: app/webroot/js/libs 
 Disallow: app/webroot/css/libs
+Disallow: docs/
