@@ -31,7 +31,14 @@ class DocentesController extends AppController {
 		}
 		$this->set('docente', $this->Docente->read(null, $id));
 	}
-
+    
+    /**
+     *Registra um novo docente no Sistema
+     * 
+     * @todo Terminar a optimizacao dos views
+     * 
+     * @todo testar todos os campos 
+     */
 	function registar_docente() {
 		if (!empty($this->data)) {
 			$this->Docente->create();
