@@ -7,7 +7,7 @@
  * @link          http://infomoz.net/opensga OpenSGA - Sistema de Gestão Académica
  * @author		  Elisio Leonardo (http://infomoz.net/elisio-leonardo)
  * @package       opensga
- * @subpackage    opensga.core.docentes.controller
+ * @subpackage    opensga.core.docentes
  * @version       OpenSGA v 0.5.0
  * @since         OpenSGA v 0.1.0.0
  * @license       GNU Affero General Public License
@@ -69,6 +69,7 @@ class DocentesController extends AppController {
 					//Finalmente Podemos gravar os dados do docente
 					$docente_data = array('Docente'=>$this->data['Docente']);
 					$docente_data['Docente']['entidade_id'] = $this->Docente->Entidade->getLastInsertID();
+                    $docente_data['Docente']['name'] = $this->request->data['Entidade']['name'];
 					if ($this->Docente->save($docente_data)) {
 						$this->Docente->configuraAcl($this->Docente->Entidade->User->getLastInsertID());
 						$this->Session->setFlash(__('Docente Registrado com Sucesso'),'flashok');
