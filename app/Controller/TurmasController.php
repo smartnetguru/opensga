@@ -437,5 +437,9 @@ class TurmasController extends AppController {
 			$cursos = $this->Turma->Curso->find('list');		
 			$this->set(compact('t0009anolectivos','t0003cursos'));
 		 }
+         
+         public function adicionar_docentes($turma_id){
+             
+         }
 }
 ?>

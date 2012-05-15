@@ -79,6 +79,7 @@ class AppController extends Controller {
 		$this->Auth->autoRedirect = false;
         $this->Auth->loginError = "Nome de Usuário ou senha incorrectas";
 		$this->Auth->authError = "Não possui permissão para aceder ao sistema";
+        $this->Auth->flash = array('element'=>'default','key'=>'auth','params'=>array('class'=>'alert error'));
 		
         $this->Auth->loginAction = array('controller' => 'users', 'action' => 'login');
         $this->Auth->logoutRedirect = array('controller' => 'users', 'action' => 'login');

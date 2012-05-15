@@ -1,4 +1,20 @@
 <?php
+/**
+ * Controller do Docente. Todas as funções referentes ao docente devem ser definidas aqui
+ * 
+ * 
+ * @copyright     Copyright 2010-2011, INFOmoz (Informática-Moçambique) (http://infomoz.net)
+ * @link          http://infomoz.net/opensga OpenSGA - Sistema de Gestão Académica
+ * @author		  Elisio Leonardo (http://infomoz.net/elisio-leonardo)
+ * @package       opensga
+ * @subpackage    opensga.core.docentes.controller
+ * @version       OpenSGA v 0.5.0
+ * @since         OpenSGA v 0.1.0.0
+ * @license       GNU Affero General Public License
+ * 
+ * @property Docente $Docente
+ * 
+ */
 class DocentesController extends AppController {
 
 	var $name = 'Docentes';
@@ -16,7 +32,7 @@ class DocentesController extends AppController {
 		$this->set('docente', $this->Docente->read(null, $id));
 	}
 
-	function adicionar() {
+	function registar_docente() {
 		if (!empty($this->data)) {
 			$this->Docente->create();
 			
@@ -25,15 +41,17 @@ class DocentesController extends AppController {
 			//Primeiro vamos criar um usuario na tabela users
 			//O Username sera o email, logo este campo eh obrigatorio
 			$this->Docente->Entidade->User->create();
-			$user_data = array('User'=>array('username'=>$this->data['Entidade']['email'],'password'=>$this->data['Entidade']['email'],'group_id'=>4,'name'=>$this->data['Entidade']['name']));
+			$user_data = array('User'=>array('username'=>$this->data['Entidade']['email'],'password'=>'12345','group_id'=>4,'name'=>$this->data['Entidade']['name']));
 			
 			if($this->Docente->Entidade->User->save($user_data)){
 				
 				//Agora gravamos o dados da Entidade
+                if(isset($this->data['Entidade']['foto'])){
 			$nome_foto = WWW_ROOT."\ffotos\\".$this->data['Entidade']['foto']['name'];
 			$imagem=array($this->data['Entidade']['foto']);
 			
 			$fileOk = $this->uploadFiles('upload',$imagem);
+            }
 			$entidade_data = array('Entidade'=>$this->data['Entidade']);
 			if(isset($fileOk['urls']) and $fileOk['urls']!=null){
 			$entidade_data ['Entidade']['foto']=$fileOk['urls'][0];}

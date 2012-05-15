@@ -72,7 +72,7 @@ class User extends AppModel {
 	
 	var $actsAs = array('Acl' => array('type' => 'requester'));
  
-	/* function parentNode() {
+	 function parentNode() {
 		if (!$this->id && empty($this->data)) {
 			return null;
 		}
@@ -87,13 +87,15 @@ class User extends AppModel {
 			return array('Group' => array('id' => $groupId));
 		}
 	}
-	 */
-	
+	 
+	/*
 	function parentNode(){
 		return null;
 	}
-
-	/*function bindNode($user) {
+*/
+    
+    /*
+	function bindNode($user) {
 		return array('model' => 'Group', 'foreign_key' => $user['User']['group_id']);
 	}
 	*/
