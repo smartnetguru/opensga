@@ -258,7 +258,13 @@ class InscricaosController extends AppController {
 		$this->set(compact('Alunos', 't0010turmas', 'epocaavaliacaos', 'tg0020estadoinscricao','funcionarios','curso1','docente1','assistente1', 'plano1','turma1', 'turno1','anoCurricular1','semestreCurricular1','anoLectivo1'));
 	}
 
-    
+    /**
+     *Inscreve alunos depois da primeira matricula
+     * @param type $aluno_id
+     * @param type $matricula_id 
+     * 
+     * @todo A lista de disciplinas deve ter em consideracao  a tabela de precedencias 
+     */
     public  function inscrever($aluno_id,$matricula_id){
        $this->loadModel('Turma');
 		$this->loadModel('Aluno');
@@ -292,7 +298,7 @@ class InscricaosController extends AppController {
 			
 				$this->Session->setFlash(sprintf(__('O Aluno %s Foi inscrito com sucesso',true),$aluno['Aluno']['codigo']."-".$aluno['Aluno']['name']),'default',array('class'=>'alert success'));
 				
-				$this->redirect(array('controller'=>'alunos','action'=>'view',$aluno_id));
+				$this->redirect(array('controller'=>'alunos','action'=>'perfil_estudante',$aluno_id));
 			
 		}
 		

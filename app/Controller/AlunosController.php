@@ -24,6 +24,9 @@
  * @since         OpenSGA v 0.10.0.0
  * @license       GNU Affero General Public License
  * 
+ * @property Aluno $Aluno
+ * @property Matricula $Matricula
+ * 
  */
  App::uses('Sanitize', 'Utility');
  
@@ -77,8 +80,12 @@ class AlunosController extends AppController {
 		
 	}
         
-        
-	function perfil($id = null){
+    /**
+     * @Todo Optimizar esta pagina
+     * @Todo Colocar os links para as opcoes do estudante
+     * @param type $id 
+     */    
+	function perfil_estudante($id = null){
 	        App::Import('Model','Matricula');
 	        $Matricula = new Matricula;			
 		if (!$id) {
@@ -90,7 +97,7 @@ class AlunosController extends AppController {
               'Matricula'=>array(
                   'Planoestudo','Turno'
               ),
-              'Curso','Provincia','Cidade','Paise','Genero','Documento'
+              'Curso','Provincia','Cidade','Paise','Genero','Documento','Entidade'
           ));
           $aluno = $this->Aluno->find('first',array('conditions'=>array('Aluno.id'=>$id)));
           //debug($aluno);
@@ -173,99 +180,109 @@ class AlunosController extends AppController {
 		$this->set(compact('cursos','planoestudos','users', 'paises', 'cidades', 'provincias', 'documentos', 'areatrabalhos','generos','cidadenascimentos','proveniencianomes','provenienciacidades','inscricoes_activas','todas_inscricoes','cadeiras_aprovadas','pagamentos'));
 	}
 
+    /**
+     *Cadastro do aluno
+     * 
+     * Registra os dados do aluno, faz a matricula inicial e gera os pagamentos para o primeiro semestre
+     * @Todo Resolver o problema da foto do aluno
+     * @todo Garantir que so sao gerados pagamentos para alunos que devem pagar(Pos laboral,etc.). Possivelmente o funcionario pode escolher quais pagamentos vai gerar
+     * @todo garantir que a escola numca seja null 
+     * @todo testar bem a funcao que gera codigo
+     * @todo criar manual de utilizador
+     * @todo Nas listagens apenas devem aparecer codificadores e opcoes activas
+     */
+    function add() {
+        App::Import('Model','Matricula');
+        $Matricula = new Matricula;
+        
+        if ($this->request->is('post') || $this->request->is('put')) {
+            $data_matricula = array();
+            $dados = $this->request->data;
+            
+            $dados['Aluno']['codigo'] = $this->Aluno->geraCodigo();
+            
+            //Grava os dados do Usuario
+            $this->Aluno->User->create();
+            $dados['User']['username'] = $dados['Aluno']['codigo'];
+            $dados['User']['password'] = md5($dados['Aluno']['codigo']);
+            $dados['User']['codigocartao'] = $dados['Aluno']['codigo'];
+            $dados['User']['name'] = $this->data['Aluno']['name'];
+            $dados['User']['group_id'] = 3;
+            if($this->Aluno->User->save($dados)){
+                
+                //Grava os dados da Entidade
+                $dados['Aluno']['user_id'] = $this->Aluno->User->getLastInsertID();
+                $entidade_data = array('Entidade'=>$dados['Aluno']);
+                $this->Aluno->Entidade->create();
+                if($this->Aluno->Entidade->save($entidade_data)){
+                    
+                    //Grava os dados do Aluno
+                    $dados['Aluno']['entidade_id'] = $this->Aluno->Entidade->getLastInsertID();
+                    //Escola nao pode ser null
+                    if(!isset($dados['Aluno']['escola_id'])){
+                        $dados['Aluno']['escola_id']=1;
+                    }
+                    $this->Aluno->create();
+                    if ($this->Aluno->save($dados)) {
 
-	function add() {
-	        App::Import('Model','Matricula');
-	        $Matricula = new Matricula;
-			
-			
-		if (!empty($this->request->data)) {
-				
-			
-			$data_matricula = array();
-			$dados = $this->data;
-			$this->Aluno->create();
-                        $dados['Aluno']['codigo'] = $this->Aluno->geraCodigo();
-                        $nome_foto = WWW_ROOT."\ffotos\\".$this->data['Aluno']['foto']['name'];
-			$imagem=array($this->data['Aluno']['foto']);
-			
-			$fileOk = $this->uploadFiles('upload',$imagem);
-			if(isset($fileOk['urls']) and $fileOk['urls']!=null){
-			$dados['Aluno']['foto']=$fileOk['urls'][0];}
-			else{
-				$dados['Aluno']['foto']='';
-			}
-                        
-                        $this->Aluno->User->create();
-                        $dados['User']['username'] = $dados['Aluno']['codigo'];
-                        $dados['User']['password'] = md5($dados['Aluno']['codigo']);
-                        $dados['User']['codigocartao'] = $dados['Aluno']['codigo'];
-						$dados['User']['name'] = $this->data['Aluno']['name'];
-                        $dados['User']['group_id'] = 3;
-                        $this->Aluno->User->save($dados);
-                        $dados['Aluno']['user_id'] = $this->Aluno->User->getLastInsertID();
-                        //$this->data['Aluno']['foto'] = $this->data['Aluno']['codigo'].".jpg";
-                        $entidade_data = array('Entidade'=>$dados['Aluno']);
-                        $this->Aluno->Entidade->create();
-                        $this->Aluno->Entidade->save($entidade_data);
-                        
-                        $dados['Aluno']['entidade_id'] = $this->Aluno->Entidade->getLastInsertID();
-                        /**
-                         * Garantindo que escola numca seja null
-                         * @todo Mais tarde remover isso
-                         */
-                        if(!isset($dados['Aluno']['escola_id'])){
-                            $dados['Aluno']['escola_id']=1;
+                        //Pega os dados da matricula e realiza a matricula
+                        $data_matricula['aluno_id']= $this->Aluno->getInsertID();
+                        $data_matricula['curso_id'] = $this->data['Aluno']['curso_id'];
+                        $data_matricula['planoestudo_id'] = $this->data['Aluno']['planoestudo_id'];
+                        $data_matricula['estadomatricula_id'] = 1;
+                        $data_matricula['data'] = $this->data['Aluno']['dataingresso'];
+                        $data_matricula['user_id'] = $this->Session->read('Auth.User.id');
+                        $data_matricula['anolectivo_id'] = $this->Session->read('SGAConfig.anolectivo_id');
+                        $data_matricula['turno_id'] = $this->data['Aluno']['turno_id'];
+                        $data_matricula['nivel'] = $this->data['Aluno']['nivel'];
+
+                        $matricula_gravar=array('Matricula'=>$data_matricula);
+                        $this->Aluno->Matricula->create();
+                        if($this->Aluno->Matricula->save($matricula_gravar)){
+                            
+                            //Registra os dados do pagamento
+                            $this->Aluno->Pagamento->gerarPagamentos($this->Session->read('SGAConfig.anolectivo_id'),$this->Aluno->getLastInsertID(),$this->Session->read('SGAConfig.semestre'));
+                            $this->Session->setFlash('Aluno Registrado com sucesso</p><p>A matricula do aluno foi registrada com sucesso</p>','default', array('class'=>'alert success'));
+                            $this->redirect(array('controller'=>'inscricaos','action' => 'inscrever',$this->Aluno->getInsertID(),$this->Aluno->Matricula->getInsertID()));
+
+                        } else {
+                            $this->Session->setFlash('Problemas ao registrar a matricula deste aluno, por favor matricule de novo.','default',array('class'=>'alert error'));
                         }
-                        /**
-                         *@todo Ajustar esses aros criados 
-                         */
-              
-			if ($this->Aluno->save($dados)) {
-				
-            					/**
-								 * Pega os dados da matricula e realiza a matricula
-								 */                    
-								 $data_matricula['aluno_id']= $this->Aluno->getInsertID();
-								 $data_matricula['curso_id'] = $this->data['Aluno']['curso_id'];
-								 $data_matricula['planoestudo_id'] = $this->data['Aluno']['planoestudo_id'];
-								 $data_matricula['estadomatricula_id'] = 1;
-								 $data_matricula['data'] = $this->data['Aluno']['dataingresso'];
-								 $data_matricula['user_id'] = $this->Session->read('Auth.User.id');
-								 $data_matricula['anolectivo_id'] = $this->Session->read('SGAConfig.anolectivo_id');
-								 $data_matricula['turno_id'] = $this->data['Aluno']['turno_id'];
-                                 $data_matricula['nivel'] = $this->data['Aluno']['nivel'];
-                                 
-								 $matricula_gravar=array('Matricula'=>$data_matricula);
-								
-								 if($Matricula->save($matricula_gravar)){
-									  $this->loadModel('Pagamento');
-									  
-                                      $this->Pagamento->gerarPagamentos($this->Session->read('SGAConfig.anolectivo_id'),$this->Aluno->getLastInsertID(),$this->Session->read('SGAConfig.semestre'));
-    								  $this->Session->setFlash('Aluno Registrado com sucesso</p><p>A matricula do aluno foi registrada com sucesso','flashok');
-									  $this->redirect(array('controller'=>'inscricaos','action' => 'inscrever',  $this->Aluno->getInsertID(),$Matricula->getInsertID()));
-									  
-								} else {
-									  $this->Session->setFlash('Erro ao registrar aluno. Por favor tente de novo.','flasherror');
-								}
-					}
-		}
-		$cursos = $this->Aluno->Curso->find('list');
-		
-		$planoestudos = $Matricula->Planoestudo->find('list');
-		$users = $this->Aluno->User->find('list');
-		$paises = $this->Aluno->Paise->find('list');
-		$cidades = $this->Aluno->Cidade->find('list');
-		$provincias = $this->Aluno->Provincia->find('list');
+                    } else { //Falhou o registro do pagamento
+                        $this->Session->setFlash('Problemas ao registrar os dados do Aluno', 'default', array('class'=>'alert error'));
+                    }
+                    
+                } else{ //falhou o registro da entidade
+                    $this->Session->setFlash('Problemas ao registrar os dados da Entidade', 'default', array('class'=>'alert error'));
+                }
+                
+                
+            }
+            else{ //falhou o registro do usuario
+                $this->Session->setFlash(__('Problemas agravar os dados do Usuario'),'default',array('class'=>'alert error'));
+            }
+            
+            
+            
+
+
+        }
+        $cursos = $this->Aluno->Curso->find('list');
+
+        $planoestudos = $this->Aluno->Matricula->Planoestudo->find('list');
+        $users = $this->Aluno->User->find('list');
+        $paises = $this->Aluno->Paise->find('list');
+        $cidades = $this->Aluno->Cidade->find('list');
+        $provincias = $this->Aluno->Provincia->find('list');
         $provenienciacidades = $this->Aluno->ProvenienciaCidade->find('list');
-		$proveniencianomes = $this->Aluno->ProvenienciaProvincia->find('list');
-		$documentos = $this->Aluno->Documento->find('list');
-		$areatrabalhos = $this->Aluno->Areatrabalho->find('list');
-		$generos = $this->Aluno->Genero->find('list');
+        $proveniencianomes = $this->Aluno->ProvenienciaProvincia->find('list');
+        $documentos = $this->Aluno->Documento->find('list');
+        $areatrabalhos = $this->Aluno->Areatrabalho->find('list');
+        $generos = $this->Aluno->Genero->find('list');
         $turnos = $this->Aluno->Matricula->Turno->find('list');
-		$cidadenascimentos = $this->Aluno->CidadeNascimento->find('list');
-		$this->set(compact('cursos','planoestudos','users', 'paises', 'cidades', 'provincias', 'documentos', 'areatrabalhos','generos','cidadenascimentos','proveniencianomes','provenienciacidades','turnos'));
-	}
+        $cidadenascimentos = $this->Aluno->CidadeNascimento->find('list');
+        $this->set(compact('cursos','planoestudos','users', 'paises', 'cidades', 'provincias', 'documentos', 'areatrabalhos','generos','cidadenascimentos','proveniencianomes','provenienciacidades','turnos'));
+    }
 
 	function edit($id = null) {
 	        //App::Import('Model','Logmv');
@@ -449,5 +466,15 @@ class AlunosController extends AppController {
         public function pdf_boletim_matricula($aluno_id){
             $this->set('aluno_id',$aluno_id);
             $this->layout = 'jasper';
+        }
+        
+        public function capturar_foto($aluno_id){
+            $this->Aluno->id = $aluno_id;
+            if (!$this->Aluno->exists()) {
+                throw new NotFoundException(__('Aluno Invalido'));
+            }
+            
+            $this->Session->write('SGATemp.aluno_id_4_foto',$aluno_id);
+            $this->redirect(array('controller'=>'users','action'=>'captura_foto'));
         }
 }

@@ -22,27 +22,29 @@ class TurmasController extends AppController {
 	function index() {
 		
 		$this->Turma->recursive = 0;
-		/*$grupo = $this->Session->read('Auth.User.group_id');
+		$grupo = $this->Session->read('Auth.User.group_id');
 		
 		$conditions = array();
 		if($grupo==4){
 			$docente_id = $this->Turma->Docente->getByUserID($this->Session->read('Auth.User.id'));
 			$conditions['Turma.docente_id']=$docente_id;
-		}*/
-		//$this->paginate = array('conditions'=>$conditions);
+		}
+		$this->paginate = array('conditions'=>$conditions);
 		$this->set('turmas', $this->paginate());
 	}
-            function index_ajax() {
+    
+    function index_ajax() {
 		$this->Turma->recursive = 0;
 		
-              
-                
-                $conditions = array();
-                $conditions['limit']=mysql_real_escape_string( $_GET['iDisplayLength'] );
-                $conditions['offset']=mysql_real_escape_string( $_GET['iDisplayStart'] );
-                
-                
-                $aColumns = array('Turma.name');
+        $conditions = array();
+        
+        
+        
+        $conditions['limit']=mysql_real_escape_string( $_GET['iDisplayLength'] );
+        $conditions['offset']=mysql_real_escape_string( $_GET['iDisplayStart'] );
+
+
+        $aColumns = array('Turma.name');
                 
                 	/* 
 	 * Filtering
@@ -61,9 +63,16 @@ class TurmasController extends AppController {
 		
 		
 	}
-	
+    
+    //Se for docente, apenas mostra as suas turmas
+        $grupo = $this->Session->read('Auth.User.group_id');
+        if($grupo == 4){
+            $docente_id = $this->Turma->Docente->getByUserID($this->Session->read('Auth.User.id'));
+			$conditions['conditions']['Turma.docente_id']=$docente_id;
+        }
+        
         $turmas = $this->Turma->find('all',$conditions);
-                $alunos_count = $this->Turma->find('count');
+                $alunos_count = $this->Turma->find('count',$conditions);
                 $alunos_count_filter = $this->Turma->find('count',$conditions);
                 $iTotal=$alunos_count;
                 $iFilteredTotal = $alunos_count_filter;

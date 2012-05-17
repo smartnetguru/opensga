@@ -103,4 +103,11 @@ class SadeAvaliacaoAlunosController extends AppController {
 		$this->Session->setFlash(__('Sade avaliacao aluno was not deleted'));
 		$this->redirect(array('action' => 'index'));
 	}
+    
+    /**
+     *Faz a avaliacao de um docente 
+     */
+    public function avaliar_docente(){
+        
+    }
 }

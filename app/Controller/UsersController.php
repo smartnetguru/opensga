@@ -128,7 +128,9 @@ class UsersController extends AppController {
 					
 					$this->Session->write($name,$c['Config']['value']);					
 				}
-				
+                //$this->PermissionsArray = $this->Components->load('PermissionsArray');
+                
+				//$this->PermissionsArray->create($this->Auth->user('group_id'));
 				
 	            $this->redirect($this->Auth->redirect());
 	        } else {
@@ -193,10 +195,63 @@ class UsersController extends AppController {
 	}
 	
 	function teste(){
-		
+		$aluno = $this->User->Aluno->findById(1);
+        debug($aluno);
 		$this->User->geraUsername('Nilza Martina Notico');
 		$this->render('add');
 	}
+    
+    public function configura_permissoes($user_id){
+        $permissoes = $this->Acl->Aro->find('all',array('conditions'=>array('Aro.foreign_key'=>$this->Session->read('Auth.User.id'))));
+        debug($permissoes);
+        exit;
+    }
+    function inicializa_acl($user_id){
+        if(!isset($user_id)){
+            exit;
+        }
+        $grupo = $this->Session->read('Auth.User.group_id');
+        if($grupo!=1){
+            exit;
+        }
+        $grupo = $this->User->Group;
+        
+        //Permissoes para SuperAdmin
+        $grupo->id=1;
+        $this->Acl->allow($grupo, 'controllers');
+        
+        
+        //Permissoes para o Grupo de docentes
+        $grupo->id=4;
+        $this->Acl->deny($grupo, 'controllers');
+        $this->Acl->allow($grupo, 'controllers/SadeAutoAvaliacaos');
+        $this->Acl->allow($grupo, 'controllers/SadeAutoAvaliacaos/docente');
+        $this->Session->setFlash('Permissoes configuradas com sucesso', 'default', array('class'=>'alert sucess'));
+        $this->redirect('/');
+    }
+    
+        /**
+     *Tira a foto do aluno usando a WebCam 
+     */
+    public function captura_foto(){
+        if(isset($GLOBALS["HTTP_RAW_POST_DATA"])){
+	$jpg = $GLOBALS["HTTP_RAW_POST_DATA"];
+    $aluno_id = $this->Session->read('SGATemp.aluno_id_4_foto');
+    
+    if($aluno_id!=null){
+        $aluno = $this->User->Aluno->findById($aluno_id);
+        $entidade_id = $aluno['Entidade']['id'];
+        $this->log('a_id_'.$aluno_id, 'testelog'); 
+        $this->log('e_id_'.$entidade_id, 'testelog'); 
+        $filename = APP."/entidades_fotos/". $entidade_id. ".jpg";
+        file_put_contents($filename, $jpg);
+    }
+	
+} else{
+	$this->log('Erro ao capturar foto');   
+}
+        
+    }
 
 }
 ?>
