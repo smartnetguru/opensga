@@ -38,13 +38,6 @@ class Aluno extends AppModel {
 			'fields' => '',
 			'order' => ''
 		),
-		'Genero' => array(
-			'className' => 'Genero',
-			'foreignKey' => 'genero_id',
-			'conditions' => '',
-			'fields' => '',
-			'order' => ''
-		),
 		'Curso' => array(
 			'className' => 'Curso',
 			'foreignKey' => 'curso_id',
