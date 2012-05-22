@@ -17,12 +17,12 @@
  * devem manter est� informa��o legal, assim como a licen�a original do software.
  * 
  * @copyright     Copyright 2010-2011, INFOmoz (Inform�tica-Mo�ambique) (http://infomoz.net)
- * @link          http://infomoz.net/opensga CakePHP(tm) Project
- * @author		  Elisio Leonardo (http://infomoz.net/elisio-leonardo)
+ ** @link          http://opensga.com OpenSGA  - Sistema de Gestão Académica
+ * @author		  Elisio Leonardo (elisio.leonardo@gmail.com)
  * @package       opensga
  * @subpackage    opensga.core.controller
  * @since         OpenSGA v 0.10.0.0
- * @license       GNU Affero General Public License
+
  * 
  */
  
@@ -235,21 +235,17 @@ class UsersController extends AppController {
      */
     public function captura_foto(){
         if(isset($GLOBALS["HTTP_RAW_POST_DATA"])){
-	$jpg = $GLOBALS["HTTP_RAW_POST_DATA"];
-    $aluno_id = $this->Session->read('SGATemp.aluno_id_4_foto');
-    
-    if($aluno_id!=null){
-        $aluno = $this->User->Aluno->findById($aluno_id);
-        $entidade_id = $aluno['Entidade']['id'];
-        $this->log('a_id_'.$aluno_id, 'testelog'); 
-        $this->log('e_id_'.$entidade_id, 'testelog'); 
-        $filename = APP."/entidades_fotos/". $entidade_id. ".jpg";
-        file_put_contents($filename, $jpg);
-    }
+            $jpg = $GLOBALS["HTTP_RAW_POST_DATA"];
+            $entidade_id = $this->Session->read('SGATemp.entidade_id_4_foto');
+            $this->log('Erro ao capturar foto'.$entidade_id,'testelog');   
+            if($entidade_id!=null){
+                $filename = APP."/entidades_fotos/". $entidade_id. ".jpg";
+                file_put_contents($filename, $jpg);
+            }
 	
-} else{
-	$this->log('Erro ao capturar foto');   
-}
+        } else{
+            $this->log('Erro ao capturar foto');   
+        }
         
     }
 

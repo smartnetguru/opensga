@@ -17,12 +17,12 @@
  * devem manter est� informa��o legal, assim como a licen�a original do software.
  * 
  * @copyright     Copyright 2010-2011, INFOmoz (Inform�tica-Mo�ambique) (http://infomoz.net)
- * @link          http://infomoz.net/opensga CakePHP(tm) Project
- * @author		  Elisio Leonardo (http://infomoz.net/elisio-leonardo)
+ ** @link          http://opensga.com OpenSGA  - Sistema de Gestão Académica
+ * @author		  Elisio Leonardo (elisio.leonardo@gmail.com)
  * @package       opensga
  * @subpackage    opensga.core.controller
  * @since         OpenSGA v 0.10.0.0
- * @license       GNU Affero General Public License
+
  * 
  */
 

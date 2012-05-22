@@ -5,12 +5,12 @@
  * 
  * @copyright     Copyright 2010-2011, INFOmoz (Informática-Moçambique) (http://infomoz.net)
  * @link          http://infomoz.net/opensga OpenSGA - Sistema de Gestão Académica
- * @author		  Elisio Leonardo (http://infomoz.net/elisio-leonardo)
+ * @author		  Elisio Leonardo (elisio.leonardo@gmail.com)
  * @package       opensga
  * @subpackage    opensga.core.docentes
  * @version       OpenSGA v 0.5.0
  * @since         OpenSGA v 0.1.0.0
- * @license       GNU Affero General Public License
+
  * 
  * @property Docente $Docente
  * 
@@ -23,13 +23,28 @@ class DocentesController extends AppController {
 		$this->Docente->recursive = 2;
 		$this->set('docentes', $this->paginate());
 	}
-
-	function perfil($id = null) {
+    
+    /**
+     *Pagina de Perfil do docente
+     * @param type $id 
+     */
+	function perfil_docente($id = null) {
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid docente', true));
 			$this->redirect(array('action' => 'index'));
 		}
-		$this->set('docente', $this->Docente->read(null, $id));
+		$docente = $this->Docente->findById($id);
+        $this->set('docente', $this->Docente->read(null, $id));
+        $this->set('entidade', $this->Docente->Entidade->findById($docente['Entidade']['id']));
+		$users = $this->Docente->Entidade->User->find('list');
+		$paises = $this->Docente->Entidade->Cidade->find('list');
+		$provincias = $this->Docente->Entidade->Cidade->find('list');
+		$proveniencianomes = $this->Docente->Entidade->Provincia->find('list');
+		$documentos = $this->Docente->Entidade->Documento->find('list');
+		$generos = $this->Docente->Entidade->Genero->find('list');
+        $cidadenascimentos = $this->Docente->Entidade->CidadeNascimento->find('list');
+        
+        $this->set(compact('users', 'paises', 'cidades', 'provincias', 'documentos','generos','cidadenascimentos','proveniencianomes','provenienciacidades'));        
 	}
     
     /**
@@ -52,23 +67,6 @@ class DocentesController extends AppController {
 			
 			if($this->Docente->Entidade->User->save($user_data)){
 				
-				//Agora gravamos o dados da Entidade
-                if(isset($this->data['Entidade']['foto'])){
-			$nome_foto = WWW_ROOT."\ffotos\\".$this->data['Entidade']['foto']['name'];
-			$imagem=array($this->data['Entidade']['foto']);
-			
-			$fileOk = $this->uploadFiles('upload',$imagem);
-            }
-			$entidade_data = array('Entidade'=>$this->data['Entidade']);
-			if(isset($fileOk['urls']) and $fileOk['urls']!=null){
-			$entidade_data ['Entidade']['foto']=$fileOk['urls'][0];}
-			else{
-				$entidade_data ['Entidade']['foto']='';
-			}
-			
-				
-				
-				
 				$entidade_data['Entidade']['user_id'] = $this->Docente->Entidade->User->getLastInsertID();
 				$this->Docente->Entidade->create();
 				if($this->Docente->Entidade->save($entidade_data)){
@@ -79,10 +77,10 @@ class DocentesController extends AppController {
                     $docente_data['Docente']['name'] = $this->request->data['Entidade']['name'];
 					if ($this->Docente->save($docente_data)) {
 						$this->Docente->configuraAcl($this->Docente->Entidade->User->getLastInsertID());
-						$this->Session->setFlash(__('Docente Registrado com Sucesso'),'flashok');
+						$this->Session->setFlash(__('Docente Registrado com Sucesso'),'default',array('class'=>'alert success'));
 						$this->redirect(array('action' => 'index'));
 					} else {
-						$this->Session->setFlash(__('Erro ao registrar Docente, tente de novo'),'flasherror');
+						$this->Session->setFlash(__('Erro ao registrar Docente, tente de novo'),'default',array('class'=>'alert error'));
 					}
 					
 				}
@@ -132,4 +130,14 @@ class DocentesController extends AppController {
 		$this->Session->setFlash(__('Docente was not deleted', true));
 		$this->redirect(array('action' => 'index'));
 	}
+    
+    public function capturar_foto($docente_id){
+        $this->Docente->id = $docente_id;
+        if (!$this->Docente->exists()) {
+            throw new NotFoundException(__('Aluno Invalido'));
+        }
+        $entidade = $this->Docente->findById($docente_id);
+        $this->Session->write('SGATemp.entidade_id_4_foto',$entidade['Entidade']['id']);
+        $this->redirect(array('controller'=>'users','action'=>'captura_foto'));
+    }
 }

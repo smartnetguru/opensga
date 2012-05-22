@@ -4,11 +4,11 @@
  * 
  * @copyright     Copyright 2010-2011, INFOmoz (Inform�tica-Mo�ambique) (http://infomoz.net)
  * @link          http://infomoz.net/opensga OpenSGA-Sistema de Gestão Académica
- * @author		  Elisio Leonardo (http://infomoz.net/elisio-leonardo)
+ * @author		  Elisio Leonardo (elisio.leonardo@gmail.com)
  * @package       opensga
  * @subpackage    opensga.core.controller
  * @since         OpenSGA v 0.10.0.0
- * @license       GNU Affero General Public License
+
  * 
  * @property Planoestudo @Planoestudo
  * @todo Dar a possibilidade de activar e desactivar um plano de estudos

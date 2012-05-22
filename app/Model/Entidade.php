@@ -17,12 +17,12 @@
  * devem manter est� informa��o legal, assim como a licen�a original do software.
  * 
  * @copyright     Copyright 2010-2011, INFOmoz (Inform�tica-Mo�ambique) (http://infomoz.net)
- * @link          http://infomoz.net/opensga CakePHP(tm) Project
- * @author		  Elisio Leonardo (http://infomoz.net/elisio-leonardo)
+ ** @link          http://opensga.com OpenSGA  - Sistema de Gestão Académica
+ * @author		  Elisio Leonardo (elisio.leonardo@gmail.com)
  * @package       opensga
  * @subpackage    opensga.core.controller
  * @since         OpenSGA v 0.10.0.0
- * @license       GNU Affero General Public License
+
  * 
  */
  
@@ -61,6 +61,13 @@ class Entidade extends AppModel {
 			'fields' => '',
 			'order' => ''
 		),
+        'CidadeNascimento' => array(
+			'className' => 'Cidade',
+			'foreignKey' => 'natcidade',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
+		),
 		'Provincia' => array(
 			'className' => 'Provincia',
 			'foreignKey' => 'provincia_id',
@@ -83,7 +90,14 @@ class Entidade extends AppModel {
 			'order' => ''
 		)
 	);
-
+    public $hasOne = array(
+        'Docente' => array(
+            'className'    => 'Docente',
+            'foreignKey'   =>'entidade_id',
+            'dependent'    => true
+        )
+    );
+    
 	var $hasMany = array(
 		'Aluno' => array(
 			'className' => 'Aluno',

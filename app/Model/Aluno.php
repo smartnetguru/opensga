@@ -5,12 +5,12 @@ App::uses('AppModel', 'Model');
  * 
  * @copyright     Copyright (C) 2010-2012, INFOmoz (Informática-Moçambique) (http://infomoz.net)
  * @link          http://infomoz.net/opensga OpenSGA - Sistema de Gestão Académica
- * @author		  Elisio Leonardo (http://infomoz.net/elisio-leonardo)
+ * @author		  Elisio Leonardo (elisio.leonardo@gmail.com)
  * @package       opensga
  * @subpackage    opensga.core.estudantes
  * @version       OpenSGA v 0.5.0
  * @since         OpenSGA v 0.1.0
- * @license       GNU Affero General Public License
+
  * 
  * @property User $User
  * @property Matricula $Matricula
@@ -31,65 +31,9 @@ class Aluno extends AppModel {
 			'fields' => '',
 			'order' => ''
 		),
-		'Paise' => array(
-			'className' => 'Paise',
-			'foreignKey' => 'paise_id',
-			'conditions' => '',
-			'fields' => '',
-			'order' => ''
-		),
         'Entidade' => array(
 			'className' => 'Entidade',
 			'foreignKey' => 'entidade_id',
-			'conditions' => '',
-			'fields' => '',
-			'order' => ''
-		),
-		'Cidade' => array(
-			'className' => 'Cidade',
-			'foreignKey' => 'cidade_id',
-			'conditions' => '',
-			'fields' => '',
-			'order' => ''
-		),
-		'CidadeNascimento' => array(
-			'className' => 'Cidade',
-			'foreignKey' => 'natcidade',
-			'conditions' => '',
-			'fields' => '',
-			'order' => ''
-		),
-		'Provincia' => array(
-			'className' => 'Provincia',
-			'foreignKey' => 'provincia_id',
-			'conditions' => '',
-			'fields' => '',
-			'order' => ''
-		),
-        'ProvenienciaCidade' => array(
-			'className' => 'Cidade',
-			'foreignKey' => 'provenienciacidade',
-			'conditions' => '',
-			'fields' => '',
-			'order' => ''
-		),
-		'ProvenienciaProvincia' => array(
-			'className' => 'Provincia',
-			'foreignKey' => 'proveniencianome',
-			'conditions' => '',
-			'fields' => '',
-			'order' => ''
-		),
-		'Documento' => array(
-			'className' => 'Documento',
-			'foreignKey' => 'documento_id',
-			'conditions' => '',
-			'fields' => '',
-			'order' => ''
-		),
-		'Areatrabalho' => array(
-			'className' => 'Areatrabalho',
-			'foreignKey' => 'areatrabalho_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
@@ -160,16 +104,6 @@ class Aluno extends AppModel {
 		)
 	);	
 
-    public $validate = array(
-        'name' => array(
-            'rule' => 'notEmpty',
-            'message'  => 'Este campo é obrigatório'
-        ),
-        'curso_id'=>array(
-            'rule'=>'notEmpty',
-            'message'=>'Este campo é obrigatório'
-        )
-    );
 
 
         /**

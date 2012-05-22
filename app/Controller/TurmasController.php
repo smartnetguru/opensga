@@ -4,12 +4,12 @@
  * 
  * @copyright     Copyright 2010-2011, INFOmoz (Informática-Moçambique) (http://infomoz.net)
  * @link          http://infomoz.net/opensga OpenSGA - Sistema de Gestão Académica
- * @author		  Elisio Leonardo (http://infomoz.net/elisio-leonardo)
+ * @author		  Elisio Leonardo (elisio.leonardo@gmail.com)
  * @package       opensga
  * @subpackage    opensga.core.turmas
  * @version       OpenSGA v 0.5.0
  * @since         OpenSGA v 0.1.0
- * @license       GNU Affero General Public License
+
  * 
  *@todo No futuro criar uma tabela docentes_turmas vai ajudar a manter o historico completo das turmas
  * 
@@ -108,6 +108,14 @@ class TurmasController extends AppController {
 		$this->loadModel('Planoestudoano');
 		$planoestudoanos = $this->Planoestudoano->find('first',array('conditions'=>array('planoestudo_id'=>$this->data['Planoestudo']['id'],'disciplina_id'=>$this->data['Turma']['disciplina_id'])));
 		
+        $this->Turma->Inscricao->contain(array(
+            'Aluno','Estadoinscricao',
+            'Turma'=>array(
+                'Curso'=>array(
+                    'fields'=>array('name')
+                ),'Disciplina','Turno','Anolectivo'
+            )
+        )); 
 		$inscricaos = $this->Turma->Inscricao->find('all',array('conditions'=>array('turma_id'=>$id)));
 		$anocurricular = $planoestudoanos['Planoestudoano']['ano'];
 		$semestrecurricular = $planoestudoanos['Planoestudoano']['semestre'];
@@ -448,6 +456,8 @@ class TurmasController extends AppController {
              if($this->request->is('post') || $this->request->is('put')){
                  $this->request->data['Turma']['id']=$turma_id;
                  $this->Turma->save($this->request->data);
+                 $this->Session->setFlash('Os docentes desta turma foram actualizados com sucesso', 'default', array('class'=>'alert success'));
+                 $this->redirect(array('controller'=>'turmas','action'=>'view',$turma_id));
                
              }
              

@@ -5,12 +5,12 @@
  * 
  * @copyright     Copyright 2010-2011, INFOmoz (Informática-Moçambique) (http://infomoz.net)
  * @link          http://infomoz.net/opensga OpenSGA - Sistema de Gestão Académica
- * @author		  Elisio Leonardo (http://infomoz.net/elisio-leonardo)
+ * @author		  Elisio Leonardo (elisio.leonardo@gmail.com)
  * @package       opensga
  * @subpackage    opensga.core.estudantes.view
  * @version       OpenSGA v 0.5.0
  * @since         OpenSGA v 0.1.0.0
- * @license       GNU Affero General Public License
+
  * 
  * @property Entidade @Entidade
  * @property Seccao @Seccao

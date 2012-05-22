@@ -108,6 +108,8 @@ class SadeAutoAvaliacaosController extends AppController {
     
     /**
      * Pagina de Auto-Avaliação do Docente
+     * 
+     * @todo Quando se coloca uma letra no campo parametro ele nao valida
      */
     public function docente(){
         if($this->request->is('post') || $this->request->is('put')){
@@ -289,7 +291,7 @@ class SadeAutoAvaliacaosController extends AppController {
         $codigos = array_keys($dados);
         $codigo = $codigos[0];
         $parametro  = $this->SadeAutoAvaliacao->SadeParametro->find('first',array('conditions'=>array('SadeParametro.codigo'=>$codigo)));
-        if($dados[$codigo]['resposta']>=$parametro['SadeParametro']['quantidade_padrao']){
+        if(is_numeric($dados[$codigo]['resposta']) && $dados[$codigo]['resposta']>=$parametro['SadeParametro']['quantidade_padrao']){
             $this->set('pontos_obtidos',$parametro['SadeParametro']['pontos_padrao']);
         }
         else{
