@@ -273,8 +273,10 @@ class InscricaosController extends AppController {
 		
 		$aluno = $this->Aluno->findById($aluno_id);
         $matricula = $this->Inscricao->Matricula->findById($matricula_id);
+        if($this->request->is('post') || $this->request->is('put')){
+            
         
-		if(!empty($this->request->data)){
+            if(!empty($this->request->data)){
 			
 			
 			$aluno_id = $this->request->data['Inscricao']['aluno_id'];
@@ -296,11 +298,12 @@ class InscricaosController extends AppController {
 			}	
 			
 			
-				$this->Session->setFlash(sprintf(__('O Aluno %s Foi inscrito com sucesso',true),$aluno['Aluno']['codigo']."-".$aluno['Aluno']['name']),'default',array('class'=>'alert success'));
+				$this->Session->setFlash(sprintf(__('O Aluno %s Foi inscrito com sucesso',true),$aluno['Aluno']['codigo']."-".""),'default',array('class'=>'alert success'));
 				
 				$this->redirect(array('controller'=>'alunos','action'=>'perfil_estudante',$aluno_id));
 			
 		}
+        }
 		
 		$turmas = $this->Turma->getAllByAlunoForInscricao($aluno_id,$matricula_id);
         
@@ -327,10 +330,28 @@ class InscricaosController extends AppController {
 	 * @access public
 	 * @link http://book.cakephp.org/view/1031/Saving-Your-Data
 	 * @Todo colocar o link para a documentação aqui
+     * 
+     * @todo Se o aluno tiver 2 matriculas actias, mostrar um select a escolhar
 	 */	
 	function inscrever_aluno($aluno_id){
 		
-		$this->loadModel('Turma');
+        $this->Inscricao->Aluno->id=$aluno_id;
+        if(!$this->Inscricao->Aluno->exists()){
+            throw new NotFoundException(__('Aluno Invalido'));
+        }
+        $this->Inscricao->Aluno->Matricula->recursive = -1;
+		$matricula = $this->Inscricao->Aluno->Matricula->findByAlunoIdAndEstadomatriculaIdAndAnolectivoId($aluno_id,1,$this->Session->read('SGAConfig.anolectivo_id'));
+        if(!$matricula){
+            $this->Session->setFlash(__('Este aluno não matriculou ou não renovou a matricula este ano','default',array('class'=>'alert error')));
+            $this->redirect(array('controller'=>'alunos','action'=>'perfil_estudante',$aluno_id));
+        }
+        
+        //Vamos considerar que o aluno so pode ter uma matricula por enquanto
+        //Entao, tem uma matricula, pode inscrever
+        $inscricoes_activas = $this->Inscricao->Aluno->getAllCadeirasActivas($aluno_id);
+        die(debug($inscricoes_activas));
+        
+        $this->loadModel('Turma');
 		$this->loadModel('Aluno');
 		$this->loadModel('Pagamento');
 		$this->loadModel('Matricula');
@@ -556,5 +577,7 @@ class InscricaosController extends AppController {
            $this->layout = 'pdf'; //this will use the pdf.ctp layout
             $this->render();
         }
+        
+        
 }
 ?>

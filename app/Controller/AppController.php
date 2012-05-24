@@ -19,7 +19,7 @@
 	App::import('Model','User');
 	App::import('Model','Feriado');
     App::uses('AuditableConfig', 'Auditable.Lib');
-	
+	//App::uses('Controller','Controller');
 	
 /**
  * Classe Mae para todos os Controllers

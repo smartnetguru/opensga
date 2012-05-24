@@ -96,7 +96,10 @@ class ProvinciasController extends AppController {
         }
         
         public function getByPais(){
-            $pais_id = $this->request->data['Aluno']['paise_id'];
+            foreach($this->request->data as $k=>$v){
+                $pais_id = $v['paise_id'];
+            }
+            
             $provincias = $this->Provincia->find('list',array('conditions'=>array('paise_id'=>$pais_id)));
             $this->set(compact('provincias'));
             $this->layout = 'ajax';

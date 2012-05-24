@@ -86,6 +86,10 @@ class AlunosController extends AppController {
      * @param type $id 
      */    
 	function perfil_estudante($id = null){
+        $this->Aluno->id=$id;
+        if(!$this->Aluno->exists()){
+            throw new NotFoundException('Esta aluno não existe no Sistema');
+        }
 	        App::Import('Model','Matricula');
 	        $Matricula = new Matricula;			
 		if (!$id) {
@@ -97,7 +101,12 @@ class AlunosController extends AppController {
               'Matricula'=>array(
                   'Planoestudo','Turno'
               ),
-              'Curso','Provincia','Cidade','Paise','Genero','Documento','Entidade'
+              'Curso','Entidade'=>array(
+                  'Provincia','Cidade','Paise','Genero','Documento'
+              ),
+              'AlunoNivelMedio'=>array(
+                  'EscolaNivelMedio'
+              )
           ));
           $aluno = $this->Aluno->find('first',array('conditions'=>array('Aluno.id'=>$id)));
           //debug($aluno);
@@ -165,15 +174,15 @@ class AlunosController extends AppController {
         //debug($pagamentos);
 		$this->set('aluno',$aluno);
 		$users = $this->Aluno->User->find('list');
-		$paises = $this->Aluno->Paise->find('list');
-		$cidades = $this->Aluno->Cidade->find('list');
-		$provincias = $this->Aluno->Provincia->find('list');
-        $provenienciacidades = $this->Aluno->Cidade->find('list');
-		$proveniencianomes = $this->Aluno->Provincia->find('list');
-		$documentos = $this->Aluno->Documento->find('list');
+		$paises = $this->Aluno->Entidade->Paise->find('list');
+		$cidades = $this->Aluno->Entidade->Cidade->find('list');
+		$provincias = $this->Aluno->Entidade->Provincia->find('list');
+        $provenienciacidades = $this->Aluno->Entidade->Cidade->find('list');
+		$proveniencianomes = $this->Aluno->Entidade->Provincia->find('list');
+		$documentos = $this->Aluno->Entidade->Documento->find('list');
 		$areatrabalhos = $this->Aluno->Areatrabalho->find('list');
-		$generos = $this->Aluno->Genero->find('list');
-        $cidadenascimentos = $this->Aluno->CidadeNascimento->find('list');
+		$generos = $this->Aluno->Entidade->Genero->find('list');
+        $cidadenascimentos = $this->Aluno->Entidade->CidadeNascimento->find('list');
 		$cursos = $this->Aluno->Curso->find('list');
 		$planoestudos = $Matricula->Planoestudo->find('list');
 		
@@ -192,11 +201,9 @@ class AlunosController extends AppController {
      * @todo Nas listagens apenas devem aparecer codificadores e opcoes activas
      */
     function add() {
-        App::Import('Model','Matricula');
-        $Matricula = new Matricula;
-        
         if ($this->request->is('post') || $this->request->is('put')) {
             $data_matricula = array();
+            
             $dados = $this->request->data;
             
             $dados['Aluno']['codigo'] = $this->Aluno->geraCodigo();
@@ -206,15 +213,15 @@ class AlunosController extends AppController {
             $dados['User']['username'] = $dados['Aluno']['codigo'];
             $dados['User']['password'] = md5($dados['Aluno']['codigo']);
             $dados['User']['codigocartao'] = $dados['Aluno']['codigo'];
-            $dados['User']['name'] = $this->data['Aluno']['name'];
+            $dados['User']['name'] = $this->data['Entidade']['name'];
             $dados['User']['group_id'] = 3;
             if($this->Aluno->User->save($dados)){
                 
                 //Grava os dados da Entidade
                 $dados['Aluno']['user_id'] = $this->Aluno->User->getLastInsertID();
-                $entidade_data = array('Entidade'=>$dados['Aluno']);
+                $dados['Entidade']['user_id']=$this->Aluno->User->getLastInsertID();
                 $this->Aluno->Entidade->create();
-                if($this->Aluno->Entidade->save($entidade_data)){
+                if($this->Aluno->Entidade->save($dados)){
                     
                     //Grava os dados do Aluno
                     $dados['Aluno']['entidade_id'] = $this->Aluno->Entidade->getLastInsertID();
@@ -270,18 +277,19 @@ class AlunosController extends AppController {
         $cursos = $this->Aluno->Curso->find('list');
 
         $planoestudos = $this->Aluno->Matricula->Planoestudo->find('list');
-        $users = $this->Aluno->User->find('list');
-        $paises = $this->Aluno->Paise->find('list');
-        $cidades = $this->Aluno->Cidade->find('list');
-        $provincias = $this->Aluno->Provincia->find('list');
-        $provenienciacidades = $this->Aluno->ProvenienciaCidade->find('list');
-        $proveniencianomes = $this->Aluno->ProvenienciaProvincia->find('list');
-        $documentos = $this->Aluno->Documento->find('list');
+        $users = $this->Aluno->Entidade->User->find('list');
+        $paises = $this->Aluno->Entidade->Paise->find('list');
+        $escola_nivel_medios = $this->Aluno->AlunoNivelMedio->EscolaNivelMedio->find('list');
+        $cidades = $this->Aluno->Entidade->Cidade->find('list');
+        $provincias = $this->Aluno->Entidade->Provincia->find('list');
+        $provenienciacidades = $this->Aluno->AlunoNivelMedio->EscolaNivelMedio->Distrito->find('list');
+        $proveniencianomes = $this->Aluno->AlunoNivelMedio->EscolaNivelMedio->Provincia->find('list');
+        $documentos = $this->Aluno->Entidade->Documento->find('list');
         $areatrabalhos = $this->Aluno->Areatrabalho->find('list');
-        $generos = $this->Aluno->Genero->find('list');
+        $generos = $this->Aluno->Entidade->Genero->find('list');
         $turnos = $this->Aluno->Matricula->Turno->find('list');
-        $cidadenascimentos = $this->Aluno->CidadeNascimento->find('list');
-        $this->set(compact('cursos','planoestudos','users', 'paises', 'cidades', 'provincias', 'documentos', 'areatrabalhos','generos','cidadenascimentos','proveniencianomes','provenienciacidades','turnos'));
+        $cidadenascimentos = $this->Aluno->Entidade->Cidade->find('list');
+        $this->set(compact('cursos','planoestudos','users', 'paises', 'cidades', 'provincias', 'documentos', 'areatrabalhos','generos','cidadenascimentos','proveniencianomes','provenienciacidades','turnos','escola_nivel_medios'));
     }
 
 	function edit($id = null) {

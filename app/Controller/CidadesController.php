@@ -101,8 +101,11 @@ class CidadesController extends AppController {
         }
         
         public function getByProvincia(){
-            $cidade_id = $this->request->data['Aluno']['provincia_id'];
-            $cidades = $this->Cidade->find('list',array('conditions'=>array('provincia_id'=>$cidade_id)));
+            foreach($this->request->data as $k=>$v){
+                $provincia_id = $v['provincia_id'];
+            }
+            
+            $cidades = $this->Cidade->find('list',array('conditions'=>array('provincia_id'=>$provincia_id)));
             $this->set(compact('cidades'));
             $this->layout = 'ajax';
         }

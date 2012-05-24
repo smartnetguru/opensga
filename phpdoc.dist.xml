@@ -7,6 +7,8 @@
             <item>TODO</item>
             <item>FIXME</item>
 			<item>@todo</item>
+			<item>OpenSGA</item>
+			<item>OPENSGA</item>
         </markers>
         <extensions>
             <extension>php</extension>

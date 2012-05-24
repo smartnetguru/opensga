@@ -22,6 +22,14 @@ App::uses('AppModel', 'Model');
 class Aluno extends AppModel {
 	var $name = 'Aluno';
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
+    
+    
+    public $hasOne = array(
+        'AlunoNivelMedio' => array(
+            'className'    => 'AlunoNivelMedio',
+            'dependent'    => true
+        )
+    );
 
 	var $belongsTo = array(
 		'User' => array(
@@ -51,7 +59,14 @@ class Aluno extends AppModel {
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
-		),		
+		),
+        'Areatrabalho' => array(
+			'className' => 'Areatrabalho',
+			'foreignKey' => 'areatrabalho_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
+		),
 
 	);
 	
@@ -109,12 +124,19 @@ class Aluno extends AppModel {
             $matriculas = new Matricula;
             $matriculas->recursive=-1;
 
-            $matricula = $matriculas->find('all',array('conditions'=>array('tg0021estadomatricula_id'=>1,'Aluno_id'=>$id)));
+            $matricula = $matriculas->find('all',array('conditions'=>array('estadomatricula_id'=>1,'Aluno_id'=>$id)));
 
             $plano_estudo = $matricula[0]['Matricula']['t0005planoestudo_id'];
             return $plano_estudo;
         }
-
+        
+        /**
+         *Retorna as cadeiras em que o aluno esta inscrito actualmente 
+         */
+        public function getAllCadeirasActivas(){
+            $inscrioes = $this->Inscricao->find('all',array('conditions'=>array('Inscricao.estadoinscricao_id'=>1)));
+            return $inscrioes;
+        }
 
 		/**
 		 * Funcao generica para retornar todas as turmas de um aluno com base no estado da turma
@@ -168,6 +190,9 @@ class Aluno extends AppModel {
 		/**
 		 * Devolve todas as turmas que o aluno pode se inscrever, baseado nas cadeiras feitas e precedencias
 		 * @Todo por enquanto as precedencias e cadeiras feitas nao sao processadas
+         * 
+         * 
+         * @todo falta isso
 		 */
 		function getAllTurmasForInscricao(){
 			
