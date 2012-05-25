@@ -65,7 +65,7 @@ class PlanoestudosController extends AppController {
 			//////$logmv->logInsert(5,$this->Session->read('Auth.User.id'),$this->Planoestudo->getLastInsertID(),$this->data["Planoestudo"]["name"]);
 				$this->Session->setFlash('Adicione os grupos de disciplinas deste plano. ','flashok');
 				//var_dump($this->Planoestudo->id);
-				$this->redirect(array('action' => 'add_grupodisciplinas',$this->Planoestudo->id));
+				$this->redirect(array('action' => 'adicionar_disciplinas',$this->Planoestudo->id));
 			} else {
 				$this->Session->setFlash('Erro ao gravar dados. Por favor tente de novo.','flasherror');
 			}
@@ -74,7 +74,7 @@ class PlanoestudosController extends AppController {
 		$this->set(compact('cursos'));
 	}
 
-   function add_precedencias($plano_id=null,$disc_id=null){
+   function adicionar_precedencias($plano_id=null,$disc_id=null){
        App::Import('Model','Planoestudoano');
        App::Import('Model','Disciplina');
        App::Import('Model','Grupodisciplina');
@@ -134,7 +134,7 @@ class PlanoestudosController extends AppController {
               $this->set('disc_id',$disc_id);
    }
 
-    function add_grupodisciplinas($plano_id,$ano_c=1,$semestre_c=1){
+    function adicionar_disciplinas($plano_id,$ano_c=1,$semestre_c=1){
         App::Import('Model','Planoestudoano');
         App::Import('Model','Disciplina');
 
@@ -153,7 +153,7 @@ class PlanoestudosController extends AppController {
                 if ($planoestudoanos->save($dados)) {
 				
 				$this->Session->setFlash('Dado Registado com Sucesso.Adicione Mais disciplinas.','default',array('class'=>'alert success'));
-				$this->redirect(array('action' => 'add_precedencias',$dados['Planoestudoano']['planoestudo_id'],$dados['Planoestudoano']['disciplina_id']));
+				$this->redirect(array('action' => 'adicionar_precedencias',$dados['Planoestudoano']['planoestudo_id'],$dados['Planoestudoano']['disciplina_id']));
 			} else {
 				$this->Session->setFlash('Erro ao gravar dados. Por favor tente de novo.','flasherror');
 			}
@@ -216,7 +216,7 @@ class PlanoestudosController extends AppController {
 		if ($this->request->is('post') || $this->request->is('put')) {
 			if ($this->Planoestudo->save($this->request->data)) {
             $this->Session->setFlash('Dados Registados com Sucesso','flasherror');
-            $this->redirect(array('action' => 'add_grupodisciplinas',$id));
+            $this->redirect(array('action' => 'adicionar_disciplinas',$id));
 			} else {
 				$this->Session->setFlash('Erro ao editar dados. Por favor tente de novo.','flasherror');}
 		}

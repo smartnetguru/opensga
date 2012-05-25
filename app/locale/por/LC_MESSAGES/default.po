@@ -1,20 +1,13 @@
-# LANGUAGE translation of CakePHP Application
-# Copyright YEAR NAME <EMAIL@ADDRESS>
-#
 msgid ""
 msgstr ""
-"Project-Id-Version: OpenSGA 0.8\n"
-"POT-Creation-Date: 2011-08-11 00:26+0000\n"
-"PO-Revision-Date: 2011-08-11 03:18+0200\n"
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
 "Last-Translator: Elisio Leonardo <elisio.leonardo@gmail.com>\n"
 "Language-Team: Elisio Leonardo <desenvolvimento@infomoz.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: plural=EXPRESSION;\n"
-"X-Poedit-Language: Portuguese\n"
-"X-Poedit-Country: MOZAMBIQUE\n"
-"X-Poedit-SourceCharset: utf-8\n"
 
 #: \cake\console\cake.php:329
 msgid "Error: Class %s could not be loaded."
@@ -4746,13 +4739,6 @@ msgstr ""
 #: \views\estadoentidades\index.ctp:46
 #: \views\estadoentidades\view.ctp:23;30
 msgid "funcionarios"
-msgstr ""
-
-#: \views\estadoentidades\add.ctp:17
-#: \views\estadoentidades\edit.ctp:19
-#: \views\estadoentidades\index.ctp:47
-#: \views\estadoentidades\view.ctp:24;109
-msgid 'Funcionario'
 msgstr ""
 
 #: \views\estadoentidades\add.ctp:18
