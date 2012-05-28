@@ -8,7 +8,7 @@ class SeccaosController extends AppController {
 		$this->set('seccaos', $this->paginate());
 	}
 
-	function view($id = null) {
+	function ver_seccao($id = null) {
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid seccao', true));
 			$this->redirect(array('action' => 'index'));
@@ -16,11 +16,11 @@ class SeccaosController extends AppController {
 		$this->set('seccao', $this->Seccao->read(null, $id));
 	}
 
-	function add() {
+	function adicionar_seccao() {
 		if (!empty($this->data)) {
 			$this->Seccao->create();
 			if ($this->Seccao->save($this->data)) {
-				$this->Session->setFlash(__('The seccao has been saved', true));
+				$this->Session->setFlash(__('Secção Adicionada com sucesso', true),'default',array('class'=>'alert success'));
 				$this->redirect(array('action' => 'index'));
 			} else {
 				$this->Session->setFlash(__('The seccao could not be saved. Please, try again.', true));
@@ -31,9 +31,13 @@ class SeccaosController extends AppController {
 		$this->set(compact('departamentos', 'faculdades'));
 	}
 
-	function edit($id = null) {
-		if (!$id && empty($this->data)) {
-			$this->Session->setFlash(__('Invalid seccao', true));
+	function editar_seccao($id = null) {
+		$this->Seccao->id=$id;
+        if(!$this->Seccao->exists()){
+            throw new NotFoundException('Secção nao encontrada');
+        }
+        if (!$id && empty($this->data)) {
+			$this->Session->setFlash(__('Secção Inválida', true));
 			$this->redirect(array('action' => 'index'));
 		}
 		if (!empty($this->data)) {

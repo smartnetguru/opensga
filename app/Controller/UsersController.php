@@ -128,11 +128,8 @@ class UsersController extends AppController {
 					
 					$this->Session->write($name,$c['Config']['value']);					
 				}
-                //$this->PermissionsArray = $this->Components->load('PermissionsArray');
-                
-				//$this->PermissionsArray->create($this->Auth->user('group_id'));
 				
-	            $this->redirect($this->Auth->redirect());
+	            $this->redirect('/');
 	        } else {
 	            $this->Session->setFlash('Your username or password was incorrect.');
 	        }

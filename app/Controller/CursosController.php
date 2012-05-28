@@ -85,7 +85,10 @@ class CursosController extends AppController {
 	}
 
 	function edit($id = null) {
-	
+        $this->Curso->id = $id;
+        if(!$this->Curso->exists()){
+            throw new NotFoundException('Curso Inválido');
+        }
 		if (!$id && empty($this->data)) {
 			$this->Session->setFlash('Invalido %s', 'flasherror');
 			$this->redirect(array('action' => 'index'));

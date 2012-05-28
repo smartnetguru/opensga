@@ -1,27 +1,13 @@
 <?php
 /**
- * OpenSGA - Sistema de Gest�o Acad�mica
- *   Copyright (C) 2010-2011  INFOmoz (Inform�tica-Mo�ambique)
- * 
- * Este programa � um software livre: Voc� pode redistribuir e/ou modificar
- * todo ou parte deste programa, desde que siga os termos da licen�a por nele
- * estabelecidos. Grande parte do c�digo deste programa est� sob a licen�a 
- * GNU Affero General Public License publicada pela Free Software Foundation.
- * A vers�o original desta licen�a est� dispon�vel na pasta raiz deste software.
- * 
- * Este software � distribuido sob a perspectiva de que possa ser �til para 
- * satisfazer as necessidades dos seus utilizadores, mas SEM NENHUMA GARANTIA. Veja
- * os termos da licen�a GNU Affero General Public License para mais detalhes
- * 
- * As redistribui��es deste software, mesmo quando o c�digo-fonte for modificado significativamente,
- * devem manter est� informa��o legal, assim como a licen�a original do software.
+ * Controller de Disciplinas
  * 
  * @copyright     Copyright 2010-2011, INFOmoz (Inform�tica-Mo�ambique) (http://infomoz.net)
  ** @link          http://opensga.com OpenSGA  - Sistema de Gestão Académica
  * @author		  Elisio Leonardo (elisio.leonardo@gmail.com)
  * @package       opensga
  * @subpackage    opensga.core.controller
- * @since         OpenSGA v 0.10.0.0
+ * @since         OpenSGA v 0.1.0
 
  * 
  */
@@ -41,7 +27,7 @@ class DisciplinasController extends AppController {
 		$this->set('disciplinas', $disciplinas);
 	}
 
-	function view($id = null) {
+	function ver_disciplina($id = null) {
 	   //App::Import('Model','Logmv');
 	    //$logmv = new Logmv;
 		if (!$id) {
@@ -58,10 +44,7 @@ class DisciplinasController extends AppController {
 		$this->set(compact('grupodisciplinars'));
 	}
 
-	function add() {
-		//App::Import('Model','Logmv');
-	    //$logmv = new Logmv;
-		
+	function adicionar_disciplina() {	
 		if (!empty($this->data)) {
 			$this->Disciplina->create();
 			if ($this->Disciplina->save($this->data)) {
@@ -72,14 +55,17 @@ class DisciplinasController extends AppController {
 				$this->Session->setFlash('Erro ao gravar dados. Por favor tente de novo.','flasherror');
 			}
 		}
-                //$this->loadModel('Grupodisciplinar');
-		$grupodisciplinars = $this->Disciplina->Grupodisciplinar->find('list');
-		$this->set(compact('grupodisciplinars'));
+		$faculdades = $this->Disciplina->Faculdade->find('list');
+        $departamentos  =$this->Disciplina->Departamento->find('list');
+        $seccaos = $this->Disciplina->Seccao->find('list');
+		$this->set(compact('faculdades','departamentos','seccaos'));
 	}
 
-	function edit($id = null){
-	  $this->Disciplina->id = $id;
-		
+	function editar_disciplina($id = null){
+        $this->Disciplina->id = $id;
+		if(!$this->Disciplina->exists()){
+            throw new NotFoundException('Disciplina Inválida');
+        }
 		if (!$id && empty($this->data)) {
 			$this->Session->setFlash('Invalido %s', 'flasherror');
 			$this->redirect(array('action' => 'index'));
@@ -99,8 +85,10 @@ class DisciplinasController extends AppController {
 		if (empty($this->data)) {
 			$this->data = $this->Disciplina->read(null, $id);
 		}
-		$grupodisciplinars = $this->Disciplina->Grupodisciplinar->find('list');
-		$this->set(compact('grupodisciplinars'));
+		$faculdades = $this->Disciplina->Faculdade->find('list');
+        $departamentos  =$this->Disciplina->Departamento->find('list');
+        $seccaos = $this->Disciplina->Seccao->find('list');
+		$this->set(compact('faculdades','departamentos','seccaos'));
 	}
 
 /*	function delete($id = null) 
@@ -154,6 +142,15 @@ class DisciplinasController extends AppController {
             $this->set('lista',$listas);
             $this->layout = 'pdf'; //this will use the pdf.ctp layout
             $this->render();
+        }
+        
+        public function beforeFilter() {
+            parent::beforeFilter();
+            $this->Security->requireAuth();
+            $this->Security->allowedControllers = array('kkk');
+            $this->Security->allowedActions = array('kkk');
+            
+            
         }
 }
 ?>

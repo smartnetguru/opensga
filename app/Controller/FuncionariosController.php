@@ -117,6 +117,10 @@ class FuncionariosController extends AppController {
 	}
 
 	function edit($id = null) {
+        $this->Funcionario->id=$id;
+        if(!$this->Funcionario->exists()){
+            throw new NotFoundException('Funcionário Invalido');
+        }
 	    //App::Import('Model','Logmv');
 	    //$logmv = new Logmv;
 		if (!$id && empty($this->data)) {

@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2012-05-25 13:25+0200\n"
+"POT-Creation-Date: 2012-05-28 04:54+0200\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -54,13 +54,25 @@ msgstr ""
 msgid "Aluno via admissao was not deleted"
 msgstr ""
 
-#: Controller\AlunosController.php:269
+#: Controller\AlunosController.php:255
 msgid "Problemas agravar os dados do Usuario"
 msgstr ""
 
-#: Controller\AlunosController.php:482
+#: Controller\AlunosController.php:312
+msgid "Problemas ao Editar dados da do Estudante"
+msgstr ""
+
+#: Controller\AlunosController.php:315
+msgid "Problemas ao Editar dados da Entidade"
+msgstr ""
+
+#: Controller\AlunosController.php:319
+msgid "Problemas ao Editar dados do Usuário"
+msgstr ""
+
+#: Controller\AlunosController.php:500
 #: Controller\DocentesController.php:137
-#: Controller\InscricaosController.php:310
+#: Controller\InscricaosController.php:314
 msgid "Aluno Invalido"
 msgstr ""
 
@@ -70,7 +82,7 @@ msgstr ""
 #: Controller\AvaliacaosController.php:121
 #: Controller\CargosController.php:89
 #: Controller\CidadesController.php:96
-#: Controller\DepartamentosController.php:88
+#: Controller\DepartamentosController.php:85
 #: Controller\DocumentosController.php:88
 #: Controller\EpocaavaliacaosController.php:103
 #: Controller\EscolasController.php:87
@@ -83,9 +95,9 @@ msgstr ""
 #: Controller\GroupsController.php:86
 #: Controller\GrupodisciplinarsController.php:87
 #: Controller\GrupodisciplinasController.php:90
-#: Controller\InscricaosController.php:388
+#: Controller\InscricaosController.php:392
 #: Controller\MatricularevisaosController.php:92
-#: Controller\MatriculasController.php:117
+#: Controller\MatriculasController.php:119
 #: Controller\MessagesController.php:98
 #: Controller\MovimentoentidadesController.php:90
 #: Controller\PaisesController.php:87
@@ -96,7 +108,7 @@ msgstr ""
 #: Controller\TipocursosController.php:91
 #: Controller\TipofuncionariosController.php:86
 #: Controller\TipomovimentosController.php:87
-#: Controller\TurmasController.php:344
+#: Controller\TurmasController.php:340
 #: Controller\TurmatipoavaliacaosController.php:155
 #: Controller\TurnosController.php:87
 msgid "%s was not deleted"
@@ -107,7 +119,7 @@ msgstr ""
 #: Controller\AvaliacaosController.php:114
 #: Controller\CargosController.php:82
 #: Controller\CidadesController.php:89
-#: Controller\DepartamentosController.php:81
+#: Controller\DepartamentosController.php:78
 #: Controller\DocumentosController.php:81
 #: Controller\EpocaavaliacaosController.php:95
 #: Controller\EscolasController.php:80
@@ -120,9 +132,9 @@ msgstr ""
 #: Controller\GroupsController.php:79
 #: Controller\GrupodisciplinarsController.php:80
 #: Controller\GrupodisciplinasController.php:83
-#: Controller\InscricaosController.php:380
+#: Controller\InscricaosController.php:384
 #: Controller\MatricularevisaosController.php:85
-#: Controller\MatriculasController.php:109
+#: Controller\MatriculasController.php:111
 #: Controller\MessagesController.php:91
 #: Controller\MovimentoentidadesController.php:83
 #: Controller\PaisesController.php:80
@@ -133,7 +145,7 @@ msgstr ""
 #: Controller\TipocursosController.php:84
 #: Controller\TipofuncionariosController.php:79
 #: Controller\TipomovimentosController.php:80
-#: Controller\TurmasController.php:336
+#: Controller\TurmasController.php:332
 #: Controller\TurmatipoavaliacaosController.php:148
 #: Controller\TurnosController.php:80
 msgid "Invalid id for %s"
@@ -142,7 +154,7 @@ msgstr ""
 #: Controller\AreatrabalhosController.php:63
 #: Controller\CargosController.php:64
 #: Controller\CidadesController.php:69
-#: Controller\DepartamentosController.php:61
+#: Controller\DepartamentosController.php:55
 #: Controller\DocumentosController.php:64
 #: Controller\EscolasController.php:63
 #: Controller\EstadoMatriculasController.php:63
@@ -285,7 +297,7 @@ msgstr ""
 msgid "Bolsa tipo bolsa was not deleted"
 msgstr ""
 
-#: Controller\ConfigsController.php:25;45;63
+#: Controller\ConfigsController.php:25;65
 #: Controller\EscolasTipopagamentosController.php:42;66;88
 msgid "ID Inválido"
 msgstr ""
@@ -294,26 +306,30 @@ msgstr ""
 msgid "Dados Gravados com Sucesso"
 msgstr ""
 
-#: Controller\ConfigsController.php:38;53
+#: Controller\ConfigsController.php:38;55
 #: Controller\EscolasTipopagamentosController.php:74
 msgid "Dados não gravados. Por favor, tente de novo"
 msgstr ""
 
-#: Controller\ConfigsController.php:50
+#: Controller\ConfigsController.php:47
+msgid "%s Invalida"
+msgstr ""
+
+#: Controller\ConfigsController.php:52
 #: Controller\EscolasTipopagamentosController.php:52;71
 msgid "Dados gravados com sucesso"
 msgstr ""
 
-#: Controller\ConfigsController.php:67
+#: Controller\ConfigsController.php:69
 #: Controller\EscolasTipopagamentosController.php:92
 msgid "Dados removidos com sucesso"
 msgstr ""
 
-#: Controller\ConfigsController.php:70
+#: Controller\ConfigsController.php:72
 msgid "Dados não removidos.Por favor, tente de novo"
 msgstr ""
 
-#: Controller\ConfigsController.php:82
+#: Controller\ConfigsController.php:84
 msgid "O idioma do sistema foi alterado com sucesso"
 msgstr ""
 
@@ -339,6 +355,26 @@ msgstr ""
 
 #: Controller\ContasController.php:90
 msgid "Conta was not deleted"
+msgstr ""
+
+#: Controller\CursoTipoPamentosController.php:30;64;93
+msgid "Invalid curso tipo pamento"
+msgstr ""
+
+#: Controller\CursoTipoPamentosController.php:44;68
+msgid "The curso tipo pamento has been saved"
+msgstr ""
+
+#: Controller\CursoTipoPamentosController.php:47;71
+msgid "The curso tipo pamento could not be saved. Please, try again."
+msgstr ""
+
+#: Controller\CursoTipoPamentosController.php:96
+msgid "Curso tipo pamento deleted"
+msgstr ""
+
+#: Controller\CursoTipoPamentosController.php:99
+msgid "Curso tipo pamento was not deleted"
 msgstr ""
 
 #: Controller\CursosEscolasController.php:41;64
@@ -493,27 +529,47 @@ msgstr ""
 msgid "Estadopagamento was not deleted"
 msgstr ""
 
-#: Controller\FaculdadesController.php:13;33
+#: Controller\FaculdadeTipoPagamentosController.php:30;64;93
+msgid "Invalid faculdade tipo pagamento"
+msgstr ""
+
+#: Controller\FaculdadeTipoPagamentosController.php:44;68
+msgid "The faculdade tipo pagamento has been saved"
+msgstr ""
+
+#: Controller\FaculdadeTipoPagamentosController.php:47;71
+msgid "The faculdade tipo pagamento could not be saved. Please, try again."
+msgstr ""
+
+#: Controller\FaculdadeTipoPagamentosController.php:96
+msgid "Faculdade tipo pagamento deleted"
+msgstr ""
+
+#: Controller\FaculdadeTipoPagamentosController.php:99
+msgid "Faculdade tipo pagamento was not deleted"
+msgstr ""
+
+#: Controller\FaculdadesController.php:13;37
 msgid "Invalid faculdade"
 msgstr ""
 
-#: Controller\FaculdadesController.php:23;38
+#: Controller\FaculdadesController.php:23;42
 msgid "The faculdade has been saved"
 msgstr ""
 
-#: Controller\FaculdadesController.php:26;41
+#: Controller\FaculdadesController.php:26;45
 msgid "The faculdade could not be saved. Please, try again."
 msgstr ""
 
-#: Controller\FaculdadesController.php:51
+#: Controller\FaculdadesController.php:55
 msgid "Invalid id for faculdade"
 msgstr ""
 
-#: Controller\FaculdadesController.php:55
+#: Controller\FaculdadesController.php:59
 msgid "Faculdade deleted"
 msgstr ""
 
-#: Controller\FaculdadesController.php:58
+#: Controller\FaculdadesController.php:62
 msgid "Faculdade was not deleted"
 msgstr ""
 
@@ -545,7 +601,7 @@ msgstr ""
 #: Controller\GrupodisciplinasController.php:54;71
 #: Controller\InscricaosController.php:145
 #: Controller\PlanoestudoanosController.php:54;69
-#: Controller\TurmasController.php:155;249
+#: Controller\TurmasController.php:151;245
 msgid "Erro ao gravar dados. Por favor tente de novo."
 msgstr ""
 
@@ -560,15 +616,15 @@ msgstr ""
 msgid "Dado Registado com Sucesso"
 msgstr ""
 
-#: Controller\InscricaosController.php:266
+#: Controller\InscricaosController.php:270
 msgid "Este aluno nao pode ser inscrito na turma %s. Provavelmente ja esta inscrito."
 msgstr ""
 
-#: Controller\InscricaosController.php:271;353
+#: Controller\InscricaosController.php:275;357
 msgid "O Aluno %s Foi inscrito com sucesso"
 msgstr ""
 
-#: Controller\InscricaosController.php:315
+#: Controller\InscricaosController.php:319
 msgid "Este aluno não matriculou ou não renovou a matricula este ano"
 msgstr ""
 
@@ -616,32 +672,32 @@ msgstr ""
 msgid "Month was not deleted"
 msgstr ""
 
-#: Controller\PagamentosController.php:46;106
+#: Controller\PagamentosController.php:39;99
 msgid "Invalid pagamento"
 msgstr ""
 
-#: Controller\PagamentosController.php:93;111
+#: Controller\PagamentosController.php:86;104
 msgid "The pagamento has been saved"
 msgstr ""
 
-#: Controller\PagamentosController.php:96;114
+#: Controller\PagamentosController.php:89;107
 msgid "The pagamento could not be saved. Please, try again."
 msgstr ""
 
-#: Controller\PagamentosController.php:127
+#: Controller\PagamentosController.php:120
 msgid "Invalid id for pagamento"
 msgstr ""
 
-#: Controller\PagamentosController.php:131
+#: Controller\PagamentosController.php:124
 msgid "Pagamento deleted"
 msgstr ""
 
-#: Controller\PagamentosController.php:134
+#: Controller\PagamentosController.php:127
 msgid "Pagamento was not deleted"
 msgstr ""
 
 #: Controller\PlanoestudosController.php:214
-msgid "Invalid manager"
+msgid "Plano de Estudos Invalido"
 msgstr ""
 
 #: Controller\RamosController.php:41;63
@@ -872,28 +928,56 @@ msgstr ""
 msgid "Sade parametro was not deleted"
 msgstr ""
 
-#: Controller\SeccaosController.php:13;36
+#: Controller\SeccaosController.php:13
 msgid "Invalid seccao"
 msgstr ""
 
-#: Controller\SeccaosController.php:23;41
-msgid "The seccao has been saved"
+#: Controller\SeccaosController.php:23
+msgid "Secção Adicionada com sucesso"
 msgstr ""
 
-#: Controller\SeccaosController.php:26;44
+#: Controller\SeccaosController.php:26;48
 msgid "The seccao could not be saved. Please, try again."
 msgstr ""
 
-#: Controller\SeccaosController.php:57
-msgid "Invalid id for seccao"
+#: Controller\SeccaosController.php:40
+msgid "Secção Inválida"
+msgstr ""
+
+#: Controller\SeccaosController.php:45
+msgid "The seccao has been saved"
 msgstr ""
 
 #: Controller\SeccaosController.php:61
+msgid "Invalid id for seccao"
+msgstr ""
+
+#: Controller\SeccaosController.php:65
 msgid "Seccao deleted"
 msgstr ""
 
-#: Controller\SeccaosController.php:64
+#: Controller\SeccaosController.php:68
 msgid "Seccao was not deleted"
+msgstr ""
+
+#: Controller\TipoInstituicaosController.php:30;61;87
+msgid "Invalid tipo instituicao"
+msgstr ""
+
+#: Controller\TipoInstituicaosController.php:44;65
+msgid "The tipo instituicao has been saved"
+msgstr ""
+
+#: Controller\TipoInstituicaosController.php:47;68
+msgid "The tipo instituicao could not be saved. Please, try again."
+msgstr ""
+
+#: Controller\TipoInstituicaosController.php:90
+msgid "Tipo instituicao deleted"
+msgstr ""
+
+#: Controller\TipoInstituicaosController.php:93
+msgid "Tipo instituicao was not deleted"
 msgstr ""
 
 #: Controller\TipopagamentosController.php:41;61
@@ -944,7 +1028,7 @@ msgstr ""
 msgid "Tipoprecedencia was not deleted"
 msgstr ""
 
-#: Controller\TurmasController.php:283;454
+#: Controller\TurmasController.php:279;450
 msgid "Turma Invalida"
 msgstr ""
 
@@ -996,19 +1080,19 @@ msgstr ""
 msgid "O usuário não foi removido"
 msgstr ""
 
-#: Controller\UsersController.php:168
+#: Controller\UsersController.php:165
 msgid "Senha alterada com sucesso"
 msgstr ""
 
-#: Controller\UsersController.php:171
+#: Controller\UsersController.php:168
 msgid "Erro ao alterar a senha. Por favor, tente de novo"
 msgstr ""
 
-#: Controller\UsersController.php:175
+#: Controller\UsersController.php:172
 msgid "As senhas introduzidas não são idênticas"
 msgstr ""
 
-#: Controller\UsersController.php:180
+#: Controller\UsersController.php:177
 msgid "A senha antiga nao confere"
 msgstr ""
 
@@ -1034,9 +1118,10 @@ msgstr ""
 #: View\BolsaResultados\edit.ctp:13
 #: View\BolsaTipoBolsas\add.ctp:9
 #: View\BolsaTipoBolsas\edit.ctp:10
-#: View\Configs\edit.ctp:41
 #: View\Contas\add.ctp:39
 #: View\Contas\edit.ctp:40
+#: View\CursoTipoPamentos\add.ctp:11
+#: View\CursoTipoPamentos\edit.ctp:12
 #: View\Cursos_escolas\add.ctp:40
 #: View\Cursos_escolas\edit.ctp:41
 #: View\DocenteFuncaos\add.ctp:9
@@ -1050,8 +1135,8 @@ msgstr ""
 #: View\Estadoentidades\edit.ctp:10
 #: View\Estadopagamentos\add.ctp:9
 #: View\Estadopagamentos\edit.ctp:10
-#: View\Faculdades\add.ctp:9
-#: View\Faculdades\edit.ctp:10
+#: View\FaculdadeTipoPagamentos\add.ctp:11
+#: View\FaculdadeTipoPagamentos\edit.ctp:12
 #: View\Groups\add.ctp:9
 #: View\Groups\edit.ctp:10
 #: View\Grupodisciplinas\t0006planoestudoanos\add.ctp:11
@@ -1090,10 +1175,10 @@ msgstr ""
 #: View\SadeNivelAvaliadors\edit.ctp:10
 #: View\SadeParametros\add.ctp:14
 #: View\SadeParametros\edit.ctp:15
-#: View\Seccaos\add.ctp:11
-#: View\Seccaos\edit.ctp:12
 #: View\Semestrelectivos\add.ctp:13
 #: View\Semestrelectivos\edit.ctp:14
+#: View\TipoInstituicaos\add.ctp:9
+#: View\TipoInstituicaos\edit.ctp:10
 #: View\Tipopagamentos\add.ctp:10
 #: View\Tipopagamentos\edit.ctp:11
 #: View\Tipoprecedencias\add.ctp:9
@@ -1141,12 +1226,15 @@ msgstr ""
 #: View\BolsaTipoBolsas\edit.ctp:13
 #: View\BolsaTipoBolsas\index.ctp:7;38
 #: View\BolsaTipoBolsas\view.ctp:17;43;86
-#: View\Configs\edit.ctp:44
 #: View\Configs\view.ctp:56
 #: View\Contas\add.ctp:42
 #: View\Contas\edit.ctp:43
 #: View\Contas\index.ctp:39;80
 #: View\Contas\view.ctp:61;85
+#: View\CursoTipoPamentos\add.ctp:14
+#: View\CursoTipoPamentos\edit.ctp:15
+#: View\CursoTipoPamentos\index.ctp:9;46
+#: View\CursoTipoPamentos\view.ctp:27
 #: View\Cursos_escolas\add.ctp:43
 #: View\Cursos_escolas\edit.ctp:44
 #: View\Cursos_escolas\index.ctp:38;80
@@ -1172,10 +1260,11 @@ msgstr ""
 #: View\Estadopagamentos\edit.ctp:13
 #: View\Estadopagamentos\index.ctp:7;43
 #: View\Estadopagamentos\view.ctp:17;45
-#: View\Faculdades\add.ctp:12
-#: View\Faculdades\edit.ctp:13
-#: View\Faculdades\index.ctp:7;43
-#: View\Faculdades\view.ctp:17;36
+#: View\FaculdadeTipoPagamentos\add.ctp:14
+#: View\FaculdadeTipoPagamentos\edit.ctp:15
+#: View\FaculdadeTipoPagamentos\index.ctp:9;46
+#: View\FaculdadeTipoPagamentos\view.ctp:27
+#: View\Faculdades\ver_faculdade.ctp:17;36
 #: View\Feriados\index.ctp:18;67
 #: View\Feriados\view.ctp:58
 #: View\Groups\add.ctp:12
@@ -1255,14 +1344,15 @@ msgstr ""
 #: View\SadeParametros\edit.ctp:18
 #: View\SadeParametros\index.ctp:12;50
 #: View\SadeParametros\view.ctp:42;74;121;167
-#: View\Seccaos\add.ctp:14
-#: View\Seccaos\edit.ctp:15
-#: View\Seccaos\index.ctp:9;51
-#: View\Seccaos\view.ctp:27;50
+#: View\Seccaos\ver_seccao.ctp:27;50
 #: View\Semestrelectivos\add.ctp:16
 #: View\Semestrelectivos\edit.ctp:17
 #: View\Semestrelectivos\index.ctp:11;53
 #: View\Semestrelectivos\view.ctp:37
+#: View\TipoInstituicaos\add.ctp:12
+#: View\TipoInstituicaos\edit.ctp:13
+#: View\TipoInstituicaos\index.ctp:7;38
+#: View\TipoInstituicaos\view.ctp:17
 #: View\Tipopagamentos\add.ctp:13
 #: View\Tipopagamentos\edit.ctp:14
 #: View\Tipopagamentos\index.ctp:8;45
@@ -1416,11 +1506,12 @@ msgstr ""
 #: View\BolsaTipoBolsas\edit.ctp:16
 #: View\BolsaTipoBolsas\index.ctp:17
 #: View\BolsaTipoBolsas\view.ctp:61;102
-#: View\Configs\edit.ctp:47
-#: View\Configs\index.ctp:89
+#: View\Configs\index.ctp:74
 #: View\Contas\edit.ctp:46
 #: View\Contas\index.ctp:60
 #: View\Contas\view.ctp:106
+#: View\CursoTipoPamentos\edit.ctp:18
+#: View\CursoTipoPamentos\index.ctp:25
 #: View\Cursos_escolas\edit.ctp:47
 #: View\Cursos_escolas\index.ctp:60
 #: View\DocenteFuncaos\edit.ctp:16
@@ -1439,9 +1530,9 @@ msgstr ""
 #: View\Estadopagamentos\edit.ctp:16
 #: View\Estadopagamentos\index.ctp:23
 #: View\Estadopagamentos\view.ctp:72
-#: View\Faculdades\edit.ctp:16
-#: View\Faculdades\index.ctp:23
-#: View\Faculdades\view.ctp:54
+#: View\FaculdadeTipoPagamentos\edit.ctp:18
+#: View\FaculdadeTipoPagamentos\index.ctp:25
+#: View\Faculdades\ver_faculdade.ctp:54
 #: View\Feriados\index.ctp:46
 #: View\Groups\edit.ctp:16
 #: View\Groups\index.ctp:23
@@ -1489,11 +1580,11 @@ msgstr ""
 #: View\SadeParametros\edit.ctp:21
 #: View\SadeParametros\index.ctp:29
 #: View\SadeParametros\view.ctp:94;139;186
-#: View\Seccaos\edit.ctp:18
-#: View\Seccaos\index.ctp:31
-#: View\Seccaos\view.ctp:68
+#: View\Seccaos\ver_seccao.ctp:68
 #: View\Semestrelectivos\edit.ctp:20
 #: View\Semestrelectivos\index.ctp:33
+#: View\TipoInstituicaos\edit.ctp:16
+#: View\TipoInstituicaos\index.ctp:17
 #: View\Tipopagamentos\edit.ctp:17
 #: View\Tipopagamentos\index.ctp:25
 #: View\Tipopagamentos\view.ctp:69
@@ -1537,12 +1628,14 @@ msgstr ""
 #: View\BolsaTipoBolsas\edit.ctp:16
 #: View\BolsaTipoBolsas\index.ctp:17
 #: View\BolsaTipoBolsas\view.ctp:20;61;102
-#: View\Configs\edit.ctp:47
-#: View\Configs\index.ctp:89
+#: View\Configs\index.ctp:74
 #: View\Configs\view.ctp:59
 #: View\Contas\edit.ctp:46
 #: View\Contas\index.ctp:60
 #: View\Contas\view.ctp:64;106
+#: View\CursoTipoPamentos\edit.ctp:18
+#: View\CursoTipoPamentos\index.ctp:25
+#: View\CursoTipoPamentos\view.ctp:30
 #: View\Cursos_escolas\edit.ctp:47
 #: View\Cursos_escolas\index.ctp:60
 #: View\Cursos_escolas\view.ctp:59
@@ -1563,9 +1656,10 @@ msgstr ""
 #: View\Estadopagamentos\edit.ctp:16
 #: View\Estadopagamentos\index.ctp:23
 #: View\Estadopagamentos\view.ctp:20;72
-#: View\Faculdades\edit.ctp:16
-#: View\Faculdades\index.ctp:23
-#: View\Faculdades\view.ctp:20;54
+#: View\FaculdadeTipoPagamentos\edit.ctp:18
+#: View\FaculdadeTipoPagamentos\index.ctp:25
+#: View\FaculdadeTipoPagamentos\view.ctp:30
+#: View\Faculdades\ver_faculdade.ctp:20;54
 #: View\Feriados\index.ctp:46
 #: View\Feriados\view.ctp:61
 #: View\Groups\edit.ctp:16
@@ -1624,12 +1718,13 @@ msgstr ""
 #: View\SadeParametros\edit.ctp:21
 #: View\SadeParametros\index.ctp:29
 #: View\SadeParametros\view.ctp:45;94;139;186
-#: View\Seccaos\edit.ctp:18
-#: View\Seccaos\index.ctp:31
-#: View\Seccaos\view.ctp:30;68
+#: View\Seccaos\ver_seccao.ctp:30;68
 #: View\Semestrelectivos\edit.ctp:20
 #: View\Semestrelectivos\index.ctp:33
 #: View\Semestrelectivos\view.ctp:40
+#: View\TipoInstituicaos\edit.ctp:16
+#: View\TipoInstituicaos\index.ctp:17
+#: View\TipoInstituicaos\view.ctp:20
 #: View\Tipopagamentos\edit.ctp:17
 #: View\Tipopagamentos\index.ctp:25
 #: View\Tipopagamentos\view.ctp:25;69
@@ -1665,9 +1760,10 @@ msgstr ""
 #: View\BolsaResultados\view.ctp:98;143
 #: View\BolsaTipoBolsas\index.ctp:15
 #: View\BolsaTipoBolsas\view.ctp:59;100
-#: View\Configs\index.ctp:87
+#: View\Configs\index.ctp:72
 #: View\Contas\index.ctp:58
 #: View\Contas\view.ctp:104
+#: View\CursoTipoPamentos\index.ctp:23
 #: View\Cursos_escolas\index.ctp:58
 #: View\DocenteFuncaos\index.ctp:15
 #: View\DocenteFuncaos\view.ctp:55
@@ -1679,8 +1775,8 @@ msgstr ""
 #: View\Estadoentidades\view.ctp:98;204
 #: View\Estadopagamentos\index.ctp:21
 #: View\Estadopagamentos\view.ctp:70
-#: View\Faculdades\index.ctp:21
-#: View\Faculdades\view.ctp:52
+#: View\FaculdadeTipoPagamentos\index.ctp:23
+#: View\Faculdades\ver_faculdade.ctp:52
 #: View\Feriados\index.ctp:44
 #: View\Groups\index.ctp:21
 #: View\Groups\view.ctp:54
@@ -1709,9 +1805,9 @@ msgstr ""
 #: View\SadeNivelAvaliadors\index.ctp:15
 #: View\SadeParametros\index.ctp:27
 #: View\SadeParametros\view.ctp:92;137;184
-#: View\Seccaos\index.ctp:29
-#: View\Seccaos\view.ctp:66
+#: View\Seccaos\ver_seccao.ctp:66
 #: View\Semestrelectivos\index.ctp:31
+#: View\TipoInstituicaos\index.ctp:15
 #: View\Tipopagamentos\index.ctp:23
 #: View\Tipopagamentos\view.ctp:67
 #: View\Tipoprecedencias\index.ctp:21
@@ -1738,9 +1834,10 @@ msgstr ""
 #: View\BolsaResultados\view.ctp:99;144
 #: View\BolsaTipoBolsas\index.ctp:16
 #: View\BolsaTipoBolsas\view.ctp:60;101
-#: View\Configs\index.ctp:88
+#: View\Configs\index.ctp:73
 #: View\Contas\index.ctp:59
 #: View\Contas\view.ctp:105
+#: View\CursoTipoPamentos\index.ctp:24
 #: View\Cursos_escolas\index.ctp:59
 #: View\DocenteFuncaos\index.ctp:16
 #: View\DocenteFuncaos\view.ctp:56
@@ -1752,8 +1849,8 @@ msgstr ""
 #: View\Estadoentidades\view.ctp:99;205
 #: View\Estadopagamentos\index.ctp:22
 #: View\Estadopagamentos\view.ctp:71
-#: View\Faculdades\index.ctp:22
-#: View\Faculdades\view.ctp:53
+#: View\FaculdadeTipoPagamentos\index.ctp:24
+#: View\Faculdades\ver_faculdade.ctp:53
 #: View\Feriados\index.ctp:45
 #: View\Groups\index.ctp:22
 #: View\Groups\view.ctp:55
@@ -1782,9 +1879,9 @@ msgstr ""
 #: View\SadeNivelAvaliadors\index.ctp:16
 #: View\SadeParametros\index.ctp:28
 #: View\SadeParametros\view.ctp:93;138;185
-#: View\Seccaos\index.ctp:30
-#: View\Seccaos\view.ctp:67
+#: View\Seccaos\ver_seccao.ctp:67
 #: View\Semestrelectivos\index.ctp:32
+#: View\TipoInstituicaos\index.ctp:16
 #: View\Tipopagamentos\index.ctp:24
 #: View\Tipopagamentos\view.ctp:68
 #: View\Tipoprecedencias\index.ctp:22
@@ -1804,8 +1901,10 @@ msgstr ""
 #: View\BolsaFonteBolsas\index.ctp:25
 #: View\BolsaResultados\index.ctp:41
 #: View\BolsaTipoBolsas\index.ctp:25
+#: View\CursoTipoPamentos\index.ctp:33
 #: View\DocenteFuncaos\index.ctp:25
 #: View\EscolaNivelMedios\index.ctp:37
+#: View\FaculdadeTipoPagamentos\index.ctp:33
 #: View\Feriados\index.ctp:54
 #: View\Months\index.ctp:26
 #: View\RegimeTrabalhos\index.ctp:25
@@ -1817,6 +1916,7 @@ msgstr ""
 #: View\SadeIndicadors\index.ctp:29
 #: View\SadeNivelAvaliadors\index.ctp:25
 #: View\SadeParametros\index.ctp:37
+#: View\TipoInstituicaos\index.ctp:25
 #: View\UnidadeOrganicas\index.ctp:25
 msgid "Page {:page} of {:pages}, showing {:current} records out of {:count} total, starting on record {:start}, ending on {:end}"
 msgstr ""
@@ -1830,13 +1930,14 @@ msgstr ""
 #: View\BolsaResultados\index.ctp:47
 #: View\BolsaTipoBolsas\index.ctp:31
 #: View\Contas\index.ctp:73
+#: View\CursoTipoPamentos\index.ctp:39
 #: View\Cursos_escolas\index.ctp:73
 #: View\DocenteFuncaos\index.ctp:31
 #: View\EscolaNivelMedios\index.ctp:43
 #: View\Escolas_tipopagamentos\index.ctp:54
 #: View\Estadoentidades\index.ctp:36
 #: View\Estadopagamentos\index.ctp:36
-#: View\Faculdades\index.ctp:36
+#: View\FaculdadeTipoPagamentos\index.ctp:39
 #: View\Feriados\index.ctp:60
 #: View\Groups\index.ctp:36
 #: View\Grupodisciplinas\t0006planoestudoanos\index.ctp:40
@@ -1856,8 +1957,8 @@ msgstr ""
 #: View\SadeIndicadors\index.ctp:35
 #: View\SadeNivelAvaliadors\index.ctp:31
 #: View\SadeParametros\index.ctp:43
-#: View\Seccaos\index.ctp:44
 #: View\Semestrelectivos\index.ctp:46
+#: View\TipoInstituicaos\index.ctp:31
 #: View\Tipopagamentos\index.ctp:38
 #: View\Tipoprecedencias\index.ctp:36
 #: View\UnidadeOrganicas\index.ctp:31
@@ -1874,13 +1975,14 @@ msgstr ""
 #: View\BolsaResultados\index.ctp:49
 #: View\BolsaTipoBolsas\index.ctp:33
 #: View\Contas\index.ctp:76
+#: View\CursoTipoPamentos\index.ctp:41
 #: View\Cursos_escolas\index.ctp:76
 #: View\DocenteFuncaos\index.ctp:33
 #: View\EscolaNivelMedios\index.ctp:45
 #: View\Escolas_tipopagamentos\index.ctp:57
 #: View\Estadoentidades\index.ctp:39
 #: View\Estadopagamentos\index.ctp:39
-#: View\Faculdades\index.ctp:39
+#: View\FaculdadeTipoPagamentos\index.ctp:41
 #: View\Feriados\index.ctp:62
 #: View\Groups\index.ctp:39
 #: View\Grupodisciplinas\t0006planoestudoanos\index.ctp:43
@@ -1900,8 +2002,8 @@ msgstr ""
 #: View\SadeIndicadors\index.ctp:37
 #: View\SadeNivelAvaliadors\index.ctp:33
 #: View\SadeParametros\index.ctp:45
-#: View\Seccaos\index.ctp:47
 #: View\Semestrelectivos\index.ctp:49
+#: View\TipoInstituicaos\index.ctp:33
 #: View\Tipopagamentos\index.ctp:41
 #: View\Tipoprecedencias\index.ctp:39
 #: View\UnidadeOrganicas\index.ctp:33
@@ -1934,13 +2036,15 @@ msgstr ""
 #: View\BolsaTipoBolsas\view.ctp:4;34;79
 #: View\Configs\view.ctp:33
 #: View\Contas\view.ctp:33;78
+#: View\CursoTipoPamentos\view.ctp:4
 #: View\Cursos_escolas\view.ctp:33
 #: View\DocenteFuncaos\view.ctp:4;32
 #: View\EscolaNivelMedios\view.ctp:4;53
 #: View\Escolas_tipopagamentos\view.ctp:4
 #: View\Estadoentidades\view.ctp:4;34;118
 #: View\Estadopagamentos\view.ctp:4;32
-#: View\Faculdades\view.ctp:4;32
+#: View\FaculdadeTipoPagamentos\view.ctp:4
+#: View\Faculdades\ver_faculdade.ctp:4;32
 #: View\Feriados\view.ctp:4
 #: View\Groups\view.ctp:4;32
 #: View\Grupodisciplinas\t0006planoestudoanos\view.ctp:4
@@ -1961,8 +2065,9 @@ msgstr ""
 #: View\SadeIndicadors\view.ctp:4;42
 #: View\SadeNivelAvaliadors\view.ctp:4
 #: View\SadeParametros\view.ctp:4;63;112;157
-#: View\Seccaos\view.ctp:4;46
+#: View\Seccaos\ver_seccao.ctp:4;46
 #: View\Semestrelectivos\view.ctp:4
+#: View\TipoInstituicaos\view.ctp:4
 #: View\Tipopagamentos\view.ctp:4;37
 #: View\Tipoprecedencias\view.ctp:4;32
 #: View\UnidadeOrganicas\view.ctp:4;32
@@ -2088,7 +2193,7 @@ msgstr ""
 #: View\EscolaNivelMedios\view.ctp:9
 #: View\Estadoentidades\view.ctp:9;36;120
 #: View\Estadopagamentos\view.ctp:9
-#: View\Faculdades\view.ctp:9;33
+#: View\Faculdades\ver_faculdade.ctp:9;33
 #: View\Feriados\view.ctp:9
 #: View\Groups\view.ctp:9
 #: View\Months\view.ctp:9;82;168
@@ -2097,7 +2202,8 @@ msgstr ""
 #: View\Regimelectivos\view.ctp:9
 #: View\SadeAvaliacaos\view.ctp:9
 #: View\SadeNivelAvaliadors\view.ctp:9
-#: View\Seccaos\view.ctp:9
+#: View\Seccaos\ver_seccao.ctp:9
+#: View\TipoInstituicaos\view.ctp:9
 #: View\Tipopagamentos\view.ctp:9
 #: View\Tipoprecedencias\view.ctp:9
 #: View\UnidadeOrganicas\view.ctp:9;36
@@ -2114,6 +2220,7 @@ msgid "Related Alunos"
 msgstr ""
 
 #: View\AlunoViaAdmissaos\view.ctp:33
+#: View\Departamentos\index.ctp:53
 #: View\Estadopagamentos\view.ctp:44
 #: View\Inscricaos\index.ctp:23
 #: View\Months\view.ctp:170
@@ -2212,7 +2319,7 @@ msgstr ""
 #: View\SadeAvaliacaos\view.ctp:40
 #: View\SadeAvaliadors\view.ctp:50
 #: View\SadeParametros\view.ctp:64;114;159
-#: View\Seccaos\view.ctp:47
+#: View\Seccaos\ver_seccao.ctp:47
 #: View\UnidadeOrganicas\view.ctp:33
 #: View\docente_categorias\view.ctp:33
 msgid "Entidade Id"
@@ -2259,122 +2366,122 @@ msgstr ""
 msgid "Faculdade Ingresso Id"
 msgstr ""
 
-#: View\Alunos\add.ctp:111
-#: View\Alunos\edit.ctp:98
+#: View\Alunos\adicionar_estudante.ctp:111
+#: View\Alunos\editar_estudante.ctp:81
 #: View\Docentes\registar_docente.ctp:163
 msgid "Tipo de Identificação:"
 msgstr ""
 
-#: View\Alunos\add.ctp:121
-#: View\Alunos\edit.ctp:108
+#: View\Alunos\adicionar_estudante.ctp:121
+#: View\Alunos\editar_estudante.ctp:91
 #: View\Docentes\registar_docente.ctp:173
 msgid "Numero do Documento de Identificação:"
 msgstr ""
 
-#: View\Alunos\add.ctp:134
-#: View\Alunos\edit.ctp:121
+#: View\Alunos\adicionar_estudante.ctp:134
+#: View\Alunos\editar_estudante.ctp:104
 #: View\Docentes\registar_docente.ctp:186
 msgid "Data de emissão:"
 msgstr ""
 
-#: View\Alunos\add.ctp:146
-#: View\Alunos\edit.ctp:139
+#: View\Alunos\adicionar_estudante.ctp:146
+#: View\Alunos\editar_estudante.ctp:116
 #: View\Docentes\registar_docente.ctp:197
 msgid "Local de emissão:"
 msgstr ""
 
-#: View\Alunos\add.ctp:167
-#: View\Alunos\edit.ctp:160
+#: View\Alunos\adicionar_estudante.ctp:167
+#: View\Alunos\editar_estudante.ctp:137
 #: View\Docentes\registar_docente.ctp:218
 msgid "Cidade onde mora:"
 msgstr ""
 
-#: View\Alunos\add.ctp:177
-#: View\Alunos\edit.ctp:170
+#: View\Alunos\adicionar_estudante.ctp:177
+#: View\Alunos\editar_estudante.ctp:147
 #: View\Docentes\registar_docente.ctp:228
 msgid "Bairro:"
 msgstr ""
 
-#: View\Alunos\add.ctp:187
-#: View\Alunos\edit.ctp:180
+#: View\Alunos\adicionar_estudante.ctp:187
+#: View\Alunos\editar_estudante.ctp:157
 #: View\Docentes\registar_docente.ctp:238
 msgid "Avenida/Rua:"
 msgstr ""
 
-#: View\Alunos\add.ctp:197
-#: View\Alunos\edit.ctp:190
+#: View\Alunos\adicionar_estudante.ctp:197
+#: View\Alunos\editar_estudante.ctp:167
 #: View\Docentes\registar_docente.ctp:248
 msgid "Caixa Postal:"
 msgstr ""
 
-#: View\Alunos\add.ctp:209;302
-#: View\Alunos\edit.ctp:202;295
+#: View\Alunos\adicionar_estudante.ctp:209;302
+#: View\Alunos\editar_estudante.ctp:179;272
 #: View\Docentes\registar_docente.ctp:260;354
 msgid "Telefone:"
 msgstr ""
 
-#: View\Alunos\add.ctp:219
-#: View\Alunos\edit.ctp:212
+#: View\Alunos\adicionar_estudante.ctp:219
+#: View\Alunos\editar_estudante.ctp:189
 #: View\Docentes\registar_docente.ctp:270
 msgid "Telemovel:"
 msgstr ""
 
-#: View\Alunos\add.ctp:229
-#: View\Alunos\edit.ctp:222
+#: View\Alunos\adicionar_estudante.ctp:229
+#: View\Alunos\editar_estudante.ctp:199
 #: View\Docentes\registar_docente.ctp:280
 msgid "Email Pessoal:"
 msgstr ""
 
-#: View\Alunos\add.ctp:250
-#: View\Alunos\edit.ctp:243
+#: View\Alunos\adicionar_estudante.ctp:250
+#: View\Alunos\editar_estudante.ctp:220
 #: View\Docentes\registar_docente.ctp:301
 msgid "É Trabalhador?:"
 msgstr ""
 
-#: View\Alunos\add.ctp:258
-#: View\Alunos\edit.ctp:251
+#: View\Alunos\adicionar_estudante.ctp:258
+#: View\Alunos\editar_estudante.ctp:228
 #: View\Docentes\registar_docente.ctp:310
 msgid "Área de Trabalho:"
 msgstr ""
 
-#: View\Alunos\add.ctp:268
-#: View\Alunos\edit.ctp:261
+#: View\Alunos\adicionar_estudante.ctp:268
+#: View\Alunos\editar_estudante.ctp:238
 #: View\Docentes\registar_docente.ctp:320
 msgid "Nome da empresa:"
 msgstr ""
 
-#: View\Alunos\add.ctp:278
-#: View\Alunos\edit.ctp:271
+#: View\Alunos\adicionar_estudante.ctp:278
+#: View\Alunos\editar_estudante.ctp:248
 #: View\Docentes\registar_docente.ctp:330
 msgid "Endereço da empresa:"
 msgstr ""
 
-#: View\Alunos\add.ctp:291
-#: View\Alunos\edit.ctp:284
+#: View\Alunos\adicionar_estudante.ctp:291
+#: View\Alunos\editar_estudante.ctp:261
 #: View\Docentes\registar_docente.ctp:343
 msgid "Nome do responsável:"
 msgstr ""
 
-#: View\Alunos\add.ctp:313
-#: View\Alunos\edit.ctp:306
+#: View\Alunos\adicionar_estudante.ctp:313
+#: View\Alunos\editar_estudante.ctp:283
 #: View\Docentes\registar_docente.ctp:365
 msgid "Email da empresa:"
 msgstr ""
 
-#: View\Alunos\add.ctp:323
-#: View\Alunos\edit.ctp:316
+#: View\Alunos\adicionar_estudante.ctp:323
+#: View\Alunos\editar_estudante.ctp:293
 #: View\Docentes\registar_docente.ctp:375
 msgid "Website da empresa:"
 msgstr ""
 
-#: View\Alunos\add.ctp:343
-#: View\Alunos\edit.ctp:336
+#: View\Alunos\adicionar_estudante.ctp:343
+#: View\Alunos\editar_estudante.ctp:313
 #: View\Docentes\registar_docente.ctp:395
 msgid "Detalhes Adicionais:"
 msgstr ""
 
-#: View\Alunos\add.ctp:363
-#: View\Alunos\edit.ctp:356
+#: View\Alunos\adicionar_estudante.ctp:363
+#: View\Alunos\editar_estudante.ctp:333
 #: View\Cursos\add.ctp:62
 #: View\Cursos\edit.ctp:62
 #: View\Cursos\view.ctp:35
@@ -2387,8 +2494,8 @@ msgstr ""
 msgid "Lista de Cursos"
 msgstr ""
 
-#: View\Alunos\add.ctp:366
-#: View\Alunos\edit.ctp:359
+#: View\Alunos\adicionar_estudante.ctp:366
+#: View\Alunos\editar_estudante.ctp:339
 #: View\Anolectivoepocas\edit.ctp:48
 #: View\Anolectivoepocas\tempo_limite.ctp:54
 #: View\Anolectivos\add.ctp:173
@@ -2400,13 +2507,14 @@ msgstr ""
 #: View\Cargos\edit.ctp:48
 #: View\Cidades\add.ctp:56
 #: View\Cidades\edit.ctp:51
-#: View\Configs\add.ctp:84
+#: View\Configs\adicionar_configuracao.ctp:50
+#: View\Configs\editar_configuracao.ctp:50
 #: View\Cursos\add.ctp:65
 #: View\Cursos\edit.ctp:65
-#: View\Departamentos\add.ctp:50
-#: View\Departamentos\edit.ctp:50
-#: View\Disciplinas\add.ctp:59
-#: View\Disciplinas\edit.ctp:59
+#: View\Departamentos\adicionar_departamento.ctp:46
+#: View\Departamentos\editar_departamento.ctp:46
+#: View\Disciplinas\adicionar_disciplina.ctp:46
+#: View\Disciplinas\editar_disciplina.ctp:59
 #: View\Docentes\registar_docente.ctp:418
 #: View\Documentos\add.ctp:23
 #: View\Documentos\edit.ctp:20
@@ -2420,6 +2528,8 @@ msgstr ""
 #: View\Estadomatriculas\edit.ctp:18
 #: View\Estadomessages\add.ctp:22
 #: View\Estadomessages\edit.ctp:19
+#: View\Faculdades\adicionar_faculdade.ctp:46
+#: View\Faculdades\editar_faculdade.ctp:46
 #: View\Funcionarios\add.ctp:57
 #: View\Funcionarios\edit.ctp:59
 #: View\Generos\add.ctp:18
@@ -2447,6 +2557,8 @@ msgstr ""
 #: View\SadeAutoAvaliacaos\assistente.ctp:251
 #: View\SadeAutoAvaliacaos\docente.ctp:251
 #: View\SadeAutoAvaliacaos\investigador.ctp:251
+#: View\Seccaos\adicionar_seccao.ctp:46
+#: View\Seccaos\editar_seccao.ctp:46
 #: View\Tipoavaliacaos\add.ctp:77
 #: View\Tipoavaliacaos\edit.ctp:25
 #: View\Tipocursos\add.ctp:18
@@ -2472,15 +2584,17 @@ msgid "GRAVAR"
 msgstr ""
 
 #: View\Alunos\index.ctp:60
-#: View\Configs\index.ctp:42
 #: View\Cursos\index.ctp:46
-#: View\Disciplinas\index.ctp:33
+#: View\Departamentos\index.ctp:57
+#: View\Disciplinas\index.ctp:40
 #: View\Docentes\index.ctp:59
 #: View\Epocaavaliacaos\index.ctp:53
+#: View\Faculdades\index.ctp:40
 #: View\Funcionarios\index.ctp:25
 #: View\Inscricaos\index.ctp:30
-#: View\Pagamentos\index.ctp:197
+#: View\Pagamentos\index.ctp:178
 #: View\Planoestudos\adicionar_disciplinas.ctp:107
+#: View\Seccaos\index.ctp:40
 #: View\Tipoavaliacaos\index.ctp:54
 #: View\Turmas\index.ctp:96
 msgid "Acção"
@@ -2494,8 +2608,6 @@ msgstr ""
 #: View\Cargos\menu.ctp:32
 #: View\Cidades\menu.ctp:32
 #: View\Cursos\menu.ctp:31
-#: View\Departamentos\menu.ctp:31
-#: View\Disciplinas\menu.ctp:10
 #: View\Documentos\menu.ctp:10
 #: View\Epocaavaliacaos\menu.ctp:11
 #: View\Escolas\menu.ctp:10
@@ -2533,7 +2645,7 @@ msgid "Detalhes Adicionais"
 msgstr ""
 
 #: View\Alunos\menu.ctp:47
-#: View\Layouts\default.ctp:159
+#: View\Layouts\default.ctp:162
 #: View\Pages\home.ctp:11
 msgid "Estudantes"
 msgstr ""
@@ -2716,7 +2828,7 @@ msgstr ""
 #: View\Avaliacaos\index.ctp:75
 #: View\Cargos\index.ctp:60
 #: View\Cidades\index.ctp:70
-#: View\Departamentos\index.ctp:62
+#: View\Departamentos\index.ctp:77
 #: View\Documentos\index.ctp:31
 #: View\Epocaavaliacaos\index.ctp:99
 #: View\Escolas\index.ctp:32
@@ -2853,9 +2965,7 @@ msgid "Anos Lectivos"
 msgstr ""
 
 #: View\Anolectivos\index.ctp:47
-#: View\Configs\index.ctp:26
 #: View\Cursos\index.ctp:31
-#: View\Disciplinas\index.ctp:17
 #: View\Epocaavaliacaos\index.ctp:39
 #: View\Funcionarios\index.ctp:10
 #: View\Inscricaos\index.ctp:10
@@ -2864,6 +2974,7 @@ msgid "Registrar novo"
 msgstr ""
 
 #: View\Anolectivos\index.ctp:65
+#: View\Configs\index.ctp:54
 #: View\Planoestudos\index.ctp:55
 msgid "Acções"
 msgstr ""
@@ -2883,7 +2994,7 @@ msgstr ""
 #: View\Inscricaos\add.ctp:9
 #: View\Inscricaos\add_turmas.ctp:11
 #: View\Inscricaos\menu.ctp:12
-#: View\Layouts\default.ctp:168
+#: View\Layouts\default.ctp:171
 #: View\Matriculas\menu.ctp:34
 #: View\Pages\home.ctp:20
 #: View\Turmas\add_disciplinas.ctp:11
@@ -2906,7 +3017,7 @@ msgstr ""
 #: View\Elements\menu_manutencao.ctp:7
 #: View\Inscricaos\add.ctp:11
 #: View\Inscricaos\menu.ctp:14
-#: View\Layouts\default.ctp:169
+#: View\Layouts\default.ctp:172
 #: View\Matriculas\menu.ctp:36
 #: View\Pages\home.ctp:14
 #: View\Turmas\fecho_da_turma.ctp:10
@@ -2918,7 +3029,7 @@ msgstr ""
 #: View\Elements\menu_manutencao.ctp:8
 #: View\Inscricaos\add.ctp:12
 #: View\Inscricaos\menu.ctp:15
-#: View\Layouts\default.ctp:170
+#: View\Layouts\default.ctp:173
 #: View\Matriculas\menu.ctp:37
 #: View\Turmas\fecho_da_turma.ctp:11
 #: View\Turmas\menu.ctp:17
@@ -2961,7 +3072,6 @@ msgstr ""
 #: View\Areatrabalhos\menu.ctp:33
 #: View\Cargos\menu.ctp:34
 #: View\Cidades\menu.ctp:34
-#: View\Departamentos\menu.ctp:33
 #: View\Documentos\menu.ctp:12
 #: View\Escolas\menu.ctp:12
 #: View\Estadoinscricaos\menu.ctp:12
@@ -2982,7 +3092,6 @@ msgstr ""
 #: View\Areatrabalhos\menu.ctp:34
 #: View\Cargos\menu.ctp:35
 #: View\Cidades\menu.ctp:35
-#: View\Departamentos\menu.ctp:34
 #: View\Documentos\menu.ctp:13
 #: View\Elements\menu_administracao.ctp:13;34
 #: View\Escolas\menu.ctp:13
@@ -2992,7 +3101,7 @@ msgstr ""
 #: View\Generos\menu.ctp:13
 #: View\Grauacademicos\menu.ctp:13
 #: View\Grupodisciplinars\menu.ctp:13
-#: View\Layouts\default.ctp:211
+#: View\Layouts\default.ctp:214
 #: View\Paises\menu.ctp:13
 #: View\Provincias\menu.ctp:13
 #: View\Tipocursos\menu.ctp:13
@@ -3005,7 +3114,6 @@ msgstr ""
 #: View\Areatrabalhos\menu.ctp:35
 #: View\Cargos\menu.ctp:36
 #: View\Cidades\menu.ctp:36
-#: View\Departamentos\menu.ctp:35
 #: View\Documentos\menu.ctp:14
 #: View\Elements\menu_administracao.ctp:14;35
 #: View\Escolas\menu.ctp:14
@@ -3015,7 +3123,7 @@ msgstr ""
 #: View\Generos\menu.ctp:14
 #: View\Grauacademicos\menu.ctp:14
 #: View\Grupodisciplinars\menu.ctp:14
-#: View\Layouts\default.ctp:212
+#: View\Layouts\default.ctp:215
 #: View\Paises\menu.ctp:14
 #: View\Provincias\menu.ctp:14
 #: View\Tipocursos\menu.ctp:14
@@ -3028,7 +3136,6 @@ msgstr ""
 #: View\Areatrabalhos\menu.ctp:36
 #: View\Cargos\menu.ctp:37
 #: View\Cidades\menu.ctp:37
-#: View\Departamentos\menu.ctp:36
 #: View\Documentos\menu.ctp:15
 #: View\Elements\menu_administracao.ctp:15;36
 #: View\Escolas\menu.ctp:15
@@ -3038,7 +3145,7 @@ msgstr ""
 #: View\Generos\menu.ctp:15
 #: View\Grauacademicos\menu.ctp:15
 #: View\Grupodisciplinars\menu.ctp:15
-#: View\Layouts\default.ctp:213
+#: View\Layouts\default.ctp:216
 #: View\Paises\menu.ctp:15
 #: View\Provincias\menu.ctp:15
 #: View\Tipocursos\menu.ctp:15
@@ -3052,7 +3159,6 @@ msgstr ""
 #: View\Cargos\menu.ctp:38
 #: View\Cidades\index.ctp:35
 #: View\Cidades\menu.ctp:38
-#: View\Departamentos\menu.ctp:37
 #: View\Documentos\menu.ctp:16
 #: View\Elements\menu_administracao.ctp:16;37
 #: View\Escolas\menu.ctp:16
@@ -3062,7 +3168,7 @@ msgstr ""
 #: View\Generos\menu.ctp:16
 #: View\Grauacademicos\menu.ctp:16
 #: View\Grupodisciplinars\menu.ctp:16
-#: View\Layouts\default.ctp:214
+#: View\Layouts\default.ctp:217
 #: View\Paises\menu.ctp:16
 #: View\Provincias\menu.ctp:16
 #: View\Tipocursos\menu.ctp:16
@@ -3075,7 +3181,6 @@ msgstr ""
 #: View\Areatrabalhos\menu.ctp:38
 #: View\Cargos\menu.ctp:39
 #: View\Cidades\menu.ctp:39
-#: View\Departamentos\menu.ctp:38
 #: View\Documentos\menu.ctp:17
 #: View\Elements\menu_administracao.ctp:17;38
 #: View\Escolas\menu.ctp:17
@@ -3085,7 +3190,7 @@ msgstr ""
 #: View\Generos\menu.ctp:17
 #: View\Grauacademicos\menu.ctp:17
 #: View\Grupodisciplinars\menu.ctp:17
-#: View\Layouts\default.ctp:215
+#: View\Layouts\default.ctp:218
 #: View\Paises\menu.ctp:17
 #: View\Provincias\menu.ctp:17
 #: View\Tipocursos\menu.ctp:17
@@ -3098,7 +3203,9 @@ msgstr ""
 #: View\Areatrabalhos\menu.ctp:39
 #: View\Cargos\menu.ctp:40
 #: View\Cidades\menu.ctp:40
-#: View\Departamentos\menu.ctp:39
+#: View\Departamentos\adicionar_departamento.ctp:15
+#: View\Departamentos\editar_departamento.ctp:15
+#: View\Departamentos\index.ctp:22
 #: View\Documentos\menu.ctp:18
 #: View\Elements\menu_administracao.ctp:18;39
 #: View\Escolas\menu.ctp:18
@@ -3108,7 +3215,7 @@ msgstr ""
 #: View\Generos\menu.ctp:18
 #: View\Grauacademicos\menu.ctp:18
 #: View\Grupodisciplinars\menu.ctp:18
-#: View\Layouts\default.ctp:216
+#: View\Layouts\default.ctp:152;219
 #: View\Paises\menu.ctp:18
 #: View\Provincias\menu.ctp:18
 #: View\Tipocursos\menu.ctp:18
@@ -3121,7 +3228,6 @@ msgstr ""
 #: View\Areatrabalhos\menu.ctp:40
 #: View\Cargos\menu.ctp:41
 #: View\Cidades\menu.ctp:41
-#: View\Departamentos\menu.ctp:40
 #: View\Documentos\menu.ctp:19
 #: View\Elements\menu_administracao.ctp:19;40
 #: View\Escolas\menu.ctp:19
@@ -3131,7 +3237,7 @@ msgstr ""
 #: View\Generos\menu.ctp:19
 #: View\Grauacademicos\menu.ctp:19
 #: View\Grupodisciplinars\menu.ctp:19
-#: View\Layouts\default.ctp:217
+#: View\Layouts\default.ctp:220
 #: View\Paises\menu.ctp:19
 #: View\Provincias\menu.ctp:19
 #: View\Tipocursos\index.ctp:6
@@ -3145,7 +3251,6 @@ msgstr ""
 #: View\Areatrabalhos\menu.ctp:41
 #: View\Cargos\menu.ctp:42
 #: View\Cidades\menu.ctp:42
-#: View\Departamentos\menu.ctp:41
 #: View\Documentos\menu.ctp:20
 #: View\Elements\menu_administracao.ctp:20;41
 #: View\Escolas\menu.ctp:20
@@ -3156,7 +3261,7 @@ msgstr ""
 #: View\Grauacademicos\menu.ctp:20
 #: View\Grupodisciplinars\index.ctp:6
 #: View\Grupodisciplinars\menu.ctp:20
-#: View\Layouts\default.ctp:218
+#: View\Layouts\default.ctp:221
 #: View\Paises\menu.ctp:20
 #: View\Provincias\menu.ctp:20
 #: View\Tipocursos\menu.ctp:20
@@ -3169,7 +3274,6 @@ msgstr ""
 #: View\Areatrabalhos\menu.ctp:42
 #: View\Cargos\menu.ctp:43
 #: View\Cidades\menu.ctp:43
-#: View\Departamentos\menu.ctp:42
 #: View\Documentos\menu.ctp:21
 #: View\Elements\menu_administracao.ctp:21;42
 #: View\Escolas\menu.ctp:21
@@ -3179,7 +3283,7 @@ msgstr ""
 #: View\Generos\menu.ctp:21
 #: View\Grauacademicos\menu.ctp:21
 #: View\Grupodisciplinars\menu.ctp:21
-#: View\Layouts\default.ctp:219
+#: View\Layouts\default.ctp:222
 #: View\Paises\menu.ctp:21
 #: View\Provincias\menu.ctp:21
 #: View\Tipocursos\menu.ctp:21
@@ -3192,7 +3296,6 @@ msgstr ""
 #: View\Areatrabalhos\menu.ctp:43
 #: View\Cargos\menu.ctp:44
 #: View\Cidades\menu.ctp:44
-#: View\Departamentos\menu.ctp:43
 #: View\Documentos\menu.ctp:22
 #: View\Elements\menu_administracao.ctp:22;43
 #: View\Escolas\menu.ctp:22
@@ -3202,7 +3305,7 @@ msgstr ""
 #: View\Generos\menu.ctp:22
 #: View\Grauacademicos\menu.ctp:22
 #: View\Grupodisciplinars\menu.ctp:22
-#: View\Layouts\default.ctp:220
+#: View\Layouts\default.ctp:223
 #: View\Paises\menu.ctp:22
 #: View\Provincias\menu.ctp:22
 #: View\Tipocursos\menu.ctp:22
@@ -3215,7 +3318,6 @@ msgstr ""
 #: View\Areatrabalhos\menu.ctp:44
 #: View\Cargos\menu.ctp:45
 #: View\Cidades\menu.ctp:45
-#: View\Departamentos\menu.ctp:44
 #: View\Documentos\menu.ctp:23
 #: View\Elements\menu_administracao.ctp:23;44
 #: View\Escolas\menu.ctp:23
@@ -3225,7 +3327,7 @@ msgstr ""
 #: View\Generos\menu.ctp:23
 #: View\Grauacademicos\menu.ctp:23
 #: View\Grupodisciplinars\menu.ctp:23
-#: View\Layouts\default.ctp:221
+#: View\Layouts\default.ctp:224
 #: View\Paises\menu.ctp:23
 #: View\Provincias\menu.ctp:23
 #: View\Tipocursos\menu.ctp:23
@@ -3238,7 +3340,6 @@ msgstr ""
 #: View\Areatrabalhos\menu.ctp:45
 #: View\Cargos\menu.ctp:46
 #: View\Cidades\menu.ctp:46
-#: View\Departamentos\menu.ctp:45
 #: View\Documentos\menu.ctp:24
 #: View\Elements\menu_administracao.ctp:24;45
 #: View\Escolas\index.ctp:6
@@ -3249,7 +3350,7 @@ msgstr ""
 #: View\Generos\menu.ctp:24
 #: View\Grauacademicos\menu.ctp:24
 #: View\Grupodisciplinars\menu.ctp:24
-#: View\Layouts\default.ctp:222
+#: View\Layouts\default.ctp:225
 #: View\Paises\menu.ctp:24
 #: View\Provincias\menu.ctp:24
 #: View\Tipocursos\menu.ctp:24
@@ -3262,7 +3363,6 @@ msgstr ""
 #: View\Areatrabalhos\menu.ctp:46
 #: View\Cargos\menu.ctp:47
 #: View\Cidades\menu.ctp:47
-#: View\Departamentos\menu.ctp:46
 #: View\Documentos\menu.ctp:25
 #: View\Elements\menu_administracao.ctp:25;46
 #: View\Escolas\menu.ctp:25
@@ -3271,7 +3371,7 @@ msgstr ""
 #: View\Generos\menu.ctp:25
 #: View\Grauacademicos\menu.ctp:25
 #: View\Grupodisciplinars\menu.ctp:25
-#: View\Layouts\default.ctp:223
+#: View\Layouts\default.ctp:226
 #: View\Paises\menu.ctp:25
 #: View\Provincias\menu.ctp:25
 #: View\Tipocursos\menu.ctp:25
@@ -3909,22 +4009,47 @@ msgstr ""
 msgid "Cidade - visualizar"
 msgstr ""
 
-#: View\Configs\edit.ctp:33
-#: View\Configs\view.ctp:58
-msgid "Edit Config"
+#: View\Configs\adicionar_configuracao.ctp:26
+#: View\Configs\editar_configuracao.ctp:26
+msgid "Dados da Configuração"
 msgstr ""
 
-#: View\Configs\edit.ctp:48
-#: View\Configs\view.ctp:60
-msgid "List Configs"
+#: View\Configs\adicionar_configuracao.ctp:30
+#: View\Configs\editar_configuracao.ctp:30
+msgid "Chave da Configuração"
 msgstr ""
 
-#: View\Configs\index.ctp:101
-#: View\Epocaavaliacaos\index.ctp:112
-#: View\Funcionarios\index.ctp:90
-#: View\Inscricaos\index.ctp:126
-#: View\Tipoavaliacaos\index.ctp:114
-msgid "Mostrando %current% linhas. Total: %count% linhas retornadas"
+#: View\Configs\adicionar_configuracao.ctp:33
+#: View\Configs\editar_configuracao.ctp:33
+msgid "Valor da Configuração"
+msgstr ""
+
+#: View\Configs\adicionar_configuracao.ctp:36
+#: View\Configs\editar_configuracao.ctp:36
+msgid "Carregar Automaticamente"
+msgstr ""
+
+#: View\Configs\adicionar_configuracao.ctp:39
+#: View\Configs\editar_configuracao.ctp:39
+msgid "Estado(Activo/Inactivo)"
+msgstr ""
+
+#: View\Configs\adicionar_configuracao.ctp:42
+#: View\Configs\editar_configuracao.ctp:42
+#: View\SadeIndicadors\view.ctp:14;44
+#: View\SadeParametros\view.ctp:14
+msgid "Descricao"
+msgstr ""
+
+#: View\Configs\adicionar_configuracao.ctp:47
+#: View\Configs\editar_configuracao.ctp:47
+msgid "Todas Configurações"
+msgstr ""
+
+#: View\Configs\index.ctp:42
+#: View\Elements\menu_administracao.ctp:30
+#: View\Layouts\default.ctp:213
+msgid "Configurações"
 msgstr ""
 
 #: View\Configs\view.ctp:31
@@ -3939,8 +4064,16 @@ msgstr ""
 msgid "Autoload"
 msgstr ""
 
+#: View\Configs\view.ctp:58
+msgid "Edit Config"
+msgstr ""
+
 #: View\Configs\view.ctp:59
 msgid "Delete Config"
+msgstr ""
+
+#: View\Configs\view.ctp:60
+msgid "List Configs"
 msgstr ""
 
 #: View\Configs\view.ctp:61
@@ -4056,8 +4189,10 @@ msgid "Conta Id"
 msgstr ""
 
 #: View\Contas\view.ctp:81
+#: View\CursoTipoPamentos\view.ctp:19
 #: View\Escolas_tipopagamentos\view.ctp:19
 #: View\Estadopagamentos\view.ctp:35
+#: View\FaculdadeTipoPagamentos\view.ctp:19
 #: View\Mensalidades\view.ctp:43
 #: View\Months\view.ctp:41;124;169
 #: View\Pagamentos\view.ctp:48
@@ -4074,15 +4209,138 @@ msgstr ""
 msgid "Data Pagamento"
 msgstr ""
 
+#: View\CursoTipoPamentos\add.ctp:4
+msgid "Add Curso Tipo Pamento"
+msgstr ""
+
+#: View\CursoTipoPamentos\add.ctp:17
+#: View\CursoTipoPamentos\edit.ctp:19
+#: View\CursoTipoPamentos\view.ctp:31
+msgid "List Curso Tipo Pamentos"
+msgstr ""
+
+#: View\CursoTipoPamentos\add.ctp:18
+#: View\CursoTipoPamentos\edit.ctp:20
+#: View\CursoTipoPamentos\index.ctp:49
+#: View\CursoTipoPamentos\view.ctp:33
+#: View\Cursos_escolas\add.ctp:49
+#: View\Cursos_escolas\edit.ctp:51
+#: View\Cursos_escolas\index.ctp:85
+#: View\Cursos_escolas\view.ctp:64
+#: View\Ramos\add.ctp:17
+#: View\Ramos\edit.ctp:19
+#: View\Ramos\index.ctp:50
+#: View\Ramos\view.ctp:28
+msgid "List Cursos"
+msgstr ""
+
+#: View\CursoTipoPamentos\add.ctp:19
+#: View\CursoTipoPamentos\edit.ctp:21
+#: View\CursoTipoPamentos\index.ctp:50
+#: View\CursoTipoPamentos\view.ctp:34
+#: View\Cursos_escolas\add.ctp:50
+#: View\Cursos_escolas\edit.ctp:52
+#: View\Cursos_escolas\index.ctp:86
+#: View\Cursos_escolas\view.ctp:65
+#: View\Ramos\add.ctp:18
+#: View\Ramos\edit.ctp:20
+#: View\Ramos\index.ctp:51
+#: View\Ramos\view.ctp:29
+msgid "New Curso"
+msgstr ""
+
+#: View\CursoTipoPamentos\add.ctp:20
+#: View\CursoTipoPamentos\edit.ctp:22
+#: View\CursoTipoPamentos\index.ctp:51
+#: View\CursoTipoPamentos\view.ctp:35
+#: View\Escolas_tipopagamentos\add.ctp:24
+#: View\Escolas_tipopagamentos\edit.ctp:26
+#: View\Escolas_tipopagamentos\index.ctp:66
+#: View\Escolas_tipopagamentos\view.ctp:55
+#: View\FaculdadeTipoPagamentos\add.ctp:20
+#: View\FaculdadeTipoPagamentos\edit.ctp:22
+#: View\FaculdadeTipoPagamentos\index.ctp:51
+#: View\FaculdadeTipoPagamentos\view.ctp:35
+#: View\Months\add.ctp:22
+#: View\Months\edit.ctp:24
+#: View\Months\index.ctp:48
+#: View\Months\view.ctp:29
+#: View\Tipopagamentos\add.ctp:16
+#: View\Tipopagamentos\edit.ctp:18
+#: View\Tipopagamentos\view.ctp:26
+msgid "List Tipopagamentos"
+msgstr ""
+
+#: View\CursoTipoPamentos\add.ctp:21
+#: View\CursoTipoPamentos\edit.ctp:23
+#: View\CursoTipoPamentos\index.ctp:52
+#: View\CursoTipoPamentos\view.ctp:36
+#: View\Escolas_tipopagamentos\add.ctp:25
+#: View\Escolas_tipopagamentos\edit.ctp:27
+#: View\Escolas_tipopagamentos\index.ctp:67
+#: View\Escolas_tipopagamentos\view.ctp:56
+#: View\FaculdadeTipoPagamentos\add.ctp:21
+#: View\FaculdadeTipoPagamentos\edit.ctp:23
+#: View\FaculdadeTipoPagamentos\index.ctp:52
+#: View\FaculdadeTipoPagamentos\view.ctp:36
+#: View\Months\add.ctp:23
+#: View\Months\edit.ctp:25
+#: View\Months\index.ctp:49
+#: View\Months\view.ctp:30;201
+#: View\Tipopagamentos\index.ctp:47
+#: View\Tipopagamentos\view.ctp:27
+msgid "New Tipopagamento"
+msgstr ""
+
+#: View\CursoTipoPamentos\edit.ctp:4
+#: View\CursoTipoPamentos\view.ctp:29
+msgid "Edit Curso Tipo Pamento"
+msgstr ""
+
+#: View\CursoTipoPamentos\index.ctp:2
+msgid "Curso Tipo Pamentos"
+msgstr ""
+
+#: View\CursoTipoPamentos\index.ctp:48
+#: View\CursoTipoPamentos\view.ctp:32
+msgid "New Curso Tipo Pamento"
+msgstr ""
+
+#: View\CursoTipoPamentos\view.ctp:2
+msgid "Curso Tipo Pamento"
+msgstr ""
+
+#: View\CursoTipoPamentos\view.ctp:9
+#: View\Cursos_escolas\view.ctp:43
+#: View\Grupodisciplinas\index.ctp:14
+#: View\Matricularevisaos\add.ctp:25
+#: View\Matricularevisaos\edit.ctp:27
+#: View\Matricularevisaos\index.ctp:67
+#: View\Matricularevisaos\view.ctp:24;56
+#: View\Planoestudos\index.ctp:52
+#: View\Ramos\view.ctp:14
+msgid "Curso"
+msgstr ""
+
+#: View\CursoTipoPamentos\view.ctp:14
+#: View\Escolas_tipopagamentos\view.ctp:14
+#: View\FaculdadeTipoPagamentos\view.ctp:14
+#: View\Tipopagamentos\view.ctp:2
+msgid "Tipopagamento"
+msgstr ""
+
+#: View\CursoTipoPamentos\view.ctp:30
+msgid "Delete Curso Tipo Pamento"
+msgstr ""
+
 #: View\Cursos\index.ctp:30
 #: View\Cursos\menu.ctp:33
-#: View\Disciplinas\menu.ctp:12
 #: View\Elements\menu_pedagogica.ctp:3
 #: View\Epocaavaliacaos\index.ctp:38
 #: View\Grupodisciplinas\add.ctp:8
 #: View\Grupodisciplinas\edit.ctp:4
 #: View\Grupodisciplinas\view.ctp:4
-#: View\Layouts\default.ctp:152;177;195;203
+#: View\Layouts\default.ctp:155;180;198;206
 #: View\Matricularevisaos\add.ctp:24
 #: View\Matricularevisaos\edit.ctp:26
 #: View\Matricularevisaos\index.ctp:66
@@ -4093,24 +4351,22 @@ msgid "Cursos"
 msgstr ""
 
 #: View\Cursos\menu.ctp:34
-#: View\Disciplinas\index.ctp:16
-#: View\Disciplinas\menu.ctp:13
+#: View\Disciplinas\index.ctp:6
 #: View\Elements\menu_pedagogica.ctp:2
 #: View\Grupodisciplinas\add.ctp:9
 #: View\Grupodisciplinas\edit.ctp:5
 #: View\Grupodisciplinas\view.ctp:5
-#: View\Layouts\default.ctp:176
+#: View\Layouts\default.ctp:154;179
 #: View\Planoestudos\menu.ctp:13
 msgid "Disciplinas"
 msgstr ""
 
 #: View\Cursos\menu.ctp:35
-#: View\Disciplinas\menu.ctp:14
 #: View\Elements\menu_pedagogica.ctp:5
 #: View\Grupodisciplinas\add.ctp:10
 #: View\Grupodisciplinas\edit.ctp:6
 #: View\Grupodisciplinas\view.ctp:6
-#: View\Layouts\default.ctp:153;178;196;204
+#: View\Layouts\default.ctp:156;181;199;207
 #: View\Planoestudos\menu.ctp:14
 msgid "Plano de Estudos"
 msgstr ""
@@ -4151,28 +4407,6 @@ msgstr ""
 msgid "New Escola"
 msgstr ""
 
-#: View\Cursos_escolas\add.ctp:49
-#: View\Cursos_escolas\edit.ctp:51
-#: View\Cursos_escolas\index.ctp:85
-#: View\Cursos_escolas\view.ctp:64
-#: View\Ramos\add.ctp:17
-#: View\Ramos\edit.ctp:19
-#: View\Ramos\index.ctp:50
-#: View\Ramos\view.ctp:28
-msgid "List Cursos"
-msgstr ""
-
-#: View\Cursos_escolas\add.ctp:50
-#: View\Cursos_escolas\edit.ctp:52
-#: View\Cursos_escolas\index.ctp:86
-#: View\Cursos_escolas\view.ctp:65
-#: View\Ramos\add.ctp:18
-#: View\Ramos\edit.ctp:20
-#: View\Ramos\index.ctp:51
-#: View\Ramos\view.ctp:29
-msgid "New Curso"
-msgstr ""
-
 #: View\Cursos_escolas\edit.ctp:33
 #: View\Cursos_escolas\view.ctp:58
 msgid "Edit Cursos Escola"
@@ -4196,17 +4430,6 @@ msgstr ""
 msgid "Escola"
 msgstr ""
 
-#: View\Cursos_escolas\view.ctp:43
-#: View\Grupodisciplinas\index.ctp:14
-#: View\Matricularevisaos\add.ctp:25
-#: View\Matricularevisaos\edit.ctp:27
-#: View\Matricularevisaos\index.ctp:67
-#: View\Matricularevisaos\view.ctp:24;56
-#: View\Planoestudos\index.ctp:52
-#: View\Ramos\view.ctp:14
-msgid "Curso"
-msgstr ""
-
 #: View\Cursos_escolas\view.ctp:48
 msgid "Data Adicao"
 msgstr ""
@@ -4215,40 +4438,83 @@ msgstr ""
 msgid "Delete Cursos Escola"
 msgstr ""
 
-#: View\Departamentos\add.ctp:34
-#: View\Departamentos\edit.ctp:34
-#: View\Departamentos\view.ctp:34
+#: View\Departamentos\adicionar_departamento.ctp:14
+#: View\Departamentos\editar_departamento.ctp:14
+#: View\Departamentos\index.ctp:21
+#: View\Disciplinas\index.ctp:5
+#: View\Faculdades\adicionar_faculdade.ctp:14
+#: View\Faculdades\editar_faculdade.ctp:14
+#: View\Seccaos\adicionar_seccao.ctp:14
+#: View\Seccaos\editar_seccao.ctp:14
+#: View\Seccaos\index.ctp:5
+msgid "Pedagógica"
+msgstr ""
+
+#: View\Departamentos\adicionar_departamento.ctp:16
+#: View\Departamentos\editar_departamento.ctp:16
+#: View\Departamentos\index.ctp:36
+msgid "Adicionar Departamento"
+msgstr ""
+
+#: View\Departamentos\adicionar_departamento.ctp:25
+#: View\Departamentos\editar_departamento.ctp:25
+msgid "Dados do Departamento"
+msgstr ""
+
+#: View\Departamentos\adicionar_departamento.ctp:29
+#: View\Departamentos\editar_departamento.ctp:29
+msgid "Código do Departamento"
+msgstr ""
+
+#: View\Departamentos\adicionar_departamento.ctp:32
+#: View\Departamentos\editar_departamento.ctp:32
+#: View\Seccaos\adicionar_seccao.ctp:38
+#: View\Seccaos\editar_seccao.ctp:38
+#: View\Seccaos\index.ctp:38
+msgid "Nome do Departamento"
+msgstr ""
+
+#: View\Departamentos\adicionar_departamento.ctp:35
+#: View\Departamentos\editar_departamento.ctp:35
+#: View\Faculdades\adicionar_faculdade.ctp:35
+#: View\Faculdades\editar_faculdade.ctp:35
+#: View\Faculdades\index.ctp:38
+#: View\Seccaos\adicionar_seccao.ctp:35
+#: View\Seccaos\editar_seccao.ctp:35
+#: View\Seccaos\index.ctp:39
+msgid "Nome da Faculdade"
+msgstr ""
+
+#: View\Departamentos\adicionar_departamento.ctp:38
+#: View\Departamentos\editar_departamento.ctp:38
+msgid "Seleccione a Opção Abaixo para definir propinas exclusivas para este departamento"
+msgstr ""
+
+#: View\Departamentos\adicionar_departamento.ctp:43
+#: View\Departamentos\editar_departamento.ctp:43
+#: View\Departamentos\index.ctp:23
+#: View\Departamentos\ver_departamento.ctp:34
+#: View\Seccaos\adicionar_seccao.ctp:43
+#: View\Seccaos\editar_seccao.ctp:43
 msgid "Lista de Departamentos"
 msgstr ""
 
-#: View\Departamentos\add.ctp:35
-msgid "Departamento - adicionar"
-msgstr ""
-
-#: View\Departamentos\edit.ctp:35
-msgid "Departamento - editar"
-msgstr ""
-
-#: View\Departamentos\index.ctp:36
-msgid "Novo Departamento"
-msgstr ""
-
-#: View\Departamentos\index.ctp:37
-#: View\Seccaos\view.ctp:14
-msgid "Departamento"
-msgstr ""
-
-#: View\Departamentos\view.ctp:35
+#: View\Departamentos\ver_departamento.ctp:35
 msgid "Departamento - visualizar"
 msgstr ""
 
-#: View\Disciplinas\add.ctp:56
-#: View\Disciplinas\edit.ctp:56
-#: View\Disciplinas\view.ctp:8
+#: View\Disciplinas\adicionar_disciplina.ctp:43
+#: View\Disciplinas\editar_disciplina.ctp:56
+#: View\Disciplinas\index.ctp:7
+#: View\Disciplinas\ver_disciplina.ctp:8
 msgid "Lista de Disciplinas"
 msgstr ""
 
-#: View\Disciplinas\view.ctp:9
+#: View\Disciplinas\index.ctp:20
+msgid "Adicionar Disciplina"
+msgstr ""
+
+#: View\Disciplinas\ver_disciplina.ctp:9
 msgid "Visualizar Disciplina"
 msgstr ""
 
@@ -4275,10 +4541,7 @@ msgstr ""
 #: View\SadeAvaliadors\edit.ctp:22
 #: View\SadeAvaliadors\index.ctp:53
 #: View\SadeAvaliadors\view.ctp:35
-#: View\Seccaos\add.ctp:22
-#: View\Seccaos\edit.ctp:24
-#: View\Seccaos\index.ctp:58
-#: View\Seccaos\view.ctp:37
+#: View\Seccaos\ver_seccao.ctp:37
 #: View\UnidadeOrganicas\add.ctp:16
 #: View\UnidadeOrganicas\edit.ctp:18
 #: View\UnidadeOrganicas\index.ctp:41
@@ -4302,10 +4565,7 @@ msgstr ""
 #: View\SadeAvaliadors\edit.ctp:23
 #: View\SadeAvaliadors\index.ctp:54
 #: View\SadeAvaliadors\view.ctp:36
-#: View\Seccaos\add.ctp:23
-#: View\Seccaos\edit.ctp:25
-#: View\Seccaos\index.ctp:59
-#: View\Seccaos\view.ctp:38;77
+#: View\Seccaos\ver_seccao.ctp:38;77
 #: View\UnidadeOrganicas\add.ctp:17
 #: View\UnidadeOrganicas\edit.ctp:19
 #: View\UnidadeOrganicas\index.ctp:42
@@ -4341,7 +4601,7 @@ msgstr ""
 
 #: View\DocenteFuncaos\view.ctp:28
 #: View\RegimeTrabalhos\view.ctp:28
-#: View\Seccaos\view.ctp:42
+#: View\Seccaos\ver_seccao.ctp:42
 #: View\UnidadeOrganicas\view.ctp:28
 #: View\docente_categorias\view.ctp:28
 msgid "Related Docentes"
@@ -4349,7 +4609,7 @@ msgstr ""
 
 #: View\DocenteFuncaos\view.ctp:34
 #: View\RegimeTrabalhos\view.ctp:34
-#: View\Seccaos\view.ctp:48
+#: View\Seccaos\ver_seccao.ctp:48
 #: View\UnidadeOrganicas\view.ctp:34
 #: View\docente_categorias\view.ctp:34
 msgid "Seccao Id"
@@ -4357,7 +4617,7 @@ msgstr ""
 
 #: View\DocenteFuncaos\view.ctp:35
 #: View\RegimeTrabalhos\view.ctp:35
-#: View\Seccaos\view.ctp:49
+#: View\Seccaos\ver_seccao.ctp:49
 #: View\UnidadeOrganicas\view.ctp:35
 #: View\docente_categorias\view.ctp:35
 msgid "Docente Categoria Id"
@@ -4426,23 +4686,14 @@ msgid "New Entidade"
 msgstr ""
 
 #: View\Docentes\edit.ctp:22
-#: View\Faculdades\add.ctp:16
-#: View\Faculdades\edit.ctp:18
-#: View\Faculdades\index.ctp:46
-#: View\Faculdades\view.ctp:23
-#: View\Seccaos\add.ctp:17
-#: View\Seccaos\edit.ctp:19
-#: View\Seccaos\view.ctp:31
+#: View\Faculdades\ver_faculdade.ctp:23
+#: View\Seccaos\ver_seccao.ctp:31
 msgid "List Seccaos"
 msgstr ""
 
 #: View\Docentes\edit.ctp:23
-#: View\Faculdades\add.ctp:17
-#: View\Faculdades\edit.ctp:19
-#: View\Faculdades\index.ctp:47
-#: View\Faculdades\view.ctp:24;63
-#: View\Seccaos\index.ctp:53
-#: View\Seccaos\view.ctp:32
+#: View\Faculdades\ver_faculdade.ctp:24;63
+#: View\Seccaos\ver_seccao.ctp:32
 msgid "New Seccao"
 msgstr ""
 
@@ -4540,12 +4791,12 @@ msgid "ESTUDANTE"
 msgstr ""
 
 #: View\Elements\header.ctp:93;97
-#: View\Layouts\default.ctp:165
+#: View\Layouts\default.ctp:168
 msgid "MANUTENÇÃO"
 msgstr ""
 
 #: View\Elements\header.ctp:103
-#: View\Layouts\default.ctp:174
+#: View\Layouts\default.ctp:177
 msgid "AVALIAÇÃO"
 msgstr ""
 
@@ -4554,17 +4805,17 @@ msgid "NOTAS DE AVALIAÇÕES"
 msgstr ""
 
 #: View\Elements\header.ctp:111
-#: View\Layouts\default.ctp:192
+#: View\Layouts\default.ctp:195
 msgid "CONTABILIDADE"
 msgstr ""
 
 #: View\Elements\header.ctp:114
-#: View\Layouts\default.ctp:200
+#: View\Layouts\default.ctp:203
 msgid "RELATÓRIOS"
 msgstr ""
 
 #: View\Elements\header.ctp:118
-#: View\Layouts\default.ctp:208
+#: View\Layouts\default.ctp:211
 msgid "ADMINISTRAÇÃO"
 msgstr ""
 
@@ -4576,7 +4827,7 @@ msgid "Funcionarios"
 msgstr ""
 
 #: View\Elements\menu_administracao.ctp:5
-#: View\Layouts\default.ctp:160
+#: View\Layouts\default.ctp:163
 #: View\Pages\home.ctp:23
 msgid "Docentes"
 msgstr ""
@@ -4594,11 +4845,6 @@ msgstr ""
 
 #: View\Elements\menu_administracao.ctp:8
 msgid "Actualizar Sistema"
-msgstr ""
-
-#: View\Elements\menu_administracao.ctp:30
-#: View\Layouts\default.ctp:210
-msgid "Configurações"
 msgstr ""
 
 #: View\Elements\menu_contabilidade.ctp:4
@@ -4725,6 +4971,13 @@ msgstr ""
 msgid "Editar Epoca de Avaliacao"
 msgstr ""
 
+#: View\Epocaavaliacaos\index.ctp:112
+#: View\Funcionarios\index.ctp:90
+#: View\Inscricaos\index.ctp:126
+#: View\Tipoavaliacaos\index.ctp:114
+msgid "Mostrando %current% linhas. Total: %count% linhas retornadas"
+msgstr ""
+
 #: View\Epocaavaliacaos\view.ctp:8
 msgid "Epoca de Avaliacao - Visualizar"
 msgstr ""
@@ -4848,33 +5101,6 @@ msgstr ""
 msgid "List Escolas Tipopagamentos"
 msgstr ""
 
-#: View\Escolas_tipopagamentos\add.ctp:24
-#: View\Escolas_tipopagamentos\edit.ctp:26
-#: View\Escolas_tipopagamentos\index.ctp:66
-#: View\Escolas_tipopagamentos\view.ctp:55
-#: View\Months\add.ctp:22
-#: View\Months\edit.ctp:24
-#: View\Months\index.ctp:48
-#: View\Months\view.ctp:29
-#: View\Tipopagamentos\add.ctp:16
-#: View\Tipopagamentos\edit.ctp:18
-#: View\Tipopagamentos\view.ctp:26
-msgid "List Tipopagamentos"
-msgstr ""
-
-#: View\Escolas_tipopagamentos\add.ctp:25
-#: View\Escolas_tipopagamentos\edit.ctp:27
-#: View\Escolas_tipopagamentos\index.ctp:67
-#: View\Escolas_tipopagamentos\view.ctp:56
-#: View\Months\add.ctp:23
-#: View\Months\edit.ctp:25
-#: View\Months\index.ctp:49
-#: View\Months\view.ctp:30;201
-#: View\Tipopagamentos\index.ctp:47
-#: View\Tipopagamentos\view.ctp:27
-msgid "New Tipopagamento"
-msgstr ""
-
 #: View\Escolas_tipopagamentos\add.ctp:26
 #: View\Escolas_tipopagamentos\edit.ctp:28
 #: View\Escolas_tipopagamentos\index.ctp:68
@@ -4926,11 +5152,6 @@ msgstr ""
 
 #: View\Escolas_tipopagamentos\view.ctp:2
 msgid "Escolas Tipopagamento"
-msgstr ""
-
-#: View\Escolas_tipopagamentos\view.ctp:14
-#: View\Tipopagamentos\view.ctp:2
-msgid "Tipopagamento"
 msgstr ""
 
 #: View\Escolas_tipopagamentos\view.ctp:24
@@ -5064,7 +5285,7 @@ msgid "Cargo Id"
 msgstr ""
 
 #: View\Estadoentidades\view.ctp:54
-#: View\Faculdades\view.ctp:34
+#: View\Faculdades\ver_faculdade.ctp:34
 msgid "Departamento Id"
 msgstr ""
 
@@ -5290,58 +5511,130 @@ msgstr ""
 msgid "Estadopagamento Id"
 msgstr ""
 
-#: View\Faculdades\add.ctp:4
-msgid "Add Faculdade"
+#: View\FaculdadeTipoPagamentos\add.ctp:4
+msgid "Add Faculdade Tipo Pagamento"
 msgstr ""
 
-#: View\Faculdades\add.ctp:15
-#: View\Faculdades\edit.ctp:17
-#: View\Faculdades\view.ctp:21
-#: View\Seccaos\add.ctp:20
-#: View\Seccaos\edit.ctp:22
-#: View\Seccaos\index.ctp:56
-#: View\Seccaos\view.ctp:35
+#: View\FaculdadeTipoPagamentos\add.ctp:17
+#: View\FaculdadeTipoPagamentos\edit.ctp:19
+#: View\FaculdadeTipoPagamentos\view.ctp:31
+msgid "List Faculdade Tipo Pagamentos"
+msgstr ""
+
+#: View\FaculdadeTipoPagamentos\add.ctp:18
+#: View\FaculdadeTipoPagamentos\edit.ctp:20
+#: View\FaculdadeTipoPagamentos\index.ctp:49
+#: View\FaculdadeTipoPagamentos\view.ctp:33
+#: View\Faculdades\ver_faculdade.ctp:21
+#: View\Seccaos\ver_seccao.ctp:35
 msgid "List Faculdades"
 msgstr ""
 
-#: View\Faculdades\edit.ctp:4
-#: View\Faculdades\view.ctp:19
-msgid "Edit Faculdade"
-msgstr ""
-
-#: View\Faculdades\index.ctp:2
-msgid "Faculdades"
-msgstr ""
-
-#: View\Faculdades\index.ctp:31
-#: View\Seccaos\index.ctp:39
-#: View\docente_categorias\index.ctp:31
-msgid "Page %page% of %pages%, showing %current% records out of %count% total, starting on record %start%, ending on %end%"
-msgstr ""
-
-#: View\Faculdades\index.ctp:45
-#: View\Faculdades\view.ctp:22
-#: View\Seccaos\add.ctp:21
-#: View\Seccaos\edit.ctp:23
-#: View\Seccaos\index.ctp:57
-#: View\Seccaos\view.ctp:36
+#: View\FaculdadeTipoPagamentos\add.ctp:19
+#: View\FaculdadeTipoPagamentos\edit.ctp:21
+#: View\FaculdadeTipoPagamentos\index.ctp:50
+#: View\FaculdadeTipoPagamentos\view.ctp:34
+#: View\Faculdades\ver_faculdade.ctp:22
+#: View\Seccaos\ver_seccao.ctp:36
 msgid "New Faculdade"
 msgstr ""
 
-#: View\Faculdades\view.ctp:2
-#: View\Seccaos\view.ctp:19
+#: View\FaculdadeTipoPagamentos\edit.ctp:4
+#: View\FaculdadeTipoPagamentos\view.ctp:29
+msgid "Edit Faculdade Tipo Pagamento"
+msgstr ""
+
+#: View\FaculdadeTipoPagamentos\index.ctp:2
+msgid "Faculdade Tipo Pagamentos"
+msgstr ""
+
+#: View\FaculdadeTipoPagamentos\index.ctp:48
+#: View\FaculdadeTipoPagamentos\view.ctp:32
+msgid "New Faculdade Tipo Pagamento"
+msgstr ""
+
+#: View\FaculdadeTipoPagamentos\view.ctp:2
+msgid "Faculdade Tipo Pagamento"
+msgstr ""
+
+#: View\FaculdadeTipoPagamentos\view.ctp:9
+#: View\Faculdades\ver_faculdade.ctp:2
+#: View\Seccaos\ver_seccao.ctp:19
 msgid "Faculdade"
 msgstr ""
 
-#: View\Faculdades\view.ctp:20
+#: View\FaculdadeTipoPagamentos\view.ctp:30
+msgid "Delete Faculdade Tipo Pagamento"
+msgstr ""
+
+#: View\Faculdades\adicionar_faculdade.ctp:15
+#: View\Faculdades\editar_faculdade.ctp:15
+#: View\Faculdades\index.ctp:30
+#: View\Layouts\default.ctp:151
+msgid "Faculdades"
+msgstr ""
+
+#: View\Faculdades\adicionar_faculdade.ctp:16;43
+#: View\Faculdades\editar_faculdade.ctp:16;43
+msgid "Lista de Faculdades"
+msgstr ""
+
+#: View\Faculdades\adicionar_faculdade.ctp:28
+#: View\Faculdades\editar_faculdade.ctp:28
+msgid "Dados da Faculdade"
+msgstr ""
+
+#: View\Faculdades\adicionar_faculdade.ctp:32
+#: View\Faculdades\editar_faculdade.ctp:32
+#: View\Faculdades\index.ctp:37
+msgid "Código da Faculdade"
+msgstr ""
+
+#: View\Faculdades\adicionar_faculdade.ctp:38
+#: View\Faculdades\editar_faculdade.ctp:38
+msgid "Seleccione a Opção Abaixo para definir propinas exclusivas para esta faculdade"
+msgstr ""
+
+#: View\Faculdades\index.ctp:20
+msgid "Adicionar Faculdade"
+msgstr ""
+
+#: View\Faculdades\index.ctp:39
+msgid "Propinas Próprias?"
+msgstr ""
+
+#: View\Faculdades\index.ctp:57
+#: View\Seccaos\index.ctp:62
+msgid "Ver"
+msgstr ""
+
+#: View\Faculdades\index.ctp:58
+#: View\Seccaos\index.ctp:63
+msgid "Editar"
+msgstr ""
+
+#: View\Faculdades\index.ctp:59
+#: View\Seccaos\index.ctp:64
+msgid "Remover"
+msgstr ""
+
+#: View\Faculdades\index.ctp:59
+msgid "Tem certeza que pretende remover este objecto?"
+msgstr ""
+
+#: View\Faculdades\ver_faculdade.ctp:19
+msgid "Edit Faculdade"
+msgstr ""
+
+#: View\Faculdades\ver_faculdade.ctp:20
 msgid "Delete Faculdade"
 msgstr ""
 
-#: View\Faculdades\view.ctp:28
+#: View\Faculdades\ver_faculdade.ctp:28
 msgid "Related Seccaos"
 msgstr ""
 
-#: View\Faculdades\view.ctp:35
+#: View\Faculdades\ver_faculdade.ctp:35
 msgid "Faculdade Id"
 msgstr ""
 
@@ -5760,23 +6053,31 @@ msgstr ""
 msgid "PÁGINA INICIAL"
 msgstr ""
 
-#: View\Layouts\default.ctp:157
+#: View\Layouts\default.ctp:153
+#: View\Seccaos\adicionar_seccao.ctp:15
+#: View\Seccaos\editar_seccao.ctp:15
+#: View\Seccaos\index.ctp:6;30
+#: View\Users\view.ctp:4
+msgid "Secções"
+msgstr ""
+
+#: View\Layouts\default.ctp:160
 msgid "PESSOAS"
 msgstr ""
 
-#: View\Layouts\default.ctp:182
+#: View\Layouts\default.ctp:185
 msgid "eSADE"
 msgstr ""
 
-#: View\Layouts\default.ctp:186
+#: View\Layouts\default.ctp:189
 msgid "Avaliação pelo Estudante"
 msgstr ""
 
-#: View\Layouts\default.ctp:187
+#: View\Layouts\default.ctp:190
 msgid "Avaliação Qualitativa"
 msgstr ""
 
-#: View\Layouts\default.ctp:188
+#: View\Layouts\default.ctp:191
 msgid "Relatórios"
 msgstr ""
 
@@ -6046,7 +6347,7 @@ msgstr ""
 msgid "Edit Pagamento"
 msgstr ""
 
-#: View\Pagamentos\index.ctp:177
+#: View\Pagamentos\index.ctp:158
 msgid "Registrar Novo"
 msgstr ""
 
@@ -6784,11 +7085,6 @@ msgstr ""
 msgid "Sade Indicador"
 msgstr ""
 
-#: View\SadeIndicadors\view.ctp:14;44
-#: View\SadeParametros\view.ctp:14
-msgid "Descricao"
-msgstr ""
-
 #: View\SadeIndicadors\view.ctp:19
 msgid "Anexo"
 msgstr ""
@@ -6868,39 +7164,62 @@ msgstr ""
 msgid "Related Sade Avaliacao Alunos"
 msgstr ""
 
-#: View\Seccaos\add.ctp:4
-msgid "Add Seccao"
+#: View\Seccaos\adicionar_seccao.ctp:16
+#: View\Seccaos\editar_seccao.ctp:16
+#: View\Seccaos\index.ctp:20
+msgid "Adicionar Secção"
 msgstr ""
 
-#: View\Seccaos\add.ctp:18
-#: View\Seccaos\edit.ctp:20
-#: View\Seccaos\index.ctp:54
-#: View\Seccaos\view.ctp:33
-msgid "List Departamentos"
+#: View\Seccaos\adicionar_seccao.ctp:25
+#: View\Seccaos\editar_seccao.ctp:25
+msgid "Dados da Secção"
 msgstr ""
 
-#: View\Seccaos\add.ctp:19
-#: View\Seccaos\edit.ctp:21
-#: View\Seccaos\index.ctp:55
-#: View\Seccaos\view.ctp:34
-msgid "New Departamento"
+#: View\Seccaos\adicionar_seccao.ctp:29
+#: View\Seccaos\editar_seccao.ctp:29
+msgid "Código do Secção"
 msgstr ""
 
-#: View\Seccaos\edit.ctp:4
-#: View\Seccaos\view.ctp:29
-msgid "Edit Seccao"
+#: View\Seccaos\adicionar_seccao.ctp:32
+#: View\Seccaos\editar_seccao.ctp:32
+#: View\Seccaos\index.ctp:37
+msgid "Nome da Secção"
 msgstr ""
 
-#: View\Seccaos\index.ctp:2
-msgid "Seccaos"
+#: View\Seccaos\index.ctp:7
+msgid "Lista de Secções"
 msgstr ""
 
-#: View\Seccaos\view.ctp:2
+#: View\Seccaos\index.ctp:36
+msgid "Código da Secção"
+msgstr ""
+
+#: View\Seccaos\index.ctp:64
+msgid "Tem certeza que deseja remover este objecto?"
+msgstr ""
+
+#: View\Seccaos\ver_seccao.ctp:2
 msgid "Seccao"
 msgstr ""
 
-#: View\Seccaos\view.ctp:30
+#: View\Seccaos\ver_seccao.ctp:14
+msgid "Departamento"
+msgstr ""
+
+#: View\Seccaos\ver_seccao.ctp:29
+msgid "Edit Seccao"
+msgstr ""
+
+#: View\Seccaos\ver_seccao.ctp:30
 msgid "Delete Seccao"
+msgstr ""
+
+#: View\Seccaos\ver_seccao.ctp:33
+msgid "List Departamentos"
+msgstr ""
+
+#: View\Seccaos\ver_seccao.ctp:34
+msgid "New Departamento"
 msgstr ""
 
 #: View\Semestrelectivos\add.ctp:4
@@ -6923,6 +7242,38 @@ msgstr ""
 
 #: View\Semestrelectivos\view.ctp:29
 msgid "Data Fim"
+msgstr ""
+
+#: View\TipoInstituicaos\add.ctp:4
+msgid "Add Tipo Instituicao"
+msgstr ""
+
+#: View\TipoInstituicaos\add.ctp:15
+#: View\TipoInstituicaos\edit.ctp:17
+#: View\TipoInstituicaos\view.ctp:21
+msgid "List Tipo Instituicaos"
+msgstr ""
+
+#: View\TipoInstituicaos\edit.ctp:4
+#: View\TipoInstituicaos\view.ctp:19
+msgid "Edit Tipo Instituicao"
+msgstr ""
+
+#: View\TipoInstituicaos\index.ctp:2
+msgid "Tipo Instituicaos"
+msgstr ""
+
+#: View\TipoInstituicaos\index.ctp:40
+#: View\TipoInstituicaos\view.ctp:22
+msgid "New Tipo Instituicao"
+msgstr ""
+
+#: View\TipoInstituicaos\view.ctp:2
+msgid "Tipo Instituicao"
+msgstr ""
+
+#: View\TipoInstituicaos\view.ctp:20
+msgid "Delete Tipo Instituicao"
 msgstr ""
 
 #: View\Tipoavaliacaos\add.ctp:33
@@ -7237,10 +7588,6 @@ msgstr ""
 msgid "Alterar Senha"
 msgstr ""
 
-#: View\Users\view.ctp:4
-msgid "Secções"
-msgstr ""
-
 #: View\Users\view.ctp:12
 msgid "Lista de usuários"
 msgstr ""
@@ -7264,6 +7611,10 @@ msgstr ""
 
 #: View\docente_categorias\index.ctp:2
 msgid "Docente Categorias"
+msgstr ""
+
+#: View\docente_categorias\index.ctp:31
+msgid "Page %page% of %pages%, showing %current% records out of %count% total, starting on record %start%, ending on %end%"
 msgstr ""
 
 #: View\docente_categorias\view.ctp:2

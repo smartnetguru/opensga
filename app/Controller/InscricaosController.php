@@ -165,7 +165,11 @@ class InscricaosController extends AppController {
 	
 	
 	function edit($id = null) {
-			
+		$this->Inscricao->id = $id;
+        if(!$this->Inscricao->exists()){
+            throw new NotFoundException('Inscricao Invalida');
+        }
+            
 			App::Import('Model','Turma');
             $turma = new Turma;
 			//App::Import('Model','Logmv');

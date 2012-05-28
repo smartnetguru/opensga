@@ -7,13 +7,28 @@ class Disciplina extends AppModel {
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 
 	var $belongsTo = array(
-		'Grupodisciplinar' => array(
-			'className' => 'Grupodisciplinar',
-			'foreignKey' => 'grupodisciplinar_id',
+		'Faculdade' => array(
+			'className' => 'Faculdade',
+			'foreignKey' => 'faculdade_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
+		),
+        'Departamento' => array(
+			'className' => 'Departamento',
+			'foreignKey' => 'departamento_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
+		),
+        'Seccao' => array(
+			'className' => 'Seccao',
+			'foreignKey' => 'seccao_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
 		)
+        
 	);
 
 	var $hasMany = array(

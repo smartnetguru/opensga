@@ -8,7 +8,7 @@ class FaculdadesController extends AppController {
 		$this->set('faculdades', $this->paginate());
 	}
 
-	function view($id = null) {
+	function ver_faculdade($id = null) {
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid faculdade', true));
 			$this->redirect(array('action' => 'index'));
@@ -16,7 +16,7 @@ class FaculdadesController extends AppController {
 		$this->set('faculdade', $this->Faculdade->read(null, $id));
 	}
 
-	function add() {
+	function adicionar_faculdade() {
 		if (!empty($this->data)) {
 			$this->Faculdade->create();
 			if ($this->Faculdade->save($this->data)) {
@@ -28,8 +28,12 @@ class FaculdadesController extends AppController {
 		}
 	}
 
-	function edit($id = null) {
-		if (!$id && empty($this->data)) {
+	function editar_faculdade($id = null) {
+		$this->Faculdade->id = $id;
+        if(!$this->Faculdade->exists()){
+            throw new NotFoundException('Faculdade Inválida');
+        }
+        if (!$id && empty($this->data)) {
 			$this->Session->setFlash(__('Invalid faculdade', true));
 			$this->redirect(array('action' => 'index'));
 		}

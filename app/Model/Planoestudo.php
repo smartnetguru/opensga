@@ -110,6 +110,20 @@ class Planoestudo extends AppModel {
 
             return $precedencias;
         }
+        
+        /**
+         *Retorna todas as disciplinas que podem ser precedentes da disciplina em questao
+         * @param type $disciplina_id
+         * @param type $plano_id
+         * @todo Depois usar containable para optimizar 
+         */
+        public function getAllDisciplinasForPrecedencia($disciplina_id,$plano_id){
+            //Primeiro verificamos o ano e o semestre da disciplina em questao
+            $disciplina_plano = $this->Planoestudoano->find('first',array('conditions'=>array('disciplina_id'=>$disciplina_id,'planoestudo_id'=>$plano_id )));
+            //Agora buscamos todas as disciplinas daquele plano que podem ser precedentes
+            $disciplinas_precedentes = $this->Planoestudoano->find('all',array('conditions'=>array('planoestudo_id'=>$plano_id,"OR"=>array('ano <'=>$disciplina_plano['Planoestudoano']['ano'],"AND"=>array('semestre <'=>$disciplina_plano['Planoestudoano']['semestre'],'ano'=>$disciplina_plano['Planoestudoano']['ano'])))));
+          return $disciplinas_precedentes;
+        }
 		
 		
 

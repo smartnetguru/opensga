@@ -1,20 +1,6 @@
 <?php
 /**
- * OpenSGA - Sistema de Gestão Académica
- *   Copyright (C) 2010-2011  INFOmoz (Informática-Moçambique)
- * 
- * Este programa é um software livre: Você pode redistribuir e/ou modificar
- * todo ou parte deste programa, desde que siga os termos da licença por nele
- * estabelecidos. Grande parte do código deste programa está sob a licença 
- * GNU Affero General Public License publicada pela Free Software Foundation.
- * A versão original desta licença está disponível na pasta raiz deste software.
- * 
- * Este software é distribuido sob a perspectiva de que possa ser útil para 
- * satisfazer as necessidades dos seus utilizadores, mas SEM NENHUMA GARANTIA. Veja
- * os termos da licença GNU Affero General Public License para mais detalhes
- * 
- * As redistribuições deste software, mesmo quando o código-fonte for modificado significativamente,
- * devem manter está informação legal, assim como a licença original do software.
+ * Controller de alunos
  * 
  * @copyright     Copyright 2010-2011, INFOmoz (Informática-Moçambique) (http://infomoz.net)
  ** @link          http://opensga.com OpenSGA  - Sistema de Gestão Académica
@@ -56,6 +42,26 @@ class AlunosController extends AppController {
                 $conditions = array();
                 $conditions['limit']=Sanitize::escape( $_GET['iDisplayLength'] );
                 $conditions['offset']=Sanitize::escape( $_GET['iDisplayStart'] );
+                
+                $aColumns = array('Entidade.name','Aluno.codigo');
+                
+                	/* 
+	 * Filtering
+	 * NOTE this does not match the built-in DataTables filtering which does it
+	 * word by word on any field. It's possible to do here, but concerned about efficiency
+	 * on very large tables, and MySQL's regex functionality is very limited
+	 */
+	
+	if ( $_GET['sSearch'] != "" )
+	{
+		$conditions['conditions']['OR']=array();
+		for ( $i=0 ; $i<count($aColumns) ; $i++ )
+		{
+			$conditions['conditions']['OR'][$aColumns[$i]." LIKE"]="%".$_GET['sSearch']."%";
+		}
+		
+		//debug($conditions);
+	}
                 $alunos = $this->Aluno->find('all',$conditions);
                 $alunos_count = $this->Aluno->find('count');
                 $alunos_count_filter = $this->Aluno->find('count',$conditions);
@@ -200,7 +206,7 @@ class AlunosController extends AppController {
      * @todo criar manual de utilizador
      * @todo Nas listagens apenas devem aparecer codificadores e opcoes activas
      */
-    function add() {
+    function adicionar_estudante() {
         if ($this->request->is('post') || $this->request->is('put')) {
             $data_matricula = array();
             
@@ -292,22 +298,53 @@ class AlunosController extends AppController {
         $this->set(compact('cursos','planoestudos','users', 'paises', 'cidades', 'provincias', 'documentos', 'areatrabalhos','generos','cidadenascimentos','proveniencianomes','provenienciacidades','turnos','escola_nivel_medios'));
     }
 
-	function edit($id = null) {
-	        //App::Import('Model','Logmv');
-	        //$logmv = new Logmv;
-		if (!$id && empty($this->data)) {
-			$this->Session->setFlash('Invalido %s', 'flasherror');
+	function editar_estudante($id = null) {
+	        $this->Aluno->id = $id;
+            
+		if (!$this->Aluno->exists()) {
+			$this->Session->setFlash('Este Aluno não existe', 'default',array('class'=>'alert error'));
 
 			$this->redirect(array('action' => 'index'));
 		}
+        if($this->request->is('post') || $this->request->is('put')){
+            if($this->request->data['Form']['aluno_id']!=$id){
+                throw new NotFoundException('Tentativa de Fraude');
+                $this->redirect(array('controller'=>'users','action'=>'logout'));
+            }
+            
+            //Grava os dados do usuario
+            $this->Aluno->User->id = $this->request->data['Form']['user_id'];
+            $user_data = array(
+                'User'=>array(
+                    'name' => $this->request->data['Entidade']['name']
+                )
+            );
+            if($this->Aluno->User->save($user_data)){
+                
+                //Grava os dados da Entidade
+                $this->Aluno->Entidade->id = $this->request->data['Form']['entidade_id'];
+                if($this->Aluno->Entidade->save($this->request->data)){
+                     //Grava os dados do Aluno
+                     if($this->Aluno->save($this->request->data)){
+                         $this->Session->setFlash('Os dados do Estudante foram actualizados com Sucesso','default',array('alert success'));
+                     }
+                     else{
+                         $this->Session->setFlash(__('Problemas ao Editar dados da do Estudante'),'default',array('alert error'));
+                     }
+                } else {
+                    $this->Session->setFlash(__('Problemas ao Editar dados da Entidade'),'default',array('alert error'));
+                }
+            }
+            else{
+                $this->Session->setFlash(__('Problemas ao Editar dados do Usuário'),'default',array('alert error'));
+            }
+            
+            $aluno = $this->Aluno->findById($id);
+            debug($aluno);
+            die(debug($this->request->data));
+        }
+        
 		if (!empty($this->data)) {
-			
-			$imagem = array($this->data['Aluno']['foto']);
-			
-			$fileOk = $this->uploadFiles('upload',$imagem);
-			
-			$this->data['Aluno']['foto']=$fileOk['urls'][0];
-			
 			if ($this->Aluno->save($this->data)) {
 				$this->Session->setFlash('Os dados do aluno foram editados com sucesso','flashok');
 				$this->redirect(array('action' => 'index'));
@@ -318,18 +355,19 @@ class AlunosController extends AppController {
 			$this->data = $this->Aluno->read(null, $id);
 			
 		}
-		$users = $this->Aluno->User->find('list');
-		$paises = $this->Aluno->Paise->find('list');
-		$cidades = $this->Aluno->Cidade->find('list');
-		$provincias = $this->Aluno->Provincia->find('list');
-        $provenienciacidades = $this->Aluno->ProvenienciaCidade->find('list');
-		$proveniencianomes = $this->Aluno->ProvenienciaProvincia->find('list');
-		$documentos = $this->Aluno->Documento->find('list');
-		$areatrabalhos = $this->Aluno->Areatrabalho->find('list');
-		$generos = $this->Aluno->Genero->find('list');
-		$cidadenascimentos = $this->Aluno->CidadeNascimento->find('list');
+		 $users = $this->Aluno->Entidade->User->find('list');
+        $paises = $this->Aluno->Entidade->Paise->find('list');
+        $escola_nivel_medios = $this->Aluno->AlunoNivelMedio->EscolaNivelMedio->find('list');
+        $cidades = $this->Aluno->Entidade->Cidade->find('list');
+        $provincias = $this->Aluno->Entidade->Provincia->find('list');
+        $provenienciacidades = $this->Aluno->AlunoNivelMedio->EscolaNivelMedio->Distrito->find('list');
+        $proveniencianomes = $this->Aluno->AlunoNivelMedio->EscolaNivelMedio->Provincia->find('list');
+        $documentos = $this->Aluno->Entidade->Documento->find('list');
+        $areatrabalhos = $this->Aluno->Areatrabalho->find('list');
+        $generos = $this->Aluno->Entidade->Genero->find('list');
         $turnos = $this->Aluno->Matricula->Turno->find('list');
-		$this->set(compact('users', 'Paises', 'Cidades', 'Provincias', 'Documentos', 'areatrabalhos','generos','cidadenascimentos','proveniencianomes','provenienciacidades','turnos'));
+        $cidadenascimentos = $this->Aluno->Entidade->Cidade->find('list');
+        $this->set(compact('cursos','planoestudos','users', 'paises', 'cidades', 'provincias', 'documentos', 'areatrabalhos','generos','cidadenascimentos','proveniencianomes','provenienciacidades','turnos','escola_nivel_medios'));
 	}
 
 

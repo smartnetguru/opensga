@@ -135,10 +135,6 @@ class TurmasController extends AppController {
 		$this->set(compact('inscricaos','turmatipoavaliacaos','anolectivos','estados','mediaTurma','anosemestrecurr', 'cursos', 'planoestudos', 'turnos', 'disciplinas', 'docentes','anocurricular','semestrecurricular'));
 		}
 
-	/**
-         * 
-     * @todo Rever esta funcao para casos em que temos muitos utilizadores por causa do last ID
-         */
         function add() {
 	    //App::Import('Model','Logmv');
 	    //$logmv = new Logmv;

@@ -13,7 +13,7 @@
  * 
  */
  
- 
+ App::uses('Hash','Utility');
 /**
  * 
  * @todo Ver bem a tabela de precedencias. O nome nao parece consistente
@@ -74,6 +74,12 @@ class PlanoestudosController extends AppController {
 		$this->set(compact('cursos'));
 	}
 
+    /**
+     * Adiciona disciplinas precedentes. 
+     * 
+     * @todo remover queris daki
+     * @todo nao pode listar disciplinas do mesmo semestre
+     */
    function adicionar_precedencias($plano_id=null,$disc_id=null){
        App::Import('Model','Planoestudoano');
        App::Import('Model','Disciplina');
@@ -111,23 +117,18 @@ class PlanoestudosController extends AppController {
 
             }
 
-            $disciplinaq = $disciplina->query("select * from planoestudoanos where disciplina_id = {$disc_id} and planoestudo_id={$plano_id}");
+            //$disciplinaq = $disciplina->query("select * from planoestudoanos where disciplina_id = {$disc_id} and planoestudo_id={$plano_id}");
 			
             
 
-            $disciplinas_precedentes = $disciplina->query("select * from planoestudoanos where planoestudo_id={$plano_id} and ano <={$disciplinaq[0]['planoestudoanos']['ano']}");
+            //$disciplinas_precedentes = $disciplina->query("select * from planoestudoanos where planoestudo_id={$plano_id} and ano <={$disciplinaq[0]['planoestudoanos']['ano']}");
 
+           $disciplinas_p = $this->Planoestudo->getAllDisciplinasForPrecedencia($disc_id,$plano_id);
+           //debug($disciplinas_p);
+           //$precedencias = Set::extract('{n}.Disciplina.name',$disciplinas_p);
+           //die(debug($precedencias));
+            $precedencias=$disciplinas_p;
            
-            $precedencias=array();
-            foreach($disciplinas_precedentes as $disc){
-                $disciplina_nome = $disciplina->query("select name from disciplinas where id = {$disc['planoestudoanos']['disciplina_id']}");
-				//var_dump($disc['planoestudoanos']['t0004disciplina_id']);
-				
-                $precedencias[$disc['planoestudoanos']['disciplina_id']]['name']=$disciplina_nome[0]['disciplinas']['name'];
-				
-                $precedencias[$disc['planoestudoanos']['disciplina_id']]['id']=$disc['planoestudoanos']['disciplina_id'];
-
-            }
 			//var_dump($precedencias);
             $this->set('precedencias',$precedencias);
              $this->set('plano_id',$plano_id);
@@ -141,7 +142,7 @@ class PlanoestudosController extends AppController {
         $planoestudoanos = new Planoestudoano;
         $disciplina = new Disciplina;
             
-            //var_dump($this->Planoestudo->id);
+            //die(var_dump($this->Planoestudo->id));
 
             if(!empty($this->data)){
               
@@ -168,13 +169,12 @@ class PlanoestudosController extends AppController {
             
 
 		$cursos = $this->Planoestudo->Curso->find('list');
-        $disciplinas_excluir = array();
+       
         $disciplinas_adicionadas = $this->Planoestudo->getAllDisciplinasByPlanoEstudo($plano_id);
 		
-		
-        foreach($disciplinas_adicionadas as $dd){
-            $disciplinas_excluir[]=$dd['d']['id'];
-        }
+		$disciplinas_excluir = Set::extract('{n}.d.id',$disciplinas_adicionadas);
+        
+       
         
         $disciplinas = $disciplina->find('list',array('conditions'=>array('NOT'=>array('id'=>$disciplinas_excluir)), 'order'=> array ('name ASC')));
        	   
@@ -187,11 +187,12 @@ class PlanoestudosController extends AppController {
                 }
 
 
-                $disciplinas2 = $this->Planoestudo->getAllDisciplinasByPlanoEstudo($plano_id);
+                $disciplinas2 = $disciplinas_adicionadas;
                 $disciplina1 = array_keys($disciplinas);
                 $precedencias = $this->Planoestudo->getAllPrecedenciasByDisciplina($disciplina1[0],$plano_id);
-               
+              
                 $disciplinas_precedencia = $planoestudoanos->findDisciplinasByPrecendencia($plano_id,1,1);
+                 
                 $this->set('pdisciplina',$disciplinas_precedencia);
                 $this->set('plano_id',$plano_id);
                 $this->set(compact('cursos','disciplinas2','anos','semestres','disciplinas','pobrigatorias','popcionais'));
@@ -211,7 +212,7 @@ class PlanoestudosController extends AppController {
 	function edit($id = null) {
 		$this->Planoestudo->id = $id;
 		if (!$this->Planoestudo->exists()) {
-			throw new NotFoundException(__('Invalid manager'));
+			throw new NotFoundException(__('Plano de Estudos Invalido'));
 		}
 		if ($this->request->is('post') || $this->request->is('put')) {
 			if ($this->Planoestudo->save($this->request->data)) {

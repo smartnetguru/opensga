@@ -76,8 +76,10 @@ class MatriculasController extends AppController {
 	}
 
 	function edit($id = null) {
-	    //App::Import('Model','Logmv');
-	    //$logmv = new Logmv;
+	    $this->Matricula->id=$id;
+        if(!$this->Matricula->exists()){
+            throw new NotFoundException('Matricula Invalida');
+        }
 		if (!$id && empty($this->data)) {
 			$this->Session->setFlash('Invalido %s', 'flasherror');
 			$this->redirect(array('action' => 'index'));
