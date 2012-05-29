@@ -145,7 +145,7 @@ class UsersController extends AppController {
         function logout(){
                 $this->Auth->logout();
 				$this->Session->delete('SGAConfig');
-                $this->redirect(array('action'=>'login'));
+                $this->redirect($this->redirect($this->Auth->logout()));
         }
 
     function trocar_senha($id = null){
@@ -186,8 +186,13 @@ class UsersController extends AppController {
         }
 
 	function beforeFilter(){
-		$this->Auth->allow(array('login','logout'));
+		
 		parent::beforeFilter();
+        $this->Auth->allow(array('login','logout'));
+        if($this->action == 'logout') {
+         $this->disableCache();
+     }
+
 		
 	}
 	

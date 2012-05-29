@@ -146,9 +146,7 @@ class DisciplinasController extends AppController {
         
         public function beforeFilter() {
             parent::beforeFilter();
-            $this->Security->requireAuth();
-            $this->Security->allowedControllers = array('kkk');
-            $this->Security->allowedActions = array('kkk');
+            
             
             
         }

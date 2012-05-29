@@ -108,7 +108,7 @@ class AlunosController extends AppController {
                   'Planoestudo','Turno'
               ),
               'Curso','Entidade'=>array(
-                  'Provincia','Cidade','Paise','Genero','Documento'
+                  'Provincia','Cidade','Paise','Genero','DocumentoIdentificacao'
               ),
               'AlunoNivelMedio'=>array(
                   'EscolaNivelMedio'
@@ -185,7 +185,7 @@ class AlunosController extends AppController {
 		$provincias = $this->Aluno->Entidade->Provincia->find('list');
         $provenienciacidades = $this->Aluno->Entidade->Cidade->find('list');
 		$proveniencianomes = $this->Aluno->Entidade->Provincia->find('list');
-		$documentos = $this->Aluno->Entidade->Documento->find('list');
+		$documentos = $this->Aluno->Entidade->DocumentoIdentificacao->find('list');
 		$areatrabalhos = $this->Aluno->Areatrabalho->find('list');
 		$generos = $this->Aluno->Entidade->Genero->find('list');
         $cidadenascimentos = $this->Aluno->Entidade->CidadeNascimento->find('list');
@@ -290,12 +290,12 @@ class AlunosController extends AppController {
         $provincias = $this->Aluno->Entidade->Provincia->find('list');
         $provenienciacidades = $this->Aluno->AlunoNivelMedio->EscolaNivelMedio->Distrito->find('list');
         $proveniencianomes = $this->Aluno->AlunoNivelMedio->EscolaNivelMedio->Provincia->find('list');
-        $documentos = $this->Aluno->Entidade->Documento->find('list');
+        $documento_identificacaos = $this->Aluno->Entidade->DocumentoIdentificacao->find('list');
         $areatrabalhos = $this->Aluno->Areatrabalho->find('list');
         $generos = $this->Aluno->Entidade->Genero->find('list');
         $turnos = $this->Aluno->Matricula->Turno->find('list');
         $cidadenascimentos = $this->Aluno->Entidade->Cidade->find('list');
-        $this->set(compact('cursos','planoestudos','users', 'paises', 'cidades', 'provincias', 'documentos', 'areatrabalhos','generos','cidadenascimentos','proveniencianomes','provenienciacidades','turnos','escola_nivel_medios'));
+        $this->set(compact('cursos','planoestudos','users', 'paises', 'cidades', 'provincias', 'documento_identificacaos', 'areatrabalhos','generos','cidadenascimentos','proveniencianomes','provenienciacidades','turnos','escola_nivel_medios'));
     }
 
 	function editar_estudante($id = null) {
@@ -362,7 +362,7 @@ class AlunosController extends AppController {
         $provincias = $this->Aluno->Entidade->Provincia->find('list');
         $provenienciacidades = $this->Aluno->AlunoNivelMedio->EscolaNivelMedio->Distrito->find('list');
         $proveniencianomes = $this->Aluno->AlunoNivelMedio->EscolaNivelMedio->Provincia->find('list');
-        $documentos = $this->Aluno->Entidade->Documento->find('list');
+        $documentos = $this->Aluno->Entidade->DocumentoIdentificacao->find('list');
         $areatrabalhos = $this->Aluno->Areatrabalho->find('list');
         $generos = $this->Aluno->Entidade->Genero->find('list');
         $turnos = $this->Aluno->Matricula->Turno->find('list');
@@ -394,11 +394,11 @@ class AlunosController extends AppController {
 		$paises = $this->Aluno->Paise->find('list');
 		$cidades = $this->Aluno->Cidade->find('list');
 		$provincias = $this->Aluno->Provincia->find('list');
-		$documentos = $this->Aluno->Documento->find('list');
+		$documentos = $this->Aluno->DocumentoIdentificacao->find('list');
 		$areatrabalhos = $this->Aluno->Areatrabalho->find('list');
 		//$generos = $this->Aluno->Generos->find('list');
 		$generos = $this->Aluno->Genero->find('list');
-		$this->set(compact('users', 'Paises', 'Cidades', 'Provincias', 'Documentos', 'tg0010areatrabalhos', 'generos'));
+		$this->set(compact('users', 'Paises', 'Cidades', 'Provincias', 'DocumentoIdentificacaos', 'tg0010areatrabalhos', 'generos'));
 		  
 		   $teste = array();
 		   $teste[] = $id;
@@ -418,10 +418,10 @@ class AlunosController extends AppController {
 		      $paises = $this->Aluno->Paise->find('list');
 		      $cidades = $this->Aluno->Cidade->find('list');
 		      $provincias = $this->Aluno->Provincia->find('list');
-		      $documentos = $this->Aluno->Documento->find('list');
+		      $documentos = $this->Aluno->DocumentoIdentificacao->find('list');
 		      $areatrabalhos = $this->Aluno->Areatrabalho->find('list');
               $cursos = $this->Aluno->Curso->find('list');
-		      $this->set(compact('users', 'Paises', 't0003cursos','Cidades', 'Provincias', 'Documentos', 'tg0010areatrabalhos'));
+		      $this->set(compact('users', 'Paises', 't0003cursos','Cidades', 'Provincias', 'DocumentoIdentificacaos', 'tg0010areatrabalhos'));
             $listas = array();
              foreach ($aluno as $m){
                 $lista = array();

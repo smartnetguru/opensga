@@ -40,7 +40,7 @@ class DocentesController extends AppController {
 		$paises = $this->Docente->Entidade->Cidade->find('list');
 		$provincias = $this->Docente->Entidade->Cidade->find('list');
 		$proveniencianomes = $this->Docente->Entidade->Provincia->find('list');
-		$documentos = $this->Docente->Entidade->Documento->find('list');
+		$documentos = $this->Docente->Entidade->DocumentoIdentificacao->find('list');
 		$generos = $this->Docente->Entidade->Genero->find('list');
         $cidadenascimentos = $this->Docente->Entidade->CidadeNascimento->find('list');
         
@@ -59,7 +59,6 @@ class DocentesController extends AppController {
 			$this->Docente->create();
 			
 			//Antes de Gravar o Docente precisamos gravar o Usuario e a Entidade
-			
 			//Primeiro vamos criar um usuario na tabela users
 			//O Username sera o email, logo este campo eh obrigatorio
 			$this->Docente->Entidade->User->create();

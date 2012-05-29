@@ -110,7 +110,17 @@ class Aluno extends AppModel {
 			'finderQuery' => '',
 			'counterQuery' => ''
 		)
-	);	
+	);
+    
+    public $validate = array(
+        'curso_id' => array(
+            'rule'       => 'numeric', // or: array('ruleName', 'param1', 'param2' ...)
+            'required'   => true,
+            'allowEmpty' => false,
+            'on'         => 'create', // or: 'update'
+            'message'    => 'Curso é um campo obrigatório'
+        )  
+    );
 
 
 
@@ -197,6 +207,20 @@ class Aluno extends AppModel {
 		function getAllTurmasForInscricao(){
 			
 		}
+        
+        public function cadastraAluno(array $data){
+            $dataSource = $this->getDataSource();
+            
+            $dataSource->begin();
+
+// Perform some tasks
+
+if (true) {
+    $dataSource->commit();
+} else {
+    $dataSource->rollback();
+}
+        }
 
 
 

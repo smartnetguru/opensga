@@ -45,24 +45,28 @@ class AppController extends Controller {
         
         Configure::write('Config.language', $this->Session->read('Config.language'));
 		setlocale (LC_ALL, 'ptb');
-       if($this->Auth->loggedIn()) {
-		AuditableConfig::$responsibleId = $this->Auth->user('id');
-	}
+        if($this->Auth->loggedIn()) {
+            AuditableConfig::$responsibleId = $this->Auth->user('id');
+        }
 	
-	// Caso deseje usar o modelo padrão, utilize como abaixo, caso contrário você pode usar qualquer modelo
-	AuditableConfig::$Logger =& ClassRegistry::init('Auditable.Logger');
+        // Caso deseje usar o modelo padrão, utilize como abaixo, caso contrário você pode usar qualquer modelo
+        AuditableConfig::$Logger =& ClassRegistry::init('Auditable.Logger');
 			 
         //Configure AuthComponent
         Security::setHash('md5');
-      //$this->Auth->allow('*');
+        //$this->Auth->allow('*');
         //$this->Auth->authorize = 'actions';
         $this->Auth->authorize = array(
-        'Actions' => array(
-            'actionPath' => 'controllers'
-        )
-    );
+            'Actions' => array(
+                'actionPath' => 'controllers'
+            )
+        );
 
-
+        if($this->request->is('ajax')){
+            
+            $this->Security->csrfCheck = false;
+            $this->Security->validatePost = false;
+        }
 		$this->Auth->autoRedirect = false;
         $this->Auth->loginError = "Nome de Usuário ou senha incorrectas";
 		$this->Auth->authError = "Não possui permissão para aceder ao sistema";
@@ -71,11 +75,6 @@ class AppController extends Controller {
         $this->Auth->loginAction = array('controller' => 'users', 'action' => 'login');
         $this->Auth->logoutRedirect = array('controller' => 'users', 'action' => 'login');
         $this->Auth->loginRedirect = array(array('controller'=>'pages','action'=>'display','home'));
-        //$this->Auth->actionPath = 'Controllers';
-		
-		//var_dump($this->Auth->isAuthorized($this->Auth->user(),'Funcionarios/index'));
-		//$this->Acl->allow(array('model'=>'User','foreign_key'=>'1'),'controllers/Funcionarios/index','*');
-		//var_dump($this->Acl->check(array('model'=>'User','foreign_key'=>'1'),'controllers/Funcionarios/index','read'));
     }
 
 	function beforeRender(){

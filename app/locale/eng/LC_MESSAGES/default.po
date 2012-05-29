@@ -69,7 +69,7 @@ msgstr ""
 #: Controller\CargosController.php:89
 #: Controller\CidadesController.php:96
 #: Controller\DepartamentosController.php:74
-#: Controller\DocumentosController.php:88
+#: Controller\DocumentoIdentificacaosController.php:88
 #: Controller\EpocaavaliacaosController.php:103
 #: Controller\EscolasController.php:87
 #: Controller\EstadoMatriculasController.php:87
@@ -106,7 +106,7 @@ msgstr ""
 #: Controller\CargosController.php:82
 #: Controller\CidadesController.php:89
 #: Controller\DepartamentosController.php:67
-#: Controller\DocumentosController.php:81
+#: Controller\DocumentoIdentificacaosController.php:81
 #: Controller\EpocaavaliacaosController.php:95
 #: Controller\EscolasController.php:80
 #: Controller\EstadoMatriculasController.php:80
@@ -141,7 +141,7 @@ msgstr ""
 #: Controller\CargosController.php:64
 #: Controller\CidadesController.php:69
 #: Controller\DepartamentosController.php:47
-#: Controller\DocumentosController.php:64
+#: Controller\DocumentoIdentificacaosController.php:64
 #: Controller\EscolasController.php:63
 #: Controller\EstadoMatriculasController.php:63
 #: Controller\EstadoentidadesController.php:60
@@ -2372,7 +2372,7 @@ msgstr ""
 #: View\Alunos\add.ctp:121
 #: View\Alunos\edit.ctp:108
 #: View\Docentes\registar_docente.ctp:173
-msgid "Numero do Documento de Identificação:"
+msgid "Numero do DocumentoIdentificacao de Identificação:"
 msgstr ""
 
 #: View\Alunos\add.ctp:134
@@ -2513,8 +2513,8 @@ msgstr ""
 #: View\Disciplinas\adicionar_disciplina.ctp:46
 #: View\Disciplinas\editar_disciplina.ctp:59
 #: View\Docentes\registar_docente.ctp:418
-#: View\Documentos\add.ctp:23
-#: View\Documentos\edit.ctp:20
+#: View\DocumentoIdentificacaos\add.ctp:23
+#: View\DocumentoIdentificacaos\edit.ctp:20
 #: View\Epocaavaliacaos\add.ctp:69
 #: View\Epocaavaliacaos\edit.ctp:24
 #: View\Escolas\add.ctp:25
@@ -2601,7 +2601,7 @@ msgstr ""
 #: View\Cargos\menu.ctp:32
 #: View\Cidades\menu.ctp:32
 #: View\Cursos\menu.ctp:31
-#: View\Documentos\menu.ctp:10
+#: View\DocumentoIdentificacaos\menu.ctp:10
 #: View\Epocaavaliacaos\menu.ctp:11
 #: View\Escolas\menu.ctp:10
 #: View\Estadoinscricaos\menu.ctp:10
@@ -2822,7 +2822,7 @@ msgstr ""
 #: View\Cargos\index.ctp:60
 #: View\Cidades\index.ctp:70
 #: View\Departamentos\index.ctp:75;124
-#: View\Documentos\index.ctp:31
+#: View\DocumentoIdentificacaos\index.ctp:31
 #: View\Epocaavaliacaos\index.ctp:99
 #: View\Escolas\index.ctp:32
 #: View\Estadoinscricaos\index.ctp:31
@@ -3065,7 +3065,7 @@ msgstr ""
 #: View\Areatrabalhos\menu.ctp:33
 #: View\Cargos\menu.ctp:34
 #: View\Cidades\menu.ctp:34
-#: View\Documentos\menu.ctp:12
+#: View\DocumentoIdentificacaos\menu.ctp:12
 #: View\Escolas\menu.ctp:12
 #: View\Estadoinscricaos\menu.ctp:12
 #: View\Estadomatriculas\menu.ctp:12
@@ -3085,7 +3085,7 @@ msgstr ""
 #: View\Areatrabalhos\menu.ctp:34
 #: View\Cargos\menu.ctp:35
 #: View\Cidades\menu.ctp:35
-#: View\Documentos\menu.ctp:13
+#: View\DocumentoIdentificacaos\menu.ctp:13
 #: View\Elements\menu_administracao.ctp:13;34
 #: View\Escolas\menu.ctp:13
 #: View\Estadoinscricaos\menu.ctp:13
@@ -3107,7 +3107,7 @@ msgstr ""
 #: View\Areatrabalhos\menu.ctp:35
 #: View\Cargos\menu.ctp:36
 #: View\Cidades\menu.ctp:36
-#: View\Documentos\menu.ctp:14
+#: View\DocumentoIdentificacaos\menu.ctp:14
 #: View\Elements\menu_administracao.ctp:14;35
 #: View\Escolas\menu.ctp:14
 #: View\Estadoinscricaos\menu.ctp:14
@@ -3129,7 +3129,7 @@ msgstr ""
 #: View\Areatrabalhos\menu.ctp:36
 #: View\Cargos\menu.ctp:37
 #: View\Cidades\menu.ctp:37
-#: View\Documentos\menu.ctp:15
+#: View\DocumentoIdentificacaos\menu.ctp:15
 #: View\Elements\menu_administracao.ctp:15;36
 #: View\Escolas\menu.ctp:15
 #: View\Estadoinscricaos\menu.ctp:15
@@ -3152,7 +3152,7 @@ msgstr ""
 #: View\Cargos\menu.ctp:38
 #: View\Cidades\index.ctp:35
 #: View\Cidades\menu.ctp:38
-#: View\Documentos\menu.ctp:16
+#: View\DocumentoIdentificacaos\menu.ctp:16
 #: View\Elements\menu_administracao.ctp:16;37
 #: View\Escolas\menu.ctp:16
 #: View\Estadoinscricaos\menu.ctp:16
@@ -3174,7 +3174,7 @@ msgstr ""
 #: View\Areatrabalhos\menu.ctp:38
 #: View\Cargos\menu.ctp:39
 #: View\Cidades\menu.ctp:39
-#: View\Documentos\menu.ctp:17
+#: View\DocumentoIdentificacaos\menu.ctp:17
 #: View\Elements\menu_administracao.ctp:17;38
 #: View\Escolas\menu.ctp:17
 #: View\Estadoinscricaos\menu.ctp:17
@@ -3197,7 +3197,7 @@ msgstr ""
 #: View\Cargos\menu.ctp:40
 #: View\Cidades\menu.ctp:40
 #: View\Departamentos\index.ctp:22
-#: View\Documentos\menu.ctp:18
+#: View\DocumentoIdentificacaos\menu.ctp:18
 #: View\Elements\menu_administracao.ctp:18;39
 #: View\Escolas\menu.ctp:18
 #: View\Estadoinscricaos\menu.ctp:18
@@ -3219,7 +3219,7 @@ msgstr ""
 #: View\Areatrabalhos\menu.ctp:40
 #: View\Cargos\menu.ctp:41
 #: View\Cidades\menu.ctp:41
-#: View\Documentos\menu.ctp:19
+#: View\DocumentoIdentificacaos\menu.ctp:19
 #: View\Elements\menu_administracao.ctp:19;40
 #: View\Escolas\menu.ctp:19
 #: View\Estadoinscricaos\menu.ctp:19
@@ -3242,7 +3242,7 @@ msgstr ""
 #: View\Areatrabalhos\menu.ctp:41
 #: View\Cargos\menu.ctp:42
 #: View\Cidades\menu.ctp:42
-#: View\Documentos\menu.ctp:20
+#: View\DocumentoIdentificacaos\menu.ctp:20
 #: View\Elements\menu_administracao.ctp:20;41
 #: View\Escolas\menu.ctp:20
 #: View\Estadoinscricaos\menu.ctp:20
@@ -3265,7 +3265,7 @@ msgstr ""
 #: View\Areatrabalhos\menu.ctp:42
 #: View\Cargos\menu.ctp:43
 #: View\Cidades\menu.ctp:43
-#: View\Documentos\menu.ctp:21
+#: View\DocumentoIdentificacaos\menu.ctp:21
 #: View\Elements\menu_administracao.ctp:21;42
 #: View\Escolas\menu.ctp:21
 #: View\Estadoinscricaos\menu.ctp:21
@@ -3287,7 +3287,7 @@ msgstr ""
 #: View\Areatrabalhos\menu.ctp:43
 #: View\Cargos\menu.ctp:44
 #: View\Cidades\menu.ctp:44
-#: View\Documentos\menu.ctp:22
+#: View\DocumentoIdentificacaos\menu.ctp:22
 #: View\Elements\menu_administracao.ctp:22;43
 #: View\Escolas\menu.ctp:22
 #: View\Estadoinscricaos\menu.ctp:22
@@ -3309,7 +3309,7 @@ msgstr ""
 #: View\Areatrabalhos\menu.ctp:44
 #: View\Cargos\menu.ctp:45
 #: View\Cidades\menu.ctp:45
-#: View\Documentos\menu.ctp:23
+#: View\DocumentoIdentificacaos\menu.ctp:23
 #: View\Elements\menu_administracao.ctp:23;44
 #: View\Escolas\menu.ctp:23
 #: View\Estadoinscricaos\menu.ctp:24
@@ -3331,7 +3331,7 @@ msgstr ""
 #: View\Areatrabalhos\menu.ctp:45
 #: View\Cargos\menu.ctp:46
 #: View\Cidades\menu.ctp:46
-#: View\Documentos\menu.ctp:24
+#: View\DocumentoIdentificacaos\menu.ctp:24
 #: View\Elements\menu_administracao.ctp:24;45
 #: View\Escolas\index.ctp:6
 #: View\Escolas\menu.ctp:24
@@ -3354,7 +3354,7 @@ msgstr ""
 #: View\Areatrabalhos\menu.ctp:46
 #: View\Cargos\menu.ctp:47
 #: View\Cidades\menu.ctp:47
-#: View\Documentos\menu.ctp:25
+#: View\DocumentoIdentificacaos\menu.ctp:25
 #: View\Elements\menu_administracao.ctp:25;46
 #: View\Escolas\menu.ctp:25
 #: View\Estadoinscricaos\menu.ctp:30
@@ -3963,7 +3963,7 @@ msgid "Cargo"
 msgstr ""
 
 #: View\Cargos\index.ctp:44
-#: View\Documentos\index.ctp:15
+#: View\DocumentoIdentificacaos\index.ctp:15
 #: View\Grupodisciplinars\index.ctp:15
 #: View\Grupodisciplinas\index.ctp:26
 #: View\Tipofuncionarios\index.ctp:15
@@ -4708,30 +4708,30 @@ msgstr ""
 msgid "Cidade de Origem:"
 msgstr ""
 
-#: View\Documentos\add.ctp:5
-#: View\Documentos\edit.ctp:5
-#: View\Documentos\view.ctp:5
-msgid "Lista de Documentos"
+#: View\DocumentoIdentificacaos\add.ctp:5
+#: View\DocumentoIdentificacaos\edit.ctp:5
+#: View\DocumentoIdentificacaos\view.ctp:5
+msgid "Lista de DocumentoIdentificacaos"
 msgstr ""
 
-#: View\Documentos\add.ctp:6
-msgid "Documento - adicionar"
+#: View\DocumentoIdentificacaos\add.ctp:6
+msgid "DocumentoIdentificacao - adicionar"
 msgstr ""
 
-#: View\Documentos\edit.ctp:6
-msgid "Documento - editar"
+#: View\DocumentoIdentificacaos\edit.ctp:6
+msgid "DocumentoIdentificacao - editar"
 msgstr ""
 
-#: View\Documentos\index.ctp:5
-msgid "Novo Documento"
+#: View\DocumentoIdentificacaos\index.ctp:5
+msgid "Novo DocumentoIdentificacao"
 msgstr ""
 
-#: View\Documentos\index.ctp:6
-msgid "Documentos"
+#: View\DocumentoIdentificacaos\index.ctp:6
+msgid "DocumentoIdentificacaos"
 msgstr ""
 
-#: View\Documentos\view.ctp:6
-msgid "Documento - visualizar"
+#: View\DocumentoIdentificacaos\view.ctp:6
+msgid "DocumentoIdentificacao - visualizar"
 msgstr ""
 
 #: View\Elements\header.ctp:40
@@ -5251,7 +5251,7 @@ msgid "Telemovel"
 msgstr ""
 
 #: View\Estadoentidades\view.ctp:51;134
-msgid "Documento Id"
+msgid "DocumentoIdentificacao Id"
 msgstr ""
 
 #: View\Estadoentidades\view.ctp:52

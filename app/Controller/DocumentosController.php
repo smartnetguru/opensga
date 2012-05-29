@@ -28,13 +28,13 @@
  
  
  
-class DocumentosController extends AppController {
+class DocumentoIdentificacaosController extends AppController {
 
-	var $name = 'Documentos';
+	var $name = 'DocumentoIdentificacaos';
 
 	function index() {
-		$this->Documento->recursive = 0;
-		$this->set('Documentos', $this->paginate());
+		$this->DocumentoIdentificacao->recursive = 0;
+		$this->set('DocumentoIdentificacaos', $this->paginate());
 	}
 
 	function view($id = null) {
@@ -42,16 +42,16 @@ class DocumentosController extends AppController {
 			$this->Session->setFlash('Invalido %s', 'flasherror');
 			$this->redirect(array('action' => 'index'));
 		}
-		$this->set('tg0009documento', $this->Documento->read(null, $id));
+		$this->set('tg0009documento', $this->DocumentoIdentificacao->read(null, $id));
 		if (empty($this->data)) {
-			$this->data = $this->Documento->read(null, $id);
+			$this->data = $this->DocumentoIdentificacao->read(null, $id);
 		}
 	}
 
 	function add() {
 		if (!empty($this->data)) {
-			$this->Documento->create();
-			if ($this->Documento->save($this->data)) {
+			$this->DocumentoIdentificacao->create();
+			if ($this->DocumentoIdentificacao->save($this->data)) {
 				$this->Session->setFlash('** Dados Cadastrados com Sucesso **','flashok');
 				$this->redirect(array('action' => 'index'));
 			} else {
@@ -65,14 +65,14 @@ class DocumentosController extends AppController {
 			$this->redirect(array('action' => 'index'));
 		}
 		if (!empty($this->data)) {
-			if ($this->Documento->save($this->data)) {
+			if ($this->DocumentoIdentificacao->save($this->data)) {
 				$this->Session->setFlash('Dado Editados com sucesso','flashok');
 				$this->redirect(array('action' => 'index'));
 			} else {
 				$this->Session->setFlash('Erro ao gravar dados. Por favor tente de novo.','flasherror');}
 		}
 		if (empty($this->data)) {
-			$this->data = $this->Documento->read(null, $id);
+			$this->data = $this->DocumentoIdentificacao->read(null, $id);
 		}
 	}
 
@@ -81,11 +81,11 @@ class DocumentosController extends AppController {
 			$this->Session->setFlash(sprintf(__('Invalid id for %s', true), 'tg0009documento'));
 			$this->redirect(array('action'=>'index'));
 		}
-		if ($this->Documento->delete($id)) {
+		if ($this->DocumentoIdentificacao->delete($id)) {
 		$this->Session->setFlash('Dados deletedos com sucesso ','flashok');
 			$this->redirect(array('action'=>'index'));
 		}
-		$this->Session->setFlash(sprintf(__('%s was not deleted', true), 'Documento'));
+		$this->Session->setFlash(sprintf(__('%s was not deleted', true), 'DocumentoIdentificacao'));
 		$this->redirect(array('action' => 'index'));
 	}
         function beforeRender(){

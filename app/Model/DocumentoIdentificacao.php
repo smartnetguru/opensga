@@ -27,27 +27,14 @@
  */
  
  
-class Documento extends AppModel {
-	var $name = 'Documento';
+class DocumentoIdentificacao extends AppModel {
+	var $name = 'DocumentoIdentificacao';
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 
 	var $hasMany = array(
-		'Funcionario' => array(
-			'className' => 'Funcionario',
-			'foreignKey' => 'documento_id',
-			'dependent' => false,
-			'conditions' => '',
-			'fields' => '',
-			'order' => '',
-			'limit' => '',
-			'offset' => '',
-			'exclusive' => '',
-			'finderQuery' => '',
-			'counterQuery' => ''
-		),
-		'Aluno' => array(
-			'className' => 'Aluno',
-			'foreignKey' => 'documento_id',
+		'Entidade' => array(
+			'className' => 'Entidade',
+			'foreignKey' => 'documento_identificacao_id',
 			'dependent' => false,
 			'conditions' => '',
 			'fields' => '',
@@ -59,6 +46,8 @@ class Documento extends AppModel {
 			'counterQuery' => ''
 		)
 	);
+	
+    
 
 }
 ?>

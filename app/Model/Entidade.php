@@ -75,9 +75,9 @@ class Entidade extends AppModel {
 			'fields' => '',
 			'order' => ''
 		),
-		'Documento' => array(
-			'className' => 'Documento',
-			'foreignKey' => 'documento_id',
+		'DocumentoIdentificacao' => array(
+			'className' => 'DocumentoIdentificacao',
+			'foreignKey' => 'documento_identificacao_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''

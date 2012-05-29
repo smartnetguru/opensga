@@ -4527,27 +4527,27 @@ msgstr ""
 #: \views\documentos\add.ctp:5
 #: \views\documentos\edit.ctp:5
 #: \views\documentos\view.ctp:5
-msgid "Lista de Documentos"
+msgid "Lista de DocumentoIdentificacaos"
 msgstr ""
 
 #: \views\documentos\add.ctp:6
-msgid "Documento - adicionar"
+msgid "DocumentoIdentificacao - adicionar"
 msgstr ""
 
 #: \views\documentos\edit.ctp:6
-msgid "Documento - editar"
+msgid "DocumentoIdentificacao - editar"
 msgstr ""
 
 #: \views\documentos\index.ctp:5
-msgid "Novo Documento"
+msgid "Novo DocumentoIdentificacao"
 msgstr ""
 
 #: \views\documentos\index.ctp:6
-msgid "Documentos"
+msgid "DocumentoIdentificacaos"
 msgstr ""
 
 #: \views\documentos\view.ctp:6
-msgid "Documento - visualizar"
+msgid "DocumentoIdentificacao - visualizar"
 msgstr ""
 
 #: \views\elements\header.ctp:106
@@ -4813,7 +4813,7 @@ msgid "Telemovel"
 msgstr ""
 
 #: \views\estadoentidades\view.ctp:51;134
-msgid "Documento Id"
+msgid "DocumentoIdentificacao Id"
 msgstr ""
 
 #: \views\estadoentidades\view.ctp:52
