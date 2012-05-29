@@ -114,7 +114,7 @@ class Aluno extends AppModel {
     
     public $validate = array(
         'curso_id' => array(
-            'rule'       => 'numeric', // or: array('ruleName', 'param1', 'param2' ...)
+            'rule'       => 'naturalNumber', // or: array('ruleName', 'param1', 'param2' ...)
             'required'   => true,
             'allowEmpty' => false,
             'on'         => 'create', // or: 'update'
