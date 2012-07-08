@@ -77,9 +77,10 @@ class FuncionariosController extends AppController {
 	    $paises = $this->Funcionario->Entidade->Paise->find('list');
 		$cidades = $this->Funcionario->Entidade->Cidade->find('list');
 		$provincias = $this->Funcionario->Entidade->Provincia->find('list');
+        $generos = $this->Funcionario->Entidade->Genero->find('list');
 		
 	   
-		$this->set(compact('users', 'Grauacademicos','tipofuncionarios','departamentos','cargos','faculdades','seccaos','unidade_organicas','documento_identificacaos','paises','cidades','provincias'));
+		$this->set(compact('users', 'Grauacademicos','tipofuncionarios','departamentos','cargos','faculdades','seccaos','unidade_organicas','documento_identificacaos','paises','cidades','provincias','generos'));
 		
 	}
 
@@ -157,6 +158,13 @@ class FuncionariosController extends AppController {
         public function beforeFilter() {
             parent::beforeFilter();
             
+        }
+        
+        public function importa_cenas(){
+            App::import('Vendor', 'excel_reader2');
+            $data = new Spreadsheet_Excel_Reader('i.xls', true);
+            debug($data);
+            $this->set('data', $data);
         }
 }
 ?>

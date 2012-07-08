@@ -183,15 +183,15 @@ class UsersController extends AppController {
         function beforeRender(){
             parent::beforeRender();	
             $this->set('current_section','administracao');
+            if($this->action=='logout'){
+                $this->response->disableCache();
+            }
         }
 
 	function beforeFilter(){
 		
 		parent::beforeFilter();
         $this->Auth->allow(array('login','logout'));
-        if($this->action == 'logout') {
-         $this->disableCache();
-     }
 
 		
 	}
@@ -228,6 +228,20 @@ class UsersController extends AppController {
         $this->Acl->deny($grupo, 'controllers');
         $this->Acl->allow($grupo, 'controllers/SadeAutoAvaliacaos');
         $this->Acl->allow($grupo, 'controllers/SadeAutoAvaliacaos/docente');
+        $this->Acl->allow($grupo, 'controllers/Users/alterar_senha');
+        
+        
+        //Permissoes para o Grupo de Funcionarios
+        $grupo->id = 2;
+        $this->Acl->deny($grupo, 'controllers');
+        $this->Acl->allow($grupo,'controllers/Alunos');
+        $this->Acl->allow($grupo,'controllers/Inscricaos');
+        $this->Acl->allow($grupo,'controllers/Planoestudos/getByCurso');
+        $this->Acl->allow($grupo,'controllers/Provincias/getByPais');
+        $this->Acl->allow($grupo,'controllers/Cidades/getByProvincia');
+        
+        $this->Acl->allow($grupo, 'controllers/Users/alterar_senha');
+        
         $this->Session->setFlash('Permissoes configuradas com sucesso', 'default', array('class'=>'alert sucess'));
         $this->redirect('/');
     }
@@ -250,6 +264,16 @@ class UsersController extends AppController {
         }
         
     }
-
+    
+    public function alterar_senha()
+    {
+        if($this->request->is('post') || $this->request->is('put')){
+            if($this->User->alteraPassword($this->request->data)){
+                $this->Session->setFlash('Senha Alterada');
+                $this->redirect('/');
+            }
+        }
+        
+    }
 }
 ?>

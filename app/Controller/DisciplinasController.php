@@ -21,15 +21,15 @@ class DisciplinasController extends AppController {
             'limit'=>1000
         );
 
-	function index() {
+    function index() {
 		$this->Disciplina->recursive = 0;
-                $disciplinas = $this->Disciplina->find('all');
+        $disciplinas = $this->Disciplina->find('all');
 		$this->set('disciplinas', $disciplinas);
 	}
 
-	function ver_disciplina($id = null) {
-	   //App::Import('Model','Logmv');
-	    //$logmv = new Logmv;
+	function ver_disciplina($id = null)
+    {
+        
 		if (!$id) {
 			$this->Session->setFlash('Invalido %s', 'flasherror');
 			$this->redirect(array('action' => 'index'));
@@ -38,7 +38,6 @@ class DisciplinasController extends AppController {
     // var_dump($this->data);
 			if (empty($this->data)) {
 			$this->data = $this->Disciplina->read(null, $id);
-	      	////$logmv->logview(4,$this->Session->read('Auth.User.id'),$this->data["Disciplina"]["id"],$this->data["Disciplina"]["name"]);
 		}
 		$grupodisciplinars = $this->Disciplina->Grupodisciplinar->find('list');
 		$this->set(compact('grupodisciplinars'));
@@ -48,11 +47,10 @@ class DisciplinasController extends AppController {
 		if (!empty($this->data)) {
 			$this->Disciplina->create();
 			if ($this->Disciplina->save($this->data)) {
-			////$logmv->logInsert(4,$this->Session->read('Auth.User.id'),$this->Disciplina->getLastInsertID(),$this->data["Disciplina"]["name"]);
-				$this->Session->setFlash('** Dados Cadastrados com Sucesso **','default',array('class'=>'alert success'));
+				$this->Session->setFlash(__('Disciplina Cadastrada com Sucesso'),'default',array('class'=>'alert success'));
 				$this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash('Erro ao gravar dados. Por favor tente de novo.','flasherror');
+				$this->Session->setFlash(__('Problemas no cadastro da disciplina.'),'default',array('class'=>'alert error'));
 			}
 		}
 		$faculdades = $this->Disciplina->Faculdade->find('list');
@@ -97,7 +95,7 @@ class DisciplinasController extends AppController {
 	//$logmv = new Logmv;
 		if (!$id) {
 			$this->Session->setFlash('Invalido codigo para %s','flasherror');
-			$this->redirect(array('action'=>'index'));
+            $this->redirect(array('action'=>'index'));
 		}
 		$verifica = $this->Disciplina->query("select id from grupodisciplinas where disciplina_id = {$id}");
 		//var_dump($verifica);

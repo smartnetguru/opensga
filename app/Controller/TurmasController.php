@@ -109,7 +109,10 @@ class TurmasController extends AppController {
 		$planoestudoanos = $this->Planoestudoano->find('first',array('conditions'=>array('planoestudo_id'=>$this->data['Planoestudo']['id'],'disciplina_id'=>$this->data['Turma']['disciplina_id'])));
 		
         $this->Turma->Inscricao->contain(array(
-            'Aluno','Estadoinscricao',
+            'Aluno'=>array(
+                'Entidade',
+                'Curso'),
+            'Estadoinscricao',
             'Turma'=>array(
                 'Curso'=>array(
                     'fields'=>array('name')
@@ -173,7 +176,7 @@ class TurmasController extends AppController {
      * @todo Garantir que isso funciona 
      */
 	function gerar_turmas(){
-		if(!empty($this->data)){
+		if(!empty($this->request->data)){
 			/**
              *@todo Verificar o ajuste do anolectivo ao regime antes de enviar para o modelo 
              */

@@ -15,8 +15,10 @@
  
 class Funcionario extends AppModel {
 	var $name = 'Funcionario';
+    
+    public $actsAs = array('Auditable.Auditable');
+    
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
-
 	var $belongsTo = array(
 		'User' => array(
 			'className' => 'User',
@@ -94,19 +96,26 @@ class Funcionario extends AppModel {
 
 
         function geraCodigo(){
-            $id = $this->find('first', array('order' => array('funcionario.created DESC'),'fields'=>'id'));
+            $id = $this->find('first', array('order' => array('Funcionario.created DESC'),'fields'=>'id'));
             $ano=date('Y');
             $id_for=str_pad($id['Funcionario']['id']+1, 5,"0",STR_PAD_LEFT);
             $codigo = $ano.$id_for;
             return $codigo;
         }
-
+        
+        /**
+         *
+         * @param type $name
+         * @return string 
+         * 
+         * @deprecated Usa o geraUsername dos users que eh global
+         */
         function criaUsername($name){
             $nome_lw = strtolower($name);
             $nome_ex = explode(' ',$nome_lw);
-            $nome_1 = substr($nome_ex[0], 0,1);
+            $nome_1 = $nome_ex[0];
             $nome_2 = end($nome_ex);
-            $nome = $nome_1.$nome_2;
+            $nome = $nome_1.".".$nome_2;
             $numero = $this->User->find('count',array('conditions'=>array('username'=>$nome)));
             if($numero>0){
                 //$numero=$numero+1;
@@ -129,9 +138,9 @@ class Funcionario extends AppModel {
             $dataSource->begin();
             
             $data['User']['name']=$data['Entidade']['name'];
-            $data['User']['username'] = $this->criaUsername($data['Entidade']['name']);
+            $data['User']['username'] = $this->User->geraUsername($data['Entidade']['name']);
             $data['User']['codigo'] = $this->geraCodigo();
-            $data['User']['password']=md5($data['User']['codigo']);
+            $data['User']['password']=AuthComponent::password('12345');
             $data['User']['group_id'] = 2;
             
             $this->User->create();

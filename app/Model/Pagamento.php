@@ -32,6 +32,8 @@ class Pagamento extends AppModel {
 	var $name = 'Pagamento';
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 
+    public $actsAs = array('Auditable.Auditable');
+    
 	var $belongsTo = array(
 		'Aluno' => array(
 			'className' => 'Aluno',
@@ -84,7 +86,7 @@ class Pagamento extends AppModel {
 			$tipos = array(1,2,3,4,5,6,7);
 		}
 		else{
-			$tipos = array(1,2,8,9,10,11,12);	
+			$tipos = array(2,8,9,10,11,12);	
 		}
         
 		$tipopagamentos = $this->Tipopagamento->find('all',array('conditions'=>array('Tipopagamento.id'=>$tipos)));
@@ -145,4 +147,42 @@ class Pagamento extends AppModel {
 		
 		return $pagamento;
 	}
+    
+    function getValorDividaTotal(){
+        $valor_divida = $this->find('all',array('conditions'=>array('Pagamento.estadopagamento_id'=>1,'Pagamento.data_limite <='=>date('Y-m-d')),'fields'=>'sum(Pagamento.valor) as valor'));
+        
+        return $valor_divida[0][0]['valor'];
+    }
+    
+    public function processaInscricoes(){
+        
+    }
+    
+    /**
+     *Gera codigo para pagamentos
+     * @param type $aluno_id
+     * @param type $tipopagamento_id
+     * @param type $anolectivo_id
+     * @return string 
+     * @todo Isto da problemas para alunos que fazem mais de 100 inscricoes
+     */
+    public function geraCodigo($aluno_id,$tipopagamento_id,$anolectivo_id){
+        $aluno = $this->Aluno->findById($aluno_id);
+        $tipopagamento = $this->Tipopagamento->findById($tipopagamento_id);
+        
+        $numero = 1;
+        
+        $criou = false;
+        while(!$criou){
+            $codigo = $aluno['Aluno']['codigo'].$tipopagamento['Tipopagamento']['codigo'].str_pad($numero, 2,"0",STR_PAD_LEFT);
+            $codigo_antigo = $this->findByCodigo($codigo);
+            if(!$codigo_antigo){
+                $criou = true;
+            }
+            else{
+                $numero = $numero+1;
+            }
+        }
+        return $codigo;
+    }
 }

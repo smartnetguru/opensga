@@ -20,8 +20,17 @@ class InscricaosController extends AppController {
 	var $name = 'Inscricaos';
    
 	function index() {    		
-		$this->Inscricao->recursive = 2;			
-		$this->set('inscricaos', $this->paginate());
+		
+        if($this->request->is('post') || $this->request->is('put')){
+            
+            $this->Pagamento->Aluno->contain(array('Entidade','Curso','Matricula'));
+            $alunos = $this->Pagamento->Aluno->find('all',array('conditions'=>array('OR'=>array(array('Entidade.name LIKE'=>'%'.$this->request->data['Aluno']['name'].'%'),array('Aluno.codigo LIKE'=>$this->request->data['Aluno']['codigo'])))));
+            
+            $this->set(compact('alunos'));
+            $this->set('mostrar_resultado',true);
+           
+        }
+		
 		
 }
 
@@ -248,17 +257,13 @@ class InscricaosController extends AppController {
 		$aluno = $this->Aluno->findById($aluno_id);
         $matricula = $this->Inscricao->Matricula->findById($matricula_id);
         if($this->request->is('post') || $this->request->is('put')){
-            
-        
-            if(!empty($this->request->data)){
-			
 			
 			$aluno_id = $this->request->data['Inscricao']['aluno_id'];
             $matricula_id = $this->request->data['Inscricao']['matricula_id'];
             
 			foreach($this->request->data['Inscricao']['disciplinas'] as $k=>$v){
-                
-                $this->Inscricao->create();
+                if($v>0){
+                  $this->Inscricao->create();
                 
                 $inscricao_save = array('Inscricao'=>array('aluno_id'=>$aluno_id,'turma_id'=>$v,'estadoinscricao_id'=>1,'matricula_id'=>$matricula_id,'data'=>date('Y-m-d')));
                     
@@ -268,7 +273,9 @@ class InscricaosController extends AppController {
 					else{
                         $turma = $this->Inscricao->Turma->findById($v);
                         $this->Session->setFlash(sprintf(__('Este aluno nao pode ser inscrito na turma %s. Provavelmente ja esta inscrito.',true),$turma['Turma']['name']),'default',array('class'=>'alert error'),$turma['Turma']['id']);
-                    }
+                    }  
+                }
+                
 			}	
 			
 			
@@ -276,7 +283,7 @@ class InscricaosController extends AppController {
 				
 				$this->redirect(array('controller'=>'alunos','action'=>'perfil_estudante',$aluno_id));
 			
-		}
+		
         }
 		
 		$turmas = $this->Turma->getAllByAlunoForInscricao($aluno_id,$matricula_id);

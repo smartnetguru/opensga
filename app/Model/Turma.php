@@ -156,6 +156,7 @@ class Turma extends AppModel {
 		 * Cria todas as turmas referentes a aquele ano lectivo e aquele semestre
 		 * @Todo Testar essa funcao
 		 * @Todo Para facilitar vamos considerar so um plano de estudos activo
+         * @todo Podemos usar transactions aqui ;)
 		 */
 		function criarTurmas($anolectivo_id,$semestre_id,$planoestudo_id,$regimelectivo_id,$turno_id){
 				$disciplinas = $this->Planoestudo->getAllDisciplinasByPlanoestudo($planoestudo_id);
@@ -177,8 +178,13 @@ class Turma extends AppModel {
 
                             $turmas=array('Turma'=>$turma);
                            
-                            $this->create();
-                            $this->save($turmas);
+                            //Primeiro precisamos ver se a turma nao esta criada ainda
+                            $turma_existe = $this->find('first',array('recursive'=>-1,'conditions'=>array('anolectivo_id'=>$anolectivo_id,'planoestudo_id'=>$planoestudo_id,'disciplina_id'=>$disciplina['d']['id'],'anocurricular'=>$turma['anocurricular'],'semestrecurricular'=>$turma['semestrecurricular'],'turno_id'=>$turma['turno_id'])));
+                            if(!$turma_existe){
+                                $this->create();
+                                $this->save($turmas);
+                            }
+                            
 					}
 
 		}

@@ -31,7 +31,10 @@
 class Entidade extends AppModel {
 	var $name = 'Entidade';
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
-
+    
+    
+    
+    
 	var $belongsTo = array(
 			'User' => array(
 			'className' => 'User',
@@ -95,50 +98,20 @@ class Entidade extends AppModel {
             'className'    => 'Docente',
             'foreignKey'   =>'entidade_id',
             'dependent'    => true
+        ),
+        'Aluno' => array(
+            'className'    => 'Aluno',
+            'foreignKey'   =>'entidade_id',
+            'dependent'    => true
+        ),
+        'Funcionario' => array(
+            'className'    => 'Funcionario',
+            'foreignKey'   =>'entidade_id',
+            'dependent'    => true
         )
     );
     
-	var $hasMany = array(
-		'Aluno' => array(
-			'className' => 'Aluno',
-			'foreignKey' => 'entidade_id',
-			'dependent' => false,
-			'conditions' => '',
-			'fields' => '',
-			'order' => '',
-			'limit' => '',
-			'offset' => '',
-			'exclusive' => '',
-			'finderQuery' => '',
-			'counterQuery' => ''
-		),
-		'Docente' => array(
-			'className' => 'Docente',
-			'foreignKey' => 'entidade_id',
-			'dependent' => false,
-			'conditions' => '',
-			'fields' => '',
-			'order' => '',
-			'limit' => '',
-			'offset' => '',
-			'exclusive' => '',
-			'finderQuery' => '',
-			'counterQuery' => ''
-		),
-		'Funcionario' => array(
-			'className' => 'Funcionario',
-			'foreignKey' => 'entidade_id',
-			'dependent' => false,
-			'conditions' => '',
-			'fields' => '',
-			'order' => '',
-			'limit' => '',
-			'offset' => '',
-			'exclusive' => '',
-			'finderQuery' => '',
-			'counterQuery' => ''
-		)
-	);
+	
 
 }
 ?>

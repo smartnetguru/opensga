@@ -19,7 +19,7 @@
 	App::import('Model','User');
 	App::import('Model','Feriado');
     App::uses('AuditableConfig', 'Auditable.Lib');
-	//App::uses('Controller','Controller');
+	App::uses('Controller','Controller');
 	
 /**
  * Classe Mae para todos os Controllers
@@ -31,24 +31,27 @@
 class AppController extends Controller {
    //var $components = array( 'Auth', 'Session');
    
-   var $_Filter = array();
-   //var $components = array( 'Acl','Auth', 'Session','RequestHandler','Filter','DebugKit.Toolbar');
+   
    var $components = array(
        'Security','Acl','Auth', 'Session','RequestHandler','DebugKit.Toolbar');
    var $helpers = array('Html','Form','Session','Js' => array('MyJquery'),'EventsCalendar','Javascript','Ajax');
 
-	 // default datetime filter  
-    var $_Form_options_datetime = array();  
+	 public $pdfConfig = array(
+		'engine' => 'CakePdf.Tcpdf',
+	);
+    
+    //public $pdfConfig = array('engine' => 'Tcpdf');
 
     function beforeFilter() {
         parent::beforeFilter();
+       
         
         Configure::write('Config.language', $this->Session->read('Config.language'));
 		setlocale (LC_ALL, 'ptb');
         if($this->Auth->loggedIn()) {
             AuditableConfig::$responsibleId = $this->Auth->user('id');
         }
-	
+        
         // Caso deseje usar o modelo padrão, utilize como abaixo, caso contrário você pode usar qualquer modelo
         AuditableConfig::$Logger =& ClassRegistry::init('Auditable.Logger');
 			 
@@ -77,12 +80,7 @@ class AppController extends Controller {
         $this->Auth->loginRedirect = array(array('controller'=>'pages','action'=>'display','home'));
     }
 
-	function beforeRender(){
-			
-		$Feriado = new Feriado;
-		$this->set('dferiados',$Feriado->getFeriados());
-		
-	}
+
 
   /** 
      * Builds up a selected datetime for the form helper 

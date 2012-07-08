@@ -149,12 +149,29 @@ class PlanoestudosController extends AppController {
 			  	$dados = $this->data;
                 $dados['Planoestudoano']['planoestudo_id']=$plano_id;
                 
+                //Calcula o Semestre Sequencial
+                if($dados['Planoestudoano']['semestre']==1){
+                    $dados['Planoestudoano']['semestre_sequencial'] = $dados['Planoestudoano']['ano']*($dados['Planoestudoano']['semestre']+1)-1;
+                }
+                if($dados['Planoestudoano']['semestre']==2){
+                    $dados['Planoestudoano']['semestre_sequencial'] = $dados['Planoestudoano']['ano']*$dados['Planoestudoano']['semestre'];
+                }
+                
+                
 				
 				
                 if ($planoestudoanos->save($dados)) {
 				
-				$this->Session->setFlash('Dado Registado com Sucesso.Adicione Mais disciplinas.','default',array('class'=>'alert success'));
-				$this->redirect(array('action' => 'adicionar_precedencias',$dados['Planoestudoano']['planoestudo_id'],$dados['Planoestudoano']['disciplina_id']));
+				
+                
+                //Se forem cadeiras inicias, pula as precedencias
+                if($dados['Planoestudoano']['semestre_sequencial']>1){
+                    $this->Session->setFlash('Dado Registado com Sucesso.Seleccione as Precedencias desta disciplina, Ou clique em voltar se nao tiver precedencias','default',array('class'=>'alert success'));
+                    $this->redirect(array('action' => 'adicionar_precedencias',$dados['Planoestudoano']['planoestudo_id'],$dados['Planoestudoano']['disciplina_id']));
+                } else{
+                    $this->Session->setFlash('Dado Registado com Sucesso.Adicione Mais disciplinas.','default',array('class'=>'alert success'));
+                    $this->redirect(array('action' => 'adicionar_disciplinas',$dados['Planoestudoano']['planoestudo_id']));
+                }
 			} else {
 				$this->Session->setFlash('Erro ao gravar dados. Por favor tente de novo.','flasherror');
 			}
@@ -358,7 +375,10 @@ class PlanoestudosController extends AppController {
         }
         
         public function getByCurso(){
-            $curso_id = $this->request->data['Aluno']['curso_id'];
+            foreach($this->request->data as $k=>$v){
+                $curso_id = $v['curso_id'];
+            }
+            //$curso_id = $this->request->data['Aluno']['curso_id'];
             $planoestudos = $this->Planoestudo->find('list',array('conditions'=>array('curso_id'=>$curso_id)));
             $this->set(compact('planoestudos'));
             $this->layout = 'ajax';

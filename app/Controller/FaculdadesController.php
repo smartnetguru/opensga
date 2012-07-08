@@ -18,6 +18,7 @@ class FaculdadesController extends AppController {
 
 	function adicionar_faculdade() {
 		if (!empty($this->data)) {
+            
 			$this->Faculdade->create();
 			if ($this->Faculdade->save($this->data)) {
 				$this->Session->setFlash(__('The faculdade has been saved', true));

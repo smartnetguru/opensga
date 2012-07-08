@@ -32,6 +32,7 @@ class Inscricao extends AppModel {
 	var $name = 'Inscricao';
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 
+    public $actsAs = array('Auditable.Auditable');
     
 	var $belongsTo = array(
 		'Aluno' => array(

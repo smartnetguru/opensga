@@ -107,4 +107,11 @@ class BolsaBolsasController extends AppController {
 		$this->Session->setFlash(__('Bolsa bolsa was not deleted'));
 		$this->redirect(array('action' => 'index'));
 	}
+    
+    /**
+     * 
+     */
+    public function registar_candidatura(){
+        
+    }
 }

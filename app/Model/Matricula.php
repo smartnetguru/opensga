@@ -16,7 +16,9 @@
 class Matricula extends AppModel {
 	var $name = 'Matricula';
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
-
+    
+    public $actsAs = array('Auditable.Auditable');
+    
 	var $belongsTo = array(
 		'Aluno' => array(
 			'className' => 'Aluno',
@@ -123,6 +125,15 @@ class Matricula extends AppModel {
         }
         $alunos = $aluno->find('list',array('conditions'=>array(array('Aluno.id'=>$matriculados)),'order'=>array('Aluno.name')));
        return $alunos;
+    }
+    
+    public function getTotalMatriculasActivas($ano_lectivo_id=null)
+    {
+        if($ano_lectivo_id==null){
+            $ano_lectivo_id = SessionComponent::read('SGAConfig.anolectivo_id');
+        }
+        
+        return $this->find('count',array('conditions'=>array('estadomatricula_id'=>1,'Matricula.anolectivo_id'=>$ano_lectivo_id)));
     }
 	
 }

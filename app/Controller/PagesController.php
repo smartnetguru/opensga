@@ -90,13 +90,27 @@ class PagesController extends AppController {
 		$this->render(implode('/', $path));
 	}
 
-    function homepage(){
+    function home(){
         App::import('Model','Message');
+        $this->loadModel('Aluno');
         $alerta = new Message;
         $recipient_id = $this->Session->read('Auth.User.id');
-
+        $total_alunos = $this->Aluno->getTotalAlunos();
+        
+        $total_matriculas_activas = $this->Aluno->Matricula->getTotalMatriculasActivas();
+        
+        //Dados de Pagamento
+         //Resumo Mensal
+        $facturas_geradas = $this->Aluno->Pagamento->find('count',array('conditions'=>array('MONTH(Pagamento.created)'=>date('m'),'YEAR(Pagamento.created)'=>date('Y'))));
+        $facturas_pagas = $this->Aluno->Pagamento->find('count',array('conditions'=>array('MONTH(Pagamento.data_pagamento)'=>date('m'),'YEAR(Pagamento.data_pagamento)'=>date('Y'),'Pagamento.estadopagamento_id'=>2)));
+        $valor_arrecadado = $this->Aluno->Pagamento->find('all',array('conditions'=>array('MONTH(Pagamento.data_pagamento)'=>date('m'),'YEAR(Pagamento.data_pagamento)'=>date('Y'),'Pagamento.estadopagamento_id'=>2),'fields'=>'sum(Pagamento.valor) as valor'));
+        
+        $valor_divida = $this->Aluno->Pagamento->getValorDividaTotal();
+        
+        debug($this);
         $alertas = $alerta->find('all',array('conditions'=>array('recipient_id'=>$recipient_id,'datainicio <='=>date('Y-m-d').' 23:59:59','datafim >='=>date('Y-m-d').' 00:00:00')));
         $this->set('alertas',$alertas);
+        $this->set(compact('total_alunos','total_matriculas_activas','facturas_geradas','facturas_pagas','valor_arrecadado','valor_divida'));
         
     }
 	
@@ -105,7 +119,7 @@ class PagesController extends AppController {
 		$user = $this->Auth->user();
 		
 		if($user!=null){
-			$this->Auth->allowedActions = array('display', 'homepage');
+			$this->Auth->allowedActions = array('display');
 		}
 		
 	}

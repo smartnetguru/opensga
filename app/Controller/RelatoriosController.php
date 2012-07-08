@@ -1,22 +1,8 @@
 <?php
 /**
- * OpenSGA - Sistema de Gestão Académica
- *   Copyright (C) 2010-2011  INFOmoz (Informática-Moçambique)
+ * Relatorios Controller
  * 
- * Este programa é um software livre: Você pode redistribuir e/ou modificar
- * todo ou parte deste programa, desde que siga os termos da licença por nele
- * estabelecidos. Grande parte do código deste programa está sob a licença 
- * GNU Affero General Public License publicada pela Free Software Foundation.
- * A versão original desta licença está disponível na pasta raiz deste software.
- * 
- * Este software é distribuido sob a perspectiva de que possa ser útil para 
- * satisfazer as necessidades dos seus utilizadores, mas SEM NENHUMA GARANTIA. Veja
- * os termos da licença GNU Affero General Public License para mais detalhes
- * 
- * As redistribuições deste software, mesmo quando o código-fonte for modificado significativamente,
- * devem manter está informação legal, assim como a licença original do software.
- * 
- * @copyright     Copyright 2010-2011, INFOmoz (Informática-Moçambique) (http://infomoz.net)
+ * @copyright     Copyright 2010-2011, INFOmoz (Informï¿½tica-Moï¿½ambique) (http://infomoz.net)
  * @link          http://infomoz.net/opensga CakePHP(tm) Project
  * @author		  Elisio Leonardo (http://infomoz.net/elisio-leonardo)
  * @package       opensga
@@ -38,6 +24,26 @@ class RelatoriosController extends AppController {
 	function quick_info(){
 		
 	}
+    
+    public function estudantes_por_faculdade(){
+        $this->loadModel('Aluno');
+        $estudantes_faculdade = $this->Aluno->getEstudantesByFaculdade();
+        $this->set(compact('estudantes_faculdade'));
+        
+    }
+    
+    public function estudantes_por_curso(){
+        if($this->request->is('post') || $this->request->is('put')){
+            $this->loadModel('Aluno');
+            $estudantes_curso = $this->Aluno->getEstudantesByCurso($this->request->data['Curso']['curso_id']);
+            $this->set(compact('estudantes_curso'));
+            $this->set('resultado',true);
+        }
+        $this->loadModel('Curso');
+        $cursos = $this->Curso->find('list');
+        $this->set(compact('cursos'));
+        
+    }
 
 }
 ?>

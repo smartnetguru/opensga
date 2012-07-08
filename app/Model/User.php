@@ -30,7 +30,8 @@
 class User extends AppModel {
 	var $name = 'User';
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
-
+    
+    
 	var $belongsTo = array(
 		'Group' => array(
 			'className' => 'Group',
@@ -70,7 +71,7 @@ class User extends AppModel {
 		)
 	);
 	
-	var $actsAs = array('Acl' => array('type' => 'requester'));
+	var $actsAs = array('Acl' => array('type' => 'requester'),'Auditable.Auditable');
  
 	 function parentNode() {
 		if (!$this->id && empty($this->data)) {
@@ -128,33 +129,12 @@ class User extends AppModel {
         }
 		
 		function beforeSave(){
-			$this->data['User']['password'] = AuthComponent::password($this->data['User']['password']);
-			
-			$nomes = explode(' ', $this->data['User']['name']);
-			
-			$username = strtolower($nomes[0]).".".strtolower(end($nomes));
-			
-			$username1 = $username;
-			$numero = 1;
-			$linha=1;
-			while($linha!=0){
-				$users = $this->find('all',array('conditions'=>array('username'=>$username)));
-				$linha = count($users);
-				if($linha==0){
-					$this->data['User']['username']=$username;
-					return true;
-				}
-				else{
-					
-					$username = $username1.$numero;
-					$numero++;
-				}	
-			}
-			
-			
-   
+            //So gera Password e Username se for novo cadastro
+            if(isset($this->request->data['User']['password'])){
+                $this->request->data['User']['password'] = AuthComponent::password($this->request->data['User']['password']);
+                $this->request->data['User']['username'] = $this->geraUsername($this->request->data['User']['name']);
+            }
 			return true;
-			
 		}
 		
 		/**
@@ -174,7 +154,7 @@ class User extends AppModel {
 				$linha = count($users);
 				if($linha==0){
 					
-					return true;
+					return $username;
 				}
 				else{
 					
@@ -182,10 +162,27 @@ class User extends AppModel {
 					$numero++;
 				}	
 			}
-			
-			
-			
-			
+            
+            return $username;
 		}
+        
+        public function alteraPassword($data){
+            $user_id = SessionComponent::read('Auth.User.id');
+            $this->id = $user_id;
+            if($data['User']['novasenha1'] != $data['User']['novasenha2']){
+                return false;
+            }
+            
+            $senha_antiga = AuthComponent::password($data['User']['senhaantiga']);
+            $senha  = $this->field('password');
+            if($senha != $senha_antiga){
+                return false;
+            }
+            
+            $this->set('password', AuthComponent::password($data['User']['novasenha1']));
+            $this->save();
+            return true;
+        }
+        
 }
 ?>

@@ -1,5 +1,5 @@
 <?php
-App::uses('AppModel', 'Model');
+//App::uses('AppModel', 'Model');
 /**
  * Classe Model do Aluno
  * 
@@ -21,8 +21,10 @@ App::uses('AppModel', 'Model');
  
 class Aluno extends AppModel {
 	var $name = 'Aluno';
+    //var $recursive = 0;
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
     
+   
     
     public $hasOne = array(
         'AlunoNivelMedio' => array(
@@ -63,6 +65,13 @@ class Aluno extends AppModel {
         'Areatrabalho' => array(
 			'className' => 'Areatrabalho',
 			'foreignKey' => 'areatrabalho_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
+		),
+        'Faculdade' => array(
+			'className' => 'Faculdade',
+			'foreignKey' => 'faculdade_ingresso_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
@@ -114,7 +123,7 @@ class Aluno extends AppModel {
     
     public $validate = array(
         'curso_id' => array(
-            'rule'       => 'naturalNumber', // or: array('ruleName', 'param1', 'param2' ...)
+            'rule'       => 'alphaNumeric', // or: array('ruleName', 'param1', 'param2' ...)
             'required'   => true,
             'allowEmpty' => false,
             'on'         => 'create', // or: 'update'
@@ -213,14 +222,123 @@ class Aluno extends AppModel {
             
             $dataSource->begin();
 
-// Perform some tasks
+                $data_matricula = array();
+                if($data['Aluno']['numero_estudante']==''){
+                    $data['Aluno']['codigo'] = $this->geraCodigo();
+                }
+                else{
+                    $data['Aluno']['codigo'] = $data['Aluno']['numero_estudante'];
+                    $data['Aluno']['numero_estudante_antigo'] = $data['Aluno']['numero_estudante'];
+                }
+            
+                    //Grava os dados do Usuario
+                $this->User->create();
+                $data['User']['username'] = $data['Aluno']['codigo'];
+                    $data['User']['password'] = AuthComponent::password($data['Aluno']['codigo']);
+                    $data['User']['codigocartao'] = $data['Aluno']['codigo'];
+                    $data['User']['name'] = $data['Entidade']['name'];
+                    $data['User']['group_id'] = 3;
+                    if($this->User->save($data)){
+                        //Grava os dados da Entidade
+                        $data['Aluno']['user_id'] = $this->User->getLastInsertID();
+                        $data['Entidade']['user_id']=$this->User->getLastInsertID();
+                        $this->Entidade->create();
+                        if($this->Entidade->save($data)){
 
-if (true) {
-    $dataSource->commit();
-} else {
-    $dataSource->rollback();
-}
+                            //Grava os dados do Aluno
+                            $data['Aluno']['entidade_id'] = $this->Entidade->getLastInsertID();
+                            //Escola nao pode ser null
+                            if(!isset($data['Aluno']['escola_id'])){
+                                $data['Aluno']['escola_id']=1;
+                            }
+                            $this->create();
+                            if ($this->save($data)) {
+
+                                //Pega os dados da matricula e realiza a matricula
+                                $data_matricula['aluno_id']= $this->getInsertID();
+                                $data_matricula['curso_id'] = $data['Aluno']['curso_id'];
+                                $data_matricula['planoestudo_id'] = $data['Aluno']['planoestudo_id'];
+                                $data_matricula['estadomatricula_id'] = 1;
+                                $data_matricula['data'] = $data['Aluno']['dataingresso'];
+                                $data_matricula['user_id'] = SessionComponent::read('Auth.User.id');
+                                $data_matricula['anolectivo_id'] = SessionComponent::read('SGAConfig.anolectivo_id');
+                                $data_matricula['turno_id'] = $data['Aluno']['turno_id'];
+                                $data_matricula['nivel'] = $data['Aluno']['nivel'];
+                                if(Configure::read('OpenSGA.matriculas.regimes'==2)){
+                                    $data_matricula['regimelectivo_id']==$data['Aluno']['regimelectivo_id'];
+                                }
+
+                                $matricula_gravar=array('Matricula'=>$data_matricula);
+                                $this->Matricula->create();
+                                if($this->Matricula->save($matricula_gravar)){
+
+                                    //Registra os dados do pagamento
+                                    $this->Pagamento->gerarPagamentos(SessionComponent::read('SGAConfig.anolectivo_id'),$this->getLastInsertID(),SessionComponent::read('SGAConfig.semestre'));
+                                    return $dataSource->commit();
+                                }
+                            }
+                        }
+                    }
+
+             
+                $dataSource->rollback();
+            
         }
+        
+    public function isBolseiro($aluno_id,$ano_lectivo_id=null){
+        
+        return TRUE;
+    }
+    
+    /**
+     *Verifica se o aluno esta matriculado 
+     */
+    public function isMatriculado($aluno_id,$anolectivo_id){
+        $matricula = $this->Matricula->find('first',array('conditions'=>array('aluno_id'=>$aluno_id,'anolectivo_id'=>$anolectivo_id),'recursive'=>-1));
+        return $matricula;
+    }
+    
+    public function setNovaMatricula($data){
+        if(empty($data['Matricula']['anolectivo_id'])){
+            $data['Matricula']['anolectivo_id']=$data['Sessao']['anolectivo_id'];
+        }
+        
+        $data['Matricula']['user_id'] = $data['Sessao']['user_id'];
+        $data['Matricula']['aluno_id'] = $this->id;
+        if($this->isMatriculado($this->id, $data['Matricula']['user_id'])){
+            return false;
+        }
+        if($this->Matricula->save($data)){
+            return true;
+        }
+        return false;
+    }
+    
+    public function getPerfilAluno(){
+        
+    }
+    
+    /**
+     *Retorna o numero de estudantes por faculdade 
+     */
+    public function getEstudantesByFaculdade(){
+        $alunos_faculdade = $this->find('all',array('conditions'=>array(),'group'=>'faculdade_ingresso_id','fields'=>array('Count(*) as total','Faculdade.name')));
+        return $alunos_faculdade;
+    }
+    
+    public function getEstudantesByCurso($curso_id){
+        $alunos_curso = $this->find('all',array('conditions'=>array('Aluno.curso_ingresso_id'=>$curso_id)));
+        
+        
+        return $alunos_curso;
+    }
+    
+    public function getTotalAlunos()
+    {
+        return $this->find('count');
+    }
+    
+  
 
 
 
