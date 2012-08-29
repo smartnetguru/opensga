@@ -34,7 +34,7 @@ class AppController extends Controller {
    
    var $components = array(
        'Security','Acl','Auth', 'Session','RequestHandler','DebugKit.Toolbar');
-   var $helpers = array('Html','Form','Session','Js' => array('MyJquery'),'EventsCalendar','Javascript','Ajax');
+   var $helpers = array('Html','Form','Session','Js' => array('MyJquery'),'EventsCalendar','Javascript','Ajax','PhpExcel');
 
 	 public $pdfConfig = array(
 		'engine' => 'CakePdf.Tcpdf',

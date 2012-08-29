@@ -28,5 +28,18 @@ class Faculdade extends AppModel {
 			'counterQuery' => ''
 		)
 	);
+    
+    var $validate = array(
+    'codigo' => array(
+        'rule' => 'isUnique',
+        'message' => 'Este codigo ja foi usado por outra Faculdade.'
+    ),
+    'name' => array(
+        'rule' => 'isUnique',
+        'message' => 'Ja existe uma Faculdade com este nome.',
+        'required'   => true,
+        'allowEmpty' => false,
+    )        
+);
 
 }

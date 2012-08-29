@@ -149,36 +149,38 @@ class UsersController extends AppController {
         }
 
     function trocar_senha($id = null){
-            if (!$id && empty($this->data)) {
-                $this->data = $this->User->read(null,$this->Session->read('Auth.User.id'));
+            $this->User->id = $id;
+            if(!$this->User->exists()){
+                throw new NotFoundException('User não encontrado');
             }
-		if ($id && !empty($this->data)) {
-			$senha_antiga = $this->data['User']['senhaantiga'];
-            $senha_nova1 = $this->data['User']['novasenha1'];
-            $senha_nova2 = $this->data['User']['novasenha2'];
+            
+            if($this->request->is('post') || $this->request->is('put')){
+                $senha_antiga = $this->data['User']['senhaantiga'];
+                $senha_nova1 = $this->data['User']['novasenha1'];
+                $senha_nova2 = $this->data['User']['novasenha2'];
 
-            $senha_bd = $this->User->findById($this->Session->read('Auth.User.id'));
-            if($senha_bd['User']['password']==md5($senha_antiga)){
-                if($senha_nova1 == $senha_nova2){
-                    $this->data['User']['password'] = md5($senha_nova1);
-                    if ($this->User->save($this->data)) {
-                        $this->Session->setFlash(sprintf(__('Senha alterada com sucesso', true), 'user'),'flashok');
+                $senha_bd = $this->User->findById($this->Session->read('Auth.User.id'));
+                if($senha_bd['User']['password']==AuthComponent::password($senha_antiga)){
+                    if($senha_nova1 == $senha_nova2){
+                        $this->request->data['User']['password'] =  AuthComponent::password($senha_nova1);
+                        if ($this->User->save($this->request->data)) {
+                            $this->Session->setFlash(sprintf(__('Senha alterada com sucesso', true), 'user'),'flashok');
+                            $this->redirect(array('action' => 'index'));
+                        } else {
+                            $this->Session->setFlash(sprintf(__('Erro ao alterar a senha. Por favor, tente de novo', true), 'user'),'flasherror');
+                        }
+                    }
+                    else{
+                        $this->Session->setFlash(sprintf(__('As senhas introduzidas não são idênticas', true), 'user'),'flasherror');
                         $this->redirect(array('action' => 'index'));
-                    } else {
-                        $this->Session->setFlash(sprintf(__('Erro ao alterar a senha. Por favor, tente de novo', true), 'user'),'flasherror');
                     }
                 }
                 else{
-                    $this->Session->setFlash(sprintf(__('As senhas introduzidas não são idênticas', true), 'user'),'flasherror');
+                    $this->Session->setFlash(sprintf(__('A senha antiga nao confere', true), 'user'));
                     $this->redirect(array('action' => 'index'));
                 }
-            }
-            else{
-                $this->Session->setFlash(sprintf(__('A senha antiga nao confere', true), 'user'));
-                $this->redirect(array('action' => 'index'));
-            }
+                }
 
-		}
     }
         function beforeRender(){
             parent::beforeRender();	
@@ -274,6 +276,21 @@ class UsersController extends AppController {
             }
         }
         
+    }
+    
+    
+
+    public function teste_shell() {
+        App::uses('ShellDispatcher', 'Console');
+        $command = ' AclExtras.AclExtras aco_sync '.' -app '.APP;
+        $args = explode(' ', $command);
+        $dispatcher = new ShellDispatcher($args, false);
+        if($dispatcher->dispatch()) {
+            $this->Session->setFlash('OK');
+        } else {
+            $this->Session->setFlash('Error');
+        }
+        return $this->redirect(array('action' => 'index'));
     }
 }
 ?>

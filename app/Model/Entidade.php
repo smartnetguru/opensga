@@ -50,30 +50,37 @@ class Entidade extends AppModel {
 			'fields' => '',
 			'order' => ''
 		),
-		'Paise' => array(
-			'className' => 'Paise',
-			'foreignKey' => 'paise_id',
+		'PaisNascimento' => array(
+			'className' => 'Pais',
+			'foreignKey' => 'pais_nascimento',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
 		),
-		'Cidade' => array(
+		'CidadeMorada' => array(
 			'className' => 'Cidade',
-			'foreignKey' => 'cidade_id',
+			'foreignKey' => 'cidade_morada',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
+		),
+        'CidadeFerias' => array(
+			'className' => 'Cidade',
+			'foreignKey' => 'cidade_ferias',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
 		),
         'CidadeNascimento' => array(
 			'className' => 'Cidade',
-			'foreignKey' => 'natcidade',
+			'foreignKey' => 'cidade_nascimento',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
 		),
-		'Provincia' => array(
+        'ProvinciaNascimento' => array(
 			'className' => 'Provincia',
-			'foreignKey' => 'provincia_id',
+			'foreignKey' => 'provincia_nascimento',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
@@ -91,7 +98,22 @@ class Entidade extends AppModel {
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
-		)
+		),
+        'ProvinciaFerias' => array(
+			'className' => 'Cidade',
+			'foreignKey' => 'provincia_ferias',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
+		),
+        'EstadoCivil' => array(
+			'className' => 'EstadoCivil',
+			'foreignKey' => 'estado_civil',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
+		),
+        
 	);
     public $hasOne = array(
         'Docente' => array(

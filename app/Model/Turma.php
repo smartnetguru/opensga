@@ -149,6 +149,32 @@ class Turma extends AppModel {
 			'exclusive' => '',
 			'finderQuery' => '',
 			'counterQuery' => ''
+		),
+        'Avaliacao' => array(
+			'className' => 'Avaliacao',
+			'foreignKey' => 'turma_id',
+			'dependent' => false,
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'exclusive' => '',
+			'finderQuery' => '',
+			'counterQuery' => ''
+		),
+        'Turmatipoavaliacao' => array(
+			'className' => 'Turmatipoavaliacao',
+			'foreignKey' => 'turma_id',
+			'dependent' => false,
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'exclusive' => '',
+			'finderQuery' => '',
+			'counterQuery' => ''
 		)
 	);
 
@@ -179,7 +205,8 @@ class Turma extends AppModel {
                             $turmas=array('Turma'=>$turma);
                            
                             //Primeiro precisamos ver se a turma nao esta criada ainda
-                            $turma_existe = $this->find('first',array('recursive'=>-1,'conditions'=>array('anolectivo_id'=>$anolectivo_id,'planoestudo_id'=>$planoestudo_id,'disciplina_id'=>$disciplina['d']['id'],'anocurricular'=>$turma['anocurricular'],'semestrecurricular'=>$turma['semestrecurricular'],'turno_id'=>$turma['turno_id'])));
+                            $turma_existe = $this->find('first',array('recursive'=>-1,'conditions'=>array('anolectivo_id'=>$anolectivo_id,'planoestudo_id'=>$planoestudo_id,'disciplina_id'=>$disciplina['d']['id'],'anocurricular'=>$turma['anocurricular'],'semestrecurricular'=>$turma['semestrecurricular'],'turno_id'=>$turma['turno_id'],'semestrelectivo_id'=>$semestre_id)));
+                            
                             if(!$turma_existe){
                                 $this->create();
                                 $this->save($turmas);
@@ -204,17 +231,25 @@ class Turma extends AppModel {
  * @Todo Filtrar para apenas mostrar as turmas em que o aluno pode se inscrever
  */
         function getAllByAlunoForInscricao($aluno_id,$matricula_id){
-        	App::import('Model','Matricula');
-			App::import('Model','Aluno');
-			$Matricula = new Matricula;
-			$Aluno = new Aluno;
+        	$matricula=$this->Inscricao->Matricula->findByAlunoId($aluno_id);
+			$this->Inscricao->Aluno->recursive=-1;
+			//Primeiro vamos pegar todas as disciplinas do plano de estudos
+            $todas_disciplinas = $this->Planoestudo->getAllDisciplinas($matricula['Matricula']['planoestudo_id']);
+            
+            //Inscricoes activas
+            $inscricoes_activas = $this->Inscricao->Aluno->getAllInscricoesActivasandAprovadasForInscricao($aluno_id);
+            
+            //De todas_disciplinas, remover inscricoes activas
+            
+            
 			
-			$matricula=$Matricula->findByAlunoId($aluno_id);
-			$Aluno->recursive=-1;
-			
-			$aluno = $Aluno->findById($aluno_id,'escola_id');
-			$turmas = $this->find('all', array('conditions'=>array('Turma.planoestudo_id'=>$matricula['Matricula']['planoestudo_id'],'Turma.estadoturma_id'=>1,'Turma.escola_id'=>$aluno['Aluno']['escola_id'],'Turma.turno_id'=>$matricula['Matricula']['turno_id']),'fields'=>array('Turma.id','Disciplina.name')));
-			
+            $conditions = array('Turma.planoestudo_id'=>$matricula['Matricula']['planoestudo_id'],'Turma.estadoturma_id'=>1,'Turma.turno_id'=>$matricula['Matricula']['turno_id'],'NOT'=>array('Turma.disciplina_id'=>$inscricoes_activas),'Turma.anolectivo_id'=>Configure::read('OpenSGA.ano_lectivo_id'));
+            if(Configure::read('OpenSGA.modulos.escolas')==1){
+                $aluno = $Aluno->findById($aluno_id,'escola_id');
+                $conditions['Turma.escola_id']=$aluno['Aluno']['escola_id'];
+            }
+			$turmas = $this->find('all', array('conditions'=>$conditions,'fields'=>array('Turma.id','Disciplina.name','Disciplina.id','Turma.anocurricular','Turma.semestrecurricular'),'order'=>array('Turma.anocurricular','Turma.semestrecurricular')));
+            
 			return $turmas;
 			
         }
@@ -389,13 +424,54 @@ class Turma extends AppModel {
             //var_dump($resultado);
             return $resultado;
 	}
-
+    
+    /**
+     *Fecha todas as turmas e inscricoes de um dado semestre. 
+     */
+    public function fecharTodasTurmas($semestre=null){
+        if($semestre==null){
+            $semestre = Configure::read('OpenSGA.semestre_lectivo_id');
+        }
+        $dataSource = $this->getDataSource();    
+        $dataSource->begin();
+            
+        $this->contain('Inscricao');
+        $turmas = $this->find('all',array('conditions'=>array('Turma.semestrelectivo_id'=>$semestre,'Turma.estadoturma_id'=>1),'limit'=>100));
+        
+        
+        
+        foreach($turmas as $turma){
+            $inscricaos = $turma['Inscricao'];
+            foreach($inscricaos as $inscricao){
+                if($inscricao['estadoinscricao_id']==1){
+                    $this->Inscricao->id = $inscricao['id'];
+                    $this->Inscricao->set('estadoinscricao_id',6);
+                    $this->Inscricao->save();
+                }
+            }
+            
+            //Fechamos a turma tambem
+            $this->id = $turma['Turma']['id'];
+            $this->set('estadoturma_id',3);
+            $this->save();
+        }
+        
+        //return $dataSource->rollback();
+        return $dataSource->commit();
+    }
+    
+    
 
 		function getTurmasByFuncionario($funcionario_id){
             $query = "SELECT tt.id FROM t0010turmas tt, funcionarios tf where (tf.id = tt.funcionario_id or tt.funcionario_ass_id = tf.id) and tf.id  = {$funcionario_id} ";
            	$resultado = $this->query($query);
 			return $resultado;
-        }	
+        }
+        
+        public function hasAvaliacoesAbertas($turma_id){
+            $avaliacoes = $this->Turmatipoavaliacao->find('all',array('conditions'=>array('Turmatipoavaliacao.turma_id'=>$turma_id)));
+            debug($avaliacoes);
+        }
 	
 }
 ?>

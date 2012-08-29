@@ -33,15 +33,9 @@ class RelatoriosController extends AppController {
     }
     
     public function estudantes_por_curso(){
-        if($this->request->is('post') || $this->request->is('put')){
-            $this->loadModel('Aluno');
-            $estudantes_curso = $this->Aluno->getEstudantesByCurso($this->request->data['Curso']['curso_id']);
-            $this->set(compact('estudantes_curso'));
-            $this->set('resultado',true);
-        }
-        $this->loadModel('Curso');
-        $cursos = $this->Curso->find('list');
-        $this->set(compact('cursos'));
+        $this->loadModel('Aluno');
+        $estudantes_curso = $this->Aluno->getEstudantesByCurso();
+        $this->set(compact('estudantes_curso'));
         
     }
 

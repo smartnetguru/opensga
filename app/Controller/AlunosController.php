@@ -95,7 +95,7 @@ class AlunosController extends AppController
                   'Planoestudo','Turno'
               ),
               'Curso','Entidade'=>array(
-                  'Provincia','Cidade','Paise','Genero','DocumentoIdentificacao'
+                  'ProvinciaNascimento','CidadeNascimento','PaisNascimento','Genero','DocumentoIdentificacao'
               ),
               'AlunoNivelMedio'=>array(
                   'EscolaNivelMedio'
@@ -120,7 +120,7 @@ class AlunosController extends AppController
              )
                 )
             ); 
-        $inscricoes_activas = $this->Aluno->Inscricao->find('all',array('conditions'=>array('Inscricao.aluno_id'=>$id)));
+        $inscricoes_activas = $this->Aluno->Inscricao->find('all',array('conditions'=>array('Inscricao.aluno_id'=>$id,'Inscricao.estadoinscricao_id'=>1)));
         
          $this->Aluno->Inscricao->contain(array(
              'Turma'=>array(
@@ -174,11 +174,11 @@ class AlunosController extends AppController
         //debug($pagamentos);
 		$this->set('aluno',$aluno);
 		$users = $this->Aluno->User->find('list');
-		$paises = $this->Aluno->Entidade->Paise->find('list');
-		$cidades = $this->Aluno->Entidade->Cidade->find('list');
-		$provincias = $this->Aluno->Entidade->Provincia->find('list');
-        $provenienciacidades = $this->Aluno->Entidade->Cidade->find('list');
-		$proveniencianomes = $this->Aluno->Entidade->Provincia->find('list');
+		$paises = $this->Aluno->Entidade->PaisNascimento->find('list');
+		$cidades = $this->Aluno->Entidade->CidadeNascimento->find('list');
+		$provincias = $this->Aluno->Entidade->ProvinciaNascimento->find('list');
+        $provenienciacidades = $this->Aluno->Entidade->CidadeNascimento->find('list');
+		$proveniencianomes = $this->Aluno->Entidade->ProvinciaNascimento->find('list');
 		$documentos = $this->Aluno->Entidade->DocumentoIdentificacao->find('list');
 		$areatrabalhos = $this->Aluno->Areatrabalho->find('list');
 		$generos = $this->Aluno->Entidade->Genero->find('list');
@@ -204,8 +204,10 @@ class AlunosController extends AppController
      */
     function adicionar_estudante() {
         if ($this->request->is('post') || $this->request->is('put')) {
+            $this->request->data['Entidade']['name'] = $this->request->data['Entidade']['nomes'].' '.$this->request->data['Entidade']['apelido'];
             if($this->Aluno->cadasTraAluno($this->request->data)){
                 $this->Session->setFlash("Aluno Registrado com Sucesso");
+                $this->redirect(array('controller'=>'alunos','action'=>'perfil_estudante',$this->Aluno->id));
             }
             else{
                 $this->Session->setFlash('Problemas ao registrar os dados do Aluno', 'default', array('class'=>'alert error'));
@@ -218,18 +220,20 @@ class AlunosController extends AppController
 
         $planoestudos = $this->Aluno->Matricula->Planoestudo->find('list');
         $users = $this->Aluno->Entidade->User->find('list');
-        $paises = $this->Aluno->Entidade->Paise->find('list');
+        
+        $paises = $this->Aluno->Entidade->PaisNascimento->find('list');
         $escola_nivel_medios = $this->Aluno->AlunoNivelMedio->EscolaNivelMedio->find('list');
-        $cidades = $this->Aluno->Entidade->Cidade->find('list');
-        $provincias = $this->Aluno->Entidade->Provincia->find('list');
+        $cidades = $this->Aluno->Entidade->CidadeNascimento->find('list');
+        $provincias = $this->Aluno->Entidade->ProvinciaNascimento->find('list');
         $provenienciacidades = $this->Aluno->AlunoNivelMedio->EscolaNivelMedio->Distrito->find('list');
         $proveniencianomes = $this->Aluno->AlunoNivelMedio->EscolaNivelMedio->Provincia->find('list');
         $documento_identificacaos = $this->Aluno->Entidade->DocumentoIdentificacao->find('list');
         $areatrabalhos = $this->Aluno->Areatrabalho->find('list');
         $generos = $this->Aluno->Entidade->Genero->find('list');
         $turnos = $this->Aluno->Matricula->Turno->find('list');
-        $cidadenascimentos = $this->Aluno->Entidade->Cidade->find('list');
-        $this->set(compact('cursos','planoestudos','users', 'paises', 'cidades', 'provincias', 'documento_identificacaos', 'areatrabalhos','generos','cidadenascimentos','proveniencianomes','provenienciacidades','turnos','escola_nivel_medios'));
+        $estado_civil = $this->Aluno->Entidade->EstadoCivil->find('list');
+        $cidadenascimentos = $this->Aluno->Entidade->CidadeNascimento->find('list');
+        $this->set(compact('nacionalidades','cursos','planoestudos','users', 'paises', 'cidades', 'provincias', 'documento_identificacaos', 'areatrabalhos','generos','cidadenascimentos','proveniencianomes','provenienciacidades','turnos','escola_nivel_medios','estado_civil'));
     }
     
     /**
@@ -306,203 +310,7 @@ class AlunosController extends AppController
         $this->set('current_section','estudantes');
     }
 		
-	function ajax_update_cidade(){
-		//var_dump($teste);
-		
-		$this->layout = 'ajax';
-	}
-        function pdf_index($id = null){
-		    //App::Import('Model','Logmv');
-	        //$logmv = new Logmv;
-           Configure::write('debug',0); // Otherwise we cannot use this method while developing
-             if (empty($this->data)) {
-			$this->data = $this->Aluno->read(null, $id);
-		}
-		$users = $this->Aluno->User->find('list');
-		$paises = $this->Aluno->Entidade->Paise->find('list');
-		$cidades = $this->Aluno->Entidade->Cidade->find('list');
-		$provincias = $this->Aluno->Entidade->Provincia->find('list');
-		$documentos = $this->Aluno->Entidade->DocumentoIdentificacao->find('list');
-		$areatrabalhos = $this->Aluno->Areatrabalho->find('list');
-		//$generos = $this->Aluno->Generos->find('list');
-		$generos = $this->Aluno->Entidade->Genero->find('list');
-		$this->set(compact('users', 'Paises', 'Cidades', 'Provincias', 'DocumentoIdentificacaos', 'tg0010areatrabalhos', 'generos'));
-		  
-		   $teste = array();
-		   $teste[] = $id;
-		   $teste[] = "Teste2";
-           $this->set('teste1',$teste);
-		   $this->layout = 'pdf'; //this will use the pdf.ctp layout
-           //$this->render('/Alunos/pdf_teste');
-		   $this->render();
-        }
-        
-        public function imprimir_alunos(){
-            $this->layout = 'jasper';
-        }
-        
-        public function pdf_ficha_cadastro($id)
-        {
-            Configure::write('debug',0);
-            
-            $this->Aluno->id = $id;
-            if(!$this->Aluno->exists()){
-                throw new NotFoundException(__('Aluno Invalido'));
-            }
-        
-        $this->Aluno->contain(array(
-              'Matricula'=>array(
-                  'Planoestudo','Turno'
-              ),
-              'Curso','Entidade'=>array(
-                  'Provincia','Cidade','Paise','Genero','DocumentoIdentificacao'
-              ),
-              'AlunoNivelMedio'=>array(
-                  'EscolaNivelMedio'
-              )
-          ));
-          $aluno = $this->Aluno->find('first',array('conditions'=>array('Aluno.id'=>$id)));
-		$users = $this->Aluno->User->find('list');
-		$paises = $this->Aluno->Entidade->Paise->find('list');
-		$cidades = $this->Aluno->Entidade->Cidade->find('list');
-		$provincias = $this->Aluno->Entidade->Provincia->find('list');
-		$documentos = $this->Aluno->Entidade->DocumentoIdentificacao->find('list');
-		$areatrabalhos = $this->Aluno->Areatrabalho->find('list');
-		//$generos = $this->Aluno->Generos->find('list');
-		$generos = $this->Aluno->Entidade->Genero->find('list');
-		$this->set(compact('users', 'Paises', 'Cidades', 'Provincias', 'DocumentoIdentificacaos', 'tg0010areatrabalhos', 'generos'));
-		  
-		   $teste = array();
-		   $teste[] = $id;
-		   $teste[] = "Teste2";
-           $this->set('teste1',$teste);
-           
-           
-           $this->set('aluno',$aluno);
-		   $this->layout = 'pdf'; //this will use the pdf.ctp layout
-           //$this->render('/Alunos/pdf_teste');
-		   $this->render();
-        }
-        
-        public function tcpdf_1(){
-                 
-                 Configure::write('debug',0); // Otherwise we cannot use this method while developing
-                 //$content = $this->render(null, 'pdf');
-                $this->layout = 'pdf'; //this will use the pdf.ctp layout
-           //$this->render('/Alunos/pdf_teste');
-		   $this->render();
-        }
-		
-		function pdf_index_alunos(){
-		      //App::Import('Model','Logmv');
-	          //$logmv = new Logmv;
-              Configure::write('debug',0); // Otherwise we cannot use this method while developing
-		      $users = $this->Aluno->User->find('list');
-			  $aluno = $this->Aluno->find('all');
-		      $paises = $this->Aluno->Paise->find('list');
-		      $cidades = $this->Aluno->Cidade->find('list');
-		      $provincias = $this->Aluno->Provincia->find('list');
-		      $documentos = $this->Aluno->DocumentoIdentificacao->find('list');
-		      $areatrabalhos = $this->Aluno->Areatrabalho->find('list');
-              $cursos = $this->Aluno->Curso->find('list');
-		      $this->set(compact('users', 'Paises', 't0003cursos','Cidades', 'Provincias', 'DocumentoIdentificacaos', 'tg0010areatrabalhos'));
-            $listas = array();
-             foreach ($aluno as $m){
-                $lista = array();
-                $lista[] =$m["Aluno"]["id"];
-				$lista[] =$m["Aluno"]["codigo"];
-				$lista[] =$m["Aluno"]["name"];
-				
-				  
-				//   $lista[] =$m["Cursos"]["name"];
-				//var_dump($m["Curso"]["name"]);
-               // $listas[] =$m["Aluno"]["name"];
-				//$listas[] =$m["Aluno"]["empresanome"];
-				$listas[] =$lista;
-                }
-           // $this->set('cursos',$this->Curso->find('all'));
-           $this->set('lista',$listas);
-           $this->layout = 'pdf'; //this will use the pdf.ctp layout
-           $this->render();
-		 //  $this->render('/Alunos/pdf_teste');
-        }
 
-		function exportar_excel(){
-			App::import('Vendor', 'Spreadsheet_Excel_Writer', array('file' => 'Spreadsheet/Excel/Writer.php'));
-			
-			// Creating a workbook
-			$workbook = new Spreadsheet_Excel_Writer();
-			$format_bold =& $workbook->addFormat();
-			$format_bold->setBold();
-			
-			$format_escola =& $workbook->addFormat();
-			$format_escola->setBold();
-			$format_escola->setAlign('center');
-			
-			$format_titulo =& $workbook->addFormat();
-			$format_titulo->setBold();
-			$format_titulo->setAlign('center');
-
-			// sending HTTP headers
-			$workbook->send('alunos_por_curso.xls');
-			
-			$cursos = $this->Aluno->Curso->find('list');
-			
-			foreach($cursos as $k=>$v){
-				$this->Aluno->Matricula->recursive = 1;
-				$alunos = $this->Aluno->Matricula->find('all',array('conditions'=>array('Matricula.curso_id'=>$k),'fields'=>array('Aluno.codigo','Aluno.name','Curso.name','Curso.codigo')));
-				// Creating a worksheet
-				$worksheet =& $workbook->addWorksheet($alunos[0]['Curso']['codigo']);
-				$worksheet->setInputEncoding('utf-8');
-				$worksheet->setColumn(0,0,12);
-				$worksheet->setColumn(1,1,15);
-				$worksheet->setColumn(2,2,45);
-				$worksheet->setColumn(3,3,45);
-				//$worksheet->insertBitmap(1,1,'/sga/img/logo.bmp');
-				// The actual data
-				
-				$worksheet->write(0, 0, iconv("UTF-8", "ISO-8859-1",'ESCOLA SUPERIOR DE ECONOMIA E GESTÃO'),$format_escola);
-				$worksheet->write(1, 0, iconv("UTF-8", "ISO-8859-1",'Lista de Estudantes de '.$alunos[0]['Curso']['name']),$format_titulo);
-				$worksheet->setMerge(0, 0, 0, 3);
-				$worksheet->setMerge(1, 0, 1, 3);
-				$sequencia = 3;
-				$worksheet->write($sequencia, 0, 'Sequencia',$format_bold);
-				$worksheet->write($sequencia, 1, 'Codigo',$format_bold);
-				$worksheet->write($sequencia, 2, 'Nome',$format_bold);
-				$worksheet->write($sequencia, 3, 'Curso',$format_bold);
-				
-				foreach($alunos as $aluno){
-					$sequencia++;	
-					$worksheet->write($sequencia, 0, $sequencia-3);
-					$worksheet->write($sequencia, 1,$aluno['Aluno']['codigo']);
-					$worksheet->write($sequencia, 2,iconv("UTF-8", "ISO-8859-1", $aluno['Aluno']['name']));
-					$worksheet->write($sequencia, 3, iconv("UTF-8", "ISO-8859-1", $aluno['Curso']['name']));
-				}
-				
-				//var_dump($alunos);
-			}
-			
-			
-			
-			
-			
-			$worksheet->write(3, 0, 'Juan Herrera');
-			$worksheet->write(3, 1, 32);
-			
-			// Let's send the file
-			$workbook->close();
-		}
-        
-        public function pdf_boletim_matricula($aluno_id){
-            $this->set('aluno_id',$aluno_id);
-            $this->layout = 'jasper';
-        }
-        
-        public function pdf_ficha_cadastro1($aluno_id){
-            $this->set('aluno_id',$aluno_id);
-            $this->layout = 'jasper';
-        }
-        
         public function capturar_foto($aluno_id){
             $this->Aluno->id = $aluno_id;
             if (!$this->Aluno->exists()) {
@@ -567,12 +375,147 @@ class AlunosController extends AppController
             
             
         }
-        public function alunocake($aluno_id){
+        
+        
+        public function matricula_simples($aluno_id){
+            $this->Aluno->Id = $aluno_id;
+            if(!$this->Aluno->exists()){
+                
+            }
+            $aluno = $this->Aluno->find('first',array('conditions'=>array('Aluno.id'=>$aluno_id)));
+            if($this->request->is('post')||$this->request->is('put')){
+                
+                //Grava os dados da Entidade
+                $this->Aluno->Entidade->id = $aluno['Entidade']['id'];
+                $this->Aluno->Entidade->save($this->request->data);
+                
+                //Grava os dados dos Alunos
+                $this->Aluno->id = $aluno['Aluno']['id'];
+                $this->Aluno->save($this->request->data);
+                
+                
+            }
             
-            $pdf = new CakePdf($this->pdfConfig);
-            $pdf->pageSize('A5');
-            $pdf->title('Teste');
-            $this->set('aluno',array(1,3,4,5));
-            //$this->layoutPath='pdf';
+            
+            $cursos  =$this->Aluno->Curso->find('list');
+            
+            $turnos = $this->Aluno->Matricula->Turno->find('list');
+            
+            $documento_identificacaos = $this->Aluno->Entidade->DocumentoIdentificacao->find('list');
+            
+            $generos = $this->Aluno->Entidade->Genero->find('list');
+            
+            $this->set(compact('aluno','cursos','turnos','documento_identificacaos','generos'));
+            
+        }
+        
+        public function ficha_cadastro($aluno_id){
+            $this->pdfConfig['orientation']='landscape';
+            
+            $this->Aluno->id=$aluno_id;
+        if(!$this->Aluno->exists()){
+            throw new NotFoundException('Esta aluno não existe no Sistema');
+        }
+        
+          $this->Aluno->contain(array(
+              'Matricula'=>array(
+                  'Planoestudo','Turno'
+              ),
+              'Curso','Entidade'=>array(
+                  'ProvinciaNascimento','CidadeNascimento','PaisNascimento','Genero','DocumentoIdentificacao'
+              ),
+              'AlunoNivelMedio'=>array(
+                  'EscolaNivelMedio'
+              )
+          ));
+          $aluno = $this->Aluno->find('first',array('conditions'=>array('Aluno.id'=>$aluno_id)));
+           /*
+          //debug($aluno);
+         $this->Aluno->Inscricao->contain(array(
+             'Turma'=>array(
+                 'fields'=>array(
+                     'id','disciplina_id','anocurricular','semestrecurricular'),
+                     'Disciplina'=>array(
+                         'fields'=>array('id','name')
+                     )
+                    ),
+             'Matricula'=>array(
+                 'fields'=>array('id','anolectivo_id'),
+                 'Anolectivo'=>array(
+                     'fields'=>array('id','ano')
+                 )
+                 
+             )
+                )
+            ); 
+        $inscricoes_activas = $this->Aluno->Inscricao->find('all',array('conditions'=>array('Inscricao.aluno_id'=>$id)));
+        
+         $this->Aluno->Inscricao->contain(array(
+             'Turma'=>array(
+                 'fields'=>array(
+                     'id','disciplina_id','anocurricular','semestrecurricular'),
+                     'Disciplina'=>array(
+                         'fields'=>array('id','name')
+                     )
+                    ),
+             'Matricula'=>array(
+                 'fields'=>array('id','anolectivo_id'),
+                 'Anolectivo'=>array(
+                     'fields'=>array('id','ano')
+                 )
+                 
+             )
+                )
+            );
+        $todas_inscricoes = $this->Aluno->Inscricao->find('all',array('conditions'=>array('Inscricao.aluno_id'=>$id)));
+         
+         $this->Aluno->Inscricao->contain(array(
+             'Turma'=>array(
+                 'fields'=>array(
+                     'id','disciplina_id','anocurricular','semestrecurricular'),
+                     'Disciplina'=>array(
+                         'fields'=>array('id','name')
+                     )
+                    ),
+             'Matricula'=>array(
+                 'fields'=>array('id','anolectivo_id'),
+                 'Anolectivo'=>array(
+                     'fields'=>array('id','ano')
+                 )
+                 
+             )
+                )
+            );        
+        $cadeiras_aprovadas = $this->Aluno->Inscricao->find('all',array('conditions'=>array('Inscricao.aluno_id'=>$id)));
+        
+        $this->Aluno->Pagamento->contain(array(
+            'Tipopagamento'
+        ));
+        
+        if($this->Aluno->isMatriculado($id,$this->Session->read('SGAConfig.anolectivo_id'))){
+            $this->set('is_matriculado',1);
+        }
+        else{
+            $this->set('is_matriculado',0);
+        }
+        $pagamentos = $this->Aluno->Pagamento->find('all',array('conditions'=>array('Pagamento.aluno_id'=>$id)));
+        //debug($pagamentos);
+		
+		$users = $this->Aluno->User->find('list');
+		$paises = $this->Aluno->Entidade->PaisNascimento->find('list');
+		$cidades = $this->Aluno->Entidade->CidadeNascimento->find('list');
+		$provincias = $this->Aluno->Entidade->ProvinciaNascimento->find('list');
+        $provenienciacidades = $this->Aluno->Entidade->CidadeNascimento->find('list');
+		$proveniencianomes = $this->Aluno->Entidade->ProvinciaNascimento->find('list');
+		$documentos = $this->Aluno->Entidade->DocumentoIdentificacao->find('list');
+		$areatrabalhos = $this->Aluno->Areatrabalho->find('list');
+		$generos = $this->Aluno->Entidade->Genero->find('list');
+        $cidadenascimentos = $this->Aluno->Entidade->CidadeNascimento->find('list');
+		$cursos = $this->Aluno->Curso->find('list');
+		$planoestudos = $this->Aluno->Matricula->Planoestudo->find('list');
+        
+        $is_bolseiro = $this->Aluno->isBolseiro($id,  $this->Session->read('SGAConfig.anolectivo_id')); */
+		
+		$this->set(compact('aluno','cursos','planoestudos','users', 'paises', 'cidades', 'provincias', 'documentos', 'areatrabalhos','generos','cidadenascimentos','proveniencianomes','provenienciacidades','inscricoes_activas','todas_inscricoes','cadeiras_aprovadas','pagamentos','is_bolseiro'));
         }
 }

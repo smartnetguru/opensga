@@ -143,18 +143,35 @@ class Aluno extends AppModel {
             $matriculas = new Matricula;
             $matriculas->recursive=-1;
 
-            $matricula = $matriculas->find('all',array('conditions'=>array('estadomatricula_id'=>1,'Aluno_id'=>$id)));
+            $matricula = $matriculas->find('first',array('conditions'=>array('estadomatricula_id'=>1,'Aluno_id'=>$id)));
 
-            $plano_estudo = $matricula[0]['Matricula']['t0005planoestudo_id'];
+            $plano_estudo = $matricula['Matricula']['planoestudo_id'];
             return $plano_estudo;
         }
         
         /**
          *Retorna as cadeiras em que o aluno esta inscrito actualmente 
+         * @return array com ID das disciplinas activas do aluno
          */
-        public function getAllCadeirasActivas(){
-            $inscrioes = $this->Inscricao->find('all',array('conditions'=>array('Inscricao.estadoinscricao_id'=>1)));
-            return $inscrioes;
+        public function getAllInscricoesActivas($aluno_id){
+            
+            $this->Inscricao->contain('Turma');
+            $inscricoes = $this->Inscricao->find('all',array('conditions'=>array('Inscricao.estadoinscricao_id'=>1,'Inscricao.aluno_id'=>$aluno_id),'recursive'=>0,'fields'=>array('Turma.disciplina_id')));
+            
+            $disciplinas = Hash::extract($inscricoes,'{n}.Turma.disciplina_id');
+            return $disciplinas;
+        }
+        
+        /**
+         *Retorna todas as cadeiras que o aluno ja aprovou para a inscricao
+         * @return type 
+         */
+        public function getAllInscricoesActivasAndAprovadasForInscricao($aluno_id){
+            $this->Inscricao->contain('Turma');
+            $inscricoes = $this->Inscricao->find('all',array('conditions'=>array('Inscricao.estadoinscricao_id'=>array(1,2),'Inscricao.aluno_id'=>$aluno_id),'recursive'=>0,'fields'=>array('Turma.disciplina_id')));
+            
+            $disciplinas = Hash::extract($inscricoes,'{n}.Turma.disciplina_id');
+            return $disciplinas;
         }
 
 		/**
@@ -217,6 +234,27 @@ class Aluno extends AppModel {
 			
 		}
         
+        public function getAllTurmasNormaisForInscricao($aluno_id){
+            
+            
+            //Primeiro, pegar a ultima matricula deste aluno, se nao for deste ano, mandar matricular
+            if(!$matricula = $this->getMatriculaCorrente($aluno_id)){
+                return false;
+            }
+            
+            $this->Inscricao->contain(array(
+               'Turma' 
+            ));
+            $turmas_aprovadas = $this->Inscricao->find('all',array('conditions'=>array('Inscricao.aluno_id'=>$aluno_id)));
+            
+            //$matricula - 
+            debug($turmas_aprovadas);
+        }
+        
+        public function getMatriculaCorrente($aluno_id){
+            return $this->Matricula->find('first',array('conditions'=>array('Matricula.aluno_id'=>$aluno_id,'Matricula.anolectivo_id'=>Configure::read('OpenSGA.ano_lectivo_id'),'Matricula.estadomatricula_id'=>1),'recursive'=>-1));
+            
+        }
         public function cadastraAluno(array $data){
             $dataSource = $this->getDataSource();
             

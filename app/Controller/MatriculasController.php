@@ -30,11 +30,71 @@
 class MatriculasController extends AppController {
 
 	var $name = 'Matriculas';
-
+    
+    
+    /**
+     *Overview das Matriculas
+     * Mostra o grafico de Novos ingressos por Curso 
+     */
 	function index() {
-		$this->Matricula->recursive = 0;
-		$this->set('matriculas', $this->paginate());
+		$matriculas_novas = $this->Matricula->find('all',array('conditions'=>array('Matricula.anolectivo_id'=>Configure::read('OpenSGA.ano_lectivo_id'),'Matricula.tipo_matricula_id'=>1),'group'=>array('Matricula.curso_id','Matricula.turno_id'),'fields'=>array('Count(*) as total','Curso.name','Turno.name','Curso.id','Turno.id')));
+        
+        
+        
+        $this->set(compact('matriculas_novas'));
 	}
+    
+    function lista_matriculas_por_curso_turno($curso_id=null,$turno_id=null){
+        $this->Matricula->contain(
+                array(
+                    'Curso'=>array(
+                        'fields'=>array(
+                            'id','name','codigo'
+                        )
+                    ),'Turno','Aluno'=>array(
+                        'Entidade'=>array(
+                            'fields'=>array(
+                                'name','id'
+                            )
+                        ),
+                        'fields'=>array(
+                            'id','codigo','entidade_id'
+                        )
+                    )
+                )
+        );
+        $conditions = array('Matricula.anolectivo_id'=>Configure::read('OpenSGA.ano_lectivo_id'),'Matricula.tipo_matricula_id'=>1);
+        if($curso_id!=null){
+            if($curso_id==18){
+               $limite_sala = 30;
+            }
+            else{
+                $limite_sala=42;
+            }
+            $conditions[]=array('Matricula.curso_id'=>$curso_id);
+            
+        }
+        if($turno_id != null){
+            $conditions[] = array('Matricula.turno_id'=>$turno_id);
+        }
+        $matriculas_novas2 = $this->Matricula->find('all',array('conditions'=>$conditions,'order'=>array('Matricula.curso_id','Matricula.turno_id')));
+        
+        $ii=0;
+        $jj=0;
+        $matriculas_nova = array();
+        foreach($matriculas_novas2 as $mn2){
+            if($ii==$limite_sala){
+                $ii=1;
+                $jj=$jj+1;
+            }
+            $matriculas_nova[$jj][]=$mn2;
+            $ii=$ii+1;
+        }
+        
+        
+        $this->set(compact('matriculas_nova','curso_id','turno_id'));
+        //$this->layout = 'pdf';
+    }
 
 	function view($id = null) {
 	    //App::Import('Model','Logmv');
@@ -163,6 +223,61 @@ class MatriculasController extends AppController {
             $planoestudos = $this->Matricula->Planoestudo->find('list',array('conditions'=>array('t0003curso_id'=>$curso)));
             $this->set('planoestudos',$planoestudos);
             $this->layout = 'ajax';
+        }
+        
+        public function lista_alunos_excel($curso_id=null,$turno_id=null){
+            $this->Matricula->contain(
+                array(
+                    'Curso'=>array(
+                        'fields'=>array(
+                            'id','name','codigo'
+                        )
+                    ),'Turno','Aluno'=>array(
+                        'Entidade'=>array(
+                            'fields'=>array(
+                                'name','id'
+                            )
+                        ),
+                        'fields'=>array(
+                            'id','codigo','entidade_id'
+                        )
+                    )
+                )
+        );
+        $conditions = array('Matricula.anolectivo_id'=>Configure::read('OpenSGA.ano_lectivo_id'),'Matricula.tipo_matricula_id'=>1);
+        if($curso_id!=null){
+            if($curso_id==18){
+               $limite_sala = 30;
+            }
+            else{
+                $limite_sala=38;
+            }
+            $conditions[]=array('Matricula.curso_id'=>$curso_id);
+            
+        }
+        if($turno_id != null){
+            $conditions[] = array('Matricula.turno_id'=>$turno_id);
+        }
+        
+        $matriculas_novas2 = $this->Matricula->find('all',array('conditions'=>$conditions,'order'=>array('Matricula.curso_id','Matricula.turno_id')));
+        
+        //die(debug($matriculas_novas2));
+        
+        $ii=0;
+        $jj=0;
+        $matriculas_nova = array();
+        foreach($matriculas_novas2 as $mn2){
+            if($ii==$limite_sala){
+                $ii=0;
+                $jj=$jj+1;
+            }
+            $matriculas_nova[$jj][]=$mn2;
+            $ii=$ii+1;
+        }
+        
+        
+        $this->set(compact('matriculas_nova','curso_id','turno_id'));
+        //$this->layout = 'pdf';
         }
 
 }

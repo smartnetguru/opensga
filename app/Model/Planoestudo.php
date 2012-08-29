@@ -43,8 +43,14 @@ class Planoestudo extends AppModel {
 			'counterQuery' => ''
 		)
 	);
-
+        
+        /**
+         *Nao usar esta funcao
+         * @param type $plano_id
+         * @return type 
+         */
         function getAllDisciplinasByPlanoEstudo($plano_id){
+            trigger_error("Deprecated function called.", E_USER_NOTICE);
             App::import('Model','planoestudoano');
             $planoestudoano = new Planoestudoano;
             $query = "Select p.id,planoestudo_id,ano,semestre,cargahorariateoricas,cargahorariapraticas,d.id,d.name,d.codigo,pe.curso_id,pe.name ";
@@ -58,7 +64,12 @@ class Planoestudo extends AppModel {
             }
             return $disciplinas;
         }
-
+        
+        public function getAllDisciplinas($plano_id){
+            
+            $disciplinas = $this->Planoestudoano->find('all',array('conditions'=>array('planoestudo_id'=>$plano_id)));
+            return $disciplinas;
+        }
 		
         function deleteAllDisciplinasByPlanoEstudo($plano_id){
             App::import('Model','planoestudoano');

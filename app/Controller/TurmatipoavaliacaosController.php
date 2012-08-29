@@ -66,7 +66,11 @@ class TurmatipoavaliacaosController extends AppController {
         $turmatipoavaliacao = $this->Turmatipoavaliacao->read(null, $id);
         $this->Turmatipoavaliacao->Turma->Inscricao->contain(
                 array(
-                    'Aluno',
+                    'Matricula'=>array(
+                        'Aluno'=>array(
+                            'Entidade'
+                        )
+                    ),
                     'Turma',
                     'Avaliacao'=>array(
                         'conditions'=>array('Avaliacao.turmatipoavaliacao_id'=>$id)

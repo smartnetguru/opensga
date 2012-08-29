@@ -67,7 +67,9 @@ class Disciplina extends AppModel {
     ),
     'name' => array(
         'rule' => 'isUnique',
-        'message' => 'Ja existe uma disciplina com este nome.'
+        'message' => 'Ja existe uma disciplina com este nome.',
+        'required'   => true,
+        'allowEmpty' => false,
     )        
 );
 

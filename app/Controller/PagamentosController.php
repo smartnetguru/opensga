@@ -144,7 +144,8 @@ class PagamentosController extends AppController {
     public function pesquisar_aluno(){
         if($this->request->is('post') || $this->request->is('put')){
             
-            $this->Pagamento->Aluno->contain(array('Entidade','Curso','Matricula'));
+            $this->Pagamento->Aluno->contain(array('Entidade','Curso','Matricula'
+            ));
             $alunos = $this->Pagamento->Aluno->find('all',array('conditions'=>array('OR'=>array(array('Entidade.name LIKE'=>'%'.$this->request->data['Aluno']['name'].'%'),array('Aluno.codigo LIKE'=>$this->request->data['Aluno']['codigo'])))));
             
             $this->set(compact('alunos'));
@@ -161,7 +162,8 @@ class PagamentosController extends AppController {
         
         if($this->request->is('post')||$this->request->is('put')){
             
-            foreach($this->request->data['Pagamento']['pagamento'] as $codigo_pago){
+            foreach($this->request->data['pagamento'] as $codigo_pagoA){
+                $codigo_pago = $codigo_pagoA['id'];
                 if($codigo_pago> 0){
                     $pagamento = $this->Pagamento->findByCodigo($codigo_pago);
                     $tipopagamento = substr($codigo_pago, 8, 2);

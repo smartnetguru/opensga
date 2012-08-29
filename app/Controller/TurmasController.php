@@ -25,6 +25,7 @@ class TurmasController extends AppController {
 		$grupo = $this->Session->read('Auth.User.group_id');
 		
 		$conditions = array();
+        $conditions['turma.estadoturma_id'] = 1;
 		if($grupo==4){
 			$docente_id = $this->Turma->Docente->getByUserID($this->Session->read('Auth.User.id'));
 			$conditions['Turma.docente_id']=$docente_id;
@@ -52,10 +53,11 @@ class TurmasController extends AppController {
 	 * word by word on any field. It's possible to do here, but concerned about efficiency
 	 * on very large tables, and MySQL's regex functionality is very limited
 	 */
-	
+	$conditions['conditions']=array();
+    $conditions['conditions']['turma.estadoturma_id'] = 1;
 	if ( $_GET['sSearch'] != "" )
 	{
-		$conditions['conditions']=array();
+		
 		for ( $i=0 ; $i<count($aColumns) ; $i++ )
 		{
 			$conditions['conditions'][$aColumns[$i]." LIKE"]="%".$_GET['sSearch']."%";
@@ -108,15 +110,20 @@ class TurmasController extends AppController {
 		$this->loadModel('Planoestudoano');
 		$planoestudoanos = $this->Planoestudoano->find('first',array('conditions'=>array('planoestudo_id'=>$this->data['Planoestudo']['id'],'disciplina_id'=>$this->data['Turma']['disciplina_id'])));
 		
+        //$this->loadModel('Inscricao');
+        //$this->Turma->bindModel(array('belongsTo'=>array('Matricula')));
         $this->Turma->Inscricao->contain(array(
-            'Aluno'=>array(
-                'Entidade',
-                'Curso'),
             'Estadoinscricao',
+            'Matricula'=>array(
+                'Aluno'=>array(
+                    'Entidade'
+                )
+            ),
             'Turma'=>array(
                 'Curso'=>array(
                     'fields'=>array('name')
                 ),'Disciplina','Turno','Anolectivo'
+                
             )
         )); 
 		$inscricaos = $this->Turma->Inscricao->find('all',array('conditions'=>array('turma_id'=>$id)));
@@ -441,6 +448,12 @@ class TurmasController extends AppController {
 			$this->set(compact('t0009anolectivos','t0003cursos'));
 		 }
          
+         public function fechar_todas_turmas($semestre){
+             $this->Turma->fecharTodasTurmas($semestre);
+             
+             $this->redirect(array('action'=>'index'));
+         }
+         
          /**
           * Adiciona docente e assistente a turma passada pelo id
           * @param int $turma_id 
@@ -465,6 +478,29 @@ class TurmasController extends AppController {
              $assistentes = $this->Turma->Assistente->find('list');
              
              $this->set(compact('turma','docentes','assistentes'));
+         }
+         
+         /**
+          *Esta funcao fecha uma determinada turma. Mas so fecha se a turma nao tiver avaliacoes abertas
+          * @param type $id 
+          */
+         public function fechar_turma($id){
+             $this->Turma->id = $id;
+             if(!$this->Turma->exists()){
+                 throw new NotFoundException('Turma Não Existente');
+             }
+             if(!$this->request->is('post') && !$this->request->is('put')){
+                 
+                 $this->Session->setFlash(__('Não Possui Permissão para aceder esta página'),'default',array('class'=>'alert error'));
+                 $this->redirect($this->referer());
+             }
+             
+             if(!$this->Turma->hasAvaliacoesAbertas($id)){
+                 
+             }
+             else{
+                 $this->Session->setFlash(__('Esta Turma Possui Avaliações Abertas por isso não pode ser fechada'),'default',array('class'=>'alert error'));
+             }
          }
 }
 ?>

@@ -83,10 +83,10 @@ class Pagamento extends AppModel {
 		
 	
 		if($num_semestre==1){
-			$tipos = array(1,2,3,4,5,6,7);
+			$tipos = array(3,4,5,6,7);
 		}
 		else{
-			$tipos = array(2,8,9,10,11,12);	
+			$tipos = array(8,9,10,11,12);	
 		}
         
 		$tipopagamentos = $this->Tipopagamento->find('all',array('conditions'=>array('Tipopagamento.id'=>$tipos)));

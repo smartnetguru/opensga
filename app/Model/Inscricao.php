@@ -124,6 +124,45 @@ class Inscricao extends AppModel {
             return FALSE;
         }
         
+        
+        public function inscreveAluno($data){
+            $dataSource = $this->getDataSource();
+            
+            $dataSource->begin();
+           $this->Pagamento =  ClassRegistry::init('Pagamento');
+            foreach($data['turmas'] as $turma_id){
+                
+                //Primeiro gravamos o pagamento ;)
+                if($data['turmas_tipo'][$turma_id]==1){
+                    $tipo_pagamento_id = 35;
+                    $this->Pagamento->Tipopagamento->id = 35;
+                    $valor = $this->Pagamento->Tipopagamento->field('valor');
+                }
+                else{
+                    $tipo_pagamento_id = 36;
+                    $this->Pagamento->Tipopagamento->id = 36;
+                    $valor = $this->Pagamento->Tipopagamento->field('valor');
+                }
+                $pagamento_inscricao = array('aluno_id'=>$data['aluno_id'],'valor'=>$valor,'data_pagamento'=>date('Y-m-d'),'tipopagamento_id'=>$tipo_pagamento_id,'data_orcamento'=>date('Y-m-d'),'estadopagamento_id'=>2,'anolectivo_id'=>Configure::read('OpenSGA.ano_lectivo_id'),'data_emissao'=>date('Y-m-d'),'numero_comprovativo'=>$data['Pagamento']['numero_comprovativo'],'valor_pago'=>  $data['Pagamento']['valor_pago']);
+                
+                $this->Pagamento->create();
+                $this->Pagamento->save(array('Pagamento'=>$pagamento_inscricao));
+                $pagamento_id = $this->Pagamento->id;
+                $inscricao_save = array('Inscricao'=>array('aluno_id'=>$data['aluno_id'],'turma_id'=>$turma_id,'estadoinscricao_id'=>1,'matricula_id'=>$data['matricula_id'],'data'=>date('Y-m-d'),'pagamento_id'=>$pagamento_id));
+               
+                if($this->validaInscricao($inscricao_save)){
+                    $this->create();
+                    $this->save($inscricao_save);
+                }
+                
+            }
+            return $dataSource->commit();
+            $dataSource->rollback();
+            
+            
+           
+            
+        }
        /* var $validate = array
 (
     'first_column' => array

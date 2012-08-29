@@ -74,9 +74,9 @@ class FuncionariosController extends AppController {
 		$tipofuncionarios = $this->Funcionario->Tipofuncionario->find('list');
 		$documento_identificacaos = $this->Funcionario->Entidade->DocumentoIdentificacao->find('list');
         $unidades_organicas = $this->Funcionario->UnidadeOrganica->find('list');
-	    $paises = $this->Funcionario->Entidade->Paise->find('list');
-		$cidades = $this->Funcionario->Entidade->Cidade->find('list');
-		$provincias = $this->Funcionario->Entidade->Provincia->find('list');
+	    $paises = $this->Funcionario->Entidade->PaisNascimento->find('list');
+		$cidades = $this->Funcionario->Entidade->CidadeNascimento->find('list');
+		$provincias = $this->Funcionario->Entidade->ProvinciaNascimento->find('list');
         $generos = $this->Funcionario->Entidade->Genero->find('list');
 		
 	   

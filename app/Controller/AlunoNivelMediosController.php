@@ -17,6 +17,10 @@ class AlunoNivelMediosController extends AppController {
 		$this->AlunoNivelMedio->recursive = 0;
 		$this->set('alunoNivelMedios', $this->paginate());
 	}
+    
+    public function teste(){
+        
+    }
 
 /**
  * view method
