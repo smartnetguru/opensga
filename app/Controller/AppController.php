@@ -82,29 +82,7 @@ class AppController extends Controller {
 
 
 
-  /** 
-     * Builds up a selected datetime for the form helper 
-     * @param string $fieldname 
-     * @return null|string 
-     */  
-    function process_datetime($fieldname) {  
-        $selected = null;  
-        if(isset($this->params['named'][$fieldname])) {  
-            $exploded = explode('-',$this->params['named'][$fieldname]);  
-            if(!empty($exploded)) {  
-                $selected = '';  
-                foreach($exploded as $k=>$e) {  
-                    if(empty($e)) {  
-                        $selected .= (($k==0) ? '0000' : '00');  
-                    } else {  
-                        $selected .= $e;  
-                    }  
-                    if($k!=2) {$selected.='-';}  
-                }  
-            }  
-        }  
-    return $selected;  
-    } 
+
 	
 	/**
  * uploads files to the server
