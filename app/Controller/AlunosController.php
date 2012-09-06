@@ -190,6 +190,10 @@ class AlunosController extends AppController
 		
 		$this->set(compact('cursos','planoestudos','users', 'paises', 'cidades', 'provincias', 'documentos', 'areatrabalhos','generos','cidadenascimentos','proveniencianomes','provenienciacidades','inscricoes_activas','todas_inscricoes','cadeiras_aprovadas','pagamentos','is_bolseiro'));
 	}
+    
+    public function seleccionar_aluno($r_controller,$r_action){
+        
+    }
 
     /**
      *Cadastro do aluno

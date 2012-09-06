@@ -85,27 +85,10 @@ class FinanceiroDepositosController extends AppController {
 		$this->set(compact('entidades', 'financeiroContas', 'financeiroEstadoDepositos', 'financeiroFormaDepositos', 'financeiroBancos'));
 	}
 
-/**
- * delete method
- *
- * @throws MethodNotAllowedException
- * @throws NotFoundException
- * @param string $id
- * @return void
- */
-	public function delete($id = null) {
-		if (!$this->request->is('post')) {
-			throw new MethodNotAllowedException();
-		}
-		$this->FinanceiroDeposito->id = $id;
-		if (!$this->FinanceiroDeposito->exists()) {
-			throw new NotFoundException(__('Invalid financeiro deposito'));
-		}
-		if ($this->FinanceiroDeposito->delete()) {
-			$this->Session->setFlash(__('Financeiro deposito deleted'));
-			$this->redirect(array('action' => 'index'));
-		}
-		$this->Session->setFlash(__('Financeiro deposito was not deleted'));
-		$this->redirect(array('action' => 'index'));
-	}
+    public function novo_deposito($aluno_id = null){
+        if($aluno_id == null){
+            $this->Session->setFlash('Seleccione o Aluno a depositar','default',array('class'=>'alert info'));
+            $this->redirect(array('controller'=>'alunos','action'=>'seleccionar_aluno'));
+        }
+    }
 }

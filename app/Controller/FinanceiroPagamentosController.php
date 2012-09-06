@@ -13,8 +13,19 @@ class FinanceiroPagamentosController extends AppController {
  * @return void
  */
 	public function index() {
-		$this->FinanceiroPagamento->recursive = 0;
-		$this->set('financeiroPagamentos', $this->paginate());
+		        //Resumo Mensal
+        $facturas_geradas = $this->FinanceiroPagamento->find('count',array('conditions'=>array('MONTH(FinanceiroPagamento.created)'=>date('m'),'YEAR(FinanceiroPagamento.created)'=>date('Y'))));
+        $facturas_pagas = $this->FinanceiroPagamento->find('count',array('conditions'=>array('MONTH(FinanceiroPagamento.data_pagamento)'=>date('m'),'YEAR(FinanceiroPagamento.data_pagamento)'=>date('Y'),'FinanceiroPagamento.financeiro_estado_pagamento_id'=>2)));
+        $facturas_divida = $this->FinanceiroPagamento->find('count',array('conditions'=>array('FinanceiroPagamento.financeiro_estado_pagamento_id'=>1)));
+        
+        $valor_arrecadado = $this->FinanceiroPagamento->find('all',array('conditions'=>array('MONTH(FinanceiroPagamento.data_pagamento)'=>date('m'),'YEAR(FinanceiroPagamento.data_pagamento)'=>date('Y'),'FinanceiroPagamento.financeiro_estado_pagamento_id'=>2),'fields'=>'sum(FinanceiroPagamento.valor) as valor'));
+        
+        $valor_divida = $this->FinanceiroPagamento->find('all',array('conditions'=>array('FinanceiroPagamento.financeiro_estado_pagamento_id'=>1),'fields'=>'sum(FinanceiroPagamento.valor) as valor'));
+        
+        //debug($valor_arrecadado);
+        
+		
+		$this->set(compact('facturas_geradas','facturas_pagas','facturas_divida','valor_arrecadado','valor_divida'));
 	}
 
 /**

@@ -13,7 +13,7 @@ class AlunoTest extends CakeTestCase {
  * @var array
  */
 	public $fixtures = array(
-		/*'app.aluno',
+		'app.aluno',
 		'app.user',
 		'app.group',
 		'app.funcionario',
@@ -34,7 +34,7 @@ class AlunoTest extends CakeTestCase {
 		'app.docente',
 		'app.entidade',
 		'app.genero',
-		'app.paise',
+		'app.pais',
 		'app.provincia',
 		'app.paise',
 		'app.cidade',
@@ -52,6 +52,7 @@ class AlunoTest extends CakeTestCase {
 		'app.estadomatricula',
 		'app.avaliacao',
 		'app.tipoavaliacao',
+		'app.turmatipoavaliacao',
 		'app.tipocurso',
 		'app.cargo',
 		'app.tipofuncionario',
@@ -62,7 +63,7 @@ class AlunoTest extends CakeTestCase {
 		'app.pagamento',
 		'app.conta',
 		'app.tipopagamento',
-		'app.estadopagamento'*/
+		'app.estadopagamento'
 	);
 
 /**
@@ -92,16 +93,6 @@ class AlunoTest extends CakeTestCase {
  * @return void
  */
 	public function testGetPlanoEstudoCorrente() {
-        $aluno_id = rand(1,1000);
-        $this->Aluno->id = $aluno_id;
-        if(!$this->Aluno->exists()){
-           return  $this->assertTrue();
-        }
-        else{
-            $result = $this->Aluno->getPlanoEstudoCorrente(rand(1,1000));
-            
-            $this->assertType('string',$result);
-        }
 	}
 
 /**
