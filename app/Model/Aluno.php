@@ -31,6 +31,7 @@ class Aluno extends AppModel {
             'className'    => 'AlunoNivelMedio',
             'dependent'    => true
         )
+        
     );
 
 	var $belongsTo = array(
@@ -108,6 +109,19 @@ class Aluno extends AppModel {
 		),
         'Pagamento' => array(
 			'className' => 'Pagamento',
+			'foreignKey' => 'aluno_id',
+			'dependent' => false,
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'exclusive' => '',
+			'finderQuery' => '',
+			'counterQuery' => ''
+		),
+        'FinanceiroPagamento' => array(
+			'className' => 'FinanceiroPagamento',
 			'foreignKey' => 'aluno_id',
 			'dependent' => false,
 			'conditions' => '',
@@ -222,6 +236,29 @@ class Aluno extends AppModel {
 			
 			return $codigo;
         }
+        
+        /**
+         *Retorna a conta do aluno
+         * @param type $aluno_id 
+         */
+        public function getContaByAlunoId($aluno_id){
+            $this->id = $aluno_id;
+            $entidade_id = $this->field('entidade_id');
+            
+            $this->Entidade->FinanceiroConta->recursive = -1;
+            $conta = $this->Entidade->FinanceiroConta->findByEntidadeId($entidade_id);
+            
+            return $conta;
+        }
+        
+        /**
+         *Retorna o Id da conta do aluno
+         * @param type $aluno_id 
+         */
+        public function getContaIdByAlunoId($aluno_id){
+            $conta = $this->getContaByAlunoId($aluno_id);
+            return $conta['FinanceiroConta']['id'];
+        }
 		
 		/**
 		 * Devolve todas as turmas que o aluno pode se inscrever, baseado nas cadeiras feitas e precedencias
@@ -310,8 +347,6 @@ class Aluno extends AppModel {
                                 $this->Matricula->create();
                                 if($this->Matricula->save($matricula_gravar)){
 
-                                    //Registra os dados do pagamento
-                                    $this->Pagamento->gerarPagamentos(SessionComponent::read('SGAConfig.anolectivo_id'),$this->getLastInsertID(),SessionComponent::read('SGAConfig.semestre'));
                                     return $dataSource->commit();
                                 }
                             }

@@ -76,9 +76,11 @@ class Pagamento extends AppModel {
 	 * Gera todos os pagamentos de todos os alunos matriculados
 	 * Nao duplica pagamentos para o mesmo plano de estudos
 	 */
-	function gerarPagamentos($anolectivo_id,$aluno_id=null,$num_semestre=1){
+	function gerarPagamentos($anolectivo_id,$aluno_id=null,$num_semestre=null){
 			
-		$this->Tipopagamento->recursive = -1;
+		if($num_semestre ==null ){
+            $num_semestre = Configure::read('OpenSGA.semestre_lectivo');
+        }
 		
 		
 	

@@ -135,6 +135,32 @@ class Matricula extends AppModel {
         
         return $this->find('count',array('conditions'=>array('estadomatricula_id'=>1,'Matricula.anolectivo_id'=>$ano_lectivo_id)));
     }
+    
+    /**
+     *Grava os dados da matricula de um estudante novo Ingresso. Tambem processa o pagamento da matricula 
+     */
+    public function matricularNovoIngresso($data){
+        
+    }
+    
+    /**
+     *Renova a Matricula de um estudante. Tambem processa o pagamento da renovação de matricula
+     * @param type $data 
+     */
+    public function renovarMatricula($data){
+        
+    }
+    
+    /**
+     *Retorna o Total de Alunos que nao renovou matricula num determinado Semestre/Ano Lectivo
+     * @param type $semestre_id 
+     */
+    public function getTotalAlunosNaoMatriculados($semestre_id){
+        //Primeiro, vemos quem renovou
+        $ano_lectivo_id = $this->Anolectivo->Semestrelectivo->field('anolectivo_id',array('Semestrelectivo.id'=>$semestre_id));
+        //$total_matriculas = $this->find()
+       // debug($ano_lectivo_id);
+    }
 	
 }
 ?>

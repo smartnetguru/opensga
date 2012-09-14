@@ -130,8 +130,29 @@ class Entidade extends AppModel {
             'className'    => 'Funcionario',
             'foreignKey'   =>'entidade_id',
             'dependent'    => true
+        ),
+        'FinanceiroConta' => array(
+            'className'    => 'FinanceiroConta',
+            'foreignKey'   =>'entidade_id',
+            'dependent'    => true
         )
     );
+    
+    public $hasMany = array(
+		'FinanceiroDeposito' => array(
+			'className' => 'FinanceiroDeposito',
+			'foreignKey' => 'entidade_id',
+			'dependent' => false,
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'exclusive' => '',
+			'finderQuery' => '',
+			'counterQuery' => ''
+		)
+	);
     
 	
 

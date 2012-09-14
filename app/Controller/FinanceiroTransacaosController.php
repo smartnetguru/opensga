@@ -19,7 +19,24 @@ class FinanceiroTransacaosController extends AppController {
 
     
     public function novo_deposito($aluno_id){
+        $this->FinanceiroTransacao->Entidade->Aluno->id = $aluno_id;
+        if(!$this->FinanceiroTransacao->Entidade->Aluno->exists()){
+            throw new NotFoundException('Este Aluno não existe');
+        }
+        if($this->request->is('post') || $this->request->is('put')){
+            $deposito = $this->FinanceiroTransacao->processarDeposito($this->request->data);
+            //die(debug($deposito));
+            if($deposito){
+                $this->Session->setFlash('O Deposito Foi efecutado com sucesso');
+                $this->redirect(array('controller'=>'alunos','action'=>'perfil_estudante',$aluno_id));
+            }
+            else{
+                $this->Session->setFlash('Problemas com o deposito. Tente novamente');
+            }
+            
+        }
         
+        $this->set(compact('aluno_id'));
     }
 /**
  * view method

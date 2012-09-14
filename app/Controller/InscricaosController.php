@@ -300,15 +300,20 @@ class InscricaosController extends AppController {
         $this->set('matricula_id',$matricula_id);
 		$this->set(compact('turmas','disciplinas')); 
     }
+
     
+    /**
+     *Verifica se esta tudo bem com a inscricao e o pagamento 
+     */
     public function valida_inscricao(){
         
         
         $turmas = $this->Inscricao->Turma->find('all',array('conditions'=>array('Turma.id'=>$this->Session->read('OpenSGA.inscricao.cadeiras')),'order'=>array('Turma.anocurricular DESC','Turma.semestrecurricular DESC')));
         
-        $this->loadModel('Pagamento');
-        $pagamento_normal = $this->Pagamento->Tipopagamento->findByCodigo(44);
-        $pagamento_atraso = $this->Pagamento->Tipopagamento->findByCodigo(45);
+        $this->loadModel('FinanceiroPagamento');
+        
+        $pagamento_normal = $this->FinanceiroPagamento->FinanceiroTipoPagamento->findByCodigo(44);
+        $pagamento_atraso = $this->FinanceiroPagamento->FinanceiroTipoPagamento->findByCodigo(45);
         $total_normal = 0;
         $total_atraso = 0;
         $turmas_normais = array();
@@ -319,12 +324,12 @@ class InscricaosController extends AppController {
         foreach($turmas as $turma){
             if($turma['Turma']['anocurricular']==$ano_maior and $turma['Turma']['semestrecurricular']==$semestre_maior){
                 $turmas_normais[] = $turma;
-                $total_normal = $total_normal + $pagamento_normal['Tipopagamento']['valor'];
+                $total_normal = $total_normal + $pagamento_normal['FinanceiroTipoPagamento']['valor'];
                 $turmas_tipo[$turma['Turma']['id']]=1;
             }
             else{
                 $turmas_atraso[] = $turma;
-                $total_atraso = $total_atraso + $pagamento_atraso['Tipopagamento']['valor'];
+                $total_atraso = $total_atraso + $pagamento_atraso['FinanceiroTipoPagamento']['valor'];
                 $turmas_tipo[$turma['Turma']['id']]=2;
                 
             }
@@ -335,6 +340,7 @@ class InscricaosController extends AppController {
         $aluno_id = $this->Session->read('OpenSGA.inscricao.aluno_id');
         $aluno = $this->Inscricao->Aluno->findById($aluno_id);
         $imprimir=false;
+        
         if($this->request->is('post') || $this->request->is('put')){
             $this->request->data['turmas']=$this->Session->read('OpenSGA.inscricao.cadeiras');
             $this->request->data['total_normal']=$total_normal;
@@ -342,6 +348,10 @@ class InscricaosController extends AppController {
             $this->request->data['aluno_id']=$aluno_id;
             $this->request->data['matricula_id']=$matricula_id;
             $this->request->data['turmas_tipo']=$turmas_tipo;
+            
+            //Transacao e Deposito
+            
+            //die(debug($this->request->data));
             //$this->Session->delete('OpenSGA.inscricao');
             $inscricao = $this->Inscricao->inscreveAluno($this->request->data);
             if($inscricao){
@@ -352,95 +362,12 @@ class InscricaosController extends AppController {
             else{
                 $this->Session->setFlash(sprintf(__('O Aluno  nao foi inscrito',true)),'default',array('class'=>'alert error'));
 				
-				$this->redirect(array('controller'=>'alunos','action'=>'perfil_estudante',$aluno_id));
+				//$this->redirect(array('controller'=>'alunos','action'=>'perfil_estudante',$aluno_id));
             }
         }
         $this->set(compact('turmas','turmas_normais','turmas_atraso','total_normal','total_atraso','matricula_id','aluno_id','imprimir','aluno'));
     }
 
-    /**
-	 * Inscreve os alunos nas turmas que ira frequentar
-	 * O diferencial desta funcao é que ela é usada no Modal na tabela dos alunos
-	 * Isso torna a aplicação mais eficiente, além de ser relativamente mais charmoso :-)
-	 *
-	 * @param int $aluno_id o ID do aluno a ser inscrito
-	 * @return void
-	 * @access public
-	 * @link http://book.cakephp.org/view/1031/Saving-Your-Data
-	 * @Todo colocar o link para a documentação aqui
-     * 
-     * @todo Se o aluno tiver 2 matriculas actias, mostrar um select a escolhar
-	 */	
-	function inscrever_aluno($aluno_id){
-		
-        $this->Inscricao->Aluno->id=$aluno_id;
-        if(!$this->Inscricao->Aluno->exists()){
-            throw new NotFoundException(__('Aluno Invalido'));
-        }
-        $this->Inscricao->Aluno->Matricula->recursive = -1;
-		$matricula = $this->Inscricao->Aluno->Matricula->findByAlunoIdAndEstadomatriculaIdAndAnolectivoId($aluno_id,1,$this->Session->read('SGAConfig.anolectivo_id'));
-        if(!$matricula){
-            $this->Session->setFlash(__('Este aluno não matriculou ou não renovou a matricula este ano','default',array('class'=>'alert error')));
-            $this->redirect(array('controller'=>'alunos','action'=>'perfil_estudante',$aluno_id));
-        }
-        
-        //Vamos considerar que o aluno so pode ter uma matricula por enquanto
-        //Entao, tem uma matricula, pode inscrever
-        $inscricoes_activas = $this->Inscricao->Aluno->getAllInscricoesActivas($aluno_id);
-        die(debug($inscricoes_activas));
-        
-        $this->loadModel('Turma');
-		$this->loadModel('Aluno');
-		$this->loadModel('Pagamento');
-		$this->loadModel('Matricula');
-		die(debug($aluno_id));
-		$aluno = $this->Aluno->findById($aluno_id);
-		if(!empty($this->data)){
-			
-			//Primeiro Devemos actualizar a matricula
-			/*
-			 * @Todo Primeiro verificar se ainda nao esta matriculado
-			 */
-			$this->Matricula->recursive = -1;
-			$matricula = $this->Matricula->findByAlunoId($aluno_id);
-			$matricula_nova=array('Matricula'=>array('aluno_id' =>$matricula['Matricula']['aluno_id'],'curso_id'=>$matricula['Matricula']['curso_id'],'planoestudo_id'=>$matricula['Matricula']['planoestudo_id'],'data'=>date('Y-m-d'),'estadomatricula_id'=>1,'user_id'=>$this->Session->read('Auth.User.id'),'anolectivo_id'=>4,'turno_id'=>$matricula['Matricula']['turno_id']));
-			$this->Matricula->create();
-			$this->Matricula->save($matricula_nova);
-			
-			foreach($this->data['Inscricao'] as $inscricao){
-				if(isset($inscricao['turma_id'])){
-					$this->Inscricao->create();
-					$inscricao_save = array('Inscricao'=>array('aluno_id'=>$inscricao['aluno_id'],'turma_id'=>$inscricao['turma_id'],'estadoinscricao_id'=>$inscricao['estadoinscricao_id']));
-					$this->Inscricao->save($inscricao_save);
-				}
-				
-				
-			}	
-			
-			
-				$this->Session->setFlash(sprintf(__('O Aluno %s Foi inscrito com sucesso',true),$aluno['Aluno']['codigo']."-".$aluno['Aluno']['name']),'flashok');
-				$this->Pagamento->recursive = -1;
-				
-				/*
-				 * FIXME isso nao funciona 
-				 */
-				$this->Pagamento->gerarPagamentos(4,$aluno_id);
-				
-				$pagamento_inscricao = $this->Pagamento->find('first',array('conditions'=>array('Pagamento.aluno_id'=>$aluno_id,'Pagamento.tipopagamento_id'=>2)));
-				
-				$pagamento_inscricao['Pagamento']['estadopagamento_id']=2;
-				$this->Pagamento->save($pagamento_inscricao);
-				
-				$this->redirect(array('controller'=>'alunos','action'=>'index'));
-			
-		}
-		
-		$turmas = $this->Turma->getAllByAlunoForInscricao($aluno_id);
-		
-		$this->set('aluno_id',$aluno_id);	
-		$this->set(compact('turmas'));
-		
-	}
 	function delete($id = null) {
 	    //App::Import('Model','Logmv');
 	    //$logmv = new Logmv;

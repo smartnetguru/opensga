@@ -26,6 +26,8 @@ class FinanceiroConta extends AppModel {
 			'order' => ''
 		)
 	);
+    
+    
 
 /**
  * hasMany associations
@@ -60,5 +62,27 @@ class FinanceiroConta extends AppModel {
 			'counterQuery' => ''
 		)
 	);
+    
+    
+    public $validade = array(
+        'entidade_id'=>array(
+            'notEmpty'=>array(
+                'rule'=>'notEmpty',
+                'message'=>'Este campo nao pode ficar vazio'
+            ),
+            'unique'=>array(
+                'rule'=>'isUnique',
+                'message'=>'Uma entidade só pode ter uma conta'
+            )
+        )
+    );
+    
+    public function criarConta($entidade_id){
+        $nova_conta = array('FinanceiroConta'=>array('entidade_id'=>$entidade_id,'saldo_actual'=>0));
+        $this->create();
+        $this->save($nova_conta);
+        $conta = $this->findById($this->id);
+        return $conta;
+    }
 
 }

@@ -198,9 +198,8 @@ class AlunosController extends AppController
     /**
      *Cadastro do aluno
      * 
-     * Registra os dados do aluno, faz a matricula inicial e gera os pagamentos para o primeiro semestre
+     * Registra os dados do aluno, faz a matricula inicial
      * @Todo Resolver o problema da foto do aluno
-     * @todo Garantir que so sao gerados pagamentos para alunos que devem pagar(Pos laboral,etc.). Possivelmente o funcionario pode escolher quais pagamentos vai gerar
      * @todo garantir que a escola numca seja null 
      * @todo testar bem a funcao que gera codigo
      * @todo criar manual de utilizador

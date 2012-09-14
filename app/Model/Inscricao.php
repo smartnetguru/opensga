@@ -127,36 +127,82 @@ class Inscricao extends AppModel {
         
         public function inscreveAluno($data){
             $dataSource = $this->getDataSource();
+            $dataSource->useNestedTransactions = true;
             
             $dataSource->begin();
-           $this->Pagamento =  ClassRegistry::init('Pagamento');
-            foreach($data['turmas'] as $turma_id){
-                
-                //Primeiro gravamos o pagamento ;)
-                if($data['turmas_tipo'][$turma_id]==1){
-                    $tipo_pagamento_id = 35;
-                    $this->Pagamento->Tipopagamento->id = 35;
-                    $valor = $this->Pagamento->Tipopagamento->field('valor');
-                }
-                else{
-                    $tipo_pagamento_id = 36;
-                    $this->Pagamento->Tipopagamento->id = 36;
-                    $valor = $this->Pagamento->Tipopagamento->field('valor');
-                }
-                $pagamento_inscricao = array('aluno_id'=>$data['aluno_id'],'valor'=>$valor,'data_pagamento'=>date('Y-m-d'),'tipopagamento_id'=>$tipo_pagamento_id,'data_orcamento'=>date('Y-m-d'),'estadopagamento_id'=>2,'anolectivo_id'=>Configure::read('OpenSGA.ano_lectivo_id'),'data_emissao'=>date('Y-m-d'),'numero_comprovativo'=>$data['Pagamento']['numero_comprovativo'],'valor_pago'=>  $data['Pagamento']['valor_pago']);
-                
-                $this->Pagamento->create();
-                $this->Pagamento->save(array('Pagamento'=>$pagamento_inscricao));
-                $pagamento_id = $this->Pagamento->id;
-                $inscricao_save = array('Inscricao'=>array('aluno_id'=>$data['aluno_id'],'turma_id'=>$turma_id,'estadoinscricao_id'=>1,'matricula_id'=>$data['matricula_id'],'data'=>date('Y-m-d'),'pagamento_id'=>$pagamento_id));
+           $this->FinanceiroTransacao =  ClassRegistry::init('FinanceiroTransacao');
+           
+           //Primeiro Realizamos o deposito
+           if($this->FinanceiroTransacao->processarDeposito($data)){
                
-                if($this->validaInscricao($inscricao_save)){
-                    $this->create();
-                    $this->save($inscricao_save);
-                }
+               
+               //Temos de ver se o valor depositado é suficiente para pagar a Inscrição
+               $valor_total_inscricao  = $data['total_normal'] + $data['total_atraso'];
+               $conta = $this->Aluno->getContaByAlunoId($data['FinanceiroTransacao']['aluno_id']);
+               if($valor_total_inscricao > $conta['FinanceiroConta']['saldo_actual']){
+                   return false;
+               }
+               
+               foreach($data['turmas'] as $turma_id){
                 
-            }
-            return $dataSource->commit();
+                    //Primeiro gravamos o pagamento ;)
+                    if($data['turmas_tipo'][$turma_id]==1){
+                        $tipo_pagamento_id = 35;
+                        $this->FinanceiroTransacao->FinanceiroPagamento->FinanceiroTipoPagamento->id = 35;
+                        $valor = $this->FinanceiroTransacao->FinanceiroPagamento->FinanceiroTipoPagamento->field('valor');
+                    }
+                    else{
+                        $tipo_pagamento_id = 36;
+                        $this->FinanceiroTransacao->FinanceiroPagamento->FinanceiroTipoPagamento->id = 36;
+                        $valor = $this->FinanceiroTransacao->FinanceiroPagamento->FinanceiroTipoPagamento->field('valor');
+                    }
+                    
+                    //Mas antes do Pagamento, a Transacao
+                    
+                    $pagamento_inscricao = array(
+                        'aluno_id'=>$data['FinanceiroTransacao']['aluno_id'],
+                        'financeiro_conta_id'=>$conta['FinanceiroConta']['id'],
+                        'valor'=>$valor,
+                        'data_pagamento'=>date('Y-m-d'),
+                        'financeiro_tipo_pagamento_id'=>$tipo_pagamento_id,
+                        'data_orcamento'=>date('Y-m-d'),
+                        'financeiro_estado_pagamento_id'=>2,
+                        'anolectivo_id'=>Configure::read('OpenSGA.ano_lectivo_id'),
+                        'data_emissao'=>date('Y-m-d'),
+                        'semestrelectivo_id'=>Configure::read('OpenSGA.semestre_lectivo_id'),
+                        'entidade_id'=>$conta['FinanceiroConta']['entidade_id']
+                    );
+                    
+                    if($pagamento_id = $this->FinanceiroTransacao->processarPagamento($pagamento_inscricao)){
+                      
+                        $inscricao_save = array('Inscricao'=>array('aluno_id'=>$data['aluno_id'],'turma_id'=>$turma_id,'estadoinscricao_id'=>1,'matricula_id'=>$data['matricula_id'],'data'=>date('Y-m-d'),'pagamento_id'=>$pagamento_id));
+
+                        if($this->validaInscricao($inscricao_save)){
+                            $this->create();
+                            if(!$this->save($inscricao_save)){
+                                $dataSource->rollback();
+                                return false;
+                            }
+                        } else{
+                            $dataSource->rollback();
+                            return false;
+                        } 
+                    } else{
+                        $dataSource->rollback();
+                        return false;
+                    }
+                    
+
+               }
+               
+               //Chamamos o Metodo Gera Pagamentos, Para Gerar os pagamentos deste Aluno
+               if($this->FinanceiroTransacao->FinanceiroPagamento->gerarPagamentosByAluno($data['FinanceiroTransacao']['aluno_id'])){
+                   return $dataSource->commit();
+               }
+               //return $dataSource->commit();
+           }
+           
+            
             $dataSource->rollback();
             
             

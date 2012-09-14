@@ -56,4 +56,15 @@ class FinanceiroDeposito extends AppModel {
 			'order' => ''
 		)
 	);
+    
+    
+    public $validate = array(
+        'numero_comprovativo'=>array(
+            'unique'=>array(
+                'rule'=>'isUnique',
+                'required'=>false,
+                'message'=>'Já existe uma transação registada com este número de comprovativo'
+            )
+        )
+    );
 }
