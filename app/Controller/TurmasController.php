@@ -187,10 +187,10 @@ class TurmasController extends AppController {
 			/**
              *@todo Verificar o ajuste do anolectivo ao regime antes de enviar para o modelo 
              */
-            $this->Turma->criarTurmas($this->data['Turma']['anolectivo_id'],$this->data['Turma']['semestrelectivo_id'],$this->data['Turma']['planoestudo_id'],$this->data['Turma']['regimelectivo_id'],$this->data['Turma']['turno_id']);
+            $this->Turma->criarTurmas($this->data['Turma']['planoestudo_id']);
 			
 			$this->Session->setFlash('As Turmas foram Geradas com Sucesso','flashok');
-			$this->redirect(array('action' => 'index'));	
+			//$this->redirect(array('action' => 'index'));	
 		}
 		
 		

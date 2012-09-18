@@ -58,6 +58,7 @@ class FinanceiroPagamento extends AppModel {
 	);
     
     
+    
     /**
      *Verifica se nao existe nenhum pagamento gerado para este tipo
      * @param type $pagamento

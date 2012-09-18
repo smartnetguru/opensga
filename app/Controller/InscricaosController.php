@@ -260,7 +260,10 @@ class InscricaosController extends AppController {
      * @param type $aluno_id
      * @param type $matricula_id 
      * 
+     * 
+     * @todo garantir que so se inscreve quem nao tem dividas no semestre anterior
      * @todo A lista de disciplinas deve ter em consideracao  a tabela de precedencias 
+     * @todo Deve existir possibilidade de inscricao condicional
      */
     public  function inscrever($aluno_id,$matricula_id){
        $this->loadModel('Turma');

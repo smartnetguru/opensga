@@ -208,7 +208,7 @@ class AlunosController extends AppController
     function adicionar_estudante() {
         if ($this->request->is('post') || $this->request->is('put')) {
             $this->request->data['Entidade']['name'] = $this->request->data['Entidade']['nomes'].' '.$this->request->data['Entidade']['apelido'];
-            if($this->Aluno->cadasTraAluno($this->request->data)){
+            if($this->Aluno->cadastraAluno($this->request->data)){
                 $this->Session->setFlash("Aluno Registrado com Sucesso");
                 $this->redirect(array('controller'=>'alunos','action'=>'perfil_estudante',$this->Aluno->id));
             }

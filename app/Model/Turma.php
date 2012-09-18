@@ -184,35 +184,45 @@ class Turma extends AppModel {
 		 * @Todo Para facilitar vamos considerar so um plano de estudos activo
          * @todo Podemos usar transactions aqui ;)
 		 */
-		function criarTurmas($anolectivo_id,$semestre_id,$planoestudo_id,$regimelectivo_id,$turno_id){
-				$disciplinas = $this->Planoestudo->getAllDisciplinasByPlanoestudo($planoestudo_id);
-                $semestre = $this->Semestrelectivo->findById($semestre_id);
-				foreach($disciplinas as $disciplina){
-                            $turma = array();
-                            $turma['anolectivo_id']=$anolectivo_id;
-                            $turma['anocurricular']=$disciplina['p']['ano'];
-                            $turma['semestrecurricular']=$disciplina['p']['semestre'];
-                            $turma['curso_id']=$disciplina['pe']['curso_id'];
-                            $turma['escola_id']=1;
-                            $turma['planoestudo_id']=$planoestudo_id;
-                            $turma['turno_id']=$turno_id;
-                            $turma['disciplina_id']=$disciplina['d']['id'];
-                            $turma['estadoturma_id']=1;
-                            $turma['semestrelectivo_id']=$semestre_id;
-                            $nome = $disciplina['d']['name']." - ".$disciplina['pe']['name'];
-                            $turma['name']=$nome;
+		function criarTurmas($planoestudo_id){
+				$datasource = $this->getDataSource();
+                $datasource->begin();
+                
+                $anolectivo_id = Configure::read('OpenSGA.ano_lectivo_id');
+                $semestre_id = Configure::read('OpenSGA.semestre_lectivo_id');
+                $disciplinas = $this->Planoestudo->getAllDisciplinasByPlanoestudo($planoestudo_id);
+                //$semestre = $this->Semestrelectivo->findById($semestre_id);
+                $turnos = $this->Turno->find('list');
+                foreach($turnos as $turno_id=>$turno){
+                    foreach($disciplinas as $disciplina){
+                        
+                                $turma = array();
+                                $turma['anolectivo_id']=$anolectivo_id;
+                                $turma['anocurricular']=$disciplina['p']['ano'];
+                                $turma['semestrecurricular']=$disciplina['p']['semestre'];
+                                $turma['curso_id']=$disciplina['pe']['curso_id'];
+                                $turma['escola_id']=1;
+                                $turma['planoestudo_id']=$planoestudo_id;
+                                $turma['turno_id']=$turno_id;
+                                $turma['disciplina_id']=$disciplina['d']['id'];
+                                $turma['estadoturma_id']=1;
+                                $turma['semestrelectivo_id']=$semestre_id;
+                                $nome = $disciplina['d']['name']." - ".$disciplina['pe']['name'];
+                                $turma['name']=$nome;
 
-                            $turmas=array('Turma'=>$turma);
-                           
-                            //Primeiro precisamos ver se a turma nao esta criada ainda
-                            $turma_existe = $this->find('first',array('recursive'=>-1,'conditions'=>array('anolectivo_id'=>$anolectivo_id,'planoestudo_id'=>$planoestudo_id,'disciplina_id'=>$disciplina['d']['id'],'anocurricular'=>$turma['anocurricular'],'semestrecurricular'=>$turma['semestrecurricular'],'turno_id'=>$turma['turno_id'],'semestrelectivo_id'=>$semestre_id)));
-                            
-                            if(!$turma_existe){
-                                $this->create();
-                                $this->save($turmas);
-                            }
-                            
-					}
+                                $turmas=array('Turma'=>$turma);
+
+                                //Primeiro precisamos ver se a turma nao esta criada ainda
+                                $turma_existe = $this->find('first',array('recursive'=>-1,'conditions'=>array('anolectivo_id'=>$anolectivo_id,'planoestudo_id'=>$planoestudo_id,'disciplina_id'=>$disciplina['d']['id'],'anocurricular'=>$turma['anocurricular'],'semestrecurricular'=>$turma['semestrecurricular'],'turno_id'=>$turma['turno_id'],'semestrelectivo_id'=>$semestre_id)));
+
+                                if(!$turma_existe){
+                                    $this->create();
+                                    $this->save($turmas);
+                                }
+
+                        }
+                }
+                $datasource->commit();
 
 		}
 		

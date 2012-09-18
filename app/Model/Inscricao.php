@@ -173,7 +173,7 @@ class Inscricao extends AppModel {
                         'entidade_id'=>$conta['FinanceiroConta']['entidade_id']
                     );
                     
-                    if($pagamento_id = $this->FinanceiroTransacao->processarPagamento($pagamento_inscricao)){
+                    if($pagamento_id === $this->FinanceiroTransacao->processarPagamento($pagamento_inscricao)){
                       
                         $inscricao_save = array('Inscricao'=>array('aluno_id'=>$data['aluno_id'],'turma_id'=>$turma_id,'estadoinscricao_id'=>1,'matricula_id'=>$data['matricula_id'],'data'=>date('Y-m-d'),'pagamento_id'=>$pagamento_id));
 

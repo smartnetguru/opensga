@@ -38,6 +38,69 @@ class FinanceiroTransacaosController extends AppController {
         
         $this->set(compact('aluno_id'));
     }
+    
+    public function novo_pagamento($aluno_id){
+        if($this->request->is('post') || $this->request->is('put')){
+            $this->request->data['FinanceiroPagamento']['financeiro_conta_id'] = $this->FinanceiroTransacao->FinanceiroPagamento->Aluno->getContaIdByAlunoId($aluno_id);
+            $this->request->data['FinanceiroPagamento']['financeiro_estado_pagamento_id'] = 2;
+            $this->request->data['FinanceiroPagamento']['anolectivo_id'] = Configure::read('OpenSGA.ano_lectivo_id');
+            $this->request->data['FinanceiroPagamento']['semestrelectivo_id'] = Configure::read('OpenSGA.semestre_lectivo_id');
+            $this->request->data['FinanceiroPagamento']['data_emissao'] = date('Y-m-d H:i:s');
+            $this->request->data['FinanceiroPagamento']['entidade_id'] = $this->FinanceiroTransacao->FinanceiroPagamento->Aluno->field('entidade_id',array('Aluno.id'=>$aluno_id));
+            $this->request->data['FinanceiroPagamento']['detalhes'] = $this->request->data['FinanceiroTransacao']['detalhes'];
+            $pagamento_valido = $this->FinanceiroTransacao->validaPagamento($this->request->data);
+            
+            if($pagamento_valido==2){
+                $this->Session->setFlash('O valor indicado é maior que o valor do pagamento. Apenas o valor do Pagamento será debitado. O restante ficará disponível na conta do aluno','default',array('class'=>'alert info'));
+                
+            }
+            if($pagamento_valido==0){
+                
+            } else {
+                $saldo_actual = $this->FinanceiroTransacao->getSaldoActual($aluno_id);
+                $valor_real = $this->FinanceiroTransacao->FinanceiroPagamento->FinanceiroTipoPagamento->field('valor',array('id'=>  $this->request->data['FinanceiroPagamento']['financeiro_tipo_pagamento_id']));
+                if($saldo_actual>=$valor_real){
+                    $this->request->data['FinanceiroPagamento']['valor'] = $valor_real;
+                    $pagamento_id = $this->FinanceiroTransacao->processarPagamento($this->request->data['FinanceiroPagamento']);
+                } else{
+                    $this->Session->setFlash('O Seu Saldo não é Suficiente para efectuar este pagamento', 'default',array('class'=>'alert error'),'saldo_insuficiente');
+                }
+            }
+            
+            
+        }
+        
+        $saldo_actual = $this->FinanceiroTransacao->getSaldoActual($aluno_id);
+        $total_divida = $this->FinanceiroTransacao->FinanceiroPagamento->find('all',array('conditions'=>array('aluno_id'=>$aluno_id,'financeiro_estado_pagamento_id'=>1),'fields'=>'SUM(FinanceiroPagamento.valor) as valor'));
+        
+        $pagamentos_pendentes = $this->FinanceiroTransacao->FinanceiroPagamento->find('all',array('conditions'=>array('aluno_id'=>$aluno_id,'financeiro_estado_pagamento_id'=>1)));
+        
+        $pagamentos_efectuados = $this->FinanceiroTransacao->FinanceiroPagamento->find('all',array('conditions'=>array('aluno_id'=>$aluno_id,'financeiro_estado_pagamento_id'=>2,'semestrelectivo_id'=>Configure::read('OpenSGA.semestre_lectivo_id'))));
+        
+        
+        $financeiro_tipo_pagamentos  = $this->FinanceiroTransacao->FinanceiroPagamento->FinanceiroTipoPagamento->find('list',array('conditions'=>array('codigo >'=>21)));
+        $tipo_pagamentos = array();
+        
+        
+        $this->set(compact('saldo_actual','pagamentos_pendentes','total_divida','financeiro_tipo_pagamentos','aluno_id','pagamentos_efectuados'));
+    }
+    
+    
+    public function pagar_factura($pagamento_id,$aluno_id){
+        if($this->request->is('post')){
+            $factura = $this->FinanceiroTransacao->pagarFactura($pagamento_id,$aluno_id);
+            if($factura){
+                $this->Session->setFlash('Factura Paga com Sucesso');
+            } else{
+                $this->Session->setFlash('Problemas ao Tentar Pagar a Factura');
+            }
+            $this->redirect(array('controller'=>'financeiro_transacaos','action'=>'novo_pagamento',$aluno_id));
+        } else{
+            throw new MethodNotAllowedException('Acessou esta página de forma incorrecta');
+        }
+        
+        
+    }
 /**
  * view method
  *

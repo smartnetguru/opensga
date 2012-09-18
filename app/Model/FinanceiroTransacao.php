@@ -77,9 +77,74 @@ class FinanceiroTransacao extends AppModel {
 		)
 	);
     
-    public $validade = array(
+    public $validate = array(
         
     );
+    
+    public function getSaldoActual($aluno_id){
+        $entidade_id = $this->Entidade->Aluno->field('entidade_id',array('id'=>$aluno_id));
+        
+        $this->contain();
+        $depositos = $this->find('all',array('conditions'=>array('entidade_id'=>$entidade_id,'financeiro_tipo_transacao_id'=>1),'fields'=>array('SUM(valor) as valor')));
+        
+        if($depositos){
+            $valor_depositos = $depositos[0][0]['valor'];
+        } else{
+            $valor_depositos=0;
+        }
+        
+        $this->contain();
+        $pagamentos = $this->find('all',array('conditions'=>array('entidade_id'=>$entidade_id,'financeiro_tipo_transacao_id'=>2),'fields'=>array('SUM(valor) as valor')));
+        if($pagamentos){
+            $valor_pagamentos = $pagamentos[0][0]['valor'];
+        } else{
+            $valor_pagamentos = 0;
+        }
+        
+        return $valor_depositos - $valor_pagamentos;
+    }
+    
+    public function pagarFactura($pagamento_id,$aluno_id){
+        $this->FinanceiroPagamento->id = $pagamento_id;
+        
+        $valor_pagamento = $this->FinanceiroPagamento->field('valor');
+        $saldo_actual  = $this->getSaldoActual($aluno_id);
+        
+        if($saldo_actual<$valor_pagamento){
+            return false;
+        }
+        $estado_pagamento = $this->FinanceiroPagamento->field('financeiro_estado_pagamento_id');
+        if($estado_pagamento != 1){
+            return false;
+        } 
+            
+        $entidade_id = $this->FinanceiroPagamento->Aluno->field('entidade_id',array('id'=>$aluno_id));
+        $conta_id = $this->FinanceiroPagamento->Aluno->getContaIdByAlunoId($aluno_id);
+        
+        $transacao = array(
+            'financeiro_tipo_transacao_id'=>2,
+            'valor'=>$valor_pagamento,
+            'entidade_id'=>$entidade_id,
+            'financeiro_conta_id'=>$conta_id
+        );
+        
+        $datasource = $this->getDataSource();
+        $datasource->begin();
+        
+        $this->create();
+        if($this->save(array('FinanceiroTransacao'=>$transacao))){
+            $this->FinanceiroPagamento->set('financeiro_estado_pagamento_id',2);
+            $this->FinanceiroPagamento->set('financeiro_transacao_id',$this->id);
+            $this->FinanceiroPagamento->set('data_pagamento',date('Y-m-d'));
+            if($this->FinanceiroPagamento->save()){
+                return $datasource->commit();
+                
+            }
+        }
+        
+        $datasource->rollback();
+        return false;
+    }
     
     public function processarDeposito($data){
         $this->Entidade->Aluno->id = $data['FinanceiroTransacao']['aluno_id'];
@@ -98,7 +163,7 @@ class FinanceiroTransacao extends AppModel {
         }
         
         //Grava os dados da transacao
-        $data['FinanceiroTransacao']['tipo_transacao_id'] = 1;
+        $data['FinanceiroTransacao']['financeiro_tipo_transacao_id'] = 1;
         $data['FinanceiroTransacao']['entidade_id'] = $aluno['Aluno']['entidade_id'];
         $data['FinanceiroTransacao']['financeiro_conta_id'] = $conta['FinanceiroConta']['id'];
         
@@ -140,16 +205,20 @@ class FinanceiroTransacao extends AppModel {
         $dataSource = $this->getDataSource();
         $dataSource->begin();
         
-        $data['tipo_transacao_id'] = 2;
+        $data['financeiro_tipo_transacao_id'] = 2;
+        
         
         $this->create();
-        if($this->save(array('FinancdeiroTransacao'=>$data))){
+        if($this->save(array('FinanceiroTransacao'=>$data))){
             $this->FinanceiroPagamento->create();
+            $data['financeiro_transacao_id'] = $this->id;
             if($this->FinanceiroPagamento->save(array('FinanceiroPagamento'=>$data))){
                 $this->FinanceiroConta->id = $data['financeiro_conta_id'];
                 $saldo_actual = $this->FinanceiroConta->field('saldo_actual');
                 $saldo_novo = $saldo_actual - $data['valor'];
                 $this->FinanceiroConta->set('saldo_actual',$saldo_novo);
+                
+                
                 if($this->FinanceiroConta->save()){
                     $dataSource->commit();
                     return $this->FinanceiroPagamento->id;
@@ -163,7 +232,20 @@ class FinanceiroTransacao extends AppModel {
             $dataSource->rollback();
         }
         
-        debug($data);
+        
+    }
+    
+    public function validaPagamento($data){
+        $this->FinanceiroPagamento->FinanceiroTipoPagamento->id = $data['FinanceiroPagamento']['financeiro_tipo_pagamento_id'];
+        $valor_real = $this->FinanceiroPagamento->FinanceiroTipoPagamento->field('valor');
+        if($valor_real > $data['FinanceiroPagamento']['valor']){
+            return 0;
+        } elseif($valor_real == $data['FinanceiroPagamento']['valor']){
+            return 1;
+        } else{
+            return 2;
+        }
+        
     }
 
 }
