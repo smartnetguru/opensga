@@ -33,14 +33,15 @@ class AppController extends Controller {
    
    
    var $components = array(
-       'Security','Acl','Auth', 'Session','RequestHandler','DebugKit.Toolbar');
+       'Security','Acl','Auth', 'Session','RequestHandler','Cookie','DebugKit.Toolbar');
    var $helpers = array('Html','Form','Session','Js' => array('MyJquery'),'EventsCalendar','Javascript','Ajax','PhpExcel');
 
 	 public $pdfConfig = array(
 		'engine' => 'CakePdf.Tcpdf',
 	);
     
-    //public $pdfConfig = array('engine' => 'Tcpdf');
+     public $cacheAction = '1 hour';
+    
 
     function beforeFilter() {
         parent::beforeFilter();
@@ -58,7 +59,7 @@ class AppController extends Controller {
         //Configure AuthComponent
         Security::setHash('md5');
         //$this->Auth->allow('*');
-        //$this->Auth->authorize = 'actions';
+        
         $this->Auth->authorize = array(
             'Actions' => array(
                 'actionPath' => 'controllers'
