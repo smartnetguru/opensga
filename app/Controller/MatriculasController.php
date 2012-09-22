@@ -244,7 +244,7 @@ class MatriculasController extends AppController {
                     )
                 )
         );
-        $conditions = array('Matricula.anolectivo_id'=>Configure::read('OpenSGA.ano_lectivo_id'),'Matricula.tipo_matricula_id'=>1);
+        $conditions = array('Matricula.anolectivo_id'=>Configure::read('OpenSGA.ano_lectivo_id'),'Matricula.tipo_matricula_id'=>array(0,1));
         if($curso_id!=null){
             if($curso_id==18){
                $limite_sala = 30;
@@ -261,7 +261,7 @@ class MatriculasController extends AppController {
         
         $matriculas_novas2 = $this->Matricula->find('all',array('conditions'=>$conditions,'order'=>array('Matricula.curso_id','Matricula.turno_id')));
         
-        //die(debug($matriculas_novas2));
+       // die(debug($matriculas_novas2));
         
         $ii=0;
         $jj=0;

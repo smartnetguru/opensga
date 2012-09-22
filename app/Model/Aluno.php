@@ -339,6 +339,7 @@ class Aluno extends AppModel {
                                 $data_matricula['anolectivo_id'] = SessionComponent::read('SGAConfig.anolectivo_id');
                                 $data_matricula['turno_id'] = $data['Aluno']['turno_id'];
                                 $data_matricula['nivel'] = $data['Aluno']['nivel'];
+                                $data_matricula['tipo_matricula_id'] = 1;
                                 if(Configure::read('OpenSGA.matriculas.regimes'==2)){
                                     $data_matricula['regimelectivo_id']==$data['Aluno']['regimelectivo_id'];
                                 }
