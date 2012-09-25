@@ -47,6 +47,7 @@ class AppController extends Controller {
         parent::beforeFilter();
        
         
+       
         Configure::write('Config.language', $this->Session->read('Config.language'));
 		setlocale (LC_ALL, 'ptb');
         if($this->Auth->loggedIn()) {
