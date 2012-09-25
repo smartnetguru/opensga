@@ -13,3 +13,7 @@ Depois de se pagar todas as facturas possiveis, o dinheiro que restar na "conta"
 
 
 ============ Rever e Documentar a Secção de Matriculas===============
+
+
+=====================Inscricoes=================================
+---Rever a forma como as cadeiras em atraso sao determinadas

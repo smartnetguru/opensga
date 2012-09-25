@@ -60,10 +60,15 @@ class FinanceiroDeposito extends AppModel {
     
     public $validate = array(
         'numero_comprovativo'=>array(
-            'unique'=>array(
+            'Unico'=>array(
                 'rule'=>'isUnique',
-                'required'=>false,
-                'message'=>'Já existe uma transação registada com este número de comprovativo'
+                'message'=>'Já existe um depósito registado com este número de comprovativo',
+                'required'=>'create',  
+            ),
+            'NaoVazio'=>array(
+                'rule'=>'notEmpty',
+                'message'=>'É obrigatório indicar o número de comprovativo',
+                
             )
         )
     );

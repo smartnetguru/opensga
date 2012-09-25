@@ -81,6 +81,26 @@ class FinanceiroTransacao extends AppModel {
         
     );
     
+    
+    public function criaNovoPagamentoPendente($data){
+        $datasource = $this->getDataSource();
+        $datasource->begin();
+        
+        $this->FinanceiroPagamento->FinanceiroTipoPagamento->id = $data['FinanceiroPagamento']['financeiro_tipo_pagamento_id'];
+        
+        $data['FinanceiroPagamento']['valor'] = $this->FinanceiroPagamento->FinanceiroTipoPagamento->field('valor');
+        $data['FinanceiroPagamento']['codigo'] = $this->FinanceiroPagamento->gerarCodigoPagamento($data['FinanceiroTransacao']['aluno_id'],$data['FinanceiroPagamento']['financeiro_tipo_pagamento_id']);
+       
+        $this->FinanceiroPagamento->create();
+        if($this->FinanceiroPagamento->save($data)){
+            $datasource->commit();
+            return $this->FinanceiroPagamento->id;
+        }
+        
+        $datasource->rollback();
+        return false;
+    }
+    
     public function getSaldoActual($aluno_id){
         $entidade_id = $this->Entidade->Aluno->field('entidade_id',array('id'=>$aluno_id));
         
@@ -169,13 +189,14 @@ class FinanceiroTransacao extends AppModel {
         
         $this->create();
         if($this->save($data)){
-            $novo_deposito = array('FinanceiroDeposito'=>$data['FinanceiroTransacao']);
+            $novo_deposito_1 = array_merge($data['FinanceiroTransacao'],$data['FinanceiroDeposito']);
+            $novo_deposito = array('FinanceiroDeposito'=>$novo_deposito_1);
+
             $novo_deposito['FinanceiroDeposito']['financeiro_transacao_id'] = $this->id;
             $novo_deposito['FinanceiroDeposito']['data_reconciliacao'] = null;
             $novo_deposito['FinanceiroDeposito']['financeiro_estado_deposito_id'] = 1;
             $novo_deposito['FinanceiroDeposito']['semestrelectivo_id'] = Configure::read('OpenSGA.semestre_lectivo_id');
-            
-        
+            //die(debug($novo_deposito));            
             $this->FinanceiroDeposito->create();
             if($this->FinanceiroDeposito->save($novo_deposito)){
                 
