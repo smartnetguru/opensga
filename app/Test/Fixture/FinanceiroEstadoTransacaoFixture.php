@@ -1,9 +1,9 @@
 <?php
 /**
- * EstadoentidadeFixture
+ * FinanceiroEstadoTransacaoFixture
  *
  */
-class EstadoentidadeFixture extends CakeTestFixture {
+class FinanceiroEstadoTransacaoFixture extends CakeTestFixture {
 
 /**
  * Fields
@@ -12,11 +12,11 @@ class EstadoentidadeFixture extends CakeTestFixture {
  */
 	public $fields = array(
 		'id' => array('type' => 'integer', 'null' => false, 'default' => null, 'key' => 'primary'),
-		'name' => array('type' => 'string', 'null' => true, 'default' => null, 'length' => 45, 'collate' => 'latin1_swedish_ci', 'charset' => 'latin1'),
+		'name' => array('type' => 'string', 'null' => true, 'default' => null, 'length' => 45, 'collate' => 'utf8_general_ci', 'charset' => 'utf8'),
 		'indexes' => array(
 			'PRIMARY' => array('column' => 'id', 'unique' => 1)
 		),
-		'tableParameters' => array('charset' => 'latin1', 'collate' => 'latin1_swedish_ci', 'engine' => 'InnoDB')
+		'tableParameters' => array('charset' => 'utf8', 'collate' => 'utf8_general_ci', 'engine' => 'InnoDB')
 	);
 
 /**
