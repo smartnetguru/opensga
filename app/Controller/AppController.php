@@ -80,6 +80,8 @@ class AppController extends Controller {
         $this->Auth->loginAction = array('controller' => 'users', 'action' => 'login');
         $this->Auth->logoutRedirect = array('controller' => 'users', 'action' => 'login');
         $this->Auth->loginRedirect = array(array('controller'=>'pages','action'=>'display','home'));
+        
+        $this->set('title_for_layout','');
     }
 
 

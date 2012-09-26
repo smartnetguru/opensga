@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2012-09-18 20:47+0200\n"
+"POT-Creation-Date: 2012-09-25 21:33+0000\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -792,23 +792,35 @@ msgstr ""
 msgid "Financeiro tipo transacao was not deleted"
 msgstr ""
 
-#: Controller\FinanceiroTransacaosController.php:114;150;182
+#: Controller\FinanceiroTransacaosController.php:68
+msgid "O Pagamento foi efectuado com Sucesso"
+msgstr ""
+
+#: Controller\FinanceiroTransacaosController.php:71
+msgid "Houve um problema ao registar o Pagamento Seleccionado. Mas o depósito do valor foi efectuado"
+msgstr ""
+
+#: Controller\FinanceiroTransacaosController.php:74
+msgid "Os dados do deposito efectuados não estão correctos. Por favor, verifique"
+msgstr ""
+
+#: Controller\FinanceiroTransacaosController.php:121;157;189
 msgid "Invalid financeiro transacao"
 msgstr ""
 
-#: Controller\FinanceiroTransacaosController.php:128;154
+#: Controller\FinanceiroTransacaosController.php:135;161
 msgid "The financeiro transacao has been saved"
 msgstr ""
 
-#: Controller\FinanceiroTransacaosController.php:131;157
+#: Controller\FinanceiroTransacaosController.php:138;164
 msgid "The financeiro transacao could not be saved. Please, try again."
 msgstr ""
 
-#: Controller\FinanceiroTransacaosController.php:185
+#: Controller\FinanceiroTransacaosController.php:192
 msgid "Financeiro transacao deleted"
 msgstr ""
 
-#: Controller\FinanceiroTransacaosController.php:188
+#: Controller\FinanceiroTransacaosController.php:195
 msgid "Financeiro transacao was not deleted"
 msgstr ""
 
@@ -2843,7 +2855,7 @@ msgstr ""
 #: View\Estadoentidades\view.ctp:153
 #: View\Feriados\view.ctp:50
 #: View\FinanceiroTransacaos\novo_deposito.ctp:49
-#: View\FinanceiroTransacaos\novo_pagamento.ctp:130
+#: View\FinanceiroTransacaos\novo_pagamento.ctp:138
 #: View\FinanceiroTransacaos\pagar_factura.ctp:99
 #: View\Months\view.ctp:87
 #: View\Movimentoentidades\view.ctp:52
@@ -3077,7 +3089,7 @@ msgstr ""
 #: View\Faculdades\adicionar_faculdade.ctp:47
 #: View\Faculdades\editar_faculdade.ctp:46
 #: View\FinanceiroTransacaos\novo_deposito.ctp:58
-#: View\FinanceiroTransacaos\novo_pagamento.ctp:140
+#: View\FinanceiroTransacaos\novo_pagamento.ctp:147
 #: View\FinanceiroTransacaos\pagar_factura.ctp:108
 #: View\Funcionarios\editar_funcionario.ctp:59
 #: View\Funcionarios\registar_funcionario.ctp:342
@@ -3230,9 +3242,8 @@ msgid "Detalhes Adicionais"
 msgstr ""
 
 #: View\Alunos\menu.ctp:47
-#: View\Layouts\default.ctp:183
-#: View\Pages\home.ctp:11
-#: View\Pages\homepage.ctp:15
+#: View\Layouts\default.ctp:181
+#: View\Pages\home.ctp:15
 msgid "Estudantes"
 msgstr ""
 
@@ -3241,7 +3252,6 @@ msgid "Ficha de Estudante"
 msgstr ""
 
 #: View\Alunos\pagar_factura.ctp:72
-#: View\Alunos\perfil_estudante.ctp:22
 #: View\Docentes\perfil_docente.ctp:22
 msgid "Perfil do Aluno"
 msgstr ""
@@ -3252,11 +3262,16 @@ msgstr ""
 #: View\Estadoentidades\edit.ctp:20
 #: View\Estadoentidades\index.ctp:48
 #: View\Estadoentidades\view.ctp:25;114
+#: View\FinanceiroTransacaos\novo_pagamento.ctp:14
 #: View\Matricularevisaos\add.ctp:22
 #: View\Matricularevisaos\edit.ctp:24
 #: View\Matricularevisaos\index.ctp:64
 #: View\Matricularevisaos\view.ctp:53
 msgid "Alunos"
+msgstr ""
+
+#: View\Alunos\perfil_estudante.ctp:23
+msgid "Perfil"
 msgstr ""
 
 #: View\Anolectivoepocas\add.ctp:32
@@ -3578,10 +3593,9 @@ msgstr ""
 #: View\Inscricaos\add.ctp:9
 #: View\Inscricaos\add_turmas.ctp:11
 #: View\Inscricaos\menu.ctp:12
-#: View\Layouts\default.ctp:193
+#: View\Layouts\default.ctp:191
 #: View\Matriculas\menu.ctp:34
-#: View\Pages\home.ctp:20
-#: View\Pages\homepage.ctp:26
+#: View\Pages\home.ctp:26
 #: View\Turmas\add_disciplinas.ctp:11
 #: View\Turmas\fecho_da_turma.ctp:8
 #: View\Turmas\menu.ctp:14
@@ -3602,10 +3616,9 @@ msgstr ""
 #: View\Elements\menu_manutencao.ctp:7
 #: View\Inscricaos\add.ctp:11
 #: View\Inscricaos\menu.ctp:14
-#: View\Layouts\default.ctp:194
+#: View\Layouts\default.ctp:192
 #: View\Matriculas\menu.ctp:36
-#: View\Pages\home.ctp:14
-#: View\Pages\homepage.ctp:20
+#: View\Pages\home.ctp:20
 #: View\Turmas\fecho_da_turma.ctp:10
 #: View\Turmas\menu.ctp:16
 msgid "Matriculas"
@@ -3615,7 +3628,7 @@ msgstr ""
 #: View\Elements\menu_manutencao.ctp:8
 #: View\Inscricaos\add.ctp:12
 #: View\Inscricaos\menu.ctp:15
-#: View\Layouts\default.ctp:195
+#: View\Layouts\default.ctp:193
 #: View\Matriculas\menu.ctp:37
 #: View\Turmas\fecho_da_turma.ctp:11
 #: View\Turmas\menu.ctp:17
@@ -3687,7 +3700,7 @@ msgstr ""
 #: View\Generos\menu.ctp:13
 #: View\Grauacademicos\menu.ctp:13
 #: View\Grupodisciplinars\menu.ctp:13
-#: View\Layouts\default.ctp:238
+#: View\Layouts\default.ctp:236
 #: View\Paises\menu.ctp:13
 #: View\Provincias\menu.ctp:13
 #: View\Tipocursos\menu.ctp:13
@@ -3709,7 +3722,7 @@ msgstr ""
 #: View\Generos\menu.ctp:14
 #: View\Grauacademicos\menu.ctp:14
 #: View\Grupodisciplinars\menu.ctp:14
-#: View\Layouts\default.ctp:239
+#: View\Layouts\default.ctp:237
 #: View\Paises\menu.ctp:14
 #: View\Provincias\menu.ctp:14
 #: View\Tipocursos\menu.ctp:14
@@ -3731,7 +3744,7 @@ msgstr ""
 #: View\Generos\menu.ctp:15
 #: View\Grauacademicos\menu.ctp:15
 #: View\Grupodisciplinars\menu.ctp:15
-#: View\Layouts\default.ctp:240
+#: View\Layouts\default.ctp:238
 #: View\Paises\menu.ctp:15
 #: View\Provincias\menu.ctp:15
 #: View\Tipocursos\menu.ctp:15
@@ -3754,7 +3767,7 @@ msgstr ""
 #: View\Generos\menu.ctp:16
 #: View\Grauacademicos\menu.ctp:16
 #: View\Grupodisciplinars\menu.ctp:16
-#: View\Layouts\default.ctp:241
+#: View\Layouts\default.ctp:239
 #: View\Paises\menu.ctp:16
 #: View\Provincias\menu.ctp:16
 #: View\Tipocursos\menu.ctp:16
@@ -3776,7 +3789,7 @@ msgstr ""
 #: View\Generos\menu.ctp:17
 #: View\Grauacademicos\menu.ctp:17
 #: View\Grupodisciplinars\menu.ctp:17
-#: View\Layouts\default.ctp:242
+#: View\Layouts\default.ctp:240
 #: View\Paises\menu.ctp:17
 #: View\Provincias\menu.ctp:17
 #: View\Tipocursos\menu.ctp:17
@@ -3801,7 +3814,7 @@ msgstr ""
 #: View\Generos\menu.ctp:18
 #: View\Grauacademicos\menu.ctp:18
 #: View\Grupodisciplinars\menu.ctp:18
-#: View\Layouts\default.ctp:157;243
+#: View\Layouts\default.ctp:155;241
 #: View\Paises\menu.ctp:18
 #: View\Provincias\menu.ctp:18
 #: View\Tipocursos\menu.ctp:18
@@ -3823,7 +3836,7 @@ msgstr ""
 #: View\Generos\menu.ctp:19
 #: View\Grauacademicos\menu.ctp:19
 #: View\Grupodisciplinars\menu.ctp:19
-#: View\Layouts\default.ctp:244
+#: View\Layouts\default.ctp:242
 #: View\Paises\menu.ctp:19
 #: View\Provincias\menu.ctp:19
 #: View\Tipocursos\index.ctp:6
@@ -3847,7 +3860,7 @@ msgstr ""
 #: View\Grauacademicos\menu.ctp:20
 #: View\Grupodisciplinars\index.ctp:6
 #: View\Grupodisciplinars\menu.ctp:20
-#: View\Layouts\default.ctp:245
+#: View\Layouts\default.ctp:243
 #: View\Paises\menu.ctp:20
 #: View\Provincias\menu.ctp:20
 #: View\Tipocursos\menu.ctp:20
@@ -3869,7 +3882,7 @@ msgstr ""
 #: View\Generos\menu.ctp:21
 #: View\Grauacademicos\menu.ctp:21
 #: View\Grupodisciplinars\menu.ctp:21
-#: View\Layouts\default.ctp:246
+#: View\Layouts\default.ctp:244
 #: View\Paises\menu.ctp:21
 #: View\Provincias\menu.ctp:21
 #: View\Tipocursos\menu.ctp:21
@@ -3891,7 +3904,7 @@ msgstr ""
 #: View\Generos\menu.ctp:22
 #: View\Grauacademicos\menu.ctp:22
 #: View\Grupodisciplinars\menu.ctp:22
-#: View\Layouts\default.ctp:247
+#: View\Layouts\default.ctp:245
 #: View\Paises\menu.ctp:22
 #: View\Provincias\menu.ctp:22
 #: View\Tipocursos\menu.ctp:22
@@ -3913,7 +3926,7 @@ msgstr ""
 #: View\Generos\menu.ctp:23
 #: View\Grauacademicos\menu.ctp:23
 #: View\Grupodisciplinars\menu.ctp:23
-#: View\Layouts\default.ctp:248
+#: View\Layouts\default.ctp:246
 #: View\Paises\menu.ctp:23
 #: View\Provincias\menu.ctp:23
 #: View\Tipocursos\menu.ctp:23
@@ -3936,7 +3949,7 @@ msgstr ""
 #: View\Generos\menu.ctp:24
 #: View\Grauacademicos\menu.ctp:24
 #: View\Grupodisciplinars\menu.ctp:24
-#: View\Layouts\default.ctp:249
+#: View\Layouts\default.ctp:247
 #: View\Paises\menu.ctp:24
 #: View\Provincias\menu.ctp:24
 #: View\Tipocursos\menu.ctp:24
@@ -3957,7 +3970,7 @@ msgstr ""
 #: View\Generos\menu.ctp:25
 #: View\Grauacademicos\menu.ctp:25
 #: View\Grupodisciplinars\menu.ctp:25
-#: View\Layouts\default.ctp:250
+#: View\Layouts\default.ctp:248
 #: View\Paises\menu.ctp:25
 #: View\Provincias\menu.ctp:25
 #: View\Tipocursos\menu.ctp:25
@@ -4050,7 +4063,6 @@ msgid "Nota"
 msgstr ""
 
 #: View\Avaliacaos\view.ctp:65
-#: View\FinanceiroTransacaos\novo_pagamento.ctp:127
 #: View\FinanceiroTransacaos\pagar_factura.ctp:96
 #: View\Movimentoentidades\view.ctp:47
 #: View\SadeAutoAvaliacaos\view.ctp:49
@@ -4360,7 +4372,7 @@ msgid "Edit Bolsa Bolsa"
 msgstr ""
 
 #: View\BolsaBolsas\index.ctp:44
-#: View\Layouts\default.ctp:196
+#: View\Layouts\default.ctp:194
 msgid "Bolsas de Estudos"
 msgstr ""
 
@@ -4629,7 +4641,7 @@ msgstr ""
 
 #: View\Configs\index.ctp:42
 #: View\Elements\menu_administracao.ctp:30
-#: View\Layouts\default.ctp:236
+#: View\Layouts\default.ctp:234
 msgid "Configurações"
 msgstr ""
 
@@ -4943,7 +4955,7 @@ msgstr ""
 #: View\Grupodisciplinas\add.ctp:8
 #: View\Grupodisciplinas\edit.ctp:4
 #: View\Grupodisciplinas\view.ctp:4
-#: View\Layouts\default.ctp:169;203
+#: View\Layouts\default.ctp:167;201
 #: View\Matricularevisaos\add.ctp:24
 #: View\Matricularevisaos\edit.ctp:26
 #: View\Matricularevisaos\index.ctp:66
@@ -4959,7 +4971,7 @@ msgstr ""
 #: View\Grupodisciplinas\add.ctp:9
 #: View\Grupodisciplinas\edit.ctp:5
 #: View\Grupodisciplinas\view.ctp:5
-#: View\Layouts\default.ctp:168;202
+#: View\Layouts\default.ctp:166;200
 #: View\Planoestudos\menu.ctp:13
 msgid "Disciplinas"
 msgstr ""
@@ -4969,7 +4981,7 @@ msgstr ""
 #: View\Grupodisciplinas\add.ctp:10
 #: View\Grupodisciplinas\edit.ctp:6
 #: View\Grupodisciplinas\view.ctp:6
-#: View\Layouts\default.ctp:170;204
+#: View\Layouts\default.ctp:168;202
 #: View\Planoestudos\menu.ctp:14
 msgid "Plano de Estudos"
 msgstr ""
@@ -5394,7 +5406,7 @@ msgid "Bem Vindo"
 msgstr ""
 
 #: View\Elements\header.ctp:50
-#: View\Layouts\default.ctp:112;139
+#: View\Layouts\default.ctp:110;137
 msgid "Sair"
 msgstr ""
 
@@ -5407,7 +5419,7 @@ msgid "HOME"
 msgstr ""
 
 #: View\Elements\header.ctp:80
-#: View\Layouts\default.ctp:151
+#: View\Layouts\default.ctp:149
 msgid "PEDAGÓGICA"
 msgstr ""
 
@@ -5420,12 +5432,12 @@ msgid "ESTUDANTE"
 msgstr ""
 
 #: View\Elements\header.ctp:93;97
-#: View\Layouts\default.ctp:190
+#: View\Layouts\default.ctp:188
 msgid "MANUTENÇÃO"
 msgstr ""
 
 #: View\Elements\header.ctp:103
-#: View\Layouts\default.ctp:200
+#: View\Layouts\default.ctp:198
 msgid "AVALIAÇÃO"
 msgstr ""
 
@@ -5434,17 +5446,17 @@ msgid "NOTAS DE AVALIAÇÕES"
 msgstr ""
 
 #: View\Elements\header.ctp:111
-#: View\Layouts\default.ctp:218
+#: View\Layouts\default.ctp:216
 msgid "CONTABILIDADE"
 msgstr ""
 
 #: View\Elements\header.ctp:114
-#: View\Layouts\default.ctp:226
+#: View\Layouts\default.ctp:224
 msgid "RELATÓRIOS"
 msgstr ""
 
 #: View\Elements\header.ctp:118
-#: View\Layouts\default.ctp:234
+#: View\Layouts\default.ctp:232
 msgid "ADMINISTRAÇÃO"
 msgstr ""
 
@@ -5455,9 +5467,8 @@ msgid "Funcionarios"
 msgstr ""
 
 #: View\Elements\menu_administracao.ctp:5
-#: View\Layouts\default.ctp:184
-#: View\Pages\home.ctp:23
-#: View\Pages\homepage.ctp:29
+#: View\Layouts\default.ctp:182
+#: View\Pages\home.ctp:29
 msgid "Docentes"
 msgstr ""
 
@@ -6218,7 +6229,7 @@ msgstr ""
 #: View\Faculdades\adicionar_faculdade.ctp:15
 #: View\Faculdades\editar_faculdade.ctp:15
 #: View\Faculdades\index.ctp:30
-#: View\Layouts\default.ctp:153
+#: View\Layouts\default.ctp:151
 msgid "Faculdades"
 msgstr ""
 
@@ -6637,7 +6648,7 @@ msgid "Entidade"
 msgstr ""
 
 #: View\FinanceiroContas\view.ctp:14
-#: View\FinanceiroTransacaos\novo_pagamento.ctp:36
+#: View\FinanceiroTransacaos\novo_pagamento.ctp:37
 #: View\FinanceiroTransacaos\pagar_factura.ctp:36
 msgid "Saldo Actual"
 msgstr ""
@@ -7012,25 +7023,23 @@ msgid "Financeiro Transacaos"
 msgstr ""
 
 #: View\FinanceiroTransacaos\novo_deposito.ctp:14
-#: View\FinanceiroTransacaos\novo_pagamento.ctp:14
+#: View\FinanceiroTransacaos\novo_pagamento.ctp:16
 #: View\FinanceiroTransacaos\pagar_factura.ctp:14
 msgid "Tesouraria"
 msgstr ""
 
 #: View\FinanceiroTransacaos\novo_deposito.ctp:15
-#: View\FinanceiroTransacaos\novo_pagamento.ctp:15
+#: View\FinanceiroTransacaos\novo_pagamento.ctp:17
 #: View\FinanceiroTransacaos\pagar_factura.ctp:15
 msgid "Transações"
 msgstr ""
 
 #: View\FinanceiroTransacaos\novo_deposito.ctp:16
-#: View\FinanceiroTransacaos\novo_pagamento.ctp:16
 #: View\FinanceiroTransacaos\pagar_factura.ctp:16
 msgid "Depósitos"
 msgstr ""
 
 #: View\FinanceiroTransacaos\novo_deposito.ctp:17
-#: View\FinanceiroTransacaos\novo_pagamento.ctp:17
 #: View\FinanceiroTransacaos\pagar_factura.ctp:17
 msgid "Novo Depósito"
 msgstr ""
@@ -7040,18 +7049,22 @@ msgid "Dados do Deposito"
 msgstr ""
 
 #: View\FinanceiroTransacaos\novo_deposito.ctp:34
+#: View\FinanceiroTransacaos\novo_pagamento.ctp:123
 msgid "Número de Comprovativo"
 msgstr ""
 
 #: View\FinanceiroTransacaos\novo_deposito.ctp:37
+#: View\FinanceiroTransacaos\novo_pagamento.ctp:126
 msgid "Forma de Depósito"
 msgstr ""
 
 #: View\FinanceiroTransacaos\novo_deposito.ctp:40
+#: View\FinanceiroTransacaos\novo_pagamento.ctp:129
 msgid "Banco Usado"
 msgstr ""
 
 #: View\FinanceiroTransacaos\novo_deposito.ctp:43
+#: View\FinanceiroTransacaos\novo_pagamento.ctp:132
 msgid "Valor Depositado"
 msgstr ""
 
@@ -7059,17 +7072,25 @@ msgstr ""
 msgid "Data de Depósito"
 msgstr ""
 
-#: View\FinanceiroTransacaos\novo_pagamento.ctp:32
+#: View\FinanceiroTransacaos\novo_pagamento.ctp:18
+msgid "Pagamentos"
+msgstr ""
+
+#: View\FinanceiroTransacaos\novo_pagamento.ctp:19
+msgid "Novo Pagamento"
+msgstr ""
+
+#: View\FinanceiroTransacaos\novo_pagamento.ctp:33
 #: View\FinanceiroTransacaos\pagar_factura.ctp:32
 msgid "Situação do Estudante"
 msgstr ""
 
-#: View\FinanceiroTransacaos\novo_pagamento.ctp:39
+#: View\FinanceiroTransacaos\novo_pagamento.ctp:40
 #: View\FinanceiroTransacaos\pagar_factura.ctp:39
 msgid "Valor Total em Dívida"
 msgstr ""
 
-#: View\FinanceiroTransacaos\novo_pagamento.ctp:42
+#: View\FinanceiroTransacaos\novo_pagamento.ctp:43
 #: View\FinanceiroTransacaos\pagar_factura.ctp:42
 msgid "Pagamentos Pendentes"
 msgstr ""
@@ -7078,28 +7099,26 @@ msgstr ""
 msgid "Pagamentos Efectuados"
 msgstr ""
 
-#: View\FinanceiroTransacaos\novo_pagamento.ctp:117
+#: View\FinanceiroTransacaos\novo_pagamento.ctp:116
 #: View\FinanceiroTransacaos\pagar_factura.ctp:86
 msgid "Pagamentos Adicionais"
 msgstr ""
 
-#: View\FinanceiroTransacaos\novo_pagamento.ctp:121
+#: View\FinanceiroTransacaos\novo_pagamento.ctp:120
 #: View\FinanceiroTransacaos\pagar_factura.ctp:90
 msgid "Pagamento a efectuar"
 msgstr ""
 
-#: View\FinanceiroTransacaos\novo_pagamento.ctp:124
-#: View\FinanceiroTransacaos\pagar_factura.ctp:93
-msgid "Valor a Pagar"
+#: View\FinanceiroTransacaos\novo_pagamento.ctp:135
+msgid "Data do Depósito"
 msgstr ""
 
-#: View\FinanceiroTransacaos\novo_pagamento.ctp:136
 #: View\FinanceiroTransacaos\pagar_factura.ctp:75
 msgid "Novo Tipo de Pagamento"
 msgstr ""
 
-#: View\FinanceiroTransacaos\novo_pagamento.ctp:137
-msgid "Novo Deposito"
+#: View\FinanceiroTransacaos\pagar_factura.ctp:93
+msgid "Valor a Pagar"
 msgstr ""
 
 #: View\FinanceiroTransacaos\view.ctp:2
@@ -7356,8 +7375,7 @@ msgid " of "
 msgstr ""
 
 #: View\Inscricaos\add.ctp:18
-#: View\Pages\home.ctp:17
-#: View\Pages\homepage.ctp:23
+#: View\Pages\home.ctp:23
 msgid "Inscrições"
 msgstr ""
 
@@ -7406,55 +7424,59 @@ msgstr ""
 msgid "Visualizar Inscricao"
 msgstr ""
 
-#: View\Layouts\default.ctp:100
+#: View\Layouts\default.ctp:11
+msgid "OpenSGA"
+msgstr ""
+
+#: View\Layouts\default.ctp:98
 msgid "Sobre o OpenSGA"
 msgstr ""
 
-#: View\Layouts\default.ctp:101
+#: View\Layouts\default.ctp:99
 msgid "OpenSGA-Sistema de Gestão Académica."
 msgstr ""
 
-#: View\Layouts\default.ctp:102
+#: View\Layouts\default.ctp:100
 msgid "Versão 0.5.0"
 msgstr ""
 
-#: View\Layouts\default.ctp:109
+#: View\Layouts\default.ctp:107
 msgid "Olá"
 msgstr ""
 
-#: View\Layouts\default.ctp:109
+#: View\Layouts\default.ctp:107
 msgid "novas mensagens"
 msgstr ""
 
-#: View\Layouts\default.ctp:110
+#: View\Layouts\default.ctp:108
 msgid "Reportar Erros"
 msgstr ""
 
-#: View\Layouts\default.ctp:111
+#: View\Layouts\default.ctp:109
 msgid "O que há de novo?"
 msgstr ""
 
-#: View\Layouts\default.ctp:126
+#: View\Layouts\default.ctp:124
 msgid "Pesquisar"
 msgstr ""
 
-#: View\Layouts\default.ctp:133
+#: View\Layouts\default.ctp:131
 msgid "Login Efectuado Como:"
 msgstr ""
 
-#: View\Layouts\default.ctp:136
+#: View\Layouts\default.ctp:134
 msgid "Meu Perfil"
 msgstr ""
 
-#: View\Layouts\default.ctp:138
+#: View\Layouts\default.ctp:136
 msgid "Mensagens"
 msgstr ""
 
-#: View\Layouts\default.ctp:149
+#: View\Layouts\default.ctp:147
 msgid "PÁGINA INICIAL"
 msgstr ""
 
-#: View\Layouts\default.ctp:164
+#: View\Layouts\default.ctp:162
 #: View\Seccaos\adicionar_seccao.ctp:15
 #: View\Seccaos\editar_seccao.ctp:15
 #: View\Seccaos\index.ctp:6;30
@@ -7462,51 +7484,51 @@ msgstr ""
 msgid "Secções"
 msgstr ""
 
-#: View\Layouts\default.ctp:174
+#: View\Layouts\default.ctp:172
 msgid "Salas de Aulas"
 msgstr ""
 
-#: View\Layouts\default.ctp:181
+#: View\Layouts\default.ctp:179
 msgid "PESSOAS"
 msgstr ""
 
-#: View\Layouts\default.ctp:185
+#: View\Layouts\default.ctp:183
 msgid "Funcionários(CTA)"
 msgstr ""
 
-#: View\Layouts\default.ctp:208
+#: View\Layouts\default.ctp:206
 msgid "eSADE"
 msgstr ""
 
-#: View\Layouts\default.ctp:212
+#: View\Layouts\default.ctp:210
 msgid "Avaliação pelo Estudante"
 msgstr ""
 
-#: View\Layouts\default.ctp:213
+#: View\Layouts\default.ctp:211
 msgid "Avaliação Qualitativa"
 msgstr ""
 
-#: View\Layouts\default.ctp:214
+#: View\Layouts\default.ctp:212
 msgid "Relatórios"
 msgstr ""
 
-#: View\Layouts\default.ctp:221
+#: View\Layouts\default.ctp:219
 msgid "Validar Pagamentos"
 msgstr ""
 
-#: View\Layouts\default.ctp:228
+#: View\Layouts\default.ctp:226
 msgid "Resumo Semestral"
 msgstr ""
 
-#: View\Layouts\default.ctp:229
+#: View\Layouts\default.ctp:227
 msgid "Estudantes por Curso"
 msgstr ""
 
-#: View\Layouts\default.ctp:230
+#: View\Layouts\default.ctp:228
 msgid "Estudantes por Faculdade"
 msgstr ""
 
-#: View\Layouts\default.ctp:237
+#: View\Layouts\default.ctp:235
 msgid "Níveis de Utilizadores"
 msgstr ""
 
@@ -7801,78 +7823,67 @@ msgstr ""
 msgid "Delete Pagamento"
 msgstr ""
 
-#: View\Pages\home.ctp:26
-#: View\Pages\homepage.ctp:32
+#: View\Pages\home.ctp:32
 msgid "Contabilidade"
 msgstr ""
 
-#: View\Pages\home.ctp:29
-#: View\Pages\homepage.ctp:35
+#: View\Pages\home.ctp:35
 msgid "Relatorios"
 msgstr ""
 
-#: View\Pages\home.ctp:32
-#: View\Pages\homepage.ctp:38
+#: View\Pages\home.ctp:38
 msgid "Administração"
 msgstr ""
 
-#: View\Pages\home.ctp:44
-#: View\Pages\homepage.ctp:50
+#: View\Pages\home.ctp:50
 msgid "Publicar um aviso rápido"
 msgstr ""
 
-#: View\Pages\home.ctp:48
-#: View\Pages\homepage.ctp:54
+#: View\Pages\home.ctp:54
 msgid "Título"
 msgstr ""
 
-#: View\Pages\home.ctp:52
-#: View\Pages\homepage.ctp:58
+#: View\Pages\home.ctp:58
 msgid "Categoria"
 msgstr ""
 
-#: View\Pages\home.ctp:60
-#: View\Pages\homepage.ctp:66
+#: View\Pages\home.ctp:66
 msgid "Mensagem"
 msgstr ""
 
-#: View\Pages\home.ctp:70
-#: View\Pages\homepage.ctp:76
+#: View\Pages\home.ctp:76
 msgid "Cancelar"
 msgstr ""
 
-#: View\Pages\home.ctp:73
-#: View\Pages\homepage.ctp:79
+#: View\Pages\home.ctp:79
 msgid "Criar Aviso"
 msgstr ""
 
-#: View\Pages\home.ctp:83
-#: View\Pages\homepage.ctp:89
+#: View\Pages\home.ctp:89
 msgid "Tarefas não cumpridas"
 msgstr ""
 
-#: View\Pages\home.ctp:100
-#: View\Pages\homepage.ctp:106
+#: View\Pages\home.ctp:106
 msgid "Relatório Rápido"
 msgstr ""
 
-#: View\Pages\homepage.ctp:111
+#: View\Pages\home.ctp:111
 msgid "Alunos cadastrados no Sistema"
 msgstr ""
 
-#: View\Pages\homepage.ctp:112
+#: View\Pages\home.ctp:112
 msgid "Matriculas Realizadas em "
 msgstr ""
 
-#: View\Pages\homepage.ctp:113
+#: View\Pages\home.ctp:113
 msgid "Facturas Pagas Este mes"
 msgstr ""
 
-#: View\Pages\homepage.ctp:114
+#: View\Pages\home.ctp:114
 msgid "Arrecadados"
 msgstr ""
 
-#: View\Pages\homepage.ctp:115
+#: View\Pages\home.ctp:115
 msgid "Em divida"
 msgstr ""
 
@@ -9269,7 +9280,11 @@ msgid "Ja existe uma Faculdade com este nome."
 msgstr ""
 
 #: Model\FinanceiroDeposito.php:validation for field numero_comprovativo
-msgid "Já existe uma transação registada com este número de comprovativo"
+msgid "Já existe um depósito registado com este número de comprovativo"
+msgstr ""
+
+#: Model\FinanceiroDeposito.php:validation for field numero_comprovativo
+msgid "É obrigatório indicar o número de comprovativo"
 msgstr ""
 
 #: Model\Genero.php:validation for field name
