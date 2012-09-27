@@ -1,3 +1,19 @@
+================Avaliacoes===================
+Ainda Falta re-implementar.
+Tentar sempre usar o campo turmatipoavaliacao, em vez de turma e tipoavaliacao separados
+
+=============TurmatipoAvaliacao==================
+Ver a questao do scan da pauta
+
+======================Entidade=====================
+A tabela enderecos foi separada, agora podem-se acrescentar N enderecos
+
+
+===========================Faculdade e Departamento============
+Ver a melhor forma de representar as chefias
+
+=======================Equivalencias de Cursos================
+Seria interessante no futuro gerir equivalencias internas automaticamente no Sistema
 ﻿
 ==Modulo Financeiro==
 O modulo financeiro precisa de ser completamente revisto, para responder as realidades actuais da maioria das universidades.
