@@ -424,101 +424,52 @@ class AlunosController extends AppController
               'Matricula'=>array(
                   'Planoestudo','Turno'
               ),
-              'Curso','Entidade'=>array(
-                  'ProvinciaNascimento','CidadeNascimento','PaisNascimento','Genero','DocumentoIdentificacao'
+              'Curso'=>array(
+                  'Faculdade'
+              ),
+              'Entidade'=>array(
+                  'ProvinciaNascimento','CidadeNascimento','PaisNascimento','Genero','DocumentoIdentificacao','EstadoCivil'
               ),
               'AlunoNivelMedio'=>array(
                   'EscolaNivelMedio'
               )
           ));
           $aluno = $this->Aluno->find('first',array('conditions'=>array('Aluno.id'=>$aluno_id)));
-           /*
-          //debug($aluno);
-         $this->Aluno->Inscricao->contain(array(
+          
+          if($aluno['Entidade']['apelido']==null){
+              $aluno['Entidade']['apelido'] = $this->Aluno->Entidade->getApelidoFromName($aluno['Entidade']['name']);
+          }
+          if($aluno['Entidade']['nomes']==null){
+              $aluno['Entidade']['nomes'] = $this->Aluno->Entidade->getNomesFromName($aluno['Entidade']['name']);
+          }
+          if($aluno['Aluno']['ano_ingresso']==null){
+              $aluno['Aluno']['ano_ingresso']= date('Y',strtotime($aluno['Aluno']['dataingresso']));
+          }
+          
+          $this->Aluno->Inscricao->contain(array(
              'Turma'=>array(
                  'fields'=>array(
-                     'id','disciplina_id','anocurricular','semestrecurricular'),
+                     'id','disciplina_id','anocurricular','semestrecurricular','anolectivo_id'),
                      'Disciplina'=>array(
                          'fields'=>array('id','name')
-                     )
-                    ),
+                     ),
+                 'Anolectivo'
+            ),
              'Matricula'=>array(
                  'fields'=>array('id','anolectivo_id'),
                  'Anolectivo'=>array(
                      'fields'=>array('id','ano')
                  )
                  
-             )
-                )
-            ); 
-        $inscricoes_activas = $this->Aluno->Inscricao->find('all',array('conditions'=>array('Inscricao.aluno_id'=>$id)));
-        
-         $this->Aluno->Inscricao->contain(array(
-             'Turma'=>array(
-                 'fields'=>array(
-                     'id','disciplina_id','anocurricular','semestrecurricular'),
-                     'Disciplina'=>array(
-                         'fields'=>array('id','name')
-                     )
-                    ),
-             'Matricula'=>array(
-                 'fields'=>array('id','anolectivo_id'),
-                 'Anolectivo'=>array(
-                     'fields'=>array('id','ano')
-                 )
-                 
-             )
+             ),
+              'Avaliacao'=>array()
                 )
             );
-        $todas_inscricoes = $this->Aluno->Inscricao->find('all',array('conditions'=>array('Inscricao.aluno_id'=>$id)));
-         
-         $this->Aluno->Inscricao->contain(array(
-             'Turma'=>array(
-                 'fields'=>array(
-                     'id','disciplina_id','anocurricular','semestrecurricular'),
-                     'Disciplina'=>array(
-                         'fields'=>array('id','name')
-                     )
-                    ),
-             'Matricula'=>array(
-                 'fields'=>array('id','anolectivo_id'),
-                 'Anolectivo'=>array(
-                     'fields'=>array('id','ano')
-                 )
-                 
-             )
-                )
-            );        
-        $cadeiras_aprovadas = $this->Aluno->Inscricao->find('all',array('conditions'=>array('Inscricao.aluno_id'=>$id)));
+          $inscricaos = $this->Aluno->Inscricao->find('all',array('conditions'=>array('Inscricao.aluno_id'=>$aluno_id)));
+          //die(debug($inscricaos));
+          
+          Configure::write('debug',0);
         
-        $this->Aluno->Pagamento->contain(array(
-            'Tipopagamento'
-        ));
-        
-        if($this->Aluno->isMatriculado($id,$this->Session->read('SGAConfig.anolectivo_id'))){
-            $this->set('is_matriculado',1);
-        }
-        else{
-            $this->set('is_matriculado',0);
-        }
-        $pagamentos = $this->Aluno->Pagamento->find('all',array('conditions'=>array('Pagamento.aluno_id'=>$id)));
-        //debug($pagamentos);
-		
-		$users = $this->Aluno->User->find('list');
-		$paises = $this->Aluno->Entidade->PaisNascimento->find('list');
-		$cidades = $this->Aluno->Entidade->CidadeNascimento->find('list');
-		$provincias = $this->Aluno->Entidade->ProvinciaNascimento->find('list');
-        $provenienciacidades = $this->Aluno->Entidade->CidadeNascimento->find('list');
-		$proveniencianomes = $this->Aluno->Entidade->ProvinciaNascimento->find('list');
-		$documentos = $this->Aluno->Entidade->DocumentoIdentificacao->find('list');
-		$areatrabalhos = $this->Aluno->Areatrabalho->find('list');
-		$generos = $this->Aluno->Entidade->Genero->find('list');
-        $cidadenascimentos = $this->Aluno->Entidade->CidadeNascimento->find('list');
-		$cursos = $this->Aluno->Curso->find('list');
-		$planoestudos = $this->Aluno->Matricula->Planoestudo->find('list');
-        
-        $is_bolseiro = $this->Aluno->isBolseiro($id,  $this->Session->read('SGAConfig.anolectivo_id')); */
-		
-		$this->set(compact('aluno','cursos','planoestudos','users', 'paises', 'cidades', 'provincias', 'documentos', 'areatrabalhos','generos','cidadenascimentos','proveniencianomes','provenienciacidades','inscricoes_activas','todas_inscricoes','cadeiras_aprovadas','pagamentos','is_bolseiro'));
+		$this->set(compact('aluno','inscricaos'));
         }
 }

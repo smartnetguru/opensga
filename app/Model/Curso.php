@@ -52,6 +52,13 @@ class Curso extends AppModel {
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
+		),
+		'Faculdade' => array(
+			'className' => 'Faculdade',
+			'foreignKey' => 'faculdade_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
 		)
 	);
 

@@ -154,6 +154,20 @@ class Entidade extends AppModel {
 		)
 	);
     
+    
+    public function getApelidoFromName($name){
+        $nomes = explode(' ',$name);
+        return $nomes[count($nomes) - 1];
+                
+    }
+    
+    public function getNomesFromName($name){
+        $nomes = explode(' ',$name);
+        unset($nomes[count($nomes)-1]);
+        return implode(' ',$nomes);
+    }
+    
+    
 	
 
 }
