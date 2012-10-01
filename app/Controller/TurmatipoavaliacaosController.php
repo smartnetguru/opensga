@@ -43,7 +43,7 @@ class TurmatipoavaliacaosController extends AppController {
      */
 	function view($id = null) {
 		if (!$id) {
-			$this->Session->setFlash('Invalido %s', 'flasherror');
+			$this->Session->setFlash(__('Esta Avaliação não está disponível para esta Turma'), 'flasherror');
 			$this->redirect(array('action' => 'index'));
 		}
         if ($this->request->is('post') || $this->request->is('put')) {

@@ -32,8 +32,8 @@ class Curso extends AppModel {
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 
 	var $belongsTo = array(
-		'Grauacademico' => array(
-			'className' => 'Grauacademico',
+		'GrauAcademico' => array(
+			'className' => 'GrauAcademico',
 			'foreignKey' => 'grauacademico_id',
 			'conditions' => '',
 			'fields' => '',

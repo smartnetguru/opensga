@@ -58,7 +58,7 @@ class CursosController extends AppController {
 		
 		}
 		
-		$grauacademicos = $this->Curso->Grauacademico->find('list');
+		$grauacademicos = $this->Curso->GrauAcademico->find('list');
 		$tipocursos = $this->Curso->Tipocurso->find('list');
         $escolas = $this->Curso->Escola->find('list');
 		$this->set(compact('grauacademicos', 'tipocursos','escolas'));
@@ -79,7 +79,7 @@ class CursosController extends AppController {
 			}
 		}
 		$escolas = $this->Curso->Escola->find('list');
-		$grauacademicos = $this->Curso->Grauacademico->find('list');
+		$grauacademicos = $this->Curso->GrauAcademico->find('list');
 		$tipocursos = $this->Curso->Tipocurso->find('list');
 		$this->set(compact('grauacademicos', 'tipocursos','escolas'));
 	}
@@ -107,9 +107,9 @@ class CursosController extends AppController {
 			$this->data = $this->Curso->read(null, $id);
 		}
         $escolas = $this->Curso->Escola->find('list');
-		$grauacademicos = $this->Curso->Grauacademico->find('list');
+		$grauacademicos = $this->Curso->GrauAcademico->find('list');
 		$tipocursos = $this->Curso->Tipocurso->find('list');
-		$this->set(compact('Grauacademicos', 'tg0007tipocursos','tg0016escolas'));
+		$this->set(compact('GrauAcademicos', 'tg0007tipocursos','tg0016escolas'));
 	}
 
 	function delete($id = null) {
@@ -147,7 +147,7 @@ class CursosController extends AppController {
                 $lista = array();
                 $lista[] =$m["Curso"]["id"];
 				$lista[] =$m["Curso"]["name"];
-                $lista[] =$m["Grauacademico"]["name"];
+                $lista[] =$m["GrauAcademico"]["name"];
                 $lista[] =$m["Tipocurso"]["name"];
                 $listas[] =$lista;
             }
