@@ -7,7 +7,6 @@ App::uses('AppController', 'Controller');
  */
 class BolsaBolsasController extends AppController {
 
-
 /**
  * index method
  *
@@ -21,6 +20,7 @@ class BolsaBolsasController extends AppController {
 /**
  * view method
  *
+ * @throws NotFoundException
  * @param string $id
  * @return void
  */
@@ -49,16 +49,19 @@ class BolsaBolsasController extends AppController {
 		}
 		$alunos = $this->BolsaBolsa->Aluno->find('list');
 		$bolsaCandidaturas = $this->BolsaBolsa->BolsaCandidatura->find('list');
-		$bolsaResultados = $this->BolsaBolsa->BolsaResultado->find('list');
-		$anoLectivos = $this->BolsaBolsa->AnoLectivo->find('list');
+		$anolectivos = $this->BolsaBolsa->Anolectivo->find('list');
 		$bancos = $this->BolsaBolsa->Banco->find('list');
 		$bolsaFonteBolsas = $this->BolsaBolsa->BolsaFonteBolsa->find('list');
-		$this->set(compact('alunos', 'bolsaCandidaturas', 'bolsaResultados', 'anoLectivos', 'bancos', 'bolsaFonteBolsas'));
+		$bolsaCriadorContas = $this->BolsaBolsa->BolsaCriadorContum->find('list');
+		$bolsaEstadoBolsas = $this->BolsaBolsa->BolsaEstadoBolsa->find('list');
+		$bolsaResultados = $this->BolsaBolsa->BolsaResultado->find('list');
+		$this->set(compact('alunos', 'bolsaCandidaturas', 'anolectivos', 'bancos', 'bolsaFonteBolsas', 'bolsaCriadorContas', 'bolsaEstadoBolsas', 'bolsaResultados'));
 	}
 
 /**
  * edit method
  *
+ * @throws NotFoundException
  * @param string $id
  * @return void
  */
@@ -79,16 +82,20 @@ class BolsaBolsasController extends AppController {
 		}
 		$alunos = $this->BolsaBolsa->Aluno->find('list');
 		$bolsaCandidaturas = $this->BolsaBolsa->BolsaCandidatura->find('list');
-		$bolsaResultados = $this->BolsaBolsa->BolsaResultado->find('list');
-		$anoLectivos = $this->BolsaBolsa->AnoLectivo->find('list');
+		$anolectivos = $this->BolsaBolsa->Anolectivo->find('list');
 		$bancos = $this->BolsaBolsa->Banco->find('list');
 		$bolsaFonteBolsas = $this->BolsaBolsa->BolsaFonteBolsa->find('list');
-		$this->set(compact('alunos', 'bolsaCandidaturas', 'bolsaResultados', 'anoLectivos', 'bancos', 'bolsaFonteBolsas'));
+		$bolsaCriadorContas = $this->BolsaBolsa->BolsaCriadorContum->find('list');
+		$bolsaEstadoBolsas = $this->BolsaBolsa->BolsaEstadoBolsa->find('list');
+		$bolsaResultados = $this->BolsaBolsa->BolsaResultado->find('list');
+		$this->set(compact('alunos', 'bolsaCandidaturas', 'anolectivos', 'bancos', 'bolsaFonteBolsas', 'bolsaCriadorContas', 'bolsaEstadoBolsas', 'bolsaResultados'));
 	}
 
 /**
  * delete method
  *
+ * @throws MethodNotAllowedException
+ * @throws NotFoundException
  * @param string $id
  * @return void
  */
@@ -107,11 +114,4 @@ class BolsaBolsasController extends AppController {
 		$this->Session->setFlash(__('Bolsa bolsa was not deleted'));
 		$this->redirect(array('action' => 'index'));
 	}
-    
-    /**
-     * 
-     */
-    public function registar_candidatura(){
-        
-    }
 }

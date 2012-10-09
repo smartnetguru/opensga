@@ -7,7 +7,6 @@ App::uses('AppController', 'Controller');
  */
 class BolsaResultadosController extends AppController {
 
-
 /**
  * index method
  *
@@ -21,6 +20,7 @@ class BolsaResultadosController extends AppController {
 /**
  * view method
  *
+ * @throws NotFoundException
  * @param string $id
  * @return void
  */
@@ -47,15 +47,16 @@ class BolsaResultadosController extends AppController {
 				$this->Session->setFlash(__('The bolsa resultado could not be saved. Please, try again.'));
 			}
 		}
-		$alunos = $this->BolsaResultado->Aluno->find('list');
-		$anoLectivos = $this->BolsaResultado->AnoLectivo->find('list');
+		$bolsaCandidaturas = $this->BolsaResultado->BolsaCandidatura->find('list');
 		$bolsaTipoBolsas = $this->BolsaResultado->BolsaTipoBolsa->find('list');
-		$this->set(compact('alunos', 'anoLectivos', 'bolsaTipoBolsas'));
+		$bolsaMotivoIndeferimentos = $this->BolsaResultado->BolsaMotivoIndeferimento->find('list');
+		$this->set(compact('bolsaCandidaturas', 'bolsaTipoBolsas', 'bolsaMotivoIndeferimentos'));
 	}
 
 /**
  * edit method
  *
+ * @throws NotFoundException
  * @param string $id
  * @return void
  */
@@ -74,15 +75,17 @@ class BolsaResultadosController extends AppController {
 		} else {
 			$this->request->data = $this->BolsaResultado->read(null, $id);
 		}
-		$alunos = $this->BolsaResultado->Aluno->find('list');
-		$anoLectivos = $this->BolsaResultado->AnoLectivo->find('list');
+		$bolsaCandidaturas = $this->BolsaResultado->BolsaCandidatura->find('list');
 		$bolsaTipoBolsas = $this->BolsaResultado->BolsaTipoBolsa->find('list');
-		$this->set(compact('alunos', 'anoLectivos', 'bolsaTipoBolsas'));
+		$bolsaMotivoIndeferimentos = $this->BolsaResultado->BolsaMotivoIndeferimento->find('list');
+		$this->set(compact('bolsaCandidaturas', 'bolsaTipoBolsas', 'bolsaMotivoIndeferimentos'));
 	}
 
 /**
  * delete method
  *
+ * @throws MethodNotAllowedException
+ * @throws NotFoundException
  * @param string $id
  * @return void
  */

@@ -5,13 +5,16 @@ App::uses('AppModel', 'Model');
  *
  * @property Aluno $Aluno
  * @property BolsaCandidatura $BolsaCandidatura
- * @property BolsaResultado $BolsaResultado
- * @property AnoLectivo $AnoLectivo
+ * @property Anolectivo $Anolectivo
  * @property Banco $Banco
  * @property BolsaFonteBolsa $BolsaFonteBolsa
+ * @property BolsaCriadorConta $BolsaCriadorConta
+ * @property BolsaEstadoBolsa $BolsaEstadoBolsa
+ * @property BolsaResultado $BolsaResultado
  * @property BolsaCandidatura $BolsaCandidatura
  */
 class BolsaBolsa extends AppModel {
+
 
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 
@@ -35,16 +38,9 @@ class BolsaBolsa extends AppModel {
 			'fields' => '',
 			'order' => ''
 		),
-		'BolsaResultado' => array(
-			'className' => 'BolsaResultado',
-			'foreignKey' => 'bolsa_resultado_id',
-			'conditions' => '',
-			'fields' => '',
-			'order' => ''
-		),
-		'AnoLectivo' => array(
-			'className' => 'AnoLectivo',
-			'foreignKey' => 'ano_lectivo_id',
+		'Anolectivo' => array(
+			'className' => 'Anolectivo',
+			'foreignKey' => 'anolectivo_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
@@ -59,6 +55,27 @@ class BolsaBolsa extends AppModel {
 		'BolsaFonteBolsa' => array(
 			'className' => 'BolsaFonteBolsa',
 			'foreignKey' => 'bolsa_fonte_bolsa_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
+		),
+		'BolsaCriadorConta' => array(
+			'className' => 'BolsaCriadorConta',
+			'foreignKey' => 'bolsa_criador_conta_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
+		),
+		'BolsaEstadoBolsa' => array(
+			'className' => 'BolsaEstadoBolsa',
+			'foreignKey' => 'bolsa_estado_bolsa_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
+		),
+		'BolsaResultado' => array(
+			'className' => 'BolsaResultado',
+			'foreignKey' => 'bolsa_resultado_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''

@@ -7,7 +7,6 @@ App::uses('AppController', 'Controller');
  */
 class BolsaCandidaturasController extends AppController {
 
-
 /**
  * index method
  *
@@ -21,6 +20,7 @@ class BolsaCandidaturasController extends AppController {
 /**
  * view method
  *
+ * @throws NotFoundException
  * @param string $id
  * @return void
  */
@@ -50,14 +50,17 @@ class BolsaCandidaturasController extends AppController {
 		$alunos = $this->BolsaCandidatura->Aluno->find('list');
 		$anoLectivos = $this->BolsaCandidatura->AnoLectivo->find('list');
 		$bolsaBolsas = $this->BolsaCandidatura->BolsaBolsa->find('list');
-		$bolsaResultados = $this->BolsaCandidatura->BolsaResultado->find('list');
+		$estadoObjectos = $this->BolsaCandidatura->EstadoObjecto->find('list');
 		$bolsaTipoBolsas = $this->BolsaCandidatura->BolsaTipoBolsa->find('list');
-		$this->set(compact('alunos', 'anoLectivos', 'bolsaBolsas', 'bolsaResultados', 'bolsaTipoBolsas'));
+		$entidades = $this->BolsaCandidatura->Entidade->find('list');
+		$bolsaTipoCandidaturas = $this->BolsaCandidatura->BolsaTipoCandidatura->find('list');
+		$this->set(compact('alunos', 'anoLectivos', 'bolsaBolsas', 'estadoObjectos', 'bolsaTipoBolsas', 'entidades', 'bolsaTipoCandidaturas'));
 	}
 
 /**
  * edit method
  *
+ * @throws NotFoundException
  * @param string $id
  * @return void
  */
@@ -79,14 +82,18 @@ class BolsaCandidaturasController extends AppController {
 		$alunos = $this->BolsaCandidatura->Aluno->find('list');
 		$anoLectivos = $this->BolsaCandidatura->AnoLectivo->find('list');
 		$bolsaBolsas = $this->BolsaCandidatura->BolsaBolsa->find('list');
-		$bolsaResultados = $this->BolsaCandidatura->BolsaResultado->find('list');
+		$estadoObjectos = $this->BolsaCandidatura->EstadoObjecto->find('list');
 		$bolsaTipoBolsas = $this->BolsaCandidatura->BolsaTipoBolsa->find('list');
-		$this->set(compact('alunos', 'anoLectivos', 'bolsaBolsas', 'bolsaResultados', 'bolsaTipoBolsas'));
+		$entidades = $this->BolsaCandidatura->Entidade->find('list');
+		$bolsaTipoCandidaturas = $this->BolsaCandidatura->BolsaTipoCandidatura->find('list');
+		$this->set(compact('alunos', 'anoLectivos', 'bolsaBolsas', 'estadoObjectos', 'bolsaTipoBolsas', 'entidades', 'bolsaTipoCandidaturas'));
 	}
 
 /**
  * delete method
  *
+ * @throws MethodNotAllowedException
+ * @throws NotFoundException
  * @param string $id
  * @return void
  */

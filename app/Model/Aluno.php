@@ -292,6 +292,7 @@ class Aluno extends AppModel {
             return $this->Matricula->find('first',array('conditions'=>array('Matricula.aluno_id'=>$aluno_id,'Matricula.anolectivo_id'=>Configure::read('OpenSGA.ano_lectivo_id'),'Matricula.estadomatricula_id'=>1),'recursive'=>-1));
             
         }
+        
         public function cadastraAluno(array $data){
             $dataSource = $this->getDataSource();
             
@@ -328,7 +329,10 @@ class Aluno extends AppModel {
                             }
                             $this->create();
                             if ($this->save($data)) {
-
+                                //Grava os dados de Identificacao
+                                
+                                
+                                
                                 //Pega os dados da matricula e realiza a matricula
                                 $data_matricula['aluno_id']= $this->getInsertID();
                                 $data_matricula['curso_id'] = $data['Aluno']['curso_id'];
@@ -361,6 +365,7 @@ class Aluno extends AppModel {
         
     public function isBolseiro($aluno_id,$ano_lectivo_id=null){
         
+        //$this->BolsaBolsa->find('first');
         return TRUE;
     }
     

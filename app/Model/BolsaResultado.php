@@ -3,13 +3,13 @@ App::uses('AppModel', 'Model');
 /**
  * BolsaResultado Model
  *
- * @property Aluno $Aluno
- * @property AnoLectivo $AnoLectivo
- * @property BolsaTipoBolsa $BolsaTipoBolsa
- * @property BolsaBolsa $BolsaBolsa
  * @property BolsaCandidatura $BolsaCandidatura
+ * @property BolsaTipoBolsa $BolsaTipoBolsa
+ * @property BolsaMotivoIndeferimento $BolsaMotivoIndeferimento
+ * @property BolsaBolsa $BolsaBolsa
  */
 class BolsaResultado extends AppModel {
+
 
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 
@@ -19,16 +19,9 @@ class BolsaResultado extends AppModel {
  * @var array
  */
 	public $belongsTo = array(
-		'Aluno' => array(
-			'className' => 'Aluno',
-			'foreignKey' => 'aluno_id',
-			'conditions' => '',
-			'fields' => '',
-			'order' => ''
-		),
-		'AnoLectivo' => array(
-			'className' => 'AnoLectivo',
-			'foreignKey' => 'ano_lectivo_id',
+		'BolsaCandidatura' => array(
+			'className' => 'BolsaCandidatura',
+			'foreignKey' => 'bolsa_candidatura_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
@@ -36,6 +29,13 @@ class BolsaResultado extends AppModel {
 		'BolsaTipoBolsa' => array(
 			'className' => 'BolsaTipoBolsa',
 			'foreignKey' => 'bolsa_tipo_bolsa_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
+		),
+		'BolsaMotivoIndeferimento' => array(
+			'className' => 'BolsaMotivoIndeferimento',
+			'foreignKey' => 'bolsa_motivo_indeferimento_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
@@ -50,19 +50,6 @@ class BolsaResultado extends AppModel {
 	public $hasMany = array(
 		'BolsaBolsa' => array(
 			'className' => 'BolsaBolsa',
-			'foreignKey' => 'bolsa_resultado_id',
-			'dependent' => false,
-			'conditions' => '',
-			'fields' => '',
-			'order' => '',
-			'limit' => '',
-			'offset' => '',
-			'exclusive' => '',
-			'finderQuery' => '',
-			'counterQuery' => ''
-		),
-		'BolsaCandidatura' => array(
-			'className' => 'BolsaCandidatura',
 			'foreignKey' => 'bolsa_resultado_id',
 			'dependent' => false,
 			'conditions' => '',

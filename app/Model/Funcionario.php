@@ -27,9 +27,9 @@ class Funcionario extends AppModel {
 			'fields' => '',
 			'order' => ''
 		),
-		'Grauacademico' => array(
-			'className' => 'Grauacademico',
-			'foreignKey' => 'grauacademico_id',
+		'GrauAcademico' => array(
+			'className' => 'GrauAcademico',
+			'foreignKey' => 'grau_academico_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''

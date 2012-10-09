@@ -6,11 +6,16 @@ App::uses('AppModel', 'Model');
  * @property Aluno $Aluno
  * @property AnoLectivo $AnoLectivo
  * @property BolsaBolsa $BolsaBolsa
- * @property BolsaResultado $BolsaResultado
+ * @property EstadoObjecto $EstadoObjecto
  * @property BolsaTipoBolsa $BolsaTipoBolsa
+ * @property Entidade $Entidade
+ * @property BolsaTipoCandidatura $BolsaTipoCandidatura
  * @property BolsaBolsa $BolsaBolsa
+ * @property BolsaCandidatoFamilia $BolsaCandidatoFamilia
+ * @property BolsaResultado $BolsaResultado
  */
 class BolsaCandidatura extends AppModel {
+
 
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 
@@ -41,9 +46,9 @@ class BolsaCandidatura extends AppModel {
 			'fields' => '',
 			'order' => ''
 		),
-		'BolsaResultado' => array(
-			'className' => 'BolsaResultado',
-			'foreignKey' => 'bolsa_resultado_id',
+		'EstadoObjecto' => array(
+			'className' => 'EstadoObjecto',
+			'foreignKey' => 'estado_objecto_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
@@ -51,6 +56,20 @@ class BolsaCandidatura extends AppModel {
 		'BolsaTipoBolsa' => array(
 			'className' => 'BolsaTipoBolsa',
 			'foreignKey' => 'bolsa_tipo_bolsa_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
+		),
+		'Entidade' => array(
+			'className' => 'Entidade',
+			'foreignKey' => 'entidade_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
+		),
+		'BolsaTipoCandidatura' => array(
+			'className' => 'BolsaTipoCandidatura',
+			'foreignKey' => 'bolsa_tipo_candidatura_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
@@ -65,6 +84,32 @@ class BolsaCandidatura extends AppModel {
 	public $hasMany = array(
 		'BolsaBolsa' => array(
 			'className' => 'BolsaBolsa',
+			'foreignKey' => 'bolsa_candidatura_id',
+			'dependent' => false,
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'exclusive' => '',
+			'finderQuery' => '',
+			'counterQuery' => ''
+		),
+		'BolsaCandidatoFamilia' => array(
+			'className' => 'BolsaCandidatoFamilia',
+			'foreignKey' => 'bolsa_candidatura_id',
+			'dependent' => false,
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'exclusive' => '',
+			'finderQuery' => '',
+			'counterQuery' => ''
+		),
+		'BolsaResultado' => array(
+			'className' => 'BolsaResultado',
 			'foreignKey' => 'bolsa_candidatura_id',
 			'dependent' => false,
 			'conditions' => '',

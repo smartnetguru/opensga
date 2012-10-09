@@ -170,6 +170,9 @@ class AlunosController extends AppController
         else{
             $this->set('is_matriculado',0);
         }
+        
+        $is_bolseiro = $this->Aluno->isBolseiro($id)?1:0;
+        debug($is_bolseiro);
         $pagamentos = $this->Aluno->Pagamento->find('all',array('conditions'=>array('Pagamento.aluno_id'=>$id)));
         //debug($pagamentos);
 		$this->set('aluno',$aluno);

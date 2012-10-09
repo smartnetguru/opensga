@@ -1,3 +1,11 @@
+=====================Duvidas=========================
+O k define o nivel academico de um estudante?
+
+---Analisar sistema financeiro
+
+---Analisar Sistema de Exame de Admissao
+
+---
 ================Avaliacoes===================
 Ainda Falta re-implementar.
 Tentar sempre usar o campo turmatipoavaliacao, em vez de turma e tipoavaliacao separados
