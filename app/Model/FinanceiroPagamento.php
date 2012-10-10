@@ -83,6 +83,16 @@ class FinanceiroPagamento extends AppModel {
         $codigo_pagamento = $codigo_aluno.$codigo_tipo_pagamento.$numero_pagamentos_novo;
         return $codigo_pagamento;
     }
+    
+    /**
+     *Gera todos os pagamentos de mensalidades de um aluno, para o semestre que se inscreveu.
+     * A funcao deve ter em consideracao o tipo de cadeiras que o aluno se inscreveu, para assim determinar o valor das mensalidades
+     * 
+     * @todo implementar a verificacao do tipo de cadeiras inscritas
+     * 
+     * @param type $aluno_id
+     * @return boolean 
+     */
     public function gerarPagamentosByAluno($aluno_id){
         $dataSource = $this->getDataSource();
         $dataSource->begin();

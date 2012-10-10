@@ -22,8 +22,10 @@
  * @package       opensga
  * @subpackage    opensga.core.controller
  * @since         OpenSGA v 0.10.0.0
-
  * 
+ * 
+ * @property Aluno $Aluno
+ * @property FinanceiroTransacao $FinanceiroTransacao
  * 
  */
  
@@ -97,20 +99,33 @@ class Inscricao extends AppModel {
             App::import('Model','Matricula');
             $matriculas = new Matricula;
             //$matriculas->recursive=-1;
-            $alunos = $matriculas->find('all',array('conditions'=>array('tg0021estadomatricula_id'=>1),'order'=> array ('name ASC')));
+            $alunos = $matriculas->find('all',array('conditions'=>array('estadomatricula_id'=>1),'order'=> array ('name ASC')));
             $alunos2 = array();
             foreach($alunos as $aluno){
                 $alunos2[$aluno['Aluno']['id']] = $aluno['Aluno']['name'];
             }
 		    return $alunos2;
         }
-		// Devolve o turno da Turma
-		function getAnolectivo($turma_id){
-            $query = "SELECT tal.codigo FROM turmas tt, anolectivos tal WHERE tt.anolectivo_id=tal.id and tt.id= {$turma_id}";
-            //var_dump($query);
-			$resultado = $this->query($query);
-			return $resultado;				
-		}
+		
+        /**
+         *Devolve todas as cadeiras inscritas por um aluno num dado Semestre
+         * @param type $aluno_id
+         * @param type $semestre_id 
+         */
+        public function getAllCadeirasInscritasByAlunoSemestre($aluno_id,$semestre_id=null){
+            
+            //Se o semestre nao for mencionado, usamos o semestre actual
+            if($semestre_id==null) $semestre_id = Configure::read('OpenSGA.semestre_lectivo_id');
+            
+            $this->contain(array(
+                'Turma'
+            ));
+            return $this->find('all',array('conditions'=>array('Inscricao.aluno_id'=>$aluno_id,'Turma.semestrelectivo_id'=>$semestre_id)));
+            
+            
+        }
+        
+        
         
         /**
          * Verifica se um aluno pode se inscrever na cadeira em questao
@@ -210,18 +225,7 @@ class Inscricao extends AppModel {
            
             
         }
-       /* var $validate = array
-(
-    'first_column' => array
-    (
-        'unique' => array
-        (
-            'rule' => array('checkUnique', array('first_column', 'second_column', 'third_column')),
-            'message' => 'Your input violates a unique key constraint, check your input and try again.',
-        )
-    ),
-);
-*/
+       
 		
 
 }

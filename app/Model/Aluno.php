@@ -1,5 +1,5 @@
 <?php
-//App::uses('AppModel', 'Model');
+App::uses('AppModel', 'Model');
 /**
  * Classe Model do Aluno
  * 
@@ -14,11 +14,10 @@
  * 
  * @property User $User
  * @property Matricula $Matricula
+ * @property Inscricao $Inscricao
  * 
  * 
  */
- 
- 
 class Aluno extends AppModel {
 	var $name = 'Aluno';
     //var $recursive = 0;
@@ -293,6 +292,28 @@ class Aluno extends AppModel {
             
         }
         
+        /**
+         *Retorna o nivel academico mais elevado que o aluno ja frequentou.
+         * Esta funcao é importante para se verificar o que sao cadeiras normais e o que sao cadeiras em atraso
+         * 
+         * @FIXME Pode nao dar certos em instituicoes que permitem puxar cadeiras
+         * @todo Implementar e testar
+         * @param type $aluno_id 
+         */
+        public function getNivelAcademicoElevado($aluno_id){
+            
+        }
+        
+        /**
+         *Retorna o Nivel Academico Real do aluno em questao, tendo em conta os criterios da universidade para a definicao de nivel academico
+         * 
+         * @todo implementar e testar
+         * @param type $aluno_id 
+         */
+        public function getNivelAcademicoReal($aluno_id){
+            
+        }
+        
         public function cadastraAluno(array $data){
             $dataSource = $this->getDataSource();
             
@@ -417,6 +438,13 @@ class Aluno extends AppModel {
         return $this->find('count');
     }
     
+    /**
+     *Verifica se o aluno possui foto no Sistema
+     * @param type $codigo 
+     */
+    public function hasFoto($codigo){
+        
+    }
   
 
 

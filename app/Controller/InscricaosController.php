@@ -14,6 +14,9 @@
  * @subpackage    opensga.core.inscricoes
  * @since         OpenSGA v 0.1.0
  * @version       OpenSGA v 0.5.0
+  * 
+  * 
+  * @property Inscricao $Inscricao
  */ 
 class InscricaosController extends AppController {
 
@@ -29,7 +32,7 @@ class InscricaosController extends AppController {
         //No security no inscrever
         if($this->action =='inscrever'){
             $this->Security->validatePost = false;
-            //die(debug($this->request->data));
+            
         }
     }
    

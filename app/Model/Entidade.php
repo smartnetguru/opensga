@@ -167,7 +167,12 @@ class Entidade extends AppModel {
         return implode(' ',$nomes);
     }
     
-    
+    /**
+     *Verifica se Esta entidade possui foto no Sistema 
+     */
+    public function hasFoto(){
+        
+    }
 	
 
 }

@@ -1,0 +1,13 @@
+======================ESEG=================
+1. Elaborar o script para ajustar os dados biometricos(Endereco e Identificacao)
+
+
+
+======================UNIZAMBEZE============
+1. Elaborar o script para ajustar os dados biometricos(Endereco e Identificacao)
+
+=======================UEM=================
+
+
+====================USTM===================
+1. Elaborar o script para ajustar os dados biometricos(Endereco e Identificacao)
