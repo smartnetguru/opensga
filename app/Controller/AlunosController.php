@@ -495,7 +495,7 @@ class AlunosController extends AppController
                 )
             );
           $inscricaos = $this->Aluno->Inscricao->find('all',array('conditions'=>array('Inscricao.aluno_id'=>$aluno_id)));
-          //die(debug($inscricaos));
+          
           $this->set('has_foto_entidade',$this->Aluno->hasFoto($aluno['Aluno']['codigo']));
           Configure::write('debug',0);
 

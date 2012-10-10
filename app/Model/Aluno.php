@@ -2,7 +2,7 @@
 App::uses('AppModel', 'Model');
 /**
  * Classe Model do Aluno
- * 
+ *
  * @copyright     Copyright (C) 2010-2012, INFOmoz (Informática-Moçambique) (http://infomoz.net)
  * @link          http://infomoz.net/opensga OpenSGA - Sistema de Gestão Académica
  * @author		  Elisio Leonardo (elisio.leonardo@gmail.com)
@@ -11,26 +11,26 @@ App::uses('AppModel', 'Model');
  * @version       OpenSGA v 0.5.0
  * @since         OpenSGA v 0.1.0
 
- * 
+ *
  * @property User $User
  * @property Matricula $Matricula
  * @property Inscricao $Inscricao
- * 
- * 
+ *
+ *
  */
 class Aluno extends AppModel {
 	var $name = 'Aluno';
     //var $recursive = 0;
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
-    
-   
-    
+
+
+
     public $hasOne = array(
         'AlunoNivelMedio' => array(
             'className'    => 'AlunoNivelMedio',
             'dependent'    => true
         )
-        
+
     );
 
 	var $belongsTo = array(
@@ -78,7 +78,7 @@ class Aluno extends AppModel {
 		),
 
 	);
-	
+
 	var $hasMany = array(
 		'Matricula' => array(
 			'className' => 'Matricula',
@@ -133,7 +133,7 @@ class Aluno extends AppModel {
 			'counterQuery' => ''
 		)
 	);
-    
+
     public $validate = array(
         'curso_id' => array(
             'rule'       => 'alphaNumeric', // or: array('ruleName', 'param1', 'param2' ...)
@@ -141,7 +141,7 @@ class Aluno extends AppModel {
             'allowEmpty' => false,
             'on'         => 'create', // or: 'update'
             'message'    => 'Curso é um campo obrigatório'
-        )  
+        )
     );
 
 
@@ -161,28 +161,28 @@ class Aluno extends AppModel {
             $plano_estudo = $matricula['Matricula']['planoestudo_id'];
             return $plano_estudo;
         }
-        
+
         /**
-         *Retorna as cadeiras em que o aluno esta inscrito actualmente 
+         *Retorna as cadeiras em que o aluno esta inscrito actualmente
          * @return array com ID das disciplinas activas do aluno
          */
         public function getAllInscricoesActivas($aluno_id){
-            
+
             $this->Inscricao->contain('Turma');
             $inscricoes = $this->Inscricao->find('all',array('conditions'=>array('Inscricao.estadoinscricao_id'=>1,'Inscricao.aluno_id'=>$aluno_id),'recursive'=>0,'fields'=>array('Turma.disciplina_id')));
-            
+
             $disciplinas = Hash::extract($inscricoes,'{n}.Turma.disciplina_id');
             return $disciplinas;
         }
-        
+
         /**
          *Retorna todas as cadeiras que o aluno ja aprovou para a inscricao
-         * @return type 
+         * @return type
          */
         public function getAllInscricoesActivasAndAprovadasForInscricao($aluno_id){
             $this->Inscricao->contain('Turma');
             $inscricoes = $this->Inscricao->find('all',array('conditions'=>array('Inscricao.estadoinscricao_id'=>array(1,2),'Inscricao.aluno_id'=>$aluno_id),'recursive'=>0,'fields'=>array('Turma.disciplina_id')));
-            
+
             $disciplinas = Hash::extract($inscricoes,'{n}.Turma.disciplina_id');
             return $disciplinas;
         }
@@ -190,34 +190,34 @@ class Aluno extends AppModel {
 		/**
 		 * Funcao generica para retornar todas as turmas de um aluno com base no estado da turma
 		 * @Todo Testar :-)
-		 */	
+		 */
         function getAllTurmasByEstado($aluno,$estado = 1){
             App::import('Model','Turma');
             App::import('Model','Inscricao');
 			App::import('Model','Matricula');
-			
+
             $turma = new Turma;
             $inscricao  = new Inscricao;
 			$Matricula = new Matricula;
-			
+
 			$plano_estudo = $this->query("Select planoestudo_id from matriculas where aluno_id = {$aluno}");
             $turma->recursive=-1;
-			
+
             $turmas = $turma->getAllTurmasActivasByPlanoEstudo($plano_estudo[0]['matriculas']['planoestudo_id']);
-            
+
 			return $turmas;
-            
+
         }
-		
+
 		function getAllTurmasByAluno($aluno_id,$estado=1){
             App::import('Model','Turma');
             App::import('Model','Inscricao');
 			App::import('Model','Matricula');
-			
+
             $turma = new Turma;
             $inscricao  = new Inscricao;
 			$Matricula = new Matricula;
-			
+
 			$plano_estudo = $this->query("Select planoestudo_id from matriculas where aluno_id = {$aluno}");
             $turma->recursive=-1;
             $turmas = $turma->getAllTurmasByAluno($plano_estudo[0]['matriculas']['planoestudo_id']);
@@ -232,91 +232,91 @@ class Aluno extends AppModel {
             	$id = $this->find('count', array('conditions'=>array('Aluno.codigo LIKE'=>'%'.$ano.'%'),'order' => array('Aluno.created DESC'),'fields'=>'id'));
             $id_for=str_pad($id+1, 4,"0",STR_PAD_LEFT);
             $codigo = $ano.$id_for;
-			
+
 			return $codigo;
         }
-        
+
         /**
          *Retorna a conta do aluno
-         * @param type $aluno_id 
+         * @param type $aluno_id
          */
         public function getContaByAlunoId($aluno_id){
             $this->id = $aluno_id;
             $entidade_id = $this->field('entidade_id');
-            
+
             $this->Entidade->FinanceiroConta->recursive = -1;
             $conta = $this->Entidade->FinanceiroConta->findByEntidadeId($entidade_id);
-            
+
             return $conta;
         }
-        
+
         /**
          *Retorna o Id da conta do aluno
-         * @param type $aluno_id 
+         * @param type $aluno_id
          */
         public function getContaIdByAlunoId($aluno_id){
             $conta = $this->getContaByAlunoId($aluno_id);
             return $conta['FinanceiroConta']['id'];
         }
-		
+
 		/**
 		 * Devolve todas as turmas que o aluno pode se inscrever, baseado nas cadeiras feitas e precedencias
 		 * @Todo por enquanto as precedencias e cadeiras feitas nao sao processadas
-         * 
-         * 
+         *
+         *
          * @todo falta isso
 		 */
 		function getAllTurmasForInscricao(){
-			
+
 		}
-        
+
         public function getAllTurmasNormaisForInscricao($aluno_id){
-            
-            
+
+
             //Primeiro, pegar a ultima matricula deste aluno, se nao for deste ano, mandar matricular
             if(!$matricula = $this->getMatriculaCorrente($aluno_id)){
                 return false;
             }
-            
+
             $this->Inscricao->contain(array(
-               'Turma' 
+               'Turma'
             ));
             $turmas_aprovadas = $this->Inscricao->find('all',array('conditions'=>array('Inscricao.aluno_id'=>$aluno_id)));
-            
-            //$matricula - 
+
+            //$matricula -
             debug($turmas_aprovadas);
         }
-        
+
         public function getMatriculaCorrente($aluno_id){
             return $this->Matricula->find('first',array('conditions'=>array('Matricula.aluno_id'=>$aluno_id,'Matricula.anolectivo_id'=>Configure::read('OpenSGA.ano_lectivo_id'),'Matricula.estadomatricula_id'=>1),'recursive'=>-1));
-            
+
         }
-        
+
         /**
          *Retorna o nivel academico mais elevado que o aluno ja frequentou.
          * Esta funcao é importante para se verificar o que sao cadeiras normais e o que sao cadeiras em atraso
-         * 
+         *
          * @FIXME Pode nao dar certos em instituicoes que permitem puxar cadeiras
          * @todo Implementar e testar
-         * @param type $aluno_id 
+         * @param type $aluno_id
          */
         public function getNivelAcademicoElevado($aluno_id){
-            
+
         }
-        
+
         /**
          *Retorna o Nivel Academico Real do aluno em questao, tendo em conta os criterios da universidade para a definicao de nivel academico
-         * 
+         *
          * @todo implementar e testar
-         * @param type $aluno_id 
+         * @param type $aluno_id
          */
         public function getNivelAcademicoReal($aluno_id){
-            
+
         }
-        
+
         public function cadastraAluno(array $data){
             $dataSource = $this->getDataSource();
-            
+
             $dataSource->begin();
 
                 $data_matricula = array();
@@ -327,7 +327,7 @@ class Aluno extends AppModel {
                     $data['Aluno']['codigo'] = $data['Aluno']['numero_estudante'];
                     $data['Aluno']['numero_estudante_antigo'] = $data['Aluno']['numero_estudante'];
                 }
-            
+
                     //Grava os dados do Usuario
                 $this->User->create();
                 $data['User']['username'] = $data['Aluno']['codigo'];
@@ -351,9 +351,9 @@ class Aluno extends AppModel {
                             $this->create();
                             if ($this->save($data)) {
                                 //Grava os dados de Identificacao
-                                
-                                
-                                
+
+
+
                                 //Pega os dados da matricula e realiza a matricula
                                 $data_matricula['aluno_id']= $this->getInsertID();
                                 $data_matricula['curso_id'] = $data['Aluno']['curso_id'];
@@ -379,30 +379,30 @@ class Aluno extends AppModel {
                         }
                     }
 
-             
+
                 $dataSource->rollback();
-            
+
         }
-        
+
     public function isBolseiro($aluno_id,$ano_lectivo_id=null){
-        
+
         //$this->BolsaBolsa->find('first');
         return TRUE;
     }
-    
+
     /**
-     *Verifica se o aluno esta matriculado 
+     *Verifica se o aluno esta matriculado
      */
     public function isMatriculado($aluno_id,$anolectivo_id){
         $matricula = $this->Matricula->find('first',array('conditions'=>array('aluno_id'=>$aluno_id,'anolectivo_id'=>$anolectivo_id),'recursive'=>-1));
         return $matricula;
     }
-    
+
     public function setNovaMatricula($data){
         if(empty($data['Matricula']['anolectivo_id'])){
             $data['Matricula']['anolectivo_id']=$data['Sessao']['anolectivo_id'];
         }
-        
+
         $data['Matricula']['user_id'] = $data['Sessao']['user_id'];
         $data['Matricula']['aluno_id'] = $this->id;
         if($this->isMatriculado($this->id, $data['Matricula']['user_id'])){
@@ -413,39 +413,46 @@ class Aluno extends AppModel {
         }
         return false;
     }
-    
+
     public function getPerfilAluno(){
-        
+
     }
-    
+
     /**
-     *Retorna o numero de estudantes por faculdade 
+     *Retorna o numero de estudantes por faculdade
      */
     public function getEstudantesByFaculdade(){
         $alunos_faculdade = $this->find('all',array('conditions'=>array(),'group'=>'faculdade_ingresso_id','fields'=>array('Count(*) as total','Faculdade.name')));
         return $alunos_faculdade;
     }
-    
+
     public function getEstudantesByCurso($curso_id){
         $alunos_curso = $this->find('all',array('conditions'=>array('Aluno.curso_ingresso_id'=>$curso_id)));
-        
-        
+
+
         return $alunos_curso;
     }
-    
+
     public function getTotalAlunos()
     {
         return $this->find('count');
     }
-    
+
     /**
      *Verifica se o aluno possui foto no Sistema
-     * @param type $codigo 
+     * @param type $codigo
      */
     public function hasFoto($codigo){
-        
+        App::uses('File', 'Utility');
+
+        $path = APP.'Assets'.DS.'Fotos'.DS.'Estudantes'.DS;
+        $file = new File($path.$codigo.'.jpg');
+        if(!$file->exists()){
+            return false;
+        }
+        return true;
     }
-  
+
 
 
 
