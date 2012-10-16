@@ -37,7 +37,7 @@ class UnidadeOrganicasController extends AppController {
  *
  * @return void
  */
-	public function add() {
+	public function nova_unidade() {
 		if ($this->request->is('post')) {
 			$this->UnidadeOrganica->create();
 			if ($this->UnidadeOrganica->save($this->request->data)) {
