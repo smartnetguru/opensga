@@ -301,7 +301,9 @@ class Aluno extends AppModel {
          * @param type $aluno_id
          */
         public function getNivelAcademicoElevado($aluno_id){
-
+            $this->Inscricao->contain('Turma');
+            $todas_inscricoes = $this->Inscricao->find('all',array('conditions'=>array('aluno_id'=>$aluno_id)));
+           // debug($todas_inscricoes);
         }
 
         /**

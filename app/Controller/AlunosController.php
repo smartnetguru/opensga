@@ -91,7 +91,7 @@ class AlunosController extends AppController
         }
 
 
-        $this->Aluno->Inscricao->getAllCadeirasInscritasByAlunoSemestre($id);
+        $this->Aluno->getNivelAcademicoElevado($id);
 
           $this->Aluno->contain(array(
               'Matricula'=>array(
@@ -495,7 +495,7 @@ class AlunosController extends AppController
                 )
             );
           $inscricaos = $this->Aluno->Inscricao->find('all',array('conditions'=>array('Inscricao.aluno_id'=>$aluno_id)));
-          
+
           $this->set('has_foto_entidade',$this->Aluno->hasFoto($aluno['Aluno']['codigo']));
           Configure::write('debug',0);
 

@@ -7,7 +7,6 @@ App::uses('AppController', 'Controller');
  */
 class UnidadeOrganicasController extends AppController {
 
-
 /**
  * index method
  *
@@ -21,6 +20,7 @@ class UnidadeOrganicasController extends AppController {
 /**
  * view method
  *
+ * @throws NotFoundException
  * @param string $id
  * @return void
  */
@@ -52,6 +52,7 @@ class UnidadeOrganicasController extends AppController {
 /**
  * edit method
  *
+ * @throws NotFoundException
  * @param string $id
  * @return void
  */
@@ -75,6 +76,8 @@ class UnidadeOrganicasController extends AppController {
 /**
  * delete method
  *
+ * @throws MethodNotAllowedException
+ * @throws NotFoundException
  * @param string $id
  * @return void
  */
