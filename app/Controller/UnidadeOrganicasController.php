@@ -47,6 +47,11 @@ class UnidadeOrganicasController extends AppController {
 				$this->Session->setFlash(__('The unidade organica could not be saved. Please, try again.'));
 			}
 		}
+		$tipoUnidadeOrganicas = $this->UnidadeOrganica->TipoUnidadeOrganica->find('list');
+		$areaAcademicas = $this->UnidadeOrganica->AreaAcademica->find('list');
+		$areaUnidades = $this->UnidadeOrganica->AreaUnidade->find('list');
+		$parentUnidadeOrganicas = $this->UnidadeOrganica->ParentUnidadeOrganica->find('list');
+		$this->set(compact('tipoUnidadeOrganicas', 'areaAcademicas', 'areaUnidades', 'parentUnidadeOrganicas'));
 	}
 
 /**
@@ -71,6 +76,11 @@ class UnidadeOrganicasController extends AppController {
 		} else {
 			$this->request->data = $this->UnidadeOrganica->read(null, $id);
 		}
+		$tipoUnidadeOrganicas = $this->UnidadeOrganica->TipoUnidadeOrganica->find('list');
+		$areaAcademicas = $this->UnidadeOrganica->AreaAcademica->find('list');
+		$areaUnidades = $this->UnidadeOrganica->AreaUnidade->find('list');
+		$parentUnidadeOrganicas = $this->UnidadeOrganica->ParentUnidadeOrganica->find('list');
+		$this->set(compact('tipoUnidadeOrganicas', 'areaAcademicas', 'areaUnidades', 'parentUnidadeOrganicas'));
 	}
 
 /**

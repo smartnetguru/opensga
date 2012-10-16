@@ -14,6 +14,9 @@ class UnidadeOrganicasControllerTest extends ControllerTestCase {
  */
 	public $fixtures = array(
 		'app.unidade_organica',
+		'app.tipo_unidade_organica',
+		'app.area_academica',
+		'app.area_unidade',
 		'app.docente',
 		'app.entidade',
 		'app.user',

@@ -7,6 +7,7 @@ App::uses('AppModel', 'Model');
  * @property AreaAcademica $AreaAcademica
  * @property AreaUnidade $AreaUnidade
  * @property UnidadeOrganica $ParentUnidadeOrganica
+ * @property EstadoObjecto $EstadoObjecto
  * @property Docente $Docente
  * @property Funcionario $Funcionario
  * @property UnidadeOrganica $ChildUnidadeOrganica
@@ -47,6 +48,13 @@ class UnidadeOrganica extends AppModel {
 		'ParentUnidadeOrganica' => array(
 			'className' => 'UnidadeOrganica',
 			'foreignKey' => 'parent_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
+		),
+		'EstadoObjecto' => array(
+			'className' => 'EstadoObjecto',
+			'foreignKey' => 'estado_objecto_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
@@ -107,7 +115,21 @@ class UnidadeOrganica extends AppModel {
  * @var array
  */
 	public $hasAndBelongsToMany = array(
-		
+		'Tipo' => array(
+			'className' => 'Tipo',
+			'joinTable' => 'tipo_unidade_organicas',
+			'foreignKey' => 'unidade_organica_id',
+			'associationForeignKey' => 'tipo_id',
+			'unique' => 'keepExisting',
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'finderQuery' => '',
+			'deleteQuery' => '',
+			'insertQuery' => ''
+		)
 	);
 
 }
