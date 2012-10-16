@@ -242,7 +242,7 @@ class AlunosController extends AppController
         $turnos = $this->Aluno->Matricula->Turno->find('list');
         $estado_civil = $this->Aluno->Entidade->EstadoCivil->find('list');
         $cidadenascimentos = $this->Aluno->Entidade->CidadeNascimento->find('list');
-        $this->set(compact('nacionalidades','cursos','planoestudos','users', 'paises', 'cidades', 'provincias', 'documento_identificacaos', 'areatrabalhos','generos','cidadenascimentos','proveniencianomes','provenienciacidades','turnos','escola_nivel_medios','estado_civil'));
+        $this->set(compact('nacionalidades','planoestudos','users', 'paises', 'cidades', 'provincias', 'documento_identificacaos', 'areatrabalhos','generos','cidadenascimentos','proveniencianomes','provenienciacidades','turnos','escola_nivel_medios','estado_civil'));
     }
 
     /**

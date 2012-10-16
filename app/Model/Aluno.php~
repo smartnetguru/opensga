@@ -141,11 +141,7 @@ class Aluno extends AppModel {
             'allowEmpty' => false,
             'on'         => 'create', // or: 'update'
             'message'    => 'Curso é um campo obrigatório'
-        ),
-	'turno_id'=>array(
-	    'rule'=>'notempty',
-	    'message'=>'campo obrigatorio'
-	)
+        )
     );
 
 
