@@ -87,7 +87,7 @@ class AlunosController extends AppController
 	function perfil_estudante($id = null){
         $this->Aluno->id=$id;
         if(!$this->Aluno->exists()){
-            throw new NotFoundException('Esta aluno não existe no Sistema');
+            throw new NotFoundException('Este aluno não existe no Sistema');
         }
 
 
@@ -101,7 +101,7 @@ class AlunosController extends AppController
                   'ProvinciaNascimento','CidadeNascimento','PaisNascimento','Genero','DocumentoIdentificacao'
               ),
               'AlunoNivelMedio'=>array(
-                  'EscolaNivelMedio'
+                  'EscolaNivelMedio'=>array('Provincia','Distrito')
               )
           ));
           $aluno = $this->Aluno->find('first',array('conditions'=>array('Aluno.id'=>$id)));
