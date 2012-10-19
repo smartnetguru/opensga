@@ -1,7 +1,7 @@
 <?php
 /**
  * Controller do Funcionario
- * 
+ *
  * @copyright     Copyright 2010-2011, INFOmoz (Inform�tica-Mo�ambique) (http://infomoz.net)
  ** @link          http://opensga.com OpenSGA  - Sistema de Gestão Académica
  * @author		  Elisio Leonardo (elisio.leonardo@gmail.com)
@@ -9,16 +9,29 @@
  * @subpackage    opensga.core.controller
  * @since         OpenSGA v 0.10.0.0
 
- * 
+ *
  */
- 
- 
+
+
 class FuncionariosController extends AppController {
 
 	var $name = 'Funcionarios';
 
+    public function autocomplete(){
+
+        $this->Funcionario->contain('Entidade');
+        $funcionarios = $this->Funcionario->find('all',array('conditions'=>array('Entidade.name LIKE'=>"%".$this->request->query['term']."%"),'fields'=>array('CONCAT(Funcionario.codigo,"-",Entidade.name) as nome')));
+
+        $funcionarios2 = array();
+        foreach($funcionarios as $f){
+            $funcionarios2[]=$f[0]['nome'];
+        }
+        //debug($funcionarios);
+        $this->set(compact('funcionarios2'));
+    }
+
 	function index() {
-	
+
 		$this->Funcionario->recursive = 2;
 		$this->set('groups',$this->Funcionario->User->Group->find('list'));
 		$this->set('funcionarios', $this->paginate());
@@ -34,7 +47,7 @@ class FuncionariosController extends AppController {
 		$this->set('Funcionario', $this->Funcionario->read(null, $id));
 		if (empty($this->data)) {
 			$this->data = $this->Funcionario->read(null, $id);
-			
+
 		}
                 $users = $this->Funcionario->User->find('list');
 		$grauacademicos = $this->Funcionario->Grauacademico->find('list');
@@ -49,22 +62,22 @@ class FuncionariosController extends AppController {
                 $cargos = $this->Funcionario->Cargo->find('list');
 				$departamento = $this->Funcionario->Departamento->find('list');
 		$this->set(compact('users', 'Grauacademicos', 'Paises', 'Cidades', 'Provincias', 'DocumentoIdentificacaos', 'tg0005cargos', 'tg0006departamentos', 'tg0011tipofuncionarios','generos','tg0005cargos','tg0006departamento'));
-	
+
 	}
 
 	function registar_funcionario() {
-	    
+
 		if (!empty($this->data)) {
 			if($this->Funcionario->cadastraFuncionario($this->request->data)){
                 $this->Session->setFlash('Funcionário registrado com sucesso','default',array('class'=>'alert success'));
                 $this->redirect(array('action'=>'index'));
-                
+
             }
             else{
                 $this->Session->setFlash('Problemas ao registar funcionario. Verifique o formulário e tente de novo','default',array('class'=>'alert nerror'));
             }
         }
-        
+
 		$users = $this->Funcionario->User->find('list');
 		$grauacademicos = $this->Funcionario->Grauacademico->find('list');
 		$cargos = $this->Funcionario->Cargo->find('list');
@@ -78,10 +91,10 @@ class FuncionariosController extends AppController {
 		$cidades = $this->Funcionario->Entidade->CidadeNascimento->find('list');
 		$provincias = $this->Funcionario->Entidade->ProvinciaNascimento->find('list');
         $generos = $this->Funcionario->Entidade->Genero->find('list');
-		
-	   
+
+
 		$this->set(compact('users', 'Grauacademicos','tipofuncionarios','departamentos','cargos','faculdades','seccaos','unidade_organicas','documento_identificacaos','paises','cidades','provincias','generos'));
-		
+
 	}
 
 	function editar_funcionario($id = null) {
@@ -128,21 +141,21 @@ class FuncionariosController extends AppController {
         $users = new User;
 		App::Import('Model','Turma');
         $turmas = new Turma;
-	
+
 		if (!$id) {
 			$this->Session->setFlash('Codigo Invalido para %s','flasherror');
 			$this->redirect(array('action'=>'index'));
 		}
-		
+
 		$dados = $turmas->getTurmasByFuncionario($id);
-		
+
 		if(empty($dados)){
-		
+
 		$user_id = $users->getUserByFuncionario($id);
-		
+
 		//var_dump($user_id[0]["us"]["id"]);
 		$users = $users->deleteUser($user_id[0]["us"]["id"]);
-		
+
 		if ($this->Funcionario->delete($id)) {
 			$this->Session->setFlash('Dados deletedos com sucesso ','flashok');
 			$this->redirect(array('action'=>'index'));
@@ -157,9 +170,9 @@ class FuncionariosController extends AppController {
         }
         public function beforeFilter() {
             parent::beforeFilter();
-            
+
         }
-        
+
         public function importa_cenas(){
             App::import('Vendor', 'excel_reader2');
             $data = new Spreadsheet_Excel_Reader('i.xls', true);
