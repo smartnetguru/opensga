@@ -87,7 +87,7 @@ class AlunosController extends AppController
 	function perfil_estudante($id = null){
         $this->Aluno->id=$id;
         if(!$this->Aluno->exists()){
-            throw new NotFoundException('Esta aluno não existe no Sistema');
+            throw new NotFoundException('Este aluno não existe no Sistema');
         }
 
 
@@ -101,7 +101,7 @@ class AlunosController extends AppController
                   'ProvinciaNascimento','CidadeNascimento','PaisNascimento','Genero','DocumentoIdentificacao'
               ),
               'AlunoNivelMedio'=>array(
-                  'EscolaNivelMedio'
+                  'EscolaNivelMedio'=>array('Provincia','Cidade')
               )
           ));
           $aluno = $this->Aluno->find('first',array('conditions'=>array('Aluno.id'=>$id)));
@@ -219,7 +219,7 @@ class AlunosController extends AppController
                 $this->redirect(array('controller'=>'alunos','action'=>'perfil_estudante',$this->Aluno->id));
             }
             else{
-                $this->Session->setFlash('Problemas ao registrar os dados do Aluno', 'default', array('class'=>'alert error'));
+                $this->Session->setFlash('Problemas ao registrar os dados do Aluno', 'default', array('class'=>'alert_error'));
             }
 
                         }
@@ -253,7 +253,7 @@ class AlunosController extends AppController
 	        $this->Aluno->id = $id;
 
 		if (!$this->Aluno->exists()) {
-			$this->Session->setFlash('Este Aluno não existe', 'default',array('class'=>'alert error'));
+			$this->Session->setFlash('Este Aluno não existe', 'default',array('class'=>'alert_error'));
 
 			$this->redirect(array('action' => 'index'));
 		}
@@ -278,14 +278,14 @@ class AlunosController extends AppController
                          $this->redirect(array('controller'=>'alunos','action'=>'perfil_estudante',$id));
                      }
                      else{
-                         $this->Session->setFlash(__('Problemas ao Editar dados da do Estudante'),'default',array('alert error'));
+                         $this->Session->setFlash(__('Problemas ao Editar dados da do Estudante'),'default',array('alert_error'));
                      }
                 } else {
-                    $this->Session->setFlash(__('Problemas ao Editar dados da Entidade'),'default',array('alert error'));
+                    $this->Session->setFlash(__('Problemas ao Editar dados da Entidade'),'default',array('alert_error'));
                 }
             }
             else{
-                $this->Session->setFlash(__('Problemas ao Editar dados do Usuário'),'default',array('alert error'));
+                $this->Session->setFlash(__('Problemas ao Editar dados do Usuário'),'default',array('alert_error'));
             }
 
 
@@ -343,7 +343,7 @@ class AlunosController extends AppController
                     $this->redirect(array('action'=>'index'));
                 }
                 else{
-                    $this->Session->setFlash('Problemas ao matricular aluno. Verifique se o aluno ainda nao esta matriculado','default',array('alert error'));
+                    $this->Session->setFlash('Problemas ao matricular aluno. Verifique se o aluno ainda nao esta matriculado','default',array('alert_error'));
                     $this->redirect(array('action'=>'index'));
                 }
             }
