@@ -27,7 +27,7 @@ class AreaAcademicasController extends AppController {
 	public function view($id = null) {
 		$this->AreaAcademica->id = $id;
 		if (!$this->AreaAcademica->exists()) {
-			throw new NotFoundException(__('Invalid area academica'));
+			throw new NotFoundException(__('Área Académica Inválida'));
 		}
 		$this->set('areaAcademica', $this->AreaAcademica->read(null, $id));
 	}
@@ -41,10 +41,10 @@ class AreaAcademicasController extends AppController {
 		if ($this->request->is('post')) {
 			$this->AreaAcademica->create();
 			if ($this->AreaAcademica->save($this->request->data)) {
-				$this->Session->setFlash(__('The area academica has been saved'));
+				$this->Session->setFlash(__('A Área Académica foi registrada com sucesso'),'default'.array('class'=>'alert_success'));
 				$this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The area academica could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('Problemas ao registrar a Área Académica'),'default',array('alert_error'));
 			}
 		}
 	}
@@ -59,14 +59,14 @@ class AreaAcademicasController extends AppController {
 	public function edit($id = null) {
 		$this->AreaAcademica->id = $id;
 		if (!$this->AreaAcademica->exists()) {
-			throw new NotFoundException(__('Invalid area academica'));
+			throw new NotFoundException(__('Área Académica Inválida'));
 		}
 		if ($this->request->is('post') || $this->request->is('put')) {
 			if ($this->AreaAcademica->save($this->request->data)) {
-				$this->Session->setFlash(__('The area academica has been saved'));
+				$this->Session->setFlash(__('A Área Académica foi editada com sucesso'),'default',array('class'=>'alert_success'));
 				$this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The area academica could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('Problemas ao editar a Área Académica'),'default',array('class'=>'alert_error'));
 			}
 		} else {
 			$this->request->data = $this->AreaAcademica->read(null, $id);
@@ -80,6 +80,7 @@ class AreaAcademicasController extends AppController {
  * @throws NotFoundException
  * @param string $id
  * @return void
+ * FIXME Não se pode remover áreas académicas já referenciadas
  */
 	public function delete($id = null) {
 		if (!$this->request->is('post')) {
