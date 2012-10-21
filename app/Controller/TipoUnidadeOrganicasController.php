@@ -27,7 +27,7 @@ class TipoUnidadeOrganicasController extends AppController {
 	public function view($id = null) {
 		$this->TipoUnidadeOrganica->id = $id;
 		if (!$this->TipoUnidadeOrganica->exists()) {
-			throw new NotFoundException(__('Invalid tipo unidade organica'));
+			throw new NotFoundException(__('Tipo de Unidade Orgânica Inválido'));
 		}
 		$this->set('tipoUnidadeOrganica', $this->TipoUnidadeOrganica->read(null, $id));
 	}
@@ -41,10 +41,10 @@ class TipoUnidadeOrganicasController extends AppController {
 		if ($this->request->is('post')) {
 			$this->TipoUnidadeOrganica->create();
 			if ($this->TipoUnidadeOrganica->save($this->request->data)) {
-				$this->Session->setFlash(__('The tipo unidade organica has been saved'));
+				$this->Session->setFlash(__('O Tipo de Unidade Orgânica foi gravado com sucesso'),'default',array('class'=>'alert_success'));
 				$this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The tipo unidade organica could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('Problemas ao registrar este tipo de Unidade orgânica'),'default',array('class'=>'alert_error'));
 			}
 		}
 	}
@@ -59,14 +59,14 @@ class TipoUnidadeOrganicasController extends AppController {
 	public function edit($id = null) {
 		$this->TipoUnidadeOrganica->id = $id;
 		if (!$this->TipoUnidadeOrganica->exists()) {
-			throw new NotFoundException(__('Invalid tipo unidade organica'));
+			throw new NotFoundException(__('Tipo de Unidade Orgânica Invalido'));
 		}
 		if ($this->request->is('post') || $this->request->is('put')) {
 			if ($this->TipoUnidadeOrganica->save($this->request->data)) {
-				$this->Session->setFlash(__('The tipo unidade organica has been saved'));
+				$this->Session->setFlash(__('O Tipo de Unidade Orgânica foi gravado com sucesso'),'default',array('class'=>'alert_success'));
 				$this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The tipo unidade organica could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('Problemas ao registrar este tipo de Unidade orgânica'),'default',array('class'=>'alert_error'));
 			}
 		} else {
 			$this->request->data = $this->TipoUnidadeOrganica->read(null, $id);
@@ -80,6 +80,8 @@ class TipoUnidadeOrganicasController extends AppController {
  * @throws NotFoundException
  * @param string $id
  * @return void
+ *
+ * @fixme apenas podem-se apagar tipos de unidades nao usadas ou seja, quando nao existem unidades desse tipo. Verificar
  */
 	public function delete($id = null) {
 		if (!$this->request->is('post')) {
