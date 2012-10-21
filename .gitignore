@@ -2,3 +2,4 @@
 /app/tmp
 /app/Config/database.php
 /app/tmp/logs/error.log
+/app/tmp
