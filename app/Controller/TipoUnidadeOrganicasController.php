@@ -81,7 +81,7 @@ class TipoUnidadeOrganicasController extends AppController {
  * @param string $id
  * @return void
  *
- * @fixme apenas podem-se apagar tipos de unidades nao usadas ou seja, quando nao existem unidades desse tipo. Verificar
+ * FIXME apenas podem-se apagar tipos de unidades nao usadas ou seja, quando nao existem unidades desse tipo. Verificar
  */
 	public function delete($id = null) {
 		if (!$this->request->is('post')) {

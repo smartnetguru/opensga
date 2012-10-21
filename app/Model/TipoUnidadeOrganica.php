@@ -30,6 +30,7 @@ class TipoUnidadeOrganica extends AppModel {
             'counterQuery' => ''
         )
     );
+    
     public $validate = array(
         'name' => array(
             array('rule' => 'notempty', 'message' => 'Campo Obrigatório'),
