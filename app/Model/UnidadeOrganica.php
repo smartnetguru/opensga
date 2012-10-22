@@ -58,6 +58,13 @@ public $actsAs = array('Tree');
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
+		),
+		'Director' => array(
+			'className' => 'Funcionario',
+			'foreignKey' => 'director',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
 		)
 	);
 
@@ -115,21 +122,6 @@ public $actsAs = array('Tree');
  * @var array
  */
 	public $hasAndBelongsToMany = array(
-		'Tipo' => array(
-			'className' => 'Tipo',
-			'joinTable' => 'tipo_unidade_organicas',
-			'foreignKey' => 'unidade_organica_id',
-			'associationForeignKey' => 'tipo_id',
-			'unique' => 'keepExisting',
-			'conditions' => '',
-			'fields' => '',
-			'order' => '',
-			'limit' => '',
-			'offset' => '',
-			'finderQuery' => '',
-			'deleteQuery' => '',
-			'insertQuery' => ''
-		)
 	);
 
 }
