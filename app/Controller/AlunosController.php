@@ -55,7 +55,7 @@ class AlunosController extends AppController
     			$conditions['conditions']['OR'][$aColumns[$i]." LIKE"]="%".$_GET['sSearch']."%";
     		}
 
-    		//debug($conditions);
+    		
     	}
 
         $alunos = $this->Aluno->find('all',$conditions);
