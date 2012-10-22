@@ -26,10 +26,6 @@ Ver a melhor forma de representar as chefias
 Seria interessante no futuro gerir equivalencias internas automaticamente no Sistema
 ﻿
 ==Modulo Financeiro==
-O modulo financeiro precisa de ser completamente revisto, para responder as realidades actuais da maioria das universidades.
-
-O primeiro problema a ser resolvido, é porque nas universidades, alunos pagam varias coisas usando mesmo talao de deposito, e em situações mais graves, depositam valores insuficientes para fazer o pagamento.
-Para estes casos, á solucao passa por criar um sistema de depositos no SIGA. Quando o aluno vai depositar o dinheiro no banco e traz o talao, regista-se apenas um deposito no sistema, sem se especificar para que servira aquele deposito. Dai, regista-se um ou mais pagamentos, onde indicamos quais facturas o aluno esta a pagar. Se o valor for suficiente para tudo, pagamos a factura, e caso contrário, algumas facturas ficarao pendentes.
 
 Depois de se pagar todas as facturas possiveis, o dinheiro que restar na "conta" interna do aluno, é guardado para as proximas facturas.
 
@@ -42,4 +38,7 @@ Depois de se pagar todas as facturas possiveis, o dinheiro que restar na "conta"
 
 
 =====================Inscricoes=================================
+----IMPORTANTE: Por agora um aluno so pode se inscrever 1 UMA vez por semestre. Mais tarde, ver a possibilidade dele aumentar ou reduzir cadeiras, recalculando assim as mensalidades.
+
+O k acontece quando vem adicionar cadeiras depois de uma mensalidade.
 ---Rever a forma como as cadeiras em atraso sao determinadas
