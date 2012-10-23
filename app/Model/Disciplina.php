@@ -1,34 +1,20 @@
 <?php
 
- 
- 
+
+
 class Disciplina extends AppModel {
 	var $name = 'Disciplina';
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 
 	var $belongsTo = array(
-		'Faculdade' => array(
-			'className' => 'Faculdade',
-			'foreignKey' => 'faculdade_id',
+		'UnidadeOrganica' => array(
+			'className' => 'UnidadeOrganica',
+			'foreignKey' => 'unidade_organica_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
 		),
-        'Departamento' => array(
-			'className' => 'Departamento',
-			'foreignKey' => 'departamento_id',
-			'conditions' => '',
-			'fields' => '',
-			'order' => ''
-		),
-        'Seccao' => array(
-			'className' => 'Seccao',
-			'foreignKey' => 'seccao_id',
-			'conditions' => '',
-			'fields' => '',
-			'order' => ''
-		)
-        
+
 	);
 
 	var $hasMany = array(
@@ -70,11 +56,11 @@ class Disciplina extends AppModel {
         'message' => 'Ja existe uma disciplina com este nome.',
         'required'   => true,
         'allowEmpty' => false,
-    )        
+    )
 );
 
     function getAllByCurso($curso_id){
-        
+
     }
 
 }

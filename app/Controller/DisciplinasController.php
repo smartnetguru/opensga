@@ -1,7 +1,7 @@
 <?php
 /**
  * Controller de Disciplinas
- * 
+ *
  * @copyright     Copyright 2010-2011, INFOmoz (Inform�tica-Mo�ambique) (http://infomoz.net)
  ** @link          http://opensga.com OpenSGA  - Sistema de Gestão Académica
  * @author		  Elisio Leonardo (elisio.leonardo@gmail.com)
@@ -9,11 +9,11 @@
  * @subpackage    opensga.core.controller
  * @since         OpenSGA v 0.1.0
 
- * 
+ *
  */
- 
- 
- 
+
+
+
 class DisciplinasController extends AppController {
 
 	var $name = 'Disciplinas';
@@ -29,7 +29,7 @@ class DisciplinasController extends AppController {
 
 	function ver_disciplina($id = null)
     {
-        
+
 		if (!$id) {
 			$this->Session->setFlash('Invalido %s', 'flasherror');
 			$this->redirect(array('action' => 'index'));
@@ -43,7 +43,7 @@ class DisciplinasController extends AppController {
 		$this->set(compact('grupodisciplinars'));
 	}
 
-	function adicionar_disciplina() {	
+	function adicionar_disciplina() {
 		if (!empty($this->data)) {
 			$this->Disciplina->create();
 			if ($this->Disciplina->save($this->data)) {
@@ -53,9 +53,7 @@ class DisciplinasController extends AppController {
 				$this->Session->setFlash(__('Problemas no cadastro da disciplina.'),'default',array('class'=>'alert error'));
 			}
 		}
-		$faculdades = $this->Disciplina->Faculdade->find('list');
-        $departamentos  =$this->Disciplina->Departamento->find('list');
-        $seccaos = $this->Disciplina->Seccao->find('list');
+
 		$this->set(compact('faculdades','departamentos','seccaos'));
 	}
 
@@ -69,11 +67,11 @@ class DisciplinasController extends AppController {
 			$this->redirect(array('action' => 'index'));
 		}
 		if ($this->request->is('post') || $this->request->is('put')) {
-			
+
 			//die(var_dump($this->request->data));
 			if ($this->Disciplina->save($this->request->data)) {
 			////$logmv->logUpdate(4,$this->Session->read('Auth.User.id'),$id,$this->data["Disciplina"]["name"]);
-				
+
 				$this->Session->setFlash('Dados modificados com sucesso','flashok');
 				$this->redirect(array('action' => 'index'));
 			} else {
@@ -83,13 +81,11 @@ class DisciplinasController extends AppController {
 		if (empty($this->data)) {
 			$this->data = $this->Disciplina->read(null, $id);
 		}
-		$faculdades = $this->Disciplina->Faculdade->find('list');
-        $departamentos  =$this->Disciplina->Departamento->find('list');
-        $seccaos = $this->Disciplina->Seccao->find('list');
+		
 		$this->set(compact('faculdades','departamentos','seccaos'));
 	}
 
-/*	function delete($id = null) 
+/*	function delete($id = null)
 	{
 	//App::Import('Model','Logmv');
 	//$logmv = new Logmv;
@@ -99,10 +95,10 @@ class DisciplinasController extends AppController {
 		}
 		$verifica = $this->Disciplina->query("select id from grupodisciplinas where disciplina_id = {$id}");
 		//var_dump($verifica);
-		
+
 		if(empty($verifica))
 		{
-	    if ($this->Disciplina->delete($id)) 
+	    if ($this->Disciplina->delete($id))
 		{
 		////$logmv->logDelete(4,$this->Session->read('Auth.User.id'),$id,$this->data["Disciplina"]["name"]);
 			$this->Session->setFlash('Dados deletedos com sucesso ','flashok');
@@ -112,18 +108,18 @@ class DisciplinasController extends AppController {
 		$this->Session->setFlash('Esta Disciplina nao pode ser Deletada. Ja Pertence a um Palno de Estudo.','flasherror');
 		$this->redirect(array('action' => 'index'));
 	}
- * 
+ *
  */
         function beforeRender()
 		{
             parent::beforeRender();
             $this->set('current_section','pedagogica');
         }
-          
+
         function pdf_index()
 		{
-            Configure::write('debug',0); 
-            $disciplina = $this->Disciplina->find('all',array('order'=> array ('Disciplina.name ASC'))); 
+            Configure::write('debug',0);
+            $disciplina = $this->Disciplina->find('all',array('order'=> array ('Disciplina.name ASC')));
             $listas = array();
 			$id = 1;
             foreach( $disciplina as $m)
@@ -136,17 +132,17 @@ class DisciplinasController extends AppController {
                 $listas[] =$lista;
 				$id++;
             }
-          
+
             $this->set('lista',$listas);
             $this->layout = 'pdf'; //this will use the pdf.ctp layout
             $this->render();
         }
-        
+
         public function beforeFilter() {
             parent::beforeFilter();
-            
-            
-            
+
+
+
         }
 }
 ?>

@@ -15,6 +15,7 @@ App::uses('AppModel', 'Model');
  * @property User $User
  * @property Matricula $Matricula
  * @property Inscricao $Inscricao
+ * @property FinanceiroPagamento $FinanceiroPagamento
  *
  *
  */
@@ -55,23 +56,9 @@ class Aluno extends AppModel {
 			'fields' => '',
 			'order' => ''
 		),
-		'Escola' => array(
-			'className' => 'Escola',
-			'foreignKey' => 'escola_id',
-			'conditions' => '',
-			'fields' => '',
-			'order' => ''
-		),
         'Areatrabalho' => array(
 			'className' => 'Areatrabalho',
 			'foreignKey' => 'areatrabalho_id',
-			'conditions' => '',
-			'fields' => '',
-			'order' => ''
-		),
-        'Faculdade' => array(
-			'className' => 'Faculdade',
-			'foreignKey' => 'faculdade_ingresso_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
@@ -95,19 +82,6 @@ class Aluno extends AppModel {
 		),
         'Inscricao' => array(
 			'className' => 'Inscricao',
-			'foreignKey' => 'aluno_id',
-			'dependent' => false,
-			'conditions' => '',
-			'fields' => '',
-			'order' => '',
-			'limit' => '',
-			'offset' => '',
-			'exclusive' => '',
-			'finderQuery' => '',
-			'counterQuery' => ''
-		),
-        'Pagamento' => array(
-			'className' => 'Pagamento',
 			'foreignKey' => 'aluno_id',
 			'dependent' => false,
 			'conditions' => '',

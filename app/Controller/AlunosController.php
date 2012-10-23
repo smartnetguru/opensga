@@ -23,7 +23,6 @@ class AlunosController extends AppController
 	function index()
     {
 		$this->Aluno->recursive = 0;
-		$escolas = $this->Aluno->Escola->find('list');
 		$cursos = $this->Aluno->Curso->find('list');
 
         $this->set('alunos', $this->paginate(null, $this->_Filter));
@@ -55,7 +54,7 @@ class AlunosController extends AppController
     			$conditions['conditions']['OR'][$aColumns[$i]." LIKE"]="%".$_GET['sSearch']."%";
     		}
 
-    		
+
     	}
 
         $alunos = $this->Aluno->find('all',$conditions);
@@ -63,7 +62,7 @@ class AlunosController extends AppController
         $alunos_count_filter = $this->Aluno->find('count',$conditions);
         $iTotal=$alunos_count;
         $iFilteredTotal = $alunos_count_filter;
-        $escolas = $this->Aluno->Escola->find('list');
+        
         $cursos = $this->Aluno->Curso->find('list');
 
         $output = array(

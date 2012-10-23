@@ -39,13 +39,6 @@ class Funcionario extends AppModel {
             'fields' => '',
             'order' => ''
         ),
-        'Departamento' => array(
-            'className' => 'Departamento',
-            'foreignKey' => 'departamento_id',
-            'conditions' => '',
-            'fields' => '',
-            'order' => ''
-        ),
         'Tipofuncionario' => array(
             'className' => 'Tipofuncionario',
             'foreignKey' => 'tipofuncionario_id',
@@ -63,20 +56,6 @@ class Funcionario extends AppModel {
         'UnidadeOrganica' => array(
             'className' => 'UnidadeOrganica',
             'foreignKey' => 'unidade_organica_id',
-            'conditions' => '',
-            'fields' => '',
-            'order' => ''
-        ),
-        'Seccao' => array(
-            'className' => 'Seccao',
-            'foreignKey' => 'seccao_id',
-            'conditions' => '',
-            'fields' => '',
-            'order' => ''
-        ),
-        'Faculdade' => array(
-            'className' => 'Faculdade',
-            'foreignKey' => 'faculdade_id',
             'conditions' => '',
             'fields' => '',
             'order' => ''
