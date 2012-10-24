@@ -62,7 +62,7 @@ class AlunosController extends AppController
         $alunos_count_filter = $this->Aluno->find('count',$conditions);
         $iTotal=$alunos_count;
         $iFilteredTotal = $alunos_count_filter;
-        
+
         $cursos = $this->Aluno->Curso->find('list');
 
         $output = array(
@@ -162,9 +162,7 @@ class AlunosController extends AppController
             );
         $cadeiras_aprovadas = $this->Aluno->Inscricao->find('all',array('conditions'=>array('Inscricao.aluno_id'=>$id)));
 
-        $this->Aluno->Pagamento->contain(array(
-            'Tipopagamento'
-        ));
+
 
         if($this->Aluno->isMatriculado($id,$this->Session->read('SGAConfig.anolectivo_id'))){
             $this->set('is_matriculado',1);
@@ -174,8 +172,11 @@ class AlunosController extends AppController
         }
 
         $is_bolseiro = $this->Aluno->isBolseiro($id)?1:0;
-
-        $pagamentos = $this->Aluno->Pagamento->find('all',array('conditions'=>array('Pagamento.aluno_id'=>$id)));
+        
+        $this->Aluno->FinanceiroPagamento->contain(array(
+            'FinanceiroTipoPagamento'
+        ));
+        $pagamentos = $this->Aluno->FinanceiroPagamento->find('all',array('conditions'=>array('FinanceiroPagamento.aluno_id'=>$id)));
         //debug($pagamentos);
 		$this->set('aluno',$aluno);
 		$users = $this->Aluno->User->find('list');

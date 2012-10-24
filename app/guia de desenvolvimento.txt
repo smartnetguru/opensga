@@ -43,6 +43,10 @@ O k acontece quando vem adicionar cadeiras depois de uma mensalidade.
 ---Rever a forma como as cadeiras em atraso sao determinadas
 
 
+=============================Usuarios=======================
+Uma dica eh criptografar todas as senhas no BeforeSave do User Model em vez de em varios sitios difentes. Pensar nisso
+
+
 ============================eSURA==============================
 [18/10/12 11:08:24] Eude Tsamba: Create a  School, Faculty or Central Unit (First Level Organizational Unit)
 Create Office of Dean (Second Level Unit)

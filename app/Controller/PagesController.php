@@ -123,6 +123,14 @@ class PagesController extends AppController {
 		}
 
 	}
+    public function docente_home(){
+        
+    }
+    public function estudante_home(){
+
+    }
+
+
 }
 
 ?>

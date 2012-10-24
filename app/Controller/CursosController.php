@@ -63,7 +63,6 @@ class CursosController extends AppController {
 				$this->Session->setFlash('Erro ao gravar dados. Por favor tente de novo.','flasherror');
 			}
 		}
-		$escolas = $this->Curso->Escola->find('list');
 		$grauacademicos = $this->Curso->GrauAcademico->find('list');
 		$tipocursos = $this->Curso->Tipocurso->find('list');
 		$this->set(compact('grauacademicos', 'tipocursos','escolas'));
@@ -91,7 +90,6 @@ class CursosController extends AppController {
 		if (empty($this->data)) {
 			$this->data = $this->Curso->read(null, $id);
 		}
-        $escolas = $this->Curso->Escola->find('list');
 		$grauacademicos = $this->Curso->GrauAcademico->find('list');
 		$tipocursos = $this->Curso->Tipocurso->find('list');
 		$this->set(compact('GrauAcademicos', 'tipocursos','escolas'));

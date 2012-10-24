@@ -47,14 +47,14 @@ class DisciplinasController extends AppController {
 		if (!empty($this->data)) {
 			$this->Disciplina->create();
 			if ($this->Disciplina->save($this->data)) {
-				$this->Session->setFlash(__('Disciplina Cadastrada com Sucesso'),'default',array('class'=>'alert success'));
+				$this->Session->setFlash(__('Dados Registrados com Sucesso'),'default',array('class'=>'alert_success'));
 				$this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('Problemas no cadastro da disciplina.'),'default',array('class'=>'alert error'));
+				$this->Session->setFlash(__('Problemas ao Registrar dados.'),'default',array('class'=>'alert error'));
 			}
 		}
-
-		$this->set(compact('faculdades','departamentos','seccaos'));
+        $unidadeOrganicas = $this->Disciplina->UnidadeOrganica->find('list');
+		$this->set(compact('unidadeOrganicas'));
 	}
 
 	function editar_disciplina($id = null){
@@ -72,44 +72,20 @@ class DisciplinasController extends AppController {
 			if ($this->Disciplina->save($this->request->data)) {
 			////$logmv->logUpdate(4,$this->Session->read('Auth.User.id'),$id,$this->data["Disciplina"]["name"]);
 
-				$this->Session->setFlash('Dados modificados com sucesso','flashok');
+				$this->Session->setFlash('Dados editados com sucesso','default',array('class'=>'alert_success'));
 				$this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash('Erro ao editar dados. Por favor tente de novo.','flasherror');
+				$this->Session->setFlash('Problemas ao editar dados','default',array('class'=>'alert_error'));
 			}
 		}
 		if (empty($this->data)) {
 			$this->data = $this->Disciplina->read(null, $id);
 		}
-		
-		$this->set(compact('faculdades','departamentos','seccaos'));
+
+        $unidadeOrganicas = $this->Disciplina->UnidadeOrganica->find('list');
+		$this->set(compact('unidadeOrganicas'));
 	}
 
-/*	function delete($id = null)
-	{
-	//App::Import('Model','Logmv');
-	//$logmv = new Logmv;
-		if (!$id) {
-			$this->Session->setFlash('Invalido codigo para %s','flasherror');
-            $this->redirect(array('action'=>'index'));
-		}
-		$verifica = $this->Disciplina->query("select id from grupodisciplinas where disciplina_id = {$id}");
-		//var_dump($verifica);
-
-		if(empty($verifica))
-		{
-	    if ($this->Disciplina->delete($id))
-		{
-		////$logmv->logDelete(4,$this->Session->read('Auth.User.id'),$id,$this->data["Disciplina"]["name"]);
-			$this->Session->setFlash('Dados deletedos com sucesso ','flashok');
-			$this->redirect(array('action'=>'index'));
-		}
-		}
-		$this->Session->setFlash('Esta Disciplina nao pode ser Deletada. Ja Pertence a um Palno de Estudo.','flasherror');
-		$this->redirect(array('action' => 'index'));
-	}
- *
- */
         function beforeRender()
 		{
             parent::beforeRender();
