@@ -85,6 +85,9 @@ class UsersController extends AppController {
         $this->set(compact('groups'));
     }
 
+    public function estudante_login(){
+        $this->redirect(array('action'=>'login','estudante'=>FALSE));
+    }
     function delete($id = null) {
         if (!$id) {
             $this->Session->setFlash(sprintf(__('ID do Usuário Inválido', true), 'user'), 'flasherror');
@@ -96,6 +99,10 @@ class UsersController extends AppController {
         }
         $this->Session->setFlash(sprintf(__('O usuário não foi removido', true), 'user'), 'flasherror');
         $this->redirect(array('action' => 'index'));
+    }
+
+    public function docente_login(){
+        $this->redirect(array('action'=>'login','docente'=>true));
     }
 
     function login() {
