@@ -4,19 +4,6 @@
  * OpenSGA - Sistema de Gest�o Acad�mica
  *   Copyright (C) 2010-2011  INFOmoz (Inform�tica-Mo�ambique)
  *
- * Este programa � um software livre: Voc� pode redistribuir e/ou modificar
- * todo ou parte deste programa, desde que siga os termos da licen�a por nele
- * estabelecidos. Grande parte do c�digo deste programa est� sob a licen�a
- * GNU Affero General Public License publicada pela Free Software Foundation.
- * A vers�o original desta licen�a est� dispon�vel na pasta raiz deste software.
- *
- * Este software � distribuido sob a perspectiva de que possa ser �til para
- * satisfazer as necessidades dos seus utilizadores, mas SEM NENHUMA GARANTIA. Veja
- * os termos da licen�a GNU Affero General Public License para mais detalhes
- *
- * As redistribui��es deste software, mesmo quando o c�digo-fonte for modificado significativamente,
- * devem manter est� informa��o legal, assim como a licen�a original do software.
- *
  * @copyright     Copyright 2010-2011, INFOmoz (Inform�tica-Mo�ambique) (http://infomoz.net)
  * * @link          http://opensga.com OpenSGA  - Sistema de Gestão Académica
  * @author		  Elisio Leonardo (elisio.leonardo@gmail.com)
@@ -130,6 +117,9 @@ class UsersController extends AppController {
                 if ($User['group_id'] == 3) {
                     $this->redirect(array('controller' => 'pages', 'action' => 'home', 'estudante' => TRUE));
                 }
+                if ($User['group_id'] == 4) {
+                    $this->redirect(array('controller' => 'pages', 'action' => 'home', 'docente' => TRUE));
+                }
                 $this->redirect('/');
             } else {
                 $this->Session->setFlash('Your username or password was incorrect.');
@@ -205,52 +195,6 @@ class UsersController extends AppController {
         $permissoes = $this->Acl->Aro->find('all', array('conditions' => array('Aro.foreign_key' => $this->Session->read('Auth.User.id'))));
         debug($permissoes);
         exit;
-    }
-
-    function inicializa_acl($user_id) {
-        if (!isset($user_id)) {
-            exit;
-        }
-        $grupo = $this->Session->read('Auth.User.group_id');
-        if ($grupo != 1) {
-            exit;
-        }
-        $grupo = $this->User->Group;
-
-        //Permissoes para SuperAdmin
-        $grupo->id = 1;
-        $this->Acl->allow($grupo, 'controllers');
-
-
-        //Permissoes para o Grupo de docentes
-        $grupo->id = 4;
-        $this->Acl->deny($grupo, 'controllers');
-        $this->Acl->allow($grupo, 'controllers/SadeAutoAvaliacaos');
-        $this->Acl->allow($grupo, 'controllers/SadeAutoAvaliacaos/docente');
-        $this->Acl->allow($grupo, 'controllers/Users/alterar_senha');
-
-
-        //Permissoes para o Grupo de Funcionarios
-        $grupo->id = 2;
-        $this->Acl->deny($grupo, 'controllers');
-        $this->Acl->allow($grupo, 'controllers/Alunos');
-        $this->Acl->allow($grupo, 'controllers/Inscricaos');
-        $this->Acl->allow($grupo, 'controllers/Planoestudos/getByCurso');
-        $this->Acl->allow($grupo, 'controllers/Provincias/getByPais');
-        $this->Acl->allow($grupo, 'controllers/Cidades/getByProvincia');
-        $this->Acl->allow($grupo, 'controllers/Relatorios/resumo_semestral');
-        $this->Acl->allow($grupo, 'controllers/FinanceiroTransacaos');
-
-        $this->Acl->allow($grupo, 'controllers/Users/alterar_senha');
-
-        //Permissoes para o Grupo de Estudantes
-        $grupo->id = 3;
-        $this->Acl->deny($grupo, 'controllers');
-        $this->Acl->allow($grupo, 'controllers/Pages/estudante_home');
-
-
-        $this->Session->setFlash(__('Permissões configuradas com sucesso'), 'default', array('class' => 'alert_success'));
-        $this->redirect('/');
     }
 
     /**

@@ -54,8 +54,16 @@ class DocentesController extends AppController {
      *
      * @todo testar todos os campos
      */
-	function registar_docente() {
-		if (!empty($this->data)) {
+	function adicionar_docente() {
+		 if ($this->request->is('post') || $this->request->is('put')) {
+             $this->request->data['Entidade']['name'] = $this->request->data['Entidade']['nomes'].' '.$this->request->data['Entidade']['apelido'];
+            if($this->Docente->cadastraDocente($this->request->data)){
+                $this->Session->setFlash("Dados registrados com sucesso",'default',array('class'=>'alert_success'));
+                $this->redirect(array('controller'=>'docentes','action'=>'perfil_docente',$this->Docente->id));
+            }
+            else{
+                $this->Session->setFlash('Problemas ao registrar dados', 'default', array('class'=>'alert_error'));
+            }
 			$this->Docente->create();
 
 			//Antes de Gravar o Docente precisamos gravar o Usuario e a Entidade
@@ -89,7 +97,13 @@ class DocentesController extends AppController {
 
 		$entidades = $this->Docente->Entidade->find('list');
 		$docenteCategorias = $this->Docente->DocenteCategoria->find('list');
-		$this->set(compact('entidades', 'seccaos', 'docenteCategorias','faculdades','departamentos'));
+        $paises = $this->Docente->Entidade->PaisNascimento->find('list');
+        $cidades = $this->Docente->Entidade->CidadeNascimento->find('list');
+        $provincias = $this->Docente->Entidade->ProvinciaNascimento->find('list');
+        $documento_identificacaos = $this->Docente->Entidade->DocumentoIdentificacao->find('list');
+        $generos = $this->Docente->Entidade->Genero->find('list');
+        $unidadeOrganicas = $this->Docente->UnidadeOrganica->find('list');
+		$this->set(compact('entidades', 'docenteCategorias','paises','provincias','cidades','generos','documento_identificacaos','unidadeOrganicas'));
 	}
 
 	function edit($id = null) {

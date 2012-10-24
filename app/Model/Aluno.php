@@ -288,6 +288,11 @@ class Aluno extends AppModel {
 
     }
 
+    /**
+     *Regista os dados do Aluno no Sistema e faz a primeira matricula
+     * @param array $data
+     * @return type
+     */
     public function cadastraAluno(array $data) {
         $dataSource = $this->getDataSource();
 
@@ -317,10 +322,6 @@ class Aluno extends AppModel {
 
                 //Grava os dados do Aluno
                 $data['Aluno']['entidade_id'] = $this->Entidade->getLastInsertID();
-                //Escola nao pode ser null
-                if (!isset($data['Aluno']['escola_id'])) {
-                    $data['Aluno']['escola_id'] = 1;
-                }
                 $this->create();
                 if ($this->save($data)) {
                     //Grava os dados de Identificacao
