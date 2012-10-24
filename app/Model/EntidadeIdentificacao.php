@@ -40,7 +40,7 @@ class EntidadeIdentificacao extends AppModel {
 			'order' => ''
 		)
 	);
-    
+
     public $validate = array(
         'numero'=>array(
             'Unico'=>array(
@@ -49,9 +49,16 @@ class EntidadeIdentificacao extends AppModel {
             )
         )
     );
-    
+
+
+    /**
+     *Tenta ver se o documento de identificacao ainda nao foi usado por ninguem
+     * @param type $check
+     * @return type
+     * @todo implementar isso :(
+     */
     public function autenticaDocumentoIdentificacao($check){
-        debug($this->data);
+
         $tipo_documento = $this->data['EntidadeIdentificacao']['documento_identificacao_id'];
         $this->contain();
         $find = $this->find('count',array('conditions'=>array('documento_identificacao_id'=>$tipo_documento,'numero'=>$check)));

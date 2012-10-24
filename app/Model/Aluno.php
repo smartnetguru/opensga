@@ -332,6 +332,24 @@ class Aluno extends AppModel {
                     $this->Entidade->EntidadeIdentificacao->create();
                     $this->Entidade->EntidadeIdentificacao->save($identificacao);
 
+
+                    //Grava os dados de Morada e Contactos
+
+                    $contactos = $data['EntidadeContacto'];
+                    foreach($contactos as $k=>$v){
+                        $this->Entidade->EntidadeContacto->create();
+                        $this->Entidade->EntidadeContacto->save(
+                                array(
+                                    'EntidadeContacto'=>array(
+                                        'entidade_id'=>  $this->Entidade->getLastInsertID(),
+                                        'tipo_contacto_id'=>$k,
+                                        'valor'=>$v,
+                                        'estado_objecto_id'=>1
+                                        )
+                                    )
+                                );
+                    }
+
                     //Pega os dados da matricula e realiza a matricula
                     $data_matricula['aluno_id'] = $this->getInsertID();
                     $data_matricula['curso_id'] = $data['Aluno']['curso_id'];

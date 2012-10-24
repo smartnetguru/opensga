@@ -20,6 +20,16 @@ INSERT INTO `tipo_contactos` (`id`, `name`, `codigo`) VALUES
 (5, 'Rua onde mora em tempo de aulas', 'morada_aulas_rua'),
 (6, 'Bairro em que mora em tempo de aulas', 'morada_aulas_bairro'),
 (7, 'Quarterão  em que mora em tempo de aulas', 'morada_aulas_quarterao'),
-(8, 'FAX', 'fax'),
+(8, 'Caixa Postal', 'caixa_postal'),
 (9, 'Cidade em Que Mora em Tempo de Aulas', 'morada_aulas_cidade'),
 (10, 'Província em que mora em tempo de aulas', 'morada_aulas_provincia');
+(11, 'País em que mora em tempo de aulas', 'morada_aulas_provincia');
+(12, 'Cidade em que mora em tempo de férias', 'morada_aulas_provincia');
+(13, 'Província em que mora em tempo de férias', 'morada_aulas_provincia');
+(14, 'País em que mora em tempo de férias', 'morada_aulas_provincia');
+(15, 'Telefone Celular do encarregado', 'morada_aulas_provincia');
+(16, 'Telefone Fixo do encarregado', 'morada_aulas_provincia');
+(17, 'Telefone Celular para casos de emergencia', 'morada_aulas_provincia');
+(18, 'Telefone Fixo para casos de emergência', 'morada_aulas_provincia');
+(19, 'Telefone Fixo do encarregado', 'morada_aulas_provincia');
+

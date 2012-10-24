@@ -190,11 +190,9 @@ class Entidade extends AppModel {
         return implode(' ',$nomes);
     }
 
-    /**
-     *Verifica se Esta entidade possui foto no Sistema
-     */
-    public function hasFoto(){
 
+    public function gravaContactos($data,$tipo_entidade='aluno'){
+        
     }
 
 
