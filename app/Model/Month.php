@@ -18,19 +18,6 @@ class Month extends AppModel {
  * @var array
  */
 	public $hasMany = array(
-		'EscolasTipopagamento' => array(
-			'className' => 'EscolasTipopagamento',
-			'foreignKey' => 'month_id',
-			'dependent' => false,
-			'conditions' => '',
-			'fields' => '',
-			'order' => '',
-			'limit' => '',
-			'offset' => '',
-			'exclusive' => '',
-			'finderQuery' => '',
-			'counterQuery' => ''
-		),
 		'Feriado' => array(
 			'className' => 'Feriado',
 			'foreignKey' => 'month_id',
@@ -57,19 +44,6 @@ class Month extends AppModel {
 			'finderQuery' => '',
 			'counterQuery' => ''
 		),
-		'Tipopagamento' => array(
-			'className' => 'Tipopagamento',
-			'foreignKey' => 'month_id',
-			'dependent' => false,
-			'conditions' => '',
-			'fields' => '',
-			'order' => '',
-			'limit' => '',
-			'offset' => '',
-			'exclusive' => '',
-			'finderQuery' => '',
-			'counterQuery' => ''
-		)
 	);
 
 }

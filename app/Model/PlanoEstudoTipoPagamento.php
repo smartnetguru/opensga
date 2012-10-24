@@ -24,7 +24,7 @@ class PlanoEstudoTipoPagamento extends AppModel {
 			'fields' => '',
 			'order' => ''
 		),
-		'Tipopagamento' => array(
+		'FinanceiroTipoPagamento' => array(
 			'className' => 'Tipopagamento',
 			'foreignKey' => 'tipopagamento_id',
 			'conditions' => '',
