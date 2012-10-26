@@ -41,7 +41,7 @@ class Funcionario extends AppModel {
         ),
         'Tipofuncionario' => array(
             'className' => 'Tipofuncionario',
-            'foreignKey' => 'tipofuncionario_id',
+            'foreignKey' => 'tipo_funcionario_id',
             'conditions' => '',
             'fields' => '',
             'order' => ''

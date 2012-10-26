@@ -281,6 +281,12 @@ function _getClassMethods($ctrlName = null) {
         $grupo->id = 4;
         $this->Acl->deny($grupo, 'controllers');
         $this->Acl->allow($grupo, 'controllers/Pages/docente_home');
+        $this->Acl->allow($grupo, 'controllers/Turmas/docente_index');
+        $this->Acl->allow($grupo, 'controllers/Turmas/docente_detalhes_turma');
+        $this->Acl->allow($grupo, 'controllers/Users/docente_login');
+        $this->Acl->allow($grupo, 'controllers/Users/docente_logout');
+        $this->Acl->allow($grupo, 'controllers/Users/login');
+        $this->Acl->allow($grupo, 'controllers/Users/logout');
 
         //Permissoes para o Grupo de Funcionarios
         $grupo->id = 2;
@@ -299,6 +305,11 @@ function _getClassMethods($ctrlName = null) {
         $grupo->id = 3;
         $this->Acl->deny($grupo, 'controllers');
         $this->Acl->allow($grupo, 'controllers/Pages/estudante_home');
+        $this->Acl->allow($grupo, 'controllers/Users/estudante_login');
+        $this->Acl->allow($grupo, 'controllers/Users/estudante_logout');
+        $this->Acl->allow($grupo, 'controllers/Users/login');
+        $this->Acl->allow($grupo, 'controllers/Users/logout');
+
 
 
         $this->Session->setFlash(__('Permissões configuradas com sucesso'), 'default', array('class' => 'alert_success'));

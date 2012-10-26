@@ -75,6 +75,12 @@ class UsersController extends AppController {
     public function estudante_login(){
         $this->redirect(array('action'=>'login','estudante'=>FALSE));
     }
+
+    public function estudante_logout(){
+
+    }
+
+    
     function delete($id = null) {
         if (!$id) {
             $this->Session->setFlash(sprintf(__('ID do Usuário Inválido', true), 'user'), 'flasherror');
@@ -90,6 +96,10 @@ class UsersController extends AppController {
 
     public function docente_login(){
         $this->redirect(array('action'=>'login','docente'=>true));
+    }
+
+    public function docente_logout(){
+
     }
 
     function login() {

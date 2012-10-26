@@ -21,6 +21,18 @@ Reside no Campus?
 Contractos
 Funcoes
 
+=========================Usuarios com Multiplas Funcoes==============
+Para casos em que um docente eh funcionario ou eh estudante ao mesmo tempo, podemos implementar a ideia de por botoes no topo de sistema para mudar de funcao
+Assim, quando ele entra no sistema, entra sempre com a funcao configurada no group_id da base de dados, e quando clica no botao trocar de funcao, mudamos apenas o group_id na session.
+
+============================Copyright=================================
+O copyright ainda da problemas em algumas paginas, devido a má formatacao dos views. É necessário passar de todos os views e ver se todos os divs abertos estao fechados, e se nao existem fechos  a mais.
+
+=====================Turmas========================
+Quem define assistentes para as turmas?? O docente tambem pode definir?
+
+---Funcoes do docente: Imprimir Lista de Estudantes, Criar Avaliacoes, Introduzir notas, fechar avaliacoes, Solicitar Fecho da turma.
+
 ================Avaliacoes===================
 Ainda Falta re-implementar.
 Tentar sempre usar o campo turmatipoavaliacao, em vez de turma e tipoavaliacao separados

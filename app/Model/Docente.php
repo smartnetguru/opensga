@@ -48,8 +48,9 @@ class Docente extends AppModel {
 
     function getByUserID($user_id) {
         //Primeiro retornamos a entidade
-        $entidade = $this->Entidade->find('first', array('conditions' => array('user_id' => $user_id),));
-        return $entidade['Docente'][0]['id'];
+        $this->contain(array('Entidade'));
+        $docente = $this->find('first', array('conditions' => array('Entidade.user_id' => $user_id),));
+        return $docente['Docente']['id'];
     }
 
     public function cadastraDocente(array $data) {
@@ -114,6 +115,22 @@ class Docente extends AppModel {
 
 
         $dataSource->rollback();
+    }
+
+        /**
+     *Esta funcao faz o mesmo que find list, mas busca o name a partir da tabela entidades
+         *@todo ver way de passar conditions como argumento
+     */
+    public function listaDocentes(){
+
+        $funcionarios = $this->find('all',array('fields'=>array('id','Entidade.name')));
+
+        $f=array();
+        foreach($funcionarios as $funcionario){
+
+            $f[$funcionario[$this->alias]['id']]=$funcionario['Entidade']['name'];
+        }
+        return $f;
     }
 
 }

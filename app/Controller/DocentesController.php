@@ -106,7 +106,7 @@ class DocentesController extends AppController {
 		$this->set(compact('entidades', 'docenteCategorias','paises','provincias','cidades','generos','documento_identificacaos','unidadeOrganicas'));
 	}
 
-	function edit($id = null) {
+	function editar_docente($id = null) {
 		if (!$id && empty($this->data)) {
 			$this->Session->setFlash(__('Invalid docente', true));
 			$this->redirect(array('action' => 'index'));
@@ -123,9 +123,14 @@ class DocentesController extends AppController {
 			$this->data = $this->Docente->read(null, $id);
 		}
 		$entidades = $this->Docente->Entidade->find('list');
-		$seccaos = $this->Docente->Seccao->find('list');
-		$docenteCategorias = $this->Docente->DocenteCategorium->find('list');
-		$this->set(compact('entidades', 'seccaos', 'docenteCategorias'));
+		$docenteCategorias = $this->Docente->DocenteCategoria->find('list');
+        $paises = $this->Docente->Entidade->PaisNascimento->find('list');
+        $cidades = $this->Docente->Entidade->CidadeNascimento->find('list');
+        $provincias = $this->Docente->Entidade->ProvinciaNascimento->find('list');
+        $documento_identificacaos = $this->Docente->Entidade->DocumentoIdentificacao->find('list');
+        $generos = $this->Docente->Entidade->Genero->find('list');
+        $unidadeOrganicas = $this->Docente->UnidadeOrganica->find('list');
+		$this->set(compact('entidades', 'docenteCategorias','paises','provincias','cidades','generos','documento_identificacaos','unidadeOrganicas'));
 	}
 
 	function delete($id = null) {
