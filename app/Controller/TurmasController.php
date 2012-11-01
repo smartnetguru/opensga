@@ -29,7 +29,7 @@ class TurmasController extends AppController {
 		$grupo = $this->Session->read('Auth.User.group_id');
 
 		$conditions = array();
-        $conditions['turma.estadoturma_id'] = 1;
+        $conditions['Turma.estadoturma_id'] = 1;
 		if($grupo==4){
 			$docente_id = $this->Turma->Docente->getByUserID($this->Session->read('Auth.User.id'));
 			$conditions['Turma.docente_id']=$docente_id;
@@ -58,7 +58,7 @@ class TurmasController extends AppController {
 	 * on very large tables, and MySQL's regex functionality is very limited
 	 */
 	$conditions['conditions']=array();
-    $conditions['conditions']['turma.estadoturma_id'] = 1;
+    $conditions['conditions']['Turma.estadoturma_id'] = 1;
 	if ( $_GET['sSearch'] != "" )
 	{
 
@@ -437,6 +437,7 @@ class TurmasController extends AppController {
 
 			$docente_id = $this->Turma->Docente->getByUserID($this->Session->read('Auth.User.id'));
 			$conditions['Turma.docente_id']=$docente_id;
+            
 		$this->paginate = array('conditions'=>$conditions);
 		$this->set('turmas', $this->paginate());
     }

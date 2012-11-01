@@ -33,3 +33,5 @@ INSERT INTO `tipo_contactos` (`id`, `name`, `codigo`) VALUES
 (18, 'Telefone Fixo para casos de emergência', 'morada_aulas_provincia');
 (19, 'Telefone Fixo do encarregado', 'morada_aulas_provincia');
 
+-- Tipo de Unidades Organicas
+INSERT INTO `opensga_eseg`.`tipo_unidade_organicas` (`id`, `name`, `created`, `modified`, `created_by`, `modified_by`) VALUES (NULL, 'Faculdade', NULL, NULL, NULL, NULL), (NULL, 'Departamento', NULL, NULL, NULL, NULL), (NULL, 'Secção', NULL, NULL, NULL, NULL);

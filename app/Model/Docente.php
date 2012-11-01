@@ -48,8 +48,10 @@ class Docente extends AppModel {
 
     function getByUserID($user_id) {
         //Primeiro retornamos a entidade
+      
         $this->contain(array('Entidade'));
         $docente = $this->find('first', array('conditions' => array('Entidade.user_id' => $user_id),));
+
         return $docente['Docente']['id'];
     }
 

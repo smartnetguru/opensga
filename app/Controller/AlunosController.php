@@ -172,7 +172,7 @@ class AlunosController extends AppController
         }
 
         $is_bolseiro = $this->Aluno->isBolseiro($id)?1:0;
-        
+
         $this->Aluno->FinanceiroPagamento->contain(array(
             'FinanceiroTipoPagamento'
         ));
@@ -453,9 +453,7 @@ class AlunosController extends AppController
               'Matricula'=>array(
                   'Planoestudo','Turno'
               ),
-              'Curso'=>array(
-                  'Faculdade'
-              ),
+              'Curso',
               'Entidade'=>array(
                   'ProvinciaNascimento','CidadeNascimento','PaisNascimento','Genero','DocumentoIdentificacao','EstadoCivil'
               ),
@@ -494,7 +492,7 @@ class AlunosController extends AppController
               'Avaliacao'=>array()
                 )
             );
-          $inscricaos = $this->Aluno->Inscricao->find('all',array('conditions'=>array('Inscricao.aluno_id'=>$aluno_id)));
+          $inscricaos = $this->Aluno->Inscricao->find('all',array('conditions'=>array('Inscricao.aluno_id'=>$aluno_id),'order'=>array('Turma.anocurricular,Turma.semestrecurricular')));
 
           $this->set('has_foto_entidade',$this->Aluno->hasFoto($aluno['Aluno']['codigo']));
           Configure::write('debug',0);

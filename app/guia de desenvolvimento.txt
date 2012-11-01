@@ -1,4 +1,6 @@
+=========================Importar dados da UEM========
 
+O Curso 20461 no Disciplina Curso deve ser mudado para 2046
 
 =====================Duvidas=========================
 O k define o nivel academico de um estudante?
@@ -52,7 +54,6 @@ Seria interessante no futuro gerir equivalencias internas automaticamente no Sis
 ﻿
 ==Modulo Financeiro==
 
-Depois de se pagar todas as facturas possiveis, o dinheiro que restar na "conta" interna do aluno, é guardado para as proximas facturas.
 
 
 ===============Nivel Academico=================

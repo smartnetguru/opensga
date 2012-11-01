@@ -77,10 +77,10 @@ class UsersController extends AppController {
     }
 
     public function estudante_logout(){
-
+        $this->redirect(array('action'=>'logout','estudante'=>FALSE));
     }
 
-    
+
     function delete($id = null) {
         if (!$id) {
             $this->Session->setFlash(sprintf(__('ID do Usuário Inválido', true), 'user'), 'flasherror');
@@ -95,11 +95,11 @@ class UsersController extends AppController {
     }
 
     public function docente_login(){
-        $this->redirect(array('action'=>'login','docente'=>true));
+        $this->redirect(array('action'=>'login','docente'=>false));
     }
 
     public function docente_logout(){
-
+            $this->redirect(array('action'=>'logout','docente'=>false));
     }
 
     function login() {
@@ -114,8 +114,11 @@ class UsersController extends AppController {
 
                     $this->Session->write($name, $c['Config']['value']);
                 }
-                $User = $this->Session->read('Auth.User');
 
+
+                $User = $this->Session->read('Auth.User');
+                $entidade = $this->User->Entidade->findByUserId($User['id']);
+                $this->Session->write('Auth.User.name',$entidade['Entidade']['name']);
                 //Temos de Certificar que o Aro existe, principalmente para estudantes importados
                 $aro = $this->User->Aro->find('all', array('conditions' => array('model' => $this->User->alias, 'foreign_key' => $User['id'])));
                 if (empty($aro)) {
