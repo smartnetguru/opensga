@@ -26,7 +26,7 @@ App::uses('Controller', 'Controller');
 class AppController extends Controller {
 
     public $components = array('Security', 'Acl', 'Auth', 'Session', 'RequestHandler', 'Cookie', 'DebugKit.Toolbar');
-    public $helpers = array('Html', 'Form', 'Session', 'Js' => array('MyJquery'), 'EventsCalendar', 'Javascript', 'Ajax', 'PhpExcel');
+    public $helpers = array('Html','Print', 'Form', 'Session', 'Js' => array('MyJquery'), 'EventsCalendar', 'Javascript', 'Ajax', 'PhpExcel');
     public $pdfConfig = array('engine' => 'CakePdf.Tcpdf');
     public $cacheAction = '1 hour';
 
