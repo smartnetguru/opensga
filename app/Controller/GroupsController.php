@@ -303,12 +303,15 @@ function _getClassMethods($ctrlName = null) {
 
         //Permissoes para o Grupo de Estudantes
         $grupo->id = 3;
+        //$this->Acl->allow($grupo, 'controllers');
         $this->Acl->deny($grupo, 'controllers');
         $this->Acl->allow($grupo, 'controllers/Pages/estudante_home');
         $this->Acl->allow($grupo, 'controllers/Users/estudante_login');
         $this->Acl->allow($grupo, 'controllers/Users/estudante_logout');
         $this->Acl->allow($grupo, 'controllers/Users/login');
         $this->Acl->allow($grupo, 'controllers/Users/logout');
+        $this->Acl->allow($grupo, 'controllers/Alunos/estudante_perfil');
+        //$this->Acl->allow($grupo, 'controllers/Turmas/estudante_view');
 
 
 
