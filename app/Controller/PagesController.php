@@ -123,6 +123,7 @@ class PagesController extends AppController {
     }
 
     public function estudante_home() {
+        
 
     }
 
