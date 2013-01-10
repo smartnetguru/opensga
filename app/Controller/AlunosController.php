@@ -29,6 +29,7 @@ class AlunosController extends AppController {
         $this->set(compact('escolas', 'cursos'));
         $this->set('relatorio', 'aluno_relatorio');
     }
+    
 
     function index_ajax() {
         $this->Aluno->recursive = 0;
@@ -132,7 +133,12 @@ class AlunosController extends AppController {
             )
                 )
         );
-        $todas_inscricoes = $this->Aluno->Inscricao->find('all', array('conditions' => array('Inscricao.aluno_id' => $id)));
+        $todas_inscricoes = $this->Aluno->Inscricao->find('all', array('conditions' => array('Inscricao.aluno_id' => $id),
+                                                                        'order'=>array(
+                                                                            'Turma.anocurricular',
+                                                                            'Turma.semestrecurricular'
+                                                                            
+                                                                        )));
 
         $this->Aluno->Inscricao->contain(array(
             'Turma' => array(
@@ -390,7 +396,8 @@ class AlunosController extends AppController {
         if (empty($this->data)) {
             $this->data = $this->Aluno->read(null, $id);
         }
-
+        $aluno = $this->Aluno->find('first', array('conditions' => array('Aluno.id' => $id)));
+        $this->set('aluno',$aluno);
         $users = $this->Aluno->Entidade->User->find('list');
         $paises = $this->Aluno->Entidade->PaisNascimento->find('list');
         $escola_nivel_medios = $this->Aluno->AlunoNivelMedio->EscolaNivelMedio->find('list');
@@ -582,5 +589,7 @@ class AlunosController extends AppController {
 
         $this->set(compact('aluno', 'inscricaos'));
     }
+    
+   
 
 }

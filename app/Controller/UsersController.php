@@ -72,14 +72,13 @@ class UsersController extends AppController {
         $this->set(compact('groups'));
     }
 
-    public function estudante_login(){
-        $this->redirect(array('action'=>'login','estudante'=>FALSE));
+    public function estudante_login() {
+        $this->redirect(array('action' => 'login', 'estudante' => FALSE));
     }
 
-    public function estudante_logout(){
-        $this->redirect(array('action'=>'logout','estudante'=>FALSE));
+    public function estudante_logout() {
+        $this->redirect(array('action' => 'logout', 'estudante' => FALSE));
     }
-
 
     function delete($id = null) {
         if (!$id) {
@@ -94,15 +93,21 @@ class UsersController extends AppController {
         $this->redirect(array('action' => 'index'));
     }
 
-    public function docente_login(){
-        $this->redirect(array('action'=>'login','docente'=>false));
+    public function docente_login() {
+        $this->redirect(array('action' => 'login', 'docente' => false));
     }
 
-    public function docente_logout(){
-            $this->redirect(array('action'=>'logout','docente'=>false));
+    public function docente_logout() {
+        $this->redirect(array('action' => 'logout', 'docente' => false));
     }
 
     function login() {
+        if ($this->Session->read('Auth.User')) {
+            //if($this->Session->read('Auth.User.group_id')==1)
+            $this->Session->setFlash('Já está logado','default',array('class'=>'alert_success'));
+            $this->redirect(array('controller' => 'pages', 'action' => 'home'));
+        }
+
 
         if ($this->request->is('post')) {
             if ($this->Auth->login()) {
@@ -118,7 +123,7 @@ class UsersController extends AppController {
 
                 $User = $this->Session->read('Auth.User');
                 $entidade = $this->User->Entidade->findByUserId($User['id']);
-                $this->Session->write('Auth.User.name',$entidade['Entidade']['name']);
+                $this->Session->write('Auth.User.name', $entidade['Entidade']['name']);
                 //Temos de Certificar que o Aro existe, principalmente para estudantes importados
                 $aro = $this->User->Aro->find('all', array('conditions' => array('model' => $this->User->alias, 'foreign_key' => $User['id'])));
                 if (empty($aro)) {

@@ -114,7 +114,7 @@ class PagesController extends AppController {
         $user = $this->Auth->user();
 
         if ($user != null) {
-            $this->Auth->allowedActions = array('display');
+            //$this->Auth->allowedActions = array('display');
         }
     }
 

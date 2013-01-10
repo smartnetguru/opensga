@@ -1,10 +1,11 @@
 <?php
+
 /**
  * OpenSGA - Sistema de Gest�o Acad�mica
  *   Copyright (C) 2010-2012  INFOmoz (Inform�tica-Mo�ambique)
  *
  * @copyright     Copyright 2010-2012, INFOmoz (Inform�tica-Mo�ambique) (http://infomoz.net)
- ** @link          http://opensga.com OpenSGA  - Sistema de Gestão Académica
+ * * @link          http://opensga.com OpenSGA  - Sistema de Gestão Académica
  * @author		  Elisio Leonardo (elisio.leonardo@gmail.com)
  * @package       opensga
  * @subpackage    opensga.core.controller
@@ -12,81 +13,78 @@
 
  *
  */
-
-
 class GroupsController extends AppController {
 
-	var $name = 'Groups';
+    var $name = 'Groups';
 
-	function index() {
-		$this->Group->recursive = 0;
-		$this->set('groups', $this->paginate());
-	}
+    function index() {
+        $this->Group->recursive = 0;
+        $this->set('groups', $this->paginate());
+    }
 
-	function view($id = null) {
-		if (!$id) {
-			$this->Session->setFlash(sprintf(__('Invalid %s', true), 'group'));
-			$this->redirect(array('action' => 'index'));
-		}
-		$this->set('group', $this->Group->read(null, $id));
-	}
-
-	function add() {
-		if (!empty($this->data)) {
-			$this->Group->create();
-			if ($this->Group->save($this->data)) {
-				$this->Session->setFlash(sprintf(__('Dado Cadastrado com sucesso', true), 'group'));
-				$this->redirect(array('action' => 'index'));
-			} else {
-				$this->Session->setFlash(sprintf(__('Erro ao gravar dados. Por favor tente de novo.', true), 'group'));
-			}
-		}
-	}
-
-	function edit($id = null) {
-		if (!$id && empty($this->data)) {
-			$this->Session->setFlash(sprintf(__('Invalid %s', true), 'group'));
-			$this->redirect(array('action' => 'index'));
-		}
-		if (!empty($this->data)) {
-			if ($this->Group->save($this->data)) {
-				$this->Session->setFlash(sprintf(__('Dado Cadastrado com sucesso', true), 'group'));
-				$this->redirect(array('action' => 'index'));
-			} else {
-				$this->Session->setFlash(sprintf(__('Erro ao gravar dados. Por favor tente de novo.', true), 'group'));
-			}
-		}
-		if (empty($this->data)) {
-			$this->data = $this->Group->read(null, $id);
-		}
-	}
-
-	function delete($id = null) {
-		if (!$id) {
-			$this->Session->setFlash(sprintf(__('Invalid id for %s', true), 'group'));
-			$this->redirect(array('action'=>'index'));
-		}
-		if ($this->Group->delete($id)) {
-			$this->Session->setFlash(sprintf(__('%s deleted', true), 'Group'));
-			$this->redirect(array('action'=>'index'));
-		}
-		$this->Session->setFlash(sprintf(__('%s was not deleted', true), 'Group'));
-		$this->redirect(array('action' => 'index'));
-	}
-
-
-	function initDB(){
-		$group =& $this->User->Group;
-		$group->id = 1;
-
-		$this->Acl->allow(array('model' => 'Group', 'foreign_key' => 1), 'controllers');
-	}
-
-        function beforeRender(){
-            $this->set('current_section','administracao');
+    function view($id = null) {
+        if (!$id) {
+            $this->Session->setFlash(sprintf(__('Invalid %s', true), 'group'));
+            $this->redirect(array('action' => 'index'));
         }
+        $this->set('group', $this->Group->read(null, $id));
+    }
 
-	function build_acl() {
+    function add() {
+        if (!empty($this->data)) {
+            $this->Group->create();
+            if ($this->Group->save($this->data)) {
+                $this->Session->setFlash(sprintf(__('Dado Cadastrado com sucesso', true), 'group'));
+                $this->redirect(array('action' => 'index'));
+            } else {
+                $this->Session->setFlash(sprintf(__('Erro ao gravar dados. Por favor tente de novo.', true), 'group'));
+            }
+        }
+    }
+
+    function edit($id = null) {
+        if (!$id && empty($this->data)) {
+            $this->Session->setFlash(sprintf(__('Invalid %s', true), 'group'));
+            $this->redirect(array('action' => 'index'));
+        }
+        if (!empty($this->data)) {
+            if ($this->Group->save($this->data)) {
+                $this->Session->setFlash(sprintf(__('Dado Cadastrado com sucesso', true), 'group'));
+                $this->redirect(array('action' => 'index'));
+            } else {
+                $this->Session->setFlash(sprintf(__('Erro ao gravar dados. Por favor tente de novo.', true), 'group'));
+            }
+        }
+        if (empty($this->data)) {
+            $this->data = $this->Group->read(null, $id);
+        }
+    }
+
+    function delete($id = null) {
+        if (!$id) {
+            $this->Session->setFlash(sprintf(__('Invalid id for %s', true), 'group'));
+            $this->redirect(array('action' => 'index'));
+        }
+        if ($this->Group->delete($id)) {
+            $this->Session->setFlash(sprintf(__('%s deleted', true), 'Group'));
+            $this->redirect(array('action' => 'index'));
+        }
+        $this->Session->setFlash(sprintf(__('%s was not deleted', true), 'Group'));
+        $this->redirect(array('action' => 'index'));
+    }
+
+    function initDB() {
+        $group = & $this->User->Group;
+        $group->id = 1;
+
+        $this->Acl->allow(array('model' => 'Group', 'foreign_key' => 1), 'controllers');
+    }
+
+    function beforeRender() {
+        $this->set('current_section', 'administracao');
+    }
+
+    function build_acl() {
         if (!Configure::read('debug')) {
             return $this->_stop();
         }
@@ -108,7 +106,7 @@ class GroupsController extends AppController {
         $Controllers = App::objects('controller');
 
         $appIndex = array_search('App', $Controllers);
-        if ($appIndex !== false ) {
+        if ($appIndex !== false) {
             unset($Controllers[$appIndex]);
         }
         $baseMethods = get_class_methods('Controller');
@@ -118,13 +116,13 @@ class GroupsController extends AppController {
         $Controllers = array_merge($Controllers, $Plugins);
 
         // look at each controller in app/controllers
-       foreach ($Controllers as $ctrlName) {
-       		$ctrlName = str_replace('Controller','',$ctrlName);
+        foreach ($Controllers as $ctrlName) {
+            $ctrlName = str_replace('Controller', '', $ctrlName);
             $methods = $this->_getClassMethods($this->_getPluginControllerPath($ctrlName));
 
             // Do all Plugins First
-            if ($this->_isPlugin($ctrlName)){
-                $pluginNode = $aco->node('controllers/'.$this->_getPluginName($ctrlName));
+            if ($this->_isPlugin($ctrlName)) {
+                $pluginNode = $aco->node('controllers/' . $this->_getPluginName($ctrlName));
                 if (!$pluginNode) {
                     $aco->create(array('parent_id' => $root['Aco']['id'], 'model' => null, 'alias' => $this->_getPluginName($ctrlName)));
                     $pluginNode = $aco->save();
@@ -133,9 +131,9 @@ class GroupsController extends AppController {
                 }
             }
             // find / make controller node
-            $controllerNode = $aco->node('controllers/'.$ctrlName);
+            $controllerNode = $aco->node('controllers/' . $ctrlName);
             if (!$controllerNode) {
-                if ($this->_isPlugin($ctrlName)){
+                if ($this->_isPlugin($ctrlName)) {
                     $pluginNode = $aco->node('controllers/' . $this->_getPluginName($ctrlName));
                     $aco->create(array('parent_id' => $pluginNode['0']['Aco']['id'], 'model' => null, 'alias' => $this->_getPluginControllerName($ctrlName)));
                     $controllerNode = $aco->save();
@@ -161,27 +159,27 @@ class GroupsController extends AppController {
                     unset($methods[$k]);
                     continue;
                 }
-                $methodNode = $aco->node('controllers/'.$ctrlName.'/'.$method);
+                $methodNode = $aco->node('controllers/' . $ctrlName . '/' . $method);
                 if (!$methodNode) {
                     $aco->create(array('parent_id' => $controllerNode['Aco']['id'], 'model' => null, 'alias' => $method));
                     $methodNode = $aco->save();
-                    $log[] = 'Created Aco node for '. $method;
+                    $log[] = 'Created Aco node for ' . $method;
                 }
             }
         }
-        if(count($log)>0) {
+        if (count($log) > 0) {
             debug($log);
         }
     }
 
-function _getClassMethods($ctrlName = null) {
+    function _getClassMethods($ctrlName = null) {
         App::uses($ctrlName . 'Controller', 'Controller');
         if (strlen(strstr($ctrlName, '.')) > 0) {
             // plugin's controller
             $num = strpos($ctrlName, '.');
-            $ctrlName = substr($ctrlName, $num+1);
+            $ctrlName = substr($ctrlName, $num + 1);
         }
-        $ctrlclass = $ctrlName.'Controller';
+        $ctrlclass = $ctrlName . 'Controller';
 
         $methods = get_class_methods($ctrlclass);
 
@@ -190,8 +188,8 @@ function _getClassMethods($ctrlName = null) {
 
         // Add scaffold defaults if scaffolds are being used
         $properties = get_class_vars($ctrlclass);
-        if (array_key_exists('scaffold',$properties)) {
-            if($properties['scaffold'] == 'admin') {
+        if (array_key_exists('scaffold', $properties)) {
+            if ($properties['scaffold'] == 'admin') {
                 $methods = array_merge($methods, array('admin_add', 'admin_edit', 'admin_index', 'admin_view', 'admin_delete'));
             } else {
                 $methods = array_merge($methods, array('add', 'edit', 'index', 'view', 'delete'));
@@ -236,22 +234,22 @@ function _getClassMethods($ctrlName = null) {
         }
     }
 
-/**
- * Get the names of the plugin controllers ...
- *
- * This function will get an array of the plugin controller names, and
- * also makes sure the controllers are available for us to get the
- * method names by doing an App::import for each plugin controller.
- *
- * @return array of plugin names.
- *
- */
+    /**
+     * Get the names of the plugin controllers ...
+     *
+     * This function will get an array of the plugin controller names, and
+     * also makes sure the controllers are available for us to get the
+     * method names by doing an App::import for each plugin controller.
+     *
+     * @return array of plugin names.
+     *
+     */
     function _getPluginControllerNames() {
         $Plugins = App::objects('plugins');
         $arr = array();
 
         // Loop through the plugins
-        foreach($Plugins as $pluginName) {
+        foreach ($Plugins as $pluginName) {
             $controllers = App::objects('controller', $pluginName);
             $pluginPath = App::pluginPath($pluginName);
 
@@ -262,7 +260,7 @@ function _getClassMethods($ctrlName = null) {
         return $arr;
     }
 
-	    function configura_permissoes($user_id) {
+    function configura_permissoes($user_id) {
         if (!isset($user_id)) {
             exit;
         }
@@ -320,4 +318,5 @@ function _getClassMethods($ctrlName = null) {
     }
 
 }
+
 ?>

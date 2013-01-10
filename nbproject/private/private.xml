@@ -2,4 +2,16 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/1"/>
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/1">
+        <file>file:/var/www/opensga/app/Config/routes.php</file>
+        <file>file:/var/www/opensga/app/View/Alunos/perfil_estudante.ctp</file>
+        <file>file:/var/www/opensga/app/View/Helper/PrintHelper.php</file>
+        <file>file:/var/www/opensga/app/View/Alunos/estudante_perfil.ctp</file>
+        <file>file:/var/www/opensga/app/View/Alunos/editar_estudante.ctp</file>
+        <file>file:/var/www/opensga/app/Controller/AlunosController.php</file>
+        <file>file:/var/www/opensga/app/Controller/AppController.php</file>
+        <file>file:/var/www/opensga/app/Controller/GroupsController.php</file>
+        <file>file:/var/www/opensga/app/View/Layouts/estudante.ctp</file>
+        <file>file:/var/www/opensga/app/Controller/InscricaosController.php</file>
+    </open-files>
 </project-private>
