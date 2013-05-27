@@ -40,7 +40,7 @@ class AppController extends Controller {
         }
 
         // Caso deseje usar o modelo padrão, utilize como abaixo, caso contrário você pode usar qualquer modelo
-        AuditableConfig::$Logger = & ClassRegistry::init('Auditable.Logger');
+        AuditableConfig::$Logger = ClassRegistry::init('Auditable.Logger');
 
         //Configure AuthComponent
         Security::setHash('md5');

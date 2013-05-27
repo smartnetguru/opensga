@@ -118,7 +118,7 @@ class User extends AppModel {
 			return $resultado;
         }
 
-		function beforeSave(){
+		function beforeSave($options=array()){
             //So gera Password e Username se for novo cadastro
             if(isset($this->request->data['User']['password'])){
                 $this->request->data['User']['password'] = AuthComponent::password($this->request->data['User']['password']);
