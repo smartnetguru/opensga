@@ -22,6 +22,7 @@ class AlunosController extends AppController {
     public $name = 'Alunos';
 
     function index() {
+    	
         $this->Aluno->recursive = 0;
         $cursos = $this->Aluno->Curso->find('list');
 

@@ -131,14 +131,14 @@ class UsersController extends AppController {
                     $this->User->Aro->create();
                     $this->User->Aro->save($new_aro);
                 }
-
+					
                 if ($User['group_id'] == 3) {
                     $this->redirect(array('controller' => 'pages', 'action' => 'home', 'estudante' => TRUE));
                 }
                 if ($User['group_id'] == 4) {
                     $this->redirect(array('controller' => 'pages', 'action' => 'home', 'docente' => TRUE));
                 }
-                $this->redirect('/');
+                $this->redirect(array('controller' => 'pages', 'action' => 'home'));
             } else {
                 $this->Session->setFlash('Your username or password was incorrect.');
             }
@@ -199,7 +199,7 @@ class UsersController extends AppController {
     function beforeFilter() {
 
         parent::beforeFilter();
-        $this->Auth->allow(array('login', 'logout'));
+        $this->Auth->allow(array('login', 'logout','opauth_complete'));
     }
 
     function teste() {
@@ -335,6 +335,10 @@ class UsersController extends AppController {
             }
         }
         return $result;
+    }
+    
+    public function opauth_complete() {
+    	debug($this->data);
     }
 
 }

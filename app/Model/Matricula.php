@@ -1,4 +1,6 @@
 <?php
+
+App::uses('CakeSession', 'Model/Datasource');
 /**
  * Model de Matricula
  * 
@@ -130,7 +132,8 @@ class Matricula extends AppModel {
     public function getTotalMatriculasActivas($ano_lectivo_id=null)
     {
         if($ano_lectivo_id==null){
-            $ano_lectivo_id = SessionComponent::read('SGAConfig.anolectivo_id');
+        	
+            $ano_lectivo_id = CakeSession::read('SGAConfig.anolectivo_id');
         }
         
         return $this->find('count',array('conditions'=>array('estadomatricula_id'=>1,'Matricula.anolectivo_id'=>$ano_lectivo_id)));

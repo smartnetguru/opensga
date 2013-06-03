@@ -15,7 +15,7 @@
 class Funcionario extends AppModel {
 
     var $name = 'Funcionario';
-    public $actsAs = array('Auditable.Auditable');
+    
     //The Associations below have been created with all possible keys, those that are not needed can be removed
     var $belongsTo = array(
         'User' => array(

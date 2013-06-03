@@ -25,14 +25,14 @@ App::uses('Controller', 'Controller');
  */
 class AppController extends Controller {
 
-    public $components = array('Security', 'Acl', 'Auth', 'Session', 'RequestHandler', 'Cookie', 'DebugKit.Toolbar');
+    public $components = array( 'Acl', 'Auth'=>array('authenticate'=>'Blowfish'), 'Session', 'RequestHandler', 'Cookie', 'DebugKit.Toolbar');
     public $helpers = array('Html','Print', 'Form', 'Session', 'Js' => array('MyJquery'), 'EventsCalendar', 'Javascript', 'Ajax', 'PhpExcel');
     public $pdfConfig = array('engine' => 'CakePdf.Tcpdf');
     public $cacheAction = '1 hour';
 
     public function beforeFilter() {
         parent::beforeFilter();
-
+		
         Configure::write('Config.language', $this->Session->read('Config.language'));
         setlocale(LC_ALL, 'ptb');
         if ($this->Auth->loggedIn()) {
@@ -41,9 +41,10 @@ class AppController extends Controller {
 
         // Caso deseje usar o modelo padrão, utilize como abaixo, caso contrário você pode usar qualquer modelo
         AuditableConfig::$Logger = ClassRegistry::init('Auditable.Logger');
-
+		
         //Configure AuthComponent
-        Security::setHash('md5');
+        //Security::setHash('md5');
+        //$this->Auth->authenticate('Blowfish');
         $this->Auth->authorize = array('Actions' => array('actionPath' => 'controllers'));
         $this->Auth->autoRedirect = false;
         $this->Auth->loginError = "Nome de Usuário ou senha incorrectas";
@@ -59,6 +60,7 @@ class AppController extends Controller {
         }
 
         $this->set('title_for_layout', '');
+        
     }
 
     public function beforeRender() {

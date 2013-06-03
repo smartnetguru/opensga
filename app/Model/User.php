@@ -61,7 +61,7 @@ class User extends AppModel {
 		)
 	);
 
-	var $actsAs = array('Acl' => array('type' => 'requester'),'Auditable.Auditable');
+	var $actsAs = array('Acl' => array('type' => 'requester'));
 
 	 function parentNode() {
 		if (!$this->id && empty($this->data)) {
@@ -120,9 +120,14 @@ class User extends AppModel {
 
 		function beforeSave($options=array()){
             //So gera Password e Username se for novo cadastro
+            
             if(isset($this->request->data['User']['password'])){
-                $this->request->data['User']['password'] = AuthComponent::password($this->request->data['User']['password']);
-                $this->request->data['User']['username'] = $this->geraUsername($this->request->data['User']['name']);
+                $this->request->data['User']['password'] =Security::hash($this->request->data['User']['password'],'Blowfish');
+                
+            }
+            
+            if(isset($this->request->data['User']['username'])){
+            	$this->request->data['User']['username'] = $this->geraUsername($this->request->data['User']['name']);
             }
 			return true;
 		}

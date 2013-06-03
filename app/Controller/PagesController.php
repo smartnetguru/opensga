@@ -61,7 +61,7 @@ class PagesController extends AppController {
 
         $count = count($path);
         if (!$count) {
-            $this->redirect('/');
+           $this->redirect(array('controller' => 'pages', 'action' => 'home'));
         }
         $page = $subpage = $title_for_layout = null;
 
@@ -78,8 +78,13 @@ class PagesController extends AppController {
         $this->set(compact('page', 'subpage', 'title_for_layout'));
         $this->render(implode('/', $path));
     }
+    
+    function index(){
+    	
+    }
 
     function home() {
+    	
         $User = $this->Session->read('Auth.User');
         if ($User['group_id'] == 3) {
             $this->redirect(array('controller' => 'pages', 'action' => 'home', 'estudante' => TRUE));
@@ -87,6 +92,7 @@ class PagesController extends AppController {
         if ($User['group_id'] == 4) {
             $this->redirect(array('controller' => 'pages', 'action' => 'home', 'docente' => TRUE));
         }
+        
         App::import('Model', 'Message');
         $this->loadModel('Aluno');
         $alerta = new Message;
@@ -103,7 +109,7 @@ class PagesController extends AppController {
 
         $valor_divida = $this->Aluno->FinanceiroPagamento->getValorDividaTotal();
 
-
+        
         $alertas = $alerta->find('all', array('conditions' => array('recipient_id' => $recipient_id, 'datainicio <=' => date('Y-m-d') . ' 23:59:59', 'datafim >=' => date('Y-m-d') . ' 00:00:00')));
         $this->set('alertas', $alertas);
         $this->set(compact('total_alunos', 'total_matriculas_activas', 'facturas_geradas', 'facturas_pagas', 'valor_arrecadado', 'valor_divida'));

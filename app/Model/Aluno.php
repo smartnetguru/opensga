@@ -106,6 +106,7 @@ class Aluno extends AppModel {
             'counterQuery' => ''
         )
     );
+    /*
     public $validate = array(
         'curso_id' => array(
             'rule' => 'notempty', // or: array('ruleName', 'param1', 'param2' ...)
@@ -119,7 +120,7 @@ class Aluno extends AppModel {
             'message' => 'campo obrigatorio'
         )
     );
-
+*/
     /**
      * Retorna o plano de estudos activo do aluno
      * @param int $id
