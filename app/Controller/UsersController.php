@@ -199,14 +199,8 @@ class UsersController extends AppController {
     function beforeFilter() {
 
         parent::beforeFilter();
+       
         $this->Auth->allow(array('login', 'logout','opauth_complete'));
-    }
-
-    function teste() {
-        $aluno = $this->User->Aluno->findById(1);
-        debug($aluno);
-        $this->User->geraUsername('Nilza Martina Notico');
-        $this->render('add');
     }
 
     public function configura_permissoes($user_id) {
