@@ -169,6 +169,10 @@ class AlunosController extends AppController {
 
         $is_bolseiro = $this->Aluno->isBolseiro($id) ? 1 : 0;
 
+        //Requisicoes
+        $requisicoes = $this->Aluno->RequisicoesPedido->find('all',array('conditions'=>array('aluno_id'=>$id)));
+        debug($requisicoes);
+        
         $this->Aluno->FinanceiroPagamento->contain(array(
             'FinanceiroTipoPagamento'
         ));
@@ -278,6 +282,9 @@ class AlunosController extends AppController {
         }
 
         $is_bolseiro = $this->Aluno->isBolseiro($id) ? 1 : 0;
+
+        //Requisicoes
+        $requisicoes = $this->Aluno->RequisicoesPedido->find('all',array('conditions'=>array('aluno_id'=>$id)));
 
         $this->Aluno->FinanceiroPagamento->contain(array(
             'FinanceiroTipoPagamento'

@@ -104,6 +104,19 @@ class Aluno extends AppModel {
             'exclusive' => '',
             'finderQuery' => '',
             'counterQuery' => ''
+        ),
+        'RequisicoesPedido' => array(
+            'className' => 'RequisicoesPedido',
+            'foreignKey' => 'aluno_id',
+            'dependent' => false,
+            'conditions' => '',
+            'fields' => '',
+            'order' => '',
+            'limit' => '',
+            'offset' => '',
+            'exclusive' => '',
+            'finderQuery' => '',
+            'counterQuery' => ''
         )
     );
     /*
