@@ -146,6 +146,11 @@ class Funcionario extends AppModel {
         }
         $dataSource->rollback();
     }
+    
+    public function getByUserId($user_id){
+        $funcionario = $this->findByUserId($user_id);
+        return $funcionario;
+    }
 
 }
 
