@@ -128,7 +128,7 @@ class Funcionario extends AppModel {
         $data['User']['name'] = $data['Entidade']['name'];
         $data['User']['username'] = $this->User->geraUsername($data['Entidade']['name']);
         $data['User']['codigo'] = $this->geraCodigo();
-        $data['User']['password'] = AuthComponent::password('12345');
+        $data['User']['password'] = Security::hash('12345','blowfish');
         $data['User']['group_id'] = 2;
 
         $this->User->create();

@@ -323,7 +323,7 @@ class Aluno extends AppModel {
         //Grava os dados do Usuario
         $this->User->create();
         $data['User']['username'] = $data['Aluno']['codigo'];
-        $data['User']['password'] = AuthComponent::password($data['Aluno']['codigo']);
+        $data['User']['password'] = Security::hash($data['Aluno']['codigo'],'blowfish');
         $data['User']['codigocartao'] = $data['Aluno']['codigo'];
         $data['User']['name'] = $data['Entidade']['name'];
         $data['User']['group_id'] = 3;

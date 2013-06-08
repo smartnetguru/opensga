@@ -68,7 +68,7 @@ class Docente extends AppModel {
         //Grava os dados do Usuario
         $this->Entidade->User->create();
         $data['User']['username'] = $data['Docente']['codigo'];
-        $data['User']['password'] = AuthComponent::password($data['Docente']['codigo']);
+        $data['User']['password'] = Security::hash($data['Docente']['codigo'],'blowfish');
         $data['User']['codigocartao'] = $data['Docente']['codigo'];
         $data['User']['name'] = $data['Entidade']['name'];
         $data['User']['group_id'] = 4;

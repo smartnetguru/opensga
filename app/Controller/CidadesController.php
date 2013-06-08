@@ -102,7 +102,8 @@ class CidadesController extends AppController {
         
         public function getByProvincia(){
             foreach($this->request->data as $k=>$v){
-                $provincia_id = $v['provincia_nascimento'];
+                
+                $provincia_id = reset($v);
             }
             
             $cidades = $this->Cidade->find('list',array('conditions'=>array('provincia_id'=>$provincia_id)));

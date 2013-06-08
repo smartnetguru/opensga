@@ -74,9 +74,9 @@ class FuncionariosController extends AppController {
         $users = $this->Funcionario->User->find('list');
         $grauacademicos = $this->Funcionario->GrauAcademico->find('list');
         $cargos = $this->Funcionario->Cargo->find('list');
-        $faculdades = $this->Funcionario->Faculdade->find('list');
-        $departamentos = $this->Funcionario->Departamento->find('list');
-        $seccaos = $this->Funcionario->Seccao->find('list');
+        //$faculdades = $this->Funcionario->UnidadeOrganica->find('list');
+        //$departamentos = $this->Funcionario->UnidadeOrganica->find('list');
+        //$seccaos = $this->Funcionario->UnidadeOrganica->find('list');
         $tipofuncionarios = $this->Funcionario->Tipofuncionario->find('list');
         $documento_identificacaos = $this->Funcionario->Entidade->DocumentoIdentificacao->find('list');
         $unidades_organicas = $this->Funcionario->UnidadeOrganica->find('list');
@@ -84,9 +84,10 @@ class FuncionariosController extends AppController {
         $cidades = $this->Funcionario->Entidade->CidadeNascimento->find('list');
         $provincias = $this->Funcionario->Entidade->ProvinciaNascimento->find('list');
         $generos = $this->Funcionario->Entidade->Genero->find('list');
+        $unidadeOrganicas = $this->Funcionario->UnidadeOrganica->find('list');
 
 
-        $this->set(compact('users', 'Grauacademicos', 'tipofuncionarios', 'departamentos', 'cargos', 'faculdades', 'seccaos', 'unidade_organicas', 'documento_identificacaos', 'paises', 'cidades', 'provincias', 'generos'));
+        $this->set(compact('users', 'Grauacademicos', 'tipofuncionarios', 'departamentos', 'cargos', 'faculdades', 'seccaos', 'unidadeOrganicas', 'documento_identificacaos', 'paises', 'cidades', 'provincias', 'generos'));
     }
 
     function editar_funcionario($id = null) {
