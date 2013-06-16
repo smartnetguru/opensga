@@ -482,30 +482,30 @@ class Aluno extends AppModel {
         if($aluno['Aluno']['estado_aluno_id']==1){
             $renovacoes = $this->Matricula->getStatusRenovacao($aluno_id);
             if(empty($renovacoes)){
-                return array("estado"=>1,"mensagem"=>'Estudante Regular');
+                return array("estado"=>1,"mensagem"=>'Estudante Regular',"regular"=>true);
             } else{
                 $string_retorno = __("Não renovou matricula nos seguintes anos: ");
                 foreach($renovacoes as $renovacao){
                     $string_retorno.=$renovacao['Anolectivo']['ano'].", ";
                 }
-                return array("estado"=>2,"mensagem"=>$string_retorno);
+                return array("estado"=>2,"mensagem"=>$string_retorno,"regular"=>false);
             }
         }
         if($aluno['Aluno']['estado_aluno_id']==3){
             $renovacoes = $this->Matricula->getStatusRenovacao($aluno_id);
             if(empty($renovacoes)){
-                return array("estado"=>3,"mensagem"=>'Concluiu o Nivel');
+                return array("estado"=>3,"mensagem"=>'Concluiu o Nivel',"regular"=>true);
             } else{
                 $string_retorno = __("Concluiu o nível, mas não renovou matricula nos seguintes anos: ");
                 foreach($renovacoes as $renovacao){
                     $string_retorno.=$renovacao['Anolectivo']['ano'].", ";
                 }
-                return array("estado"=>4,"mensagem"=>$string_retorno);
+                return array("estado"=>4,"mensagem"=>$string_retorno,"regular"=>false);
             }
         }
         
         
-        return array("estado"=>5,"mensagem"=>$aluno['EstadoAluno']['name']);
+        return array("estado"=>5,"mensagem"=>$aluno['EstadoAluno']['name'],"regular"=>false);
     }
 
 }
