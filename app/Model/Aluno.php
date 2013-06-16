@@ -64,6 +64,14 @@ class Aluno extends AppModel {
             'fields' => '',
             'order' => ''
         ),
+        'EstadoAluno' => array(
+            'className' => 'EstadoAluno',
+            'foreignKey' => 'estado_aluno_id',
+            'conditions' => '',
+            'fields' => '',
+            'order' => ''
+        ),
+    
     );
     var $hasMany = array(
         'Matricula' => array(
@@ -72,7 +80,7 @@ class Aluno extends AppModel {
             'dependent' => false,
             'conditions' => '',
             'fields' => '',
-            'order' => '',
+            'order' => 'data',
             'limit' => '',
             'offset' => '',
             'exclusive' => '',
@@ -460,6 +468,44 @@ class Aluno extends AppModel {
             return false;
         }
         return true;
+    }
+    
+    /**
+     * Verifica se um determinado aluno é regular. Para tal, basta verificar se todas as matriculas foram renovadas ate ao presente ano, verificar a situacao da conclusao e o status na tabela alunos
+     * @param type $id_aluno
+     * @return array Um array contendo o status e o motivo
+     */
+    function isRegular($aluno_id) {
+        $this->contain('EstadoAluno');
+        $aluno = $this->findById($aluno_id);
+        
+        if($aluno['Aluno']['estado_aluno_id']==1){
+            $renovacoes = $this->Matricula->getStatusRenovacao($aluno_id);
+            if(empty($renovacoes)){
+                return array("estado"=>1,"mensagem"=>'Estudante Regular');
+            } else{
+                $string_retorno = __("Não renovou matricula nos seguintes anos: ");
+                foreach($renovacoes as $renovacao){
+                    $string_retorno.=$renovacao['Anolectivo']['ano'].", ";
+                }
+                return array("estado"=>2,"mensagem"=>$string_retorno);
+            }
+        }
+        if($aluno['Aluno']['estado_aluno_id']==3){
+            $renovacoes = $this->Matricula->getStatusRenovacao($aluno_id);
+            if(empty($renovacoes)){
+                return array("estado"=>3,"mensagem"=>'Concluiu o Nivel');
+            } else{
+                $string_retorno = __("Concluiu o nível, mas não renovou matricula nos seguintes anos: ");
+                foreach($renovacoes as $renovacao){
+                    $string_retorno.=$renovacao['Anolectivo']['ano'].", ";
+                }
+                return array("estado"=>4,"mensagem"=>$string_retorno);
+            }
+        }
+        
+        
+        return array("estado"=>5,"mensagem"=>$aluno['EstadoAluno']['name']);
     }
 
 }
