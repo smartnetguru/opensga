@@ -277,7 +277,7 @@ class InscricaosController extends AppController {
     public function inscrever($aluno_id, $matricula_id) {
         $this->loadModel('Turma');
         $this->loadModel('Aluno');
-        $this->loadModel('Pagamento');
+        $this->loadModel('FinanceiroPagamento');
         $this->loadModel('Matricula');
 
 

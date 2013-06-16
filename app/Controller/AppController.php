@@ -45,6 +45,7 @@ class AppController extends Controller {
         //Configure AuthComponent
         //Security::setHash('md5');
         //$this->Auth->authenticate('Blowfish');
+        $this->Security->blackHoleCallback = 'blackhole';
         $this->Auth->authorize = array('Actions' => array('actionPath' => 'controllers'));
         $this->Auth->autoRedirect = false;
         $this->Auth->loginError = "Nome de Usuário ou senha incorrectas";

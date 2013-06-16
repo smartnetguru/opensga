@@ -119,6 +119,9 @@ class UsersController extends AppController {
 
                     $this->Session->write($name, $c['Config']['value']);
                 }
+                $this->Session->write('SGAConfig.anolectivo_id',Configure::read('OpenSGA.ano_lectivo_id'));
+                $this->Session->write('SGAConfig.ano_lectivo',Configure::read('OpenSGA.ano_lectivo'));
+                $this->Session->write('Config.language', 'por');
 
 
                 $User = $this->Session->read('Auth.User');
@@ -133,10 +136,14 @@ class UsersController extends AppController {
                 }
 					
                 if ($User['group_id'] == 3) {
+                    
                     $this->redirect(array('controller' => 'pages', 'action' => 'home', 'estudante' => TRUE));
                 }
                 if ($User['group_id'] == 4) {
                     $this->redirect(array('controller' => 'pages', 'action' => 'home', 'docente' => TRUE));
+                }
+                if($User['group_id']==2){
+                    
                 }
                 $this->redirect(array('controller' => 'pages', 'action' => 'home'));
             } else {

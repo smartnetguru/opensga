@@ -91,20 +91,6 @@ class Turma extends AppModel {
 			'fields' => '',
 			'order' => ''
 		),
-		'Assistente' => array(
-			'className' => 'Docente',
-			'foreignKey' => 'assistente_id',
-			'conditions' => '',
-			'fields' => '',
-			'order' => ''
-		),
-		'Docente' => array(
-			'className' => 'Docente',
-			'foreignKey' => 'docente_id',
-			'conditions' => '',
-			'fields' => '',
-			'order' => ''
-		),
 		'UnidadeOrganica' => array(
 			'className' => 'UnidadeOrganica',
 			'foreignKey' => 'unidade_organica_id',
@@ -245,7 +231,7 @@ class Turma extends AppModel {
 			$this->Inscricao->Aluno->recursive=-1;
 			//Primeiro vamos pegar todas as disciplinas do plano de estudos
             $todas_disciplinas = $this->Planoestudo->getAllDisciplinas($matricula['Matricula']['planoestudo_id']);
-
+           
             //Inscricoes activas
             $inscricoes_activas = $this->Inscricao->Aluno->getAllInscricoesActivasandAprovadasForInscricao($aluno_id);
 
@@ -258,8 +244,9 @@ class Turma extends AppModel {
                 $aluno = $Aluno->findById($aluno_id,'escola_id');
                 $conditions['Turma.escola_id']=$aluno['Aluno']['escola_id'];
             }
+                        debug($conditions);
 			$turmas = $this->find('all', array('conditions'=>$conditions,'fields'=>array('Turma.id','Disciplina.name','Disciplina.id','Turma.anocurricular','Turma.semestrecurricular'),'order'=>array('Turma.anocurricular','Turma.semestrecurricular')));
-
+                         debug($turmas);
 			return $turmas;
 
         }

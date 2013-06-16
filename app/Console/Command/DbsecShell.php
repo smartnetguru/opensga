@@ -1,101 +1,387 @@
 <?php 
 ini_set('memory_limit',"512M");
-class DraShell extends AppShell {
-	public $uses = array('UemDra.Faculdade','UemDra.DraSeccao','UemDra.DraDepartamento','UemDra.DraProvincia','UemDra.DraCurso','UemDra.DraPessoa','Provincia','UnidadeOrganica','Curso','User','Entidade','Aluno');
-	
-	public function main() {
-		$this->out('Hello world.');
-	}
-	
-	public function getCodigoProvincia($codigo_antigo){
-		$provincia = $this->DraProvincia->findById($codigo_antigo);
-		
-		$nome_provincia = $provincia['DraProvincia']['nome'];
-		
-		$provincia2 = $this->Provincia->findByName($nome_provincia);
-		
-		return $provincia2['Provincia']['id'];
-	}
-	
-	public function importa_unidade_organica(){
-		$this->out('Inicio da Importacao.');
-		
-		$this->out('--------------Importando Faculdades--------------------');
-		$faculdades = $this->Faculdade->find('all');
-		foreach($faculdades as $faculdade){
-			$codigo_provincia = $this->getCodigoProvincia($faculdade['Faculdade']['provincia_id']);
-			
-			$faculdade_array = array(
-					'UnidadeOrganica'=>array(
-							'name'=>$faculdade['Faculdade']['nome'],
-							'codigo'=>trim($faculdade['Faculdade']['fac_id']),
-							'tipo_unidade_organica_id'=>1,
-							'nivel_unidade'=>1
-							
-			)
-					
-			);
-			$this->UnidadeOrganica->create();
-			$this->UnidadeOrganica->save($faculdade_array);
-			$this->out('Faculdade Inseriida--'.$this->UnidadeOrganica->id.'---'.$faculdade_array['UnidadeOrganica']['name']);
-		}
-		$this->out('Faculdades Importadas');
-		
-		$this->out('--------------Importando Departamentos--------------------');
-		$departamentos = $this->DraDepartamento->find('all');
-		foreach($departamentos as $departamento){
-			
-			$fac_id = $departamento['DraDepartamento']['fac_id'];
-			$fac_id = trim($fac_id);
-			
-			$faculdade = $this->UnidadeOrganica->find('first',array('conditions'=>array('UnidadeOrganica.codigo'=>$fac_id,'UnidadeOrganica.nivel_unidade'=>1)));
-			
-			$faculdade_array = array(
-					'UnidadeOrganica'=>array(
-							'name'=>$departamento['DraDepartamento']['nome'],
-							'codigo'=>trim($departamento['DraDepartamento']['dept_id']),
-							'tipo_unidade_organica_id'=>2,
-							'nivel_unidade'=>2,
-							'parent_id'=>$faculdade['UnidadeOrganica']['id']
-								
-					)
-		);
-			
-			$this->UnidadeOrganica->create();
-			$this->UnidadeOrganica->save($faculdade_array);
-			$this->out('Departamento Inserido--'.$this->UnidadeOrganica->id.'---'.$faculdade_array['UnidadeOrganica']['name']);
-			
-		}
-		
-		$this->out('--------------Importando Seccoes--------------------');
-		
-	}
-	
-	
-	public function importa_curso(){
-		$cursos  = $this->DraCurso->find('all');
-		foreach($cursos as $curso){
-			debug($curso);
-			$fac_id = $curso['DraCurso']['dpt_id'];
-			$faculdade = $this->UnidadeOrganica->find('first',array('conditions'=>array('UnidadeOrganica.codigo'=>$fac_id,'UnidadeOrganica.nivel_unidade'=>2)));
-			debug($faculdade);
-			$curso_array = array(
+App::uses('AuditableConfig', 'Auditable.Lib');
+class DbsecShell extends AppShell {
+	public $uses = array('UemDra.DraCurso','UemDbsec.DbsecAvaliacaoTipo','UemDbsec.DbsecCurso','Curso','UnidadeOrganica','UemDbsec.DbsecDisciplina','Disciplina','UemDbsec.DbsecDisciplinaCurso','Planoestudo','Planoestudoano','UemDra.DraCurso','UemDbsec.DbsecEstudante','Aluno','UemDbsec.DbsecLeccionamento','Turma','Anolectivo','Semestrelectivo','Turma','CursosTurno','Matricula','UemDbsec.DbsecInscricao','Inscricao','User','Entidade');
+        
+        /**
+         * @todo  Implementar se for necessario
+         */
+        public function importa_avaliacao_tipo(){
+            $avaliacao_tipos = $this->DbsecAvaliacaoTipo->find('all');
+            foreach($avaliacao_tipos as $at){
+                debug($at);
+            }
+        }
+        
+        public function verifica_cursos(){
+            $cursos = $this->DbsecCurso->find('all',array('conditions'=>array('relevante'=>1)));
+            foreach($cursos as $curso){
+                $curso_existe = $this->Curso->findByCodigo($curso['DbsecCurso']['curso_id']);
+                if(!empty($curso_existe)){
+                    $this->out("Sim");
+                }
+                else{
+                    $fac_id = $curso['DbsecCurso']['dpt_id'];
+                    $faculdade = $this->UnidadeOrganica->find('first',array('conditions'=>array('UnidadeOrganica.codigo'=>$fac_id,'UnidadeOrganica.nivel_unidade'=>2)));
+                    
+                    $curso_array = array(
 					'Curso'=>array(
-							'name'=>$curso['DraCurso']['curso_nome'],
-							'grauacademico_id'=>$curso['DraCurso']['nivel'],
-							'tipocurso_id'=>$curso['DraCurso']['nivel'],
+							'name'=>$curso['DbsecCurso']['curso_nome'],
+							'grauacademico_id'=>$curso['DbsecCurso']['nivel'],
+							'tipocurso_id'=>$curso['DbsecCurso']['nivel'],
 							'unidade_organica_id'=>$faculdade['UnidadeOrganica']['id'],
-							'codigo'=>$curso['DraCurso']['curso_id']
+							'codigo'=>$curso['DbsecCurso']['curso_id']
 			)
 			);
+                    
 			$this->Curso->create();
 			$this->Curso->save($curso_array);
 			$this->out('Curso Inserido--'.$this->Curso->id.'---'.$curso_array['Curso']['name']);
-		}
-	}
-	
-	
-	public function normalize_str($str)
+                }
+            }
+        }
+        
+        public function importa_disciplinas(){
+            $disciplinas = $this->DbsecDisciplina->find('all');
+            foreach($disciplinas as $disciplina){
+                
+                $codigo_existe = $this->Disciplina->findByCodigoAntigo($disciplina['DbsecDisciplina']['disc_id']);
+                if(!empty($codigo_existe)){
+                    debug($disciplina);
+                    $this->out("Codigo");
+                } else{
+                    $nome_existe = $this->Disciplina->findByName($disciplina['DbsecDisciplina']['disc_nome']);{
+                        if(!empty($nome_existe)){
+                            debug($disciplina);
+                            $this->out("Nome");
+                        } else{
+                            $array_disciplina = array(
+                                'Disciplina'=>array(
+                                    'codigo'=>$disciplina['DbsecDisciplina']['disc_id'],
+                                    'name'=>$disciplina['DbsecDisciplina']['disc_nome'],
+                                    'codigo_antigo'=>$disciplina['DbsecDisciplina']['disc_id']
+                                )
+                            );
+                            $this->Disciplina->create();
+                            $this->Disciplina->save($array_disciplina);
+                            $this->out("Disciplina Criada--".$disciplina['DbsecDisciplina']['disc_id']);
+                            
+                        }
+                }
+                }
+            }
+        }
+        
+        public function importa_plano_estudo(){
+            $disciplina_curso = $this->DbsecDisciplinaCurso->find('all');
+            foreach($disciplina_curso as $dc){
+                $curso = $this->Curso->findByCodigo($dc['DbsecDisciplinaCurso']['id_curso']);
+                $plano_estudo_existe = $this->Planoestudo->find('first',array('conditions'=>array('curso_id'=>$curso['Curso']['id'],'ano_criacao'=>$dc['DbsecDisciplinaCurso']['curriculum'])));
+                if(empty($plano_estudo_existe)){
+                    $this->Planoestudo->create();
+                    $array_plano_estudo = array(
+                        'Planoestudo'=>array(
+                            'name'=>$curso['Curso']['name']." - ".$dc['DbsecDisciplinaCurso']['curriculum'],
+                            'curso_id'=>$curso['Curso']['id'],
+                            'ano_criacao'=>$dc['DbsecDisciplinaCurso']['curriculum'],
+                            'codigo'=>$curso['Curso']['codigo']."-".$dc['DbsecDisciplinaCurso']['curriculum']
+                        )
+                    );
+                    $this->Planoestudo->save($array_plano_estudo);
+                    $plano_estudo_id = $this->Planoestudo->id;
+                } else{
+                    $plano_estudo_id = $plano_estudo_existe['Planoestudo']['id'];
+                }
+                
+                $disciplina = $this->Disciplina->findByCodigo($dc['DbsecDisciplinaCurso']['id_disc']);
+                if(empty($disciplina)){
+                    
+                    $disciplina_dbsec = $this->DbsecDisciplina->findByDiscId($dc['DbsecDisciplinaCurso']['id_disc']);
+                    $disciplina = $this->Disciplina->findByName($disciplina_dbsec['DbsecDisciplinaCurso']['disc_nome']);
+                    if(empty($disciplina)){
+                        die(debug($dc['DbsecDisciplinaCurso']['id_disc']));
+                    }
+                }
+
+                if($dc['DbsecDisciplinaCurso']['semestre']==1){
+                    $semestre_sequencial = $dc['DbsecDisciplinaCurso']['nivel']*($dc['DbsecDisciplinaCurso']['semestre']+1)-1;
+                }
+                if($dc['DbsecDisciplinaCurso']['semestre']==2){
+                    $semestre_sequencial = $dc['DbsecDisciplinaCurso']['nivel']*$dc['DbsecDisciplinaCurso']['semestre'];
+                }
+                $array_plano_ano = array(
+                    'Planoestudoano'=>array(
+                        'planoestudo_id'=>$plano_estudo_id,
+                        'ano'=>$dc['DbsecDisciplinaCurso']['nivel'],
+                        'semestre'=>$dc['DbsecDisciplinaCurso']['semestre'],
+                        'carga_total'=>$dc['DbsecDisciplinaCurso']['cargaHoraria'],
+                        'creditos'=>$dc['DbsecDisciplinaCurso']['peso'],
+                        'disciplina_id'=>$disciplina['Disciplina']['id'],
+                        'codigo'=>$disciplina['Disciplina']['codigo']."-".$curso['Curso']['codigo']."-".$dc['DbsecDisciplinaCurso']['curriculum'],
+                        'ramo_id'=>$dc['DbsecDisciplinaCurso']['ramo'],
+                        'semestre_sequencial'=>$semestre_sequencial
+                    )
+                );
+                $plano_ano_existe = $this->Planoestudoano->find('first',array('conditions'=>array('planoestudo_id'=>$plano_estudo_id,'disciplina_id'=>$disciplina['Disciplina']['id'],'ramo_id'=>$dc['DbsecDisciplinaCurso']['ramo'])));
+                if(empty($plano_ano_existe)){
+                    $this->Planoestudoano->create();
+                $this->Planoestudoano->save($array_plano_ano);
+                $this->out('Plano Ano Criado');
+                } else{
+                    $this->out("Plano existia-------------------------------------");
+                    debug($plano_ano_existe);
+                    die(debug($array_plano_ano));
+                }
+                
+            }
+        }
+        
+        public function verifica_estudantes(){
+            $estudantes = $this->DbsecEstudante->find('all');
+            $existem = 0;
+            $nao_existem = 0;
+            foreach($estudantes as $estudante){
+                $this->Aluno->recursive=-1;
+                $estudante_sga = $this->Aluno->findByCodigo($estudante['DbsecEstudante']['est_num']);
+                if(empty($estudante_sga)){
+                    $nao_existem++;
+                    debug($estudante['DbsecEstudante']['est_num']);
+                }
+                else{
+                    $existem++;
+                    
+                }
+            }
+            $this->out("Existem".$existem);
+            $this->out("Nao existem".$nao_existem);
+        }
+        
+        public function importa_leccionamento(){
+            $leccionamentos = $this->DbsecLeccionamento->find('all');
+            $i=0;
+            foreach($leccionamentos as $lec){
+                $this->Planoestudo->recursive= -1;
+                $this->Curso->recursive = -1;
+                $curso = $this->Curso->findByCodigo($lec['DbsecLeccionamento']['id_curso']);
+                 $plano_estudo = $this->Planoestudo->find('first',array('conditions'=>array('curso_id'=>$curso['Curso']['id'],'ano_criacao'=>$lec['DbsecLeccionamento']['curriculum'])));
+                $this->Anolectivo->recursive = -1;
+                $anolectivo = $this->Anolectivo->findByAno($lec['DbsecLeccionamento']['ano']);
+                $this->Disciplina->recursive = -1;
+                $disciplina = $this->Disciplina->findByCodigo($lec['DbsecLeccionamento']['id_disc']);
+                if(!empty($disciplina)){
+                    $semestre_lectivo = $this->Semestrelectivo->find('first',array('conditions'=>array('anolectivo_id'=>$anolectivo['Anolectivo']['id'],'semestre'=>$lec['DbsecLeccionamento']['semestre'])));
+                    if(empty($semestre_lectivo)){
+                        $array_semestre = array(
+                            'Semestrelectivo'=>array(
+                                'codigo'=>$anolectivo['Anolectivo']['ano']."-".$lec['DbsecLeccionamento']['semestre'],
+                                'anolectivo_id'=>$anolectivo['Anolectivo']['id'],
+                                'semestre'=>$lec['DbsecLeccionamento']['semestre'],
+                                'semestre_id'=>$lec['DbsecLeccionamento']['semestre'],
+                            )
+                        );
+                        $this->Semestrelectivo->create();
+                        $this->Semestrelectivo->save($array_semestre);
+                        $semestre_lectivo = $this->Semestrelectivo->find('first',array('conditions'=>array('anolectivo_id'=>$anolectivo['Anolectivo']['id'],'semestre'=>$lec['DbsecLeccionamento']['semestre'])));
+                    }
+                    
+                    $array_turma = array(
+                        'Turma'=>array(
+                            'anolectivo_id'=>$anolectivo['Anolectivo']['id'],
+                            'planoestudo_id'=>$plano_estudo['Planoestudo']['id'],
+                            'disciplina_id'=>$disciplina['Disciplina']['id'],
+                            'curso_id'=>$plano_estudo['Planoestudo']['curso_id'],
+                            'estadoturma_id'=>1,
+                            'codigo'=>$lec['DbsecLeccionamento']['id'],
+                            'anocurricular'=>$lec['DbsecLeccionamento']['nivel'],
+                            'semestrecurricular'=>$lec['DbsecLeccionamento']['semestre'],
+                            'name'=>$disciplina['Disciplina']['name']." - ".$lec['DbsecLeccionamento']['ano']." - ".$plano_estudo['Planoestudo']['name'],
+                            'semestrelectivo_id'=>$semestre_lectivo['Semestrelectivo']['id'],
+                            'unidade_organica_id'=>$curso['Curso']['unidade_organica_id']
+                        )
+                    );
+                    
+                    $this->Turma->create();
+                    $this->Turma->save($array_turma);
+                    $this->out("Turma Criada--".$array_turma['Turma']['name']." ------ -----  ".$this->Turma->id);
+                }
+            }
+        }
+        
+        public function actualiza_semestres(){
+            $anolectivos = $this->Anolectivo->find('all');
+            foreach($anolectivos as $anolectivo){
+                $semestre_lectivo = $this->Semestrelectivo->find('first',array('conditions'=>array('anolectivo_id'=>$anolectivo['Anolectivo']['id'])));
+                    if(empty($semestre_lectivo)){
+                        $array_semestre = array(
+                            array(
+                             'Semestrelectivo'=>array(
+                                'codigo'=>$anolectivo['Anolectivo']['ano']."-1",
+                                'anolectivo_id'=>$anolectivo['Anolectivo']['id'],
+                                'semestre'=>1,
+                                'semestre_id'=>1,
+                            )   
+                            ),
+                            array(
+                            'Semestrelectivo'=>array(
+                                'codigo'=>$anolectivo['Anolectivo']['ano']."-1",
+                                'anolectivo_id'=>$anolectivo['Anolectivo']['id'],
+                                'semestre'=>2,
+                                'semestre_id'=>2,
+                            )    
+                            )
+                            
+                        );
+                        $this->Semestrelectivo->create();
+                        $this->Semestrelectivo->saveAll($array_semestre);
+                        $this->out($anolectivo['Anolectivo']['id']);
+            }
+        }
+        
+        }
+        
+        Public function actualiza_turnos(){
+            $cursos = $this->DraCurso->find('all');
+            foreach($cursos as $curso){
+                $curso_sga= $this->Curso->findByCodigo($curso['DraCurso']['curso_id']);
+                $array_curso_turno = array(
+                    'CursosTurno'=>array(
+                        'curso_id'=>$curso_sga['Curso']['id'],
+                        'turno_id'=>$curso['DraCurso']['regime']
+                    )
+                );
+                $this->CursosTurno->create();
+                $this->CursosTurno->save($array_curso_turno);
+                
+                
+        }
+        }
+        
+        public function actualiza_turnos_dbsec(){
+            $cursos = $this->DbsecCurso->find('all');
+            foreach($cursos as $curso){
+               $curso_sga= $this->Curso->findByCodigo($curso['DbsecCurso']['curso_id']);
+               $curso_turno_existe = $this->CursosTurno->findByCursoId($curso_sga['Curso']['id']);
+               if(empty($curso_turno_existe)){
+                   $array_curso_turno = array(
+                    'CursosTurno'=>array(
+                        'curso_id'=>$curso_sga['Curso']['id'],
+                        'turno_id'=>$curso['DbsecCurso']['regime']
+                    )
+                );
+                $this->CursosTurno->create();
+                $this->CursosTurno->save($array_curso_turno);
+               }
+                
+            }
+        }
+        
+        public function actualiza_turnos_matriculas_turmas(){
+            $matriculas = $this->Matricula->find('all');
+            foreach($matriculas as $matricula){
+                $turno = $this->CursosTurno->findByCursoId($matricula['Matricula']['curso_id']);
+                $this->Matricula->id=$matricula['Matricula']['id'];
+            }
+        }
+        
+        public function actualiza_matricula_plano(){
+            $this->Matricula->recursive=-1;
+            $matriculas = $this->Matricula->find('all',array('conditions'=>array('planoestudo_id'=>null)));
+            $i=0;
+            foreach($matriculas as $matricula){
+                $this->Aluno->recursive = -1;
+                $aluno = $this->Aluno->findById($matricula['Matricula']['aluno_id']);
+                if($aluno['Aluno']['codigo']==''){
+                    
+                }else{
+                    $aluno_dbsec = $this->DbsecEstudante->findByEstNum($aluno['Aluno']['codigo']);
+                if(!empty($aluno_dbsec)){
+                    $this->Planoestudo->recursive=-1;
+                    $planoestudo = $this->Planoestudo->find('first',array('conditions'=>array('curso_id'=>$matricula['Matricula']['curso_id'],'ano_criacao'=>$aluno_dbsec['DbsecEstudante']['curriculum'])));
+                    $this->Aluno->id = $aluno['Aluno']['id'];
+                    $this->Aluno->set('planoestudo_id',$planoestudo['Planoestudo']['id']);
+                    $this->Aluno->save();
+                    $this->Matricula->id = $matricula['Matricula']['id'];
+                    $this->Matricula->set('planoestudo_id',$planoestudo['Planoestudo']['id']);
+                    $this->Matricula->save();
+                }
+                }
+                
+                $i++;
+        debug($i);
+        }
+        
+        }
+        
+        public function importa_inscricao(){
+            $inscricaos = $this->DbsecInscricao->find('all');
+            $i=0;
+            AuditableConfig::$Logger = ClassRegistry::init('Auditable.Logger');
+            foreach($inscricaos as $inscricao){
+                $this->Aluno->recursive=-1;
+                
+                $aluno = $this->Aluno->findByCodigo(trim($inscricao['DbsecInscricao']['num_est']));
+              
+                $this->Disciplina->recursive=-1;
+                $disciplina = $this->Disciplina->findByCodigo($inscricao['DbsecInscricao']['id_disc']);
+                $this->Turma->recursive = -1;
+                $turma = $this->Turma->findByCodigo($inscricao['DbsecInscricao']['id_lec']);
+                
+                $this->Anolectivo->recursive=-1;
+                $anolectivo = $this->Anolectivo->findByAno($inscricao['DbsecInscricao']['ano_lectivo']);
+                $this->Matricula->recursive=-1;
+                $matricula = $this->Matricula->find('first',array('conditions'=>array('aluno_id'=>$aluno['Aluno']['id'],'anolectivo_id'=>$anolectivo['Anolectivo']['id'])));
+                if(empty($matricula)){
+                    $nova_matricula = array(
+                     'Matricula'=>array(
+                        
+                         'aluno_id'=>$aluno['Aluno']['id'],
+                         'curso_id'=>$aluno['Aluno']['curso_id'],
+                         'planoestudo_id'=>$aluno['Aluno']['planoestudo_id'],
+                         'data'=>$inscricao['DbsecInscricao']['data_registo'],
+                         'estadomatricula_id'=>0,
+                         'user_id'=>1,
+                         'anolectivo_id'=>$anolectivo['Anolectivo']['id'],
+                         'tipo_matricula_id'=>0
+                     )
+                 );
+                    
+                    $this->Matricula->create();
+                 $this->Matricula->save($nova_matricula);
+                $matricula = $this->Matricula->find('first',array('conditions'=>array('aluno_id'=>$aluno['Aluno']['id'],'anolectivo_id'=>$anolectivo['Anolectivo']['id']))); 
+                }
+                $this->Curso->recursive=-1;
+                $curso_frequencia = $this->Curso->findByCodigo($inscricao['DbsecInscricao']['id_curso_freq']);
+                $turma_frequencia = $this->Turma->find('first',array('conditions'=>array('curso_id'=>$curso_frequencia['Curso']['id'],'disciplina_id'=>$disciplina['Disciplina']['id'],'anolectivo_id'=>$anolectivo['Anolectivo']['id'])));
+                $curso = $this->Curso->findByCodigo($inscricao['DbsecInscricao']['id_curso_freq']);
+                if(empty($turma)){
+                    $turma = $this->Turma->find('first',array('conditions'=>array('curso_id'=>$curso['Curso']['id'],'disciplina_id'=>$disciplina['Disciplina']['id'],'anolectivo_id'=>$anolectivo['Anolectivo']['id'])));
+                }
+                
+                $array_inscricao = array(
+                    'Inscricao'=>array(
+                        'aluno_id'=>$aluno['Aluno']['id'],
+                        'turma_id'=>$turma['Turma']['id'],
+                        'estadoinscricao_id'=>1,
+                        'nota_frequencia'=>$inscricao['DbsecInscricao']['nota_freq'],
+                        'nota_final'=>$inscricao['DbsecInscricao']['media'],
+                        'data'=>$inscricao['DbsecInscricao']['data_registo'],
+                        'matricula_id'=>$matricula['Matricula']['id'],
+                        'tipo_inscricao_id'=>$inscricao['DbsecInscricao']['tipo_id'],
+                        'nota_exame_normal'=>$inscricao['DbsecInscricao']['nota'],
+                        'nota_exame_recorrencia'=>$inscricao['DbsecInscricao']['nota_rec'],
+                        'estado_inscricao'=>$inscricao['DbsecInscricao']['aprovado'],
+                        'turma_frequencia_id'=>$turma_frequencia['Turma']['id']
+                    )
+                );
+                
+                $this->Inscricao->create();
+                $this->Inscricao->save($array_inscricao);
+                $this->out("Inscricao Criada----- ".$this->Inscricao->id);
+            }
+        }
+        
+        public function normalize_str($str)
 	{
 		$invalid = array('Š'=>'S', 'š'=>'s', 'Đ'=>'Dj', 'đ'=>'dj', 'Ž'=>'Z', 'ž'=>'z',
 				'Č'=>'C', 'č'=>'c', 'Ć'=>'C', 'ć'=>'c', 'À'=>'A', 'Á'=>'A', 'Â'=>'A', 'Ã'=>'A',
@@ -114,8 +400,7 @@ class DraShell extends AppShell {
 	
 		return $str;
 	}
-	
-	public function geraEmailUem($apelido,$nome){
+        public function geraEmailUem($apelido,$nome){
 		
 		$nome = $this->normalize_str($nome);
 		$nome = trim(strtolower($nome));
@@ -162,29 +447,32 @@ class DraShell extends AppShell {
 		}
 		return strtolower($email);
 	}
-	public function importa_pessoa(){
+        
+        public function importa_pessoa_dbsec(){
 		App::import('Component','Auth');
 		App::import('Controller','ComponentCollection');
 		$collection = new ComponentCollection();
 		$this->Auth = new AuthComponent($collection);
 		
-		$pessoas = $this->DraPessoa->find('all',array('conditions'=>array('DraEstudante.est_num'=>array("0082957","0111929","0268917","0282946\/95","0291945","0476955","0660961","1101107","4401304","6342103","6343105","7101117","7161113","20091211","20091220","20091223","20091231","20091243","20091244","20092840","20094975","20095544","20095548","20095645","20095751","20100741","20105326","20114419","20114467","20116856","20124447","20124501","20125028","20125067","20125074","20125116","20125129","20125139","20125756","20125764","20125766","20125767","20125768","20125769","20125770","20125771","20125772","20125773","20125774","20125775","20125776","20125777","20125778","20125779","20125780","20125781","20125782","20125806","20125807","20125810","20125815","20125820","20125822","20125823","20125824","20125825","20125827","20125828","20125829","20125831","20125832","20125833","20125834","20125836","20125837","20125839","20125840","20125841","20125842","20125843","20125844","20125846","20125847","20125848","20125849","20125851","20125852","20125853","20125854","20125856","20125857","20125859","20125861","20125862","20125863","20125864","20125865","20125866","20125867","20125868","20125869","20125870","20125872","20125874","20125875","20125876","20125877","20125878","20125880","20125881","20125883","20125884","20125885","20125886","20125887","20125888","20125889","20125890","20125891","20125892","20125893","20125894","20125895","20125896","20125897","20125899","20125901","20125902","20125903","20125904","20125905","20125906","20125907","20125909","20125910","20125911","20125912","20125926","20125927","20125929","20125930","20125931","20125935","20125940","20125941","20125943","20125944","20125945","20125946","20125947","20125948","20125950","20125951","20125952","20125953","20125955","20125956","20125959","20125960","20125961","20125963","20125964","20125965","20127000","20127001","20127002","20127003","20127004","20130001","20130002","20130003","20130005","20130007","20130008","20130009","20130010","20130012","20130014","20130016","20130017","20130019","20130020","20130021","20130022","20130023","20130024","20130025","20130026","20130028","20130029","20130030","20130031","20130032","20130033","20130034","20130035","20130036","20130037","20130038","20130039","20130040","20130041","20130042","20130043","20130044","20130045","20130046","20130048","20130050","20130051","20130052","20130053","20130054","20130055","20130057","20130058","20130059","20130060","20130061","20130062","20130063","20130064","20130065","20130067","20130068","20130069","20130071","20130072","20130073","20130074","20130076","20130077","20130078","20130079","20130080","20130081","20130082","20130084","20130085","20130086","20130087","20130088","20130090","20130091","20130092","20130093","20130094","20130095","20130096","20130097","20130098","20130099","20130100","20130102","20130103","20130104","20130105","20130106","20130107","20130108","20130110","20130111","20130112","20130113","20130114","20130115","20130116","20130117","20130118","20130119","20130120","20130121","20130122","20130125","20130196","20130197","20130198","20130199","20130200","20130201","20130202","20130203","20130204","20130206","20130209","20130210","20130211","20130212","20130213","20130214","20130215","20130216","20130217","20130218","20130219","20130220","20130221","20130223","20130224","20130225","20130226","20130229","20130230","20130231","20130232","20130233","20130234","20130235","20130236","20130237","20130238","20130239","20130240","20130241","20130242","20130243","20130244","20130246","20130247","20130248","20130249","20130250","20130251","20130252","20130253","20130254","20130255","20130256","20130257","20130258","20130259","20130260","20130261","20130262","20130263","20130264","20130265","20130266","20130268","20130269","20130270","20130271","20130272","20130273","20130274","20130275","20130276","20130277","20130278","20130279","20130280","20130281","20130283","20130284","20130285","20130286","20130287","20130288","20130290","20130292","20130294","20130295","20130296","20130297","20130298","20130300","20130301","20130302","20130303","20130305","20130306","20130307","20130308","20130309","20130310","20130311","20130312","20130313","20130314","20130315","20130316","20130317","20130318","20130319","20130320","20130321","20130322","20130323","20130324","20130325","20130326","20130327","20130328","20130329","20130330","20130331","20130332","20130333","20130334","20130335","20130336","20130337","20130338","20130339","20130340","20130341","20130342","20130343","20130344","20130345","20130346","20130347","20130348","20130349","20130350","20130351","20130353","20130354","20130356","20130357","20130358","20130359","20130360","20130362","20130363","20130364","20130365","20130366","20130367","20130368","20130370","20130371","20130372","20130373","20130374","20130375","20130376","20130377","20130378","20130379","20130380","20130381","20130382","20130383","20130384","20130385","20130386","20130388","20130390","20130392","20130393","20130396","20130397","20130398","20130399","20130400","20130401","20130402","20130403","20130405","20130436","20130437","20130438","20130439","20130440","20130441","20130443","20130446","20130447","20130448","20130450","20130452","20130453","20130454","20130456","20130457","20130459","20130460","20130461","20130462","20130463","20130464","20130465","20130466","20130467","20130468","20130469","20130470","20130471","20130472","20130473","20130474","20130475","20130476","20130477","20130478","20130479","20130480","20130481","20130483","20130484","20130485","20130486","20130487","20130488","20130489","20130490","20130491","20130492","20130493","20130494","20130495","20130496","20130497","20130499","20130500","20130501","20130502","20130503","20130504","20130505","20130506","20130507","20130508","20130509","20130510","20130511","20130512","20130513","20130514","20130515","20130516","20130518","20130519","20130520","20130521","20130522","20130523","20130524","20130526","20130527","20130528","20130529","20130530","20130531","20130532","20130533","20130534","20130535","20130537","20130538","20130540","20130542","20130543","20130544","20130545","20130546","20130547","20130548","20130549","20130551","20130553","20130555","20130556","20130557","20130558","20130559","20130560","20130561","20130562","20130563","20130564","20130566","20130567","20130568","20130569","20130570","20130571","20130572","20130573","20130574","20130575","20130576","20130577","20130578","20130579","20130580","20130581","20130582","20130583","20130584","20130586","20130587","20130588","20130589","20130590","20130592","20130593","20130594","20130595","20130596","20130598","20130600","20130601","20130603","20130604","20130605","20130606","20130607","20130608","20130609","20130610","20130611","20130612","20130614","20130615","20130616","20130617","20130619","20130620","20130621","20130622","20130623","20130624","20130625","20130626","20130628","20130629","20130630","20130631","20130632","20130633","20130634","20130635","20130637","20130639","20130640","20130641","20130642","20130643","20130644","20130645","20130647","20130648","20130650","20130652","20130655","20130656","20130657","20130658","20130659","20130660","20130664","20130665","20130666","20130668","20130669","20130670","20130671","20130672","20130673","20130674","20130675","20130676","20130677","20130678","20130679","20130680","20130681","20130682","20130683","20130684","20130685","20130686","20130687","20130688","20130689","20130690","20130691","20130692","20130693","20130694","20130695","20130696","20130697","20130698","20130699","20130700","20130701","20130702","20130703","20130704","20130705","20130706","20130707","20130708","20130709","20130710","20130712","20130713","20130715","20130718","20130720","20130721","20130722","20130725","20130726","20130728","20130729","20130730","20130731","20130732","20130733","20130734","20130735","20130736","20130737","20130738","20130739","20130740","20130741","20130742","20130743","20130744","20130745","20130746","20130747","20130748","20130749","20130750","20130751","20130752","20130753","20130755","20130756","20130757","20130758","20130759","20130760","20130761","20130762","20130763","20130764","20130765","20130767","20130768","20130769","20130770","20130773","20130774","20130775","20130776","20130777","20130779","20130780","20130782","20130784","20130785","20130786","20130787","20130788","20130789","20130790","20130791","20130792","20130794","20130795","20130796","20130797","20130798","20130799","20130800","20130801","20130802","20130803","20130804","20130805","20130806","20130807","20130808","20130809","20130810","20130811","20130812","20130813","20130814","20130815","20130816","20130817","20130818","20130819","20130822","20130823","20130824","20130826","20130827","20130828","20130829","20130860","20130861","20130862","20130863","20130864","20130865","20130866","20130867","20130868","20130869","20130870","20130871","20130872","20130873","20130874","20130875","20130876","20130877","20130878","20130879","20130880","20130881","20130882","20130883","20130884","20130885","20130886","20130887","20130889","20130890","20130891","20130892","20130893","20130895","20130896","20130898","20130899","20130901","20130902","20130903","20130904","20130905","20130906","20130907","20130909","20130910","20130911","20130912","20130913","20130914","20130915","20130917","20130918","20130919","20130920","20130921","20130922","20130923","20130924","20130925","20130926","20130927","20130928","20130929","20130931","20130933","20130934","20130935","20130936","20130937","20130938","20130939","20130942","20130943","20130944","20130945","20130946","20130947","20130948","20130949","20130950","20130951","20130952","20130953","20130954","20130955","20130956","20130958","20130959","20130960","20130961","20130962","20130963","20130964","20130965","20130966","20130970","20130972","20130973","20130974","20130975","20130976","20130977","20130978","20130979","20130980","20130981","20130982","20130983","20130984","20130985","20130986","20130988","20130989","20130990","20130991","20130992","20130993","20130994","20130995","20130996","20130997","20130998","20130999","20131000","20131001","20131002","20131003","20131004","20131005","20131006","20131008","20131009","20131010","20131011","20131012","20131013","20131014","20131015","20131016","20131017","20131018","20131019","20131020","20131021","20131022","20131023","20131024","20131025","20131026","20131027","20131028","20131029","20131030","20131031","20131032","20131033","20131034","20131035","20131036","20131037","20131038","20131039","20131040","20131041","20131042","20131043","20131044","20131045","20131046","20131047","20131048","20131049","20131050","20131051","20131052","20131053","20131054","20131055","20131056","20131057","20131058","20131059","20131060","20131061","20131062","20131063","20131064","20131065","20131066","20131067","20131068","20131069","20131070","20131071","20131072","20131073","20131074","20131075","20131076","20131077","20131078","20131079","20131080","20131081","20131082","20131083","20131085","20131086","20131087","20131088","20131090","20131091","20131092","20131093","20131094","20131095","20131097","20131098","20131099","20131100","20131101","20131103","20131104","20131105","20131106","20131107","20131108","20131109","20131110","20131111","20131113","20131114","20131115","20131116","20131117","20131118","20131119","20131120","20131121","20131122","20131123","20131124","20131126","20131127","20131128","20131129","20131130","20131131","20131132","20131133","20131135","20131136","20131137","20131138","20131139","20131140","20131141","20131142","20131143","20131144","20131145","20131146","20131147","20131148","20131149","20131150","20131151","20131152","20131153","20131154","20131155","20131156","20131157","20131158","20131159","20131160","20131161","20131163","20131164","20131165","20131166","20131168","20131169","20131170","20131171","20131172","20131173","20131174","20131175","20131176","20131177","20131178","20131179","20131180","20131181","20131182","20131183","20131184","20131185","20131186","20131187","20131188","20131192","20131194","20131195","20131196","20131198","20131199","20131200","20131201","20131202","20131203","20131205","20131206","20131207","20131208","20131209","20131210","20131211","20131212","20131213","20131214","20131215","20131216","20131217","20131218","20131219","20131221","20131222","20131223","20131224","20131225","20131226","20131227","20131228","20131229","20131230","20131231","20131232","20131233","20131234","20131235","20131238","20131239","20131241","20131242","20131243","20131244","20131245","20131246","20131247","20131249","20131250","20131251","20131253","20131254","20131255","20131257","20131258","20131259","20131261","20131262","20131263","20131264","20131265","20131267","20131268","20131269","20131270","20131272","20131273","20131274","20131275","20131276","20131277","20131278","20131280","20131281","20131282","20131283","20131284","20131285","20131286","20131287","20131288","20131290","20131291","20131292","20131293","20131294","20131295","20131296","20131297","20131298","20131299","20131300","20131301","20131302","20131303","20131304","20131305","20131306","20131307","20131308","20131309","20131310","20131311","20131312","20131313","20131314","20131315","20131316","20131317","20131318","20131319","20131320","20131321","20131322","20131323","20131324","20131325","20131326","20131327","20131330","20131331","20131332","20131333","20131334","20131335","20131336","20131337","20131338","20131339","20131341","20131342","20131343","20131344","20131345","20131346","20131347","20131348","20131349","20131350","20131352","20131353","20131354","20131355","20131356","20131357","20131358","20131359","20131360","20131361","20131362","20131363","20131364","20131365","20131366","20131368","20131369","20131371","20131373","20131374","20131375","20131376","20131377","20131378","20131379","20131380","20131381","20131382","20131383","20131384","20131385","20131386","20131387","20131388","20131389","20131390","20131391","20131392","20131393","20131394","20131395","20131396","20131397","20131400","20131401","20131402","20131403","20131404","20131405","20131406","20131407","20131408","20131409","20131411","20131412","20131413","20131416","20131417","20131418","20131419","20131420","20131422","20131423","20131425","20131426","20131427","20131428","20131430","20131431","20131433","20131434","20131435","20131436","20131438","20131439","20131440","20131441","20131444","20131445","20131446","20131449","20131450","20131451","20131452","20131453","20131454","20131456","20131458","20131462","20131463","20131464","20131465","20131469","20131471","20131472","20131473","20131474","20131476","20131477","20131478","20131479","20131480","20131481","20131482","20131483","20131484","20131485","20131486","20131487","20131488","20131489","20131490","20131492","20131494","20131495","20131496","20131497","20131498","20131499","20131501","20131502","20131503","20131504","20131505","20131506","20131507","20131508","20131510","20131511","20131512","20131513","20131514","20131515","20131516","20131517","20131518","20131519","20131520","20131521","20131522","20131523","20131524","20131525","20131526","20131527","20131528","20131529","20131530","20131531","20131532","20131535","20131536","20131538","20131539","20131540","20131544","20131545","20131547","20131548","20131549","20131550","20131551","20131552","20131554","20131555","20131556","20131558","20131559","20131560","20131561","20131562","20131563","20131564","20131565","20131566","20131567","20131568","20131569","20131570","20131571","20131572","20131573","20131574","20131575","20131576","20131578","20131579","20131580","20131581","20131582","20131583","20131584","20131585","20131586","20131587","20131588","20131589","20131591","20131593","20131595","20131597","20131598","20131599","20131600","20131601","20131602","20131603","20131604","20131605","20131608","20131609","20131610","20131611","20131612","20131614","20131615","20131617","20131618","20131620","20131621","20131624","20131625","20131626","20131627","20131628","20131631","20131632","20131634","20131635","20131636","20131638","20131640","20131641","20131642","20131643","20131644","20131645","20131646","20131648","20131649","20131650","20131651","20131652","20131653","20131654","20131655","20131656","20131658","20131660","20131661","20131663","20131664","20131665","20131666","20131667","20131668","20131670","20131671","20131672","20131673","20131674","20131675","20131676","20131677","20131678","20131679","20131680","20131681","20131682","20131683","20131684","20131685","20131686","20131687","20131688","20131689","20131690","20131691","20131693","20131694","20131695","20131696","20131697","20131699","20131700","20131701","20131703","20131704","20131705","20131706","20131707","20131708","20131709","20131710","20131711","20131713","20131715","20131716","20131717","20131721","20131723","20131724","20131725","20131726","20131727","20131728","20131730","20131733","20131736","20131738","20131739","20131740","20131741","20131742","20131743","20131744","20131745","20131746","20131748","20131750","20131751","20131752","20131755","20131756","20131757","20131758","20131759","20131760","20131761","20131762","20131764","20131765","20131766","20131767","20131768","20131772","20131773","20131774","20131775","20131777","20131778","20131779","20131780","20131782","20131783","20131784","20131785","20131786","20131787","20131788","20131790","20131791","20131792","20131793","20131794","20131795","20131796","20131797","20131798","20131799","20131800","20131801","20131802","20131803","20131804","20131808","20131810","20131811","20131832","20131833","20131834","20131836","20131837","20131838","20131840","20131843","20131844","20131845","20131846","20131847","20131848","20131849","20131850","20131851","20131853","20131854","20131856","20131857","20131858","20131859","20131861","20131862","20131863","20131864","20131865","20131867","20131868","20131869","20131871","20131873","20131876","20131878","20131879","20131880","20131881","20131882","20131883","20131884","20131885","20131887","20131889","20131890","20131891","20131892","20131893","20131894","20131895","20131896","20131897","20131898","20131899","20131900","20131901","20131902","20131904","20131905","20131906","20131907","20131908","20131909","20131910","20131911","20131912","20131913","20131914","20131915","20131916","20131917","20131918","20131920","20131921","20131922","20131923","20131924","20131925","20131926","20131927","20131928","20131929","20131930","20131931","20131932","20131933","20131934","20131935","20131936","20131937","20131938","20131940","20131941","20131942","20131943","20131944","20131945","20131946","20131947","20131948","20131950","20131951","20131952","20131953","20131954","20131955","20131956","20131957","20131958","20131959","20131960","20131961","20131962","20131963","20131964","20131965","20131966","20131967","20131968","20131970","20131971","20131972","20131973","20131974","20131975","20131976","20131977","20131979","20131980","20131981","20131982","20131983","20131984","20131985","20131986","20131987","20131988","20131989","20131990","20131991","20131992","20131993","20131994","20131995","20131996","20131997","20131998","20131999","20132000","20132001","20132002","20132003","20132004","20132005","20132006","20132007","20132008","20132009","20132011","20132012","20132013","20132014","20132016","20132018","20132019","20132022","20132023","20132025","20132026","20132027","20132028","20132030","20132031","20132032","20132033","20132034","20132037","20132038","20132039","20132040","20132041","20132042","20132043","20132044","20132045","20132046","20132047","20132048","20132049","20132050","20132051","20132052","20132053","20132054","20132055","20132056","20132057","20132058","20132060","20132061","20132062","20132063","20132064","20132065","20132067","20132068","20132070","20132071","20132072","20132073","20132074","20132075","20132076","20132077","20132078","20132079","20132080","20132081","20132082","20132083","20132086","20132088","20132090","20132093","20132094","20132097","20132099","20132101","20132103","20132104","20132105","20132106","20132107","20132108","20132109","20132110","20132111","20132112","20132113","20132114","20132115","20132116","20132118","20132119","20132120","20132121","20132122","20132123","20132124","20132126","20132127","20132128","20132131","20132132","20132133","20132134","20132135","20132136","20132137","20132140","20132142","20132144","20132145","20132146","20132147","20132148","20132149","20132150","20132151","20132152","20132153","20132154","20132155","20132156","20132157","20132158","20132159","20132160","20132161","20132162","20132163","20132164","20132165","20132166","20132167","20132168","20132169","20132171","20132172","20132173","20132174","20132175","20132176","20132178","20132179","20132180","20132181","20132182","20132183","20132184","20132185","20132187","20132188","20132189","20132190","20132191","20132192","20132193","20132194","20132195","20132196","20132197","20132198","20132199","20132200","20132201","20132202","20132203","20132204","20132205","20132206","20132207","20132208","20132209","20132211","20132212","20132213","20132214","20132215","20132216","20132217","20132218","20132219","20132220","20132221","20132223","20132224","20132226","20132227","20132228","20132229","20132231","20132232","20132234","20132235","20132236","20132240","20132241","20132243","20132244","20132245","20132247","20132248","20132249","20132250","20132251","20132252","20132256","20132257","20132258","20132259","20132260","20132261","20132262","20132264","20132265","20132266","20132267","20132268","20132269","20132270","20132271","20132272","20132273","20132274","20132275","20132278","20132279","20132280","20132281","20132282","20132283","20132284","20132285","20132286","20132288","20132289","20132290","20132292","20132293","20132294","20132295","20132296","20132297","20132298","20132299","20132301","20132302","20132304","20132305","20132307","20132308","20132309","20132310","20132311","20132312","20132313","20132314","20132316","20132317","20132318","20132319","20132320","20132321","20132322","20132323","20132324","20132378","20132379","20132381","20132382","20132383","20132384","20132385","20132386","20132387","20132388","20132389","20132390","20132391","20132392","20132393","20132394","20132397","20132398","20132399","20132400","20132401","20132403","20132404","20132405","20132406","20132407","20132409","20132410","20132411","20132412","20132414","20132416","20132417","20132419","20132420","20132421","20132422","20132423","20132424","20132425","20132426","20132427","20132428","20132430","20132431","20132432","20132433","20132434","20132435","20132437","20132438","20132440","20132442","20132444","20132445","20132447","20132449","20132450","20132451","20132452","20132453","20132454","20132455","20132456","20132457","20132458","20132459","20132460","20132461","20132462","20132463","20132466","20132467","20132468","20132471","20132472","20132473","20132474","20132475","20132476","20132478","20132479","20132481","20132482","20132483","20132484","20132485","20132486","20132487","20132488","20132489","20132491","20132492","20132493","20132495","20132496","20132497","20132498","20132499","20132500","20132501","20132503","20132505","20132507","20132508","20132509","20132510","20132511","20132512","20132513","20132515","20132517","20132518","20132519","20132520","20132522","20132523","20132524","20132525","20132526","20132527","20132528","20132530","20132531","20132532","20132533","20132534","20132535","20132536","20132537","20132538","20132539","20132541","20132542","20132543","20132544","20132547","20132548","20132549","20132550","20132551","20132552","20132553","20132554","20132555","20132557","20132559","20132560","20132561","20132562","20132563","20132564","20132565","20132566","20132567","20132568","20132569","20132570","20132571","20132572","20132573","20132574","20132575","20132576","20132577","20132579","20132580","20132581","20132582","20132583","20132584","20132585","20132586","20132587","20132588","20132589","20132590","20132591","20132592","20132593","20132595","20132596","20132597","20132678","20132679","20132680","20132681","20132682","20132683","20132684","20132685","20132686","20132687","20132688","20132689","20132690","20132691","20132692","20132693","20132695","20132696","20132697","20132698","20132699","20132700","20132701","20132702","20132703","20132704","20132705","20132706","20132707","20132708","20132709","20132710","20132711","20132712","20132713","20132714","20132715","20132716","20132717","20132836","20132837","20132838","20132839","20132840","20132841","20132842","20132843","20132845","20132846","20132847","20132848","20132849","20132850","20132851","20132852","20132853","20132854","20132856","20132858","20132859","20132860","20132861","20132862","20132863","20132864","20132865","20132866","20132868","20132869","20132870","20132871","20132872","20132873","20132874","20132875","20132877","20132878","20132879","20132882","20132883","20132884","20132887","20132888","20132889","20132892","20132893","20132894","20132895","20132896","20132899","20132901","20132902","20132904","20132905","20132906","20132907","20132909","20132910","20132911","20132912","20132913","20132944","20132945","20132946","20132947","20132948","20132949","20132950","20132951","20132952","20132953","20132954","20132956","20132957","20132958","20132959","20132961","20132962","20132964","20132965","20132966","20132967","20132968","20132969","20132970","20132971","20132972","20132974","20132975","20132976","20132977","20132978","20132980","20132981","20132983","20132984","20132985","20132986","20132987","20132988","20132989","20132990","20132992","20132993","20132995","20132997","20132998","20132999","20133001","20133002","20133003","20133004","20133005","20133006","20133007","20133008","20133010","20133011","20133012","20133013","20133014","20133016","20133018","20133019","20133022","20133025","20133026","20133030","20133031","20133032","20133033","20133034","20133035","20133036","20133037","20133038","20133039","20133040","20133041","20133042","20133043","20133044","20133046","20133047","20133048","20133049","20133050","20133051","20133052","20133053","20133054","20133055","20133056","20133057","20133058","20133059","20133060","20133061","20133062","20133063","20133064","20133065","20133066","20133067","20133069","20133070","20133071","20133072","20133073","20133074","20133075","20133076","20133077","20133078","20133079","20133080","20133081","20133082","20133083","20133085","20133086","20133087","20133088","20133089","20133090","20133091","20133092","20133093","20133094","20133095","20133096","20133097","20133099","20133100","20133101","20133102","20133103","20133104","20133105","20133106","20133107","20133108","20133109","20133110","20133111","20133112","20133113","20133114","20133116","20133117","20133118","20133119","20133120","20133122","20133123","20133124","20133125","20133126","20133127","20133128","20133129","20133130","20133131","20133132","20133133","20133134","20133137","20133139","20133140","20133141","20133142","20133143","20133145","20133146","20133147","20133148","20133149","20133150","20133151","20133152","20133153","20133154","20133155","20133156","20133157","20133158","20133161","20133162","20133163","20133164","20133165","20133166","20133167","20133168","20133169","20133170","20133171","20133172","20133173","20133174","20133175","20133176","20133177","20133178","20133179","20133180","20133181","20133185","20133186","20133187","20133188","20133190","20133191","20133192","20133193","20133195","20133196","20133197","20133199","20133200","20133202","20133203","20133204","20133206","20133207","20133209","20133210","20133211","20133212","20133213","20133214","20133215","20133216","20133217","20133218","20133220","20133221","20133222","20133223","20133224","20133225","20133226","20133227","20133228","20133229","20133230","20133231","20133234","20133237","20133238","20133239","20133240","20133241","20133242","20133243","20133244","20133245","20133246","20133247","20133248","20133249","20133250","20133251","20133252","20133254","20133256","20133258","20133259","20133260","20133261","20133262","20133263","20133265","20133266","20133267","20133268","20133269","20133270","20133272","20133273","20133275","20133276","20133277","20133278","20133279","20133280","20133281","20133282","20133284","20133286","20133287","20133288","20133289","20133290","20133291","20133293","20133294","20133295","20133296","20133297","20133298","20133301","20133303","20133304","20133305","20133306","20133307","20133308","20133309","20133310","20133311","20133312","20133315","20133317","20133318","20133320","20133323","20133324","20133325","20133326","20133329","20133330","20133331","20133332","20133333","20133334","20133335","20133336","20133337","20133339","20133340","20133341","20133342","20133343","20133344","20133345","20133346","20133347","20133350","20133351","20133352","20133353","20133354","20133355","20133356","20133357","20133358","20133359","20133360","20133362","20133363","20133364","20133365","20133366","20133367","20133368","20133369","20133370","20133372","20133373","20133374","20133375","20133376","20133377","20133378","20133379","20133380","20133381","20133382","20133383","20133384","20133385","20133386","20133387","20133388","20133389","20133390","20133391","20133392","20133393","20133394","20133395","20133396","20133397","20133398","20133429","20133430","20133431","20133432","20133433","20133434","20133435","20133437","20133438","20133439","20133440","20133442","20133443","20133444","20133445","20133447","20133448","20133449","20133450","20133451","20133452","20133453","20133454","20133455","20133456","20133458","20133459","20133460","20133461","20133462","20133463","20133464","20133465","20133466","20133467","20133468","20133469","20133470","20133471","20133472","20133473","20133474","20133475","20133476","20133478","20133479","20133480","20133481","20133482","20133483","20133484","20133485","20133486","20133487","20133489","20133490","20133491","20133492","20133494","20133495","20133496","20133497","20133498","20133499","20133500","20133501","20133502","20133503","20133504","20133505","20133506","20133508","20133509","20133511","20133512","20133514","20133515","20133516","20133517","20133518","20133519","20133520","20133521","20133522","20133523","20133524","20133526","20133527","20133528","20133529","20133530","20133531","20133532","20133533","20133534","20133535","20133536","20133538","20133539","20133540","20133541","20133542","20133543","20133545","20133546","20133547","20133548","20133549","20133550","20133551","20133552","20133553","20133554","20133555","20133556","20133557","20133558","20133560","20133561","20133562","20133563","20133564","20133565","20133566","20133567","20133568","20133569","20133571","20133572","20133573","20133574","20133575","20133576","20133577","20133578","20133579","20133581","20133582","20133583","20133584","20133585","20133586","20133587","20133588","20133589","20133590","20133591","20133593","20133624","20133625","20133626","20133627","20133628","20133629","20133630","20133631","20133632","20133633","20133634","20133635","20133637","20133639","20133641","20133642","20133643","20133644","20133645","20133646","20133647","20133648","20133649","20133650","20133652","20133653","20133654","20133655","20133656","20133657","20133658","20133659","20133662","20133663","20133664","20133665","20133666","20133668","20133669","20133670","20133671","20133672","20133673","20133676","20133677","20133678","20133679","20133680","20133681","20133682","20133683","20133684","20133685","20133686","20133687","20133688","20133689","20133691","20133693","20133694","20133695","20133696","20133697","20133699","20133700","20133701","20133702","20133703","20133704","20133706","20133707","20133708","20133709","20133710","20133711","20133712","20133713","20133714","20133715","20133716","20133717","20133718","20133719","20133720","20133721","20133722","20133723","20133724","20133725","20133727","20133728","20133730","20133731","20133733","20133734","20133735","20133736","20133737","20133738","20133741","20133742","20133743","20133744","20133745","20133747","20133748","20133749","20133750","20133751","20133752","20133755","20133756","20133757","20133758","20133759","20133760","20133761","20133762","20133763","20133764","20133765","20133769","20133770","20133771","20133772","20133773","20133774","20133775","20133776","20133777","20133778","20133779","20133780","20133781","20133782","20133783","20133785","20133787","20133788","20133790","20133791","20133792","20133793","20133795","20133796","20133798","20133799","20133801","20133802","20133803","20133805","20133806","20133807","20133808","20133810","20133811","20133812","20133813","20133814","20133815","20133818","20133819","20133820","20133821","20133822","20133823","20133824","20133825","20133827","20133828","20133829","20133830","20133831","20133832","20133835","20133836","20133837","20133838","20133839","20133840","20133841","20133842","20133843","20133844","20133845","20133847","20133848","20133849","20133850","20133851","20133852","20133853","20133854","20133856","20133857","20133858","20133859","20133860","20133861","20133862","20133863","20133864","20133865","20133866","20133867","20133868","20133869","20133870","20133872","20133873","20133874","20133875","20133876","20133878","20133879","20133881","20133882","20133884","20133885","20133886","20133889","20133892","20133893","20133894","20133898","20133901","20133902","20133903","20133904","20133905","20133906","20133907","20133908","20133909","20133913","20133916","20133917","20133918","20133919","20133920","20133923","20133925","20133927","20133929","20133932","20133935","20133936","20133938","20133939","20133940","20133941","20133942","20133943","20133944","20133945","20133946","20133947","20133948","20133949","20133950","20133951","20133952","20133953","20133954","20133955","20133956","20133957","20133958","20133961","20133962","20133965","20133966","20133967","20133968","20133969","20133976","20133977","20133978","20133980","20133981","20133982","20133983","20133984","20133986","20133987","20133988","20133989","20133990","20133991","20133992","20133993","20133995","20133996","20133997","20133999","20134000","20134002","20134003","20134005","20134006","20134007","20134008","20134009","20134010","20134012","20134013","20134014","20134015","20134016","20134017","20134018","20134019","20134020","20134022","20134023","20134024","20134025","20134026","20134027","20134028","20134029","20134030","20134031","20134032","20134033","20134034","20134035","20134036","20134037","20134039","20134040","20134041","20134042","20134043","20134044","20134045","20134046","20134047","20134049","20134050","20134051","20134052","20134053","20134054","20134055","20134057","20134058","20134060","20134061","20134062","20134063","20134064","20134065","20134068","20134069","20134070","20134071","20134073","20134074","20134075","20134076","20134077","20134078","20134079","20134080","20134082","20134083","20134084","20134086","20134087","20134088","20134089","20134090","20134091","20134092","20134095","20134096","20134098","20134100","20134101","20134102","20134103","20134104","20134105","20134106","20134108","20134109","20134110","20134111","20134112","20134114","20134115","20134116","20134118","20134119","20134120","20134121","20134122","20134123","20134124","20134125","20134126","20134128","20134129","20134130","20134131","20134132","20134133","20134135","20134136","20134137","20134138","20134139","20134140","20134141","20134142","20134143","20134144","20134148","20134150","20134151","20134152","20134153","20134154","20134155","20134156","20134157","20134158","20134159","20134160","20134161","20134162","20134163","20134164","20134165","20134166","20134167","20134168","20134169","20134170","20134171","20134172","20134173","20134174","20134175","20134176","20134177","20134178","20134179","20134180","20134181","20134182","20134183","20134184","20134185","20134186","20134187","20134188","20134189","20134190","20134191","20134192","20134193","20134194","20134196","20134197","20134198","20134199","20134200","20134201","20134202","20134203","20134204","20134205","20134207","20134208","20134209","20134210","20134211","20134212","20134213","20134216","20134217","20134218","20134219","20134220","20134221","20134222","20134223","20134224","20134225","20134227","20134231","20134232","20134233","20134234","20134236","20134237","20134239","20134240","20134241","20134242","20134246","20134247","20134248","20134249","20134250","20134251","20134252","20134255","20134256","20134257","20134258","20134259","20134260","20134261","20134262","20134264","20134266","20134267","20134269","20134270","20134271","20134272","20134273","20134276","20134277","20134279","20134280","20134281","20134282","20134283","20134285","20134286","20134287","20134288","20134289","20134290","20134291","20134292","20134293","20134294","20134295","20134298","20134301","20134302","20134303","20134304","20134305","20134306","20134307","20134308","20134309","20134311","20134312","20134313","20134314","20134315","20134316","20134317","20134318","20134319","20134320","20134321","20134322","20134323","20134324","20134325","20134326","20134327","20134328","20134330","20134331","20134332","20134333","20134334","20134335","20134336","20134337","20134339","20134340","20134341","20134342","20134343","20134344","20134346","20134347","20134350","20134354","20134355","20134356","20134358","20134359","20134360","20134362","20134363","20134364","20134366","20134367","20134368","20134369","20134370","20134371","20134373","20134375","20134376","20134377","20134378","20134379","20134380","20134382","20134383","20134384","20134386","20134387","20134388","20134390","20134391","20134393","20134394","20134395","20134397","20134400","20134401","20134402","20134403","20134404","20134405","20134408","20134409","20134410","20134411","20134412","20134414","20134415","20134417","20134419","20134420","20134421","20134423","20134424","20134426","20134427","20134428","20134429","20134430","20134431","20134432","20134434","20134435","20134436","20134437","20134438","20134439","20134441","20134442","20134443","20134446","20134447","20134448","20134450","20134451","20134452","20134453","20134454","20134455","20134456","20134457","20134459","20134460","20134462","20134463","20134464","20134465","20134466","20134468","20134471","20134472","20134473","20134474","20134475","20134476","20134477","20134478","20134479","20134480","20134481","20134482","20134483","20134484","20134485","20134486","20134487","20134488","20134489","20134491","20134492","20134493","20134494","20134495","20134496","20134497","20134498","20134499","20134500","20134501","20134502","20134504","20134505","20134506","20134507","20134508","20134509","20134510","20134511","20134512","20134513","20134514","20134515","20134516","20134517","20134518","20134519","20134520","20134521","20134522","20134523","20134524","20134525","20134526","20134527","20134528","20134529","20134530","20134531","20134532","20134533","20134534","20134535","20134536","20134537","20134538","20134539","20134540","20134541","20134542","20134543","20134544","20134545","20134546","20134547","20134548","20134549","20134550","20134551","20134552","20134553","20134554","20134555","20134556","20134557","20134558","20134559","20134560","20134561","20134562","20134563","20134564","20134565","20134566","20134567","20134568","20134569","20134571","20134572","20134573","20134574","20134577","20134578","20134579","20134581","20134582","20134583","20134584","20134585","20134586","20134587","20134588","20134589","20134591","20134592","20134593","20134594","20134595","20134596","20134597","20134600","20134601","20134603","20134604","20134605","20134608","20134609","20134611","20134615","20134616","20134617","20134618","20134619","20134622","20134626","20134627","20134628","20134629","20134630","20134632","20134633","20134634","20134635","20134636","20134639","20134645","20134646","20134647","20134648","20134651","20134652","20134654","20134656","20134682","20134683","20134685","20134715","20134718","20134719","20134723","20134726","20134727","20134730","20134737","20134739","20134740","20134741","20134744","20134748","20134750","20134753","20134754","20134756","20134757","20134759","20134761","20134763","20134764","20134765","20134766","20134767","20134774","20134778","20134779","20134780","20134781","20134782","20134786","20134789","20134800","20134805","20134808","20134815","20134871","20134874","20134877","20134881","20134882","20134884","20134888","20134889","20134890","20134891","20134892","20134898","20134901","20134902","20134904","20134907","20134908","20134909","20134910","20134911","20134912","20134913","20134914","20134915","20134916","20134924","20134926","20134927","20134930","20134931","20134932","20134933","20134934","20134935","20134936","20134937","20134938","20134939","20134940","20134941","20134942","20134943","20134944","20134945","20134946","20134947","20134948","20134949","20134950","20134951","20134952","20134953","20134954","20134955","20134956","20134957","20134958","20134959","20134961","20134962","20134964","20134965","20134966","20134967","20134968","20134969","20134970","20134971","20134972","20134973","20134974","20134975","20134976","20134977","20134978","20134979","20134981","20134982","20134983","973001087","983001073","983001076","20002004004","20003001087","20022004011","20023001007","20023201077","20062045035"))));
+		$estudantes = $this->DbsecEstudante->find('all');
 		$iii=0;
-		foreach($pessoas as $pessoa){
-		
+		foreach($estudantes  as $estudante){
+                    $this->out($iii++);
+                        $aluno = $this->Aluno->findByCodigo(trim($estudante['DbsecEstudante']['est_num']));
+                        if(empty($aluno)){
 			$dataSource = $this->User->getDataSource();
 			
 			$dataSource->begin();
-			$email_pessoa = $this->geraEmailUem($pessoa['DraPessoa']['apelido'],$pessoa['DraPessoa']['nomes']);
-			$this->out($email_pessoa);
+			$email_pessoa = $this->geraEmailUem($estudante['DbsecEstudante']['apelido'],$estudante['DbsecEstudante']['nomes']);
+			
 			//Primeiro criar um user
 			$user_array = array(
 					'User'=>array(
 							'username'=>$email_pessoa,
 							'password'=>Security::hash('dra02062013', 'blowfish'),
-							'codigocartao'=>$pessoa['DraEstudante']['est_num'],
+							'codigocartao'=>$estudante['DbsecEstudante']['est_num'],
 							'group_id'=>3,
-							'estado_objecto_id'=>$pessoa['DraEstudante']['status']
+							'estado_objecto_id'=>$estudante['DbsecEstudante']['status_id']
 							
 			)
 			);
@@ -193,35 +481,33 @@ class DraShell extends AppShell {
 			if($this->User->save($user_array)){
 				$pessoa_array = array(
 						'Entidade'=>array(
-								'codigo'=>$pessoa['DraPessoa']['id'],
-								'apelido'=>$pessoa['DraPessoa']['apelido'],
-								'nomes'=>$pessoa['DraPessoa']['nomes'],
-								'name'=>$pessoa['DraPessoa']['nomes'].' '.$pessoa['DraPessoa']['apelido'],
-								'nome_pai'=>$pessoa['DraPessoa']['pai_nome'],
-								'nome_mae'=>$pessoa['DraPessoa']['mae_nome'],
-								'nacionalidade'=>$pessoa['DraPessoa']['nacionalidade'],
-								'pais_nascimento'=>$pessoa['DraPessoa']['nacionalidade'],
-								'created'=>$pessoa['DraPessoa']['data_registo'],
-								'data_nascimento'=>$pessoa['DraPessoa']['data_nascimento'],
+								
+								'apelido'=>$estudante['DbsecEstudante']['apelido'],
+								'nomes'=>$estudante['DbsecEstudante']['nomes'],
+								'name'=>$estudante['DbsecEstudante']['nomes'].' '.$estudante['DbsecEstudante']['apelido'],
+								
+								'created'=>$estudante['DbsecEstudante']['data_registo'],
+								'data_nascimento'=>$estudante['DbsecEstudante']['data_nascimento'],
 								'user_id'=>$this->User->id,
-								'estado_civil'=>$pessoa['DraPessoa']['estado_civil'],
-								'cidade_nascimento'=>$pessoa['DraPessoa']['distrito'],
+								
 						)
 				);
 				$this->Entidade->create();
 				if($this->Entidade->save($pessoa_array)){
+                                    $curso = $this->Curso->findByCodigo($estudante['DbsecEstudante']['id_curso']);
+                                    $planoestudo = $this->Planoestudo->find('first',array('conditions'=>array('curso_id'=>$curso['Curso']['id'],'ano_criacao'=>$estudante['DbsecEstudante']['ano_ingresso'])));
 					$aluno_array = array(
 							'Aluno'=>array(
 									'entidade_id'=>$this->Entidade->id,
-									'codigo'=>$pessoa['DraEstudante']['est_num'],
+									'codigo'=>$estudante['DbsecEstudante']['est_num'],
 									'user_id'=>$this->User->id,
-									'curso_id',
-									'estadoentidade_id'=>$pessoa['DraEstudante']['status'],
-									'numero_estudante'=>$pessoa['DraEstudante']['est_num'],
-									'aluno_via_admissao_id'=>$pessoa['DraEstudante']['via_ingresso'],
-									'ano_ingresso'=>$pessoa['DraEstudante']['ano_ingresso'],
-									'created'=>$pessoa['DraEstudante']['data_registo'],
-									'estado_aluno_id'=>$pessoa['DraEstudante']['status']
+									'curso_id'=>$curso['Curso']['id'],
+									'estadoentidade_id'=>$estudante['DbsecEstudante']['status_id'],
+									'numero_estudante'=>$estudante['DbsecEstudante']['est_num'],
+									'planoestudo_id'=>$planoestudo['Planoestudo']['id'],
+									'ano_ingresso'=>$estudante['DbsecEstudante']['ano_ingresso'],
+									'created'=>$estudante['DbsecEstudante']['data_registo'],
+									'estado_aluno_id'=>$estudante['DbsecEstudante']['status_id']
 					)
 					);
 					
@@ -236,8 +522,7 @@ class DraShell extends AppShell {
 					$this->Aluno->create();
 					if($this->Aluno->save($aluno_array)){
 						
-						$this->out($iii.'----User Inserido--'.$this->User->id.'---'.$user_array['User']['username']);
-						$iii++;
+						
 						$dataSource->commit();
 					}
 					else{
@@ -257,63 +542,10 @@ class DraShell extends AppShell {
 					}
 				}
 			}
-			
-			
-		}
-	}
-	
-	public function actualiza_passwords(){
-		$this->User->recursive=-1;
-		$users = $this->User->find('all');
-		foreach($users as $user){
-			$user_id = $user['User']['id'];
-			$this->User->id=$user_id;
-			if($user_id==1)
-				$senha2=Security::hash('chimoio2007', 'blowfish');
-			else
-				$senha2=Security::hash('dra02062013', 'blowfish');
-			$this->User->set('password',$senha2);
-			$this->User->save();
-			var_dump($user_id);
+                        }
 			
 		}
 	}
-	
-	public function valida_alunos_importados(){
-		var_dump("inicio");
-		$this->out("teste");
-		$alunos_dra = $this->DraPessoa->find('all');
-		$numeros_dra = Hash::extract($alunos_dra, '{n}.DraEstudante.est_num');
-		
-		$this->Aluno->recursive=-1;
-		$alunos_sga = $this->Aluno->find('all');
-		$numeros_sga = Hash::extract($alunos_sga, '{n}.Aluno.codigo');
-		var_dump(count($numeros_dra));
-		var_dump(count($numeros_sga));
-		$resultado = array_diff($numeros_dra,$numeros_sga);
-		var_dump(count($resultado));
-		sort($resultado);
-		
-		var_dump(count($resultado));
-		CakeLog::error(json_encode($resultado));
-		var_dump("hehe");
-		
-	}
-	
-	public function actualiza_apelido(){
-		$this->Entidade->recursive = -1;
-		$entidades = $this->Entidade->find('all');
-		
-		foreach($entidades as $entidade){
-			$this->Entidade->id=$entidade['Entidade']['id'];
-			$nomes = explode(" ",$entidade['Entidade']['name']);
-			$apelido = end($nomes);
-			$this->Entidade->set('apelido',$apelido);
-			$this->Entidade->save();
-			$this->out($entidade['Entidade']['id']);
-		}
-	}
-	
 	
 }
 

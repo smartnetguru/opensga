@@ -33,7 +33,7 @@ class AlunosController extends AppController {
     
 
     function index_ajax() {
-        $this->Aluno->recursive = 0;
+        
         $conditions = array();
         $conditions['limit'] = Sanitize::escape($_GET['iDisplayLength']);
         $conditions['offset'] = Sanitize::escape($_GET['iDisplayStart']);
@@ -52,7 +52,7 @@ class AlunosController extends AppController {
                 $conditions['conditions']['OR'][$aColumns[$i] . " LIKE"] = "%" . $_GET['sSearch'] . "%";
             }
         }
-
+        $this->Aluno->contain(array('Entidade','Curso'));
         $alunos = $this->Aluno->find('all', $conditions);
         $alunos_count = $this->Aluno->find('count');
         $alunos_count_filter = $this->Aluno->find('count', $conditions);
@@ -161,7 +161,7 @@ class AlunosController extends AppController {
 
 
 
-        if ($this->Aluno->isMatriculado($id, $this->Session->read('SGAConfig.anolectivo_id'))) {
+        if ($this->Aluno->isMatriculado($id, Configure::read('OpenSGA.ano_lectivo_id'))) {
             $this->set('is_matriculado', 1);
         } else {
             $this->set('is_matriculado', 0);
