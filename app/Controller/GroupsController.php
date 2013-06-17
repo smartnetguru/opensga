@@ -291,10 +291,13 @@ class GroupsController extends AppController {
         $this->Acl->deny($grupo, 'controllers');
         $this->Acl->allow($grupo, 'controllers/Alunos');
         $this->Acl->allow($grupo, 'controllers/Inscricaos');
+        $this->Acl->allow($grupo, 'controllers/Pages');
         $this->Acl->allow($grupo, 'controllers/Planoestudos/getByCurso');
         $this->Acl->allow($grupo, 'controllers/Provincias/getByPais');
         $this->Acl->allow($grupo, 'controllers/Cidades/getByProvincia');
         $this->Acl->allow($grupo, 'controllers/Relatorios/resumo_semestral');
+        $this->Acl->allow($grupo, 'controllers/Requisicoes/RequisicoesPedidos/nova_requisicao');
+        $this->Acl->allow($grupo, 'controllers/Requisicoes/RequisicoesPedidos/registar_requisicao_estudante');
         $this->Acl->allow($grupo, 'controllers/FinanceiroTransacaos');
 
         $this->Acl->allow($grupo, 'controllers/Users/alterar_senha');

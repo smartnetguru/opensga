@@ -2,7 +2,7 @@
 ini_set('memory_limit',"512M");
 App::uses('AuditableConfig', 'Auditable.Lib');
 class DbsecShell extends AppShell {
-	public $uses = array('UemDra.DraCurso','UemDbsec.DbsecAvaliacaoTipo','UemDbsec.DbsecCurso','Curso','UnidadeOrganica','UemDbsec.DbsecDisciplina','Disciplina','UemDbsec.DbsecDisciplinaCurso','Planoestudo','Planoestudoano','UemDra.DraCurso','UemDbsec.DbsecEstudante','Aluno','UemDbsec.DbsecLeccionamento','Turma','Anolectivo','Semestrelectivo','Turma','CursosTurno','Matricula','UemDbsec.DbsecInscricao','Inscricao','User','Entidade');
+	public $uses = array('UemDra.DraCurso','UemDbsec.DbsecAvaliacaoTipo','UemDbsec.DbsecCurso','Curso','UnidadeOrganica','UemDbsec.DbsecDisciplina','Disciplina','UemDbsec.DbsecDisciplinaCurso','Planoestudo','Planoestudoano','UemDra.DraCurso','UemDbsec.DbsecEstudante','Aluno','UemDbsec.DbsecLeccionamento','Turma','Anolectivo','Semestrelectivo','Turma','CursosTurno','Matricula','UemDbsec.DbsecInscricao','Inscricao','User','Entidade','UemDra.DraConclusao');
         
         /**
          * @todo  Implementar se for necessario
@@ -546,6 +546,30 @@ class DbsecShell extends AppShell {
 			
 		}
 	}
+        
+        public function importa_conclusao(){
+            $conclusaos = $this->DraConclusao->find('all',array('conditions'=>array('ano_fim NOT'=>NULL)));
+            $datasource = $this->Aluno->getDataSource();
+                $datasource->begin();
+                $i=0;
+            foreach($conclusaos as $conclusao){
+                $this->Aluno->recursive=-1;
+                $aluno = $this->Aluno->findByCodigo(trim($conclusao['DraConclusao']['est_num']));
+                if(!empty($aluno)){
+                $curso = $this->Curso->findByCodigo($conclusao['DraConclusao']['curso_id']);
+                $this->Aluno->id = $aluno['Aluno']['id'];
+                $this->Aluno->set('estado_aluno_id',3);
+                $this->Aluno->set('curso_id',$curso['Curso']['id']);
+                $this->Aluno->set('data_conclusao',$conclusao['DraConclusao']['data_conclusao']);
+                $this->Aluno->set('nota_conclusao',$conclusao['DraConclusao']['nota_final']);
+                $this->Aluno->save();
+                } else{
+                    
+                }
+                $this->out($i++);
+            }
+          $datasource->commit();
+        }
 	
 }
 
