@@ -23,12 +23,23 @@ class AlunosController extends AppController {
 
     function index() {
     	
-        $this->Aluno->recursive = 0;
-        $cursos = $this->Aluno->Curso->find('list');
+        $conditions = array();
+        if($this->request->is('post')){
+            if($this->request->data['Aluno']['codigo']!=''){
+                $conditions['Aluno.codigo'] = $this->request->data['Aluno']['codigo'];
+            } else{
+                $conditions['Entidade.nomes LIKE'] = '%'.$this->request->data['Aluno']['nomes'].'%';
+                $conditions['Entidade.apelido LIKE'] = '%'.$this->request->data['Aluno']['apelido'].'%';
+            }
+                debug($this->request->data);
+        }
+        
+        
+        
+        $this->Aluno->contain('Entidade','Curso');
+        $alunos = $this->Aluno->find('all',array('conditions'=>$conditions,'limit'=>1000));
 
-        $this->set('alunos', $this->paginate(null, $this->_Filter));
-        $this->set(compact('escolas', 'cursos'));
-        $this->set('relatorio', 'aluno_relatorio');
+        $this->set('alunos', $alunos);
     }
     
 

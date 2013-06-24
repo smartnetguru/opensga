@@ -41,23 +41,20 @@ class FuncionariosController extends AppController {
             $this->Session->setFlash('Invalido %s', 'flasherror');
             $this->redirect(array('action' => 'index'));
         }
-        $this->set('Funcionario', $this->Funcionario->read(null, $id));
-        if (empty($this->data)) {
-            $this->data = $this->Funcionario->read(null, $id);
-        }
-        $users = $this->Funcionario->User->find('list');
-        $grauacademicos = $this->Funcionario->Grauacademico->find('list');
-        $paises = $this->Funcionario->Paise->find('list');
-        $cidades = $this->Funcionario->Cidade->find('list');
-        $provincias = $this->Funcionario->Provincia->find('list');
-        $documentos = $this->Funcionario->DocumentoIdentificacao->find('list');
-        $cargos = $this->Funcionario->Cargo->find('list');
-        $departamentos = $this->Funcionario->Departamento->find('list');
-        $tipofuncionarios = $this->Funcionario->Tipofuncionario->find('list');
-        $generos = $this->Funcionario->Genero->find('list');
-        $cargos = $this->Funcionario->Cargo->find('list');
-        $departamento = $this->Funcionario->Departamento->find('list');
-        $this->set(compact('users', 'Grauacademicos', 'Paises', 'Cidades', 'Provincias', 'DocumentoIdentificacaos', 'tg0005cargos', 'tg0006departamentos', 'tg0011tipofuncionarios', 'generos', 'tg0005cargos', 'tg0006departamento'));
+       
+       
+            $funcionario = $this->Funcionario->read(null, $id);
+       
+       
+       
+        
+       
+        
+        
+        
+        
+        
+        $this->set(compact('funcionario'));
     }
 
     function registar_funcionario() {
@@ -67,13 +64,13 @@ class FuncionariosController extends AppController {
                 $this->Session->setFlash('Funcionário registrado com sucesso', 'default', array('class' => 'alert success'));
                 $this->redirect(array('action' => 'index'));
             } else {
-                $this->Session->setFlash('Problemas ao registar funcionario. Verifique o formulário e tente de novo', 'default', array('class' => 'alert nerror'));
+                $this->Session->setFlash('Problemas ao registar funcionario. Verifique o formulário e tente de novo', 'default', array('class' => 'alert error'));
             }
         }
 
         $users = $this->Funcionario->User->find('list');
         $grauacademicos = $this->Funcionario->GrauAcademico->find('list');
-        $cargos = $this->Funcionario->Cargo->find('list');
+       
         //$faculdades = $this->Funcionario->UnidadeOrganica->find('list');
         //$departamentos = $this->Funcionario->UnidadeOrganica->find('list');
         //$seccaos = $this->Funcionario->UnidadeOrganica->find('list');
@@ -119,11 +116,11 @@ class FuncionariosController extends AppController {
         $cidades = $this->Funcionario->Cidade->find('list');
         $provincias = $this->Funcionario->Provincia->find('list');
         $documentos = $this->Funcionario->DocumentoIdentificacao->find('list');
-        $cargos = $this->Funcionario->Cargo->find('list');
+       
         $departamentos = $this->Funcionario->Departamento->find('list');
         $tipofuncionarios = $this->Funcionario->Tipofuncionario->find('list');
         $generos = $this->Funcionario->Genero->find('list');
-        $cargos = $this->Funcionario->Cargo->find('list');
+       
         $departamento = $this->Funcionario->Departamento->find('list');
         $this->set(compact('users', 'Grauacademicos', 'Paises', 'Cidades', 'Provincias', 'DocumentoIdentificacaos', 'tg0005cargos', 'tg0006departamentos', 'tg0011tipofuncionarios', 'generos', 'tg0005cargos', 'tg0006departamento'));
     }
@@ -172,6 +169,37 @@ class FuncionariosController extends AppController {
         $data = new Spreadsheet_Excel_Reader('i.xls', true);
         debug($data);
         $this->set('data', $data);
+    }
+    
+    public function editar_funcao($funcionario_id){
+        $funcionario = $this->Funcionario->read(null, $funcionario_id);
+        if($this->request->is('post') || $this->request->is('put')){
+            
+            if($this->request->data['FuncionariosFuncaoProfissional']['nova_funcao_funcionario']!= ""){
+                $funcao_existe = $this->Funcionario->FuncionariosFuncaoProfissional->FuncaoProfissional->findByName($this->request->data['FuncionariosFuncaoProfissional']['nova_funcao_funcionario']);
+                if(empty($funcao_existe)){
+                    $array_nova_funcao = array(
+                        'FuncaoProfissional'=>array(
+                            'name'=>$this->request->data['FuncionariosFuncaoProfissional']['nova_funcao_funcionario']
+                        )
+                    );
+                    $this->Funcionario->FuncionariosFuncaoProfissional->FuncaoProfissional->create();
+                    $this->Funcionario->FuncionariosFuncaoProfissional->FuncaoProfissional->save($array_nova_funcao);
+                    $this->request->data['FuncionariosFuncaoProfissional']['funcao_profissional_id'] = $this->Funcionario->FuncionariosFuncaoProfissional->FuncaoProfissional->id;
+                } else{
+                    $this->request->data['FuncionariosFuncaoProfissional']['funcao_profissional_id'] = $funcao_existe['FuncaoProfissional']['id'];
+                }
+            }
+            
+            $this->Funcionario->FuncionariosFuncaoProfissional->create();
+            $this->Funcionario->FuncionariosFuncaoProfissional->save($this->request->data);
+            $this->Session->setFlash(__("Função Profissional atribuida ao funcionário com sucesso"),'default',array('class'=>"alert success"));
+            $this->redirect(array('action'=>"perfil_funcionario",$this->request->data['FuncionariosFuncaoProfissional']['funcionario_id']));
+        }
+        
+        $funcaoProfissionals = $this->Funcionario->FuncionariosFuncaoProfissional->FuncaoProfissional->find('list');
+        $this->set(compact('funcionario','funcaoProfissionals'));
+        
     }
 
 }

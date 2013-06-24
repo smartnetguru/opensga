@@ -15,7 +15,7 @@ App::uses('AppModel', 'Model');
  */
 class UnidadeOrganica extends AppModel {
 
-public $actsAs = array('Tree');
+public $actsAs = array('Tree','Containable','Auditable');
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 
 /**

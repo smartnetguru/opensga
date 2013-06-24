@@ -32,13 +32,6 @@ class Funcionario extends AppModel {
             'fields' => '',
             'order' => ''
         ),
-        'Cargo' => array(
-            'className' => 'Cargo',
-            'foreignKey' => 'cargo_id',
-            'conditions' => '',
-            'fields' => '',
-            'order' => ''
-        ),
         'Tipofuncionario' => array(
             'className' => 'Tipofuncionario',
             'foreignKey' => 'tipo_funcionario_id',
@@ -68,6 +61,22 @@ class Funcionario extends AppModel {
             'order' => ''
         )
     );
+    
+    public $hasMany = array(
+		'FuncionariosFuncaoProfissional' => array(
+			'className' => 'FuncionariosFuncaoProfissional',
+			'foreignKey' => 'funcionario_id',
+			'dependent' => false,
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'exclusive' => '',
+			'finderQuery' => '',
+			'counterQuery' => ''
+		)
+	);
 
     /**
      *Esta funcao faz o mesmo que find list, mas busca o name a partir da tabela entidades

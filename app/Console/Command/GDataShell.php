@@ -44,10 +44,11 @@ class GDataShell extends AppShell {
         $client = Zend_Gdata_ClientLogin::getHttpClient('elisio.leonardo@uem.ac.mz', 'Tesc&eatsop1', $service);
         $gdata = new Zend_Gdata_Gapps($client, 'uem.ac.mz');
 
-        $this->Entidade->contain('User');
-        $users = $this->Entidade->find('all', array('conditions' => array('User.codigo_activacao' => NULL,'User.username LIKE'=>'e%')));
+        $this->Entidade->contain(array('User','Aluno'));
+        $users = $this->Entidade->find('all', array('conditions' => array('User.codigo_activacao' => NULL,'Aluno.codigo LIKE'=>'2013%')));
         var_dump(count($users));
         foreach ($users as $u) {
+           
             $usernames = explode('@', $u['User']['username']);
             $usernames[0]=  str_replace(' ', '', $usernames[0]);
             $mudar_apelido = false;
