@@ -41,19 +41,19 @@ class FuncionariosController extends AppController {
             $this->Session->setFlash('Invalido %s', 'flasherror');
             $this->redirect(array('action' => 'index'));
         }
-       
-       
-            $funcionario = $this->Funcionario->read(null, $id);
-       
-       
-       
-        
-       
-        
-        
-        
-        
-        
+
+
+        $funcionario = $this->Funcionario->read(null, $id);
+
+
+
+
+
+
+
+
+
+
         $this->set(compact('funcionario'));
     }
 
@@ -70,7 +70,7 @@ class FuncionariosController extends AppController {
 
         $users = $this->Funcionario->User->find('list');
         $grauacademicos = $this->Funcionario->GrauAcademico->find('list');
-       
+
         //$faculdades = $this->Funcionario->UnidadeOrganica->find('list');
         //$departamentos = $this->Funcionario->UnidadeOrganica->find('list');
         //$seccaos = $this->Funcionario->UnidadeOrganica->find('list');
@@ -116,11 +116,11 @@ class FuncionariosController extends AppController {
         $cidades = $this->Funcionario->Cidade->find('list');
         $provincias = $this->Funcionario->Provincia->find('list');
         $documentos = $this->Funcionario->DocumentoIdentificacao->find('list');
-       
+
         $departamentos = $this->Funcionario->Departamento->find('list');
         $tipofuncionarios = $this->Funcionario->Tipofuncionario->find('list');
         $generos = $this->Funcionario->Genero->find('list');
-       
+
         $departamento = $this->Funcionario->Departamento->find('list');
         $this->set(compact('users', 'Grauacademicos', 'Paises', 'Cidades', 'Provincias', 'DocumentoIdentificacaos', 'tg0005cargos', 'tg0006departamentos', 'tg0011tipofuncionarios', 'generos', 'tg0005cargos', 'tg0006departamento'));
     }
@@ -170,36 +170,39 @@ class FuncionariosController extends AppController {
         debug($data);
         $this->set('data', $data);
     }
-    
-    public function editar_funcao($funcionario_id){
+
+    public function editar_funcao($funcionario_id) {
         $funcionario = $this->Funcionario->read(null, $funcionario_id);
-        if($this->request->is('post') || $this->request->is('put')){
-            
-            if($this->request->data['FuncionariosFuncaoProfissional']['nova_funcao_funcionario']!= ""){
+        if ($this->request->is('post') || $this->request->is('put')) {
+
+            if ($this->request->data['FuncionariosFuncaoProfissional']['nova_funcao_funcionario'] != "") {
                 $funcao_existe = $this->Funcionario->FuncionariosFuncaoProfissional->FuncaoProfissional->findByName($this->request->data['FuncionariosFuncaoProfissional']['nova_funcao_funcionario']);
-                if(empty($funcao_existe)){
+                if (empty($funcao_existe)) {
                     $array_nova_funcao = array(
-                        'FuncaoProfissional'=>array(
-                            'name'=>$this->request->data['FuncionariosFuncaoProfissional']['nova_funcao_funcionario']
+                        'FuncaoProfissional' => array(
+                            'name' => $this->request->data['FuncionariosFuncaoProfissional']['nova_funcao_funcionario']
                         )
                     );
                     $this->Funcionario->FuncionariosFuncaoProfissional->FuncaoProfissional->create();
                     $this->Funcionario->FuncionariosFuncaoProfissional->FuncaoProfissional->save($array_nova_funcao);
                     $this->request->data['FuncionariosFuncaoProfissional']['funcao_profissional_id'] = $this->Funcionario->FuncionariosFuncaoProfissional->FuncaoProfissional->id;
-                } else{
+                } else {
                     $this->request->data['FuncionariosFuncaoProfissional']['funcao_profissional_id'] = $funcao_existe['FuncaoProfissional']['id'];
+                    $this->Funcionario->FuncionariosFuncaoProfissional->create();
+                    $this->Funcionario->FuncionariosFuncaoProfissional->save($this->request->data);
                 }
+            } else {
+                $this->Funcionario->FuncionariosFuncaoProfissional->create();
+                $this->Funcionario->FuncionariosFuncaoProfissional->save($this->request->data);
             }
-            
-            $this->Funcionario->FuncionariosFuncaoProfissional->create();
-            $this->Funcionario->FuncionariosFuncaoProfissional->save($this->request->data);
-            $this->Session->setFlash(__("Função Profissional atribuida ao funcionário com sucesso"),'default',array('class'=>"alert success"));
-            $this->redirect(array('action'=>"perfil_funcionario",$this->request->data['FuncionariosFuncaoProfissional']['funcionario_id']));
+
+
+            $this->Session->setFlash(__("Função Profissional atribuida ao funcionário com sucesso"), 'default', array('class' => "alert success"));
+            $this->redirect(array('action' => "perfil_funcionario", $this->request->data['FuncionariosFuncaoProfissional']['funcionario_id']));
         }
-        
+
         $funcaoProfissionals = $this->Funcionario->FuncionariosFuncaoProfissional->FuncaoProfissional->find('list');
-        $this->set(compact('funcionario','funcaoProfissionals'));
-        
+        $this->set(compact('funcionario', 'funcaoProfissionals'));
     }
 
 }

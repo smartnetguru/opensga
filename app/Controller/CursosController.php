@@ -65,7 +65,8 @@ class CursosController extends AppController {
 		}
 		$grauacademicos = $this->Curso->GrauAcademico->find('list');
 		$tipocursos = $this->Curso->Tipocurso->find('list');
-		$this->set(compact('grauacademicos', 'tipocursos','escolas'));
+                $unidadeOrganicas = $this->Curso->UnidadeOrganica->find('list');
+		$this->set(compact('grauacademicos', 'tipocursos','escolas','unidadeOrganicas'));
 	}
 
 	function edit($id = null) {

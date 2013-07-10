@@ -103,6 +103,10 @@ class Curso extends AppModel {
             $codigo = "C".$id_for;
             return $codigo;
         }
+        
+        public function getPlanoEstudoRecente($curso_id){
+            return $this->Planoestudo->find('first',array('conditions'=>array('curso_id'=>$curso_id),'order'=>'ano_criacao DESC'));
+        }
 
 }
 ?>

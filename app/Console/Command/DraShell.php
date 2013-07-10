@@ -1,7 +1,7 @@
 <?php 
-ini_set('memory_limit',"512M");
+ini_set('memory_limit',"2048M");
 class DraShell extends AppShell {
-	public $uses = array('UemDra.Faculdade','UemDra.DraSeccao','UemDra.DraDepartamento','UemDra.DraProvincia','UemDra.DraCurso','UemDra.DraPessoa','Provincia','UnidadeOrganica','Curso','User','Entidade','Aluno','UemDra.DraMatricula','Matricula','Anolectivo');
+	public $uses = array('UemDra.DraEscola','UemDra.Faculdade','UemDra.DraSeccao','UemDra.DraDepartamento','UemDra.DraProvincia','UemDra.DraCurso','UemDra.DraPessoa','Provincia','UnidadeOrganica','Curso','User','Entidade','Aluno','UemDra.DraMatricula','Matricula','Anolectivo','EscolaNivelMedio','UemDra.DraHistorico','HistoricoCurso','MudancaCurso','UemDra.DraMudancaCurso','UemDra.DraEstudanteHistorico','UemDra.DraObservacaoEstudante','AlunoEstado','MotivoEstadoAluno');
 	
 	public function main() {
 		$this->out('Hello world.');
@@ -351,6 +351,123 @@ class DraShell extends AppShell {
                  $this->Matricula->create();
                  $this->Matricula->save($nova_matricula);
              }
+        }
+        
+        
+        public function importa_escolas(){
+            $escolas  = $this->DraEscola->find('all');
+            foreach($escolas as $escola){
+               $array_escola = array(
+                  'EscolaNivelMedio'=>array(
+                      'name' =>$escola['DraEscola']['nome'],
+                      'provincia_id'=>$this->getCodigoProvincia($escola['DraEscola']['prov_id']),
+                      'distrito_id'=>$escola['DraEscola']['dist_id'],
+                      'pais_id'=>152
+                  ) 
+               );
+               
+               $this->EscolaNivelMedio->create();
+               $this->EscolaNivelMedio->save($array_escola);
+                $this->out($this->EscolaNivelMedio->id);
+            }
+        }
+        
+        
+        public function importa_mudanca_curso(){
+            $historicos = $this->DraMudancaCurso->find('all');
+            foreach($historicos as $historico){
+                
+                $this->Aluno->contain();
+                $aluno = $this->Aluno->findByCodigo(trim($historico['DraMudancaCurso']['est_num']));
+                $this->Curso->contain();
+                $curso_sga = $this->Curso->find('first',array('conditions'=>array('Curso.codigo'=>trim($historico['DraMudancaCurso']['curso_id_ant']))));
+                $this->Curso->contain();
+                $curso_sga_2 = $this->Curso->find('first',array('conditions'=>array('Curso.codigo'=>trim($historico['DraMudancaCurso']['curso_id_act']))));
+                
+                $array_historico = array(
+                    'MudancaCurso'=>array(
+                        'aluno_id'=>$aluno['Aluno']['id'],
+                        'codigo'=>$historico['DraMudancaCurso']['id'],
+                        'curso_antigo'=>$curso_sga['Curso']['id'],
+                        'curso_novo'=>$curso_sga_2['Curso']['id'],
+                        'data_mudanca'=>$historico['DraMudancaCurso']['data_registo'],
+                        'observacao'=>$historico['DraMudancaCurso']['observacao']
+                    )
+                );
+                
+                $this->MudancaCurso->create();
+               $this->MudancaCurso->save($array_historico);
+                $this->out($this->MudancaCurso->id);
+            }
+        }
+        
+                public function importa_historico_curso(){
+            $historicos = $this->DraHistorico->find('all');
+            foreach($historicos as $historico){
+                
+                $this->Aluno->contain();
+                $aluno = $this->Aluno->findByCodigo(trim($historico['DraHistorico']['est_num']));
+                $this->Curso->contain();
+                $curso_sga = $this->Curso->find('first',array('conditions'=>array('Curso.codigo'=>trim($historico['DraHistorico']['curso_id']))));
+                $this->Anolectivo->contain();
+                $ano_lectivo_ingresso = $this->Anolectivo->findByAno($historico['DraHistorico']['ano_ingresso']);
+                $this->Anolectivo->contain();
+                $ano_lectivo_fim = $this->Anolectivo->findByAno($historico['DraHistorico']['ano_fim']);
+                $array_historico = array(
+                    'HistoricoCurso'=>array(
+                        'aluno_id'=>$aluno['Aluno']['id'],
+                        'curso_id'=>$curso_sga['Curso']['id'],
+                        'ano_ingresso'=>$historico['DraHistorico']['ano_ingresso'],
+                        'ano_fim'=>$historico['DraHistorico']['ano_fim'],
+                        'ano_lectivo_ingresso'=>$ano_lectivo_ingresso['Anolectivo']['id'],
+                        'ano_lectivo_fim'=>$ano_lectivo_fim['Anolectivo']['id'],
+                        'nota_final'=>$historico['DraHistorico']['nota_final'],
+                        'data_conclusao'=>$historico['DraHistorico']['data_conclusao'],
+                        'conclusao_confirmada'=>$historico['DraHistorico']['conclusao_confirm']
+                    )
+                );
+                $this->HistoricoCurso->create();
+                $this->HistoricoCurso->save($array_historico);
+                $this->out($this->HistoricoCurso->id);
+            }
+        }
+        
+        public function importa_estudante_historico(){
+            $estudante_historico = $this->DraEstudanteHistorico->find('all');
+            foreach($estudante_historico as $eh){
+                $this->Aluno->contain();
+                $aluno = $this->Aluno->findByCodigo(trim($eh['DraEstudanteHistorico']['est_num']));
+                
+                $array_estado = array(
+                    'AlunoEstado'=>array(
+                        'aluno_id'=>$aluno['Aluno']['id'],
+                        'estado_anterior'=>$eh['DraEstudanteHistorico']['status_anterior'],
+                        'estado_actual'=>$eh['DraEstudanteHistorico']['status_actual'],
+                        'motivo_estado_aluno_id'=>$eh['DraEstudanteHistorico']['observacao_id'],
+                        'observacao'=>$eh['DraEstudanteHistorico']['observacao'],
+                        'data_mudanca'=>$eh['DraEstudanteHistorico']['data_registo']
+                    )
+                );
+                $this->AlunoEstado->create();
+                $this->AlunoEstado->save($array_estado);
+                $this->out($this->AlunoEstado->id);
+                
+            }
+        }
+        
+        public function importa_observacao_estudante(){
+            $observacao = $this->DraObservacaoEstudante->find('all');
+            foreach($observacao as $o){
+                $array_motivo = array(
+                    'MotivoEstadoAluno'=>array(
+                        'name'=>$o['DraObservacaoEstudante']['descricao']
+                    )
+                );
+                
+                $this->MotivoEstadoAluno->create();
+                $this->MotivoEstadoAluno->save($array_motivo);
+                $this->out($this->MotivoEstadoAluno->id);
+            }
         }
 	
 	

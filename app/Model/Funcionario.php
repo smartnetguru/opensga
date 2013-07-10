@@ -160,6 +160,14 @@ class Funcionario extends AppModel {
         $funcionario = $this->findByUserId($user_id);
         return $funcionario;
     }
+    
+    
+    /**
+     * Queremos criar ou actualizar acos_aros depois do save do funcionario
+     */
+    public function afterSave($created){
+        die(debug($this));
+    }
 
 }
 

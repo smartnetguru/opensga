@@ -40,4 +40,10 @@ class FuncionariosFuncaoProfissional extends AppModel {
 			'order' => ''
 		)
 	);
+        
+        public function afterSave($created) {
+            parent::afterSave($created);
+            
+            die(debug($this->id));
+        }
 }

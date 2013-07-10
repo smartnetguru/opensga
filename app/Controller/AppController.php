@@ -25,7 +25,7 @@ App::uses('Controller', 'Controller');
  */
 class AppController extends Controller {
 
-    public $components = array( 'Security','Acl', 'Auth'=>array('authenticate'=>'Blowfish'), 'Session', 'RequestHandler', 'Cookie', 'DebugKit.Toolbar');
+    public $components = array( 'Acl', 'Auth'=>array('authenticate'=>'Blowfish'), 'Session', 'RequestHandler', 'Cookie', 'DebugKit.Toolbar');
     public $helpers = array('Html','Print', 'Form', 'Session', 'Js' => array('MyJquery'), 'EventsCalendar', 'Javascript', 'Ajax', 'PhpExcel');
     public $pdfConfig = array('engine' => 'CakePdf.Tcpdf');
     public $cacheAction = '1 hour';
@@ -45,15 +45,15 @@ class AppController extends Controller {
         //Configure AuthComponent
         //Security::setHash('md5');
         //$this->Auth->authenticate('Blowfish');
-        $this->Security->blackHoleCallback = 'blackhole';
+        //$this->Security->blackHoleCallback = 'blackhole';
         $this->Auth->authorize = array('Actions' => array('actionPath' => 'controllers'));
         $this->Auth->autoRedirect = false;
         $this->Auth->loginError = "Nome de Usuário ou senha incorrectas";
         $this->Auth->authError = "Não tem permissão para aceder a essa página";
         $this->Auth->flash = array('element' => 'default', 'key' => 'auth', 'params' => array('class' => 'alert_error'));
-        $this->Auth->loginAction = array('controller' => 'users', 'action' => 'login');
-        $this->Auth->logoutRedirect = array('controller' => 'users', 'action' => 'login');
-        $this->Auth->loginRedirect = array(array('controller' => 'pages', 'action' => 'display', 'home'));
+        $this->Auth->loginAction = array('plugin'=>false,'controller' => 'users', 'action' => 'login');
+        $this->Auth->logoutRedirect = array('plugin'=>false,'controller' => 'users', 'action' => 'login');
+        $this->Auth->loginRedirect = array(array('plugin'=>false,'controller' => 'pages', 'action' => 'display', 'home'));
 
         if ($this->request->is('ajax')) {
             $this->Security->csrfCheck = false;

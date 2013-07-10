@@ -69,6 +69,13 @@ class Matricula extends AppModel {
             'conditions' => '',
             'fields' => '',
             'order' => ''
+        ),
+        'TipoMatricula' => array(
+            'className' => 'TipoMatricula',
+            'foreignKey' => 'tipo_matricula_id',
+            'conditions' => '',
+            'fields' => '',
+            'order' => ''
         )
     );
     var $validate = array(

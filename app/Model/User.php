@@ -162,19 +162,13 @@ class User extends AppModel {
 		}
 
         public function alteraPassword($data){
-            $user_id = SessionComponent::read('Auth.User.id');
+            $user_id = $data['User']['user_id'];
             $this->id = $user_id;
             if($data['User']['novasenha1'] != $data['User']['novasenha2']){
                 return false;
             }
 
-            $senha_antiga = AuthComponent::password($data['User']['senhaantiga']);
-            $senha  = $this->field('password');
-            if($senha != $senha_antiga){
-                return false;
-            }
-
-            $this->set('password', AuthComponent::password($data['User']['novasenha1']));
+            $this->set('password', Security::hash($data['User']['novasenha1'],'blowfish'));
             $this->save();
             return true;
         }
@@ -183,6 +177,86 @@ class User extends AppModel {
         //Verifica se um dado Estudante é aluno
         public function isAluno($user_id){
            return true;
+        }
+        
+        
+        
+        
+        public function normalize_str($str)
+	{
+		$invalid = array('Š'=>'S', 'š'=>'s', 'Đ'=>'Dj', 'đ'=>'dj', 'Ž'=>'Z', 'ž'=>'z',
+				'Č'=>'C', 'č'=>'c', 'Ć'=>'C', 'ć'=>'c', 'À'=>'A', 'Á'=>'A', 'Â'=>'A', 'Ã'=>'A',
+				'Ä'=>'A', 'Å'=>'A', 'Æ'=>'A', 'Ç'=>'C', 'È'=>'E', 'É'=>'E', 'Ê'=>'E', 'Ë'=>'E',
+				'Ì'=>'I', 'Í'=>'I', 'Î'=>'I', 'Ï'=>'I', 'Ñ'=>'N', 'Ò'=>'O', 'Ó'=>'O', 'Ô'=>'O',
+				'Õ'=>'O', 'Ö'=>'O', 'Ø'=>'O', 'Ù'=>'U', 'Ú'=>'U', 'Û'=>'U', 'Ü'=>'U', 'Ý'=>'Y',
+				'Þ'=>'B', 'ß'=>'Ss', 'à'=>'a', 'á'=>'a', 'â'=>'a', 'ã'=>'a', 'ä'=>'a', 'å'=>'a',
+				'æ'=>'a', 'ç'=>'c', 'è'=>'e', 'é'=>'e', 'ê'=>'e',  'ë'=>'e', 'ì'=>'i', 'í'=>'i',
+				'î'=>'i', 'ï'=>'i', 'ð'=>'o', 'ñ'=>'n', 'ò'=>'o', 'ó'=>'o', 'ô'=>'o', 'õ'=>'o',
+				'ö'=>'o', 'ø'=>'o', 'ù'=>'u', 'ú'=>'u', 'û'=>'u', 'ý'=>'y',  'ý'=>'y', 'þ'=>'b',
+				'ÿ'=>'y', 'Ŕ'=>'R', 'ŕ'=>'r', "`" => "'", "´" => "'", "„" => ",", "`" => "'",
+				"´" => "'", "“" => "\"", "”" => "\"", "´" => "'", "&acirc;€™" => "'", "{" => "",
+				"~" => "", "–" => "-", "’" => "'");
+	
+		$str = str_replace(array_keys($invalid), array_values($invalid), $str);
+	
+		return $str;
+	}
+	
+	public function geraEmailUem($apelido,$nome){
+		
+		$nome = $this->normalize_str($nome);
+		$nome = trim(strtolower($nome));
+		
+		$apelido = strtolower(trim($this->normalize_str($apelido)));
+		
+		$nome = utf8_encode($nome);
+		$apelido = utf8_encode($apelido);
+		$nome = preg_replace('/[^a-zA-Z0-9\s]/s','',$nome);
+		
+		$nome = preg_replace('/\s+/', ' ', $nome);
+		$nomes  = explode(' ',$nome);
+		$email = $nomes[0].'.'.$apelido.'@uem.ac.mz';
+		
+		//Verificar se existe algum email assim
+		$email_existe = $this->findByUsername($email);
+		if($email_existe){
+			if(count($nomes)>1){
+				$segundo_nome = trim($nomes[1]);
+				$email = $nomes[0].'.'.$segundo_nome[0].'.'.$apelido.'@uem.ac.mz';
+				$email_existe1 = $this->findByUsername($email);
+				
+				if($email_existe1){
+					$email = $nomes[0].'.'.$segundo_nome.'.'.$apelido.'@uem.ac.mz';
+					$email_existe3 = $this->findByUsername($email);
+					if($email_existe3){
+					$email = $apelido.'.'.$nomes[0].'@uem.ac.mz';
+				$email_existe2 = $this->findByUsername($email);
+				if($email_existe2){
+					$email = $apelido.'.'.$nomes[0].'.'.$email_existe2['User']['id'].'@uem.ac.mz';
+				}
+					}	
+				}
+				
+			}
+			else{
+				$email = $apelido.'.'.$nomes[0].'@uem.ac.mz';
+				$email_existe2 = $this->findByUsername($email);
+				if($email_existe2){
+					$email = $apelido.'.'.$nomes[0].'.'.$email_existe2['User']['id'].'@uem.ac.mz';
+					
+				}
+			}
+		}
+		return strtolower($email);
+	}
+        
+        public function getFuncionarioActivoId($user_id){
+            if($user_id==1 || $user_id==null)
+                return 0;
+            $this->Funcionario->contain();
+            $funcionario = $this->Funcionario->findByUserId($user_id);
+            
+            return $funcionario['Funcionario']['id'];
         }
 
 }

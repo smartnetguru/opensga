@@ -45,8 +45,9 @@ class GDataShell extends AppShell {
         $gdata = new Zend_Gdata_Gapps($client, 'uem.ac.mz');
 
         $this->Entidade->contain(array('User','Aluno'));
-        $users = $this->Entidade->find('all', array('conditions' => array('User.codigo_activacao' => NULL,'Aluno.codigo LIKE'=>'2013%')));
+        $users = $this->Entidade->find('all', array('conditions' => array('User.codigo_activacao' => NULL)));
         var_dump(count($users));
+        $ii = 0;
         foreach ($users as $u) {
            
             $usernames = explode('@', $u['User']['username']);
@@ -69,6 +70,8 @@ class GDataShell extends AppShell {
                     $user->login->changePasswordAtNextLogin = true;
                     $user = $user->save();
                 }
+            } catch(Exception $e){
+                debug($u);
             }
 
             $user = $gdata->retrieveUser($usernames[0]);
@@ -82,7 +85,7 @@ class GDataShell extends AppShell {
                 }
                 $this->User->save();
             }
-
+            $this->out($ii++);
             var_dump($user->login->userName);
         }
     }
