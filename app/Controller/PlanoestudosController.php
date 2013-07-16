@@ -112,24 +112,17 @@ class PlanoestudosController extends AppController {
 
                 }
                 }
-                 $this->Session->setFlash('Dado Registado com Sucesso.Adicione Mais disciplinas.','flashok');
-				$this->redirect(array('action' => 'add_grupodisciplinas',$this->data['Planoestudo']['plano_id']));
+                 $this->Session->setFlash(__('Dado Registado com Sucesso.Adicione Mais disciplinas.'),'default',array('class'=>'alert success'));
+				$this->redirect(array('action' => 'adicionar_disciplinas',$this->data['Planoestudo']['plano_id']));
 
             }
 
-            //$disciplinaq = $disciplina->query("select * from planoestudoanos where disciplina_id = {$disc_id} and planoestudo_id={$plano_id}");
-			
             
 
-            //$disciplinas_precedentes = $disciplina->query("select * from planoestudoanos where planoestudo_id={$plano_id} and ano <={$disciplinaq[0]['planoestudoanos']['ano']}");
-
            $disciplinas_p = $this->Planoestudo->getAllDisciplinasForPrecedencia($disc_id,$plano_id);
-           //debug($disciplinas_p);
-           //$precedencias = Set::extract('{n}.Disciplina.name',$disciplinas_p);
-           //die(debug($precedencias));
             $precedencias=$disciplinas_p;
            
-			//var_dump($precedencias);
+			
             $this->set('precedencias',$precedencias);
              $this->set('plano_id',$plano_id);
               $this->set('disc_id',$disc_id);

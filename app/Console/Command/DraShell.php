@@ -1,7 +1,7 @@
 <?php 
 ini_set('memory_limit',"2048M");
 class DraShell extends AppShell {
-	public $uses = array('UemDra.DraEscola','UemDra.Faculdade','UemDra.DraSeccao','UemDra.DraDepartamento','UemDra.DraProvincia','UemDra.DraCurso','UemDra.DraPessoa','Provincia','UnidadeOrganica','Curso','User','Entidade','Aluno','UemDra.DraMatricula','Matricula','Anolectivo','EscolaNivelMedio','UemDra.DraHistorico','HistoricoCurso','MudancaCurso','UemDra.DraMudancaCurso','UemDra.DraEstudanteHistorico','UemDra.DraObservacaoEstudante','AlunoEstado','MotivoEstadoAluno');
+	public $uses = array('UemDra.DraFoto','UemDra.DraEscola','UemDra.Faculdade','UemDra.DraSeccao','UemDra.DraDepartamento','UemDra.DraProvincia','UemDra.DraCurso','UemDra.DraPessoa','Provincia','UnidadeOrganica','Curso','User','Entidade','Aluno','UemDra.DraMatricula','Matricula','Anolectivo','EscolaNivelMedio','UemDra.DraHistorico','HistoricoCurso','MudancaCurso','UemDra.DraMudancaCurso','UemDra.DraEstudanteHistorico','UemDra.DraObservacaoEstudante','AlunoEstado','MotivoEstadoAluno');
 	
 	public function main() {
 		$this->out('Hello world.');
@@ -467,6 +467,15 @@ class DraShell extends AppShell {
                 $this->MotivoEstadoAluno->create();
                 $this->MotivoEstadoAluno->save($array_motivo);
                 $this->out($this->MotivoEstadoAluno->id);
+            }
+        }
+        
+        
+        public function importa_foto(){
+            
+            $foto  =  $this->DraFoto->find('all');
+            foreach($foto as $f){
+                debug($f);
             }
         }
 	

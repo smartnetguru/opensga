@@ -279,6 +279,16 @@ class MatriculasController extends AppController {
         $this->set(compact('matriculas_nova','curso_id','turno_id'));
         //$this->layout = 'pdf';
         }
+        
+        
+        public function exportar_matriculas(){
+            
+            $this->Matricula->contain(array(
+                'Anolectivo'
+            ));
+            $matriculas = $this->Matricula->find('all',array('conditions'=>array('Anolectivo.ano'=>2013)));
+            die(debug($matriculas));
+        }
 
 }
 ?>

@@ -516,11 +516,19 @@ class Aluno extends AppModel {
         return $alunos_faculdade;
     }
 
-    public function getEstudantesByCurso($curso_id) {
-        $alunos_curso = $this->find('all', array('conditions' => array('Aluno.curso_ingresso_id' => $curso_id)));
+    public function getTotalEstudantesPorCurso() {
+        $this->contain('Curso');
+        $alunos_curso = $this->find('all', array('conditions' => array(),'group'=>'Curso.name','fields'=>array('Count(*) as total','Curso.name')));
 
 
         return $alunos_curso;
+    }
+    
+    public function getTotalAlunosActivosPorCurso(){
+        $this->Matricula->contain(array('Curso','Anolectivo'));
+        $total_alunos = $this->Matricula->find('all',array('conditions'=>array('Anolectivo.ano'=>2013,'Curso.unidade_organica_id'=>28),'group'=>'Curso.name','fields'=>array('Count(Matricula.curso_id) as total','Curso.name')));
+        
+        return $total_alunos;
     }
 
     public function getTotalAlunos() {
