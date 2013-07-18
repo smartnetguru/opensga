@@ -2,7 +2,7 @@
 
 class OpenSGAShell extends AppShell {
 
-    public $uses = array('Turma', 'Matricula', 'Curso', 'UnidadeOrganica', 'Candidatura');
+    public $uses = array('Turma', 'Matricula', 'Curso', 'UnidadeOrganica', 'Candidatura','Aluno','EstadoAluno','Planoestudo','Disciplina');
 
     public function main() {
         $this->out('Hello world.');
@@ -203,9 +203,9 @@ class OpenSGAShell extends AppShell {
         $xls = PHPExcel_IOFactory::load(APP . 'Reports' . DS . 'entrega_certificados.xlsx');
 
         $worksheet = $xls->getActiveSheet();
-        debug("Teste");
+        
 
-        $linha_actual = 1;
+        $linha_actual = 2;
         foreach ($worksheet->getRowIterator() as $row) {
 
             $numero_estudante = $worksheet->getCell('A' . $linha_actual)->getValue();
@@ -213,8 +213,8 @@ class OpenSGAShell extends AppShell {
 
             $datasource = $this->Aluno->getDataSource();
             $datasource->begin();
-            $this->contain();
-            $aluno = $this->findById($data['aluno_id']);
+            $this->Aluno->contain();
+            
             $array_estado = array(
                 'AlunoEstado' => array(
                     'aluno_id' => $aluno['Aluno']['id'],
@@ -222,21 +222,99 @@ class OpenSGAShell extends AppShell {
                     'estado_actual' => 1,
                     'motivo_estado_aluno_id' => 15,
                     'observacao' => "Entregou Certificado",
-                    'data_mudanca' => $data['data_mudanca'],
+                    'data_mudanca' => date('Y-m-d'),
                     // 'anexo_url'=>$data['anexo_url'],
                     'funcionario_id' => 1
                 )
             );
-            $this->AlunoEstado->create();
-            $this->AlunoEstado->save($array_estado);
+            
+            
+            $this->Aluno->AlunoEstado->create();
+            $this->Aluno->AlunoEstado->save($array_estado);
 
-            $this->id = $data['aluno_id'];
-            $this->set('estado_aluno_id', $data['estado_actual']);
-            $this->save();
-            //return $datasource->commit();
-            debug($worksheet->getCell('A' . $linha_actual)->getValue());
+            $this->Aluno->id = $aluno['Aluno']['id'];
+            $this->Aluno->set('estado_aluno_id', 1);
+            $this->Aluno->set('estadoentidade_id', 1);
+            $this->Aluno->save();
+           $datasource->commit();
+            
+            $this->out($this->Aluno->AlunoEstado->id);
             $linha_actual++;
         }
+    }
+    
+    
+    public function aproveitamento(){
+        
+        
+        App::import('Vendor', 'PHPExcel', array('file' => 'PHPExcel.php'));
+        if (!class_exists('PHPExcel'))
+            throw new CakeException('Vendor class PHPExcel not found!');
+
+        $xls = PHPExcel_IOFactory::load(APP . 'Reports' . DS . 'aproveitamento2.xlsx');
+
+        $worksheet = $xls->getActiveSheet();
+        
+        $cursos = $this->Curso->find('all',array('conditions'=>array('unidade_organica_id'=>28)));
+        foreach($cursos as $curso){
+            $myWorkSheet = new PHPExcel_Worksheet($xls, substr($curso['Curso']['name'],0,30));
+            $worksheet = $xls->addSheet($myWorkSheet);
+            
+             $this->Planoestudo->contain();
+        $planoestudo = $this->Planoestudo->find('first',array('conditions'=>array('curso_id'=>$curso['Curso']['id'],'ano_criacao <'=>2009),'order'=>array('ano_criacao DESC')));
+        
+        $planoestudoano = $this->Planoestudo->Planoestudoano->find('all',array('conditions'=>array('planoestudo_id'=>$planoestudo['Planoestudo']['id']),'order'=>array('ano','semestre')));
+        
+        $linha = 1;
+        $coluna  =1;
+        $ano_actual = $coluna;
+        $semestre_actual = $coluna;
+        $total_colunas = 0;
+        foreach($planoestudoano as $pa){
+            $worksheet->setCellValueByColumnAndRow($coluna,3,$pa['Disciplina']['name']);
+            $worksheet->setCellValueByColumnAndRow($coluna,4,$pa['Disciplina']['codigo']);
+            $worksheet->getStyleByColumnAndRow($coluna,3)->getAlignment()->setTextRotation(90);
+            $worksheet->getStyleByColumnAndRow($coluna,4)->getAlignment()->setTextRotation(90);
+            
+            
+            $total_colunas++;
+            $coluna++;
+        }
+        //debug($planoestudo);
+        //die();
+        
+        $alunos  = $this->Aluno->find('all',array('conditions'=>array('Aluno.ano_ingresso'=>2009,'Aluno.curso_id'=>$curso['Curso']['id'])));
+        $linha = 5;
+        $i=0;
+        foreach($alunos as $aluno){
+            $worksheet->setCellValueByColumnAndRow(0,$linha,''.$aluno['Aluno']['codigo']);
+                $coluna  =1;
+            while($coluna<=$total_colunas){
+                $codigo_disciplina = $worksheet->getCellByColumnAndRow($coluna,4)->getValue();
+                $disciplina = $this->Disciplina->findByCodigo($codigo_disciplina);
+                $this->Aluno->Inscricao->contain(array(
+                   'Turma' 
+                ));
+                $inscricao = $this->Aluno->Inscricao->find('first',array('conditions'=>array('Inscricao.aluno_id'=>$aluno['Aluno']['id'],'Turma.disciplina_id'=>$disciplina['Disciplina']['id']),'order'=>'data DESC'));
+                if($inscricao)
+                $worksheet->setCellValueByColumnAndRow($coluna,$linha,$inscricao['Inscricao']['nota_final']);
+                
+                $coluna++;
+                $i++;
+                $this->out($i);    
+            }
+            
+                
+            $linha++;
+        }
+        }
+        //Comecamos por preencher as disciplinas
+       
+        
+        
+        $objWriter = PHPExcel_IOFactory::createWriter($xls, 'Excel2007');
+        debug(getcwd());
+        $objWriter->save('aproveitamento2.xlsx');
     }
 
 }

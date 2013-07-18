@@ -478,6 +478,33 @@ class DraShell extends AppShell {
                 debug($f);
             }
         }
+        
+        public function actualiza_sexo(){
+            
+            $this->Aluno->contain('Entidade');
+            $aluno = $this->Aluno->find('all',array('conditions'=>array('Entidade.genero_id'=>null)));
+            die(debug())
+            $pessoa  = $this->DraPessoa->find('all');
+            $i=0;
+            foreach($pessoa as $p){
+                $this->Aluno->contain();
+                $aluno = $this->Aluno->findByCodigo(trim($p['DraEstudante']['est_num']));
+                if($aluno){
+                    $sexo = trim($p['DraPessoa']['sexo']);
+                    if($sexo=='Feminino'){
+                        $genero_id = 2;
+                    } elseif($sexo == 'Masculino'){
+                        $genero_id = 1;
+                    } else{
+                        $genero_id= 0;
+                    }
+                    $this->Entidade->id = $aluno['Aluno']['entidade_id'];
+                    $this->Entidade->set('genero_id',$genero_id);
+                    $this->Entidade->save();
+                    $this->out($i++);
+                }
+            }
+        }
 	
 	
 }

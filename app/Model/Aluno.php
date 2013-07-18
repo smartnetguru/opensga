@@ -526,7 +526,7 @@ class Aluno extends AppModel {
     
     public function getTotalAlunosActivosPorCurso(){
         $this->Matricula->contain(array('Curso','Anolectivo'));
-        $total_alunos = $this->Matricula->find('all',array('conditions'=>array('Anolectivo.ano'=>2013,'Curso.unidade_organica_id'=>28),'group'=>'Curso.name','fields'=>array('Count(Matricula.curso_id) as total','Curso.name')));
+        $total_alunos = $this->Matricula->find('all',array('conditions'=>array('Anolectivo.ano'=>2013),'group'=>'Curso.name','fields'=>array('Count(Matricula.curso_id) as total','Curso.name')));
         
         return $total_alunos;
     }
