@@ -45,7 +45,7 @@ class GDataShell extends AppShell {
         $gdata = new Zend_Gdata_Gapps($client, 'uem.ac.mz');
 
         $this->Entidade->contain(array('User','Aluno'));
-        $users = $this->Entidade->find('all', array('conditions' => array('User.codigo_activacao' => NULL,'Aluno.ano_ingresso'=>2011)));
+        $users = $this->Entidade->find('all', array('conditions' => array('User.codigo_activacao' => NULL,'Aluno.ano_ingresso'=>2010)));
         var_dump(count($users));
         $ii = 0;
         foreach ($users as $u) {

@@ -536,10 +536,19 @@ class AlunosController extends AppController {
 
     public function mostrar_foto($codigo) {
         $this->viewClass = 'Media';
-
+         App::uses('Folder', 'Utility');
         App::uses('File', 'Utility');
-        $path = APP . 'Assets' . DS . 'Fotos' . DS . 'Estudantes' . DS;
-        $file = new File($path . $codigo . '.jpg');
+        $this->Aluno->contain();
+        $aluno = $this->Aluno->findByCodigo($codigo);
+        if(!empty($aluno)){
+            App::uses('File', 'Utility');
+        $path = APP . 'Assets' . DS . 'Fotos' . DS . 'Estudantes' . DS.$aluno['Aluno']['ano_ingresso'].DS;
+        
+        $file_path = $path . $codigo . '.jpg';
+        $folder_novo = new Folder($path);
+        
+        $file = new File($file_path);
+        
         if (!$file->exists()) {
             $codigo = 'default_profile_picture';
             $path = WWW_ROOT . DS . 'img' . DS;
@@ -556,7 +565,11 @@ class AlunosController extends AppController {
             'path' => $path
         );
         $this->set($params);
-    }
+        } else{
+            throw new NotFoundException('Estudante não encontrado. Mostrar foto');
+        }
+        
+    } 
 
     public function pagar_factura($aluno_id, $pagamento_id) {
         $this->Aluno->id = $aluno_id;
@@ -937,5 +950,7 @@ class AlunosController extends AppController {
 
         $this->set(compact('aluno', 'is_regular', 'classe_estado', 'cursos','funcionario'));
     }
+
+    
 
 }

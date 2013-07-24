@@ -2,7 +2,7 @@
 
 class OpenSGAShell extends AppShell {
 
-    public $uses = array('Turma', 'Matricula', 'Curso', 'UnidadeOrganica', 'Candidatura','Aluno','EstadoAluno','Planoestudo','Disciplina');
+    public $uses = array('Turma', 'Matricula', 'Curso', 'UnidadeOrganica', 'Candidatura','Aluno','EstadoAluno','Planoestudo','Disciplina','Planoestudoano');
 
     public function main() {
         $this->out('Hello world.');
@@ -193,6 +193,100 @@ class OpenSGAShell extends AppShell {
 
         $worksheet = $xls->getActiveSheet();
         $worksheets = $xls->getAllSheets();
+        foreach($worksheets as $ws){
+            //Cria o Plano de estudos
+            $curso_nome = $ws->getTitle();
+            $array_plano_estudos = array(
+                'name'=>$curso_nome,
+                'duracao'=>5,
+                'semestresano'=>2
+                    
+            );
+            $this->Curso->create();
+            $this->Curso->save($array_plano_estudos);
+            $array_plano_estudos['curso_id']=$this->Curso->id;
+            $this->Planoestudo->create();
+            $this->Planoestudo->save($array_plano_estudos);
+            
+            $ultima_linha = false;
+            $linha_actual = 2;
+            $ciclo = 1;
+            while(!$ultima_linha){
+                $verificador = $ws->getCellByColumnAndRow(2,$linha_actual)->getCalculatedValue();
+                
+                if(is_numeric($verificador)){
+                    $array_disciplina = array(
+                      'codigo'=>  $ws->getCellByColumnAndRow(0,$linha_actual)->getCalculatedValue(),
+                        'name'=>$ws->getCellByColumnAndRow(1,$linha_actual)->getCalculatedValue()
+                    
+                    );
+                    $disciplina_existe = $this->Disciplina->findByCodigo($array_disciplina['codigo']);
+                    if(empty($disciplina_existe)){
+                        $disciplina_existe = $this->Disciplina->findByName($array_disciplina['name']);
+                        if(empty($disciplina_existe)){
+                            $this->Disciplina->create();
+                            $this->Disciplina->save(array('Disciplina'=>$array_disciplina));
+                            $disciplina_existe = $this->Disciplina->findByCodigo($array_disciplina['codigo']);
+                        }
+                    }
+                    $array_plano_estudo_anos = array(
+                        'Planoestudoano'=>array(
+                            'planoestudo_id'=>$this->Planoestudo->id,
+                            'disciplina_id'=>$disciplina_existe['Disciplina']['id'],
+                            'semestre_sequencial'=>$ws->getCellByColumnAndRow(2,$linha_actual)->getCalculatedValue(),
+                            'carga_total' =>$ws->getCellByColumnAndRow(3,$linha_actual)->getCalculatedValue(),
+                            'cargahorariateoricas' =>$ws->getCellByColumnAndRow(4,$linha_actual)->getCalculatedValue(),
+                            'cargahorariapraticas' =>$ws->getCellByColumnAndRow(5,$linha_actual)->getCalculatedValue(),
+                            'creditos' =>$ws->getCellByColumnAndRow(6,$linha_actual)->getCalculatedValue(),
+                            
+                        )
+                    );
+                    if($array_plano_estudo_anos['Planoestudoano']['semestre_sequencial'] % 2==0){
+                        $array_plano_estudo_anos['Planoestudoano']['ano'] = $array_plano_estudo_anos['Planoestudoano']['semestre_sequencial']/2;
+                        $array_plano_estudo_anos['Planoestudoano']['semestre'] = 2;
+                                
+                    } else{
+                        $array_plano_estudo_anos['Planoestudoano']['ano'] = ($array_plano_estudo_anos['Planoestudoano']['semestre_sequencial']+1)/2;
+                        $array_plano_estudo_anos['Planoestudoano']['semestre'] = 1;
+                    }
+                    
+                    $this->Planoestudoano->create();
+                    $this->Planoestudoano->save($array_plano_estudo_anos);
+                    
+                    $codigo_precedencia = $ws->getCellByColumnAndRow(7,$linha_actual)->getCalculatedValue();
+                    if($codigo_precedencia != NULL){
+                        $disciplina_precendencia = $this->Disciplina->findByCodigo($codigo_precedencia);
+                        $array_precedencia = array(
+                            'Precedencia'=>array(
+                                'planoestudoano_id'=>$this->Planoestudoano->id,
+                                'precedencia'=>$disciplina_precendencia['Disciplina']['id'],
+                                'tipoprecedencia_id'=>1
+                            )
+                        );
+                        $this->Precedencia->create();
+                        $this->Precedencia->save($array_precedencia);
+                        
+                    }
+                    $linha_actual++;
+                } else {
+                    if($verificador=='Semestre' || $verificador==null){
+                        
+                    } else{
+                        debug($verificador);
+                    }
+                    
+                    $linha_actual++;
+                }
+                
+                if($linha_actual ==100){
+                    $ultima_linha = true;
+                }
+               
+                
+            }
+            
+            
+        }
     }
 
     public function entrega_certificado() {
@@ -315,6 +409,59 @@ class OpenSGAShell extends AppShell {
         $objWriter = PHPExcel_IOFactory::createWriter($xls, 'Excel2007');
         debug(getcwd());
         $objWriter->save('aproveitamento2.xlsx');
+    }
+    
+    public function importa_dados_unizambeze(){
+        App::import('Vendor', 'PHPExcel', array('file' => 'PHPExcel.php'));
+        if (!class_exists('PHPExcel'))
+            throw new CakeException('Vendor class PHPExcel not found!');
+
+        $xls = PHPExcel_IOFactory::load(APP . 'Reports' . DS . 'uz_contabilidade.xlsx');
+
+        $worksheet = $xls->getActiveSheet();
+        
+    }
+    
+    public function actualiza_fotos_uem(){
+        App::uses('Folder', 'Utility');
+App::uses('File', 'Utility');
+
+    $i=0;
+    $this->Aluno->contain('Entidade');
+    $alunos = $this->Aluno->find('all',array('conditions'=>array('Entidade.foto'=>'0')));
+    die(debug(count($alunos)));
+    foreach($alunos as $aluno){
+        $foto_file = new File('C:'.DS.'fotos_uem'.DS.$aluno['Aluno']['codigo'].'.jpg');
+        $path = APP.'Assets'.DS.'Fotos'.DS.'Estudantes'.DS.$aluno['Aluno']['ano_ingresso'];
+        if($foto_file->exists()){
+            $path = APP.'Assets'.DS.'Fotos'.DS.'Estudantes'.DS.$aluno['Aluno']['ano_ingresso'];
+            $folder_novo = new Folder($path,true);
+            $foto_file->copy($path.DS.$aluno['Aluno']['codigo'].'.jpg');
+            $foto_file->delete();
+            $this->Aluno->Entidade->id = $aluno['Entidade']['id'];
+            $this->Aluno->Entidade->set('foto',$aluno['Aluno']['codigo'].'.jpg');
+            $this->Aluno->Entidade->save();
+            $this->out($i++);
+        } else{ 
+            $foto_existe = new File($path.DS.$aluno['Aluno']['codigo'].'.jpg');
+            if($foto_existe->exists()){
+                $this->Aluno->Entidade->id = $aluno['Entidade']['id'];
+                $this->Aluno->Entidade->set('foto',$aluno['Aluno']['codigo'].'.jpg');
+                $this->Aluno->Entidade->save();
+            }
+            else{
+                $this->Aluno->Entidade->id = $aluno['Entidade']['id'];
+                $this->Aluno->Entidade->set('foto',0);
+                $this->Aluno->Entidade->save();
+            }
+                    $this->out($i++);
+        
+        
+    }
+    
+    
+
+
     }
 
 }
