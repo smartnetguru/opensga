@@ -33,7 +33,12 @@ class AppController extends Controller {
     public function beforeFilter() {
         parent::beforeFilter();
 		
-        Configure::write('Config.language', $this->Session->read('Config.language'));
+        $config_language  = $this->Session->read('Config.language');
+       
+        if($config_language==null){
+            $config_language = 'por';
+        }
+        Configure::write('Config.language', $config_language);
         setlocale(LC_ALL, 'ptb');
         if ($this->Auth->loggedIn()) {
             AuditableConfig::$responsibleId = $this->Auth->user('id');

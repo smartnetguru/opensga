@@ -55,6 +55,48 @@ class CandidatoAlumni extends AppModel {
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
+		),
+		'PaisNascimento' => array(
+			'className' => 'Pais',
+			'foreignKey' => 'pais_nascimento',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
+		),
+		'ProvinciaNascimento' => array(
+			'className' => 'Provincia',
+			'foreignKey' => 'provincia_nascimento',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
+		),
+		'CidadeNascimento' => array(
+			'className' => 'Cidade',
+			'foreignKey' => 'cidade_nascimento',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
+		),
+		'PaisMorada' => array(
+			'className' => 'Pais',
+			'foreignKey' => 'pais_morada',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
+		),
+		'ProvinciaMorada' => array(
+			'className' => 'Provincia',
+			'foreignKey' => 'provincia_morada',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
+		),
+		'CidadeMorada' => array(
+			'className' => 'cidade',
+			'foreignKey' => 'cidade_morada',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
 		)
 	);
 

@@ -37,12 +37,12 @@ class CandidatoAlumnisController extends AppController {
  *
  * @return void
  */
-	public function add() {
+	public function cadastro_alumni() {
 		if ($this->request->is('post')) {
 			$this->CandidatoAlumni->create();
 			if ($this->CandidatoAlumni->save($this->request->data)) {
 				$this->Session->setFlash(__('The candidato alumni has been saved'));
-				$this->redirect(array('action' => 'index'));
+				//$this->redirect(array('action' => 'index'));
 			} else {
 				$this->Session->setFlash(__('The candidato alumni could not be saved. Please, try again.'));
 			}
@@ -52,7 +52,14 @@ class CandidatoAlumnisController extends AppController {
 		$unidadeOrganicas = $this->CandidatoAlumni->UnidadeOrganica->find('list');
 		$cursos = $this->CandidatoAlumni->Curso->find('list');
 		$grauAcademicos = $this->CandidatoAlumni->GrauAcademico->find('list');
-		$this->set(compact('generos', 'estadoCivils', 'unidadeOrganicas', 'cursos', 'grauAcademicos'));
+                $paisNascimentos = $this->CandidatoAlumni->PaisNascimento->find('list');
+                $provinciaNascimentos = $this->CandidatoAlumni->ProvinciaNascimento->find('list');
+                $cidadeNascimentos = $this->CandidatoAlumni->CidadeNascimento->find('list');
+                $paisMoradas = $this->CandidatoAlumni->PaisMorada->find('list');
+                $provinciaMoradas = $this->CandidatoAlumni->ProvinciaMorada->find('list');
+                $cidadeMoradas = $this->CandidatoAlumni->CidadeMorada->find('list');
+                $this->layout = 'guest_users';
+		$this->set(compact('generos', 'estadoCivils', 'unidadeOrganicas', 'cursos', 'grauAcademicos','paisNascimentos','provinciaNascimentos','cidadeNascimentos','paisMoradas','provinciaMoradas','cidadeMoradas'));
 	}
 
 /**
@@ -105,4 +112,10 @@ class CandidatoAlumnisController extends AppController {
 		$this->Session->setFlash(__('Candidato alumni was not deleted'));
 		$this->redirect(array('action' => 'index'));
 	}
+        
+        public function beforeFilter() {
+            parent::beforeFilter();
+            
+            $this->Auth->allow(array('cadastro_alumni'));
+        }
 }

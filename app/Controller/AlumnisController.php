@@ -103,4 +103,7 @@ class AlumnisController extends AppController {
 		$this->Session->setFlash(__('Alumni was not deleted'));
 		$this->redirect(array('action' => 'index'));
 	}
+        
+        
+        
 }
