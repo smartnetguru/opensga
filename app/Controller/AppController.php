@@ -47,10 +47,9 @@ class AppController extends Controller {
         // Caso deseje usar o modelo padrão, utilize como abaixo, caso contrário você pode usar qualquer modelo
         AuditableConfig::$Logger = ClassRegistry::init('Auditable.Logger');
 		
-        //Configure AuthComponent
-        //Security::setHash('md5');
-        //$this->Auth->authenticate('Blowfish');
-        //$this->Security->blackHoleCallback = 'blackhole';
+        
+        $this->Security->blackHoleCallback = 'acesso_bloqueado';
+        $this->Security->csrfExpires = "+30 minutes";
         $this->Auth->authorize = array('Actions' => array('actionPath' => 'controllers'));
         $this->Auth->autoRedirect = false;
         $this->Auth->loginError = "Nome de Usuário ou senha incorrectas";
@@ -67,6 +66,17 @@ class AppController extends Controller {
 
         $this->set('title_for_layout', '');
         
+    }
+    
+    public function acesso_bloqueado($type){
+        throw new BadRequestException("Acesso Bloquado por Motivos de Seguranca");
+        /*‘auth’ Indicates a form validation error, or a controller/action mismatch error.
+‘csrf’ Indicates a CSRF error.
+‘get’ Indicates an HTTP method restriction failure.
+‘post’ Indicates an HTTP method restriction failure.
+‘put’ Indicates an HTTP method restriction failure.
+‘delete’ Indicates an HTTP method restriction failure.
+‘secure’ Indicates an SSL method restriction failure. */
     }
 
     public function beforeRender() {
