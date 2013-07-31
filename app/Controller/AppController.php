@@ -25,7 +25,7 @@ App::uses('Controller', 'Controller');
  */
 class AppController extends Controller {
 
-    public $components = array( 'Acl', 'Auth'=>array('authenticate'=>'Blowfish'), 'Session', 'RequestHandler', 'Cookie','HighCharts.HighCharts', 'DebugKit.Toolbar');
+    public $components = array('Security', 'Acl', 'Auth'=>array('authenticate'=>'Blowfish'), 'Session', 'RequestHandler', 'Cookie','HighCharts.HighCharts', 'DebugKit.Toolbar');
     public $helpers = array('Html','Print', 'Form', 'Session', 'Js' => array('MyJquery'), 'EventsCalendar', 'Javascript', 'Ajax', 'PhpExcel','HighCharts.HighCharts');
     public $pdfConfig = array('engine' => 'CakePdf.Tcpdf');
     public $cacheAction = '1 hour';

@@ -10,3 +10,4 @@
 Assets
 tmp
 /app/Config/core.php
+/lib/Cake/Console/Templates/skel/tmp
