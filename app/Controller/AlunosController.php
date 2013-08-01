@@ -925,6 +925,16 @@ class AlunosController extends AppController {
     
     public function alterar_status($aluno_id){
         
+        if($this->request->is('post')){
+            
+            if($this->Aluno->alteraStatus($this->request->data['Aluno'])){
+                $this->Session->setFlash(__('Status do Aluno Alterado Com Sucesso'),'default',array('class'=>'alert success'));
+                $this->redirect(array('action'=>'perfil_estudante',$this->request->data['Aluno']['aluno_id']));
+            } else {
+                $this->Session->setFlash(__('Problemas ao alterar Status do Estudante'),'default',array('class'=>'alert error'));
+            }
+        }
+        
         $this->Aluno->contain(array(
             'Entidade' => array(
                 'Genero'
@@ -948,7 +958,9 @@ class AlunosController extends AppController {
             $classe_estado = "alert error";
         }
 
-        $this->set(compact('aluno', 'is_regular', 'classe_estado', 'cursos','funcionario'));
+        $estadoAlunos = $this->Aluno->EstadoAluno->find('list');
+        $motivoEstadoAlunos = $this->Aluno->AlunoEstado->MotivoEstadoAluno->find('list');
+        $this->set(compact('aluno', 'is_regular', 'classe_estado', 'cursos','funcionario','estadoAlunos','motivoEstadoAlunos'));
     }
     
     public function concluir_nivel($aluno_id){
