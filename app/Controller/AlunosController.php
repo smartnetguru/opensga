@@ -950,6 +950,45 @@ class AlunosController extends AppController {
 
         $this->set(compact('aluno', 'is_regular', 'classe_estado', 'cursos','funcionario'));
     }
+    
+    public function concluir_nivel($aluno_id){
+        
+        if($this->request->is('post')){
+           if($this->Aluno->concluirNivel($this->request->data)){
+               $this->Session->setFlash(__('Conclusão Registrada com Sucesso'),'default',array('class'=>'alert success'));
+               $this->redirect(array('action'=>'perfil_estudante',$this->request->data['Aluno']['aluno_id']));
+           } else {
+               $this->Session->setFlash(__('Problemas ao registrar a Conclusão de Nivel'),'default',array('class'=>'alert error'));
+           }
+            
+        }
+        
+        $this->Aluno->contain(array(
+            'Entidade' => array(
+                'Genero'
+            ),
+            'Curso' => array(
+                'UnidadeOrganica'
+            )
+        ));
+        $aluno = $this->Aluno->findById($aluno_id);
+        $funcionario = $this->Aluno->User->getFuncionarioActivoId($this->Session->read('Auth.User.Id'));
+        $is_regular = $this->Aluno->isRegular($aluno_id);
+        
+
+        if (count($is_regular) == 1 && $is_regular[0]['regular'] == true) {
+            if ($is_regular[0]['estado'] == 1) {
+                $classe_estado = "alert note no-margin";
+            } else {
+                $classe_estado = "alert success";
+            }
+        } else {
+            $classe_estado = "alert error";
+        }
+
+        $this->set(compact('aluno', 'is_regular', 'classe_estado'));
+        $this->set(compact('aluno', 'is_regular', 'classe_estado', 'cursos','funcionario'));
+    }
 
     
 

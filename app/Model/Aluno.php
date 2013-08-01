@@ -79,7 +79,6 @@ class Aluno extends AppModel {
             'fields' => '',
             'order' => ''
         ),
-    
     );
     var $hasMany = array(
         'Matricula' => array(
@@ -172,23 +171,38 @@ class Aluno extends AppModel {
             'exclusive' => '',
             'finderQuery' => '',
             'counterQuery' => ''
-        )
-    );
-    /*
-    public $validate = array(
-        'curso_id' => array(
-            'rule' => 'notempty', // or: array('ruleName', 'param1', 'param2' ...)
-            'required' => true,
-            'allowEmpty' => false,
-            'on' => 'create', // or: 'update'
-            'message' => 'Curso é um campo obrigatório'
         ),
-        'turno_id' => array(
-            'rule' => 'notempty',
-            'message' => 'campo obrigatorio'
+        'HistoricoCurso' => array(
+            'className' => 'HistoricoCurso',
+            'foreignKey' => 'aluno_id',
+            'dependent' => false,
+            'conditions' => '',
+            'fields' => '',
+            'order' => '',
+            'limit' => '',
+            'offset' => '',
+            'exclusive' => '',
+            'finderQuery' => '',
+            'counterQuery' => ''
         )
     );
-*/
+
+    /*
+      public $validate = array(
+      'curso_id' => array(
+      'rule' => 'notempty', // or: array('ruleName', 'param1', 'param2' ...)
+      'required' => true,
+      'allowEmpty' => false,
+      'on' => 'create', // or: 'update'
+      'message' => 'Curso é um campo obrigatório'
+      ),
+      'turno_id' => array(
+      'rule' => 'notempty',
+      'message' => 'campo obrigatorio'
+      )
+      );
+     */
+
     /**
      * Retorna o plano de estudos activo do aluno
      * @param int $id
@@ -309,7 +323,7 @@ class Aluno extends AppModel {
      * @todo falta isso
      */
     function getAllTurmasForInscricao() {
-
+        
     }
 
     public function getAllTurmasNormaisForInscricao($aluno_id) {
@@ -354,11 +368,11 @@ class Aluno extends AppModel {
      * @param type $aluno_id
      */
     public function getNivelAcademicoReal($aluno_id) {
-
+        
     }
 
     /**
-     *Regista os dados do Aluno no Sistema e faz a primeira matricula
+     * Regista os dados do Aluno no Sistema e faz a primeira matricula
      * @param array $data
      * @return type
      */
@@ -371,19 +385,19 @@ class Aluno extends AppModel {
         if ($data['Aluno']['numero_estudante'] == '') {
             $data['Aluno']['codigo'] = $this->geraCodigo();
         } else {
-            if($data['Aluno']['codigo']=='' || $data['Aluno']['codigo']==NULL)
+            if ($data['Aluno']['codigo'] == '' || $data['Aluno']['codigo'] == NULL)
                 $data['Aluno']['codigo'] = $data['Aluno']['numero_estudante'];
             $data['Aluno']['numero_estudante_antigo'] = $data['Aluno']['numero_estudante'];
         }
-        
-        if(!isset($data['Entidade']['name'])){
-            $data['Entidade']['name']= $data['Entidade']['nomes']." ".$data['Entidade']['apelido'];
+
+        if (!isset($data['Entidade']['name'])) {
+            $data['Entidade']['name'] = $data['Entidade']['nomes'] . " " . $data['Entidade']['apelido'];
         }
 
         //Grava os dados do Usuario
         $this->User->create();
-        $data['User']['username'] = $this->User->geraEmailUem($data['Entidade']['apelido'],$data['Entidade']['nomes'] );
-        $data['User']['password'] = Security::hash($data['Aluno']['codigo'],'blowfish');
+        $data['User']['username'] = $this->User->geraEmailUem($data['Entidade']['apelido'], $data['Entidade']['nomes']);
+        $data['User']['password'] = Security::hash($data['Aluno']['codigo'], 'blowfish');
         $data['User']['codigocartao'] = $data['Aluno']['codigo'];
         $data['User']['name'] = $data['Entidade']['name'];
         $data['User']['group_id'] = 3;
@@ -396,14 +410,14 @@ class Aluno extends AppModel {
 
                 //Grava os dados do Aluno
                 $data['Aluno']['entidade_id'] = $this->Entidade->getLastInsertID();
-                
+
                 $planoestudo = $this->Curso->getPlanoEstudoRecente($data['Aluno']['curso_id']);
                 $aluno['Aluno']['planoestudo_id'] = $planoestudo['Planoestudo']['id'];
                 $this->create();
                 if ($this->save($data)) {
                     //Grava os dados de Identificacao
 
-                    $identificacao = array('EntidadeIdentificacao'=>$data['EntidadeIdentificacao']);
+                    $identificacao = array('EntidadeIdentificacao' => $data['EntidadeIdentificacao']);
                     $identificacao['EntidadeIdentificacao']['entidade_id'] = $this->Entidade->getLastInsertID();
                     $identificacao['EntidadeIdentificacao']['estado_objecto_id'] = 1;
 
@@ -414,31 +428,31 @@ class Aluno extends AppModel {
                     //Grava os dados de Morada e Contactos
 
                     $contactos = $data['EntidadeContacto'];
-                    foreach($contactos as $k=>$v){
+                    foreach ($contactos as $k => $v) {
                         $this->Entidade->EntidadeContacto->create();
                         $this->Entidade->EntidadeContacto->save(
                                 array(
-                                    'EntidadeContacto'=>array(
-                                        'entidade_id'=>  $this->Entidade->getLastInsertID(),
-                                        'tipo_contacto_id'=>$k,
-                                        'valor'=>$v,
-                                        'estado_objecto_id'=>1
-                                        )
+                                    'EntidadeContacto' => array(
+                                        'entidade_id' => $this->Entidade->getLastInsertID(),
+                                        'tipo_contacto_id' => $k,
+                                        'valor' => $v,
+                                        'estado_objecto_id' => 1
                                     )
-                                );
+                                )
+                        );
                     }
-                    
+
                     //Grava os dados do Nivel Medio
                     $aluno_nivel_medio = array(
-                        'AlunoNivelMedio'=>$data['AlunoNivelMedio']
+                        'AlunoNivelMedio' => $data['AlunoNivelMedio']
                     );
-                    
+
                     $aluno_nivel_medio['AlunoNivelMedio']['provincia_id'] = $data['AlunoNivelMedio']['EscolaNivelMedio']['provincia_id'];
                     $aluno_nivel_medio['AlunoNivelMedio']['aluno_id'] = $this->id;
-                    
+
                     $this->AlunoNivelMedio->create();
                     $this->AlunoNivelMedio->save($aluno_nivel_medio);
-                    
+
 
                     /**
                      * @fixme desactivamos temporariamente o o turno e o regime e o nivel
@@ -451,18 +465,25 @@ class Aluno extends AppModel {
                     $data_matricula['data'] = date('Y-m-d');
                     $data_matricula['user_id'] = SessionComponent::read('Auth.User.id');
                     $data_matricula['anolectivo_id'] = Configure::read('OpenSGA.ano_lectivo_id');
-                   // $data_matricula['turno_id'] = $data['Aluno']['turno_id'];
+                    // $data_matricula['turno_id'] = $data['Aluno']['turno_id'];
                     //$data_matricula['nivel'] = $data['Aluno']['nivel'];
                     $data_matricula['tipo_matricula_id'] = 1;
                     if (Configure::read('OpenSGA.matriculas.regimes' == 2)) {
-                   //     $data_matricula['regimelectivo_id'] = $data['Aluno']['regimelectivo_id'];
+                        //     $data_matricula['regimelectivo_id'] = $data['Aluno']['regimelectivo_id'];
                     }
 
                     $matricula_gravar = array('Matricula' => $data_matricula);
                     $this->Matricula->create();
                     if ($this->Matricula->save($matricula_gravar)) {
-                        
-                        
+
+                        $historico_array = array(
+                            'aluno_id' => $this->id,
+                            'curso_id' => $data['Aluno']['curso_id'],
+                            'ano_ingresso' => $data['Aluno']['ano_ingresso'],
+                            'ano_lectivo_ingresso' => Configure::read('OpenSGA.ano_lectivo_id')
+                        );
+                        $this->HistoricoCurso->create();
+                        $this->HistoricoCurso->save($historico_array);
                         return $dataSource->commit();
                     }
                 }
@@ -505,7 +526,7 @@ class Aluno extends AppModel {
     }
 
     public function getPerfilAluno() {
-
+        
     }
 
     /**
@@ -518,16 +539,16 @@ class Aluno extends AppModel {
 
     public function getTotalEstudantesPorCurso() {
         $this->contain('Curso');
-        $alunos_curso = $this->find('all', array('conditions' => array(),'group'=>'Curso.name','fields'=>array('Count(*) as total','Curso.name')));
+        $alunos_curso = $this->find('all', array('conditions' => array(), 'group' => 'Curso.name', 'fields' => array('Count(*) as total', 'Curso.name')));
 
 
         return $alunos_curso;
     }
-    
-    public function getTotalAlunosActivosPorCurso(){
-        $this->Matricula->contain(array('Curso','Anolectivo'));
-        $total_alunos = $this->Matricula->find('all',array('conditions'=>array('Anolectivo.ano'=>2013),'group'=>'Curso.name','fields'=>array('Count(Matricula.curso_id) as total','Curso.name')));
-        
+
+    public function getTotalAlunosActivosPorCurso() {
+        $this->Matricula->contain(array('Curso', 'Anolectivo'));
+        $total_alunos = $this->Matricula->find('all', array('conditions' => array('Anolectivo.ano' => 2013), 'group' => 'Curso.name', 'fields' => array('Count(Matricula.curso_id) as total', 'Curso.name')));
+
         return $total_alunos;
     }
 
@@ -549,7 +570,7 @@ class Aluno extends AppModel {
         }
         return true;
     }
-    
+
     /**
      * Verifica se um determinado aluno é regular. Para tal, basta verificar se todas as matriculas foram renovadas ate ao presente ano, verificar a situacao da conclusao e o status na tabela alunos
      * @param type $id_aluno
@@ -558,171 +579,218 @@ class Aluno extends AppModel {
     function isRegular($aluno_id) {
         $this->contain('EstadoAluno');
         $aluno = $this->findById($aluno_id);
-        
+
         $irregularidades = array();
-        if($aluno['Aluno']['estado_aluno_id']==1){
+        if ($aluno['Aluno']['estado_aluno_id'] == 1) {
             $renovacoes = $this->Matricula->getStatusRenovacao($aluno_id);
-            if(empty($renovacoes)){
-                $irregularidades[] =  array("estado"=>1,"mensagem"=>'Estudante Regular',"regular"=>true);
-            } else{
+            if (empty($renovacoes)) {
+                $irregularidades[] = array("estado" => 1, "mensagem" => 'Estudante Regular', "regular" => true);
+            } else {
                 $string_retorno = __("Não renovou matricula nos seguintes anos: ");
-                foreach($renovacoes as $renovacao){
-                    $string_retorno.=$renovacao['Anolectivo']['ano'].", ";
+                foreach ($renovacoes as $renovacao) {
+                    $string_retorno.=$renovacao['Anolectivo']['ano'] . ", ";
                 }
-                $irregularidades[]  = array("estado"=>2,"mensagem"=>$string_retorno,"regular"=>false);
+                $irregularidades[] = array("estado" => 2, "mensagem" => $string_retorno, "regular" => false);
             }
-        } elseif($aluno['Aluno']['estado_aluno_id']==3){
+        } elseif ($aluno['Aluno']['estado_aluno_id'] == 3) {
             $renovacoes = $this->Matricula->getStatusRenovacao($aluno_id);
-            if(empty($renovacoes)){
-                $irregularidades[]  =  array("estado"=>3,"mensagem"=>'Concluiu o Nivel',"regular"=>true);
-            } else{
+            if (empty($renovacoes)) {
+                $irregularidades[] = array("estado" => 3, "mensagem" => 'Concluiu o Nivel', "regular" => true);
+            } else {
                 $string_retorno = __("Concluiu o nível, mas não renovou matricula nos seguintes anos: ");
-                foreach($renovacoes as $renovacao){
-                    $string_retorno.=$renovacao['Anolectivo']['ano'].", ";
+                foreach ($renovacoes as $renovacao) {
+                    $string_retorno.=$renovacao['Anolectivo']['ano'] . ", ";
                 }
-                $irregularidades[]  = array("estado"=>4,"mensagem"=>$string_retorno,"regular"=>false);
+                $irregularidades[] = array("estado" => 4, "mensagem" => $string_retorno, "regular" => false);
             }
-        } else{
-            $irregularidades[] =  array("estado"=>5,"mensagem"=>$aluno['EstadoAluno']['name'],"regular"=>false);
+        } else {
+            $irregularidades[] = array("estado" => 5, "mensagem" => $aluno['EstadoAluno']['name'], "regular" => false);
         }
-        
-        
+
+
         return $irregularidades;
     }
-    
-    public function processaContacto($aluno_id){
-        $entidade_id = $this->field('entidade_id',array('id'=>$aluno_id));
-        
-        $telefone = $this->Entidade->EntidadeContacto->field('valor',array('entidade_id'=>$entidade_id,'tipo_contacto_id'=>4,'estado_objecto_id'=>1));
-        $telemovel = $this->Entidade->EntidadeContacto->field('valor',array('entidade_id'=>$entidade_id,'tipo_contacto_id'=>2,'estado_objecto_id'=>1));
-        $distrito_id = $this->Entidade->EntidadeContacto->field('valor',array('entidade_id'=>$entidade_id,'tipo_contacto_id'=>9,'estado_objecto_id'=>1));
-        $distrito = $this->Entidade->CidadeNascimento->field('name',array('id'=>$distrito_id));
-        $rua = $this->Entidade->EntidadeContacto->field('valor',array('entidade_id'=>$entidade_id,'tipo_contacto_id'=>5,'estado_objecto_id'=>1));
-        $numero = $this->Entidade->EntidadeContacto->field('valor',array('entidade_id'=>$entidade_id,'tipo_contacto_id'=>8,'estado_objecto_id'=>1));
-        $quarteirao = $this->Entidade->EntidadeContacto->field('valor',array('entidade_id'=>$entidade_id,'tipo_contacto_id'=>7,'estado_objecto_id'=>1));
-        $bairro = $this->Entidade->EntidadeContacto->field('valor',array('entidade_id'=>$entidade_id,'tipo_contacto_id'=>6,'estado_objecto_id'=>1));
-        $telemovel_emergencia = $this->field('telemovel_emergencia',array('id'=>$aluno_id));
-        
+
+    public function processaContacto($aluno_id) {
+        $entidade_id = $this->field('entidade_id', array('id' => $aluno_id));
+
+        $telefone = $this->Entidade->EntidadeContacto->field('valor', array('entidade_id' => $entidade_id, 'tipo_contacto_id' => 4, 'estado_objecto_id' => 1));
+        $telemovel = $this->Entidade->EntidadeContacto->field('valor', array('entidade_id' => $entidade_id, 'tipo_contacto_id' => 2, 'estado_objecto_id' => 1));
+        $distrito_id = $this->Entidade->EntidadeContacto->field('valor', array('entidade_id' => $entidade_id, 'tipo_contacto_id' => 9, 'estado_objecto_id' => 1));
+        $distrito = $this->Entidade->CidadeNascimento->field('name', array('id' => $distrito_id));
+        $rua = $this->Entidade->EntidadeContacto->field('valor', array('entidade_id' => $entidade_id, 'tipo_contacto_id' => 5, 'estado_objecto_id' => 1));
+        $numero = $this->Entidade->EntidadeContacto->field('valor', array('entidade_id' => $entidade_id, 'tipo_contacto_id' => 8, 'estado_objecto_id' => 1));
+        $quarteirao = $this->Entidade->EntidadeContacto->field('valor', array('entidade_id' => $entidade_id, 'tipo_contacto_id' => 7, 'estado_objecto_id' => 1));
+        $bairro = $this->Entidade->EntidadeContacto->field('valor', array('entidade_id' => $entidade_id, 'tipo_contacto_id' => 6, 'estado_objecto_id' => 1));
+        $telemovel_emergencia = $this->field('telemovel_emergencia', array('id' => $aluno_id));
+
         $contactos = array(
-            'telefone'=>$telefone,
-            'telemovel' =>$telemovel,
-            'distrito' =>$distrito,
+            'telefone' => $telefone,
+            'telemovel' => $telemovel,
+            'distrito' => $distrito,
             'rua' => $rua,
-            'numero'=>$numero,
-            'quarteirao'=>$quarteirao,
-            'bairro'=>$bairro,
-            'telemovel_emergencia'=>$telemovel_emergencia
+            'numero' => $numero,
+            'quarteirao' => $quarteirao,
+            'bairro' => $bairro,
+            'telemovel_emergencia' => $telemovel_emergencia
         );
         return $contactos;
     }
-    
-    
-     public function alteraStatus($data){
+
+    public function alteraStatus($data) {
         $datasource = $this->getDataSource();
         $datasource->begin();
         $this->contain();
         $aluno = $this->findById($data['aluno_id']);
         $array_estado = array(
-            'AlunoEstado'=>array(
-                'aluno_id'=>$aluno['Aluno']['id'],
-                'estado_anterior'=>$aluno['Aluno']['estado_aluno_id'],
-                'estado_actual'=>$data['estado_actual'],
-                'motivo_estado_aluno_id'=>$data['motivo_estado_aluno_id'],
-                'observacao'=>$data['observacao'],
-                'data_mudanca'=>$data['data_mudanca'],
-               // 'anexo_url'=>$data['anexo_url'],
-                'funcionario_id'=>$data['funcionario_id']
+            'AlunoEstado' => array(
+                'aluno_id' => $aluno['Aluno']['id'],
+                'estado_anterior' => $aluno['Aluno']['estado_aluno_id'],
+                'estado_actual' => $data['estado_actual'],
+                'motivo_estado_aluno_id' => $data['motivo_estado_aluno_id'],
+                'observacao' => $data['observacao'],
+                'data_mudanca' => $data['data_mudanca'],
+                // 'anexo_url'=>$data['anexo_url'],
+                'funcionario_id' => $data['funcionario_id']
             )
         );
         $this->AlunoEstado->create();
         $this->AlunoEstado->save($array_estado);
-        
+
         $this->id = $data['aluno_id'];
-        $this->set('estado_aluno_id',$data['estado_actual']);
+        $this->set('estado_aluno_id', $data['estado_actual']);
         $this->save();
         return $datasource->commit();
     }
-    
-    
-    public function mudaCurso($data){
+
+    public function mudaCurso($data) {
         $datasource = $this->getDataSource();
         $datasource->begin();
-        
+
         $funcionario_id = $data['Aluno']['funcionario_id'];
-        
+
         $mudanca_array = array(
-                'MudancaCurso' => array(
-                    'aluno_id' => $data['Aluno']['aluno_id'],
-                    'curso_antigo' => $data['Aluno']['curso_antigo'],
-                    'curso_novo' => $data['Aluno']['curso_id'],
-                    'data_mudanca' => $data['Aluno']['data_mudanca'],
-                    'funcionario_id' => $funcionario_id,
-                    'observacao' => $data['Aluno']['observacao']
-                )
+            'MudancaCurso' => array(
+                'aluno_id' => $data['Aluno']['aluno_id'],
+                'curso_antigo' => $data['Aluno']['curso_antigo'],
+                'curso_novo' => $data['Aluno']['curso_id'],
+                'data_mudanca' => $data['Aluno']['data_mudanca'],
+                'funcionario_id' => $funcionario_id,
+                'observacao' => $data['Aluno']['observacao']
+            )
+        );
+        if ($data['Aluno']['mudanca_via_exame'] == 1) {
+            $mudanca_array['MudancaCurso']['forma_mudanca_id'] = 1;
+            $this->contain();
+            $aluno_bloquear = $this->findByCodigo($data['Aluno']['numero_estudante_atribuido']);
+            $data_estado = array(
+                'aluno_id' => $aluno_bloquear['Aluno']['id'],
+                'estado_anterior' => $aluno_bloquear['Aluno']['estado_aluno_id'],
+                'estado_actual' => 10,
+                'motivo_estado_aluno_id' => 5,
+                'observacao' => $data['Aluno']['observacao'],
+                'data_mudanca' => $data['Aluno']['data_mudanca'],
+                // 'anexo_url' => $data['anexo_url'],
+                'funcionario_id' => $funcionario_id
             );
-            if ($data['Aluno']['mudanca_via_exame'] == 1) {
-                $mudanca_array['MudancaCurso']['forma_mudanca_id'] = 1;
-                $this->contain();
-                $aluno_bloquear = $this->findByCodigo($data['Aluno']['numero_estudante_atribuido']);
-                $data_estado = array(
-                    'aluno_id' => $aluno_bloquear['Aluno']['id'],
-                    'estado_anterior' => $aluno_bloquear['Aluno']['estado_aluno_id'],
-                    'estado_actual' => 10,
-                    'motivo_estado_aluno_id' => 5,
-                    'observacao' => $data['Aluno']['observacao'],
-                    'data_mudanca' => $data['Aluno']['data_mudanca'],
-                   // 'anexo_url' => $data['anexo_url'],
-                    'funcionario_id' => $funcionario_id
-                );
-                $this->alteraStatus($data_estado);
-                
-            } else {
-                $mudanca_array['MudancaCurso']['forma_mudanca_id'] = 2;
-            }
-            $data_ano = DateTime::createFromFormat("Y-m-d", $data['Aluno']['data_mudanca']);
-            //Finaliza o historico
-            $historico_actual = $this->HistoricoCurso->find('first',array('conditions'=>array('aluno_id'=>$data['Aluno']['aluno_id'],'curso_id'=>$data['Aluno']['curso_antigo'],'ano_fim'=>null)));
-            if(!empty($historico_actual)){
-                $this->HistoricoCurso->id = $historico_actual['HistoricoCurso']['id'];
-            
-            $this->HistoricoCurso->set('ano_fim',$data_ano->format("Y"));
+            $this->alteraStatus($data_estado);
+        } else {
+            $mudanca_array['MudancaCurso']['forma_mudanca_id'] = 2;
+        }
+        $data_ano = DateTime::createFromFormat("Y-m-d", $data['Aluno']['data_mudanca']);
+        //Finaliza o historico
+        $historico_actual = $this->HistoricoCurso->find('first', array('conditions' => array('aluno_id' => $data['Aluno']['aluno_id'], 'curso_id' => $data['Aluno']['curso_antigo'], 'ano_fim' => null)));
+        if (!empty($historico_actual)) {
+            $this->HistoricoCurso->id = $historico_actual['HistoricoCurso']['id'];
+
+            $this->HistoricoCurso->set('ano_fim', $data_ano->format("Y"));
             $this->HistoricoCurso->save();
-            }
+        }
+
+
+        $this->Matricula->Anolectivo->contain();
+        $anolectivo = $this->Matricula->Anolectivo->findByAno($data_ano->format("Y"));
+        //Cria Novo Historico
+        $planoestudo = $this->Curso->getPlanoEstudoRecente($data['Aluno']['curso_id']);
+        if (empty($planoestudo)) {
+            $planoestudo_id = 0;
+        } else {
+            $planoestudo_id = $planoestudo['Planoestudo']['id'];
+        }
+        $array_novo_historico = array(
+            'HistoricoCurso' => array(
+                'aluno_id' => $data['Aluno']['aluno_id'],
+                'curso_id' => $data['Aluno']['curso_id'],
+                'ano_ingresso' => $data_ano->format("Y"),
+                'ano_lectivo_ingresso' => $anolectivo['Anolectivo']['id'],
+                'funcionario_id' => $funcionario_id,
+                'planoestudo_id' => $planoestudo_id
+            )
+        );
+
+        $this->HistoricoCurso->create();
+        $this->HistoricoCurso->save($array_novo_historico);
+
+        $this->id = $data['Aluno']['aluno_id'];
+        $this->set('curso_id', $data['Aluno']['curso_id']);
+        $this->set('planoestudo_id', $planoestudo_id);
+        $this->save();
+        $this->MudancaCurso->create();
+        $this->MudancaCurso->save($mudanca_array);
+
+        return $datasource->commit();
+    }
+    
+    public function concluirNivel($data){
+        
+        $datasource = $this->getDataSource();
+        $datasource->begin();
+        if($data['HistoricoCurso']['ano_fim']=='' || $data['HistoricoCurso']['nota_final']=='' ||$data['HistoricoCurso']['data_conclusao']==''){
+            return false;
+        }
+        $this->contain();
+        $aluno = $this->findById($data['Aluno']['aluno_id']);
+        $this->HistoricoCurso->contain();
+        $historico_curso = $this->HistoricoCurso->find('first',array('conditions'=>array('aluno_id'=>$data['Aluno']['aluno_id'],'curso_id'=>$data['Aluno']['curso_id'],'ano_fim'=>null)));
+        if(empty($historico_curso)){
+            //Nao tem historico, vamos registrar novo
             
             
             $this->Matricula->Anolectivo->contain();
-            $anolectivo = $this->Matricula->Anolectivo->findByAno($data_ano->format("Y"));
-            //Cria Novo Historico
-            $planoestudo = $this->Curso->getPlanoEstudoRecente($data['Aluno']['curso_id']);
-            if(empty($planoestudo)){
-                $planoestudo_id=0;
-            } else{
-                $planoestudo_id=$planoestudo['Planoestudo']['id'];
-            }
-            $array_novo_historico = array(
-                'HistoricoCurso' => array(
-                    'aluno_id'=>$data['Aluno']['aluno_id'],
-                    'curso_id'=>$data['Aluno']['curso_id'],
-                    'ano_ingresso'=>$data_ano->format("Y"),
-                    'ano_lectivo_ingresso'=>$anolectivo['Anolectivo']['id'],
-                    'funcionario_id'=>$funcionario_id,
-                    'planoestudo_id' => $planoestudo_id 
-                )
-            );
-            
-            $this->HistoricoCurso->create();
-            $this->HistoricoCurso->save($array_novo_historico);
-            
-            $this->id = $data['Aluno']['aluno_id'];
-            $this->set('curso_id',$data['Aluno']['curso_id']);
-            $this->set('planoestudo_id',$planoestudo_id);
-            $this->save();
-            $this->MudancaCurso->create();
-            $this->MudancaCurso->save($mudanca_array);
-            
-            return $datasource->commit();
-            
+            $ano_lectivo = $this->Matricula->Anolectivo->findByAno($aluno['Aluno']['ano_ingresso']);
+            $historico_array = array(
+                'aluno_id'=>$aluno['Aluno']['id'],
+                'curso_id'=>$aluno['Aluno']['curso_id'],
+                'ano_ingresso'=>$aluno['Aluno']['ano_ingresso'],
+                'ano_lectivo_ingresso'=>$ano_lectivo['Anolectivo']['id']
                 
+            );
+            $this->HistoricoCurso->create();
+            $this->HistoricoCurso->save(array('HistoricoCurso'=>$historico_array));
+            $this->HistoricoCurso->contain();
+            $historico_curso = $this->HistoricoCurso->find('first',array('conditions'=>array('aluno_id'=>$data['Aluno']['aluno_id'],'curso_id'=>$data['Aluno']['curso_id'],'ano_fim'=>null)));
+            
+        }
+        
+        $this->HistoricoCurso->id = $historico_curso['HistoricoCurso']['id'];
+        $this->HistoricoCurso->set('ano_fim',$data['HistoricoCurso']['ano_fim']);
+        $this->HistoricoCurso->set('nota_final',$data['HistoricoCurso']['nota_final']);
+        $this->HistoricoCurso->set('data_conclusao',$data['HistoricoCurso']['data_conclusao']);
+        $this->HistoricoCurso->set('funcionario_id',$data['HistoricoCurso']['ano_fim']);
+        $this->HistoricoCurso->save();
+        
+        $data_estado = array(
+                'aluno_id' => $aluno['Aluno']['id'],
+                'estado_anterior' => $aluno['Aluno']['estado_aluno_id'],
+                'estado_actual' => 3,
+                'motivo_estado_aluno_id' => 20,
+                'observacao' => $data['Aluno']['observacao'],
+                'data_mudanca' => $data['HistoricoCurso']['data_conclusao'],
+                'anexo_url' => $data['Aluno']['anexo_url'],
+                'funcionario_id' => $data['HistoricoCurso']['funcionario_id']
+            );
+            $this->alteraStatus($data_estado);
+        return $datasource->commit();
     }
 
 }
