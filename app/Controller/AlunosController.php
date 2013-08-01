@@ -36,7 +36,7 @@ class AlunosController extends AppController {
 
 
         $this->Aluno->contain('Entidade', 'Curso');
-        $alunos = $this->Aluno->find('all', array('conditions' => $conditions, 'limit' => 1000));
+        $alunos = $this->Aluno->find('all', array('conditions' => $conditions, 'limit' => 100));
         
         if(count($alunos)==1){
             $this->redirect(array('action'=>'perfil_estudante',$alunos[0]['Aluno']['id']));
