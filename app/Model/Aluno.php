@@ -580,6 +580,9 @@ class Aluno extends AppModel {
         $this->contain('EstadoAluno');
         $aluno = $this->findById($aluno_id);
 
+        $this->AlunoEstado->contain('MotivoEstadoAluno');
+        $aluno_estado = $this->AlunoEstado->find('first',array('conditions'=>array('aluno_id'=>$aluno['Aluno']['id'],'estado_actual'=>$aluno['Aluno']['estado_aluno_id']),'order'=>'data_mudanca DESC'));
+        
         $irregularidades = array();
         if ($aluno['Aluno']['estado_aluno_id'] == 1) {
             $renovacoes = $this->Matricula->getStatusRenovacao($aluno_id);
@@ -604,7 +607,8 @@ class Aluno extends AppModel {
                 $irregularidades[] = array("estado" => 4, "mensagem" => $string_retorno, "regular" => false);
             }
         } else {
-            $irregularidades[] = array("estado" => 5, "mensagem" => $aluno['EstadoAluno']['name'], "regular" => false);
+            
+            $irregularidades[] = array("estado" => 5, "mensagem" => $aluno['EstadoAluno']['name']." (".$aluno_estado['MotivoEstadoAluno']['name'].")", "regular" => false);
         }
 
 
@@ -654,6 +658,7 @@ class Aluno extends AppModel {
                 'funcionario_id' => $data['funcionario_id']
             )
         );
+        die(debug($array_estado));
         $this->AlunoEstado->create();
         $this->AlunoEstado->save($array_estado);
 
