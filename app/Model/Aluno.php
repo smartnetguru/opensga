@@ -658,7 +658,7 @@ class Aluno extends AppModel {
                 'funcionario_id' => $data['funcionario_id']
             )
         );
-        die(debug($array_estado));
+        
         $this->AlunoEstado->create();
         $this->AlunoEstado->save($array_estado);
 
