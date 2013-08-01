@@ -1,8 +1,8 @@
 <?php
-
+ini_set('memory_limit',"2048M");
 class OpenSGAShell extends AppShell {
 
-    public $uses = array('Turma', 'Matricula', 'Curso', 'UnidadeOrganica', 'Candidatura','Aluno','EstadoAluno','Planoestudo','Disciplina','Planoestudoano');
+    public $uses = array('Turma', 'Matricula', 'Curso', 'UnidadeOrganica', 'Candidatura','Aluno','EstadoAluno','Planoestudo','Disciplina','Planoestudoano','HistoricoCurso','Anolectivo');
 
     public function main() {
         $this->out('Hello world.');
@@ -455,14 +455,33 @@ App::uses('File', 'Utility');
                 $this->Aluno->Entidade->save();
             }
                     $this->out($i++);
-        
-        
     }
-    
-    
-
-
     }
+}
 
+public function verifica_historico_curso(){
+    $this->Aluno->contain();
+    $alunos = $this->Aluno->find('all');
+    $zeros = 0;
+    foreach($alunos as $aluno){
+        $this->HistoricoCurso->contain();
+        $historicos = $this->HistoricoCurso->find('first',array('conditions'=>array('aluno_id'=>$aluno['Aluno']['id'])));
+        $this->out($aluno['Aluno']['id']);
+        
+        if(empty($historicos)){
+            $ano_lectivo = $this->Anolectivo->findByAno($aluno['Aluno']['ano_ingresso']);
+            $historico_array = array(
+                'aluno_id'=>$aluno['Aluno']['id'],
+                'curso_id'=>$aluno['Aluno']['curso_id'],
+                'ano_ingresso'=>$aluno['Aluno']['ano_ingresso'],
+                'ano_lectivo_ingresso'=>$ano_lectivo['Anolectivo']['id']
+                
+            );
+            $this->HistoricoCurso->create();
+            $this->HistoricoCurso->save(array('HistoricoCurso'=>$historico_array));
+        }
+    }
+    $this->out("fim");
+    $this->out($zeros);
 }
 }

@@ -483,7 +483,7 @@ class DraShell extends AppShell {
             
             $this->Aluno->contain('Entidade');
             $aluno = $this->Aluno->find('all',array('conditions'=>array('Entidade.genero_id'=>null)));
-            die(debug())
+            die(debug());
             $pessoa  = $this->DraPessoa->find('all');
             $i=0;
             foreach($pessoa as $p){
