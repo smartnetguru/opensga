@@ -139,6 +139,7 @@ class Funcionario extends AppModel {
         $data['User']['codigo'] = $this->geraCodigo();
         $data['User']['password'] = Security::hash('12345','blowfish');
         $data['User']['group_id'] = 2;
+        
 
         $this->User->create();
         if ($this->User->save($data)) {
@@ -147,6 +148,7 @@ class Funcionario extends AppModel {
             if ($this->Entidade->save($data)) {
                 $data['Funcionario']['user_id'] = $this->User->id;
                 $data['Funcionario']['entidade_id'] = $this->Entidade->id;
+                
                 $this->create();
                 if ($this->save($data)) {
                     return $dataSource->commit();
@@ -162,12 +164,7 @@ class Funcionario extends AppModel {
     }
     
     
-    /**
-     * Queremos criar ou actualizar acos_aros depois do save do funcionario
-     */
-    public function afterSave($created){
-        die(debug($this));
-    }
+    
 
 }
 

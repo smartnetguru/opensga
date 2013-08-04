@@ -26,7 +26,7 @@ App::uses('Controller', 'Controller');
 class AppController extends Controller {
 
     public $components = array('Security', 'Acl', 'Auth'=>array('authenticate'=>'Blowfish'), 'Session', 'RequestHandler', 'Cookie','HighCharts.HighCharts', 'DebugKit.Toolbar');
-    public $helpers = array('Html','Print', 'Form', 'Session', 'Js' => array('MyJquery'), 'EventsCalendar', 'Javascript', 'Ajax', 'PhpExcel','HighCharts.HighCharts');
+    public $helpers = array('Html','Print', 'Form', 'Session', 'Js' => array('MyJquery'), 'EventsCalendar', 'Javascript', 'Ajax', 'PhpExcel','HighCharts.HighCharts','AclLink');
     public $pdfConfig = array('engine' => 'CakePdf.Tcpdf');
     public $cacheAction = '1 hour';
 
@@ -48,7 +48,7 @@ class AppController extends Controller {
         AuditableConfig::$Logger = ClassRegistry::init('Auditable.Logger');
 		
         
-        $this->Security->blackHoleCallback = 'acesso_bloqueado';
+        
         $this->Security->csrfExpires = "+30 minutes";
         $this->Auth->authorize = array('Actions' => array('actionPath' => 'controllers'));
         $this->Auth->autoRedirect = false;
@@ -63,21 +63,33 @@ class AppController extends Controller {
             $this->Security->csrfCheck = false;
             $this->Security->validatePost = false;
         }
+        
+        //Devemos forcar o prefixo para funcionarios da faculdade, docente e estudantes
+        $grupo_id = $this->Session->read('Auth.User.group_id');
+        if($grupo_id ==4){
+            if($this->request->prefix != 'docente'){
+                $this->Security->blackHole($this);
+            }
+            
+        } elseif($grupo_id ==3){
+            if($this->request->prefix != 'estudante'){
+                $this->Security->blackHole($this);
+            }
+        } elseif($grupo_id ==2){
+            $this->loadModel('User');
+            if($this->User->isFromFaculdade($this->Session->read('Auth.User.id'))){
+                if($this->request->prefix != 'faculdade'){
+                $this->Security->blackHole($this);
+            }
+            }
+           
+        }
 
         $this->set('title_for_layout', '');
         
     }
     
-    public function acesso_bloqueado($type){
-        throw new BadRequestException("Acesso Bloquado por Motivos de Seguranca");
-        /*‘auth’ Indicates a form validation error, or a controller/action mismatch error.
-‘csrf’ Indicates a CSRF error.
-‘get’ Indicates an HTTP method restriction failure.
-‘post’ Indicates an HTTP method restriction failure.
-‘put’ Indicates an HTTP method restriction failure.
-‘delete’ Indicates an HTTP method restriction failure.
-‘secure’ Indicates an SSL method restriction failure. */
-    }
+
 
     public function beforeRender() {
         parent::beforeRender();

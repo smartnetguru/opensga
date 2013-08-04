@@ -79,17 +79,7 @@ class User extends AppModel {
 		}
 	}
 
-	/*
-	function parentNode(){
-		return null;
-	}
-*/
 
-    /*
-	function bindNode($user) {
-		return array('model' => 'Group', 'foreign_key' => $user['User']['group_id']);
-	}
-	*/
 
 
 		function getUserByFuncionario($funcionario_id){
@@ -137,6 +127,7 @@ class User extends AppModel {
 		 * Por Enquanto Ele usa a estrutura "primeironome.ultimonome<sequencia>"
 		 */
 		function geraUsername($nome){
+                        $nome = $this->normalize_str($nome);
 			$nomes = explode(' ', $nome);
 
 			$username = strtolower($nomes[0]).".".strtolower(end($nomes));
@@ -145,8 +136,9 @@ class User extends AppModel {
 			$numero = 1;
 			$linha=1;
 			while($linha!=0){
-				$users = $this->find('all',array('conditions'=>array('username'=>$username)));
-				$linha = count($users);
+                                $this->contain();
+				$users = $this->find('count',array('conditions'=>array('username'=>$username)));
+				$linha = $users;
 				if($linha==0){
 
 					return $username;
@@ -257,6 +249,20 @@ class User extends AppModel {
             $funcionario = $this->Funcionario->findByUserId($user_id);
             
             return $funcionario['Funcionario']['id'];
+        }
+        
+        public function isFromFaculdade($user_id){
+            $this->contain();
+            $user = $this->findById($user_id);
+            if($user['User']['group_id']==2){
+                $this->Funcionario->contain('UnidadeOrganica');
+                $funcionario = $this->Funcionario->findByUserId($user_id);
+                if($this->Funcionario->UnidadeOrganica->isFromFaculdade($funcionario['Funcionario']['unidade_organica_id'])){
+                    return true;
+                } else {
+                    return false;
+                }
+            }
         }
 
 }

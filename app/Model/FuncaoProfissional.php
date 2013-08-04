@@ -55,5 +55,12 @@ class FuncaoProfissional extends AppModel {
 			'insertQuery' => ''
 		)
 	);
+        
+        
+        public function beforeSave($options = array()) {
+            parent::beforeSave($options);
+            $this->data['FuncaoProfissional']['codigo'] = Inflector::slug($this->data['FuncaoProfissional']['name']);
+            return true;
+        }
 
 }

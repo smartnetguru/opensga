@@ -145,12 +145,17 @@ class UsersController extends AppController {
                     $this->redirect(array('controller' => 'pages', 'action' => 'home', 'docente' => TRUE));
                 }
                 if($User['group_id']==2){
+                    $this->User->contain('Funcionario');
                     $user_data = $this->User->findById($User['id']);
-                    $this->Session->write('Auth.User.unidade_organica_id',$user_data['Funcionario']['unidade_organica_id']);
+                    
+                    $this->Session->write('Auth.User.unidade_organica_id',$user_data['Funcionario'][0]['unidade_organica_id']);
+                    if($this->User->isFromFaculdade($User['id'])){
+                        $this->redirect(array('controller' => 'pages', 'action' => 'home','faculdade'=>TRUE));
+                    }
                 }
                 $this->redirect(array('controller' => 'pages', 'action' => 'home'));
             } else {
-                $this->Session->setFlash('Your username or password was incorrect.');
+                $this->Session->setFlash(__('Nome de Usuário ou Senha Invalidos'),'default',array('class'=>'alert error'));
             }
         }
         $this->layout = 'login';
@@ -198,6 +203,15 @@ class UsersController extends AppController {
         }
     }
 
+    
+    public function faculdade_logout(){
+        $this->Auth->logout();
+        $this->Session->delete('SGAConfig');
+        $this->redirect($this->redirect($this->Auth->logout()));
+    }
+    public function faculdade_login() {
+        $this->redirect(array('action' => 'login', 'docente' => false,'faculdade'=>false));
+    }
     function beforeRender() {
         parent::beforeRender();
         $this->set('current_section', 'administracao');

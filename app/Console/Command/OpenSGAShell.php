@@ -1,8 +1,10 @@
 <?php
-ini_set('memory_limit',"2048M");
+
+ini_set('memory_limit', "2048M");
+
 class OpenSGAShell extends AppShell {
 
-    public $uses = array('Turma', 'Matricula', 'Curso', 'UnidadeOrganica', 'Candidatura','Aluno','EstadoAluno','Planoestudo','Disciplina','Planoestudoano','HistoricoCurso','Anolectivo');
+    public $uses = array('Turma', 'Matricula', 'Curso', 'UnidadeOrganica', 'Candidatura', 'Aluno', 'EstadoAluno', 'Planoestudo', 'Disciplina', 'Planoestudoano', 'HistoricoCurso', 'Anolectivo');
 
     public function main() {
         $this->out('Hello world.');
@@ -193,99 +195,90 @@ class OpenSGAShell extends AppShell {
 
         $worksheet = $xls->getActiveSheet();
         $worksheets = $xls->getAllSheets();
-        foreach($worksheets as $ws){
+        foreach ($worksheets as $ws) {
             //Cria o Plano de estudos
             $curso_nome = $ws->getTitle();
             $array_plano_estudos = array(
-                'name'=>$curso_nome,
-                'duracao'=>5,
-                'semestresano'=>2
-                    
+                'name' => $curso_nome,
+                'duracao' => 5,
+                'semestresano' => 2
             );
             $this->Curso->create();
             $this->Curso->save($array_plano_estudos);
-            $array_plano_estudos['curso_id']=$this->Curso->id;
+            $array_plano_estudos['curso_id'] = $this->Curso->id;
             $this->Planoestudo->create();
             $this->Planoestudo->save($array_plano_estudos);
-            
+
             $ultima_linha = false;
             $linha_actual = 2;
             $ciclo = 1;
-            while(!$ultima_linha){
-                $verificador = $ws->getCellByColumnAndRow(2,$linha_actual)->getCalculatedValue();
-                
-                if(is_numeric($verificador)){
+            while (!$ultima_linha) {
+                $verificador = $ws->getCellByColumnAndRow(2, $linha_actual)->getCalculatedValue();
+
+                if (is_numeric($verificador)) {
                     $array_disciplina = array(
-                      'codigo'=>  $ws->getCellByColumnAndRow(0,$linha_actual)->getCalculatedValue(),
-                        'name'=>$ws->getCellByColumnAndRow(1,$linha_actual)->getCalculatedValue()
-                    
+                        'codigo' => $ws->getCellByColumnAndRow(0, $linha_actual)->getCalculatedValue(),
+                        'name' => $ws->getCellByColumnAndRow(1, $linha_actual)->getCalculatedValue()
                     );
                     $disciplina_existe = $this->Disciplina->findByCodigo($array_disciplina['codigo']);
-                    if(empty($disciplina_existe)){
+                    if (empty($disciplina_existe)) {
                         $disciplina_existe = $this->Disciplina->findByName($array_disciplina['name']);
-                        if(empty($disciplina_existe)){
+                        if (empty($disciplina_existe)) {
                             $this->Disciplina->create();
-                            $this->Disciplina->save(array('Disciplina'=>$array_disciplina));
+                            $this->Disciplina->save(array('Disciplina' => $array_disciplina));
                             $disciplina_existe = $this->Disciplina->findByCodigo($array_disciplina['codigo']);
                         }
                     }
                     $array_plano_estudo_anos = array(
-                        'Planoestudoano'=>array(
-                            'planoestudo_id'=>$this->Planoestudo->id,
-                            'disciplina_id'=>$disciplina_existe['Disciplina']['id'],
-                            'semestre_sequencial'=>$ws->getCellByColumnAndRow(2,$linha_actual)->getCalculatedValue(),
-                            'carga_total' =>$ws->getCellByColumnAndRow(3,$linha_actual)->getCalculatedValue(),
-                            'cargahorariateoricas' =>$ws->getCellByColumnAndRow(4,$linha_actual)->getCalculatedValue(),
-                            'cargahorariapraticas' =>$ws->getCellByColumnAndRow(5,$linha_actual)->getCalculatedValue(),
-                            'creditos' =>$ws->getCellByColumnAndRow(6,$linha_actual)->getCalculatedValue(),
-                            
+                        'Planoestudoano' => array(
+                            'planoestudo_id' => $this->Planoestudo->id,
+                            'disciplina_id' => $disciplina_existe['Disciplina']['id'],
+                            'semestre_sequencial' => $ws->getCellByColumnAndRow(2, $linha_actual)->getCalculatedValue(),
+                            'carga_total' => $ws->getCellByColumnAndRow(3, $linha_actual)->getCalculatedValue(),
+                            'cargahorariateoricas' => $ws->getCellByColumnAndRow(4, $linha_actual)->getCalculatedValue(),
+                            'cargahorariapraticas' => $ws->getCellByColumnAndRow(5, $linha_actual)->getCalculatedValue(),
+                            'creditos' => $ws->getCellByColumnAndRow(6, $linha_actual)->getCalculatedValue(),
                         )
                     );
-                    if($array_plano_estudo_anos['Planoestudoano']['semestre_sequencial'] % 2==0){
-                        $array_plano_estudo_anos['Planoestudoano']['ano'] = $array_plano_estudo_anos['Planoestudoano']['semestre_sequencial']/2;
+                    if ($array_plano_estudo_anos['Planoestudoano']['semestre_sequencial'] % 2 == 0) {
+                        $array_plano_estudo_anos['Planoestudoano']['ano'] = $array_plano_estudo_anos['Planoestudoano']['semestre_sequencial'] / 2;
                         $array_plano_estudo_anos['Planoestudoano']['semestre'] = 2;
-                                
-                    } else{
-                        $array_plano_estudo_anos['Planoestudoano']['ano'] = ($array_plano_estudo_anos['Planoestudoano']['semestre_sequencial']+1)/2;
+                    } else {
+                        $array_plano_estudo_anos['Planoestudoano']['ano'] = ($array_plano_estudo_anos['Planoestudoano']['semestre_sequencial'] + 1) / 2;
                         $array_plano_estudo_anos['Planoestudoano']['semestre'] = 1;
                     }
-                    
+
                     $this->Planoestudoano->create();
                     $this->Planoestudoano->save($array_plano_estudo_anos);
-                    
-                    $codigo_precedencia = $ws->getCellByColumnAndRow(7,$linha_actual)->getCalculatedValue();
-                    if($codigo_precedencia != NULL){
+
+                    $codigo_precedencia = $ws->getCellByColumnAndRow(7, $linha_actual)->getCalculatedValue();
+                    if ($codigo_precedencia != NULL) {
                         $disciplina_precendencia = $this->Disciplina->findByCodigo($codigo_precedencia);
                         $array_precedencia = array(
-                            'Precedencia'=>array(
-                                'planoestudoano_id'=>$this->Planoestudoano->id,
-                                'precedencia'=>$disciplina_precendencia['Disciplina']['id'],
-                                'tipoprecedencia_id'=>1
+                            'Precedencia' => array(
+                                'planoestudoano_id' => $this->Planoestudoano->id,
+                                'precedencia' => $disciplina_precendencia['Disciplina']['id'],
+                                'tipoprecedencia_id' => 1
                             )
                         );
                         $this->Precedencia->create();
                         $this->Precedencia->save($array_precedencia);
-                        
                     }
                     $linha_actual++;
                 } else {
-                    if($verificador=='Semestre' || $verificador==null){
+                    if ($verificador == 'Semestre' || $verificador == null) {
                         
-                    } else{
+                    } else {
                         debug($verificador);
                     }
-                    
+
                     $linha_actual++;
                 }
-                
-                if($linha_actual ==100){
+
+                if ($linha_actual == 100) {
                     $ultima_linha = true;
                 }
-               
-                
             }
-            
-            
         }
     }
 
@@ -297,7 +290,7 @@ class OpenSGAShell extends AppShell {
         $xls = PHPExcel_IOFactory::load(APP . 'Reports' . DS . 'entrega_certificados.xlsx');
 
         $worksheet = $xls->getActiveSheet();
-        
+
 
         $linha_actual = 2;
         foreach ($worksheet->getRowIterator() as $row) {
@@ -308,7 +301,7 @@ class OpenSGAShell extends AppShell {
             $datasource = $this->Aluno->getDataSource();
             $datasource->begin();
             $this->Aluno->contain();
-            
+
             $array_estado = array(
                 'AlunoEstado' => array(
                     'aluno_id' => $aluno['Aluno']['id'],
@@ -321,8 +314,8 @@ class OpenSGAShell extends AppShell {
                     'funcionario_id' => 1
                 )
             );
-            
-            
+
+
             $this->Aluno->AlunoEstado->create();
             $this->Aluno->AlunoEstado->save($array_estado);
 
@@ -330,17 +323,16 @@ class OpenSGAShell extends AppShell {
             $this->Aluno->set('estado_aluno_id', 1);
             $this->Aluno->set('estadoentidade_id', 1);
             $this->Aluno->save();
-           $datasource->commit();
-            
+            $datasource->commit();
+
             $this->out($this->Aluno->AlunoEstado->id);
             $linha_actual++;
         }
     }
-    
-    
-    public function aproveitamento(){
-        
-        
+
+    public function aproveitamento() {
+
+
         App::import('Vendor', 'PHPExcel', array('file' => 'PHPExcel.php'));
         if (!class_exists('PHPExcel'))
             throw new CakeException('Vendor class PHPExcel not found!');
@@ -348,70 +340,70 @@ class OpenSGAShell extends AppShell {
         $xls = PHPExcel_IOFactory::load(APP . 'Reports' . DS . 'aproveitamento2.xlsx');
 
         $worksheet = $xls->getActiveSheet();
-        
-        $cursos = $this->Curso->find('all',array('conditions'=>array('unidade_organica_id'=>28)));
-        foreach($cursos as $curso){
-            $myWorkSheet = new PHPExcel_Worksheet($xls, substr($curso['Curso']['name'],0,30));
+
+        $cursos = $this->Curso->find('all', array('conditions' => array('unidade_organica_id' => 28)));
+        foreach ($cursos as $curso) {
+            $myWorkSheet = new PHPExcel_Worksheet($xls, substr($curso['Curso']['name'], 0, 30));
             $worksheet = $xls->addSheet($myWorkSheet);
-            
-             $this->Planoestudo->contain();
-        $planoestudo = $this->Planoestudo->find('first',array('conditions'=>array('curso_id'=>$curso['Curso']['id'],'ano_criacao <'=>2009),'order'=>array('ano_criacao DESC')));
-        
-        $planoestudoano = $this->Planoestudo->Planoestudoano->find('all',array('conditions'=>array('planoestudo_id'=>$planoestudo['Planoestudo']['id']),'order'=>array('ano','semestre')));
-        
-        $linha = 1;
-        $coluna  =1;
-        $ano_actual = $coluna;
-        $semestre_actual = $coluna;
-        $total_colunas = 0;
-        foreach($planoestudoano as $pa){
-            $worksheet->setCellValueByColumnAndRow($coluna,3,$pa['Disciplina']['name']);
-            $worksheet->setCellValueByColumnAndRow($coluna,4,$pa['Disciplina']['codigo']);
-            $worksheet->getStyleByColumnAndRow($coluna,3)->getAlignment()->setTextRotation(90);
-            $worksheet->getStyleByColumnAndRow($coluna,4)->getAlignment()->setTextRotation(90);
-            
-            
-            $total_colunas++;
-            $coluna++;
-        }
-        //debug($planoestudo);
-        //die();
-        
-        $alunos  = $this->Aluno->find('all',array('conditions'=>array('Aluno.ano_ingresso'=>2009,'Aluno.curso_id'=>$curso['Curso']['id'])));
-        $linha = 5;
-        $i=0;
-        foreach($alunos as $aluno){
-            $worksheet->setCellValueByColumnAndRow(0,$linha,''.$aluno['Aluno']['codigo']);
-                $coluna  =1;
-            while($coluna<=$total_colunas){
-                $codigo_disciplina = $worksheet->getCellByColumnAndRow($coluna,4)->getValue();
-                $disciplina = $this->Disciplina->findByCodigo($codigo_disciplina);
-                $this->Aluno->Inscricao->contain(array(
-                   'Turma' 
-                ));
-                $inscricao = $this->Aluno->Inscricao->find('first',array('conditions'=>array('Inscricao.aluno_id'=>$aluno['Aluno']['id'],'Turma.disciplina_id'=>$disciplina['Disciplina']['id']),'order'=>'data DESC'));
-                if($inscricao)
-                $worksheet->setCellValueByColumnAndRow($coluna,$linha,$inscricao['Inscricao']['nota_final']);
-                
+
+            $this->Planoestudo->contain();
+            $planoestudo = $this->Planoestudo->find('first', array('conditions' => array('curso_id' => $curso['Curso']['id'], 'ano_criacao <' => 2009), 'order' => array('ano_criacao DESC')));
+
+            $planoestudoano = $this->Planoestudo->Planoestudoano->find('all', array('conditions' => array('planoestudo_id' => $planoestudo['Planoestudo']['id']), 'order' => array('ano', 'semestre')));
+
+            $linha = 1;
+            $coluna = 1;
+            $ano_actual = $coluna;
+            $semestre_actual = $coluna;
+            $total_colunas = 0;
+            foreach ($planoestudoano as $pa) {
+                $worksheet->setCellValueByColumnAndRow($coluna, 3, $pa['Disciplina']['name']);
+                $worksheet->setCellValueByColumnAndRow($coluna, 4, $pa['Disciplina']['codigo']);
+                $worksheet->getStyleByColumnAndRow($coluna, 3)->getAlignment()->setTextRotation(90);
+                $worksheet->getStyleByColumnAndRow($coluna, 4)->getAlignment()->setTextRotation(90);
+
+
+                $total_colunas++;
                 $coluna++;
-                $i++;
-                $this->out($i);    
             }
-            
-                
-            $linha++;
-        }
+            //debug($planoestudo);
+            //die();
+
+            $alunos = $this->Aluno->find('all', array('conditions' => array('Aluno.ano_ingresso' => 2009, 'Aluno.curso_id' => $curso['Curso']['id'])));
+            $linha = 5;
+            $i = 0;
+            foreach ($alunos as $aluno) {
+                $worksheet->setCellValueByColumnAndRow(0, $linha, '' . $aluno['Aluno']['codigo']);
+                $coluna = 1;
+                while ($coluna <= $total_colunas) {
+                    $codigo_disciplina = $worksheet->getCellByColumnAndRow($coluna, 4)->getValue();
+                    $disciplina = $this->Disciplina->findByCodigo($codigo_disciplina);
+                    $this->Aluno->Inscricao->contain(array(
+                        'Turma'
+                    ));
+                    $inscricao = $this->Aluno->Inscricao->find('first', array('conditions' => array('Inscricao.aluno_id' => $aluno['Aluno']['id'], 'Turma.disciplina_id' => $disciplina['Disciplina']['id']), 'order' => 'data DESC'));
+                    if ($inscricao)
+                        $worksheet->setCellValueByColumnAndRow($coluna, $linha, $inscricao['Inscricao']['nota_final']);
+
+                    $coluna++;
+                    $i++;
+                    $this->out($i);
+                }
+
+
+                $linha++;
+            }
         }
         //Comecamos por preencher as disciplinas
-       
-        
-        
+
+
+
         $objWriter = PHPExcel_IOFactory::createWriter($xls, 'Excel2007');
         debug(getcwd());
         $objWriter->save('aproveitamento2.xlsx');
     }
-    
-    public function importa_dados_unizambeze(){
+
+    public function importa_dados_unizambeze() {
         App::import('Vendor', 'PHPExcel', array('file' => 'PHPExcel.php'));
         if (!class_exists('PHPExcel'))
             throw new CakeException('Vendor class PHPExcel not found!');
@@ -419,69 +411,71 @@ class OpenSGAShell extends AppShell {
         $xls = PHPExcel_IOFactory::load(APP . 'Reports' . DS . 'uz_contabilidade.xlsx');
 
         $worksheet = $xls->getActiveSheet();
-        
     }
-    
-    public function actualiza_fotos_uem(){
+
+    public function actualiza_fotos_uem() {
         App::uses('Folder', 'Utility');
-App::uses('File', 'Utility');
+        App::uses('File', 'Utility');
 
-    $i=0;
-    $this->Aluno->contain('Entidade');
-    $alunos = $this->Aluno->find('all',array('conditions'=>array('Entidade.foto'=>'0')));
-    die(debug(count($alunos)));
-    foreach($alunos as $aluno){
-        $foto_file = new File('C:'.DS.'fotos_uem'.DS.$aluno['Aluno']['codigo'].'.jpg');
-        $path = APP.'Assets'.DS.'Fotos'.DS.'Estudantes'.DS.$aluno['Aluno']['ano_ingresso'];
-        if($foto_file->exists()){
-            $path = APP.'Assets'.DS.'Fotos'.DS.'Estudantes'.DS.$aluno['Aluno']['ano_ingresso'];
-            $folder_novo = new Folder($path,true);
-            $foto_file->copy($path.DS.$aluno['Aluno']['codigo'].'.jpg');
-            $foto_file->delete();
-            $this->Aluno->Entidade->id = $aluno['Entidade']['id'];
-            $this->Aluno->Entidade->set('foto',$aluno['Aluno']['codigo'].'.jpg');
-            $this->Aluno->Entidade->save();
-            $this->out($i++);
-        } else{ 
-            $foto_existe = new File($path.DS.$aluno['Aluno']['codigo'].'.jpg');
-            if($foto_existe->exists()){
+        $i = 0;
+        $this->Aluno->contain('Entidade');
+        $alunos = $this->Aluno->find('all', array('conditions' => array('Entidade.foto' => '0')));
+        die(debug(count($alunos)));
+        foreach ($alunos as $aluno) {
+            $foto_file = new File('C:' . DS . 'fotos_uem' . DS . $aluno['Aluno']['codigo'] . '.jpg');
+            $path = APP . 'Assets' . DS . 'Fotos' . DS . 'Estudantes' . DS . $aluno['Aluno']['ano_ingresso'];
+            if ($foto_file->exists()) {
+                $path = APP . 'Assets' . DS . 'Fotos' . DS . 'Estudantes' . DS . $aluno['Aluno']['ano_ingresso'];
+                $folder_novo = new Folder($path, true);
+                $foto_file->copy($path . DS . $aluno['Aluno']['codigo'] . '.jpg');
+                $foto_file->delete();
                 $this->Aluno->Entidade->id = $aluno['Entidade']['id'];
-                $this->Aluno->Entidade->set('foto',$aluno['Aluno']['codigo'].'.jpg');
+                $this->Aluno->Entidade->set('foto', $aluno['Aluno']['codigo'] . '.jpg');
                 $this->Aluno->Entidade->save();
+                $this->out($i++);
+            } else {
+                $foto_existe = new File($path . DS . $aluno['Aluno']['codigo'] . '.jpg');
+                if ($foto_existe->exists()) {
+                    $this->Aluno->Entidade->id = $aluno['Entidade']['id'];
+                    $this->Aluno->Entidade->set('foto', $aluno['Aluno']['codigo'] . '.jpg');
+                    $this->Aluno->Entidade->save();
+                } else {
+                    $this->Aluno->Entidade->id = $aluno['Entidade']['id'];
+                    $this->Aluno->Entidade->set('foto', 0);
+                    $this->Aluno->Entidade->save();
+                }
+                $this->out($i++);
             }
-            else{
-                $this->Aluno->Entidade->id = $aluno['Entidade']['id'];
-                $this->Aluno->Entidade->set('foto',0);
-                $this->Aluno->Entidade->save();
-            }
-                    $this->out($i++);
-    }
-    }
-}
-
-public function verifica_historico_curso(){
-    $this->Aluno->contain();
-    $alunos = $this->Aluno->find('all');
-    $zeros = 0;
-    foreach($alunos as $aluno){
-        $this->HistoricoCurso->contain();
-        $historicos = $this->HistoricoCurso->find('first',array('conditions'=>array('aluno_id'=>$aluno['Aluno']['id'])));
-        $this->out($aluno['Aluno']['id']);
-        
-        if(empty($historicos)){
-            $ano_lectivo = $this->Anolectivo->findByAno($aluno['Aluno']['ano_ingresso']);
-            $historico_array = array(
-                'aluno_id'=>$aluno['Aluno']['id'],
-                'curso_id'=>$aluno['Aluno']['curso_id'],
-                'ano_ingresso'=>$aluno['Aluno']['ano_ingresso'],
-                'ano_lectivo_ingresso'=>$ano_lectivo['Anolectivo']['id']
-                
-            );
-            $this->HistoricoCurso->create();
-            $this->HistoricoCurso->save(array('HistoricoCurso'=>$historico_array));
         }
     }
-    $this->out("fim");
-    $this->out($zeros);
-}
+
+    public function verifica_historico_curso() {
+        $this->Aluno->contain();
+        $alunos = $this->Aluno->find('all');
+        $zeros = 0;
+        foreach ($alunos as $aluno) {
+            $this->HistoricoCurso->contain();
+            $historicos = $this->HistoricoCurso->find('first', array('conditions' => array('aluno_id' => $aluno['Aluno']['id'])));
+            $this->out($aluno['Aluno']['id']);
+
+            if (empty($historicos)) {
+                $ano_lectivo = $this->Anolectivo->findByAno($aluno['Aluno']['ano_ingresso']);
+                $historico_array = array(
+                    'aluno_id' => $aluno['Aluno']['id'],
+                    'curso_id' => $aluno['Aluno']['curso_id'],
+                    'ano_ingresso' => $aluno['Aluno']['ano_ingresso'],
+                    'ano_lectivo_ingresso' => $ano_lectivo['Anolectivo']['id']
+                );
+                $this->HistoricoCurso->create();
+                $this->HistoricoCurso->save(array('HistoricoCurso' => $historico_array));
+            }
+        }
+        $this->out("fim");
+        $this->out($zeros);
+    }
+    
+    public function reorganiza_unidade_organicas(){
+        $this->UnidadeOrganica->recover();
+    }
+
 }

@@ -123,5 +123,16 @@ public $actsAs = array('Tree','Containable','Auditable');
  */
 	public $hasAndBelongsToMany = array(
 	);
+        
+        public function isFromFaculdade($unidade_organica_id){
+            
+            $unidades = $this->getPath($unidade_organica_id);
+            if($unidades[1]['UnidadeOrganica']['tipo_unidade_organica_id']==1){
+                return true;
+            } else{
+                return false;
+            }
+            
+        }
 
 }

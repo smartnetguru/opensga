@@ -1,27 +1,43 @@
 <?php
 
-/** 
+/**
  * Vamos tentar criar aqui uma superlogica de permissoes que vai fazer com que tudo de certo :)
  * A dica é a seguinte:
  * Pegamos todos os users que tiverem a coluna verifica_permissoes = 1, e dai criamos as permissoes de acordo com o seu  a sua unidade_organica,e a sua funcao_profissional
  * 
  * Vamos criar metodos diferentes para funcionarios, docentes e estudantes, para não atrapalhar as coisas
  */
-class OpensgaAclShell extends AppShell {
-    public $uses = array('Funcionario','User','Docente','Aluno');
+class OpenSGAAclShell extends AppShell {
+
+    public $uses = array('Funcionario', 'User', 'Docente', 'Aluno');
+
     public function main() {
         $this->out('Hello world.');
     }
-    
-    public function funcionarios(){
+
+    public function funcionarios() {
         //Pegamos todos funcionarios
         $this->Funcionario->contain(array('User'));
-        $funcionarios = $this->Funcionario->find('all',array('conditions'=>array('group_id'=>2,'verificar_permissoes OR'=>array(1,null))));
-        foreach($funcionarios as $funcionario){
-            debug($funcionario);
+        $funcionarios = $this->Funcionario->find('all', array('conditions' => array('group_id' => 2)));
+        foreach ($funcionarios as $funcionario) {
+            $acl_command = "acl deny User.{$funcionario['User']['id']} controllers";
+            $this->dispatchShell($acl_command);
+            
+            $acl_command = "acl grant User.{$funcionario['User']['id']} controllers/Users/login";
+            $this->dispatchShell($acl_command);
+            $acl_command = "acl grant User.{$funcionario['User']['id']} controllers/Users/logout";
+            $this->dispatchShell($acl_command);
+            $acl_command = "acl grant User.{$funcionario['User']['id']} controllers/Users/faculdade_logout";
+            $this->dispatchShell($acl_command);
+            if ($this->User->isFromFaculdade($funcionario['User']['id'])) {
+                $acl_command = "acl grant User.{$funcionario['User']['id']} controllers/Pages/faculdade_home";
+                $this->dispatchShell($acl_command);
+            } else {
+                $acl_command = "acl grant User.{$funcionario['User']['id']} controllers/Pages/home";
+                $this->dispatchShell($acl_command);
+            }
+            debug($acl_command);
         }
     }
-   
-        
-    
+
 }

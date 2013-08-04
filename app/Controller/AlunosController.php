@@ -44,6 +44,9 @@ class AlunosController extends AppController {
 
         $this->set('alunos', $alunos);
     }
+    
+    
+    
 
     function index_ajax() {
 
@@ -1000,6 +1003,32 @@ class AlunosController extends AppController {
 
         $this->set(compact('aluno', 'is_regular', 'classe_estado'));
         $this->set(compact('aluno', 'is_regular', 'classe_estado', 'cursos','funcionario'));
+    }
+    
+    
+        function faculdade_index() {
+
+        $conditions = array();
+        if ($this->request->is('post')) {
+            if ($this->request->data['Aluno']['codigo'] != '') {
+                $conditions['Aluno.codigo'] = $this->request->data['Aluno']['codigo'];
+            } else {
+                $conditions['Entidade.nomes LIKE'] = '%' . $this->request->data['Aluno']['nomes'] . '%';
+                $conditions['Entidade.apelido LIKE'] = '%' . $this->request->data['Aluno']['apelido'] . '%';
+            }
+        }
+
+        $unidade_organica_id = $this->Session->read('Auth.User.unidade_organica_id');
+        $conditions['Curso.unidade_organica_id']=$unidade_organica_id;
+
+        $this->Aluno->contain('Entidade', 'Curso');
+        $alunos = $this->Aluno->find('all', array('conditions' => $conditions, 'limit' => 1000));
+        
+        if(count($alunos)==1){
+            $this->redirect(array('action'=>'perfil_estudante',$alunos[0]['Aluno']['id']));
+        }
+
+        $this->set('alunos', $alunos);
     }
 
     

@@ -132,6 +132,10 @@ class PagesController extends AppController {
         
 
     }
+    
+    public function faculdade_home(){
+        
+    }
 
 }
 
