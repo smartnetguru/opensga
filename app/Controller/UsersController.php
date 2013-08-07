@@ -217,6 +217,43 @@ class UsersController extends AppController {
             }
         }
     }
+    
+        function faculdade_trocar_senha($id = null) {
+        $this->User->id = $id;
+        if (!$this->User->exists()) {
+            throw new NotFoundException('Usuário não encontrado');
+        }
+
+        if ($this->request->is('post') || $this->request->is('put')) {
+            $senha_antiga = $this->data['User']['senhaantiga'];
+            $senha_nova1 = $this->data['User']['novasenha1'];
+            $senha_nova2 = $this->data['User']['novasenha2'];
+
+            $senha_bd = $this->User->findById($this->Session->read('Auth.User.id'));
+            $storedHash = $senha_bd['User']['password'];
+            $newHash = Security::hash($this->request->data['User']['senhaantiga'], 'blowfish', $storedHash);
+            $correct = $storedHash == $newHash;
+            if ($correct) {
+                if ($senha_nova1 == $senha_nova2) {
+                    $this->request->data['User']['password'] = Security::hash($senha_nova1,'blowfish');
+                    $this->User->id = $id;
+                    $this->User->set('password',Security::hash($senha_nova1,'blowfish'));
+                    if ($this->User->save()) {
+                        $this->Session->setFlash(sprintf(__('Senha alterada com sucesso', true), 'user'), 'flashok');
+                        $this->redirect('/');
+                    } else {
+                        $this->Session->setFlash(sprintf(__('Erro ao alterar a senha. Por favor, tente de novo', true), 'user'), 'flasherror');
+                    }
+                } else {
+                    $this->Session->setFlash(sprintf(__('As senhas introduzidas não são idênticas', true), 'user'), 'flasherror');
+                    
+                }
+            } else {
+                $this->Session->setFlash(sprintf(__('A senha antiga nao confere', true), 'user'));
+                
+            }
+        }
+    }
 
     public function faculdade_logout() {
         $this->Auth->logout();
