@@ -104,13 +104,16 @@ class UsersController extends AppController {
     function login() {
         if ($this->Session->read('Auth.User')) {
             //if($this->Session->read('Auth.User.group_id')==1)
-            $this->Session->setFlash('Já está logado','default',array('class'=>'alert_success'));
+            $this->Session->setFlash('Já está logado', 'default', array('class' => 'alert_success'));
             $this->redirect(array('controller' => 'pages', 'action' => 'home'));
         }
 
 
         if ($this->request->is('post')) {
             if ($this->Auth->login()) {
+                $password_login = $this->request->data['User']['password'];
+
+
                 $this->loadModel('Config');
                 $configs = $this->Config->find('all');
                 $sgaconfigs = array();
@@ -119,16 +122,16 @@ class UsersController extends AppController {
 
                     $this->Session->write($name, $c['Config']['value']);
                 }
-                $this->Session->write('SGAConfig.anolectivo_id',Configure::read('OpenSGA.ano_lectivo_id'));
-                $this->Session->write('SGAConfig.ano_lectivo',Configure::read('OpenSGA.ano_lectivo'));
+                $this->Session->write('SGAConfig.anolectivo_id', Configure::read('OpenSGA.ano_lectivo_id'));
+                $this->Session->write('SGAConfig.ano_lectivo', Configure::read('OpenSGA.ano_lectivo'));
                 $this->Session->write('Config.language', 'por');
 
 
                 $User = $this->Session->read('Auth.User');
                 $entidade = $this->User->Entidade->findByUserId($User['id']);
                 $this->Session->write('Auth.User.name', $entidade['Entidade']['name']);
-                
-                
+
+
                 //Temos de Certificar que o Aro existe, principalmente para estudantes importados
                 $aro = $this->User->Aro->find('all', array('conditions' => array('model' => $this->User->alias, 'foreign_key' => $User['id'])));
                 if (empty($aro)) {
@@ -136,26 +139,33 @@ class UsersController extends AppController {
                     $this->User->Aro->create();
                     $this->User->Aro->save($new_aro);
                 }
-					
+
                 if ($User['group_id'] == 3) {
-                    
+
                     $this->redirect(array('controller' => 'pages', 'action' => 'home', 'estudante' => TRUE));
                 }
                 if ($User['group_id'] == 4) {
                     $this->redirect(array('controller' => 'pages', 'action' => 'home', 'docente' => TRUE));
                 }
-                if($User['group_id']==2){
+                if ($User['group_id'] == 2) {
                     $this->User->contain('Funcionario');
                     $user_data = $this->User->findById($User['id']);
-                    
-                    $this->Session->write('Auth.User.unidade_organica_id',$user_data['Funcionario'][0]['unidade_organica_id']);
-                    if($this->User->isFromFaculdade($User['id'])){
-                        $this->redirect(array('controller' => 'pages', 'action' => 'home','faculdade'=>TRUE));
+
+                    $this->Session->write('Auth.User.unidade_organica_id', $user_data['Funcionario'][0]['unidade_organica_id']);
+
+                    if ($this->User->isFromFaculdade($User['id'])) {
+                        if ($password_login == '12345') {
+                            $this->redirect(array('controller' => 'users', 'action' => 'trocar_senha', $User['id'], 'faculdade' => TRUE));
+                        }
+                        $this->redirect(array('controller' => 'pages', 'action' => 'home', 'faculdade' => TRUE));
                     }
+                }
+                if ($password_login == '12345') {
+                    $this->redirect(array('controller' => 'users', 'action' => 'trocar_senha', $User['id']));
                 }
                 $this->redirect(array('controller' => 'pages', 'action' => 'home'));
             } else {
-                $this->Session->setFlash(__('Nome de Usuário ou Senha Invalidos'),'default',array('class'=>'alert error'));
+                $this->Session->setFlash(__('Nome de Usuário ou Senha Invalidos'), 'default', array('class' => 'alert error'));
             }
         }
         $this->layout = 'login';
@@ -174,7 +184,7 @@ class UsersController extends AppController {
     function trocar_senha($id = null) {
         $this->User->id = $id;
         if (!$this->User->exists()) {
-            throw new NotFoundException('User não encontrado');
+            throw new NotFoundException('Usuário não encontrado');
         }
 
         if ($this->request->is('post') || $this->request->is('put')) {
@@ -183,35 +193,41 @@ class UsersController extends AppController {
             $senha_nova2 = $this->data['User']['novasenha2'];
 
             $senha_bd = $this->User->findById($this->Session->read('Auth.User.id'));
-            if ($senha_bd['User']['password'] == AuthComponent::password($senha_antiga)) {
+            $storedHash = $senha_bd['User']['password'];
+            $newHash = Security::hash($this->request->data['User']['senhaantiga'], 'blowfish', $storedHash);
+            $correct = $storedHash == $newHash;
+            if ($correct) {
                 if ($senha_nova1 == $senha_nova2) {
-                    $this->request->data['User']['password'] = AuthComponent::password($senha_nova1);
-                    if ($this->User->save($this->request->data)) {
+                    $this->request->data['User']['password'] = Security::hash($senha_nova1,'blowfish');
+                    $this->User->id = $id;
+                    $this->User->set('password',Security::hash($senha_nova1,'blowfish'));
+                    if ($this->User->save()) {
                         $this->Session->setFlash(sprintf(__('Senha alterada com sucesso', true), 'user'), 'flashok');
-                        $this->redirect(array('action' => 'index'));
+                        $this->redirect('/');
                     } else {
                         $this->Session->setFlash(sprintf(__('Erro ao alterar a senha. Por favor, tente de novo', true), 'user'), 'flasherror');
                     }
                 } else {
                     $this->Session->setFlash(sprintf(__('As senhas introduzidas não são idênticas', true), 'user'), 'flasherror');
-                    $this->redirect(array('action' => 'index'));
+                    
                 }
             } else {
                 $this->Session->setFlash(sprintf(__('A senha antiga nao confere', true), 'user'));
-                $this->redirect(array('action' => 'index'));
+                
             }
         }
     }
 
-    
-    public function faculdade_logout(){
+    public function faculdade_logout() {
         $this->Auth->logout();
         $this->Session->delete('SGAConfig');
         $this->redirect($this->redirect($this->Auth->logout()));
     }
+
     public function faculdade_login() {
-        $this->redirect(array('action' => 'login', 'docente' => false,'faculdade'=>false));
+        $this->redirect(array('action' => 'login', 'docente' => false, 'faculdade' => false));
     }
+
     function beforeRender() {
         parent::beforeRender();
         $this->set('current_section', 'administracao');
@@ -223,8 +239,8 @@ class UsersController extends AppController {
     function beforeFilter() {
 
         parent::beforeFilter();
-       
-        $this->Auth->allow(array('login', 'logout','opauth_complete'));
+
+        $this->Auth->allow(array('login', 'logout', 'opauth_complete'));
     }
 
     public function configura_permissoes($user_id) {
@@ -254,7 +270,7 @@ class UsersController extends AppController {
         if ($this->request->is('post') || $this->request->is('put')) {
             $this->request->data['User']['user_id'] = $this->Session->read('Auth.User.id');
             if ($this->User->alteraPassword($this->request->data)) {
-                $this->Session->setFlash(__('Senha Alterada com Sucesso'),'default',array('class'=>'alert success'));
+                $this->Session->setFlash(__('Senha Alterada com Sucesso'), 'default', array('class' => 'alert success'));
                 $this->redirect('/');
             }
         }
@@ -355,9 +371,9 @@ class UsersController extends AppController {
         }
         return $result;
     }
-    
+
     public function opauth_complete() {
-    	debug($this->data);
+        debug($this->data);
     }
 
 }

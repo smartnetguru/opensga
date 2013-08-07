@@ -32,8 +32,12 @@ class OpenSGAAclShell extends AppShell {
             if ($this->User->isFromFaculdade($funcionario['User']['id'])) {
                 $acl_command = "acl grant User.{$funcionario['User']['id']} controllers/Pages/faculdade_home";
                 $this->dispatchShell($acl_command);
+                $acl_command = "acl grant User.{$funcionario['User']['id']} controllers/Users/faculdade_trocar_senha";
+                $this->dispatchShell($acl_command);
             } else {
                 $acl_command = "acl grant User.{$funcionario['User']['id']} controllers/Pages/home";
+                $this->dispatchShell($acl_command);
+                $acl_command = "acl grant User.{$funcionario['User']['id']} controllers/Users/trocar_senha";
                 $this->dispatchShell($acl_command);
                 $unidade_organica = $this->UnidadeOrganica->findById($funcionario['Funcionario']['unidade_organica_id']);
                 if($unidade_organica['UnidadeOrganica']['codigo']=='DRA_DI'){
