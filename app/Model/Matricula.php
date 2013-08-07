@@ -174,12 +174,16 @@ class Matricula extends AppModel {
     public function getStatusRenovacao($aluno_id){
         
         //Primeiro vamos buscar todos os anos lectivos que ele devia matricular
-        $this->Aluno->contain();
+        $this->Aluno->contain('HistoricoCurso');
         $aluno = $this->Aluno->findById($aluno_id);
+        
+        
         $this->Anolectivo->contain();
         $ano_lectivo_conditions  = array('ano >='=>$aluno['Aluno']['ano_ingresso']);
         if($aluno['Aluno']['estado_aluno_id']==3){
-            $ano_lectivo_conditions['ano <=']=$aluno['Aluno']['ano_conclusao'];
+            $this->Aluno->HistoricoCurso->contain();
+            $historicoAluno = $this->Aluno->HistoricoCurso->find('first',array('conditions'=>array('aluno_id'=>$aluno['Aluno']['id'],'curso_id'=>$aluno['Aluno']['curso_id'])));
+            $ano_lectivo_conditions['ano <=']=$historicoAluno['HistoricoCurso']['ano_fim'];
         } else{
             $ano_lectivo_conditions['ano <=']=Configure::read('OpenSGA.ano_lectivo');
         }

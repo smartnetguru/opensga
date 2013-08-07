@@ -9,7 +9,7 @@
  */
 class OpenSGAAclShell extends AppShell {
 
-    public $uses = array('Funcionario', 'User', 'Docente', 'Aluno');
+    public $uses = array('Funcionario', 'User', 'Docente', 'Aluno','UnidadeOrganica');
 
     public function main() {
         $this->out('Hello world.');
@@ -35,8 +35,25 @@ class OpenSGAAclShell extends AppShell {
             } else {
                 $acl_command = "acl grant User.{$funcionario['User']['id']} controllers/Pages/home";
                 $this->dispatchShell($acl_command);
+                $unidade_organica = $this->UnidadeOrganica->findById($funcionario['Funcionario']['unidade_organica_id']);
+                if($unidade_organica['UnidadeOrganica']['codigo']=='DRA_DI'){
+                    $acl_command = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/index";
+                    $this->dispatchShell($acl_command);
+                    $acl_command = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/perfil_estudante";
+                    $this->dispatchShell($acl_command);
+                } elseif($unidade_organica['UnidadeOrganica']['codigo']=='DRA_DR'){
+                    $acl_command = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/index";
+                    $this->dispatchShell($acl_command);
+                    $acl_command = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/perfil_estudante";
+                    $this->dispatchShell($acl_command);
+                } elseif($unidade_organica['UnidadeOrganica']['codigo']=='DRA_DA'){
+                    $acl_command = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/index";
+                    $this->dispatchShell($acl_command);
+                    $acl_command = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/perfil_estudante";
+                    $this->dispatchShell($acl_command);
+                }
             }
-            debug($acl_command);
+            debug($unidade_organica);
         }
     }
 

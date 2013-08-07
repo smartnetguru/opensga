@@ -1030,6 +1030,32 @@ class AlunosController extends AppController {
 
         $this->set('alunos', $alunos);
     }
+    
+    public function alterar_nome_candidato($codigo){
+        $this->loadModel('Candidatura');
+        if($this->request->is('post')){
+            $this->Candidatura->id = $this->request->data['Candidatura']['candidatura_id'];
+            $this->Candidatura->save($this->request->data);
+            $this->Session->setFlash('Nome de Candidato Alterado','default',array('class'=>'alert success'));
+            $this->redirect('/');
+        }
+        
+        $candidato = $this->Candidatura->findById($codigo);
+        $this->set(compact('candidato'));
+        
+    }
+    
+    public function busca_candidatos_action($action_seguinte){
+        if ($this->request->is('post')) {
+            $this->loadModel('Candidatura');
+            $candidato = $this->Candidatura->findByNumeroEstudante($this->request->data['Candidatura']['numero_estudante']);
+            if (!empty($candidato)) {
+                $this->redirect(array('action' => $action_seguinte, $candidato['Candidatura']['id']));
+            } else {
+                $this->Session->setFlash(__('Candidato Invalido'));
+            }
+        }
+    }
 
     
 

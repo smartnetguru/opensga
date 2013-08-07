@@ -58,6 +58,7 @@ class AppController extends Controller {
         $this->Auth->loginAction = array('plugin'=>false,'controller' => 'users', 'action' => 'login');
         $this->Auth->logoutRedirect = array('plugin'=>false,'controller' => 'users', 'action' => 'login');
         $this->Auth->loginRedirect = array(array('plugin'=>false,'controller' => 'pages', 'action' => 'display', 'home'));
+        $this->Auth->unauthorizedRedirect = false;
 
         if ($this->request->is('ajax')) {
             $this->Security->csrfCheck = false;
