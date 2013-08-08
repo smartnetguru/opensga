@@ -130,7 +130,9 @@ class UsersController extends AppController {
                 $User = $this->Session->read('Auth.User');
                 $entidade = $this->User->Entidade->findByUserId($User['id']);
                 $this->Session->write('Auth.User.name', $entidade['Entidade']['name']);
-
+                $log_text = $this->RequestHandler->getClientIP() ."\t". Controller::referer()."\t".$entidade['Entidade']['name']."\t".$User['id'];
+                //die(debug($log_text));
+                $this->log($log_text, 'access_log'. date('dmY'));
 
                 //Temos de Certificar que o Aro existe, principalmente para estudantes importados
                 $aro = $this->User->Aro->find('all', array('conditions' => array('model' => $this->User->alias, 'foreign_key' => $User['id'])));
@@ -239,17 +241,17 @@ class UsersController extends AppController {
                     $this->User->id = $id;
                     $this->User->set('password',Security::hash($senha_nova1,'blowfish'));
                     if ($this->User->save()) {
-                        $this->Session->setFlash(sprintf(__('Senha alterada com sucesso', true), 'user'), 'flashok');
+                        $this->Session->setFlash(__('Senha alterada com sucesso'), 'default',array('class'=>'alert success'));
                         $this->redirect('/');
                     } else {
-                        $this->Session->setFlash(sprintf(__('Erro ao alterar a senha. Por favor, tente de novo', true), 'user'), 'flasherror');
+                        $this->Session->setFlash(sprintf(__('Erro ao alterar a senha. Por favor, tente de novo', true), 'user'), 'default',array('class'=>'alert error'));
                     }
                 } else {
-                    $this->Session->setFlash(sprintf(__('As senhas introduzidas não são idênticas', true), 'user'), 'flasherror');
+                    $this->Session->setFlash(sprintf(__('As senhas introduzidas não são idênticas', true), 'user'), 'default',array('class'=>'alert error'));
                     
                 }
             } else {
-                $this->Session->setFlash(sprintf(__('A senha antiga nao confere', true), 'user'));
+                $this->Session->setFlash(sprintf(__('A senha antiga nao confere', true), 'user'), 'default',array('class'=>'alert error'));
                 
             }
         }
@@ -295,7 +297,7 @@ class UsersController extends AppController {
             $entidade_id = $this->Session->read('SGATemp.entidade_id_4_foto');
             $this->log('Erro ao capturar foto' . $entidade_id, 'testelog');
             if ($entidade_id != null) {
-                $filename = APP . "/entidades_fotos/" . $entidade_id . ".jpg";
+                $filename = APP. $entidade_id . ".jpg";
                 file_put_contents($filename, $jpg);
             }
         } else {
