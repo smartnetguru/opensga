@@ -47,6 +47,16 @@ class OpenSGAAclShell extends AppShell {
                     $this->dispatchShell($acl_command);
                     $acl_command = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/renovar_matricula";
                     $this->dispatchShell($acl_command);
+                    $acl_command = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/busca_candidato";
+                    $this->dispatchShell($acl_command);
+                    $acl_command = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/matricular_candidato";
+                    $this->dispatchShell($acl_command);
+                    $acl_command = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/print_boletim_matricula";
+                    $this->dispatchShell($acl_command);
+                    $acl_command = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/print_comprovativo_matricula";
+                    $this->dispatchShell($acl_command);
+                    $acl_command = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/print_comprovativo_renovacao_matricula";
+                    $this->dispatchShell($acl_command);
                 } elseif($unidade_organica['UnidadeOrganica']['codigo']=='DRA_DR'){
                     $acl_command = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/index";
                     $this->dispatchShell($acl_command);
