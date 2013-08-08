@@ -2,44 +2,88 @@
 ini_set('memory_limit',"512M");
 App::uses('AuditableConfig', 'Auditable.Lib');
 class DbsecShell extends AppShell {
-	public $uses = array('UemDra.DraCurso','UemDbsec.DbsecAvaliacaoTipo','UemDbsec.DbsecCurso','Curso','UnidadeOrganica','UemDbsec.DbsecDisciplina','Disciplina','UemDbsec.DbsecDisciplinaCurso','Planoestudo','Planoestudoano','UemDra.DraCurso','UemDbsec.DbsecEstudante','Aluno','UemDbsec.DbsecLeccionamento','Turma','Anolectivo','Semestrelectivo','Turma','CursosTurno','Matricula','UemDbsec.DbsecInscricao','Inscricao','User','Entidade','UemDra.DraConclusao');
+	public $uses = array('Tipoavaliacao','UemDra.DraCurso','Curso','UnidadeOrganica','Disciplina','Planoestudo','Planoestudoano','UemDra.DraCurso','Aluno','Turma','Anolectivo','Semestrelectivo','Turma','CursosTurno','Matricula','Inscricao','User','Entidade','UemDra.DraConclusao');
         
         /**
          * @todo  Implementar se for necessario
          */
         public function importa_avaliacao_tipo(){
-            $avaliacao_tipos = $this->DbsecAvaliacaoTipo->find('all');
-            foreach($avaliacao_tipos as $at){
-                debug($at);
+            
+            App::import('Vendor', 'PHPExcel', array('file' => 'PHPExcel.php'));
+        if (!class_exists('PHPExcel'))
+            throw new CakeException('Vendor class PHPExcel not found!');
+
+        $xls = PHPExcel_IOFactory::load(APP . 'Imports' . DS . 'avaliacao_tipo.xlsx');
+
+        $linha_actual=2;
+        $worksheet = $xls->getActiveSheet();
+        foreach($worksheet->getRowIterator() as $ow){
+            $tipo_avaliacao = $worksheet->getCell('B' . $linha_actual)->getCalculatedValue();
+            if($tipo_avaliacao instanceof PHPExcel_RichText){
+                $tipo_avaliacao = $tipo_avaliacao->getPlainText();
             }
+            
+            if($tipo_avaliacao==''){
+                break;
+            }
+            //verificar se este tipo de avaliacao existe
+            $tipo_avaliacao_existe = $this->Tipoavaliacao->findByName($tipo_avaliacao);
+            if(empty($tipo_avaliacao_existe)){
+                $array_tipo_avaliacao = array('Tipoavaliacao'=>array('name'=>$tipo_avaliacao));
+                $this->Tipoavaliacao->create();
+                $this->Tipoavaliacao->save($array_tipo_avaliacao);
+                $this->out('Tipo de Avalicao criada -->'.$tipo_avaliacao);
+            } else{
+                $this->out('Tipo de Avaliacao Existente--->'.$tipo_avaliacao);
+            }
+            
+            $linha_actual++;
+        }
+        
         }
         
         public function verifica_cursos(){
-            $cursos = $this->DbsecCurso->find('all',array('conditions'=>array('relevante'=>1)));
-            foreach($cursos as $curso){
-                $curso_existe = $this->Curso->findByCodigo($curso['DbsecCurso']['curso_id']);
+            App::import('Vendor', 'PHPExcel', array('file' => 'PHPExcel.php'));
+        if (!class_exists('PHPExcel'))
+            throw new CakeException('Vendor class PHPExcel not found!');
+
+        $xls = PHPExcel_IOFactory::load(APP . 'Imports' . DS . 'curso.xlsx');
+
+        $linha_actual=2;
+        $worksheet = $xls->getActiveSheet();
+        foreach($worksheet->getRowIterator() as $ow){
+            $curso_id = $worksheet->getCell('A' . $linha_actual)->getCalculatedValue();
+            if($curso_id instanceof PHPExcel_RichText){
+                $curso_id = $curso_id->getPlainText();
+            }
+            
+            $curso_existe = $this->Curso->findByCodigo($curso_id);
                 if(!empty($curso_existe)){
-                    $this->out("Sim");
+                    $this->out("Curso Existe-->".$curso_id);
                 }
                 else{
-                    $fac_id = $curso['DbsecCurso']['dpt_id'];
+                    $fac_id =$worksheet->getCell('E' . $linha_actual)->getCalculatedValue();
+                    
                     $faculdade = $this->UnidadeOrganica->find('first',array('conditions'=>array('UnidadeOrganica.codigo'=>$fac_id,'UnidadeOrganica.nivel_unidade'=>2)));
                     
                     $curso_array = array(
 					'Curso'=>array(
-							'name'=>$curso['DbsecCurso']['curso_nome'],
-							'grauacademico_id'=>$curso['DbsecCurso']['nivel'],
-							'tipocurso_id'=>$curso['DbsecCurso']['nivel'],
+							'name'=>$worksheet->getCell('B' . $linha_actual)->getCalculatedValue(),
+							'grauacademico_id'=>$worksheet->getCell('F' . $linha_actual)->getCalculatedValue(),
+							'tipocurso_id'=>$worksheet->getCell('F' . $linha_actual)->getCalculatedValue(),
 							'unidade_organica_id'=>$faculdade['UnidadeOrganica']['id'],
-							'codigo'=>$curso['DbsecCurso']['curso_id']
+							'codigo'=>$curso_id
 			)
 			);
                     
-			$this->Curso->create();
-			$this->Curso->save($curso_array);
+			//$this->Curso->create();
+			//$this->Curso->save($curso_array);
 			$this->out('Curso Inserido--'.$this->Curso->id.'---'.$curso_array['Curso']['name']);
                 }
-            }
+                $linha_actual++;
+        }
+            
+           
         }
         
         public function importa_disciplinas(){
