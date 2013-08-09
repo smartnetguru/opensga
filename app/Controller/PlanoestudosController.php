@@ -25,7 +25,7 @@ class PlanoestudosController extends AppController {
 
     function index() {
         $this->Planoestudo->recursive = 0;
-        $this->set('planoestudos', $this->paginate());
+        $this->set('planoestudos', $this->Planoestudo->find('all'));
     }
 
     function view($id = null) {

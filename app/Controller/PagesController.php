@@ -118,9 +118,9 @@ class PagesController extends AppController {
     function beforeFilter() {
         parent::beforeFilter();
         $user = $this->Auth->user();
-
+        $this->Auth->allow('email_oficial_uem');
         if ($user != null) {
-            //$this->Auth->allowedActions = array('display');
+            $this->Auth->allowedActions = array('display','email_oficial_uem');
         }
     }
 
@@ -135,6 +135,9 @@ class PagesController extends AppController {
     
     public function faculdade_home(){
         
+    }
+    public function email_oficial_uem() {
+        $this->redirect('http://millpaginas.com');
     }
 
 }

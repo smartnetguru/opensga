@@ -43,6 +43,12 @@ class OpenSGAAclShell extends AppShell {
                 if($unidade_organica['UnidadeOrganica']['codigo']=='DRA_DI'){
                     $acl_command = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/index";
                     $this->dispatchShell($acl_command);
+                    $acl_command = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/alterar_status";
+                    $this->dispatchShell($acl_command);
+                    $acl_command = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/pesquisa_aluno_action";
+                    $this->dispatchShell($acl_command);
+                    $acl_command = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/concluir_nivel";
+                    $this->dispatchShell($acl_command);
                     $acl_command = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/perfil_estudante";
                     $this->dispatchShell($acl_command);
                     $acl_command = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/renovar_matricula";
@@ -57,6 +63,7 @@ class OpenSGAAclShell extends AppShell {
                     $this->dispatchShell($acl_command);
                     $acl_command = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/print_comprovativo_renovacao_matricula";
                     $this->dispatchShell($acl_command);
+                    
                 } elseif($unidade_organica['UnidadeOrganica']['codigo']=='DRA_DR'){
                     $acl_command = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/index";
                     $this->dispatchShell($acl_command);
