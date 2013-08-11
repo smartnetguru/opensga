@@ -4,7 +4,7 @@ ini_set('memory_limit', "2048M");
 
 class OpenSGAShell extends AppShell {
 
-    public $uses = array('Turma', 'Matricula', 'Curso', 'UnidadeOrganica', 'Candidatura', 'Aluno', 'EstadoAluno', 'Planoestudo', 'Disciplina', 'Planoestudoano', 'HistoricoCurso', 'Anolectivo');
+    public $uses = array('Turma', 'Matricula', 'Curso', 'UnidadeOrganica', 'Candidatura', 'Aluno', 'EstadoAluno', 'Planoestudo', 'Disciplina', 'Planoestudoano', 'HistoricoCurso', 'Anolectivo','CandidatoAlumni');
 
     public function main() {
         $this->out('Hello world.');
@@ -476,6 +476,58 @@ class OpenSGAShell extends AppShell {
     
     public function reorganiza_unidade_organicas(){
         $this->UnidadeOrganica->recover();
+    }
+    
+    public function importa_alumnis(){
+        App::import('Vendor', 'PHPExcel', array('file' => 'PHPExcel.php'));
+        if (!class_exists('PHPExcel'))
+            throw new CakeException('Vendor class PHPExcel not found!');
+
+        $xls = PHPExcel_IOFactory::load(APP . 'Imports' . DS . 'alumnis.xlsx');
+
+        $worksheet = $xls->getActiveSheet();
+        $linha_actual = 2;
+        foreach($worksheet->getRowIterator() as $row){
+            $controlador = $worksheet->getCell('J'.$linha_actual)->getCalculatedValue();
+            if($controlador==''){
+                break;
+            }
+            
+            $caa  = array();
+            $caa['apelido'] = $worksheet->getCell('C'.$linha_actual)->getCalculatedValue();
+            $caa['nomes'] = $worksheet->getCell('D'.$linha_actual)->getCalculatedValue();
+            $caa['nome_pai'] = $worksheet->getCell('F'.$linha_actual)->getCalculatedValue();
+            $caa['nome_mae'] = $worksheet->getCell('G'.$linha_actual)->getCalculatedValue();
+            $caa['data_nascimento'] = $worksheet->getCell('E'.$linha_actual)->getCalculatedValue();
+            $caa['estado_civil_id'] = $worksheet->getCell('I'.$linha_actual)->getCalculatedValue();
+            $caa['genero_id'] = $worksheet->getCell('H'.$linha_actual)->getCalculatedValue();
+            $caa['pais_nascimento'] = $worksheet->getCell('J'.$linha_actual)->getCalculatedValue();
+            $caa['provincia_nascimento'] = $worksheet->getCell('K'.$linha_actual)->getCalculatedValue();
+            $caa['cidade_nascimento'] = $worksheet->getCell('L'.$linha_actual)->getCalculatedValue();
+            $caa['pais_morada'] = $worksheet->getCell('J'.$linha_actual)->getCalculatedValue();
+            $caa['provincia_morada'] = $worksheet->getCell('X'.$linha_actual)->getCalculatedValue();
+            $caa['cidade_morada'] = $worksheet->getCell('Y'.$linha_actual)->getCalculatedValue();
+            $caa['numero_estudante'] = $worksheet->getCell('Q'.$linha_actual)->getCalculatedValue();
+            $caa['email'] = $worksheet->getCell('A'.$linha_actual)->getCalculatedValue();
+            $caa['telemovel'] = $worksheet->getCell('B'.$linha_actual)->getCalculatedValue();
+            $caa['ano_conclusao'] = $worksheet->getCell('P'.$linha_actual)->getCalculatedValue();
+            $caa['grau_academico_id'] = $worksheet->getCell('O'.$linha_actual)->getCalculatedValue();
+            
+            
+            $faculdade_nome = $worksheet->getCell('U'.$linha_actual)->getCalculatedValue();
+            
+            $unidade_organica = $this->UnidadeOrganica->findByName($faculdade_nome);
+            $caa['unidade_organica_id'] = $unidade_organica['UnidadeOrganica']['id'];
+            
+            $curso_nome = $worksheet->getCell('S'.$linha_actual)->getCalculatedValue();
+            
+            $curso_real = $this->Curso->findByName($curso_nome);
+            $caa['curso_id'] = $curso_real['Curso']['id'];
+            $this->CandidatoAlumni->create();
+            $this->CandidatoAlumni->save($caa);
+            $this->out($this->CandidatoAlumni->id);
+            $linha_actual++;
+        }
     }
 
 }
