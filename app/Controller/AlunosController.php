@@ -1,5 +1,5 @@
 <?php
-
+ini_set('memory_limit', "2048M");
 App::uses('AppController', 'Controller');
 App::uses('Sanitize', 'Utility');
 
@@ -403,42 +403,25 @@ class AlunosController extends AppController {
 
         if ($this->request->is('post') || $this->request->is('put')) {
             //Grava os dados do usuario
-            $this->Aluno->User->id = $this->Aluno->field('user_id');
-            $user_data = array(
-                'User' => array(
-                    'name' => $this->request->data['Entidade']['name']
-                )
-            );
-            $entidade_id = $this->Aluno->field('entidade_id');
-            if ($this->Aluno->User->save($user_data)) {
-
-                //Grava os dados da Entidade
-                $this->Aluno->Entidade->id = $entidade_id;
-                if ($this->Aluno->Entidade->save($this->request->data)) {
-                    //Grava os dados do Aluno
-                    if ($this->Aluno->save($this->request->data)) {
-                        $this->Session->setFlash(__('Os dados do Estudante foram actualizados com Sucesso'), 'default', array('class' => 'alert_success'));
-                        $this->redirect(array('controller' => 'alunos', 'action' => 'perfil_estudante', $id));
-                    } else {
-                        $this->Session->setFlash(__('Problemas ao Editar dados da do Estudante'), 'default', array('alert_error'));
-                    }
-                } else {
-                    $this->Session->setFlash(__('Problemas ao Editar dados da Entidade'), 'default', array('alert_error'));
-                }
-            } else {
-                $this->Session->setFlash(__('Problemas ao Editar dados do Usuário'), 'default', array('alert_error'));
-            }
+            
+            $this->Aluno->Entidade->id = $this->request->data['Aluno']['entidade_id'];
+            $this->Aluno->Entidade->save($this->request->data);
+            $this->Aluno->AlunoNivelMedio->id = $this->request->data['Aluno']['aluno_nivel_medio_id'];
+            $this->Aluno->AlunoNivelMedio->save($this->request->data);
+            
+            $this->Session->setFlash(__('Dados do Aluno Actualizados com Sucesso'),'default',array('class'=>'alert success'));
+            $this->redirect(array('controller'=>'alunos','action'=>'perfil_estudante',$this->request->data['Aluno']['aluno_id']));
+            
         }
+        
+        
+        $cursos = $this->Aluno->Curso->find('list');
 
-        if (empty($this->data)) {
-            $this->data = $this->Aluno->read(null, $id);
-        }
-        $aluno = $this->Aluno->find('first', array('conditions' => array('Aluno.id' => $id)));
-        $this->set('aluno', $aluno);
+        $planoestudos = $this->Aluno->Matricula->Planoestudo->find('list');
         $users = $this->Aluno->Entidade->User->find('list');
-        $paises = $this->Aluno->Entidade->PaisNascimento->find('list');
-        $escola_nivel_medios = $this->Aluno->AlunoNivelMedio->EscolaNivelMedio->find('list');
 
+        $paises = $this->Aluno->Entidade->PaisNascimento->find('list');
+        $escolaNivelMedios = $this->Aluno->AlunoNivelMedio->EscolaNivelMedio->find('list');
         $cidades = $this->Aluno->Entidade->CidadeNascimento->find('list');
         $provincias = $this->Aluno->Entidade->ProvinciaNascimento->find('list');
         $provenienciacidades = $this->Aluno->AlunoNivelMedio->EscolaNivelMedio->Distrito->find('list');
@@ -447,8 +430,15 @@ class AlunosController extends AppController {
         $areatrabalhos = $this->Aluno->Areatrabalho->find('list');
         $generos = $this->Aluno->Entidade->Genero->find('list');
         $turnos = $this->Aluno->Matricula->Turno->find('list');
+        $estado_civil = $this->Aluno->Entidade->EstadoCivil->find('list');
         $cidadenascimentos = $this->Aluno->Entidade->CidadeNascimento->find('list');
-        $this->set(compact('cursos', 'planoestudos', 'users', 'paises', 'cidades', 'provincias', 'documento_identificacaos', 'areatrabalhos', 'generos', 'cidadenascimentos', 'proveniencianomes', 'provenienciacidades', 'turnos', 'escola_nivel_medios'));
+        $this->Aluno->contain(array('Entidade','AlunoNivelMedio'=>array('EscolaNivelMedio'),'Curso'=>array('UnidadeOrganica')));
+        $aluno = $this->Aluno->find('first', array('conditions' => array('Aluno.id' => $id)));
+        $this->request->data = $aluno;
+        
+        $this->set(compact('aluno', 'nacionalidades', 'cursos', 'planoestudos', 'users', 'paises', 'cidades', 'provincias', 'documento_identificacaos', 'areatrabalhos', 'generos', 'cidadenascimentos', 'proveniencianomes', 'provenienciacidades', 'turnos', 'escolaNivelMedios', 'estado_civil'));
+        
+        
     }
 
     function beforeRender() {

@@ -413,6 +413,7 @@ class Aluno extends AppModel {
 
                 $planoestudo = $this->Curso->getPlanoEstudoRecente($data['Aluno']['curso_id']);
                 $aluno['Aluno']['planoestudo_id'] = $planoestudo['Planoestudo']['id'];
+                $aluno['Aluno']['estado_aluno_id'] = 1;
                 $this->create();
                 if ($this->save($data)) {
                     //Grava os dados de Identificacao
