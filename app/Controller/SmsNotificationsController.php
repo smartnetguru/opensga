@@ -39,7 +39,16 @@ class SmsNotificationsController extends AppController {
 
     
 
-    
+    public function get_message(){
+        $this->log("Sms received",'sms_timwe');
+        die(debug($this->request));
+        CakeLog::debug($this->request->query);
+        $this->response->type("text/html");
+        $this->response->charset("utf-8");
+        $this->response->header(array("text" => "Ok"));
+        $this->autoRender = false;
+        $this->response->send();
+    }
 
     public function get_sms() {
         $phone = $this->request->query['phone'];

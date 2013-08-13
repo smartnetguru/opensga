@@ -73,7 +73,7 @@ class Candidatura extends AppModel {
 			'order' => ''
 		),
 		'EstadoMatricula' => array(
-			'className' => 'EstadoMatricula',
+			'className' => 'Estadomatricula',
 			'foreignKey' => 'estado_matricula_id',
 			'conditions' => '',
 			'fields' => '',

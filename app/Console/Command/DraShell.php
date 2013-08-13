@@ -215,7 +215,7 @@ class DraShell extends AppShell {
 									'entidade_id'=>$this->Entidade->id,
 									'codigo'=>$pessoa['DraEstudante']['est_num'],
 									'user_id'=>$this->User->id,
-									'curso_id',
+									
 									'estadoentidade_id'=>$pessoa['DraEstudante']['status'],
 									'numero_estudante'=>$pessoa['DraEstudante']['est_num'],
 									'aluno_via_admissao_id'=>$pessoa['DraEstudante']['via_ingresso'],
