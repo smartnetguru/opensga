@@ -412,8 +412,9 @@ class Aluno extends AppModel {
                 $data['Aluno']['entidade_id'] = $this->Entidade->getLastInsertID();
 
                 $planoestudo = $this->Curso->getPlanoEstudoRecente($data['Aluno']['curso_id']);
-                $aluno['Aluno']['planoestudo_id'] = $planoestudo['Planoestudo']['id'];
-                $aluno['Aluno']['estado_aluno_id'] = 1;
+                
+                $data['Aluno']['planoestudo_id'] = $planoestudo['Planoestudo']['id'];
+                $data['Aluno']['estado_aluno_id'] = 1;
                 $this->create();
                 if ($this->save($data)) {
                     //Grava os dados de Identificacao
@@ -443,11 +444,25 @@ class Aluno extends AppModel {
                         );
                     }
 
-                    //Grava os dados do Nivel Medio
+                    
                     $aluno_nivel_medio = array(
                         'AlunoNivelMedio' => $data['AlunoNivelMedio']
                     );
-
+                    //Grava os dados do Nivel Medio
+                    if($data['AlunoNivelMedio']['nova_escola_anterior'] !=''){
+                        $array_nova_escola = array(
+                            'name'=> $data['AlunoNivelMedio']['nova_escola_anterior'],
+                            'pais_id' =>$data['AlunoNivelMedio']['EscolaNivelMedio']['pais_id'],
+                            'provincia_id'=>$data['AlunoNivelMedio']['EscolaNivelMedio']['provincia_id'],
+                            'distrito_id'=>$data['AlunoNivelMedio']['EscolaNivelMedio']['distrito_id']
+                        );
+                        
+                        $this->AlunoNivelMedio->EscolaNivelMedio->create();
+                        $this->AlunoNivelMedio->EscolaNivelMedio->save(array('EscolaNivelMedio'=>$array_nova_escola));
+                        $aluno_nivel_medio['AlunoNivelMedio']['escola_nivel_medio_id'] = $this->AlunoNivelMedio->EscolaNivelMedio->id;
+                    }
+                    
+                    
                     $aluno_nivel_medio['AlunoNivelMedio']['provincia_id'] = $data['AlunoNivelMedio']['EscolaNivelMedio']['provincia_id'];
                     $aluno_nivel_medio['AlunoNivelMedio']['aluno_id'] = $this->id;
 
@@ -464,7 +479,7 @@ class Aluno extends AppModel {
                     $data_matricula['planoestudo_id'] = $data['Aluno']['planoestudo_id'];
                     $data_matricula['estadomatricula_id'] = 1;
                     $data_matricula['data'] = date('Y-m-d');
-                    $data_matricula['user_id'] = SessionComponent::read('Auth.User.id');
+                    $data_matricula['user_id'] = $data['Matricula']['user_id'];
                     $data_matricula['anolectivo_id'] = Configure::read('OpenSGA.ano_lectivo_id');
                     // $data_matricula['turno_id'] = $data['Aluno']['turno_id'];
                     //$data_matricula['nivel'] = $data['Aluno']['nivel'];
@@ -485,7 +500,7 @@ class Aluno extends AppModel {
                         );
                         $this->HistoricoCurso->create();
                         $this->HistoricoCurso->save($historico_array);
-                        return $dataSource->commit();
+                       return $dataSource->commit();
                     }
                 }
             }

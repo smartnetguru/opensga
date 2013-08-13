@@ -61,5 +61,15 @@ class EscolaNivelMedio extends AppModel {
 			'counterQuery' => ''
 		)
 	);
+        
+        
+        public $validate = array(
+            'name'=>array(
+                'uniqueRule'=>array(
+                    'rule' => array('checkUnique', array('name', 'pais_id', 'provincia_id','distrito_id')),
+                    'message'=>'Essa Escola ja foi registrada. Procure na Caixa de Selecção'
+                )
+            )
+        );
 
 }

@@ -56,11 +56,11 @@ class CursosController extends AppController {
 
 			$this->Curso->create();
 			if ($this->Curso->save($this->data)) {
-				$this->Session->setFlash('** Dados Cadastrados com Sucesso **','flashok');
+				$this->Session->setFlash(__('Curso Cadastrado com Sucesso'),'default',array('class'=>'alert success'));
 
 				$this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash('Erro ao gravar dados. Por favor tente de novo.','flasherror');
+				$this->Session->setFlash(__('Erro ao Cadastrar Curso. Por favor tente de novo'),'default',array('class'=>'alert error'));
 			}
 		}
 		$grauacademicos = $this->Curso->GrauAcademico->find('list');
@@ -94,21 +94,6 @@ class CursosController extends AppController {
 		$grauacademicos = $this->Curso->GrauAcademico->find('list');
 		$tipocursos = $this->Curso->Tipocurso->find('list');
 		$this->set(compact('GrauAcademicos', 'tipocursos','escolas'));
-	}
-
-	function delete($id = null) {
-
-		if (!$id) {
-			$this->Session->setFlash('Codigo Invalido para este curso','flasherror');
-			$this->redirect(array('action'=>'index'));
-		}
-		if ($this->Curso->delete($id)) {
-	    $this->Session->setFlash('Dados deletedos com sucesso ','flashok');
-
-			$this->redirect(array('action'=>'index'));
-		}
-		$this->Session->setFlash('Curso nao eliminado.Por favor, tente novamente','flasherror');
-		$this->redirect(array('action' => 'index'));
 	}
 
         function beforeRender(){
