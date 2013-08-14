@@ -861,7 +861,9 @@ class AlunosController extends AppController {
         $aluno = $this->Aluno->findById($aluno_id);
         $cursos = $this->Aluno->Curso->find('list');
         $is_regular = $this->Aluno->isRegular($aluno_id);
-        $funcionario = $this->Aluno->User->getFuncionarioActivoId($this->Session->read('Auth.User.Id'));
+        $user_id = $this->Session->read('Auth');
+        
+        $funcionario = $this->Aluno->User->getFuncionarioActivoId($this->Session->read('Auth.User.id'));
 
         if (count($is_regular) == 1 && $is_regular[0]['regular'] == true) {
             if ($is_regular[0]['estado'] == 1) {

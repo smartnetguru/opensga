@@ -689,7 +689,7 @@ class Aluno extends AppModel {
         $datasource->begin();
 
         $funcionario_id = $data['Aluno']['funcionario_id'];
-
+        die(debug($data));
         $mudanca_array = array(
             'MudancaCurso' => array(
                 'aluno_id' => $data['Aluno']['aluno_id'],

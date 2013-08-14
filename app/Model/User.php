@@ -247,9 +247,10 @@ class User extends AppModel {
     }
 
     public function getFuncionarioActivoId($user_id) {
-        if ($user_id == 1 || $user_id == null)
+        if ($user_id == 1)
             return array('Funcionario' => array('id' => 0));
         $this->Funcionario->contain();
+        
         $funcionario = $this->Funcionario->findByUserId($user_id);
 
         return $funcionario['Funcionario']['id'];

@@ -41,7 +41,9 @@ class SmsNotificationsController extends AppController {
 
     public function get_message(){
         $this->log("Sms received",'sms_timwe');
-        die(debug($this->request));
+        $this->log($this->request->query['PasswordHash'],'sms_timwe');
+        $this->log($this->request->query['Text'],'sms_timwe');
+        
         CakeLog::debug($this->request->query);
         $this->response->type("text/html");
         $this->response->charset("utf-8");
