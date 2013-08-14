@@ -4,7 +4,7 @@ ini_set('memory_limit', "2048M");
 
 class OpenSGAShell extends AppShell {
 
-    public $uses = array('Turma', 'Matricula', 'Curso', 'UnidadeOrganica', 'Candidatura', 'Aluno', 'EstadoAluno', 'Planoestudo', 'Disciplina', 'Planoestudoano', 'HistoricoCurso', 'Anolectivo','CandidatoAlumni');
+    public $uses = array('Turma', 'Matricula', 'Curso', 'UnidadeOrganica', 'Candidatura', 'Aluno', 'EstadoAluno', 'Planoestudo', 'Disciplina', 'Planoestudoano', 'HistoricoCurso', 'Anolectivo','CandidatoAlumni','Requisicoes.RequisicoesPedido');
 
     public function main() {
         $this->out('Hello world.');
@@ -527,6 +527,31 @@ class OpenSGAShell extends AppShell {
             $this->CandidatoAlumni->save($caa);
             $this->out($this->CandidatoAlumni->id);
             $linha_actual++;
+        }
+    }
+    
+    public function cria_pedido_cartao(){
+        
+        $this->Aluno->contain('Curso');
+        $alunos = $this->Aluno->find('all',array('conditions'=>array('ano_ingresso'=>2013)));
+        foreach($alunos as $aluno){
+            //Verifica se este aluno nao tem nenhum pedido de novo cartao ja emitido
+            $pedido_existe = $this->RequisicoesPedido->find('first',array('conditions'=>array('aluno_id'=>$aluno['Aluno']['id'],'requisicoes_tipo_pedido_id'=>6)));
+            
+            if(empty($pedido_existe)){
+                $novo_pedido = array(
+                    'aluno_id'=>$aluno['Aluno']['id'],
+                    'requisicoes_tipo_pedido_id'=>6,
+                    'data_pedido'=>date('Y-m-d H:i:s'),
+                    'curso_id'=>$aluno['Aluno']['curso_id'],
+                    'requisicoes_estado_pedido_id'=>1,
+                    'funcionario_id'=>1,
+                    
+                );
+                $this->RequisicoesPedido->create();
+                $this->RequisicoesPedido->save(array('RequisicoesPedido'=>$novo_pedido));
+                $this->out($this->RequisicoesPedido->id);
+            }
         }
     }
 

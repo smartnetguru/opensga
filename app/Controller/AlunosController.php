@@ -814,12 +814,19 @@ class AlunosController extends AppController {
         
     }
 
-    public function pesquisa_aluno_action($action_seguinte) {
+    public function pesquisa_aluno_action($action_seguinte,$controller=null,$plugin=null) {
 
         if ($this->request->is('post')) {
             $aluno = $this->Aluno->findByCodigo($this->request->data['Aluno']['codigo']);
             if (!empty($aluno)) {
-                $this->redirect(array('action' => $action_seguinte, $aluno['Aluno']['id']));
+                if($plugin!=null){
+                    $this->redirect(array('plugin'=>$plugin,'controller'=>$controller,'action' => $action_seguinte, $aluno['Aluno']['id']));
+                } elseif($controller!=NULL){
+                    $this->redirect(array('controller'=>$controller,'action' => $action_seguinte, $aluno['Aluno']['id']));
+                } else{
+                    $this->redirect(array('action' => $action_seguinte, $aluno['Aluno']['id']));
+                }
+                
             } else {
                 $this->Session->setFlash(__('Estudante não encontrado'), 'default', array('class' => 'alert error'));
             }

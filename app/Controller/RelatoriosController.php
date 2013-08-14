@@ -254,6 +254,13 @@ class RelatoriosController extends AppController {
         $mychart->addSeries($series);
         $this->set(compact('estudantes_curso', 'curso_nome', 'curso_total'));
     }
+    
+    public function requisicoes(){
+        
+        $this->loadModel('RequisicoesPedidos');
+        $cartoes = $this->RequisicoesPedidos->find('all');
+        debug($cartoes);
+    }
 
 }
 
