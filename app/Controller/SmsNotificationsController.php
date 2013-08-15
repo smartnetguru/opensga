@@ -51,6 +51,33 @@ class SmsNotificationsController extends AppController {
         $this->autoRender = false;
         $this->response->send();
     }
+    
+    public function send_sms($text_message){
+        
+        $url_sms1 = "http://mb.timwe.com/sendMT?";
+        $url_sms ="CountryId=258";
+        $url_sms .= "&Destination=842569523";
+        $url_sms .= "&ExtTxId=12313409";
+        $url_sms .= "&OpId=242";
+        $url_sms .= "&PartnerRoleId=1112";
+        $url_sms .= "&PricePointId=356";
+        $url_sms .= "&ProductId=1762";
+        $url_sms .= "&SenderId=SIGATESTE";
+        $url_sms .= "&Test=0";
+        $url_sms .= "&Text=".utf8_encode("SIGATESTE");
+        
+        debug($url_sms);
+        
+        $password = "2c0mr9".$url_sms;
+        debug($password);
+        $password_hash = md5($password);
+        
+        $url_sms .="&PasswordHash=".$password_hash;
+        $url_final = $url_sms1.$url_sms;
+        debug($url_sms);
+        debug($url_final);
+        
+    }
 
     public function get_sms() {
         $phone = $this->request->query['phone'];
