@@ -213,6 +213,7 @@ class User extends AppModel {
         $nome = preg_replace('/[^a-zA-Z0-9\s]/s', '', $nome);
 
         $nome = preg_replace('/\s+/', ' ', $nome);
+        $apelido = preg_replace('/\s+/', ' ', $apelido);
         $nomes = explode(' ', $nome);
         $email = $nomes[0] . '.' . $apelido . '@uem.ac.mz';
 

@@ -135,7 +135,10 @@ class Funcionario extends AppModel {
         $dataSource->begin();
 
         $data['User']['name'] = $data['Entidade']['name'];
-        $data['User']['username'] = $this->User->geraUsername($data['Entidade']['name']);
+        $nomes = explode(' ', $data['Entidade']['name']);
+
+        
+        $data['User']['username'] = $this->User->geraEmailUem(strtolower(end($nomes)),strtolower($nomes[0]));
         $data['User']['codigo'] = $this->geraCodigo();
         $data['User']['password'] = Security::hash('12345','blowfish');
         $data['User']['group_id'] = 2;

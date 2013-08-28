@@ -18,8 +18,9 @@ class OpenSGAAclShell extends AppShell {
     public function funcionarios() {
         //Pegamos todos funcionarios
         $this->Funcionario->contain(array('User'));
-        $funcionarios = $this->Funcionario->find('all', array('conditions' => array('group_id' => 2)));
+        $funcionarios = $this->Funcionario->find('all', array('conditions' => array('group_id' => 2,'User.id'=>'42849')));
         foreach ($funcionarios as $funcionario) {
+            
             $acl_command = "acl deny User.{$funcionario['User']['id']} controllers";
             $this->dispatchShell($acl_command);
             
@@ -34,6 +35,10 @@ class OpenSGAAclShell extends AppShell {
                 $this->dispatchShell($acl_command);
                 $acl_command = "acl grant User.{$funcionario['User']['id']} controllers/Users/faculdade_trocar_senha";
                 $this->dispatchShell($acl_command);
+                $acl_command = "acl grant User.{$funcionario['User']['id']} controllers/Turmas/faculdade_index";
+                $this->dispatchShell($acl_command);
+                $acl_command = "acl grant User.{$funcionario['User']['id']} controllers/Turmas/faculdade_view";
+                $this->dispatchShell($acl_command);
             } else {
                 $acl_command = "acl grant User.{$funcionario['User']['id']} controllers/Pages/home";
                 $this->dispatchShell($acl_command);
@@ -43,6 +48,7 @@ class OpenSGAAclShell extends AppShell {
                     $this->dispatchShell($acl_command);
                 $acl_command = "acl grant User.{$funcionario['User']['id']} controllers/Requisicoes/RequisicoesPedidos/entregar_cartao_novo_ingresso";
                 $this->dispatchShell($acl_command);
+                
                 $unidade_organica = $this->UnidadeOrganica->findById($funcionario['Funcionario']['unidade_organica_id']);
                 
                 /*

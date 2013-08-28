@@ -2,6 +2,7 @@
 
 ini_set('memory_limit', "512M");
 App::uses('AppController', 'Controller');
+App::uses('HttpSocket', 'Network/Http');
 
 /**
  * SmsNotifications Controller
@@ -57,24 +58,27 @@ class SmsNotificationsController extends AppController {
         $url_sms1 = "http://mb.timwe.com/sendMT?";
         $url_sms ="CountryId=258";
         $url_sms .= "&Destination=842569523";
-        $url_sms .= "&ExtTxId=12313409";
+        $url_sms .= "&ExtTxId=".rand(1,1000000);
         $url_sms .= "&OpId=242";
         $url_sms .= "&PartnerRoleId=1112";
         $url_sms .= "&PricePointId=356";
         $url_sms .= "&ProductId=1762";
-        $url_sms .= "&SenderId=SIGATESTE";
-        $url_sms .= "&Test=0";
-        $url_sms .= "&Text=".utf8_encode("SIGATESTE");
         
-        debug($url_sms);
+        $url_sms .= "&Test=0";
+        $url_sms .= "&Text=".utf8_encode(urlencode("Teste de SMS SIGA"));
+        
+        //debug($url_sms);
         
         $password = "2c0mr9".$url_sms;
-        debug($password);
+        //debug($password);
         $password_hash = md5($password);
         
         $url_sms .="&PasswordHash=".$password_hash;
         $url_final = $url_sms1.$url_sms;
-        debug($url_sms);
+        $HttpSocket = new HttpSocket();
+        $results = $HttpSocket->get($url_final);
+        debug($results->body);
+        //debug($url_sms);
         debug($url_final);
         
     }

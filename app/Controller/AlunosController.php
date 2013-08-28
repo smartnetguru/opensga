@@ -527,6 +527,43 @@ class AlunosController extends AppController {
         $this->set(compact('aluno', 'renovacoes_falta', 'matriculas'));
     }
 
+    
+    public function reingresso($aluno_id) {
+        $this->Aluno->id = $aluno_id;
+        if (!$this->Aluno->exists()) {
+            throw new NotFoundException(__('Aluno Invalido'));
+        }
+
+        if ($this->request->is('post') || $this->request->is('put')) {
+            
+            
+            $this->Aluno->Matricula->create();
+            $this->Aluno->Matricula->save($this->request->data);
+            $this->Session->setFlash(__('Reingresso realizado com sucesso'),'default',array('class'=>'alert success'));
+            $this->redirect(array('action' => 'perfil_estudante', $this->request->data['Matricula']['aluno_id']));
+        }
+
+
+        $aluno = $this->Aluno->findById($aluno_id);
+        $renovacoes_falta = $this->Aluno->Matricula->getStatusRenovacao($aluno_id);
+       
+       
+        
+        
+        if(count($renovacoes_falta)<2){
+            $this->Session->setFlash(__('Este estudante tem menos de 2 anos fora da Universidade. Deve renovar a matricula em vez de reingresso'),'default',array('class'=>'alert info'));
+            $this->redirect(array('action' => 'perfil_estudante', $this->request->data['Matricula']['aluno_id']));
+        }
+        $ano_renovacoes = array();
+        foreach($renovacoes_falta as $k=>$v){
+            $ano_renovacoes[$v['Anolectivo']['id']] = $v['Anolectivo']['ano'];
+        } 
+        $this->Aluno->Matricula->contain('Anolectivo', 'Estadomatricula', 'Curso', 'TipoMatricula');
+        $matriculas = $this->Aluno->Matricula->find('all', array('conditions' => array('aluno_id' => $aluno_id), 'order' => 'Anolectivo.ano'));
+
+        $this->set(compact('aluno', 'renovacoes_falta', 'matriculas','ano_renovacoes'));
+    }
+
     public function mostrar_foto($codigo) {
         $this->viewClass = 'Media';
          App::uses('Folder', 'Utility');

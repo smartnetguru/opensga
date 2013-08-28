@@ -26,7 +26,7 @@ App::uses('Controller', 'Controller');
 class AppController extends Controller {
 
     public $components = array('Security', 'Acl', 'Auth'=>array('authenticate'=>'Blowfish'), 'Session', 'RequestHandler', 'Cookie','HighCharts.HighCharts', 'DebugKit.Toolbar');
-    public $helpers = array('Html','Print', 'Form', 'Session', 'Js' => array('MyJquery'), 'EventsCalendar', 'Javascript', 'Ajax', 'PhpExcel','HighCharts.HighCharts','AclLink');
+    public $helpers = array('Html','AclLink','Print', 'Form', 'Session', 'Js' => array('MyJquery'), 'EventsCalendar', 'Javascript', 'Ajax', 'PhpExcel','HighCharts.HighCharts','AclLink');
     public $pdfConfig = array('engine' => 'CakePdf.Tcpdf');
     public $cacheAction = '1 hour';
 
@@ -49,7 +49,7 @@ class AppController extends Controller {
 		
         
         
-        $this->Security->csrfExpires = "+30 minutes";
+       $this->Security->csrfExpires = "+30 minutes";
         $this->Auth->authorize = array('Actions' => array('actionPath' => 'controllers'));
         $this->Auth->autoRedirect = false;
         $this->Auth->loginError = "Nome de Usuário ou senha incorrectas";
@@ -80,7 +80,8 @@ class AppController extends Controller {
             $this->loadModel('User');
             if($this->User->isFromFaculdade($this->Session->read('Auth.User.id'))){
                 if($this->request->prefix != 'faculdade'){
-                $this->Security->blackHole($this);
+                    $this->Session->setFlash(__('Não tem Permissão para acessar a area anterior'),'default',array('class'=>'alert info'));
+                $this->redirect(array('controller'=>'pages','action'=>'home','faculdade'=>true));
             }
             }
            
