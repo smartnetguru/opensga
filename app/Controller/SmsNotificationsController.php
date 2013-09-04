@@ -41,45 +41,64 @@ class SmsNotificationsController extends AppController {
     
 
     public function get_message(){
-        $this->log("Sms received",'sms_timwe');
-        $this->log($this->request->query['PasswordHash'],'sms_timwe');
-        $this->log($this->request->query['Text'],'sms_timwe');
         
-        CakeLog::debug($this->request->query);
+        $country_id = $this->request->query['CountryId'];
+        $country_iso = $this->request->query['ContryISO'];
+        $product_id = $this->request->query['ProductId'];
+        $pricepoint_id = $this->request->query['PricePointId'];
+        $operator_id = $this->request->query['OpId'];
+        $origin = $this->request->query['Origin'];
+        $text = $this->request->query['Text'];
+        $transaction_id = $this->request->query['TxId'];
+        $test = $this->request->query['Test'];
+        $password_hash = $this->request->query['PasswordHash'];
+        
+        $array_sms = array(
+            'SmsNotification'=>array(
+                'message'=>$text,
+                'countryid'=>$country_id,
+                'countryiso'=>$country_iso,
+                'productid'=>$product_id,
+                'pricepointid'=>$pricepoint_id,
+                'operatorid'=>$operator_id,
+                'transactionind'=>$transaction_id,
+                'password_hash'=>$password_hash,
+                'phone_number'=>$origin
+            )
+        );
+        
+        $this->SmsNotification->create();
+        $this->SmsNotification->save($array_sms);
+        
+        $message = preg_replace('/\s+/', ' ', $text);
+        $message_explode = explode(' ', $message);
+        $comando_recebido = strtolower($message_explode[0]);
+        $this->log("Sms received",'sms_timwe');
+        $this->log($text,'sms_timwe');
+        $this->log($message_explode[1],'sms_timwe');
+        $this->log("------------------------------------",'sms_timwe');
+        
+        switch ($comando_recebido) {
+            case "nome":
+                //$this->redirect(array('action' => 'get_nome_completo', $phone, $smscenter, $message_explode[1]));
+                break;
+            case "email":
+                //$this->redirect(array('action' => 'get_email_estudante', $phone, $smscenter, $message_explode[1]));
+                break;
+        }
+        
+        
         $this->response->type("text/html");
         $this->response->charset("utf-8");
-        $this->response->header(array("text" => "Ok"));
+        $this->response->header(array("text" => "Ok".$this->SmsNotification->id));
         $this->autoRender = false;
         $this->response->send();
     }
     
-    public function send_sms($text_message){
+    public function send_sms(){
         
-        $url_sms1 = "http://mb.timwe.com/sendMT?";
-        $url_sms ="CountryId=258";
-        $url_sms .= "&Destination=842569523";
-        $url_sms .= "&ExtTxId=".rand(1,1000000);
-        $url_sms .= "&OpId=242";
-        $url_sms .= "&PartnerRoleId=1112";
-        $url_sms .= "&PricePointId=356";
-        $url_sms .= "&ProductId=1762";
-        
-        $url_sms .= "&Test=0";
-        $url_sms .= "&Text=".utf8_encode(urlencode("Teste de SMS SIGA"));
-        
-        //debug($url_sms);
-        
-        $password = "2c0mr9".$url_sms;
-        //debug($password);
-        $password_hash = md5($password);
-        
-        $url_sms .="&PasswordHash=".$password_hash;
-        $url_final = $url_sms1.$url_sms;
-        $HttpSocket = new HttpSocket();
-        $results = $HttpSocket->get($url_final);
-        debug($results->body);
-        //debug($url_sms);
-        debug($url_final);
+        $this->loadModel('SmsEnviada');
+        $this->SmsEnviada->sendSMS(842569523,"Ola Elisio Leonardo");
         
     }
 

@@ -258,8 +258,25 @@ class RelatoriosController extends AppController {
     public function requisicoes(){
         
         $this->loadModel('RequisicoesPedidos');
-        $cartoes = $this->RequisicoesPedidos->find('all');
-        debug($cartoes);
+        
+        
+        //Total de Requisicoes. Total, Pendentes. Processamento. Despacho. Pronto. Entregue. Enviado a Faculdade
+        //Certificados. Total. pendentes. Processamento.Despacho. Pronto. Entregue
+        //declaracao. Total. pendentes. Processamento.Despacho. Pronto. Entregue
+        //Cartao de Estudante 2a Via. Total. pendentes. Processamento.Despacho. Pronto. Entregue
+        //Bolsas de Estudos. Processamento.Despacho. Pronto. Entregue
+        //Novo Cartao de Estudante. Total. pendentes. Enviados a faculdade
+        
+        //Cartoes de Novos Ingressos
+        $cartoes_novos_total = $this->RequisicoesPedidos->find('count',array('conditions'=>array('requisicoes_tipo_pedido_id'=>6)));
+        $cartoes_novos_pendentes = $this->RequisicoesPedidos->find('count',array('conditions'=>array('requisicoes_tipo_pedido_id'=>6,'requisicoes_estado_pedido_id'=>1)));
+        $cartoes_novos_enviados = $this->RequisicoesPedidos->find('count',array('conditions'=>array('requisicoes_tipo_pedido_id'=>6,'requisicoes_estado_pedido_id'=>6)));
+        
+        $this->set(compact('cartoes_novos_total','cartoes_novos_pendentes','cartoes_novos_enviados'));
+        
+        
+        
+                
     }
 
 }
