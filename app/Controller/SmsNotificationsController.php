@@ -87,12 +87,17 @@ class SmsNotificationsController extends AppController {
                 break;
         }
         
-        
+         
+        $response_text  = "SIGA".  $this->SmsNotification->id;
+         $this->log($response_text,'sms_timwe');
         $this->response->type("text/html");
         $this->response->charset("utf-8");
-        $this->response->header(array("text" => "Ok".$this->SmsNotification->id));
-        $this->autoRender = false;
-        $this->response->send();
+        //$this->response->header(array("text" => $response_text));
+        $this->response->body($response_text);
+        //$this->response->send();
+        return $this->response;
+        
+        
     }
     
     public function send_sms(){
