@@ -1092,6 +1092,10 @@ class AlunosController extends AppController {
             }
         }
     }
+    
+    public function enviar_sms($aluno_id){
+        
+    }
 
     
 

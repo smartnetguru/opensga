@@ -43,7 +43,7 @@ class SmsNotificationsController extends AppController {
     public function get_message(){
         
         $country_id = $this->request->query['CountryId'];
-        $country_iso = $this->request->query['ContryISO'];
+        $country_iso = $this->request->query['CountryISO'];
         $product_id = $this->request->query['ProductId'];
         $pricepoint_id = $this->request->query['PricePointId'];
         $operator_id = $this->request->query['OpId'];
@@ -88,7 +88,7 @@ class SmsNotificationsController extends AppController {
         }
         
          
-        $response_text  = "SIGA".  $this->SmsNotification->id;
+        $response_text  =   $this->SmsNotification->id."SIGA";
          $this->log($response_text,'sms_timwe');
         $this->response->type("text/html");
         $this->response->charset("utf-8");

@@ -1,7 +1,7 @@
 <?php 
 ini_set('memory_limit',"2048M");
 class DraShell extends AppShell {
-	public $uses = array('UemDra.DraFoto','UemDra.DraEscola','UemDra.Faculdade','UemDra.DraSeccao','UemDra.DraDepartamento','UemDra.DraProvincia','UemDra.DraCurso','UemDra.DraPessoa','Provincia','UnidadeOrganica','Curso','User','Entidade','Aluno','UemDra.DraMatricula','Matricula','Anolectivo','EscolaNivelMedio','UemDra.DraHistorico','HistoricoCurso','MudancaCurso','UemDra.DraMudancaCurso','UemDra.DraEstudanteHistorico','UemDra.DraObservacaoEstudante','AlunoEstado','MotivoEstadoAluno');
+	public $uses = array('UemDra.DraFoto','UemDra.DraEscola','UemDra.Faculdade','UemDra.DraSeccao','UemDra.DraDepartamento','UemDra.DraProvincia','UemDra.DraCurso','UemDra.DraPessoa','Provincia','UnidadeOrganica','Curso','User','Entidade','Aluno','UemDra.DraMatricula','Matricula','Anolectivo','EscolaNivelMedio','UemDra.DraHistorico','HistoricoCurso','MudancaCurso','UemDra.DraMudancaCurso','UemDra.DraEstudanteHistorico','UemDra.DraObservacaoEstudante','AlunoEstado','MotivoEstadoAluno','EntidadeContacto');
 	
 	public function main() {
 		$this->out('Hello world.');
@@ -504,6 +504,86 @@ class DraShell extends AppShell {
                     $this->out($i++);
                 }
             }
+        }
+        
+        
+        public function importa_endereco(){
+            App::import('Vendor', 'PHPExcel', array('file' => 'PHPExcel.php'));
+        if (!class_exists('PHPExcel'))
+            throw new CakeException('Vendor class PHPExcel not found!');
+
+        $xls = PHPExcel_IOFactory::load(APP . 'Imports' . DS . 'endereco.xlsx');
+
+        $linha_actual = 2;
+        $worksheet = $xls->getActiveSheet();
+        foreach ($worksheet->getRowIterator() as $ow) {
+            $numero_estudante = $worksheet->getCell('R' . $linha_actual)->getCalculatedValue();
+            $this->out($numero_estudante);
+            $aluno = $this->Aluno->findByCodigo($numero_estudante);
+            if(!empty($aluno)){
+                $avenida = $worksheet->getCell('C' . $linha_actual)->getCalculatedValue();
+                $numero  = $worksheet->getCell('D' . $linha_actual)->getCalculatedValue();
+                $bairro = $worksheet->getCell('E' . $linha_actual)->getCalculatedValue();
+                $telefone  = $worksheet->getCell('H' . $linha_actual)->getCalculatedValue();
+                $celular  = $worksheet->getCell('J' . $linha_actual)->getCalculatedValue();
+                $email = $worksheet->getCell('K' . $linha_actual)->getCalculatedValue();
+                $quarteirao = $worksheet->getCell('M' . $linha_actual)->getCalculatedValue();
+                
+                $this->Entidade->id = $aluno['Aluno']['entidade_id'];
+                $this->Entidade->set('telemovel',$celular);
+                $this->Entidade->set('telefone',$telefone);
+                $this->Entidade->set('email',$email);
+                $this->Entidade->save();
+                
+                //Avenida
+                $avenida_existe = $this->EntidadeContacto->find('first',array('conditions'=>array('entidade_id'=>$aluno['Aluno']['entidade_id'],'tipo_contacto_id'=>5,'valor'=>$avenida)));
+                if(empty($avenida_existe) && $avenida!=''){
+                    $this->EntidadeContacto->create();
+                    $this->EntidadeContacto->save(array('EntidadeContacto'=>array('entidade_id'=>$aluno['Aluno']['entidade_id'],'tipo_contacto_id'=>5,'valor'=>$avenida,'estado_objecto_id'=>1)));
+                }
+                //Email
+                $email_existe = $this->EntidadeContacto->find('first',array('conditions'=>array('entidade_id'=>$aluno['Aluno']['entidade_id'],'tipo_contacto_id'=>1,'valor'=>$email)));
+                if(empty($email_existe) && $email!=''){
+                    $this->EntidadeContacto->create();
+                    $this->EntidadeContacto->save(array('EntidadeContacto'=>array('entidade_id'=>$aluno['Aluno']['entidade_id'],'tipo_contacto_id'=>1,'valor'=>$email,'estado_objecto_id'=>1)));
+                }
+                //Quarteirao
+                $quarteirao_existe = $this->EntidadeContacto->find('first',array('conditions'=>array('entidade_id'=>$aluno['Aluno']['entidade_id'],'tipo_contacto_id'=>7,'valor'=>$quarteirao)));
+                if(empty($quarteirao_existe) && $quarteirao!=''){
+                    $this->EntidadeContacto->create();
+                    $this->EntidadeContacto->save(array('EntidadeContacto'=>array('entidade_id'=>$aluno['Aluno']['entidade_id'],'tipo_contacto_id'=>7,'valor'=>$avenida,'estado_objecto_id'=>1)));
+                }
+                //Numero
+                $numero_existe = $this->EntidadeContacto->find('first',array('conditions'=>array('entidade_id'=>$aluno['Aluno']['entidade_id'],'tipo_contacto_id'=>8,'valor'=>$numero)));
+                if(empty($numero_existe) && $numero!=''){
+                    $this->EntidadeContacto->create();
+                    $this->EntidadeContacto->save(array('EntidadeContacto'=>array('entidade_id'=>$aluno['Aluno']['entidade_id'],'tipo_contacto_id'=>8,'valor'=>$numero,'estado_objecto_id'=>1)));
+                }
+                //Bairro
+                $bairro_existe = $this->EntidadeContacto->find('first',array('conditions'=>array('entidade_id'=>$aluno['Aluno']['entidade_id'],'tipo_contacto_id'=>6,'valor'=>$bairro)));
+                if(empty($bairro_existe) && $bairro!=''){
+                    $this->EntidadeContacto->create();
+                    $this->EntidadeContacto->save(array('EntidadeContacto'=>array('entidade_id'=>$aluno['Aluno']['entidade_id'],'tipo_contacto_id'=>6,'valor'=>$bairro,'estado_objecto_id'=>1)));
+                }
+                //Telefone
+                $telefone_existe = $this->EntidadeContacto->find('first',array('conditions'=>array('entidade_id'=>$aluno['Aluno']['entidade_id'],'tipo_contacto_id'=>4,'valor'=>$telefone)));
+                if(empty($telefone_existe) && $telefone!=''){
+                    $this->EntidadeContacto->create();
+                    $this->EntidadeContacto->save(array('EntidadeContacto'=>array('entidade_id'=>$aluno['Aluno']['entidade_id'],'tipo_contacto_id'=>4,'valor'=>$telefone,'estado_objecto_id'=>1)));
+                }
+                //Celular
+                $celular_existe = $this->EntidadeContacto->find('first',array('conditions'=>array('entidade_id'=>$aluno['Aluno']['entidade_id'],'tipo_contacto_id'=>2,'valor'=>$celular)));
+                if(empty($celular_existe) && $celular!=''){
+                    $this->EntidadeContacto->create();
+                    $this->EntidadeContacto->save(array('EntidadeContacto'=>array('entidade_id'=>$aluno['Aluno']['entidade_id'],'tipo_contacto_id'=>2,'valor'=>$celular,'estado_objecto_id'=>1)));
+                }
+                
+                
+            }
+            //Av. Rua
+            $this->out($linha_actual);
+            $linha_actual++;
+        }
         }
         
        
