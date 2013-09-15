@@ -1094,6 +1094,45 @@ class AlunosController extends AppController {
     }
     
     public function enviar_sms($aluno_id){
+        $this->Aluno->contain(array(
+            'Entidade' => array(
+                'Genero'
+            ),
+            'Curso' => array(
+                'UnidadeOrganica'
+            )
+        ));
+        $aluno = $this->Aluno->findById($aluno_id);
+        if($this->request->is('post')){
+            $this->loadModel('SmsEnviada');
+            $sms_envidada = $this->SmsEnviada->sendSMS($celular,$this->request->data['Aluno']['mensagem'],$aluno['Aluno']['entidade_id'],1,$this->Session->read('Auth.User.id'));
+            if($sms_enviada==1){
+                $this->Session->setFlash(__('SMS Enviada com Sucesso'),'default',array('class'=>'alert success'));
+                $this->redirect(array('action'=>'perfil_estudante',$this->request->data['Aluno']['aluno_id']));
+            } else{
+                $this->Session->setFlash(__('Problemas no envio da SMS'),'default',array('class'=>'alert error'));
+            }
+            
+        }
+        $is_regular = $this->Aluno->isRegular($aluno_id);
+        
+
+        if (count($is_regular) == 1 && $is_regular[0]['regular'] == true) {
+            if ($is_regular[0]['estado'] == 1) {
+                $classe_estado = "alert note no-margin";
+            } else {
+                $classe_estado = "alert success";
+            }
+        } else {
+            $classe_estado = "alert error";
+        }
+        
+        $celular = $this->Aluno->Entidade->getCellNumber($aluno['Aluno']['entidade_id']);
+        $funcionario = $this->Aluno->User->getFuncionarioActivoId($this->Session->read('Auth.User.id'));
+        if(!$celular){
+            $this->Session->setFlash(__("Este Estudante não Possui nenhum Numero de Celular Associado"),'default',array('class'=>'alert error'));
+        }
+        $this->set(compact('aluno', 'is_regular', 'classe_estado','celular','funcionario'));
         
     }
 

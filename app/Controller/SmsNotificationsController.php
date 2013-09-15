@@ -103,7 +103,7 @@ class SmsNotificationsController extends AppController {
     public function send_sms(){
         
         $this->loadModel('SmsEnviada');
-        $this->SmsEnviada->sendSMS(842569523,"Ola Elisio Leonardo");
+        $this->SmsEnviada->sendSMS(842569523,"SMS de Teste");
         
     }
 

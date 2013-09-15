@@ -194,6 +194,21 @@ class Entidade extends AppModel {
     public function gravaContactos($data,$tipo_entidade='aluno'){
         
     }
+    
+    
+    public function getCellNumber($entidade_id){
+        $entidade = $this->findById($entidade_id);
+        if($entidade['Entidade']['telemovel']){
+            return $entidade['Entidade']['telemovel'];
+        } else{
+            $entidade_contacto = $this->EntidadeContacto->find('first',array('conditions'=>array('entidade_id'=>$entidade_id,'tipo_contacto_id'=>2,'estado_objecto_id'=>1),'orderr'=>'id DESC'));
+            if($entidade_contacto){
+                return $entidade_contacto['EntidadeContacto']['valor'];
+            } else{
+                return 0;
+            }
+        }
+    }
 
 
 }
