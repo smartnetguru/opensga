@@ -89,10 +89,15 @@ class SmsEnviada extends AppModel {
 ));
         $results = $HttpSocket->get($url_final);
         debug($results);
-        $this->set('resultado',$results);
+        
+        $resultado = $results->body;
+        $this->set('resultado',$resultado);
         $this->set('url_final',$url_final);
         $this->save();
-        return 1;
+        if(is_numeric($resultado) && $resultado>0){
+            return 1;
+        }
+        return 0;
         
     }
 }
