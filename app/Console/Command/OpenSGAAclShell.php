@@ -20,34 +20,38 @@ class OpenSGAAclShell extends AppShell {
         $this->Funcionario->contain(array('User'));
         $funcionarios = $this->Funcionario->find('all', array('conditions' => array('group_id' => 2,'User.id'=>'42849')));
         foreach ($funcionarios as $funcionario) {
+            $comando_acl = array();
+            $comando_acl[] = "acl deny User.{$funcionario['User']['id']} controllers";
             
-            $acl_command = "acl deny User.{$funcionario['User']['id']} controllers";
-            $this->dispatchShell($acl_command);
             
-            $acl_command = "acl grant User.{$funcionario['User']['id']} controllers/Users/login";
-            $this->dispatchShell($acl_command);
-            $acl_command = "acl grant User.{$funcionario['User']['id']} controllers/Users/logout";
-            $this->dispatchShell($acl_command);
-            $acl_command = "acl grant User.{$funcionario['User']['id']} controllers/Users/faculdade_logout";
-            $this->dispatchShell($acl_command);
+            $comando_acl[] = "acl grant User.{$funcionario['User']['id']} controllers/Users/login";
+            
+            $comando_acl[] = "acl grant User.{$funcionario['User']['id']} controllers/Users/logout";
+            
+            $comando_acl[] = "acl grant User.{$funcionario['User']['id']} controllers/Users/faculdade_logout";
+            
+            $comando_acl[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/enviar_sms";
+                    
+                    
+             //Permissoes para funcionarios da faculdade
             if ($this->User->isFromFaculdade($funcionario['User']['id'])) {
-                $acl_command = "acl grant User.{$funcionario['User']['id']} controllers/Pages/faculdade_home";
-                $this->dispatchShell($acl_command);
-                $acl_command = "acl grant User.{$funcionario['User']['id']} controllers/Users/faculdade_trocar_senha";
-                $this->dispatchShell($acl_command);
-                $acl_command = "acl grant User.{$funcionario['User']['id']} controllers/Turmas/faculdade_index";
-                $this->dispatchShell($acl_command);
-                $acl_command = "acl grant User.{$funcionario['User']['id']} controllers/Turmas/faculdade_view";
-                $this->dispatchShell($acl_command);
+                $comando_acl[] = "acl grant User.{$funcionario['User']['id']} controllers/Pages/faculdade_home";
+                
+                $comando_acl[] = "acl grant User.{$funcionario['User']['id']} controllers/Users/faculdade_trocar_senha";
+                
+                $comando_acl[] = "acl grant User.{$funcionario['User']['id']} controllers/Turmas/faculdade_index";
+                
+                $comando_acl[] = "acl grant User.{$funcionario['User']['id']} controllers/Turmas/faculdade_view";
+                
             } else {
-                $acl_command = "acl grant User.{$funcionario['User']['id']} controllers/Pages/home";
-                $this->dispatchShell($acl_command);
-                $acl_command = "acl grant User.{$funcionario['User']['id']} controllers/Users/trocar_senha";
-                $this->dispatchShell($acl_command);
-                $acl_command = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/pesquisa_aluno_action";
-                    $this->dispatchShell($acl_command);
-                $acl_command = "acl grant User.{$funcionario['User']['id']} controllers/Requisicoes/RequisicoesPedidos/entregar_cartao_novo_ingresso";
-                $this->dispatchShell($acl_command);
+                $comando_acl[] = "acl grant User.{$funcionario['User']['id']} controllers/Pages/home";
+                
+                $comando_acl[] = "acl grant User.{$funcionario['User']['id']} controllers/Users/trocar_senha";
+                
+                $comando_acl[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/pesquisa_aluno_action";
+                    
+                $comando_acl[] = "acl grant User.{$funcionario['User']['id']} controllers/Requisicoes/RequisicoesPedidos/entregar_cartao_novo_ingresso";
+                
                 
                 $unidade_organica = $this->UnidadeOrganica->findById($funcionario['Funcionario']['unidade_organica_id']);
                 
@@ -56,50 +60,65 @@ class OpenSGAAclShell extends AppShell {
                  */
                 if($unidade_organica['UnidadeOrganica']['codigo']=='DRA'){
                      
-                    $acl_command = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/pesquisa_aluno_action";
-                    $this->dispatchShell($acl_command);
+                    $comando_acl[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/pesquisa_aluno_action";
+                    
                 }
                 if($unidade_organica['UnidadeOrganica']['codigo']=='DRA_DI'){
-                    $acl_command = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/index";
-                    $this->dispatchShell($acl_command);
-                    $acl_command = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/alterar_status";
-                    $this->dispatchShell($acl_command);
-                    $acl_command = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/editar_estudante";
-                    $this->dispatchShell($acl_command);
-                    $acl_command = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/alterar_nome";
-                    $this->dispatchShell($acl_command);
-                    $acl_command = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/mudanca_curso";
-                    $this->dispatchShell($acl_command);
-                    $acl_command = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/concluir_nivel";
-                    $this->dispatchShell($acl_command);
-                    $acl_command = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/perfil_estudante";
-                    $this->dispatchShell($acl_command);
-                    $acl_command = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/renovar_matricula";
-                    $this->dispatchShell($acl_command);
-                    $acl_command = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/busca_candidato";
-                    $this->dispatchShell($acl_command);
-                    $acl_command = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/matricular_candidato";
-                    $this->dispatchShell($acl_command);
-                    $acl_command = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/print_boletim_matricula";
-                    $this->dispatchShell($acl_command);
-                    $acl_command = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/print_comprovativo_matricula";
-                    $this->dispatchShell($acl_command);
-                    $acl_command = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/print_comprovativo_mudanca_curso";
-                    $this->dispatchShell($acl_command);
-                    $acl_command = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/print_comprovativo_renovacao_matricula";
-                    $this->dispatchShell($acl_command);
+                    $comando_acl[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/index";
                     
+                    $comando_acl[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/alterar_status";
+                    
+                    $comando_acl[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/editar_estudante";
+                    
+                    $comando_acl[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/alterar_nome";
+                    
+                    $comando_acl[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/mudanca_curso";
+                    
+                    $comando_acl[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/concluir_nivel";
+                    
+                    $comando_acl[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/perfil_estudante";
+                    
+                    $comando_acl[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/renovar_matricula";
+                    
+                    $comando_acl[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/reingresso";
+                    
+                    $comando_acl[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/busca_candidato";
+                    
+                    $comando_acl[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/matricular_candidato";
+                    
+                    $comando_acl[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/print_boletim_matricula";
+                    
+                    $comando_acl[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/print_comprovativo_matricula";
+                    
+                    $comando_acl[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/print_comprovativo_mudanca_curso";
+                    
+                    $comando_acl[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/print_comprovativo_renovacao_matricula";
+                    
+                    
+                    $comando_acl[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/cerimonia_graduacao";
+                    
+                    $comando_acl[] = "acl grant User.{$funcionario['User']['id']} controllers/CerimoniaGraduacaos/index";
+                    
+                    $comando_acl[] = "acl grant User.{$funcionario['User']['id']} controllers/CerimnoniaGraduacaos/nova_cerimonia";
+                    
+                    
+
+                                        
+
                 } elseif($unidade_organica['UnidadeOrganica']['codigo']=='DRA_DR'){
-                    $acl_command = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/index";
-                    $this->dispatchShell($acl_command);
-                    $acl_command = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/perfil_estudante";
-                    $this->dispatchShell($acl_command);
+                    $comando_acl[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/index";
+                    
+                    $comando_acl[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/perfil_estudante";
+                    
                 } elseif($unidade_organica['UnidadeOrganica']['codigo']=='DRA_DA'){
-                    $acl_command = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/index";
-                    $this->dispatchShell($acl_command);
-                    $acl_command = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/perfil_estudante";
-                    $this->dispatchShell($acl_command);
+                    $comando_acl[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/index";
+                    
+                    $comando_acl[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/perfil_estudante";
+                    
                 }
+            }
+            foreach($comando_acl as $c_acl){
+                $this->dispatchShell($c_acl);
             }
             debug($unidade_organica);
         }
