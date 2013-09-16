@@ -1105,7 +1105,8 @@ class AlunosController extends AppController {
         $aluno = $this->Aluno->findById($aluno_id);
         if($this->request->is('post')){
             $this->loadModel('SmsEnviada');
-            $sms_envidada = $this->SmsEnviada->sendSMS($celular,$this->request->data['Aluno']['mensagem'],$aluno['Aluno']['entidade_id'],1,$this->Session->read('Auth.User.id'));
+            $celular = $this->Aluno->Entidade->getCellNumber($aluno['Aluno']['entidade_id']);
+            $sms_enviada = $this->SmsEnviada->sendSMS($celular,$this->request->data['Aluno']['mensagem'],$aluno['Aluno']['entidade_id'],1,$this->Session->read('Auth.User.id'));
             if($sms_enviada==1){
                 $this->Session->setFlash(__('SMS Enviada com Sucesso'),'default',array('class'=>'alert success'));
                 $this->redirect(array('action'=>'perfil_estudante',$this->request->data['Aluno']['aluno_id']));
