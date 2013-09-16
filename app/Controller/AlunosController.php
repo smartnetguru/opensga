@@ -1135,6 +1135,87 @@ class AlunosController extends AppController {
         $this->set(compact('aluno', 'is_regular', 'classe_estado','celular','funcionario'));
         
     }
+    
+    public function cerimonia_graduacao($aluno_id){
+        if($this->request->is('post')){
+            $this->Aluno->CandidatoGraduacao->create();
+            $this->request->data['CandidatoGraduacao']['estado_candidatura_id']=1;
+            $this->request->data['CandidatoGraduacao']['estado_objecto_id']=1;
+            $this->Aluno->CandidatoGraduacao->save($this->request->data);
+            
+            $this->Aluno->contain(array(
+            'Entidade' => array(
+                'Genero'
+            ),
+            'Curso' => array(
+                'UnidadeOrganica'
+            )
+        ));
+        $aluno = $this->Aluno->findById($this->request->data['CandidatoGraduacao']['aluno_id']);
+        
+        $this->Aluno->Entidade->id = $aluno['Aluno']['entidade_id'];
+        $this->Aluno->Entidade->set('data_nascimento',$this->request->data['CandidatoGraduacao']['data_nascimento']);
+        $this->Aluno->Entidade->set('estado_civil',$this->request->data['CandidatoGraduacao']['estado_civil_id']);
+        $this->Aluno->Entidade->set('genero_id',$this->request->data['CandidatoGraduacao']['genero_id']);
+        $this->Aluno->Entidade->set('pais_nascimento',$this->request->data['CandidatoGraduacao']['pais_nascimento']);
+        $this->Aluno->Entidade->set('provincia_nascimento',$this->request->data['CandidatoGraduacao']['provincia_nascimento']);
+        $this->Aluno->Entidade->set('cidade_nascimento',$this->request->data['CandidatoGraduacao']['distrito_nascimento']);
+        if($aluno['Entidade']['telemovel'] != $this->request->data['CandidatoGraduacao']['telemovel']){
+            $this->Aluno->Entidade->set('telemovel',$this->request->data['CandidatoGraduacao']['telemovel']);
+            $novo_contacto = array('EntidadeContacto'=>array(
+               'entidade_id'=>$aluno['Aluno']['entidade_id'],
+                'tipo_contacto_id'=>2,
+                'valor'=>$this->request->data['CandidatoGraduacao']['telemovel']
+            ));
+            
+            $this->Aluno->Entidade->EntidadeContacto->create();
+            $this->Aluno->Entidade->EntidadeContacto->save($novo_contacto);
+        }
+        $this->Aluno->Entidade->save();
+        
+            
+        }
+        $this->Aluno->contain(array(
+            'Entidade' => array(
+                'Genero'
+            ),
+            'Curso' => array(
+                'UnidadeOrganica'
+            )
+        ));
+        $aluno = $this->Aluno->findById($aluno_id);
+        
+        
+        
+        $is_regular = $this->Aluno->isRegular($aluno_id);
+        
+
+        if (count($is_regular) == 1 && $is_regular[0]['regular'] == true) {
+            if ($is_regular[0]['estado'] == 1) {
+                $classe_estado = "alert note no-margin";
+            } else {
+                $classe_estado = "alert success";
+            }
+        } else {
+            $classe_estado = "alert error";
+        }
+        
+        $paises = $this->Aluno->Entidade->PaisNascimento->find('list');
+        
+        $cidades = $this->Aluno->Entidade->CidadeNascimento->find('list');
+        $provincias = $this->Aluno->Entidade->ProvinciaNascimento->find('list');
+        $celular = $this->Aluno->Entidade->getCellNumber($aluno['Aluno']['entidade_id']);
+        $funcionario = $this->Aluno->User->getFuncionarioActivoId($this->Session->read('Auth.User.id'));
+        $generos = $this->Aluno->Entidade->Genero->find('list');
+        $estado_civil = $this->Aluno->Entidade->EstadoCivil->find('list');
+        $regaliaSocials = $this->Aluno->CandidatoGraduacao->RegaliaSocial->find('list');
+        $regimeEstudos = $this->Aluno->CandidatoGraduacao->RegimeEstudo->find('list');
+        $cerimoniaGraduacaos = $this->Aluno->CandidatoGraduacao->CerimoniaGraduacao->find('list');
+        if(!$celular){
+            $this->Session->setFlash(__("Este Estudante não Possui nenhum Numero de Celular Associado"),'default',array('class'=>'alert error'));
+        }
+        $this->set(compact('aluno', 'is_regular', 'classe_estado','celular','funcionario','paises','cidades','provincias','regaliaSocials','regimeEstudos','generos','estado_civil','cerimoniaGraduacaos'));
+    }
 
     
 

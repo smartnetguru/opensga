@@ -45,14 +45,14 @@ class CerimoniaGraduacaosController extends AppController {
  *
  * @return void
  */
-	public function add() {
+	public function nova_cerimonia() {
 		if ($this->request->is('post')) {
 			$this->CerimoniaGraduacao->create();
 			if ($this->CerimoniaGraduacao->save($this->request->data)) {
-				$this->Session->setFlash(__('The cerimonia graduacao has been saved.'));
+				$this->Session->setFlash(__('A Cerimónia de Graduação foi Registrada com Sucesso'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The cerimonia graduacao could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('Problemas ao Registrar a Cerimónia de Graduação, tente novamente'));
 			}
 		}
 	}

@@ -184,6 +184,19 @@ class Aluno extends AppModel {
             'exclusive' => '',
             'finderQuery' => '',
             'counterQuery' => ''
+        ),
+        'CandidatoGraduacao' => array(
+            'className' => 'CandidatoGraduacao',
+            'foreignKey' => 'aluno_id',
+            'dependent' => false,
+            'conditions' => '',
+            'fields' => '',
+            'order' => '',
+            'limit' => '',
+            'offset' => '',
+            'exclusive' => '',
+            'finderQuery' => '',
+            'counterQuery' => ''
         )
     );
    
