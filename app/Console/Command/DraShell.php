@@ -519,8 +519,14 @@ class DraShell extends AppShell {
         foreach ($worksheet->getRowIterator() as $ow) {
             $numero_estudante = $worksheet->getCell('R' . $linha_actual)->getCalculatedValue();
             $this->out($numero_estudante);
-            $aluno = $this->Aluno->findByCodigo($numero_estudante);
+            $this->Aluno->contain(array('Entidade'));
+            $aluno = $this->Aluno->find('first',array('conditions'=>array('Aluno.codigo'=>$numero_estudante,'Entidade.telemovel'=>null)));
+            
             if(!empty($aluno)){
+                
+                if($aluno['Entidade']['telemovel']!=null){
+                    $this->out('Ja tinha');
+                } else{
                 $avenida = $worksheet->getCell('C' . $linha_actual)->getCalculatedValue();
                 $numero  = $worksheet->getCell('D' . $linha_actual)->getCalculatedValue();
                 $bairro = $worksheet->getCell('E' . $linha_actual)->getCalculatedValue();
@@ -579,6 +585,9 @@ class DraShell extends AppShell {
                 }
                 
                 
+            }
+            } else{
+                $this->out("0 Alunos :)");
             }
             //Av. Rua
             $this->out($linha_actual);
