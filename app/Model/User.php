@@ -254,7 +254,7 @@ class User extends AppModel {
         
         $funcionario = $this->Funcionario->findByUserId($user_id);
 
-        return $funcionario['Funcionario']['id'];
+        return $funcionario;
     }
 
     public function isFromFaculdade($user_id) {
