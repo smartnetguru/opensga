@@ -73,24 +73,5 @@ class SmsNotificationTypesController extends AppController {
 		}
 	}
 
-/**
- * delete method
- *
- * @throws NotFoundException
- * @param string $id
- * @return void
- */
-	public function delete($id = null) {
-		$this->SmsNotificationType->id = $id;
-		if (!$this->SmsNotificationType->exists()) {
-			throw new NotFoundException(__('Invalid sms notification type'));
-		}
-		$this->request->onlyAllow('post', 'delete');
-		if ($this->SmsNotificationType->delete()) {
-			$this->Session->setFlash(__('Sms notification type deleted'));
-			$this->redirect(array('action' => 'index'));
-		}
-		$this->Session->setFlash(__('Sms notification type was not deleted'));
-		$this->redirect(array('action' => 'index'));
-	}
+
 }

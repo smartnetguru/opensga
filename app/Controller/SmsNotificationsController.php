@@ -73,13 +73,12 @@ class SmsNotificationsController extends AppController {
         $message = preg_replace('/\s+/', ' ', $text);
         $message_explode = explode(' ', $message);
         $comando_recebido = strtolower($message_explode[0]);
-        $this->log("Sms received",'sms_timwe');
-        $this->log($text,'sms_timwe');
-        $this->log($message_explode[1],'sms_timwe');
-        $this->log("------------------------------------",'sms_timwe');
+        
         
         switch ($comando_recebido) {
-            case "nome":
+            case "r2014":
+                $this->log("Renovacao".$message,'sms');
+                $this->SmsNotification->processaSMSRenovacao($origin,$message_explode[1]);
                 //$this->redirect(array('action' => 'get_nome_completo', $phone, $smscenter, $message_explode[1]));
                 break;
             case "email":
