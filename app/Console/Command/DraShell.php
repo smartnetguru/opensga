@@ -1,7 +1,7 @@
 <?php 
 ini_set('memory_limit',"2048M");
 class DraShell extends AppShell {
-	public $uses = array('UemDra.DraFoto','UemDra.DraEscola','UemDra.Faculdade','UemDra.DraSeccao','UemDra.DraDepartamento','UemDra.DraProvincia','UemDra.DraCurso','UemDra.DraPessoa','Provincia','UnidadeOrganica','Curso','User','Entidade','Aluno','UemDra.DraMatricula','Matricula','Anolectivo','EscolaNivelMedio','UemDra.DraHistorico','HistoricoCurso','MudancaCurso','UemDra.DraMudancaCurso','UemDra.DraEstudanteHistorico','UemDra.DraObservacaoEstudante','AlunoEstado','MotivoEstadoAluno','EntidadeContacto');
+	public $uses = array('Provincia','UnidadeOrganica','Curso','User','Entidade','Aluno','Matricula','Anolectivo','EscolaNivelMedio','HistoricoCurso','MudancaCurso','AlunoEstado','MotivoEstadoAluno','EntidadeContacto');
 	
 	public function main() {
 		$this->out('Hello world.');
