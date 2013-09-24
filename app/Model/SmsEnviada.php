@@ -87,6 +87,7 @@ class SmsEnviada extends AppModel {
    'host' => 'mb.timwe.com',
    'timeout' => 60
 ));
+        $this->log($url_final,'sms_enviadas');
         $results = $HttpSocket->get($url_final);
         debug($results);
         
