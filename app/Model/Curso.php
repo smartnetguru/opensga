@@ -81,6 +81,19 @@ class Curso extends AppModel {
 			'exclusive' => '',
 			'finderQuery' => '',
 			'counterQuery' => ''
+		),
+		'CursosTurno' => array(
+			'className' => 'CursosTurno',
+			'foreignKey' => 'curso_id',
+			'dependent' => false,
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'exclusive' => '',
+			'finderQuery' => '',
+			'counterQuery' => ''
 		)
 	);
 
@@ -106,6 +119,11 @@ class Curso extends AppModel {
         
         public function getPlanoEstudoRecente($curso_id){
             return $this->Planoestudo->find('first',array('conditions'=>array('curso_id'=>$curso_id),'order'=>'ano_criacao DESC'));
+        }
+        
+        public function getTurnoIdByCursoId($curso_id){
+            $curso_turno = $this->CursosTurno->findByCursoId($curso_id);
+            return $curso_turno['CursosTurno']['turno_id'];
         }
 
 }

@@ -289,6 +289,37 @@ class MatriculasController extends AppController {
             $matriculas = $this->Matricula->find('all',array('conditions'=>array('Anolectivo.ano'=>2013)));
             die(debug($matriculas));
         }
+        
+        public function carrega_ficheiro_renovacao(){
+            if($this->request->is('post')){
+                $this->loadModel('Upload');
+                
+                $this->request->data['Upload']['name'] = $this->request->data['Upload']['file']['name'];
+                $this->request->data['Upload']['size'] = $this->request->data['Upload']['file']['size'];
+                $this->Upload->create();
+                $this->Upload->save($this->request->data);
+                $type = $this->request->data['Upload']['file']['type'];
+                if($type == 'text/plain'){
+                    $upload_sucesso = $this->Upload->uploadFiles('uploads', array($this->request->data['Upload']['file']),'renovacao');
+                    if(isset($upload_sucesso['urls'])){
+                        $this->Upload->set('file_url',$upload_sucesso['urls'][0]);
+                        $this->Upload->set('tipo_upload_id',1);
+                        $processado = $this->Matricula->processaFicheiroRenovacao($upload_sucesso['urls'][0]);
+                        
+                    }
+                    debug($upload_sucesso);
+                } else{
+                    $this->Session->setFlash(__('Tentou carregar um ficheiro no formato errado.'),'default',array('class'=>'alert error'));
+                }
+                        
+                die(debug($this->request->data));
+            }
+        }
+        
+        
+        public function processa_ficheiro_renovacao_teste(){
+            $this->Matricula->processaFicheiroRenovacao('uploads/renovacao/2013-09-17-232539P770011221.txt');
+        }
 
 }
 ?>

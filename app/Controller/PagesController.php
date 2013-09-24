@@ -120,7 +120,7 @@ class PagesController extends AppController {
         $user = $this->Auth->user();
         $this->Auth->allow('email_oficial_uem');
         if ($user != null) {
-            $this->Auth->allowedActions = array('display','email_oficial_uem');
+            $this->Auth->allowedActions = array('display','email_oficial_uem','webmail');
         }
     }
 
@@ -137,7 +137,10 @@ class PagesController extends AppController {
         
     }
     public function email_oficial_uem() {
-        $this->redirect('http://millpaginas.com');
+        $this->redirect('http://millpaginas.com/como-acessar-e-usar-o-novo-email-institucional-da-sua-universidade/');
+    }
+    public function webmail() {
+        $this->redirect('https://www.google.com/a/uem.ac.mz/');
     }
 
 }

@@ -99,6 +99,63 @@ class AppController extends Controller {
             $this->layout=$this->request->prefix;
         }
     }
+    
+    
+     public function afterFilter(){
+        parent::afterFilter();
+ 
+        // sql logging to chrome console
+        if (class_exists('ConnectionManager') && Configure::read('debug') >= 2) {
+            App::import('Vendor', 'ChromePhp/ChromePhp');
+            
+            $sources = ConnectionManager::sourceList();
+            
+            $logs = array();
+            foreach ($sources as $source){
+                $db = ConnectionManager::getDataSource($source);
+                $logs[$source] = $db->getLog();
+            }
+            
+            foreach ($logs as $source => $logInfo){
+                
+                $text = $logInfo['count'] > 1 ? 'queries' : 'query';
+                ChromePhp::info('------- SQL: '.sprintf('(%s) %s %s took %s ms', $source, count($logInfo['log']), $text, $logInfo['time']).' -------');
+                ChromePhp::info('------- REQUEST: '.$this->request->params['controller'].'/'.$this->request->params['action'].' -------');
+                
+                foreach ($logInfo['log'] as $k => $i){
+                    
+                    $i += array('error' => '');
+                    if (!empty($i['params']) && is_array($i['params'])) {
+                        $bindParam = $bindType = null;
+                        if (preg_match('/.+ :.+/', $i['query'])) {
+                            $bindType = true;
+                        }
+                        foreach ($i['params'] as $bindKey => $bindVal) {
+                            if ($bindType === true) {
+                                $bindParam .= h($bindKey) ." => " . h($bindVal) . ", ";
+                            } else {
+                                $bindParam .= h($bindVal) . ", ";
+                            }
+                        }
+                        $i['query'] .= " , params[ " . rtrim($bindParam, ', ') . " ]";
+                    }
+                    
+                    $error = !empty($i['error']) ? "\nError: ".$i['error']:"\n";
+                    $logStr = $i['query'].$error."\nAffected: ".$i['affected']."\nNum. Rows: ".$i['numRows']."\nTook(ms): ".$i['took']."\n\n";
+                    
+                    if(!empty($i['error'])){
+                        ChromePhp::error($logStr);
+                    }
+                    else if($i['took'] >= 100){
+                        ChromePhp::warn($logStr);
+                    }
+                    else{
+                        ChromePhp::info($logStr);
+                    }
+                }
+            }
+        }
+    }
 
 
 }

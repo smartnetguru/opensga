@@ -70,6 +70,17 @@ class Anolectivo extends AppModel {
 			'counterQuery' => ''
 		)
 	);
+        
+        
+        /**
+         * Devolve o id do ano lectivo, dado o ano
+         * @param type $ano
+         * @return type
+         */
+        public function getAnoLectivoIdByAno($ano){
+            $anolectivo = $this->findByAno($ano);
+            return $anolectivo['Anolectivo']['id'];
+        }
 
 
 }
