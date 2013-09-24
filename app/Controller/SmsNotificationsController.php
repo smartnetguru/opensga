@@ -107,7 +107,7 @@ class SmsNotificationsController extends AppController {
     }
 
 public function testa_sms(){
-    $this->SmsNotification->processaSMSRenovacao(1,1,20131030);
+    $this->SmsNotification->processaSMSRenovacao(1,258826489374,20131030);
 }
     public function beforeFilter() {
         parent::beforeFilter();
