@@ -586,8 +586,8 @@ class Aluno extends AppModel {
         return $total_alunos;
     }
 
-    public function getTotalAlunos() {
-        return $this->find('count');
+    public function getTotalAlunosActivos() {
+        return $this->find('count',array('conditions'=>array('estado_aluno_id'=>array(1,11))));
     }
 
     /**

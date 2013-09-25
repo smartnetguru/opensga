@@ -97,7 +97,7 @@ class PagesController extends AppController {
         $this->loadModel('Aluno');
         $alerta = new Message;
         $recipient_id = $this->Session->read('Auth.User.id');
-        $total_alunos = $this->Aluno->getTotalAlunos();
+        $total_alunos_activos = $this->Aluno->getTotalAlunosActivos();
 
         $total_matriculas_activas = $this->Aluno->Matricula->getTotalMatriculasActivas();
 
@@ -112,7 +112,7 @@ class PagesController extends AppController {
         
         $alertas = $alerta->find('all', array('conditions' => array('recipient_id' => $recipient_id, 'datainicio <=' => date('Y-m-d') . ' 23:59:59', 'datafim >=' => date('Y-m-d') . ' 00:00:00')));
         $this->set('alertas', $alertas);
-        $this->set(compact('total_alunos', 'total_matriculas_activas', 'facturas_geradas', 'facturas_pagas', 'valor_arrecadado', 'valor_divida'));
+        $this->set(compact('total_alunos_activos', 'total_matriculas_activas', 'facturas_geradas', 'facturas_pagas', 'valor_arrecadado', 'valor_divida'));
     }
 
     function beforeFilter() {
