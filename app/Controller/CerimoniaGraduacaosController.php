@@ -32,12 +32,21 @@ class CerimoniaGraduacaosController extends AppController {
  * @param string $id
  * @return void
  */
-	public function view($id = null) {
+	public function ver_detalhes($id = null) {
 		if (!$this->CerimoniaGraduacao->exists($id)) {
-			throw new NotFoundException(__('Invalid cerimonia graduacao'));
+			throw new NotFoundException(__('Cerimónia de Graduação Inválida'));
 		}
+                
 		$options = array('conditions' => array('CerimoniaGraduacao.' . $this->CerimoniaGraduacao->primaryKey => $id));
+                $this->CerimoniaGraduacao->recursive = 0;
 		$this->set('cerimoniaGraduacao', $this->CerimoniaGraduacao->find('first', $options));
+                
+                $this->CerimoniaGraduacao->CandidatoGraduacao->contain(array(
+                    'Aluno'=>array('Entidade','Curso')
+                ));
+                $candidatos = $this->CerimoniaGraduacao->CandidatoGraduacao->find('all',array('conditions'=>array('cerimonia_graduacao_id'=>$id)));
+                $this->set(compact('candidatos'));
+                
 	}
 
 /**
