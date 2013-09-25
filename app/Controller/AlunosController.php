@@ -1137,6 +1137,13 @@ class AlunosController extends AppController {
         
     }
     
+    
+    /**
+     * Inscreve aluno para a cerimonia de graduacao. 
+     * 
+     * @todo Passar toda a logica do Model para o Modelo :(
+     * @param type $aluno_id
+     */
     public function cerimonia_graduacao($aluno_id){
         if($this->request->is('post')){
             $this->Aluno->CandidatoGraduacao->create();
@@ -1172,7 +1179,10 @@ class AlunosController extends AppController {
             $this->Aluno->Entidade->EntidadeContacto->create();
             $this->Aluno->Entidade->EntidadeContacto->save($novo_contacto);
         }
-        $this->Aluno->Entidade->save();
+        if($this->Aluno->Entidade->save()){
+            $this->Session->setFlash(__('Aluno Inscrito com Sucesso'),'default',array('class'=>'alert success'));
+            $this->redirect(array('controller'=>'cerimonia_graduacaos','action'=>'ver_detalhes',$this->request->data['CandidatoGraduacao']['cerimonia_graduacao_id']));
+        }
         
             
         }
