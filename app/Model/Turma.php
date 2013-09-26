@@ -469,6 +469,10 @@ class Turma extends AppModel {
             $avaliacoes = $this->Turmatipoavaliacao->find('all',array('conditions'=>array('Turmatipoavaliacao.turma_id'=>$turma_id)));
             debug($avaliacoes);
         }
+        
+        public function getTotalAlunosInscritosByTurma($turma_id = null){
+            
+        }
 
 }
 ?>

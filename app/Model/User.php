@@ -206,6 +206,7 @@ class User extends AppModel {
         $nome = $this->normalize_str($nome);
         $nome = trim(strtolower($nome));
 
+        
         $apelido = strtolower(trim($this->normalize_str($apelido)));
 
         $nome = utf8_encode($nome);

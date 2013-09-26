@@ -31,12 +31,10 @@ class TurmasController extends AppController {
 
         $conditions = array();
         $conditions['Turma.estadoturma_id'] = 1;
-        if ($grupo == 4) {
-            $docente_id = $this->Turma->Docente->getByUserID($this->Session->read('Auth.User.id'));
-            $conditions['Turma.docente_id'] = $docente_id;
-        }
-        $this->paginate = array('conditions' => $conditions);
-        $this->set('turmas', $this->paginate());
+        $conditions['Turma.anolectivo_id']  = Configure::read('OpenSGA.ano_lectivo_id');
+        
+        
+        $this->set('turmas', $this->Turma->find('all',array('conditions'=>$conditions,'limit'=>1000)));
     }
 
     function faculdade_index() {
@@ -109,7 +107,7 @@ class TurmasController extends AppController {
         $this->set('turmas', $turmas);
     }
 
-    function view($id = null) {
+    function ver_turma($id = null) {
         $this->Turma->id = $id;
         if (!$this->Turma->exists()) {
             throw new NotFoundException(__('Turma Inválida'));
@@ -458,7 +456,7 @@ class TurmasController extends AppController {
             ),
             'Turma' => array(
                 'Curso' => array(
-                    'fields' => array('name')
+                    'UnidadeOrganica'
                 ), 'Disciplina', 'Turno', 'Anolectivo'
             )
         ));
@@ -578,6 +576,28 @@ class TurmasController extends AppController {
 
         $this->layout = 'pdf'; //this will use the pdf.ctp layout
         $this->render();
+    }
+    
+    
+    public function print_lista_estudantes($turma_id){
+        $this->Turma->Inscricao->contain(array(
+            'Estadoinscricao',
+            'Matricula' => array(
+                'Aluno' => array(
+                    'Entidade'=>array(
+                        'User'
+                    )
+                )
+            ),
+            'Turma' => array(
+                'Curso' => array(
+                    'UnidadeOrganica'
+                ), 'Disciplina', 'Turno', 'Anolectivo'
+            )
+        ));
+        $inscricaos = $this->Turma->Inscricao->find('all', array('conditions' => array('turma_id' => $turma_id)));
+        
+        $this->set(compact('inscricaos'));
     }
 
     function fecho_da_turma() {

@@ -4,7 +4,7 @@ ini_set('memory_limit', "2048M");
 
 class OpenSGAShell extends AppShell {
 
-    public $uses = array('Turma', 'Matricula', 'Curso', 'UnidadeOrganica', 'Candidatura', 'Aluno', 'EstadoAluno', 'Planoestudo', 'Disciplina', 'Planoestudoano', 'HistoricoCurso', 'Anolectivo','CandidatoAlumni','Requisicoes.RequisicoesPedido','Entidade');
+    public $uses = array('Turma', 'Matricula', 'Curso', 'UnidadeOrganica', 'Candidatura', 'Aluno', 'EstadoAluno', 'Planoestudo', 'Disciplina', 'Planoestudoano', 'HistoricoCurso', 'Anolectivo','CandidatoAlumni','Requisicoes.RequisicoesPedido','Entidade','User');
 
     public function main() {
         $this->out('Hello world.');
@@ -560,12 +560,19 @@ class OpenSGAShell extends AppShell {
         $this->Entidade->contain('User');
         
         $entidades = $this->Entidade->find('all',array('conditions'=>array('User.username LIKE'=>'% %')));
+        
         foreach($entidades as $entidade){
             
+            
             $apelido = $entidade['Entidade']['apelido'];
-            $nome = $entidade['Entidade']['nome'];
-            $email = $this->User->
-            debug($entidade);
+            $nome = $entidade['Entidade']['name'];
+            $email = $this->User->geraEmailUem($apelido,$nome);
+            
+            $this->User->id = $entidade['User']['id'];
+            $this->User->set('email',$email);
+            $this->User->save();
+            $this->out($email);
+            
         }
     }
 

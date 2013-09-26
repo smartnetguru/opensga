@@ -1,6 +1,6 @@
 <?php
 
-ini_set('memory_limit', "2096M");
+ini_set('memory_limit', "3096M");
 App::uses('AuditableConfig', 'Auditable.Lib');
 
 class DbsecShell extends AppShell {
@@ -95,7 +95,7 @@ class DbsecShell extends AppShell {
         if (!class_exists('PHPExcel'))
             throw new CakeException('Vendor class PHPExcel not found!');
 
-        $xls = PHPExcel_IOFactory::load(APP . 'Imports' . DS . 'disciplina.xlsx');
+        $xls = PHPExcel_IOFactory::load(APP . 'Imports' . DS .'dmi'.DS. 'disciplina.xlsx');
 
         $linha_actual = 2;
         $worksheet = $xls->getActiveSheet();
@@ -141,6 +141,7 @@ class DbsecShell extends AppShell {
                     $this->out("Disciplina Criada--" . $nome_disciplina);
                 }
             }
+            $this->out("------------------------------------------------------------------------".$linha_actual);
             $linha_actual++;
         }
     }
@@ -150,7 +151,7 @@ class DbsecShell extends AppShell {
         if (!class_exists('PHPExcel'))
             throw new CakeException('Vendor class PHPExcel not found!');
 
-        $xls = PHPExcel_IOFactory::load(APP . 'Imports' . DS . 'disciplina_curso.xlsx');
+        $xls = PHPExcel_IOFactory::load(APP . 'Imports' . DS .'dmi'.DS. 'disciplina_curso.xlsx');
 
         $linha_actual = 2;
         $worksheet = $xls->getActiveSheet();
@@ -178,7 +179,7 @@ class DbsecShell extends AppShell {
             }
 
             $codigo_disciplina = $worksheet->getCell('A' . $linha_actual)->getCalculatedValue();
-            $xls2 = PHPExcel_IOFactory::load(APP . 'Imports' . DS . 'disciplina.xlsx');
+            $xls2 = PHPExcel_IOFactory::load(APP . 'Imports' . DS .'dmi'.DS. 'disciplina.xlsx');
             $worksheet2 = $xls2->getActiveSheet();
             $linha_actual2 = 2;
             while (true) {
@@ -290,11 +291,12 @@ class DbsecShell extends AppShell {
         if (!class_exists('PHPExcel'))
             throw new CakeException('Vendor class PHPExcel not found!');
 
-        $xls = PHPExcel_IOFactory::load(APP . 'Imports' . DS . 'leccionamento.xlsx');
+        $xls = PHPExcel_IOFactory::load(APP . 'Imports' . DS .'dmi'.DS. 'leccionamento.xlsx');
 
         $linha_actual = 2;
         $worksheet = $xls->getActiveSheet();
-
+        $xls2 = PHPExcel_IOFactory::load(APP . 'Imports' . DS .'dmi'.DS. 'disciplina.xlsx');
+        $worksheet2 = $xls2->getActiveSheet();
         foreach ($worksheet->getRowIterator() as $row) {
             $this->Planoestudo->recursive = -1;
             $this->Curso->recursive = -1;
@@ -309,16 +311,15 @@ class DbsecShell extends AppShell {
             $this->Anolectivo->recursive = -1;
             $anolectivo = $this->Anolectivo->findByAno(trim($worksheet->getCell('B' . $linha_actual)->getCalculatedValue()));
             $this->Disciplina->recursive = -1;
-
+           
 
 
             $codigo_disciplina = $disciplina_db;
-            $xls2 = PHPExcel_IOFactory::load(APP . 'Imports' . DS . 'disciplina.xlsx');
-            $worksheet2 = $xls2->getActiveSheet();
+            
             $linha_actual2 = 2;
             while (true) {
                 $codigo2 = $worksheet2->getCell('A' . $linha_actual2)->getCalculatedValue();
-                $this->out($codigo2);
+                
                 if ($codigo2 == $codigo_disciplina) {
                     $nome_disciplina = $worksheet2->getCell('B' . $linha_actual2)->getCalculatedValue();
                     break;
@@ -365,11 +366,23 @@ class DbsecShell extends AppShell {
                         'unidade_organica_id' => $curso['Curso']['unidade_organica_id']
                     )
                 );
-
-                $this->Turma->create();
+                
+                //Verificar se turma existe antes de criar
+                $this->Turma->recursive =-1;
+                $turma_existe = $this->Turma->find('first',array('conditions'=>$array_turma['Turma']));
+                
+                if(empty($turma_existe)){
+                    $this->Turma->create();
                 $this->Turma->save($array_turma);
                 $this->out("Turma Criada--" . $array_turma['Turma']['name'] . " ------ -----  " . $this->Turma->id);
+                } else{
+                    $this->out("Turma existia");
+                }
+                
+
+                
             }
+            $this->out("------------------------------------------------------------------------".$linha_actual);
             $linha_actual++;
         }
     }
@@ -466,15 +479,17 @@ class DbsecShell extends AppShell {
     }
 
     public function importa_inscricao() {
+        AuditableConfig::$Logger = ClassRegistry::init('Auditable.Logger');
         App::import('Vendor', 'PHPExcel', array('file' => 'PHPExcel.php'));
         if (!class_exists('PHPExcel'))
             throw new CakeException('Vendor class PHPExcel not found!');
+        debug("teste0");
 
-        $xls = PHPExcel_IOFactory::load(APP . 'Imports' . DS . 'inscricao.xlsx');
+        $xls = PHPExcel_IOFactory::load(APP . 'Imports' . DS .'dmi'.DS. 'inscricao.xlsx');
 
         $linha_actual = 2;
         $worksheet = $xls->getActiveSheet();
-        $xls2 = PHPExcel_IOFactory::load(APP . 'Imports' . DS . 'disciplina.xlsx');
+        $xls2 = PHPExcel_IOFactory::load(APP . 'Imports' . DS .'dmi'.DS. 'disciplina.xlsx');
             $worksheet2 = $xls2->getActiveSheet();
 
         foreach ($worksheet->getRowIterator() as $row) {
@@ -566,7 +581,7 @@ class DbsecShell extends AppShell {
 
 
             $linha_actual++;
-            $this->out($linha_actual);
+            $this->out("----------------------------------------------------------------".$linha_actual);
             
         }
     }
