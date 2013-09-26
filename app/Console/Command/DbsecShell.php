@@ -152,7 +152,8 @@ class DbsecShell extends AppShell {
             throw new CakeException('Vendor class PHPExcel not found!');
 
         $xls = PHPExcel_IOFactory::load(APP . 'Imports' . DS .'dmi'.DS. 'disciplina_curso.xlsx');
-
+        $xls2 = PHPExcel_IOFactory::load(APP . 'Imports' . DS .'dmi'.DS. 'disciplina.xlsx');
+            $worksheet2 = $xls2->getActiveSheet();
         $linha_actual = 2;
         $worksheet = $xls->getActiveSheet();
         foreach ($worksheet->getRowIterator() as $ow) {
@@ -179,8 +180,7 @@ class DbsecShell extends AppShell {
             }
 
             $codigo_disciplina = $worksheet->getCell('A' . $linha_actual)->getCalculatedValue();
-            $xls2 = PHPExcel_IOFactory::load(APP . 'Imports' . DS .'dmi'.DS. 'disciplina.xlsx');
-            $worksheet2 = $xls2->getActiveSheet();
+            
             $linha_actual2 = 2;
             while (true) {
                 $codigo2 = $worksheet2->getCell('A' . $linha_actual2)->getCalculatedValue();

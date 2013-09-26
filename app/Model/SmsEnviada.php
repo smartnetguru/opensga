@@ -1,6 +1,7 @@
 <?php
 App::uses('AppModel', 'Model');
 App::uses('HttpSocket', 'Network/Http');
+ini_set('max_execution_time', 300);
 /**
  * SmsEnviada Model
  *
