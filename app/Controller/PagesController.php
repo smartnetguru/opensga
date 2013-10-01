@@ -110,10 +110,10 @@ class PagesController extends AppController {
         $valor_arrecadado = $this->Aluno->FinanceiroPagamento->find('all', array('conditions' => array('MONTH(FinanceiroPagamento.data_pagamento)' => date('m'), 'YEAR(FinanceiroPagamento.data_pagamento)' => date('Y'), 'FinanceiroPagamento.financeiro_estado_pagamento_id' => 2), 'fields' => 'sum(FinanceiroPagamento.valor) as valor'));
         $valor_divida = $this->Aluno->FinanceiroPagamento->getValorDividaTotal();
         $alertas = null;
-        $sms_enviadas_24  = $this->SmsEnviada->find('count',array('conditions'=>array('SmsEnviada.created >'=>'DATE_SUB(CURDATE(), INTERVAL 1 DAY)')));
-        $sms_enviadas_30  = $this->SmsEnviada->find('count',array('conditions'=>array('SmsEnviada.created >'=>'DATE_SUB(CURDATE(), INTERVAL 30 DAY)')));
-        $sms_recebidas_24 = $this->SmsNotification->find('count',array('conditions'=>array('SmsNotification.created >'=>'DATE_SUB(CURDATE(), INTERVAL 1 DAY)')));
-        $sms_recebidas_30 = $this->SmsNotification->find('count',array('conditions'=>array('SmsNotification.created >'=>'DATE_SUB(CURDATE(), INTERVAL 30 DAY)')));
+        $sms_enviadas_24  = $this->SmsEnviada->find('count',array('conditions'=>array('SmsEnviada.created >DATE_SUB(CURDATE(), INTERVAL 1 DAY)')));
+        $sms_enviadas_30  = $this->SmsEnviada->find('count',array('conditions'=>array('SmsEnviada.created >DATE_SUB(CURDATE(), INTERVAL 30 DAY)')));
+        $sms_recebidas_24 = $this->SmsNotification->find('count',array('conditions'=>array('SmsNotification.created >DATE_SUB(CURDATE(), INTERVAL 1 DAY)')));
+        $sms_recebidas_30 = $this->SmsNotification->find('count',array('conditions'=>array('SmsNotification.created >DATE_SUB(CURDATE(), INTERVAL 30 DAY)')));
         
         
         //Ultimos Acessos
@@ -129,9 +129,9 @@ class PagesController extends AppController {
     function beforeFilter() {
         parent::beforeFilter();
         $user = $this->Auth->user();
-        $this->Auth->allow('email_oficial_uem');
+        $this->Auth->allow('email_oficial_uem','email');
         if ($user != null) {
-            $this->Auth->allowedActions = array('display','email_oficial_uem','webmail');
+            $this->Auth->allowedActions = array('display','email_oficial_uem','webmail','email');
         }
     }
 
@@ -150,9 +150,16 @@ class PagesController extends AppController {
     public function email_oficial_uem() {
         $this->redirect('http://millpaginas.com/como-acessar-e-usar-o-novo-email-institucional-da-sua-universidade/');
     }
+    
     public function webmail() {
         $this->redirect('https://www.google.com/a/uem.ac.mz/');
     }
+    
+    public function email(){
+        $this->layout='guest_users';
+    }
+    
+   
 
 }
 

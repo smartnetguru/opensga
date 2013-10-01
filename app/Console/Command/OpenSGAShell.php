@@ -4,7 +4,7 @@ ini_set('memory_limit', "2048M");
 
 class OpenSGAShell extends AppShell {
 
-    public $uses = array('Turma', 'Matricula', 'Curso', 'UnidadeOrganica', 'Candidatura', 'Aluno', 'EstadoAluno', 'Planoestudo', 'Disciplina', 'Planoestudoano', 'HistoricoCurso', 'Anolectivo','CandidatoAlumni','Requisicoes.RequisicoesPedido','Entidade','User');
+    public $uses = array('Turma', 'Matricula', 'Curso', 'UnidadeOrganica', 'Candidatura', 'Aluno', 'EstadoAluno', 'Planoestudo', 'Disciplina', 'Planoestudoano', 'HistoricoCurso', 'Anolectivo', 'CandidatoAlumni', 'Requisicoes.RequisicoesPedido', 'Entidade', 'User');
 
     public function main() {
         $this->out('Hello world.');
@@ -473,12 +473,12 @@ class OpenSGAShell extends AppShell {
         $this->out("fim");
         $this->out($zeros);
     }
-    
-    public function reorganiza_unidade_organicas(){
+
+    public function reorganiza_unidade_organicas() {
         $this->UnidadeOrganica->recover();
     }
-    
-    public function importa_alumnis(){
+
+    public function importa_alumnis() {
         App::import('Vendor', 'PHPExcel', array('file' => 'PHPExcel.php'));
         if (!class_exists('PHPExcel'))
             throw new CakeException('Vendor class PHPExcel not found!');
@@ -487,40 +487,40 @@ class OpenSGAShell extends AppShell {
 
         $worksheet = $xls->getActiveSheet();
         $linha_actual = 2;
-        foreach($worksheet->getRowIterator() as $row){
-            $controlador = $worksheet->getCell('J'.$linha_actual)->getCalculatedValue();
-            if($controlador==''){
+        foreach ($worksheet->getRowIterator() as $row) {
+            $controlador = $worksheet->getCell('J' . $linha_actual)->getCalculatedValue();
+            if ($controlador == '') {
                 break;
             }
-            
-            $caa  = array();
-            $caa['apelido'] = $worksheet->getCell('C'.$linha_actual)->getCalculatedValue();
-            $caa['nomes'] = $worksheet->getCell('D'.$linha_actual)->getCalculatedValue();
-            $caa['nome_pai'] = $worksheet->getCell('F'.$linha_actual)->getCalculatedValue();
-            $caa['nome_mae'] = $worksheet->getCell('G'.$linha_actual)->getCalculatedValue();
-            $caa['data_nascimento'] = $worksheet->getCell('E'.$linha_actual)->getCalculatedValue();
-            $caa['estado_civil_id'] = $worksheet->getCell('I'.$linha_actual)->getCalculatedValue();
-            $caa['genero_id'] = $worksheet->getCell('H'.$linha_actual)->getCalculatedValue();
-            $caa['pais_nascimento'] = $worksheet->getCell('J'.$linha_actual)->getCalculatedValue();
-            $caa['provincia_nascimento'] = $worksheet->getCell('K'.$linha_actual)->getCalculatedValue();
-            $caa['cidade_nascimento'] = $worksheet->getCell('L'.$linha_actual)->getCalculatedValue();
-            $caa['pais_morada'] = $worksheet->getCell('J'.$linha_actual)->getCalculatedValue();
-            $caa['provincia_morada'] = $worksheet->getCell('X'.$linha_actual)->getCalculatedValue();
-            $caa['cidade_morada'] = $worksheet->getCell('Y'.$linha_actual)->getCalculatedValue();
-            $caa['numero_estudante'] = $worksheet->getCell('Q'.$linha_actual)->getCalculatedValue();
-            $caa['email'] = $worksheet->getCell('A'.$linha_actual)->getCalculatedValue();
-            $caa['telemovel'] = $worksheet->getCell('B'.$linha_actual)->getCalculatedValue();
-            $caa['ano_conclusao'] = $worksheet->getCell('P'.$linha_actual)->getCalculatedValue();
-            $caa['grau_academico_id'] = $worksheet->getCell('O'.$linha_actual)->getCalculatedValue();
-            
-            
-            $faculdade_nome = $worksheet->getCell('U'.$linha_actual)->getCalculatedValue();
-            
+
+            $caa = array();
+            $caa['apelido'] = $worksheet->getCell('C' . $linha_actual)->getCalculatedValue();
+            $caa['nomes'] = $worksheet->getCell('D' . $linha_actual)->getCalculatedValue();
+            $caa['nome_pai'] = $worksheet->getCell('F' . $linha_actual)->getCalculatedValue();
+            $caa['nome_mae'] = $worksheet->getCell('G' . $linha_actual)->getCalculatedValue();
+            $caa['data_nascimento'] = $worksheet->getCell('E' . $linha_actual)->getCalculatedValue();
+            $caa['estado_civil_id'] = $worksheet->getCell('I' . $linha_actual)->getCalculatedValue();
+            $caa['genero_id'] = $worksheet->getCell('H' . $linha_actual)->getCalculatedValue();
+            $caa['pais_nascimento'] = $worksheet->getCell('J' . $linha_actual)->getCalculatedValue();
+            $caa['provincia_nascimento'] = $worksheet->getCell('K' . $linha_actual)->getCalculatedValue();
+            $caa['cidade_nascimento'] = $worksheet->getCell('L' . $linha_actual)->getCalculatedValue();
+            $caa['pais_morada'] = $worksheet->getCell('J' . $linha_actual)->getCalculatedValue();
+            $caa['provincia_morada'] = $worksheet->getCell('X' . $linha_actual)->getCalculatedValue();
+            $caa['cidade_morada'] = $worksheet->getCell('Y' . $linha_actual)->getCalculatedValue();
+            $caa['numero_estudante'] = $worksheet->getCell('Q' . $linha_actual)->getCalculatedValue();
+            $caa['email'] = $worksheet->getCell('A' . $linha_actual)->getCalculatedValue();
+            $caa['telemovel'] = $worksheet->getCell('B' . $linha_actual)->getCalculatedValue();
+            $caa['ano_conclusao'] = $worksheet->getCell('P' . $linha_actual)->getCalculatedValue();
+            $caa['grau_academico_id'] = $worksheet->getCell('O' . $linha_actual)->getCalculatedValue();
+
+
+            $faculdade_nome = $worksheet->getCell('U' . $linha_actual)->getCalculatedValue();
+
             $unidade_organica = $this->UnidadeOrganica->findByName($faculdade_nome);
             $caa['unidade_organica_id'] = $unidade_organica['UnidadeOrganica']['id'];
-            
-            $curso_nome = $worksheet->getCell('S'.$linha_actual)->getCalculatedValue();
-            
+
+            $curso_nome = $worksheet->getCell('S' . $linha_actual)->getCalculatedValue();
+
             $curso_real = $this->Curso->findByName($curso_nome);
             $caa['curso_id'] = $curso_real['Curso']['id'];
             $this->CandidatoAlumni->create();
@@ -529,50 +529,137 @@ class OpenSGAShell extends AppShell {
             $linha_actual++;
         }
     }
-    
-    public function cria_pedido_cartao(){
-        
+
+    public function cria_pedido_cartao() {
+
         $this->Aluno->contain('Curso');
-        $alunos = $this->Aluno->find('all',array('conditions'=>array('ano_ingresso'=>2013)));
-        foreach($alunos as $aluno){
+        $alunos = $this->Aluno->find('all', array('conditions' => array('ano_ingresso' => 2013)));
+        foreach ($alunos as $aluno) {
             //Verifica se este aluno nao tem nenhum pedido de novo cartao ja emitido
-            $pedido_existe = $this->RequisicoesPedido->find('first',array('conditions'=>array('aluno_id'=>$aluno['Aluno']['id'],'requisicoes_tipo_pedido_id'=>6)));
-            
-            if(empty($pedido_existe)){
+            $pedido_existe = $this->RequisicoesPedido->find('first', array('conditions' => array('aluno_id' => $aluno['Aluno']['id'], 'requisicoes_tipo_pedido_id' => 6)));
+
+            if (empty($pedido_existe)) {
                 $novo_pedido = array(
-                    'aluno_id'=>$aluno['Aluno']['id'],
-                    'requisicoes_tipo_pedido_id'=>6,
-                    'data_pedido'=>date('Y-m-d H:i:s'),
-                    'curso_id'=>$aluno['Aluno']['curso_id'],
-                    'requisicoes_estado_pedido_id'=>1,
-                    'funcionario_id'=>1,
-                    
+                    'aluno_id' => $aluno['Aluno']['id'],
+                    'requisicoes_tipo_pedido_id' => 6,
+                    'data_pedido' => date('Y-m-d H:i:s'),
+                    'curso_id' => $aluno['Aluno']['curso_id'],
+                    'requisicoes_estado_pedido_id' => 1,
+                    'funcionario_id' => 1,
                 );
                 $this->RequisicoesPedido->create();
-                $this->RequisicoesPedido->save(array('RequisicoesPedido'=>$novo_pedido));
+                $this->RequisicoesPedido->save(array('RequisicoesPedido' => $novo_pedido));
                 $this->out($this->RequisicoesPedido->id);
             }
         }
     }
-    
-    
-    public function corrige_usernames(){
+
+    public function corrige_usernames() {
         $this->Entidade->contain('User');
-        
-        $entidades = $this->Entidade->find('all',array('conditions'=>array('User.username LIKE'=>'% %')));
-        
-        foreach($entidades as $entidade){
-            
-            
+
+        $entidades = $this->Entidade->find('all', array('conditions' => array('User.username LIKE' => '% %')));
+
+        foreach ($entidades as $entidade) {
+
+
             $apelido = $entidade['Entidade']['apelido'];
             $nome = $entidade['Entidade']['name'];
-            $email = $this->User->geraEmailUem($apelido,$nome);
-            
+            $email = $this->User->geraEmailUem($apelido, $nome);
+
             $this->User->id = $entidade['User']['id'];
-            $this->User->set('email',$email);
+            $this->User->set('email', $email);
             $this->User->save();
             $this->out($email);
+        }
+    }
+
+    public function print_lista_estudantes_email() {
+   
+        
+        $this->Curso->contain('UnidadeOrganica');
+        $cursos = $this->Curso->find('all');
+        App::import('Vendor', 'PHPExcel', array('file' => 'PHPExcel.php'));
+        
+        if (!class_exists('PHPExcel'))
+            throw new CakeException('Vendor class PHPExcel not found!');
+        
+        
+        $i = 0;
+        foreach ($cursos as $curso) {
+
+            $xls = PHPExcel_IOFactory::load(APP . 'Reports' . DS . 'print_lista_estudantes_curso_email.xlsx');
+            $worksheet = $xls->getActiveSheet();
+
+            $xls->getActiveSheet()->setCellValue('A1', Configure::read('OpenSGA.instituicao.nome'));
+            $xls->getActiveSheet()->setCellValue('A2', $curso['UnidadeOrganica']['name']);
+            $xls->getActiveSheet()->setCellValue('A3', $curso['Curso']['name']);
+            $xls->getActiveSheet()->setCellValue('A4', 'Ano Lectivo de 2013');
+            $xls->getActiveSheet()->setCellValue('A6', "EMAIL INSTITUCIONAL");
+
+            $this->Aluno->contain(array('Entidade' => array('User')));
+            $alunos = $this->Aluno->find('all', array('conditions' => array('Aluno.curso_id' => $curso['Curso']['id']), 'order' => array('Entidade.apelido', 'Entidade.nomes')));
+            $linha_actual = 10;
+            $ii = 1;
+            foreach ($alunos as $aluno) {
+                $xls->getActiveSheet()->setCellValue('A' . $linha_actual, $ii++);
+                $xls->getActiveSheet()->setCellValue('B' . $linha_actual, $aluno['Aluno']['codigo']);
+                $xls->getActiveSheet()->setCellValue('C' . $linha_actual, $aluno['Entidade']['apelido']);
+                $xls->getActiveSheet()->setCellValue('D' . $linha_actual, $aluno['Entidade']['nomes']);
+                $xls->getActiveSheet()->setCellValue('E' . $linha_actual, $aluno['Entidade']['User']['username']);
+                $this->out('Aluno Adicionado------------------' . $i++);
+                $linha_actual++;
+            }
+
+
             
+            $objDrawing = new PHPExcel_Worksheet_Drawing();
+            $objDrawing->setName("OpenSGA");
+            $objDrawing->setDescription("");
+            $objDrawing->setPath(WWW_ROOT . 'img' . DS . 'logo_login_' . Configure::read('OpenSGA.instituicao.sigla') . '.png');
+            $objDrawing->setCoordinates('A2');
+            $objDrawing->setResizeProportional(true);
+            $objDrawing->setWidthAndHeight(108,115);
+            $objDrawing->setOffsetX(10);
+            $objDrawing->setRotation(0);
+            $objDrawing->getShadow()->setVisible(true);
+            $objDrawing->getShadow()->setDirection(45);
+
+            $objDrawing->setWorksheet($xls->getActiveSheet());
+
+            //$phpExcel->addWorksheetMeta($this->Session->read('Auth.User.name'), 'Lista de Estudantes');
+            $xls->getProperties()->setCreator("SIGA");
+            $xls->getProperties()->setLastModifiedBy("SIGA");
+            $xls->getProperties()->setTitle("Lista de Emails Institucionais");
+            $xls->getProperties()->setSubject("");
+            $xls->getProperties()->setDescription("Lista de Emails Institucionais");
+            $xls->getProperties()->setKeywords("OpenSGA,SIGA");
+            $xls->getProperties()->setCategory("Relatorio");
+            $xls->getActiveSheet()->getHeaderFooter()->setOddFooter('&L&D &T &C' . $xls->getProperties()->getTitle().' - Page &P of &N &R'." [Gerado por siga.uem.mz]");
+            $xls->getActiveSheet()->setShowGridlines(false);
+
+
+            $xls->getSecurity()->setLockWindows(true);
+            $xls->getSecurity()->setLockStructure(true);
+            $xls->getSecurity()->setWorkbookPassword("PHPExcel");
+
+
+            $xls->getActiveSheet()->getProtection()->setPassword('PHPExcel');
+            $xls->getActiveSheet()->getProtection()->setSheet(true); // This should be enabled in order to enable any of the following!
+            $xls->getActiveSheet()->getProtection()->setSort(true);
+            $xls->getActiveSheet()->getProtection()->setObjects(true);
+            $xls->getActiveSheet()->getProtection()->setInsertRows(true);
+            $xls->getActiveSheet()->getProtection()->setFormatCells(true);
+            $objWriter = PHPExcel_IOFactory::createWriter($xls, 'Excel2007');
+            $filename = $this->User->normalize_str($curso['Curso']['name']);
+            $filename = Inflector::slug($filename);
+
+            $objWriter->save(APP . 'exports' . DS . $filename . '.xlsx');
+            
+           
+
+
+            // clear memory
+            $xls->disconnectWorksheets();
         }
     }
 
