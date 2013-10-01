@@ -22,6 +22,7 @@ class CursosController extends AppController {
 
 	function index() {
 		$this->Curso->recursive = 0;
+                $this->paginate = array('limit'=>1000);
 		$this->set('cursos', $this->paginate());
 
 

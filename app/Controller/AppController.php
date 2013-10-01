@@ -12,7 +12,6 @@
 
  *
  */
-
 App::uses('AuditableConfig', 'Auditable.Lib');
 App::uses('Controller', 'Controller');
 
@@ -25,17 +24,17 @@ App::uses('Controller', 'Controller');
  */
 class AppController extends Controller {
 
-    public $components = array('Security', 'Acl', 'Auth'=>array('authenticate'=>'Blowfish'), 'Session', 'RequestHandler', 'Cookie','HighCharts.HighCharts', 'DebugKit.Toolbar');
-    public $helpers = array('Html','AclLink','Print', 'Form', 'Session', 'Js' => array('MyJquery'), 'EventsCalendar', 'Javascript', 'Ajax', 'PhpExcel','HighCharts.HighCharts','AclLink');
+    public $components = array('Security', 'Acl', 'Auth' => array('authenticate' => 'Blowfish'), 'Session', 'RequestHandler', 'Cookie', 'HighCharts.HighCharts', 'DebugKit.Toolbar');
+    public $helpers = array('Html', 'AclLink', 'Print', 'Form', 'Session', 'Js' => array('MyJquery'), 'EventsCalendar', 'Javascript', 'Ajax', 'PhpExcel', 'HighCharts.HighCharts', 'AclLink');
     public $pdfConfig = array('engine' => 'CakePdf.Tcpdf');
     public $cacheAction = '1 hour';
 
     public function beforeFilter() {
         parent::beforeFilter();
-		
-        $config_language  = $this->Session->read('Config.language');
-       
-        if($config_language==null){
+
+        $config_language = $this->Session->read('Config.language');
+
+        if ($config_language == null) {
             $config_language = 'por';
         }
         Configure::write('Config.language', $config_language);
@@ -46,61 +45,57 @@ class AppController extends Controller {
 
         // Caso deseje usar o modelo padrão, utilize como abaixo, caso contrário você pode usar qualquer modelo
         AuditableConfig::$Logger = ClassRegistry::init('Auditable.Logger');
-		
-        
-        
-       $this->Security->csrfExpires = "+30 minutes";
+
+
+
+        $this->Security->csrfExpires = "+30 minutes";
         $this->Auth->authorize = array('Actions' => array('actionPath' => 'controllers'));
         $this->Auth->autoRedirect = false;
         $this->Auth->loginError = "Nome de Usuário ou senha incorrectas";
         $this->Auth->authError = "Não tem permissão para aceder a essa página";
         $this->Auth->flash = array('element' => 'default', 'key' => 'auth', 'params' => array('class' => 'alert_error'));
-        $this->Auth->loginAction = array('plugin'=>false,'controller' => 'users', 'action' => 'login');
-        $this->Auth->logoutRedirect = array('plugin'=>false,'controller' => 'users', 'action' => 'login');
-        $this->Auth->loginRedirect = array(array('plugin'=>false,'controller' => 'pages', 'action' => 'display', 'home'));
+        $this->Auth->loginAction = array('plugin' => false, 'controller' => 'users', 'action' => 'login');
+        $this->Auth->logoutRedirect = array('plugin' => false, 'controller' => 'users', 'action' => 'login');
+        $this->Auth->loginRedirect = array(array('plugin' => false, 'controller' => 'pages', 'action' => 'display', 'home'));
         $this->Auth->unauthorizedRedirect = false;
 
         if ($this->request->is('ajax')) {
             $this->Security->csrfCheck = false;
             $this->Security->validatePost = false;
         }
-        
+
         //Devemos forcar o prefixo para funcionarios da faculdade, docente e estudantes
-        $grupo_id = $this->Session->read('Auth.User.group_id');
-        if($grupo_id ==4){
-            if($this->request->prefix != 'docente'){
-                $this->Security->blackHole($this);
+        if ($this->action != 'logout') {
+            $grupo_id = $this->Session->read('Auth.User.group_id');
+            if ($grupo_id == 4) {
+                if ($this->request->prefix != 'docente') {
+                    $this->Security->blackHole($this);
+                }
+            } elseif ($grupo_id == 3) {
+                if ($this->request->prefix != 'estudante') {
+                    $this->Security->blackHole($this);
+                }
+            } elseif ($grupo_id == 2) {
+                $this->loadModel('User');
+                if ($this->User->isFromFaculdade($this->Session->read('Auth.User.id'))) {
+                    if ($this->request->prefix != 'faculdade') {
+                        $this->Session->setFlash(__('Não tem Permissão para acessar a area anterior'), 'default', array('class' => 'alert info'));
+                        $this->redirect(array('controller' => 'pages', 'action' => 'home', 'faculdade' => true));
+                    }
+                }
             }
-            
-        } elseif($grupo_id ==3){
-            if($this->request->prefix != 'estudante'){
-                $this->Security->blackHole($this);
-            }
-        } elseif($grupo_id ==2){
-            $this->loadModel('User');
-            if($this->User->isFromFaculdade($this->Session->read('Auth.User.id'))){
-                if($this->request->prefix != 'faculdade'){
-                    $this->Session->setFlash(__('Não tem Permissão para acessar a area anterior'),'default',array('class'=>'alert info'));
-                $this->redirect(array('controller'=>'pages','action'=>'home','faculdade'=>true));
-            }
-            }
-           
         }
 
-        $this->set('title_for_layout', '');
-        
-    }
-    
 
+        $this->set('title_for_layout', '');
+    }
 
     public function beforeRender() {
         parent::beforeRender();
-        if(isset($this->request->prefix)){
-            $this->layout=$this->request->prefix;
+        if (isset($this->request->prefix)) {
+            $this->layout = $this->request->prefix;
         }
     }
-    
-    
 
 }
 

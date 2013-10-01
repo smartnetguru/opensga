@@ -12,30 +12,7 @@ ini_set('max_execution_time', 300);
  */
 class SmsNotificationsController extends AppController {
 
-    /**
-     * index method
-     *
-     * @return void
-     */
-    public function index() {
-        $this->SmsNotification->recursive = 0;
-        $this->set('smsNotifications', $this->paginate());
-    }
 
-    /**
-     * view method
-     *
-     * @throws NotFoundException
-     * @param string $id
-     * @return void
-     */
-    public function view($id = null) {
-        if (!$this->SmsNotification->exists($id)) {
-            throw new NotFoundException(__('Invalid sms notification'));
-        }
-        $options = array('conditions' => array('SmsNotification.' . $this->SmsNotification->primaryKey => $id));
-        $this->set('smsNotification', $this->SmsNotification->find('first', $options));
-    }
 
     public function get_message() {
 
@@ -121,7 +98,7 @@ class SmsNotificationsController extends AppController {
                 debug($numero);
                 $mensagem = "Boa tarde! A DRA o convida a participar da reuniao com estudantes estrangeiros, amanha (27/09/13), as 14, no Centro Cultural Universitario. www.dra.uem.mz";
                 debug($mensagem);
-                $this->SmsEnviada->sendSMS($numero,$mensagem);    
+                //$this->SmsEnviada->sendSMS($numero,$mensagem);    
             }
             }
             

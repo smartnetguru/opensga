@@ -84,7 +84,9 @@ class PagesController extends AppController {
     }
 
     function home() {
-    	
+    	$this->loadModel('SmsEnviada');
+        $this->loadModel('SmsNotification');
+        
         $User = $this->Session->read('Auth.User');
         if ($User['group_id'] == 3) {
             $this->redirect(array('controller' => 'pages', 'action' => 'home', 'estudante' => TRUE));
@@ -93,9 +95,9 @@ class PagesController extends AppController {
             $this->redirect(array('controller' => 'pages', 'action' => 'home', 'docente' => TRUE));
         }
         
-        App::import('Model', 'Message');
+      
         $this->loadModel('Aluno');
-        $alerta = new Message;
+      
         $recipient_id = $this->Session->read('Auth.User.id');
         $total_alunos_activos = $this->Aluno->getTotalAlunosActivos();
 
@@ -106,13 +108,22 @@ class PagesController extends AppController {
         $facturas_geradas = $this->Aluno->FinanceiroPagamento->find('count', array('conditions' => array('MONTH(FinanceiroPagamento.created)' => date('m'), 'YEAR(FinanceiroPagamento.created)' => date('Y'))));
         $facturas_pagas = $this->Aluno->FinanceiroPagamento->find('count', array('conditions' => array('MONTH(FinanceiroPagamento.data_pagamento)' => date('m'), 'YEAR(FinanceiroPagamento.data_pagamento)' => date('Y'), 'FinanceiroPagamento.financeiro_estado_pagamento_id' => 2)));
         $valor_arrecadado = $this->Aluno->FinanceiroPagamento->find('all', array('conditions' => array('MONTH(FinanceiroPagamento.data_pagamento)' => date('m'), 'YEAR(FinanceiroPagamento.data_pagamento)' => date('Y'), 'FinanceiroPagamento.financeiro_estado_pagamento_id' => 2), 'fields' => 'sum(FinanceiroPagamento.valor) as valor'));
-
         $valor_divida = $this->Aluno->FinanceiroPagamento->getValorDividaTotal();
-
+        $alertas = null;
+        $sms_enviadas_24  = $this->SmsEnviada->find('count',array('conditions'=>array('SmsEnviada.created >'=>'DATE_SUB(CURDATE(), INTERVAL 1 DAY)')));
+        $sms_enviadas_30  = $this->SmsEnviada->find('count',array('conditions'=>array('SmsEnviada.created >'=>'DATE_SUB(CURDATE(), INTERVAL 30 DAY)')));
+        $sms_recebidas_24 = $this->SmsNotification->find('count',array('conditions'=>array('SmsNotification.created >'=>'DATE_SUB(CURDATE(), INTERVAL 1 DAY)')));
+        $sms_recebidas_30 = $this->SmsNotification->find('count',array('conditions'=>array('SmsNotification.created >'=>'DATE_SUB(CURDATE(), INTERVAL 30 DAY)')));
         
-        $alertas = $alerta->find('all', array('conditions' => array('recipient_id' => $recipient_id, 'datainicio <=' => date('Y-m-d') . ' 23:59:59', 'datafim >=' => date('Y-m-d') . ' 00:00:00')));
+        
+        //Ultimos Acessos
+        $this->loadModel('User');
+        $ultimos_users = $this->User->find('all',array('limit'=>10,'order'=>'User.ultimo_login DESC'));
         $this->set('alertas', $alertas);
-        $this->set(compact('total_alunos_activos', 'total_matriculas_activas', 'facturas_geradas', 'facturas_pagas', 'valor_arrecadado', 'valor_divida'));
+        $this->set(compact('total_alunos_activos', 'total_matriculas_activas', 'facturas_geradas', 'facturas_pagas', 'valor_arrecadado', 'valor_divida','sms_enviadas_24','sms_enviadas_30','sms_recebidas_24','sms_recebidas_30','ultimos_users'));
+        
+        
+        
     }
 
     function beforeFilter() {

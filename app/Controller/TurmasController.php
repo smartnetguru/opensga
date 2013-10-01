@@ -599,6 +599,10 @@ class TurmasController extends AppController {
         
         $this->set(compact('inscricaos'));
     }
+    
+    public function print_dhl(){
+        
+    }
 
     function fecho_da_turma() {
         App::Import('Model', 'Turma');

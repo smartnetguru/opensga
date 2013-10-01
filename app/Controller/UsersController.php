@@ -104,7 +104,7 @@ class UsersController extends AppController {
     function login() {
         if ($this->Session->read('Auth.User')) {
             //if($this->Session->read('Auth.User.group_id')==1)
-            $this->Session->setFlash('Já está logado', 'default', array('class' => 'alert_success'));
+            $this->Session->setFlash('Já está logado', 'default', array('class' => 'alert success'));
             $this->redirect(array('controller' => 'pages', 'action' => 'home'));
         }
 
@@ -130,18 +130,27 @@ class UsersController extends AppController {
                 $User = $this->Session->read('Auth.User');
                 $entidade = $this->User->Entidade->findByUserId($User['id']);
                 $this->Session->write('Auth.User.name', $entidade['Entidade']['name']);
-                $log_text = $this->RequestHandler->getClientIP() ."\t". Controller::referer()."\t".$entidade['Entidade']['name']."\t".$User['id'];
-                //die(debug($log_text));
-                $this->log($log_text, 'access_log'. date('dmY'));
+                
 
                 //Temos de Certificar que o Aro existe, principalmente para estudantes importados
-                $aro = $this->User->Aro->find('all', array('conditions' => array('model' => $this->User->alias, 'foreign_key' => $User['id'])));
+                $aro = $this->User->Aro->find('first', array('conditions' => array('model' => $this->User->alias, 'foreign_key' => $User['id'])));
                 if (empty($aro)) {
                     $new_aro = array('parent_id' => $User['group_id'], 'foreign_key' => $User['id'], 'model' => $this->User->alias);
                     $this->User->Aro->create();
                     $this->User->Aro->save($new_aro);
                 }
 
+                // Vamos pegar todos os grupos e colocar na Sessao
+                $this->User->GroupsUser->contain('Group');
+                $grupos  =  $this->User->GroupsUser->find('all',array('conditions'=>array('user_id'=>$User['id']),'fields'=>array('GroupsUser.group_id','Group.name')));
+                
+                $grupos_combine = Hash::combine($grupos, '{n}.Group.id', '{n}.Group.name');
+                
+                //Actualizamos o Ultimos Login
+                $this->User->id = $User['id'];
+                $this->User->set('ultimo_login',date('Y-m-d H:i:s'));
+                $this->User->save();
+                $this->Session->write('Auth.User.Groups',$grupos_combine);
                 if ($User['group_id'] == 3) {
 
                     $this->redirect(array('controller' => 'pages', 'action' => 'home', 'estudante' => TRUE));
