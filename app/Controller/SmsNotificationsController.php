@@ -12,8 +12,6 @@ ini_set('max_execution_time', 300);
  */
 class SmsNotificationsController extends AppController {
 
-
-
     public function get_message() {
 
         $country_id = $this->request->query['CountryId'];
@@ -51,12 +49,12 @@ class SmsNotificationsController extends AppController {
 
         switch ($comando_recebido) {
             case "rm2014":
-                $this->log("Renovacao" . $message, 'sms');
+
                 $this->SmsNotification->processaSMSRenovacao($this->SmsNotification->id, $origin, $message_explode[1]);
-                //$this->redirect(array('action' => 'get_nome_completo', $phone, $smscenter, $message_explode[1]));
+
                 break;
             case "email":
-                //$this->redirect(array('action' => 'get_email_estudante', $phone, $smscenter, $message_explode[1]));
+                $this->SmsNotification->getEmailEstudante($this->SmsNotification->id, $origin, $message_explode[1]);
                 break;
         }
 
@@ -92,25 +90,24 @@ class SmsNotificationsController extends AppController {
         $alunos = $this->Aluno->find('all', array('conditions' => array('Entidade.pais_nascimento NOT' => 152)));
         debug(count($alunos));
         foreach ($alunos as $aluno) {
-            if(isset($aluno['Entidade']['EntidadeContacto'][0]['valor'])){
+            if (isset($aluno['Entidade']['EntidadeContacto'][0]['valor'])) {
                 $numero = $aluno['Entidade']['EntidadeContacto'][0]['valor'];
-            if (is_numeric($numero)) {
-                debug($numero);
-                $mensagem = "Boa tarde! A DRA o convida a participar da reuniao com estudantes estrangeiros, amanha (27/09/13), as 14, no Centro Cultural Universitario. www.dra.uem.mz";
-                debug($mensagem);
-                //$this->SmsEnviada->sendSMS($numero,$mensagem);    
+                if (is_numeric($numero)) {
+                    debug($numero);
+                    $mensagem = "Boa tarde! A DRA o convida a participar da reuniao com estudantes estrangeiros, amanha (27/09/13), as 14, no Centro Cultural Universitario. www.dra.uem.mz";
+                    debug($mensagem);
+                    //$this->SmsEnviada->sendSMS($numero,$mensagem);    
+                }
             }
-            }
-            
+
 
             //debug($aluno);
             //$this->SmsEnviada->sendSMS($v,"Boa tarde! A DRA o convida a participar da reuniao com estudantes estrangeiros, amanha (27/09/13), as 14, no Centro Cultural Universitario.");    
         }
-        
     }
 
     public function testa_sms() {
-        $this->SmsNotification->processaSMSRenovacao(1, 258826489374, 20131030);
+        $this->SmsNotification->getEmailEstudante(1, 258842569523, 20131030);
     }
 
     public function beforeFilter() {
