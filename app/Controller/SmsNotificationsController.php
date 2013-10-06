@@ -53,8 +53,16 @@ class SmsNotificationsController extends AppController {
                 $this->SmsNotification->processaSMSRenovacao($this->SmsNotification->id, $origin, $message_explode[1]);
 
                 break;
+            case "crm2014":
+
+                $this->SmsNotification->processaSMSConfirmacaoRenovacao($this->SmsNotification->id, $origin, $message_explode[1]);
+
+                break;
             case "email":
                 $this->SmsNotification->getEmailEstudante($this->SmsNotification->id, $origin, $message_explode[1]);
+                break;
+            case "senha":
+                $this->SmsNotification->getSenhaEmailEstudante($this->SmsNotification->id, $origin, $message_explode[2]);
                 break;
         }
 
@@ -63,9 +71,9 @@ class SmsNotificationsController extends AppController {
         $this->log($response_text, 'sms_timwe');
         $this->response->type("text/html");
         $this->response->charset("utf-8");
-        //$this->response->header(array("text" => $response_text));
+        
         $this->response->body($response_text);
-        //$this->response->send();
+        
         return $this->response;
     }
 

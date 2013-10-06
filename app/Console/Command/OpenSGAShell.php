@@ -296,6 +296,10 @@ class OpenSGAShell extends AppShell {
         foreach ($worksheet->getRowIterator() as $row) {
 
             $numero_estudante = $worksheet->getCell('A' . $linha_actual)->getValue();
+            if($numero_estudante==''){
+                break;
+            }
+            $this->Aluno->contain();
             $aluno = $this->Aluno->findByCodigo($numero_estudante);
 
             $datasource = $this->Aluno->getDataSource();
