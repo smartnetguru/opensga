@@ -33,6 +33,7 @@ class AnolectivosController extends AppController {
 
 	function index() {
 		$this->Anolectivo->recursive = 0;
+                $this->paginate = array('limit'=>1000,'order'=>'Anolectivo.ano DESC');
 		$this->set('anolectivos', $this->paginate());
 	}
 
@@ -55,50 +56,41 @@ class AnolectivosController extends AppController {
 		$this->set(compact('anolectivo'));
 	}
 
-	function add() {
+	function novo_ano_lectivo() {
 	    
-		if (!empty($this->data)) {
-			$this->Anolectivo->create();
-            $dados['Anolectivo']['codigo'] = $this->request->data['Anolectivo']['ano']['year'];
-			$dados['Anolectivo']['ano'] = $this->request->data['Anolectivo']['ano']['year'];
-			$dados['Anolectivo']['num_semestre'] = 2;
-			if ($this->Anolectivo->save($dados)) {
-				$this->loadModel('Semestrelectivo');
-				$semestres = array('Semestrelectivo'=>array(0=>array('codigo'=>$dados['Anolectivo']['codigo'].'-1','anolectivo_id'=>$this->Anolectivo->getInsertID(),'semestre'=>1,'data_inicio'=>$this->request->data['Anolectivo']['datainicio1'],'data_fim'=>$this->request->data['Anolectivo']['datafim1']),1=>array('codigo'=>$dados['Anolectivo']['codigo'].'-2','anolectivo_id'=>$this->Anolectivo->getInsertID(),'semestre'=>2,'data_inicio'=>$this->request->data['Anolectivo']['datainicio2'],'data_fim'=>$this->request->data['Anolectivo']['datafim2'])));
-				if($this->Semestrelectivo->saveAll($semestres['Semestrelectivo'])){
-					$this->loadModel('Config');
-					$anolectivoconfig = $this->Config->findByName('ano_lectivo');
-					$anolectivoconfig['Config']['value'] = $this->request->data['Anolectivo']['ano']['year'];
-					$this->Config->save($anolectivoconfig);
-					
-					$anolectivo_id = $this->Config->findByName('anolectivo_id');
-					$anolectivo_id['Config']['value'] = $this->Anolectivo->getInsertID();
-					$this->Config->save($anolectivo_id);
-					
-					$semestrelectivo = $this->Config->findByName('semestre');
-					$semestrelectivo['Config']['value'] = 1;
-					$this->Config->save($semestrelectivo);
-					
-					$semestrelectivo_id = $this->Config->findByName('semestrelectivo_id');
-					$semestrelectivo_id['Config']['value'] = $this->Semestrelectivo->getInsertID()-1;
-					$this->Config->save($semestrelectivo_id);														
-					
-					
-					$configs = $this->Config->find('all');
-				$sgaconfigs = array();
-				foreach($configs as $c){
-					$name = "SGAConfig.".$c['Config']['name'];
-					
-					$this->Session->write($name,$c['Config']['value']);					
-				}
-				
-					$this->Session->setFlash('** Dados Cadastrados com Sucesso **','flashok');
-					$this->redirect(array('action' => 'index'));
-				} else {
-					$this->Session->setFlash('Erro ao gravar dados. Por favor tente de novo.','flasherror');}	
-				}
-				
-		}
+                if($this->request->is('post')){
+                    $this->request->data['Anolectivo']['ano'] = $this->request->data['Anolectivo']['ano']['year'];
+                    $this->Anolectivo->create();
+                    if($this->Anolectivo->save($this->request->data)){
+                        $semestres = array();
+                        $semestres[] = array(
+                            'Semestrelectivo'=>array(
+                                'anolectivo_id'=>$this->Anolectivo->id,
+                                'codigo'=>$this->request->data['Anolectivo']['ano'].'-1',
+                                'semestre'=>1,
+                                'semestre_id'=>1
+                            )
+                        );
+                        $semestres[] = array(
+                            'Semestrelectivo'=>array(
+                                'anolectivo_id'=>$this->Anolectivo->id,
+                                'codigo'=>$this->request->data['Anolectivo']['ano'].'-2',
+                                'semestre'=>2,
+                                'semestre_id'=>2
+                            )
+                        );
+                        $this->Anolectivo->Semestrelectivo->create();
+                        if($this->Anolectivo->Semestrelectivo->saveAll($semestres)){
+                            $this->Session->setFlash(__('O Ano lectivo e os seus semestres foram registrados com Sucesso'),'default',array('class'=>'alert success'));
+                            $this->redirect(array('action'=>'index'));
+                        } else{
+                            $this->Session->setFlash(__('O ano lectivo foi gravado, mas os semestres nãO'),'default',array('class'=>'alert error'));
+                        }
+                    } else{
+                        $this->Session->setFlash(__('Não foi possivel gravar os dados. Tente novamente'),'default',array('class'=>'alert error'));
+                    }
+                }
+		
 		
 		
 	}
