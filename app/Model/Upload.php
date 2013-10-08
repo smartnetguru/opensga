@@ -52,13 +52,19 @@ class Upload extends AppModel {
         if (!is_dir($folder_url)) {
             mkdir($folder_url);
         }
+        
+        $folder_url = APP.$folder.'/'.date('Y');
+        $rel_url = $folder.'/'.date('Y');
+        if (!is_dir($folder_url)) {
+            mkdir($folder_url);
+        }
 
         // if itemId is set create an item folder
         if ($itemId) {
             // set new absolute folder
-            $folder_url = APP . $folder . '/' . $itemId;
+            $folder_url = APP . $folder . '/'.date('Y').'/' . $itemId;
             // set new relative folder
-            $rel_url = $folder . '/' . $itemId;
+            $rel_url = $folder . '/' .date('Y').'/'. $itemId;
             // create directory
             if (!is_dir($folder_url)) {
                 mkdir($folder_url);

@@ -149,6 +149,19 @@ class Entidade extends AppModel {
 			'finderQuery' => '',
 			'counterQuery' => ''
 		),
+        'FinanceiroTransacao' => array(
+			'className' => 'FinanceiroTransacao',
+			'foreignKey' => 'entidade_id',
+			'dependent' => false,
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'exclusive' => '',
+			'finderQuery' => '',
+			'counterQuery' => ''
+		),
         'EntidadeIdentificacao' => array(
 			'className' => 'EntidadeIdentificacao',
 			'foreignKey' => 'entidade_id',

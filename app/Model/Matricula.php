@@ -211,11 +211,16 @@ class Matricula extends AppModel {
         $matricula = $this->find('first',array('conditions'=>array('aluno_id'=>$aluno_id,'anolectivo_id'=>$ano_lectivo_id)));
         return $matricula;
     }
+    
+    
+ 
 
     public function processaFicheiroRenovacao($file_url) {
         App::uses('File', 'Utility');
         $file = new File(APP . $file_url);
         $linhas = file(APP.$file_url,FILE_IGNORE_NEW_LINES);
+        $datasource = $this->getDataSource();
+        $datasource->begin();
         foreach($linhas as $linha){
             
             switch($linha[0]){
@@ -240,23 +245,82 @@ class Matricula extends AppModel {
                     $transacao_id = substr($linha,58,7);
                     $atm_id = substr($linha,65,10);
                     $localizacao_atm = substr($linha,75,16);
+                    $montante_decimal = substr($montante, -2);
+                    debug($montante_decimal);
+                    $montante_real = ltrim(substr($montante,0,-2),'0');
+                    debug($montante_real);
+                    $montante = $montante_real.'.'.$montante_decimal;
                     
-                    debug($montante);
-                    debug($comissao);
-                    debug($transacao_id);
-                    debug($atm_id);
-                    debug($localizacao_atm);
-                    debug($data);
-                    debug($referencia);
+                    
+                    
+                    $transacao = array();
+                    $deposito = array();
+                    $transacao['tipo_transacao_id'] = 1;
+                    $transacao['valor'] = $montante;
+                    $this->Aluno->Entidade->FinanceiroTransacao->FinanceiroPagamento->contain('Aluno');
+                    $pagamento = $this->Aluno->Entidade->FinanceiroTransacao->FinanceiroPagamento->findByReferenciaPagamento($referencia);
+                    if($pagamento){
+                        $transacao['entidade_id'] = $pagamento['FinanceiroPagamento']['entidade_id'];
+                        $transacao['financeiro_conta_id'] = $pagamento['FinanceiroPagamento']['financeiro_conta_id'];
+                        $deposito['entidade_id'] = $pagamento['FinanceiroPagamento']['entidade_id'];
+                        $deposito['financeiro_conta_id'] = $pagamento['FinanceiroPagamento']['financeiro_conta_id'];
+                        $transacao['financeiro_estado_transacao_id'] = 4;
+                        
+                        $deposito['financeiro_estado_deposito_id'] = 2;
+                        $anolectivo = $this->Anolectivo->findByAno('2014');
+                        
+                        //Renova a Matricula se o valor for aceitavel.
+                        if($pagamento['FinanceiroPagamento']['valor']==$montante){
+                            $deposito['data_reconciliacao'] = date('Y-m-d H:i:s');
+                            $matricula_existe = $this->find('first',array('conditions'=>array('aluno_id'=>$pagamento['FinanceiroPagamento']['aluno_id'],'anolectivo_id'=>$anolectivo['Anolectivo']['id'])));
+                            if(empty($matricula_existe)){
+                                $this->create();
+                                $matricula = array(
+                                    'aluno_id'=>$pagamento['Aluno']['id'],
+                                    'curso_id'=>$pagamento['Aluno']['curso_id'],
+                                    'planoestudo_id'=>$pagamento['Aluno']['planoestudo_id'],
+                                    'data'=>$data,
+                                    'estadomatricula_id'=>1,
+                                    'anolectivo_id'=>$anolectivo['Anolectivo']['id'],
+                                    'tipo_matricula_id'=>2
+                                );
+                                $this->save(array('Matricula'=>$matricula));
+                            } else{
+                                $deposito['financeiro_estado_deposito_id'] = 5;
+                            }
+                        } else{
+                            $deposito['financeiro_estado_deposito_id'] = 4;
+                        }
+                    } else{
+                        $transacao['financeiro_estado_transacao_id'] = 5;
+                        $deposito['financeiro_estado_deposito_id'] = 3;
+                    }
+                    $this->Aluno->Entidade->FinanceiroTransacao->create();
+                    $this->Aluno->Entidade->FinanceiroTransacao->save(array('FinanceiroTransacao'=>$transacao));
+                    
+                    $deposito['data_deposito'] = $data;
+                    $deposito['numero_comprovativo'] = $referencia;
+                    $deposito['financeiro_forma_deposito_id'] = 1;
+                    $deposito['financeiro_transacao_id'] = $this->Aluno->Entidade->FinanceiroTransacao->id;
+                    $deposito['financeiro_banco_id'] = 1;
+                    $deposito['valor'] = $montante;
+                    $deposito['referencia_deposito'] = $referencia;
+                    $deposito['id_transacao_banco'] = $transacao_id;
+                    $this->Aluno->Entidade->FinanceiroTransacao->FinanceiroDeposito->create();
+                    $this->Aluno->Entidade->FinanceiroTransacao->FinanceiroDeposito->save(array('FinanceiroDeposito'=>$deposito));
+                    
+                    
+                    
+                    
+                    
+                    
                     break;
                 case '9':
                     $total_pagamentos = substr($linha, 1,7);
                     $valor_total = substr($linha, 8,16);
                     $total_commissoes = substr($linha, 24,16);
                     
-                    debug($total_pagamentos);
-                    debug($valor_total);
-                    debug($total_commissoes);
+                    
                     break;
                 
                 
@@ -264,6 +328,8 @@ class Matricula extends AppModel {
             }
             
         }
+        $datasource->commit();
+        return true;
         
 
         
