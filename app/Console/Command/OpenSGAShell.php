@@ -4,7 +4,7 @@ ini_set('memory_limit', "2048M");
 
 class OpenSGAShell extends AppShell {
 
-    public $uses = array('Turma', 'Matricula', 'Curso', 'UnidadeOrganica', 'Candidatura', 'Aluno', 'EstadoAluno', 'Planoestudo', 'Disciplina', 'Planoestudoano', 'HistoricoCurso', 'Anolectivo', 'CandidatoAlumni', 'Requisicoes.RequisicoesPedido', 'Entidade', 'User');
+    public $uses = array('Turma', 'Matricula', 'Curso', 'UnidadeOrganica', 'Candidatura', 'Aluno', 'EstadoAluno', 'Planoestudo', 'Disciplina', 'Planoestudoano', 'HistoricoCurso', 'Anolectivo', 'CandidatoAlumni', 'Requisicoes.RequisicoesPedido', 'Entidade', 'User','SmsNotification');
 
     public function main() {
         $this->out('Hello world.');
@@ -712,5 +712,21 @@ class OpenSGAShell extends AppShell {
             debug($aluno);
         }
     }
+    
+     public function testa_sms() {
+        $sms_recebidas = $this->SmsNotification->find('all',array('conditions'=>array('message LIKE'=>'crm2014%')));
+        foreach($sms_recebidas as $sms){
+           $message = $sms['SmsNotification']['message'];
+           $message_explode = explode(' ',$message);
+           if(isset($message_explode[1])){
+               debug($message_explode[1]);
+               
+               
+              // $this->SmsNotification->processaSMSConfirmacaoRenovacao($this->SmsNotification->id, $origin, $message_explode[1]);
+           }
+           
+        }
+    }
+   
 
 }

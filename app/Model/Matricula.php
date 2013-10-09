@@ -168,7 +168,7 @@ class Matricula extends AppModel {
      * Retorna o estado da renovacao de matricula do Aluno.
      * @param type $aluno_id
      */
-    public function getStatusRenovacao($aluno_id) {
+    public function getStatusRenovacao($aluno_id,$renovacoes_futuras = false) {
 
         //Primeiro vamos buscar todos os anos lectivos que ele devia matricular
         $this->Aluno->contain('HistoricoCurso');
@@ -182,7 +182,13 @@ class Matricula extends AppModel {
             $historicoAluno = $this->Aluno->HistoricoCurso->find('first', array('conditions' => array('aluno_id' => $aluno['Aluno']['id'], 'curso_id' => $aluno['Aluno']['curso_id'])));
             $ano_lectivo_conditions['ano <='] = $historicoAluno['HistoricoCurso']['ano_fim'];
         } else {
-            $ano_lectivo_conditions['ano <='] = Configure::read('OpenSGA.ano_lectivo');
+            if($renovacoes_futuras){
+                $ano_lectivo_maximo = $this->Anolectivo->find('first',array('order'=>'Anolectivo.ano DESC'));
+                $ano_lectivo_conditions['ano <='] = $ano_lectivo_maximo['Anolectivo']['ano'];
+            } else{
+                $ano_lectivo_conditions['ano <='] = Configure::read('OpenSGA.ano_lectivo');
+            }
+            
         }
         $ano_lectivos = $this->Anolectivo->find('all', array('conditions' => $ano_lectivo_conditions, 'order' => 'ano desc'));
         $array_renovacao_falta = array();
@@ -274,7 +280,10 @@ class Matricula extends AppModel {
                             $deposito['data_reconciliacao'] = date('Y-m-d H:i:s');
                             $matricula_existe = $this->find('first',array('conditions'=>array('aluno_id'=>$pagamento['FinanceiroPagamento']['aluno_id'],'anolectivo_id'=>$anolectivo['Anolectivo']['id'])));
                             if(empty($matricula_existe)){
-                                $this->create();
+                                
+                                //verifica se o aluno é regular
+                                if($this->Aluno->isRegular($pagamento['Aluno']['aluno_id'])){
+                                    $this->create();
                                 $matricula = array(
                                     'aluno_id'=>$pagamento['Aluno']['id'],
                                     'curso_id'=>$pagamento['Aluno']['curso_id'],
@@ -285,6 +294,10 @@ class Matricula extends AppModel {
                                     'tipo_matricula_id'=>2
                                 );
                                 $this->save(array('Matricula'=>$matricula));
+                                } else{
+                                    $deposito['financeiro_estado_deposito_id'] = 6;
+                                }
+                                
                             } else{
                                 $deposito['financeiro_estado_deposito_id'] = 5;
                             }

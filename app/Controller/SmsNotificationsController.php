@@ -115,7 +115,8 @@ class SmsNotificationsController extends AppController {
     }
 
     public function testa_sms() {
-        $this->SmsNotification->getEmailEstudante(1, 258842569523, 20131030);
+           
+        $this->SmsNotification->processaSMSConfirmacaoRenovacao(10000000000000000, 258842569523, 20092946);
     }
 
     public function beforeFilter() {

@@ -520,7 +520,7 @@ class AlunosController extends AppController {
 
 
         $aluno = $this->Aluno->findById($aluno_id);
-        $renovacoes_falta = $this->Aluno->Matricula->getStatusRenovacao($aluno_id);
+        $renovacoes_falta = $this->Aluno->Matricula->getStatusRenovacao($aluno_id,true);
         $this->Aluno->Matricula->contain('Anolectivo', 'Estadomatricula', 'Curso', 'TipoMatricula');
         $matriculas = $this->Aluno->Matricula->find('all', array('conditions' => array('aluno_id' => $aluno_id), 'order' => 'Anolectivo.ano'));
 

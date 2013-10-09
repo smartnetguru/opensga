@@ -24,6 +24,23 @@ class CerimoniaGraduacaosController extends AppController {
 		$this->CerimoniaGraduacao->recursive = 0;
 		$this->set('cerimoniaGraduacaos', $this->Paginator->paginate());
 	}
+        
+        
+        public function print_lista_graduandos($cerimonia_graduacao_id){
+            $this->CerimoniaGraduacao->CandidatoGraduacao->contain(array(
+                    'Aluno'=>array(
+                        'Entidade'=>array(
+                            'Genero','PaisNascimento','ProvinciaNascimento','User'
+                        ),
+                        'Curso'=>array(
+                            'UnidadeOrganica'
+                        )
+                    )
+                ));
+                $candidatos = $this->CerimoniaGraduacao->CandidatoGraduacao->find('all',array('conditions'=>array('cerimonia_graduacao_id'=>$cerimonia_graduacao_id)));
+                $this->set(compact('candidatos'));
+                //debug($candidatos);
+        }
 
 /**
  * view method
