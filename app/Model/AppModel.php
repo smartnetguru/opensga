@@ -4,6 +4,7 @@ App::uses('Model', 'Model');
 
 class AppModel extends Model {
 
+    
     public $actsAs = array('Containable', 'Auditable.Auditable');
 
     function checkUnique($data, $fields) {
