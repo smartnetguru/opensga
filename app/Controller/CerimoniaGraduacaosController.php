@@ -1,4 +1,5 @@
 <?php
+ini_set('max_execution_time', 300);
 App::uses('AppController', 'Controller');
 /**
  * CerimoniaGraduacaos Controller
@@ -38,6 +39,18 @@ class CerimoniaGraduacaosController extends AppController {
                     )
                 ));
                 $candidatos = $this->CerimoniaGraduacao->CandidatoGraduacao->find('all',array('conditions'=>array('cerimonia_graduacao_id'=>$cerimonia_graduacao_id)));
+                
+                $candidatos2 = array();
+                foreach($candidatos as $candidato){
+                    $is_regular = $this->CerimoniaGraduacao->CandidatoGraduacao->Aluno->isRegular($candidato['CandidatoGraduacao']['aluno_id']);
+                    if($is_regular[0]['regular']==true){
+                        $candidato['Aluno']['Status'] = 'Regular';
+                    } else{
+                        $candidato['Aluno']['Status'] = 'Não Regular';
+                    }
+                    $candidatos2[] = $candidato;
+                }
+                $candidatos = $candidatos2;
                 $this->set(compact('candidatos'));
                 //debug($candidatos);
         }
