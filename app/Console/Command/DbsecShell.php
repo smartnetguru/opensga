@@ -577,6 +577,10 @@ class DbsecShell extends AppShell {
                 $this->Inscricao->create();
                 $this->Inscricao->save($array_inscricao);
                 $this->out("Inscricao Criada----- " . $this->Inscricao->id);
+            } else{
+                $array_inscricao['Inscricao']['id'] = $inscricao_existe['Inscricao']['id'];
+                $this->Inscricao->save($array_inscricao);
+                $this->out($inscricao_existe['Inscricao']['id'].'Inscricao Actualizada-------------------'.$this->Inscricao->id);
             }
 
 
