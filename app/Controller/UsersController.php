@@ -1,5 +1,5 @@
 <?php
-
+App::uses('AppController', 'Controller');
 /**
  * OpenSGA - Sistema de Gest�o Acad�mica
  *   Copyright (C) 2010-2011  INFOmoz (Inform�tica-Mo�ambique)

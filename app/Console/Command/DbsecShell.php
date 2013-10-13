@@ -771,6 +771,144 @@ class DbsecShell extends AppShell {
         }
         $datasource->commit();
     }
+    
+    public function importa_docentes_dmi(){
+        AuditableConfig::$Logger = ClassRegistry::init('Auditable.Logger');
+        App::import('Vendor', 'PHPExcel', array('file' => 'PHPExcel.php'));
+        if (!class_exists('PHPExcel'))
+            throw new CakeException('Vendor class PHPExcel not found!');
+        debug("teste0");
+
+        $xls = PHPExcel_IOFactory::load(APP . 'Imports' . DS .'dmi'.DS. 'docentes.xlsx');
+
+        $linha_actual = 2;
+        $worksheet = $xls->getActiveSheet();
+        foreach($worksheet->getRowIterator() as $row){
+             $nome_completo = $worksheet->getCell('A' . $linha_actual)->getCalculatedValue();
+             if($nome_completo==''){
+                 break;
+                 
+             }
+             $explode_nome = explode(',',$nome_completo);
+             
+             $apelido = trim($explode_nome[0]);
+             $nomes = trim($explode_nome[1]);
+             $nome_completo = $nomes.' '.$apelido;
+             $email = $this->User->geraEmailUem($apelido,$nomes);
+             
+             $p_genero = $worksheet->getCell('B' . $linha_actual)->getCalculatedValue();
+             if($p_genero=='1'){
+                 $genero = 1;
+             } else{
+                 $genero = 2;
+             }
+             
+             $p_categoria = $worksheet->getCell('D' . $linha_actual)->getCalculatedValue();
+             if($p_categoria == '1'){
+                 $cp = 1;
+             } else{
+                 $p_categoria2= $worksheet->getCell('E' . $linha_actual)->getCalculatedValue();
+                 if($p_categoria2=='1'){
+                     $cp = 2;
+                 } else{
+                     $p_categoria3 = $worksheet->getCell('F' . $linha_actual)->getCalculatedValue();
+                     if($p_categoria3=='1'){
+                         $cp = 3;
+                     } else{
+                         $p_categoria4 = $worksheet->getCell('G' . $linha_actual)->getCalculatedValue();
+                         if($p_categoria4=='1'){
+                             $cp = 4;
+                         } else{
+                             $p_categoria5 = $worksheet->getCell('H' . $linha_actual)->getCalculatedValue();
+                             if($p_categoria5 =='1'){
+                                 $cp = 5;
+                             }
+                         }
+                     }
+                 }
+             }
+             
+              $p_categoriaa = $worksheet->getCell('I' . $linha_actual)->getCalculatedValue();
+             if($p_categoriaa == '1'){
+                 $ca = 1;
+             } else{
+                 $p_categoria2a= $worksheet->getCell('J' . $linha_actual)->getCalculatedValue();
+                 if($p_categoria2a=='1'){
+                     $ca = 2;
+                 } else{
+                     $p_categoria3a = $worksheet->getCell('K' . $linha_actual)->getCalculatedValue();
+                     if($p_categoria3a=='1'){
+                         $ca = 3;
+                     } else{
+                         $p_categoria4a = $worksheet->getCell('L' . $linha_actual)->getCalculatedValue();
+                         if($p_categoria4a=='1'){
+                             $ca = 4;
+                         }
+                     }
+                 }
+             }
+             
+             $p_regime = $worksheet->getCell('M' . $linha_actual)->getCalculatedValue();
+             if($p_regime=='1'){
+                 $regime=1;
+             }
+             
+             $array_user = array(
+                 'User'=>array(
+                     'username'=>$email,
+                     'password'=>Security::hash('docentedra1', 'blowfish'),
+                     'group_id'=>4,
+                     'verificar_permissoes'=>0,
+                    'estado_email'=>0,
+                     'estado_objecto_id'=>1
+                 
+                 )
+             );
+             
+             $datasource = $this->User->getDatasource();
+             $datasource->begin();
+             $this->User->create();
+             $this->User->save($array_user);
+             $array_groups = array(
+                 'GroupsUser'=>array(
+                     'user_id'=>$this->User->id,
+                     'group_id'=>4,
+                     'estado_objecto_id'=>1
+                 )
+             );
+             $this->User->GroupsUser->create();
+             $this->User->GroupsUser->save($array_groups);
+             
+             $array_entidade = array(
+                 'Entidade'=>array(
+                     'user_id'=>$this->User->id,
+                     'name'=>$nome_completo,
+                     'apelido'=>$apelido,
+                     'nomes'=>$nomes,
+                     'genero_id'=>$genero,
+                 )
+             );
+             $this->Entidade->create();
+             $this->Entidade->save($array_entidade);
+             
+             $array_docente = array(
+                 'Docente'=>array(
+                     'entidade_id'=>$this->Entidade->id,
+                     'categoria_profissional_id'=>$cp,
+                     'categoria_academica_id'=>$ca,
+                     'unidade_organica_id'=>28,
+                     'regime_trabalho_id'=>$regime
+                 )
+             );
+             $this->Entidade->Docente->create();
+             $this->Entidade->Docente->save($array_docente);
+             
+             $datasource->commit();
+             
+             $this->out($this->Entidade->Docente->id);
+             $linha_actual++;
+        }
+    }
 
 }
 

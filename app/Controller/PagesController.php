@@ -118,6 +118,11 @@ class PagesController extends AppController {
         
         //Ultimos Acessos
         $this->loadModel('User');
+        $this->User->contain(array(
+            'Group'=>array(
+                'fields'=>'name'
+            )
+        ));
         $ultimos_users = $this->User->find('all',array('limit'=>10,'order'=>'User.ultimo_login DESC'));
         $this->set('alertas', $alertas);
         $this->set(compact('total_alunos_activos', 'total_matriculas_activas', 'facturas_geradas', 'facturas_pagas', 'valor_arrecadado', 'valor_divida','sms_enviadas_24','sms_enviadas_30','sms_recebidas_24','sms_recebidas_30','ultimos_users'));
