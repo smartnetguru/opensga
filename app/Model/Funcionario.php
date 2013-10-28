@@ -66,21 +66,7 @@ class Funcionario extends AppModel {
         'Docente'
     );
     
-    public $hasMany = array(
-		'FuncionariosFuncaoProfissional' => array(
-			'className' => 'FuncionariosFuncaoProfissional',
-			'foreignKey' => 'funcionario_id',
-			'dependent' => false,
-			'conditions' => '',
-			'fields' => '',
-			'order' => '',
-			'limit' => '',
-			'offset' => '',
-			'exclusive' => '',
-			'finderQuery' => '',
-			'counterQuery' => ''
-		)
-	);
+
 
     /**
      *Esta funcao faz o mesmo que find list, mas busca o name a partir da tabela entidades

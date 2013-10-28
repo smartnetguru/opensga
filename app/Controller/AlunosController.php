@@ -199,7 +199,7 @@ class AlunosController extends AppController {
                 }
         //Requisicoes
                 
-        $requisicoes = $this->Aluno->RequisicoesPedido->getAllRequisicoesPedidoByEstudante('all', array('conditions' => array('aluno_id' => $id)));
+        $requisicoes = $this->Aluno->RequisicoesPedido->getAllRequisicoesPedidoByEstudante($id);
 
 
         $this->Aluno->FinanceiroPagamento->contain(array(

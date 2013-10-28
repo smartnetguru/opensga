@@ -38,24 +38,7 @@ class FuncaoProfissional extends AppModel {
  *
  * @var array
  */
-	public $hasAndBelongsToMany = array(
-		'Funcionario' => array(
-			'className' => 'Funcionario',
-			'joinTable' => 'funcionarios_funcao_profissionals',
-			'foreignKey' => 'funcao_profissional_id',
-			'associationForeignKey' => 'funcionario_id',
-			'unique' => 'keepExisting',
-			'conditions' => '',
-			'fields' => '',
-			'order' => '',
-			'limit' => '',
-			'offset' => '',
-			'finderQuery' => '',
-			'deleteQuery' => '',
-			'insertQuery' => ''
-		)
-	);
-        
+	
         
         public function beforeSave($options = array()) {
             parent::beforeSave($options);
