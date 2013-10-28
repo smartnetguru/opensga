@@ -1,5 +1,6 @@
 <?php
 ini_set('memory_limit', "2048M");
+set_time_limit(300);
 App::uses('AppController', 'Controller');
 App::uses('Sanitize', 'Utility');
 
@@ -197,7 +198,8 @@ class AlunosController extends AppController {
                     $classe_estado="alert error";
                 }
         //Requisicoes
-        $requisicoes = $this->Aluno->RequisicoesPedido->find('all', array('conditions' => array('aluno_id' => $id)));
+                
+        $requisicoes = $this->Aluno->RequisicoesPedido->getAllRequisicoesPedidoByEstudante('all', array('conditions' => array('aluno_id' => $id)));
 
 
         $this->Aluno->FinanceiroPagamento->contain(array(
@@ -206,22 +208,9 @@ class AlunosController extends AppController {
         $pagamentos = $this->Aluno->FinanceiroPagamento->find('all', array('conditions' => array('FinanceiroPagamento.aluno_id' => $id)));
         //debug($pagamentos);
         $this->set('aluno', $aluno);
-        $users = $this->Aluno->User->find('list');
-        $paises = $this->Aluno->Entidade->PaisNascimento->find('list');
-        $cidades = $this->Aluno->Entidade->CidadeNascimento->find('list');
-        $provincias = $this->Aluno->Entidade->ProvinciaNascimento->find('list');
-        $provenienciacidades = $this->Aluno->Entidade->CidadeNascimento->find('list');
-        $proveniencianomes = $this->Aluno->Entidade->ProvinciaNascimento->find('list');
-        $documentos = $this->Aluno->Entidade->DocumentoIdentificacao->find('list');
-        $areatrabalhos = $this->Aluno->Areatrabalho->find('list');
-        $generos = $this->Aluno->Entidade->Genero->find('list');
-        $cidadenascimentos = $this->Aluno->Entidade->CidadeNascimento->find('list');
-        $cursos = $this->Aluno->Curso->find('list');
-        $planoestudos = $this->Aluno->Matricula->Planoestudo->find('list');
+      $is_bolseiro = $this->Aluno->isBolseiro($id, $this->Session->read('SGAConfig.anolectivo_id'));
 
-        $is_bolseiro = $this->Aluno->isBolseiro($id, $this->Session->read('SGAConfig.anolectivo_id'));
-
-        $this->set(compact('cursos', 'planoestudos', 'users', 'paises', 'cidades', 'provincias', 'documentos', 'areatrabalhos', 'generos', 'cidadenascimentos', 'proveniencianomes', 'provenienciacidades', 'inscricoes_activas', 'todas_inscricoes', 'cadeiras_aprovadas', 'pagamentos', 'is_bolseiro','is_regular','classe_estado'));
+        $this->set(compact( 'inscricoes_activas', 'todas_inscricoes', 'cadeiras_aprovadas', 'pagamentos', 'is_bolseiro','is_regular','classe_estado','requisicoes'));
     }
 
     public function estudante_perfil($id = null) {
@@ -519,7 +508,11 @@ class AlunosController extends AppController {
         }
 
 
+        $this->Aluno->contain(array(
+            'Entidade','Planoestudo','Curso'=>array('UnidadeOrganica')
+        ));
         $aluno = $this->Aluno->findById($aluno_id);
+        
         $renovacoes_falta = $this->Aluno->Matricula->getStatusRenovacao($aluno_id,true);
         $this->Aluno->Matricula->contain('Anolectivo', 'Estadomatricula', 'Curso', 'TipoMatricula');
         $matriculas = $this->Aluno->Matricula->find('all', array('conditions' => array('aluno_id' => $aluno_id), 'order' => 'Anolectivo.ano'));

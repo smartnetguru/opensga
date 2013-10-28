@@ -891,13 +891,27 @@ class DbsecShell extends AppShell {
              $this->Entidade->create();
              $this->Entidade->save($array_entidade);
              
+             $array_funcionario = array(
+               'user_id'=>$this->User->id,
+                 'entidade_id'=>$this->Entidade->id,
+                 'unidade_organica_id'=>28,
+                 ''
+             );
+             debug($array_user);
+             debug($array_entidade);
+             debug($array_funcionario);
+             $datasource->showLog();
+             $this->Entidade->Funcionario->create();
+             $this->Entidade->Funcionario->save($array_funcionario);
+             
              $array_docente = array(
                  'Docente'=>array(
                      'entidade_id'=>$this->Entidade->id,
                      'categoria_profissional_id'=>$cp,
                      'categoria_academica_id'=>$ca,
                      'unidade_organica_id'=>28,
-                     'regime_trabalho_id'=>$regime
+                     'regime_trabalho_id'=>$regime,
+                     'funcionario_id'=>$this->Entidade->Funcionario->id
                  )
              );
              $this->Entidade->Docente->create();

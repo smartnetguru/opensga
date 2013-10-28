@@ -62,6 +62,10 @@ class Funcionario extends AppModel {
         )
     );
     
+    public $hasOne = array(
+        'Docente'
+    );
+    
     public $hasMany = array(
 		'FuncionariosFuncaoProfissional' => array(
 			'className' => 'FuncionariosFuncaoProfissional',

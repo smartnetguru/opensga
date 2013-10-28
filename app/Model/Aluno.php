@@ -121,7 +121,7 @@ class Aluno extends AppModel {
             'counterQuery' => ''
         ),
         'RequisicoesPedido' => array(
-            'className' => 'RequisicoesPedido',
+            'className' => 'Requisicoes.RequisicoesPedido',
             'foreignKey' => 'aluno_id',
             'dependent' => false,
             'conditions' => '',

@@ -230,6 +230,7 @@ class User extends AppModel {
         $nome = preg_replace('/\s+/', ' ', $nome);
         $apelido = preg_replace('/\s+/', ' ', $apelido);
         $nomes = explode(' ', $nome);
+        $apelido = str_replace(' ', '', $apelido);
         $email = $nomes[0] . '.' . $apelido . '@uem.ac.mz';
 
         //Verificar se existe algum email assim
