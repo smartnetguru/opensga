@@ -116,13 +116,9 @@ public $actsAs = array('Tree','Containable','Auditable');
 	);
 
 
-/**
- * hasAndBelongsToMany associations
- *
- * @var array
- */
-	public $hasAndBelongsToMany = array(
-	);
+        public $virtualFields = array(
+            'nome_codigo' => 'CONCAT(UnidadeOrganica.codigo," - ",UnidadeOrganica.name)'
+        );
         
         public function isFromFaculdade($unidade_organica_id){
             

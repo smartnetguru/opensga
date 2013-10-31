@@ -23,7 +23,7 @@ class AlunosController extends AppController {
     public $name = 'Alunos';
 
     function index() {
-
+        
         $conditions = array();
         if ($this->request->is('post')) {
             if ($this->request->data['Aluno']['codigo'] != '') {
@@ -33,12 +33,14 @@ class AlunosController extends AppController {
                 $conditions['Entidade.apelido LIKE'] = '%' . $this->request->data['Aluno']['apelido'] . '%';
             }
         }
+        $this->paginate = array(
+            'conditions'=>$conditions
+        );
 
-
-
-        $this->Aluno->contain('Entidade', 'Curso');
-        $alunos = $this->Aluno->find('all', array('conditions' => $conditions, 'limit' => 100));
         
+        $this->Aluno->contain('Entidade', 'Curso','EstadoAluno');
+        $alunos = $this->paginate();
+                
         if(count($alunos)==1){
             $this->redirect(array('action'=>'perfil_estudante',$alunos[0]['Aluno']['id']));
         }
@@ -49,46 +51,6 @@ class AlunosController extends AppController {
     
     
 
-    function index_ajax() {
-
-        $conditions = array();
-        $conditions['limit'] = Sanitize::escape($_GET['iDisplayLength']);
-        $conditions['offset'] = Sanitize::escape($_GET['iDisplayStart']);
-        $aColumns = array('Entidade.name', 'Aluno.codigo');
-
-        /*
-         * Filtering
-         * NOTE this does not match the built-in DataTables filtering which does it
-         * word by word on any field. It's possible to do here, but concerned about efficiency
-         * on very large tables, and MySQL's regex functionality is very limited
-         */
-
-        if ($_GET['sSearch'] != "") {
-            $conditions['conditions']['OR'] = array();
-            for ($i = 0; $i < count($aColumns); $i++) {
-                $conditions['conditions']['OR'][$aColumns[$i] . " LIKE"] = "%" . $_GET['sSearch'] . "%";
-            }
-        }
-        $this->Aluno->contain(array('Entidade', 'Curso'));
-        $alunos = $this->Aluno->find('all', $conditions);
-        $alunos_count = $this->Aluno->find('count');
-        $alunos_count_filter = $this->Aluno->find('count', $conditions);
-        $iTotal = $alunos_count;
-        $iFilteredTotal = $alunos_count_filter;
-
-        $cursos = $this->Aluno->Curso->find('list');
-
-        $output = array(
-            "sEcho" => intval($_GET['sEcho']),
-            "iTotalRecords" => $iTotal,
-            "iTotalDisplayRecords" => $iFilteredTotal,
-            "aaData" => array()
-        );
-
-
-        $this->set('output', $output);
-        $this->set('alunos', $alunos);
-    }
 
     /**
      * @Todo Optimizar esta pagina
@@ -331,6 +293,48 @@ class AlunosController extends AppController {
         $this->set(compact('cursos', 'planoestudos', 'users', 'paises', 'cidades', 'provincias', 'documentos', 'areatrabalhos', 'generos', 'cidadenascimentos', 'proveniencianomes', 'provenienciacidades', 'inscricoes_activas', 'todas_inscricoes', 'cadeiras_aprovadas', 'pagamentos', 'is_bolseiro'));
     }
 
+    
+    public function exportar_alunos(){
+        set_time_limit(1800);
+        if($this->request->is('post')){
+            $conditions = array();
+            if($this->request->data['Aluno']['ano_ingresso']!=''){
+                $conditions['Aluno.ano_ingresso'] = $this->request->data['Aluno']['ano_ingresso'];
+            }
+            if($this->request->data['Aluno']['curso_id']!=''){
+                $conditions['Aluno.curso_id'] = $this->request->data['Aluno']['curso_id'];
+            }
+            if($this->request->data['Aluno']['estado_aluno_id']!=''){
+                $conditions['Aluno.estado_aluno_id'] = $this->request->data['Aluno']['estado_aluno_id'];
+            }
+            if($this->request->data['Curso']['unidade_organica_id']!=''){
+                $conditions['Aluno.unidade_organica_id'] = $this->request->data['Aluno']['unidade_organica_id'];
+            }
+            
+            $this->Aluno->contain(array(
+                'Curso'=>array(
+                    'UnidadeOrganica'
+                ),'EstadoAluno','Entidade'=>array(
+                            'Genero'
+                        ),
+            ));
+            $alunos = $this->Aluno->find('all',array('conditions'=>$conditions));
+           
+            $this->set(compact('alunos'));
+            $this->render('exportar_alunos_excel');
+            
+        }
+        $anolectivos = $this->Aluno->Matricula->Anolectivo->find('list',array('order'=>'ano DESC','fields'=>'ano'));
+        $cursos = $this->Aluno->Curso->find('list',array('order'=>'name'));
+        $unidadeOrganicas = $this->Aluno->Curso->UnidadeOrganica->find('list',array('order'=>'name','fields'=>'nome_codigo'));
+        $estadoAlunos = $this->Aluno->EstadoAluno->find('list');
+        $this->set(compact('anolectivos','cursos','unidadeOrganicas','estadoAlunos'));
+    }
+    
+    public function exportar_alunos_excel(){
+        
+    }
+    
     public function seleccionar_aluno($r_controller, $r_action) {
         
     }
