@@ -398,7 +398,7 @@ class Aluno extends AppModel {
         $dataSource = $this->getDataSource();
 
         $dataSource->begin();
-
+        die(debug($data));
         $data_matricula = array();
         if ($data['Aluno']['numero_estudante'] == '') {
             $data['Aluno']['codigo'] = $this->geraCodigo();
