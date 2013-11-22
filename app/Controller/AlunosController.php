@@ -350,13 +350,15 @@ class AlunosController extends AppController {
      * @todo Nas listagens apenas devem aparecer codificadores e opcoes activas
      */
     function adicionar_estudante() {
-        if ($this->request->is('post') || $this->request->is('put')) {
+        if ($this->request->is('post') || $this->request->is('put')){ 
+            $this->request->data['Aluno']['codigo'] = $this->request->data['Aluno']['numero_estudante'];
+            $this->request->data['Matricula']['user_id'] = $this->Session->read('Auth.User.id');
             $this->request->data['Entidade']['name'] = $this->request->data['Entidade']['nomes'] . ' ' . $this->request->data['Entidade']['apelido'];
             if ($this->Aluno->cadastraAluno($this->request->data)) {
-                $this->Session->setFlash("Aluno Registrado com Sucesso", 'default', array('class' => 'alert_success'));
+                $this->Session->setFlash("Aluno Registrado com Sucesso", 'default', array('class' => 'alert success'));
                 $this->redirect(array('controller' => 'alunos', 'action' => 'perfil_estudante', $this->Aluno->id));
             } else {
-                $this->Session->setFlash('Problemas ao registrar os dados do Aluno', 'default', array('class' => 'alert_error'));
+                $this->Session->setFlash('Problemas ao registrar os dados do Aluno', 'default', array('class' => 'alert error'));
             }
         }
 
@@ -367,7 +369,7 @@ class AlunosController extends AppController {
         $users = $this->Aluno->Entidade->User->find('list');
 
         $paises = $this->Aluno->Entidade->PaisNascimento->find('list');
-        $escola_nivel_medios = $this->Aluno->AlunoNivelMedio->EscolaNivelMedio->find('list');
+        $escolaNivelMedios = $this->Aluno->AlunoNivelMedio->EscolaNivelMedio->find('list');
         $cidades = $this->Aluno->Entidade->CidadeNascimento->find('list');
         $provincias = $this->Aluno->Entidade->ProvinciaNascimento->find('list');
         $provenienciacidades = $this->Aluno->AlunoNivelMedio->EscolaNivelMedio->Distrito->find('list');
@@ -378,7 +380,7 @@ class AlunosController extends AppController {
         $turnos = $this->Aluno->Matricula->Turno->find('list');
         $estado_civil = $this->Aluno->Entidade->EstadoCivil->find('list');
         $cidadenascimentos = $this->Aluno->Entidade->CidadeNascimento->find('list');
-        $this->set(compact('nacionalidades', 'cursos', 'planoestudos', 'users', 'paises', 'cidades', 'provincias', 'documento_identificacaos', 'areatrabalhos', 'generos', 'cidadenascimentos', 'proveniencianomes', 'provenienciacidades', 'turnos', 'escola_nivel_medios', 'estado_civil'));
+        $this->set(compact('nacionalidades', 'cursos', 'planoestudos', 'users', 'paises', 'cidades', 'provincias', 'documento_identificacaos', 'areatrabalhos', 'generos', 'cidadenascimentos', 'proveniencianomes', 'provenienciacidades', 'turnos', 'escolaNivelMedios', 'estado_civil'));
     }
 
     /**
@@ -441,8 +443,8 @@ class AlunosController extends AppController {
 
     public function beforeFilter() {
         parent::beforeFilter();
-        if ($this->request->params['action'] == 'matricular_candidato') {
-            //$this->Security->validatePost = false; 
+        if ($this->request->params['action'] == 'adicionar_estudante') {
+            $this->Security->validatePost = false; 
         }
     }
 

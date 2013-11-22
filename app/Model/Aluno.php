@@ -398,7 +398,7 @@ class Aluno extends AppModel {
         $dataSource = $this->getDataSource();
 
         $dataSource->begin();
-        die(debug($data));
+        
         $data_matricula = array();
         if ($data['Aluno']['numero_estudante'] == '') {
             $data['Aluno']['codigo'] = $this->geraCodigo();
@@ -430,9 +430,10 @@ class Aluno extends AppModel {
                 $data['Aluno']['entidade_id'] = $this->Entidade->getLastInsertID();
 
                 $planoestudo = $this->Curso->getPlanoEstudoRecente($data['Aluno']['curso_id']);
-
+                if(!empty($planoestudo))
                 $data['Aluno']['planoestudo_id'] = $planoestudo['Planoestudo']['id'];
                 $data['Aluno']['estado_aluno_id'] = 1;
+                
                 $this->create();
                 if ($this->save($data)) {
                     //Grava os dados de Identificacao
@@ -448,6 +449,7 @@ class Aluno extends AppModel {
                     //Grava os dados de Morada e Contactos
 
                     $contactos = $data['EntidadeContacto'];
+                    
                     foreach ($contactos as $k => $v) {
                         $this->Entidade->EntidadeContacto->create();
                         $this->Entidade->EntidadeContacto->save(
@@ -502,10 +504,8 @@ class Aluno extends AppModel {
                     // $data_matricula['turno_id'] = $data['Aluno']['turno_id'];
                     //$data_matricula['nivel'] = $data['Aluno']['nivel'];
                     $data_matricula['tipo_matricula_id'] = 1;
-                    if (Configure::read('OpenSGA.matriculas.regimes' == 2)) {
-                        //     $data_matricula['regimelectivo_id'] = $data['Aluno']['regimelectivo_id'];
-                    }
-
+                    
+                    
                     $matricula_gravar = array('Matricula' => $data_matricula);
                     $this->Matricula->create();
                     if ($this->Matricula->save($matricula_gravar)) {
