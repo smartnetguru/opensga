@@ -100,5 +100,29 @@ class CursosController extends AppController {
         function beforeRender(){
             parent::beforeRender();
         }
+        
+        
+        public function report_cursos_activos($ano_academico=null){
+            $conditions = array();
+            
+            if(!empty($ano_academico)){
+                $anolectivo = $this->Curso->Matricula->Anolectivo->findByAno($ano_academico);
+                $conditions['Matricula.anolectivo_id'] = $anolectivo['Anolectivo']['id'];
+            }
+            $this->Curso->contain(array(
+               'GrauAcademico'
+            ));
+            debug($anolectivo);
+            $cursos = $this->Curso->find('all',array('fields'=>array('Curso.id','Curso.name','Curso.codigo','Grauacademico.name')));
+            foreach($cursos as $k=>$curso){
+                
+                $conditions['Matricula.curso_id'] = $curso['Curso']['id'];
+                $matriculados = $this->Curso->Matricula->find('count',array('conditions'=>$conditions));
+                $cursos[$k]['Matriculas']['total']=$matriculados;
+                
+            }
+            
+            $this->set(compact('cursos'));
+        }
 }
 ?>
