@@ -65,7 +65,8 @@ class AppController extends Controller {
         }
         
         //Devemos forcar o prefixo para funcionarios da faculdade, docente e estudantes
-        if ($this->action != 'logout') {
+        $general_actions = array('logout','trocar_senha');
+        if (!in_array($this->action,$general_actions)) {
             $grupo_id = $this->Session->read('Auth.User.group_id');
             
             if ($grupo_id == 4) {
