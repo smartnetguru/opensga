@@ -13,3 +13,4 @@ tmp
 /lib/Cake/Console/Templates/skel/tmp
 /.settings/
 /.clover/
+/nbproject/private/

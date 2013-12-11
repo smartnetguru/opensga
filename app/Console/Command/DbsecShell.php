@@ -49,7 +49,7 @@ class DbsecShell extends AppShell {
         if (!class_exists('PHPExcel'))
             throw new CakeException('Vendor class PHPExcel not found!');
 
-        $xls = PHPExcel_IOFactory::load(APP . 'Imports' . DS . 'curso.xlsx');
+        $xls = PHPExcel_IOFactory::load(APP . 'Imports' . DS . 'agronomia'.DS.'curso.xlsx');
 
         $linha_actual = 2;
         $worksheet = $xls->getActiveSheet();
@@ -95,7 +95,7 @@ class DbsecShell extends AppShell {
         if (!class_exists('PHPExcel'))
             throw new CakeException('Vendor class PHPExcel not found!');
 
-        $xls = PHPExcel_IOFactory::load(APP . 'Imports' . DS .'dmi'.DS. 'disciplina.xlsx');
+        $xls = PHPExcel_IOFactory::load(APP . 'Imports' . DS .'agronomia'.DS. 'disciplina.xlsx');
 
         $linha_actual = 2;
         $worksheet = $xls->getActiveSheet();
@@ -151,8 +151,8 @@ class DbsecShell extends AppShell {
         if (!class_exists('PHPExcel'))
             throw new CakeException('Vendor class PHPExcel not found!');
 
-        $xls = PHPExcel_IOFactory::load(APP . 'Imports' . DS .'dmi'.DS. 'disciplina_curso.xlsx');
-        $xls2 = PHPExcel_IOFactory::load(APP . 'Imports' . DS .'dmi'.DS. 'disciplina.xlsx');
+        $xls = PHPExcel_IOFactory::load(APP . 'Imports' . DS .'agronomia'.DS. 'disciplina_curso.xlsx');
+        $xls2 = PHPExcel_IOFactory::load(APP . 'Imports' . DS .'agronomia'.DS. 'disciplina.xlsx');
             $worksheet2 = $xls2->getActiveSheet();
         $linha_actual = 2;
         $worksheet = $xls->getActiveSheet();
@@ -240,7 +240,7 @@ class DbsecShell extends AppShell {
         if (!class_exists('PHPExcel'))
             throw new CakeException('Vendor class PHPExcel not found!');
 
-        $xls = PHPExcel_IOFactory::load(APP . 'Imports' . DS . 'estudante.xlsx');
+        $xls = PHPExcel_IOFactory::load(APP . 'Imports' . DS .'agronomia'.DS. 'estudante.xlsx');
 
         $linha_actual = 2;
         $worksheet = $xls->getActiveSheet();
@@ -291,11 +291,11 @@ class DbsecShell extends AppShell {
         if (!class_exists('PHPExcel'))
             throw new CakeException('Vendor class PHPExcel not found!');
 
-        $xls = PHPExcel_IOFactory::load(APP . 'Imports' . DS .'dmi'.DS. 'leccionamento.xlsx');
+        $xls = PHPExcel_IOFactory::load(APP . 'Imports' . DS .'agronomia'.DS. 'leccionamento.xlsx');
 
         $linha_actual = 2;
         $worksheet = $xls->getActiveSheet();
-        $xls2 = PHPExcel_IOFactory::load(APP . 'Imports' . DS .'dmi'.DS. 'disciplina.xlsx');
+        $xls2 = PHPExcel_IOFactory::load(APP . 'Imports' . DS .'agronomia'.DS. 'disciplina.xlsx');
         $worksheet2 = $xls2->getActiveSheet();
         foreach ($worksheet->getRowIterator() as $row) {
             $this->Planoestudo->recursive = -1;
@@ -387,50 +387,9 @@ class DbsecShell extends AppShell {
         }
     }
 
-    public function actualiza_semestres() {
-        $anolectivos = $this->Anolectivo->find('all');
-        foreach ($anolectivos as $anolectivo) {
-            $semestre_lectivo = $this->Semestrelectivo->find('first', array('conditions' => array('anolectivo_id' => $anolectivo['Anolectivo']['id'])));
-            if (empty($semestre_lectivo)) {
-                $array_semestre = array(
-                    array(
-                        'Semestrelectivo' => array(
-                            'codigo' => $anolectivo['Anolectivo']['ano'] . "-1",
-                            'anolectivo_id' => $anolectivo['Anolectivo']['id'],
-                            'semestre' => 1,
-                            'semestre_id' => 1,
-                        )
-                    ),
-                    array(
-                        'Semestrelectivo' => array(
-                            'codigo' => $anolectivo['Anolectivo']['ano'] . "-1",
-                            'anolectivo_id' => $anolectivo['Anolectivo']['id'],
-                            'semestre' => 2,
-                            'semestre_id' => 2,
-                        )
-                    )
-                );
-                $this->Semestrelectivo->create();
-                $this->Semestrelectivo->saveAll($array_semestre);
-                $this->out($anolectivo['Anolectivo']['id']);
-            }
-        }
-    }
+    
 
-    Public function actualiza_turnos() {
-        $cursos = $this->DraCurso->find('all');
-        foreach ($cursos as $curso) {
-            $curso_sga = $this->Curso->findByCodigo($curso['DraCurso']['curso_id']);
-            $array_curso_turno = array(
-                'CursosTurno' => array(
-                    'curso_id' => $curso_sga['Curso']['id'],
-                    'turno_id' => $curso['DraCurso']['regime']
-                )
-            );
-            $this->CursosTurno->create();
-            $this->CursosTurno->save($array_curso_turno);
-        }
-    }
+   
 
     public function actualiza_turnos_dbsec() {
         $cursos = $this->DbsecCurso->find('all');
@@ -485,18 +444,18 @@ class DbsecShell extends AppShell {
             throw new CakeException('Vendor class PHPExcel not found!');
         debug("teste0");
 
-        $xls = PHPExcel_IOFactory::load(APP . 'Imports' . DS .'dmi'.DS. 'inscricao.xlsx');
+        $xls = PHPExcel_IOFactory::load(APP . 'Imports' . DS .'agronomia'.DS. 'inscricao.xlsx');
 
         $linha_actual = 2;
         $worksheet = $xls->getActiveSheet();
-        $xls2 = PHPExcel_IOFactory::load(APP . 'Imports' . DS .'dmi'.DS. 'disciplina.xlsx');
+        $xls2 = PHPExcel_IOFactory::load(APP . 'Imports' . DS .'agronomia'.DS. 'disciplina.xlsx');
             $worksheet2 = $xls2->getActiveSheet();
 
         foreach ($worksheet->getRowIterator() as $row) {
             $this->Aluno->recursive = -1;
 
-            $aluno = $this->Aluno->findByCodigo(trim($worksheet->getCell('A' . $linha_actual)->getCalculatedValue()));
-
+            $aluno = $this->Aluno->findByCodigo(trim($worksheet->getCell('A' . $linha_actual)->getCalculatedValue()));debug(trim($worksheet->getCell('A' . $linha_actual)->getCalculatedValue()));
+            debug($aluno);
             $codigo_disciplina = $worksheet->getCell('B' . $linha_actual)->getCalculatedValue();
             
             $linha_actual2 = 2;

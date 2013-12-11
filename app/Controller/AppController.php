@@ -63,10 +63,11 @@ class AppController extends Controller {
             $this->Security->csrfCheck = false;
             $this->Security->validatePost = false;
         }
-
+        
         //Devemos forcar o prefixo para funcionarios da faculdade, docente e estudantes
         if ($this->action != 'logout') {
             $grupo_id = $this->Session->read('Auth.User.group_id');
+            
             if ($grupo_id == 4) {
                 if ($this->request->prefix != 'docente') {
                     $this->Security->blackHole($this);
@@ -78,6 +79,8 @@ class AppController extends Controller {
             } elseif ($grupo_id == 2) {
                 $this->loadModel('User');
                 if ($this->User->isFromFaculdade($this->Session->read('Auth.User.id'))) {
+                    
+                    
                     if ($this->request->prefix != 'faculdade') {
                         $this->Session->setFlash(__('Não tem Permissão para acessar a area anterior'), 'default', array('class' => 'alert info'));
                         $this->redirect(array('controller' => 'pages', 'action' => 'home', 'faculdade' => true));
