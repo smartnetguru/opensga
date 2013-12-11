@@ -454,8 +454,8 @@ class DbsecShell extends AppShell {
         foreach ($worksheet->getRowIterator() as $row) {
             $this->Aluno->recursive = -1;
 
-            $aluno = $this->Aluno->findByCodigo(trim($worksheet->getCell('A' . $linha_actual)->getCalculatedValue()));debug(trim($worksheet->getCell('A' . $linha_actual)->getCalculatedValue()));
-            debug($aluno);
+            $aluno = $this->Aluno->findByCodigo(trim($worksheet->getCell('A' . $linha_actual)->getCalculatedValue()));
+            
             $codigo_disciplina = $worksheet->getCell('B' . $linha_actual)->getCalculatedValue();
             
             $linha_actual2 = 2;
