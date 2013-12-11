@@ -24,6 +24,7 @@ class AlunosController extends AppController {
 
     function index() {
         
+        
         $conditions = array();
         if ($this->request->is('post')) {
             if ($this->request->data['Aluno']['codigo'] != '') {
@@ -34,12 +35,14 @@ class AlunosController extends AppController {
             }
         }
         $this->paginate = array(
-            'conditions'=>$conditions
+            'conditions'=>$conditions,
+            'contain'=>array('Entidade', 'Curso','EstadoAluno'),
         );
+        
 
         
-        $this->Aluno->contain('Entidade', 'Curso','EstadoAluno');
-        $alunos = $this->paginate();
+        
+        $alunos = $this->paginate('Aluno');
                 
         if(count($alunos)==1){
             $this->redirect(array('action'=>'perfil_estudante',$alunos[0]['Aluno']['id']));
@@ -1064,6 +1067,129 @@ class AlunosController extends AppController {
         }
 
         $this->set('alunos', $alunos);
+    }
+    
+    /**
+     * @Todo Optimizar esta pagina
+     * @Todo Colocar os links para as opcoes do estudante
+     * @param type $id
+     */
+    function faculdade_perfil_estudante($id = null) {
+        $this->Aluno->id = $id;
+        if (!$this->Aluno->exists()) {
+            throw new NotFoundException('Este aluno não existe no Sistema');
+        }
+
+
+        
+
+        $this->Aluno->contain(array(
+            'Matricula' => array(
+                'Planoestudo', 'Turno'
+            ),
+            'Curso', 'Entidade' => array(
+                'ProvinciaNascimento', 'CidadeNascimento', 'PaisNascimento', 'Genero', 'DocumentoIdentificacao'
+            ),
+            'AlunoNivelMedio' => array(
+                'EscolaNivelMedio' => array('Provincia', 'Distrito')
+            )
+        ));
+        $aluno = $this->Aluno->find('first', array('conditions' => array('Aluno.id' => $id)));
+        
+        $this->Aluno->Inscricao->contain(array(
+            'Turma' => array(
+                'fields' => array(
+                    'id', 'disciplina_id', 'anocurricular', 'semestrecurricular'),
+                'Disciplina' => array(
+                    'fields' => array('id', 'name')
+                )
+            ),
+            'Matricula' => array(
+                'fields' => array('id', 'anolectivo_id'),
+                'Anolectivo' => array(
+                    'fields' => array('id', 'ano')
+                )
+            )
+                )
+        );
+        $inscricoes_activas = $this->Aluno->Inscricao->find('all', array('conditions' => array('Inscricao.aluno_id' => $id, 'Inscricao.estadoinscricao_id' => 1)));
+
+        $this->Aluno->Inscricao->contain(array(
+            'Turma' => array(
+                'fields' => array(
+                    'id', 'disciplina_id', 'anocurricular', 'semestrecurricular'),
+                'Disciplina' => array(
+                    'fields' => array('id', 'name')
+                )
+            ),
+            'Matricula' => array(
+                'fields' => array('id', 'anolectivo_id'),
+                'Anolectivo' => array(
+                    'fields' => array('id', 'ano')
+                )
+            )
+                )
+        );
+        $todas_inscricoes = $this->Aluno->Inscricao->find('all', array('conditions' => array('Inscricao.aluno_id' => $id),
+            'order' => array(
+                'Turma.anocurricular',
+                'Turma.semestrecurricular'
+        )));
+
+        $this->Aluno->Inscricao->contain(array(
+            'Turma' => array(
+                'fields' => array(
+                    'id', 'disciplina_id', 'anocurricular', 'semestrecurricular'),
+                'Disciplina' => array(
+                    'fields' => array('id', 'name')
+                )
+            ),
+            'Matricula' => array(
+                'fields' => array('id', 'anolectivo_id'),
+                'Anolectivo' => array(
+                    'fields' => array('id', 'ano')
+                )
+            )
+                )
+        );
+        $cadeiras_aprovadas = $this->Aluno->Inscricao->find('all', array('conditions' => array('Inscricao.aluno_id' => $id)));
+
+
+
+        if ($this->Aluno->isMatriculado($id, Configure::read('OpenSGA.ano_lectivo_id'))) {
+            $this->set('is_matriculado', 1);
+        } else {
+            $this->set('is_matriculado', 0);
+        }
+
+        $is_bolseiro = $this->Aluno->isBolseiro($id) ? 1 : 0;
+        $is_regular = $this->Aluno->isRegular($id);
+                
+                if(count($is_regular)==1 && $is_regular[0]['regular']==true){
+                    if($is_regular[0]['estado']==1){
+                        $classe_estado="alert note";
+                    } else{
+                        $classe_estado="alert success";
+                    }
+                    
+                    
+                } else{
+                    $classe_estado="alert error";
+                }
+        //Requisicoes
+                
+        $requisicoes = $this->Aluno->RequisicoesPedido->getAllRequisicoesPedidoByEstudante($id);
+
+
+        $this->Aluno->FinanceiroPagamento->contain(array(
+            'FinanceiroTipoPagamento'
+        ));
+        $pagamentos = $this->Aluno->FinanceiroPagamento->find('all', array('conditions' => array('FinanceiroPagamento.aluno_id' => $id)));
+        //debug($pagamentos);
+        $this->set('aluno', $aluno);
+      $is_bolseiro = $this->Aluno->isBolseiro($id, $this->Session->read('SGAConfig.anolectivo_id'));
+
+        $this->set(compact( 'inscricoes_activas', 'todas_inscricoes', 'cadeiras_aprovadas', 'pagamentos', 'is_bolseiro','is_regular','classe_estado','requisicoes'));
     }
     
     public function alterar_nome_candidato($codigo){

@@ -46,9 +46,28 @@ class TurmasController extends AppController {
         $unidade_organica_id = $this->Session->read('Auth.User.unidade_organica_id');
 
         $conditions = array();
+        if ($this->request->is('post')) {
+            
+            if ($this->request->data['Turma']['codigo'] != '') {
+                $conditions['Turma.codigo'] = $this->request->data['Turma']['codigo'];
+            } elseif ($this->request->data['Turma']['name'] != '') {
+                $conditions['Turma.name LIKE'] = '%'. $this->request->data['Turma']['name'].'%';
+            } elseif ($this->request->data['Anolectivo']['ano'] != '') {
+                $conditions['Anolectivo.ano'] = $this->request->data['Anolectivo']['ano'];
+            }
+            
+        }
         $conditions['Turma.estadoturma_id'] = 1;
         $conditions['Curso.unidade_organica_id']=$unidade_organica_id;
-        $turmas = $this->Turma->find('all',array('conditions'=>$conditions,'limit'=>1000));
+        
+        $this->paginate = array(
+            'conditions'=>$conditions,
+            'contain'=>array(
+            'Anolectivo','Disciplina', 'Planoestudo', 'Curso' => array('UnidadeOrganica')
+        )
+        );
+        
+        $turmas = $this->paginate('Turma');
         
         $this->set('turmas', $turmas);
     }
