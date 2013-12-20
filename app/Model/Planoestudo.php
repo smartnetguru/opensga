@@ -67,6 +67,9 @@ class Planoestudo extends AppModel {
         
         public function getAllDisciplinas($plano_id){
             
+            $this->Planoestudoano->contain(array(
+                'Disciplina'
+            ));
             $disciplinas = $this->Planoestudoano->find('all',array('conditions'=>array('planoestudo_id'=>$plano_id)));
             return $disciplinas;
         }

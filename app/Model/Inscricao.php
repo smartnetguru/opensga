@@ -152,10 +152,10 @@ class Inscricao extends AppModel {
             //Temos de ver se o valor depositado é suficiente para pagar a Inscrição
             $valor_total_inscricao = $data['total_normal'] + $data['total_atraso'];
             $conta = $this->Aluno->getContaByAlunoId($data['FinanceiroTransacao']['aluno_id']);
-            if ($valor_total_inscricao > $conta['FinanceiroConta']['saldo_actual']) {
+           /** if ($valor_total_inscricao > $conta['FinanceiroConta']['saldo_actual']) {
                 return false;
             }
-
+*/
 
 
 

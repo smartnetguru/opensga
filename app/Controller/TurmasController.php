@@ -176,7 +176,7 @@ class TurmasController extends AppController {
         $this->set(compact('inscricaos', 'turmatipoavaliacaos', 'anolectivos', 'estados', 'mediaTurma', 'anosemestrecurr', 'cursos', 'planoestudos', 'turnos', 'disciplinas', 'docentes', 'anocurricular', 'semestrecurricular'));
     }
     
-    function faculdade_view($id = null) {
+    function faculdade_ver_turma($id = null) {
         $this->Turma->id = $id;
         if (!$this->Turma->exists()) {
             throw new NotFoundException(__('Turma Inválida'));
@@ -619,8 +619,26 @@ class TurmasController extends AppController {
         $this->set(compact('inscricaos'));
     }
     
-    public function print_dhl(){
+    public function faculdade_print_pauta($turma_id){
+        $this->Turma->Inscricao->contain(array(
+            'Estadoinscricao',
+            'Matricula' => array(
+                'Aluno' => array(
+                    'Entidade'=>array(
+                        
+                    )
+                )
+            ),
+            'Turma' => array(
+                'Curso' => array(
+                    'fields' => array('name')
+                ), 'Disciplina', 'Turno', 'Anolectivo'
+            )
+        ));
+        $inscricaos = $this->Turma->Inscricao->find('all', array('conditions' => array('turma_id' => $turma_id)));
+        $inscricaos = Hash::sort($inscricaos,'{n}.Matricula.Aluno.Entidade.apelido','asc');
         
+        $this->set(compact('inscricaos'));
     }
 
     function fecho_da_turma() {

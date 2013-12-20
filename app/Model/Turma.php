@@ -234,7 +234,7 @@ class Turma extends AppModel {
            
             //Inscricoes activas
             $inscricoes_activas = $this->Inscricao->Aluno->getAllInscricoesActivasandAprovadasForInscricao($aluno_id);
-
+            
             //De todas_disciplinas, remover inscricoes activas
 
 
@@ -244,9 +244,9 @@ class Turma extends AppModel {
                 $aluno = $Aluno->findById($aluno_id,'escola_id');
                 $conditions['Turma.escola_id']=$aluno['Aluno']['escola_id'];
             }
-                        debug($conditions);
+                        
 			$turmas = $this->find('all', array('conditions'=>$conditions,'fields'=>array('Turma.id','Disciplina.name','Disciplina.id','Turma.anocurricular','Turma.semestrecurricular'),'order'=>array('Turma.anocurricular','Turma.semestrecurricular')));
-                         debug($turmas);
+                         
 			return $turmas;
 
         }
@@ -473,6 +473,8 @@ class Turma extends AppModel {
         public function getTotalAlunosInscritosByTurma($turma_id = null){
             
         }
+        
+       
 
 }
 ?>

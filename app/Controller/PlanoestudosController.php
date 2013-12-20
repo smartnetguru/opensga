@@ -196,6 +196,7 @@ class PlanoestudosController extends AppController {
 
 
         $disciplinas2 = $disciplinas_adicionadas;
+        
         $disciplina1 = array_keys($disciplinas);
         //$precedencias = $this->Planoestudo->getAllPrecedenciasByDisciplina($disciplina1[0], $plano_id);
 

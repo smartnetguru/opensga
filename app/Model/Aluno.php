@@ -256,7 +256,8 @@ class Aluno extends AppModel {
      */
     public function getAllInscricoesActivasAndAprovadasForInscricao($aluno_id) {
         $this->Inscricao->contain('Turma');
-        $inscricoes = $this->Inscricao->find('all', array('conditions' => array('Inscricao.estadoinscricao_id' => array(1, 2), 'Inscricao.aluno_id' => $aluno_id), 'recursive' => 0, 'fields' => array('Turma.disciplina_id')));
+        $inscricoes = $this->Inscricao->find('all', array('conditions' => array('Inscricao.estadoinscricao_id' => array(1, 2), 'Inscricao.aluno_id' => $aluno_id), 'recursive' => 0, 'fields' => array('Turma.disciplina_id','Turma.name')));
+        
 
         $disciplinas = Hash::extract($inscricoes, '{n}.Turma.disciplina_id');
         return $disciplinas;
