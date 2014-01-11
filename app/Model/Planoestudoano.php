@@ -38,7 +38,14 @@ class Planoestudoano extends AppModel {
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
-		)
+		),
+        'Planoestudo' => array(
+			'className' => 'Planoestudo',
+			'foreignKey' => 'planoestudo_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
+		),
 
 	);
 

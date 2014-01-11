@@ -41,7 +41,9 @@ class OpenSGAAclShell extends AppShell {
             if ($this->User->isFromFaculdade($funcionario['User']['id'])) {
                 $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Inscricaos/faculdade_inscrever";
                 $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Inscricaos/faculdade_valida_inscricao";
+                $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Inscricaos/faculdade_ver_inscricoes_aluno";
                 $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Inscricaos/faculdade_adicionar_cadeiras_inscricao";
+                $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Inscricaos/faculdade_print_comprovativo_inscricao";
                 
                 $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Pages/faculdade_home";
                 $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Users/faculdade_logout";

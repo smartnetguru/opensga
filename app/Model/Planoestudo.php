@@ -48,6 +48,8 @@ class Planoestudo extends AppModel {
          *Nao usar esta funcao
          * @param type $plano_id
          * @return type 
+         * 
+         * @fixme Rever como se buscam as precedencias
          */
         function getAllDisciplinasByPlanoEstudo($plano_id){
             trigger_error("Deprecated function called.", E_USER_NOTICE);
@@ -59,7 +61,7 @@ class Planoestudo extends AppModel {
             $query .="order by ano, semestre, d.name ";
             $disciplinas = $this->query($query);
             for($i=0;$i<count($disciplinas);$i++){
-                $disciplinas[$i]['pr']=$this->getAllPrecedenciasByDisciplina($disciplinas[$i]['d']['id'],$plano_id);
+                //$disciplinas[$i]['pr']=$this->getAllPrecedenciasByDisciplina($disciplinas[$i]['d']['id'],$plano_id);
                 
             }
             return $disciplinas;
@@ -68,7 +70,7 @@ class Planoestudo extends AppModel {
         public function getAllDisciplinas($plano_id){
             
             $this->Planoestudoano->contain(array(
-                'Disciplina'
+                'Disciplina','Planoestudo'
             ));
             $disciplinas = $this->Planoestudoano->find('all',array('conditions'=>array('planoestudo_id'=>$plano_id)));
             return $disciplinas;
@@ -107,6 +109,7 @@ class Planoestudo extends AppModel {
         function getAllPrecedenciasByDisciplina($disciplina_id,$plano_id=null){
             App::Import('Model','Grupodisciplina');
             $grupodisciplinas = new Grupodisciplina;
+            
             
             $o = $grupodisciplinas->find('all',array('conditions'=>array('planoestudo_id'=>$plano_id,'disciplina_id'=>$disciplina_id,'tipoprecedencia_id'=>'O'),'fields'=>array('Grupodisciplina.id','Disciplina.name')));
             $obr=array();

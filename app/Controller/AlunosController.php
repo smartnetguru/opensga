@@ -872,6 +872,26 @@ class AlunosController extends AppController {
         }
         $this->set(compact('action_seguinte'));
     }
+    
+    public function faculdade_pesquisa_aluno_action($action_seguinte,$controller=null,$plugin=null) {
+
+        if ($this->request->is('post')) {
+            $aluno = $this->Aluno->findByCodigo($this->request->data['Aluno']['codigo']);
+            if (!empty($aluno)) {
+                if($plugin!=null){
+                    $this->redirect(array('plugin'=>$plugin,'controller'=>$controller,'action' => $action_seguinte, $aluno['Aluno']['id']));
+                } elseif($controller!=NULL){
+                    $this->redirect(array('controller'=>$controller,'action' => $action_seguinte, $aluno['Aluno']['id']));
+                } else{
+                    $this->redirect(array('action' => $action_seguinte, $aluno['Aluno']['id']));
+                }
+                
+            } else {
+                $this->Session->setFlash(__('Estudante não encontrado'), 'default', array('class' => 'alert error'));
+            }
+        }
+        $this->set(compact('action_seguinte'));
+    }
 
     public function mudanca_curso($aluno_id) {
 
@@ -1046,7 +1066,7 @@ class AlunosController extends AppController {
     
         function faculdade_index() {
 
-        $conditions = array();
+            $conditions = array();
         if ($this->request->is('post')) {
             if ($this->request->data['Aluno']['codigo'] != '') {
                 $conditions['Aluno.codigo'] = $this->request->data['Aluno']['codigo'];
@@ -1055,18 +1075,22 @@ class AlunosController extends AppController {
                 $conditions['Entidade.apelido LIKE'] = '%' . $this->request->data['Aluno']['apelido'] . '%';
             }
         }
-
         $unidade_organica_id = $this->Session->read('Auth.User.unidade_organica_id');
         $conditions['Curso.unidade_organica_id']=$unidade_organica_id;
-
-        $this->Aluno->contain('Entidade', 'Curso');
-        $alunos = $this->Aluno->find('all', array('conditions' => $conditions, 'limit' => 1000));
+        $this->paginate = array(
+            'conditions'=>$conditions,
+            'contain'=>array('Entidade', 'Curso','EstadoAluno'),
+        );
         
+        $alunos = $this->paginate('Aluno');
+                
         if(count($alunos)==1){
             $this->redirect(array('action'=>'perfil_estudante',$alunos[0]['Aluno']['id']));
         }
 
         $this->set('alunos', $alunos);
+        
+        
     }
     
     /**

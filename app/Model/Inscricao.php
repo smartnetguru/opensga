@@ -58,6 +58,13 @@ class Inscricao extends AppModel {
             'conditions' => '',
             'fields' => '',
             'order' => ''
+        ),
+        'TipoInscricao' => array(
+            'className' => 'TipoInscricao',
+            'foreignKey' => 'tipo_inscricao_id',
+            'conditions' => '',
+            'fields' => '',
+            'order' => ''
         )
     );
     var $hasMany = array(

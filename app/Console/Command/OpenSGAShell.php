@@ -151,28 +151,28 @@ class OpenSGAShell extends AppShell {
 
         foreach ($plano_estudos as $planoestudo_id => $plano_estudo) {
             $turnos = $this->Turma->Turno->find('list');
-            $disciplinas = $this->Turma->Planoestudo->getAllDisciplinasByPlanoestudo($planoestudo_id);
+            $disciplinas = $this->Turma->Planoestudo->getAllDisciplinas($planoestudo_id);
             foreach ($turnos as $turno_id => $turno) {
                 foreach ($disciplinas as $disciplina) {
-
+                    
                     $turma = array();
                     $turma['anolectivo_id'] = $anolectivo_id;
-                    $turma['anocurricular'] = $disciplina['p']['ano'];
-                    $turma['semestrecurricular'] = $disciplina['p']['semestre'];
-                    $turma['curso_id'] = $disciplina['pe']['curso_id'];
+                    $turma['anocurricular'] = $disciplina['Planoestudoano']['ano'];
+                    $turma['semestrecurricular'] = $disciplina['Planoestudoano']['semestre'];
+                    $turma['curso_id'] = $disciplina['Planoestudo']['curso_id'];
                     $turma['escola_id'] = 1;
                     $turma['planoestudo_id'] = $planoestudo_id;
                     $turma['turno_id'] = $turno_id;
-                    $turma['disciplina_id'] = $disciplina['d']['id'];
+                    $turma['disciplina_id'] = $disciplina['Disciplina']['id'];
                     $turma['estadoturma_id'] = 1;
                     $turma['semestrelectivo_id'] = $semestre_id;
-                    $nome = $disciplina['d']['name'] . " - " . $disciplina['pe']['name'];
+                    $nome = $disciplina['Disciplina']['name'] . " - " . $disciplina['Planoestudo']['name'];
                     $turma['name'] = $nome;
 
                     $turmas = array('Turma' => $turma);
 
                     //Primeiro precisamos ver se a turma nao esta criada ainda
-                    $turma_existe = $this->Turma->find('first', array('recursive' => -1, 'conditions' => array('anolectivo_id' => $anolectivo_id, 'planoestudo_id' => $planoestudo_id, 'disciplina_id' => $disciplina['d']['id'], 'anocurricular' => $turma['anocurricular'], 'semestrecurricular' => $turma['semestrecurricular'], 'turno_id' => $turma['turno_id'], 'semestrelectivo_id' => $semestre_id)));
+                    $turma_existe = $this->Turma->find('first', array('recursive' => -1, 'conditions' => array('anolectivo_id' => $anolectivo_id, 'planoestudo_id' => $planoestudo_id, 'disciplina_id' => $disciplina['Disciplina']['id'], 'anocurricular' => $turma['anocurricular'], 'semestrecurricular' => $turma['semestrecurricular'], 'turno_id' => $turma['turno_id'], 'semestrelectivo_id' => $semestre_id)));
 
                     if (!$turma_existe) {
                         $this->Turma->create();
@@ -713,20 +713,19 @@ class OpenSGAShell extends AppShell {
         }
     }
     
-     public function testa_sms() {
-        $sms_recebidas = $this->SmsNotification->find('all',array('conditions'=>array('message LIKE'=>'crm2014%')));
-        foreach($sms_recebidas as $sms){
-           $message = $sms['SmsNotification']['message'];
-           $message_explode = explode(' ',$message);
-           if(isset($message_explode[1])){
-               debug($message_explode[1]);
-               
-               
-              // $this->SmsNotification->processaSMSConfirmacaoRenovacao($this->SmsNotification->id, $origin, $message_explode[1]);
-           }
-           
-        }
-    }
+     public function ajusta_turno_matricula(){
+        
+         $matriculas = $this->Matricula->find('all',array('conditions'=>array('turno_id'=>null)));
+         $i=0;
+         foreach($matriculas as $matricula){
+             $curso_turno = $this->Matricula->Curso->CursosTurno->findByCursoId($matricula['Matricula']['curso_id']);
+             $this->Matricula->id = $matricula['Matricula']['id'];
+             $this->Matricula->set('turno_id',$curso_turno['CursosTurno']['turno_id']);
+             $this->Matricula->save();
+             $this->out($i++);
+             
+         }
+     }
    
 
 }

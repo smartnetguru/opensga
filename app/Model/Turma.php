@@ -244,6 +244,8 @@ class Turma extends AppModel {
                 $aluno = $Aluno->findById($aluno_id,'escola_id');
                 $conditions['Turma.escola_id']=$aluno['Aluno']['escola_id'];
             }
+            
+            debug($conditions);
                         
 			$turmas = $this->find('all', array('conditions'=>$conditions,'fields'=>array('Turma.id','Disciplina.name','Disciplina.id','Turma.anocurricular','Turma.semestrecurricular'),'order'=>array('Turma.anocurricular','Turma.semestrecurricular')));
                          

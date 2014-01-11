@@ -4,7 +4,7 @@
  * Controller do Funcionario
  *
  * @copyright     Copyright 2010-2011, INFOmoz (Inform�tica-Mo�ambique) (http://infomoz.net)
- * * @link          http://opensga.com OpenSGA  - Sistema de Gestão Académica
+ * @link          http://opensga.com OpenSGA  - Sistema de Gestão Académica
  * @author		  Elisio Leonardo (elisio.leonardo@gmail.com)
  * @package       opensga
  * @subpackage    opensga.core.controller
@@ -79,9 +79,7 @@ class FuncionariosController extends AppController {
         $users = $this->Funcionario->User->find('list');
         $grauacademicos = $this->Funcionario->GrauAcademico->find('list');
 
-        //$faculdades = $this->Funcionario->UnidadeOrganica->find('list');
-        //$departamentos = $this->Funcionario->UnidadeOrganica->find('list');
-        //$seccaos = $this->Funcionario->UnidadeOrganica->find('list');
+        
         $tipofuncionarios = $this->Funcionario->Tipofuncionario->find('list');
         $documento_identificacaos = $this->Funcionario->Entidade->DocumentoIdentificacao->find('list');
         $unidades_organicas = $this->Funcionario->UnidadeOrganica->find('list');
