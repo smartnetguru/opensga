@@ -237,6 +237,14 @@ class InscricaosController extends AppController {
         } else{
             $anolectivo = $this->Inscricao->Turma->Anolectivo->findByAno($anolectivo_ano);
         }
+        
+        //Pegamos todas inscricoes activas
+        $this->Inscricao->contain(array(
+            'Turma'=>array(
+                'Disciplina'
+            ),'TipoInscricao'
+        ));
+        $inscricoes_activas  = $this->Inscricao->find('all',array('conditions'=>array('estadoinscricao_id'=>1,'aluno_id'=>$aluno_id)));
     }
 
     function edit($id = null) {

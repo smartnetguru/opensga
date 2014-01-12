@@ -130,5 +130,14 @@ public $actsAs = array('Tree','Containable','Auditable');
             }
             
         }
+        
+        public function getFaculdadeByCursoId($curso_id){
+            $curso = $this->Curso->findById($curso_id);
+            $unidadeOrganica = $this->findById($curso['Curso']['unidade_organica_id']);
+            if($unidadeOrganica['UnidadeOrganica']['tipo_unidade_organica_id']==2){
+                $unidadeOrganica = $this->findById($unidadeOrganica['UnidadeOrganica']['parent_id']);
+            }
+            return $unidadeOrganica;
+        }
 
 }
