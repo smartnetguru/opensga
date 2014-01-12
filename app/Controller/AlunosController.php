@@ -1076,7 +1076,19 @@ class AlunosController extends AppController {
             }
         }
         $unidade_organica_id = $this->Session->read('Auth.User.unidade_organica_id');
-        $conditions['Curso.unidade_organica_id']=$unidade_organica_id;
+        $unidadeOrganicas = $this->Aluno->Curso->UnidadeOrganica->find('all',array('conditions'=>array('parent_id'=>$unidade_organica_id)));
+      
+        if($unidadeOrganicas){
+           $unidades_organicas = Hash::extract($unidadeOrganicas,'{n}.UnidadeOrganica.id');
+          
+           $unidades_organicas[] = $unidade_organica_id;
+          
+           $conditions['Curso.unidade_organica_id']=$unidades_organicas;
+        } else{
+            $conditions['Curso.unidade_organica_id']=$unidade_organica_id;
+        }
+        
+        
         $this->paginate = array(
             'conditions'=>$conditions,
             'contain'=>array('Entidade', 'Curso','EstadoAluno'),
