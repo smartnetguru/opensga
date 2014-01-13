@@ -58,7 +58,7 @@ class FinanceiroDeposito extends AppModel {
 	);
     
     
-    public $validate = array(
+    /**public $validate = array(
         'numero_comprovativo'=>array(
             'Unico'=>array(
                 'rule'=>'isUnique',
@@ -71,5 +71,5 @@ class FinanceiroDeposito extends AppModel {
                 
             )
         )
-    );
+    );**/
 }

@@ -31,14 +31,26 @@ class FuncionariosController extends AppController {
 
     function index() {
 
-        
-        $this->Funcionario->contain(array(
-            'Entidade'=>array(
+        $conditions = array();
+        if ($this->request->is('post')) {
+            if ($this->request->data['Funcionario']['codigo'] != '') {
+                $conditions['Funcionario.codigo'] = $this->request->data['Funcionario']['codigo'];
+            } else {
+                $conditions['Entidade.nomes LIKE'] = '%' . $this->request->data['Funcionario']['nomes'] . '%';
+                $conditions['Entidade.apelido LIKE'] = '%' . $this->request->data['Funcionario']['apelido'] . '%';
+                
+            }
+        }
+        $this->paginate = array(
+            'conditions'=>$conditions,
+            'contain'=>array('Entidade'=>array(
                 'User'=>array(
                     'Group'
                 )
-            )
-        ));
+            ), 'UnidadeOrganica'),
+        );
+        
+        
      
         $this->set('groups', $this->Funcionario->User->Group->find('list'));
         $this->set('funcionarios', $this->paginate());

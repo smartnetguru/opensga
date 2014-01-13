@@ -233,18 +233,27 @@ class InscricaosController extends AppController {
     public function faculdade_print_comprovativo_inscricao($aluno_id,$anolectivo_ano = null){
         
         if($anolectivo_ano == null){
-            $anolectivo = $this->Inscricao->Turma->Anolectivo->findByAno(Configure::read('OpenSGA.ano_lectivo'));
+            $anolectivo = $this->Inscricao->Turma->Anolectivo->findByAno(2014);
         } else{
-            $anolectivo = $this->Inscricao->Turma->Anolectivo->findByAno($anolectivo_ano);
+            $anolectivo = $this->Inscricao->Turma->Anolectivo->findByAno(2014);
         }
         
+        $this->Inscricao->Aluno->contain(array(
+            'Entidade'
+        ));
+        $aluno = $this->Inscricao->Aluno->findById($aluno_id);
         //Pegamos todas inscricoes activas
         $this->Inscricao->contain(array(
             'Turma'=>array(
-                'Disciplina'
+                'Disciplina','Curso'=>array('UnidadeOrganica'),'Planoestudo'=>array(
+                    'Planoestudoano'
+                )
             ),'TipoInscricao'
         ));
-        $inscricoes_activas  = $this->Inscricao->find('all',array('conditions'=>array('estadoinscricao_id'=>1,'aluno_id'=>$aluno_id)));
+        $inscricoes_activas  = $this->Inscricao->find('all',array('conditions'=>array('estadoinscricao_id'=>1,'aluno_id'=>$aluno_id,'Turma.anolectivo_id'=>30)));
+        
+        $this->set(compact('inscricoes_activas','aluno','anolectivo'));
+        
     }
 
     function edit($id = null) {
@@ -472,7 +481,7 @@ class InscricaosController extends AppController {
                 'Disciplina'
             ),'TipoInscricao'
         ));
-        $inscricoes_activas  = $this->Inscricao->find('all',array('conditions'=>array('estadoinscricao_id'=>1,'aluno_id'=>$aluno_id)));
+        $inscricoes_activas  = $this->Inscricao->find('all',array('conditions'=>array('estadoinscricao_id'=>1,'aluno_id'=>$aluno_id,'Turma.anolectivo_id'=>30)));
         
         $aluno = $this->Inscricao->Aluno->findById($aluno_id);
         $matricula=$this->Inscricao->Matricula->findByAlunoIdAndCursoId($aluno_id,$aluno['Aluno']['curso_id']);

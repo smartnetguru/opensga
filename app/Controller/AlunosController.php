@@ -38,10 +38,6 @@ class AlunosController extends AppController {
             'conditions'=>$conditions,
             'contain'=>array('Entidade', 'Curso','EstadoAluno'),
         );
-        
-
-        
-        
         $alunos = $this->paginate('Aluno');
                 
         if(count($alunos)==1){

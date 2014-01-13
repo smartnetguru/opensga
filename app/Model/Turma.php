@@ -230,22 +230,22 @@ class Turma extends AppModel {
         	$matricula=$this->Inscricao->Matricula->findByAlunoId($aluno_id);
 			$this->Inscricao->Aluno->recursive=-1;
 			//Primeiro vamos pegar todas as disciplinas do plano de estudos
+                        
             $todas_disciplinas = $this->Planoestudo->getAllDisciplinas($matricula['Matricula']['planoestudo_id']);
            
             //Inscricoes activas
-            $inscricoes_activas = $this->Inscricao->Aluno->getAllInscricoesActivasandAprovadasForInscricao($aluno_id);
+            //$inscricoes_activas = $this->Inscricao->Aluno->getAllInscricoesActivasandAprovadasForInscricao($aluno_id);
             
             //De todas_disciplinas, remover inscricoes activas
 
 
 
-            $conditions = array('Turma.planoestudo_id'=>$matricula['Matricula']['planoestudo_id'],'Turma.estadoturma_id'=>1,'Turma.turno_id'=>$matricula['Matricula']['turno_id'],'NOT'=>array('Turma.disciplina_id'=>$inscricoes_activas),'Turma.anolectivo_id'=>Configure::read('OpenSGA.ano_lectivo_id'));
+            $conditions = array('Turma.planoestudo_id'=>$matricula['Matricula']['planoestudo_id'],'Turma.estadoturma_id'=>1,'Turma.anolectivo_id'=>Configure::read('OpenSGA.ano_lectivo_id'));
             if(Configure::read('OpenSGA.modulos.escolas')==1){
                 $aluno = $Aluno->findById($aluno_id,'escola_id');
                 $conditions['Turma.escola_id']=$aluno['Aluno']['escola_id'];
             }
             
-            debug($conditions);
                         
 			$turmas = $this->find('all', array('conditions'=>$conditions,'fields'=>array('Turma.id','Disciplina.name','Disciplina.id','Turma.anocurricular','Turma.semestrecurricular'),'order'=>array('Turma.anocurricular','Turma.semestrecurricular')));
                          
