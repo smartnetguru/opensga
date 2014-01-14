@@ -229,28 +229,47 @@ class InscricaosController extends AppController {
         $this->set(compact('turmas', 'disciplinas'));
     }
     
-    
-    public function faculdade_print_comprovativo_inscricao($aluno_id,$anolectivo_ano = null){
+    /**
+     *
+     * Imprime o Comprovativo de inscricao
+     * @param type $aluno_id
+     * @param type $anolectivo_ano 
+     * 
+     * @fixme ver o ano lectivo que esta estatico
+     */
+    public function faculdade_print_comprovativo_inscricao($aluno_id,$matricula_id,$anolectivo_ano = null){
         
         if($anolectivo_ano == null){
-            $anolectivo = $this->Inscricao->Turma->Anolectivo->findByAno(2014);
+            $anolectivo = $this->Inscricao->Turma->Anolectivo->findByAno(Configure::read('OpenSGA.ano_lectivo'));
         } else{
-            $anolectivo = $this->Inscricao->Turma->Anolectivo->findByAno(2014);
+            $anolectivo = $this->Inscricao->Turma->Anolectivo->findByAno($anolectivo_ano);
         }
         
         $this->Inscricao->Aluno->contain(array(
-            'Entidade'
+            'Entidade'=>array(
+                'User'
+            )
         ));
         $aluno = $this->Inscricao->Aluno->findById($aluno_id);
+        $matricula = $this->Inscricao->Aluno->Matricula->findByAlunoIdAndAnolectivoId($aluno_id,$anolectivo['Anolectivo']['id']);
+        
         //Pegamos todas inscricoes activas
         $this->Inscricao->contain(array(
             'Turma'=>array(
-                'Disciplina','Curso'=>array('UnidadeOrganica'),'Planoestudo'=>array(
-                    'Planoestudoano'
-                )
+                'Disciplina'=>array(
+                    'Planoestudoano'=>array(
+                        'conditions'=>array(
+                            'planoestudo_id'=>$matricula['Matricula']['planoestudo_id']
+                        )
+                    )
+                ),'Curso'=>array(
+                    'UnidadeOrganica'
+                ),'Planoestudo','Turno'
+                
             ),'TipoInscricao'
         ));
         $inscricoes_activas  = $this->Inscricao->find('all',array('conditions'=>array('estadoinscricao_id'=>1,'aluno_id'=>$aluno_id,'Turma.anolectivo_id'=>30)));
+        
         
         $this->set(compact('inscricoes_activas','aluno','anolectivo'));
         
