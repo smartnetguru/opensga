@@ -731,22 +731,7 @@ class OpenSGAShell extends AppShell {
          }
      }
      
-     public function reorganiza_turnos_agronomia(){
-         AuditableConfig::$Logger = ClassRegistry::init('Auditable.Logger');
-         $turmas = $this->Turma->find('all',array('conditions'=>array('Turma.anolectivo_id'=>30)));
-         foreach($turmas as $turma){
-             $curso_id = $turma['Turma']['curso_id'];
-             $curso_turno = $this->Curso->CursosTurno->findById($curso_id);
-             $this->Turma->recursive = -1;
-             $turmas_remover = $this->Turma->find('all',array('conditions'=>array('Turma.anolectivo_id'=>30,'Turma.curso_id'=>$curso_id,'NOT'=>array('Turma.turno_id'=>$curso_turno['CursosTurno']['turno_id']))));
-             debug(count($turmas_remover));
-             foreach($turmas_remover as $tr){
-                 debug($tr['Turma']['id']);
-                 $this->Turma->delete($tr['Turma']['id']);
-             }
-         }
-         
-     }
+     
    
 
 }
