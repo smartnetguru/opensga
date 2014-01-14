@@ -269,9 +269,11 @@ class InscricaosController extends AppController {
             ),'TipoInscricao'
         ));
         $inscricoes_activas  = $this->Inscricao->find('all',array('conditions'=>array('estadoinscricao_id'=>1,'aluno_id'=>$aluno_id,'Turma.anolectivo_id'=>30)));
+        $this->loadModel('Funcionario');
+        $this->Funcionario->contain('Entidade');
+        $funcionario = $this->Funcionario->getByUserId($inscricoes_activas[0]['Inscricao']['created_by']);
         
-        
-        $this->set(compact('inscricoes_activas','aluno','anolectivo'));
+        $this->set(compact('inscricoes_activas','aluno','anolectivo','funcionario'));
         
     }
 
