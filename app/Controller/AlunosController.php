@@ -501,6 +501,7 @@ class AlunosController extends AppController {
             foreach ($this->request->data['Anolectivo'] as $k => $v) {
                 if ($v != 0) {
                     $this->request->data['Matricula']['anolectivo_id'] = $v;
+                    
                     $this->Aluno->Matricula->create();
                     if ($this->Aluno->Matricula->save($this->request->data)) {
                         $this->Session->setFlash(__('A Matricula do Aluno foi renovada com Sucesso'), 'default', array('class' => 'alert success'));

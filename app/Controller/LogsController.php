@@ -1,4 +1,5 @@
 <?php
+
 /**
  * OpenSGA - Sistema de Gest�o Acad�mica
  *   Copyright (C) 2010-2011  INFOmoz (Inform�tica-Mo�ambique)
@@ -33,6 +34,9 @@ class LogsController extends AppController {
 	public function index()
 	{
             $this->loadModel('Auditable.Logger');
+            $this->Logger->contain(array(
+                'User'=>array('Entidade')
+            ));
             $logs = $this->Logger->find('all',array('conditions'=>array(),'limit'=>1000,'order'=>'Logger.created DESC'));
             
             $this->set('loggers', $logs);

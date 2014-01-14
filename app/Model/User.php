@@ -31,22 +31,17 @@ class User extends AppModel {
             'order' => ''
         )
     );
+    
+    public $hasOne = array(
+    'Entidade' => array(
+        'className'     => 'Entidade',
+        'foreignKey'    => 'user_id',
+        'conditions' => ''  
+    ));
+    
     var $hasMany = array(
         'Funcionario' => array(
             'className' => 'Funcionario',
-            'foreignKey' => 'user_id',
-            'dependent' => false,
-            'conditions' => '',
-            'fields' => '',
-            'order' => '',
-            'limit' => '',
-            'offset' => '',
-            'exclusive' => '',
-            'finderQuery' => '',
-            'counterQuery' => ''
-        ),
-        'Entidade' => array(
-            'className' => 'Entidade',
             'foreignKey' => 'user_id',
             'dependent' => false,
             'conditions' => '',

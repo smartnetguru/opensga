@@ -41,6 +41,8 @@ class AppController extends Controller {
         setlocale(LC_ALL, 'ptb');
         if ($this->Auth->loggedIn()) {
             AuditableConfig::$responsibleId = $this->Auth->user('id');
+            
+            
         }
 
         // Caso deseje usar o modelo padrão, utilize como abaixo, caso contrário você pode usar qualquer modelo
