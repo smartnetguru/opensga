@@ -731,6 +731,17 @@ class OpenSGAShell extends AppShell {
          }
      }
      
+     public function ajusta_planoestudo_matriculas(){
+         
+         $this->Matricula->contain('Curso');
+         $matriculas = $this->Matricula->find('all',array('conditions'=>array('planoestudo_id'=>null,'Curso.unidade_organica_id'=>1)));
+         foreach($matriculas as $matricula){
+             $planoestudo = $this->Planoestudo->find('first',array('conditions'=>array('curso_id'=>$matricula['Matricula']['curso_id']),'order'=>'ano_criacao desc'));
+                     
+             debug($planoestudo);
+         }
+     }
+     
      
    
 

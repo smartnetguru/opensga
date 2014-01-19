@@ -543,6 +543,10 @@ class AlunosController extends AppController {
         }
 
 
+        
+        $this->Aluno->contain(array(
+            'Entidade','Planoestudo','Curso'=>array('UnidadeOrganica')
+        ));
         $aluno = $this->Aluno->findById($aluno_id);
         $renovacoes_falta = $this->Aluno->Matricula->getStatusRenovacao($aluno_id);
        
@@ -551,7 +555,7 @@ class AlunosController extends AppController {
         
         if(count($renovacoes_falta)<2){
             $this->Session->setFlash(__('Este estudante tem menos de 2 anos fora da Universidade. Deve renovar a matricula em vez de reingresso'),'default',array('class'=>'alert info'));
-            $this->redirect(array('action' => 'perfil_estudante', $this->request->data['Matricula']['aluno_id']));
+            $this->redirect(array('action' => 'perfil_estudante', $aluno_id));
         }
         $ano_renovacoes = array();
         foreach($renovacoes_falta as $k=>$v){
@@ -813,6 +817,7 @@ class AlunosController extends AppController {
             )
         ));
         $aluno = $this->Aluno->Matricula->findById($matricula_id);
+         
 
         $this->set(compact('aluno'));
     }
@@ -837,11 +842,13 @@ class AlunosController extends AppController {
         }
         
         $funcionario_id = $mudanca['MudancaCurso']['funcionario_id'];
-        if($funcionario_id==NULL){
-            $funcionario = array('Entidade'=>array('name'=>'Elísio Leonardo'));
+        if(!$funcionario_id){
+            $funcionario = array('Entidade'=>array('name'=>'Administrador SIGA'));
         } else{
+            $this->Aluno->MudancaCurso->Funcionario->contain('Entidade');
             $funcionario = $this->Aluno->MudancaCurso->Funcionario->findById($funcionario_id);
         }
+        
         
         $this->set(compact('mudanca','funcionario'));
     }

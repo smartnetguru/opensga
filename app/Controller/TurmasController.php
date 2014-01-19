@@ -598,7 +598,7 @@ class TurmasController extends AppController {
     }
     
     
-    public function print_lista_estudantes($turma_id){
+    public function faculdade_print_lista_estudantes($turma_id){
         $this->Turma->Inscricao->contain(array(
             'Estadoinscricao',
             'Matricula' => array(

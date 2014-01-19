@@ -64,6 +64,9 @@ class SmsNotificationsController extends AppController {
             case "senha":
                 $this->SmsNotification->getSenhaEmailEstudante($this->SmsNotification->id, $origin, $message_explode[2]);
                 break;
+            case "ojm":
+                $this->redirect("http://siga.uem.mz/ojm_teste.php?numero=".$origin."&valor=".$message_explode[1]);
+                break;
         }
 
 

@@ -14,3 +14,4 @@ tmp
 /.settings/
 /.clover/
 /nbproject/private/
+/docs/manuais/build/pdf/.doctrees/
