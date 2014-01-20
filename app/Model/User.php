@@ -105,6 +105,7 @@ class User extends AppModel {
             return array('Group' => array('id' => $groupId));
         }
     }
+    
 
     function getUserByFuncionario($funcionario_id) {
         $query = "SELECT us.id FROM users us, funcionarios tf WHERE tf.user_id = us.id AND tf.id = {$funcionario_id} ";

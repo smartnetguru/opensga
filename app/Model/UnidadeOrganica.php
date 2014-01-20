@@ -139,5 +139,20 @@ public $actsAs = array('Tree','Containable','Auditable');
             }
             return $unidadeOrganica;
         }
+        
+        public function getWithChilds($unidade_organica_id){
+            $unidadeOrganicas = $this->find('all',array('conditions'=>array('parent_id'=>$unidade_organica_id)));
+      
+            
+        if($unidadeOrganicas){
+           $unidades_organicas = Hash::extract($unidadeOrganicas,'{n}.UnidadeOrganica.id');
+          
+           $unidades_organicas[] = $unidade_organica_id;
+          
+           return $unidades_organicas;
+        } else{
+            return $unidade_organica_id;
+        }
+        }
 
 }

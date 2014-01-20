@@ -11,18 +11,10 @@
  * @package       opensga
  * @subpackage    opensga.core.controller
  * @since         OpenSGA v 0.1.0
+ * 
+ * @property Aluno $Aluno
 
  *
- */
-
-/**
- * Static content controller
- *
- * Override this controller by placing a copy in controllers directory of an application
- *
- * @package       cake
- * @subpackage    cake.cake.libs.controller
- * @link http://book.cakephp.org/view/958/The-Pages-Controller
  */
 class PagesController extends AppController {
 
@@ -150,7 +142,26 @@ class PagesController extends AppController {
     }
     
     public function faculdade_home(){
+        $this->loadModel('Aluno');
+        $unidade_organica_id = $this->Session->read('Auth.User.unidade_organica_id');
+        $unidades_organicas = $this->Aluno->Curso->UnidadeOrganica->getWithChilds($unidade_organica_id);
+        $this->Aluno->contain('Curso');
+        $total_alunos_faculdade = $this->Aluno->find('count',array('conditions'=>array('Curso.unidade_organica_id'=>$unidades_organicas)));
+        $total_alunos_activos_faculdade = $this->Aluno->getTotalAlunosActivos($unidades_organicas);
+        $total_matriculas_activas_faculdade = $this->Aluno->Matricula->getTotalMatriculasActivas($unidades_organicas);
+        $total_matriculas_nao_renovadas = $this->Aluno->Matricula->getTotalMatriculasNaoRenovadas($unidades_organicas);
         
+        
+        $total_inscricoes_activas = $this->Aluno->Inscricao->getTotalInscricoesActivas($unidades_organicas);
+        $total_inscricoes_activas_ano = $this->Aluno->Inscricao->getTotalInscricoesActivas($unidades_organicas,Configure::read('OpenSGA.ano_lectivo_id'));
+        $total_inscricoes_passadas_abertas = $total_inscricoes_activas - $total_inscricoes_activas_ano;
+        
+        $cursos  = $this->Aluno->Curso->getAllIdsByUnidadeOrganica($unidades_organicas);
+        $total_turmas_activas = $this->Aluno->Inscricao->Turma->find('count',array('conditions'=>array('Turma.curso_id'=>$cursos)));
+        $total_turmas_activas_ano = $this->Aluno->Inscricao->Turma->find('count',array('conditions'=>array('Turma.curso_id'=>$cursos,'Turma.anolectivo_id'=>Configure::read('OpenSGA.ano_lectivo_id'))));
+        $total_turmas_passadas = $total_turmas_activas - $total_turmas_activas_ano;
+        
+        $this->set(compact('total_alunos_faculdade','total_alunos_activos_faculdade','total_matriculas_activas_faculdade','total_matriculas_nao_renovadas','total_inscricoes_activas_ano', 'total_inscricoes_activas','total_inscricoes_passadas_abertas','total_turmas_activas_ano', 'total_turmas_activas','total_turmas_passadas','total_turmas_sem_docente'));
     }
     public function email_oficial_uem() {
         $this->redirect('http://millpaginas.com/como-acessar-e-usar-o-novo-email-institucional-da-sua-universidade/');

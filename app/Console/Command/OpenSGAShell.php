@@ -1,10 +1,11 @@
 <?php
 
 ini_set('memory_limit', "2048M");
+App::uses('AuditableConfig', 'Auditable.Lib');
 
 class OpenSGAShell extends AppShell {
 
-    public $uses = array('Turma', 'Matricula', 'Curso', 'UnidadeOrganica', 'Candidatura', 'Aluno', 'EstadoAluno', 'Planoestudo', 'Disciplina', 'Planoestudoano', 'HistoricoCurso', 'Anolectivo', 'CandidatoAlumni', 'Requisicoes.RequisicoesPedido', 'Entidade', 'User','SmsNotification');
+    public $uses = array('Inscricao', 'Turma', 'Matricula', 'Curso', 'UnidadeOrganica', 'Candidatura', 'Aluno', 'EstadoAluno', 'Planoestudo', 'Disciplina', 'Planoestudoano', 'HistoricoCurso', 'Anolectivo', 'CandidatoAlumni', 'Requisicoes.RequisicoesPedido', 'Entidade', 'User', 'SmsNotification');
 
     public function main() {
         $this->out('Hello world.');
@@ -148,16 +149,16 @@ class OpenSGAShell extends AppShell {
         $plano_estudos = $this->Turma->Planoestudo->find('list');
         $anolectivo_id = Configure::read('OpenSGA.ano_lectivo_id');
         $semestre_id = Configure::read('OpenSGA.semestre_lectivo_id');
-        
+
         foreach ($plano_estudos as $planoestudo_id => $plano_estudo) {
             $turnos = $this->Turma->Turno->find('list');
             $disciplinas = $this->Turma->Planoestudo->getAllDisciplinas($planoestudo_id);
-            
-                foreach ($disciplinas as $disciplina) {
-                    $curso_id = $disciplina['Planoestudo']['curso_id'];
-                    $turnos = $this->Turma->Curso->CursosTurno->findAllByCursoId($curso_id);
-                    foreach($turnos as $turno){
-                        $turno_id = $turno['CursosTurno']['turno_id'];
+
+            foreach ($disciplinas as $disciplina) {
+                $curso_id = $disciplina['Planoestudo']['curso_id'];
+                $turnos = $this->Turma->Curso->CursosTurno->findAllByCursoId($curso_id);
+                foreach ($turnos as $turno) {
+                    $turno_id = $turno['CursosTurno']['turno_id'];
                     $turma = array();
                     $turma['anolectivo_id'] = $anolectivo_id;
                     $turma['anocurricular'] = $disciplina['Planoestudoano']['ano'];
@@ -185,8 +186,7 @@ class OpenSGAShell extends AppShell {
                         $this->out('<error>Turma Existente: ' . $nome . '</error>');
                     }
                 }
-                }
-            
+            }
         }
     }
 
@@ -300,7 +300,7 @@ class OpenSGAShell extends AppShell {
         foreach ($worksheet->getRowIterator() as $row) {
 
             $numero_estudante = $worksheet->getCell('A' . $linha_actual)->getValue();
-            if($numero_estudante==''){
+            if ($numero_estudante == '') {
                 break;
             }
             $this->Aluno->contain();
@@ -563,16 +563,16 @@ class OpenSGAShell extends AppShell {
     }
 
     public function print_lista_estudantes_email() {
-   
-        
+
+
         $this->Curso->contain('UnidadeOrganica');
         $cursos = $this->Curso->find('all');
         App::import('Vendor', 'PHPExcel', array('file' => 'PHPExcel.php'));
-        
+
         if (!class_exists('PHPExcel'))
             throw new CakeException('Vendor class PHPExcel not found!');
-        
-        
+
+
         $i = 0;
         foreach ($cursos as $curso) {
 
@@ -600,14 +600,14 @@ class OpenSGAShell extends AppShell {
             }
 
 
-            
+
             $objDrawing = new PHPExcel_Worksheet_Drawing();
             $objDrawing->setName("OpenSGA");
             $objDrawing->setDescription("");
             $objDrawing->setPath(WWW_ROOT . 'img' . DS . 'logo_login_' . Configure::read('OpenSGA.instituicao.sigla') . '.png');
             $objDrawing->setCoordinates('A2');
             $objDrawing->setResizeProportional(true);
-            $objDrawing->setWidthAndHeight(108,115);
+            $objDrawing->setWidthAndHeight(108, 115);
             $objDrawing->setOffsetX(10);
             $objDrawing->setRotation(0);
             $objDrawing->getShadow()->setVisible(true);
@@ -623,7 +623,7 @@ class OpenSGAShell extends AppShell {
             $xls->getProperties()->setDescription("Lista de Emails Institucionais");
             $xls->getProperties()->setKeywords("OpenSGA,SIGA");
             $xls->getProperties()->setCategory("Relatorio");
-            $xls->getActiveSheet()->getHeaderFooter()->setOddFooter('&L&D &T &C' . $xls->getProperties()->getTitle().' - Page &P of &N &R'." [Gerado por siga.uem.mz]");
+            $xls->getActiveSheet()->getHeaderFooter()->setOddFooter('&L&D &T &C' . $xls->getProperties()->getTitle() . ' - Page &P of &N &R' . " [Gerado por siga.uem.mz]");
             $xls->getActiveSheet()->setShowGridlines(false);
 
 
@@ -643,106 +643,142 @@ class OpenSGAShell extends AppShell {
             $filename = Inflector::slug($filename);
 
             $objWriter->save(APP . 'exports' . DS . $filename . '.xlsx');
-            
-           
+
+
 
 
             // clear memory
             $xls->disconnectWorksheets();
         }
     }
-    
-    
-    public function gera_pagamentos_renovacao_2014(){
+
+    public function gera_pagamentos_renovacao_2014() {
         $this->Aluno->contain();
         $alunos = $this->Aluno->find('all');
-        foreach($alunos as $aluno){
+        foreach ($alunos as $aluno) {
             $ano_ingresso = $aluno['Aluno']['ano_ingresso'];
-                    if ($ano_ingresso >= 2000 && $ano_ingresso <= 2007) {
-                        $referencia = substr($aluno['Aluno']['codigo'], 2);
-                    } elseif($ano_ingresso>2007) {
-                        $referencia = "0" . $aluno['Aluno']['codigo'];
-                    } else{
-                        $referencia =  $aluno['Aluno']['codigo'];
-                    }
-                    
-                    $datasource = $this->Aluno->getDatasource();
-                    $datasource->begin();
-                    $transacao = array();
-                    $pagamento = array();
-                    
-                    $curso_turno = $this->Aluno->Curso->CursosTurno->find('first',array('conditions'=>array('curso_id'=>$aluno['Aluno']['curso_id'])));
-                    if($curso_turno['CursosTurno']['turno_id']==1){
-                        $transacao['financeiro_tipo_transacao_id'] = 2;
-                        $pagamento['tipo_pagamento_id'] = 37;
-                    $transacao['valor'] = 80;
-                    $referencia = $referencia."02";
-                    } else{
-                        $transacao['financeiro_tipo_transacao_id'] = 2;
-                        $pagamento['tipo_pagamento_id'] = 38;
-                    $transacao['valor'] = 160;
-                    $referencia = $referencia."03";
-                    }
-                    $transacao['entidade_id'] = $aluno['Aluno']['entidade_id'];
-                    
-                    $conta_existe = $this->Aluno->Entidade->FinanceiroTransacao->FinanceiroConta->find('first',array('conditions'=>array('entidade_id'=>$aluno['Aluno']['entidade_id'],'unidade_organica_id'=>29)));
-                    if(empty($conta_existe)){
-                        $this->Aluno->Entidade->FinanceiroTransacao->FinanceiroConta->create();
-                        $this->Aluno->Entidade->FinanceiroTransacao->FinanceiroConta->save(array('FinanceiroConta'=>array('entidade_id'=>$aluno['Aluno']['entidade_id'],'unidade_organica_id'=>29)));
-                        $conta_existe = $this->Aluno->Entidade->FinanceiroTransacao->FinanceiroConta->find('first',array('conditions'=>array('entidade_id'=>$aluno['Aluno']['entidade_id'],'unidade_organica_id'=>29)));
-                    }
-                    $transacao['financeiro_conta_id'] = $conta_existe['FinanceiroConta']['id'];
-                    $transacao['financeiro_estado_transacao_id'] = 1;
-                    $this->Aluno->Entidade->FinanceiroTransacao->create();
-                    $this->Aluno->Entidade->FinanceiroTransacao->save(array('FinanceiroTransacao'=>$transacao));
-                    
-                    $pagamento['aluno_id'] = $aluno['Aluno']['id'];
-                    $pagamento['financeiro_conta_id'] = $conta_existe['FinanceiroConta']['id'];
-                    $pagamento['valor'] = $transacao['valor'];
-                    $pagamento['data_limite'] = '2013-12-31';
-                    $pagamento['data_emissao'] = '2013-09-30';
-                    $anolectivo = $this->Aluno->Matricula->Anolectivo->findByAno('2014');
-                    $pagamento['anolectivo_id'] = $anolectivo['Anolectivo']['id'];
-                    $pagamento['financeiro_estado_pagamento_id'] = 1;
-                    $pagamento['codigo'] = $referencia;
-                    $pagamento['financeiro_transacao_id'] = $this->Aluno->Entidade->FinanceiroTransacao->id;
-                    $pagamento['referencia_pagamento'] = $referencia;
-                    $pagamento['entidade_id'] = $aluno['Aluno']['entidade_id'];
-                    
-                    $this->Aluno->Entidade->FinanceiroTransacao->FinanceiroPagamento->create();
-                    $this->Aluno->Entidade->FinanceiroTransacao->FinanceiroPagamento->save(array('FinanceiroPagamento'=>$pagamento));
-                    
-                    $datasource->commit();
+            if ($ano_ingresso >= 2000 && $ano_ingresso <= 2007) {
+                $referencia = substr($aluno['Aluno']['codigo'], 2);
+            } elseif ($ano_ingresso > 2007) {
+                $referencia = "0" . $aluno['Aluno']['codigo'];
+            } else {
+                $referencia = $aluno['Aluno']['codigo'];
+            }
+
+            $datasource = $this->Aluno->getDatasource();
+            $datasource->begin();
+            $transacao = array();
+            $pagamento = array();
+
+            $curso_turno = $this->Aluno->Curso->CursosTurno->find('first', array('conditions' => array('curso_id' => $aluno['Aluno']['curso_id'])));
+            if ($curso_turno['CursosTurno']['turno_id'] == 1) {
+                $transacao['financeiro_tipo_transacao_id'] = 2;
+                $pagamento['tipo_pagamento_id'] = 37;
+                $transacao['valor'] = 80;
+                $referencia = $referencia . "02";
+            } else {
+                $transacao['financeiro_tipo_transacao_id'] = 2;
+                $pagamento['tipo_pagamento_id'] = 38;
+                $transacao['valor'] = 160;
+                $referencia = $referencia . "03";
+            }
+            $transacao['entidade_id'] = $aluno['Aluno']['entidade_id'];
+
+            $conta_existe = $this->Aluno->Entidade->FinanceiroTransacao->FinanceiroConta->find('first', array('conditions' => array('entidade_id' => $aluno['Aluno']['entidade_id'], 'unidade_organica_id' => 29)));
+            if (empty($conta_existe)) {
+                $this->Aluno->Entidade->FinanceiroTransacao->FinanceiroConta->create();
+                $this->Aluno->Entidade->FinanceiroTransacao->FinanceiroConta->save(array('FinanceiroConta' => array('entidade_id' => $aluno['Aluno']['entidade_id'], 'unidade_organica_id' => 29)));
+                $conta_existe = $this->Aluno->Entidade->FinanceiroTransacao->FinanceiroConta->find('first', array('conditions' => array('entidade_id' => $aluno['Aluno']['entidade_id'], 'unidade_organica_id' => 29)));
+            }
+            $transacao['financeiro_conta_id'] = $conta_existe['FinanceiroConta']['id'];
+            $transacao['financeiro_estado_transacao_id'] = 1;
+            $this->Aluno->Entidade->FinanceiroTransacao->create();
+            $this->Aluno->Entidade->FinanceiroTransacao->save(array('FinanceiroTransacao' => $transacao));
+
+            $pagamento['aluno_id'] = $aluno['Aluno']['id'];
+            $pagamento['financeiro_conta_id'] = $conta_existe['FinanceiroConta']['id'];
+            $pagamento['valor'] = $transacao['valor'];
+            $pagamento['data_limite'] = '2013-12-31';
+            $pagamento['data_emissao'] = '2013-09-30';
+            $anolectivo = $this->Aluno->Matricula->Anolectivo->findByAno('2014');
+            $pagamento['anolectivo_id'] = $anolectivo['Anolectivo']['id'];
+            $pagamento['financeiro_estado_pagamento_id'] = 1;
+            $pagamento['codigo'] = $referencia;
+            $pagamento['financeiro_transacao_id'] = $this->Aluno->Entidade->FinanceiroTransacao->id;
+            $pagamento['referencia_pagamento'] = $referencia;
+            $pagamento['entidade_id'] = $aluno['Aluno']['entidade_id'];
+
+            $this->Aluno->Entidade->FinanceiroTransacao->FinanceiroPagamento->create();
+            $this->Aluno->Entidade->FinanceiroTransacao->FinanceiroPagamento->save(array('FinanceiroPagamento' => $pagamento));
+
+            $datasource->commit();
             debug($aluno);
         }
     }
-    
-     public function ajusta_turno_matricula(){
-        
-         $matriculas = $this->Matricula->find('all',array('conditions'=>array('turno_id'=>null)));
-         $i=0;
-         foreach($matriculas as $matricula){
-             $curso_turno = $this->Matricula->Curso->CursosTurno->findByCursoId($matricula['Matricula']['curso_id']);
-             $this->Matricula->id = $matricula['Matricula']['id'];
-             $this->Matricula->set('turno_id',$curso_turno['CursosTurno']['turno_id']);
-             $this->Matricula->save();
-             $this->out($i++);
-             
-         }
-     }
-     
-     public function ajusta_planoestudo_matriculas(){
-         
-         $this->Matricula->contain('Curso');
-         $matriculas = $this->Matricula->find('all',array('conditions'=>array('planoestudo_id'=>null,'Curso.unidade_organica_id'=>1)));
-         foreach($matriculas as $matricula){
-             $planoestudo = $this->Planoestudo->find('first',array('conditions'=>array('curso_id'=>$matricula['Matricula']['curso_id']),'order'=>'ano_criacao desc'));
-                     
-             debug($planoestudo);
-         }
-     }
-     
-     
-   
+
+    public function ajusta_turno_matricula() {
+
+        $matriculas = $this->Matricula->find('all', array('conditions' => array('turno_id' => null)));
+        $i = 0;
+        foreach ($matriculas as $matricula) {
+            $curso_turno = $this->Matricula->Curso->CursosTurno->findByCursoId($matricula['Matricula']['curso_id']);
+            $this->Matricula->id = $matricula['Matricula']['id'];
+            $this->Matricula->set('turno_id', $curso_turno['CursosTurno']['turno_id']);
+            $this->Matricula->save();
+            $this->out($i++);
+        }
+    }
+
+    public function ajusta_planoestudo_matriculas() {
+
+        $this->Matricula->contain('Curso');
+        $matriculas = $this->Matricula->find('all', array('conditions' => array('planoestudo_id' => null, 'Curso.unidade_organica_id' => 1)));
+        foreach ($matriculas as $matricula) {
+            $planoestudo = $this->Planoestudo->find('first', array('conditions' => array('curso_id' => $matricula['Matricula']['curso_id']), 'order' => 'ano_criacao desc'));
+
+            debug($planoestudo);
+        }
+    }
+
+    public function ajusta_estado_inscricao() {
+        AuditableConfig::$Logger = ClassRegistry::init('Auditable.Logger');
+        $inscricaos = $this->Inscricao->find('all',array('conditions'=>array('estado_inscricao_id'=>array(null,0,1))));
+        foreach ($inscricaos as $inscricao) {
+            $this->Inscricao->id = $inscricao['Inscricao']['id'];
+            $nota_frequencia = $inscricao['Inscricao']['nota_frequencia'];
+            $estado_inscricao = $inscricao['Inscricao']['estado_inscricao'];
+            $nota_final = $inscricao['Inscricao']['nota_final'];
+            $nota_recorrencia = $inscricao['Inscricao']['nota_exame_recorrencia'];
+            $nota_normal = $inscricao['Inscricao']['nota_exame_normal'];
+
+            if ($nota_final == -1) {
+                if($estado_inscricao==3){
+                    $this->Inscricao->set('estado_inscricao_id', 8);
+                }
+            } elseif ($nota_final < 10) {
+                if ($nota_recorrencia != -1) {
+                    $this->Inscricao->set('estado_inscricao_id', 12);
+                } elseif ($nota_normal != -1) {
+                    $this->Inscricao->set('estado_inscricao_id', 10);
+                } else {
+                    $this->Inscricao->set('estado_inscricao_id', 7);
+                } 
+            } else{
+                if ($nota_recorrencia != -1) {
+                    $this->Inscricao->set('estado_inscricao_id', 6);
+                } elseif ($nota_normal != -1 && $nota_normal>=9.5) {
+                    $this->Inscricao->set('estado_inscricao_id', 5);
+                } else {
+                    if($nota_frequencia>=13.5)
+                        $this->Inscricao->set('estado_inscricao_id', 4);
+                    else
+                        $this->Inscricao->set('estado_inscricao_id', 13);
+                } 
+            }
+            
+            $this->out($this->Inscricao->id.'------'.$nota_final.'---------'.$nota_recorrencia.'------------'.$nota_normal.'--------'.$nota_frequencia.'---------'.$this->Inscricao->data['Inscricao']['estado_inscricao_id']);
+            $this->Inscricao->save();
+        }
+    }
 
 }

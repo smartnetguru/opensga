@@ -38,9 +38,9 @@ class Inscricao extends AppModel {
             'fields' => '',
             'order' => ''
         ),
-        'Estadoinscricao' => array(
-            'className' => 'Estadoinscricao',
-            'foreignKey' => 'estadoinscricao_id',
+        'EstadoInscricao' => array(
+            'className' => 'EstadoInscricao',
+            'foreignKey' => 'estado_inscricao_id',
             'conditions' => '',
             'fields' => '',
             'order' => ''
@@ -132,6 +132,26 @@ class Inscricao extends AppModel {
         ));
         return $this->find('all', array('conditions' => array('Inscricao.aluno_id' => $aluno_id, 'Turma.semestrelectivo_id' => $semestre_id)));
     }
+    
+    
+    public function getTotalInscricoesActivas($unidades_organicas = null,$ano_lectivo_id = null){
+        
+        $conditions = array();
+        $conditions['Inscricao.estado_inscricao_id'] = 1;
+        if($unidades_organicas){
+            $cursos = $this->Turma->Curso->getAllIdsByUnidadeOrganica($unidades_organicas);
+            $conditions['Turma.curso_id'] = $cursos;
+        }
+        if($ano_lectivo_id){
+            $conditions['Turma.anolectivo_id'] = $ano_lectivo_id;
+        }
+        
+        $this->contain(array(
+           'Turma'
+        ));
+        return $this->find('count',array('conditions'=>$conditions));
+        
+    }
 
     /**
      * Verifica se um aluno pode se inscrever na cadeira em questao
@@ -199,7 +219,7 @@ class Inscricao extends AppModel {
                 $pagamento_id = $this->FinanceiroTransacao->processarPagamento($pagamento_inscricao);
                 if ($pagamento_inscricao) {
 
-                    $inscricao_save = array('Inscricao' => array('aluno_id' => $data['aluno_id'], 'turma_id' => $turma_id, 'estadoinscricao_id' => 1, 'matricula_id' => $data['matricula_id'], 'data' => date('Y-m-d'), 'pagamento_id' => $pagamento_id));
+                    $inscricao_save = array('Inscricao' => array('aluno_id' => $data['aluno_id'], 'turma_id' => $turma_id, 'estado_inscricao_id' => 1, 'matricula_id' => $data['matricula_id'], 'data' => date('Y-m-d'), 'pagamento_id' => $pagamento_id,'tipo_inscricao_id'=>1));
 
                     if ($this->validaInscricao($inscricao_save)) {
                         $this->create();

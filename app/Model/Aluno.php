@@ -587,9 +587,22 @@ class Aluno extends AppModel {
         return $total_alunos;
     }
 
-    public function getTotalAlunosActivos() {
-        return $this->find('count',array('conditions'=>array('estado_aluno_id'=>array(1,11))));
+    /**
+     * Retorna o Total de Alunos Activos no Sistema.
+     * 
+     * Se a Unidade Organica for passada, entao apenas retorna o total para aquela unidade
+     */
+    public function getTotalAlunosActivos($unidade_organica_id=null) {
+        
+        $conditions = array();
+        $conditions['estado_aluno_id'] = array(1,11);
+        if($unidade_organica_id){
+            $conditions['Curso.unidade_organica_id'] = $unidade_organica_id;
+        }
+        $this->contain('Curso');
+        return $this->find('count',array('conditions'=>$conditions));
     }
+    
 
     /**
      * Verifica se o aluno possui foto no Sistema

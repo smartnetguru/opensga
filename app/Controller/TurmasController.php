@@ -145,7 +145,7 @@ class TurmasController extends AppController {
         //$this->loadModel('Inscricao');
         //$this->Turma->bindModel(array('belongsTo'=>array('Matricula')));
         $this->Turma->Inscricao->contain(array(
-            'Estadoinscricao',
+            'EstadoInscricao',
             'Matricula' => array(
                 'Aluno' => array(
                     'Entidade'
@@ -205,7 +205,7 @@ class TurmasController extends AppController {
         //$this->loadModel('Inscricao');
         //$this->Turma->bindModel(array('belongsTo'=>array('Matricula')));
         $this->Turma->Inscricao->contain(array(
-            'Estadoinscricao',
+            'EstadoInscricao',
             'Matricula' => array(
                 'Aluno' => array(
                     'Entidade'
@@ -467,7 +467,7 @@ class TurmasController extends AppController {
         //$this->loadModel('Inscricao');
         //$this->Turma->bindModel(array('belongsTo'=>array('Matricula')));
         $this->Turma->Inscricao->contain(array(
-            'Estadoinscricao',
+            'EstadoInscricao',
             'Matricula' => array(
                 'Aluno' => array(
                     'Entidade'
@@ -600,7 +600,7 @@ class TurmasController extends AppController {
     
     public function faculdade_print_lista_estudantes($turma_id){
         $this->Turma->Inscricao->contain(array(
-            'Estadoinscricao',
+            'EstadoInscricao',
             'Matricula' => array(
                 'Aluno' => array(
                     'Entidade'=>array(
@@ -621,7 +621,7 @@ class TurmasController extends AppController {
     
     public function faculdade_print_pauta($turma_id){
         $this->Turma->Inscricao->contain(array(
-            'Estadoinscricao',
+            'EstadoInscricao',
             'Matricula' => array(
                 'Aluno' => array(
                     'Entidade'=>array(

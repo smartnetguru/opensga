@@ -1,4 +1,5 @@
 <?php
+
 ini_set('memory_limit', "2048M");
 set_time_limit(300);
 App::uses('AppController', 'Controller');
@@ -23,8 +24,8 @@ class AlunosController extends AppController {
     public $name = 'Alunos';
 
     function index() {
-        
-        
+
+
         $conditions = array();
         if ($this->request->is('post')) {
             if ($this->request->data['Aluno']['codigo'] != '') {
@@ -35,21 +36,17 @@ class AlunosController extends AppController {
             }
         }
         $this->paginate = array(
-            'conditions'=>$conditions,
-            'contain'=>array('Entidade', 'Curso','EstadoAluno'),
+            'conditions' => $conditions,
+            'contain' => array('Entidade', 'Curso', 'EstadoAluno'),
         );
         $alunos = $this->paginate('Aluno');
-                
-        if(count($alunos)==1){
-            $this->redirect(array('action'=>'perfil_estudante',$alunos[0]['Aluno']['id']));
+
+        if (count($alunos) == 1) {
+            $this->redirect(array('action' => 'perfil_estudante', $alunos[0]['Aluno']['id']));
         }
 
         $this->set('alunos', $alunos);
     }
-    
-    
-    
-
 
     /**
      * @Todo Optimizar esta pagina
@@ -63,7 +60,7 @@ class AlunosController extends AppController {
         }
 
 
-        
+
 
         $this->Aluno->contain(array(
             'Matricula' => array(
@@ -77,7 +74,7 @@ class AlunosController extends AppController {
             )
         ));
         $aluno = $this->Aluno->find('first', array('conditions' => array('Aluno.id' => $id)));
-        
+
         $this->Aluno->Inscricao->contain(array(
             'Turma' => array(
                 'fields' => array(
@@ -94,7 +91,7 @@ class AlunosController extends AppController {
             )
                 )
         );
-        $inscricoes_activas = $this->Aluno->Inscricao->find('all', array('conditions' => array('Inscricao.aluno_id' => $id, 'Inscricao.estadoinscricao_id' => 1)));
+        $inscricoes_activas = $this->Aluno->Inscricao->find('all', array('conditions' => array('Inscricao.aluno_id' => $id, 'Inscricao.estado_inscricao_id' => 1)));
 
         $this->Aluno->Inscricao->contain(array(
             'Turma' => array(
@@ -116,7 +113,7 @@ class AlunosController extends AppController {
             'order' => array(
                 'Turma.anocurricular',
                 'Turma.semestrecurricular'
-        )));
+                )));
 
         $this->Aluno->Inscricao->contain(array(
             'Turma' => array(
@@ -146,20 +143,18 @@ class AlunosController extends AppController {
 
         $is_bolseiro = $this->Aluno->isBolseiro($id) ? 1 : 0;
         $is_regular = $this->Aluno->isRegular($id);
-                
-                if(count($is_regular)==1 && $is_regular[0]['regular']==true){
-                    if($is_regular[0]['estado']==1){
-                        $classe_estado="alert note";
-                    } else{
-                        $classe_estado="alert success";
-                    }
-                    
-                    
-                } else{
-                    $classe_estado="alert error";
-                }
+
+        if (count($is_regular) == 1 && $is_regular[0]['regular'] == true) {
+            if ($is_regular[0]['estado'] == 1) {
+                $classe_estado = "alert note";
+            } else {
+                $classe_estado = "alert success";
+            }
+        } else {
+            $classe_estado = "alert error";
+        }
         //Requisicoes
-                
+
         $requisicoes = $this->Aluno->RequisicoesPedido->getAllRequisicoesPedidoByEstudante($id);
 
 
@@ -169,9 +164,9 @@ class AlunosController extends AppController {
         $pagamentos = $this->Aluno->FinanceiroPagamento->find('all', array('conditions' => array('FinanceiroPagamento.aluno_id' => $id)));
         //debug($pagamentos);
         $this->set('aluno', $aluno);
-      $is_bolseiro = $this->Aluno->isBolseiro($id, $this->Session->read('SGAConfig.anolectivo_id'));
+        $is_bolseiro = $this->Aluno->isBolseiro($id, $this->Session->read('SGAConfig.anolectivo_id'));
 
-        $this->set(compact( 'inscricoes_activas', 'todas_inscricoes', 'cadeiras_aprovadas', 'pagamentos', 'is_bolseiro','is_regular','classe_estado','requisicoes'));
+        $this->set(compact('inscricoes_activas', 'todas_inscricoes', 'cadeiras_aprovadas', 'pagamentos', 'is_bolseiro', 'is_regular', 'classe_estado', 'requisicoes'));
     }
 
     public function estudante_perfil($id = null) {
@@ -217,7 +212,7 @@ class AlunosController extends AppController {
             )
                 )
         );
-        $inscricoes_activas = $this->Aluno->Inscricao->find('all', array('conditions' => array('Inscricao.aluno_id' => $id, 'Inscricao.estadoinscricao_id' => 1)));
+        $inscricoes_activas = $this->Aluno->Inscricao->find('all', array('conditions' => array('Inscricao.aluno_id' => $id, 'Inscricao.estado_inscricao_id' => 1)));
 
         $this->Aluno->Inscricao->contain(array(
             'Turma' => array(
@@ -292,48 +287,46 @@ class AlunosController extends AppController {
         $this->set(compact('cursos', 'planoestudos', 'users', 'paises', 'cidades', 'provincias', 'documentos', 'areatrabalhos', 'generos', 'cidadenascimentos', 'proveniencianomes', 'provenienciacidades', 'inscricoes_activas', 'todas_inscricoes', 'cadeiras_aprovadas', 'pagamentos', 'is_bolseiro'));
     }
 
-    
-    public function exportar_alunos(){
+    public function exportar_alunos() {
         set_time_limit(1800);
-        if($this->request->is('post')){
+        if ($this->request->is('post')) {
             $conditions = array();
-            if($this->request->data['Aluno']['ano_ingresso']!=''){
+            if ($this->request->data['Aluno']['ano_ingresso'] != '') {
                 $conditions['Aluno.ano_ingresso'] = $this->request->data['Aluno']['ano_ingresso'];
             }
-            if($this->request->data['Aluno']['curso_id']!=''){
+            if ($this->request->data['Aluno']['curso_id'] != '') {
                 $conditions['Aluno.curso_id'] = $this->request->data['Aluno']['curso_id'];
             }
-            if($this->request->data['Aluno']['estado_aluno_id']!=''){
+            if ($this->request->data['Aluno']['estado_aluno_id'] != '') {
                 $conditions['Aluno.estado_aluno_id'] = $this->request->data['Aluno']['estado_aluno_id'];
             }
-            if($this->request->data['Curso']['unidade_organica_id']!=''){
+            if ($this->request->data['Curso']['unidade_organica_id'] != '') {
                 $conditions['Aluno.unidade_organica_id'] = $this->request->data['Aluno']['unidade_organica_id'];
             }
-            
+
             $this->Aluno->contain(array(
-                'Curso'=>array(
+                'Curso' => array(
                     'UnidadeOrganica'
-                ),'EstadoAluno','Entidade'=>array(
-                            'Genero'
-                        ),
+                ), 'EstadoAluno', 'Entidade' => array(
+                    'Genero'
+                ),
             ));
-            $alunos = $this->Aluno->find('all',array('conditions'=>$conditions));
-           
+            $alunos = $this->Aluno->find('all', array('conditions' => $conditions));
+
             $this->set(compact('alunos'));
             $this->render('exportar_alunos_excel');
-            
         }
-        $anolectivos = $this->Aluno->Matricula->Anolectivo->find('list',array('order'=>'ano DESC','fields'=>'ano'));
-        $cursos = $this->Aluno->Curso->find('list',array('order'=>'name'));
-        $unidadeOrganicas = $this->Aluno->Curso->UnidadeOrganica->find('list',array('order'=>'name','fields'=>'nome_codigo'));
+        $anolectivos = $this->Aluno->Matricula->Anolectivo->find('list', array('order' => 'ano DESC', 'fields' => 'ano'));
+        $cursos = $this->Aluno->Curso->find('list', array('order' => 'name'));
+        $unidadeOrganicas = $this->Aluno->Curso->UnidadeOrganica->find('list', array('order' => 'name', 'fields' => 'nome_codigo'));
         $estadoAlunos = $this->Aluno->EstadoAluno->find('list');
-        $this->set(compact('anolectivos','cursos','unidadeOrganicas','estadoAlunos'));
+        $this->set(compact('anolectivos', 'cursos', 'unidadeOrganicas', 'estadoAlunos'));
     }
-    
-    public function exportar_alunos_excel(){
+
+    public function exportar_alunos_excel() {
         
     }
-    
+
     public function seleccionar_aluno($r_controller, $r_action) {
         
     }
@@ -349,7 +342,7 @@ class AlunosController extends AppController {
      * @todo Nas listagens apenas devem aparecer codificadores e opcoes activas
      */
     function adicionar_estudante() {
-        if ($this->request->is('post') || $this->request->is('put')){ 
+        if ($this->request->is('post') || $this->request->is('put')) {
             $this->request->data['Aluno']['codigo'] = $this->request->data['Aluno']['numero_estudante'];
             $this->request->data['Matricula']['user_id'] = $this->Session->read('Auth.User.id');
             $this->request->data['Entidade']['name'] = $this->request->data['Entidade']['nomes'] . ' ' . $this->request->data['Entidade']['apelido'];
@@ -397,18 +390,17 @@ class AlunosController extends AppController {
 
         if ($this->request->is('post') || $this->request->is('put')) {
             //Grava os dados do usuario
-            
+
             $this->Aluno->Entidade->id = $this->request->data['Aluno']['entidade_id'];
             $this->Aluno->Entidade->save($this->request->data);
             $this->Aluno->AlunoNivelMedio->id = $this->request->data['Aluno']['aluno_nivel_medio_id'];
             $this->Aluno->AlunoNivelMedio->save($this->request->data);
-            
-            $this->Session->setFlash(__('Dados do Aluno Actualizados com Sucesso'),'default',array('class'=>'alert success'));
-            $this->redirect(array('controller'=>'alunos','action'=>'perfil_estudante',$this->request->data['Aluno']['aluno_id']));
-            
+
+            $this->Session->setFlash(__('Dados do Aluno Actualizados com Sucesso'), 'default', array('class' => 'alert success'));
+            $this->redirect(array('controller' => 'alunos', 'action' => 'perfil_estudante', $this->request->data['Aluno']['aluno_id']));
         }
-        
-        
+
+
         $cursos = $this->Aluno->Curso->find('list');
 
         $planoestudos = $this->Aluno->Matricula->Planoestudo->find('list');
@@ -426,13 +418,11 @@ class AlunosController extends AppController {
         $turnos = $this->Aluno->Matricula->Turno->find('list');
         $estado_civil = $this->Aluno->Entidade->EstadoCivil->find('list');
         $cidadenascimentos = $this->Aluno->Entidade->CidadeNascimento->find('list');
-        $this->Aluno->contain(array('Entidade','AlunoNivelMedio'=>array('EscolaNivelMedio'),'Curso'=>array('UnidadeOrganica')));
+        $this->Aluno->contain(array('Entidade', 'AlunoNivelMedio' => array('EscolaNivelMedio'), 'Curso' => array('UnidadeOrganica')));
         $aluno = $this->Aluno->find('first', array('conditions' => array('Aluno.id' => $id)));
         $this->request->data = $aluno;
-        
+
         $this->set(compact('aluno', 'nacionalidades', 'cursos', 'planoestudos', 'users', 'paises', 'cidades', 'provincias', 'documento_identificacaos', 'areatrabalhos', 'generos', 'cidadenascimentos', 'proveniencianomes', 'provenienciacidades', 'turnos', 'escolaNivelMedios', 'estado_civil'));
-        
-        
     }
 
     function beforeRender() {
@@ -443,7 +433,7 @@ class AlunosController extends AppController {
     public function beforeFilter() {
         parent::beforeFilter();
         if ($this->request->params['action'] == 'adicionar_estudante') {
-            $this->Security->validatePost = false; 
+            $this->Security->validatePost = false;
         }
     }
 
@@ -501,7 +491,7 @@ class AlunosController extends AppController {
             foreach ($this->request->data['Anolectivo'] as $k => $v) {
                 if ($v != 0) {
                     $this->request->data['Matricula']['anolectivo_id'] = $v;
-                    
+
                     $this->Aluno->Matricula->create();
                     if ($this->Aluno->Matricula->save($this->request->data)) {
                         $this->Session->setFlash(__('A Matricula do Aluno foi renovada com Sucesso'), 'default', array('class' => 'alert success'));
@@ -515,18 +505,17 @@ class AlunosController extends AppController {
 
 
         $this->Aluno->contain(array(
-            'Entidade','Planoestudo','Curso'=>array('UnidadeOrganica')
+            'Entidade', 'Planoestudo', 'Curso' => array('UnidadeOrganica')
         ));
         $aluno = $this->Aluno->findById($aluno_id);
-        
-        $renovacoes_falta = $this->Aluno->Matricula->getStatusRenovacao($aluno_id,true);
+
+        $renovacoes_falta = $this->Aluno->Matricula->getStatusRenovacao($aluno_id, true);
         $this->Aluno->Matricula->contain('Anolectivo', 'Estadomatricula', 'Curso', 'TipoMatricula');
         $matriculas = $this->Aluno->Matricula->find('all', array('conditions' => array('aluno_id' => $aluno_id), 'order' => 'Anolectivo.ano'));
 
         $this->set(compact('aluno', 'renovacoes_falta', 'matriculas'));
     }
 
-    
     public function reingresso($aluno_id) {
         $this->Aluno->id = $aluno_id;
         if (!$this->Aluno->exists()) {
@@ -534,75 +523,74 @@ class AlunosController extends AppController {
         }
 
         if ($this->request->is('post') || $this->request->is('put')) {
-            
-            
+
+
             $this->Aluno->Matricula->create();
             $this->Aluno->Matricula->save($this->request->data);
-            $this->Session->setFlash(__('Reingresso realizado com sucesso'),'default',array('class'=>'alert success'));
+            $this->Session->setFlash(__('Reingresso realizado com sucesso'), 'default', array('class' => 'alert success'));
             $this->redirect(array('action' => 'perfil_estudante', $this->request->data['Matricula']['aluno_id']));
         }
 
 
-        
+
         $this->Aluno->contain(array(
-            'Entidade','Planoestudo','Curso'=>array('UnidadeOrganica')
+            'Entidade', 'Planoestudo', 'Curso' => array('UnidadeOrganica')
         ));
         $aluno = $this->Aluno->findById($aluno_id);
         $renovacoes_falta = $this->Aluno->Matricula->getStatusRenovacao($aluno_id);
-       
-       
-        
-        
-        if(count($renovacoes_falta)<2){
-            $this->Session->setFlash(__('Este estudante tem menos de 2 anos fora da Universidade. Deve renovar a matricula em vez de reingresso'),'default',array('class'=>'alert info'));
+
+
+
+
+        if (count($renovacoes_falta) < 2) {
+            $this->Session->setFlash(__('Este estudante tem menos de 2 anos fora da Universidade. Deve renovar a matricula em vez de reingresso'), 'default', array('class' => 'alert info'));
             $this->redirect(array('action' => 'perfil_estudante', $aluno_id));
         }
         $ano_renovacoes = array();
-        foreach($renovacoes_falta as $k=>$v){
+        foreach ($renovacoes_falta as $k => $v) {
             $ano_renovacoes[$v['Anolectivo']['id']] = $v['Anolectivo']['ano'];
-        } 
+        }
         $this->Aluno->Matricula->contain('Anolectivo', 'Estadomatricula', 'Curso', 'TipoMatricula');
         $matriculas = $this->Aluno->Matricula->find('all', array('conditions' => array('aluno_id' => $aluno_id), 'order' => 'Anolectivo.ano'));
 
-        $this->set(compact('aluno', 'renovacoes_falta', 'matriculas','ano_renovacoes'));
+        $this->set(compact('aluno', 'renovacoes_falta', 'matriculas', 'ano_renovacoes'));
     }
 
     public function mostrar_foto($codigo) {
         $this->viewClass = 'Media';
-         App::uses('Folder', 'Utility');
+        App::uses('Folder', 'Utility');
         App::uses('File', 'Utility');
         $this->Aluno->contain();
         $aluno = $this->Aluno->findByCodigo($codigo);
-        if(!empty($aluno)){
+        if (!empty($aluno)) {
             App::uses('File', 'Utility');
-        $path = APP . 'Assets' . DS . 'Fotos' . DS . 'Estudantes' . DS.$aluno['Aluno']['ano_ingresso'].DS;
-        
-        $file_path = $path . $codigo . '.jpg';
-        $folder_novo = new Folder($path);
-        
-        $file = new File($file_path);
-        
-        if (!$file->exists()) {
-            $codigo = 'default_profile_picture';
-            $path = WWW_ROOT . DS . 'img' . DS;
-        }
+            $path = APP . 'Assets' . DS . 'Fotos' . DS . 'Estudantes' . DS . $aluno['Aluno']['ano_ingresso'] . DS;
+
+            $file_path = $path . $codigo . '.jpg';
+            $folder_novo = new Folder($path);
+
+            $file = new File($file_path);
+
+            if (!$file->exists()) {
+                $codigo = 'default_profile_picture';
+                $path = WWW_ROOT . DS . 'img' . DS;
+            }
 
 
-        $params = array(
-            'id' => $codigo . '.jpg',
-            'name' => 'fotografia',
-            'extension' => 'jpg',
-            'mimeType' => array(
-                'docx' => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
-            ),
-            'path' => $path
-        );
-        $this->set($params);
-        } else{
+            $params = array(
+                'id' => $codigo . '.jpg',
+                'name' => 'fotografia',
+                'extension' => 'jpg',
+                'mimeType' => array(
+                    'docx' => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+                ),
+                'path' => $path
+            );
+            $this->set($params);
+        } else {
             throw new NotFoundException('Estudante não encontrado. Mostrar foto');
         }
-        
-    } 
+    }
 
     public function pagar_factura($aluno_id, $pagamento_id) {
         $this->Aluno->id = $aluno_id;
@@ -817,79 +805,91 @@ class AlunosController extends AppController {
             )
         ));
         $aluno = $this->Aluno->Matricula->findById($matricula_id);
-         
+
 
         $this->set(compact('aluno'));
     }
-    
-    public function print_comprovativo_mudanca_curso($mudanca_curso_id){
-        
+
+    public function print_comprovativo_mudanca_curso($mudanca_curso_id) {
+
         $this->Aluno->MudancaCurso->contain(array(
-            'Aluno'=>array(
+            'Aluno' => array(
                 'Entidade'
             ),
-            'CursoNovo'=>array(
+            'CursoNovo' => array(
                 'UnidadeOrganica'
             ),
-            'CursoAntigo','Funcionario'=>array('Entidade')
+            'CursoAntigo', 'Funcionario' => array('Entidade')
         ));
         $mudanca = $this->Aluno->MudancaCurso->findById($mudanca_curso_id);
-        if($mudanca['CursoNovo']['UnidadeOrganica']['tipo_unidade_organica_id']>1){
+        if ($mudanca['CursoNovo']['UnidadeOrganica']['tipo_unidade_organica_id'] > 1) {
             $this->Aluno->Curso->UnidadeOrganica->contain();
             $unidadeMae = $this->Aluno->Curso->UnidadeOrganica->findById($mudanca['CursoNovo']['UnidadeOrganica']['parent_id']);
             $mudanca['CursoNovo']['UnidadeOrganica'] = $unidadeMae['UnidadeOrganica'];
-            
         }
-        
+
         $funcionario_id = $mudanca['MudancaCurso']['funcionario_id'];
-        if(!$funcionario_id){
-            $funcionario = array('Entidade'=>array('name'=>'Administrador SIGA'));
-        } else{
+        if (!$funcionario_id) {
+            $funcionario = array('Entidade' => array('name' => 'Administrador SIGA'));
+        } else {
             $this->Aluno->MudancaCurso->Funcionario->contain('Entidade');
             $funcionario = $this->Aluno->MudancaCurso->Funcionario->findById($funcionario_id);
         }
-        
-        
-        $this->set(compact('mudanca','funcionario'));
+
+
+        $this->set(compact('mudanca', 'funcionario'));
     }
 
     public function anular_matricula($aluno_id) {
         
     }
 
-    public function pesquisa_aluno_action($action_seguinte,$controller=null,$plugin=null) {
+    public function pesquisa_aluno_action($action_seguinte, $controller=null, $plugin=null) {
 
         if ($this->request->is('post')) {
             $aluno = $this->Aluno->findByCodigo($this->request->data['Aluno']['codigo']);
             if (!empty($aluno)) {
-                if($plugin!=null){
-                    $this->redirect(array('plugin'=>$plugin,'controller'=>$controller,'action' => $action_seguinte, $aluno['Aluno']['id']));
-                } elseif($controller!=NULL){
-                    $this->redirect(array('controller'=>$controller,'action' => $action_seguinte, $aluno['Aluno']['id']));
-                } else{
+                if ($plugin != null) {
+                    $this->redirect(array('plugin' => $plugin, 'controller' => $controller, 'action' => $action_seguinte, $aluno['Aluno']['id']));
+                } elseif ($controller != NULL) {
+                    $this->redirect(array('controller' => $controller, 'action' => $action_seguinte, $aluno['Aluno']['id']));
+                } else {
                     $this->redirect(array('action' => $action_seguinte, $aluno['Aluno']['id']));
                 }
-                
             } else {
                 $this->Session->setFlash(__('Estudante não encontrado'), 'default', array('class' => 'alert error'));
             }
         }
         $this->set(compact('action_seguinte'));
     }
-    
-    public function faculdade_pesquisa_aluno_action($action_seguinte,$controller=null,$plugin=null) {
 
+    /**
+     * Pesquisa um aluno e Redirecciona para uma accao especifica.
+     * 
+     * Tambem verifica se o aluno encontrado pertence a unidadde Organica do Usuario actualmente no sistema.
+     * 
+     * @param type $action_seguinte
+     * @param type $controller
+     * @param type $plugin 
+     */
+    public function faculdade_pesquisa_aluno_action($action_seguinte, $controller=null, $plugin=null) {
+        $unidade_organica_id = $this->Session->read('Auth.User.unidade_organica_id');
         if ($this->request->is('post')) {
+            $this->Aluno->contain('Curso');
             $aluno = $this->Aluno->findByCodigo($this->request->data['Aluno']['codigo']);
             if (!empty($aluno)) {
-                if($plugin!=null){
-                    $this->redirect(array('plugin'=>$plugin,'controller'=>$controller,'action' => $action_seguinte, $aluno['Aluno']['id']));
-                } elseif($controller!=NULL){
-                    $this->redirect(array('controller'=>$controller,'action' => $action_seguinte, $aluno['Aluno']['id']));
-                } else{
+                if ($aluno['Curso']['unidade_organica_id'] != $unidade_organica_id) {
+                    $this->Session->setFlash(__('Este Aluno Nao pertence a Sua Unidade Organica'), 'default', array('class' => 'alert error'));
+
+                    $this->redirect(array('controller' => 'pages', 'action' => 'home', 'faculdade' => true));
+                }
+                if ($plugin != null) {
+                    $this->redirect(array('plugin' => $plugin, 'controller' => $controller, 'action' => $action_seguinte, $aluno['Aluno']['id']));
+                } elseif ($controller != NULL) {
+                    $this->redirect(array('controller' => $controller, 'action' => $action_seguinte, $aluno['Aluno']['id']));
+                } else {
                     $this->redirect(array('action' => $action_seguinte, $aluno['Aluno']['id']));
                 }
-                
             } else {
                 $this->Session->setFlash(__('Estudante não encontrado'), 'default', array('class' => 'alert error'));
             }
@@ -905,13 +905,11 @@ class AlunosController extends AppController {
         }
 
         if ($this->request->is('post')) {
-            if($this->Aluno->mudaCurso($this->request->data)){
-                $this->Session->setFlash(__('Mudança de Curso efectuada com sucesso'),'default',array('class'=>'alert success'));
-                $this->set('mudanca_sucesso',1);
-                $this->set('mudanca_curso_id',$this->Aluno->MudancaCurso->id);
+            if ($this->Aluno->mudaCurso($this->request->data)) {
+                $this->Session->setFlash(__('Mudança de Curso efectuada com sucesso'), 'default', array('class' => 'alert success'));
+                $this->set('mudanca_sucesso', 1);
+                $this->set('mudanca_curso_id', $this->Aluno->MudancaCurso->id);
             }
-            
-            
         }
         $this->Aluno->contain(array(
             'Entidade' => array(
@@ -925,7 +923,7 @@ class AlunosController extends AppController {
         $cursos = $this->Aluno->Curso->find('list');
         $is_regular = $this->Aluno->isRegular($aluno_id);
         $user_id = $this->Session->read('Auth');
-        
+
         $funcionario = $this->Aluno->User->getFuncionarioActivoId($this->Session->read('Auth.User.id'));
 
         if (count($is_regular) == 1 && $is_regular[0]['regular'] == true) {
@@ -938,30 +936,30 @@ class AlunosController extends AppController {
             $classe_estado = "alert error";
         }
 
-        $this->set(compact('aluno', 'is_regular', 'classe_estado', 'cursos','funcionario'));
+        $this->set(compact('aluno', 'is_regular', 'classe_estado', 'cursos', 'funcionario'));
     }
-    
-    public function alterar_nome($aluno_id){
-        
-        if($this->request->is('post')){
+
+    public function alterar_nome($aluno_id) {
+
+        if ($this->request->is('post')) {
             $nomes = trim($this->request->data['Aluno']['nomes']);
             $apelido = trim($this->request->data['Aluno']['apelido']);
-            if($nomes != '' && $apelido != ''){
+            if ($nomes != '' && $apelido != '') {
                 $this->Aluno->contain();
                 $aluno = $this->Aluno->findById($this->request->data['Aluno']['aluno_id']);
-                
+
                 $entidade = $this->Aluno->Entidade->findById($aluno['Aluno']['entidade_id']);
-                
+
                 $this->Aluno->Entidade->id = $entidade['Entidade']['id'];
-                $this->Aluno->Entidade->set('nomes',$nomes);
-                $this->Aluno->Entidade->set('apelido',$apelido);
-                $this->Aluno->Entidade->set('name',$nomes." ".$apelido);
+                $this->Aluno->Entidade->set('nomes', $nomes);
+                $this->Aluno->Entidade->set('apelido', $apelido);
+                $this->Aluno->Entidade->set('name', $nomes . " " . $apelido);
                 $this->Aluno->Entidade->save();
-                $this->Session->setFlash(__('Nome Alterado com Sucesso'),'default',array('class'=>'alert success'));
-                $this->redirect(array('action'=>'perfil_estudante',$this->request->data['Aluno']['aluno_id']));
+                $this->Session->setFlash(__('Nome Alterado com Sucesso'), 'default', array('class' => 'alert success'));
+                $this->redirect(array('action' => 'perfil_estudante', $this->request->data['Aluno']['aluno_id']));
             }
         }
-         $this->Aluno->contain(array(
+        $this->Aluno->contain(array(
             'Entidade' => array(
                 'Genero'
             ),
@@ -970,9 +968,9 @@ class AlunosController extends AppController {
             )
         ));
         $aluno = $this->Aluno->findById($aluno_id);
-        
+
         $is_regular = $this->Aluno->isRegular($aluno_id);
-        
+
 
         if (count($is_regular) == 1 && $is_regular[0]['regular'] == true) {
             if ($is_regular[0]['estado'] == 1) {
@@ -986,20 +984,19 @@ class AlunosController extends AppController {
 
         $this->set(compact('aluno', 'is_regular', 'classe_estado'));
     }
-    
-    
-    public function alterar_status($aluno_id){
-        
-        if($this->request->is('post')){
-            
-            if($this->Aluno->alteraStatus($this->request->data['Aluno'])){
-                $this->Session->setFlash(__('Status do Aluno Alterado Com Sucesso'),'default',array('class'=>'alert success'));
-                $this->redirect(array('action'=>'perfil_estudante',$this->request->data['Aluno']['aluno_id']));
+
+    public function alterar_status($aluno_id) {
+
+        if ($this->request->is('post')) {
+
+            if ($this->Aluno->alteraStatus($this->request->data['Aluno'])) {
+                $this->Session->setFlash(__('Status do Aluno Alterado Com Sucesso'), 'default', array('class' => 'alert success'));
+                $this->redirect(array('action' => 'perfil_estudante', $this->request->data['Aluno']['aluno_id']));
             } else {
-                $this->Session->setFlash(__('Problemas ao alterar Status do Estudante'),'default',array('class'=>'alert error'));
+                $this->Session->setFlash(__('Problemas ao alterar Status do Estudante'), 'default', array('class' => 'alert error'));
             }
         }
-        
+
         $this->Aluno->contain(array(
             'Entidade' => array(
                 'Genero'
@@ -1009,7 +1006,7 @@ class AlunosController extends AppController {
             )
         ));
         $aluno = $this->Aluno->findById($aluno_id);
-        
+
         $is_regular = $this->Aluno->isRegular($aluno_id);
         $funcionario = $this->Aluno->User->getFuncionarioActivoId($this->Session->read('Auth.User.Id'));
 
@@ -1025,21 +1022,20 @@ class AlunosController extends AppController {
 
         $estadoAlunos = $this->Aluno->EstadoAluno->find('list');
         $motivoEstadoAlunos = $this->Aluno->AlunoEstado->MotivoEstadoAluno->find('list');
-        $this->set(compact('aluno', 'is_regular', 'classe_estado', 'cursos','funcionario','estadoAlunos','motivoEstadoAlunos'));
+        $this->set(compact('aluno', 'is_regular', 'classe_estado', 'cursos', 'funcionario', 'estadoAlunos', 'motivoEstadoAlunos'));
     }
-    
-    public function concluir_nivel($aluno_id){
-        
-        if($this->request->is('post')){
-           if($this->Aluno->concluirNivel($this->request->data)){
-               $this->Session->setFlash(__('Conclusão Registrada com Sucesso'),'default',array('class'=>'alert success'));
-               $this->redirect(array('action'=>'perfil_estudante',$this->request->data['Aluno']['aluno_id']));
-           } else {
-               $this->Session->setFlash(__('Problemas ao registrar a Conclusão de Nivel'),'default',array('class'=>'alert error'));
-           }
-            
+
+    public function concluir_nivel($aluno_id) {
+
+        if ($this->request->is('post')) {
+            if ($this->Aluno->concluirNivel($this->request->data)) {
+                $this->Session->setFlash(__('Conclusão Registrada com Sucesso'), 'default', array('class' => 'alert success'));
+                $this->redirect(array('action' => 'perfil_estudante', $this->request->data['Aluno']['aluno_id']));
+            } else {
+                $this->Session->setFlash(__('Problemas ao registrar a Conclusão de Nivel'), 'default', array('class' => 'alert error'));
+            }
         }
-        
+
         $this->Aluno->contain(array(
             'Entidade' => array(
                 'Genero'
@@ -1051,7 +1047,7 @@ class AlunosController extends AppController {
         $aluno = $this->Aluno->findById($aluno_id);
         $funcionario = $this->Aluno->User->getFuncionarioActivoId($this->Session->read('Auth.User.Id'));
         $is_regular = $this->Aluno->isRegular($aluno_id);
-        
+
 
         if (count($is_regular) == 1 && $is_regular[0]['regular'] == true) {
             if ($is_regular[0]['estado'] == 1) {
@@ -1064,13 +1060,12 @@ class AlunosController extends AppController {
         }
 
         $this->set(compact('aluno', 'is_regular', 'classe_estado'));
-        $this->set(compact('aluno', 'is_regular', 'classe_estado', 'cursos','funcionario'));
+        $this->set(compact('aluno', 'is_regular', 'classe_estado', 'cursos', 'funcionario'));
     }
-    
-    
-        function faculdade_index() {
 
-            $conditions = array();
+    function faculdade_index() {
+
+        $conditions = array();
         if ($this->request->is('post')) {
             if ($this->request->data['Aluno']['codigo'] != '') {
                 $conditions['Aluno.codigo'] = $this->request->data['Aluno']['codigo'];
@@ -1080,35 +1075,33 @@ class AlunosController extends AppController {
             }
         }
         $unidade_organica_id = $this->Session->read('Auth.User.unidade_organica_id');
-        $unidadeOrganicas = $this->Aluno->Curso->UnidadeOrganica->find('all',array('conditions'=>array('parent_id'=>$unidade_organica_id)));
-      
-        if($unidadeOrganicas){
-           $unidades_organicas = Hash::extract($unidadeOrganicas,'{n}.UnidadeOrganica.id');
-          
-           $unidades_organicas[] = $unidade_organica_id;
-          
-           $conditions['Curso.unidade_organica_id']=$unidades_organicas;
-        } else{
-            $conditions['Curso.unidade_organica_id']=$unidade_organica_id;
+        $unidadeOrganicas = $this->Aluno->Curso->UnidadeOrganica->find('all', array('conditions' => array('parent_id' => $unidade_organica_id)));
+
+        if ($unidadeOrganicas) {
+            $unidades_organicas = Hash::extract($unidadeOrganicas, '{n}.UnidadeOrganica.id');
+
+            $unidades_organicas[] = $unidade_organica_id;
+
+            $conditions['Curso.unidade_organica_id'] = $unidades_organicas;
+        } else {
+            $conditions['Curso.unidade_organica_id'] = $unidade_organica_id;
         }
-        
-        
+
+
         $this->paginate = array(
-            'conditions'=>$conditions,
-            'contain'=>array('Entidade', 'Curso','EstadoAluno'),
+            'conditions' => $conditions,
+            'contain' => array('Entidade', 'Curso', 'EstadoAluno'),
         );
-        
+
         $alunos = $this->paginate('Aluno');
-                
-        if(count($alunos)==1){
-            $this->redirect(array('action'=>'perfil_estudante',$alunos[0]['Aluno']['id']));
+
+        if (count($alunos) == 1) {
+            $this->redirect(array('action' => 'perfil_estudante', $alunos[0]['Aluno']['id']));
         }
 
         $this->set('alunos', $alunos);
-        
-        
     }
-    
+
     /**
      * @Todo Optimizar esta pagina
      * @Todo Colocar os links para as opcoes do estudante
@@ -1121,7 +1114,7 @@ class AlunosController extends AppController {
         }
 
 
-        
+
 
         $this->Aluno->contain(array(
             'Matricula' => array(
@@ -1135,7 +1128,7 @@ class AlunosController extends AppController {
             )
         ));
         $aluno = $this->Aluno->find('first', array('conditions' => array('Aluno.id' => $id)));
-        
+
         $this->Aluno->Inscricao->contain(array(
             'Turma' => array(
                 'fields' => array(
@@ -1152,7 +1145,7 @@ class AlunosController extends AppController {
             )
                 )
         );
-        $inscricoes_activas = $this->Aluno->Inscricao->find('all', array('conditions' => array('Inscricao.aluno_id' => $id, 'Inscricao.estadoinscricao_id' => 1)));
+        $inscricoes_activas = $this->Aluno->Inscricao->find('all', array('conditions' => array('Inscricao.aluno_id' => $id, 'Inscricao.estado_inscricao_id' => 1)));
 
         $this->Aluno->Inscricao->contain(array(
             'Turma' => array(
@@ -1174,7 +1167,7 @@ class AlunosController extends AppController {
             'order' => array(
                 'Turma.anocurricular',
                 'Turma.semestrecurricular'
-        )));
+                )));
 
         $this->Aluno->Inscricao->contain(array(
             'Turma' => array(
@@ -1204,20 +1197,18 @@ class AlunosController extends AppController {
 
         $is_bolseiro = $this->Aluno->isBolseiro($id) ? 1 : 0;
         $is_regular = $this->Aluno->isRegular($id);
-                
-                if(count($is_regular)==1 && $is_regular[0]['regular']==true){
-                    if($is_regular[0]['estado']==1){
-                        $classe_estado="alert note";
-                    } else{
-                        $classe_estado="alert success";
-                    }
-                    
-                    
-                } else{
-                    $classe_estado="alert error";
-                }
+
+        if (count($is_regular) == 1 && $is_regular[0]['regular'] == true) {
+            if ($is_regular[0]['estado'] == 1) {
+                $classe_estado = "alert note";
+            } else {
+                $classe_estado = "alert success";
+            }
+        } else {
+            $classe_estado = "alert error";
+        }
         //Requisicoes
-                
+
         $requisicoes = $this->Aluno->RequisicoesPedido->getAllRequisicoesPedidoByEstudante($id);
 
 
@@ -1227,26 +1218,25 @@ class AlunosController extends AppController {
         $pagamentos = $this->Aluno->FinanceiroPagamento->find('all', array('conditions' => array('FinanceiroPagamento.aluno_id' => $id)));
         //debug($pagamentos);
         $this->set('aluno', $aluno);
-      $is_bolseiro = $this->Aluno->isBolseiro($id, $this->Session->read('SGAConfig.anolectivo_id'));
+        $is_bolseiro = $this->Aluno->isBolseiro($id, $this->Session->read('SGAConfig.anolectivo_id'));
 
-        $this->set(compact( 'inscricoes_activas', 'todas_inscricoes', 'cadeiras_aprovadas', 'pagamentos', 'is_bolseiro','is_regular','classe_estado','requisicoes'));
+        $this->set(compact('inscricoes_activas', 'todas_inscricoes', 'cadeiras_aprovadas', 'pagamentos', 'is_bolseiro', 'is_regular', 'classe_estado', 'requisicoes'));
     }
-    
-    public function alterar_nome_candidato($codigo){
+
+    public function alterar_nome_candidato($codigo) {
         $this->loadModel('Candidatura');
-        if($this->request->is('post')){
+        if ($this->request->is('post')) {
             $this->Candidatura->id = $this->request->data['Candidatura']['candidatura_id'];
             $this->Candidatura->save($this->request->data);
-            $this->Session->setFlash('Nome de Candidato Alterado','default',array('class'=>'alert success'));
+            $this->Session->setFlash('Nome de Candidato Alterado', 'default', array('class' => 'alert success'));
             $this->redirect('/');
         }
-        
+
         $candidato = $this->Candidatura->findById($codigo);
         $this->set(compact('candidato'));
-        
     }
-    
-    public function busca_candidatos_action($action_seguinte){
+
+    public function busca_candidatos_action($action_seguinte) {
         if ($this->request->is('post')) {
             $this->loadModel('Candidatura');
             $candidato = $this->Candidatura->findByNumeroEstudante($this->request->data['Candidatura']['numero_estudante']);
@@ -1257,8 +1247,8 @@ class AlunosController extends AppController {
             }
         }
     }
-    
-    public function enviar_sms($aluno_id){
+
+    public function enviar_sms($aluno_id) {
         $this->Aluno->contain(array(
             'Entidade' => array(
                 'Genero'
@@ -1268,20 +1258,19 @@ class AlunosController extends AppController {
             )
         ));
         $aluno = $this->Aluno->findById($aluno_id);
-        if($this->request->is('post')){
+        if ($this->request->is('post')) {
             $this->loadModel('SmsEnviada');
             $celular = $this->Aluno->Entidade->getCellNumber($aluno['Aluno']['entidade_id']);
-            $sms_enviada = $this->SmsEnviada->sendSMS($celular,$this->request->data['Aluno']['mensagem'],$aluno['Aluno']['entidade_id'],1,$this->Session->read('Auth.User.id'));
-            if($sms_enviada==1){
-                $this->Session->setFlash(__('SMS Enviada com Sucesso'),'default',array('class'=>'alert success'));
-                $this->redirect(array('action'=>'perfil_estudante',$this->request->data['Aluno']['aluno_id']));
-            } else{
-                $this->Session->setFlash(__('Problemas no envio da SMS'),'default',array('class'=>'alert error'));
+            $sms_enviada = $this->SmsEnviada->sendSMS($celular, $this->request->data['Aluno']['mensagem'], $aluno['Aluno']['entidade_id'], 1, $this->Session->read('Auth.User.id'));
+            if ($sms_enviada == 1) {
+                $this->Session->setFlash(__('SMS Enviada com Sucesso'), 'default', array('class' => 'alert success'));
+                $this->redirect(array('action' => 'perfil_estudante', $this->request->data['Aluno']['aluno_id']));
+            } else {
+                $this->Session->setFlash(__('Problemas no envio da SMS'), 'default', array('class' => 'alert error'));
             }
-            
         }
         $is_regular = $this->Aluno->isRegular($aluno_id);
-        
+
 
         if (count($is_regular) == 1 && $is_regular[0]['regular'] == true) {
             if ($is_regular[0]['estado'] == 1) {
@@ -1292,64 +1281,60 @@ class AlunosController extends AppController {
         } else {
             $classe_estado = "alert error";
         }
-        
+
         $celular = $this->Aluno->Entidade->getCellNumber($aluno['Aluno']['entidade_id']);
         $funcionario = $this->Aluno->User->getFuncionarioActivoId($this->Session->read('Auth.User.id'));
-        if(!$celular){
-            $this->Session->setFlash(__("Este Estudante não Possui nenhum Numero de Celular Associado"),'default',array('class'=>'alert error'));
+        if (!$celular) {
+            $this->Session->setFlash(__("Este Estudante não Possui nenhum Numero de Celular Associado"), 'default', array('class' => 'alert error'));
         }
-        $this->set(compact('aluno', 'is_regular', 'classe_estado','celular','funcionario'));
-        
+        $this->set(compact('aluno', 'is_regular', 'classe_estado', 'celular', 'funcionario'));
     }
-    
-    
+
     /**
      * Inscreve aluno para a cerimonia de graduacao. 
      * 
      * @todo Passar toda a logica do Model para o Modelo :(
      * @param type $aluno_id
      */
-    public function cerimonia_graduacao($aluno_id){
-        if($this->request->is('post')){
+    public function cerimonia_graduacao($aluno_id) {
+        if ($this->request->is('post')) {
             $this->Aluno->CandidatoGraduacao->create();
-            $this->request->data['CandidatoGraduacao']['estado_candidatura_id']=1;
-            $this->request->data['CandidatoGraduacao']['estado_objecto_id']=1;
+            $this->request->data['CandidatoGraduacao']['estado_candidatura_id'] = 1;
+            $this->request->data['CandidatoGraduacao']['estado_objecto_id'] = 1;
             $this->Aluno->CandidatoGraduacao->save($this->request->data);
-            
+
             $this->Aluno->contain(array(
-            'Entidade' => array(
-                'Genero'
-            ),
-            'Curso' => array(
-                'UnidadeOrganica'
-            )
-        ));
-        $aluno = $this->Aluno->findById($this->request->data['CandidatoGraduacao']['aluno_id']);
-        
-        $this->Aluno->Entidade->id = $aluno['Aluno']['entidade_id'];
-        $this->Aluno->Entidade->set('data_nascimento',$this->request->data['CandidatoGraduacao']['data_nascimento']);
-        $this->Aluno->Entidade->set('estado_civil',$this->request->data['CandidatoGraduacao']['estado_civil_id']);
-        $this->Aluno->Entidade->set('genero_id',$this->request->data['CandidatoGraduacao']['genero_id']);
-        $this->Aluno->Entidade->set('pais_nascimento',$this->request->data['CandidatoGraduacao']['pais_nascimento']);
-        $this->Aluno->Entidade->set('provincia_nascimento',$this->request->data['CandidatoGraduacao']['provincia_nascimento']);
-        $this->Aluno->Entidade->set('cidade_nascimento',$this->request->data['CandidatoGraduacao']['distrito_nascimento']);
-        if($aluno['Entidade']['telemovel'] != $this->request->data['CandidatoGraduacao']['telemovel']){
-            $this->Aluno->Entidade->set('telemovel',$this->request->data['CandidatoGraduacao']['telemovel']);
-            $novo_contacto = array('EntidadeContacto'=>array(
-               'entidade_id'=>$aluno['Aluno']['entidade_id'],
-                'tipo_contacto_id'=>2,
-                'valor'=>$this->request->data['CandidatoGraduacao']['telemovel']
+                'Entidade' => array(
+                    'Genero'
+                ),
+                'Curso' => array(
+                    'UnidadeOrganica'
+                )
             ));
-            
-            $this->Aluno->Entidade->EntidadeContacto->create();
-            $this->Aluno->Entidade->EntidadeContacto->save($novo_contacto);
-        }
-        if($this->Aluno->Entidade->save()){
-            $this->Session->setFlash(__('Aluno Inscrito com Sucesso'),'default',array('class'=>'alert success'));
-            $this->redirect(array('controller'=>'cerimonia_graduacaos','action'=>'ver_detalhes',$this->request->data['CandidatoGraduacao']['cerimonia_graduacao_id']));
-        }
-        
-            
+            $aluno = $this->Aluno->findById($this->request->data['CandidatoGraduacao']['aluno_id']);
+
+            $this->Aluno->Entidade->id = $aluno['Aluno']['entidade_id'];
+            $this->Aluno->Entidade->set('data_nascimento', $this->request->data['CandidatoGraduacao']['data_nascimento']);
+            $this->Aluno->Entidade->set('estado_civil', $this->request->data['CandidatoGraduacao']['estado_civil_id']);
+            $this->Aluno->Entidade->set('genero_id', $this->request->data['CandidatoGraduacao']['genero_id']);
+            $this->Aluno->Entidade->set('pais_nascimento', $this->request->data['CandidatoGraduacao']['pais_nascimento']);
+            $this->Aluno->Entidade->set('provincia_nascimento', $this->request->data['CandidatoGraduacao']['provincia_nascimento']);
+            $this->Aluno->Entidade->set('cidade_nascimento', $this->request->data['CandidatoGraduacao']['distrito_nascimento']);
+            if ($aluno['Entidade']['telemovel'] != $this->request->data['CandidatoGraduacao']['telemovel']) {
+                $this->Aluno->Entidade->set('telemovel', $this->request->data['CandidatoGraduacao']['telemovel']);
+                $novo_contacto = array('EntidadeContacto' => array(
+                        'entidade_id' => $aluno['Aluno']['entidade_id'],
+                        'tipo_contacto_id' => 2,
+                        'valor' => $this->request->data['CandidatoGraduacao']['telemovel']
+                        ));
+
+                $this->Aluno->Entidade->EntidadeContacto->create();
+                $this->Aluno->Entidade->EntidadeContacto->save($novo_contacto);
+            }
+            if ($this->Aluno->Entidade->save()) {
+                $this->Session->setFlash(__('Aluno Inscrito com Sucesso'), 'default', array('class' => 'alert success'));
+                $this->redirect(array('controller' => 'cerimonia_graduacaos', 'action' => 'ver_detalhes', $this->request->data['CandidatoGraduacao']['cerimonia_graduacao_id']));
+            }
         }
         $this->Aluno->contain(array(
             'Entidade' => array(
@@ -1360,11 +1345,11 @@ class AlunosController extends AppController {
             )
         ));
         $aluno = $this->Aluno->findById($aluno_id);
-        
-        
-        
+
+
+
         $is_regular = $this->Aluno->isRegular($aluno_id);
-        
+
 
         if (count($is_regular) == 1 && $is_regular[0]['regular'] == true) {
             if ($is_regular[0]['estado'] == 1) {
@@ -1375,9 +1360,9 @@ class AlunosController extends AppController {
         } else {
             $classe_estado = "alert error";
         }
-        
+
         $paises = $this->Aluno->Entidade->PaisNascimento->find('list');
-        
+
         $cidades = $this->Aluno->Entidade->CidadeNascimento->find('list');
         $provincias = $this->Aluno->Entidade->ProvinciaNascimento->find('list');
         $celular = $this->Aluno->Entidade->getCellNumber($aluno['Aluno']['entidade_id']);
@@ -1387,12 +1372,10 @@ class AlunosController extends AppController {
         $regaliaSocials = $this->Aluno->CandidatoGraduacao->RegaliaSocial->find('list');
         $regimeEstudos = $this->Aluno->CandidatoGraduacao->RegimeEstudo->find('list');
         $cerimoniaGraduacaos = $this->Aluno->CandidatoGraduacao->CerimoniaGraduacao->find('list');
-        if(!$celular){
-            $this->Session->setFlash(__("Este Estudante não Possui nenhum Numero de Celular Associado"),'default',array('class'=>'alert error'));
+        if (!$celular) {
+            $this->Session->setFlash(__("Este Estudante não Possui nenhum Numero de Celular Associado"), 'default', array('class' => 'alert error'));
         }
-        $this->set(compact('aluno', 'is_regular', 'classe_estado','celular','funcionario','paises','cidades','provincias','regaliaSocials','regimeEstudos','generos','estado_civil','cerimoniaGraduacaos'));
+        $this->set(compact('aluno', 'is_regular', 'classe_estado', 'celular', 'funcionario', 'paises', 'cidades', 'provincias', 'regaliaSocials', 'regimeEstudos', 'generos', 'estado_civil', 'cerimoniaGraduacaos'));
     }
-
-    
 
 }

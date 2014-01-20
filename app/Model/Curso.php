@@ -1,4 +1,5 @@
 <?php
+
 /**
  * OpenSGA - Sistema de Gestão Académica
  *   Copyright (C) 2010-2011  INFOmoz (Informática-Moçambique)
@@ -17,7 +18,7 @@
  * devem manter está informação legal, assim como a licença original do software.
  *
  * @copyright     Copyright 2010-2011, INFOmoz (Informática-Moçambique) (http://infomoz.net)
- ** @link          http://opensga.com OpenSGA  - Sistema de Gestão Académica
+ * * @link          http://opensga.com OpenSGA  - Sistema de Gestão Académica
  * @author		  Elisio Leonardo (elisio.leonardo@gmail.com)
  * @package       opensga
  * @subpackage    opensga.core.controller
@@ -25,119 +26,125 @@
 
  *
  */
-
-
 class Curso extends AppModel {
-	var $name = 'Curso';
-	//The Associations below have been created with all possible keys, those that are not needed can be removed
 
-	var $belongsTo = array(
-		'GrauAcademico' => array(
-			'className' => 'GrauAcademico',
-			'foreignKey' => 'grauacademico_id',
-			'conditions' => '',
-			'fields' => '',
-			'order' => ''
-		),
-		'UnidadeOrganica' => array(
-			'className' => 'UnidadeOrganica',
-			'foreignKey' => 'unidade_organica_id',
-			'conditions' => '',
-			'fields' => '',
-			'order' => ''
-		),
-		'Tipocurso' => array(
-			'className' => 'Tipocurso',
-			'foreignKey' => 'tipocurso_id',
-			'conditions' => '',
-			'fields' => '',
-			'order' => ''
-		),
-	);
+    var $name = 'Curso';
+    //The Associations below have been created with all possible keys, those that are not needed can be removed
 
-	var $hasMany = array(
-		'Planoestudo' => array(
-			'className' => 'Planoestudo',
-			'foreignKey' => 'curso_id',
-			'dependent' => false,
-			'conditions' => '',
-			'fields' => '',
-			'order' => '',
-			'limit' => '',
-			'offset' => '',
-			'exclusive' => '',
-			'finderQuery' => '',
-			'counterQuery' => ''
-		),
-		'Turma' => array(
-			'className' => 'Turma',
-			'foreignKey' => 'curso_id',
-			'dependent' => false,
-			'conditions' => '',
-			'fields' => '',
-			'order' => '',
-			'limit' => '',
-			'offset' => '',
-			'exclusive' => '',
-			'finderQuery' => '',
-			'counterQuery' => ''
-		),
-		'CursosTurno' => array(
-			'className' => 'CursosTurno',
-			'foreignKey' => 'curso_id',
-			'dependent' => false,
-			'conditions' => '',
-			'fields' => '',
-			'order' => '',
-			'limit' => '',
-			'offset' => '',
-			'exclusive' => '',
-			'finderQuery' => '',
-			'counterQuery' => ''
-		),
-		'Matricula' => array(
-			'className' => 'Matricula',
-			'foreignKey' => 'curso_id',
-			'dependent' => false,
-			'conditions' => '',
-			'fields' => '',
-			'order' => '',
-			'limit' => '',
-			'offset' => '',
-			'exclusive' => '',
-			'finderQuery' => '',
-			'counterQuery' => ''
-		)
-	);
-
+    var $belongsTo = array(
+        'GrauAcademico' => array(
+            'className' => 'GrauAcademico',
+            'foreignKey' => 'grauacademico_id',
+            'conditions' => '',
+            'fields' => '',
+            'order' => ''
+        ),
+        'UnidadeOrganica' => array(
+            'className' => 'UnidadeOrganica',
+            'foreignKey' => 'unidade_organica_id',
+            'conditions' => '',
+            'fields' => '',
+            'order' => ''
+        ),
+        'Tipocurso' => array(
+            'className' => 'Tipocurso',
+            'foreignKey' => 'tipocurso_id',
+            'conditions' => '',
+            'fields' => '',
+            'order' => ''
+        ),
+    );
+    var $hasMany = array(
+        'Planoestudo' => array(
+            'className' => 'Planoestudo',
+            'foreignKey' => 'curso_id',
+            'dependent' => false,
+            'conditions' => '',
+            'fields' => '',
+            'order' => '',
+            'limit' => '',
+            'offset' => '',
+            'exclusive' => '',
+            'finderQuery' => '',
+            'counterQuery' => ''
+        ),
+        'Turma' => array(
+            'className' => 'Turma',
+            'foreignKey' => 'curso_id',
+            'dependent' => false,
+            'conditions' => '',
+            'fields' => '',
+            'order' => '',
+            'limit' => '',
+            'offset' => '',
+            'exclusive' => '',
+            'finderQuery' => '',
+            'counterQuery' => ''
+        ),
+        'CursosTurno' => array(
+            'className' => 'CursosTurno',
+            'foreignKey' => 'curso_id',
+            'dependent' => false,
+            'conditions' => '',
+            'fields' => '',
+            'order' => '',
+            'limit' => '',
+            'offset' => '',
+            'exclusive' => '',
+            'finderQuery' => '',
+            'counterQuery' => ''
+        ),
+        'Matricula' => array(
+            'className' => 'Matricula',
+            'foreignKey' => 'curso_id',
+            'dependent' => false,
+            'conditions' => '',
+            'fields' => '',
+            'order' => '',
+            'limit' => '',
+            'offset' => '',
+            'exclusive' => '',
+            'finderQuery' => '',
+            'counterQuery' => ''
+        )
+    );
     var $validate = array(
-    'codigo' => array(
-        'rule' => 'isUnique',
-        'message' => 'Este codigo ja foi usado por outro curso.'
-    ),
-    'name' => array(
-        'rule' => 'isUnique',
-        'message' => 'Ja existe um curso com este nome.'
-    )
+        'codigo' => array(
+            'rule' => 'isUnique',
+            'message' => 'Este codigo ja foi usado por outro curso.'
+        ),
+        'name' => array(
+            'rule' => 'isUnique',
+            'message' => 'Ja existe um curso com este nome.'
+        )
+    );
 
-);
+    function geraCodigo() {
+        $id = $this->find('first', array('order' => array('Curso.created DESC'), 'fields' => 'id'));
+        $ano = date('Y');
+        $id_for = str_pad($id['Curso']['id'] + 1, 4, "0", STR_PAD_LEFT);
+        $codigo = "C" . $id_for;
+        return $codigo;
+    }
 
-    function geraCodigo(){
-            $id = $this->find('first', array('order' => array('Curso.created DESC'),'fields'=>'id'));
-            $ano=date('Y');
-            $id_for=str_pad($id['Curso']['id']+1, 4,"0",STR_PAD_LEFT);
-            $codigo = "C".$id_for;
-            return $codigo;
-        }
+    public function getPlanoEstudoRecente($curso_id) {
+        return $this->Planoestudo->find('first', array('conditions' => array('curso_id' => $curso_id), 'order' => 'ano_criacao DESC'));
+    }
+
+    public function getTurnoIdByCursoId($curso_id) {
+        $curso_turno = $this->CursosTurno->findByCursoId($curso_id);
+        return $curso_turno['CursosTurno']['turno_id'];
+    }
+    
+    public function getAllIdsByUnidadeOrganica($unidades_organicas){
         
-        public function getPlanoEstudoRecente($curso_id){
-            return $this->Planoestudo->find('first',array('conditions'=>array('curso_id'=>$curso_id),'order'=>'ano_criacao DESC'));
-        }
+        $cursos = $this->find('all',array('conditions'=>array('unidade_organica_id'=>$unidades_organicas)));
+        return  Hash::extract($cursos,'{n}.Curso.id');
         
-        public function getTurnoIdByCursoId($curso_id){
-            $curso_turno = $this->CursosTurno->findByCursoId($curso_id);
-            return $curso_turno['CursosTurno']['turno_id'];
-        }
+    }
 
+    
+    
 }
+
 ?>

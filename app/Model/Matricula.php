@@ -129,13 +129,20 @@ class Matricula extends AppModel {
         return $alunos;
     }
 
-    public function getTotalMatriculasActivas($ano_lectivo_id = null) {
+    public function getTotalMatriculasActivas($unidades_organicas = null, $ano_lectivo_id = null) {
         if ($ano_lectivo_id == null) {
 
             $ano_lectivo_id = Configure::read('OpenSGA.ano_lectivo_id');
         }
 
-        return $this->find('count', array('conditions' => array('estadomatricula_id' => 1, 'Matricula.anolectivo_id' => $ano_lectivo_id)));
+        $conditions = array();
+        $conditions['estadomatricula_id'] = 1;
+        $conditions['Matricula.anolectivo_id'] = $ano_lectivo_id;
+        if ($unidades_organicas) {
+            $conditions['Curso.unidade_organica_id'] = $unidades_organicas;
+        }
+        $this->contain('Curso');
+        return $this->find('count', array('conditions' => $conditions));
     }
 
     /**
@@ -154,21 +161,23 @@ class Matricula extends AppModel {
     }
 
     /**
-     * Retorna o Total de Alunos que nao renovou matricula num determinado Semestre/Ano Lectivo
+     * Retorna o Total de Alunos que nao renovou matricula num determinado ano lectivo
      * @param type $semestre_id 
      */
-    public function getTotalAlunosNaoMatriculados($semestre_id) {
-        //Primeiro, vemos quem renovou
-        $ano_lectivo_id = $this->Anolectivo->Semestrelectivo->field('anolectivo_id', array('Semestrelectivo.id' => $semestre_id));
-        //$total_matriculas = $this->find()
-        // debug($ano_lectivo_id);
+    public function getTotalMatriculasNaoRenovadas($unidades_organicas = null,$ano_lectivo_id = null) {
+        
+        $total_matriculas_renovadas = $this->getTotalMatriculasActivas($unidades_organicas, $ano_lectivo_id);
+        
+        $total_alunos_activos = $this->Aluno->getTotalAlunosActivos($unidades_organicas);
+        
+        return $total_alunos_activos - $total_matriculas_renovadas;
     }
 
     /**
      * Retorna o estado da renovacao de matricula do Aluno.
      * @param type $aluno_id
      */
-    public function getStatusRenovacao($aluno_id,$renovacoes_futuras = false) {
+    public function getStatusRenovacao($aluno_id, $renovacoes_futuras = false) {
 
         //Primeiro vamos buscar todos os anos lectivos que ele devia matricular
         $this->Aluno->contain('HistoricoCurso');
@@ -182,13 +191,12 @@ class Matricula extends AppModel {
             $historicoAluno = $this->Aluno->HistoricoCurso->find('first', array('conditions' => array('aluno_id' => $aluno['Aluno']['id'], 'curso_id' => $aluno['Aluno']['curso_id'])));
             $ano_lectivo_conditions['ano <='] = $historicoAluno['HistoricoCurso']['ano_fim'];
         } else {
-            if($renovacoes_futuras){
-                $ano_lectivo_maximo = $this->Anolectivo->find('first',array('order'=>'Anolectivo.ano DESC'));
+            if ($renovacoes_futuras) {
+                $ano_lectivo_maximo = $this->Anolectivo->find('first', array('order' => 'Anolectivo.ano DESC'));
                 $ano_lectivo_conditions['ano <='] = $ano_lectivo_maximo['Anolectivo']['ano'];
-            } else{
+            } else {
                 $ano_lectivo_conditions['ano <='] = Configure::read('OpenSGA.ano_lectivo');
             }
-            
         }
         $ano_lectivos = $this->Anolectivo->find('all', array('conditions' => $ano_lectivo_conditions, 'order' => 'ano desc'));
         $array_renovacao_falta = array();
@@ -202,7 +210,7 @@ class Matricula extends AppModel {
         }
         return $array_renovacao_falta;
     }
-    
+
     /**
      * Retorna a renovacao dado o id do aluno e o ano lectivo
      * 
@@ -211,106 +219,103 @@ class Matricula extends AppModel {
      * @param type $ano
      * @return type
      */
-    public function getRenovacaoByAlunoAndAnoLectivo($aluno_id,$ano){
+    public function getRenovacaoByAlunoAndAnoLectivo($aluno_id, $ano) {
         $ano_lectivo_id = $this->Anolectivo->getAnoLectivoIdByAno($ano);
-        
-        $matricula = $this->find('first',array('conditions'=>array('aluno_id'=>$aluno_id,'anolectivo_id'=>$ano_lectivo_id)));
+
+        $matricula = $this->find('first', array('conditions' => array('aluno_id' => $aluno_id, 'anolectivo_id' => $ano_lectivo_id)));
         return $matricula;
     }
-    
-    
- 
 
     public function processaFicheiroRenovacao($file_url) {
         App::uses('File', 'Utility');
         $file = new File(APP . $file_url);
-        $linhas = file(APP.$file_url,FILE_IGNORE_NEW_LINES);
+        $linhas = file(APP . $file_url, FILE_IGNORE_NEW_LINES);
         $datasource = $this->getDataSource();
         $datasource->begin();
-        foreach($linhas as $linha){
-            
-            switch($linha[0]){
+        foreach ($linhas as $linha) {
+
+            switch ($linha[0]) {
                 case '0': //Primeira Linha
-                    $dia = substr($linha, 6,2);
-                    $mes = substr($linha,8,2);
-                    $ano = substr($linha,10,4);
-                    $data = $ano.'-'.$mes.'-'.$dia;
+                    $dia = substr($linha, 6, 2);
+                    $mes = substr($linha, 8, 2);
+                    $ano = substr($linha, 10, 4);
+                    $data = $ano . '-' . $mes . '-' . $dia;
                     break;
                 case '1':
-                    $referencia = substr($linha, 1,11);
-                    $montante = substr($linha,12,16);
-                    $comissao = substr($linha, 28,16);
-                    $dia = substr($linha, 44,2);
-                    $mes = substr($linha,46,2);
-                    $ano = substr($linha,48,4);
-                    $hora = substr($linha,52,2);
-                    $minuto = substr($linha,54,2);
-                    $segundo = substr($linha, 56,2);
-                    $data = $ano.'-'.$mes.'-'.$dia." ".$hora.":".$minuto.":".$segundo;
-                    
-                    $transacao_id = substr($linha,58,7);
-                    $atm_id = substr($linha,65,10);
-                    $localizacao_atm = substr($linha,75,16);
+                    $referencia = substr($linha, 1, 11);
+                    $montante = substr($linha, 12, 16);
+                    $comissao = substr($linha, 28, 16);
+                    $dia = substr($linha, 44, 2);
+                    $mes = substr($linha, 46, 2);
+                    $ano = substr($linha, 48, 4);
+                    $hora = substr($linha, 52, 2);
+                    $minuto = substr($linha, 54, 2);
+                    $segundo = substr($linha, 56, 2);
+                    $data = $ano . '-' . $mes . '-' . $dia . " " . $hora . ":" . $minuto . ":" . $segundo;
+
+                    $transacao_id = substr($linha, 58, 7);
+                    $atm_id = substr($linha, 65, 10);
+                    $localizacao_atm = substr($linha, 75, 16);
                     $montante_decimal = substr($montante, -2);
                     debug($montante_decimal);
-                    $montante_real = ltrim(substr($montante,0,-2),'0');
+                    $montante_real = ltrim(substr($montante, 0, -2), '0');
                     debug($montante_real);
-                    $montante = $montante_real.'.'.$montante_decimal;
-                    
-                    
-                    
+                    $montante = $montante_real . '.' . $montante_decimal;
+
+
+
                     $transacao = array();
                     $deposito = array();
                     $transacao['tipo_transacao_id'] = 1;
                     $transacao['valor'] = $montante;
                     $this->Aluno->Entidade->FinanceiroTransacao->FinanceiroPagamento->contain('Aluno');
                     $pagamento = $this->Aluno->Entidade->FinanceiroTransacao->FinanceiroPagamento->findByReferenciaPagamento($referencia);
-                    if($pagamento){
+                    if ($pagamento) {
                         $transacao['entidade_id'] = $pagamento['FinanceiroPagamento']['entidade_id'];
                         $transacao['financeiro_conta_id'] = $pagamento['FinanceiroPagamento']['financeiro_conta_id'];
                         $deposito['entidade_id'] = $pagamento['FinanceiroPagamento']['entidade_id'];
                         $deposito['financeiro_conta_id'] = $pagamento['FinanceiroPagamento']['financeiro_conta_id'];
                         $transacao['financeiro_estado_transacao_id'] = 4;
-                        
+
                         $deposito['financeiro_estado_deposito_id'] = 2;
                         $anolectivo = $this->Anolectivo->findByAno('2014');
-                        
+
                         //Renova a Matricula se o valor for aceitavel.
-                        if($pagamento['FinanceiroPagamento']['valor']==$montante){
+                        if ($pagamento['FinanceiroPagamento']['valor'] == $montante) {
                             $deposito['data_reconciliacao'] = date('Y-m-d H:i:s');
-                            $matricula_existe = $this->find('first',array('conditions'=>array('aluno_id'=>$pagamento['FinanceiroPagamento']['aluno_id'],'anolectivo_id'=>$anolectivo['Anolectivo']['id'])));
-                            if(empty($matricula_existe)){
-                                
+                            $matricula_existe = $this->find('first', array('conditions' => array('aluno_id' => $pagamento['FinanceiroPagamento']['aluno_id'], 'anolectivo_id' => $anolectivo['Anolectivo']['id'])));
+                            if (empty($matricula_existe)) {
+
                                 //verifica se o aluno é regular
-                                if($this->Aluno->isRegular($pagamento['Aluno']['aluno_id'])){
+                                if ($this->Aluno->isRegular($pagamento['Aluno']['aluno_id'])) {
                                     $this->create();
-                                $matricula = array(
-                                    'aluno_id'=>$pagamento['Aluno']['id'],
-                                    'curso_id'=>$pagamento['Aluno']['curso_id'],
-                                    'planoestudo_id'=>$pagamento['Aluno']['planoestudo_id'],
-                                    'data'=>$data,
-                                    'estadomatricula_id'=>1,
-                                    'anolectivo_id'=>$anolectivo['Anolectivo']['id'],
-                                    'tipo_matricula_id'=>2
-                                );
-                                $this->save(array('Matricula'=>$matricula));
-                                } else{
+                                    $matricula = array(
+                                        'aluno_id' => $pagamento['Aluno']['id'],
+                                        'curso_id' => $pagamento['Aluno']['curso_id'],
+                                        'planoestudo_id' => $pagamento['Aluno']['planoestudo_id'],
+                                        'data' => $data,
+                                        'estadomatricula_id' => 1,
+                                        'anolectivo_id' => $anolectivo['Anolectivo']['id'],
+                                        'tipo_matricula_id' => 2,
+                                        'user_id' => 1
+                                    );
+                                    $this->save(array('Matricula' => $matricula));
+                                } else {
                                     $deposito['financeiro_estado_deposito_id'] = 6;
                                 }
-                                
-                            } else{
+                            } else {
                                 $deposito['financeiro_estado_deposito_id'] = 5;
                             }
-                        } else{
+                        } else {
                             $deposito['financeiro_estado_deposito_id'] = 4;
                         }
-                    } else{
+                    } else {
                         $transacao['financeiro_estado_transacao_id'] = 5;
                         $deposito['financeiro_estado_deposito_id'] = 3;
                     }
                     $this->Aluno->Entidade->FinanceiroTransacao->create();
-                    $this->Aluno->Entidade->FinanceiroTransacao->save(array('FinanceiroTransacao'=>$transacao));
-                    
+                    $this->Aluno->Entidade->FinanceiroTransacao->save(array('FinanceiroTransacao' => $transacao));
+
                     $deposito['data_deposito'] = $data;
                     $deposito['numero_comprovativo'] = $referencia;
                     $deposito['financeiro_forma_deposito_id'] = 1;
@@ -320,32 +325,25 @@ class Matricula extends AppModel {
                     $deposito['referencia_deposito'] = $referencia;
                     $deposito['id_transacao_banco'] = $transacao_id;
                     $this->Aluno->Entidade->FinanceiroTransacao->FinanceiroDeposito->create();
-                    $this->Aluno->Entidade->FinanceiroTransacao->FinanceiroDeposito->save(array('FinanceiroDeposito'=>$deposito));
-                    
-                    
-                    
-                    
-                    
-                    
+                    $this->Aluno->Entidade->FinanceiroTransacao->FinanceiroDeposito->save(array('FinanceiroDeposito' => $deposito));
+
+
+
+
+
+
                     break;
                 case '9':
-                    $total_pagamentos = substr($linha, 1,7);
-                    $valor_total = substr($linha, 8,16);
-                    $total_commissoes = substr($linha, 24,16);
-                    
-                    
+                    $total_pagamentos = substr($linha, 1, 7);
+                    $valor_total = substr($linha, 8, 16);
+                    $total_commissoes = substr($linha, 24, 16);
+
+
                     break;
-                
-                
-                    
             }
-            
         }
         $datasource->commit();
         return true;
-        
-
-        
     }
 
 }
