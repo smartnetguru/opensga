@@ -45,6 +45,7 @@
  */
 class Turma extends AppModel {
 	var $name = 'Turma';
+    public $recursive = 0;
     
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 

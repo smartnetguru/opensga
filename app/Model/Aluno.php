@@ -333,6 +333,8 @@ class Aluno extends AppModel {
         $conta = $this->getContaByAlunoId($aluno_id);
         return $conta['FinanceiroConta']['id'];
     }
+    
+    
 
     /**
      * Devolve todas as turmas que o aluno pode se inscrever, baseado nas cadeiras feitas e precedencias

@@ -222,6 +222,33 @@ class Entidade extends AppModel {
             }
         }
     }
+    
+    /**
+     * Retorna todos os dados do documento de identificacao activo para a entidade
+     * @todo implementar o metodo
+     * @param type $entidade_id 
+     */
+    public function getDocumentoIdentificacao($entidade_id){
+        
+    }
+    
+    /**
+     *Retorna a morada de uma entidade como uma string devidamente formatada
+     * 
+     * @todo implementar
+     * @param type $entidade_id 
+     */
+    public function getMorada($entidade_id){
+        return '';
+    }
+    
+    /**
+     * Retorna apenas o numero de documento de identificacao da entidade
+     * @todo implementar o metodo
+     */
+    public function getNumeroDocumentoIdentificacao($entidade_id){
+        return 0;
+    }
 
 
 }
