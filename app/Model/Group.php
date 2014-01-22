@@ -28,10 +28,17 @@
  
  
 class Group extends AppModel {
-	var $name = 'Group';
-	//The Associations below have been created with all possible keys, those that are not needed can be removed
-
-	var $hasMany = array(
+	
+    public $belongsTo = array(
+        'EstadoObjecto' => array(
+            'className' => 'EstadoObjecto',
+            'foreignKey' => 'estado_objecto_id',
+            'conditions' => '',
+            'fields' => '',
+            'order' => ''
+        ),
+         );
+	public $hasMany = array(
 		'User' => array(
 			'className' => 'User',
 			'foreignKey' => 'group_id',
@@ -60,8 +67,23 @@ class Group extends AppModel {
         )
 	);
 	
-	var $actsAs = array('Acl' => array('type' => 'requester'));
+	public $actsAs = array('Acl' => array('type' => 'requester'));
 	
+    public $validate = array(
+        'name'=> array(
+            'nameRule-1'=> array(
+                'rule'=>'isUnique',
+                'required'=>'create',
+                'message' => 'Não podem existir dois grupos com mesmo nome'
+            ),
+            'nameRule-2'=>array(
+                'rule'=>'notEmpty',
+                'message'=>'O nome do Grupo nao pode ser vazio'
+            )
+            
+        )
+    );
+    
 	function parentNode() {
 		return null;
 	}

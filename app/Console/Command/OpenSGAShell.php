@@ -882,7 +882,7 @@ class OpenSGAShell extends AppShell {
         }
         $objWriter = PHPExcel_IOFactory::createWriter($xls, 'Excel2007');
         
-        $objWriter->save(APP.'webroot'.DS.'renovacao'.Configure::read('OpenSGA.ano_lectivo').'.xlsx');
+        $objWriter->save(Configure::read('OpenSGA.save_path').DS.'renovacao'.Configure::read('OpenSGA.ano_lectivo').'.xlsx');
         
     }
     

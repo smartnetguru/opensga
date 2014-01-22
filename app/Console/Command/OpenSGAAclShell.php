@@ -26,10 +26,12 @@ class OpenSGAAclShell extends AppShell {
             $comandos = array();
             $comandos[] = "acl deny User.{$funcionario['User']['id']} controllers";
             
-            
+            $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/autocomplete";
+            $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/mostrar_foto";
             $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Users/login";
             
             $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Users/logout";
+            
             
             $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Users/faculdade_logout";
             
@@ -118,6 +120,12 @@ class OpenSGAAclShell extends AppShell {
                     $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/CerimoniaGraduacaos/ver_detalhes";
                     $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/CerimoniaGraduacaos/print_lista_graduandos";
                     $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/CerimoniaGraduacaos/nova_cerimonia";
+                    
+                    $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Groups/index";
+                    $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Groups/novo_grupo";
+                    $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Groups/editar_grupo";
+                    $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Groups/remover_grupo";
+                    $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Groups/ver_grupo";
                     
                     $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Logs/index";
                     $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Logs/view";

@@ -220,6 +220,11 @@ class Aluno extends AppModel {
             )
         )
     );
+    
+    
+    public $virtualFields = array(
+        
+    );
 
     /**
      * Retorna o plano de estudos activo do aluno

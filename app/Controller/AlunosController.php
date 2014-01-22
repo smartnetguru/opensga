@@ -844,6 +844,34 @@ class AlunosController extends AppController {
         
     }
 
+    /**
+     * Auto Complete Para alunos
+     */
+    public function autocomplete() {
+        if ($this->request->is('ajax')) {
+            $this->autoRender = false;
+            $this->layout = 'ajax';
+            
+            $this->Aluno->contain(array(
+                'Entidade','Curso'
+            ));
+            $this->Aluno->virtualFields['auto_complete'] = 'CONCAT(Aluno.codigo," - ",Entidade.name)';
+            $conditions = array(
+                'Aluno.codigo LIKE ' => '%'. $this->request->query['term'] . '%'
+            );
+            if($this->Aluno->Entidade->User->isFromFaculdade($this->Session->read('Auth.User.id'))){
+                $conditions['Curso.unidade_organica_id'] = $this->Session->read('Auth.User.unidade_organica_id');
+            }
+            $results = $this->Aluno->find('all', array('fields' => array('Aluno.auto_complete'),
+                'conditions' => $conditions,
+                'group' => array('Aluno.codigo'),'limit'=>20
+                    ));
+            $codigos = Set::extract('../Aluno/auto_complete', $results);
+            
+            echo json_encode($codigos);
+        }
+    }
+
     public function pesquisa_aluno_action($action_seguinte, $controller=null, $plugin=null) {
 
         if ($this->request->is('post')) {
@@ -860,7 +888,8 @@ class AlunosController extends AppController {
                 $this->Session->setFlash(__('Estudante não encontrado'), 'default', array('class' => 'alert error'));
             }
         }
-        $this->set(compact('action_seguinte'));
+        $codigos = '';
+        $this->set(compact('action_seguinte','codigos'));
     }
 
     /**
@@ -894,7 +923,8 @@ class AlunosController extends AppController {
                 $this->Session->setFlash(__('Estudante não encontrado'), 'default', array('class' => 'alert error'));
             }
         }
-        $this->set(compact('action_seguinte'));
+        $codigos = '';
+        $this->set(compact('action_seguinte','codigos'));
     }
 
     public function mudanca_curso($aluno_id) {
