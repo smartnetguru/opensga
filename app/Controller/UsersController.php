@@ -51,6 +51,15 @@ class UsersController extends AppController {
         $groups = $this->User->Group->find('list');
         $this->set(compact('groups'));
     }
+    
+    
+    public function altera_unidade_organica_admin(){
+        if($this->request->is('post')){
+            
+            $this->Session->write('Auth.User.unidade_organica_id',$this->request->data['User']['unidade_organica']);
+            $this->redirect('/');
+        }
+    }
 
     function edit($id = null) {
         if (!$id && empty($this->data)) {
@@ -151,6 +160,12 @@ class UsersController extends AppController {
                 $this->User->set('ultimo_login',date('Y-m-d H:i:s'));
                 $this->User->save();
                 $this->Session->write('Auth.User.Groups',$grupos_combine);
+                if($User['group_id']==1){
+                    $unidade_organicas = $this->User->Funcionario->UnidadeOrganica->find('list');
+                    $this->Session->write('Auth.User.unidade_organicas',$unidade_organicas);
+                    $this->Session->write('Auth.User.unidade_organica_id', 29);
+                    //die(var_dump($unidade_organicas));
+                }
                 if ($User['group_id'] == 3) {
 
                     $this->redirect(array('controller' => 'pages', 'action' => 'home', 'estudante' => TRUE));
@@ -289,6 +304,9 @@ class UsersController extends AppController {
         parent::beforeFilter();
 
         $this->Auth->allow(array('login', 'logout', 'opauth_complete'));
+        if($this->action=='login' or $this->action=='logout'){
+            Configure::write('debug',0);
+        }
     }
 
     public function configura_permissoes($user_id) {

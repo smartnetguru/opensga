@@ -22,6 +22,7 @@ class GroupsController extends AppController {
            'EstadoObjecto' 
         ));
         $this->set('groups', $this->paginate());
+        
     }
 
     function ver_grupo($id = null) {

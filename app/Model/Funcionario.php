@@ -72,6 +72,8 @@ class Funcionario extends AppModel {
      *Esta funcao faz o mesmo que find list, mas busca o name a partir da tabela entidades
      */
     public function listaFuncionarios(){
+        
+        $this->contain('Entidade');
 
         $funcionarios = $this->find('all',array('fields'=>array('id','Entidade.name')));
 

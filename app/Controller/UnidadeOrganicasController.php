@@ -118,16 +118,17 @@ class UnidadeOrganicasController extends AppController {
             }
             $this->UnidadeOrganica->create();
             if ($this->UnidadeOrganica->save($this->request->data)) {
-                $this->Session->setFlash(__('Unidade Orgânica Registrada com Sucesso'), 'default', array('class' => 'alert_success'));
+                $this->Session->setFlash(__('Unidade Orgânica Registrada com Sucesso'), 'default', array('class' => 'alert success'));
                 $this->redirect(array('action' => 'index'));
             } else {
-                $this->Session->setFlash(__('Problemas ao Registrar Unidade Orgânica'), 'default', array('class' => 'alert_error'));
+                $this->Session->setFlash(__('Problemas ao Registrar Unidade Orgânica'), 'default', array('class' => 'alert error'));
             }
         }
         $tipoUnidadeOrganicas = $this->UnidadeOrganica->TipoUnidadeOrganica->find('list');
         $areaAcademicas = $this->UnidadeOrganica->AreaAcademica->find('list');
         $areaUnidades = $this->UnidadeOrganica->AreaUnidade->find('list');
         $parentUnidadeOrganicas = $this->UnidadeOrganica->ParentUnidadeOrganica->find('list');
+        
         $directors = $this->UnidadeOrganica->Director->listaFuncionarios('all');
         $this->set(compact('tipoUnidadeOrganicas', 'areaAcademicas', 'areaUnidades', 'parentUnidadeOrganicas', 'directors'));
     }
