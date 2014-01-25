@@ -19,19 +19,6 @@ class Disciplina extends AppModel {
 	);
 
 	var $hasMany = array(
-		'Grupodisciplina' => array(
-			'className' => 'Grupodisciplina',
-			'foreignKey' => 'disciplina_id',
-			'dependent' => false,
-			'conditions' => '',
-			'fields' => '',
-			'order' => '',
-			'limit' => '',
-			'offset' => '',
-			'exclusive' => '',
-			'finderQuery' => '',
-			'counterQuery' => ''
-		),
 		'Turma' => array(
 			'className' => 'Turma',
 			'foreignKey' => 'disciplina_id',
@@ -45,8 +32,34 @@ class Disciplina extends AppModel {
 			'finderQuery' => '',
 			'counterQuery' => ''
 		),
-		'Planoestudoano' => array(
-			'className' => 'Planoestudoano',
+		'DisciplinaPlanoEstudo' => array(
+			'className' => 'DisciplinaPlanoEstudo',
+			'foreignKey' => 'disciplina_id',
+			'dependent' => false,
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'exclusive' => '',
+			'finderQuery' => '',
+			'counterQuery' => ''
+		),
+        'DisciplinaUnidadeOrganica' => array(
+			'className' => 'DisciplinaUnidadeOrganica',
+			'foreignKey' => 'disciplina_id',
+			'dependent' => false,
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'exclusive' => '',
+			'finderQuery' => '',
+			'counterQuery' => ''
+		),
+        'DisciplinaDocente' => array(
+			'className' => 'DisciplinaDocente',
 			'foreignKey' => 'disciplina_id',
 			'dependent' => false,
 			'conditions' => '',

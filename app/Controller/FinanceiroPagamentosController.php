@@ -61,7 +61,7 @@ class FinanceiroPagamentosController extends AppController {
 		$alunos = $this->FinanceiroPagamento->Aluno->find('list');
 		$financeiroContas = $this->FinanceiroPagamento->FinanceiroContum->find('list');
 		$financeiroTipoPagamentos = $this->FinanceiroPagamento->FinanceiroTipoPagamento->find('list');
-		$anolectivos = $this->FinanceiroPagamento->Anolectivo->find('list');
+		$anolectivos = $this->FinanceiroPagamento->AnoLectivo->find('list');
 		$financeiroEstadoPagamentos = $this->FinanceiroPagamento->FinanceiroEstadoPagamento->find('list');
 		$this->set(compact('alunos', 'financeiroContas', 'financeiroTipoPagamentos', 'anolectivos', 'financeiroEstadoPagamentos'));
 	}
@@ -91,7 +91,7 @@ class FinanceiroPagamentosController extends AppController {
 		$alunos = $this->FinanceiroPagamento->Aluno->find('list');
 		$financeiroContas = $this->FinanceiroPagamento->FinanceiroContum->find('list');
 		$financeiroTipoPagamentos = $this->FinanceiroPagamento->FinanceiroTipoPagamento->find('list');
-		$anolectivos = $this->FinanceiroPagamento->Anolectivo->find('list');
+		$anolectivos = $this->FinanceiroPagamento->AnoLectivo->find('list');
 		$financeiroEstadoPagamentos = $this->FinanceiroPagamento->FinanceiroEstadoPagamento->find('list');
 		$this->set(compact('alunos', 'financeiroContas', 'financeiroTipoPagamentos', 'anolectivos', 'financeiroEstadoPagamentos'));
 	}

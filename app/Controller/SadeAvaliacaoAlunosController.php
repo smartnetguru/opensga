@@ -50,7 +50,7 @@ class SadeAvaliacaoAlunosController extends AppController {
 		$alunos = $this->SadeAvaliacaoAluno->Aluno->find('list');
 		$entidades = $this->SadeAvaliacaoAluno->Entidade->find('list');
 		$sadeParametros = $this->SadeAvaliacaoAluno->SadeParametro->find('list');
-		$anolectivos = $this->SadeAvaliacaoAluno->Anolectivo->find('list');
+		$anolectivos = $this->SadeAvaliacaoAluno->AnoLectivo->find('list');
 		$this->set(compact('alunos', 'entidades', 'sadeParametros', 'anolectivos'));
 	}
 
@@ -78,7 +78,7 @@ class SadeAvaliacaoAlunosController extends AppController {
 		$alunos = $this->SadeAvaliacaoAluno->Aluno->find('list');
 		$entidades = $this->SadeAvaliacaoAluno->Entidade->find('list');
 		$sadeParametros = $this->SadeAvaliacaoAluno->SadeParametro->find('list');
-		$anolectivos = $this->SadeAvaliacaoAluno->Anolectivo->find('list');
+		$anolectivos = $this->SadeAvaliacaoAluno->AnoLectivo->find('list');
 		$this->set(compact('alunos', 'entidades', 'sadeParametros', 'anolectivos'));
 	}
 

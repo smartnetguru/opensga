@@ -41,7 +41,17 @@ class OpenSGAAclShell extends AppShell {
                     
              //Permissoes para funcionarios da faculdade
             if ($this->User->isFromFaculdade($funcionario['User']['id'])) {
-                $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Inscricaos/faculdade_apagar_inscricao";
+                
+                $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Cursos/faculdade_index";
+                $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Cursos/faculdade_ver_curso";
+                                
+                $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Disciplinas/faculdade_index";
+                $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Disciplinas/faculdade_ver_disciplina";
+                $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Disciplinas/faculdade_adicionar_disciplina";
+                $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Disciplinas/faculdade_editar_disciplina";
+                $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Disciplinas/faculdade_desactivar_disciplina";
+                $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Disciplinas/faculdade_remover_disciplina";
+                
                 $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Inscricaos/faculdade_inscrever";
                 $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Inscricaos/faculdade_valida_inscricao";
                 $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Inscricaos/faculdade_ver_inscricoes_aluno";
@@ -80,6 +90,8 @@ class OpenSGAAclShell extends AppShell {
                 if($unidade_organica['UnidadeOrganica']['codigo']=='DRA'){
                      
                     $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/pesquisa_aluno_action";
+                    $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Candidaturas/index";
+                    
                     
                 }
                 if($unidade_organica['UnidadeOrganica']['codigo']=='DRA_DI'){

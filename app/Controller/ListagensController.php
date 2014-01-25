@@ -60,7 +60,7 @@ class ListagensController extends AppController {
          //$listagens = new Listagen;
          //busca lista de dados
          $cursos = $curso->find('list' ,array('order'=> array ('name ASC')));
-         $turmas = $turma->find('list',array('conditions'=>array('estadoturma_id'=> 1),'order'=> array ('name ASC')));
+         $turmas = $turma->find('list',array('conditions'=>array('estado_turma_id'=> 1),'order'=> array ('name ASC')));
          $provincias = $provincia->find('list' ,array('order'=> array ('name ASC')));
          $disciplinas = $disciplina->find('list',array('order'=> array ('name ASC')));
 		 
@@ -373,10 +373,10 @@ class ListagensController extends AppController {
        {
            App::Import('Model','Curso');
            App::Import('Model','Turma');
-            App::Import('Model','Anolectivo');
+            App::Import('Model','AnoLectivo');
            $curso = new Curso;
            $turma = new Turma;
-		   $t0009anolectivo = new Anolectivo;
+		   $t0009anolectivo = new AnoLectivo;
 		   
            $cursos = $curso->find('list',array('order'=> array ('name ASC')));
 
@@ -563,8 +563,8 @@ class ListagensController extends AppController {
 	     Configure::write('debug',2);
          App::Import('Model','Listagen');
          $listagens = new Listagen;
-			App::Import('Model','Planoestudo');
-            $planoestudos = new Planoestudo;			
+			App::Import('Model','PlanoEstudo');
+            $planoestudos = new PlanoEstudo;			
 			$plano = $planoestudos->find('list',array('conditions'=>array('t0003curso_id'=>$this->data['Listagens']['t0003curso_id'])));		
 			//$plano = $curso;	
 			var_dump($plano);
@@ -595,12 +595,12 @@ class ListagensController extends AppController {
         {
            App::Import('Model','Curso');
            App::Import('Model','Turma');
-            App::Import('Model','Anolectivo');
-			App::Import('Model','Planoestudo');
-            $planoestudo = new Planoestudo;
+            App::Import('Model','AnoLectivo');
+			App::Import('Model','PlanoEstudo');
+            $planoestudo = new PlanoEstudo;
            $curso = new Curso;
            $turma = new Turma;
-		   $t0009anolectivo = new Anolectivo;
+		   $t0009anolectivo = new AnoLectivo;
 		   
            $cursos = $curso->find('list',array('order'=> array ('name ASC')));
 
@@ -631,14 +631,14 @@ class ListagensController extends AppController {
          if($this->data['Listagens']['select']=='1')
          {	
 		 
-           $anolectivo_id = $this->data['Listagens']['t0009anolectivo_id'];
+           $ano_lectivo_id = $this->data['Listagens']['t0009anolectivo_id'];
 		   $curso_id = $this->data['Listagens']['t0003curso_id'];
 		   $plano_id = $this->data['Listagens']['t0005planoestudo_id'];
 		   $turma_id = $this->data['Listagens']['t0010turma_id'];
 		   
 		   $verifica = 1;
 		   $titulo = 'de Mapa de Frequencias';
-		 $dados_pauta = $listagens->getAllPautaByCondition($anolectivo_id,$curso_id,$plano_id,$turma_id);		 
+		 $dados_pauta = $listagens->getAllPautaByCondition($ano_lectivo_id,$curso_id,$plano_id,$turma_id);		 
 		 $dados_turma =  $listagens->getAllTurmaByCondition($turma_id);
 
 		 }
@@ -650,7 +650,7 @@ class ListagensController extends AppController {
          if($this->data['Listagens']['select']=='2')
          {	
 		 
-           $anolectivo_id = $this->data['Listagens']['t0009anolectivo_id'];
+           $ano_lectivo_id = $this->data['Listagens']['t0009anolectivo_id'];
 		   $curso_id = $this->data['Listagens']['t0003curso_id'];
 		   $plano_id = $this->data['Listagens']['t0005planoestudo_id'];
 		   $turma_id = $this->data['Listagens']['t0010turma_id'];
@@ -658,7 +658,7 @@ class ListagensController extends AppController {
 		   $verifica = 2;
 		   $titulo = 'de Pauta de Resultados';
          
-		   $dados_exame = $listagens->getAllPautaExameByCondition($anolectivo_id,$curso_id,$plano_id,$turma_id);
+		   $dados_exame = $listagens->getAllPautaExameByCondition($ano_lectivo_id,$curso_id,$plano_id,$turma_id);
 		   //var_dump($dados_exame);		   
            $dados_turma =  $listagens->getAllTurmaByCondition($turma_id);
 		 }
@@ -702,7 +702,7 @@ class ListagensController extends AppController {
               $lista_turma[] =$z['tt']['name'];			  
 			  $lista_turma[] =$z['tc']['name'];
 			  $lista_turma[] =$z['tf']['name'];
-			  $lista_turma[] =$listagens->getLabelsPauta($anolectivo_id,$curso_id,$plano_id,$turma_id);
+			  $lista_turma[] =$listagens->getLabelsPauta($ano_lectivo_id,$curso_id,$plano_id,$turma_id);
 			  $lista_turma[] =$z['tal']['codigo'];
 			  $listas_turma[] =$lista_turma;
 			  

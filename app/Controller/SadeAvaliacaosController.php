@@ -47,7 +47,7 @@ class SadeAvaliacaosController extends AppController {
 				$this->Session->setFlash(__('The sade avaliacao could not be saved. Please, try again.'));
 			}
 		}
-		$anolectivos = $this->SadeAvaliacao->Anolectivo->find('list');
+		$anolectivos = $this->SadeAvaliacao->AnoLectivo->find('list');
 		$this->set(compact('anolectivos'));
 	}
 
@@ -72,7 +72,7 @@ class SadeAvaliacaosController extends AppController {
 		} else {
 			$this->request->data = $this->SadeAvaliacao->read(null, $id);
 		}
-		$anolectivos = $this->SadeAvaliacao->Anolectivo->find('list');
+		$anolectivos = $this->SadeAvaliacao->AnoLectivo->find('list');
 		$this->set(compact('anolectivos'));
 	}
 

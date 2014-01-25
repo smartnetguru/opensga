@@ -53,7 +53,7 @@ class FinanceiroTransacaosController extends AppController {
                 //Agora Criamos um novo Pagamento Pendente
                 $this->request->data['FinanceiroPagamento']['financeiro_conta_id'] = $this->FinanceiroTransacao->FinanceiroPagamento->Aluno->getContaIdByAlunoId($aluno_id);
                 $this->request->data['FinanceiroPagamento']['financeiro_estado_pagamento_id'] = 1;
-                $this->request->data['FinanceiroPagamento']['anolectivo_id'] = Configure::read('OpenSGA.ano_lectivo_id');
+                $this->request->data['FinanceiroPagamento']['ano_lectivo_id'] = Configure::read('OpenSGA.ano_lectivo_id');
                 $this->request->data['FinanceiroPagamento']['semestrelectivo_id'] = Configure::read('OpenSGA.semestre_lectivo_id');
                 $this->request->data['FinanceiroPagamento']['data_emissao'] = date('Y-m-d H:i:s');
                 $this->request->data['FinanceiroPagamento']['entidade_id'] = $this->FinanceiroTransacao->FinanceiroPagamento->Aluno->field('entidade_id', array('Aluno.id' => $aluno_id));

@@ -32,7 +32,7 @@ class EstadomatriculasController extends AppController {
 	var $name = 'Estadomatriculas';
 
 	function index() {
-		$this->Estadomatricula->recursive = 0;
+		$this->EstadoMatricula->recursive = 0;
 		$this->set('tg0021estadomatriculas', $this->paginate());
 	}
 
@@ -41,16 +41,16 @@ class EstadomatriculasController extends AppController {
 			$this->Session->setFlash('Invalido %s', 'flasherror');
 			$this->redirect(array('action' => 'index'));
 		}
-		$this->set('tg0021estadomatricula', $this->Estadomatricula->read(null, $id));
+		$this->set('tg0021estadomatricula', $this->EstadoMatricula->read(null, $id));
 		if (empty($this->data)) {
-			$this->data = $this->Estadomatricula->read(null, $id);
+			$this->data = $this->EstadoMatricula->read(null, $id);
 		}
 	}
 
 	function add() {
 		if (!empty($this->data)) {
-			$this->Estadomatricula->create();
-			if ($this->Estadomatricula->save($this->data)) {
+			$this->EstadoMatricula->create();
+			if ($this->EstadoMatricula->save($this->data)) {
 				$this->Session->setFlash('** Dados Cadastrados com Sucesso **','flashok');
 				$this->redirect(array('action' => 'index'));
 			} else {
@@ -64,14 +64,14 @@ class EstadomatriculasController extends AppController {
 			$this->redirect(array('action' => 'index'));
 		}
 		if (!empty($this->data)) {
-			if ($this->Estadomatricula->save($this->data)) {
+			if ($this->EstadoMatricula->save($this->data)) {
 				$this->Session->setFlash('Dado Editados com sucesso','flashok');
 				$this->redirect(array('action' => 'index'));
 			} else {
 				$this->Session->setFlash('Erro ao gravar dados. Por favor tente de novo.','flasherror');}
 		}
 		if (empty($this->data)) {
-			$this->data = $this->Estadomatricula->read(null, $id);
+			$this->data = $this->EstadoMatricula->read(null, $id);
 		}
 	}
 
@@ -80,11 +80,11 @@ class EstadomatriculasController extends AppController {
 			$this->Session->setFlash(sprintf(__('Invalid id for %s', true), 'tg0021estadomatricula'));
 			$this->redirect(array('action'=>'index'));
 		}
-		if ($this->Estadomatricula->delete($id)) {
+		if ($this->EstadoMatricula->delete($id)) {
 			$this->Session->setFlash('Dados deletedos com sucesso ','flashok');
 			$this->redirect(array('action'=>'index'));
 		}
-		$this->Session->setFlash(sprintf(__('%s was not deleted', true), 'Estadomatricula'));
+		$this->Session->setFlash(sprintf(__('%s was not deleted', true), 'EstadoMatricula'));
 		$this->redirect(array('action' => 'index'));
 	}
 

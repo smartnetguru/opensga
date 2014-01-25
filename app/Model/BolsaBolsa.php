@@ -5,7 +5,7 @@ App::uses('AppModel', 'Model');
  *
  * @property Aluno $Aluno
  * @property BolsaCandidatura $BolsaCandidatura
- * @property Anolectivo $Anolectivo
+ * @property AnoLectivo $AnoLectivo
  * @property Banco $Banco
  * @property BolsaFonteBolsa $BolsaFonteBolsa
  * @property BolsaCriadorConta $BolsaCriadorConta
@@ -38,9 +38,9 @@ class BolsaBolsa extends AppModel {
 			'fields' => '',
 			'order' => ''
 		),
-		'Anolectivo' => array(
-			'className' => 'Anolectivo',
-			'foreignKey' => 'anolectivo_id',
+		'AnoLectivo' => array(
+			'className' => 'AnoLectivo',
+			'foreignKey' => 'ano_lectivo_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''

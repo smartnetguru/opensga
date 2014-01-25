@@ -50,7 +50,7 @@ class SadeAvaliacaoQualitativasController extends AppController {
 		$sadeAvaliadors = $this->SadeAvaliacaoQualitativa->SadeAvaliador->find('list');
 		$entidades = $this->SadeAvaliacaoQualitativa->Entidade->find('list');
 		$sadeParametros = $this->SadeAvaliacaoQualitativa->SadeParametro->find('list');
-		$anolectivos = $this->SadeAvaliacaoQualitativa->Anolectivo->find('list');
+		$anolectivos = $this->SadeAvaliacaoQualitativa->AnoLectivo->find('list');
 		$this->set(compact('sadeAvaliadors', 'entidades', 'sadeParametros', 'anolectivos'));
 	}
 
@@ -78,7 +78,7 @@ class SadeAvaliacaoQualitativasController extends AppController {
 		$sadeAvaliadors = $this->SadeAvaliacaoQualitativa->SadeAvaliador->find('list');
 		$entidades = $this->SadeAvaliacaoQualitativa->Entidade->find('list');
 		$sadeParametros = $this->SadeAvaliacaoQualitativa->SadeParametro->find('list');
-		$anolectivos = $this->SadeAvaliacaoQualitativa->Anolectivo->find('list');
+		$anolectivos = $this->SadeAvaliacaoQualitativa->AnoLectivo->find('list');
 		$this->set(compact('sadeAvaliadors', 'entidades', 'sadeParametros', 'anolectivos'));
 	}
 

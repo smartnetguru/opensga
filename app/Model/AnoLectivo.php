@@ -27,8 +27,8 @@
  */
  
  
-class Anolectivo extends AppModel {
-	var $name = 'Anolectivo';
+class AnoLectivo extends AppModel {
+	var $name = 'AnoLectivo';
         var $displayField = 'codigo';
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 
@@ -45,7 +45,7 @@ class Anolectivo extends AppModel {
 	var $hasMany = array(
 		'Turma' => array(
 			'className' => 'Turma',
-			'foreignKey' => 'anolectivo_id',
+			'foreignKey' => 'ano_lectivo_id',
 			'dependent' => false,
 			'conditions' => '',
 			'fields' => '',
@@ -56,9 +56,9 @@ class Anolectivo extends AppModel {
 			'finderQuery' => '',
 			'counterQuery' => ''
 		),
-            'Semestrelectivo' => array(
-			'className' => 'Semestrelectivo',
-			'foreignKey' => 'anolectivo_id',
+            'SemestreLectivo' => array(
+			'className' => 'SemestreLectivo',
+			'foreignKey' => 'ano_lectivo_id',
 			'dependent' => false,
 			'conditions' => '',
 			'fields' => '',
@@ -79,7 +79,7 @@ class Anolectivo extends AppModel {
          */
         public function getAnoLectivoIdByAno($ano){
             $anolectivo = $this->findByAno($ano);
-            return $anolectivo['Anolectivo']['id'];
+            return $anolectivo['AnoLectivo']['id'];
         }
 
 

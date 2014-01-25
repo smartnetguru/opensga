@@ -50,15 +50,15 @@ class Turma extends AppModel {
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 
 	var $belongsTo = array(
-		'Anolectivo' => array(
-			'className' => 'Anolectivo',
-			'foreignKey' => 'anolectivo_id',
+		'AnoLectivo' => array(
+			'className' => 'AnoLectivo',
+			'foreignKey' => 'ano_lectivo_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
 		),
-        'Semestrelectivo' => array(
-			'className' => 'Semestrelectivo',
+        'SemestreLectivo' => array(
+			'className' => 'SemestreLectivo',
 			'foreignKey' => 'semestrelectivo_id',
 			'conditions' => '',
 			'fields' => '',
@@ -71,9 +71,9 @@ class Turma extends AppModel {
 			'fields' => '',
 			'order' => ''
 		),
-		'Planoestudo' => array(
-			'className' => 'Planoestudo',
-			'foreignKey' => 'planoestudo_id',
+		'PlanoEstudo' => array(
+			'className' => 'PlanoEstudo',
+			'foreignKey' => 'plano_estudo_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
@@ -99,23 +99,23 @@ class Turma extends AppModel {
 			'fields' => '',
 			'order' => ''
 		),
-        'Anolectivo' => array(
-			'className' => 'Anolectivo',
-			'foreignKey' => 'anolectivo_id',
+        'AnoLectivo' => array(
+			'className' => 'AnoLectivo',
+			'foreignKey' => 'ano_lectivo_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
 		),
-        'Planoestudo' => array(
-			'className' => 'Planoestudo',
-			'foreignKey' => 'planoestudo_id',
+        'PlanoEstudo' => array(
+			'className' => 'PlanoEstudo',
+			'foreignKey' => 'plano_estudo_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
 		),
-        'Estadoturma' => array(
-			'className' => 'Estadoturma',
-			'foreignKey' => 'estadoturma_id',
+        'EstadoTurma' => array(
+			'className' => 'EstadoTurma',
+			'foreignKey' => 'estado_turma_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
@@ -171,28 +171,28 @@ class Turma extends AppModel {
 		 * @Todo Para facilitar vamos considerar so um plano de estudos activo
          * @todo Podemos usar transactions aqui ;)
 		 */
-		function criarTurmas($planoestudo_id){
+		function criarTurmas($plano_estudo_id){
 				$datasource = $this->getDataSource();
                 $datasource->begin();
 
-                $anolectivo_id = Configure::read('OpenSGA.ano_lectivo_id');
+                $ano_lectivo_id = Configure::read('OpenSGA.ano_lectivo_id');
                 $semestre_id = Configure::read('OpenSGA.semestre_lectivo_id');
-                $disciplinas = $this->Planoestudo->getAllDisciplinasByPlanoestudo($planoestudo_id);
-                //$semestre = $this->Semestrelectivo->findById($semestre_id);
+                $disciplinas = $this->PlanoEstudo->getAllDisciplinasByPlanoestudo($plano_estudo_id);
+                //$semestre = $this->SemestreLectivo->findById($semestre_id);
                 $turnos = $this->Turno->find('list');
                 foreach($turnos as $turno_id=>$turno){
                     foreach($disciplinas as $disciplina){
 
                                 $turma = array();
-                                $turma['anolectivo_id']=$anolectivo_id;
+                                $turma['ano_lectivo_id']=$ano_lectivo_id;
                                 $turma['anocurricular']=$disciplina['p']['ano'];
                                 $turma['semestrecurricular']=$disciplina['p']['semestre'];
                                 $turma['curso_id']=$disciplina['pe']['curso_id'];
                                 $turma['escola_id']=1;
-                                $turma['planoestudo_id']=$planoestudo_id;
+                                $turma['plano_estudo_id']=$plano_estudo_id;
                                 $turma['turno_id']=$turno_id;
                                 $turma['disciplina_id']=$disciplina['d']['id'];
-                                $turma['estadoturma_id']=1;
+                                $turma['estado_turma_id']=1;
                                 $turma['semestrelectivo_id']=$semestre_id;
                                 $nome = $disciplina['d']['name']." - ".$disciplina['pe']['name'];
                                 $turma['name']=$nome;
@@ -200,7 +200,7 @@ class Turma extends AppModel {
                                 $turmas=array('Turma'=>$turma);
 
                                 //Primeiro precisamos ver se a turma nao esta criada ainda
-                                $turma_existe = $this->find('first',array('recursive'=>-1,'conditions'=>array('anolectivo_id'=>$anolectivo_id,'planoestudo_id'=>$planoestudo_id,'disciplina_id'=>$disciplina['d']['id'],'anocurricular'=>$turma['anocurricular'],'semestrecurricular'=>$turma['semestrecurricular'],'turno_id'=>$turma['turno_id'],'semestrelectivo_id'=>$semestre_id)));
+                                $turma_existe = $this->find('first',array('recursive'=>-1,'conditions'=>array('ano_lectivo_id'=>$ano_lectivo_id,'plano_estudo_id'=>$plano_estudo_id,'disciplina_id'=>$disciplina['d']['id'],'anocurricular'=>$turma['anocurricular'],'semestrecurricular'=>$turma['semestrecurricular'],'turno_id'=>$turma['turno_id'],'semestrelectivo_id'=>$semestre_id)));
 
                                 if(!$turma_existe){
                                     $this->create();
@@ -232,7 +232,7 @@ class Turma extends AppModel {
 			$this->Inscricao->Aluno->recursive=-1;
 			//Primeiro vamos pegar todas as disciplinas do plano de estudos
                         
-            $todas_disciplinas = $this->Planoestudo->getAllDisciplinas($matricula['Matricula']['planoestudo_id']);
+            $todas_disciplinas = $this->PlanoEstudo->getAllDisciplinas($matricula['Matricula']['plano_estudo_id']);
            
             //Inscricoes activas
             //$inscricoes_activas = $this->Inscricao->Aluno->getAllInscricoesActivasandAprovadasForInscricao($aluno_id);
@@ -241,7 +241,7 @@ class Turma extends AppModel {
 
 
 
-            $conditions = array('Turma.planoestudo_id'=>$matricula['Matricula']['planoestudo_id'],'Turma.estadoturma_id'=>1,'Turma.anolectivo_id'=>Configure::read('OpenSGA.ano_lectivo_id'));
+            $conditions = array('Turma.plano_estudo_id'=>$matricula['Matricula']['plano_estudo_id'],'Turma.estado_turma_id'=>1,'Turma.ano_lectivo_id'=>Configure::read('OpenSGA.ano_lectivo_id'));
             if(Configure::read('OpenSGA.modulos.escolas')==1){
                 $aluno = $Aluno->findById($aluno_id,'escola_id');
                 $conditions['Turma.escola_id']=$aluno['Aluno']['escola_id'];
@@ -261,7 +261,7 @@ class Turma extends AppModel {
 		}
         function getAllTurmasActivasByPlanoEstudo($plano){
 			$this->recursive=0;
-			$turmas = $this->find('all',array('conditions'=>array('planoestudo_id'=>$plano,'estado'=>1),'fields'=>array('Turma.id','Disciplina.name')));
+			$turmas = $this->find('all',array('conditions'=>array('plano_estudo_id'=>$plano,'estado'=>1),'fields'=>array('Turma.id','Disciplina.name')));
 
 
 			return $turmas;
@@ -399,8 +399,8 @@ class Turma extends AppModel {
 
 
 	// Devolve a turma de um determinado aluno
-	function getTurmaAluno($t0009anolectivo_id, $curso_id, $planoestudo_id, $aluno_id){
-	$query = "select tt.name from turmas tt, inscricaos ti where tt.id=ti.t0010turma_id and tt.t0009anolectivo_id = {$t0009anolectivo_id} and tt.t0003curso_id ={$curso_id} and tt.t0005planoestudo_id = {$planoestudo_id} and ti.Aluno_id = {$aluno_id}";
+	function getTurmaAluno($t0009anolectivo_id, $curso_id, $plano_estudo_id, $aluno_id){
+	$query = "select tt.name from turmas tt, inscricaos ti where tt.id=ti.t0010turma_id and tt.t0009anolectivo_id = {$t0009anolectivo_id} and tt.t0003curso_id ={$curso_id} and tt.t0005planoestudo_id = {$plano_estudo_id} and ti.Aluno_id = {$aluno_id}";
 	//var_dump($query);
 	$resultado = $this->query($query);
 	//var_dump($resultado);
@@ -436,7 +436,7 @@ class Turma extends AppModel {
         $dataSource->begin();
 
         $this->contain('Inscricao');
-        $turmas = $this->find('all',array('conditions'=>array('Turma.semestrelectivo_id'=>$semestre,'Turma.estadoturma_id'=>1),'limit'=>100));
+        $turmas = $this->find('all',array('conditions'=>array('Turma.semestrelectivo_id'=>$semestre,'Turma.estado_turma_id'=>1),'limit'=>100));
 
 
 
@@ -452,7 +452,7 @@ class Turma extends AppModel {
 
             //Fechamos a turma tambem
             $this->id = $turma['Turma']['id'];
-            $this->set('estadoturma_id',3);
+            $this->set('estado_turma_id',3);
             $this->save();
         }
 

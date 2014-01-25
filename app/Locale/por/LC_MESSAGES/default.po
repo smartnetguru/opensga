@@ -3445,7 +3445,7 @@ msgstr ""
 #: \views\semestrelectivos\edit.ctp:23
 #: \views\semestrelectivos\index.ctp:57
 #: \views\semestrelectivos\view.ctp:14;44
-msgid "Anolectivo"
+msgid "AnoLectivo"
 msgstr ""
 
 #: \views\anolectivoepocas\add.ctp:20
@@ -5095,7 +5095,7 @@ msgid "Data Limite"
 msgstr ""
 
 #: \views\estadopagamentos\view.ctp:42
-msgid "Anolectivo Id"
+msgid "AnoLectivo Id"
 msgstr ""
 
 #: \views\estadopagamentos\view.ctp:43
@@ -5301,7 +5301,7 @@ msgstr ""
 #: \views\planoestudoanos\edit.ctp:4
 #: \views\planoestudoanos\index.ctp:49
 #: \views\planoestudoanos\view.ctp:2;29;30;32
-msgid "Planoestudoano"
+msgid "DisciplinaPlanoEstudo"
 msgstr ""
 
 #: \views\grupodisciplinas\t0006planoestudoanos\add.ctp:17
@@ -5484,7 +5484,7 @@ msgstr ""
 #: \views\matricularevisaos\edit.ctp:29
 #: \views\matricularevisaos\index.ctp:69
 #: \views\matricularevisaos\view.ctp:29;58
-msgid "Planoestudo"
+msgid "PlanoEstudo"
 msgstr ""
 
 #: \views\matricularevisaos\view.ctp:9
@@ -5799,7 +5799,7 @@ msgstr ""
 #: \views\ramos\edit.ctp:22
 #: \views\ramos\index.ctp:53
 #: \views\ramos\view.ctp:31;82
-msgid "New Planoestudoano"
+msgid "New DisciplinaPlanoEstudo"
 msgstr ""
 
 #: \views\ramos\edit.ctp:4
@@ -5829,7 +5829,7 @@ msgid "Related Planoestudoanos"
 msgstr ""
 
 #: \views\ramos\view.ctp:40
-msgid "Planoestudo Id"
+msgid "PlanoEstudo Id"
 msgstr ""
 
 #: \views\ramos\view.ctp:43

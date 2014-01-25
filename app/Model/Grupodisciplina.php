@@ -39,9 +39,9 @@ class Grupodisciplina extends AppModel {
 			'fields' => '',
 			'order' => ''
 		),
-		'Planoestudo' => array(
-			'className' => 'Planoestudo',
-			'foreignKey' => 'planoestudo_id',
+		'PlanoEstudo' => array(
+			'className' => 'PlanoEstudo',
+			'foreignKey' => 'plano_estudo_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''

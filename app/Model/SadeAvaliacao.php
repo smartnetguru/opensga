@@ -3,7 +3,7 @@ App::uses('AppModel', 'Model');
 /**
  * SadeAvaliacao Model
  *
- * @property Anolectivo $Anolectivo
+ * @property AnoLectivo $AnoLectivo
  * @property SadeAutoAvaliacao $SadeAutoAvaliacao
  */
 class SadeAvaliacao extends AppModel {
@@ -16,9 +16,9 @@ class SadeAvaliacao extends AppModel {
  * @var array
  */
 	public $belongsTo = array(
-		'Anolectivo' => array(
-			'className' => 'Anolectivo',
-			'foreignKey' => 'anolectivo_id',
+		'AnoLectivo' => array(
+			'className' => 'AnoLectivo',
+			'foreignKey' => 'ano_lectivo_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''

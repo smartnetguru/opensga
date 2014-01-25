@@ -28,8 +28,8 @@
  
  
  
-class Planoestudoano extends AppModel {
-	var $name = 'Planoestudoano';
+class DisciplinaPlanoEstudo extends AppModel {
+	var $name = 'DisciplinaPlanoEstudo';
 
     var $belongsTo = array(
 		'Disciplina' => array(
@@ -39,9 +39,9 @@ class Planoestudoano extends AppModel {
 			'fields' => '',
 			'order' => ''
 		),
-        'Planoestudo' => array(
-			'className' => 'Planoestudo',
-			'foreignKey' => 'planoestudo_id',
+        'PlanoEstudo' => array(
+			'className' => 'PlanoEstudo',
+			'foreignKey' => 'plano_estudo_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
@@ -52,7 +52,7 @@ class Planoestudoano extends AppModel {
     
 
     function findDisciplinasByPrecendencia($plano,$ano=1,$semestre=1){
-            $disciplinas_id = $this->find('list',array('conditions'=>array('Planoestudoano.ano <'=>$ano),'fields'=>array('Planoestudoano.disciplina_id')));
+            $disciplinas_id = $this->find('list',array('conditions'=>array('DisciplinaPlanoEstudo.ano <'=>$ano),'fields'=>array('DisciplinaPlanoEstudo.disciplina_id')));
             App::Import('Model','Disciplina');
             $disciplina = new Disciplina;
 

@@ -35,7 +35,7 @@ class MatriculasController extends AppController {
      * Mostra o grafico de Novos ingressos por Curso 
      */
     function index() {
-        $matriculas_novas = $this->Matricula->find('all', array('conditions' => array('Matricula.anolectivo_id' => Configure::read('OpenSGA.ano_lectivo_id'), 'Matricula.tipo_matricula_id' => array(1, 0)), 'group' => array('Matricula.curso_id', 'Matricula.turno_id'), 'fields' => array('Count(*) as total', 'Curso.name', 'Turno.name', 'Curso.id', 'Turno.id')));
+        $matriculas_novas = $this->Matricula->find('all', array('conditions' => array('Matricula.ano_lectivo_id' => Configure::read('OpenSGA.ano_lectivo_id'), 'Matricula.tipo_matricula_id' => array(1, 0)), 'group' => array('Matricula.curso_id', 'Matricula.turno_id'), 'fields' => array('Count(*) as total', 'Curso.name', 'Turno.name', 'Curso.id', 'Turno.id')));
 
 
 
@@ -61,7 +61,7 @@ class MatriculasController extends AppController {
                     )
                 )
         );
-        $conditions = array('Matricula.anolectivo_id' => Configure::read('OpenSGA.ano_lectivo_id'), 'Matricula.tipo_matricula_id' => 1);
+        $conditions = array('Matricula.ano_lectivo_id' => Configure::read('OpenSGA.ano_lectivo_id'), 'Matricula.tipo_matricula_id' => 1);
         if ($curso_id != null) {
             if ($curso_id == 18) {
                 $limite_sala = 30;
@@ -105,7 +105,7 @@ class MatriculasController extends AppController {
         }
         $alunos = $this->Matricula->Aluno->find('list');
         $cursos = $this->Matricula->Curso->find('list');
-        $planoestudos = $this->Matricula->Planoestudo->find('list');
+        $planoestudos = $this->Matricula->PlanoEstudo->find('list');
         $users = $this->Matricula->User->find('list');
         $this->set(compact('Alunos', 't0003cursos', 't0005planoestudos', 'users'));
     }
@@ -127,7 +127,7 @@ class MatriculasController extends AppController {
         $alunos = $this->Matricula->getAlunosForMatricula();
         //sort($alunos);
         $cursos = $this->Matricula->Curso->find('list');
-        $planoestudos = $this->Matricula->Planoestudo->find('list');
+        $planoestudos = $this->Matricula->PlanoEstudo->find('list');
         $users = $this->Matricula->User->find('list');
         $this->set(compact('Alunos', 't0003cursos', 't0005planoestudos', 'users'));
     }
@@ -157,7 +157,7 @@ class MatriculasController extends AppController {
         }
         $alunos = $this->Matricula->Aluno->find('list', array('order' => 'id'));
         $cursos = $this->Matricula->Curso->find('list');
-        $planoestudos = $this->Matricula->Planoestudo->find('list');
+        $planoestudos = $this->Matricula->PlanoEstudo->find('list');
         $users = $this->Matricula->User->find('list');
         $this->set(compact('Alunos', 't0003cursos', 't0005planoestudos', 'users'));
     }
@@ -195,7 +195,7 @@ class MatriculasController extends AppController {
             $lista[] = $m["Matricula"]["id"];
             $lista[] = $m["Aluno"]["name"];
             $lista[] = str_replace("Licenciatura em", " L.", $m["Curso"]["name"]);
-            $lista[] = $m["Planoestudo"]["name"];
+            $lista[] = $m["PlanoEstudo"]["name"];
             if ($matricula[0]["Matricula"]["tg0021estadomatricula_id"] == 1)
                 $estado = "Normal";
             if ($matricula[0]["Matricula"]["tg0021estadomatricula_id"] == 2)
@@ -219,7 +219,7 @@ class MatriculasController extends AppController {
 
         $curso = $this->data["Matricula"]["t0003curso_id"];
 
-        $planoestudos = $this->Matricula->Planoestudo->find('list', array('conditions' => array('t0003curso_id' => $curso)));
+        $planoestudos = $this->Matricula->PlanoEstudo->find('list', array('conditions' => array('t0003curso_id' => $curso)));
         $this->set('planoestudos', $planoestudos);
         $this->layout = 'ajax';
     }
@@ -243,7 +243,7 @@ class MatriculasController extends AppController {
                     )
                 )
         );
-        $conditions = array('Matricula.anolectivo_id' => Configure::read('OpenSGA.ano_lectivo_id'), 'Matricula.tipo_matricula_id' => array(0, 1));
+        $conditions = array('Matricula.ano_lectivo_id' => Configure::read('OpenSGA.ano_lectivo_id'), 'Matricula.tipo_matricula_id' => array(0, 1));
         if ($curso_id != null) {
             if ($curso_id == 18) {
                 $limite_sala = 30;
@@ -280,9 +280,9 @@ class MatriculasController extends AppController {
     public function exportar_matriculas() {
 
         $this->Matricula->contain(array(
-            'Anolectivo'
+            'AnoLectivo'
         ));
-        $matriculas = $this->Matricula->find('all', array('conditions' => array('Anolectivo.ano' => 2013)));
+        $matriculas = $this->Matricula->find('all', array('conditions' => array('AnoLectivo.ano' => 2013)));
         die(debug($matriculas));
     }
 
@@ -328,15 +328,15 @@ class MatriculasController extends AppController {
             $ano = date('Y');
         }
 
-        $this->Matricula->Anolectivo->contain();
-        $anolectivo = $this->Matricula->Anolectivo->findByAno($ano);
+        $this->Matricula->AnoLectivo->contain();
+        $anolectivo = $this->Matricula->AnoLectivo->findByAno($ano);
         $this->Matricula->contain(array(
             'Aluno' => array(
                 'Entidade'
-            ), 'Curso', 'Anolectivo'
+            ), 'Curso', 'AnoLectivo'
         ));
-        $matriculas = $this->Matricula->find('all', array('conditions' => array('anolectivo_id' => $anolectivo['Anolectivo']['id'], 'tipo_matricula_id' => 2), 'limit' => 1000));
-        $total = $this->Matricula->find('count', array('conditions' => array('anolectivo_id' => $anolectivo['Anolectivo']['id'], 'tipo_matricula_id' => 2)));
+        $matriculas = $this->Matricula->find('all', array('conditions' => array('ano_lectivo_id' => $anolectivo['AnoLectivo']['id'], 'tipo_matricula_id' => 2), 'limit' => 1000));
+        $total = $this->Matricula->find('count', array('conditions' => array('ano_lectivo_id' => $anolectivo['AnoLectivo']['id'], 'tipo_matricula_id' => 2)));
 
         $this->set(compact('anolectivo', 'matriculas', 'total'));
     }

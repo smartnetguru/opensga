@@ -72,9 +72,9 @@ class Aluno extends AppModel {
             'fields' => '',
             'order' => ''
         ),
-        'Planoestudo' => array(
-            'className' => 'Planoestudo',
-            'foreignKey' => 'planoestudo_id',
+        'PlanoEstudo' => array(
+            'className' => 'PlanoEstudo',
+            'foreignKey' => 'plano_estudo_id',
             'conditions' => '',
             'fields' => '',
             'order' => ''
@@ -236,9 +236,9 @@ class Aluno extends AppModel {
         $matriculas = new Matricula;
         $matriculas->recursive = -1;
 
-        $matricula = $matriculas->find('first', array('conditions' => array('estadomatricula_id' => 1, 'Aluno_id' => $id)));
+        $matricula = $matriculas->find('first', array('conditions' => array('estado_matricula_id' => 1, 'Aluno_id' => $id)));
 
-        $plano_estudo = $matricula['Matricula']['planoestudo_id'];
+        $plano_estudo = $matricula['Matricula']['plano_estudo_id'];
         return $plano_estudo;
     }
 
@@ -281,10 +281,10 @@ class Aluno extends AppModel {
         $inscricao = new Inscricao;
         $Matricula = new Matricula;
 
-        $plano_estudo = $this->query("Select planoestudo_id from matriculas where aluno_id = {$aluno}");
+        $plano_estudo = $this->query("Select plano_estudo_id from matriculas where aluno_id = {$aluno}");
         $turma->recursive = -1;
 
-        $turmas = $turma->getAllTurmasActivasByPlanoEstudo($plano_estudo[0]['matriculas']['planoestudo_id']);
+        $turmas = $turma->getAllTurmasActivasByPlanoEstudo($plano_estudo[0]['matriculas']['plano_estudo_id']);
 
         return $turmas;
     }
@@ -298,9 +298,9 @@ class Aluno extends AppModel {
         $inscricao = new Inscricao;
         $Matricula = new Matricula;
 
-        $plano_estudo = $this->query("Select planoestudo_id from matriculas where aluno_id = {$aluno}");
+        $plano_estudo = $this->query("Select plano_estudo_id from matriculas where aluno_id = {$aluno}");
         $turma->recursive = -1;
-        $turmas = $turma->getAllTurmasByAluno($plano_estudo[0]['matriculas']['planoestudo_id']);
+        $turmas = $turma->getAllTurmasByAluno($plano_estudo[0]['matriculas']['plano_estudo_id']);
         return $turmas;
     }
 
@@ -370,7 +370,7 @@ class Aluno extends AppModel {
     }
 
     public function getMatriculaCorrente($aluno_id) {
-        return $this->Matricula->find('first', array('conditions' => array('Matricula.aluno_id' => $aluno_id, 'Matricula.anolectivo_id' => Configure::read('OpenSGA.ano_lectivo_id'), 'Matricula.estadomatricula_id' => 1), 'recursive' => -1));
+        return $this->Matricula->find('first', array('conditions' => array('Matricula.aluno_id' => $aluno_id, 'Matricula.ano_lectivo_id' => Configure::read('OpenSGA.ano_lectivo_id'), 'Matricula.estado_matricula_id' => 1), 'recursive' => -1));
     }
 
     /**
@@ -439,7 +439,7 @@ class Aluno extends AppModel {
 
                 $planoestudo = $this->Curso->getPlanoEstudoRecente($data['Aluno']['curso_id']);
                 if(!empty($planoestudo))
-                $data['Aluno']['planoestudo_id'] = $planoestudo['Planoestudo']['id'];
+                $data['Aluno']['plano_estudo_id'] = $planoestudo['PlanoEstudo']['id'];
                 $data['Aluno']['estado_aluno_id'] = 1;
                 
                 $this->create();
@@ -504,11 +504,11 @@ class Aluno extends AppModel {
                     //Pega os dados da matricula e realiza a matricula
                     $data_matricula['aluno_id'] = $this->getInsertID();
                     $data_matricula['curso_id'] = $data['Aluno']['curso_id'];
-                    $data_matricula['planoestudo_id'] = $data['Aluno']['planoestudo_id'];
-                    $data_matricula['estadomatricula_id'] = 1;
+                    $data_matricula['plano_estudo_id'] = $data['Aluno']['plano_estudo_id'];
+                    $data_matricula['estado_matricula_id'] = 1;
                     $data_matricula['data'] = date('Y-m-d');
                     $data_matricula['user_id'] = $data['Matricula']['user_id'];
-                    $data_matricula['anolectivo_id'] = Configure::read('OpenSGA.ano_lectivo_id');
+                    $data_matricula['ano_lectivo_id'] = Configure::read('OpenSGA.ano_lectivo_id');
                     // $data_matricula['turno_id'] = $data['Aluno']['turno_id'];
                     //$data_matricula['nivel'] = $data['Aluno']['nivel'];
                     $data_matricula['tipo_matricula_id'] = 1;
@@ -546,14 +546,14 @@ class Aluno extends AppModel {
      * Verifica se o aluno esta matriculado
      * Estar matriculado significa que possui pelo menos uma matricula na tabela matriculas, e nao exactamente que renovou matricula no ano lectivo corrente
      */
-    public function isMatriculado($aluno_id, $anolectivo_id) {
+    public function isMatriculado($aluno_id, $ano_lectivo_id) {
         $matricula = $this->Matricula->find('first', array('conditions' => array('aluno_id' => $aluno_id), 'recursive' => -1));
         return $matricula;
     }
 
     public function setNovaMatricula($data) {
-        if (empty($data['Matricula']['anolectivo_id'])) {
-            $data['Matricula']['anolectivo_id'] = $data['Sessao']['anolectivo_id'];
+        if (empty($data['Matricula']['ano_lectivo_id'])) {
+            $data['Matricula']['ano_lectivo_id'] = $data['Sessao']['ano_lectivo_id'];
         }
 
         $data['Matricula']['user_id'] = $data['Sessao']['user_id'];
@@ -588,8 +588,8 @@ class Aluno extends AppModel {
     }
 
     public function getTotalAlunosActivosPorCurso() {
-        $this->Matricula->contain(array('Curso', 'Anolectivo'));
-        $total_alunos = $this->Matricula->find('all', array('conditions' => array('Anolectivo.ano' => 2013), 'group' => 'Curso.name', 'fields' => array('Count(Matricula.curso_id) as total', 'Curso.name')));
+        $this->Matricula->contain(array('Curso', 'AnoLectivo'));
+        $total_alunos = $this->Matricula->find('all', array('conditions' => array('AnoLectivo.ano' => 2013), 'group' => 'Curso.name', 'fields' => array('Count(Matricula.curso_id) as total', 'Curso.name')));
 
         return $total_alunos;
     }
@@ -646,7 +646,7 @@ class Aluno extends AppModel {
             } else {
                 $string_retorno = __("Não renovou matricula nos seguintes anos: ");
                 foreach ($renovacoes as $renovacao) {
-                    $string_retorno.=$renovacao['Anolectivo']['ano'] . ", ";
+                    $string_retorno.=$renovacao['AnoLectivo']['ano'] . ", ";
                 }
                 $irregularidades[] = array("estado" => 2, "mensagem" => $string_retorno, "regular" => false);
             }
@@ -657,7 +657,7 @@ class Aluno extends AppModel {
             } else {
                 $string_retorno = __("Concluiu o nível, mas não renovou matricula nos seguintes anos: ");
                 foreach ($renovacoes as $renovacao) {
-                    $string_retorno.=$renovacao['Anolectivo']['ano'] . ", ";
+                    $string_retorno.=$renovacao['AnoLectivo']['ano'] . ", ";
                 }
                 $irregularidades[] = array("estado" => 4, "mensagem" => $string_retorno, "regular" => false);
             }
@@ -768,23 +768,23 @@ class Aluno extends AppModel {
         }
 
 
-        $this->Matricula->Anolectivo->contain();
-        $anolectivo = $this->Matricula->Anolectivo->findByAno($data_ano->format("Y"));
+        $this->Matricula->AnoLectivo->contain();
+        $anolectivo = $this->Matricula->AnoLectivo->findByAno($data_ano->format("Y"));
         //Cria Novo Historico
         $planoestudo = $this->Curso->getPlanoEstudoRecente($data['Aluno']['curso_id']);
         if (empty($planoestudo)) {
-            $planoestudo_id = 0;
+            $plano_estudo_id = 0;
         } else {
-            $planoestudo_id = $planoestudo['Planoestudo']['id'];
+            $plano_estudo_id = $planoestudo['PlanoEstudo']['id'];
         }
         $array_novo_historico = array(
             'HistoricoCurso' => array(
                 'aluno_id' => $data['Aluno']['aluno_id'],
                 'curso_id' => $data['Aluno']['curso_id'],
                 'ano_ingresso' => $data_ano->format("Y"),
-                'ano_lectivo_ingresso' => $anolectivo['Anolectivo']['id'],
+                'ano_lectivo_ingresso' => $anolectivo['AnoLectivo']['id'],
                 'funcionario_id' => $funcionario_id,
-                'planoestudo_id' => $planoestudo_id
+                'plano_estudo_id' => $plano_estudo_id
             )
         );
 
@@ -793,7 +793,7 @@ class Aluno extends AppModel {
 
         $this->id = $data['Aluno']['aluno_id'];
         $this->set('curso_id', $data['Aluno']['curso_id']);
-        $this->set('planoestudo_id', $planoestudo_id);
+        $this->set('plano_estudo_id', $plano_estudo_id);
         $this->save();
         $this->MudancaCurso->create();
         $this->MudancaCurso->save($mudanca_array);
@@ -816,13 +816,13 @@ class Aluno extends AppModel {
             //Nao tem historico, vamos registrar novo
 
 
-            $this->Matricula->Anolectivo->contain();
-            $ano_lectivo = $this->Matricula->Anolectivo->findByAno($aluno['Aluno']['ano_ingresso']);
+            $this->Matricula->AnoLectivo->contain();
+            $ano_lectivo = $this->Matricula->AnoLectivo->findByAno($aluno['Aluno']['ano_ingresso']);
             $historico_array = array(
                 'aluno_id' => $aluno['Aluno']['id'],
                 'curso_id' => $aluno['Aluno']['curso_id'],
                 'ano_ingresso' => $aluno['Aluno']['ano_ingresso'],
-                'ano_lectivo_ingresso' => $ano_lectivo['Anolectivo']['id']
+                'ano_lectivo_ingresso' => $ano_lectivo['AnoLectivo']['id']
             );
             $this->HistoricoCurso->create();
             $this->HistoricoCurso->save(array('HistoricoCurso' => $historico_array));

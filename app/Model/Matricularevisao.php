@@ -46,8 +46,8 @@ class Matricularevisao extends AppModel {
 			'fields' => '',
 			'order' => ''
 		),
-		'Planoestudo' => array(
-			'className' => 'Planoestudo',
+		'PlanoEstudo' => array(
+			'className' => 'PlanoEstudo',
 			'foreignKey' => 't0005planoestudo_id',
 			'conditions' => '',
 			'fields' => '',

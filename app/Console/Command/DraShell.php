@@ -1,7 +1,7 @@
 <?php 
 ini_set('memory_limit',"2048M");
 class DraShell extends AppShell {
-	public $uses = array('Provincia','UnidadeOrganica','Curso','User','Entidade','Aluno','Matricula','Anolectivo','EscolaNivelMedio','HistoricoCurso','MudancaCurso','AlunoEstado','MotivoEstadoAluno','EntidadeContacto');
+	public $uses = array('Provincia','UnidadeOrganica','Curso','User','Entidade','Aluno','Matricula','AnoLectivo','EscolaNivelMedio','HistoricoCurso','MudancaCurso','AlunoEstado','MotivoEstadoAluno','EntidadeContacto');
 	
 	public function main() {
 		$this->out('Hello world.');
@@ -322,17 +322,17 @@ class DraShell extends AppShell {
                  
                  $ano = $matricula['DraMatricula']['ano_lectivo'];
                  
-                 $ano_lectivo = $this->Anolectivo->findByAno($ano);
+                 $ano_lectivo = $this->AnoLectivo->findByAno($ano);
                  if(empty($ano_lectivo)){
                      $novo_ano_lectivo = array(
-                         'Anolectivo'=>array(
+                         'AnoLectivo'=>array(
                              'ano'=>$ano,
                              'num_semestre'=>2
                          )
                      );
-                     $this->Anolectivo->create();
-                     $this->Anolectivo->save($novo_ano_lectivo);
-                     $ano_lectivo = $this->Anolectivo->findByAno($ano);
+                     $this->AnoLectivo->create();
+                     $this->AnoLectivo->save($novo_ano_lectivo);
+                     $ano_lectivo = $this->AnoLectivo->findByAno($ano);
                  }
                  
                  $nova_matricula = array(
@@ -340,11 +340,11 @@ class DraShell extends AppShell {
                          'codigo'=>$matricula['DraMatricula']['id'],
                          'aluno_id'=>$aluno['Aluno']['id'],
                          'curso_id'=>$aluno['Aluno']['curso_id'],
-                         'planoestudo_id'=>null,
+                         'plano_estudo_id'=>null,
                          'data'=>$matricula['DraMatricula']['data'],
-                         'estadomatricula_id'=>$matricula['DraMatricula']['apagado'],
+                         'estado_matricula_id'=>$matricula['DraMatricula']['apagado'],
                          'user_id'=>1,
-                         'anolectivo_id'=>$ano_lectivo['Anolectivo']['id'],
+                         'ano_lectivo_id'=>$ano_lectivo['AnoLectivo']['id'],
                          'tipo_matricula_id'=>$matricula['DraMatricula']['reingresso']
                      )
                  );
@@ -409,18 +409,18 @@ class DraShell extends AppShell {
                 $aluno = $this->Aluno->findByCodigo(trim($historico['DraHistorico']['est_num']));
                 $this->Curso->contain();
                 $curso_sga = $this->Curso->find('first',array('conditions'=>array('Curso.codigo'=>trim($historico['DraHistorico']['curso_id']))));
-                $this->Anolectivo->contain();
-                $ano_lectivo_ingresso = $this->Anolectivo->findByAno($historico['DraHistorico']['ano_ingresso']);
-                $this->Anolectivo->contain();
-                $ano_lectivo_fim = $this->Anolectivo->findByAno($historico['DraHistorico']['ano_fim']);
+                $this->AnoLectivo->contain();
+                $ano_lectivo_ingresso = $this->AnoLectivo->findByAno($historico['DraHistorico']['ano_ingresso']);
+                $this->AnoLectivo->contain();
+                $ano_lectivo_fim = $this->AnoLectivo->findByAno($historico['DraHistorico']['ano_fim']);
                 $array_historico = array(
                     'HistoricoCurso'=>array(
                         'aluno_id'=>$aluno['Aluno']['id'],
                         'curso_id'=>$curso_sga['Curso']['id'],
                         'ano_ingresso'=>$historico['DraHistorico']['ano_ingresso'],
                         'ano_fim'=>$historico['DraHistorico']['ano_fim'],
-                        'ano_lectivo_ingresso'=>$ano_lectivo_ingresso['Anolectivo']['id'],
-                        'ano_lectivo_fim'=>$ano_lectivo_fim['Anolectivo']['id'],
+                        'ano_lectivo_ingresso'=>$ano_lectivo_ingresso['AnoLectivo']['id'],
+                        'ano_lectivo_fim'=>$ano_lectivo_fim['AnoLectivo']['id'],
                         'nota_final'=>$historico['DraHistorico']['nota_final'],
                         'data_conclusao'=>$historico['DraHistorico']['data_conclusao'],
                         'conclusao_confirmada'=>$historico['DraHistorico']['conclusao_confirm']

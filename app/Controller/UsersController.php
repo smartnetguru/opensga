@@ -56,7 +56,12 @@ class UsersController extends AppController {
     public function altera_unidade_organica_admin(){
         if($this->request->is('post')){
             
-            $this->Session->write('Auth.User.unidade_organica_id',$this->request->data['User']['unidade_organica']);
+            $unidadeOrganica = $this->User->Funcionario->UnidadeOrganica->findById($this->request->data['UnidadeOrganica']['id']);
+            if($this->User->Funcionario->UnidadeOrganica->exists()){
+                $this->Session->write('Auth.User.unidade_organica_id',$this->request->data['User']['unidade_organica']);
+                $this->Session->write('Auth.User.unidade_organica',$unidadeOrganica['UnidadeOrganica']['name']);
+            }
+            
             $this->redirect('/');
         }
     }
@@ -131,7 +136,7 @@ class UsersController extends AppController {
 
                     $this->Session->write($name, $c['Config']['value']);
                 }
-                $this->Session->write('SGAConfig.anolectivo_id', Configure::read('OpenSGA.ano_lectivo_id'));
+                $this->Session->write('SGAConfig.ano_lectivo_id', Configure::read('OpenSGA.ano_lectivo_id'));
                 $this->Session->write('SGAConfig.ano_lectivo', Configure::read('OpenSGA.ano_lectivo'));
                 $this->Session->write('Config.language', 'por');
 
@@ -174,10 +179,15 @@ class UsersController extends AppController {
                     $this->redirect(array('controller' => 'pages', 'action' => 'home', 'docente' => TRUE));
                 }
                 if ($User['group_id'] == 2) {
-                    $this->User->contain('Funcionario');
+                    $this->User->contain(array(
+                        'Funcionario'=>array(
+                            'UnidadeOrganica'
+                        )
+                    ));
                     $user_data = $this->User->findById($User['id']);
 
                     $this->Session->write('Auth.User.unidade_organica_id', $user_data['Funcionario'][0]['unidade_organica_id']);
+                    $this->Session->write('Auth.User.unidade_organica', $user_data['Funcionario'][0]['UnidadeOrganica']['name']);
 
                     if ($this->User->isFromFaculdade($User['id'])) {
                         if ($password_login == '12345') {

@@ -6909,7 +6909,7 @@ msgstr ""
 #: View/Semestrelectivos/edit.ctp:23
 #: View/Semestrelectivos/index.ctp:57
 #: View/Semestrelectivos/view.ctp:14;44
-msgid "Anolectivo"
+msgid "AnoLectivo"
 msgstr ""
 
 #: View/Anolectivoepocas/add.ctp:48
@@ -8041,7 +8041,7 @@ msgstr ""
 #: View/SadeAvaliacaos/edit.ctp:20
 #: View/SadeAvaliacaos/index.ctp:46
 #: View/SadeAvaliacaos/view.ctp:29
-msgid "New Anolectivo"
+msgid "New AnoLectivo"
 msgstr ""
 
 #: View/BolsaBolsas/add.ctp:38
@@ -8478,7 +8478,7 @@ msgstr ""
 #: View/SadeAvaliadors/view.ctp:54
 #: View/SadeParametros/view.ctp:70;118;163
 #: View/SalaAulas/view.ctp:38
-msgid "Anolectivo Id"
+msgid "AnoLectivo Id"
 msgstr ""
 
 #: View/BolsaCandidaturas/view.ctp:133
@@ -11765,7 +11765,7 @@ msgstr ""
 #: View/Planoestudoanos/edit.ctp:4
 #: View/Planoestudoanos/index.ctp:49
 #: View/Planoestudoanos/view.ctp:2;29;30;32
-msgid "Planoestudoano"
+msgid "DisciplinaPlanoEstudo"
 msgstr ""
 
 #: View/Grupodisciplinas/t0006planoestudoanos/add.ctp:17
@@ -12336,7 +12336,7 @@ msgstr ""
 #: View/Matricularevisaos/index.ctp:69
 #: View/Matricularevisaos/view.ctp:29;58
 #: View/PlanoEstudoTipoPagamentos/view.ctp:9
-msgid "Planoestudo"
+msgid "PlanoEstudo"
 msgstr ""
 
 #: View/Matricularevisaos/view.ctp:9
@@ -12861,7 +12861,7 @@ msgstr ""
 #: View/PlanoEstudoTipoPagamentos/edit.ctp:21
 #: View/PlanoEstudoTipoPagamentos/index.ctp:50
 #: View/PlanoEstudoTipoPagamentos/view.ctp:34
-msgid "New Planoestudo"
+msgid "New PlanoEstudo"
 msgstr ""
 
 #: View/PlanoEstudoTipoPagamentos/edit.ctp:4
@@ -12978,7 +12978,7 @@ msgstr ""
 #: View/Ramos/edit.ctp:22
 #: View/Ramos/index.ctp:53
 #: View/Ramos/view.ctp:31;82
-msgid "New Planoestudoano"
+msgid "New DisciplinaPlanoEstudo"
 msgstr ""
 
 #: View/Ramos/edit.ctp:4
@@ -13010,7 +13010,7 @@ msgstr ""
 #: View/Ramos/view.ctp:40
 #: View/SalaAulas/view.ctp:40
 #: View/Tipoprecedencias/view.ctp:34
-msgid "Planoestudo Id"
+msgid "PlanoEstudo Id"
 msgstr ""
 
 #: View/Ramos/view.ctp:43
@@ -13225,7 +13225,7 @@ msgstr ""
 #: View/SadeAutoAvaliacaos/edit.ctp:34
 #: View/SadeAutoAvaliacaos/index.ctp:76
 #: View/SadeAutoAvaliacaos/view.ctp:75
-msgid "New Semestrelectivo"
+msgid "New SemestreLectivo"
 msgstr ""
 
 #: View/SadeAutoAvaliacaos/add.ctp:34
@@ -13306,7 +13306,7 @@ msgid "Pontos Bonificados"
 msgstr ""
 
 #: View/SadeAutoAvaliacaos/view.ctp:44
-msgid "Semestrelectivo"
+msgid "SemestreLectivo"
 msgstr ""
 
 #: View/SadeAutoAvaliacaos/view.ctp:54
@@ -13461,7 +13461,7 @@ msgstr ""
 #: View/SadeAvaliacaos/view.ctp:47
 #: View/SadeParametros/view.ctp:71
 #: View/SalaAulas/view.ctp:58
-msgid "Semestrelectivo Id"
+msgid "SemestreLectivo Id"
 msgstr ""
 
 #: View/SadeAvaliacaos/view.ctp:49
@@ -13714,7 +13714,7 @@ msgid "Mediaturma"
 msgstr ""
 
 #: View/SalaAulas/view.ctp:49
-msgid "Estadoturma Id"
+msgid "EstadoTurma Id"
 msgstr ""
 
 #: View/SalaAulas/view.ctp:52
@@ -14611,7 +14611,7 @@ msgid "Essa Escola ja foi registrada. Procure na Caixa de Selecção"
 msgstr ""
 
 #: Model/Genero.php:validation for field name
-#: Model/Semestrelectivo.php:validation for field codigo
+#: Model/SemestreLectivo.php:validation for field codigo
 msgid "notempty"
 msgstr ""
 
@@ -14627,11 +14627,11 @@ msgstr ""
 msgid "Este aluno ja possui uma matricula activa"
 msgstr ""
 
-#: Model/Semestrelectivo.php:validation for field t0009anolectivo_id;validation for field semestre
+#: Model/SemestreLectivo.php:validation for field t0009anolectivo_id;validation for field semestre
 msgid "numeric"
 msgstr ""
 
-#: Model/Semestrelectivo.php:validation for field data_inicio;validation for field data_fim
+#: Model/SemestreLectivo.php:validation for field data_inicio;validation for field data_fim
 msgid "date"
 msgstr ""
 

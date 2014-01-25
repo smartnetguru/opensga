@@ -28,7 +28,7 @@ class HistoricoCursoFixture extends CakeTestFixture {
 		'anexo_url' => array('type' => 'string', 'null' => true, 'default' => null, 'collate' => 'utf8_general_ci', 'charset' => 'utf8'),
 		'conclusao_confirmada' => array('type' => 'boolean', 'null' => true, 'default' => null),
 		'funcionario_confirmador' => array('type' => 'integer', 'null' => true, 'default' => null),
-		'planoestudo_id' => array('type' => 'integer', 'null' => true, 'default' => null),
+		'plano_estudo_id' => array('type' => 'integer', 'null' => true, 'default' => null),
 		'indexes' => array(
 			'PRIMARY' => array('column' => 'id', 'unique' => 1)
 		),
@@ -59,7 +59,7 @@ class HistoricoCursoFixture extends CakeTestFixture {
 			'anexo_url' => null,
 			'conclusao_confirmada' => 0,
 			'funcionario_confirmador' => null,
-			'planoestudo_id' => null
+			'plano_estudo_id' => null
 		),
 		array(
 			'id' => '2',
@@ -79,7 +79,7 @@ class HistoricoCursoFixture extends CakeTestFixture {
 			'anexo_url' => null,
 			'conclusao_confirmada' => 0,
 			'funcionario_confirmador' => null,
-			'planoestudo_id' => null
+			'plano_estudo_id' => null
 		),
 		array(
 			'id' => '3',
@@ -99,7 +99,7 @@ class HistoricoCursoFixture extends CakeTestFixture {
 			'anexo_url' => null,
 			'conclusao_confirmada' => 0,
 			'funcionario_confirmador' => null,
-			'planoestudo_id' => null
+			'plano_estudo_id' => null
 		),
 		array(
 			'id' => '4',
@@ -119,7 +119,7 @@ class HistoricoCursoFixture extends CakeTestFixture {
 			'anexo_url' => null,
 			'conclusao_confirmada' => 0,
 			'funcionario_confirmador' => null,
-			'planoestudo_id' => null
+			'plano_estudo_id' => null
 		),
 		array(
 			'id' => '5',
@@ -139,7 +139,7 @@ class HistoricoCursoFixture extends CakeTestFixture {
 			'anexo_url' => null,
 			'conclusao_confirmada' => 0,
 			'funcionario_confirmador' => null,
-			'planoestudo_id' => null
+			'plano_estudo_id' => null
 		),
 		array(
 			'id' => '6',
@@ -159,7 +159,7 @@ class HistoricoCursoFixture extends CakeTestFixture {
 			'anexo_url' => null,
 			'conclusao_confirmada' => 0,
 			'funcionario_confirmador' => null,
-			'planoestudo_id' => null
+			'plano_estudo_id' => null
 		),
 		array(
 			'id' => '7',
@@ -179,7 +179,7 @@ class HistoricoCursoFixture extends CakeTestFixture {
 			'anexo_url' => null,
 			'conclusao_confirmada' => 0,
 			'funcionario_confirmador' => null,
-			'planoestudo_id' => null
+			'plano_estudo_id' => null
 		),
 		array(
 			'id' => '8',
@@ -199,7 +199,7 @@ class HistoricoCursoFixture extends CakeTestFixture {
 			'anexo_url' => null,
 			'conclusao_confirmada' => 0,
 			'funcionario_confirmador' => null,
-			'planoestudo_id' => null
+			'plano_estudo_id' => null
 		),
 		array(
 			'id' => '9',
@@ -219,7 +219,7 @@ class HistoricoCursoFixture extends CakeTestFixture {
 			'anexo_url' => null,
 			'conclusao_confirmada' => 0,
 			'funcionario_confirmador' => null,
-			'planoestudo_id' => null
+			'plano_estudo_id' => null
 		),
 		array(
 			'id' => '10',
@@ -239,7 +239,7 @@ class HistoricoCursoFixture extends CakeTestFixture {
 			'anexo_url' => null,
 			'conclusao_confirmada' => 0,
 			'funcionario_confirmador' => null,
-			'planoestudo_id' => null
+			'plano_estudo_id' => null
 		),
 	);
 

@@ -47,7 +47,7 @@ class PlanoEstudoTipoPagamentosController extends AppController {
 				$this->Session->setFlash(__('The plano estudo tipo pagamento could not be saved. Please, try again.'));
 			}
 		}
-		$planoestudos = $this->PlanoEstudoTipoPagamento->Planoestudo->find('list');
+		$planoestudos = $this->PlanoEstudoTipoPagamento->PlanoEstudo->find('list');
 		$tipopagamentos = $this->PlanoEstudoTipoPagamento->Tipopagamento->find('list');
 		$this->set(compact('planoestudos', 'tipopagamentos'));
 	}
@@ -74,7 +74,7 @@ class PlanoEstudoTipoPagamentosController extends AppController {
 		} else {
 			$this->request->data = $this->PlanoEstudoTipoPagamento->read(null, $id);
 		}
-		$planoestudos = $this->PlanoEstudoTipoPagamento->Planoestudo->find('list');
+		$planoestudos = $this->PlanoEstudoTipoPagamento->PlanoEstudo->find('list');
 		$tipopagamentos = $this->PlanoEstudoTipoPagamento->Tipopagamento->find('list');
 		$this->set(compact('planoestudos', 'tipopagamentos'));
 	}

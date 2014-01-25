@@ -27,8 +27,8 @@
  */
 
  
-class Semestrelectivo extends AppModel {
-	var $name = 'Semestrelectivo';
+class SemestreLectivo extends AppModel {
+	var $name = 'SemestreLectivo';
         var $displayField = 'codigo';
 	var $validate = array(
 		'codigo' => array(
@@ -85,9 +85,9 @@ class Semestrelectivo extends AppModel {
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 
 	var $belongsTo = array(
-		'Anolectivo' => array(
-			'className' => 'Anolectivo',
-			'foreignKey' => 'anolectivo_id',
+		'AnoLectivo' => array(
+			'className' => 'AnoLectivo',
+			'foreignKey' => 'ano_lectivo_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''

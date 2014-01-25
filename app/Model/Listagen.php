@@ -239,11 +239,11 @@ class Listagen extends AppModel {
      
 ///////////**************************************/////////////////////
 
-    function getLabelsPauta($anolectivo_id,$curso_id,$plano_id,$turma_id) {
+    function getLabelsPauta($ano_lectivo_id,$curso_id,$plano_id,$turma_id) {
 		   // ATENCAO, Acrescentar os restantes campos (anolectivo, disciplina, etc...) no where
 		
 			$labels = "Cod.Aluno, Nome do Aluno";
-			$query = "select id, name from tipoavaliacaos where id in ( SELECT distinct tav.t0015tipoavaliacao_id FROM t0008alunos ta, t0013inscricaos ti, avaliacaos tav, tipoavaliacaos tta, t0010turmas tt, funcionarios tf, t0003cursos tc, t0009anolectivos tal, t0005planoestudos tp WHERE ti.t0008aluno_id = ta.id AND tav.t0013inscricao_id = ti.id AND tav.t0015tipoavaliacao_id = tta.id AND tt.id = ti.t0010turma_id AND tf.id = tt.funcionario_id AND tal.id = tt.t0009anolectivo_id AND tt.t0003curso_id = tc.id AND tp.id = tt.t0005planoestudo_id AND tt.t0009anolectivo_id = {$anolectivo_id} AND tt.t0005planoestudo_id = {$plano_id} AND tt.t0003curso_id = {$curso_id} AND ti.t0010turma_id ={$turma_id} ) ";
+			$query = "select id, name from tipoavaliacaos where id in ( SELECT distinct tav.t0015tipoavaliacao_id FROM t0008alunos ta, t0013inscricaos ti, avaliacaos tav, tipoavaliacaos tta, t0010turmas tt, funcionarios tf, t0003cursos tc, t0009anolectivos tal, t0005planoestudos tp WHERE ti.t0008aluno_id = ta.id AND tav.t0013inscricao_id = ti.id AND tav.t0015tipoavaliacao_id = tta.id AND tt.id = ti.t0010turma_id AND tf.id = tt.funcionario_id AND tal.id = tt.t0009anolectivo_id AND tt.t0003curso_id = tc.id AND tp.id = tt.t0005planoestudo_id AND tt.t0009anolectivo_id = {$ano_lectivo_id} AND tt.t0005planoestudo_id = {$plano_id} AND tt.t0003curso_id = {$curso_id} AND ti.t0010turma_id ={$turma_id} ) ";
 			
 				$resultado = $this->query($query);       
 				for($i=0;$i<count($resultado);$i++){
@@ -257,9 +257,9 @@ class Listagen extends AppModel {
 		}
 			
 
-  function constroiQueryPauta($anolectivo_id,$curso_id,$plano_id,$turma_id) {
+  function constroiQueryPauta($ano_lectivo_id,$curso_id,$plano_id,$turma_id) {
 	  // ATENCAO, Acrescentar os restantes campos (anolectivo, disciplina, etc...) no where
-		$query = "select id, name from tipoavaliacaos where id in ( SELECT distinct tav.t0015tipoavaliacao_id FROM t0008alunos ta, t0013inscricaos ti, avaliacaos tav, tipoavaliacaos tta, t0010turmas tt, funcionarios tf, t0003cursos tc, t0009anolectivos tal, t0005planoestudos tp WHERE ti.t0008aluno_id = ta.id AND tav.t0013inscricao_id = ti.id AND tav.t0015tipoavaliacao_id = tta.id AND tt.id = ti.t0010turma_id AND tf.id = tt.funcionario_id AND tal.id = tt.t0009anolectivo_id AND tt.t0003curso_id = tc.id AND tp.id = tt.t0005planoestudo_id AND tt.t0009anolectivo_id = {$anolectivo_id} AND tt.t0005planoestudo_id = {$plano_id} AND tt.t0003curso_id = {$curso_id} AND ti.t0010turma_id ={$turma_id} ) ";
+		$query = "select id, name from tipoavaliacaos where id in ( SELECT distinct tav.t0015tipoavaliacao_id FROM t0008alunos ta, t0013inscricaos ti, avaliacaos tav, tipoavaliacaos tta, t0010turmas tt, funcionarios tf, t0003cursos tc, t0009anolectivos tal, t0005planoestudos tp WHERE ti.t0008aluno_id = ta.id AND tav.t0013inscricao_id = ti.id AND tav.t0015tipoavaliacao_id = tta.id AND tt.id = ti.t0010turma_id AND tf.id = tt.funcionario_id AND tal.id = tt.t0009anolectivo_id AND tt.t0003curso_id = tc.id AND tp.id = tt.t0005planoestudo_id AND tt.t0009anolectivo_id = {$ano_lectivo_id} AND tt.t0005planoestudo_id = {$plano_id} AND tt.t0003curso_id = {$curso_id} AND ti.t0010turma_id ={$turma_id} ) ";
 			
 		$resultado = $this->query($query);       
     $camposSum1 = "";
@@ -289,7 +289,7 @@ class Listagen extends AppModel {
 					 $queryPauta = $queryPauta . "union all ";
 				}
 				// ATENCAO, Acrescentar os restantes campos (anolectivo, disciplina, etc...) no where
-				$queryPauta = $queryPauta . "SELECT ta.codigo, ta.name," . $camposSum0 . " FROM t0008alunos ta, t0013inscricaos ti, avaliacaos tav, tipoavaliacaos tta, t0010turmas tt, funcionarios tf, t0003cursos tc, t0009anolectivos tal, t0005planoestudos tp WHERE ti.t0008aluno_id = ta.id AND tav.t0013inscricao_id = ti.id AND tav.t0015tipoavaliacao_id = tta.id AND tt.id = ti.t0010turma_id AND tf.id = tt.funcionario_id AND tal.id = tt.t0009anolectivo_id AND tt.t0003curso_id = tc.id AND tp.id = tt.t0005planoestudo_id AND tt.t0009anolectivo_id = {$anolectivo_id} AND tt.t0005planoestudo_id = {$plano_id} AND tt.t0003curso_id = {$curso_id} AND ti.t0010turma_id ={$turma_id} and tta.id=" . $resultado[$i]["tipoavaliacaos"]['id'] . " ";
+				$queryPauta = $queryPauta . "SELECT ta.codigo, ta.name," . $camposSum0 . " FROM t0008alunos ta, t0013inscricaos ti, avaliacaos tav, tipoavaliacaos tta, t0010turmas tt, funcionarios tf, t0003cursos tc, t0009anolectivos tal, t0005planoestudos tp WHERE ti.t0008aluno_id = ta.id AND tav.t0013inscricao_id = ti.id AND tav.t0015tipoavaliacao_id = tta.id AND tt.id = ti.t0010turma_id AND tf.id = tt.funcionario_id AND tal.id = tt.t0009anolectivo_id AND tt.t0003curso_id = tc.id AND tp.id = tt.t0005planoestudo_id AND tt.t0009anolectivo_id = {$ano_lectivo_id} AND tt.t0005planoestudo_id = {$plano_id} AND tt.t0003curso_id = {$curso_id} AND ti.t0010turma_id ={$turma_id} and tta.id=" . $resultado[$i]["tipoavaliacaos"]['id'] . " ";
 		}
 			   				
 		// coloca a finalizaÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â‚¬Å¾Ã‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¡ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â§ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â‚¬Å¾Ã‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¡ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â£o da querie
@@ -301,10 +301,10 @@ class Listagen extends AppModel {
   }		 
 	
 	
-  function  getAllPautaByCondition($anolectivo_id,$curso_id,$plano_id,$turma_id){
+  function  getAllPautaByCondition($ano_lectivo_id,$curso_id,$plano_id,$turma_id){
 	 
 	 //var_dump("entra getAllPautaResultado....");	
-	 $query = $this->constroiQueryPauta($anolectivo_id,$curso_id,$plano_id,$turma_id);
+	 $query = $this->constroiQueryPauta($ano_lectivo_id,$curso_id,$plano_id,$turma_id);
      //var_dump($query);
 	 
 	 $resultado = $this->query($query);
@@ -315,10 +315,10 @@ class Listagen extends AppModel {
 
 ///////////**************************************/////////////////////
 
-     function  getAllPautaExameByCondition($anolectivo_id,$curso_id,$plano_id,$turma_id){
+     function  getAllPautaExameByCondition($ano_lectivo_id,$curso_id,$plano_id,$turma_id){
 	 
 	 // le todos os tipo de avaliacao com notas
-	 $query = "SELECT distinct ta.codigo, ta.name,ti.notafrequencia, ti.notafinal FROM t0008alunos ta, t0013inscricaos ti, avaliacaos tav, tipoavaliacaos tta, t0010turmas tt, funcionarios tf, t0003cursos tc, t0009anolectivos tal, t0005planoestudos tp WHERE ti.t0008aluno_id = ta.id AND tav.t0013inscricao_id = ti.id AND tav.t0015tipoavaliacao_id = tta.id AND tt.id = ti.t0010turma_id AND tf.id = tt.funcionario_id AND tal.id = tt.t0009anolectivo_id AND tt.t0003curso_id = tc.id AND tp.id = tt.t0005planoestudo_id AND tt.t0009anolectivo_id = {$anolectivo_id} AND tt.t0005planoestudo_id = {$plano_id} AND tt.t0003curso_id = {$curso_id} AND ti.t0010turma_id ={$turma_id} and (tta.id=4 or tta.id=5) order by ta.name ";
+	 $query = "SELECT distinct ta.codigo, ta.name,ti.notafrequencia, ti.notafinal FROM t0008alunos ta, t0013inscricaos ti, avaliacaos tav, tipoavaliacaos tta, t0010turmas tt, funcionarios tf, t0003cursos tc, t0009anolectivos tal, t0005planoestudos tp WHERE ti.t0008aluno_id = ta.id AND tav.t0013inscricao_id = ti.id AND tav.t0015tipoavaliacao_id = tta.id AND tt.id = ti.t0010turma_id AND tf.id = tt.funcionario_id AND tal.id = tt.t0009anolectivo_id AND tt.t0003curso_id = tc.id AND tp.id = tt.t0005planoestudo_id AND tt.t0009anolectivo_id = {$ano_lectivo_id} AND tt.t0005planoestudo_id = {$plano_id} AND tt.t0003curso_id = {$curso_id} AND ti.t0010turma_id ={$turma_id} and (tta.id=4 or tta.id=5) order by ta.name ";
   
 	   
 	   //var_dump($query);

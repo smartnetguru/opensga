@@ -32,7 +32,7 @@ class SemestrelectivosController extends AppController {
 	var $name = 'Semestrelectivos';
 
 	function index() {
-		$this->Semestrelectivo->recursive = 0;
+		$this->SemestreLectivo->recursive = 0;
 		$this->set('t0019semestrelectivos', $this->paginate());
 	}
 
@@ -41,20 +41,20 @@ class SemestrelectivosController extends AppController {
 			$this->Session->setFlash('Invalido %s', 'flasherror');
 			$this->redirect(array('action' => 'index'));
 		}
-		$this->set('t0019semestrelectivo', $this->Semestrelectivo->read(null, $id));
+		$this->set('t0019semestrelectivo', $this->SemestreLectivo->read(null, $id));
 	}
 
 	function add() {
 		if (!empty($this->data)) {
-                   $anolectivos = $this->Semestrelectivo->Anolectivo->create();
+                   $anolectivos = $this->SemestreLectivo->AnoLectivo->create();
                    
-                   if($this->Semestrelectivo->Anolectivo->save($this->data)){
-                   foreach($this->data['Semestrelectivo'] as $semestre){
-                        $semestre['t0009anolectivo_id']=$this->Semestrelectivo->Anolectivo->getInsertID();
+                   if($this->SemestreLectivo->AnoLectivo->save($this->data)){
+                   foreach($this->data['SemestreLectivo'] as $semestre){
+                        $semestre['t0009anolectivo_id']=$this->SemestreLectivo->AnoLectivo->getInsertID();
                        
                        
-                    $this->Semestrelectivo->create();
-                    if(!$this->Semestrelectivo->save($semestre)){
+                    $this->SemestreLectivo->create();
+                    if(!$this->SemestreLectivo->save($semestre)){
                        $this->Session->setFlash('Erro ao gravar dados. Por favor tente de novo.','flasherror');
                     }
                    }
@@ -64,7 +64,7 @@ class SemestrelectivosController extends AppController {
 			}
 		}
                   
-		$anolectivos = $this->Semestrelectivo->Anolectivo->find('list');
+		$anolectivos = $this->SemestreLectivo->AnoLectivo->find('list');
 		$this->set(compact('t0009anolectivos'));
 	}
 
@@ -74,16 +74,16 @@ class SemestrelectivosController extends AppController {
 			$this->redirect(array('action' => 'index'));
 		}
 		if (!empty($this->data)) {
-			if ($this->Semestrelectivo->save($this->data)) {
+			if ($this->SemestreLectivo->save($this->data)) {
 				$this->Session->setFlash('Dado Editados com sucesso','flashok');
 				$this->redirect(array('action' => 'index'));
 			} else {
 				$this->Session->setFlash('Erro ao editar dados. Por favor tente de novo.','flasherror');	}
 		}
 		if (empty($this->data)) {
-			$this->data = $this->Semestrelectivo->read(null, $id);
+			$this->data = $this->SemestreLectivo->read(null, $id);
 		}
-		$anolectivos = $this->Semestrelectivo->Anolectivo->find('list');
+		$anolectivos = $this->SemestreLectivo->AnoLectivo->find('list');
 		$this->set(compact('t0009anolectivos'));
 	}
 
@@ -92,17 +92,17 @@ class SemestrelectivosController extends AppController {
 			$this->Session->setFlash(sprintf(__('Invalid id for %s', true), 't0019semestrelectivo'));
 			$this->redirect(array('action'=>'index'));
 		}
-		if ($this->Semestrelectivo->delete($id)) {
+		if ($this->SemestreLectivo->delete($id)) {
 			$this->Session->setFlash('Dados deletedos com sucesso ','flashok');
 			$this->redirect(array('action'=>'index'));
 		}
-		$this->Session->setFlash(sprintf(__('%s was not deleted', true), 'Semestrelectivo'));
+		$this->Session->setFlash(sprintf(__('%s was not deleted', true), 'SemestreLectivo'));
 		$this->redirect(array('action' => 'index'));
 	}
 
 
         function update_semestres(){
-           $this->set('num',$this->data['Anolectivo']['num_semestre']);
+           $this->set('num',$this->data['AnoLectivo']['num_semestre']);
             $this->layout = 'ajax';
         }
 }

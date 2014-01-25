@@ -32,7 +32,7 @@ class PlanoestudoanosController extends AppController {
 	var $name = 'Planoestudoanos';
 
 	function index() {
-		$this->Planoestudoano->recursive = 0;
+		$this->DisciplinaPlanoEstudo->recursive = 0;
 		$this->set('planoestudoanos', $this->paginate());
 	}
 
@@ -41,13 +41,13 @@ class PlanoestudoanosController extends AppController {
 			$this->Session->setFlash(sprintf(__('Invalid %s', true), 'planoestudoano'));
 			$this->redirect(array('action' => 'index'));
 		}
-		$this->set('planoestudoano', $this->Planoestudoano->read(null, $id));
+		$this->set('planoestudoano', $this->DisciplinaPlanoEstudo->read(null, $id));
 	}
 
 	function add() {
 		if (!empty($this->data)) {
-			$this->Planoestudoano->create();
-			if ($this->Planoestudoano->save($this->data)) {
+			$this->DisciplinaPlanoEstudo->create();
+			if ($this->DisciplinaPlanoEstudo->save($this->data)) {
 				$this->Session->setFlash(sprintf(__('Dado Registado com Sucesso', true), 'planoestudoano'));
 				$this->redirect(array('action' => 'index'));
 			} else {
@@ -62,7 +62,7 @@ class PlanoestudoanosController extends AppController {
 			$this->redirect(array('action' => 'index'));
 		}
 		if (!empty($this->data)) {
-			if ($this->Planoestudoano->save($this->data)) {
+			if ($this->DisciplinaPlanoEstudo->save($this->data)) {
 				$this->Session->setFlash(sprintf(__('Dado Registado com Sucesso', true), 'planoestudoano'));
 				$this->redirect(array('action' => 'index'));
 			} else {
@@ -70,7 +70,7 @@ class PlanoestudoanosController extends AppController {
 			}
 		}
 		if (empty($this->data)) {
-			$this->data = $this->Planoestudoano->read(null, $id);
+			$this->data = $this->DisciplinaPlanoEstudo->read(null, $id);
 		}
 	}
 
@@ -79,11 +79,11 @@ class PlanoestudoanosController extends AppController {
 			$this->Session->setFlash(sprintf(__('Invalid id for %s', true), 'planoestudoano'));
 			$this->redirect(array('action'=>'index'));
 		}
-		if ($this->Planoestudoano->delete($id)) {
-			$this->Session->setFlash(sprintf(__('%s deleted', true), 'Planoestudoano'));
+		if ($this->DisciplinaPlanoEstudo->delete($id)) {
+			$this->Session->setFlash(sprintf(__('%s deleted', true), 'DisciplinaPlanoEstudo'));
 			$this->redirect(array('action'=>'index'));
 		}
-		$this->Session->setFlash(sprintf(__('%s was not deleted', true), 'Planoestudoano'));
+		$this->Session->setFlash(sprintf(__('%s was not deleted', true), 'DisciplinaPlanoEstudo'));
 		$this->redirect(array('action' => 'index'));
 	}
         function beforeRender(){

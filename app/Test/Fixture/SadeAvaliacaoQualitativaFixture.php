@@ -17,7 +17,7 @@ class SadeAvaliacaoQualitativaFixture extends CakeTestFixture {
 		'sade_parametro_id' => array('type' => 'integer', 'null' => true, 'default' => null),
 		'resposta' => array('type' => 'float', 'null' => true, 'default' => null, 'length' => '10,3'),
 		'pontos_obtidos' => array('type' => 'float', 'null' => true, 'default' => null, 'length' => '10,3'),
-		'anolectivo_id' => array('type' => 'integer', 'null' => true, 'default' => null),
+		'ano_lectivo_id' => array('type' => 'integer', 'null' => true, 'default' => null),
 		'data' => array('type' => 'datetime', 'null' => true, 'default' => null),
 		'created' => array('type' => 'datetime', 'null' => true, 'default' => null),
 		'modified' => array('type' => 'datetime', 'null' => true, 'default' => null),

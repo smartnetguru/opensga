@@ -3,7 +3,7 @@ App::uses('AppModel', 'Model');
 /**
  * PlanoEstudoTipoPagamento Model
  *
- * @property Planoestudo $Planoestudo
+ * @property PlanoEstudo $PlanoEstudo
  * @property Tipopagamento $Tipopagamento
  */
 class PlanoEstudoTipoPagamento extends AppModel {
@@ -17,9 +17,9 @@ class PlanoEstudoTipoPagamento extends AppModel {
  * @var array
  */
 	public $belongsTo = array(
-		'Planoestudo' => array(
-			'className' => 'Planoestudo',
-			'foreignKey' => 'planoestudo_id',
+		'PlanoEstudo' => array(
+			'className' => 'PlanoEstudo',
+			'foreignKey' => 'plano_estudo_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''

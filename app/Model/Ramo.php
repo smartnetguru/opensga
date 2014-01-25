@@ -42,8 +42,8 @@ class Ramo extends AppModel {
 	);
 
 	var $hasMany = array(
-		'Planoestudoano' => array(
-			'className' => 'Planoestudoano',
+		'DisciplinaPlanoEstudo' => array(
+			'className' => 'DisciplinaPlanoEstudo',
 			'foreignKey' => 'ramo_id',
 			'dependent' => false,
 			'conditions' => '',

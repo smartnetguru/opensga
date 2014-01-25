@@ -55,7 +55,7 @@ class MatricularevisaosController extends AppController {
 		}
 		$alunos = $this->Matricularevisao->Aluno->find('list');
 		$cursos = $this->Matricularevisao->Curso->find('list');
-		$planoestudos = $this->Matricularevisao->Planoestudo->find('list');
+		$planoestudos = $this->Matricularevisao->PlanoEstudo->find('list');
 		$this->set(compact('Alunos', 't0003cursos', 't0005planoestudos'));
 	}
 
@@ -76,7 +76,7 @@ class MatricularevisaosController extends AppController {
 		}
 		$alunos = $this->Matricularevisao->Aluno->find('list');
 		$cursos = $this->Matricularevisao->Curso->find('list');
-		$planoestudos = $this->Matricularevisao->Planoestudo->find('list');
+		$planoestudos = $this->Matricularevisao->PlanoEstudo->find('list');
 		$this->set(compact('Alunos', 't0003cursos', 't0005planoestudos'));
 	}
 

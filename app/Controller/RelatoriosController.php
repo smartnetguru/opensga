@@ -30,21 +30,21 @@ class RelatoriosController extends AppController {
      */
     public function resumo_semestral($semestre_id = null) {
         $this->loadModel('Aluno');
-        $this->loadModel('Semestrelectivo');
+        $this->loadModel('SemestreLectivo');
 
         if ($semestre_id == null) {
             $semestre_id = Configure::read('OpenSGA.semestre_lectivo_id');
         }
-        $this->Semestrelectivo->id = $semestre_id;
-        if (!$this->Semestrelectivo->exists()) {
+        $this->SemestreLectivo->id = $semestre_id;
+        if (!$this->SemestreLectivo->exists()) {
             throw new NotFoundException('Este Semestre Lectivo não existe no Sistema');
         }
 
-        $ano_lectivo_id = $this->Aluno->Matricula->Anolectivo->Semestrelectivo->field('anolectivo_id', array('Semestrelectivo.id' => $semestre_id));
+        $ano_lectivo_id = $this->Aluno->Matricula->AnoLectivo->SemestreLectivo->field('ano_lectivo_id', array('SemestreLectivo.id' => $semestre_id));
         //Resumo de Alunos
         $total_alunos_activos = $this->Aluno->find('count', array('conditions' => array('NOT' => array('Aluno.estadoentidade_id' => array(2, 3, 4)))));
-        $total_novos_ingressos = $this->Aluno->Matricula->find('count', array('conditions' => array('Matricula.tipo_matricula_id' => array(0, 1), 'Matricula.anolectivo_id' => $ano_lectivo_id)));
-        $total_matriculas_renovadas = $this->Aluno->Matricula->find('count', array('conditions' => array('Matricula.tipo_matricula_id' => 2, 'Matricula.anolectivo_id' => $ano_lectivo_id)));
+        $total_novos_ingressos = $this->Aluno->Matricula->find('count', array('conditions' => array('Matricula.tipo_matricula_id' => array(0, 1), 'Matricula.ano_lectivo_id' => $ano_lectivo_id)));
+        $total_matriculas_renovadas = $this->Aluno->Matricula->find('count', array('conditions' => array('Matricula.tipo_matricula_id' => 2, 'Matricula.ano_lectivo_id' => $ano_lectivo_id)));
         $total_nao_matriculados = $total_alunos_activos - $total_novos_ingressos - $total_matriculas_renovadas;
 
         //Resumo de Tesouraria

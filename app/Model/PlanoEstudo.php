@@ -10,12 +10,12 @@
  * @since         OpenSGA v 0.10.0.0
 
  * 
- * @property Planoestudo @Planoestudo
+ * @property PlanoEstudo @PlanoEstudo
  * @todo Dar a possibilidade de activar e desactivar um plano de estudos
  */
  
-class Planoestudo extends AppModel {
-	var $name = 'Planoestudo';
+class PlanoEstudo extends AppModel {
+	var $name = 'PlanoEstudo';
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 
 	var $belongsTo = array(
@@ -29,9 +29,9 @@ class Planoestudo extends AppModel {
 	);
     
     var $hasMany = array(
-		'Planoestudoano' => array(
-			'className' => 'Planoestudoano',
-			'foreignKey' => 'planoestudo_id',
+		'DisciplinaPlanoEstudo' => array(
+			'className' => 'DisciplinaPlanoEstudo',
+			'foreignKey' => 'plano_estudo_id',
 			'dependent' => false,
 			'conditions' => '',
 			'fields' => '',
@@ -54,10 +54,10 @@ class Planoestudo extends AppModel {
         function getAllDisciplinasByPlanoEstudo($plano_id){
             trigger_error("Deprecated function called.", E_USER_NOTICE);
             App::import('Model','planoestudoano');
-            $planoestudoano = new Planoestudoano;
-            $query = "Select p.id,planoestudo_id,ano,semestre,cargahorariateoricas,cargahorariapraticas,d.id,d.name,d.codigo,pe.curso_id,pe.name ";
+            $planoestudoano = new DisciplinaPlanoEstudo;
+            $query = "Select p.id,plano_estudo_id,ano,semestre,cargahorariateoricas,cargahorariapraticas,d.id,d.name,d.codigo,pe.curso_id,pe.name ";
             $query .="from planoestudoanos p,disciplinas d,planoestudos pe ";
-            $query .="where p.disciplina_id = d.id and p.planoestudo_id = {$plano_id} and p.planoestudo_id=pe.id ";
+            $query .="where p.disciplina_id = d.id and p.plano_estudo_id = {$plano_id} and p.plano_estudo_id=pe.id ";
             $query .="order by ano, semestre, d.name ";
             $disciplinas = $this->query($query);
             for($i=0;$i<count($disciplinas);$i++){
@@ -69,17 +69,17 @@ class Planoestudo extends AppModel {
         
         public function getAllDisciplinas($plano_id){
             
-            $this->Planoestudoano->contain(array(
-                'Disciplina','Planoestudo'
+            $this->DisciplinaPlanoEstudo->contain(array(
+                'Disciplina','PlanoEstudo'
             ));
-            $disciplinas = $this->Planoestudoano->find('all',array('conditions'=>array('planoestudo_id'=>$plano_id)));
+            $disciplinas = $this->DisciplinaPlanoEstudo->find('all',array('conditions'=>array('plano_estudo_id'=>$plano_id)));
             return $disciplinas;
         }
 		
         function deleteAllDisciplinasByPlanoEstudo($plano_id){
             App::import('Model','planoestudoano');
-            $planoestudoano = new Planoestudoano;
-            $query = "delete from planoestudoanos  where planoestudo_id = {$plano_id} ";
+            $planoestudoano = new DisciplinaPlanoEstudo;
+            $query = "delete from planoestudoanos  where plano_estudo_id = {$plano_id} ";
             $resultado = $this->query($query);
 			return $resultado;
         }	
@@ -87,7 +87,7 @@ class Planoestudo extends AppModel {
         function deleteAllGrupoDiscByPlanoEstudo($plano_id){
             App::import('Model','Grupodisciplina');
             $planoestudogruposdisc = new Grupodisciplina;
-            $query = "delete from grupodisciplinas where planoestudo_id = {$plano_id} ";
+            $query = "delete from grupodisciplinas where plano_estudo_id = {$plano_id} ";
            	$resultado = $this->query($query);
 			return $resultado;
         }			
@@ -95,10 +95,10 @@ class Planoestudo extends AppModel {
 
        function getAllMatriculasByPlanoEstudo($plano_id){
             App::import('Model','planoestudoano');
-            $planoestudoano = new Planoestudoano;
+            $planoestudoano = new DisciplinaPlanoEstudo;
             $query = "select tm.id ";
             $query .="from planoestudos tp , matriculas tm ";
-            $query .="where tm.planoestudo_id=tp.id and tm.planoestudo_id = {$plano_id} ";
+            $query .="where tm.plano_estudo_id=tp.id and tm.plano_estudo_id = {$plano_id} ";
             $resultado = $this->query($query);
 			
 			//var_dump($resultado);
@@ -111,12 +111,12 @@ class Planoestudo extends AppModel {
             $grupodisciplinas = new Grupodisciplina;
             
             
-            $o = $grupodisciplinas->find('all',array('conditions'=>array('planoestudo_id'=>$plano_id,'disciplina_id'=>$disciplina_id,'tipoprecedencia_id'=>'O'),'fields'=>array('Grupodisciplina.id','Disciplina.name')));
+            $o = $grupodisciplinas->find('all',array('conditions'=>array('plano_estudo_id'=>$plano_id,'disciplina_id'=>$disciplina_id,'tipoprecedencia_id'=>'O'),'fields'=>array('Grupodisciplina.id','Disciplina.name')));
             $obr=array();
             foreach($o as $ob){
                 $obr[$ob['Grupodisciplina']['id']]=$ob['Disciplina']['name'];
             }
-            $a = $grupodisciplinas->find('all',array('conditions'=>array('planoestudo_id'=>$plano_id,'disciplina_id'=>$disciplina_id,'tipoprecedencia_id'=>'A'),'fields'=>array('Grupodisciplina.id','Disciplina.name')));
+            $a = $grupodisciplinas->find('all',array('conditions'=>array('plano_estudo_id'=>$plano_id,'disciplina_id'=>$disciplina_id,'tipoprecedencia_id'=>'A'),'fields'=>array('Grupodisciplina.id','Disciplina.name')));
             $acs=array();
             foreach($a as $ac){
                 
@@ -136,9 +136,9 @@ class Planoestudo extends AppModel {
          */
         public function getAllDisciplinasForPrecedencia($disciplina_id,$plano_id){
             //Primeiro verificamos o ano e o semestre da disciplina em questao
-            $disciplina_plano = $this->Planoestudoano->find('first',array('conditions'=>array('disciplina_id'=>$disciplina_id,'planoestudo_id'=>$plano_id )));
+            $disciplina_plano = $this->DisciplinaPlanoEstudo->find('first',array('conditions'=>array('disciplina_id'=>$disciplina_id,'plano_estudo_id'=>$plano_id )));
             //Agora buscamos todas as disciplinas daquele plano que podem ser precedentes
-            $disciplinas_precedentes = $this->Planoestudoano->find('all',array('conditions'=>array('planoestudo_id'=>$plano_id,"OR"=>array('ano <'=>$disciplina_plano['Planoestudoano']['ano'],"AND"=>array('semestre <'=>$disciplina_plano['Planoestudoano']['semestre'],'ano'=>$disciplina_plano['Planoestudoano']['ano'])))));
+            $disciplinas_precedentes = $this->DisciplinaPlanoEstudo->find('all',array('conditions'=>array('plano_estudo_id'=>$plano_id,"OR"=>array('ano <'=>$disciplina_plano['DisciplinaPlanoEstudo']['ano'],"AND"=>array('semestre <'=>$disciplina_plano['DisciplinaPlanoEstudo']['semestre'],'ano'=>$disciplina_plano['DisciplinaPlanoEstudo']['ano'])))));
           return $disciplinas_precedentes;
         }
 		

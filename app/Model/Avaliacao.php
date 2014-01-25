@@ -51,8 +51,8 @@ class Avaliacao extends AppModel {
 	
 	
 		//Devolve o ano lectivo
-        function getAnoLectivo($anolectivo_id){
-            $query = "select codigo from anolectivos where id = {$anolectivo_id}";
+        function getAnoLectivo($ano_lectivo_id){
+            $query = "select codigo from anolectivos where id = {$ano_lectivo_id}";
 		//var_dump($query);
             $resultado = $this->query($query);
 			return $resultado;	
@@ -68,8 +68,8 @@ class Avaliacao extends AppModel {
 		}
 		
 				//Devolve o Plano
-        function getPlano($planoestudo_id){
-            $query = "select name from t0005planoestudos where id = {$planoestudo_id}";		
+        function getPlano($plano_estudo_id){
+            $query = "select name from t0005planoestudos where id = {$plano_estudo_id}";		
             $resultado = $this->query($query);
 			//var_dump($resultado);
 			return $resultado;				
@@ -126,13 +126,13 @@ class Avaliacao extends AppModel {
 		}
 		
 		function update_plano(){
-			App::Import('Model','Planoestudo');
-            $t005planoestudos = new Planoestudo;
+			App::Import('Model','PlanoEstudo');
+            $t005planoestudos = new PlanoEstudo;
 			
 			//select tp.name from t0005planoestudos tp,t0003cursos tc where tp.t0003curso_id = tc.id and tp.t0003curso_id = 1
 			
 			$planoestudo = $t005planoestudos->find('all',array('conditions'=>array('Aluno_id'=>$this->data['Inscricao']['Aluno_id'])));		
-			$plano = $planoestudo[0]['Planoestudo'];		
+			$plano = $planoestudo[0]['PlanoEstudo'];		
 			$this->set('plano',$plano);
 			$this->layout = 'ajax';
 		}

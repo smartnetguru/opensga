@@ -158,7 +158,7 @@ class PagesController extends AppController {
         
         $cursos  = $this->Aluno->Curso->getAllIdsByUnidadeOrganica($unidades_organicas);
         $total_turmas_activas = $this->Aluno->Inscricao->Turma->find('count',array('conditions'=>array('Turma.curso_id'=>$cursos)));
-        $total_turmas_activas_ano = $this->Aluno->Inscricao->Turma->find('count',array('conditions'=>array('Turma.curso_id'=>$cursos,'Turma.anolectivo_id'=>Configure::read('OpenSGA.ano_lectivo_id'))));
+        $total_turmas_activas_ano = $this->Aluno->Inscricao->Turma->find('count',array('conditions'=>array('Turma.curso_id'=>$cursos,'Turma.ano_lectivo_id'=>Configure::read('OpenSGA.ano_lectivo_id'))));
         $total_turmas_passadas = $total_turmas_activas - $total_turmas_activas_ano;
         
         $this->set(compact('total_alunos_faculdade','total_alunos_activos_faculdade','total_matriculas_activas_faculdade','total_matriculas_nao_renovadas','total_inscricoes_activas_ano', 'total_inscricoes_activas','total_inscricoes_passadas_abertas','total_turmas_activas_ano', 'total_turmas_activas','total_turmas_passadas','total_turmas_sem_docente'));

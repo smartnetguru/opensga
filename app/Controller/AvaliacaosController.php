@@ -66,8 +66,8 @@ class AvaliacaosController extends AppController {
             $cursos = $curso->find('list');
            $turmas = $turma->find('list');
 			$epocaavaliacaos = $epocaavaliacao->find('list');
-            $anolectivos = $turma->Anolectivo->find('list');
-			$planoestudos = $turma->Planoestudo->find('list');
+            $anolectivos = $turma->AnoLectivo->find('list');
+			$planoestudos = $turma->PlanoEstudo->find('list');
 			
 		if (!empty($this->data)) {
 			$this->Avaliacao->create();
@@ -153,15 +153,15 @@ class AvaliacaosController extends AppController {
             $turmas = $turma->find('list');	
 			$epocaavaliacaos = $epocaavaliacao->find('list');				
 			$tipoavaliacaos = $this->Avaliacao->Tipoavaliacao->find('list');
-			$anolectivos = $turma->Anolectivo->find('list');
-			$planoestudos = $turma->Planoestudo->find('list');    
+			$anolectivos = $turma->AnoLectivo->find('list');
+			$planoestudos = $turma->PlanoEstudo->find('list');    
 
 			$this->set(compact('tipoavaliacaos','t0003cursos','t0010turmas','t0009anolectivos','t0005planoestudos','epocaavaliacaos'));
 			
         }
 		
-		//,$planoestudo_id,$turma_id,$epocaavaliacao_id,$tipoavaliacao_id
-		function lancamento_de_notas($turma_id,$epocadeavaliacao,$tipoavaliacao,$planoestudo_id,$curso_id,$t0009anolectivo_id){
+		//,$plano_estudo_id,$turma_id,$epocaavaliacao_id,$tipoavaliacao_id
+		function lancamento_de_notas($turma_id,$epocadeavaliacao,$tipoavaliacao,$plano_estudo_id,$curso_id,$t0009anolectivo_id){
 		     
 			 App::Import('Model','Inscricao');
 			 App::Import('Model','Turma');
@@ -243,7 +243,7 @@ class AvaliacaosController extends AppController {
 			 
 			 //-----------------Plano by Id-------------
 			
-			 $plano = $this->Avaliacao->getPlano($planoestudo_id);
+			 $plano = $this->Avaliacao->getPlano($plano_estudo_id);
 			 $plano_name=$plano[0]["t0005planoestudos"]["name"];
 			 
 			 //----------------Curso by Id-------------
@@ -283,8 +283,8 @@ class AvaliacaosController extends AppController {
 		
 		
 		function update_plano(){
-			App::Import('Model','Planoestudo');
-            $planoestudos = new Planoestudo;			
+			App::Import('Model','PlanoEstudo');
+            $planoestudos = new PlanoEstudo;			
 			$curso = $planoestudos->find('list',array('conditions'=>array('t0003curso_id'=>$this->data['Avaliacaos']['t0003curso_id'])));		
 			$plano = $curso;	
 			//var_dump($plano);

@@ -108,7 +108,7 @@ class Inscricao extends AppModel {
         App::import('Model', 'Matricula');
         $matriculas = new Matricula;
         //$matriculas->recursive=-1;
-        $alunos = $matriculas->find('all', array('conditions' => array('estadomatricula_id' => 1), 'order' => array('name ASC')));
+        $alunos = $matriculas->find('all', array('conditions' => array('estado_matricula_id' => 1), 'order' => array('name ASC')));
         $alunos2 = array();
         foreach ($alunos as $aluno) {
             $alunos2[$aluno['Aluno']['id']] = $aluno['Aluno']['name'];
@@ -143,7 +143,7 @@ class Inscricao extends AppModel {
             $conditions['Turma.curso_id'] = $cursos;
         }
         if($ano_lectivo_id){
-            $conditions['Turma.anolectivo_id'] = $ano_lectivo_id;
+            $conditions['Turma.ano_lectivo_id'] = $ano_lectivo_id;
         }
         
         $this->contain(array(
@@ -210,7 +210,7 @@ class Inscricao extends AppModel {
                     'financeiro_tipo_pagamento_id' => $tipo_pagamento_id,
                     'data_orcamento' => date('Y-m-d'),
                     'financeiro_estado_pagamento_id' => 2,
-                    'anolectivo_id' => Configure::read('OpenSGA.ano_lectivo_id'),
+                    'ano_lectivo_id' => Configure::read('OpenSGA.ano_lectivo_id'),
                     'data_emissao' => date('Y-m-d'),
                     'semestrelectivo_id' => Configure::read('OpenSGA.semestre_lectivo_id'),
                     'entidade_id' => $conta['FinanceiroConta']['entidade_id']

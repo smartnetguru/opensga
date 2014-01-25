@@ -49,8 +49,8 @@ class SadeAutoAvaliacaosController extends AppController {
 		}
 		$entidades = $this->SadeAutoAvaliacao->Entidade->find('list');
 		$sadeParametros = $this->SadeAutoAvaliacao->SadeParametro->find('list');
-		$anolectivos = $this->SadeAutoAvaliacao->Anolectivo->find('list');
-		$semestrelectivos = $this->SadeAutoAvaliacao->Semestrelectivo->find('list');
+		$anolectivos = $this->SadeAutoAvaliacao->AnoLectivo->find('list');
+		$semestrelectivos = $this->SadeAutoAvaliacao->SemestreLectivo->find('list');
 		$sadeAvaliacaos = $this->SadeAutoAvaliacao->SadeAvaliacao->find('list');
 		$this->set(compact('entidades', 'sadeParametros', 'anolectivos', 'semestrelectivos', 'sadeAvaliacaos'));
 	}
@@ -78,8 +78,8 @@ class SadeAutoAvaliacaosController extends AppController {
 		}
 		$entidades = $this->SadeAutoAvaliacao->Entidade->find('list');
 		$sadeParametros = $this->SadeAutoAvaliacao->SadeParametro->find('list');
-		$anolectivos = $this->SadeAutoAvaliacao->Anolectivo->find('list');
-		$semestrelectivos = $this->SadeAutoAvaliacao->Semestrelectivo->find('list');
+		$anolectivos = $this->SadeAutoAvaliacao->AnoLectivo->find('list');
+		$semestrelectivos = $this->SadeAutoAvaliacao->SemestreLectivo->find('list');
 		$sadeAvaliacaos = $this->SadeAutoAvaliacao->SadeAvaliacao->find('list');
 		$this->set(compact('entidades', 'sadeParametros', 'anolectivos', 'semestrelectivos', 'sadeAvaliacaos'));
 	}
@@ -131,7 +131,7 @@ class SadeAutoAvaliacaosController extends AppController {
                 $sade_auto_avaliacao['entidade_id']=$entidade['Entidade']['id'];
                 $sade_auto_avaliacao['sade_parametro_id']=$k;
                 $sade_auto_avaliacao['data']=date('Y-m-d');
-                $sade_auto_avaliacao['anolectivo_id']=$this->Session->read('SGAConfig.anolectivo_id');
+                $sade_auto_avaliacao['ano_lectivo_id']=$this->Session->read('SGAConfig.ano_lectivo_id');
                 $sade_auto_avaliacao['semestrelectivo_id']=$this->Session->read('SGAConfig.semestrelectivo_id');
                 if($v['resposta']>=$parametros_array[$k]['quantidade']){
                     $sade_auto_avaliacao['pontos_obtidos']=$parametros_array[$k]['pontos'];
@@ -139,7 +139,7 @@ class SadeAutoAvaliacaosController extends AppController {
                 else{
                     $sade_auto_avaliacao['pontos_obtidos']=0;
                 }
-                $avaliacao_antiga = $this->SadeAutoAvaliacao->find('first',array('conditions'=>array('SadeAutoAvaliacao.sade_parametro_id'=>$k,'SadeAutoAvaliacao.entidade_id'=>$entidade['Entidade']['id'],'SadeAutoAvaliacao.anolectivo_id'=>$this->Session->read('SGAConfig.anolectivo_id'))));
+                $avaliacao_antiga = $this->SadeAutoAvaliacao->find('first',array('conditions'=>array('SadeAutoAvaliacao.sade_parametro_id'=>$k,'SadeAutoAvaliacao.entidade_id'=>$entidade['Entidade']['id'],'SadeAutoAvaliacao.ano_lectivo_id'=>$this->Session->read('SGAConfig.ano_lectivo_id'))));
                 
                 if($avaliacao_antiga){
                     $this->SadeAutoAvaliacao->id=$avaliacao_antiga['SadeAutoAvaliacao']['id'];
@@ -159,7 +159,7 @@ class SadeAutoAvaliacaosController extends AppController {
         $user_id  =$this->Session->read('Auth.User.id');
         $entidade = $this->SadeAutoAvaliacao->Entidade->find('first',array('conditions'=>array('Entidade.user_id'=>$user_id)));
         $this->SadeAutoAvaliacao->contain();
-        $avaliacao_antiga = $this->SadeAutoAvaliacao->find('all',array('conditions'=>array('SadeAutoAvaliacao.entidade_id'=>$entidade['Entidade']['id'],'SadeAutoAvaliacao.anolectivo_id'=>$this->Session->read('SGAConfig.anolectivo_id'))));
+        $avaliacao_antiga = $this->SadeAutoAvaliacao->find('all',array('conditions'=>array('SadeAutoAvaliacao.entidade_id'=>$entidade['Entidade']['id'],'SadeAutoAvaliacao.ano_lectivo_id'=>$this->Session->read('SGAConfig.ano_lectivo_id'))));
         $auto_avaliacao=array();
         foreach($avaliacao_antiga as $aa){
             $auto_avaliacao[$aa['SadeAutoAvaliacao']['sade_parametro_id']]=array('resposta'=>$aa['SadeAutoAvaliacao']['resposta'],'pontos_obtidos'=>$aa['SadeAutoAvaliacao']['pontos_obtidos'],'pontos_bonificados'=>$aa['SadeAutoAvaliacao']['pontos_bonificados']);
@@ -188,7 +188,7 @@ class SadeAutoAvaliacaosController extends AppController {
                 $sade_auto_avaliacao['entidade_id']=$entidade['Entidade']['id'];
                 $sade_auto_avaliacao['sade_parametro_id']=$k;
                 $sade_auto_avaliacao['data']=date('Y-m-d');
-                $sade_auto_avaliacao['anolectivo_id']=$this->Session->read('SGAConfig.anolectivo_id');
+                $sade_auto_avaliacao['ano_lectivo_id']=$this->Session->read('SGAConfig.ano_lectivo_id');
                 $sade_auto_avaliacao['semestrelectivo_id']=$this->Session->read('SGAConfig.semestrelectivo_id');
                 if($v['resposta']>=$parametros_array[$k]['quantidade']){
                     $sade_auto_avaliacao['pontos_obtidos']=$parametros_array[$k]['pontos'];
@@ -196,7 +196,7 @@ class SadeAutoAvaliacaosController extends AppController {
                 else{
                     $sade_auto_avaliacao['pontos_obtidos']=0;
                 }
-                $avaliacao_antiga = $this->SadeAutoAvaliacao->find('first',array('conditions'=>array('SadeAutoAvaliacao.sade_parametro_id'=>$k,'SadeAutoAvaliacao.entidade_id'=>$entidade['Entidade']['id'],'SadeAutoAvaliacao.anolectivo_id'=>$this->Session->read('SGAConfig.anolectivo_id'))));
+                $avaliacao_antiga = $this->SadeAutoAvaliacao->find('first',array('conditions'=>array('SadeAutoAvaliacao.sade_parametro_id'=>$k,'SadeAutoAvaliacao.entidade_id'=>$entidade['Entidade']['id'],'SadeAutoAvaliacao.ano_lectivo_id'=>$this->Session->read('SGAConfig.ano_lectivo_id'))));
                 
                 if($avaliacao_antiga){
                     $this->SadeAutoAvaliacao->id=$avaliacao_antiga['SadeAutoAvaliacao']['id'];
@@ -216,7 +216,7 @@ class SadeAutoAvaliacaosController extends AppController {
         $user_id  =$this->Session->read('Auth.User.id');
         $entidade = $this->SadeAutoAvaliacao->Entidade->find('first',array('conditions'=>array('Entidade.user_id'=>2)));
         $this->SadeAutoAvaliacao->contain();
-        $avaliacao_antiga = $this->SadeAutoAvaliacao->find('all',array('conditions'=>array('SadeAutoAvaliacao.entidade_id'=>$entidade['Entidade']['id'],'SadeAutoAvaliacao.anolectivo_id'=>$this->Session->read('SGAConfig.anolectivo_id'))));
+        $avaliacao_antiga = $this->SadeAutoAvaliacao->find('all',array('conditions'=>array('SadeAutoAvaliacao.entidade_id'=>$entidade['Entidade']['id'],'SadeAutoAvaliacao.ano_lectivo_id'=>$this->Session->read('SGAConfig.ano_lectivo_id'))));
         $auto_avaliacao=array();
         foreach($avaliacao_antiga as $aa){
             $auto_avaliacao[$aa['SadeAutoAvaliacao']['sade_parametro_id']]=array('resposta'=>$aa['SadeAutoAvaliacao']['resposta'],'pontos_obtidos'=>$aa['SadeAutoAvaliacao']['pontos_obtidos'],'pontos_bonificados'=>$aa['SadeAutoAvaliacao']['pontos_bonificados']);
@@ -247,7 +247,7 @@ class SadeAutoAvaliacaosController extends AppController {
                 $sade_auto_avaliacao['entidade_id']=$entidade['Entidade']['id'];
                 $sade_auto_avaliacao['sade_parametro_id']=$k;
                 $sade_auto_avaliacao['data']=date('Y-m-d');
-                $sade_auto_avaliacao['anolectivo_id']=$this->Session->read('SGAConfig.anolectivo_id');
+                $sade_auto_avaliacao['ano_lectivo_id']=$this->Session->read('SGAConfig.ano_lectivo_id');
                 $sade_auto_avaliacao['semestrelectivo_id']=$this->Session->read('SGAConfig.semestrelectivo_id');
                 if($v['resposta']>=$parametros_array[$k]['quantidade']){
                     $sade_auto_avaliacao['pontos_obtidos']=$parametros_array[$k]['pontos'];
@@ -255,7 +255,7 @@ class SadeAutoAvaliacaosController extends AppController {
                 else{
                     $sade_auto_avaliacao['pontos_obtidos']=0;
                 }
-                $avaliacao_antiga = $this->SadeAutoAvaliacao->find('first',array('conditions'=>array('SadeAutoAvaliacao.sade_parametro_id'=>$k,'SadeAutoAvaliacao.entidade_id'=>$entidade['Entidade']['id'],'SadeAutoAvaliacao.anolectivo_id'=>$this->Session->read('SGAConfig.anolectivo_id'))));
+                $avaliacao_antiga = $this->SadeAutoAvaliacao->find('first',array('conditions'=>array('SadeAutoAvaliacao.sade_parametro_id'=>$k,'SadeAutoAvaliacao.entidade_id'=>$entidade['Entidade']['id'],'SadeAutoAvaliacao.ano_lectivo_id'=>$this->Session->read('SGAConfig.ano_lectivo_id'))));
                 
                 if($avaliacao_antiga){
                     $this->SadeAutoAvaliacao->id=$avaliacao_antiga['SadeAutoAvaliacao']['id'];
@@ -275,7 +275,7 @@ class SadeAutoAvaliacaosController extends AppController {
         $user_id  =$this->Session->read('Auth.User.id');
         $entidade = $this->SadeAutoAvaliacao->Entidade->find('first',array('conditions'=>array('Entidade.user_id'=>$user_id)));
         $this->SadeAutoAvaliacao->contain();
-        $avaliacao_antiga = $this->SadeAutoAvaliacao->find('all',array('conditions'=>array('SadeAutoAvaliacao.entidade_id'=>$entidade['Entidade']['id'],'SadeAutoAvaliacao.anolectivo_id'=>$this->Session->read('SGAConfig.anolectivo_id'))));
+        $avaliacao_antiga = $this->SadeAutoAvaliacao->find('all',array('conditions'=>array('SadeAutoAvaliacao.entidade_id'=>$entidade['Entidade']['id'],'SadeAutoAvaliacao.ano_lectivo_id'=>$this->Session->read('SGAConfig.ano_lectivo_id'))));
         $auto_avaliacao=array();
         foreach($avaliacao_antiga as $aa){
             $auto_avaliacao[$aa['SadeAutoAvaliacao']['sade_parametro_id']]=array('resposta'=>$aa['SadeAutoAvaliacao']['resposta'],'pontos_obtidos'=>$aa['SadeAutoAvaliacao']['pontos_obtidos'],'pontos_bonificados'=>$aa['SadeAutoAvaliacao']['pontos_bonificados']);

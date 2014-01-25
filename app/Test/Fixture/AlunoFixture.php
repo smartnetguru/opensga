@@ -51,7 +51,7 @@ class AlunoFixture extends CakeTestFixture {
 		'estado_aluno_id' => array('type' => 'integer', 'null' => true, 'default' => null),
 		'codigo_barras' => array('type' => 'string', 'null' => true, 'default' => null, 'length' => 45, 'collate' => 'utf8_general_ci', 'charset' => 'utf8'),
 		'turno_ingresso' => array('type' => 'integer', 'null' => true, 'default' => null),
-		'planoestudo_id' => array('type' => 'integer', 'null' => true, 'default' => null),
+		'plano_estudo_id' => array('type' => 'integer', 'null' => true, 'default' => null),
 		'observacoes' => array('type' => 'text', 'null' => true, 'default' => null, 'collate' => 'utf8_general_ci', 'charset' => 'utf8'),
 		'data_conclusao' => array('type' => 'date', 'null' => true, 'default' => null),
 		'nota_conclusao' => array('type' => 'float', 'null' => true, 'default' => null, 'length' => '10,2'),
@@ -113,7 +113,7 @@ class AlunoFixture extends CakeTestFixture {
 			'estado_aluno_id' => '1',
 			'codigo_barras' => null,
 			'turno_ingresso' => '1',
-			'planoestudo_id' => null,
+			'plano_estudo_id' => null,
 			'observacoes' => null,
 			'data_conclusao' => null,
 			'nota_conclusao' => null
@@ -159,7 +159,7 @@ class AlunoFixture extends CakeTestFixture {
 			'estado_aluno_id' => '1',
 			'codigo_barras' => null,
 			'turno_ingresso' => '1',
-			'planoestudo_id' => null,
+			'plano_estudo_id' => null,
 			'observacoes' => null,
 			'data_conclusao' => null,
 			'nota_conclusao' => null
@@ -205,7 +205,7 @@ class AlunoFixture extends CakeTestFixture {
 			'estado_aluno_id' => '1',
 			'codigo_barras' => null,
 			'turno_ingresso' => '2',
-			'planoestudo_id' => null,
+			'plano_estudo_id' => null,
 			'observacoes' => null,
 			'data_conclusao' => null,
 			'nota_conclusao' => null
@@ -251,7 +251,7 @@ class AlunoFixture extends CakeTestFixture {
 			'estado_aluno_id' => '1',
 			'codigo_barras' => null,
 			'turno_ingresso' => '1',
-			'planoestudo_id' => '29',
+			'plano_estudo_id' => '29',
 			'observacoes' => null,
 			'data_conclusao' => null,
 			'nota_conclusao' => null
@@ -297,7 +297,7 @@ class AlunoFixture extends CakeTestFixture {
 			'estado_aluno_id' => '1',
 			'codigo_barras' => null,
 			'turno_ingresso' => '1',
-			'planoestudo_id' => null,
+			'plano_estudo_id' => null,
 			'observacoes' => null,
 			'data_conclusao' => null,
 			'nota_conclusao' => null
@@ -343,7 +343,7 @@ class AlunoFixture extends CakeTestFixture {
 			'estado_aluno_id' => '1',
 			'codigo_barras' => null,
 			'turno_ingresso' => '1',
-			'planoestudo_id' => '29',
+			'plano_estudo_id' => '29',
 			'observacoes' => null,
 			'data_conclusao' => null,
 			'nota_conclusao' => null
@@ -389,7 +389,7 @@ class AlunoFixture extends CakeTestFixture {
 			'estado_aluno_id' => '1',
 			'codigo_barras' => null,
 			'turno_ingresso' => '1',
-			'planoestudo_id' => null,
+			'plano_estudo_id' => null,
 			'observacoes' => null,
 			'data_conclusao' => null,
 			'nota_conclusao' => null
@@ -435,7 +435,7 @@ class AlunoFixture extends CakeTestFixture {
 			'estado_aluno_id' => '1',
 			'codigo_barras' => null,
 			'turno_ingresso' => '1',
-			'planoestudo_id' => '29',
+			'plano_estudo_id' => '29',
 			'observacoes' => null,
 			'data_conclusao' => null,
 			'nota_conclusao' => null
@@ -481,7 +481,7 @@ class AlunoFixture extends CakeTestFixture {
 			'estado_aluno_id' => '1',
 			'codigo_barras' => null,
 			'turno_ingresso' => '2',
-			'planoestudo_id' => null,
+			'plano_estudo_id' => null,
 			'observacoes' => null,
 			'data_conclusao' => null,
 			'nota_conclusao' => null
@@ -527,7 +527,7 @@ class AlunoFixture extends CakeTestFixture {
 			'estado_aluno_id' => '1',
 			'codigo_barras' => null,
 			'turno_ingresso' => '1',
-			'planoestudo_id' => null,
+			'plano_estudo_id' => null,
 			'observacoes' => null,
 			'data_conclusao' => null,
 			'nota_conclusao' => null

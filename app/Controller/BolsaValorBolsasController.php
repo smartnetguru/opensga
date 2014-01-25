@@ -47,7 +47,7 @@ class BolsaValorBolsasController extends AppController {
 				$this->Session->setFlash(__('The bolsa valor bolsa could not be saved. Please, try again.'));
 			}
 		}
-		$anolectivos = $this->BolsaValorBolsa->Anolectivo->find('list');
+		$anolectivos = $this->BolsaValorBolsa->AnoLectivo->find('list');
 		$bolsaTipoBolsas = $this->BolsaValorBolsa->BolsaTipoBolsa->find('list');
 		$this->set(compact('anolectivos', 'bolsaTipoBolsas'));
 	}
@@ -74,7 +74,7 @@ class BolsaValorBolsasController extends AppController {
 		} else {
 			$this->request->data = $this->BolsaValorBolsa->read(null, $id);
 		}
-		$anolectivos = $this->BolsaValorBolsa->Anolectivo->find('list');
+		$anolectivos = $this->BolsaValorBolsa->AnoLectivo->find('list');
 		$bolsaTipoBolsas = $this->BolsaValorBolsa->BolsaTipoBolsa->find('list');
 		$this->set(compact('anolectivos', 'bolsaTipoBolsas'));
 	}

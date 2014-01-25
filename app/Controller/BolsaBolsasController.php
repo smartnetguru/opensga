@@ -49,7 +49,7 @@ class BolsaBolsasController extends AppController {
 		}
 		$alunos = $this->BolsaBolsa->Aluno->find('list');
 		$bolsaCandidaturas = $this->BolsaBolsa->BolsaCandidatura->find('list');
-		$anolectivos = $this->BolsaBolsa->Anolectivo->find('list');
+		$anolectivos = $this->BolsaBolsa->AnoLectivo->find('list');
 		$bancos = $this->BolsaBolsa->Banco->find('list');
 		$bolsaFonteBolsas = $this->BolsaBolsa->BolsaFonteBolsa->find('list');
 		$bolsaCriadorContas = $this->BolsaBolsa->BolsaCriadorContum->find('list');
@@ -82,7 +82,7 @@ class BolsaBolsasController extends AppController {
 		}
 		$alunos = $this->BolsaBolsa->Aluno->find('list');
 		$bolsaCandidaturas = $this->BolsaBolsa->BolsaCandidatura->find('list');
-		$anolectivos = $this->BolsaBolsa->Anolectivo->find('list');
+		$anolectivos = $this->BolsaBolsa->AnoLectivo->find('list');
 		$bancos = $this->BolsaBolsa->Banco->find('list');
 		$bolsaFonteBolsas = $this->BolsaBolsa->BolsaFonteBolsa->find('list');
 		$bolsaCriadorContas = $this->BolsaBolsa->BolsaCriadorContum->find('list');

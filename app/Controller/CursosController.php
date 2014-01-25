@@ -106,8 +106,8 @@ class CursosController extends AppController {
             $conditions = array();
             
             if(!empty($ano_academico)){
-                $anolectivo = $this->Curso->Matricula->Anolectivo->findByAno($ano_academico);
-                $conditions['Matricula.anolectivo_id'] = $anolectivo['Anolectivo']['id'];
+                $anolectivo = $this->Curso->Matricula->AnoLectivo->findByAno($ano_academico);
+                $conditions['Matricula.ano_lectivo_id'] = $anolectivo['AnoLectivo']['id'];
             }
             $this->Curso->contain(array(
                'GrauAcademico'

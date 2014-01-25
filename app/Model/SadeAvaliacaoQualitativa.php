@@ -6,7 +6,7 @@ App::uses('AppModel', 'Model');
  * @property SadeAvaliador $SadeAvaliador
  * @property Entidade $Entidade
  * @property SadeParametro $SadeParametro
- * @property Anolectivo $Anolectivo
+ * @property AnoLectivo $AnoLectivo
  */
 class SadeAvaliacaoQualitativa extends AppModel {
 
@@ -39,9 +39,9 @@ class SadeAvaliacaoQualitativa extends AppModel {
 			'fields' => '',
 			'order' => ''
 		),
-		'Anolectivo' => array(
-			'className' => 'Anolectivo',
-			'foreignKey' => 'anolectivo_id',
+		'AnoLectivo' => array(
+			'className' => 'AnoLectivo',
+			'foreignKey' => 'ano_lectivo_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''

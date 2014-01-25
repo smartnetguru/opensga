@@ -27,6 +27,84 @@ class DisciplinasController extends AppController {
 		$this->set('disciplinas', $disciplinas);
 	}
 
+    function faculdade_index() {
+        $this->Disciplina->contain(array(
+            'DisciplinaUnidadeOrganica'
+        ));
+        $this->paginate = array(
+            'conditions'=>array(
+                'DisciplinaUnidadeOrganica.unidade_organica_id'=>Configure::read('Auth.User.unidade_organica_id')
+            ),
+            'contain'=>array(
+                'DisciplinaUnidadeOrganica'
+                )
+        
+        );
+		$disciplinas = $this->paginate();
+		$this->set('disciplinas', $disciplinas);
+	}
+    
+    function faculdade_ver_disciplina($id = null)
+    {
+
+		if (!$id) {
+			$this->Session->setFlash('Invalido %s', 'flasherror');
+			$this->redirect(array('action' => 'index'));
+		}
+	$this->set('disciplina', $this->Disciplina->read(null, $id));
+    // var_dump($this->data);
+			if (empty($this->data)) {
+			$this->data = $this->Disciplina->read(null, $id);
+		}
+		$grupodisciplinars = $this->Disciplina->Grupodisciplinar->find('list');
+		$this->set(compact('grupodisciplinars'));
+	}
+    
+    function faculdade_adicionar_disciplina() {
+		if (!empty($this->data)) {
+			$this->Disciplina->create();
+			if ($this->Disciplina->save($this->data)) {
+				$this->Session->setFlash(__('Dados Registrados com Sucesso'),'default',array('class'=>'alert_success'));
+				$this->redirect(array('action' => 'index'));
+			} else {
+				$this->Session->setFlash(__('Problemas ao Registrar dados.'),'default',array('class'=>'alert error'));
+			}
+		}
+        $unidadeOrganicas = $this->Disciplina->UnidadeOrganica->find('list');
+		$this->set(compact('unidadeOrganicas'));
+	}
+
+    
+    	function faculdade_editar_disciplina($id = null){
+        $this->Disciplina->id = $id;
+		if(!$this->Disciplina->exists()){
+            throw new NotFoundException('Disciplina Inválida');
+        }
+		if (!$id && empty($this->data)) {
+			$this->Session->setFlash('Invalido %s', 'flasherror');
+			$this->redirect(array('action' => 'index'));
+		}
+		if ($this->request->is('post') || $this->request->is('put')) {
+
+			//die(var_dump($this->request->data));
+			if ($this->Disciplina->save($this->request->data)) {
+			////$logmv->logUpdate(4,$this->Session->read('Auth.User.id'),$id,$this->data["Disciplina"]["name"]);
+
+				$this->Session->setFlash('Dados editados com sucesso','default',array('class'=>'alert_success'));
+				$this->redirect(array('action' => 'index'));
+			} else {
+				$this->Session->setFlash('Problemas ao editar dados','default',array('class'=>'alert_error'));
+			}
+		}
+		if (empty($this->data)) {
+			$this->data = $this->Disciplina->read(null, $id);
+		}
+
+        $unidadeOrganicas = $this->Disciplina->UnidadeOrganica->find('list');
+		$this->set(compact('unidadeOrganicas'));
+	}
+    
+    
 	function ver_disciplina($id = null)
     {
 
@@ -86,39 +164,6 @@ class DisciplinasController extends AppController {
 		$this->set(compact('unidadeOrganicas'));
 	}
 
-        function beforeRender()
-		{
-            parent::beforeRender();
-            $this->set('current_section','pedagogica');
-        }
 
-        function pdf_index()
-		{
-            Configure::write('debug',0);
-            $disciplina = $this->Disciplina->find('all',array('order'=> array ('Disciplina.name ASC')));
-            $listas = array();
-			$id = 1;
-            foreach( $disciplina as $m)
-			{
-                $lista = array();
-                $lista[] =$id;
-	            $lista[] =$m["Disciplina"]["codigo"];
-                $lista[] =$m["Disciplina"]["name"];
-                $lista[] =$m["Grupodisciplinar"]["name"];
-                $listas[] =$lista;
-				$id++;
-            }
-
-            $this->set('lista',$listas);
-            $this->layout = 'pdf'; //this will use the pdf.ctp layout
-            $this->render();
-        }
-
-        public function beforeFilter() {
-            parent::beforeFilter();
-
-
-
-        }
 }
 ?>

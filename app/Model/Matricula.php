@@ -35,16 +35,16 @@ class Matricula extends AppModel {
             'fields' => '',
             'order' => ''
         ),
-        'Planoestudo' => array(
-            'className' => 'Planoestudo',
-            'foreignKey' => 'planoestudo_id',
+        'PlanoEstudo' => array(
+            'className' => 'PlanoEstudo',
+            'foreignKey' => 'plano_estudo_id',
             'conditions' => '',
             'fields' => '',
             'order' => ''
         ),
-        'Estadomatricula' => array(
-            'className' => 'Estadomatricula',
-            'foreignKey' => 'estadomatricula_id',
+        'EstadoMatricula' => array(
+            'className' => 'EstadoMatricula',
+            'foreignKey' => 'estado_matricula_id',
             'conditions' => '',
             'fields' => '',
             'order' => ''
@@ -63,9 +63,9 @@ class Matricula extends AppModel {
             'fields' => '',
             'order' => ''
         ),
-        'Anolectivo' => array(
-            'className' => 'Anolectivo',
-            'foreignKey' => 'anolectivo_id',
+        'AnoLectivo' => array(
+            'className' => 'AnoLectivo',
+            'foreignKey' => 'ano_lectivo_id',
             'conditions' => '',
             'fields' => '',
             'order' => ''
@@ -88,14 +88,14 @@ class Matricula extends AppModel {
     /**
      * Retorna todos os alunos matriculados num dado plano de estudos
      */
-    function getAllAlunosMatriculados($anolectivo_id) {
-        $alunos = $this->find('all', array('conditions' => array('anolectivo_id' => $anolectivo_id), 'fields' => array('aluno_id', 'Aluno.codigo')));
+    function getAllAlunosMatriculados($ano_lectivo_id) {
+        $alunos = $this->find('all', array('conditions' => array('ano_lectivo_id' => $ano_lectivo_id), 'fields' => array('aluno_id', 'Aluno.codigo')));
         return $alunos;
     }
 
     function validaMatricula($check) {
         $aluno = $check['aluno_id'];
-        $alunos = $this->find('all', array('conditions' => array('aluno_id' => $aluno, 'estadomatricula_id' => 4)));
+        $alunos = $this->find('all', array('conditions' => array('aluno_id' => $aluno, 'estado_matricula_id' => 4)));
 
         if (empty($alunos)) {
             return true;
@@ -107,7 +107,7 @@ class Matricula extends AppModel {
         App::import('Model', 'Aluno');
         $aluno = new Aluno;
 
-        $matriculados_f = $this->find('list', array('conditions' => array('estadomatricula_id' => 4, 'estadomatricula_id' => 3, 'estadomatricula_id' => 1), 'fields' => 'aluno_id'));
+        $matriculados_f = $this->find('list', array('conditions' => array('estado_matricula_id' => 4, 'estado_matricula_id' => 3, 'estado_matricula_id' => 1), 'fields' => 'aluno_id'));
         $matriculados = array();
         foreach ($matriculados_f as $f) {
             $matriculados[] = $f;
@@ -120,7 +120,7 @@ class Matricula extends AppModel {
         App::import('Model', 'Aluno');
         $aluno = new Aluno;
 
-        $matriculados_f = $this->find('list', array('conditions' => array('estadomatricula_id' => 1), 'fields' => 'aluno_id'));
+        $matriculados_f = $this->find('list', array('conditions' => array('estado_matricula_id' => 1), 'fields' => 'aluno_id'));
         $matriculados = array();
         foreach ($matriculados_f as $f) {
             $matriculados[] = $f;
@@ -136,8 +136,8 @@ class Matricula extends AppModel {
         }
 
         $conditions = array();
-        $conditions['estadomatricula_id'] = 1;
-        $conditions['Matricula.anolectivo_id'] = $ano_lectivo_id;
+        $conditions['estado_matricula_id'] = 1;
+        $conditions['Matricula.ano_lectivo_id'] = $ano_lectivo_id;
         if ($unidades_organicas) {
             $conditions['Curso.unidade_organica_id'] = $unidades_organicas;
         }
@@ -184,7 +184,7 @@ class Matricula extends AppModel {
         $aluno = $this->Aluno->findById($aluno_id);
 
 
-        $this->Anolectivo->contain();
+        $this->AnoLectivo->contain();
         $ano_lectivo_conditions = array('ano >=' => $aluno['Aluno']['ano_ingresso']);
         if ($aluno['Aluno']['estado_aluno_id'] == 3) {
             $this->Aluno->HistoricoCurso->contain();
@@ -192,16 +192,16 @@ class Matricula extends AppModel {
             $ano_lectivo_conditions['ano <='] = $historicoAluno['HistoricoCurso']['ano_fim'];
         } else {
             if ($renovacoes_futuras) {
-                $ano_lectivo_maximo = $this->Anolectivo->find('first', array('order' => 'Anolectivo.ano DESC'));
-                $ano_lectivo_conditions['ano <='] = $ano_lectivo_maximo['Anolectivo']['ano'];
+                $ano_lectivo_maximo = $this->AnoLectivo->find('first', array('order' => 'AnoLectivo.ano DESC'));
+                $ano_lectivo_conditions['ano <='] = $ano_lectivo_maximo['AnoLectivo']['ano'];
             } else {
                 $ano_lectivo_conditions['ano <='] = Configure::read('OpenSGA.ano_lectivo');
             }
         }
-        $ano_lectivos = $this->Anolectivo->find('all', array('conditions' => $ano_lectivo_conditions, 'order' => 'ano desc'));
+        $ano_lectivos = $this->AnoLectivo->find('all', array('conditions' => $ano_lectivo_conditions, 'order' => 'ano desc'));
         $array_renovacao_falta = array();
         foreach ($ano_lectivos as $ano_lectivo) {
-            $matricula = $this->find('first', array('conditions' => array('aluno_id' => $aluno_id, 'anolectivo_id' => $ano_lectivo['Anolectivo']['id'])));
+            $matricula = $this->find('first', array('conditions' => array('aluno_id' => $aluno_id, 'ano_lectivo_id' => $ano_lectivo['AnoLectivo']['id'])));
             if (empty($matricula)) {
                 $array_renovacao_falta[] = $ano_lectivo;
             } else {
@@ -220,9 +220,9 @@ class Matricula extends AppModel {
      * @return type
      */
     public function getRenovacaoByAlunoAndAnoLectivo($aluno_id, $ano) {
-        $ano_lectivo_id = $this->Anolectivo->getAnoLectivoIdByAno($ano);
+        $ano_lectivo_id = $this->AnoLectivo->getAnoLectivoIdByAno($ano);
 
-        $matricula = $this->find('first', array('conditions' => array('aluno_id' => $aluno_id, 'anolectivo_id' => $ano_lectivo_id)));
+        $matricula = $this->find('first', array('conditions' => array('aluno_id' => $aluno_id, 'ano_lectivo_id' => $ano_lectivo_id)));
         return $matricula;
     }
 
@@ -278,12 +278,12 @@ class Matricula extends AppModel {
                         $transacao['financeiro_estado_transacao_id'] = 4;
 
                         $deposito['financeiro_estado_deposito_id'] = 2;
-                        $anolectivo = $this->Anolectivo->findByAno('2014');
+                        $anolectivo = $this->AnoLectivo->findByAno('2014');
 
                         //Renova a Matricula se o valor for aceitavel.
                         if ($pagamento['FinanceiroPagamento']['valor'] == $montante) {
                             $deposito['data_reconciliacao'] = date('Y-m-d H:i:s');
-                            $matricula_existe = $this->find('first', array('conditions' => array('aluno_id' => $pagamento['FinanceiroPagamento']['aluno_id'], 'anolectivo_id' => $anolectivo['Anolectivo']['id'])));
+                            $matricula_existe = $this->find('first', array('conditions' => array('aluno_id' => $pagamento['FinanceiroPagamento']['aluno_id'], 'ano_lectivo_id' => $anolectivo['AnoLectivo']['id'])));
                             if (empty($matricula_existe)) {
 
                                 //verifica se o aluno é regular
@@ -292,10 +292,10 @@ class Matricula extends AppModel {
                                     $matricula = array(
                                         'aluno_id' => $pagamento['Aluno']['id'],
                                         'curso_id' => $pagamento['Aluno']['curso_id'],
-                                        'planoestudo_id' => $pagamento['Aluno']['planoestudo_id'],
+                                        'plano_estudo_id' => $pagamento['Aluno']['plano_estudo_id'],
                                         'data' => $data,
-                                        'estadomatricula_id' => 1,
-                                        'anolectivo_id' => $anolectivo['Anolectivo']['id'],
+                                        'estado_matricula_id' => 1,
+                                        'ano_lectivo_id' => $anolectivo['AnoLectivo']['id'],
                                         'tipo_matricula_id' => 2,
                                         'user_id' => 1
                                     );

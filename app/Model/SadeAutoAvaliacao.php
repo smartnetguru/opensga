@@ -5,8 +5,8 @@ App::uses('AppModel', 'Model');
  *
  * @property Entidade $Entidade
  * @property SadeParametro $SadeParametro
- * @property Anolectivo $Anolectivo
- * @property Semestrelectivo $Semestrelectivo
+ * @property AnoLectivo $AnoLectivo
+ * @property SemestreLectivo $SemestreLectivo
  * @property SadeAvaliacao $SadeAvaliacao
  */
 class SadeAutoAvaliacao extends AppModel {
@@ -33,15 +33,15 @@ class SadeAutoAvaliacao extends AppModel {
 			'fields' => '',
 			'order' => ''
 		),
-		'Anolectivo' => array(
-			'className' => 'Anolectivo',
-			'foreignKey' => 'anolectivo_id',
+		'AnoLectivo' => array(
+			'className' => 'AnoLectivo',
+			'foreignKey' => 'ano_lectivo_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
 		),
-		'Semestrelectivo' => array(
-			'className' => 'Semestrelectivo',
+		'SemestreLectivo' => array(
+			'className' => 'SemestreLectivo',
 			'foreignKey' => 'semestrelectivo_id',
 			'conditions' => '',
 			'fields' => '',

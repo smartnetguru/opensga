@@ -12,7 +12,7 @@ class PlanoEstudoTipoPagamentoFixture extends CakeTestFixture {
  */
 	public $fields = array(
 		'id' => array('type' => 'integer', 'null' => false, 'default' => null, 'key' => 'primary'),
-		'planoestudo_id' => array('type' => 'integer', 'null' => true, 'default' => null),
+		'plano_estudo_id' => array('type' => 'integer', 'null' => true, 'default' => null),
 		'tipopagamento_id' => array('type' => 'integer', 'null' => true, 'default' => null),
 		'valor' => array('type' => 'float', 'null' => true, 'default' => null, 'length' => '10,3'),
 		'indexes' => array(

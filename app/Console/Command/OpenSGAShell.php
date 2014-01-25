@@ -5,7 +5,7 @@ App::uses('AuditableConfig', 'Auditable.Lib');
 
 class OpenSGAShell extends AppShell {
 
-    public $uses = array('Inscricao', 'Turma', 'Matricula', 'Curso', 'UnidadeOrganica', 'Candidatura', 'Aluno', 'EstadoAluno', 'Planoestudo', 'Disciplina', 'Planoestudoano', 'HistoricoCurso', 'Anolectivo', 'CandidatoAlumni', 'Requisicoes.RequisicoesPedido', 'Entidade', 'User', 'SmsNotification');
+    public $uses = array('Inscricao', 'Turma', 'Matricula', 'Curso', 'UnidadeOrganica', 'Candidatura', 'Aluno', 'EstadoAluno', 'PlanoEstudo', 'Disciplina', 'DisciplinaPlanoEstudo', 'HistoricoCurso', 'AnoLectivo', 'CandidatoAlumni', 'Requisicoes.RequisicoesPedido', 'Entidade', 'User', 'SmsNotification');
 
     public function main() {
         $this->out('Hello world.');
@@ -146,37 +146,37 @@ class OpenSGAShell extends AppShell {
     }
 
     public function gerar_turmas() {
-        $plano_estudos = $this->Turma->Planoestudo->find('list');
-        $anolectivo_id = Configure::read('OpenSGA.ano_lectivo_id');
+        $plano_estudos = $this->Turma->PlanoEstudo->find('list');
+        $ano_lectivo_id = Configure::read('OpenSGA.ano_lectivo_id');
         $semestre_id = Configure::read('OpenSGA.semestre_lectivo_id');
 
-        foreach ($plano_estudos as $planoestudo_id => $plano_estudo) {
+        foreach ($plano_estudos as $plano_estudo_id => $plano_estudo) {
             $turnos = $this->Turma->Turno->find('list');
-            $disciplinas = $this->Turma->Planoestudo->getAllDisciplinas($planoestudo_id);
+            $disciplinas = $this->Turma->PlanoEstudo->getAllDisciplinas($plano_estudo_id);
 
             foreach ($disciplinas as $disciplina) {
-                $curso_id = $disciplina['Planoestudo']['curso_id'];
+                $curso_id = $disciplina['PlanoEstudo']['curso_id'];
                 $turnos = $this->Turma->Curso->CursosTurno->findAllByCursoId($curso_id);
                 foreach ($turnos as $turno) {
                     $turno_id = $turno['CursosTurno']['turno_id'];
                     $turma = array();
-                    $turma['anolectivo_id'] = $anolectivo_id;
-                    $turma['anocurricular'] = $disciplina['Planoestudoano']['ano'];
-                    $turma['semestrecurricular'] = $disciplina['Planoestudoano']['semestre'];
-                    $turma['curso_id'] = $disciplina['Planoestudo']['curso_id'];
+                    $turma['ano_lectivo_id'] = $ano_lectivo_id;
+                    $turma['anocurricular'] = $disciplina['DisciplinaPlanoEstudo']['ano'];
+                    $turma['semestrecurricular'] = $disciplina['DisciplinaPlanoEstudo']['semestre'];
+                    $turma['curso_id'] = $disciplina['PlanoEstudo']['curso_id'];
                     $turma['escola_id'] = 1;
-                    $turma['planoestudo_id'] = $planoestudo_id;
+                    $turma['plano_estudo_id'] = $plano_estudo_id;
                     $turma['turno_id'] = $turno_id;
                     $turma['disciplina_id'] = $disciplina['Disciplina']['id'];
-                    $turma['estadoturma_id'] = 1;
+                    $turma['estado_turma_id'] = 1;
                     $turma['semestrelectivo_id'] = $semestre_id;
-                    $nome = $disciplina['Disciplina']['name'] . " - " . $disciplina['Planoestudo']['name'];
+                    $nome = $disciplina['Disciplina']['name'] . " - " . $disciplina['PlanoEstudo']['name'];
                     $turma['name'] = $nome;
 
                     $turmas = array('Turma' => $turma);
 
                     //Primeiro precisamos ver se a turma nao esta criada ainda
-                    $turma_existe = $this->Turma->find('first', array('recursive' => -1, 'conditions' => array('anolectivo_id' => $anolectivo_id, 'planoestudo_id' => $planoestudo_id, 'disciplina_id' => $disciplina['Disciplina']['id'], 'anocurricular' => $turma['anocurricular'], 'semestrecurricular' => $turma['semestrecurricular'], 'turno_id' => $turma['turno_id'], 'semestrelectivo_id' => $semestre_id)));
+                    $turma_existe = $this->Turma->find('first', array('recursive' => -1, 'conditions' => array('ano_lectivo_id' => $ano_lectivo_id, 'plano_estudo_id' => $plano_estudo_id, 'disciplina_id' => $disciplina['Disciplina']['id'], 'anocurricular' => $turma['anocurricular'], 'semestrecurricular' => $turma['semestrecurricular'], 'turno_id' => $turma['turno_id'], 'semestrelectivo_id' => $semestre_id)));
 
                     if (!$turma_existe) {
                         $this->Turma->create();
@@ -210,8 +210,8 @@ class OpenSGAShell extends AppShell {
             $this->Curso->create();
             $this->Curso->save($array_plano_estudos);
             $array_plano_estudos['curso_id'] = $this->Curso->id;
-            $this->Planoestudo->create();
-            $this->Planoestudo->save($array_plano_estudos);
+            $this->PlanoEstudo->create();
+            $this->PlanoEstudo->save($array_plano_estudos);
 
             $ultima_linha = false;
             $linha_actual = 2;
@@ -234,8 +234,8 @@ class OpenSGAShell extends AppShell {
                         }
                     }
                     $array_plano_estudo_anos = array(
-                        'Planoestudoano' => array(
-                            'planoestudo_id' => $this->Planoestudo->id,
+                        'DisciplinaPlanoEstudo' => array(
+                            'plano_estudo_id' => $this->PlanoEstudo->id,
                             'disciplina_id' => $disciplina_existe['Disciplina']['id'],
                             'semestre_sequencial' => $ws->getCellByColumnAndRow(2, $linha_actual)->getCalculatedValue(),
                             'carga_total' => $ws->getCellByColumnAndRow(3, $linha_actual)->getCalculatedValue(),
@@ -244,23 +244,23 @@ class OpenSGAShell extends AppShell {
                             'creditos' => $ws->getCellByColumnAndRow(6, $linha_actual)->getCalculatedValue(),
                         )
                     );
-                    if ($array_plano_estudo_anos['Planoestudoano']['semestre_sequencial'] % 2 == 0) {
-                        $array_plano_estudo_anos['Planoestudoano']['ano'] = $array_plano_estudo_anos['Planoestudoano']['semestre_sequencial'] / 2;
-                        $array_plano_estudo_anos['Planoestudoano']['semestre'] = 2;
+                    if ($array_plano_estudo_anos['DisciplinaPlanoEstudo']['semestre_sequencial'] % 2 == 0) {
+                        $array_plano_estudo_anos['DisciplinaPlanoEstudo']['ano'] = $array_plano_estudo_anos['DisciplinaPlanoEstudo']['semestre_sequencial'] / 2;
+                        $array_plano_estudo_anos['DisciplinaPlanoEstudo']['semestre'] = 2;
                     } else {
-                        $array_plano_estudo_anos['Planoestudoano']['ano'] = ($array_plano_estudo_anos['Planoestudoano']['semestre_sequencial'] + 1) / 2;
-                        $array_plano_estudo_anos['Planoestudoano']['semestre'] = 1;
+                        $array_plano_estudo_anos['DisciplinaPlanoEstudo']['ano'] = ($array_plano_estudo_anos['DisciplinaPlanoEstudo']['semestre_sequencial'] + 1) / 2;
+                        $array_plano_estudo_anos['DisciplinaPlanoEstudo']['semestre'] = 1;
                     }
 
-                    $this->Planoestudoano->create();
-                    $this->Planoestudoano->save($array_plano_estudo_anos);
+                    $this->DisciplinaPlanoEstudo->create();
+                    $this->DisciplinaPlanoEstudo->save($array_plano_estudo_anos);
 
                     $codigo_precedencia = $ws->getCellByColumnAndRow(7, $linha_actual)->getCalculatedValue();
                     if ($codigo_precedencia != NULL) {
                         $disciplina_precendencia = $this->Disciplina->findByCodigo($codigo_precedencia);
                         $array_precedencia = array(
                             'Precedencia' => array(
-                                'planoestudoano_id' => $this->Planoestudoano->id,
+                                'planoestudoano_id' => $this->DisciplinaPlanoEstudo->id,
                                 'precedencia' => $disciplina_precendencia['Disciplina']['id'],
                                 'tipoprecedencia_id' => 1
                             )
@@ -354,10 +354,10 @@ class OpenSGAShell extends AppShell {
             $myWorkSheet = new PHPExcel_Worksheet($xls, substr($curso['Curso']['name'], 0, 30));
             $worksheet = $xls->addSheet($myWorkSheet);
 
-            $this->Planoestudo->contain();
-            $planoestudo = $this->Planoestudo->find('first', array('conditions' => array('curso_id' => $curso['Curso']['id'], 'ano_criacao <' => 2009), 'order' => array('ano_criacao DESC')));
+            $this->PlanoEstudo->contain();
+            $planoestudo = $this->PlanoEstudo->find('first', array('conditions' => array('curso_id' => $curso['Curso']['id'], 'ano_criacao <' => 2009), 'order' => array('ano_criacao DESC')));
 
-            $planoestudoano = $this->Planoestudo->Planoestudoano->find('all', array('conditions' => array('planoestudo_id' => $planoestudo['Planoestudo']['id']), 'order' => array('ano', 'semestre')));
+            $planoestudoano = $this->PlanoEstudo->DisciplinaPlanoEstudo->find('all', array('conditions' => array('plano_estudo_id' => $planoestudo['PlanoEstudo']['id']), 'order' => array('ano', 'semestre')));
 
             $linha = 1;
             $coluna = 1;
@@ -467,12 +467,12 @@ class OpenSGAShell extends AppShell {
             $this->out($aluno['Aluno']['id']);
 
             if (empty($historicos)) {
-                $ano_lectivo = $this->Anolectivo->findByAno($aluno['Aluno']['ano_ingresso']);
+                $ano_lectivo = $this->AnoLectivo->findByAno($aluno['Aluno']['ano_ingresso']);
                 $historico_array = array(
                     'aluno_id' => $aluno['Aluno']['id'],
                     'curso_id' => $aluno['Aluno']['curso_id'],
                     'ano_ingresso' => $aluno['Aluno']['ano_ingresso'],
-                    'ano_lectivo_ingresso' => $ano_lectivo['Anolectivo']['id']
+                    'ano_lectivo_ingresso' => $ano_lectivo['AnoLectivo']['id']
                 );
                 $this->HistoricoCurso->create();
                 $this->HistoricoCurso->save(array('HistoricoCurso' => $historico_array));
@@ -700,8 +700,8 @@ class OpenSGAShell extends AppShell {
             $pagamento['valor'] = $transacao['valor'];
             $pagamento['data_limite'] = '2013-12-31';
             $pagamento['data_emissao'] = '2013-09-30';
-            $anolectivo = $this->Aluno->Matricula->Anolectivo->findByAno('2014');
-            $pagamento['anolectivo_id'] = $anolectivo['Anolectivo']['id'];
+            $anolectivo = $this->Aluno->Matricula->AnoLectivo->findByAno('2014');
+            $pagamento['ano_lectivo_id'] = $anolectivo['AnoLectivo']['id'];
             $pagamento['financeiro_estado_pagamento_id'] = 1;
             $pagamento['codigo'] = $referencia;
             $pagamento['financeiro_transacao_id'] = $this->Aluno->Entidade->FinanceiroTransacao->id;
@@ -732,9 +732,9 @@ class OpenSGAShell extends AppShell {
     public function ajusta_planoestudo_matriculas() {
 
         $this->Matricula->contain('Curso');
-        $matriculas = $this->Matricula->find('all', array('conditions' => array('planoestudo_id' => null, 'Curso.unidade_organica_id' => 1)));
+        $matriculas = $this->Matricula->find('all', array('conditions' => array('plano_estudo_id' => null, 'Curso.unidade_organica_id' => 1)));
         foreach ($matriculas as $matricula) {
-            $planoestudo = $this->Planoestudo->find('first', array('conditions' => array('curso_id' => $matricula['Matricula']['curso_id']), 'order' => 'ano_criacao desc'));
+            $planoestudo = $this->PlanoEstudo->find('first', array('conditions' => array('curso_id' => $matricula['Matricula']['curso_id']), 'order' => 'ano_criacao desc'));
 
             debug($planoestudo);
         }
@@ -857,17 +857,17 @@ class OpenSGAShell extends AppShell {
         $this->Aluno->Matricula->contain(array(
             'Aluno'=>array(
                 'Entidade'
-            ),'Anolectivo','Curso'=>array(
+            ),'AnoLectivo','Curso'=>array(
                 'UnidadeOrganica'
             )
             
         ));
-        $matriculas = $this->Aluno->Matricula->find('all',array('conditions'=>array('Matricula.anolectivo_id'=>Configure::read('OpenSGA.ano_lectivo_id'))));
+        $matriculas = $this->Aluno->Matricula->find('all',array('conditions'=>array('Matricula.ano_lectivo_id'=>Configure::read('OpenSGA.ano_lectivo_id'))));
         foreach($matriculas as $matricula){
             $xls->getActiveSheet()->setCellValue('A'. $linha_actual, $matricula['Aluno']['codigo']);
             $xls->getActiveSheet()->setCellValue('B'. $linha_actual, $matricula['Aluno']['Entidade']['apelido']);
             $xls->getActiveSheet()->setCellValue('C'. $linha_actual, $matricula['Aluno']['Entidade']['nomes']);
-            $xls->getActiveSheet()->setCellValue('D'. $linha_actual, $matricula['Anolectivo']['ano']);
+            $xls->getActiveSheet()->setCellValue('D'. $linha_actual, $matricula['AnoLectivo']['ano']);
             $xls->getActiveSheet()->setCellValue('E'. $linha_actual, $matricula['Matricula']['data']);
             $xls->getActiveSheet()->setCellValue('F'. $linha_actual, $matricula['Curso']['name']);
             $unidade_organica = $matricula['Curso']['UnidadeOrganica'];

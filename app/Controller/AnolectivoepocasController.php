@@ -53,7 +53,7 @@ class AnolectivoepocasController extends AppController {
 			} else {
 				$this->Session->setFlash('Erro ao gravar dados. Por favor tente de novo.','flasherror');}
 		}
-		$anolectivos = $this->T0017anolectivoepoca->Anolectivo->find('list');
+		$anolectivos = $this->T0017anolectivoepoca->AnoLectivo->find('list');
 		$epocaavaliacaos = $this->T0017anolectivoepoca->Epocaavaliacao->find('list');
 		$this->set(compact('t0009anolectivos', 'epocaavaliacaos'));
 	}
@@ -73,7 +73,7 @@ class AnolectivoepocasController extends AppController {
 		if (empty($this->data)) {
 			$this->data = $this->T0017anolectivoepoca->read(null, $id);
 		}
-		$anolectivos = $this->T0017anolectivoepoca->Anolectivo->find('list');
+		$anolectivos = $this->T0017anolectivoepoca->AnoLectivo->find('list');
 		$epocaavaliacaos = $this->T0017anolectivoepoca->Epocaavaliacao->find('list');
 		$this->set(compact('t0009anolectivos', 'epocaavaliacaos'));
 	}
@@ -107,7 +107,7 @@ class AnolectivoepocasController extends AppController {
 			} else {
 				$this->Session->setFlash('Erro ao gravar dados. Por favor tente de novo.','flasherror');}
 		}
-			$anolectivos = $this->T0017anolectivoepoca->Anolectivo->find('list');
+			$anolectivos = $this->T0017anolectivoepoca->AnoLectivo->find('list');
 		
 			$epocaavaliacaos = $this->T0017anolectivoepoca->Epocaavaliacao->find('list');
 			$this->set(compact('t0009anolectivos', 'epocaavaliacaos'));

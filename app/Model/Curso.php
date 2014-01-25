@@ -55,8 +55,8 @@ class Curso extends AppModel {
         ),
     );
     var $hasMany = array(
-        'Planoestudo' => array(
-            'className' => 'Planoestudo',
+        'PlanoEstudo' => array(
+            'className' => 'PlanoEstudo',
             'foreignKey' => 'curso_id',
             'dependent' => false,
             'conditions' => '',
@@ -128,7 +128,7 @@ class Curso extends AppModel {
     }
 
     public function getPlanoEstudoRecente($curso_id) {
-        return $this->Planoestudo->find('first', array('conditions' => array('curso_id' => $curso_id), 'order' => 'ano_criacao DESC'));
+        return $this->PlanoEstudo->find('first', array('conditions' => array('curso_id' => $curso_id), 'order' => 'ano_criacao DESC'));
     }
 
     public function getTurnoIdByCursoId($curso_id) {

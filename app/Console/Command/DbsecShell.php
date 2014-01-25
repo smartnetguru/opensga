@@ -5,7 +5,7 @@ App::uses('AuditableConfig', 'Auditable.Lib');
 
 class DbsecShell extends AppShell {
 
-    public $uses = array('Tipoavaliacao', 'Curso', 'UnidadeOrganica', 'Disciplina', 'Planoestudo', 'Planoestudoano',  'Aluno', 'Turma', 'Anolectivo', 'Semestrelectivo', 'Turma', 'CursosTurno', 'Matricula', 'Inscricao', 'User', 'Entidade',);
+    public $uses = array('Tipoavaliacao', 'Curso', 'UnidadeOrganica', 'Disciplina', 'PlanoEstudo', 'DisciplinaPlanoEstudo',  'Aluno', 'Turma', 'AnoLectivo', 'SemestreLectivo', 'Turma', 'CursosTurno', 'Matricula', 'Inscricao', 'User', 'Entidade',);
 
     /**
      * @todo  Implementar se for necessario
@@ -90,6 +90,7 @@ class DbsecShell extends AppShell {
         }
     }
 
+    
     public function importa_disciplinas() {
         App::import('Vendor', 'PHPExcel', array('file' => 'PHPExcel.php'));
         if (!class_exists('PHPExcel'))
@@ -111,6 +112,8 @@ class DbsecShell extends AppShell {
                 if (!empty($nome_existe)) {
 
                     $this->out("Ja existe Disciplina com Este nome");
+                    
+                    
                 } else {
                     $codigo_existe = $this->Disciplina->findByCodigoAntigo($codigo_disciplina);
                     if (empty($codigo_existe)) {
@@ -145,6 +148,48 @@ class DbsecShell extends AppShell {
             $linha_actual++;
         }
     }
+    
+    
+     public function importa_disciplina_unidade() {
+        App::import('Vendor', 'PHPExcel', array('file' => 'PHPExcel.php'));
+        if (!class_exists('PHPExcel'))
+            throw new CakeException('Vendor class PHPExcel not found!');
+
+        $xls = PHPExcel_IOFactory::load(APP . 'Imports' . DS .'agronomia'.DS. 'disciplina.xlsx');
+
+        $linha_actual = 2;
+        $worksheet = $xls->getActiveSheet();
+        foreach ($worksheet->getRowIterator() as $ow) {
+            $codigo_disciplina = $worksheet->getCell('A' . $linha_actual)->getCalculatedValue();
+            $nome_disciplina = $worksheet->getCell('B' . $linha_actual)->getCalculatedValue();
+
+            if ($codigo_disciplina == '') {
+                break;
+            }
+            
+            $unidade_organica_id = 1;
+            
+            $disciplina = $this->Disciplina->findByName($nome_disciplina);
+            if(empty($disciplina)){
+                die($nome_disciplina);
+            }
+            $novo_insert = array(
+                'DisciplinaUnidadeOrganica'=>array(
+                    'disciplina_id'=>$disciplina['Disciplina']['id'],
+                    'unidade_organica_id'=>$unidade_organica_id,
+                    'estado_objecto_id'=>1
+                )
+            );
+            $disciplina_existe = $this->Disciplina->DisciplinaUnidadeOrganica->find('first',array('conditions'=>array('disciplina_id'=>$disciplina['Disciplina']['id'],'unidade_organica_id'=>$unidade_organica_id)));
+            if(empty($disciplina_existe)){
+                $this->Disciplina->DisciplinaUnidadeOrganica->create();
+                $this->Disciplina->DisciplinaUnidadeOrganica->save($novo_insert);
+            }
+            
+            $this->out("------------------------------------------------------------------------".$linha_actual);
+            $linha_actual++;
+        }
+    }
 
     public function importa_plano_estudo() {
         App::import('Vendor', 'PHPExcel', array('file' => 'PHPExcel.php'));
@@ -162,21 +207,21 @@ class DbsecShell extends AppShell {
             if ($curso_codigo == '') {
                 break;
             }
-            $plano_estudo_existe = $this->Planoestudo->find('first', array('conditions' => array('curso_id' => $curso['Curso']['id'], 'ano_criacao' => $worksheet->getCell('J' . $linha_actual)->getCalculatedValue())));
+            $plano_estudo_existe = $this->PlanoEstudo->find('first', array('conditions' => array('curso_id' => $curso['Curso']['id'], 'ano_criacao' => $worksheet->getCell('J' . $linha_actual)->getCalculatedValue())));
             if (empty($plano_estudo_existe)) {
-                $this->Planoestudo->create();
+                $this->PlanoEstudo->create();
                 $array_plano_estudo = array(
-                    'Planoestudo' => array(
+                    'PlanoEstudo' => array(
                         'name' => $curso['Curso']['name'] . " - " . $worksheet->getCell('J' . $linha_actual)->getCalculatedValue(),
                         'curso_id' => $curso['Curso']['id'],
                         'ano_criacao' => $worksheet->getCell('J' . $linha_actual)->getCalculatedValue(),
                         'codigo' => $curso['Curso']['codigo'] . "-" . $worksheet->getCell('J' . $linha_actual)->getCalculatedValue()
                     )
                 );
-                $this->Planoestudo->save($array_plano_estudo);
-                $plano_estudo_id = $this->Planoestudo->id;
+                $this->PlanoEstudo->save($array_plano_estudo);
+                $plano_estudo_id = $this->PlanoEstudo->id;
             } else {
-                $plano_estudo_id = $plano_estudo_existe['Planoestudo']['id'];
+                $plano_estudo_id = $plano_estudo_existe['PlanoEstudo']['id'];
             }
 
             $codigo_disciplina = $worksheet->getCell('A' . $linha_actual)->getCalculatedValue();
@@ -209,8 +254,8 @@ class DbsecShell extends AppShell {
                 $semestre_sequencial = $worksheet->getCell('D' . $linha_actual)->getCalculatedValue() * $worksheet->getCell('G' . $linha_actual)->getCalculatedValue();
             }
             $array_plano_ano = array(
-                'Planoestudoano' => array(
-                    'planoestudo_id' => $plano_estudo_id,
+                'DisciplinaPlanoEstudo' => array(
+                    'plano_estudo_id' => $plano_estudo_id,
                     'ano' => $worksheet->getCell('D' . $linha_actual)->getCalculatedValue(),
                     'semestre' => $worksheet->getCell('G' . $linha_actual)->getCalculatedValue(),
                     'carga_total' => $worksheet->getCell('E' . $linha_actual)->getCalculatedValue(),
@@ -221,10 +266,10 @@ class DbsecShell extends AppShell {
                     'semestre_sequencial' => $semestre_sequencial
                 )
             );
-            $plano_ano_existe = $this->Planoestudoano->find('first', array('conditions' => array('planoestudo_id' => $plano_estudo_id, 'disciplina_id' => $disciplina['Disciplina']['id'], 'ramo_id' => $worksheet->getCell('L' . $linha_actual)->getCalculatedValue(), 'ano' => $worksheet->getCell('D' . $linha_actual)->getCalculatedValue(), 'semestre' => $worksheet->getCell('G' . $linha_actual)->getCalculatedValue(),)));
+            $plano_ano_existe = $this->DisciplinaPlanoEstudo->find('first', array('conditions' => array('plano_estudo_id' => $plano_estudo_id, 'disciplina_id' => $disciplina['Disciplina']['id'], 'ramo_id' => $worksheet->getCell('L' . $linha_actual)->getCalculatedValue(), 'ano' => $worksheet->getCell('D' . $linha_actual)->getCalculatedValue(), 'semestre' => $worksheet->getCell('G' . $linha_actual)->getCalculatedValue(),)));
             if (empty($plano_ano_existe)) {
-                $this->Planoestudoano->create();
-                $this->Planoestudoano->save($array_plano_ano);
+                $this->DisciplinaPlanoEstudo->create();
+                $this->DisciplinaPlanoEstudo->save($array_plano_ano);
                 $this->out('Plano Ano Criado');
             } else {
                 $this->out("Plano existia-------------------------------------");
@@ -261,17 +306,17 @@ class DbsecShell extends AppShell {
                 $this->out($codigo);
             } else {
                 $curriculum = trim($worksheet->getCell('R' . $linha_actual)->getCalculatedValue());
-                $this->Planoestudo->contain();
-                $plano_estudo = $this->Planoestudo->find('first', array('conditions' => array('curso_id' => $estudante_sga['Aluno']['curso_id'], 'ano_criacao' => $curriculum)));
+                $this->PlanoEstudo->contain();
+                $plano_estudo = $this->PlanoEstudo->find('first', array('conditions' => array('curso_id' => $estudante_sga['Aluno']['curso_id'], 'ano_criacao' => $curriculum)));
                 $this->Aluno->id = $estudante_sga['Aluno']['id'];
-                $this->Aluno->set('planoestudo_id', $plano_estudo['Planoestudo']['id']);
+                $this->Aluno->set('plano_estudo_id', $plano_estudo['PlanoEstudo']['id']);
                 $this->Aluno->save();
 
                 $matriculas = $this->Matricula->find('all', array('conditions' => array('aluno_id' => $estudante_sga['Aluno']['id'])));
                 foreach ($matriculas as $matricula) {
                     $this->Matricula->id = $matricula['Matricula']['id'];
-                    if ($matricula['Matricula']['planoestudo_id'] == '') {
-                        $this->Matricula->set('planoestudo_id', $plano_estudo['Planoestudo']['id']);
+                    if ($matricula['Matricula']['plano_estudo_id'] == '') {
+                        $this->Matricula->set('plano_estudo_id', $plano_estudo['PlanoEstudo']['id']);
                         $this->Matricula->save();
                         $this->out('Matricula Actualizada---' . $matricula['Matricula']['id']);
                     }
@@ -298,7 +343,7 @@ class DbsecShell extends AppShell {
         $xls2 = PHPExcel_IOFactory::load(APP . 'Imports' . DS .'agronomia'.DS. 'disciplina.xlsx');
         $worksheet2 = $xls2->getActiveSheet();
         foreach ($worksheet->getRowIterator() as $row) {
-            $this->Planoestudo->recursive = -1;
+            $this->PlanoEstudo->recursive = -1;
             $this->Curso->recursive = -1;
             $disciplina_db = trim($worksheet->getCell('A' . $linha_actual)->getCalculatedValue());
             $curso_db = trim($worksheet->getCell('F' . $linha_actual)->getCalculatedValue());
@@ -307,9 +352,9 @@ class DbsecShell extends AppShell {
             }
 
             $curso = $this->Curso->findByCodigo($curso_db);
-            $plano_estudo = $this->Planoestudo->find('first', array('conditions' => array('curso_id' => $curso['Curso']['id'], 'ano_criacao' => trim($worksheet->getCell('G' . $linha_actual)->getCalculatedValue()))));
-            $this->Anolectivo->recursive = -1;
-            $anolectivo = $this->Anolectivo->findByAno(trim($worksheet->getCell('B' . $linha_actual)->getCalculatedValue()));
+            $plano_estudo = $this->PlanoEstudo->find('first', array('conditions' => array('curso_id' => $curso['Curso']['id'], 'ano_criacao' => trim($worksheet->getCell('G' . $linha_actual)->getCalculatedValue()))));
+            $this->AnoLectivo->recursive = -1;
+            $anolectivo = $this->AnoLectivo->findByAno(trim($worksheet->getCell('B' . $linha_actual)->getCalculatedValue()));
             $this->Disciplina->recursive = -1;
            
 
@@ -336,33 +381,33 @@ class DbsecShell extends AppShell {
                 die($nome_disciplina);
             }
             if (!empty($disciplina)) {
-                $semestre_lectivo = $this->Semestrelectivo->find('first', array('conditions' => array('anolectivo_id' => $anolectivo['Anolectivo']['id'], 'semestre' => trim($worksheet->getCell('C' . $linha_actual)->getCalculatedValue()))));
+                $semestre_lectivo = $this->SemestreLectivo->find('first', array('conditions' => array('ano_lectivo_id' => $anolectivo['AnoLectivo']['id'], 'semestre' => trim($worksheet->getCell('C' . $linha_actual)->getCalculatedValue()))));
                 if (empty($semestre_lectivo)) {
                     $array_semestre = array(
-                        'Semestrelectivo' => array(
-                            'codigo' => $anolectivo['Anolectivo']['ano'] . "-" . trim($worksheet->getCell('C' . $linha_actual)->getCalculatedValue()),
-                            'anolectivo_id' => $anolectivo['Anolectivo']['id'],
+                        'SemestreLectivo' => array(
+                            'codigo' => $anolectivo['AnoLectivo']['ano'] . "-" . trim($worksheet->getCell('C' . $linha_actual)->getCalculatedValue()),
+                            'ano_lectivo_id' => $anolectivo['AnoLectivo']['id'],
                             'semestre' => trim($worksheet->getCell('C' . $linha_actual)->getCalculatedValue()),
                             'semestre_id' => trim($worksheet->getCell('C' . $linha_actual)->getCalculatedValue()),
                         )
                     );
-                    $this->Semestrelectivo->create();
-                    $this->Semestrelectivo->save($array_semestre);
-                    $semestre_lectivo = $this->Semestrelectivo->find('first', array('conditions' => array('anolectivo_id' => $anolectivo['Anolectivo']['id'], 'semestre' => trim($worksheet->getCell('C' . $linha_actual)->getCalculatedValue()))));
+                    $this->SemestreLectivo->create();
+                    $this->SemestreLectivo->save($array_semestre);
+                    $semestre_lectivo = $this->SemestreLectivo->find('first', array('conditions' => array('ano_lectivo_id' => $anolectivo['AnoLectivo']['id'], 'semestre' => trim($worksheet->getCell('C' . $linha_actual)->getCalculatedValue()))));
                 }
 
                 $array_turma = array(
                     'Turma' => array(
-                        'anolectivo_id' => $anolectivo['Anolectivo']['id'],
-                        'planoestudo_id' => $plano_estudo['Planoestudo']['id'],
+                        'ano_lectivo_id' => $anolectivo['AnoLectivo']['id'],
+                        'plano_estudo_id' => $plano_estudo['PlanoEstudo']['id'],
                         'disciplina_id' => $disciplina['Disciplina']['id'],
-                        'curso_id' => $plano_estudo['Planoestudo']['curso_id'],
-                        'estadoturma_id' => 1,
+                        'curso_id' => $plano_estudo['PlanoEstudo']['curso_id'],
+                        'estado_turma_id' => 1,
                         'codigo' => trim($worksheet->getCell('M' . $linha_actual)->getCalculatedValue()),
                         'anocurricular' => trim($worksheet->getCell('N' . $linha_actual)->getCalculatedValue()),
                         'semestrecurricular' => trim($worksheet->getCell('C' . $linha_actual)->getCalculatedValue()),
-                        'name' => $disciplina['Disciplina']['name'] . " - " . trim($worksheet->getCell('B' . $linha_actual)->getCalculatedValue()) . " - " . $plano_estudo['Planoestudo']['name'],
-                        'semestrelectivo_id' => $semestre_lectivo['Semestrelectivo']['id'],
+                        'name' => $disciplina['Disciplina']['name'] . " - " . trim($worksheet->getCell('B' . $linha_actual)->getCalculatedValue()) . " - " . $plano_estudo['PlanoEstudo']['name'],
+                        'semestrelectivo_id' => $semestre_lectivo['SemestreLectivo']['id'],
                         'unidade_organica_id' => $curso['Curso']['unidade_organica_id']
                     )
                 );
@@ -411,7 +456,7 @@ class DbsecShell extends AppShell {
 
     public function actualiza_matricula_plano() {
         $this->Matricula->recursive = -1;
-        $matriculas = $this->Matricula->find('all', array('conditions' => array('planoestudo_id' => null)));
+        $matriculas = $this->Matricula->find('all', array('conditions' => array('plano_estudo_id' => null)));
         $i = 0;
         foreach ($matriculas as $matricula) {
             $this->Aluno->recursive = -1;
@@ -421,13 +466,13 @@ class DbsecShell extends AppShell {
             } else {
                 $aluno_dbsec = $this->DbsecEstudante->findByEstNum($aluno['Aluno']['codigo']);
                 if (!empty($aluno_dbsec)) {
-                    $this->Planoestudo->recursive = -1;
-                    $planoestudo = $this->Planoestudo->find('first', array('conditions' => array('curso_id' => $matricula['Matricula']['curso_id'], 'ano_criacao' => $aluno_dbsec['DbsecEstudante']['curriculum'])));
+                    $this->PlanoEstudo->recursive = -1;
+                    $planoestudo = $this->PlanoEstudo->find('first', array('conditions' => array('curso_id' => $matricula['Matricula']['curso_id'], 'ano_criacao' => $aluno_dbsec['DbsecEstudante']['curriculum'])));
                     $this->Aluno->id = $aluno['Aluno']['id'];
-                    $this->Aluno->set('planoestudo_id', $planoestudo['Planoestudo']['id']);
+                    $this->Aluno->set('plano_estudo_id', $planoestudo['PlanoEstudo']['id']);
                     $this->Aluno->save();
                     $this->Matricula->id = $matricula['Matricula']['id'];
-                    $this->Matricula->set('planoestudo_id', $planoestudo['Planoestudo']['id']);
+                    $this->Matricula->set('plano_estudo_id', $planoestudo['PlanoEstudo']['id']);
                     $this->Matricula->save();
                 }
             }
@@ -482,34 +527,34 @@ class DbsecShell extends AppShell {
             
             $turma = $this->Turma->findByCodigo(trim($worksheet->getCell('V' . $linha_actual)->getCalculatedValue()));
 
-            $this->Anolectivo->recursive = -1;
-            $anolectivo = $this->Anolectivo->findByAno(trim($worksheet->getCell('E' . $linha_actual)->getCalculatedValue()));
+            $this->AnoLectivo->recursive = -1;
+            $anolectivo = $this->AnoLectivo->findByAno(trim($worksheet->getCell('E' . $linha_actual)->getCalculatedValue()));
             $this->Matricula->recursive = -1;
-            $matricula = $this->Matricula->find('first', array('conditions' => array('aluno_id' => $aluno['Aluno']['id'], 'anolectivo_id' => $anolectivo['Anolectivo']['id'])));
+            $matricula = $this->Matricula->find('first', array('conditions' => array('aluno_id' => $aluno['Aluno']['id'], 'ano_lectivo_id' => $anolectivo['AnoLectivo']['id'])));
             if (empty($matricula)) {
                 $nova_matricula = array(
                     'Matricula' => array(
                         'aluno_id' => $aluno['Aluno']['id'],
                         'curso_id' => $aluno['Aluno']['curso_id'],
-                        'planoestudo_id' => $aluno['Aluno']['planoestudo_id'],
+                        'plano_estudo_id' => $aluno['Aluno']['plano_estudo_id'],
                         'data' => trim($worksheet->getCell('L' . $linha_actual)->getCalculatedValue()),
-                        'estadomatricula_id' => 0,
+                        'estado_matricula_id' => 0,
                         'user_id' => 1,
-                        'anolectivo_id' => $anolectivo['Anolectivo']['id'],
+                        'ano_lectivo_id' => $anolectivo['AnoLectivo']['id'],
                         'tipo_matricula_id' => 0
                     )
                 );
 
                 $this->Matricula->create();
                 $this->Matricula->save($nova_matricula);
-                $matricula = $this->Matricula->find('first', array('conditions' => array('aluno_id' => $aluno['Aluno']['id'], 'anolectivo_id' => $anolectivo['Anolectivo']['id'])));
+                $matricula = $this->Matricula->find('first', array('conditions' => array('aluno_id' => $aluno['Aluno']['id'], 'ano_lectivo_id' => $anolectivo['AnoLectivo']['id'])));
             }
             $this->Curso->recursive = -1;
             $curso_frequencia = $this->Curso->findByCodigo(trim($worksheet->getCell('U' . $linha_actual)->getCalculatedValue()));
-            $turma_frequencia = $this->Turma->find('first', array('conditions' => array('curso_id' => $curso_frequencia['Curso']['id'], 'disciplina_id' => $disciplina['Disciplina']['id'], 'anolectivo_id' => $anolectivo['Anolectivo']['id'])));
+            $turma_frequencia = $this->Turma->find('first', array('conditions' => array('curso_id' => $curso_frequencia['Curso']['id'], 'disciplina_id' => $disciplina['Disciplina']['id'], 'ano_lectivo_id' => $anolectivo['AnoLectivo']['id'])));
             $curso = $this->Curso->findByCodigo(trim($worksheet->getCell('N' . $linha_actual)->getCalculatedValue()));
             if (empty($turma)) {
-                $turma = $this->Turma->find('first', array('conditions' => array('curso_id' => $curso['Curso']['id'], 'disciplina_id' => $disciplina['Disciplina']['id'], 'anolectivo_id' => $anolectivo['Anolectivo']['id'])));
+                $turma = $this->Turma->find('first', array('conditions' => array('curso_id' => $curso['Curso']['id'], 'disciplina_id' => $disciplina['Disciplina']['id'], 'ano_lectivo_id' => $anolectivo['AnoLectivo']['id'])));
             }
 
             $array_inscricao = array(
@@ -656,7 +701,7 @@ class DbsecShell extends AppShell {
                     $this->Entidade->create();
                     if ($this->Entidade->save($pessoa_array)) {
                         $curso = $this->Curso->findByCodigo($estudante['DbsecEstudante']['id_curso']);
-                        $planoestudo = $this->Planoestudo->find('first', array('conditions' => array('curso_id' => $curso['Curso']['id'], 'ano_criacao' => $estudante['DbsecEstudante']['ano_ingresso'])));
+                        $planoestudo = $this->PlanoEstudo->find('first', array('conditions' => array('curso_id' => $curso['Curso']['id'], 'ano_criacao' => $estudante['DbsecEstudante']['ano_ingresso'])));
                         $aluno_array = array(
                             'Aluno' => array(
                                 'entidade_id' => $this->Entidade->id,
@@ -665,7 +710,7 @@ class DbsecShell extends AppShell {
                                 'curso_id' => $curso['Curso']['id'],
                                 'estadoentidade_id' => $estudante['DbsecEstudante']['status_id'],
                                 'numero_estudante' => $estudante['DbsecEstudante']['est_num'],
-                                'planoestudo_id' => $planoestudo['Planoestudo']['id'],
+                                'plano_estudo_id' => $planoestudo['PlanoEstudo']['id'],
                                 'ano_ingresso' => $estudante['DbsecEstudante']['ano_ingresso'],
                                 'created' => $estudante['DbsecEstudante']['data_registo'],
                                 'estado_aluno_id' => $estudante['DbsecEstudante']['status_id']

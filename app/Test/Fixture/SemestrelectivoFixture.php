@@ -13,7 +13,7 @@ class SemestrelectivoFixture extends CakeTestFixture {
 	public $fields = array(
 		'id' => array('type' => 'integer', 'null' => false, 'default' => null, 'key' => 'primary'),
 		'codigo' => array('type' => 'string', 'null' => true, 'default' => null, 'length' => 30, 'collate' => 'utf8_general_ci', 'charset' => 'utf8'),
-		'anolectivo_id' => array('type' => 'integer', 'null' => true, 'default' => null),
+		'ano_lectivo_id' => array('type' => 'integer', 'null' => true, 'default' => null),
 		'semestre' => array('type' => 'integer', 'null' => true, 'default' => null),
 		'data_inicio' => array('type' => 'date', 'null' => true, 'default' => null),
 		'data_fim' => array('type' => 'date', 'null' => true, 'default' => null),
@@ -33,7 +33,7 @@ class SemestrelectivoFixture extends CakeTestFixture {
 		array(
 			'id' => '1',
 			'codigo' => '2011-1',
-			'anolectivo_id' => '1',
+			'ano_lectivo_id' => '1',
 			'semestre' => '1',
 			'data_inicio' => null,
 			'data_fim' => null,
@@ -42,7 +42,7 @@ class SemestrelectivoFixture extends CakeTestFixture {
 		array(
 			'id' => '2',
 			'codigo' => '2011-1',
-			'anolectivo_id' => '1',
+			'ano_lectivo_id' => '1',
 			'semestre' => '2',
 			'data_inicio' => null,
 			'data_fim' => null,
@@ -51,7 +51,7 @@ class SemestrelectivoFixture extends CakeTestFixture {
 		array(
 			'id' => '3',
 			'codigo' => '2009-1',
-			'anolectivo_id' => '2',
+			'ano_lectivo_id' => '2',
 			'semestre' => '1',
 			'data_inicio' => null,
 			'data_fim' => null,
@@ -60,7 +60,7 @@ class SemestrelectivoFixture extends CakeTestFixture {
 		array(
 			'id' => '4',
 			'codigo' => '2009-1',
-			'anolectivo_id' => '2',
+			'ano_lectivo_id' => '2',
 			'semestre' => '2',
 			'data_inicio' => null,
 			'data_fim' => null,
@@ -69,7 +69,7 @@ class SemestrelectivoFixture extends CakeTestFixture {
 		array(
 			'id' => '5',
 			'codigo' => '2010-1',
-			'anolectivo_id' => '3',
+			'ano_lectivo_id' => '3',
 			'semestre' => '1',
 			'data_inicio' => null,
 			'data_fim' => null,
@@ -78,7 +78,7 @@ class SemestrelectivoFixture extends CakeTestFixture {
 		array(
 			'id' => '6',
 			'codigo' => '2010-1',
-			'anolectivo_id' => '3',
+			'ano_lectivo_id' => '3',
 			'semestre' => '2',
 			'data_inicio' => null,
 			'data_fim' => null,
@@ -87,7 +87,7 @@ class SemestrelectivoFixture extends CakeTestFixture {
 		array(
 			'id' => '7',
 			'codigo' => '1992-1',
-			'anolectivo_id' => '4',
+			'ano_lectivo_id' => '4',
 			'semestre' => '1',
 			'data_inicio' => null,
 			'data_fim' => null,
@@ -96,7 +96,7 @@ class SemestrelectivoFixture extends CakeTestFixture {
 		array(
 			'id' => '8',
 			'codigo' => '1992-1',
-			'anolectivo_id' => '4',
+			'ano_lectivo_id' => '4',
 			'semestre' => '2',
 			'data_inicio' => null,
 			'data_fim' => null,
@@ -105,7 +105,7 @@ class SemestrelectivoFixture extends CakeTestFixture {
 		array(
 			'id' => '9',
 			'codigo' => '2012-1',
-			'anolectivo_id' => '5',
+			'ano_lectivo_id' => '5',
 			'semestre' => '1',
 			'data_inicio' => null,
 			'data_fim' => null,
@@ -114,7 +114,7 @@ class SemestrelectivoFixture extends CakeTestFixture {
 		array(
 			'id' => '10',
 			'codigo' => '2012-1',
-			'anolectivo_id' => '5',
+			'ano_lectivo_id' => '5',
 			'semestre' => '2',
 			'data_inicio' => null,
 			'data_fim' => null,

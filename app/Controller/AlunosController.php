@@ -64,7 +64,7 @@ class AlunosController extends AppController {
 
         $this->Aluno->contain(array(
             'Matricula' => array(
-                'Planoestudo', 'Turno'
+                'PlanoEstudo', 'Turno'
             ),
             'Curso', 'Entidade' => array(
                 'ProvinciaNascimento', 'CidadeNascimento', 'PaisNascimento', 'Genero', 'DocumentoIdentificacao'
@@ -84,8 +84,8 @@ class AlunosController extends AppController {
                 )
             ),
             'Matricula' => array(
-                'fields' => array('id', 'anolectivo_id'),
-                'Anolectivo' => array(
+                'fields' => array('id', 'ano_lectivo_id'),
+                'AnoLectivo' => array(
                     'fields' => array('id', 'ano')
                 )
             )
@@ -102,8 +102,8 @@ class AlunosController extends AppController {
                 )
             ),
             'Matricula' => array(
-                'fields' => array('id', 'anolectivo_id'),
-                'Anolectivo' => array(
+                'fields' => array('id', 'ano_lectivo_id'),
+                'AnoLectivo' => array(
                     'fields' => array('id', 'ano')
                 )
             )
@@ -124,8 +124,8 @@ class AlunosController extends AppController {
                 )
             ),
             'Matricula' => array(
-                'fields' => array('id', 'anolectivo_id'),
-                'Anolectivo' => array(
+                'fields' => array('id', 'ano_lectivo_id'),
+                'AnoLectivo' => array(
                     'fields' => array('id', 'ano')
                 )
             )
@@ -164,7 +164,7 @@ class AlunosController extends AppController {
         $pagamentos = $this->Aluno->FinanceiroPagamento->find('all', array('conditions' => array('FinanceiroPagamento.aluno_id' => $id)));
         //debug($pagamentos);
         $this->set('aluno', $aluno);
-        $is_bolseiro = $this->Aluno->isBolseiro($id, $this->Session->read('SGAConfig.anolectivo_id'));
+        $is_bolseiro = $this->Aluno->isBolseiro($id, $this->Session->read('SGAConfig.ano_lectivo_id'));
 
         $this->set(compact('inscricoes_activas', 'todas_inscricoes', 'cadeiras_aprovadas', 'pagamentos', 'is_bolseiro', 'is_regular', 'classe_estado', 'requisicoes'));
     }
@@ -181,7 +181,7 @@ class AlunosController extends AppController {
 
         $this->Aluno->contain(array(
             'Matricula' => array(
-                'Planoestudo', 'Turno'
+                'PlanoEstudo', 'Turno'
             ),
             'Curso', 'Entidade' => array(
                 'ProvinciaNascimento', 'CidadeNascimento', 'PaisNascimento', 'Genero', 'DocumentoIdentificacao'
@@ -205,8 +205,8 @@ class AlunosController extends AppController {
                 )
             ),
             'Matricula' => array(
-                'fields' => array('id', 'anolectivo_id'),
-                'Anolectivo' => array(
+                'fields' => array('id', 'ano_lectivo_id'),
+                'AnoLectivo' => array(
                     'fields' => array('id', 'ano')
                 )
             )
@@ -223,8 +223,8 @@ class AlunosController extends AppController {
                 )
             ),
             'Matricula' => array(
-                'fields' => array('id', 'anolectivo_id'),
-                'Anolectivo' => array(
+                'fields' => array('id', 'ano_lectivo_id'),
+                'AnoLectivo' => array(
                     'fields' => array('id', 'ano')
                 )
             )
@@ -241,8 +241,8 @@ class AlunosController extends AppController {
                 )
             ),
             'Matricula' => array(
-                'fields' => array('id', 'anolectivo_id'),
-                'Anolectivo' => array(
+                'fields' => array('id', 'ano_lectivo_id'),
+                'AnoLectivo' => array(
                     'fields' => array('id', 'ano')
                 )
             )
@@ -252,7 +252,7 @@ class AlunosController extends AppController {
 
 
 
-        if ($this->Aluno->isMatriculado($id, $this->Session->read('SGAConfig.anolectivo_id'))) {
+        if ($this->Aluno->isMatriculado($id, $this->Session->read('SGAConfig.ano_lectivo_id'))) {
             $this->set('is_matriculado', 1);
         } else {
             $this->set('is_matriculado', 0);
@@ -280,9 +280,9 @@ class AlunosController extends AppController {
         $generos = $this->Aluno->Entidade->Genero->find('list');
         $cidadenascimentos = $this->Aluno->Entidade->CidadeNascimento->find('list');
         $cursos = $this->Aluno->Curso->find('list');
-        $planoestudos = $this->Aluno->Matricula->Planoestudo->find('list');
+        $planoestudos = $this->Aluno->Matricula->PlanoEstudo->find('list');
 
-        $is_bolseiro = $this->Aluno->isBolseiro($id, $this->Session->read('SGAConfig.anolectivo_id'));
+        $is_bolseiro = $this->Aluno->isBolseiro($id, $this->Session->read('SGAConfig.ano_lectivo_id'));
 
         $this->set(compact('cursos', 'planoestudos', 'users', 'paises', 'cidades', 'provincias', 'documentos', 'areatrabalhos', 'generos', 'cidadenascimentos', 'proveniencianomes', 'provenienciacidades', 'inscricoes_activas', 'todas_inscricoes', 'cadeiras_aprovadas', 'pagamentos', 'is_bolseiro'));
     }
@@ -316,7 +316,7 @@ class AlunosController extends AppController {
             $this->set(compact('alunos'));
             $this->render('exportar_alunos_excel');
         }
-        $anolectivos = $this->Aluno->Matricula->Anolectivo->find('list', array('order' => 'ano DESC', 'fields' => 'ano'));
+        $anolectivos = $this->Aluno->Matricula->AnoLectivo->find('list', array('order' => 'ano DESC', 'fields' => 'ano'));
         $cursos = $this->Aluno->Curso->find('list', array('order' => 'name'));
         $unidadeOrganicas = $this->Aluno->Curso->UnidadeOrganica->find('list', array('order' => 'name', 'fields' => 'nome_codigo'));
         $estadoAlunos = $this->Aluno->EstadoAluno->find('list');
@@ -357,7 +357,7 @@ class AlunosController extends AppController {
 
         $cursos = $this->Aluno->Curso->find('list');
 
-        $planoestudos = $this->Aluno->Matricula->Planoestudo->find('list');
+        $planoestudos = $this->Aluno->Matricula->PlanoEstudo->find('list');
         $users = $this->Aluno->Entidade->User->find('list');
 
         $paises = $this->Aluno->Entidade->PaisNascimento->find('list');
@@ -403,7 +403,7 @@ class AlunosController extends AppController {
 
         $cursos = $this->Aluno->Curso->find('list');
 
-        $planoestudos = $this->Aluno->Matricula->Planoestudo->find('list');
+        $planoestudos = $this->Aluno->Matricula->PlanoEstudo->find('list');
         $users = $this->Aluno->Entidade->User->find('list');
 
         $paises = $this->Aluno->Entidade->PaisNascimento->find('list');
@@ -453,7 +453,7 @@ class AlunosController extends AppController {
             throw new NotFoundException(__('Aluno Invalido'));
         }
         if ($this->request->is('post') || $this->request->is('put')) {
-            $this->request->data['Sessao']['anolectivo_id'] = $this->Session->read('SGAConfig.anolectivo_id');
+            $this->request->data['Sessao']['ano_lectivo_id'] = $this->Session->read('SGAConfig.ano_lectivo_id');
             $this->request->data['Sessao']['user_id'] = $this->Session->read('Auth.User.id');
             if ($this->Aluno->setNovaMatricula($this->request->data)) {
                 $this->Session->setFlash('Aluno Matriculado com sucesso', 'default', array('alert success'));
@@ -466,8 +466,8 @@ class AlunosController extends AppController {
 
 
         $cursos = $this->Aluno->Matricula->Curso->find('list');
-        $planoestudos = $this->Aluno->Matricula->Planoestudo->find('list');
-        $anolectivos = $this->Aluno->Matricula->Anolectivo->find('list');
+        $planoestudos = $this->Aluno->Matricula->PlanoEstudo->find('list');
+        $anolectivos = $this->Aluno->Matricula->AnoLectivo->find('list');
         $turnos = $this->Aluno->Matricula->Turno->find('list');
 
         $this->set(compact('cursos', 'planoestudos', 'anolectivos', 'turnos'));
@@ -488,9 +488,9 @@ class AlunosController extends AppController {
 
         if ($this->request->is('post') || $this->request->is('put')) {
 
-            foreach ($this->request->data['Anolectivo'] as $k => $v) {
+            foreach ($this->request->data['AnoLectivo'] as $k => $v) {
                 if ($v != 0) {
-                    $this->request->data['Matricula']['anolectivo_id'] = $v;
+                    $this->request->data['Matricula']['ano_lectivo_id'] = $v;
 
                     $this->Aluno->Matricula->create();
                     if ($this->Aluno->Matricula->save($this->request->data)) {
@@ -505,13 +505,13 @@ class AlunosController extends AppController {
 
 
         $this->Aluno->contain(array(
-            'Entidade', 'Planoestudo', 'Curso' => array('UnidadeOrganica')
+            'Entidade', 'PlanoEstudo', 'Curso' => array('UnidadeOrganica')
         ));
         $aluno = $this->Aluno->findById($aluno_id);
 
         $renovacoes_falta = $this->Aluno->Matricula->getStatusRenovacao($aluno_id, true);
-        $this->Aluno->Matricula->contain('Anolectivo', 'Estadomatricula', 'Curso', 'TipoMatricula');
-        $matriculas = $this->Aluno->Matricula->find('all', array('conditions' => array('aluno_id' => $aluno_id), 'order' => 'Anolectivo.ano'));
+        $this->Aluno->Matricula->contain('AnoLectivo', 'EstadoMatricula', 'Curso', 'TipoMatricula');
+        $matriculas = $this->Aluno->Matricula->find('all', array('conditions' => array('aluno_id' => $aluno_id), 'order' => 'AnoLectivo.ano'));
 
         $this->set(compact('aluno', 'renovacoes_falta', 'matriculas'));
     }
@@ -534,7 +534,7 @@ class AlunosController extends AppController {
 
 
         $this->Aluno->contain(array(
-            'Entidade', 'Planoestudo', 'Curso' => array('UnidadeOrganica')
+            'Entidade', 'PlanoEstudo', 'Curso' => array('UnidadeOrganica')
         ));
         $aluno = $this->Aluno->findById($aluno_id);
         $renovacoes_falta = $this->Aluno->Matricula->getStatusRenovacao($aluno_id);
@@ -548,10 +548,10 @@ class AlunosController extends AppController {
         }
         $ano_renovacoes = array();
         foreach ($renovacoes_falta as $k => $v) {
-            $ano_renovacoes[$v['Anolectivo']['id']] = $v['Anolectivo']['ano'];
+            $ano_renovacoes[$v['AnoLectivo']['id']] = $v['AnoLectivo']['ano'];
         }
-        $this->Aluno->Matricula->contain('Anolectivo', 'Estadomatricula', 'Curso', 'TipoMatricula');
-        $matriculas = $this->Aluno->Matricula->find('all', array('conditions' => array('aluno_id' => $aluno_id), 'order' => 'Anolectivo.ano'));
+        $this->Aluno->Matricula->contain('AnoLectivo', 'EstadoMatricula', 'Curso', 'TipoMatricula');
+        $matriculas = $this->Aluno->Matricula->find('all', array('conditions' => array('aluno_id' => $aluno_id), 'order' => 'AnoLectivo.ano'));
 
         $this->set(compact('aluno', 'renovacoes_falta', 'matriculas', 'ano_renovacoes'));
     }
@@ -604,7 +604,7 @@ class AlunosController extends AppController {
         App::uses('CakeTime', 'Utility');
         $CakeTime = new CakeTime();
         $this->set('aluno', $this->Aluno->read(null, $aluno_id));
-        $this->Aluno->Pagamento->contain(array('Aluno' => array('Entidade'), 'Tipopagamento', 'Anolectivo'));
+        $this->Aluno->Pagamento->contain(array('Aluno' => array('Entidade'), 'Tipopagamento', 'AnoLectivo'));
         $pagamento = $this->Aluno->Pagamento->read(null, $pagamento_id);
         $data_limite = $CakeTime->toUnix($pagamento['Pagamento']['data_limite']);
         $data_hoje = $CakeTime->toUnix(date('Y-m-d'));
@@ -658,7 +658,7 @@ class AlunosController extends AppController {
 
         $this->Aluno->contain(array(
             'Matricula' => array(
-                'Planoestudo', 'Turno'
+                'PlanoEstudo', 'Turno'
             ),
             'Curso',
             'Entidade' => array(
@@ -683,15 +683,15 @@ class AlunosController extends AppController {
         $this->Aluno->Inscricao->contain(array(
             'Turma' => array(
                 'fields' => array(
-                    'id', 'disciplina_id', 'anocurricular', 'semestrecurricular', 'anolectivo_id'),
+                    'id', 'disciplina_id', 'anocurricular', 'semestrecurricular', 'ano_lectivo_id'),
                 'Disciplina' => array(
                     'fields' => array('id', 'name')
                 ),
-                'Anolectivo'
+                'AnoLectivo'
             ),
             'Matricula' => array(
-                'fields' => array('id', 'anolectivo_id'),
-                'Anolectivo' => array(
+                'fields' => array('id', 'ano_lectivo_id'),
+                'AnoLectivo' => array(
                     'fields' => array('id', 'ano')
                 )
             ),
@@ -740,7 +740,7 @@ class AlunosController extends AppController {
 
         $cursos = $this->Aluno->Curso->find('list');
 
-        $planoestudos = $this->Aluno->Matricula->Planoestudo->find('list');
+        $planoestudos = $this->Aluno->Matricula->PlanoEstudo->find('list');
         $users = $this->Aluno->Entidade->User->find('list');
 
         $paises = $this->Aluno->Entidade->PaisNascimento->find('list');
@@ -800,7 +800,7 @@ class AlunosController extends AppController {
             'Aluno' => array(
                 'Entidade', 'User'
             ),
-            'Anolectivo', 'Curso', 'User' => array(
+            'AnoLectivo', 'Curso', 'User' => array(
                 'Entidade'
             )
         ));
@@ -1148,7 +1148,7 @@ class AlunosController extends AppController {
 
         $this->Aluno->contain(array(
             'Matricula' => array(
-                'Planoestudo', 'Turno'
+                'PlanoEstudo', 'Turno'
             ),
             'Curso', 'Entidade' => array(
                 'ProvinciaNascimento', 'CidadeNascimento', 'PaisNascimento', 'Genero', 'DocumentoIdentificacao'
@@ -1168,8 +1168,8 @@ class AlunosController extends AppController {
                 )
             ),
             'Matricula' => array(
-                'fields' => array('id', 'anolectivo_id'),
-                'Anolectivo' => array(
+                'fields' => array('id', 'ano_lectivo_id'),
+                'AnoLectivo' => array(
                     'fields' => array('id', 'ano')
                 )
             )
@@ -1186,8 +1186,8 @@ class AlunosController extends AppController {
                 )
             ),
             'Matricula' => array(
-                'fields' => array('id', 'anolectivo_id'),
-                'Anolectivo' => array(
+                'fields' => array('id', 'ano_lectivo_id'),
+                'AnoLectivo' => array(
                     'fields' => array('id', 'ano')
                 )
             )
@@ -1208,8 +1208,8 @@ class AlunosController extends AppController {
                 )
             ),
             'Matricula' => array(
-                'fields' => array('id', 'anolectivo_id'),
-                'Anolectivo' => array(
+                'fields' => array('id', 'ano_lectivo_id'),
+                'AnoLectivo' => array(
                     'fields' => array('id', 'ano')
                 )
             )
@@ -1248,7 +1248,7 @@ class AlunosController extends AppController {
         $pagamentos = $this->Aluno->FinanceiroPagamento->find('all', array('conditions' => array('FinanceiroPagamento.aluno_id' => $id)));
         //debug($pagamentos);
         $this->set('aluno', $aluno);
-        $is_bolseiro = $this->Aluno->isBolseiro($id, $this->Session->read('SGAConfig.anolectivo_id'));
+        $is_bolseiro = $this->Aluno->isBolseiro($id, $this->Session->read('SGAConfig.ano_lectivo_id'));
 
         $this->set(compact('inscricoes_activas', 'todas_inscricoes', 'cadeiras_aprovadas', 'pagamentos', 'is_bolseiro', 'is_regular', 'classe_estado', 'requisicoes'));
     }

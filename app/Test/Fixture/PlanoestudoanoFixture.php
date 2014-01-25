@@ -12,7 +12,7 @@ class PlanoestudoanoFixture extends CakeTestFixture {
  */
 	public $fields = array(
 		'id' => array('type' => 'integer', 'null' => false, 'default' => null, 'key' => 'primary'),
-		'planoestudo_id' => array('type' => 'integer', 'null' => false, 'default' => null),
+		'plano_estudo_id' => array('type' => 'integer', 'null' => false, 'default' => null),
 		'ano' => array('type' => 'integer', 'null' => true, 'default' => null),
 		'semestre' => array('type' => 'integer', 'null' => true, 'default' => null),
 		'cargahorariateoricas' => array('type' => 'integer', 'null' => true, 'default' => '0'),
@@ -41,7 +41,7 @@ class PlanoestudoanoFixture extends CakeTestFixture {
 	public $records = array(
 		array(
 			'id' => '1',
-			'planoestudo_id' => '1',
+			'plano_estudo_id' => '1',
 			'ano' => '2',
 			'semestre' => '2',
 			'cargahorariateoricas' => '0',
@@ -59,7 +59,7 @@ class PlanoestudoanoFixture extends CakeTestFixture {
 		),
 		array(
 			'id' => '2',
-			'planoestudo_id' => '2',
+			'plano_estudo_id' => '2',
 			'ano' => '2',
 			'semestre' => '2',
 			'cargahorariateoricas' => '0',
@@ -77,7 +77,7 @@ class PlanoestudoanoFixture extends CakeTestFixture {
 		),
 		array(
 			'id' => '3',
-			'planoestudo_id' => '3',
+			'plano_estudo_id' => '3',
 			'ano' => '2',
 			'semestre' => '2',
 			'cargahorariateoricas' => '0',
@@ -95,7 +95,7 @@ class PlanoestudoanoFixture extends CakeTestFixture {
 		),
 		array(
 			'id' => '4',
-			'planoestudo_id' => '4',
+			'plano_estudo_id' => '4',
 			'ano' => '2',
 			'semestre' => '2',
 			'cargahorariateoricas' => '0',
@@ -113,7 +113,7 @@ class PlanoestudoanoFixture extends CakeTestFixture {
 		),
 		array(
 			'id' => '5',
-			'planoestudo_id' => '5',
+			'plano_estudo_id' => '5',
 			'ano' => '1',
 			'semestre' => '1',
 			'cargahorariateoricas' => '0',
@@ -131,7 +131,7 @@ class PlanoestudoanoFixture extends CakeTestFixture {
 		),
 		array(
 			'id' => '6',
-			'planoestudo_id' => '6',
+			'plano_estudo_id' => '6',
 			'ano' => '2',
 			'semestre' => '1',
 			'cargahorariateoricas' => '0',
@@ -149,7 +149,7 @@ class PlanoestudoanoFixture extends CakeTestFixture {
 		),
 		array(
 			'id' => '7',
-			'planoestudo_id' => '7',
+			'plano_estudo_id' => '7',
 			'ano' => '1',
 			'semestre' => '1',
 			'cargahorariateoricas' => '0',
@@ -167,7 +167,7 @@ class PlanoestudoanoFixture extends CakeTestFixture {
 		),
 		array(
 			'id' => '8',
-			'planoestudo_id' => '8',
+			'plano_estudo_id' => '8',
 			'ano' => '2',
 			'semestre' => '1',
 			'cargahorariateoricas' => '0',
@@ -185,7 +185,7 @@ class PlanoestudoanoFixture extends CakeTestFixture {
 		),
 		array(
 			'id' => '9',
-			'planoestudo_id' => '9',
+			'plano_estudo_id' => '9',
 			'ano' => '2',
 			'semestre' => '2',
 			'cargahorariateoricas' => '0',
@@ -203,7 +203,7 @@ class PlanoestudoanoFixture extends CakeTestFixture {
 		),
 		array(
 			'id' => '10',
-			'planoestudo_id' => '5',
+			'plano_estudo_id' => '5',
 			'ano' => '2',
 			'semestre' => '2',
 			'cargahorariateoricas' => '0',

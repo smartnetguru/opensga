@@ -8,7 +8,7 @@ App::uses('AppModel', 'Model');
  * @property Aluno $Aluno
  * @property FinanceiroConta $FinanceiroConta
  * @property FinanceiroTipoPagamento $FinanceiroTipoPagamento
- * @property Anolectivo $Anolectivo
+ * @property AnoLectivo $AnoLectivo
  * @property FinanceiroEstadoPagamento $FinanceiroEstadoPagamento
  */
 class FinanceiroPagamento extends AppModel {
@@ -41,9 +41,9 @@ class FinanceiroPagamento extends AppModel {
             'fields' => '',
             'order' => ''
         ),
-        'Anolectivo' => array(
-            'className' => 'Anolectivo',
-            'foreignKey' => 'anolectivo_id',
+        'AnoLectivo' => array(
+            'className' => 'AnoLectivo',
+            'foreignKey' => 'ano_lectivo_id',
             'conditions' => '',
             'fields' => '',
             'order' => ''
@@ -64,7 +64,7 @@ class FinanceiroPagamento extends AppModel {
      */
     function evitaDuplicados($pagamento) {
         $this->recursive = -1;
-        $pagamento = $this->find('first', array('conditions' => array('FinanceiroPagamento.aluno_id' => $pagamento['aluno_id'], 'FinanceiroPagamento.anolectivo_id' => $pagamento['anolectivo_id'], 'financeiro_tipo_pagamento_id' => $pagamento['financeiro_tipo_pagamento_id'])));
+        $pagamento = $this->find('first', array('conditions' => array('FinanceiroPagamento.aluno_id' => $pagamento['aluno_id'], 'FinanceiroPagamento.ano_lectivo_id' => $pagamento['ano_lectivo_id'], 'financeiro_tipo_pagamento_id' => $pagamento['financeiro_tipo_pagamento_id'])));
 
         return $pagamento;
     }
@@ -125,7 +125,7 @@ class FinanceiroPagamento extends AppModel {
                 'financeiro_conta_id' => $this->Aluno->getContaIdByAlunoId($aluno_id),
                 'valor' => $valor_mensalidade,
                 'data_limite' => date('Y') . "-" . $ftp['FinanceiroTipoPagamento']['mes_limite'] . "-" . $ftp['FinanceiroTipoPagamento']['dia_limite'],
-                'anolectivo_id' => Configure::read('OpenSGA.ano_lectivo_id'),
+                'ano_lectivo_id' => Configure::read('OpenSGA.ano_lectivo_id'),
                 'semestrelectivo_id' => Configure::read('OpenSGA.semestre_lectivo_id'),
                 'financeiro_estado_pagamento_id' => 1,
                 'codigo' => $this->gerarCodigoPagamento($aluno_id, $ftp['FinanceiroTipoPagamento']['codigo']),
@@ -154,7 +154,7 @@ class FinanceiroPagamento extends AppModel {
      * Gera todos os pagamentos de todos os alunos matriculados
      * Nao duplica pagamentos para o mesmo plano de estudos
      */
-    function gerarPagamentos($anolectivo_id, $aluno_id = null, $num_semestre = null) {
+    function gerarPagamentos($ano_lectivo_id, $aluno_id = null, $num_semestre = null) {
 
         foreach ($alunos as $aluno) {
             $aluno_id = $aluno['Matricula']['aluno_id'];
