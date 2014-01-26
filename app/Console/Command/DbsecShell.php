@@ -5,7 +5,7 @@ App::uses('AuditableConfig', 'Auditable.Lib');
 
 class DbsecShell extends AppShell {
 
-    public $uses = array('Tipoavaliacao', 'Curso', 'UnidadeOrganica', 'Disciplina', 'PlanoEstudo', 'DisciplinaPlanoEstudo',  'Aluno', 'Turma', 'AnoLectivo', 'SemestreLectivo', 'Turma', 'CursosTurno', 'Matricula', 'Inscricao', 'User', 'Entidade',);
+    public $uses = array('TipoAvaliacao', 'Curso', 'UnidadeOrganica', 'Disciplina', 'PlanoEstudo', 'DisciplinaPlanoEstudo',  'Aluno', 'Turma', 'AnoLectivo', 'SemestreLectivo', 'Turma', 'CursosTurno', 'Matricula', 'Inscricao', 'User', 'Entidade',);
 
     /**
      * @todo  Implementar se for necessario
