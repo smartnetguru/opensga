@@ -29,9 +29,9 @@
  
  
 class DisciplinaPlanoEstudo extends AppModel {
-	var $name = 'DisciplinaPlanoEstudo';
+	public $name = 'DisciplinaPlanoEstudo';
 
-    var $belongsTo = array(
+    public $belongsTo = array(
 		'Disciplina' => array(
 			'className' => 'Disciplina',
 			'foreignKey' => 'disciplina_id',
@@ -48,6 +48,32 @@ class DisciplinaPlanoEstudo extends AppModel {
 		),
 
 	);
+    
+    public $hasMany = array(
+        'Precedencia' => array(
+            'className' => 'Precedencia',
+            'foreignKey' => 'disciplina_plano_estudo_id',
+            'dependent' => false,
+            'conditions' => '',
+            'fields' => '',
+            'order' => '',
+            'limit' => '',
+            'offset' => '',
+            'exclusive' => '',
+            'finderQuery' => '',
+            'counterQuery' => ''
+        )
+    );
+    
+    public $validate = array(
+        'disciplina_id' => array(
+            'EvitaDuplicados' => array(
+                'rule' => array('checkUnique', array('disciplina_id', 'plano_estudo_id')),
+                
+                'message' => 'Uma Disciplina nao pode estar no mesmo plano de Estudo duas vezes'
+            )
+        )
+    );
 
     
 

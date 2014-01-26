@@ -32,7 +32,7 @@ class TipocursosController extends AppController {
 	var $name = 'Tipocursos';
 
 	function index() {
-		$this->Tipocurso->recursive = 0;
+		$this->TipoCurso->recursive = 0;
 		$this->set('tg0007tipocursos', $this->paginate());
 	}
 
@@ -47,14 +47,14 @@ class TipocursosController extends AppController {
 			$this->redirect(array('action' => 'index'));
 		}
 		if (empty($this->data)) {
-			$this->data = $this->Tipocurso->read(null, $id);
+			$this->data = $this->TipoCurso->read(null, $id);
 		}
 	}
 
 	function add() {
 		if (!empty($this->data)) {
-			$this->Tipocurso->create();
-			if ($this->Tipocurso->save($this->data)) {
+			$this->TipoCurso->create();
+			if ($this->TipoCurso->save($this->data)) {
 				$this->Session->setFlash('** Dados Cadastrados com Sucesso **','flashok');
 				$this->redirect(array('action' => 'index'));
 			} else {
@@ -68,14 +68,14 @@ class TipocursosController extends AppController {
 			$this->redirect(array('action' => 'index'));
 		}
 		if (!empty($this->data)) {
-			if ($this->Tipocurso->save($this->data)) {
+			if ($this->TipoCurso->save($this->data)) {
 				$this->Session->setFlash('Dado Editados com sucesso','flashok');
 				$this->redirect(array('action' => 'index'));
 			} else {
 				$this->Session->setFlash('Erro ao editar dados. Por favor tente de novo.','flasherror');}
 		}
 		if (empty($this->data)) {
-			$this->data = $this->Tipocurso->read(null, $id);
+			$this->data = $this->TipoCurso->read(null, $id);
 		}
 	}
 
@@ -84,11 +84,11 @@ class TipocursosController extends AppController {
 			$this->Session->setFlash(sprintf(__('Invalid id for %s', true), 'tg0007tipocurso'));
 			$this->redirect(array('action'=>'index'));
 		}
-		if ($this->Tipocurso->delete($id)) {
+		if ($this->TipoCurso->delete($id)) {
 			$this->Session->setFlash('Dados deletedos com sucesso ','flashok');
 			$this->redirect(array('action'=>'index'));
 		}
-		$this->Session->setFlash(sprintf(__('%s was not deleted', true), 'Tipocurso'));
+		$this->Session->setFlash(sprintf(__('%s was not deleted', true), 'TipoCurso'));
 		$this->redirect(array('action' => 'index'));
 	}
         function beforeRender(){

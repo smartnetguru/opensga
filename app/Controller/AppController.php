@@ -60,6 +60,7 @@ class AppController extends Controller {
         $this->Auth->unauthorizedRedirect = false;
 
         if ($this->request->is('ajax')) {
+            $this->layout=false;
             $this->Security->csrfCheck = false;
             $this->Security->validatePost = false;
         }
@@ -130,7 +131,7 @@ class AppController extends Controller {
 
     public function beforeRender() {
         parent::beforeRender();
-        if (isset($this->request->prefix)) {
+        if (isset($this->request->prefix) && !$this->request->is('ajax')) {
             $this->layout = $this->request->prefix;
         }
     }

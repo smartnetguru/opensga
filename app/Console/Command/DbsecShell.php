@@ -73,8 +73,8 @@ class DbsecShell extends AppShell {
                 $curso_array = array(
                     'Curso' => array(
                         'name' => $worksheet->getCell('B' . $linha_actual)->getCalculatedValue(),
-                        'grauacademico_id' => $worksheet->getCell('F' . $linha_actual)->getCalculatedValue(),
-                        'tipocurso_id' => $worksheet->getCell('F' . $linha_actual)->getCalculatedValue(),
+                        'grau_academico_id' => $worksheet->getCell('F' . $linha_actual)->getCalculatedValue(),
+                        'tipo_curso_id' => $worksheet->getCell('F' . $linha_actual)->getCalculatedValue(),
                         'unidade_organica_id' => $faculdade['UnidadeOrganica']['id'],
                         'codigo' => $curso_id
                     )

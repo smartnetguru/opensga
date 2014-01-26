@@ -23,8 +23,14 @@
  * @package       opensga
  * @subpackage    opensga.core.controller
  * @since         OpenSGA v 0.10.0.0
-
- *
+ * 
+ * @property GrauAcademico $GrauAcademico
+ *@property UnidadeOrganica $UnidadeOrganica
+ * @property TipoCurso $TipoCurso
+ * @property PlanoEstudo $PlanoEstudo
+ * @property Matricula $Matricula
+ * @property CursosTurno $CursosTurno
+ * @property Turma $Turma
  */
 class Curso extends AppModel {
 
@@ -34,7 +40,7 @@ class Curso extends AppModel {
     var $belongsTo = array(
         'GrauAcademico' => array(
             'className' => 'GrauAcademico',
-            'foreignKey' => 'grauacademico_id',
+            'foreignKey' => 'grau_academico_id',
             'conditions' => '',
             'fields' => '',
             'order' => ''
@@ -46,9 +52,9 @@ class Curso extends AppModel {
             'fields' => '',
             'order' => ''
         ),
-        'Tipocurso' => array(
-            'className' => 'Tipocurso',
-            'foreignKey' => 'tipocurso_id',
+        'TipoCurso' => array(
+            'className' => 'TipoCurso',
+            'foreignKey' => 'tipo_curso_id',
             'conditions' => '',
             'fields' => '',
             'order' => ''
@@ -118,6 +124,28 @@ class Curso extends AppModel {
             'message' => 'Ja existe um curso com este nome.'
         )
     );
+    
+    public function cadastraCurso($data){
+        $datasource = $this->getDataSource();
+        $datasource->begin();
+        
+        $this->create();
+        if($this->save($data)){
+            $array_curso_turno = array(
+                'CursosTurno'=>array(
+                    'curso_id'=>$this->id,
+                    'turno_id'=>$data['Curso']['turno_id']
+                )
+            );
+            
+            $this->CursosTurno->create();
+            if($this->CursosTurno->save($array_curso_turno)){
+                return $this->commit();
+            }
+           
+        }
+        return $this->rollback();
+    }
 
     function geraCodigo() {
         $id = $this->find('first', array('order' => array('Curso.created DESC'), 'fields' => 'id'));

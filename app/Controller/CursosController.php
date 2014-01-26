@@ -1,11 +1,12 @@
 <?php
+
 /**
  * OpenSGA - Sistema de Gest�o Acad�mica
  *   Copyright (C) 2010-2011  INFOmoz (Inform�tica-Mo�ambique)
  *
  *
  * @copyright     Copyright 2010-2011, INFOmoz (Inform�tica-Mo�ambique) (http://infomoz.net)
- ** @link          http://opensga.com OpenSGA  - Sistema de Gestão Académica
+ * * @link          http://opensga.com OpenSGA  - Sistema de Gestão Académica
  * @author		  Elisio Leonardo (elisio.leonardo@gmail.com)
  * @package       opensga
  * @subpackage    opensga.core.controller
@@ -13,116 +14,158 @@
 
  *
  */
-
-
 class CursosController extends AppController {
 
-	var $name = 'Cursos';
+    function index() {
 
 
-	function index() {
-		$this->Curso->recursive = 0;
-                $this->paginate = array('limit'=>1000);
-		$this->set('cursos', $this->paginate());
+        $this->set('cursos', $this->paginate());
+    }
 
+    function faculdade_index() {
+        $this->paginate = array(
+            'conditions' => array(
+                'Curso.unidade_organica_id' => $this->Curso->UnidadeOrganica->getWithChilds($this->Session->read('Auth.User.unidade_organica_id'))
+            ),
+            'contain'=>array(
+                'GrauAcademico','TipoCurso'
+            )
+        );
 
-	}
+        $this->set('cursos', $this->paginate());
+    }
 
-	function view($id = null)
-	{
+    function faculdade_ver_curso($id = null) {
 
-		if (!$id) {
-			$this->Session->setFlash('Curso Invalido','flasherror');
-			$this->redirect(array('action' => 'index'));
-		}
-		$this->set('cursos', $this->Curso->read(null, $id));
-		if (empty($this->data))
-		{
+        if (!$id) {
+            $this->Session->setFlash('Curso Invalido', 'flasherror');
+            $this->redirect(array('action' => 'index'));
+        }
+        $this->set('cursos', $this->Curso->read(null, $id));
+        if (empty($this->data)) {
 
-		$this->data = $this->Curso->read(null, $id);
+            $this->data = $this->Curso->read(null, $id);
+        }
 
-
-		}
-
-		$grauacademicos = $this->Curso->GrauAcademico->find('list');
-		$tipocursos = $this->Curso->Tipocurso->find('list');
+        $grauacademicos = $this->Curso->GrauAcademico->find('list');
+        $tipocursos = $this->Curso->TipoCurso->find('list');
         $escolas = $this->Curso->Escola->find('list');
-		$this->set(compact('grauacademicos', 'tipocursos','escolas'));
-	}
+        $this->set(compact('grauacademicos', 'tipocursos', 'escolas'));
+    }
 
-	function add()
-	{
+    function faculdade_adicionar_curso() {
 
-		if (!empty($this->data)) {
+        if($this->request->is('post')){
+            $this->request->data['Curso']['unidade_organica_id'] = $this->Session->read('Auth.User.unidade_organica_id');
+            if ($this->Curso->cadastraCurso($this->request->data)) {
+                $this->Session->setFlash(__('Dados Gravados com Sucesso'), 'default', array('class' => 'alert success'));
 
-			$this->Curso->create();
-			if ($this->Curso->save($this->data)) {
-				$this->Session->setFlash(__('Curso Cadastrado com Sucesso'),'default',array('class'=>'alert success'));
+                $this->redirect(array('action' => 'index'));
+            } else {
+                $this->Session->setFlash(__('Erro ao Gravar Dados. Por favor tente de novo'), 'default', array('class' => 'alert error'));
+            
+        }
+        }
+        $grauAcademicos = $this->Curso->GrauAcademico->find('list');
+        $tipoCursos = $this->Curso->TipoCurso->find('list');
+        $unidadeOrganicas = $this->Curso->UnidadeOrganica->find('list');
+        $turnos = $this->Curso->CursosTurno->Turno->find('list');
+        $this->set(compact('grauAcademicos', 'tipoCursos', 'escolas', 'unidadeOrganicas','turnos'));
+    }
 
-				$this->redirect(array('action' => 'index'));
-			} else {
-				$this->Session->setFlash(__('Erro ao Cadastrar Curso. Por favor tente de novo'),'default',array('class'=>'alert error'));
-			}
-		}
-		$grauacademicos = $this->Curso->GrauAcademico->find('list');
-		$tipocursos = $this->Curso->Tipocurso->find('list');
-                $unidadeOrganicas = $this->Curso->UnidadeOrganica->find('list');
-		$this->set(compact('grauacademicos', 'tipocursos','escolas','unidadeOrganicas'));
-	}
-
-	function edit($id = null) {
+    function faculdade_editar_curso($id = null) {
         $this->Curso->id = $id;
-        if(!$this->Curso->exists()){
+        if (!$this->Curso->exists()) {
             throw new NotFoundException('Curso Inválido');
         }
-		if (!$id && empty($this->data)) {
-			$this->Session->setFlash('Invalido %s', 'flasherror');
-			$this->redirect(array('action' => 'index'));
-		}
-		if (!empty($this->data)) {
-
-			if ($this->Curso->save($this->data)) {
-				$this->Session->setFlash('Dados modificados com sucesso.','flashok');
-
-				$this->redirect(array('action' => 'index'));
-			} else {
-				$this->Session->setFlash('Erro ao editar dados. Por favor tente de novo.','flasherror');}
-		}
-                $this->set('cursos', $this->Curso->read(null, $id));
-		if (empty($this->data)) {
-			$this->data = $this->Curso->read(null, $id);
-		}
-		$grauacademicos = $this->Curso->GrauAcademico->find('list');
-		$tipocursos = $this->Curso->Tipocurso->find('list');
-		$this->set(compact('GrauAcademicos', 'tipocursos','escolas'));
-	}
-
-        function beforeRender(){
-            parent::beforeRender();
+        if (!$id && empty($this->data)) {
+            $this->Session->setFlash('Invalido %s', 'flasherror');
+            $this->redirect(array('action' => 'index'));
         }
-        
-        
-        public function report_cursos_activos($ano_academico=null){
-            $conditions = array();
-            
-            if(!empty($ano_academico)){
-                $anolectivo = $this->Curso->Matricula->AnoLectivo->findByAno($ano_academico);
-                $conditions['Matricula.ano_lectivo_id'] = $anolectivo['AnoLectivo']['id'];
+        if (!empty($this->data)) {
+
+            if ($this->Curso->save($this->data)) {
+                $this->Session->setFlash('Dados modificados com sucesso.', 'flashok');
+
+                $this->redirect(array('action' => 'index'));
+            } else {
+                $this->Session->setFlash('Erro ao editar dados. Por favor tente de novo.', 'flasherror');
             }
-            $this->Curso->contain(array(
-               'GrauAcademico'
-            ));
-            debug($anolectivo);
-            $cursos = $this->Curso->find('all',array('fields'=>array('Curso.id','Curso.name','Curso.codigo','Grauacademico.name')));
-            foreach($cursos as $k=>$curso){
-                
-                $conditions['Matricula.curso_id'] = $curso['Curso']['id'];
-                $matriculados = $this->Curso->Matricula->find('count',array('conditions'=>$conditions));
-                $cursos[$k]['Matriculas']['total']=$matriculados;
-                
-            }
-            
-            $this->set(compact('cursos'));
         }
+        $this->set('cursos', $this->Curso->read(null, $id));
+        if (empty($this->data)) {
+            $this->data = $this->Curso->read(null, $id);
+        }
+        $grauacademicos = $this->Curso->GrauAcademico->find('list');
+        $tipocursos = $this->Curso->TipoCurso->find('list');
+        $this->set(compact('GrauAcademicos', 'tipocursos', 'escolas'));
+    }
+
+    function ver_curso($id = null) {
+
+        if (!$id) {
+            $this->Session->setFlash('Curso Invalido', 'flasherror');
+            $this->redirect(array('action' => 'index'));
+        }
+        $this->set('cursos', $this->Curso->read(null, $id));
+        if (empty($this->data)) {
+
+            $this->data = $this->Curso->read(null, $id);
+        }
+
+        $grauacademicos = $this->Curso->GrauAcademico->find('list');
+        $tipocursos = $this->Curso->TipoCurso->find('list');
+        $escolas = $this->Curso->Escola->find('list');
+        $this->set(compact('grauacademicos', 'tipocursos', 'escolas'));
+    }
+
+    function adicionar_curso() {
+
+        if (!empty($this->data)) {
+
+            $this->Curso->create();
+            if ($this->Curso->save($this->data)) {
+                $this->Session->setFlash(__('Curso Cadastrado com Sucesso'), 'default', array('class' => 'alert success'));
+
+                $this->redirect(array('action' => 'index'));
+            } else {
+                $this->Session->setFlash(__('Erro ao Cadastrar Curso. Por favor tente de novo'), 'default', array('class' => 'alert error'));
+            }
+        }
+        $grauacademicos = $this->Curso->GrauAcademico->find('list');
+        $tipocursos = $this->Curso->TipoCurso->find('list');
+        $unidadeOrganicas = $this->Curso->UnidadeOrganica->find('list');
+        $this->set(compact('grauacademicos', 'tipocursos', 'escolas', 'unidadeOrganicas'));
+    }
+
+    function editar_curso($id = null) {
+        $this->Curso->id = $id;
+        if (!$this->Curso->exists()) {
+            throw new NotFoundException('Curso Inválido');
+        }
+        if (!$id && empty($this->data)) {
+            $this->Session->setFlash('Invalido %s', 'flasherror');
+            $this->redirect(array('action' => 'index'));
+        }
+        if (!empty($this->data)) {
+
+            if ($this->Curso->save($this->data)) {
+                $this->Session->setFlash('Dados modificados com sucesso.', 'flashok');
+
+                $this->redirect(array('action' => 'index'));
+            } else {
+                $this->Session->setFlash('Erro ao editar dados. Por favor tente de novo.', 'flasherror');
+            }
+        }
+        $this->set('cursos', $this->Curso->read(null, $id));
+        if (empty($this->data)) {
+            $this->data = $this->Curso->read(null, $id);
+        }
+        $grauacademicos = $this->Curso->GrauAcademico->find('list');
+        $tipocursos = $this->Curso->TipoCurso->find('list');
+        $this->set(compact('GrauAcademicos', 'tipocursos', 'escolas'));
+    }
+
 }
+
 ?>

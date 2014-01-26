@@ -26,6 +26,19 @@ class UnidadeOrganicasController extends AppController {
         ));
         $this->set('unidadeOrganicas', $this->paginate());
     }
+    
+    public function faculdade_index() {
+        
+        $this->UnidadeOrganica->contain(array(
+            'TipoUnidadeOrganica'=>array(
+                'fields'=>array('id','name')
+            ),
+            'ParentUnidadeOrganica'=>array(
+                'fields'=>array('id','name')
+            )
+        ));
+        $this->set('unidadeOrganicas', $this->paginate());
+    }
 
     /**
      * view method

@@ -23,6 +23,19 @@ class OpenSGAAclShell extends AppShell {
         foreach ($funcionarios as $funcionario) {
             $this->out($funcionario['User']['username']);
             
+            $unidade_organica = $this->UnidadeOrganica->findById($funcionario['Funcionario']['unidade_organica_id']);
+            $unidadeOrganicas = $this->UnidadeOrganica->find('all', array('conditions' => array('parent_id' => $unidade_organica['UnidadeOrganica']['id'])));
+         
+            if ($unidadeOrganicas) {
+            $unidades_organicas = Hash::extract($unidadeOrganicas, '{n}.UnidadeOrganica.codigo');
+
+            $unidades_organicas[] = $unidade_organica['UnidadeOrganica']['codigo'];
+         
+        } else {
+            $unidade_organicas = array($unidade_organica['UnidadeOrganica']['codigo']);
+        }
+           
+           
             $comandos = array();
             $comandos[] = "acl deny User.{$funcionario['User']['id']} controllers";
             
@@ -44,6 +57,8 @@ class OpenSGAAclShell extends AppShell {
                 
                 $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Cursos/faculdade_index";
                 $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Cursos/faculdade_ver_curso";
+                $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Cursos/faculdade_adicionar_curso";
+                $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Cursos/faculdade_editar_curso";
                                 
                 $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Disciplinas/faculdade_index";
                 $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Disciplinas/faculdade_ver_disciplina";
@@ -59,6 +74,14 @@ class OpenSGAAclShell extends AppShell {
                 $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Inscricaos/faculdade_print_comprovativo_inscricao";
                 
                 $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Pages/faculdade_home";
+                
+                $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/PlanoEstudos/faculdade_index";
+                $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/PlanoEstudos/faculdade_adicionar_plano_estudo";
+                $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/PlanoEstudos/faculdade_editar_plano_estudo";
+                $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/PlanoEstudos/faculdade_ver_plano_estudo";
+                $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/PlanoEstudos/faculdade_adicionar_disciplinas";
+                $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/PlanoEstudos/faculdade_adicionar_precedencias";
+                
                 $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Users/faculdade_logout";
                 $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Users/faculdade_trocar_senha";
                 
@@ -82,19 +105,21 @@ class OpenSGAAclShell extends AppShell {
                 $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Requisicoes/RequisicoesPedidos/entregar_cartao_novo_ingresso";
                 
                 
-                $unidade_organica = $this->UnidadeOrganica->findById($funcionario['Funcionario']['unidade_organica_id']);
+                
                 
                 /*
                  * Permissoes comuns para todos Funcionarios da DRA
                  */
-                if($unidade_organica['UnidadeOrganica']['codigo']=='DRA'){
+                if(in_array('DRA',$unidade_organicas)){
                      
                     $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/pesquisa_aluno_action";
                     $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Candidaturas/index";
+                    $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Disciplinas/index";
+                    $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Disciplinas/ver_disciplina";
                     
                     
                 }
-                if($unidade_organica['UnidadeOrganica']['codigo']=='DRA_DI'){
+                if(in_array('DRA_DI',$unidade_organicas)){
                     $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/index";
                     
                     $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/alterar_status";
@@ -133,6 +158,12 @@ class OpenSGAAclShell extends AppShell {
                     $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/CerimoniaGraduacaos/print_lista_graduandos";
                     $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/CerimoniaGraduacaos/nova_cerimonia";
                     
+                    $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Cursos/adicionar_curso";
+                    $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Cursos/editar_curso";
+                    
+                    $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Disciplinas/adicionar_disciplina";
+                    $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Disciplinas/editar_disciplina";
+                    
                     $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Groups/index";
                     $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Groups/novo_grupo";
                     $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Groups/editar_grupo";
@@ -148,7 +179,7 @@ class OpenSGAAclShell extends AppShell {
 
                                         
 
-                } elseif($unidade_organica['UnidadeOrganica']['codigo']=='DRA_DR'){
+                } elseif(in_array('DRA_DR',$unidade_organicas)){
                     $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/index";
                     
                     $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/perfil_estudante";

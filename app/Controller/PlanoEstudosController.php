@@ -13,7 +13,6 @@
 
  * 
  */
-App::uses('Hash', 'Utility');
 
 /**
  * 
@@ -27,8 +26,50 @@ class PlanoEstudosController extends AppController {
         $this->PlanoEstudo->recursive = 0;
         $this->set('planoestudos', $this->PlanoEstudo->find('all'));
     }
+    
+    function faculdade_index() {
+        
+        $this->paginate = array(
+            'contain'=>array(
+                'Curso','EstadoObjecto'
+            ),
+            'conditions'=>array(
+                'Curso.unidade_organica_id'=>$this->Session->read('Auth.User.unidade_organica_id')
+            )
+        );
+        $this->set('plano_estudos', $this->paginate('PlanoEstudo'));
+    }
 
-    function view($id = null) {
+    function faculdade_ver_plano_estudo($id = null) {
+        App::Import('Model', 'DisciplinaPlanoEstudo');
+        App::Import('Model', 'Disciplina');
+        //App::Import('Model','Logmv');
+        //$logmv =new Logmv;
+        $planoestudoanos = new DisciplinaPlanoEstudo;
+        $disciplina = new Disciplina;
+
+        if (!$id) {
+            $this->Session->setFlash('Invalido %s', 'flasherror');
+            $this->redirect(array('action' => 'index'));
+        }
+        $this->set('planoestudo', $this->PlanoEstudo->read(null, $id));
+        if (empty($this->data)) {
+            $this->data = $this->PlanoEstudo->read(null, $id);
+            //var_dump($this->data);
+            ////////$logmv->logview(5,$this->Session->read('Auth.User.id'),$this->data["PlanoEstudo"]["id"],$this->data["PlanoEstudo"]["name"]);
+        }
+
+        $disciplinas = $this->PlanoEstudo->getAllDisciplinasByPlanoEstudo($id);
+
+
+        $disciplinas_precedencia = $planoestudoanos->findDisciplinasByPrecendencia($id, 1, 1);
+        $this->set('pdisciplina', $disciplinas_precedencia);
+        $this->set('plano_id', $id);
+        $cursos = $this->PlanoEstudo->Curso->find('list');
+        $this->set(compact('cursos', 'disciplinas', 'anos', 'semestres', 'disciplinas', 'pobrigatorias', 'popcionais'));
+    }
+    
+    function ver_plano_estudo($id = null) {
         App::Import('Model', 'DisciplinaPlanoEstudo');
         App::Import('Model', 'Disciplina');
         //App::Import('Model','Logmv');
@@ -57,21 +98,25 @@ class PlanoEstudosController extends AppController {
         $this->set(compact('cursos', 'disciplinas', 'anos', 'semestres', 'disciplinas', 'pobrigatorias', 'popcionais'));
     }
 
-    function add() {
-        //App::Import('Model','Logmv');
-        //$logmv =new Logmv;
-        if (!empty($this->data)) {
+    
+    /**
+     * Cria um novo Plano de Estudos para uma Unidade Organica
+     * Depois direcciona para pagina de adicionar disciplinas
+     */
+    function faculdade_adicionar_plano_estudo() {
+        
+        if($this->request->is('post')){
             $this->PlanoEstudo->create();
-            if ($this->PlanoEstudo->save($this->data)) {
-                //////$logmv->logInsert(5,$this->Session->read('Auth.User.id'),$this->PlanoEstudo->getLastInsertID(),$this->data["PlanoEstudo"]["name"]);
-                $this->Session->setFlash('Adicione os grupos de disciplinas deste plano. ', 'flashok');
-                //var_dump($this->PlanoEstudo->id);
+            if ($this->PlanoEstudo->save($this->request->data)) {
+                $this->Session->setFlash('Adicione as  disciplinas deste plano de estudos. ','default',array('class'=>'alert success') );
                 $this->redirect(array('action' => 'adicionar_disciplinas', $this->PlanoEstudo->id));
             } else {
-                $this->Session->setFlash('Erro ao gravar dados. Por favor tente de novo.', 'flasherror');
+                $this->Session->setFlash('Erro ao gravar dados. Por favor tente de novo.');
             }
         }
-        $cursos = $this->PlanoEstudo->Curso->find('list');
+        
+        
+        $cursos = $this->PlanoEstudo->Curso->find('list',array('conditions'=>array('Curso.unidade_organica_id'=>$this->Session->read('Auth.User.unidade_organica_id'))));
         $this->set(compact('cursos'));
     }
 
@@ -81,144 +126,99 @@ class PlanoEstudosController extends AppController {
      * @todo remover queris daki
      * @todo nao pode listar disciplinas do mesmo semestre
      */
-    function adicionar_precedencias($plano_id = null, $disc_id = null) {
-        App::Import('Model', 'DisciplinaPlanoEstudo');
-        App::Import('Model', 'Disciplina');
-        App::Import('Model', 'Grupodisciplina');
-        //App::Import('Model','Logmv');
-        //$logmv =new Logmv;
-        $planoestudoanos = new DisciplinaPlanoEstudo;
-        $disciplina = new Disciplina;
-        $grupodisciplina = new Grupodisciplina;
-
-
-
-        if (!empty($this->data)) {
-
-            if (!empty($this->data['pobrigatorias'])) {
-                foreach ($this->data['pobrigatorias'] as $po) {
-                    $grupod = array('plano_estudo_id' => $this->data['PlanoEstudo']['plano_id'], 'tipo' => 'O', 'disciplina_id' => $this->data['PlanoEstudo']['disc_id'], 'grupodisciplinasprec' => $po);
-                    $grupodp = array('Grupodisciplina' => $grupod);
-                    $grupodisciplina->create();
-                    $grupodisciplina->save($grupodp);
-                }
-            }
-            if (!empty($this->data['paconselhadas'])) {
-                foreach ($this->data['paconselhadas'] as $po) {
-                    $grupod = array('plano_estudo_id' => $this->data['PlanoEstudo']['plano_id'], 'tipo' => 'A', 'disciplina_id' => $this->data['PlanoEstudo']['disc_id'], 'grupodisciplinasprec' => $po);
-                    $grupodp = array('Grupodisciplina' => $grupod);
-                    $grupodisciplina->create();
-                    $grupodisciplina->save($grupodp);
-                }
-            }
-            $this->Session->setFlash(__('Dado Registado com Sucesso.Adicione Mais disciplinas.'), 'default', array('class' => 'alert success'));
-            $this->redirect(array('action' => 'adicionar_disciplinas', $this->data['PlanoEstudo']['plano_id']));
+    function faculdade_adicionar_precedencias($plano_estudo_id = null, $disciplina_id = null) {
+        $disciplinaPlanoEstudo = $this->PlanoEstudo->DisciplinaPlanoEstudo->findByPlanoEstudoIdAndDisciplinaId($plano_estudo_id,$disciplina_id);
+        if(empty($disciplinaPlanoEstudo)){
+            throw new NotFoundException(__('Esta disciplina nao pertence a este plano de Estudos'));
         }
+        $this->PlanoEstudo->contain(array(
+            'Curso'
+        ));
+        $planoEstudo = $this->PlanoEstudo->find('first',array('conditions'=>array('Curso.unidade_organica_id'=>$this->Session->read('Auth.User.unidade_organica_id'),'PlanoEstudo.id'=>$plano_estudo_id)));
+        if(empty($planoEstudo)){
+            throw new MethodNotAllowedException(__('Nao possui permissao para aceder a pagina anterior'));
+        }
+        
+        if($this->request->is('post')){
+            
+            $this->request->data['DisciplinaPlanoEstudo']['id'] = $disciplinaPlanoEstudo['DisciplinaPlanoEstudo']['id'];
+            if($this->PlanoEstudo->cadastraPrecedencias($this->request->data)){
+                $this->Session->setFlash(__('Dado Registado com Sucesso.Adicione Mais disciplinas.'), 'default', array('class' => 'alert success'));
+                $this->redirect(array('action' => 'adicionar_disciplinas', $this->data['PlanoEstudo']['plano_estudo_id']));
+            } else{
+                $this->Session->setFlash(__('Problemas ao Gravar Dados. Tente Novamente'), 'default', array('class' => 'alert error'));
+            }
+            
+        }
+        
+       
+        $precedencias = $this->PlanoEstudo->getAllDisciplinasForPrecedencia($plano_estudo_id, $disciplina_id);
 
 
-
-        $disciplinas_p = $this->PlanoEstudo->getAllDisciplinasForPrecedencia($disc_id, $plano_id);
-        $precedencias = $disciplinas_p;
-
-
-        $this->set('precedencias', $precedencias);
-        $this->set('plano_id', $plano_id);
-        $this->set('disc_id', $disc_id);
+        $this->set(compact('precedencias','plano_estudo_id','disciplina_id'));
     }
 
-    function adicionar_disciplinas($plano_id, $ano_c = 1, $semestre_c = 1) {
-        App::Import('Model', 'DisciplinaPlanoEstudo');
-        App::Import('Model', 'Disciplina');
-
-        $planoestudoanos = new DisciplinaPlanoEstudo;
-        $disciplina = new Disciplina;
-
-        //die(var_dump($this->PlanoEstudo->id));
-
-        if (!empty($this->data)) {
-
-            $dados = $this->data;
-            $dados['DisciplinaPlanoEstudo']['plano_estudo_id'] = $plano_id;
-
-            //Calcula o Semestre Sequencial
-            if ($dados['DisciplinaPlanoEstudo']['semestre'] == 1) {
-                $dados['DisciplinaPlanoEstudo']['semestre_sequencial'] = $dados['DisciplinaPlanoEstudo']['ano'] * ($dados['DisciplinaPlanoEstudo']['semestre'] + 1) - 1;
-            }
-            if ($dados['DisciplinaPlanoEstudo']['semestre'] == 2) {
-                $dados['DisciplinaPlanoEstudo']['semestre_sequencial'] = $dados['DisciplinaPlanoEstudo']['ano'] * $dados['DisciplinaPlanoEstudo']['semestre'];
-            }
-
-
-
-
-            if ($planoestudoanos->save($dados)) {
-
-
-
-                //Se forem cadeiras inicias, pula as precedencias
-                if ($dados['DisciplinaPlanoEstudo']['semestre_sequencial'] > 1) {
-                    $this->Session->setFlash('Dado Registado com Sucesso.Seleccione as Precedencias desta disciplina, Ou clique em voltar se nao tiver precedencias', 'default', array('class' => 'alert success'));
-                    $this->redirect(array('action' => 'adicionar_precedencias', $dados['DisciplinaPlanoEstudo']['plano_estudo_id'], $dados['DisciplinaPlanoEstudo']['disciplina_id']));
-                } else {
-                    $this->Session->setFlash('Dado Registado com Sucesso.Adicione Mais disciplinas.', 'default', array('class' => 'alert success'));
-                    $this->redirect(array('action' => 'adicionar_disciplinas', $dados['DisciplinaPlanoEstudo']['plano_estudo_id']));
-                }
-            } else {
-                $this->Session->setFlash('Erro ao gravar dados. Por favor tente de novo.', 'flasherror');
-            }
+    function faculdade_adicionar_disciplinas($plano_estudo_id) {
+        $this->PlanoEstudo->contain(array(
+            'Curso'
+        ));
+        $planoEstudo = $this->PlanoEstudo->findById($plano_estudo_id);
+        if(empty($planoEstudo)){
+            throw new NotFoundException(__('Plano de Estudos Nao encontrado'));
         }
+        if($planoEstudo['Curso']['unidade_organica_id']!=$this->Session->read('Auth.User.unidade_organica_id')){
+            
+            throw new MethodNotAllowedException(__('Nao tem permissao para aceder a pagina anterior'));
+        }
+        if($this->request->is('post')){
+            $this->request->data['DisciplinaPlanoEstudo']['plano_estudo_id'] = $plano_estudo_id;
+            //Calcula o Semestre Sequencial
+            if ($this->request->data['DisciplinaPlanoEstudo']['semestre_curricular'] == 1) {
+                $this->request->data['DisciplinaPlanoEstudo']['semestre_sequencial'] = $this->request->data['DisciplinaPlanoEstudo']['ano_curricular'] * ($this->request->data['DisciplinaPlanoEstudo']['semestre_curricular'] + 1) - 1;
+            }
+            if ($this->request->data['DisciplinaPlanoEstudo']['semestre_curricular'] == 2) {
+                $this->request->data['DisciplinaPlanoEstudo']['semestre_sequencial'] = $this->request->data['DisciplinaPlanoEstudo']['ano_curricular'] * $this->request->data['DisciplinaPlanoEstudo']['semestre_curricular'];
+            }
+            
+            $this->PlanoEstudo->DisciplinaPlanoEstudo->create();
+            if($this->PlanoEstudo->DisciplinaPlanoEstudo->save($this->request->data)){
+                if($this->request->data['DisciplinaPlanoEstudo']['semestre_sequencial']>1){
+                    $this->Session->setFlash('Dado Registado com Sucesso.Seleccione as Precedencias desta disciplina, Ou clique em voltar se nao tiver precedencias', 'default', array('class' => 'alert success'));
+                    $this->redirect(array('action' => 'adicionar_precedencias', $this->request->data['DisciplinaPlanoEstudo']['plano_estudo_id'], $this->request->data['DisciplinaPlanoEstudo']['disciplina_id']));
+                } else{
+                    $this->Session->setFlash('Dado Registado com Sucesso.Adicione Mais disciplinas.', 'default', array('class' => 'alert success'));
+                    $this->redirect(array('action' => 'adicionar_disciplinas', $this->request->data['DisciplinaPlanoEstudo']['plano_estudo_id']));
+                }
+            } else{
+                $this->Session->setFlash('Erro ao gravar dados. Por favor tente de novo.','default',array('class'=>'alert error'));
+            }
+            
+        }
+        
 
-        $plano_estudo = $this->PlanoEstudo->findById($plano_id);
-
-        $this->request->data['PlanoEstudo'] = $plano_estudo['PlanoEstudo'];
-
-
-
-
-
+        
+        $this->request->data['PlanoEstudo'] = $planoEstudo['PlanoEstudo'];
         $cursos = $this->PlanoEstudo->Curso->find('list');
-
-        $disciplinas_adicionadas = $this->PlanoEstudo->getAllDisciplinas($plano_id);
-
         
-        $disciplinas_excluir = Set::extract('{n}.Disciplina.id', $disciplinas_adicionadas);
-
+        $disciplinas_adicionadas = $this->PlanoEstudo->getAllDisciplinas($plano_estudo_id);
+        $disciplinas_excluir = Hash::extract($disciplinas_adicionadas,'{n}.Disciplina.id' );
         
-        $disciplinas = $disciplina->find('list', array('conditions' => array('NOT' => array('id' => $disciplinas_excluir)), 'order' => array('name ASC')));
-
+        $disciplinas = $this->PlanoEstudo->DisciplinaPlanoEstudo->Disciplina->find('list', array('conditions' => array('NOT' => array('id' => $disciplinas_excluir)), 'order' => array('name ASC')));
         $anos = array();
-        for ($i = 1; $i <= $plano_estudo['PlanoEstudo']['duracao']; $i++) {
+        for ($i = 1; $i <= $planoEstudo['PlanoEstudo']['duracao']; $i++) {
             $anos[$i] = $i;
         }
-        for ($i = 1; $i <= $plano_estudo['PlanoEstudo']['semestresano']; $i++) {
+        for ($i = 1; $i <= $planoEstudo['PlanoEstudo']['semestresano']; $i++) {
             $semestres[$i] = $i;
         }
 
-
-        $disciplinas2 = $disciplinas_adicionadas;
         
-        $disciplina1 = array_keys($disciplinas);
-        //$precedencias = $this->PlanoEstudo->getAllPrecedenciasByDisciplina($disciplina1[0], $plano_id);
-
-        //$disciplinas_precedencia = $planoestudoanos->findDisciplinasByPrecendencia($plano_id, 1, 1);
-
-        //$this->set('pdisciplina', $disciplinas_precedencia);
-        $this->set('plano_id', $plano_id);
-        $this->set(compact('cursos', 'disciplinas2', 'anos', 'semestres', 'disciplinas', 'pobrigatorias', 'popcionais'));
+        
+        $this->set('plano_id', $plano_estudo_id);
+        $this->set(compact('cursos', 'disciplinas_adicionadas', 'anos', 'semestres', 'disciplinas'));
     }
 
-    function update_disciplinas_precedencia($plano_id, $accao) {
-
-        App::Import('Model', 'DisciplinaPlanoEstudo');
-        $planoestudoanos = new DisciplinaPlanoEstudo;
-        $ano = $this->data['DisciplinaPlanoEstudo']['ano'];
-        $disciplinas_precedencia = $planoestudoanos->findDisciplinasByPrecendencia($plano_id, $ano, 1);
-        $this->set('pdisciplina', $disciplinas_precedencia);
-
-        $this->layout = 'ajax';
-    }
-
-    function edit($id = null) {
+    function faculdade_editar_plano_estudo($id = null) {
         $this->PlanoEstudo->id = $id;
         if (!$this->PlanoEstudo->exists()) {
             throw new NotFoundException(__('Plano de Estudos Invalido'));
@@ -238,132 +238,7 @@ class PlanoEstudosController extends AppController {
         $this->set(compact('cursos'));
     }
 
-    function delete($id = null) {
-        App::Import('Model', 'PlanoEstudo');
-        $planoestudos = new PlanoEstudo;
-        if (!$id) {
-            $this->Session->setFlash('Invalido codigo para %s', 'flasherror');
-            $this->redirect(array('action' => 'index'));
-        }
-        $dados = $planoestudos->getAllMatriculasByPlanoEstudo($id);
 
-        //var_dump($dados);
-
-        if (empty($dados)) {
-            //////$logmv->logDelete(5,$this->Session->read('Auth.User.id'),$id,$this->data["PlanoEstudo"]["name"]);
-            $planoestudoano = $planoestudos->deleteAllDisciplinasByPlanoEstudo($id);
-            $planoestudogruposdisc = $planoestudos->deleteAllGrupoDiscByPlanoEstudo($id);
-            if ($this->PlanoEstudo->delete($id)) {
-                $this->Session->setFlash('Dados deletados com sucesso ', 'flashok');
-                $this->redirect(array('action' => 'index'));
-            }
-        }
-        $this->Session->setFlash('Nao e possivel apagar. Matriculas Associadas', 'flasherror');
-        $this->redirect(array('action' => 'index'));
-    }
-
-    function remove_disc($plano_id, $disc_id, $plano_retorno) {
-        App::Import('Model', 'DisciplinaPlanoEstudo');
-        App::Import('Model', 'Disciplina');
-
-        $planoestudoanos = new DisciplinaPlanoEstudo;
-        $disciplina = new Disciplina;
-
-        $planoestudoanos->query("delete from planoestudoanos where id={$plano_id}");
-
-        $planoestudoanos->query("delete from grupodisciplinas where disciplina_id={$disc_id}");
-        $this->Session->setFlash('Dados deletedos com sucesso ', 'flashok');
-        $this->redirect(array('action' => 'add_grupodisciplinas', $plano_retorno));
-    }
-
-    function beforeRender() {
-        $this->set('current_section', 'pedagogica');
-    }
-
-    function pdf_index() {
-        Configure::write('debug', 0); // Otherwise we cannot use this method while developing
-        $planoestudo = $this->PlanoEstudo->find('all');
-        $listas = array();
-        foreach ($planoestudo as $m) {
-            $lista = array();
-            $lista[] = $m["PlanoEstudo"]["id"];
-            $lista[] = $m["PlanoEstudo"]["name"];
-            $lista[] = $m["Curso"]["name"];
-            $lista[] = $m["PlanoEstudo"]["duracao"];
-            $lista[] = $m["PlanoEstudo"]["semestresano"];
-            $listas[] = $lista;
-        }
-        // $this->set('cursos',$this->Curso->find('all'));
-        $this->set('lista', $listas);
-        $this->layout = 'pdf'; //this will use the pdf.ctp layout
-        $this->render();
-    }
-
-    function pdf_index_planoestudo($id = null) {
-        // quando queremos visualizar as variaveis temos de comentar a funcao abaixo : nota bem
-        Configure::write('debug', 0); // Otherwise we cannot use this method while developing
-        $planoestudo = $this->PlanoEstudo->findById($id); // quando quer trazer dados por id
-        //$cursos = $this->PlanoEstudo->Curso->find('list',array('conditions'=>array('')));
-        $disciplinas = $this->PlanoEstudo->getAllDisciplinasByPlanoEstudo($id);
-        $this->set(compact('cursos', 'disciplinas', 'planoestudo'));
-        //var_dump($disciplinas);
-        //var_dump($planoestudo);
-        $listas = array();
-        $teste = array();
-        $teste[] = $id;
-        $teste[] = $planoestudo['PlanoEstudo']['name'];
-        $teste[] = $planoestudo['Curso']['name'];
-        foreach ($disciplinas as $m) {
-            $lista = array();
-            $lista[] = $m['d']['codigo'];
-            $lista[] = $m['d']['name'];
-            $lista[] = $m['p']['ano'];
-            $lista[] = $m['p']['semestre'];
-            $lista[] = $m['p']['cargahorariateoricas'];
-            $lista[] = $m['p']['cargahorariapraticas'];
-            $listas[] = $lista;
-        }
-
-
-
-
-        // $teste[] = $this->data['DisciplinaPlanoEstudo']["name"];
-
-        $this->set('teste1', $teste);
-        $this->set('lista', $listas);
-        $this->layout = 'pdf'; //this will use the pdf.ctp layout,comenta quando quer visualizar as variaveis
-        //$this->render('/t0005planoestudos/pdf_teste');
-        $this->render(); // comenta quando quer visualizar as variaveis
-    }
-
-    function ajax_add_obr() {
-        App::import('Model', 'Grupodisciplina');
-        $grupodisciplina = new Grupodisciplina;
-
-        //$nova_disciplina =
-
-        $a = array();
-        $a["codigo"] = null;
-        $a["tipo"] = "O";
-        $a["disciplina_id"] = $this->data["DisciplinaPlanoEstudo"]["disciplina_id"];
-        $a["grupodisciplinasprec"] = $this->data["DisciplinaPlanoEstudo"]["pdisciplina"];
-        $precedencia = array('Grupodisciplina' => $a);
-
-        $grupodisciplina->save($precedencia);
-
-        $precedencias = $grupodisciplina->find('all', array('conditions' => array('disciplina_id' => $a["disciplina_id"])));
-
-        $this->set('precedencias', $precedencias);
-
-
-
-        //var_dump($precedencias);
-        $this->layout = 'ajax';
-    }
-
-    function _getAllPrecedencias() {
-        
-    }
 
     public function getByCurso() {
         foreach ($this->request->data as $k => $v) {
@@ -373,6 +248,13 @@ class PlanoEstudosController extends AppController {
         $planoestudos = $this->PlanoEstudo->find('list', array('conditions' => array('curso_id' => $curso_id)));
         $this->set(compact('planoestudos'));
         $this->layout = 'ajax';
+    }
+    
+    public function beforeFilter(){
+        parent::beforeFilter();
+        if($this->action=='faculdade_adicionar_precedencias'){
+            //$this->Security->validatePost=false;
+        }
     }
 
 }

@@ -82,8 +82,8 @@ class DraShell extends AppShell {
 			$curso_array = array(
 					'Curso'=>array(
 							'name'=>$curso['DraCurso']['curso_nome'],
-							'grauacademico_id'=>$curso['DraCurso']['nivel'],
-							'tipocurso_id'=>$curso['DraCurso']['nivel'],
+							'grau_academico_id'=>$curso['DraCurso']['nivel'],
+							'tipo_curso_id'=>$curso['DraCurso']['nivel'],
 							'unidade_organica_id'=>$faculdade['UnidadeOrganica']['id'],
 							'codigo'=>$curso['DraCurso']['curso_id']
 			)
