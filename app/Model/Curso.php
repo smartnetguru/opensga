@@ -156,8 +156,18 @@ class Curso extends AppModel {
     }
 
     public function getPlanoEstudoRecente($curso_id) {
-        return $this->PlanoEstudo->find('first', array('conditions' => array('curso_id' => $curso_id), 'order' => 'ano_criacao DESC'));
+        return $this->PlanoEstudo->find('first', array('conditions' => array('curso_id' => $curso_id,'estado_objecto_id'=>1), 'order' => 'ano_criacao DESC'));
     }
+    
+    public function getPlanoEstudoIdRecente($curso_id) {
+        $planoEstudo =  $this->PlanoEstudo->find('first', array('conditions' => array('curso_id' => $curso_id,'estado_objecto_id'=>1), 'order' => 'ano_criacao DESC'));
+        if(!empty($planoEstudo)){
+            return $planoEstudo['PlanoEstudo']['id'];
+        }
+        return null;
+        
+    }
+    
 
     public function getTurnoIdByCursoId($curso_id) {
         $curso_turno = $this->CursosTurno->findByCursoId($curso_id);

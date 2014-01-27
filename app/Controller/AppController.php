@@ -25,7 +25,7 @@ App::uses('Controller', 'Controller');
 class AppController extends Controller {
 
     public $components = array('Security', 'Acl', 'Auth' => array('authenticate' => 'Blowfish'), 'Session', 'RequestHandler', 'Paginator', 'Cookie', 'HighCharts.HighCharts', 'DebugKit.Toolbar');
-    public $helpers = array('Html', 'AclLink', 'Print', 'Form', 'Session', 'Js' => array('MyJquery'), 'EventsCalendar', 'Javascript', 'Ajax', 'PhpExcel', 'HighCharts.HighCharts', 'AclLink');
+    public $helpers = array('Html', 'AclLink', 'Print', 'BreadCumbs', 'Form', 'Session', 'Js' => array('MyJquery'), 'EventsCalendar', 'Javascript', 'Ajax', 'PhpExcel', 'HighCharts.HighCharts', 'AclLink');
     public $pdfConfig = array('engine' => 'CakePdf.Tcpdf');
     public $cacheAction = '1 hour';
 
@@ -59,21 +59,23 @@ class AppController extends Controller {
         $this->Auth->loginRedirect = array(array('plugin' => false, 'controller' => 'pages', 'action' => 'display', 'home'));
         $this->Auth->unauthorizedRedirect = false;
 
+
+
         if ($this->request->is('ajax')) {
-            $this->layout=false;
+            $this->layout = false;
             $this->Security->csrfCheck = false;
             $this->Security->validatePost = false;
         }
 
         //Devemos forcar o prefixo para funcionarios da faculdade, docente e estudantes
-        $general_actions = array('logout', 'trocar_senha', 'autocomplete','altera_unidade_organica_admin');
+        $general_actions = array('logout', 'trocar_senha', 'autocomplete', 'altera_unidade_organica_admin');
         if (!in_array($this->action, $general_actions)) {
             $grupo_id = $this->Session->read('Auth.User.group_id');
-            if($grupo_id==1){
+            if ($grupo_id == 1) {
                 $this->loadModel('User');
                 $unidade_organica = $this->User->Funcionario->UnidadeOrganica->findById($this->Session->read('Auth.User.unidade_organica_id'));
                 $codigo_unidade = $unidade_organica['UnidadeOrganica']['codigo_interno'];
-                
+
                 switch ($codigo_unidade) {
                     case 'cooperacao':
                         if ($this->request->plugin != 'cooperacao') {
@@ -86,9 +88,8 @@ class AppController extends Controller {
                             $this->Session->setFlash(__('Não tem Permissão para acessar a area anterior'), 'default', array('class' => 'alert info'));
                             $this->redirect(array('controller' => 'pages', 'action' => 'home', 'faculdade' => true));
                         }
-                } 
-            }
-            elseif ($grupo_id == 4) {
+                }
+            } elseif ($grupo_id == 4) {
                 if ($this->request->prefix != 'docente') {
                     $this->Security->blackHole($this);
                 }

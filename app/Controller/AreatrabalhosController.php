@@ -32,7 +32,7 @@ class AreatrabalhosController extends AppController {
 	var $name = 'Areatrabalhos';
 
 	function index() {
-		$this->Areatrabalho->recursive = 0;
+		$this->AreaTrabalho->recursive = 0;
 		$this->set('tg0010areatrabalhos', $this->paginate());
 	}
 
@@ -41,16 +41,16 @@ class AreatrabalhosController extends AppController {
 			$this->Session->setFlash('Invalido %s', 'flasherror');
 			$this->redirect(array('action' => 'index'));
 		}
-		//$this->set('tg0010areatrabalho', $this->Areatrabalho->read(null, $id));
+		//$this->set('tg0010areatrabalho', $this->AreaTrabalho->read(null, $id));
                 if (empty($this->data)) {
-			$this->data = $this->Areatrabalho->read(null, $id);
+			$this->data = $this->AreaTrabalho->read(null, $id);
 		}
 	}
 
 	function add() {
 		if (!empty($this->data)) {
-			$this->Areatrabalho->create();
-			if ($this->Areatrabalho->save($this->data)) {
+			$this->AreaTrabalho->create();
+			if ($this->AreaTrabalho->save($this->data)) {
 				$this->Session->setFlash('** Dados Cadastrados com Sucesso **','flashok');
 				$this->redirect(array('action' => 'index'));
 			} else {
@@ -64,14 +64,14 @@ class AreatrabalhosController extends AppController {
 			$this->redirect(array('action' => 'index'));
 		}
 		if (!empty($this->data)) {
-			if ($this->Areatrabalho->save($this->data)) {
+			if ($this->AreaTrabalho->save($this->data)) {
 				$this->Session->setFlash('Dado Editados com sucesso','flashok');
 				$this->redirect(array('action' => 'index'));
 			} else {
 				$this->Session->setFlash('Erro ao gravar dados. Por favor tente de novo.','flasherror');}
 		}
 		if (empty($this->data)) {
-			$this->data = $this->Areatrabalho->read(null, $id);
+			$this->data = $this->AreaTrabalho->read(null, $id);
 		}
 	}
 
@@ -80,11 +80,11 @@ class AreatrabalhosController extends AppController {
 			$this->Session->setFlash(sprintf(__('Invalid id for %s', true), 'tg0010areatrabalho'));
 			$this->redirect(array('action'=>'index'));
 		}
-		if ($this->Areatrabalho->delete($id)) {
+		if ($this->AreaTrabalho->delete($id)) {
 			$this->Session->setFlash('Dados deletedos com sucesso ','flashok');
 			$this->redirect(array('action'=>'index'));
 		}
-		$this->Session->setFlash(sprintf(__('%s was not deleted', true), 'Areatrabalho'));
+		$this->Session->setFlash(sprintf(__('%s was not deleted', true), 'AreaTrabalho'));
 		$this->redirect(array('action' => 'index'));
 	}
         function beforeRender(){

@@ -4877,7 +4877,7 @@ msgid "Etrabalhador"
 msgstr ""
 
 #: \views\estadoentidades\view.ctp:143
-msgid "Areatrabalho Id"
+msgid "AreaTrabalho Id"
 msgstr ""
 
 #: \views\estadoentidades\view.ctp:144

@@ -276,7 +276,7 @@ class AlunosController extends AppController {
         $provenienciacidades = $this->Aluno->Entidade->CidadeNascimento->find('list');
         $proveniencianomes = $this->Aluno->Entidade->ProvinciaNascimento->find('list');
         $documentos = $this->Aluno->Entidade->DocumentoIdentificacao->find('list');
-        $areatrabalhos = $this->Aluno->Areatrabalho->find('list');
+        $areatrabalhos = $this->Aluno->AreaTrabalho->find('list');
         $generos = $this->Aluno->Entidade->Genero->find('list');
         $cidadenascimentos = $this->Aluno->Entidade->CidadeNascimento->find('list');
         $cursos = $this->Aluno->Curso->find('list');
@@ -367,7 +367,7 @@ class AlunosController extends AppController {
         $provenienciacidades = $this->Aluno->AlunoNivelMedio->EscolaNivelMedio->Distrito->find('list');
         $proveniencianomes = $this->Aluno->AlunoNivelMedio->EscolaNivelMedio->Provincia->find('list');
         $documento_identificacaos = $this->Aluno->Entidade->DocumentoIdentificacao->find('list');
-        $areatrabalhos = $this->Aluno->Areatrabalho->find('list');
+        $areatrabalhos = $this->Aluno->AreaTrabalho->find('list');
         $generos = $this->Aluno->Entidade->Genero->find('list');
         $turnos = $this->Aluno->Matricula->Turno->find('list');
         $estado_civil = $this->Aluno->Entidade->EstadoCivil->find('list');
@@ -413,7 +413,7 @@ class AlunosController extends AppController {
         $provenienciacidades = $this->Aluno->AlunoNivelMedio->EscolaNivelMedio->Distrito->find('list');
         $proveniencianomes = $this->Aluno->AlunoNivelMedio->EscolaNivelMedio->Provincia->find('list');
         $documento_identificacaos = $this->Aluno->Entidade->DocumentoIdentificacao->find('list');
-        $areatrabalhos = $this->Aluno->Areatrabalho->find('list');
+        $areatrabalhos = $this->Aluno->AreaTrabalho->find('list');
         $generos = $this->Aluno->Entidade->Genero->find('list');
         $turnos = $this->Aluno->Matricula->Turno->find('list');
         $estado_civil = $this->Aluno->Entidade->EstadoCivil->find('list');
@@ -430,12 +430,6 @@ class AlunosController extends AppController {
         $this->set('current_section', 'estudantes');
     }
 
-    public function beforeFilter() {
-        parent::beforeFilter();
-        if ($this->request->params['action'] == 'adicionar_estudante') {
-            $this->Security->validatePost = false;
-        }
-    }
 
     public function capturar_foto($aluno_id) {
         $this->Aluno->id = $aluno_id;
@@ -720,8 +714,16 @@ class AlunosController extends AppController {
     }
 
     public function matricular_candidato($candidato_id) {
-        $this->loadModel('Candidatura');
-        $candidato = $this->Candidatura->findById($candidato_id);
+        
+        $this->Aluno->Candidatura->id = $candidato_id;
+        if(!$this->Aluno->Candidatura->exists()){
+            throw new NotFoundException('Candidato Nao encontrado');
+         
+        }
+                
+        $candidato = $this->Aluno->Candidatura->findById($candidato_id);
+        
+        
         $aluno_existe = $this->Aluno->findByCodigo($candidato['Candidatura']['numero_estudante']);
         if (!empty($aluno_existe)) {
             $this->Session->setFlash(__('Este candidato já está matriculado'));
@@ -729,8 +731,11 @@ class AlunosController extends AppController {
         }
 
         if ($this->request->is('post')) {
+            
             $this->request->data['Entidade']['name'] = $this->request->data['Entidade']['nomes'] . ' ' . $this->request->data['Entidade']['apelido'];
-            if ($this->Aluno->cadastraAluno($this->request->data)) {
+            $this->request->data['Dados']['user_id'] = $this->Session->read('Auth.User.id');
+            $this->request->data['Dados']['numero_candidato'] = $candidato_id;
+            if ($this->Aluno->matriculaNovoIngresso($this->request->data)) {
                 $this->Session->setFlash("Aluno Registrado com Sucesso", 'default', array('class' => 'alert_success'));
                 $this->redirect(array('controller' => 'alunos', 'action' => 'perfil_estudante', $this->Aluno->id));
             } else {
@@ -750,12 +755,19 @@ class AlunosController extends AppController {
         $provenienciacidades = $this->Aluno->AlunoNivelMedio->EscolaNivelMedio->Distrito->find('list');
         $proveniencianomes = $this->Aluno->AlunoNivelMedio->EscolaNivelMedio->Provincia->find('list');
         $documento_identificacaos = $this->Aluno->Entidade->DocumentoIdentificacao->find('list');
-        $areatrabalhos = $this->Aluno->Areatrabalho->find('list');
+        $areatrabalhos = $this->Aluno->AreaTrabalho->find('list');
         $generos = $this->Aluno->Entidade->Genero->find('list');
         $turnos = $this->Aluno->Matricula->Turno->find('list');
         $estado_civil = $this->Aluno->Entidade->EstadoCivil->find('list');
         $cidadenascimentos = $this->Aluno->Entidade->CidadeNascimento->find('list');
-        $this->set(compact('candidato', 'nacionalidades', 'cursos', 'planoestudos', 'users', 'paises', 'cidades', 'provincias', 'documento_identificacaos', 'areatrabalhos', 'generos', 'cidadenascimentos', 'proveniencianomes', 'provenienciacidades', 'turnos', 'escolaNivelMedios', 'estado_civil'));
+        $grauParentescos = $this->Aluno->GrauParentesco->find('list');
+        
+        $naturalidade = '';
+        $this->set(compact('candidato', 'nacionalidades', 'cursos', 'planoestudos', 'users', 'paises', 'cidades', 'provincias', 'documento_identificacaos', 'areatrabalhos', 'generos', 'cidadenascimentos', 'proveniencianomes', 'provenienciacidades', 'turnos', 'escolaNivelMedios', 'estado_civil','naturalidade','grauParentescos'));
+        
+        $this->set('siga_page_title','Matriculas');
+        $this->set('siga_page_overview','Formulario de Matricula de Novos Ingressos');
+        $this->layout = 'clipone_default';
     }
 
     public function print_boletim_matricula($aluno_id) {

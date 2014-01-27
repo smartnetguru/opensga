@@ -27,8 +27,8 @@
  */
  
  
-class Areatrabalho extends AppModel {
-	var $name = 'Areatrabalho';
+class AreaTrabalho extends AppModel {
+	var $name = 'AreaTrabalho';
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 
 	var $hasMany = array(

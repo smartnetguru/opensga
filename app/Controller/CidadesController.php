@@ -100,7 +100,7 @@ class CidadesController extends AppController {
             $this->set('current_section','administracao');
         }
         
-        public function getByProvincia(){
+        public function ajax_get_by_provincia(){
             foreach($this->request->data as $k=>$v){
                 
                 $provincia_id = reset($v);

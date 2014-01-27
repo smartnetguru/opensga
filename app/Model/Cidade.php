@@ -49,9 +49,9 @@ class Cidade extends AppModel {
 	);
 
 	var $hasMany = array(
-		'Funcionario' => array(
-			'className' => 'Funcionario',
-			'foreignKey' => 'Cidade_id',
+		'Entidade' => array(
+			'className' => 'Entidade',
+			'foreignKey' => 'cidade_id',
 			'dependent' => false,
 			'conditions' => '',
 			'fields' => '',
@@ -62,8 +62,21 @@ class Cidade extends AppModel {
 			'finderQuery' => '',
 			'counterQuery' => ''
 		),
-		'Aluno' => array(
-			'className' => 'Aluno',
+		'Bairro' => array(
+			'className' => 'Bairro',
+			'foreignKey' => 'cidade_id',
+			'dependent' => false,
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'exclusive' => '',
+			'finderQuery' => '',
+			'counterQuery' => ''
+		),
+		'Rua' => array(
+			'className' => 'Rua',
 			'foreignKey' => 'Cidade_id',
 			'dependent' => false,
 			'conditions' => '',
