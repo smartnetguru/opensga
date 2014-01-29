@@ -59,7 +59,13 @@ class CandidatoAlumnisController extends AppController {
                 $provinciaMoradas = $this->CandidatoAlumni->ProvinciaMorada->find('list');
                 $cidadeMoradas = $this->CandidatoAlumni->CidadeMorada->find('list');
                 $this->layout = 'guest_users';
+                
+                $this->set('siga_page_title','Pre-Registro de Alumni');
+                $this->set('siga_page_overview','Preencha o formulario abaixo para se registar como Alumni da UEM');
+                $this->set('naturalidade','');
 		$this->set(compact('generos', 'estadoCivils', 'unidadeOrganicas', 'cursos', 'grauAcademicos','paisNascimentos','provinciaNascimentos','cidadeNascimentos','paisMoradas','provinciaMoradas','cidadeMoradas'));
+        
+        
 	}
 
 /**

@@ -54,7 +54,7 @@ class FinanceiroTransacaosController extends AppController {
                 $this->request->data['FinanceiroPagamento']['financeiro_conta_id'] = $this->FinanceiroTransacao->FinanceiroPagamento->Aluno->getContaIdByAlunoId($aluno_id);
                 $this->request->data['FinanceiroPagamento']['financeiro_estado_pagamento_id'] = 1;
                 $this->request->data['FinanceiroPagamento']['ano_lectivo_id'] = Configure::read('OpenSGA.ano_lectivo_id');
-                $this->request->data['FinanceiroPagamento']['semestrelectivo_id'] = Configure::read('OpenSGA.semestre_lectivo_id');
+                $this->request->data['FinanceiroPagamento']['semestre_lectivo_id'] = Configure::read('OpenSGA.semestre_lectivo_id');
                 $this->request->data['FinanceiroPagamento']['data_emissao'] = date('Y-m-d H:i:s');
                 $this->request->data['FinanceiroPagamento']['entidade_id'] = $this->FinanceiroTransacao->FinanceiroPagamento->Aluno->field('entidade_id', array('Aluno.id' => $aluno_id));
                 $this->request->data['FinanceiroPagamento']['detalhes'] = $this->request->data['FinanceiroTransacao']['detalhes'];
@@ -80,7 +80,7 @@ class FinanceiroTransacaosController extends AppController {
 
         $pagamentos_pendentes = $this->FinanceiroTransacao->FinanceiroPagamento->find('all', array('conditions' => array('aluno_id' => $aluno_id, 'financeiro_estado_pagamento_id' => 1)));
 
-        $pagamentos_efectuados = $this->FinanceiroTransacao->FinanceiroPagamento->find('all', array('conditions' => array('aluno_id' => $aluno_id, 'financeiro_estado_pagamento_id' => 2, 'semestrelectivo_id' => Configure::read('OpenSGA.semestre_lectivo_id'))));
+        $pagamentos_efectuados = $this->FinanceiroTransacao->FinanceiroPagamento->find('all', array('conditions' => array('aluno_id' => $aluno_id, 'financeiro_estado_pagamento_id' => 2, 'semestre_lectivo_id' => Configure::read('OpenSGA.semestre_lectivo_id'))));
 
 
         $financeiro_tipo_pagamentos = $this->FinanceiroTransacao->FinanceiroPagamento->FinanceiroTipoPagamento->find('list', array('conditions' => array('codigo >' => 21)));

@@ -126,7 +126,7 @@ class FinanceiroPagamento extends AppModel {
                 'valor' => $valor_mensalidade,
                 'data_limite' => date('Y') . "-" . $ftp['FinanceiroTipoPagamento']['mes_limite'] . "-" . $ftp['FinanceiroTipoPagamento']['dia_limite'],
                 'ano_lectivo_id' => Configure::read('OpenSGA.ano_lectivo_id'),
-                'semestrelectivo_id' => Configure::read('OpenSGA.semestre_lectivo_id'),
+                'semestre_lectivo_id' => Configure::read('OpenSGA.semestre_lectivo_id'),
                 'financeiro_estado_pagamento_id' => 1,
                 'codigo' => $this->gerarCodigoPagamento($aluno_id, $ftp['FinanceiroTipoPagamento']['codigo']),
                 'data_emissao' => date('Y-m-d H:i:s'),

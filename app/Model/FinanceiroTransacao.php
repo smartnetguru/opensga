@@ -195,7 +195,7 @@ class FinanceiroTransacao extends AppModel {
             $novo_deposito['FinanceiroDeposito']['financeiro_transacao_id'] = $this->id;
             $novo_deposito['FinanceiroDeposito']['data_reconciliacao'] = null;
             $novo_deposito['FinanceiroDeposito']['financeiro_estado_deposito_id'] = 1;
-            $novo_deposito['FinanceiroDeposito']['semestrelectivo_id'] = Configure::read('OpenSGA.semestre_lectivo_id');
+            $novo_deposito['FinanceiroDeposito']['semestre_lectivo_id'] = Configure::read('OpenSGA.semestre_lectivo_id');
             //die(debug($novo_deposito));            
             $this->FinanceiroDeposito->create();
             if($this->FinanceiroDeposito->save($novo_deposito)){

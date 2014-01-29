@@ -132,7 +132,7 @@ class SadeAutoAvaliacaosController extends AppController {
                 $sade_auto_avaliacao['sade_parametro_id']=$k;
                 $sade_auto_avaliacao['data']=date('Y-m-d');
                 $sade_auto_avaliacao['ano_lectivo_id']=$this->Session->read('SGAConfig.ano_lectivo_id');
-                $sade_auto_avaliacao['semestrelectivo_id']=$this->Session->read('SGAConfig.semestrelectivo_id');
+                $sade_auto_avaliacao['semestre_lectivo_id']=$this->Session->read('SGAConfig.semestre_lectivo_id');
                 if($v['resposta']>=$parametros_array[$k]['quantidade']){
                     $sade_auto_avaliacao['pontos_obtidos']=$parametros_array[$k]['pontos'];
                 }
@@ -189,7 +189,7 @@ class SadeAutoAvaliacaosController extends AppController {
                 $sade_auto_avaliacao['sade_parametro_id']=$k;
                 $sade_auto_avaliacao['data']=date('Y-m-d');
                 $sade_auto_avaliacao['ano_lectivo_id']=$this->Session->read('SGAConfig.ano_lectivo_id');
-                $sade_auto_avaliacao['semestrelectivo_id']=$this->Session->read('SGAConfig.semestrelectivo_id');
+                $sade_auto_avaliacao['semestre_lectivo_id']=$this->Session->read('SGAConfig.semestre_lectivo_id');
                 if($v['resposta']>=$parametros_array[$k]['quantidade']){
                     $sade_auto_avaliacao['pontos_obtidos']=$parametros_array[$k]['pontos'];
                 }
@@ -248,7 +248,7 @@ class SadeAutoAvaliacaosController extends AppController {
                 $sade_auto_avaliacao['sade_parametro_id']=$k;
                 $sade_auto_avaliacao['data']=date('Y-m-d');
                 $sade_auto_avaliacao['ano_lectivo_id']=$this->Session->read('SGAConfig.ano_lectivo_id');
-                $sade_auto_avaliacao['semestrelectivo_id']=$this->Session->read('SGAConfig.semestrelectivo_id');
+                $sade_auto_avaliacao['semestre_lectivo_id']=$this->Session->read('SGAConfig.semestre_lectivo_id');
                 if($v['resposta']>=$parametros_array[$k]['quantidade']){
                     $sade_auto_avaliacao['pontos_obtidos']=$parametros_array[$k]['pontos'];
                 }

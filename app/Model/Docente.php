@@ -61,14 +61,14 @@ class Docente extends AppModel {
         $dataSource->begin();
 
 
-        if (isset($data['Docente']['codigo']) && $data['Docente']['codigo'] == '') {
-            $data['Docente']['codigo'] = $this->Entidade->User->geraUsername($data['Entidade']['name']);
+        if (!isset($data['Docente']['codigo']) || $data['Docente']['codigo'] == '') {
+            $data['Docente']['codigo'] = $this->Entidade->User->geraEmailUem($data['Entidade']['apelido'],$data['Entidade']['nomes']);
         }
 
         //Grava os dados do Usuario
         $this->Entidade->User->create();
         $data['User']['username'] = $data['Docente']['codigo'];
-        $data['User']['password'] = Security::hash($data['Docente']['codigo'],'blowfish');
+        $data['User']['password'] = Security::hash('uem2013','blowfish');
         $data['User']['codigocartao'] = $data['Docente']['codigo'];
         $data['User']['name'] = $data['Entidade']['name'];
         $data['User']['group_id'] = 4;

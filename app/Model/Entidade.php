@@ -61,6 +61,20 @@ class Entidade extends AppModel {
 			'fields' => '',
 			'order' => ''
 		),
+        'Bairro' => array(
+			'className' => 'Bairro',
+			'foreignKey' => 'bairro_morada',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
+		),
+        'Rua' => array(
+			'className' => 'Cidade',
+			'foreignKey' => 'avenida_rua',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
+		),
         'CidadeFerias' => array(
 			'className' => 'Cidade',
 			'foreignKey' => 'cidade_ferias',
@@ -89,9 +103,9 @@ class Entidade extends AppModel {
 			'fields' => '',
 			'order' => ''
 		),
-		'Estadoentidade' => array(
-			'className' => 'Estadoentidade',
-			'foreignKey' => 'estadoentidade_id',
+		'EstadoEntidade' => array(
+			'className' => 'EstadoEntidade',
+			'foreignKey' => 'EstadoEntidade_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''

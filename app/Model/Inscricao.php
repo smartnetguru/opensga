@@ -130,7 +130,7 @@ class Inscricao extends AppModel {
         $this->contain(array(
             'Turma'
         ));
-        return $this->find('all', array('conditions' => array('Inscricao.aluno_id' => $aluno_id, 'Turma.semestrelectivo_id' => $semestre_id)));
+        return $this->find('all', array('conditions' => array('Inscricao.aluno_id' => $aluno_id, 'Turma.semestre_lectivo_id' => $semestre_id)));
     }
     
     
@@ -212,7 +212,7 @@ class Inscricao extends AppModel {
                     'financeiro_estado_pagamento_id' => 2,
                     'ano_lectivo_id' => Configure::read('OpenSGA.ano_lectivo_id'),
                     'data_emissao' => date('Y-m-d'),
-                    'semestrelectivo_id' => Configure::read('OpenSGA.semestre_lectivo_id'),
+                    'semestre_lectivo_id' => Configure::read('OpenSGA.semestre_lectivo_id'),
                     'entidade_id' => $conta['FinanceiroConta']['entidade_id']
                 );
 

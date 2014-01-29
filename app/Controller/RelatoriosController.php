@@ -42,20 +42,20 @@ class RelatoriosController extends AppController {
 
         $ano_lectivo_id = $this->Aluno->Matricula->AnoLectivo->SemestreLectivo->field('ano_lectivo_id', array('SemestreLectivo.id' => $semestre_id));
         //Resumo de Alunos
-        $total_alunos_activos = $this->Aluno->find('count', array('conditions' => array('NOT' => array('Aluno.estadoentidade_id' => array(2, 3, 4)))));
+        $total_alunos_activos = $this->Aluno->find('count', array('conditions' => array('NOT' => array('Aluno.EstadoEntidade_id' => array(2, 3, 4)))));
         $total_novos_ingressos = $this->Aluno->Matricula->find('count', array('conditions' => array('Matricula.tipo_matricula_id' => array(0, 1), 'Matricula.ano_lectivo_id' => $ano_lectivo_id)));
         $total_matriculas_renovadas = $this->Aluno->Matricula->find('count', array('conditions' => array('Matricula.tipo_matricula_id' => 2, 'Matricula.ano_lectivo_id' => $ano_lectivo_id)));
         $total_nao_matriculados = $total_alunos_activos - $total_novos_ingressos - $total_matriculas_renovadas;
 
         //Resumo de Tesouraria
-        $facturas_geradas = $this->Aluno->FinanceiroPagamento->find('count', array('conditions' => array('FinanceiroPagamento.semestrelectivo_id' => $semestre_id)));
-        $facturas_pagas = $this->Aluno->FinanceiroPagamento->find('count', array('conditions' => array('FinanceiroPagamento.financeiro_estado_pagamento_id' => 2, 'semestrelectivo_id' => $semestre_id)));
-        $facturas_divida = $this->Aluno->FinanceiroPagamento->find('count', array('conditions' => array('FinanceiroPagamento.financeiro_estado_pagamento_id' => 1, 'FinanceiroPagamento.semestrelectivo_id' => $semestre_id)));
-        $valor_arrecadado = $this->Aluno->FinanceiroPagamento->find('all', array('conditions' => array('FinanceiroPagamento.semestrelectivo_id' => $semestre_id, 'FinanceiroPagamento.financeiro_estado_pagamento_id' => 2), 'fields' => 'sum(FinanceiroPagamento.valor) as valor'));
-        $valor_divida = $this->Aluno->FinanceiroPagamento->find('all', array('conditions' => array('FinanceiroPagamento.financeiro_estado_pagamento_id' => 1, 'FinanceiroPagamento.semestrelectivo_id' => $semestre_id), 'fields' => 'sum(FinanceiroPagamento.valor) as valor'));
+        $facturas_geradas = $this->Aluno->FinanceiroPagamento->find('count', array('conditions' => array('FinanceiroPagamento.semestre_lectivo_id' => $semestre_id)));
+        $facturas_pagas = $this->Aluno->FinanceiroPagamento->find('count', array('conditions' => array('FinanceiroPagamento.financeiro_estado_pagamento_id' => 2, 'semestre_lectivo_id' => $semestre_id)));
+        $facturas_divida = $this->Aluno->FinanceiroPagamento->find('count', array('conditions' => array('FinanceiroPagamento.financeiro_estado_pagamento_id' => 1, 'FinanceiroPagamento.semestre_lectivo_id' => $semestre_id)));
+        $valor_arrecadado = $this->Aluno->FinanceiroPagamento->find('all', array('conditions' => array('FinanceiroPagamento.semestre_lectivo_id' => $semestre_id, 'FinanceiroPagamento.financeiro_estado_pagamento_id' => 2), 'fields' => 'sum(FinanceiroPagamento.valor) as valor'));
+        $valor_divida = $this->Aluno->FinanceiroPagamento->find('all', array('conditions' => array('FinanceiroPagamento.financeiro_estado_pagamento_id' => 1, 'FinanceiroPagamento.semestre_lectivo_id' => $semestre_id), 'fields' => 'sum(FinanceiroPagamento.valor) as valor'));
 
-        $total_depositos = $this->Aluno->Entidade->FinanceiroDeposito->find('count', array('semestrelectivo_id' => Configure::read('OpenSGA.semestre_lectivo_id')));
-        $valor_depositos = $this->Aluno->Entidade->FinanceiroDeposito->find('all', array('conditions' => array('semestrelectivo_id' => $semestre_id), 'fields' => 'sum(FinanceiroDeposito.valor) as valor'));
+        $total_depositos = $this->Aluno->Entidade->FinanceiroDeposito->find('count', array('semestre_lectivo_id' => Configure::read('OpenSGA.semestre_lectivo_id')));
+        $valor_depositos = $this->Aluno->Entidade->FinanceiroDeposito->find('all', array('conditions' => array('semestre_lectivo_id' => $semestre_id), 'fields' => 'sum(FinanceiroDeposito.valor) as valor'));
 
         //debug($total_depositos);
 

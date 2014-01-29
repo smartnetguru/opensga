@@ -67,7 +67,9 @@ class AlunosController extends AppController {
                 'PlanoEstudo', 'Turno'
             ),
             'Curso', 'Entidade' => array(
-                'ProvinciaNascimento', 'CidadeNascimento', 'PaisNascimento', 'Genero', 'DocumentoIdentificacao'
+                'ProvinciaNascimento', 'CidadeNascimento', 'PaisNascimento', 'Genero', 'DocumentoIdentificacao','User','CidadeMorada'=>array(
+                    'Bairro','Rua'
+                )
             ),
             'AlunoNivelMedio' => array(
                 'EscolaNivelMedio' => array('Provincia', 'Distrito')
@@ -78,7 +80,7 @@ class AlunosController extends AppController {
         $this->Aluno->Inscricao->contain(array(
             'Turma' => array(
                 'fields' => array(
-                    'id', 'disciplina_id', 'anocurricular', 'semestrecurricular'),
+                    'id', 'disciplina_id', 'ano_curricular', 'semestre_curricular'),
                 'Disciplina' => array(
                     'fields' => array('id', 'name')
                 )
@@ -96,7 +98,7 @@ class AlunosController extends AppController {
         $this->Aluno->Inscricao->contain(array(
             'Turma' => array(
                 'fields' => array(
-                    'id', 'disciplina_id', 'anocurricular', 'semestrecurricular'),
+                    'id', 'disciplina_id', 'ano_curricular', 'semestre_curricular'),
                 'Disciplina' => array(
                     'fields' => array('id', 'name')
                 )
@@ -111,14 +113,14 @@ class AlunosController extends AppController {
         );
         $todas_inscricoes = $this->Aluno->Inscricao->find('all', array('conditions' => array('Inscricao.aluno_id' => $id),
             'order' => array(
-                'Turma.anocurricular',
-                'Turma.semestrecurricular'
+                'Turma.ano_curricular',
+                'Turma.semestre_curricular'
                 )));
 
         $this->Aluno->Inscricao->contain(array(
             'Turma' => array(
                 'fields' => array(
-                    'id', 'disciplina_id', 'anocurricular', 'semestrecurricular'),
+                    'id', 'disciplina_id', 'ano_curricular', 'semestre_curricular'),
                 'Disciplina' => array(
                     'fields' => array('id', 'name')
                 )
@@ -146,12 +148,12 @@ class AlunosController extends AppController {
 
         if (count($is_regular) == 1 && $is_regular[0]['regular'] == true) {
             if ($is_regular[0]['estado'] == 1) {
-                $classe_estado = "alert note";
+                $classe_estado = "alert alert-info";
             } else {
-                $classe_estado = "alert success";
+                $classe_estado = "alert alert-success";
             }
         } else {
-            $classe_estado = "alert error";
+            $classe_estado = "alert alert-danger";
         }
         //Requisicoes
 
@@ -167,6 +169,8 @@ class AlunosController extends AppController {
         $is_bolseiro = $this->Aluno->isBolseiro($id, $this->Session->read('SGAConfig.ano_lectivo_id'));
 
         $this->set(compact('inscricoes_activas', 'todas_inscricoes', 'cadeiras_aprovadas', 'pagamentos', 'is_bolseiro', 'is_regular', 'classe_estado', 'requisicoes'));
+        
+        $this->layout = 'clipone_default';
     }
 
     public function estudante_perfil($id = null) {
@@ -199,7 +203,7 @@ class AlunosController extends AppController {
         $this->Aluno->Inscricao->contain(array(
             'Turma' => array(
                 'fields' => array(
-                    'id', 'disciplina_id', 'anocurricular', 'semestrecurricular'),
+                    'id', 'disciplina_id', 'ano_curricular', 'semestre_curricular'),
                 'Disciplina' => array(
                     'fields' => array('id', 'name')
                 )
@@ -217,7 +221,7 @@ class AlunosController extends AppController {
         $this->Aluno->Inscricao->contain(array(
             'Turma' => array(
                 'fields' => array(
-                    'id', 'disciplina_id', 'anocurricular', 'semestrecurricular'),
+                    'id', 'disciplina_id', 'ano_curricular', 'semestre_curricular'),
                 'Disciplina' => array(
                     'fields' => array('id', 'name')
                 )
@@ -235,7 +239,7 @@ class AlunosController extends AppController {
         $this->Aluno->Inscricao->contain(array(
             'Turma' => array(
                 'fields' => array(
-                    'id', 'disciplina_id', 'anocurricular', 'semestrecurricular'),
+                    'id', 'disciplina_id', 'ano_curricular', 'semestre_curricular'),
                 'Disciplina' => array(
                     'fields' => array('id', 'name')
                 )
@@ -550,6 +554,10 @@ class AlunosController extends AppController {
         $this->set(compact('aluno', 'renovacoes_falta', 'matriculas', 'ano_renovacoes'));
     }
 
+    /**
+     *@fixme Deprecated... mudar o mais rapido possivel para entidades
+     * @param string $codigo 
+     */
     public function mostrar_foto($codigo) {
         $this->viewClass = 'Media';
         App::uses('Folder', 'Utility');
@@ -564,7 +572,7 @@ class AlunosController extends AppController {
             $folder_novo = new Folder($path);
 
             $file = new File($file_path);
-
+            
             if (!$file->exists()) {
                 $codigo = 'default_profile_picture';
                 $path = WWW_ROOT . DS . 'img' . DS;
@@ -677,7 +685,7 @@ class AlunosController extends AppController {
         $this->Aluno->Inscricao->contain(array(
             'Turma' => array(
                 'fields' => array(
-                    'id', 'disciplina_id', 'anocurricular', 'semestrecurricular', 'ano_lectivo_id'),
+                    'id', 'disciplina_id', 'ano_curricular', 'semestre_curricular', 'ano_lectivo_id'),
                 'Disciplina' => array(
                     'fields' => array('id', 'name')
                 ),
@@ -692,7 +700,7 @@ class AlunosController extends AppController {
             'Avaliacao' => array()
                 )
         );
-        $inscricaos = $this->Aluno->Inscricao->find('all', array('conditions' => array('Inscricao.aluno_id' => $aluno_id), 'order' => array('Turma.anocurricular,Turma.semestrecurricular')));
+        $inscricaos = $this->Aluno->Inscricao->find('all', array('conditions' => array('Inscricao.aluno_id' => $aluno_id), 'order' => array('Turma.ano_curricular,Turma.semestre_curricular')));
 
         $this->set('has_foto_entidade', $this->Aluno->hasFoto($aluno['Aluno']['codigo']));
         Configure::write('debug', 0);
@@ -731,7 +739,7 @@ class AlunosController extends AppController {
         }
 
         if ($this->request->is('post')) {
-            
+            die(debug($this->request->data));
             $this->request->data['Entidade']['name'] = $this->request->data['Entidade']['nomes'] . ' ' . $this->request->data['Entidade']['apelido'];
             $this->request->data['Dados']['user_id'] = $this->Session->read('Auth.User.id');
             $this->request->data['Dados']['numero_candidato'] = $candidato_id;
@@ -1174,7 +1182,7 @@ class AlunosController extends AppController {
         $this->Aluno->Inscricao->contain(array(
             'Turma' => array(
                 'fields' => array(
-                    'id', 'disciplina_id', 'anocurricular', 'semestrecurricular'),
+                    'id', 'disciplina_id', 'ano_curricular', 'semestre_curricular'),
                 'Disciplina' => array(
                     'fields' => array('id', 'name')
                 )
@@ -1192,7 +1200,7 @@ class AlunosController extends AppController {
         $this->Aluno->Inscricao->contain(array(
             'Turma' => array(
                 'fields' => array(
-                    'id', 'disciplina_id', 'anocurricular', 'semestrecurricular'),
+                    'id', 'disciplina_id', 'ano_curricular', 'semestre_curricular'),
                 'Disciplina' => array(
                     'fields' => array('id', 'name')
                 )
@@ -1207,14 +1215,14 @@ class AlunosController extends AppController {
         );
         $todas_inscricoes = $this->Aluno->Inscricao->find('all', array('conditions' => array('Inscricao.aluno_id' => $id),
             'order' => array(
-                'Turma.anocurricular',
-                'Turma.semestrecurricular'
+                'Turma.ano_curricular',
+                'Turma.semestre_curricular'
                 )));
 
         $this->Aluno->Inscricao->contain(array(
             'Turma' => array(
                 'fields' => array(
-                    'id', 'disciplina_id', 'anocurricular', 'semestrecurricular'),
+                    'id', 'disciplina_id', 'ano_curricular', 'semestre_curricular'),
                 'Disciplina' => array(
                     'fields' => array('id', 'name')
                 )

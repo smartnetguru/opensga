@@ -697,8 +697,8 @@ class ListagensController extends AppController {
 		  foreach ($dados_turma as $z)
            {
 			  $lista_turma = array();
-              $lista_turma[] =$z['tt']['anocurricular'];
-              $lista_turma[] =$z['tt']['semestrecurricular'];
+              $lista_turma[] =$z['tt']['ano_curricular'];
+              $lista_turma[] =$z['tt']['semestre_curricular'];
               $lista_turma[] =$z['tt']['name'];			  
 			  $lista_turma[] =$z['tc']['name'];
 			  $lista_turma[] =$z['tf']['name'];

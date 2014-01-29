@@ -331,7 +331,7 @@ class Listagen extends AppModel {
 	function getAllTurmaByCondition($turma_id){
 
 	
-	   $query = "SELECT tt.anocurricular, tt.semestrecurricular, tt.name,tf.name, tc.name, tal.codigo FROM t0003cursos tc, t0010turmas tt, funcionarios tf, t0009anolectivos tal WHERE tt.t0003curso_id= tc.id AND tt.funcionario_id=tf.id AND tt.t0009anolectivo_id = tal.id AND tt.id={$turma_id}";
+	   $query = "SELECT tt.ano_curricular, tt.semestre_curricular, tt.name,tf.name, tc.name, tal.codigo FROM t0003cursos tc, t0010turmas tt, funcionarios tf, t0009anolectivos tal WHERE tt.t0003curso_id= tc.id AND tt.funcionario_id=tf.id AND tt.t0009anolectivo_id = tal.id AND tt.id={$turma_id}";
 	   //var_dump( $query);
 	   $resultado = $this->query($query);       
        return $resultado;

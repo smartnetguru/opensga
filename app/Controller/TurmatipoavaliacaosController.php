@@ -27,13 +27,13 @@
  */
  
  
-class TurmatipoavaliacaosController extends AppController {
+class TurmaTipoAvaliacaosController extends AppController {
 
-	var $name = 'Turmatipoavaliacaos';
+	var $name = 'TurmaTipoAvaliacaos';
 
 	function index() {
-		$this->Turmatipoavaliacao->recursive = 0;
-		$this->set('turmatipoavaliacaos', $this->paginate());
+		$this->TurmaTipoAvaliacao->recursive = 0;
+		$this->set('TurmaTipoAvaliacaos', $this->paginate());
 	}
     
     /**
@@ -50,21 +50,21 @@ class TurmatipoavaliacaosController extends AppController {
             foreach($this->request->data['Avaliacao'] as $avaliacao){
                 
                 $avaliacao['data']=date('Y-m-d');
-                $avaliacao_find = $this->Turmatipoavaliacao->Avaliacao->find('first',array('conditions'=>array('Avaliacao.inscricao_id'=>$avaliacao['inscricao_id'],'Avaliacao.turmatipoavaliacao_id'=>$avaliacao['turmatipoavaliacao_id'])));
+                $avaliacao_find = $this->TurmaTipoAvaliacao->Avaliacao->find('first',array('conditions'=>array('Avaliacao.inscricao_id'=>$avaliacao['inscricao_id'],'Avaliacao.TurmaTipoAvaliacao_id'=>$avaliacao['TurmaTipoAvaliacao_id'])));
                 if($avaliacao_find){
-                    $this->Turmatipoavaliacao->Avaliacao->id = $avaliacao_find['Avaliacao']['id'];
-                    $this->Turmatipoavaliacao->Avaliacao->save($avaliacao);
+                    $this->TurmaTipoAvaliacao->Avaliacao->id = $avaliacao_find['Avaliacao']['id'];
+                    $this->TurmaTipoAvaliacao->Avaliacao->save($avaliacao);
                 }
                 else{
-                    $this->Turmatipoavaliacao->Avaliacao->create();
-                    $this->Turmatipoavaliacao->Avaliacao->save($avaliacao);
+                    $this->TurmaTipoAvaliacao->Avaliacao->create();
+                    $this->TurmaTipoAvaliacao->Avaliacao->save($avaliacao);
                 }
                 
             }
         }
         
-        $turmatipoavaliacao = $this->Turmatipoavaliacao->read(null, $id);
-        $this->Turmatipoavaliacao->Turma->Inscricao->contain(
+        $TurmaTipoAvaliacao = $this->TurmaTipoAvaliacao->read(null, $id);
+        $this->TurmaTipoAvaliacao->Turma->Inscricao->contain(
                 array(
                     'Matricula'=>array(
                         'Aluno'=>array(
@@ -73,21 +73,21 @@ class TurmatipoavaliacaosController extends AppController {
                     ),
                     'Turma',
                     'Avaliacao'=>array(
-                        'conditions'=>array('Avaliacao.turmatipoavaliacao_id'=>$id)
+                        'conditions'=>array('Avaliacao.TurmaTipoAvaliacao_id'=>$id)
                     )
                 )
         );
-        $inscricoes = $this->Turmatipoavaliacao->Turma->Inscricao->find('all',array('conditions'=>array('Inscricao.turma_id'=>$turmatipoavaliacao['Turma']['id'])));
+        $inscricoes = $this->TurmaTipoAvaliacao->Turma->Inscricao->find('all',array('conditions'=>array('Inscricao.turma_id'=>$TurmaTipoAvaliacao['Turma']['id'])));
         
-        $avaliacoes = $this->Turmatipoavaliacao->Avaliacao->find('all',array('conditions'=>array('Avaliacao.turmatipoavaliacao_id'=>$id)));
+        $avaliacoes = $this->TurmaTipoAvaliacao->Avaliacao->find('all',array('conditions'=>array('Avaliacao.TurmaTipoAvaliacao_id'=>$id)));
         
-		$this->set('turmatipoavaliacao', $turmatipoavaliacao);
+		$this->set('TurmaTipoAvaliacao', $TurmaTipoAvaliacao);
                 if (empty($this->data)) {
-			$this->data = $this->Turmatipoavaliacao->read(null, $id);
+			$this->data = $this->TurmaTipoAvaliacao->read(null, $id);
 		}
 
-		$turma = $this->Turmatipoavaliacao->Turma->find('list');
-		$tipoavaliacao = $this->Turmatipoavaliacao->Tipoavaliacao->find('list');
+		$turma = $this->TurmaTipoAvaliacao->Turma->find('list');
+		$tipoavaliacao = $this->TurmaTipoAvaliacao->Tipoavaliacao->find('list');
        	$this->set(compact('turma', 'tipoavaliacao','inscricoes','avaliacoes'));
 	}
     /**
@@ -104,13 +104,13 @@ class TurmatipoavaliacaosController extends AppController {
 	function add($turma_id) {
 		if ($this->request->is('post')) {
 			$tta = $this->request->data;
-			$tta['Turmatipoavaliacao']['turma_id']=$turma_id;
-            $tta['Turmatipoavaliacao']['estado']=1;
+			$tta['TurmaTipoAvaliacao']['turma_id']=$turma_id;
+            $tta['TurmaTipoAvaliacao']['estado']=1;
 			
             //Precisamos verificar se o peso total nao ultrapassa 100%
-            $pesos = $this->Turmatipoavaliacao->find('first',array('fields'=>array('SUM(Turmatipoavaliacao.peso)')));
-			$this->Turmatipoavaliacao->create();
-			if ($this->Turmatipoavaliacao->save($tta)) {
+            $pesos = $this->TurmaTipoAvaliacao->find('first',array('fields'=>array('SUM(TurmaTipoAvaliacao.peso)')));
+			$this->TurmaTipoAvaliacao->create();
+			if ($this->TurmaTipoAvaliacao->save($tta)) {
 				$this->Session->setFlash(__('Avaliacao Adicionada com sucesso'),'flashok');
 				$this->redirect(array('controller'=>'turmas','action' => 'view',$turma_id));
 				
@@ -119,11 +119,11 @@ class TurmatipoavaliacaosController extends AppController {
 		}
 
 	
-		$pesos = $this->Turmatipoavaliacao->find('all',array('fields'=>array('SUM(Turmatipoavaliacao.peso)')));
+		$pesos = $this->TurmaTipoAvaliacao->find('all',array('fields'=>array('SUM(TurmaTipoAvaliacao.peso)')));
         debug($pesos);
-        $this->Turmatipoavaliacao->Turma->recursive = -1;
-		$turma = $this->Turmatipoavaliacao->Turma->findById($turma_id);
-		$tipoavaliacaos = $this->Turmatipoavaliacao->Tipoavaliacao->find('list');
+        $this->TurmaTipoAvaliacao->Turma->recursive = -1;
+		$turma = $this->TurmaTipoAvaliacao->Turma->findById($turma_id);
+		$tipoavaliacaos = $this->TurmaTipoAvaliacao->Tipoavaliacao->find('list');
 		$this->set(compact('turma', 'tipoavaliacaos'));
 	}
 
@@ -133,30 +133,30 @@ class TurmatipoavaliacaosController extends AppController {
 			$this->redirect(array('action' => 'index'));
 		}
 		if (!empty($this->data)) {
-			if ($this->Turmatipoavaliacao->save($this->data)) {
+			if ($this->TurmaTipoAvaliacao->save($this->data)) {
 				$this->Session->setFlash('Dado Editados com sucesso','flashok');
 				$this->redirect(array('action' => 'index'));
 			} else {
 				$this->Session->setFlash('Erro ao editar dados. Por favor tente de novo.','flasherror');}
 		}
 		if (empty($this->data)) {
-			$this->data = $this->Turmatipoavaliacao->read(null, $id);
+			$this->data = $this->TurmaTipoAvaliacao->read(null, $id);
 		}
-		$turmas = $this->Turmatipoavaliacao->Turma->find('list');
-		$tipoavaliacaos = $this->Turmatipoavaliacao->Tipoavaliacao->find('list');
+		$turmas = $this->TurmaTipoAvaliacao->Turma->find('list');
+		$tipoavaliacaos = $this->TurmaTipoAvaliacao->Tipoavaliacao->find('list');
 		$this->set(compact('t0010turmas', 'tipoavaliacaos'));
 	}
 
 	function delete($id = null) {
 		if (!$id) {
-			$this->Session->setFlash(sprintf(__('Invalid id for %s', true), 't0018turmatipoavaliacao'));
+			$this->Session->setFlash(sprintf(__('Invalid id for %s', true), 't0018TurmaTipoAvaliacao'));
 			$this->redirect(array('action'=>'index'));
 		}
-		if ($this->Turmatipoavaliacao->delete($id)) {
+		if ($this->TurmaTipoAvaliacao->delete($id)) {
 			$this->Session->setFlash('Dados deletedos com sucesso ','flashok');
 			$this->redirect(array('action'=>'index'));
 		}
-		$this->Session->setFlash(sprintf(__('%s was not deleted', true), 'Turmatipoavaliacao'));
+		$this->Session->setFlash(sprintf(__('%s was not deleted', true), 'TurmaTipoAvaliacao'));
 		$this->redirect(array('action' => 'index'));
 	}
         function beforeRender(){

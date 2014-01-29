@@ -42,7 +42,7 @@ class SadeAutoAvaliacao extends AppModel {
 		),
 		'SemestreLectivo' => array(
 			'className' => 'SemestreLectivo',
-			'foreignKey' => 'semestrelectivo_id',
+			'foreignKey' => 'semestre_lectivo_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''

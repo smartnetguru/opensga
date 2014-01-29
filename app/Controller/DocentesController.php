@@ -20,7 +20,11 @@ class DocentesController extends AppController {
 	var $name = 'Docentes';
 
 	function index() {
-		$this->Docente->recursive = 2;
+		$this->Docente->contain(array(
+            'Entidade'=>array(
+                'User'
+            ),'UnidadeOrganica','DocenteCategoria'
+        ));
 		$this->set('docentes', $this->paginate());
 	}
 
@@ -28,23 +32,20 @@ class DocentesController extends AppController {
      *Pagina de Perfil do docente
      * @param type $id
      */
-	function perfil_docente($id = null) {
-		if (!$id) {
+	function perfil_docente($docente_id = null) {
+		if (!$docente_id) {
 			$this->Session->setFlash(__('Invalid docente', true));
 			$this->redirect(array('action' => 'index'));
 		}
-		$docente = $this->Docente->findById($id);
-        $this->set('docente', $this->Docente->read(null, $id));
-        $this->set('entidade', $this->Docente->Entidade->findById($docente['Entidade']['id']));
-		$users = $this->Docente->Entidade->User->find('list');
-		$paises = $this->Docente->Entidade->Cidade->find('list');
-		$provincias = $this->Docente->Entidade->Cidade->find('list');
-		$proveniencianomes = $this->Docente->Entidade->Provincia->find('list');
-		$documentos = $this->Docente->Entidade->DocumentoIdentificacao->find('list');
-		$generos = $this->Docente->Entidade->Genero->find('list');
-        $cidadenascimentos = $this->Docente->Entidade->CidadeNascimento->find('list');
-
-        $this->set(compact('users', 'paises', 'cidades', 'provincias', 'documentos','generos','cidadenascimentos','proveniencianomes','provenienciacidades'));
+        $this->Docente->contain(array(
+            'Entidade'=>array(
+                'User','PaisNascimento','CidadeNascimento','ProvinciaNascimento','DocumentoIdentificacao','Genero'
+            ),'UnidadeOrganica'
+        ));
+		$docente = $this->Docente->findById($docente_id);
+        $this->set(compact('docente'));
+        
+        
 	}
 
     /**
@@ -64,34 +65,8 @@ class DocentesController extends AppController {
             else{
                 $this->Session->setFlash('Problemas ao registrar dados', 'default', array('class'=>'alert_error'));
             }
-			$this->Docente->create();
-
-			//Antes de Gravar o Docente precisamos gravar o Usuario e a Entidade
-			//Primeiro vamos criar um usuario na tabela users
-			//O Username sera o email, logo este campo eh obrigatorio
-			$this->Docente->Entidade->User->create();
-			$user_data = array('User'=>array('username'=>$this->data['Entidade']['email'],'password'=>'12345','group_id'=>4,'name'=>$this->data['Entidade']['name']));
-
-			if($this->Docente->Entidade->User->save($user_data)){
-
-				$entidade_data['Entidade']['user_id'] = $this->Docente->Entidade->User->getLastInsertID();
-				$this->Docente->Entidade->create();
-				if($this->Docente->Entidade->save($entidade_data)){
-
-					//Finalmente Podemos gravar os dados do docente
-					$docente_data = array('Docente'=>$this->data['Docente']);
-					$docente_data['Docente']['entidade_id'] = $this->Docente->Entidade->getLastInsertID();
-                    $docente_data['Docente']['name'] = $this->request->data['Entidade']['name'];
-					if ($this->Docente->save($docente_data)) {
-						$this->Docente->configuraAcl($this->Docente->Entidade->User->getLastInsertID());
-						$this->Session->setFlash(__('Docente Registrado com Sucesso'),'default',array('class'=>'alert success'));
-						$this->redirect(array('action' => 'index'));
-					} else {
-						$this->Session->setFlash(__('Erro ao registrar Docente, tente de novo'),'default',array('class'=>'alert error'));
-					}
-
-				}
-			}
+            
+			
 
 		}
 
@@ -133,26 +108,51 @@ class DocentesController extends AppController {
 		$this->set(compact('entidades', 'docenteCategorias','paises','provincias','cidades','generos','documento_identificacaos','unidadeOrganicas'));
 	}
 
-	function delete($id = null) {
-		if (!$id) {
-			$this->Session->setFlash(__('Invalid id for docente', true));
-			$this->redirect(array('action'=>'index'));
-		}
-		if ($this->Docente->delete($id)) {
-			$this->Session->setFlash(__('Docente deleted', true));
-			$this->redirect(array('action'=>'index'));
-		}
-		$this->Session->setFlash(__('Docente was not deleted', true));
-		$this->redirect(array('action' => 'index'));
-	}
+	
 
-    public function capturar_foto($docente_id){
-        $this->Docente->id = $docente_id;
-        if (!$this->Docente->exists()) {
-            throw new NotFoundException(__('Aluno Invalido'));
+    public function docente_meu_perfil(){
+        
+    }
+    
+      public function mostrar_foto($docente_id) {
+        $this->viewClass = 'Media';
+        App::uses('Folder', 'Utility');
+        App::uses('File', 'Utility');
+        $this->Docente->contain();
+        $docente = $this->Docente->findById($docente_id);
+        if (!empty($docente)) {
+            App::uses('File', 'Utility');
+            $path = APP . 'Assets' . DS . 'Fotos' . DS . 'Docentes' . DS . $docente['UnidadeOrganica']['codigo'] . DS;
+
+            $file_path = $path . $docente_id . '.jpg';
+            $folder_novo = new Folder($path);
+
+            $file = new File($file_path);
+            
+            if (!$file->exists()) {
+                $docente_id = 'default_profile_picture';
+                $path = WWW_ROOT . DS . 'img' . DS;
+            }
+
+
+            $params = array(
+                'id' => $docente_id . '.jpg',
+                'name' => 'fotografia',
+                'extension' => 'jpg',
+                'mimeType' => array(
+                    'docx' => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+                ),
+                'path' => $path
+            );
+            $this->set($params);
+        } else {
+            throw new NotFoundException('Estudante não encontrado. Mostrar foto');
         }
-        $entidade = $this->Docente->findById($docente_id);
-        $this->Session->write('SGATemp.entidade_id_4_foto',$entidade['Entidade']['id']);
-        $this->redirect(array('controller'=>'users','action'=>'captura_foto'));
+    }
+
+  
+    public function beforeFilter() {
+        parent::beforeFilter();
+        $this->layout = 'clipone_default';
     }
 }

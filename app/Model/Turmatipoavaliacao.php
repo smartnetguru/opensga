@@ -27,8 +27,8 @@
  */
  
  
-class Turmatipoavaliacao extends AppModel {
-	var $name = 'Turmatipoavaliacao';
+class TurmaTipoAvaliacao extends AppModel {
+	var $name = 'TurmaTipoAvaliacao';
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 
 	var $belongsTo = array(
@@ -51,7 +51,7 @@ class Turmatipoavaliacao extends AppModel {
 	var $hasMany = array(
 		'Avaliacao' => array(
 			'className' => 'Avaliacao',
-			'foreignKey' => 'turmatipoavaliacao_id',
+			'foreignKey' => 'TurmaTipoAvaliacao_id',
 			'dependent' => false,
 			'conditions' => '',
 			'fields' => '',

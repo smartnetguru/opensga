@@ -116,10 +116,10 @@ class InscricaosController extends AppController {
         $turno1 = $turno[0]['ttu']['name'];
 
         $anoCurricular = $turma->getAnoCurricular($this->data['Inscricao']['t0010turma_id']);
-        $anoCurricular1 = $anoCurricular[0]['tt']['anocurricular'];
+        $anoCurricular1 = $anoCurricular[0]['tt']['ano_curricular'];
 
         $semestreCurricular = $turma->getSemestreCurricular($this->data['Inscricao']['t0010turma_id']);
-        $semestreCurricular1 = $semestreCurricular[0]['tt']['semestrecurricular'];
+        $semestreCurricular1 = $semestreCurricular[0]['tt']['semestre_curricular'];
 
         $anoLectivo = $turma->getAnoLectivo($this->data['Inscricao']['t0010turma_id']);
         $anoLectivo1 = $anoLectivo[0]['tal']['codigo'];
@@ -286,10 +286,10 @@ class InscricaosController extends AppController {
         $turno1 = $turno[0]['ttu']['name'];
 
         $anoCurricular = $turma->getAnoCurricular($this->data['Inscricao']['t0010turma_id']);
-        $anoCurricular1 = $anoCurricular[0]['tt']['anocurricular'];
+        $anoCurricular1 = $anoCurricular[0]['tt']['ano_curricular'];
 
         $semestreCurricular = $turma->getSemestreCurricular($this->data['Inscricao']['t0010turma_id']);
-        $semestreCurricular1 = $semestreCurricular[0]['tt']['semestrecurricular'];
+        $semestreCurricular1 = $semestreCurricular[0]['tt']['semestre_curricular'];
 
         $anoLectivo = $turma->getAnoLectivo($this->data['Inscricao']['t0010turma_id']);
         $anoLectivo1 = $anoLectivo[0]['tal']['codigo'];
@@ -341,7 +341,7 @@ class InscricaosController extends AppController {
         $this->Inscricao->contain(array(
             'Turma'
         ));
-        $inscricoes_activas = $this->Inscricao->find('all', array('conditions' => array('Inscricao.aluno_id' => $aluno_id, 'Turma.ano_lectivo_id' => Configure::read('OpenSGA.ano_lectivo_id'), 'Turma.semestrelectivo_id' => Configure::read('OpenSGA.semestre_lectivo_id'))));
+        $inscricoes_activas = $this->Inscricao->find('all', array('conditions' => array('Inscricao.aluno_id' => $aluno_id, 'Turma.ano_lectivo_id' => Configure::read('OpenSGA.ano_lectivo_id'), 'Turma.semestre_lectivo_id' => Configure::read('OpenSGA.semestre_lectivo_id'))));
         if (!empty($inscricoes_activas)) {
             $this->Session->setFlash(__('Este Aluno já fez inscrições neste ano. As cadeiras seguintes serão adicionadas ás inscrições anteriores, e o valor da inscrição será recalculado'), 'default', array('class' => 'alert info'));
             $this->redirect(array('controller' => 'inscricaos', 'action' => 'adicionar_cadeiras_inscricao', $aluno_id, $matricula_id));
@@ -391,7 +391,10 @@ class InscricaosController extends AppController {
             $this->redirect($this->referer());
         }
 
-        $turmas = $this->Inscricao->Turma->find('all', array('conditions' => array('Turma.id' => $this->Session->read('OpenSGA.inscricao.cadeiras')), 'order' => array('Turma.anocurricular DESC', 'Turma.semestrecurricular DESC')));
+        $this->Inscricao->Turma->contain(array(
+            'Disciplina'
+        ));
+        $turmas = $this->Inscricao->Turma->find('all', array('conditions' => array('Turma.id' => $this->Session->read('OpenSGA.inscricao.cadeiras')), 'order' => array('Turma.ano_curricular DESC', 'Turma.semestre_curricular DESC')));
 
 
         $this->loadModel('FinanceiroPagamento');
@@ -405,10 +408,10 @@ class InscricaosController extends AppController {
         $turmas_normais = array();
         $turmas_atraso = array();
         $turmas_tipo = array();
-        $ano_maior = $turmas[0]['Turma']['anocurricular'];
-        $semestre_maior = $turmas[0]['Turma']['semestrecurricular'];
+        $ano_maior = $turmas[0]['Turma']['ano_curricular'];
+        $semestre_maior = $turmas[0]['Turma']['semestre_curricular'];
         foreach ($turmas as $turma) {
-            if ($turma['Turma']['anocurricular'] == $ano_maior and $turma['Turma']['semestrecurricular'] == $semestre_maior) {
+            if ($turma['Turma']['ano_curricular'] == $ano_maior and $turma['Turma']['semestre_curricular'] == $semestre_maior) {
                 $turmas_normais[] = $turma;
                 $total_normal = $total_normal + $pagamento_normal['FinanceiroTipoPagamento']['valor'];
                 $turmas_tipo[$turma['Turma']['id']] = 1;

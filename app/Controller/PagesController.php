@@ -133,7 +133,7 @@ class PagesController extends AppController {
     }
 
     public function docente_home() {
-
+           $this->redirect(array('controller'=>'docentes','action'=>'meu_perfil','docente'=>true));
     }
 
     public function estudante_home() {

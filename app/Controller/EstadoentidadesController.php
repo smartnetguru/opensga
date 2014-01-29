@@ -27,13 +27,13 @@
  */
  
  
-class EstadoentidadesController extends AppController {
+class EstadoEntidadesController extends AppController {
 
-	var $name = 'Estadoentidades';
+	var $name = 'EstadoEntidades';
 
 	function index() {
-		$this->Estadoentidade->recursive = 0;
-		$this->set('Estadoentidades', $this->paginate());
+		$this->EstadoEntidade->recursive = 0;
+		$this->set('EstadoEntidades', $this->paginate());
 	}
 
 	function view($id = null) {
@@ -41,13 +41,13 @@ class EstadoentidadesController extends AppController {
 			$this->Session->setFlash('Invalido %s', 'flasherror');
 			$this->redirect(array('action' => 'index'));
 		}
-		$this->set('Estadoentidade', $this->Estadoentidade->read(null, $id));
+		$this->set('EstadoEntidade', $this->EstadoEntidade->read(null, $id));
 	}
 
 	function add() {
 		if (!empty($this->data)) {
-			$this->Estadoentidade->create();
-			if ($this->Estadoentidade->save($this->data)) {
+			$this->EstadoEntidade->create();
+			if ($this->EstadoEntidade->save($this->data)) {
 				$this->Session->setFlash('** Dados Cadastrados com Sucesso **','flashok');
 				$this->redirect(array('action' => 'index'));
 			} else {
@@ -57,11 +57,11 @@ class EstadoentidadesController extends AppController {
 
 	function edit($id = null) {
 		if (!$id && empty($this->data)) {
-			$this->Session->setFlash(sprintf(__('Invalid %s', true), 'Estadoentidade'));
+			$this->Session->setFlash(sprintf(__('Invalid %s', true), 'EstadoEntidade'));
 			$this->redirect(array('action' => 'index'));
 		}
 		if (!empty($this->data)) {
-			if ($this->Estadoentidade->save($this->data)) {
+			if ($this->EstadoEntidade->save($this->data)) {
 				$this->Session->setFlash('Dado Editados com sucesso','flashok');
 				$this->redirect(array('action' => 'index'));
 			} else {
@@ -70,20 +70,20 @@ class EstadoentidadesController extends AppController {
                                 }
 		}
 		if (empty($this->data)) {
-			$this->data = $this->Estadoentidade->read(null, $id);
+			$this->data = $this->EstadoEntidade->read(null, $id);
 		}
 	}
 
 	function delete($id = null) {
 		if (!$id) {
-			$this->Session->setFlash(sprintf(__('Invalid id for %s', true), 'Estadoentidade'));
+			$this->Session->setFlash(sprintf(__('Invalid id for %s', true), 'EstadoEntidade'));
 			$this->redirect(array('action'=>'index'));
 		}
-		if ($this->Estadoentidade->delete($id)) {
+		if ($this->EstadoEntidade->delete($id)) {
 			$this->Session->setFlash('Dados deletedos com sucesso ','flashok');
 			$this->redirect(array('action'=>'index'));
 		}
-		$this->Session->setFlash(sprintf(__('%s was not deleted', true), 'Estadoentidade'));
+		$this->Session->setFlash(sprintf(__('%s was not deleted', true), 'EstadoEntidade'));
 		$this->redirect(array('action' => 'index'));
 	}
         function beforeRender(){
