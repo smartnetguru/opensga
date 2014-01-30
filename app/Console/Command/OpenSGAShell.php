@@ -251,6 +251,51 @@ class OpenSGAShell extends AppShell {
         $this->out($existentes);
     }
 
+    
+    
+    public function importa_admitidos_2014() {
+        AuditableConfig::$Logger = ClassRegistry::init('Auditable.Logger');
+        App::import('Vendor', 'PHPExcel', array('file' => 'PHPExcel.php'));
+        if (!class_exists('PHPExcel'))
+            throw new CakeException('Vendor class PHPExcel not found!');
+
+        $xls = PHPExcel_IOFactory::load(APP . 'Imports' . DS . 'admitidos.xlsx');
+
+        $worksheet = $xls->getActiveSheet();
+        //debug($xls->getActiveSheetIndex());
+        $linha_actual = 2;
+        foreach ($worksheet->getRowIterator() as $row) {
+            if ($worksheet->getCell('A' . $linha_actual)->getValue() == '') {
+                break;
+            }
+            
+            $nao_encontrados = array();
+            $numero_candidato = $worksheet->getCell('A' . $linha_actual)->getCalculatedValue();
+            $candidato = $this->Candidatura->findByNumeroCandidato($numero_candidato);
+            if($candidato){
+                $this->Candidatura->id = $candidato['Candidatura']['id'];
+                
+                $this->Candidatura->set('numero_estudante',$worksheet->getCell('B' . $linha_actual)->getCalculatedValue());
+                $this->Candidatura->set('codigo_curso_admitido_admissao',$worksheet->getCell('D' . $linha_actual)->getCalculatedValue());
+                $this->Candidatura->set('data_nascimento',$worksheet->getCell('O' . $linha_actual)->getFormattedValue());
+                $this->Candidatura->set('aluno_via_admissao_id',1);
+                $this->Candidatura->set('tipo_ingresso_id',1);
+                $this->Candidatura->set('estado_candidatura_id',2);
+               
+                $this->Candidatura->save();
+                $this->out($linha_actual.'--------------------------------'.$this->Candidatura->id);
+                
+               // debug($this->Candidatura->data);
+            } else{
+                $nao_encontrados[]=$numero_candidato;
+            }
+
+            $linha_actual++;
+        }
+        $this->out($nao_encontrados);
+    }
+    
+    
     public function gerar_turmas() {
         $plano_estudos = $this->Turma->PlanoEstudo->find('list');
         $ano_lectivo_id = Configure::read('OpenSGA.ano_lectivo_id');

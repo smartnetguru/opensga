@@ -712,7 +712,7 @@ class AlunosController extends AppController {
 
         if ($this->request->is('post')) {
             $this->loadModel('Candidatura');
-            $candidato = $this->Candidatura->findByNumeroEstudante($this->request->data['Candidatura']['numero_estudante']);
+            $candidato = $this->Candidatura->findByNumeroEstudanteAndEstadoCandidaturaId($this->request->data['Candidatura']['numero_estudante'],2);
             if (!empty($candidato)) {
                 $this->redirect(array('action' => 'matricular_candidato', $candidato['Candidatura']['id']));
             } else {
@@ -729,8 +729,11 @@ class AlunosController extends AppController {
          
         }
                 
-        $candidato = $this->Aluno->Candidatura->findById($candidato_id);
-        
+        $candidato = $this->Aluno->Candidatura->findByIdAndEstadoCandidaturaId($candidato_id,2);
+        if(!$candidato){
+            $this->Session->setFlash(__('Este candidato nao tem permissao para matricular'));
+            $this->redirect('/');
+        }
         
         $aluno_existe = $this->Aluno->findByCodigo($candidato['Candidatura']['numero_estudante']);
         if (!empty($aluno_existe)) {
