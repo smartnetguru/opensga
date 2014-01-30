@@ -295,6 +295,44 @@ class OpenSGAShell extends AppShell {
         $this->out($nao_encontrados);
     }
     
+    public function importa_apelidos_2014() {
+        AuditableConfig::$Logger = ClassRegistry::init('Auditable.Logger');
+        App::import('Vendor', 'PHPExcel', array('file' => 'PHPExcel.php'));
+        if (!class_exists('PHPExcel'))
+            throw new CakeException('Vendor class PHPExcel not found!');
+
+        $xls = PHPExcel_IOFactory::load(APP . 'Imports' . DS . 'candidato_apelidos.xlsx');
+
+        $worksheet = $xls->getActiveSheet();
+        //debug($xls->getActiveSheetIndex());
+        $linha_actual = 2;
+        foreach ($worksheet->getRowIterator() as $row) {
+            if ($worksheet->getCell('A' . $linha_actual)->getValue() == '') {
+                break;
+            }
+            
+            $nao_encontrados = array();
+            $numero_candidato = $worksheet->getCell('A' . $linha_actual)->getCalculatedValue();
+            $candidato = $this->Candidatura->findByNumeroCandidato($numero_candidato);
+            if($candidato){
+                $this->Candidatura->id = $candidato['Candidatura']['id'];
+                
+                $this->Candidatura->set('apelido',  ucwords(strtolower($worksheet->getCell('B' . $linha_actual)->getCalculatedValue())));
+               
+                $this->Candidatura->save();
+                $this->out($linha_actual.'--------------------------------'.$this->Candidatura->id);
+                
+               // debug($this->Candidatura->data);
+            } else{
+                $nao_encontrados[]=$numero_candidato;
+            }
+
+            $linha_actual++;
+        }
+        $this->out($nao_encontrados);
+    }
+    
+    
     
     public function gerar_turmas() {
         $plano_estudos = $this->Turma->PlanoEstudo->find('list');

@@ -1430,5 +1430,70 @@ class AlunosController extends AppController {
         }
         $this->set(compact('aluno', 'is_regular', 'classe_estado', 'celular', 'funcionario', 'paises', 'cidades', 'provincias', 'regaliaSocials', 'regimeEstudos', 'generos', 'estado_civil', 'cerimoniaGraduacaos'));
     }
+    
+    
+    public function pesquisar_candidato(){
+        $conditions = array();
+        if ($this->request->is('post')) {
+            if ($this->request->data['Candidatura']['numero_candidato'] != '') {
+                $conditions['Candidatura.numero_candidato'] = $this->request->data['Candidatura']['numero_candidato'];
+            } else {
+                $conditions['Candidatura.nomes LIKE'] = '%' . $this->request->data['Candidatura']['nomes'] . '%';
+                $conditions['Candidatura.apelido LIKE'] = '%' . $this->request->data['Candidatura']['apelido'] . '%';
+            }
+        }
+        
+        $conditions['Candidatura.estado_candidatura_id'] = 2;
+        $this->paginate= array(
+            'conditions' => $conditions,
+            'limit'=>50
+        );
+        $candidatos = $this->paginate('Candidatura');
+
+        if (count($candidatos) == 1) {
+            $this->redirect(array('action' => 'atribuir_bolsa_candidato', $candidatos[0]['Candidatura']['id']));
+        }
+
+        $this->set('candidatos', $candidatos);
+        
+        
+    }
+    
+    public function atribuir_bolsa_candidato($candidato_id){
+        $this->loadModel('Candidatura');
+        $candidato = $this->Candidatura->findById($candidato_id);
+        if($this->request->is('post')){
+            $this->loadModel('BolsaTemporaria');
+            if($this->request->data['BolsaTemporaria']['bolsa_tipo_bolsa_id']!=5){
+                $this->request->data['BolsaTemporaria']['doador'] = 'OE';
+            } else{
+                $this->request->data['BolsaTemporaria']['doador'] = 'N';
+            }
+            $this->request->data['BolsaTemporaria']['apelido'] = $candidato['Candidatura']['apelido'];
+            $this->request->data['BolsaTemporaria']['nomes'] = $candidato['Candidatura']['nomes'];
+            
+            $bolsa_existe = $this->BolsaTemporaria->findByNumeroCandidato($this->request->data['BolsaTemporaria']['numero_candidato']);
+            if(!$bolsa_existe){
+                $this->BolsaTemporaria->create();
+            $this->BolsaTemporaria->save($this->request->data);
+            $this->Session->setFlash('Bolsa Atribuida com Sucesso','default',array('class'=>'alert success'));
+            $this->redirect(array('action'=>'pesquisar_candidato'));
+            } else{
+                $this->BolsaTemporaria->id = $bolsa_existe['BolsaTemporaria']['id'];
+                $this->BolsaTemporaria->save($this->request->data);
+            }
+            
+        }
+        
+        
+        
+        $tipo_bolsas = $this->Candidatura->BolsaTipoBolsa->find('list');
+        $this->set(compact('candidato','tipo_bolsas'));
+        
+    }
+    
+    public function print_bolsas_novo_ingresso(){
+        
+    }
 
 }
