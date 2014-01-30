@@ -112,6 +112,15 @@ class DocentesController extends AppController {
 
     public function docente_meu_perfil(){
         
+        
+        $docente_id = $this->Docente->getByUserID($this->Session->read('Auth.User.id'));
+        $this->Docente->contain(array(
+            'Entidade'=>array(
+                'User','PaisNascimento','CidadeNascimento','ProvinciaNascimento','DocumentoIdentificacao','Genero'
+            ),'UnidadeOrganica'
+        ));
+		$docente = $this->Docente->findById($docente_id);
+        $this->set(compact('docente'));
     }
     
       public function mostrar_foto($docente_id) {

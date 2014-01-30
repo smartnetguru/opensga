@@ -18,17 +18,27 @@ class OpenSGAAclShell extends AppShell {
     public function docentes(){
         $this->Docente->contain(array(
             'Entidade'=>array(
-                'User'
+                'User'=>array(
+                    'conditions'=>array(
+                        'group_id'=>4
+                    )
+                )
             )
         ));
-        $docentes = $this->Docente->find('all', array('conditions' => array('User.group_id' => 4)));
+        $docentes = $this->Docente->find('all', array());
         foreach($docentes as $docente){
             $user_id = $docente['Entidade']['User']['id'];
+            $this->out($user_id);
             $comandos = array();
-            $comandos[] = "acl deny User.{$funcionario['User']['id']} controllers";
+            $comandos[] = "acl deny User.{$docente['Entidade']['User']['id']} controllers";
             
-            $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Docentes/docente_meu_perfil";
+            $comandos[] = "acl grant User.{$docente['Entidade']['User']['id']} controllers/Docentes/docente_meu_perfil";
         }
+        
+        foreach($comandos as $comando){
+                $this->out($comando);
+                $this->dispatchShell($comando);
+            }
     }
 
     public function funcionarios() {
