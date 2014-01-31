@@ -335,12 +335,12 @@ class OpenSGAShell extends AppShell {
     
     
     public function organiza_curso_codigo(){
-        $candidatos = $this->Candidatura->find('all',array('conditions'=>array('estado_candidatura_id'=>2,'codigo_curso_admitido_admissao'=>1053)));
+        $candidatos = $this->Candidatura->find('all',array('conditions'=>array('estado_candidatura_id'=>2,'codigo_curso_admitido_admissao'=>array(1046,1047))));
         debug(count($candidatos));
         foreach($candidatos as $candidato){
         $curso_admissao = $candidato['Candidatura']['codigo_curso_admitido_admissao'];
             $this->Curso->contain('UnidadeOrganica');
-            $curso = $this->Curso->findByCodigoAdmissao($curso_admissao);
+            $curso = $this->Curso->findByCodigo(6004);
             if(!empty($curso)){
                 $this->Candidatura->id = $candidato['Candidatura']['id'];
                 $this->Candidatura->set('curso_id',$curso['Curso']['id']);
@@ -471,6 +471,12 @@ class OpenSGAShell extends AppShell {
                         break;
                     case 1126:
                         $curso_id = 6616;
+                        break;
+                    case 1046:
+                        $curso_id = 6004;
+                        break;
+                    case 1047:
+                        $curso_id = 6004;
                         break;
                     
                 }
