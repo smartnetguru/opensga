@@ -1479,6 +1479,8 @@ class AlunosController extends AppController {
             } else{
                 $this->BolsaTemporaria->id = $bolsa_existe['BolsaTemporaria']['id'];
                 $this->BolsaTemporaria->save($this->request->data);
+                $this->Session->setFlash('Bolsa Atribuida com Sucesso','default',array('class'=>'alert success'));
+            $this->redirect(array('action'=>'pesquisar_candidato'));
             }
             
         }
