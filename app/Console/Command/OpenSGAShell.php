@@ -334,6 +334,34 @@ class OpenSGAShell extends AppShell {
     
     
     
+    public function organiza_curso_codigo(){
+        $candidatos = $this->Candidatura->find('all',array('conditions'=>array('estado_candidatura_id'=>2,'codigo_curso_admitido_admissao'=>1053)));
+        debug(count($candidatos));
+        foreach($candidatos as $candidato){
+        $curso_admissao = $candidato['Candidatura']['codigo_curso_admitido_admissao'];
+            $this->Curso->contain('UnidadeOrganica');
+            $curso = $this->Curso->findByCodigoAdmissao($curso_admissao);
+            if(!empty($curso)){
+                $this->Candidatura->id = $candidato['Candidatura']['id'];
+                $this->Candidatura->set('curso_id',$curso['Curso']['id']);
+                $this->Candidatura->set('nome_curso',$curso['Curso']['name']);
+                
+                $unidade_organica = $curso['UnidadeOrganica'];
+                $faculdade = $unidade_organica;
+                if($unidade_organica['tipo_unidade_organica_id']==2){
+                    $unidade_organica_nova = $this->Aluno->Curso->UnidadeOrganica->findById($unidade_organica['parent_id']);
+                    $faculdade = $unidade_organica_nova['UnidadeOrganica'];
+                }
+                
+                $this->Candidatura->set('nome_faculdade',$faculdade['name']);
+                $this->Candidatura->save();
+                $this->out($this->Candidatura->id);
+                
+            }
+        }
+        
+    }
+    
     public function organiza_curso_candidato(){
         $candidatos = $this->Candidatura->find('all',array('conditions'=>array('estado_candidatura_id'=>2,'curso_id'=>null)));
         foreach($candidatos as $candidato){
