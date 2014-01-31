@@ -1500,6 +1500,7 @@ class AlunosController extends AppController {
         $cursos = $this->BolsaTemporaria->find('list',array('fields'=>array('BolsaTemporaria.curso_id','Curso.name'),'order'=>'Curso.name'));
         $bolseiros = array();
         foreach($cursos as $k=>$v){
+            $this->BolsaTemporaria->contain('BolsaTipoBolsa');
             $bolsas = $this->BolsaTemporaria->find('all',array('conditions'=>array('curso_id'=>$k),'order'=>array('apelido','nomes')));
             $bolseiros[$v] = $bolsas;
     }
