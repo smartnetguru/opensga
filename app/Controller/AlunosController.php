@@ -1507,5 +1507,14 @@ class AlunosController extends AppController {
         
         $this->set(compact('bolseiros'));
     }
+    
+    
+    public function beforeFilter() {
+        parent::beforeFilter();
+        
+        if($this->action=='pesquisar_candidato'){
+            $this->Security->validatePost=false;
+        }
+    }
 
 }
