@@ -334,6 +334,147 @@ class OpenSGAShell extends AppShell {
     
     
     
+    public function organiza_curso_candidato(){
+        $candidatos = $this->Candidatura->find('all',array('conditions'=>array('estado_candidatura_id'=>2,'curso_id'=>null)));
+        foreach($candidatos as $candidato){
+            
+            $nao_mudados = array();
+            $curso_admissao = $candidato['Candidatura']['codigo_curso_admitido_admissao'];
+            $this->Curso->contain('UnidadeOrganica');
+            $curso = $this->Curso->findByCodigoAdmissao($curso_admissao);
+            if(!empty($curso)){
+                $this->Candidatura->id = $candidato['Candidatura']['id'];
+                $this->Candidatura->set('curso_id',$curso['Curso']['id']);
+                $this->Candidatura->set('nome_curso',$curso['Curso']['name']);
+                
+                $unidade_organica = $curso['UnidadeOrganica'];
+                $faculdade = $unidade_organica;
+                if($unidade_organica['tipo_unidade_organica_id']==2){
+                    $unidade_organica_nova = $this->Aluno->Curso->UnidadeOrganica->findById($unidade_organica['parent_id']);
+                    $faculdade = $unidade_organica_nova['UnidadeOrganica'];
+                }
+                
+                $this->Candidatura->set('nome_faculdade',$faculdade['name']);
+                $this->Candidatura->save();
+                $this->out($this->Candidatura->id);
+                
+            } else{
+                switch ($curso_admissao){
+                    case 1015:
+                        $curso_id = 3601;
+                        break;
+                    case 1017:
+                        $curso_id = 3601;
+                        break;
+                    case 1016:
+                        $curso_id = 3612;
+                        break;
+                    case 1018:
+                        $curso_id = 3612;
+                        break;
+                    case 1042:
+                        $curso_id = 5022;
+                        break;
+                    case 1133:
+                        $curso_id = 5022;
+                        break;
+                    case 1045:
+                        $curso_id = 5024;
+                        break;
+                    case 1134:
+                        $curso_id = 5024;
+                        break;
+                    case 1114:
+                        $curso_id = 4014;
+                        break;
+                    case 1115:
+                        $curso_id = 4014;
+                        break;
+                    case 1123:
+                        $curso_id = 4014;
+                        break;
+                    case 1120:
+                        $curso_id = 4017;
+                        break;
+                    case 1121:
+                        $curso_id = 4017;
+                        break;
+                    case 1122:
+                        $curso_id = 4017;
+                        break;
+                    case 1097:
+                        $curso_id = 2008;
+                        break;
+                    case 1098:
+                        $curso_id = 2008;
+                        break;
+                    case 1099:
+                        $curso_id = 2008;
+                        break;
+                    case 1067:
+                        $curso_id = 1067;
+                        break;
+                    case 1068:
+                        $curso_id = 1067;
+                        break;
+                    case 1069:
+                        $curso_id = 1067;
+                        break;
+                    case 1091:
+                        $curso_id = 1114;
+                        break;
+                    case 1093:
+                        $curso_id = 1114;
+                        break;
+                    case 1103:
+                        $curso_id = 5343;
+                        break;
+                    case 1104:
+                        $curso_id = 5343;
+                        break;
+                    case 1118:
+                        $curso_id = 6615;
+                        break;
+                    case 1119:
+                        $curso_id = 6615;
+                        break;
+                    case 1125:
+                        $curso_id = 6616;
+                        break;
+                    case 1126:
+                        $curso_id = 6616;
+                        break;
+                    
+                }
+                $this->Curso->contain('UnidadeOrganica');
+                $curso = $this->Curso->findByCodigo($curso_id);
+            if(!empty($curso)){
+                $this->Candidatura->id = $candidato['Candidatura']['id'];
+                $this->Candidatura->set('curso_id',$curso['Curso']['id']);
+                $this->Candidatura->set('nome_curso',$curso['Curso']['name']);
+                
+                $unidade_organica = $curso['UnidadeOrganica'];
+                $faculdade = $unidade_organica;
+                if($unidade_organica['tipo_unidade_organica_id']==2){
+                    $unidade_organica_nova = $this->Aluno->Curso->UnidadeOrganica->findById($unidade_organica['parent_id']);
+                    $faculdade = $unidade_organica_nova['UnidadeOrganica'];
+                }
+                
+                $this->Candidatura->set('nome_faculdade',$faculdade['name']);
+                $this->Candidatura->save();
+                $this->out($this->Candidatura->id);
+                
+            } else{
+                
+                $nao_mudados[]=$curso_admissao;
+            }
+                
+            }
+            
+        }
+        $this->out($nao_mudados);
+    }
+    
     public function gerar_turmas() {
         $plano_estudos = $this->Turma->PlanoEstudo->find('list');
         $ano_lectivo_id = Configure::read('OpenSGA.ano_lectivo_id');
@@ -387,6 +528,7 @@ class OpenSGAShell extends AppShell {
         $xls = PHPExcel_IOFactory::load(APP . 'Reports' . DS . 'plano_estudos_unizambeze.xlsx');
 
         $worksheet = $xls->getActiveSheet();
+        
         $worksheets = $xls->getAllSheets();
         foreach ($worksheets as $ws) {
             //Cria o Plano de estudos
@@ -1126,6 +1268,52 @@ class OpenSGAShell extends AppShell {
             $this->out($this->CandidatoAlumni->id);
             $linha_actual++;
         }
+    }
+    
+    
+    public function exporta_bolsas_novo_ingresso(){
+    
+        App::import('Vendor', 'PHPExcel', array('file' => 'PHPExcel.php'));
+        if (!class_exists('PHPExcel'))
+            throw new CakeException('Vendor class PHPExcel not found!');
+
+        $xls = PHPExcel_IOFactory::load(APP . 'Reports' . DS . 'Faculdades'.DS.'renovacao.xlsx');
+
+        $worksheet = $xls->getActiveSheet();
+        $linha_actual = 2;
+        $this->Aluno->Matricula->contain(array(
+            'Aluno'=>array(
+                'Entidade'
+            ),'AnoLectivo','Curso'=>array(
+                'UnidadeOrganica'
+            )
+            
+        ));
+        $matriculas = $this->Aluno->Matricula->find('all',array('conditions'=>array('Matricula.ano_lectivo_id'=>Configure::read('OpenSGA.ano_lectivo_id')),'limit'=>10));
+        foreach($matriculas as $matricula){
+            $xls->getActiveSheet()->setCellValue('A'. $linha_actual, $matricula['Aluno']['codigo']);
+            $xls->getActiveSheet()->setCellValue('B'. $linha_actual, $matricula['Aluno']['Entidade']['apelido']);
+            $xls->getActiveSheet()->setCellValue('C'. $linha_actual, $matricula['Aluno']['Entidade']['nomes']);
+            $xls->getActiveSheet()->setCellValue('D'. $linha_actual, $matricula['AnoLectivo']['ano']);
+            $xls->getActiveSheet()->setCellValue('E'. $linha_actual, $matricula['Matricula']['data']);
+            $xls->getActiveSheet()->setCellValue('F'. $linha_actual, $matricula['Curso']['name']);
+            $unidade_organica = $matricula['Curso']['UnidadeOrganica'];
+        $faculdade = $unidade_organica;
+        if($unidade_organica['tipo_unidade_organica_id']==2){
+            $unidade_organica_nova = $this->Aluno->Curso->UnidadeOrganica->findById($unidade_organica['parent_id']);
+            $faculdade = $unidade_organica_nova['UnidadeOrganica'];
+        }
+        $xls->getActiveSheet()->setCellValue('G'. $linha_actual, $faculdade['name']);
+            $this->out($linha_actual . "---" . $matricula['Aluno']['codigo']);
+            $linha_actual++;
+            $xls->getActiveSheet()->setBreak('G'. $linha_actual,2);
+        }
+        $objWriter = PHPExcel_IOFactory::createWriter($xls, 'Excel2007');
+        
+        $objWriter->save(Configure::read('OpenSGA.save_path').DS.'renovacao'.Configure::read('OpenSGA.ano_lectivo').'.xlsx');
+        
+    
+    
     }
     
 

@@ -1446,7 +1446,8 @@ class AlunosController extends AppController {
         $conditions['Candidatura.estado_candidatura_id'] = 2;
         $this->paginate= array(
             'conditions' => $conditions,
-            'limit'=>50
+            'limit'=>50,
+            'contain'=>array('Curso')
         );
         $candidatos = $this->paginate('Candidatura');
 
@@ -1493,7 +1494,17 @@ class AlunosController extends AppController {
     }
     
     public function print_bolsas_novo_ingresso(){
+        $this->loadModel('BolsaTemporaria');
+        //primeiro_pegamos todos cursos, para paginacao
+        $this->BolsaTemporaria->contain('Curso');
+        $cursos = $this->BolsaTemporaria->find('list',array('fields'=>array('BolsaTemporaria.curso_id','Curso.name'),'order'=>'Curso.name'));
+        $bolseiros = array();
+        foreach($cursos as $k=>$v){
+            $bolsas = $this->BolsaTemporaria->find('all',array('conditions'=>array('curso_id'=>$k),'order'=>array('apelido','nomes')));
+            $bolseiros[$v] = $bolsas;
+    }
         
+        $this->set(compact('bolseiros'));
     }
 
 }
