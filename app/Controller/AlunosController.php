@@ -1451,9 +1451,6 @@ class AlunosController extends AppController {
         );
         $candidatos = $this->paginate('Candidatura');
 
-        if (count($candidatos) == 1) {
-            $this->redirect(array('action' => 'atribuir_bolsa_candidato', $candidatos[0]['Candidatura']['id']));
-        }
 
         $this->set('candidatos', $candidatos);
         
@@ -1513,7 +1510,6 @@ class AlunosController extends AppController {
         parent::beforeFilter();
         
         if($this->action=='pesquisar_candidato'){
-            $this->Security->validatePost=false;
         }
     }
 
