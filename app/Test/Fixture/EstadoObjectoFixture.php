@@ -11,7 +11,7 @@ class EstadoObjectoFixture extends CakeTestFixture {
  * @var array
  */
 	public $fields = array(
-		'id' => array('type' => 'integer', 'null' => false, 'default' => null, 'key' => 'primary'),
+		'id' => array('type' => 'integer', 'null' => false, 'default' => null, 'length' => 3, 'key' => 'primary'),
 		'name' => array('type' => 'string', 'null' => true, 'default' => null, 'length' => 45, 'collate' => 'utf8_general_ci', 'charset' => 'utf8'),
 		'indexes' => array(
 			'PRIMARY' => array('column' => 'id', 'unique' => 1)
@@ -25,6 +25,18 @@ class EstadoObjectoFixture extends CakeTestFixture {
  * @var array
  */
 	public $records = array(
+		array(
+			'id' => '1',
+			'name' => 'Activo'
+		),
+		array(
+			'id' => '2',
+			'name' => 'Inactivo'
+		),
+		array(
+			'id' => '3',
+			'name' => 'Removido'
+		),
 	);
 
 }

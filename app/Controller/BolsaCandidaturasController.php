@@ -3,7 +3,7 @@ App::uses('AppController', 'Controller');
 /**
  * BolsaCandidaturas Controller
  *
- * @property BolsaCandidatura $BolsaCandidatura
+ * @property BolsaPedido $BolsaPedido
  */
 class BolsaCandidaturasController extends AppController {
 
@@ -13,7 +13,7 @@ class BolsaCandidaturasController extends AppController {
  * @return void
  */
 	public function index() {
-		$this->BolsaCandidatura->recursive = 0;
+		$this->BolsaPedido->recursive = 0;
 		$this->set('bolsaCandidaturas', $this->paginate());
 	}
 
@@ -25,11 +25,11 @@ class BolsaCandidaturasController extends AppController {
  * @return void
  */
 	public function view($id = null) {
-		$this->BolsaCandidatura->id = $id;
-		if (!$this->BolsaCandidatura->exists()) {
+		$this->BolsaPedido->id = $id;
+		if (!$this->BolsaPedido->exists()) {
 			throw new NotFoundException(__('Invalid bolsa candidatura'));
 		}
-		$this->set('bolsaCandidatura', $this->BolsaCandidatura->read(null, $id));
+		$this->set('bolsaCandidatura', $this->BolsaPedido->read(null, $id));
 	}
 
 /**
@@ -39,21 +39,21 @@ class BolsaCandidaturasController extends AppController {
  */
 	public function add() {
 		if ($this->request->is('post')) {
-			$this->BolsaCandidatura->create();
-			if ($this->BolsaCandidatura->save($this->request->data)) {
+			$this->BolsaPedido->create();
+			if ($this->BolsaPedido->save($this->request->data)) {
 				$this->Session->setFlash(__('The bolsa candidatura has been saved'));
 				$this->redirect(array('action' => 'index'));
 			} else {
 				$this->Session->setFlash(__('The bolsa candidatura could not be saved. Please, try again.'));
 			}
 		}
-		$alunos = $this->BolsaCandidatura->Aluno->find('list');
-		$anoLectivos = $this->BolsaCandidatura->AnoLectivo->find('list');
-		$bolsaBolsas = $this->BolsaCandidatura->BolsaBolsa->find('list');
-		$estadoObjectos = $this->BolsaCandidatura->EstadoObjecto->find('list');
-		$bolsaTipoBolsas = $this->BolsaCandidatura->BolsaTipoBolsa->find('list');
-		$entidades = $this->BolsaCandidatura->Entidade->find('list');
-		$bolsaTipoCandidaturas = $this->BolsaCandidatura->BolsaTipoCandidatura->find('list');
+		$alunos = $this->BolsaPedido->Aluno->find('list');
+		$anoLectivos = $this->BolsaPedido->AnoLectivo->find('list');
+		$bolsaBolsas = $this->BolsaPedido->BolsaBolsa->find('list');
+		$estadoObjectos = $this->BolsaPedido->EstadoObjecto->find('list');
+		$bolsaTipoBolsas = $this->BolsaPedido->BolsaTipoBolsa->find('list');
+		$entidades = $this->BolsaPedido->Entidade->find('list');
+		$bolsaTipoCandidaturas = $this->BolsaPedido->BolsaTipoCandidatura->find('list');
 		$this->set(compact('alunos', 'anoLectivos', 'bolsaBolsas', 'estadoObjectos', 'bolsaTipoBolsas', 'entidades', 'bolsaTipoCandidaturas'));
 	}
 
@@ -65,27 +65,27 @@ class BolsaCandidaturasController extends AppController {
  * @return void
  */
 	public function edit($id = null) {
-		$this->BolsaCandidatura->id = $id;
-		if (!$this->BolsaCandidatura->exists()) {
+		$this->BolsaPedido->id = $id;
+		if (!$this->BolsaPedido->exists()) {
 			throw new NotFoundException(__('Invalid bolsa candidatura'));
 		}
 		if ($this->request->is('post') || $this->request->is('put')) {
-			if ($this->BolsaCandidatura->save($this->request->data)) {
+			if ($this->BolsaPedido->save($this->request->data)) {
 				$this->Session->setFlash(__('The bolsa candidatura has been saved'));
 				$this->redirect(array('action' => 'index'));
 			} else {
 				$this->Session->setFlash(__('The bolsa candidatura could not be saved. Please, try again.'));
 			}
 		} else {
-			$this->request->data = $this->BolsaCandidatura->read(null, $id);
+			$this->request->data = $this->BolsaPedido->read(null, $id);
 		}
-		$alunos = $this->BolsaCandidatura->Aluno->find('list');
-		$anoLectivos = $this->BolsaCandidatura->AnoLectivo->find('list');
-		$bolsaBolsas = $this->BolsaCandidatura->BolsaBolsa->find('list');
-		$estadoObjectos = $this->BolsaCandidatura->EstadoObjecto->find('list');
-		$bolsaTipoBolsas = $this->BolsaCandidatura->BolsaTipoBolsa->find('list');
-		$entidades = $this->BolsaCandidatura->Entidade->find('list');
-		$bolsaTipoCandidaturas = $this->BolsaCandidatura->BolsaTipoCandidatura->find('list');
+		$alunos = $this->BolsaPedido->Aluno->find('list');
+		$anoLectivos = $this->BolsaPedido->AnoLectivo->find('list');
+		$bolsaBolsas = $this->BolsaPedido->BolsaBolsa->find('list');
+		$estadoObjectos = $this->BolsaPedido->EstadoObjecto->find('list');
+		$bolsaTipoBolsas = $this->BolsaPedido->BolsaTipoBolsa->find('list');
+		$entidades = $this->BolsaPedido->Entidade->find('list');
+		$bolsaTipoCandidaturas = $this->BolsaPedido->BolsaTipoCandidatura->find('list');
 		$this->set(compact('alunos', 'anoLectivos', 'bolsaBolsas', 'estadoObjectos', 'bolsaTipoBolsas', 'entidades', 'bolsaTipoCandidaturas'));
 	}
 
@@ -101,11 +101,11 @@ class BolsaCandidaturasController extends AppController {
 		if (!$this->request->is('post')) {
 			throw new MethodNotAllowedException();
 		}
-		$this->BolsaCandidatura->id = $id;
-		if (!$this->BolsaCandidatura->exists()) {
+		$this->BolsaPedido->id = $id;
+		if (!$this->BolsaPedido->exists()) {
 			throw new NotFoundException(__('Invalid bolsa candidatura'));
 		}
-		if ($this->BolsaCandidatura->delete()) {
+		if ($this->BolsaPedido->delete()) {
 			$this->Session->setFlash(__('Bolsa candidatura deleted'));
 			$this->redirect(array('action' => 'index'));
 		}

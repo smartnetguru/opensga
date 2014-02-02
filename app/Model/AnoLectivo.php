@@ -33,9 +33,9 @@ class AnoLectivo extends AppModel {
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 
 	var $belongsTo = array(
-        'Regimelectivo' => array(
-			'className' => 'Regimelectivo',
-			'foreignKey' => 'regimelectivo_id',
+        'RegimeLectivo' => array(
+			'className' => 'RegimeLectivo',
+			'foreignKey' => 'RegimeLectivo_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''

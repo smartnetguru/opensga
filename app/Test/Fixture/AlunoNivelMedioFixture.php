@@ -146,6 +146,116 @@ class AlunoNivelMedioFixture extends CakeTestFixture {
 			'tipo_nivel_medio_id' => null,
 			'nota_final' => '15.00'
 		),
+		array(
+			'id' => '13',
+			'aluno_id' => '42353',
+			'escola_nivel_medio_id' => '79',
+			'ano_conclusao' => '2012',
+			'created' => '2013-07-04 08:14:45',
+			'modified' => '2013-07-04 08:14:45',
+			'provincia_id' => '5',
+			'tipo_nivel_medio_id' => null,
+			'nota_final' => '12.00'
+		),
+		array(
+			'id' => '14',
+			'aluno_id' => '42354',
+			'escola_nivel_medio_id' => '79',
+			'ano_conclusao' => '2012',
+			'created' => '2013-07-04 08:23:47',
+			'modified' => '2013-07-04 08:23:47',
+			'provincia_id' => '5',
+			'tipo_nivel_medio_id' => null,
+			'nota_final' => '12.00'
+		),
+		array(
+			'id' => '15',
+			'aluno_id' => '42355',
+			'escola_nivel_medio_id' => '985',
+			'ano_conclusao' => '2005',
+			'created' => '2013-07-04 08:33:21',
+			'modified' => '2013-07-04 08:33:21',
+			'provincia_id' => '5',
+			'tipo_nivel_medio_id' => null,
+			'nota_final' => '13.00'
+		),
+		array(
+			'id' => '16',
+			'aluno_id' => '42356',
+			'escola_nivel_medio_id' => '8',
+			'ano_conclusao' => '2009',
+			'created' => '2013-07-04 08:42:21',
+			'modified' => '2013-07-04 08:42:21',
+			'provincia_id' => '5',
+			'tipo_nivel_medio_id' => null,
+			'nota_final' => '12.00'
+		),
+		array(
+			'id' => '17',
+			'aluno_id' => '42357',
+			'escola_nivel_medio_id' => '8',
+			'ano_conclusao' => '2009',
+			'created' => '2013-07-04 08:52:10',
+			'modified' => '2013-07-04 08:52:10',
+			'provincia_id' => '6',
+			'tipo_nivel_medio_id' => null,
+			'nota_final' => '13.00'
+		),
+		array(
+			'id' => '18',
+			'aluno_id' => '42358',
+			'escola_nivel_medio_id' => '556',
+			'ano_conclusao' => '2010',
+			'created' => '2013-07-04 08:59:47',
+			'modified' => '2013-07-04 08:59:47',
+			'provincia_id' => '1',
+			'tipo_nivel_medio_id' => null,
+			'nota_final' => '15.00'
+		),
+		array(
+			'id' => '19',
+			'aluno_id' => '42359',
+			'escola_nivel_medio_id' => '8',
+			'ano_conclusao' => '2008',
+			'created' => '2013-07-04 09:09:24',
+			'modified' => '2013-07-04 09:09:24',
+			'provincia_id' => '1',
+			'tipo_nivel_medio_id' => null,
+			'nota_final' => '15.00'
+		),
+		array(
+			'id' => '20',
+			'aluno_id' => '42360',
+			'escola_nivel_medio_id' => '8',
+			'ano_conclusao' => '2011',
+			'created' => '2013-07-04 09:22:36',
+			'modified' => '2013-07-04 09:22:36',
+			'provincia_id' => '1',
+			'tipo_nivel_medio_id' => null,
+			'nota_final' => '14.00'
+		),
+		array(
+			'id' => '21',
+			'aluno_id' => '42361',
+			'escola_nivel_medio_id' => '86',
+			'ano_conclusao' => '2008',
+			'created' => '2013-07-04 09:26:37',
+			'modified' => '2013-07-04 09:26:37',
+			'provincia_id' => '5',
+			'tipo_nivel_medio_id' => null,
+			'nota_final' => '16.00'
+		),
+		array(
+			'id' => '22',
+			'aluno_id' => '42362',
+			'escola_nivel_medio_id' => '645',
+			'ano_conclusao' => '2010',
+			'created' => '2013-07-04 09:38:01',
+			'modified' => '2013-07-04 09:38:01',
+			'provincia_id' => '5',
+			'tipo_nivel_medio_id' => null,
+			'nota_final' => '13.00'
+		),
 	);
 
 }

@@ -33,6 +33,18 @@ class DocenteFixture extends CakeTestFixture {
  * @var array
  */
 	public $records = array(
+		array(
+			'id' => '1',
+			'entidade_id' => '42509',
+			'docente_categoria_id' => null,
+			'docente_funcao_id' => null,
+			'unidade_organica_id' => '1',
+			'regime_trabalho_id' => null,
+			'created' => '2014-01-28 15:59:36',
+			'modified' => '2014-01-28 15:59:36',
+			'created_by' => '1',
+			'modified_by' => null
+		),
 	);
 
 }

@@ -332,15 +332,53 @@ class OpenSGAShell extends AppShell {
         $this->out($nao_encontrados);
     }
     
-    
+    public function importa_parentes_2014() {
+        AuditableConfig::$Logger = ClassRegistry::init('Auditable.Logger');
+        App::import('Vendor', 'PHPExcel', array('file' => 'PHPExcel.php'));
+        if (!class_exists('PHPExcel'))
+            throw new CakeException('Vendor class PHPExcel not found!');
+
+        $xls = PHPExcel_IOFactory::load(APP . 'Imports' . DS . 'parentes.xlsx');
+
+        $worksheet = $xls->getActiveSheet();
+        //debug($xls->getActiveSheetIndex());
+        $linha_actual = 2;
+        foreach ($worksheet->getRowIterator() as $row) {
+            if ($worksheet->getCell('A' . $linha_actual)->getValue() == '') {
+                break;
+            }
+            
+            $nao_encontrados = array();
+            $numero_candidato = $worksheet->getCell('A' . $linha_actual)->getCalculatedValue();
+            $candidato = $this->Candidatura->findByNumeroCandidato($numero_candidato);
+            if($candidato){
+                $this->Candidatura->id = $candidato['Candidatura']['id'];
+                
+                $this->Candidatura->set('nome_pai',  ucwords(strtolower($worksheet->getCell('D' . $linha_actual)->getCalculatedValue())));
+                $this->Candidatura->set('nome_mae',  ucwords(strtolower($worksheet->getCell('E' . $linha_actual)->getCalculatedValue())));
+                $this->Candidatura->set('cidade_nascimento',  $worksheet->getCell('D' . $linha_actual)->getCalculatedValue());
+               
+                $this->Candidatura->save();
+                $this->out($linha_actual.'--------------------------------'.$this->Candidatura->id);
+                
+               // debug($this->Candidatura->data);
+            } else{
+                $nao_encontrados[]=$numero_candidato;
+            }
+
+            $linha_actual++;
+        }
+        $this->out($nao_encontrados);
+    }
     
     public function organiza_curso_codigo(){
-        $candidatos = $this->Candidatura->find('all',array('conditions'=>array('estado_candidatura_id'=>2,'codigo_curso_admitido_admissao'=>array(1046,1047))));
+        $candidatos = $this->Candidatura->find('all',array('conditions'=>array('estado_candidatura_id'=>2,'codigo_curso_admitido_admissao'=>array(1040,1096,1027,1028,1029,1030,1052,1041,1056))));
         debug(count($candidatos));
+        
         foreach($candidatos as $candidato){
         $curso_admissao = $candidato['Candidatura']['codigo_curso_admitido_admissao'];
             $this->Curso->contain('UnidadeOrganica');
-            $curso = $this->Curso->findByCodigo(6004);
+            $curso = $this->Curso->findByCodigo($curso_admissao);
             if(!empty($curso)){
                 $this->Candidatura->id = $candidato['Candidatura']['id'];
                 $this->Candidatura->set('curso_id',$curso['Curso']['id']);

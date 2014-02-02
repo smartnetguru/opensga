@@ -13,8 +13,8 @@ class BolsaBolsaFixture extends CakeTestFixture {
 	public $fields = array(
 		'id' => array('type' => 'integer', 'null' => false, 'default' => null, 'key' => 'primary'),
 		'aluno_id' => array('type' => 'integer', 'null' => true, 'default' => null, 'key' => 'index'),
-		'bolsa_candidatura_id' => array('type' => 'integer', 'null' => true, 'default' => null, 'key' => 'index'),
-		'ano_lectivo_id' => array('type' => 'integer', 'null' => true, 'default' => null, 'key' => 'index'),
+		'bolsa_pedido_id' => array('type' => 'integer', 'null' => true, 'default' => null, 'key' => 'index'),
+		'anolectivo_id' => array('type' => 'integer', 'null' => true, 'default' => null, 'key' => 'index'),
 		'banco_id' => array('type' => 'integer', 'null' => true, 'default' => null, 'key' => 'index'),
 		'nib' => array('type' => 'string', 'null' => true, 'default' => null, 'length' => 45, 'collate' => 'utf8_general_ci', 'charset' => 'utf8'),
 		'conta_bancaria' => array('type' => 'string', 'null' => true, 'default' => null, 'length' => 45, 'collate' => 'utf8_general_ci', 'charset' => 'utf8'),
@@ -32,8 +32,8 @@ class BolsaBolsaFixture extends CakeTestFixture {
 		'indexes' => array(
 			'PRIMARY' => array('column' => 'id', 'unique' => 1),
 			'bolsas_alunos' => array('column' => 'aluno_id', 'unique' => 0),
-			'bolsa_bolsas_candidaturas' => array('column' => 'bolsa_candidatura_id', 'unique' => 0),
-			'bolsa_bolsas_anolectivos' => array('column' => 'ano_lectivo_id', 'unique' => 0),
+			'bolsa_bolsas_candidaturas' => array('column' => 'bolsa_pedido_id', 'unique' => 0),
+			'bolsa_bolsas_anolectivos' => array('column' => 'anolectivo_id', 'unique' => 0),
 			'bolsa_bolsas_bancos' => array('column' => 'banco_id', 'unique' => 0),
 			'bolsa_bolsas_estado_bolsas' => array('column' => 'bolsa_estado_bolsa_id', 'unique' => 0),
 			'bolsa_bolsas_fonte_bolsas' => array('column' => 'bolsa_fonte_bolsa_id', 'unique' => 0),

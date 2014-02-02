@@ -32,7 +32,7 @@ class TipoavaliacaosController extends AppController {
 	var $name = 'Tipoavaliacaos';
 
 	function index() {
-		$this->Tipoavaliacao->recursive = 0;
+		$this->TipoAvaliacao->recursive = 0;
 		$this->set('tipoavaliacaos', $this->paginate());
 	}
 
@@ -43,13 +43,13 @@ class TipoavaliacaosController extends AppController {
 			$this->Session->setFlash('Invalido %s', 'flasherror');
 			$this->redirect(array('action' => 'index'));
 		}
-		$this->set('t0015tipoavaliacao', $this->Tipoavaliacao->read(null, $id));
+		$this->set('t0015tipoavaliacao', $this->TipoAvaliacao->read(null, $id));
                 if (empty($this->data)) {
-			$this->data = $this->Tipoavaliacao->read(null, $id);
-			//$logmv->logview(13,$this->Session->read('Auth.User.id'),$id,$this->data["Tipoavaliacao"]["name"]);
+			$this->data = $this->TipoAvaliacao->read(null, $id);
+			//$logmv->logview(13,$this->Session->read('Auth.User.id'),$id,$this->data["TipoAvaliacao"]["name"]);
 		
-                        $epocaavaliacaos = $this->Tipoavaliacao->Epocaavaliacao->find('list');
-		$this->set(compact('epocaavaliacaos'));
+                        $EpocaAvaliacaos = $this->TipoAvaliacao->EpocaAvaliacao->find('list');
+		$this->set(compact('EpocaAvaliacaos'));
 		}
                 
 	}
@@ -58,9 +58,9 @@ class TipoavaliacaosController extends AppController {
 	        //App::Import('Model','Logmv');
 	        //$logmv = new Logmv;
 		if (!empty($this->data)) {
-			$this->Tipoavaliacao->create();
-			if ($this->Tipoavaliacao->save($this->data)) {
-			//$logmv->logInsert(13,$this->Session->read('Auth.User.id'),$this->Tipoavaliacao->getLastInsertID(),$this->data["Tipoavaliacao"]["name"]);
+			$this->TipoAvaliacao->create();
+			if ($this->TipoAvaliacao->save($this->data)) {
+			//$logmv->logInsert(13,$this->Session->read('Auth.User.id'),$this->TipoAvaliacao->getLastInsertID(),$this->data["TipoAvaliacao"]["name"]);
 				$this->Session->setFlash('** Dados Cadastrados com Sucesso **','flashok');
 				$this->redirect(array('action' => 'index'));
 			} else {
@@ -68,8 +68,8 @@ class TipoavaliacaosController extends AppController {
 
                                 }
 		}
-        $epocaavaliacaos = $this->Tipoavaliacao->Epocaavaliacao->find('list');
-		$this->set(compact('epocaavaliacaos'));
+        $EpocaAvaliacaos = $this->TipoAvaliacao->EpocaAvaliacao->find('list');
+		$this->set(compact('EpocaAvaliacaos'));
 	}
 
 	function edit($id = null) {
@@ -80,18 +80,18 @@ class TipoavaliacaosController extends AppController {
 			$this->redirect(array('action' => 'index'));
 		}
 		if (!empty($this->data)) {
-			if ($this->Tipoavaliacao->save($this->data)) {
-			    //$logmv->logUpdate(13,$this->Session->read('Auth.User.id'),$id,$this->data["Tipoavaliacao"]["name"]);
+			if ($this->TipoAvaliacao->save($this->data)) {
+			    //$logmv->logUpdate(13,$this->Session->read('Auth.User.id'),$id,$this->data["TipoAvaliacao"]["name"]);
 				$this->Session->setFlash('Dado Editados com sucesso','flashok');
 				$this->redirect(array('action' => 'index'));
 			} else {
 				$this->Session->setFlash('Erro ao editar dados. Por favor tente de novo.','flasherror');}
 		}
 		if (empty($this->data)) {
-			$this->data = $this->Tipoavaliacao->read(null, $id);
+			$this->data = $this->TipoAvaliacao->read(null, $id);
 		}
-                $epocaavaliacaos = $this->Tipoavaliacao->Epocaavaliacao->find('list');
-		$this->set(compact('epocaavaliacaos'));
+                $EpocaAvaliacaos = $this->TipoAvaliacao->EpocaAvaliacao->find('list');
+		$this->set(compact('EpocaAvaliacaos'));
 	}
 
 	function delete($id = null) {
@@ -101,12 +101,12 @@ class TipoavaliacaosController extends AppController {
 			$this->Session->setFlash(sprintf(__('Invalid id for %s', true), 't0015tipoavaliacao'));
 			$this->redirect(array('action'=>'index'));
 		}
-		if ($this->Tipoavaliacao->delete($id)) {
+		if ($this->TipoAvaliacao->delete($id)) {
 		//$logmv->logDelete(13,$this->Session->read('Auth.User.id'),$id,'Delete Tipo de Avaliacao');
 			$this->Session->setFlash('Dados deletedos com sucesso ','flashok');
 			$this->redirect(array('action'=>'index'));
 		}
-		$this->Session->setFlash(sprintf(__('%s was not deleted', true), 'Tipoavaliacao'));
+		$this->Session->setFlash(sprintf(__('%s was not deleted', true), 'TipoAvaliacao'));
 		$this->redirect(array('action' => 'index'));
 	}
         function beforeRender(){

@@ -47,7 +47,7 @@ class ConfigFixture extends CakeTestFixture {
 		),
 		array(
 			'id' => '3',
-			'name' => 'ano_lectivo_id',
+			'name' => 'anolectivo_id',
 			'value' => '1',
 			'autoload' => 1,
 			'descricao' => null,

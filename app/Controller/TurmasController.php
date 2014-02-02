@@ -252,10 +252,10 @@ class TurmasController extends AppController {
         $anolectivos = $this->Turma->AnoLectivo->find('list');
         $planoestudos = $this->Turma->PlanoEstudo->find('list');
         $semestrelectivos = $this->Turma->SemestreLectivo->find('list');
-        $regimelectivos = $this->Turma->AnoLectivo->Regimelectivo->find('list');
+        $RegimeLectivos = $this->Turma->AnoLectivo->RegimeLectivo->find('list');
         $turnos = $this->Turma->Turno->find('list');
 
-        $this->set(compact('anolectivos', 'planoestudos', 'semestrelectivos', 'regimelectivos', 'turnos'));
+        $this->set(compact('anolectivos', 'planoestudos', 'semestrelectivos', 'RegimeLectivos', 'turnos'));
     }
 
 

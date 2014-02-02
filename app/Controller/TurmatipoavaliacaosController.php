@@ -87,7 +87,7 @@ class TurmaTipoAvaliacaosController extends AppController {
 		}
 
 		$turma = $this->TurmaTipoAvaliacao->Turma->find('list');
-		$tipoavaliacao = $this->TurmaTipoAvaliacao->Tipoavaliacao->find('list');
+		$tipoavaliacao = $this->TurmaTipoAvaliacao->TipoAvaliacao->find('list');
        	$this->set(compact('turma', 'tipoavaliacao','inscricoes','avaliacoes'));
 	}
     /**
@@ -123,7 +123,7 @@ class TurmaTipoAvaliacaosController extends AppController {
         debug($pesos);
         $this->TurmaTipoAvaliacao->Turma->recursive = -1;
 		$turma = $this->TurmaTipoAvaliacao->Turma->findById($turma_id);
-		$tipoavaliacaos = $this->TurmaTipoAvaliacao->Tipoavaliacao->find('list');
+		$tipoavaliacaos = $this->TurmaTipoAvaliacao->TipoAvaliacao->find('list');
 		$this->set(compact('turma', 'tipoavaliacaos'));
 	}
 
@@ -143,7 +143,7 @@ class TurmaTipoAvaliacaosController extends AppController {
 			$this->data = $this->TurmaTipoAvaliacao->read(null, $id);
 		}
 		$turmas = $this->TurmaTipoAvaliacao->Turma->find('list');
-		$tipoavaliacaos = $this->TurmaTipoAvaliacao->Tipoavaliacao->find('list');
+		$tipoavaliacaos = $this->TurmaTipoAvaliacao->TipoAvaliacao->find('list');
 		$this->set(compact('t0010turmas', 'tipoavaliacaos'));
 	}
 

@@ -43,9 +43,9 @@ class Candidatura extends AppModel {
 			'fields' => '',
 			'order' => ''
 		),
-		'Provincia' => array(
+		'ProvinciaNascimento' => array(
 			'className' => 'Provincia',
-			'foreignKey' => 'provincia_id',
+			'foreignKey' => 'provincia_nascimento',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
@@ -75,13 +75,6 @@ class Candidatura extends AppModel {
 		'EstadoMatricula' => array(
 			'className' => 'EstadoMatricula',
 			'foreignKey' => 'estado_matricula_id',
-			'conditions' => '',
-			'fields' => '',
-			'order' => ''
-		),
-		'Funcionario' => array(
-			'className' => 'Funcionario',
-			'foreignKey' => 'funcionario_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''

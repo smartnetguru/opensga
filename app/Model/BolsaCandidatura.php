@@ -1,7 +1,7 @@
 <?php
 App::uses('AppModel', 'Model');
 /**
- * BolsaCandidatura Model
+ * BolsaPedido Model
  *
  * @property Aluno $Aluno
  * @property AnoLectivo $AnoLectivo
@@ -14,7 +14,7 @@ App::uses('AppModel', 'Model');
  * @property BolsaCandidatoFamilia $BolsaCandidatoFamilia
  * @property BolsaResultado $BolsaResultado
  */
-class BolsaCandidatura extends AppModel {
+class BolsaPedido extends AppModel {
 
 
 	//The Associations below have been created with all possible keys, those that are not needed can be removed

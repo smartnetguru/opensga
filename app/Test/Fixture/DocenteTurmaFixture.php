@@ -37,15 +37,15 @@ class DocenteTurmaFixture extends CakeTestFixture {
  */
 	public $records = array(
 		array(
-			'id' => 1,
-			'docente_id' => 1,
-			'turma_id' => 1,
-			'estado_docente_turma_id' => 1,
-			'tipo_docente_turma_id' => 1,
-			'created' => '2014-01-28 23:40:15',
-			'modified' => '2014-01-28 23:40:15',
-			'created_by' => 1,
-			'modified_by' => 1
+			'id' => '1',
+			'docente_id' => '1',
+			'turma_id' => '9636',
+			'estado_docente_turma_id' => '1',
+			'tipo_docente_turma_id' => '1',
+			'created' => '2014-01-29 00:49:26',
+			'modified' => '2014-01-29 00:49:26',
+			'created_by' => '1',
+			'modified_by' => null
 		),
 	);
 

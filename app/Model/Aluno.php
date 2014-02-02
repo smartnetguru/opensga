@@ -24,19 +24,13 @@ App::uses('SessionComponent', 'Controller/Component');
  */
 class Aluno extends AppModel {
 
-    var $name = 'Aluno';
-    //var $recursive = 0;
-    //The Associations below have been created with all possible keys, those that are not needed can be removed
-
-
-
     public $hasOne = array(
         'AlunoNivelMedio' => array(
             'className' => 'AlunoNivelMedio',
             'dependent' => true
         )
     );
-    var $belongsTo = array(
+    public $belongsTo = array(
         'User' => array(
             'className' => 'User',
             'foreignKey' => 'user_id',
@@ -94,7 +88,7 @@ class Aluno extends AppModel {
             'order' => ''
         ),
     );
-    var $hasMany = array(
+    public $hasMany = array(
         'Matricula' => array(
             'className' => 'Matricula',
             'foreignKey' => 'aluno_id',
@@ -760,7 +754,7 @@ class Aluno extends AppModel {
         if (!isset($data['Entidade']['name'])) {
             $data['Entidade']['name'] = $data['Entidade']['nomes'] . " " . $data['Entidade']['apelido'];
         }
-
+        die(debug($data));
         //Grava os dados do Usuario
         $this->User->create();
         $data['User']['username'] = $this->User->geraEmailUem($data['Entidade']['apelido'], $data['Entidade']['nomes']);
@@ -931,7 +925,7 @@ class Aluno extends AppModel {
                             
                             $this->Candidatura->set('data_matricula',date('Y-m-d H:m:s'));
                             if($this->Candidatura->save()){
-                                return $dataSource->commit();
+           //                     return $dataSource->commit();
                             }
                                 
                         }

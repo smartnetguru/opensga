@@ -91,7 +91,7 @@ class InscricaosController extends AppController {
         //var_dump($this->data);
         $alunos = $this->Inscricao->Aluno->find('list');
         $turmas = $this->Inscricao->Turma->find('list');
-        $epocaavaliacaos = $this->Inscricao->Epocaavaliacao->find('list');
+        $EpocaAvaliacaos = $this->Inscricao->EpocaAvaliacao->find('list');
         //$notafrequencia = $this->data['Inscricao']['notafrequencia'];
 
 
@@ -125,7 +125,7 @@ class InscricaosController extends AppController {
         $anoLectivo1 = $anoLectivo[0]['tal']['codigo'];
 
 
-        $this->set(compact('Alunos', 'turmas', 'epocaavaliacaos', 'tg0020estadoinscricao', 'funcionarios', 'curso1', 'docente1', 'assistente1', 'plano1', 'turma1', 'turno1', 'anoCurricular1', 'semestreCurricular1', 'anoLectivo1'));
+        $this->set(compact('Alunos', 'turmas', 'EpocaAvaliacaos', 'tg0020estadoinscricao', 'funcionarios', 'curso1', 'docente1', 'assistente1', 'plano1', 'turma1', 'turno1', 'anoCurricular1', 'semestreCurricular1', 'anoLectivo1'));
     }
 
     /**
@@ -262,7 +262,7 @@ class InscricaosController extends AppController {
         //var_dump($this->data);
         $alunos = $this->Inscricao->Aluno->find('list');
         $turmas = $this->Inscricao->Turma->find('list');
-        $epocaavaliacaos = $this->Inscricao->Epocaavaliacao->find('list');
+        $EpocaAvaliacaos = $this->Inscricao->EpocaAvaliacao->find('list');
         //$notafrequencia = $this->data['Inscricao']['notafrequencia'];
 
         $estadoinscricao = $this->Inscricao->Estadoinscricao->find('list');
@@ -295,7 +295,7 @@ class InscricaosController extends AppController {
         $anoLectivo1 = $anoLectivo[0]['tal']['codigo'];
 
 
-        $this->set(compact('Alunos', 't0010turmas', 'epocaavaliacaos', 'tg0020estadoinscricao', 'funcionarios', 'curso1', 'docente1', 'assistente1', 'plano1', 'turma1', 'turno1', 'anoCurricular1', 'semestreCurricular1', 'anoLectivo1'));
+        $this->set(compact('Alunos', 't0010turmas', 'EpocaAvaliacaos', 'tg0020estadoinscricao', 'funcionarios', 'curso1', 'docente1', 'assistente1', 'plano1', 'turma1', 'turno1', 'anoCurricular1', 'semestreCurricular1', 'anoLectivo1'));
     }
 
     /**

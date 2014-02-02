@@ -142,6 +142,116 @@ class EscolaNivelMedioFixture extends CakeTestFixture {
 			'created_by' => null,
 			'modified_by' => null
 		),
+		array(
+			'id' => '11',
+			'name' => 'Centro Piloto de Muaguide',
+			'distrito_id' => '106',
+			'provincia_id' => '1',
+			'pais_id' => '152',
+			'created' => null,
+			'modified' => null,
+			'created_by' => null,
+			'modified_by' => null
+		),
+		array(
+			'id' => '12',
+			'name' => 'Escola Secundária de Montepuez',
+			'distrito_id' => '108',
+			'provincia_id' => '1',
+			'pais_id' => '152',
+			'created' => null,
+			'modified' => null,
+			'created_by' => null,
+			'modified_by' => null
+		),
+		array(
+			'id' => '13',
+			'name' => 'Escola de Artes e Ofícios de Montepuez',
+			'distrito_id' => '108',
+			'provincia_id' => '1',
+			'pais_id' => '152',
+			'created' => null,
+			'modified' => null,
+			'created_by' => null,
+			'modified_by' => null
+		),
+		array(
+			'id' => '14',
+			'name' => 'Escola Industrial de Montepuez',
+			'distrito_id' => '108',
+			'provincia_id' => '1',
+			'pais_id' => '152',
+			'created' => null,
+			'modified' => null,
+			'created_by' => null,
+			'modified_by' => null
+		),
+		array(
+			'id' => '15',
+			'name' => 'Escola Agrária de Bilibiza',
+			'distrito_id' => '113',
+			'provincia_id' => '1',
+			'pais_id' => '152',
+			'created' => null,
+			'modified' => null,
+			'created_by' => null,
+			'modified_by' => null
+		),
+		array(
+			'id' => '16',
+			'name' => 'Escola Comunitária S. Carlos Luanga',
+			'distrito_id' => '114',
+			'provincia_id' => '1',
+			'pais_id' => '152',
+			'created' => null,
+			'modified' => null,
+			'created_by' => null,
+			'modified_by' => null
+		),
+		array(
+			'id' => '17',
+			'name' => 'Escola Comunitária da ADEMO Pemba',
+			'distrito_id' => '114',
+			'provincia_id' => '1',
+			'pais_id' => '152',
+			'created' => null,
+			'modified' => null,
+			'created_by' => null,
+			'modified_by' => null
+		),
+		array(
+			'id' => '18',
+			'name' => 'Escola Secundária de Pemba',
+			'distrito_id' => '114',
+			'provincia_id' => '1',
+			'pais_id' => '152',
+			'created' => null,
+			'modified' => null,
+			'created_by' => null,
+			'modified_by' => null
+		),
+		array(
+			'id' => '19',
+			'name' => 'Colégio Liceal Dom José Garcia',
+			'distrito_id' => '114',
+			'provincia_id' => '1',
+			'pais_id' => '152',
+			'created' => null,
+			'modified' => null,
+			'created_by' => null,
+			'modified_by' => null
+		),
+		array(
+			'id' => '20',
+			'name' => 'Seminário de S. José',
+			'distrito_id' => '114',
+			'provincia_id' => '1',
+			'pais_id' => '152',
+			'created' => null,
+			'modified' => null,
+			'created_by' => null,
+			'modified_by' => null
+		),
 	);
 
 }

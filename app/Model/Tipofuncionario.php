@@ -27,14 +27,14 @@
  */
  
  
-class Tipofuncionario extends AppModel {
-	var $name = 'Tipofuncionario';
+class TipoFuncionario extends AppModel {
+	var $name = 'TipoFuncionario';
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 
 	var $hasMany = array(
 		'Funcionario' => array(
 			'className' => 'Funcionario',
-			'foreignKey' => 'tg0011tipofuncionario_id',
+			'foreignKey' => 'tg0011TipoFuncionario_id',
 			'dependent' => false,
 			'conditions' => '',
 			'fields' => '',

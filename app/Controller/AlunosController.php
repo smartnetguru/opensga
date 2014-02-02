@@ -67,8 +67,8 @@ class AlunosController extends AppController {
                 'PlanoEstudo', 'Turno'
             ),
             'Curso', 'Entidade' => array(
-                'ProvinciaNascimento', 'CidadeNascimento', 'PaisNascimento', 'Genero', 'DocumentoIdentificacao','User','CidadeMorada'=>array(
-                    'Bairro','Rua'
+                'ProvinciaNascimento', 'CidadeNascimento', 'PaisNascimento', 'Genero', 'DocumentoIdentificacao', 'User', 'CidadeMorada' => array(
+                    'Bairro', 'Rua'
                 )
             ),
             'AlunoNivelMedio' => array(
@@ -115,7 +115,7 @@ class AlunosController extends AppController {
             'order' => array(
                 'Turma.ano_curricular',
                 'Turma.semestre_curricular'
-                )));
+        )));
 
         $this->Aluno->Inscricao->contain(array(
             'Turma' => array(
@@ -169,7 +169,7 @@ class AlunosController extends AppController {
         $is_bolseiro = $this->Aluno->isBolseiro($id, $this->Session->read('SGAConfig.ano_lectivo_id'));
 
         $this->set(compact('inscricoes_activas', 'todas_inscricoes', 'cadeiras_aprovadas', 'pagamentos', 'is_bolseiro', 'is_regular', 'classe_estado', 'requisicoes'));
-        
+
         $this->layout = 'clipone_default';
     }
 
@@ -434,7 +434,6 @@ class AlunosController extends AppController {
         $this->set('current_section', 'estudantes');
     }
 
-
     public function capturar_foto($aluno_id) {
         $this->Aluno->id = $aluno_id;
         if (!$this->Aluno->exists()) {
@@ -555,7 +554,7 @@ class AlunosController extends AppController {
     }
 
     /**
-     *@fixme Deprecated... mudar o mais rapido possivel para entidades
+     * @fixme Deprecated... mudar o mais rapido possivel para entidades
      * @param string $codigo 
      */
     public function mostrar_foto($codigo) {
@@ -572,7 +571,7 @@ class AlunosController extends AppController {
             $folder_novo = new Folder($path);
 
             $file = new File($file_path);
-            
+
             if (!$file->exists()) {
                 $codigo = 'default_profile_picture';
                 $path = WWW_ROOT . DS . 'img' . DS;
@@ -712,29 +711,31 @@ class AlunosController extends AppController {
 
         if ($this->request->is('post')) {
             $this->loadModel('Candidatura');
-            $candidato = $this->Candidatura->findByNumeroEstudanteAndEstadoCandidaturaId($this->request->data['Candidatura']['numero_estudante'],2);
+            $candidato = $this->Candidatura->findByNumeroEstudanteAndEstadoCandidaturaId($this->request->data['Candidatura']['numero_estudante'], 2);
             if (!empty($candidato)) {
                 $this->redirect(array('action' => 'matricular_candidato', $candidato['Candidatura']['id']));
             } else {
                 $this->Session->setFlash(__('Candidato Invalido'));
             }
         }
+
+        $this->layout = 'clipone_default';
     }
 
     public function matricular_candidato($candidato_id) {
-        
+
         $this->Aluno->Candidatura->id = $candidato_id;
-        if(!$this->Aluno->Candidatura->exists()){
+        if (!$this->Aluno->Candidatura->exists()) {
             throw new NotFoundException('Candidato Nao encontrado');
-         
         }
-                
-        $candidato = $this->Aluno->Candidatura->findByIdAndEstadoCandidaturaId($candidato_id,2);
-        if(!$candidato){
+
+        $candidato = $this->Aluno->Candidatura->findByIdAndEstadoCandidaturaId($candidato_id, 2);
+        debug($candidato);
+        if (!$candidato) {
             $this->Session->setFlash(__('Este candidato nao tem permissao para matricular'));
             $this->redirect('/');
         }
-        
+
         $aluno_existe = $this->Aluno->findByCodigo($candidato['Candidatura']['numero_estudante']);
         if (!empty($aluno_existe)) {
             $this->Session->setFlash(__('Este candidato já está matriculado'));
@@ -755,13 +756,8 @@ class AlunosController extends AppController {
         }
 
         $cursos = $this->Aluno->Curso->find('list');
-
-        $planoestudos = $this->Aluno->Matricula->PlanoEstudo->find('list');
-        $users = $this->Aluno->Entidade->User->find('list');
-
         $paises = $this->Aluno->Entidade->PaisNascimento->find('list');
         $escolaNivelMedios = $this->Aluno->AlunoNivelMedio->EscolaNivelMedio->find('list');
-        $cidades = $this->Aluno->Entidade->CidadeNascimento->find('list');
         $provincias = $this->Aluno->Entidade->ProvinciaNascimento->find('list');
         $provenienciacidades = $this->Aluno->AlunoNivelMedio->EscolaNivelMedio->Distrito->find('list');
         $proveniencianomes = $this->Aluno->AlunoNivelMedio->EscolaNivelMedio->Provincia->find('list');
@@ -770,14 +766,21 @@ class AlunosController extends AppController {
         $generos = $this->Aluno->Entidade->Genero->find('list');
         $turnos = $this->Aluno->Matricula->Turno->find('list');
         $estado_civil = $this->Aluno->Entidade->EstadoCivil->find('list');
-        $cidadenascimentos = $this->Aluno->Entidade->CidadeNascimento->find('list');
+        $cidadeNascimentos = $this->Aluno->Entidade->CidadeNascimento->find('list', array(
+            'conditions' => array(
+                'provincia_id' => $candidato['Candidatura']['provincia_nascimento']
+            )
+                )
+        );
         $grauParentescos = $this->Aluno->GrauParentesco->find('list');
-        
+        $this->loadModel('SimNaoResposta');
+        $simNaoRespostas = $this->SimNaoResposta->find('list');
+
         $naturalidade = '';
-        $this->set(compact('candidato', 'nacionalidades', 'cursos', 'planoestudos', 'users', 'paises', 'cidades', 'provincias', 'documento_identificacaos', 'areatrabalhos', 'generos', 'cidadenascimentos', 'proveniencianomes', 'provenienciacidades', 'turnos', 'escolaNivelMedios', 'estado_civil','naturalidade','grauParentescos'));
-        
-        $this->set('siga_page_title','Matriculas');
-        $this->set('siga_page_overview','Formulario de Matricula de Novos Ingressos');
+        $this->set(compact('candidato', 'cursos', 'paises', 'provincias', 'documento_identificacaos', 'areatrabalhos', 'generos', 'cidadeNascimentos', 'proveniencianomes', 'provenienciacidades', 'turnos', 'escolaNivelMedios', 'estado_civil', 'naturalidade', 'grauParentescos', 'simNaoRespostas'));
+
+        $this->set('siga_page_title', 'Matriculas');
+        $this->set('siga_page_overview', 'Formulario de Matricula de Novos Ingressos');
         $this->layout = 'clipone_default';
     }
 
@@ -874,28 +877,28 @@ class AlunosController extends AppController {
         if ($this->request->is('ajax')) {
             $this->autoRender = false;
             $this->layout = 'ajax';
-            
+
             $this->Aluno->contain(array(
-                'Entidade','Curso'
+                'Entidade', 'Curso'
             ));
             $this->Aluno->virtualFields['auto_complete'] = 'CONCAT(Aluno.codigo," - ",Entidade.name)';
             $conditions = array(
-                'Aluno.codigo LIKE ' => '%'. $this->request->query['term'] . '%'
+                'Aluno.codigo LIKE ' => '%' . $this->request->query['term'] . '%'
             );
-            if($this->Aluno->Entidade->User->isFromFaculdade($this->Session->read('Auth.User.id'))){
+            if ($this->Aluno->Entidade->User->isFromFaculdade($this->Session->read('Auth.User.id'))) {
                 $conditions['Curso.unidade_organica_id'] = $this->Session->read('Auth.User.unidade_organica_id');
             }
             $results = $this->Aluno->find('all', array('fields' => array('Aluno.auto_complete'),
                 'conditions' => $conditions,
-                'group' => array('Aluno.codigo'),'limit'=>20
-                    ));
+                'group' => array('Aluno.codigo'), 'limit' => 20
+            ));
             $codigos = Set::extract('../Aluno/auto_complete', $results);
-            
+
             echo json_encode($codigos);
         }
     }
 
-    public function pesquisa_aluno_action($action_seguinte, $controller=null, $plugin=null) {
+    public function pesquisa_aluno_action($action_seguinte, $controller = null, $plugin = null) {
 
         if ($this->request->is('post')) {
             $aluno = $this->Aluno->findByCodigo($this->request->data['Aluno']['codigo']);
@@ -912,7 +915,7 @@ class AlunosController extends AppController {
             }
         }
         $codigos = '';
-        $this->set(compact('action_seguinte','codigos'));
+        $this->set(compact('action_seguinte', 'codigos'));
     }
 
     /**
@@ -924,7 +927,7 @@ class AlunosController extends AppController {
      * @param type $controller
      * @param type $plugin 
      */
-    public function faculdade_pesquisa_aluno_action($action_seguinte, $controller=null, $plugin=null) {
+    public function faculdade_pesquisa_aluno_action($action_seguinte, $controller = null, $plugin = null) {
         $unidade_organica_id = $this->Session->read('Auth.User.unidade_organica_id');
         if ($this->request->is('post')) {
             $this->Aluno->contain('Curso');
@@ -947,7 +950,7 @@ class AlunosController extends AppController {
             }
         }
         $codigos = '';
-        $this->set(compact('action_seguinte','codigos'));
+        $this->set(compact('action_seguinte', 'codigos'));
     }
 
     public function mudanca_curso($aluno_id) {
@@ -1220,7 +1223,7 @@ class AlunosController extends AppController {
             'order' => array(
                 'Turma.ano_curricular',
                 'Turma.semestre_curricular'
-                )));
+        )));
 
         $this->Aluno->Inscricao->contain(array(
             'Turma' => array(
@@ -1379,7 +1382,7 @@ class AlunosController extends AppController {
                         'entidade_id' => $aluno['Aluno']['entidade_id'],
                         'tipo_contacto_id' => 2,
                         'valor' => $this->request->data['CandidatoGraduacao']['telemovel']
-                        ));
+                ));
 
                 $this->Aluno->Entidade->EntidadeContacto->create();
                 $this->Aluno->Entidade->EntidadeContacto->save($novo_contacto);
@@ -1430,9 +1433,8 @@ class AlunosController extends AppController {
         }
         $this->set(compact('aluno', 'is_regular', 'classe_estado', 'celular', 'funcionario', 'paises', 'cidades', 'provincias', 'regaliaSocials', 'regimeEstudos', 'generos', 'estado_civil', 'cerimoniaGraduacaos'));
     }
-    
-    
-    public function pesquisar_candidato(){
+
+    public function pesquisar_candidato() {
         $conditions = array();
         if ($this->request->is('post')) {
             if ($this->request->data['Candidatura']['numero_candidato'] != '') {
@@ -1442,76 +1444,72 @@ class AlunosController extends AppController {
                 $conditions['Candidatura.apelido LIKE'] = '%' . $this->request->data['Candidatura']['apelido'] . '%';
             }
         }
-        
+
         $conditions['Candidatura.estado_candidatura_id'] = 2;
-        $this->paginate= array(
+        $this->paginate = array(
             'conditions' => $conditions,
-            'limit'=>50,
-            'contain'=>array('Curso')
+            'limit' => 50,
+            'contain' => array('Curso')
         );
         $candidatos = $this->paginate('Candidatura');
 
 
         $this->set('candidatos', $candidatos);
-        
-        
     }
-    
-    public function atribuir_bolsa_candidato($candidato_id){
+
+    public function atribuir_bolsa_candidato($candidato_id) {
         $this->loadModel('Candidatura');
         $candidato = $this->Candidatura->findById($candidato_id);
-        if($this->request->is('post')){
+        if ($this->request->is('post')) {
             $this->loadModel('BolsaTemporaria');
-            if($this->request->data['BolsaTemporaria']['bolsa_tipo_bolsa_id']!=5){
+            if ($this->request->data['BolsaTemporaria']['bolsa_tipo_bolsa_id'] != 5) {
                 $this->request->data['BolsaTemporaria']['doador'] = 'OE';
-            } else{
+            } else {
                 $this->request->data['BolsaTemporaria']['doador'] = 'N';
             }
             $this->request->data['BolsaTemporaria']['apelido'] = $candidato['Candidatura']['apelido'];
             $this->request->data['BolsaTemporaria']['nomes'] = $candidato['Candidatura']['nomes'];
-            
+
             $bolsa_existe = $this->BolsaTemporaria->findByNumeroCandidato($this->request->data['BolsaTemporaria']['numero_candidato']);
-            if(!$bolsa_existe){
+            if (!$bolsa_existe) {
                 $this->BolsaTemporaria->create();
-            $this->BolsaTemporaria->save($this->request->data);
-            $this->Session->setFlash('Bolsa Atribuida com Sucesso','default',array('class'=>'alert success'));
-            $this->redirect(array('action'=>'pesquisar_candidato'));
-            } else{
+                $this->BolsaTemporaria->save($this->request->data);
+                $this->Session->setFlash('Bolsa Atribuida com Sucesso', 'default', array('class' => 'alert success'));
+                $this->redirect(array('action' => 'pesquisar_candidato'));
+            } else {
                 $this->BolsaTemporaria->id = $bolsa_existe['BolsaTemporaria']['id'];
                 $this->BolsaTemporaria->save($this->request->data);
-                $this->Session->setFlash('Bolsa Atribuida com Sucesso','default',array('class'=>'alert success'));
-            $this->redirect(array('action'=>'pesquisar_candidato'));
+                $this->Session->setFlash('Bolsa Atribuida com Sucesso', 'default', array('class' => 'alert success'));
+                $this->redirect(array('action' => 'pesquisar_candidato'));
             }
-            
         }
-        
-        
-        
+
+
+
         $tipo_bolsas = $this->Candidatura->BolsaTipoBolsa->find('list');
-        $this->set(compact('candidato','tipo_bolsas'));
-        
+        $this->set(compact('candidato', 'tipo_bolsas'));
     }
-    
-    public function print_bolsas_novo_ingresso(){
+
+    public function print_bolsas_novo_ingresso() {
         $this->loadModel('BolsaTemporaria');
         //primeiro_pegamos todos cursos, para paginacao
         $this->BolsaTemporaria->contain('Curso');
-        $cursos = $this->BolsaTemporaria->find('list',array('fields'=>array('BolsaTemporaria.curso_id','Curso.name'),'order'=>'Curso.name'));
+        $cursos = $this->BolsaTemporaria->find('list', array('fields' => array('BolsaTemporaria.curso_id', 'Curso.name'), 'order' => 'Curso.name'));
         $bolseiros = array();
-        foreach($cursos as $k=>$v){
+        foreach ($cursos as $k => $v) {
             $this->BolsaTemporaria->contain('BolsaTipoBolsa');
-            $bolsas = $this->BolsaTemporaria->find('all',array('conditions'=>array('curso_id'=>$k),'order'=>array('apelido','nomes')));
+            $bolsas = $this->BolsaTemporaria->find('all', array('conditions' => array('curso_id' => $k), 'order' => array('apelido', 'nomes')));
             $bolseiros[$v] = $bolsas;
-    }
-        
+        }
+
         $this->set(compact('bolseiros'));
     }
-    
-    
+
     public function beforeFilter() {
         parent::beforeFilter();
-        
-        if($this->action=='pesquisar_candidato'){
+
+        if ($this->action == 'pesquisar_candidato') {
+            
         }
     }
 

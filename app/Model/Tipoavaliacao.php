@@ -27,13 +27,13 @@
  */
  
  
-class Tipoavaliacao extends AppModel {
-	var $name = 'Tipoavaliacao';
+class TipoAvaliacao extends AppModel {
+	var $name = 'TipoAvaliacao';
 
     var $belongsTo = array(
-		'Epocaavaliacao' => array(
-			'className' => 'Epocaavaliacao',
-			'foreignKey' => 'epocaavaliacao_id',
+		'EpocaAvaliacao' => array(
+			'className' => 'EpocaAvaliacao',
+			'foreignKey' => 'EpocaAvaliacao_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''

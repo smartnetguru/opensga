@@ -47,7 +47,7 @@ class BolsaResultadosController extends AppController {
 				$this->Session->setFlash(__('The bolsa resultado could not be saved. Please, try again.'));
 			}
 		}
-		$bolsaCandidaturas = $this->BolsaResultado->BolsaCandidatura->find('list');
+		$bolsaCandidaturas = $this->BolsaResultado->BolsaPedido->find('list');
 		$bolsaTipoBolsas = $this->BolsaResultado->BolsaTipoBolsa->find('list');
 		$bolsaMotivoIndeferimentos = $this->BolsaResultado->BolsaMotivoIndeferimento->find('list');
 		$this->set(compact('bolsaCandidaturas', 'bolsaTipoBolsas', 'bolsaMotivoIndeferimentos'));
@@ -75,7 +75,7 @@ class BolsaResultadosController extends AppController {
 		} else {
 			$this->request->data = $this->BolsaResultado->read(null, $id);
 		}
-		$bolsaCandidaturas = $this->BolsaResultado->BolsaCandidatura->find('list');
+		$bolsaCandidaturas = $this->BolsaResultado->BolsaPedido->find('list');
 		$bolsaTipoBolsas = $this->BolsaResultado->BolsaTipoBolsa->find('list');
 		$bolsaMotivoIndeferimentos = $this->BolsaResultado->BolsaMotivoIndeferimento->find('list');
 		$this->set(compact('bolsaCandidaturas', 'bolsaTipoBolsas', 'bolsaMotivoIndeferimentos'));

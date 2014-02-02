@@ -28,10 +28,10 @@ class CerimoniaGraduacaoFixture extends CakeTestFixture {
  */
 	public $records = array(
 		array(
-			'id' => 1,
-			'data' => '2013-09-15 23:49:02',
-			'local' => 'Lorem ipsum dolor sit amet',
-			'name' => 'Lorem ipsum dolor sit amet'
+			'id' => '1',
+			'data' => '2013-11-01 00:00:00',
+			'local' => 'Campus Universitário',
+			'name' => 'Novembro/2013'
 		),
 	);
 

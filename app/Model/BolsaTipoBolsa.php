@@ -3,7 +3,7 @@ App::uses('AppModel', 'Model');
 /**
  * BolsaTipoBolsa Model
  *
- * @property BolsaCandidatura $BolsaCandidatura
+ * @property BolsaPedido $BolsaPedido
  * @property BolsaResultado $BolsaResultado
  * @property BolsaValorBolsa $BolsaValorBolsa
  */
@@ -18,8 +18,8 @@ class BolsaTipoBolsa extends AppModel {
  * @var array
  */
 	public $hasMany = array(
-		'BolsaCandidatura' => array(
-			'className' => 'BolsaCandidatura',
+		'BolsaPedido' => array(
+			'className' => 'BolsaPedido',
 			'foreignKey' => 'bolsa_tipo_bolsa_id',
 			'dependent' => false,
 			'conditions' => '',

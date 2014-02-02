@@ -28,14 +28,14 @@
  
  
  
-class Epocaavaliacao extends AppModel {
-	var $name = 'Epocaavaliacao';
+class EpocaAvaliacao extends AppModel {
+	var $name = 'EpocaAvaliacao';
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 
 	var $hasMany = array(
 		'Inscricao' => array(
 			'className' => 'Inscricao',
-			'foreignKey' => 'epocaavaliacao_id',
+			'foreignKey' => 'EpocaAvaliacao_id',
 			'dependent' => false,
 			'conditions' => '',
 			'fields' => '',

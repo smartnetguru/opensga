@@ -39,8 +39,8 @@ class TurmaTipoAvaliacao extends AppModel {
 			'fields' => '',
 			'order' => ''
 		),
-		'Tipoavaliacao' => array(
-			'className' => 'Tipoavaliacao',
+		'TipoAvaliacao' => array(
+			'className' => 'TipoAvaliacao',
 			'foreignKey' => 'tipoavaliacao_id',
 			'conditions' => '',
 			'fields' => '',

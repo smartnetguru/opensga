@@ -13,7 +13,7 @@ class GrupodisciplinaFixture extends CakeTestFixture {
 	public $fields = array(
 		'id' => array('type' => 'integer', 'null' => false, 'default' => null, 'key' => 'primary'),
 		'codigo' => array('type' => 'string', 'null' => true, 'default' => null, 'length' => 25, 'collate' => 'utf8_general_ci', 'charset' => 'utf8'),
-		'plano_estudo_id' => array('type' => 'integer', 'null' => false, 'default' => null),
+		'planoestudo_id' => array('type' => 'integer', 'null' => false, 'default' => null),
 		'tipoprecedencia_id' => array('type' => 'integer', 'null' => true, 'default' => null),
 		'disciplina_id' => array('type' => 'integer', 'null' => true, 'default' => null),
 		'grupodisciplinasprec' => array('type' => 'integer', 'null' => true, 'default' => null),

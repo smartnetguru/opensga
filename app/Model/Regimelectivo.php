@@ -28,14 +28,14 @@
  
  
  
-class Regimelectivo extends AppModel {
-	var $name = 'Regimelectivo';
+class RegimeLectivo extends AppModel {
+	var $name = 'RegimeLectivo';
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 
 	var $hasMany = array(
 		'AnoLectivo' => array(
 			'className' => 'AnoLectivo',
-			'foreignKey' => 'regimelectivo_id',
+			'foreignKey' => 'RegimeLectivo_id',
 			'dependent' => false,
 			'conditions' => '',
 			'fields' => '',

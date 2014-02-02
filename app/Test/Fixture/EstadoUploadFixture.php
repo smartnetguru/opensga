@@ -25,10 +25,6 @@ class EstadoUploadFixture extends CakeTestFixture {
  * @var array
  */
 	public $records = array(
-		array(
-			'id' => 1,
-			'name' => 'Lorem ipsum dolor sit amet'
-		),
 	);
 
 }

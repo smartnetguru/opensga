@@ -32,8 +32,8 @@ class Avaliacao extends AppModel {
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 
 	var $belongsTo = array(
-		'Tipoavaliacao' => array(
-			'className' => 'Tipoavaliacao',
+		'TipoAvaliacao' => array(
+			'className' => 'TipoAvaliacao',
 			'foreignKey' => 'tipoavaliacao_id',
 			'conditions' => '',
 			'fields' => '',
@@ -82,8 +82,8 @@ class Avaliacao extends AppModel {
 			return $resultado;				
 		}
 		
-		function getEpocaAvaliacaos($epocaavaliacao_id){
-            $query = "select name from epocaavaliacaos where id = {$epocaavaliacao_id}";		
+		function getEpocaAvaliacaos($EpocaAvaliacao_id){
+            $query = "select name from EpocaAvaliacaos where id = {$EpocaAvaliacao_id}";		
             $resultado = $this->query($query);
 			//var_dump($resultado);
 			return $resultado;				

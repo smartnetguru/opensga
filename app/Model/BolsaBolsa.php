@@ -4,14 +4,14 @@ App::uses('AppModel', 'Model');
  * BolsaBolsa Model
  *
  * @property Aluno $Aluno
- * @property BolsaCandidatura $BolsaCandidatura
+ * @property BolsaPedido $BolsaPedido
  * @property AnoLectivo $AnoLectivo
  * @property Banco $Banco
  * @property BolsaFonteBolsa $BolsaFonteBolsa
  * @property BolsaCriadorConta $BolsaCriadorConta
  * @property BolsaEstadoBolsa $BolsaEstadoBolsa
  * @property BolsaResultado $BolsaResultado
- * @property BolsaCandidatura $BolsaCandidatura
+ * @property BolsaPedido $BolsaPedido
  */
 class BolsaBolsa extends AppModel {
 
@@ -31,8 +31,8 @@ class BolsaBolsa extends AppModel {
 			'fields' => '',
 			'order' => ''
 		),
-		'BolsaCandidatura' => array(
-			'className' => 'BolsaCandidatura',
+		'BolsaPedido' => array(
+			'className' => 'BolsaPedido',
 			'foreignKey' => 'bolsa_candidatura_id',
 			'conditions' => '',
 			'fields' => '',
@@ -59,20 +59,6 @@ class BolsaBolsa extends AppModel {
 			'fields' => '',
 			'order' => ''
 		),
-		'BolsaCriadorConta' => array(
-			'className' => 'BolsaCriadorConta',
-			'foreignKey' => 'bolsa_criador_conta_id',
-			'conditions' => '',
-			'fields' => '',
-			'order' => ''
-		),
-		'BolsaEstadoBolsa' => array(
-			'className' => 'BolsaEstadoBolsa',
-			'foreignKey' => 'bolsa_estado_bolsa_id',
-			'conditions' => '',
-			'fields' => '',
-			'order' => ''
-		),
 		'BolsaResultado' => array(
 			'className' => 'BolsaResultado',
 			'foreignKey' => 'bolsa_resultado_id',
@@ -88,8 +74,8 @@ class BolsaBolsa extends AppModel {
  * @var array
  */
 	public $hasMany = array(
-		'BolsaCandidatura' => array(
-			'className' => 'BolsaCandidatura',
+		'BolsaPedido' => array(
+			'className' => 'BolsaPedido',
 			'foreignKey' => 'bolsa_bolsa_id',
 			'dependent' => false,
 			'conditions' => '',

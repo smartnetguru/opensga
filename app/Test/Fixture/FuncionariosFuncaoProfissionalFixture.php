@@ -34,16 +34,6 @@ class FuncionariosFuncaoProfissionalFixture extends CakeTestFixture {
  * @var array
  */
 	public $records = array(
-		array(
-			'id' => '1',
-			'funcionario_id' => '1',
-			'funcao_profissional_id' => '1',
-			'unidade_organica_id' => null,
-			'created' => null,
-			'modified' => null,
-			'created_by' => null,
-			'modified_by' => null
-		),
 	);
 
 }

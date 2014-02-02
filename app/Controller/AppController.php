@@ -66,6 +66,10 @@ class AppController extends Controller {
             $this->Security->csrfCheck = false;
             $this->Security->validatePost = false;
         }
+        
+        if($this->request->controller!='alunos'){
+            $this->layout = 'clipone_default';
+        }
 
         //Devemos forcar o prefixo para funcionarios da faculdade, docente e estudantes
         $general_actions = array('logout', 'trocar_senha', 'autocomplete', 'altera_unidade_organica_admin');

@@ -65,6 +65,18 @@ class EstadoAlunoFixture extends CakeTestFixture {
 			'id' => '10',
 			'name' => 'Mudou de curso a maneira antiga - novo numero'
 		),
+		array(
+			'id' => '11',
+			'name' => 'Matricula Condicional'
+		),
+		array(
+			'id' => '12',
+			'name' => 'nao esta registado na bd'
+		),
+		array(
+			'id' => '13',
+			'name' => 'Matricula Anulada'
+		),
 	);
 
 }

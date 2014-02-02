@@ -39,9 +39,9 @@ class Anolectivoepoca extends AppModel {
 			'fields' => '',
 			'order' => ''
 		),
-		'Epocaavaliacao' => array(
-			'className' => 'Epocaavaliacao',
-			'foreignKey' => 'epocaavaliacao_id',
+		'EpocaAvaliacao' => array(
+			'className' => 'EpocaAvaliacao',
+			'foreignKey' => 'EpocaAvaliacao_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''

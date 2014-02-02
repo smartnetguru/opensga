@@ -37,6 +37,22 @@ class DocumentoIdentificacaoFixture extends CakeTestFixture {
 			'id' => '3',
 			'name' => 'DIRE'
 		),
+		array(
+			'id' => '4',
+			'name' => 'Talao de Bilhete de Identificacao'
+		),
+		array(
+			'id' => '5',
+			'name' => 'Cartao de Eleitor'
+		),
+		array(
+			'id' => '6',
+			'name' => 'Carta de Conducao'
+		),
+		array(
+			'id' => '7',
+			'name' => 'Talao de Carta de Conducao'
+		),
 	);
 
 }

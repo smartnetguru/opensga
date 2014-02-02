@@ -92,8 +92,8 @@ class Listagen extends AppModel {
      function getAllFunctionaryByCondition($genero_id,$departament_id,$tipofunc_id,$grauc_id){
          
       $query = "SELECT funcionario.id,funcionario.codigo as codigo,funcionario.name as nome,grau.name as grau,departamento.name as departamento,genero.name as genero,tipo.name as tipo  ";
-      $query .="FROM `funcionarios` funcionario,Grauacademicos grau,tg0006departamentos departamento,generos genero,tg0011tipofuncionarios tipo ";
-      $query .="where funcionario.Grauacademico_id=grau.id and funcionario.tg0006departamento_id=departamento.id and funcionario.genero_id=genero.id and funcionario.tg0011tipofuncionario_id=tipo.id ";
+      $query .="FROM `funcionarios` funcionario,Grauacademicos grau,tg0006departamentos departamento,generos genero,tg0011TipoFuncionarios tipo ";
+      $query .="where funcionario.Grauacademico_id=grau.id and funcionario.tg0006departamento_id=departamento.id and funcionario.genero_id=genero.id and funcionario.tg0011TipoFuncionario_id=tipo.id ";
       
       if(isset($departament_id) and $departament_id!=null){
           $query .="and funcionario.tg0006departamento_id={$departament_id} ";
@@ -106,7 +106,7 @@ class Listagen extends AppModel {
       }
       if(isset($tipofunc_id) and $tipofunc_id!=null)
       {
-          $query .="and funcionario.tg0011tipofuncionario_id={$tipofunc_id} ";
+          $query .="and funcionario.tg0011TipoFuncionario_id={$tipofunc_id} ";
       }
 	  
 	   $query .= "order by nome";

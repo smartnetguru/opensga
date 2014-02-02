@@ -29,5 +29,7 @@
  
 class Administracao extends AppModel {
 	public $useTable = false;
+    
+    
 }
 ?>

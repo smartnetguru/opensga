@@ -3,7 +3,7 @@ App::uses('AppModel', 'Model');
 /**
  * BolsaResultado Model
  *
- * @property BolsaCandidatura $BolsaCandidatura
+ * @property BolsaPedido $BolsaPedido
  * @property BolsaTipoBolsa $BolsaTipoBolsa
  * @property BolsaMotivoIndeferimento $BolsaMotivoIndeferimento
  * @property BolsaBolsa $BolsaBolsa
@@ -19,8 +19,8 @@ class BolsaResultado extends AppModel {
  * @var array
  */
 	public $belongsTo = array(
-		'BolsaCandidatura' => array(
-			'className' => 'BolsaCandidatura',
+		'BolsaPedido' => array(
+			'className' => 'BolsaPedido',
 			'foreignKey' => 'bolsa_candidatura_id',
 			'conditions' => '',
 			'fields' => '',

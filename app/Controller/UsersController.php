@@ -116,6 +116,7 @@ class UsersController extends AppController {
     }
 
     function login() {
+        
         if ($this->Session->read('Auth.User')) {
             //if($this->Session->read('Auth.User.group_id')==1)
             $this->Session->setFlash('Já está logado', 'default', array('class' => 'alert success'));
@@ -204,7 +205,7 @@ class UsersController extends AppController {
                 $this->Session->setFlash(__('Nome de Usuário ou Senha Invalidos'), 'default', array('class' => 'alert error'));
             }
         }
-        $this->layout = 'login';
+        $this->layout = 'clipone_login';
     }
 
     function after_login() {
@@ -315,6 +316,7 @@ class UsersController extends AppController {
 
         $this->Auth->allow(array('login', 'logout', 'opauth_complete'));
         if($this->action=='login' or $this->action=='logout'){
+           
             Configure::write('debug',0);
         }
     }

@@ -28,13 +28,13 @@
  
  
  
-class EpocaavaliacaosController extends AppController {
+class EpocaAvaliacaosController extends AppController {
 
-	var $name = 'Epocaavaliacaos';
+	var $name = 'EpocaAvaliacaos';
 
 	function index() {
-		$this->Epocaavaliacao->recursive = 0;
-		$this->set('epocaavaliacaos', $this->paginate());
+		$this->EpocaAvaliacao->recursive = 0;
+		$this->set('EpocaAvaliacaos', $this->paginate());
 	}
 
 	function view($id = null) 
@@ -44,11 +44,11 @@ class EpocaavaliacaosController extends AppController {
 			$this->Session->setFlash('Invalido %s', 'flasherror');
 			$this->redirect(array('action' => 'index'));
 		}
-		$this->set('epocaavaliacao', $this->Epocaavaliacao->read(null, $id));
+		$this->set('EpocaAvaliacao', $this->EpocaAvaliacao->read(null, $id));
                 if (empty($this->data)) 
 				{
-			$this->data = $this->Epocaavaliacao->read(null, $id);
-			//$logmv->logview(14,$this->Session->read('Auth.User.id'),$id,$this->data["Epocaavaliacao"]["name"]);
+			$this->data = $this->EpocaAvaliacao->read(null, $id);
+			//$logmv->logview(14,$this->Session->read('Auth.User.id'),$id,$this->data["EpocaAvaliacao"]["name"]);
 		
 		        }
 	}
@@ -57,9 +57,9 @@ class EpocaavaliacaosController extends AppController {
 	        //App::Import('Model','Logmv');
 	        //$logmv = new Logmv;
 		if (!empty($this->data)) {
-			$this->Epocaavaliacao->create();
-			if ($this->Epocaavaliacao->save($this->data)) {
-			//$logmv->logInsert(14,$this->Session->read('Auth.User.id'),$this->Epocaavaliacao->getLastInsertID(),$this->data["Epocaavaliacao"]["name"]);
+			$this->EpocaAvaliacao->create();
+			if ($this->EpocaAvaliacao->save($this->data)) {
+			//$logmv->logInsert(14,$this->Session->read('Auth.User.id'),$this->EpocaAvaliacao->getLastInsertID(),$this->data["EpocaAvaliacao"]["name"]);
 				$this->Session->setFlash('** Dados Cadastrados com Sucesso **','flashok');
 				$this->redirect(array('action' => 'index'));
 			} else {
@@ -75,8 +75,8 @@ class EpocaavaliacaosController extends AppController {
 			$this->redirect(array('action' => 'index'));
 		}
 		if (!empty($this->data)) {
-			if ($this->Epocaavaliacao->save($this->data)) {
-			 //$logmv->logUpdate(14,$this->Session->read('Auth.User.id'),$id,$this->data["Epocaavaliacao"]["name"]);
+			if ($this->EpocaAvaliacao->save($this->data)) {
+			 //$logmv->logUpdate(14,$this->Session->read('Auth.User.id'),$id,$this->data["EpocaAvaliacao"]["name"]);
 				
 				$this->Session->setFlash('Dado Editados com sucesso','flashok');
 				$this->redirect(array('action' => 'index'));
@@ -84,7 +84,7 @@ class EpocaavaliacaosController extends AppController {
 				$this->Session->setFlash('Erro ao editar dados. Por favor tente de novo.','flasherror');}
 		}
 		if (empty($this->data)) {
-			$this->data = $this->Epocaavaliacao->read(null, $id);
+			$this->data = $this->EpocaAvaliacao->read(null, $id);
 		}
 	}
 
@@ -92,15 +92,15 @@ class EpocaavaliacaosController extends AppController {
 	        //App::Import('Model','Logmv');
 	        //$logmv = new Logmv;
 		if (!$id) {
-			$this->Session->setFlash(sprintf(__('Invalid id for %s', true), 'epocaavaliacao'));
+			$this->Session->setFlash(sprintf(__('Invalid id for %s', true), 'EpocaAvaliacao'));
 			$this->redirect(array('action'=>'index'));
 		}
-		if ($this->Epocaavaliacao->delete($id)) {
+		if ($this->EpocaAvaliacao->delete($id)) {
 		//$logmv->logDelete(14,$this->Session->read('Auth.User.id'),$id,'Delete Epoca de Avaliacao');
 			$this->Session->setFlash('Dados deletedos com sucesso ','flashok');
 			$this->redirect(array('action'=>'index'));
 		}
-		$this->Session->setFlash(sprintf(__('%s was not deleted', true), 'Epocaavaliacao'));
+		$this->Session->setFlash(sprintf(__('%s was not deleted', true), 'EpocaAvaliacao'));
 		$this->redirect(array('action' => 'index'));
 	}
         function beforeRender(){

@@ -55,17 +55,17 @@ class AvaliacaosController extends AppController {
 	function add() {
             App::Import('Model','Turma');
             App::Import('Model','Curso');
-			App::Import('Model','Epocaavaliacao');
+			App::Import('Model','EpocaAvaliacao');
 			//App::Import('Model','Logmv');
 			
 	        //$logmv = new Logmv;
             $curso = new Curso;
             $turma = new Turma;
-			$epocaavaliacao = new Epocaavaliacao;
+			$EpocaAvaliacao = new EpocaAvaliacao;
 			
             $cursos = $curso->find('list');
            $turmas = $turma->find('list');
-			$epocaavaliacaos = $epocaavaliacao->find('list');
+			$EpocaAvaliacaos = $EpocaAvaliacao->find('list');
             $anolectivos = $turma->AnoLectivo->find('list');
 			$planoestudos = $turma->PlanoEstudo->find('list');
 			
@@ -79,14 +79,14 @@ class AvaliacaosController extends AppController {
 				$this->Session->setFlash('Erro ao gravar dados. Por favor tente de novo.','flasherror');
 			}
 		}
-		$tipoavaliacaos = $this->Avaliacao->Tipoavaliacao->find('list');
+		$tipoavaliacaos = $this->Avaliacao->TipoAvaliacao->find('list');
 		$inscricaos = $this->Avaliacao->Inscricao->find('list');
 
                
              
 
 			
-		$this->set(compact('tipoavaliacaos','t0013inscricaos','t0003cursos','t0010turmas','t0009anolectivos','t0005planoestudos','epocaavaliacaos'));
+		$this->set(compact('tipoavaliacaos','t0013inscricaos','t0003cursos','t0010turmas','t0009anolectivos','t0005planoestudos','EpocaAvaliacaos'));
 	}
 
 	function edit($id = null) {
@@ -104,7 +104,7 @@ class AvaliacaosController extends AppController {
 		if (empty($this->data)) {
 			$this->data = $this->Avaliacao->read(null, $id);
 		}
-		$tipoavaliacaos = $this->Avaliacao->Tipoavaliacao->find('list');
+		$tipoavaliacaos = $this->Avaliacao->TipoAvaliacao->find('list');
 		$inscricaos = $this->Avaliacao->Inscricao->find('list');
 		$this->set(compact('tipoavaliacaos', 't0013inscricaos'));
 	}
@@ -130,10 +130,10 @@ class AvaliacaosController extends AppController {
 			
 		    App::Import('Model','Turma');
             App::Import('Model','Curso');
-			App::Import('Model','Epocaavaliacao');
+			App::Import('Model','EpocaAvaliacao');
             $curso = new Curso;
             $turma = new Turma;
-			$epocaavaliacao = new Epocaavaliacao;
+			$EpocaAvaliacao = new EpocaAvaliacao;
 			 //var_dump($this->data['Avaliacaos']['t0009anolectivo_id']);
 			if (!empty($this->data)) {
 			
@@ -142,31 +142,31 @@ class AvaliacaosController extends AppController {
 				$this->Session->setFlash('Lancamento de Notas. ','flashok');
 				//$temporaryData = 'Mundi';
 	
-			//$this->data['Avaliacaos']['t0010turma_id'],$this->data['Avaliacaos']['epocaavaliacao_id'],$this->data['Avaliacaos']['t0015tipoavaliacao_id']
+			//$this->data['Avaliacaos']['t0010turma_id'],$this->data['Avaliacaos']['EpocaAvaliacao_id'],$this->data['Avaliacaos']['t0015tipoavaliacao_id']
                //var_dump($this->data['Avaliacaos']['t0003curso_id']);
-				$this->redirect(array('action' => 'lancamento_de_notas',$this->data['Avaliacaos']['t0010turma_id'],$this->data['Avaliacaos']['epocaavaliacao_id'],$this->data['Avaliacaos']['t0015tipoavaliacao_id'],$this->data['Avaliacaos']['t0005planoestudo_id'],$this->data['Avaliacaos']['t0003curso_id'],$this->data['Avaliacaos']['t0009anolectivo_id']));
+				$this->redirect(array('action' => 'lancamento_de_notas',$this->data['Avaliacaos']['t0010turma_id'],$this->data['Avaliacaos']['EpocaAvaliacao_id'],$this->data['Avaliacaos']['t0015tipoavaliacao_id'],$this->data['Avaliacaos']['t0005planoestudo_id'],$this->data['Avaliacaos']['t0003curso_id'],$this->data['Avaliacaos']['t0009anolectivo_id']));
 			} else {
 				//$this->Session->setFlash('Accao nao Permitida. Por favor tente de novo.','flasherror');
 			}
 			
             $cursos = $curso->find('list');
             $turmas = $turma->find('list');	
-			$epocaavaliacaos = $epocaavaliacao->find('list');				
-			$tipoavaliacaos = $this->Avaliacao->Tipoavaliacao->find('list');
+			$EpocaAvaliacaos = $EpocaAvaliacao->find('list');				
+			$tipoavaliacaos = $this->Avaliacao->TipoAvaliacao->find('list');
 			$anolectivos = $turma->AnoLectivo->find('list');
 			$planoestudos = $turma->PlanoEstudo->find('list');    
 
-			$this->set(compact('tipoavaliacaos','t0003cursos','t0010turmas','t0009anolectivos','t0005planoestudos','epocaavaliacaos'));
+			$this->set(compact('tipoavaliacaos','t0003cursos','t0010turmas','t0009anolectivos','t0005planoestudos','EpocaAvaliacaos'));
 			
         }
 		
-		//,$plano_estudo_id,$turma_id,$epocaavaliacao_id,$tipoavaliacao_id
+		//,$plano_estudo_id,$turma_id,$EpocaAvaliacao_id,$tipoavaliacao_id
 		function lancamento_de_notas($turma_id,$epocadeavaliacao,$tipoavaliacao,$plano_estudo_id,$curso_id,$t0009anolectivo_id){
 		     
 			 App::Import('Model','Inscricao');
 			 App::Import('Model','Turma');
              App::Import('Model','Curso');
-			 App::Import('Model','Epocaavaliacao');
+			 App::Import('Model','EpocaAvaliacao');
 			 App::Import('Model','T0017anolectivoepoca');
             //----------------------------------------------------------------------------
 			 $curso = new Curso;
@@ -176,7 +176,7 @@ class AvaliacaosController extends AppController {
 			 $this->Avaliacao->recursive = 0;
 			//----------------------------------------------------------------------------
 			 $estadoinscricao = $inscricao->Estadoinscricao->find('list');	
-			 $epoca = $t0017anolectivoepoca->find('all',array('conditions'=>array('epocaavaliacao_id'=>$epocadeavaliacao)));
+			 $epoca = $t0017anolectivoepoca->find('all',array('conditions'=>array('EpocaAvaliacao_id'=>$epocadeavaliacao)));
 			 $controle_epoca = $epoca[0]["T0017anolectivoepoca"]["limite"];
 			
 			 //$logmv->logInsert(12,$this->Session->read('Auth.User.id'),$this->Avaliacao->getLastInsertID(),$turma_id);
@@ -227,7 +227,7 @@ class AvaliacaosController extends AppController {
 					  $inscricao['Inscricao']['notafinal']  = $nota['nota'];
 					}
 					$inscricao['Inscricao']['tg0020estadoinscricao_id']=$nota['tg0020estadoinscricao_id'];
-					$inscricao['Inscricao']['epocaavaliacao_id'] = $this->data["Avaliacaos"]["epoca_avaliacao"];
+					$inscricao['Inscricao']['EpocaAvaliacao_id'] = $this->data["Avaliacaos"]["epoca_avaliacao"];
 					//-- faz o update -----------------------------------------------------------------------------------------
 					$this->Avaliacao->Inscricao->save($inscricao);
 			       }
@@ -258,7 +258,7 @@ class AvaliacaosController extends AppController {
 			  
 			  //------------ Epoca de avalicao by Id-----
 			  $epoca_avalicao= $this->Avaliacao->getEpocaAvaliacaos($epocadeavaliacao);
-			  $epoca_avalicao1 = $epoca_avalicao[0]["epocaavaliacaos"]["name"];
+			  $epoca_avalicao1 = $epoca_avalicao[0]["EpocaAvaliacaos"]["name"];
 			 
 			 //------------ Tipo de avalicao by Id-----
 			  $tipoavaliacao1 = $this->Avaliacao->getTipoAvaliacaos($tipoavaliacao);			  
@@ -334,9 +334,9 @@ $turmas11 = $turma11->find('all');
 		
 		
 		function update_tipo_de_avaliacao(){
-			App::Import('Model','Tipoavaliacao');
-            $tipoavaliacao = new Tipoavaliacao;
-			$tipoavaliacaos = $tipoavaliacao->find('list',array('conditions'=>array('epocaavaliacao_id'=>$this->data['Avaliacaos']['epocaavaliacao_id'])));  //, 'order'=> array ('name ASC')
+			App::Import('Model','TipoAvaliacao');
+            $tipoavaliacao = new TipoAvaliacao;
+			$tipoavaliacaos = $tipoavaliacao->find('list',array('conditions'=>array('EpocaAvaliacao_id'=>$this->data['Avaliacaos']['EpocaAvaliacao_id'])));  //, 'order'=> array ('name ASC')
 			
 			//var_dump($tipoavaliacaos);
 			$this->set('tipoavaliacaos',$tipoavaliacaos);

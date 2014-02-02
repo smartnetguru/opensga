@@ -27,63 +27,63 @@
  */
  
  
-class RegimelectivosController extends AppController {
+class RegimeLectivosController extends AppController {
 
-	var $name = 'Regimelectivos';
+	var $name = 'RegimeLectivos';
 
 	function index() {
-		$this->Regimelectivo->recursive = 0;
-		$this->set('regimelectivos', $this->paginate());
+		$this->RegimeLectivo->recursive = 0;
+		$this->set('RegimeLectivos', $this->paginate());
 	}
 
 	function view($id = null) {
 		if (!$id) {
-			$this->Session->setFlash(__('Invalid regimelectivo', true));
+			$this->Session->setFlash(__('Invalid RegimeLectivo', true));
 			$this->redirect(array('action' => 'index'));
 		}
-		$this->set('regimelectivo', $this->Regimelectivo->read(null, $id));
+		$this->set('RegimeLectivo', $this->RegimeLectivo->read(null, $id));
 	}
 
 	function add() {
 		if (!empty($this->data)) {
-			$this->Regimelectivo->create();
-			if ($this->Regimelectivo->save($this->data)) {
-				$this->Session->setFlash(__('The regimelectivo has been saved', true));
+			$this->RegimeLectivo->create();
+			if ($this->RegimeLectivo->save($this->data)) {
+				$this->Session->setFlash(__('The RegimeLectivo has been saved', true));
 				$this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The regimelectivo could not be saved. Please, try again.', true));
+				$this->Session->setFlash(__('The RegimeLectivo could not be saved. Please, try again.', true));
 			}
 		}
 	}
 
 	function edit($id = null) {
 		if (!$id && empty($this->data)) {
-			$this->Session->setFlash(__('Invalid regimelectivo', true));
+			$this->Session->setFlash(__('Invalid RegimeLectivo', true));
 			$this->redirect(array('action' => 'index'));
 		}
 		if (!empty($this->data)) {
-			if ($this->Regimelectivo->save($this->data)) {
-				$this->Session->setFlash(__('The regimelectivo has been saved', true));
+			if ($this->RegimeLectivo->save($this->data)) {
+				$this->Session->setFlash(__('The RegimeLectivo has been saved', true));
 				$this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The regimelectivo could not be saved. Please, try again.', true));
+				$this->Session->setFlash(__('The RegimeLectivo could not be saved. Please, try again.', true));
 			}
 		}
 		if (empty($this->data)) {
-			$this->data = $this->Regimelectivo->read(null, $id);
+			$this->data = $this->RegimeLectivo->read(null, $id);
 		}
 	}
 
 	function delete($id = null) {
 		if (!$id) {
-			$this->Session->setFlash(__('Invalid id for regimelectivo', true));
+			$this->Session->setFlash(__('Invalid id for RegimeLectivo', true));
 			$this->redirect(array('action'=>'index'));
 		}
-		if ($this->Regimelectivo->delete($id)) {
-			$this->Session->setFlash(__('Regimelectivo deleted', true));
+		if ($this->RegimeLectivo->delete($id)) {
+			$this->Session->setFlash(__('RegimeLectivo deleted', true));
 			$this->redirect(array('action'=>'index'));
 		}
-		$this->Session->setFlash(__('Regimelectivo was not deleted', true));
+		$this->Session->setFlash(__('RegimeLectivo was not deleted', true));
 		$this->redirect(array('action' => 'index'));
 	}
 }
