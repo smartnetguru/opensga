@@ -65,7 +65,7 @@ class CandidaturasController extends AppController {
             $this->Candidatura->contain(array(
             'Genero'
         ));
-            $candidatos2 = $this->Candidatura->find('all',array('conditions'=>array('estado_candidatura_id'=>2,'ano_lectivo_admissao'=>Configure::read('OpenSGA.ano_lectivo'),'curso_id'=>$k)));
+            $candidatos2 = $this->Candidatura->find('all',array('conditions'=>array('estado_candidatura_id'=>2,'ano_lectivo_admissao'=>Configure::read('OpenSGA.ano_lectivo'),'curso_id'=>$k),'order'=>array('apelido','nomes')));
             $candidatos[$v]=$candidatos2;
             
         }

@@ -378,7 +378,7 @@ class OpenSGAShell extends AppShell {
         foreach($candidatos as $candidato){
         $curso_admissao = $candidato['Candidatura']['codigo_curso_admitido_admissao'];
             $this->Curso->contain('UnidadeOrganica');
-            $curso = $this->Curso->findByCodigo($curso_admissao);
+            $curso = $this->Curso->findByCodigoAdmissao($curso_admissao);
             if(!empty($curso)){
                 $this->Candidatura->id = $candidato['Candidatura']['id'];
                 $this->Candidatura->set('curso_id',$curso['Curso']['id']);
