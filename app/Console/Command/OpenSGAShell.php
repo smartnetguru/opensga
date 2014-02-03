@@ -1,6 +1,7 @@
 <?php
 
 ini_set('memory_limit', "2048M");
+ini_set('xdebug.max_nesting_level', 20000);
 App::uses('AuditableConfig', 'Auditable.Lib');
 
 class OpenSGAShell extends AppShell {
@@ -32,7 +33,7 @@ class OpenSGAShell extends AppShell {
         $xls = PHPExcel_IOFactory::load(APP . 'Reports' . DS . 'autenticidades.xlsx');
 
         $worksheet = $xls->getActiveSheet();
-        //debug($xls->getActiveSheetIndex());
+//debug($xls->getActiveSheetIndex());
         $linha_actual = 1;
         $numeros = array();
         foreach ($worksheet->getRowIterator() as $row) {
@@ -52,7 +53,7 @@ class OpenSGAShell extends AppShell {
             if ($linha_actual == 1600) {
                 break;
             }
-            //$this->out($linha_actual);
+//$this->out($linha_actual);
             $linha_actual++;
         }
 
@@ -92,9 +93,9 @@ class OpenSGAShell extends AppShell {
         debug(getcwd());
         $objWriter->save('fixeiro.xlsx');
 
-        //debug($resultado);
+//debug($resultado);
         debug(count($numeros_limpo));
-        // clear memory
+// clear memory
         $xls->disconnectWorksheets();
     }
 
@@ -111,19 +112,19 @@ class OpenSGAShell extends AppShell {
         $xls = PHPExcel_IOFactory::load(APP . 'Imports' . DS . 'candidatos.xlsx');
 
         $worksheet = $xls->getActiveSheet();
-        //debug($xls->getActiveSheetIndex());
+//debug($xls->getActiveSheetIndex());
         $linha_actual = 2;
         foreach ($worksheet->getRowIterator() as $row) {
             if ($worksheet->getCell('A' . $linha_actual)->getValue() == '') {
                 break;
             }
-            
+
             $array_candidato = array(
                 'Candidatura' => array(
                     'numero_estudante' => $worksheet->getCell('A' . $linha_actual)->getCalculatedValue(),
                     'nomes' => $worksheet->getCell('B' . $linha_actual)->getValue(),
-                 //   'apelido' => $worksheet->getCell('C' . $linha_actual)->getValue(),
-                 //   'nome_curso' => $worksheet->getCell('D' . $linha_actual)->getValue()
+                //   'apelido' => $worksheet->getCell('C' . $linha_actual)->getValue(),
+//   'nome_curso' => $worksheet->getCell('D' . $linha_actual)->getValue()
                 )
             );
 
@@ -145,8 +146,7 @@ class OpenSGAShell extends AppShell {
             $linha_actual++;
         }
     }
-    
-    
+
     /**
      * Importa candidatos do excel
      * @todo Verificar esta funcao. Nao eh consistente
@@ -160,99 +160,97 @@ class OpenSGAShell extends AppShell {
         $xls = PHPExcel_IOFactory::load(APP . 'Imports' . DS . 'candidatos.xlsx');
 
         $worksheet = $xls->getActiveSheet();
-        //debug($xls->getActiveSheetIndex());
+//debug($xls->getActiveSheetIndex());
         $linha_actual = 2;
         foreach ($worksheet->getRowIterator() as $row) {
             if ($worksheet->getCell('A' . $linha_actual)->getValue() == '') {
                 break;
             }
-            
+
             $array_candidato = array(
                 'Candidatura' => array(
                     'numero_candidato' => $worksheet->getCell('A' . $linha_actual)->getCalculatedValue(),
                     'nomes' => ucwords(strtolower($worksheet->getCell('B' . $linha_actual)->getValue())),
-                 //   'apelido' => $worksheet->getCell('C' . $linha_actual)->getValue(),
-                 //   'nome_curso' => $worksheet->getCell('D' . $linha_actual)->getValue()
+                //   'apelido' => $worksheet->getCell('C' . $linha_actual)->getValue(),
+//   'nome_curso' => $worksheet->getCell('D' . $linha_actual)->getValue()
                 )
             );
-            
+
             $sexo = $worksheet->getCell('C' . $linha_actual)->getCalculatedValue();
-            if($sexo=='M'){
+            if ($sexo == 'M') {
                 $array_candidato['Candidatura']['genero_id'] = 1;
-            } elseif($sexo=='F'){
+            } elseif ($sexo == 'F') {
                 $array_candidato['Candidatura']['genero_id'] = 2;
             }
-            
+
             $estado_civil = $worksheet->getCell('E' . $linha_actual)->getCalculatedValue();
-            if($estado_civil=='S'){
+            if ($estado_civil == 'S') {
                 $array_candidato['Candidatura']['estado_civil'] = 1;
-            } elseif($estado_civil=='C'){
+            } elseif ($estado_civil == 'C') {
                 $array_candidato['Candidatura']['estado_civil'] = 2;
-            } elseif($estado_civil=='D'){
+            } elseif ($estado_civil == 'D') {
                 $array_candidato['Candidatura']['estado_civil'] = 4;
-            } elseif($estado_civil=='V'){
+            } elseif ($estado_civil == 'V') {
                 $array_candidato['Candidatura']['estado_civil'] = 6;
             }
 
             $pais_nome = $worksheet->getCell('G' . $linha_actual)->getCalculatedValue();
-            
+
             $paisNascimento = $this->Aluno->Entidade->PaisNascimento->findByName($pais_nome);
-            if($paisNascimento){
-                
+            if ($paisNascimento) {
+
                 $array_candidato['Candidatura']['pais_nascimento'] = $paisNascimento['PaisNascimento']['id'];
                 $this->Aluno->Entidade->PaisNascimento->id = $paisNascimento['PaisNascimento']['id'];
-                $this->Aluno->Entidade->PaisNascimento->set('codigo_admissao',$worksheet->getCell('F' . $linha_actual)->getCalculatedValue());
-            } else{
+                $this->Aluno->Entidade->PaisNascimento->set('codigo_admissao', $worksheet->getCell('F' . $linha_actual)->getCalculatedValue());
+            } else {
                 debug('pais');
                 die(debug($pais_nome));
             }
-            
+
             $provincia_nome = $worksheet->getCell('I' . $linha_actual)->getCalculatedValue();
-            
+
             $provinciaNascimento = $this->Aluno->Entidade->ProvinciaNascimento->findByName($provincia_nome);
-            if($provinciaNascimento){
+            if ($provinciaNascimento) {
                 $array_candidato['Candidatura']['provincia_nascimento'] = $provinciaNascimento['ProvinciaNascimento']['id'];
                 $this->Aluno->Entidade->ProvinciaNascimento->id = $provinciaNascimento['ProvinciaNascimento']['id'];
-                $this->Aluno->Entidade->ProvinciaNascimento->set('codigo_admissao',$worksheet->getCell('H' . $linha_actual)->getCalculatedValue());
-            } else{
+                $this->Aluno->Entidade->ProvinciaNascimento->set('codigo_admissao', $worksheet->getCell('H' . $linha_actual)->getCalculatedValue());
+            } else {
                 debug('provincia');
                 die(debug($provincia_nome));
             }
-            
+
             $array_candidato['Candidatura']['curso_opcao1'] = $worksheet->getCell('L' . $linha_actual)->getCalculatedValue();
             $array_candidato['Candidatura']['curso_opcao2'] = $worksheet->getCell('M' . $linha_actual)->getCalculatedValue();
             $array_candidato['Candidatura']['codigo_escola_admissao'] = $worksheet->getCell('N' . $linha_actual)->getCalculatedValue();
             $array_candidato['Candidatura']['ano_conclusao'] = $worksheet->getCell('O' . $linha_actual)->getCalculatedValue();
             $array_candidato['Candidatura']['documento_identificacao_numero'] = $worksheet->getCell('P' . $linha_actual)->getCalculatedValue();
             $array_candidato['Candidatura']['estado_candidatura_id'] = 1;
-            
+
             $documento_nome = $worksheet->getCell('Q' . $linha_actual)->getCalculatedValue();
             $documentoIdentificao = $this->Aluno->Entidade->DocumentoIdentificacao->findByName($documento_nome);
             $array_candidato['Candidatura']['documento_identificacao_id'] = $documentoIdentificao['DocumentoIdentificacao']['id'];
-            
-            
+
+
             $existentes = array();
             $candidato_existe = $this->Candidatura->findByNumeroCandidato($array_candidato['Candidatura']['numero_candidato']);
-            
-            if(!empty($candidato_existe)){
+
+            if (!empty($candidato_existe)) {
                 $existentes[] = $array_candidato['Candidatura']['numero_candidato'];
                 $this->out($array_candidato);
-            } else{
+            } else {
                 $this->Candidatura->create();
                 $this->Candidatura->save($array_candidato);
-                $this->out($linha_actual.'-----------------------------------------------------------'.$this->Candidatura->id);
+                $this->out($linha_actual . '-----------------------------------------------------------' . $this->Candidatura->id);
             }
-            //$this->Candidatura->create();
-            //$this->Candidatura->save($array_candidato);
-            //debug($this->Candidatura->id);
+//$this->Candidatura->create();
+//$this->Candidatura->save($array_candidato);
+//debug($this->Candidatura->id);
 
             $linha_actual++;
         }
         $this->out($existentes);
     }
 
-    
-    
     public function importa_admitidos_2014() {
         AuditableConfig::$Logger = ClassRegistry::init('Auditable.Logger');
         App::import('Vendor', 'PHPExcel', array('file' => 'PHPExcel.php'));
@@ -262,170 +260,99 @@ class OpenSGAShell extends AppShell {
         $xls = PHPExcel_IOFactory::load(APP . 'Imports' . DS . 'admitidos.xlsx');
 
         $worksheet = $xls->getActiveSheet();
-        //debug($xls->getActiveSheetIndex());
+//debug($xls->getActiveSheetIndex());
         $linha_actual = 2;
         foreach ($worksheet->getRowIterator() as $row) {
             if ($worksheet->getCell('A' . $linha_actual)->getValue() == '') {
                 break;
             }
-            
+
             $nao_encontrados = array();
             $numero_candidato = $worksheet->getCell('A' . $linha_actual)->getCalculatedValue();
             $candidato = $this->Candidatura->findByNumeroCandidato($numero_candidato);
-            if($candidato){
+            if ($candidato) {
                 $this->Candidatura->id = $candidato['Candidatura']['id'];
-                
-                $this->Candidatura->set('numero_estudante',$worksheet->getCell('B' . $linha_actual)->getCalculatedValue());
-                $this->Candidatura->set('codigo_curso_admitido_admissao',$worksheet->getCell('D' . $linha_actual)->getCalculatedValue());
-                $this->Candidatura->set('data_nascimento',$worksheet->getCell('O' . $linha_actual)->getFormattedValue());
-                $this->Candidatura->set('aluno_via_admissao_id',1);
-                $this->Candidatura->set('tipo_ingresso_id',1);
-                $this->Candidatura->set('estado_candidatura_id',2);
-               
+
+                $this->Candidatura->set('numero_estudante', $worksheet->getCell('B' . $linha_actual)->getCalculatedValue());
+                $this->Candidatura->set('codigo_curso_admitido_admissao', $worksheet->getCell('D' . $linha_actual)->getCalculatedValue());
+                $this->Candidatura->set('data_nascimento', $worksheet->getCell('O' . $linha_actual)->getFormattedValue());
+                $this->Candidatura->set('aluno_via_admissao_id', 1);
+                $this->Candidatura->set('tipo_ingresso_id', 1);
+                $this->Candidatura->set('estado_candidatura_id', 2);
+
                 $this->Candidatura->save();
-                $this->out($linha_actual.'--------------------------------'.$this->Candidatura->id);
-                
-               // debug($this->Candidatura->data);
-            } else{
-                $nao_encontrados[]=$numero_candidato;
+                $this->out($linha_actual . '--------------------------------' . $this->Candidatura->id);
+
+// debug($this->Candidatura->data);
+            } else {
+                $nao_encontrados[] = $numero_candidato;
             }
 
             $linha_actual++;
         }
         $this->out($nao_encontrados);
     }
-    
-    public function importa_apelidos_2014() {
+
+    public function verifica_admitidos_2014() {
         AuditableConfig::$Logger = ClassRegistry::init('Auditable.Logger');
         App::import('Vendor', 'PHPExcel', array('file' => 'PHPExcel.php'));
         if (!class_exists('PHPExcel'))
             throw new CakeException('Vendor class PHPExcel not found!');
 
-        $xls = PHPExcel_IOFactory::load(APP . 'Imports' . DS . 'candidato_apelidos.xlsx');
+        $xls = PHPExcel_IOFactory::load(APP . 'Imports' . DS . 'admitidos.xlsx');
 
         $worksheet = $xls->getActiveSheet();
-        //debug($xls->getActiveSheetIndex());
+//debug($xls->getActiveSheetIndex());
         $linha_actual = 2;
+        $total = 0;
         foreach ($worksheet->getRowIterator() as $row) {
             if ($worksheet->getCell('A' . $linha_actual)->getValue() == '') {
                 break;
             }
-            
+
             $nao_encontrados = array();
-            $numero_candidato = $worksheet->getCell('A' . $linha_actual)->getCalculatedValue();
-            $candidato = $this->Candidatura->findByNumeroCandidato($numero_candidato);
-            if($candidato){
-                $this->Candidatura->id = $candidato['Candidatura']['id'];
-                
-                $this->Candidatura->set('apelido',  ucwords(strtolower($worksheet->getCell('B' . $linha_actual)->getCalculatedValue())));
-               
-                $this->Candidatura->save();
-                $this->out($linha_actual.'--------------------------------'.$this->Candidatura->id);
-                
-               // debug($this->Candidatura->data);
-            } else{
-                $nao_encontrados[]=$numero_candidato;
-            }
 
-            $linha_actual++;
-        }
-        $this->out($nao_encontrados);
-    }
-    
-    public function importa_parentes_2014() {
-        AuditableConfig::$Logger = ClassRegistry::init('Auditable.Logger');
-        App::import('Vendor', 'PHPExcel', array('file' => 'PHPExcel.php'));
-        if (!class_exists('PHPExcel'))
-            throw new CakeException('Vendor class PHPExcel not found!');
-
-        $xls = PHPExcel_IOFactory::load(APP . 'Imports' . DS . 'parentes.xlsx');
-
-        $worksheet = $xls->getActiveSheet();
-        //debug($xls->getActiveSheetIndex());
-        $linha_actual = 2;
-        foreach ($worksheet->getRowIterator() as $row) {
-            if ($worksheet->getCell('A' . $linha_actual)->getValue() == '') {
-                break;
-            }
+            $numero_candidato = $worksheet->getCell('A' . $linha_actual)->getValue();
             
-            $nao_encontrados = array();
-            $numero_candidato = $worksheet->getCell('A' . $linha_actual)->getCalculatedValue();
             $candidato = $this->Candidatura->findByNumeroCandidato($numero_candidato);
-            if($candidato){
-                $this->Candidatura->id = $candidato['Candidatura']['id'];
+            if ($candidato) {
                 
-                $this->Candidatura->set('nome_pai',  ucwords(strtolower($worksheet->getCell('D' . $linha_actual)->getCalculatedValue())));
-                $this->Candidatura->set('nome_mae',  ucwords(strtolower($worksheet->getCell('E' . $linha_actual)->getCalculatedValue())));
-                $this->Candidatura->set('cidade_nascimento',  $worksheet->getCell('D' . $linha_actual)->getCalculatedValue());
-               
-                $this->Candidatura->save();
-                $this->out($linha_actual.'--------------------------------'.$this->Candidatura->id);
-                
-               // debug($this->Candidatura->data);
-            } else{
-                $nao_encontrados[]=$numero_candidato;
-            }
+            } else {
+                $array_candidato = array(
+                    'Candidatura' => array(
+                        'numero_candidato' => $numero_candidato,
+                        
+                    )
+                );
+                $array_candidato['Candidatura']['numero_estudante']= $worksheet->getCell('B' . $linha_actual)->getCalculatedValue();
+                $nome_completo = $worksheet->getCell('C' . $linha_actual)->getCalculatedValue();
+                $nome_explode = explode(" ", $nome_completo);
+                $array_candidato['Candidatura']['apelido'] = ucwords(strtolower(end($nome_explode)));
+                $array_candidato['Candidatura']['nomes'] = ucwords(strtolower($nome_completo));
+                $curso_admissao_admitido = $worksheet->getCell('D' . $linha_actual)->getCalculatedValue();
+                $array_candidato['Candidatura']['codigo_curso_admitido_admissao'] = $curso_admissao_admitido;
+                $this->Aluno->Curso->contain('UnidadeOrganica');
+                $curso = $this->Aluno->Curso->findByCodigoAdmissao($curso_admissao_admitido);
 
-            $linha_actual++;
-        }
-        $this->out($nao_encontrados);
-    }
-    
-    public function organiza_curso_codigo(){
-        $candidatos = $this->Candidatura->find('all',array('conditions'=>array('estado_candidatura_id'=>2,'codigo_curso_admitido_admissao'=>array(1040,1096,1027,1028,1029,1030,1052,1041,1056))));
-        debug(count($candidatos));
-        
-        foreach($candidatos as $candidato){
-        $curso_admissao = $candidato['Candidatura']['codigo_curso_admitido_admissao'];
-            $this->Curso->contain('UnidadeOrganica');
-            $curso = $this->Curso->findByCodigoAdmissao($curso_admissao);
-            if(!empty($curso)){
-                $this->Candidatura->id = $candidato['Candidatura']['id'];
-                $this->Candidatura->set('curso_id',$curso['Curso']['id']);
-                $this->Candidatura->set('nome_curso',$curso['Curso']['name']);
-                
-                $unidade_organica = $curso['UnidadeOrganica'];
-                $faculdade = $unidade_organica;
-                if($unidade_organica['tipo_unidade_organica_id']==2){
-                    $unidade_organica_nova = $this->Aluno->Curso->UnidadeOrganica->findById($unidade_organica['parent_id']);
-                    $faculdade = $unidade_organica_nova['UnidadeOrganica'];
+                if ($curso) {
+                	
+                    $array_candidato['Candidatura']['curso_id'] = $curso['Curso']['id'];
+                    $array_candidato['Candidatura']['nome_curso'] = $curso['Curso']['name'];
+                    $array_candidato['Candidatura']['estado_candidatura_id'] = 2;
+                    $unidade_organica = $curso['UnidadeOrganica'];
+                    $faculdade = $unidade_organica;
+                    if ($unidade_organica['tipo_unidade_organica_id'] == 2) {
+                        $unidade_organica_nova = $this->Aluno->Curso->UnidadeOrganica->findById($unidade_organica['parent_id']);
+                        $faculdade = $unidade_organica_nova['UnidadeOrganica'];
+                    }
+                    $array_candidato['Candidatura']['nome_faculdade'] = $faculdade['name'];
+                    $array_candidato['Candidatura']['ano_lectivo_admissao'] = 2014;
+                	$this->Candidatura->create();
+                	$this->Candidatura->save($array_candidato);
+                    $this->out($total++ . '--------------' . $linha_actual . '---------------------' . $numero_candidato);
                 }
-                
-                $this->Candidatura->set('nome_faculdade',$faculdade['name']);
-                $this->Candidatura->save();
-                $this->out($this->Candidatura->id);
-                
-            }
-        }
-        
-    }
-    
-    public function organiza_curso_candidato(){
-        $candidatos = $this->Candidatura->find('all',array('conditions'=>array('estado_candidatura_id'=>2,'curso_id'=>null)));
-        foreach($candidatos as $candidato){
-            
-            $nao_mudados = array();
-            $curso_admissao = $candidato['Candidatura']['codigo_curso_admitido_admissao'];
-            $this->Curso->contain('UnidadeOrganica');
-            $curso = $this->Curso->findByCodigoAdmissao($curso_admissao);
-            if(!empty($curso)){
-                $this->Candidatura->id = $candidato['Candidatura']['id'];
-                $this->Candidatura->set('curso_id',$curso['Curso']['id']);
-                $this->Candidatura->set('nome_curso',$curso['Curso']['name']);
-                
-                $unidade_organica = $curso['UnidadeOrganica'];
-                $faculdade = $unidade_organica;
-                if($unidade_organica['tipo_unidade_organica_id']==2){
-                    $unidade_organica_nova = $this->Aluno->Curso->UnidadeOrganica->findById($unidade_organica['parent_id']);
-                    $faculdade = $unidade_organica_nova['UnidadeOrganica'];
-                }
-                
-                $this->Candidatura->set('nome_faculdade',$faculdade['name']);
-                $this->Candidatura->save();
-                $this->out($this->Candidatura->id);
-                
-            } else{
-                switch ($curso_admissao){
+                else{
+                	switch ($curso_admissao_admitido) {
                     case 1015:
                         $curso_id = 3601;
                         break;
@@ -516,37 +443,283 @@ class OpenSGAShell extends AppShell {
                     case 1047:
                         $curso_id = 6004;
                         break;
-                    
                 }
-                $this->Curso->contain('UnidadeOrganica');
-                $curso = $this->Curso->findByCodigo($curso_id);
-            if(!empty($curso)){
-                $this->Candidatura->id = $candidato['Candidatura']['id'];
-                $this->Candidatura->set('curso_id',$curso['Curso']['id']);
-                $this->Candidatura->set('nome_curso',$curso['Curso']['name']);
+                $this->Aluno->Curso->contain('UnidadeOrganica');
+                $curso = $this->Aluno->Curso->findByCodigo($curso_id);
+
+                if ($curso) {
+                	
+                    $array_candidato['Candidatura']['curso_id'] = $curso['Curso']['id'];
+                    $array_candidato['Candidatura']['nome_curso'] = $curso['Curso']['name'];
+                    $array_candidato['Candidatura']['estado_candidatura_id'] = 2;
+                    $unidade_organica = $curso['UnidadeOrganica'];
+                    $faculdade = $unidade_organica;
+                    if ($unidade_organica['tipo_unidade_organica_id'] == 2) {
+                        $unidade_organica_nova = $this->Aluno->Curso->UnidadeOrganica->findById($unidade_organica['parent_id']);
+                        $faculdade = $unidade_organica_nova['UnidadeOrganica'];
+                    }
+                    $array_candidato['Candidatura']['nome_faculdade'] = $faculdade['name'];
+                    $array_candidato['Candidatura']['ano_lectivo_admissao'] = 2014;
+                	$this->Candidatura->create();
+                	$this->Candidatura->save($array_candidato);
+                    $this->out($total++ . '--------------' . $linha_actual . '---------------------' . $numero_candidato);
+                    //debug($array_candidato);
+                }
+                }
                 
+
+                
+            }
+            $linha_actual++;
+            //$this->out($nao_encontrados);
+        }
+    }
+
+    public function importa_apelidos_2014() {
+        AuditableConfig::$Logger = ClassRegistry::init('Auditable.Logger');
+        App::import('Vendor', 'PHPExcel', array('file' => 'PHPExcel.php'));
+        if (!class_exists('PHPExcel'))
+            throw new CakeException('Vendor class PHPExcel not found!');
+
+        $xls = PHPExcel_IOFactory::load(APP . 'Imports' . DS . 'candidato_apelidos.xlsx');
+
+        $worksheet = $xls->getActiveSheet();
+//debug($xls->getActiveSheetIndex());
+        $linha_actual = 2;
+        foreach ($worksheet->getRowIterator() as $row) {
+            if ($worksheet->getCell('A' . $linha_actual)->getValue() == '') {
+                break;
+            }
+
+            $nao_encontrados = array();
+            $numero_candidato = $worksheet->getCell('A' . $linha_actual)->getCalculatedValue();
+            $candidato = $this->Candidatura->findByNumeroCandidato($numero_candidato);
+            if ($candidato) {
+                $this->Candidatura->id = $candidato['Candidatura']['id'];
+
+                $this->Candidatura->set('apelido', ucwords(strtolower($worksheet->getCell('B' . $linha_actual)->getCalculatedValue())));
+
+                $this->Candidatura->save();
+                $this->out($linha_actual . '--------------------------------' . $this->Candidatura->id);
+
+// debug($this->Candidatura->data);
+            } else {
+                $nao_encontrados[] = $numero_candidato;
+            }
+
+            $linha_actual++;
+        }
+        $this->out($nao_encontrados);
+    }
+
+    public function importa_parentes_2014() {
+        AuditableConfig::$Logger = ClassRegistry::init('Auditable.Logger');
+        App::import('Vendor', 'PHPExcel', array('file' => 'PHPExcel.php'));
+        if (!class_exists('PHPExcel'))
+            throw new CakeException('Vendor class PHPExcel not found!');
+
+        $xls = PHPExcel_IOFactory::load(APP . 'Imports' . DS . 'parentes.xlsx');
+
+        $worksheet = $xls->getActiveSheet();
+//debug($xls->getActiveSheetIndex());
+        $linha_actual = 2;
+        foreach ($worksheet->getRowIterator() as $row) {
+            if ($worksheet->getCell('A' . $linha_actual)->getValue() == '') {
+                break;
+            }
+
+            $nao_encontrados = array();
+            $numero_candidato = $worksheet->getCell('A' . $linha_actual)->getCalculatedValue();
+            $candidato = $this->Candidatura->findByNumeroCandidato($numero_candidato);
+            if ($candidato) {
+                $this->Candidatura->id = $candidato['Candidatura']['id'];
+
+                $this->Candidatura->set('nome_pai', ucwords(strtolower($worksheet->getCell('D' . $linha_actual)->getCalculatedValue())));
+                $this->Candidatura->set('nome_mae', ucwords(strtolower($worksheet->getCell('E' . $linha_actual)->getCalculatedValue())));
+                $this->Candidatura->set('cidade_nascimento', $worksheet->getCell('D' . $linha_actual)->getCalculatedValue());
+
+                $this->Candidatura->save();
+                $this->out($linha_actual . '--------------------------------' . $this->Candidatura->id);
+
+// debug($this->Candidatura->data);
+            } else {
+                $nao_encontrados[] = $numero_candidato;
+            }
+
+            $linha_actual++;
+        }
+        $this->out($nao_encontrados);
+    }
+
+    public function organiza_curso_codigo() {
+        $candidatos = $this->Candidatura->find('all', array('conditions' => array('estado_candidatura_id' => 2, 'codigo_curso_admitido_admissao' => array(1040, 1096, 1027, 1028, 1029, 1030, 1052, 1041, 1056))));
+        debug(count($candidatos));
+
+        foreach ($candidatos as $candidato) {
+            $curso_admissao = $candidato['Candidatura']['codigo_curso_admitido_admissao'];
+            $this->Curso->contain('UnidadeOrganica');
+            $curso = $this->Curso->findByCodigoAdmissao($curso_admissao);
+            if (!empty($curso)) {
+                $this->Candidatura->id = $candidato['Candidatura']['id'];
+                $this->Candidatura->set('curso_id', $curso['Curso']['id']);
+                $this->Candidatura->set('nome_curso', $curso['Curso']['name']);
+
                 $unidade_organica = $curso['UnidadeOrganica'];
                 $faculdade = $unidade_organica;
-                if($unidade_organica['tipo_unidade_organica_id']==2){
+                if ($unidade_organica['tipo_unidade_organica_id'] == 2) {
                     $unidade_organica_nova = $this->Aluno->Curso->UnidadeOrganica->findById($unidade_organica['parent_id']);
                     $faculdade = $unidade_organica_nova['UnidadeOrganica'];
                 }
-                
-                $this->Candidatura->set('nome_faculdade',$faculdade['name']);
+
+                $this->Candidatura->set('nome_faculdade', $faculdade['name']);
                 $this->Candidatura->save();
                 $this->out($this->Candidatura->id);
-                
-            } else{
-                
-                $nao_mudados[]=$curso_admissao;
             }
-                
+        }
+    }
+
+    public function organiza_curso_candidato() {
+        $candidatos = $this->Candidatura->find('all', array('conditions' => array('estado_candidatura_id' => 2, 'curso_id' => null)));
+        foreach ($candidatos as $candidato) {
+
+            $nao_mudados = array();
+            $curso_admissao = $candidato['Candidatura']['codigo_curso_admitido_admissao'];
+            $this->Curso->contain('UnidadeOrganica');
+            $curso = $this->Curso->findByCodigoAdmissao($curso_admissao);
+            if (!empty($curso)) {
+                $this->Candidatura->id = $candidato['Candidatura']['id'];
+                $this->Candidatura->set('curso_id', $curso['Curso']['id']);
+                $this->Candidatura->set('nome_curso', $curso['Curso']['name']);
+
+                $unidade_organica = $curso['UnidadeOrganica'];
+                $faculdade = $unidade_organica;
+                if ($unidade_organica['tipo_unidade_organica_id'] == 2) {
+                    $unidade_organica_nova = $this->Aluno->Curso->UnidadeOrganica->findById($unidade_organica['parent_id']);
+                    $faculdade = $unidade_organica_nova['UnidadeOrganica'];
+                }
+
+                $this->Candidatura->set('nome_faculdade', $faculdade['name']);
+                $this->Candidatura->save();
+                $this->out($this->Candidatura->id);
+            } else {
+                switch ($curso_admissao) {
+                    case 1015:
+                        $curso_id = 3601;
+                        break;
+                    case 1017:
+                        $curso_id = 3601;
+                        break;
+                    case 1016:
+                        $curso_id = 3612;
+                        break;
+                    case 1018:
+                        $curso_id = 3612;
+                        break;
+                    case 1042:
+                        $curso_id = 5022;
+                        break;
+                    case 1133:
+                        $curso_id = 5022;
+                        break;
+                    case 1045:
+                        $curso_id = 5024;
+                        break;
+                    case 1134:
+                        $curso_id = 5024;
+                        break;
+                    case 1114:
+                        $curso_id = 4014;
+                        break;
+                    case 1115:
+                        $curso_id = 4014;
+                        break;
+                    case 1123:
+                        $curso_id = 4014;
+                        break;
+                    case 1120:
+                        $curso_id = 4017;
+                        break;
+                    case 1121:
+                        $curso_id = 4017;
+                        break;
+                    case 1122:
+                        $curso_id = 4017;
+                        break;
+                    case 1097:
+                        $curso_id = 2008;
+                        break;
+                    case 1098:
+                        $curso_id = 2008;
+                        break;
+                    case 1099:
+                        $curso_id = 2008;
+                        break;
+                    case 1067:
+                        $curso_id = 1067;
+                        break;
+                    case 1068:
+                        $curso_id = 1067;
+                        break;
+                    case 1069:
+                        $curso_id = 1067;
+                        break;
+                    case 1091:
+                        $curso_id = 1114;
+                        break;
+                    case 1093:
+                        $curso_id = 1114;
+                        break;
+                    case 1103:
+                        $curso_id = 5343;
+                        break;
+                    case 1104:
+                        $curso_id = 5343;
+                        break;
+                    case 1118:
+                        $curso_id = 6615;
+                        break;
+                    case 1119:
+                        $curso_id = 6615;
+                        break;
+                    case 1125:
+                        $curso_id = 6616;
+                        break;
+                    case 1126:
+                        $curso_id = 6616;
+                        break;
+                    case 1046:
+                        $curso_id = 6004;
+                        break;
+                    case 1047:
+                        $curso_id = 6004;
+                        break;
+                }
+                $this->Curso->contain('UnidadeOrganica');
+                $curso = $this->Curso->findByCodigo($curso_id);
+                if (!empty($curso)) {
+                    $this->Candidatura->id = $candidato['Candidatura']['id'];
+                    $this->Candidatura->set('curso_id', $curso['Curso']['id']);
+                    $this->Candidatura->set('nome_curso', $curso['Curso']['name']);
+
+                    $unidade_organica = $curso['UnidadeOrganica'];
+                    $faculdade = $unidade_organica;
+                    if ($unidade_organica['tipo_unidade_organica_id'] == 2) {
+                        $unidade_organica_nova = $this->Aluno->Curso->UnidadeOrganica->findById($unidade_organica['parent_id']);
+                        $faculdade = $unidade_organica_nova['UnidadeOrganica'];
+                    }
+
+                    $this->Candidatura->set('nome_faculdade', $faculdade['name']);
+                    $this->Candidatura->save();
+                    $this->out($this->Candidatura->id);
+                } else {
+
+                    $nao_mudados[] = $curso_admissao;
+                }
             }
-            
         }
         $this->out($nao_mudados);
     }
-    
+
     public function gerar_turmas() {
         $plano_estudos = $this->Turma->PlanoEstudo->find('list');
         $ano_lectivo_id = Configure::read('OpenSGA.ano_lectivo_id');
@@ -577,7 +750,7 @@ class OpenSGAShell extends AppShell {
 
                     $turmas = array('Turma' => $turma);
 
-                    //Primeiro precisamos ver se a turma nao esta criada ainda
+//Primeiro precisamos ver se a turma nao esta criada ainda
                     $turma_existe = $this->Turma->find('first', array('recursive' => -1, 'conditions' => array('ano_lectivo_id' => $ano_lectivo_id, 'plano_estudo_id' => $plano_estudo_id, 'disciplina_id' => $disciplina['Disciplina']['id'], 'anocurricular' => $turma['anocurricular'], 'semestrecurricular' => $turma['semestrecurricular'], 'turno_id' => $turma['turno_id'], 'semestrelectivo_id' => $semestre_id)));
 
                     if (!$turma_existe) {
@@ -600,10 +773,10 @@ class OpenSGAShell extends AppShell {
         $xls = PHPExcel_IOFactory::load(APP . 'Reports' . DS . 'plano_estudos_unizambeze.xlsx');
 
         $worksheet = $xls->getActiveSheet();
-        
+
         $worksheets = $xls->getAllSheets();
         foreach ($worksheets as $ws) {
-            //Cria o Plano de estudos
+//Cria o Plano de estudos
             $curso_nome = $ws->getTitle();
             $array_plano_estudos = array(
                 'name' => $curso_nome,
@@ -777,8 +950,8 @@ class OpenSGAShell extends AppShell {
                 $total_colunas++;
                 $coluna++;
             }
-            //debug($planoestudo);
-            //die();
+//debug($planoestudo);
+//die();
 
             $alunos = $this->Aluno->find('all', array('conditions' => array('Aluno.ano_ingresso' => 2009, 'Aluno.curso_id' => $curso['Curso']['id'])));
             $linha = 5;
@@ -805,7 +978,7 @@ class OpenSGAShell extends AppShell {
                 $linha++;
             }
         }
-        //Comecamos por preencher as disciplinas
+//Comecamos por preencher as disciplinas
 
 
 
@@ -946,7 +1119,7 @@ class OpenSGAShell extends AppShell {
         $this->Aluno->contain('Curso');
         $alunos = $this->Aluno->find('all', array('conditions' => array('ano_ingresso' => 2013)));
         foreach ($alunos as $aluno) {
-            //Verifica se este aluno nao tem nenhum pedido de novo cartao ja emitido
+//Verifica se este aluno nao tem nenhum pedido de novo cartao ja emitido
             $pedido_existe = $this->RequisicoesPedido->find('first', array('conditions' => array('aluno_id' => $aluno['Aluno']['id'], 'requisicoes_tipo_pedido_id' => 6)));
 
             if (empty($pedido_existe)) {
@@ -1018,7 +1191,7 @@ class OpenSGAShell extends AppShell {
 
             $objDrawing->setWorksheet($xls->getActiveSheet());
 
-            //$phpExcel->addWorksheetMeta($this->Session->read('Auth.User.name'), 'Lista de Estudantes');
+//$phpExcel->addWorksheetMeta($this->Session->read('Auth.User.name'), 'Lista de Estudantes');
             $xls->getProperties()->setCreator("SIGA");
             $xls->getProperties()->setLastModifiedBy("SIGA");
             $xls->getProperties()->setTitle("Lista de Emails Institucionais");
@@ -1050,7 +1223,7 @@ class OpenSGAShell extends AppShell {
 
 
 
-            // clear memory
+// clear memory
             $xls->disconnectWorksheets();
         }
     }
@@ -1145,7 +1318,7 @@ class OpenSGAShell extends AppShell {
 
     public function ajusta_estado_inscricao() {
         AuditableConfig::$Logger = ClassRegistry::init('Auditable.Logger');
-        $inscricaos = $this->Inscricao->find('all',array('conditions'=>array('estado_inscricao_id'=>array(null,0,1))));
+        $inscricaos = $this->Inscricao->find('all', array('conditions' => array('estado_inscricao_id' => array(null, 0, 1))));
         foreach ($inscricaos as $inscricao) {
             $this->Inscricao->id = $inscricao['Inscricao']['id'];
             $nota_frequencia = $inscricao['Inscricao']['nota_frequencia'];
@@ -1155,7 +1328,7 @@ class OpenSGAShell extends AppShell {
             $nota_normal = $inscricao['Inscricao']['nota_exame_normal'];
 
             if ($nota_final == -1) {
-                if($estado_inscricao==3){
+                if ($estado_inscricao == 3) {
                     $this->Inscricao->set('estado_inscricao_id', 8);
                 }
             } elseif ($nota_final < 10) {
@@ -1165,180 +1338,171 @@ class OpenSGAShell extends AppShell {
                     $this->Inscricao->set('estado_inscricao_id', 10);
                 } else {
                     $this->Inscricao->set('estado_inscricao_id', 7);
-                } 
-            } else{
+                }
+            } else {
                 if ($nota_recorrencia != -1) {
                     $this->Inscricao->set('estado_inscricao_id', 6);
-                } elseif ($nota_normal != -1 && $nota_normal>=9.5) {
+                } elseif ($nota_normal != -1 && $nota_normal >= 9.5) {
                     $this->Inscricao->set('estado_inscricao_id', 5);
                 } else {
-                    if($nota_frequencia>=13.5)
+                    if ($nota_frequencia >= 13.5)
                         $this->Inscricao->set('estado_inscricao_id', 4);
                     else
                         $this->Inscricao->set('estado_inscricao_id', 13);
-                } 
+                }
             }
-            
-            $this->out($this->Inscricao->id.'------'.$nota_final.'---------'.$nota_recorrencia.'------------'.$nota_normal.'--------'.$nota_frequencia.'---------'.$this->Inscricao->data['Inscricao']['estado_inscricao_id']);
+
+            $this->out($this->Inscricao->id . '------' . $nota_final . '---------' . $nota_recorrencia . '------------' . $nota_normal . '--------' . $nota_frequencia . '---------' . $this->Inscricao->data['Inscricao']['estado_inscricao_id']);
             $this->Inscricao->save();
         }
     }
-    
-    
-    public function exporta_estudantes_dbsec(){
+
+    public function exporta_estudantes_dbsec() {
         App::import('Vendor', 'PHPExcel', array('file' => 'PHPExcel.php'));
         if (!class_exists('PHPExcel'))
             throw new CakeException('Vendor class PHPExcel not found!');
 
-        $xls = PHPExcel_IOFactory::load(APP . 'Reports' . DS . 'Faculdades'.DS.'import_estudantes.xlsx');
+        $xls = PHPExcel_IOFactory::load(APP . 'Reports' . DS . 'Faculdades' . DS . 'import_estudantes.xlsx');
 
         $worksheet = $xls->getActiveSheet();
-        
-        
-        //debug($xls->getActiveSheetIndex());
-        
-        
-        
-                
+
+
+//debug($xls->getActiveSheetIndex());
+
+
+
+
         $this->Aluno->contain(array(
-            'Entidade'=>array(
-                'Genero','PaisNascimento','User'
-            ),'Curso'=>array(
+            'Entidade' => array(
+                'Genero', 'PaisNascimento', 'User'
+            ), 'Curso' => array(
                 'UnidadeOrganica'
             )
         ));
         $alunos = $this->Aluno->find('all');
-        $linha_actual=2;
-        foreach($alunos as $aluno){
-             $xls->getActiveSheet()->setCellValue('A'. $linha_actual, $aluno['Aluno']['codigo']);
-             $xls->getActiveSheet()->setCellValue('B'. $linha_actual, $aluno['Entidade']['apelido']);
-             $xls->getActiveSheet()->setCellValue('C'. $linha_actual, $aluno['Entidade']['nomes']);
-             $bi = $this->Aluno->Entidade->getNumeroDocumentoIdentificacao($aluno['Entidade']['id']);
-             $xls->getActiveSheet()->setCellValue('D'. $linha_actual, $bi);
-             $xls->getActiveSheet()->setCellValue('E'. $linha_actual, $aluno['Entidade']['data_nascimento']);
-             $xls->getActiveSheet()->setCellValue('F'. $linha_actual, $aluno['Aluno']['ano_ingresso']);
-             $morada = $this->Aluno->Entidade->getMorada($aluno['Entidade']['id']);
-             $xls->getActiveSheet()->setCellValue('G'. $linha_actual, $morada);
-             $telefone = $this->Aluno->Entidade->getCellNumber($aluno['Entidade']['id']);
-             $xls->getActiveSheet()->setCellValue('H'. $linha_actual, $telefone);
-             $xls->getActiveSheet()->setCellValue('I'. $linha_actual, $telefone);
-             $xls->getActiveSheet()->setCellValue('J'. $linha_actual, $aluno['Curso']['codigo']);
-             $xls->getActiveSheet()->setCellValue('K'. $linha_actual, $aluno['Entidade']['PaisNascimento']['name']);
-             $xls->getActiveSheet()->setCellValue('L'. $linha_actual, $aluno['Entidade']['User']['username']);
-             
-             $unidade_organica = $aluno['Curso']['UnidadeOrganica'];
-        $faculdade = $unidade_organica;
-        if($unidade_organica['tipo_unidade_organica_id']==2){
-            $unidade_organica_nova = $this->Aluno->Curso->UnidadeOrganica->findById($unidade_organica['parent_id']);
-            $faculdade = $unidade_organica_nova['UnidadeOrganica'];
-        }
-        $xls->getActiveSheet()->setCellValue('M'. $linha_actual, $faculdade['codigo']);
-        $xls->getActiveSheet()->setCellValue('N'. $linha_actual, $aluno['Curso']['UnidadeOrganica']['codigo']);
-        $xls->getActiveSheet()->setCellValue('O'. $linha_actual, $aluno['Entidade']['Genero']['name']);
-        $xls->getActiveSheet()->setCellValue('P'. $linha_actual, $aluno['Aluno']['estado_aluno_id']);
-        $xls->getActiveSheet()->setCellValue('Q'. $linha_actual, $aluno['Aluno']['codigo']);
+        $linha_actual = 2;
+        foreach ($alunos as $aluno) {
+            $xls->getActiveSheet()->setCellValue('A' . $linha_actual, $aluno['Aluno']['codigo']);
+            $xls->getActiveSheet()->setCellValue('B' . $linha_actual, $aluno['Entidade']['apelido']);
+            $xls->getActiveSheet()->setCellValue('C' . $linha_actual, $aluno['Entidade']['nomes']);
+            $bi = $this->Aluno->Entidade->getNumeroDocumentoIdentificacao($aluno['Entidade']['id']);
+            $xls->getActiveSheet()->setCellValue('D' . $linha_actual, $bi);
+            $xls->getActiveSheet()->setCellValue('E' . $linha_actual, $aluno['Entidade']['data_nascimento']);
+            $xls->getActiveSheet()->setCellValue('F' . $linha_actual, $aluno['Aluno']['ano_ingresso']);
+            $morada = $this->Aluno->Entidade->getMorada($aluno['Entidade']['id']);
+            $xls->getActiveSheet()->setCellValue('G' . $linha_actual, $morada);
+            $telefone = $this->Aluno->Entidade->getCellNumber($aluno['Entidade']['id']);
+            $xls->getActiveSheet()->setCellValue('H' . $linha_actual, $telefone);
+            $xls->getActiveSheet()->setCellValue('I' . $linha_actual, $telefone);
+            $xls->getActiveSheet()->setCellValue('J' . $linha_actual, $aluno['Curso']['codigo']);
+            $xls->getActiveSheet()->setCellValue('K' . $linha_actual, $aluno['Entidade']['PaisNascimento']['name']);
+            $xls->getActiveSheet()->setCellValue('L' . $linha_actual, $aluno['Entidade']['User']['username']);
+
+            $unidade_organica = $aluno['Curso']['UnidadeOrganica'];
+            $faculdade = $unidade_organica;
+            if ($unidade_organica['tipo_unidade_organica_id'] == 2) {
+                $unidade_organica_nova = $this->Aluno->Curso->UnidadeOrganica->findById($unidade_organica['parent_id']);
+                $faculdade = $unidade_organica_nova['UnidadeOrganica'];
+            }
+            $xls->getActiveSheet()->setCellValue('M' . $linha_actual, $faculdade['codigo']);
+            $xls->getActiveSheet()->setCellValue('N' . $linha_actual, $aluno['Curso']['UnidadeOrganica']['codigo']);
+            $xls->getActiveSheet()->setCellValue('O' . $linha_actual, $aluno['Entidade']['Genero']['name']);
+            $xls->getActiveSheet()->setCellValue('P' . $linha_actual, $aluno['Aluno']['estado_aluno_id']);
+            $xls->getActiveSheet()->setCellValue('Q' . $linha_actual, $aluno['Aluno']['codigo']);
             $this->out($linha_actual . "---" . $aluno['Aluno']['codigo']);
             $linha_actual++;
-        
         }
-        
-        
+
+
         $objWriter = PHPExcel_IOFactory::createWriter($xls, 'Excel2007');
-        
-        $objWriter->save(APP.'webroot'.DS.'import.xlsx');
+
+        $objWriter->save(APP . 'webroot' . DS . 'import.xlsx');
     }
-    
-    public function exporta_renovacao_matriculas(){
+
+    public function exporta_renovacao_matriculas() {
         App::import('Vendor', 'PHPExcel', array('file' => 'PHPExcel.php'));
         if (!class_exists('PHPExcel'))
             throw new CakeException('Vendor class PHPExcel not found!');
 
-        $xls = PHPExcel_IOFactory::load(APP . 'Reports' . DS . 'Faculdades'.DS.'renovacao.xlsx');
+        $xls = PHPExcel_IOFactory::load(APP . 'Reports' . DS . 'Faculdades' . DS . 'renovacao.xlsx');
 
         $worksheet = $xls->getActiveSheet();
         $linha_actual = 2;
         $this->Aluno->Matricula->contain(array(
-            'Aluno'=>array(
+            'Aluno' => array(
                 'Entidade'
-            ),'AnoLectivo','Curso'=>array(
+            ), 'AnoLectivo', 'Curso' => array(
                 'UnidadeOrganica'
             )
-            
         ));
-        $matriculas = $this->Aluno->Matricula->find('all',array('conditions'=>array('Matricula.ano_lectivo_id'=>Configure::read('OpenSGA.ano_lectivo_id'))));
-        foreach($matriculas as $matricula){
-            $xls->getActiveSheet()->setCellValue('A'. $linha_actual, $matricula['Aluno']['codigo']);
-            $xls->getActiveSheet()->setCellValue('B'. $linha_actual, $matricula['Aluno']['Entidade']['apelido']);
-            $xls->getActiveSheet()->setCellValue('C'. $linha_actual, $matricula['Aluno']['Entidade']['nomes']);
-            $xls->getActiveSheet()->setCellValue('D'. $linha_actual, $matricula['AnoLectivo']['ano']);
-            $xls->getActiveSheet()->setCellValue('E'. $linha_actual, $matricula['Matricula']['data']);
-            $xls->getActiveSheet()->setCellValue('F'. $linha_actual, $matricula['Curso']['name']);
+        $matriculas = $this->Aluno->Matricula->find('all', array('conditions' => array('Matricula.ano_lectivo_id' => Configure::read('OpenSGA.ano_lectivo_id'))));
+        foreach ($matriculas as $matricula) {
+            $xls->getActiveSheet()->setCellValue('A' . $linha_actual, $matricula['Aluno']['codigo']);
+            $xls->getActiveSheet()->setCellValue('B' . $linha_actual, $matricula['Aluno']['Entidade']['apelido']);
+            $xls->getActiveSheet()->setCellValue('C' . $linha_actual, $matricula['Aluno']['Entidade']['nomes']);
+            $xls->getActiveSheet()->setCellValue('D' . $linha_actual, $matricula['AnoLectivo']['ano']);
+            $xls->getActiveSheet()->setCellValue('E' . $linha_actual, $matricula['Matricula']['data']);
+            $xls->getActiveSheet()->setCellValue('F' . $linha_actual, $matricula['Curso']['name']);
             $unidade_organica = $matricula['Curso']['UnidadeOrganica'];
-        $faculdade = $unidade_organica;
-        if($unidade_organica['tipo_unidade_organica_id']==2){
-            $unidade_organica_nova = $this->Aluno->Curso->UnidadeOrganica->findById($unidade_organica['parent_id']);
-            $faculdade = $unidade_organica_nova['UnidadeOrganica'];
-        }
-        $xls->getActiveSheet()->setCellValue('G'. $linha_actual, $faculdade['name']);
+            $faculdade = $unidade_organica;
+            if ($unidade_organica['tipo_unidade_organica_id'] == 2) {
+                $unidade_organica_nova = $this->Aluno->Curso->UnidadeOrganica->findById($unidade_organica['parent_id']);
+                $faculdade = $unidade_organica_nova['UnidadeOrganica'];
+            }
+            $xls->getActiveSheet()->setCellValue('G' . $linha_actual, $faculdade['name']);
             $this->out($linha_actual . "---" . $matricula['Aluno']['codigo']);
             $linha_actual++;
         }
         $objWriter = PHPExcel_IOFactory::createWriter($xls, 'Excel2007');
-        
-        $objWriter->save(Configure::read('OpenSGA.save_path').DS.'renovacao'.Configure::read('OpenSGA.ano_lectivo').'.xlsx');
-        
+
+        $objWriter->save(Configure::read('OpenSGA.save_path') . DS . 'renovacao' . Configure::read('OpenSGA.ano_lectivo') . '.xlsx');
     }
-    
-    
-        public function exporta_candidatos_boletins(){
+
+    public function exporta_candidatos_boletins() {
         App::import('Vendor', 'PHPExcel', array('file' => 'PHPExcel.php'));
         if (!class_exists('PHPExcel'))
             throw new CakeException('Vendor class PHPExcel not found!');
 
-        $xls = PHPExcel_IOFactory::load(APP . 'Reports' .DS.'estudantes_admitidos.xlsx');
+        $xls = PHPExcel_IOFactory::load(APP . 'Reports' . DS . 'estudantes_admitidos.xlsx');
 
         $worksheet = $xls->getActiveSheet();
         $linha_actual = 2;
         $this->Candidatura->contain(array(
-            'Curso'=>array(
+            'Curso' => array(
                 'UnidadeOrganica'
-            ),'Genero'
-            
+            ), 'Genero'
         ));
-        $candidatos = $this->Candidatura->find('all',array('conditions'=>array('estado_candidatura_id'=>2,'ano_lectivo_admissao'=>2014)));
-        
-        foreach($candidatos as $candidato){
-            $xls->getActiveSheet()->setCellValue('A'. $linha_actual, $candidato['Candidatura']['numero_candidato']);
-            $xls->getActiveSheet()->setCellValue('B'. $linha_actual, $candidato['Candidatura']['numero_estudante']);
-            $xls->getActiveSheet()->setCellValue('C'. $linha_actual, $candidato['Candidatura']['apelido']);
-            $xls->getActiveSheet()->setCellValue('D'. $linha_actual, $candidato['Candidatura']['nomes']);
-            $xls->getActiveSheet()->setCellValue('E'. $linha_actual, $candidato['Curso']['name']);
-            $xls->getActiveSheet()->setCellValue('G'. $linha_actual, $candidato['Genero']['name']);
-            $xls->getActiveSheet()->setCellValue('H'. $linha_actual, $candidato['Candidatura']['data_nascimento']);
+        $candidatos = $this->Candidatura->find('all', array('conditions' => array('estado_candidatura_id' => 2, 'ano_lectivo_admissao' => 2014)));
+
+        foreach ($candidatos as $candidato) {
+            $xls->getActiveSheet()->setCellValue('A' . $linha_actual, $candidato['Candidatura']['numero_candidato']);
+            $xls->getActiveSheet()->setCellValue('B' . $linha_actual, $candidato['Candidatura']['numero_estudante']);
+            $xls->getActiveSheet()->setCellValue('C' . $linha_actual, $candidato['Candidatura']['apelido']);
+            $xls->getActiveSheet()->setCellValue('D' . $linha_actual, $candidato['Candidatura']['nomes']);
+            $xls->getActiveSheet()->setCellValue('E' . $linha_actual, $candidato['Curso']['name']);
+            $xls->getActiveSheet()->setCellValue('G' . $linha_actual, $candidato['Genero']['name']);
+            $xls->getActiveSheet()->setCellValue('H' . $linha_actual, $candidato['Candidatura']['data_nascimento']);
             $unidade_organica = $candidato['Curso']['UnidadeOrganica'];
-        $faculdade = $unidade_organica;
-        if($unidade_organica['tipo_unidade_organica_id']==2){
-            $unidade_organica_nova = $this->Aluno->Curso->UnidadeOrganica->findById($unidade_organica['parent_id']);
-            $faculdade = $unidade_organica_nova['UnidadeOrganica'];
-        }
-        $xls->getActiveSheet()->setCellValue('F'. $linha_actual, $faculdade['name']);
+            $faculdade = $unidade_organica;
+            if ($unidade_organica['tipo_unidade_organica_id'] == 2) {
+                $unidade_organica_nova = $this->Aluno->Curso->UnidadeOrganica->findById($unidade_organica['parent_id']);
+                $faculdade = $unidade_organica_nova['UnidadeOrganica'];
+            }
+            $xls->getActiveSheet()->setCellValue('F' . $linha_actual, $faculdade['name']);
             $this->out($linha_actual . "---" . $candidato['Candidatura']['numero_estudante']);
             $linha_actual++;
         }
         $objWriter = PHPExcel_IOFactory::createWriter($xls, 'Excel2007');
-        
-        $objWriter->save(Configure::read('OpenSGA.save_path').DS.'estudantes_admitidos_'.Configure::read('OpenSGA.ano_lectivo').'.xlsx');
-        
+
+        $objWriter->save(Configure::read('OpenSGA.save_path') . DS . 'estudantes_admitidos_' . Configure::read('OpenSGA.ano_lectivo') . '.xlsx');
     }
-    
-    
-    
+
     public function bolsa_importa_alineas() {
         App::import('Vendor', 'PHPExcel', array('file' => 'PHPExcel.php'));
         if (!class_exists('PHPExcel'))
             throw new CakeException('Vendor class PHPExcel not found!');
 
-        $xls = PHPExcel_IOFactory::load(APP . 'Imports' . DS . bolsas.DS.'bolsas_alinea.xlsx');
+        $xls = PHPExcel_IOFactory::load(APP . 'Imports' . DS . bolsas . DS . 'bolsas_alinea.xlsx');
 
         $worksheet = $xls->getActiveSheet();
         $linha_actual = 2;
@@ -1384,52 +1548,46 @@ class OpenSGAShell extends AppShell {
             $linha_actual++;
         }
     }
-    
-    
-    public function exporta_bolsas_novo_ingresso(){
-    
+
+    public function exporta_bolsas_novo_ingresso() {
+
         App::import('Vendor', 'PHPExcel', array('file' => 'PHPExcel.php'));
         if (!class_exists('PHPExcel'))
             throw new CakeException('Vendor class PHPExcel not found!');
 
-        $xls = PHPExcel_IOFactory::load(APP . 'Reports' . DS . 'Faculdades'.DS.'renovacao.xlsx');
+        $xls = PHPExcel_IOFactory::load(APP . 'Reports' . DS . 'Faculdades' . DS . 'renovacao.xlsx');
 
         $worksheet = $xls->getActiveSheet();
         $linha_actual = 2;
         $this->Aluno->Matricula->contain(array(
-            'Aluno'=>array(
+            'Aluno' => array(
                 'Entidade'
-            ),'AnoLectivo','Curso'=>array(
+            ), 'AnoLectivo', 'Curso' => array(
                 'UnidadeOrganica'
             )
-            
         ));
-        $matriculas = $this->Aluno->Matricula->find('all',array('conditions'=>array('Matricula.ano_lectivo_id'=>Configure::read('OpenSGA.ano_lectivo_id')),'limit'=>10));
-        foreach($matriculas as $matricula){
-            $xls->getActiveSheet()->setCellValue('A'. $linha_actual, $matricula['Aluno']['codigo']);
-            $xls->getActiveSheet()->setCellValue('B'. $linha_actual, $matricula['Aluno']['Entidade']['apelido']);
-            $xls->getActiveSheet()->setCellValue('C'. $linha_actual, $matricula['Aluno']['Entidade']['nomes']);
-            $xls->getActiveSheet()->setCellValue('D'. $linha_actual, $matricula['AnoLectivo']['ano']);
-            $xls->getActiveSheet()->setCellValue('E'. $linha_actual, $matricula['Matricula']['data']);
-            $xls->getActiveSheet()->setCellValue('F'. $linha_actual, $matricula['Curso']['name']);
+        $matriculas = $this->Aluno->Matricula->find('all', array('conditions' => array('Matricula.ano_lectivo_id' => Configure::read('OpenSGA.ano_lectivo_id')), 'limit' => 10));
+        foreach ($matriculas as $matricula) {
+            $xls->getActiveSheet()->setCellValue('A' . $linha_actual, $matricula['Aluno']['codigo']);
+            $xls->getActiveSheet()->setCellValue('B' . $linha_actual, $matricula['Aluno']['Entidade']['apelido']);
+            $xls->getActiveSheet()->setCellValue('C' . $linha_actual, $matricula['Aluno']['Entidade']['nomes']);
+            $xls->getActiveSheet()->setCellValue('D' . $linha_actual, $matricula['AnoLectivo']['ano']);
+            $xls->getActiveSheet()->setCellValue('E' . $linha_actual, $matricula['Matricula']['data']);
+            $xls->getActiveSheet()->setCellValue('F' . $linha_actual, $matricula['Curso']['name']);
             $unidade_organica = $matricula['Curso']['UnidadeOrganica'];
-        $faculdade = $unidade_organica;
-        if($unidade_organica['tipo_unidade_organica_id']==2){
-            $unidade_organica_nova = $this->Aluno->Curso->UnidadeOrganica->findById($unidade_organica['parent_id']);
-            $faculdade = $unidade_organica_nova['UnidadeOrganica'];
-        }
-        $xls->getActiveSheet()->setCellValue('G'. $linha_actual, $faculdade['name']);
+            $faculdade = $unidade_organica;
+            if ($unidade_organica['tipo_unidade_organica_id'] == 2) {
+                $unidade_organica_nova = $this->Aluno->Curso->UnidadeOrganica->findById($unidade_organica['parent_id']);
+                $faculdade = $unidade_organica_nova['UnidadeOrganica'];
+            }
+            $xls->getActiveSheet()->setCellValue('G' . $linha_actual, $faculdade['name']);
             $this->out($linha_actual . "---" . $matricula['Aluno']['codigo']);
             $linha_actual++;
-            $xls->getActiveSheet()->setBreak('G'. $linha_actual,2);
+            $xls->getActiveSheet()->setBreak('G' . $linha_actual, 2);
         }
         $objWriter = PHPExcel_IOFactory::createWriter($xls, 'Excel2007');
-        
-        $objWriter->save(Configure::read('OpenSGA.save_path').DS.'renovacao'.Configure::read('OpenSGA.ano_lectivo').'.xlsx');
-        
-    
-    
+
+        $objWriter->save(Configure::read('OpenSGA.save_path') . DS . 'renovacao' . Configure::read('OpenSGA.ano_lectivo') . '.xlsx');
     }
-    
 
 }
