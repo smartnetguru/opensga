@@ -730,7 +730,7 @@ class AlunosController extends AppController {
         }
 
         $candidato = $this->Aluno->Candidatura->findByIdAndEstadoCandidaturaId($candidato_id, 2);
-        debug($candidato);
+        
         if (!$candidato) {
             $this->Session->setFlash(__('Este candidato nao tem permissao para matricular'));
             $this->redirect('/');
@@ -743,15 +743,15 @@ class AlunosController extends AppController {
         }
 
         if ($this->request->is('post')) {
-            die(debug($this->request->data));
+            
             $this->request->data['Entidade']['name'] = $this->request->data['Entidade']['nomes'] . ' ' . $this->request->data['Entidade']['apelido'];
             $this->request->data['Dados']['user_id'] = $this->Session->read('Auth.User.id');
             $this->request->data['Dados']['numero_candidato'] = $candidato_id;
             if ($this->Aluno->matriculaNovoIngresso($this->request->data)) {
-                $this->Session->setFlash("Aluno Registrado com Sucesso", 'default', array('class' => 'alert_success'));
-                $this->redirect(array('controller' => 'alunos', 'action' => 'perfil_estudante', $this->Aluno->id));
+                $this->Session->setFlash("Aluno Registrado com Sucesso", 'default', array('class' => 'alert alert-success'));
+                $this->redirect(array('controller' => 'alunos', 'action' => 'matricula_novo_ingresso_sucesso', $this->Aluno->id));
             } else {
-                $this->Session->setFlash('Problemas ao registrar os dados do Aluno', 'default', array('class' => 'alert_error'));
+                $this->Session->setFlash('Problemas ao registrar os dados do Aluno', 'default', array('class' => 'alert alert-danger'));
             }
         }
 
@@ -759,7 +759,7 @@ class AlunosController extends AppController {
         $paises = $this->Aluno->Entidade->PaisNascimento->find('list');
         $escolaNivelMedios = $this->Aluno->AlunoNivelMedio->EscolaNivelMedio->find('list');
         $provincias = $this->Aluno->Entidade->ProvinciaNascimento->find('list');
-        $provenienciacidades = $this->Aluno->AlunoNivelMedio->EscolaNivelMedio->Distrito->find('list');
+        $cidades = $this->Aluno->AlunoNivelMedio->EscolaNivelMedio->Distrito->find('list');
         $proveniencianomes = $this->Aluno->AlunoNivelMedio->EscolaNivelMedio->Provincia->find('list');
         $documento_identificacaos = $this->Aluno->Entidade->DocumentoIdentificacao->find('list');
         $areatrabalhos = $this->Aluno->AreaTrabalho->find('list');
@@ -777,13 +777,26 @@ class AlunosController extends AppController {
         $simNaoRespostas = $this->SimNaoResposta->find('list');
 
         $naturalidade = '';
-        $this->set(compact('candidato', 'cursos', 'paises', 'provincias', 'documento_identificacaos', 'areatrabalhos', 'generos', 'cidadeNascimentos', 'proveniencianomes', 'provenienciacidades', 'turnos', 'escolaNivelMedios', 'estado_civil', 'naturalidade', 'grauParentescos', 'simNaoRespostas'));
+        $this->set(compact('candidato', 'cursos', 'paises', 'provincias', 'documento_identificacaos', 'areatrabalhos', 'generos', 'cidadeNascimentos', 'proveniencianomes', 'cidades', 'turnos', 'escolaNivelMedios', 'estado_civil', 'naturalidade', 'grauParentescos', 'simNaoRespostas'));
 
         $this->set('siga_page_title', 'Matriculas');
         $this->set('siga_page_overview', 'Formulario de Matricula de Novos Ingressos');
         $this->layout = 'clipone_default';
     }
 
+    public function matricula_novo_ingresso_sucesso($aluno_id){
+        
+        $this->Aluno->contain(array('Entidade'=>array('User'),'Curso'));
+        $this->Aluno->id = $aluno_id;
+        if(!$this->Aluno->exists()){
+            throw new NotFoundException('Aluno nao Encontrado');
+        }
+        $aluno = $this->Aluno->read();
+        $this->set(compact('aluno'));
+        
+        $this->layout = 'clipone_default';
+    }
+    
     public function print_boletim_matricula($aluno_id) {
 
 
@@ -816,7 +829,10 @@ class AlunosController extends AppController {
     }
 
     public function print_comprovativo_matricula($aluno_id) {
-        $this->Aluno->recursive = 0;
+        $this->Aluno->contain(array(
+            'Entidade'=>array('User'),'Curso'
+        ));
+        
         $aluno = $this->Aluno->findById($aluno_id);
         $this->set(compact('aluno', 'faculdade'));
     }

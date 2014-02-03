@@ -220,8 +220,9 @@ class OpenSGAAclShell extends AppShell {
                     
                 } elseif($unidade_organica['UnidadeOrganica']['codigo']=='GC'){
                     //Funcionarios do Gabinete de Cooperacao
+                    
                     $comandos[] = "acl deny User.{$funcionario['User']['id']} controllers";
-            
+                    $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Cooperacao";
                     $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/autocomplete";
                     $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/mostrar_foto";
                     $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Users/login";

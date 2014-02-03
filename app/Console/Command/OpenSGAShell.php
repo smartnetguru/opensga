@@ -1290,6 +1290,49 @@ class OpenSGAShell extends AppShell {
     }
     
     
+        public function exporta_candidatos_boletins(){
+        App::import('Vendor', 'PHPExcel', array('file' => 'PHPExcel.php'));
+        if (!class_exists('PHPExcel'))
+            throw new CakeException('Vendor class PHPExcel not found!');
+
+        $xls = PHPExcel_IOFactory::load(APP . 'Reports' .DS.'estudantes_admitidos.xlsx');
+
+        $worksheet = $xls->getActiveSheet();
+        $linha_actual = 2;
+        $this->Candidatura->contain(array(
+            'Curso'=>array(
+                'UnidadeOrganica'
+            ),'Genero'
+            
+        ));
+        $candidatos = $this->Candidatura->find('all',array('conditions'=>array('estado_candidatura_id'=>2,'ano_lectivo_admissao'=>2014)));
+        
+        foreach($candidatos as $candidato){
+            $xls->getActiveSheet()->setCellValue('A'. $linha_actual, $candidato['Candidatura']['numero_candidato']);
+            $xls->getActiveSheet()->setCellValue('B'. $linha_actual, $candidato['Candidatura']['numero_estudante']);
+            $xls->getActiveSheet()->setCellValue('C'. $linha_actual, $candidato['Candidatura']['apelido']);
+            $xls->getActiveSheet()->setCellValue('D'. $linha_actual, $candidato['Candidatura']['nomes']);
+            $xls->getActiveSheet()->setCellValue('E'. $linha_actual, $candidato['Curso']['name']);
+            $xls->getActiveSheet()->setCellValue('G'. $linha_actual, $candidato['Genero']['name']);
+            $xls->getActiveSheet()->setCellValue('H'. $linha_actual, $candidato['Candidatura']['data_nascimento']);
+            $unidade_organica = $candidato['Curso']['UnidadeOrganica'];
+        $faculdade = $unidade_organica;
+        if($unidade_organica['tipo_unidade_organica_id']==2){
+            $unidade_organica_nova = $this->Aluno->Curso->UnidadeOrganica->findById($unidade_organica['parent_id']);
+            $faculdade = $unidade_organica_nova['UnidadeOrganica'];
+        }
+        $xls->getActiveSheet()->setCellValue('F'. $linha_actual, $faculdade['name']);
+            $this->out($linha_actual . "---" . $candidato['Candidatura']['numero_estudante']);
+            $linha_actual++;
+        }
+        $objWriter = PHPExcel_IOFactory::createWriter($xls, 'Excel2007');
+        
+        $objWriter->save(Configure::read('OpenSGA.save_path').DS.'estudantes_admitidos_'.Configure::read('OpenSGA.ano_lectivo').'.xlsx');
+        
+    }
+    
+    
+    
     public function bolsa_importa_alineas() {
         App::import('Vendor', 'PHPExcel', array('file' => 'PHPExcel.php'));
         if (!class_exists('PHPExcel'))

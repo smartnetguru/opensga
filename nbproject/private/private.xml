@@ -5,9 +5,17 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/var/www/opensga/app/Console/Command/OpenSGAShell.php</file>
+            <file>file:/var/www/opensga/app/View/Alunos/print_comprovativo_matricula.ctp</file>
             <file>file:/var/www/opensga/app/webroot/bootstrap_phpunit.php</file>
+            <file>file:/var/www/opensga/app/Controller/CandidaturasController.php</file>
+            <file>file:/var/www/opensga/app/View/Alunos/matricula_novo_ingresso_sucesso.ctp</file>
+            <file>file:/var/www/opensga/app/View/Alunos/matricular_candidato.ctp</file>
+            <file>file:/var/www/opensga/app/Controller/AlunosController.php</file>
             <file>file:/var/www/opensga/app/Controller/AjaxController.php</file>
+            <file>file:/var/www/opensga/app/webroot/assets/fonts/style.css</file>
             <file>file:/var/www/opensga/app/Test/Case/Model/AlunoTest.php</file>
+            <file>file:/var/www/opensga/app/webroot/assets/js/form-matricular-candidato-wizard.js</file>
         </group>
     </open-files>
 </project-private>
