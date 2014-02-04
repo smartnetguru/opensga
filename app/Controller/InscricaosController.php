@@ -52,8 +52,8 @@ class InscricaosController extends AppController {
 
 		//No security no inscrever
 		if ($this->action == 'faculdade_inscrever' || $this->action == 'faculdade_adicionar_cadeiras_inscricao') {
-			$this->Security->csrfCheck = false;
-			$this->Security->validatePost = false;
+			//$this->Security->csrfCheck = false;
+			//$this->Security->validatePost = false;
 		}
 	}
 
@@ -161,7 +161,7 @@ class InscricaosController extends AppController {
 			$aluno_id = $this->request->data['Inscricao']['aluno_id'];
 			$matricula_id = $this->request->data['Inscricao']['matricula_id'];
 			$inscricao_nova = array();
-			foreach ($this->request->data['Inscricao']['disciplinas'] as $k => $v) {
+			foreach ($this->request->data['disciplinas'] as $k => $v) {
 				if ($v > 0) {
 					$inscricao_nova[] = $v;
 				}
@@ -351,7 +351,7 @@ class InscricaosController extends AppController {
 			$aluno_id = $this->request->data['Inscricao']['aluno_id'];
 			$matricula_id = $this->request->data['Inscricao']['matricula_id'];
 			$inscricao_nova = array();
-			foreach ($this->request->data['Inscricao']['disciplinas'] as $k => $v) {
+			foreach ($this->request->data['disciplinas'] as $k => $v) {
 				if ($v > 0) {
 					$inscricao_nova[] = $v;
 				}
@@ -461,11 +461,11 @@ class InscricaosController extends AppController {
 
 			$inscricao = $this->Inscricao->inscreveAluno($this->request->data);
 			if ($inscricao) {
-				$this->Session->setFlash(sprintf(__('O Aluno  Foi inscrito com sucesso', true)), 'default', array('class' => 'alert_success'));
+				$this->Session->setFlash(sprintf(__('O Aluno  Foi inscrito com sucesso', true)), 'default', array('class' => 'alert alert-success'));
 
 				$imprimir = true;
 			} else {
-				$this->Session->setFlash(sprintf(__('O Aluno  nao foi inscrito', true)), 'default', array('class' => 'alert_error'));
+				$this->Session->setFlash(sprintf(__('O Aluno  nao foi inscrito', true)), 'default', array('class' => 'alert alert-danger'));
 
 				//$this->redirect(array('controller' => 'alunos', 'action' => 'perfil_estudante', $aluno_id));
 			}
