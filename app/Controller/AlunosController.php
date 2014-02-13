@@ -427,6 +427,8 @@ class AlunosController extends AppController {
 		$this->request->data = $aluno;
 
 		$this->set(compact('aluno', 'nacionalidades', 'cursos', 'planoestudos', 'users', 'paises', 'cidades', 'provincias', 'documento_identificacaos', 'areatrabalhos', 'generos', 'cidadenascimentos', 'proveniencianomes', 'provenienciacidades', 'turnos', 'escolaNivelMedios', 'estado_civil'));
+
+		$this->layout = 'default';
 	}
 
 	function beforeRender() {
@@ -1530,7 +1532,7 @@ class AlunosController extends AppController {
 			} else {
 				$this->BolsaTemporaria->id = $bolsa_existe['BolsaTemporaria']['id'];
 				$this->BolsaTemporaria->save($this->request->data);
-				$this->Session->setFlash('Bolsa Atribuida com Sucesso', 'default', array('class' => 'alert success'));
+				$this->Session->setFlash('Bolsa Actualizada com Sucesso', 'default', array('class' => 'alert success'));
 				$this->redirect(array('action' => 'pesquisar_candidato'));
 			}
 		}
