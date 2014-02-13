@@ -1,5 +1,7 @@
 <?php
+
 App::uses('AppModel', 'Model');
+
 /**
  * Candidatura Model
  *
@@ -19,15 +21,13 @@ App::uses('AppModel', 'Model');
  * @property Turno $Turno
  */
 class Candidatura extends AppModel {
-
-
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 
-/**
- * belongsTo associations
- *
- * @var array
- */
+	/**
+	 * belongsTo associations
+	 *
+	 * @var array
+	 */
 	public $belongsTo = array(
 		'Entidade' => array(
 			'className' => 'Entidade',
@@ -57,7 +57,6 @@ class Candidatura extends AppModel {
 			'fields' => '',
 			'order' => ''
 		),
-		
 		'Curso' => array(
 			'className' => 'Curso',
 			'foreignKey' => 'curso_id',
@@ -86,7 +85,6 @@ class Candidatura extends AppModel {
 			'fields' => '',
 			'order' => ''
 		),
-		
 		'BolsaTipoBolsa' => array(
 			'className' => 'BolsaTipoBolsa',
 			'foreignKey' => 'bolsa_tipo_bolsa_id',
@@ -109,18 +107,20 @@ class Candidatura extends AppModel {
 			'order' => ''
 		)
 	);
-        
-        
-        public $validate = array(
-            'numero_estudante'=>array(
-                'uniqueRule'=>array(
-                    'rule'=>'isUnique',
-                    'message'=>'Não podem existir 2 candidatos com mesmo número de estudante'
-                ),
-                'notEmptyRule'=>array(
-                    'rule'=>'notEmpty',
-                    'message'=>'Todo candidato deve ter um número de estudante atribuido'
-                )
-            )
-        );
+	public $hasOne = array(
+		'BolsaTemporaria'
+	);
+	public $validate = array(
+		'numero_estudante' => array(
+			'uniqueRule' => array(
+				'rule' => 'isUnique',
+				'message' => 'Não podem existir 2 candidatos com mesmo número de estudante'
+			),
+			'notEmptyRule' => array(
+				'rule' => 'notEmpty',
+				'message' => 'Todo candidato deve ter um número de estudante atribuido'
+			)
+		)
+	);
+
 }

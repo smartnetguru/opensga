@@ -1502,7 +1502,9 @@ class AlunosController extends AppController {
 		$this->paginate = array(
 			'conditions' => $conditions,
 			'limit' => 50,
-			'contain' => array('Curso')
+			'contain' => array('Curso', 'BolsaTemporaria' => array(
+					'BolsaTipoBolsa'
+				))
 		);
 		$candidatos = $this->paginate('Candidatura');
 
