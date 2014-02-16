@@ -1046,50 +1046,16 @@ class AlunosController extends AppController {
 		$this->set(compact('aluno', 'is_regular', 'classe_estado', 'cursos', 'funcionario'));
 	}
 
-	public function alterar_nome($aluno_id) {
-
+	public function alterar_nome($alunoId) {
 		if ($this->request->is('post')) {
-			$nomes = trim($this->request->data['Aluno']['nomes']);
-			$apelido = trim($this->request->data['Aluno']['apelido']);
-			if ($nomes != '' && $apelido != '') {
-				$this->Aluno->contain();
-				$aluno = $this->Aluno->findById($this->request->data['Aluno']['aluno_id']);
-
-				$entidade = $this->Aluno->Entidade->findById($aluno['Aluno']['entidade_id']);
-
-				$this->Aluno->Entidade->id = $entidade['Entidade']['id'];
-				$this->Aluno->Entidade->set('nomes', $nomes);
-				$this->Aluno->Entidade->set('apelido', $apelido);
-				$this->Aluno->Entidade->set('name', $nomes . " " . $apelido);
-				$this->Aluno->Entidade->save();
-				$this->Session->setFlash(__('Nome Alterado com Sucesso'), 'default', array('class' => 'alert success'));
+			$dados = $this->request->data['Aluno'];
+			if ($this->Aluno->Entidade->alteraNome($dados['entidade_id'], $dados['apelido'], $dados['nomes'])) {
+				$this->Session->setFlash(__('Nome Alterado com Sucesso'), 'default', array('class' => 'alert alert-success'));
 				$this->redirect(array('action' => 'perfil_estudante', $this->request->data['Aluno']['aluno_id']));
 			}
 		}
-		$this->Aluno->contain(array(
-			'Entidade' => array(
-				'Genero'
-			),
-			'Curso' => array(
-				'UnidadeOrganica'
-			)
-		));
-		$aluno = $this->Aluno->findById($aluno_id);
-
-		$is_regular = $this->Aluno->isRegular($aluno_id);
-
-
-		if (count($is_regular) == 1 && $is_regular[0]['regular'] == true) {
-			if ($is_regular[0]['estado'] == 1) {
-				$classe_estado = "alert note no-margin";
-			} else {
-				$classe_estado = "alert success";
-			}
-		} else {
-			$classe_estado = "alert error";
-		}
-
-		$this->set(compact('aluno', 'is_regular', 'classe_estado'));
+		$aluno = $this->Aluno->getAlunoForDisplay($alunoId);
+		$this->set(compact('aluno'));
 	}
 
 	public function alterar_status($aluno_id) {
@@ -1328,19 +1294,6 @@ class AlunosController extends AppController {
 		$is_bolseiro = $this->Aluno->isBolseiro($id, $this->Session->read('SGAConfig.ano_lectivo_id'));
 
 		$this->set(compact('inscricoes_activas', 'todas_inscricoes', 'cadeiras_aprovadas', 'pagamentos', 'is_bolseiro', 'is_regular', 'classe_estado', 'requisicoes'));
-	}
-
-	public function alterar_nome_candidato($codigo) {
-		$this->loadModel('Candidatura');
-		if ($this->request->is('post')) {
-			$this->Candidatura->id = $this->request->data['Candidatura']['candidatura_id'];
-			$this->Candidatura->save($this->request->data);
-			$this->Session->setFlash('Nome de Candidato Alterado', 'default', array('class' => 'alert success'));
-			$this->redirect('/');
-		}
-
-		$candidato = $this->Candidatura->findById($codigo);
-		$this->set(compact('candidato'));
 	}
 
 	public function busca_candidatos_action($action_seguinte) {

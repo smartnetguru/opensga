@@ -24,14 +24,20 @@ App::uses('Controller', 'Controller');
  */
 class AppController extends Controller {
 
-	public $components = array('Security', 'Acl', 'Auth' => array('authenticate' => 'Blowfish'), 'Session', 'RequestHandler', 'Paginator', 'Cookie', 'HighCharts.HighCharts', 'DebugKit.Toolbar');
+	public $components = array(
+		'Security', 'Acl', 'Auth' => array(
+			'authenticate' => 'Blowfish'
+		), 'Session', 'RequestHandler', 'Paginator', 'Cookie', 'HighCharts.HighCharts', 'DebugKit.Toolbar' => array(
+			'panels' => array('DebugKitEx.Resque')
+		)
+	);
 	public $helpers = array('Html', 'AclLink', 'Print', 'BreadCumbs', 'Form', 'Session', 'Js' => array('MyJquery'), 'EventsCalendar', 'Javascript', 'Ajax', 'PhpExcel', 'HighCharts.HighCharts', 'AclLink');
 	public $pdfConfig = array('engine' => 'CakePdf.Tcpdf');
 	public $cacheAction = '1 hour';
 
 	public function beforeFilter() {
 		parent::beforeFilter();
-
+		CakeResque::enqueue('default', 'NotificationShell', array('test'));
 		$config_language = $this->Session->read('Config.language');
 
 		if ($config_language == null) {

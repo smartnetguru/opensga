@@ -18,6 +18,7 @@ App::uses('SessionComponent', 'Controller/Component');
  * @property Matricula $Matricula
  * @property Inscricao $Inscricao
  * @property FinanceiroPagamento $FinanceiroPagamento
+ * @property Curso $Curso 
  *
  *
  */
@@ -372,6 +373,22 @@ class Aluno extends AppModel {
 
 	public function getMatriculaCorrente($aluno_id) {
 		return $this->Matricula->find('first', array('conditions' => array('Matricula.aluno_id' => $aluno_id, 'Matricula.ano_lectivo_id' => Configure::read('OpenSGA.ano_lectivo_id'), 'Matricula.estado_matricula_id' => 1), 'recursive' => -1));
+	}
+
+	public function getAlunoForDisplay($alunoId) {
+		$this->contain(array(
+			'Entidade' => array(
+				'Genero'
+			),
+			'Curso' => array(
+				'UnidadeOrganica'
+			)
+		));
+		$aluno = $this->findById($alunoId);
+		$faculdade = $this->Curso->getFaculdadeByCursoId($aluno['Aluno']['curso_id']);
+		$aluno['Faculdade'] = $faculdade['UnidadeOrganica'];
+
+		return $aluno;
 	}
 
 	/**

@@ -18,6 +18,18 @@ class OpenSGAShell extends AppShell {
 		$this->log('Teste de Shell Efectuado com Sucesso');
 	}
 
+	function teste_email() {
+		App::uses('CakeEmail', 'Network/Email');
+		$email = new CakeEmail();
+		$email->config('smtp')
+				->template('test_template', 'test_layout') //I'm assuming these were created
+				->emailFormat('html')
+				->to('elisio.leonardo@gmail.com')
+				->from(array('naoresponder@uem.ac.mz'))
+				->subject('just testing something')
+				->send();
+	}
+
 	/**
 	 * Comando temporario para organizar a tabela de matriculas
 	 */
