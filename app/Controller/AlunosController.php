@@ -1054,48 +1054,26 @@ class AlunosController extends AppController {
 				$this->redirect(array('action' => 'perfil_estudante', $this->request->data['Aluno']['aluno_id']));
 			}
 		}
-		$aluno = $this->Aluno->getAlunoForDisplay($alunoId);
+		$aluno = $this->Aluno->getAlunoForAction($alunoId);
 		$this->set(compact('aluno'));
 	}
 
-	public function alterar_status($aluno_id) {
-
+	public function alterar_status($alunoId) {
 		if ($this->request->is('post')) {
 
 			if ($this->Aluno->alteraStatus($this->request->data['Aluno'])) {
-				$this->Session->setFlash(__('Status do Aluno Alterado Com Sucesso'), 'default', array('class' => 'alert success'));
+				$this->Session->setFlash(__('Status do Aluno Alterado Com Sucesso'), 'default', array('class' => 'alert alert-success'));
 				$this->redirect(array('action' => 'perfil_estudante', $this->request->data['Aluno']['aluno_id']));
 			} else {
-				$this->Session->setFlash(__('Problemas ao alterar Status do Estudante'), 'default', array('class' => 'alert error'));
+				$this->Session->setFlash(__('Problemas ao alterar Status do Estudante'), 'default', array('class' => 'alert alert-danger'));
 			}
 		}
 
-		$this->Aluno->contain(array(
-			'Entidade' => array(
-				'Genero'
-			),
-			'Curso' => array(
-				'UnidadeOrganica'
-			)
-		));
-		$aluno = $this->Aluno->findById($aluno_id);
-
-		$is_regular = $this->Aluno->isRegular($aluno_id);
+		$aluno = $this->Aluno->getAlunoForAction($alunoId);
 		$funcionario = $this->Aluno->User->getFuncionarioActivoId($this->Session->read('Auth.User.Id'));
-
-		if (count($is_regular) == 1 && $is_regular[0]['regular'] == true) {
-			if ($is_regular[0]['estado'] == 1) {
-				$classe_estado = "alert note no-margin";
-			} else {
-				$classe_estado = "alert success";
-			}
-		} else {
-			$classe_estado = "alert error";
-		}
-
 		$estadoAlunos = $this->Aluno->EstadoAluno->find('list');
 		$motivoEstadoAlunos = $this->Aluno->AlunoEstado->MotivoEstadoAluno->find('list');
-		$this->set(compact('aluno', 'is_regular', 'classe_estado', 'cursos', 'funcionario', 'estadoAlunos', 'motivoEstadoAlunos'));
+		$this->set(compact('aluno', 'cursos', 'funcionario', 'estadoAlunos', 'motivoEstadoAlunos'));
 	}
 
 	public function concluir_nivel($aluno_id) {

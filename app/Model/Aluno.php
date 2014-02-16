@@ -18,7 +18,7 @@ App::uses('SessionComponent', 'Controller/Component');
  * @property Matricula $Matricula
  * @property Inscricao $Inscricao
  * @property FinanceiroPagamento $FinanceiroPagamento
- * @property Curso $Curso 
+ * @property Curso $Curso
  *
  *
  */
@@ -375,7 +375,7 @@ class Aluno extends AppModel {
 		return $this->Matricula->find('first', array('conditions' => array('Matricula.aluno_id' => $aluno_id, 'Matricula.ano_lectivo_id' => Configure::read('OpenSGA.ano_lectivo_id'), 'Matricula.estado_matricula_id' => 1), 'recursive' => -1));
 	}
 
-	public function getAlunoForDisplay($alunoId) {
+	public function getAlunoForAction($alunoId) {
 		$this->contain(array(
 			'Entidade' => array(
 				'Genero'
@@ -718,7 +718,7 @@ class Aluno extends AppModel {
 		$datasource->begin();
 		$this->contain();
 		$aluno = $this->findById($data['aluno_id']);
-		$array_estado = array(
+		$arrayEstado = array(
 			'AlunoEstado' => array(
 				'aluno_id' => $aluno['Aluno']['id'],
 				'estado_anterior' => $aluno['Aluno']['estado_aluno_id'],
@@ -726,13 +726,11 @@ class Aluno extends AppModel {
 				'motivo_estado_aluno_id' => $data['motivo_estado_aluno_id'],
 				'observacao' => $data['observacao'],
 				'data_mudanca' => $data['data_mudanca'],
-				// 'anexo_url'=>$data['anexo_url'],
-				'funcionario_id' => $data['funcionario_id']
 			)
 		);
 
 		$this->AlunoEstado->create();
-		$this->AlunoEstado->save($array_estado);
+		$this->AlunoEstado->save($arrayEstado);
 
 		$this->id = $data['aluno_id'];
 		$this->set('estado_aluno_id', $data['estado_actual']);

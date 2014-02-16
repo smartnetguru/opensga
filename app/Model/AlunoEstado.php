@@ -1,5 +1,7 @@
 <?php
+
 App::uses('AppModel', 'Model');
+
 /**
  * AlunoEstado Model
  *
@@ -8,15 +10,13 @@ App::uses('AppModel', 'Model');
  * @property Funcionario $Funcionario
  */
 class AlunoEstado extends AppModel {
-
-
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 
-/**
- * belongsTo associations
- *
- * @var array
- */
+	/**
+	 * belongsTo associations
+	 *
+	 * @var array
+	 */
 	public $belongsTo = array(
 		'Aluno' => array(
 			'className' => 'Aluno',
@@ -31,13 +31,7 @@ class AlunoEstado extends AppModel {
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
-		),
-		'Funcionario' => array(
-			'className' => 'Funcionario',
-			'foreignKey' => 'funcionario_id',
-			'conditions' => '',
-			'fields' => '',
-			'order' => ''
 		)
 	);
+
 }
