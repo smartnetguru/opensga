@@ -3,20 +3,20 @@
 /**
  * OpenSGA - Sistema de Gest�o Acad�mica
  *   Copyright (C) 2010-2011  INFOmoz (Inform�tica-Mo�ambique)
- * 
+ *
  * Este programa � um software livre: Voc� pode redistribuir e/ou modificar
  * todo ou parte deste programa, desde que siga os termos da licen�a por nele
- * estabelecidos. Grande parte do c�digo deste programa est� sob a licen�a 
+ * estabelecidos. Grande parte do c�digo deste programa est� sob a licen�a
  * GNU Affero General Public License publicada pela Free Software Foundation.
  * A vers�o original desta licen�a est� dispon�vel na pasta raiz deste software.
- * 
- * Este software � distribuido sob a perspectiva de que possa ser �til para 
+ *
+ * Este software � distribuido sob a perspectiva de que possa ser �til para
  * satisfazer as necessidades dos seus utilizadores, mas SEM NENHUMA GARANTIA. Veja
  * os termos da licen�a GNU Affero General Public License para mais detalhes
- * 
+ *
  * As redistribui��es deste software, mesmo quando o c�digo-fonte for modificado significativamente,
  * devem manter est� informa��o legal, assim como a licen�a original do software.
- * 
+ *
  * @copyright     Copyright 2010-2011, INFOmoz (Inform�tica-Mo�ambique) (http://infomoz.net)
  * * @link          http://opensga.com OpenSGA  - Sistema de Gestão Académica
  * @author		  Elisio Leonardo (elisio.leonardo@gmail.com)
@@ -24,322 +24,84 @@
  * @subpackage    opensga.core.controller
  * @since         OpenSGA v 0.10.0.0
 
- * 
+ *
  */
 class MatriculasController extends AppController {
 
-    var $name = 'Matriculas';
+	var $name = 'Matriculas';
 
-    /**
-     * Overview das Matriculas
-     * Mostra o grafico de Novos ingressos por Curso 
-     */
-    function index() {
-        $matriculas_novas = $this->Matricula->find('all', array('conditions' => array('Matricula.ano_lectivo_id' => Configure::read('OpenSGA.ano_lectivo_id'), 'Matricula.tipo_matricula_id' => array(1, 0)), 'group' => array('Matricula.curso_id', 'Matricula.turno_id'), 'fields' => array('Count(*) as total', 'Curso.name', 'Turno.name', 'Curso.id', 'Turno.id')));
-
-
-
-        $this->set(compact('matriculas_novas'));
-    }
-
-    function lista_matriculas_por_curso_turno($curso_id = null, $turno_id = null) {
-        $this->Matricula->contain(
-                array(
-                    'Curso' => array(
-                        'fields' => array(
-                            'id', 'name', 'codigo'
-                        )
-                    ), 'Turno', 'Aluno' => array(
-                        'Entidade' => array(
-                            'fields' => array(
-                                'name', 'id'
-                            )
-                        ),
-                        'fields' => array(
-                            'id', 'codigo', 'entidade_id'
-                        )
-                    )
-                )
-        );
-        $conditions = array('Matricula.ano_lectivo_id' => Configure::read('OpenSGA.ano_lectivo_id'), 'Matricula.tipo_matricula_id' => 1);
-        if ($curso_id != null) {
-            if ($curso_id == 18) {
-                $limite_sala = 30;
-            } else {
-                $limite_sala = 42;
-            }
-            $conditions[] = array('Matricula.curso_id' => $curso_id);
-        }
-        if ($turno_id != null) {
-            $conditions[] = array('Matricula.turno_id' => $turno_id);
-        }
-        $matriculas_novas2 = $this->Matricula->find('all', array('conditions' => $conditions, 'order' => array('Matricula.curso_id', 'Matricula.turno_id')));
-
-        $ii = 0;
-        $jj = 0;
-        $matriculas_nova = array();
-        foreach ($matriculas_novas2 as $mn2) {
-            if ($ii == $limite_sala) {
-                $ii = 1;
-                $jj = $jj + 1;
-            }
-            $matriculas_nova[$jj][] = $mn2;
-            $ii = $ii + 1;
-        }
+	/**
+	 * Overview das Matriculas
+	 * Mostra o grafico de Novos ingressos por Curso
+	 */
+	function index() {
+		$matriculas_novas = $this->Matricula->find('all', array('conditions' => array('Matricula.ano_lectivo_id' => Configure::read('OpenSGA.ano_lectivo_id'), 'Matricula.tipo_matricula_id' => array(1, 0)), 'group' => array('Matricula.curso_id', 'Matricula.turno_id'), 'fields' => array('Count(*) as total', 'Curso.name', 'Turno.name', 'Curso.id', 'Turno.id')));
 
 
-        $this->set(compact('matriculas_nova', 'curso_id', 'turno_id'));
-        //$this->layout = 'pdf';
-    }
 
-    function view($id = null) {
-        //App::Import('Model','Logmv');
-        //$logmv = new Logmv;
-        if (!$id) {
-            $this->Session->setFlash('Invalido %s', 'flasherror');
-            $this->redirect(array('action' => 'index'));
-        }
-        if (empty($this->data)) {
-            $this->data = $this->Matricula->read(null, $id);
-            //$logmv->logview(10,$this->Session->read('Auth.User.id'),$id,$this->data["Matricula"]["name"]);
-        }
-        $alunos = $this->Matricula->Aluno->find('list');
-        $cursos = $this->Matricula->Curso->find('list');
-        $planoestudos = $this->Matricula->PlanoEstudo->find('list');
-        $users = $this->Matricula->User->find('list');
-        $this->set(compact('Alunos', 't0003cursos', 't0005planoestudos', 'users'));
-    }
+		$this->set(compact('matriculas_novas'));
+	}
 
-    function add() {
-        //App::Import('Model','Logmv');
-        //$logmv = new Logmv;
-        if (!empty($this->data)) {
-            $this->Matricula->create();
-            $this->data['Matricula']['tg0021estadomatricula_id'] = 1;
-            if ($this->Matricula->save($this->data)) {
-                //$logmv->logInsert(10,$this->Session->read('Auth.User.id'),$this->Matricula->getLastInsertID(),$this->data["Matricula"]["codigo"]);
-                $this->Session->setFlash('** Dados Cadastrados com Sucesso **', 'flashok');
-                $this->redirect(array('action' => 'index'));
-            } else {
-                $this->Session->setFlash('Erro ao gravar dados. Por favor tente de novo.', 'flasherror');
-            }
-        }
-        $alunos = $this->Matricula->getAlunosForMatricula();
-        //sort($alunos);
-        $cursos = $this->Matricula->Curso->find('list');
-        $planoestudos = $this->Matricula->PlanoEstudo->find('list');
-        $users = $this->Matricula->User->find('list');
-        $this->set(compact('Alunos', 't0003cursos', 't0005planoestudos', 'users'));
-    }
+	public function exportar_matriculas() {
 
-    function edit($id = null) {
-        $this->Matricula->id = $id;
-        if (!$this->Matricula->exists()) {
-            throw new NotFoundException('Matricula Invalida');
-        }
-        if (!$id && empty($this->data)) {
-            $this->Session->setFlash('Invalido %s', 'flasherror');
-            $this->redirect(array('action' => 'index'));
-        }
-        if (!empty($this->data)) {
-            if ($this->Matricula->save($this->data)) {
+		$this->Matricula->contain(array(
+			'AnoLectivo'
+		));
+		$matriculas = $this->Matricula->find('all', array('conditions' => array('AnoLectivo.ano' => 2013)));
+		die(debug($matriculas));
+	}
+
+	public function carregar_ficheiro_renovacao() {
+		$this->loadModel('Upload');
+		if ($this->request->is('post')) {
+
+			$type = $this->request->data['Upload']['file']['type'];
+			if ($type == 'text/plain') {
+
+				$upload_sucesso = $this->Upload->uploadFiles('uploads', array($this->request->data['Upload']['file']), 'renovacao');
+				if (isset($upload_sucesso['urls'])) {
 
 
-                $this->Session->setFlash('Dado Editados com sucesso', 'flashok');
-                $this->redirect(array('action' => 'index'));
-            } else {
-                $this->Session->setFlash('Erro ao editar dados. Por favor tente de novo.', 'flasherror');
-            }
-        }
-        if (empty($this->data)) {
-            $this->data = $this->Matricula->read(null, $id);
-            //$logmv->logUpdate(10,$this->Session->read('Auth.User.id'),$id,$this->data["Matricula"]["codigo"]);
-        }
-        $alunos = $this->Matricula->Aluno->find('list', array('order' => 'id'));
-        $cursos = $this->Matricula->Curso->find('list');
-        $planoestudos = $this->Matricula->PlanoEstudo->find('list');
-        $users = $this->Matricula->User->find('list');
-        $this->set(compact('Alunos', 't0003cursos', 't0005planoestudos', 'users'));
-    }
+					$this->request->data['Upload']['name'] = $this->request->data['Upload']['file']['name'];
+					$this->request->data['Upload']['size'] = $this->request->data['Upload']['file']['size'];
+					$this->request->data['Upload']['file_url'] = $upload_sucesso['urls'][0];
+					$this->request->data['Upload']['tipo_upload_id'] = 1;
+					$this->Upload->create();
+					$this->Upload->save($this->request->data);
 
-    function delete($id = null) {
-        //App::Import('Model','Logmv');
-        //$logmv = new Logmv;
-        if (!$id) {
-            $this->Session->setFlash(sprintf(__('Invalid id for %s', true), 't0011matricula'));
-            $this->redirect(array('action' => 'index'));
-        }
-        if ($this->Matricula->delete($id)) {
-            //$logmv->logDelete(10,$this->Session->read('Auth.User.id'),$id,'Delete Matricula');
-            $this->Session->setFlash('Dados deletedos com sucesso ', 'flashok');
-            $this->redirect(array('action' => 'index'));
-        }
-        $this->Session->setFlash(sprintf(__('%s was not deleted', true), 'Matricula'));
-        $this->redirect(array('action' => 'index'));
-    }
+					$processado = $this->Matricula->processaFicheiroRenovacao($upload_sucesso['urls'][0]);
+					if ($processado) {
+						$this->Session->setFlash(__('Ficheiro de Renovação Processado com Sucesso'), 'default', array('class' => 'alert success'));
+						$this->redirect(array('action' => 'renovacao_matriculas', 2014));
+					}
+				}
+			} else {
+				$this->Session->setFlash(__('Tentou carregar um ficheiro no formato errado.'), 'default', array('class' => 'alert error'));
+			}
+		}
+	}
 
-    function beforeRender() {
-        $this->set('current_section', 'manutencao');
-    }
+	public function processa_ficheiro_renovacao_teste() {
+		$this->Matricula->processaFicheiroRenovacao('uploads/renovacao/P770011001.txt');
+	}
 
-    function pdf_index() {
-        //App::Import('Model','Logmv');
-        //$logmv = new Logmv;
-        Configure::write('debug', 0); // Otherwise we cannot use this method while developing
-        $matricula = $this->Matricula->find('all', array("order" => "Aluno.name"));
-        $estado = "";
-        $listas = array();
-        foreach ($matricula as $m) {
-            //var_dump($matricula[0]["Matricula"]["tg0021estadomatricula_id"]);
-            $lista = array();
-            $lista[] = $m["Matricula"]["id"];
-            $lista[] = $m["Aluno"]["name"];
-            $lista[] = str_replace("Licenciatura em", " L.", $m["Curso"]["name"]);
-            $lista[] = $m["PlanoEstudo"]["name"];
-            if ($matricula[0]["Matricula"]["tg0021estadomatricula_id"] == 1)
-                $estado = "Normal";
-            if ($matricula[0]["Matricula"]["tg0021estadomatricula_id"] == 2)
-                $estado = "Anulada";
-            if ($matricula[0]["Matricula"]["tg0021estadomatricula_id"] == 3)
-                $estado = "Suspensa";
-            if ($matricula[0]["Matricula"]["tg0021estadomatricula_id"] == 4)
-                $estado = "Concluida";
+	public function renovacao_matriculas($ano = null) {
+		if ($ano == null) {
+			$ano = date('Y');
+		}
 
-            $lista[] = $estado;
-            $lista[] = $m["Matricula"]["data"];
-            $listas[] = $lista;
-        }
-        // $this->set('cursos',$this->Curso->find('all'));
-        $this->set('lista', $listas);
-        $this->layout = 'pdf'; //this will use the pdf.ctp layout
-        $this->render();
-    }
+		$this->Matricula->AnoLectivo->contain();
+		$anolectivo = $this->Matricula->AnoLectivo->findByAno($ano);
+		$this->Matricula->contain(array(
+			'Aluno' => array(
+				'Entidade'
+			), 'Curso', 'AnoLectivo'
+		));
+		$matriculas = $this->Matricula->find('all', array('conditions' => array('ano_lectivo_id' => $anolectivo['AnoLectivo']['id'], 'tipo_matricula_id' => 2), 'limit' => 20));
+		$total = $this->Matricula->find('count', array('conditions' => array('ano_lectivo_id' => $anolectivo['AnoLectivo']['id'], 'tipo_matricula_id' => 2)));
 
-    function ajax_update_plano_estudos() {
-
-        $curso = $this->data["Matricula"]["t0003curso_id"];
-
-        $planoestudos = $this->Matricula->PlanoEstudo->find('list', array('conditions' => array('t0003curso_id' => $curso)));
-        $this->set('planoestudos', $planoestudos);
-        $this->layout = 'ajax';
-    }
-
-    public function lista_alunos_excel($curso_id = null, $turno_id = null) {
-        $this->Matricula->contain(
-                array(
-                    'Curso' => array(
-                        'fields' => array(
-                            'id', 'name', 'codigo'
-                        )
-                    ), 'Turno', 'Aluno' => array(
-                        'Entidade' => array(
-                            'fields' => array(
-                                'name', 'id'
-                            )
-                        ),
-                        'fields' => array(
-                            'id', 'codigo', 'entidade_id'
-                        )
-                    )
-                )
-        );
-        $conditions = array('Matricula.ano_lectivo_id' => Configure::read('OpenSGA.ano_lectivo_id'), 'Matricula.tipo_matricula_id' => array(0, 1));
-        if ($curso_id != null) {
-            if ($curso_id == 18) {
-                $limite_sala = 30;
-            } else {
-                $limite_sala = 38;
-            }
-            $conditions[] = array('Matricula.curso_id' => $curso_id);
-        }
-        if ($turno_id != null) {
-            $conditions[] = array('Matricula.turno_id' => $turno_id);
-        }
-
-        $matriculas_novas2 = $this->Matricula->find('all', array('conditions' => $conditions, 'order' => array('Matricula.curso_id', 'Matricula.turno_id')));
-
-        // die(debug($matriculas_novas2));
-
-        $ii = 0;
-        $jj = 0;
-        $matriculas_nova = array();
-        foreach ($matriculas_novas2 as $mn2) {
-            if ($ii == $limite_sala) {
-                $ii = 0;
-                $jj = $jj + 1;
-            }
-            $matriculas_nova[$jj][] = $mn2;
-            $ii = $ii + 1;
-        }
-
-
-        $this->set(compact('matriculas_nova', 'curso_id', 'turno_id'));
-        //$this->layout = 'pdf';
-    }
-
-    public function exportar_matriculas() {
-
-        $this->Matricula->contain(array(
-            'AnoLectivo'
-        ));
-        $matriculas = $this->Matricula->find('all', array('conditions' => array('AnoLectivo.ano' => 2013)));
-        die(debug($matriculas));
-    }
-
-    public function carregar_ficheiro_renovacao() {
-        $this->loadModel('Upload');
-        if ($this->request->is('post')) {
-
-            $type = $this->request->data['Upload']['file']['type'];
-            if ($type == 'text/plain') {
-                
-                $upload_sucesso = $this->Upload->uploadFiles('uploads', array($this->request->data['Upload']['file']), 'renovacao');
-                if (isset($upload_sucesso['urls'])) {
-                    
-
-                    $this->request->data['Upload']['name'] = $this->request->data['Upload']['file']['name'];
-                    $this->request->data['Upload']['size'] = $this->request->data['Upload']['file']['size'];
-                    $this->request->data['Upload']['file_url'] = $upload_sucesso['urls'][0];
-                    $this->request->data['Upload']['tipo_upload_id'] = 1;
-                    $this->Upload->create();
-                    $this->Upload->save($this->request->data);
-
-                    $processado = $this->Matricula->processaFicheiroRenovacao($upload_sucesso['urls'][0]);
-                    if($processado){
-                        $this->Session->setFlash(__('Ficheiro de Renovação Processado com Sucesso'),'default',array('class'=>'alert success'));
-                        $this->redirect(array('action'=>'renovacao_matriculas',2014));
-                    }
-                }
-                
-            } else {
-                $this->Session->setFlash(__('Tentou carregar um ficheiro no formato errado.'), 'default', array('class' => 'alert error'));
-            }
-
-            
-        }
-    }
-
-    public function processa_ficheiro_renovacao_teste() {
-        $this->Matricula->processaFicheiroRenovacao('uploads/renovacao/P770011001.txt');
-    }
-
-    public function renovacao_matriculas($ano = null) {
-        if ($ano == null) {
-            $ano = date('Y');
-        }
-
-        $this->Matricula->AnoLectivo->contain();
-        $anolectivo = $this->Matricula->AnoLectivo->findByAno($ano);
-        $this->Matricula->contain(array(
-            'Aluno' => array(
-                'Entidade'
-            ), 'Curso', 'AnoLectivo'
-        ));
-        $matriculas = $this->Matricula->find('all', array('conditions' => array('ano_lectivo_id' => $anolectivo['AnoLectivo']['id'], 'tipo_matricula_id' => 2), 'limit' => 1000));
-        $total = $this->Matricula->find('count', array('conditions' => array('ano_lectivo_id' => $anolectivo['AnoLectivo']['id'], 'tipo_matricula_id' => 2)));
-
-        $this->set(compact('anolectivo', 'matriculas', 'total'));
-    }
+		$this->set(compact('anolectivo', 'matriculas', 'total'));
+	}
 
 }
 

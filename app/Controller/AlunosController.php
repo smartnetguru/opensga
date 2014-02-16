@@ -168,7 +168,7 @@ class AlunosController extends AppController {
 
 		$this->set(compact('inscricoes_activas', 'todas_inscricoes', 'cadeiras_aprovadas', 'pagamentos', 'is_bolseiro', 'is_regular', 'classe_estado', 'requisicoes'));
 
-		$this->layout = 'clipone_default';
+		//$this->layout = 'clipone_default';
 	}
 
 	public function estudante_perfil($id = null) {
@@ -755,7 +755,7 @@ class AlunosController extends AppController {
 			}
 		}
 
-		$this->layout = 'clipone_default';
+		//$this->layout = 'clipone_default';
 	}
 
 	public function matricular_candidato($candidato_id) {
@@ -817,7 +817,7 @@ class AlunosController extends AppController {
 
 		$this->set('siga_page_title', 'Matriculas');
 		$this->set('siga_page_overview', 'Formulario de Matricula de Novos Ingressos');
-		$this->layout = 'clipone_default';
+		//$this->layout = 'clipone_default';
 	}
 
 	public function matricula_novo_ingresso_sucesso($aluno_id) {
@@ -830,7 +830,7 @@ class AlunosController extends AppController {
 		$aluno = $this->Aluno->read();
 		$this->set(compact('aluno'));
 
-		$this->layout = 'clipone_default';
+		//$this->layout = 'clipone_default';
 	}
 
 	public function print_boletim_matricula($aluno_id) {

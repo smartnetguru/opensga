@@ -162,6 +162,6 @@ class DocentesController extends AppController {
   
     public function beforeFilter() {
         parent::beforeFilter();
-        $this->layout = 'clipone_default';
+        //$this->layout = 'clipone_default';
     }
 }

@@ -332,7 +332,7 @@ class TurmasController extends AppController {
 		parent::beforeFilter();
 
 		if (!$this->request->prefix)
-			$this->layout = 'clipone_default';
+			//$this->layout = 'clipone_default';
 	}
 
 	public function faculdade_print_lista_estudantes($turma_id) {
