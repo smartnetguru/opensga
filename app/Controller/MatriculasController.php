@@ -35,11 +35,15 @@ class MatriculasController extends AppController {
 	 * Mostra o grafico de Novos ingressos por Curso
 	 */
 	function index() {
-		$matriculas_novas = $this->Matricula->find('all', array('conditions' => array('Matricula.ano_lectivo_id' => Configure::read('OpenSGA.ano_lectivo_id'), 'Matricula.tipo_matricula_id' => array(1, 0)), 'group' => array('Matricula.curso_id', 'Matricula.turno_id'), 'fields' => array('Count(*) as total', 'Curso.name', 'Turno.name', 'Curso.id', 'Turno.id')));
 
+		$this->Matricula->contain(array(
+			'Aluno' => array(
+				'Entidade'
+			), 'Curso', 'EstadoMatricula', 'AnoLectivo', 'TipoMatricula'
+		));
+		$matriculas = $this->paginate('Matricula');
 
-
-		$this->set(compact('matriculas_novas'));
+		$this->set(compact('matriculas'));
 	}
 
 	public function exportar_matriculas() {
