@@ -65,9 +65,7 @@ class AppController extends Controller {
 			$this->Security->validatePost = false;
 		}
 
-		if ($this->request->controller == 'alunos') {
-			$this->layout = 'legacy';
-		}
+
 
 
 //Devemos forcar o prefixo para funcionarios da faculdade, docente e estudantes

@@ -23,9 +23,7 @@ class AlunosController extends AppController {
 
 	public $name = 'Alunos';
 
-	function index() {
-
-
+	public function index() {
 		$conditions = array();
 		if ($this->request->is('post')) {
 			if ($this->request->data['Aluno']['codigo'] != '') {
