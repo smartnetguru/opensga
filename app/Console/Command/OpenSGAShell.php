@@ -1465,13 +1465,13 @@ class OpenSGAShell extends AppShell {
 		$objWriter->save(Configure::read('OpenSGA.save_path') . DS . 'renovacao' . Configure::read('OpenSGA.ano_lectivo') . '.xlsx');
 	}
 
-	public function importa_admitidos_1202() {
+	public function importa_admitidos_server() {
 		AuditableConfig::$Logger = ClassRegistry::init('Auditable.Logger');
 		App::import('Vendor', 'PHPExcel', array('file' => 'PHPExcel.php'));
 		if (!class_exists('PHPExcel'))
 			throw new CakeException('Vendor class PHPExcel not found!');
 
-		$xls = PHPExcel_IOFactory::load(APP . 'Imports' . DS . 'admitidos_1202.xlsx');
+		$xls = PHPExcel_IOFactory::load(APP . 'Imports' . DS . 'admitidos_server.xlsx');
 
 		$worksheet = $xls->getActiveSheet();
 //debug($xls->getActiveSheetIndex());

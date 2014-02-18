@@ -1471,12 +1471,6 @@ class AlunosController extends AppController {
 
 	public function beforeFilter() {
 		parent::beforeFilter();
-
-		if ($this->action == 'pesquisar_candidato') {
-
-		}
-		$this->Security->csrfCheck = false;
-		$this->Security->validatePost = false;
 	}
 
 }
