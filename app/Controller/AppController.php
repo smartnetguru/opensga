@@ -64,6 +64,7 @@ class AppController extends Controller {
 		$this->Auth->logoutRedirect = array('plugin' => false, 'controller' => 'users', 'action' => 'login');
 		$this->Auth->loginRedirect = array(array('plugin' => false, 'controller' => 'pages', 'action' => 'display', 'home'));
 		$this->Auth->unauthorizedRedirect = false;
+		$paginationOptions = array();
 
 		if ($this->request->is('ajax')) {
 			$this->layout = false;
@@ -135,6 +136,7 @@ class AppController extends Controller {
 
 
 		$this->set('title_for_layout', '');
+		$this->set(compact('paginationOptions'));
 	}
 
 	public function beforeRender() {
