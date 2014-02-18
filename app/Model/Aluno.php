@@ -382,12 +382,32 @@ class Aluno extends AppModel {
 			),
 			'Curso' => array(
 				'UnidadeOrganica'
-			)
+			), 'PlanoEstudo'
 		));
 		$aluno = $this->findById($alunoId);
 		$faculdade = $this->Curso->getFaculdadeByCursoId($aluno['Aluno']['curso_id']);
 		$aluno['Faculdade'] = $faculdade['UnidadeOrganica'];
 
+		return $aluno;
+	}
+
+	public function getAlunoForPerfil($id) {
+		$this->contain(array(
+			'Matricula' => array(
+				'PlanoEstudo', 'Turno'
+			),
+			'Curso', 'Entidade' => array(
+				'ProvinciaNascimento', 'CidadeNascimento', 'PaisNascimento', 'Genero', 'DocumentoIdentificacao', 'User', 'Bairro', 'Rua', 'CidadeMorada'
+			),
+			'AlunoNivelMedio' => array(
+				'EscolaNivelMedio' => array('Provincia', 'Distrito')
+			)
+		));
+
+		$aluno = $this->find('first', array('conditions' => array('Aluno.id' => $id)));
+		$faculdade = $this->Curso->getFaculdadeByCursoId($aluno['Aluno']['curso_id']);
+		$aluno['Faculdade'] = $faculdade['UnidadeOrganica'];
+		$aluno['Curso']['UnidadeOrganica'] = $faculdade['UnidadeOrganica'];
 		return $aluno;
 	}
 
@@ -748,6 +768,7 @@ class Aluno extends AppModel {
 
 		$dataSource->begin();
 
+
 		$data_matricula = array();
 		if ($data['Aluno']['numero_estudante'] == '') {
 			$data['Aluno']['codigo'] = $this->geraCodigo();
@@ -765,8 +786,13 @@ class Aluno extends AppModel {
 
 		//Grava os dados do Usuario
 		$this->User->create();
-		$data['User']['username'] = $this->User->geraEmailUem($data['Entidade']['apelido'], $data['Entidade']['nomes']);
-		$data['User']['password'] = Security::hash($data['Aluno']['codigo'], 'blowfish');
+		if (!isset($data['User']['username']) || $data['User']['username'] == '') {
+			$data['User']['username'] = $this->User->geraEmailUem($data['Entidade']['apelido'], $data['Entidade']['nomes']);
+		}
+		if (!isset($data['User']['password']) || $data['User']['password'] == '') {
+			$data['User']['password'] = Security::hash($data['Aluno']['codigo'], 'blowfish');
+		}
+
 		$data['User']['codigocartao'] = $data['Aluno']['codigo'];
 		$data['User']['name'] = $data['Entidade']['name'];
 		$data['User']['group_id'] = 3;

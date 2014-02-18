@@ -56,24 +56,8 @@ class AlunosController extends AppController {
 		if (!$this->Aluno->exists()) {
 			throw new NotFoundException('Este aluno não existe no Sistema');
 		}
-
-
-
-
-		$this->Aluno->contain(array(
-			'Matricula' => array(
-				'PlanoEstudo', 'Turno'
-			),
-			'Curso', 'Entidade' => array(
-				'ProvinciaNascimento', 'CidadeNascimento', 'PaisNascimento', 'Genero', 'DocumentoIdentificacao', 'User', 'CidadeMorada' => array(
-					'Bairro', 'Rua'
-				)
-			),
-			'AlunoNivelMedio' => array(
-				'EscolaNivelMedio' => array('Provincia', 'Distrito')
-			)
-		));
-		$aluno = $this->Aluno->find('first', array('conditions' => array('Aluno.id' => $id)));
+		$aluno = $this->Aluno->getAlunoForPerfil($id);
+		$matriculas = $this->Aluno->Matricula->getAllMatriculasByAluno($id);
 
 		$this->Aluno->Inscricao->contain(array(
 			'Turma' => array(
@@ -133,8 +117,6 @@ class AlunosController extends AppController {
 		);
 		$cadeiras_aprovadas = $this->Aluno->Inscricao->find('all', array('conditions' => array('Inscricao.aluno_id' => $id)));
 
-
-
 		if ($this->Aluno->isMatriculado($id, Configure::read('OpenSGA.ano_lectivo_id'))) {
 			$this->set('is_matriculado', 1);
 		} else {
@@ -166,9 +148,7 @@ class AlunosController extends AppController {
 		$this->set('aluno', $aluno);
 		$is_bolseiro = $this->Aluno->isBolseiro($id, $this->Session->read('SGAConfig.ano_lectivo_id'));
 
-		$this->set(compact('inscricoes_activas', 'todas_inscricoes', 'cadeiras_aprovadas', 'pagamentos', 'is_bolseiro', 'is_regular', 'classe_estado', 'requisicoes'));
-
-		//$this->layout = 'clipone_default';
+		$this->set(compact('inscricoes_activas', 'todas_inscricoes', 'cadeiras_aprovadas', 'pagamentos', 'is_bolseiro', 'is_regular', 'classe_estado', 'requisicoes', 'matriculas'));
 	}
 
 	public function estudante_perfil($id = null) {

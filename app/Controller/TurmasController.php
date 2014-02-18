@@ -68,14 +68,23 @@ class TurmasController extends AppController {
 		$unidade_organica_id = $this->Session->read('Auth.User.unidade_organica_id');
 
 		$conditions = array();
+		$paginationOptions = array();
 		if ($this->request->is('post')) {
 
 			if ($this->request->data['Turma']['codigo'] != '') {
 				$conditions['Turma.codigo'] = $this->request->data['Turma']['codigo'];
-			} elseif ($this->request->data['Turma']['name'] != '') {
+			}
+			if ($this->request->data['Turma']['name'] != '') {
 				$conditions['Turma.name LIKE'] = '%' . $this->request->data['Turma']['name'] . '%';
-			} elseif ($this->request->data['AnoLectivo']['ano'] != '') {
+			}
+			if ($this->request->data['AnoLectivo']['ano'] != '') {
 				$conditions['AnoLectivo.ano'] = $this->request->data['AnoLectivo']['ano'];
+				$paginationOptions['url']['ano_lectivo'] = $this->request->data['AnoLectivo']['ano'];
+			}
+		}
+		if ($this->request->is('ajax')) {
+			if (isset($this->request->params['named']['ano_lectivo'])) {
+				$conditions['AnoLectivo.ano'] = $this->request->params['named']['ano_lectivo'];
 			}
 		}
 		$conditions['Turma.estado_turma_id'] = 1;
@@ -86,12 +95,11 @@ class TurmasController extends AppController {
 			'contain' => array(
 				'AnoLectivo', 'Disciplina', 'PlanoEstudo', 'Curso' => array('UnidadeOrganica')
 			),
-			'limit' => 100
+			'limit' => 20
 		);
 
 		$turmas = $this->paginate('Turma');
-
-		$this->set('turmas', $turmas);
+		$this->set(compact('turmas', 'paginationOptions'));
 	}
 
 	function ver_turma($id = null) {
@@ -102,15 +110,15 @@ class TurmasController extends AppController {
 
 		if (empty($this->data)) {
 			$this->Turma->contain(array(
-				'Turno', 'PlanoEstudo', 'AnoLectivo', 'EstadoTurma', 'Curso' => array(
+				'Turno',
+				'PlanoEstudo', 'AnoLectivo', 'EstadoTurma', 'Curso' => array(
 					'UnidadeOrganica'
 				), 'Disciplina', 'AnoLectivo'
 			));
 			$this->data = $this->Turma->read(null, $id);
 		}
 
-		$this->Turma->Inscricao->contain(array(
-			'EstadoInscricao',
+		$this->Turma->Inscricao->contain(array('EstadoInscricao',
 			'Matricula' => array(
 				'Aluno' => array(
 					'Entidade'
@@ -148,13 +156,14 @@ class TurmasController extends AppController {
 
 		if (empty($this->data)) {
 			$this->Turma->contain(array(
-				'Turno', 'PlanoEstudo', 'AnoLectivo', 'EstadoTurma', 'Curso' => array(
+				'Turno', 'PlanoEstudo', 'AnoLectivo', 'EstadoTurma', 'Curso' => array
+					(
 					'UnidadeOrganica'
 				), 'Disciplina', 'AnoLectivo'
 			));
 			$this->data = $this->Turma->read(null, $id);
 		}
-		$unidadeOrganicaTurma = $this->data['Curso']['unidade_organica_id'];
+		$unidadeOrganicaTurma = $this->data['Curso'] ['unidade_organica_id'];
 		$unidadeOrganicaUser = $this->Session->read('Auth.User.unidade_organica_id');
 		if ($unidadeOrganicaTurma != $unidadeOrganicaUser) {
 			$this->Session->SetFlash('Nao tem permissao para aceder a pagina anterior');
@@ -201,7 +210,8 @@ class TurmasController extends AppController {
 
 			$this->data["Turma"]["estado"] = '1';
 
-			if ($this->Turma->save($this->data)) {
+			if (
+					$this->Turma->save($this->data)) {
 				$this->Session->setFlash('** Dados Cadastrados com Sucesso **', 'flashok');
 				$this->redirect(array('action' => 'add_disciplinas', $this->Turma->getLastInsertID()));
 			} else {
@@ -234,7 +244,9 @@ class TurmasController extends AppController {
 			/**
 			 * @todo Verificar o ajuste do anolectivo ao regime antes de enviar para o modelo
 			 */
-			$this->Turma->criarTurmas($this->data['Turma']['plano_estudo_id']);
+			$this->Turma->criarTurmas($this->data['Turma']
+
+					['plano_estudo_id']);
 
 			$this->Session->setFlash('As Turmas foram Geradas com Sucesso', 'flashok');
 			//$this->redirect(array('action' => 'index'));
@@ -256,7 +268,8 @@ class TurmasController extends AppController {
 	 * @param type $id
 	 * @throws NotFoundException
 	 */
-	public function docente_ver_turma($id = null) {
+	public
+			function docente_ver_turma($id = null) {
 		$this->Turma->id = $id;
 		if (!$this->Turma->exists()) {
 			throw new NotFoundException(__('Turma Inválida'));
@@ -319,20 +332,15 @@ class TurmasController extends AppController {
 		$this->Turma->recursive = 0;
 		$grupo = $this->Session->read('Auth.User.group_id');
 
-		$conditions = array();
+		$conditions = array()
+
+		;
 
 		$docente_id = $this->Turma->Docente->getByUserID($this->Session->read('Auth.User.id'));
 		$conditions['Turma.docente_id'] = $docente_id;
 
 		$this->paginate = array('conditions' => $conditions);
 		$this->set('turmas', $this->paginate());
-	}
-
-	public function beforeFilter() {
-		parent::beforeFilter();
-
-		if (!$this->request->prefix)
-			//$this->layout = 'clipone_default';
 	}
 
 	public function faculdade_print_lista_estudantes($turma_id) {
@@ -373,11 +381,12 @@ class TurmasController extends AppController {
 		));
 		$inscricaos2 = $this->Turma->Inscricao->find('all', array('conditions' => array('turma_id' => $turma_id)));
 		$inscricaos = Hash::sort($inscricaos2, '{n}.Matricula.Aluno.Entidade.apelido', 'asc');
-		$faculdade = $this->Turma->Curso->getFaculdadeByCursoId($inscricaos[0]['Turma']['curso_id']);
+		$faculdade = $this->Turma->Curso->getFaculdadeByCursoId($inscricaos[0] ['Turma']['curso_id']);
 		$this->set(compact('inscricaos', 'faculdade'));
 	}
 
-	public function print_lista_estudantes($turma_id) {
+	public
+			function print_lista_estudantes($turma_id) {
 		$this->Turma->Inscricao->contain(array(
 			'EstadoInscricao',
 			'Matricula' => array(
@@ -422,7 +431,8 @@ class TurmasController extends AppController {
 	public function fechar_todas_turmas($semestre) {
 		$this->Turma->fecharTodasTurmas($semestre);
 
-		$this->redirect(array('action' => 'index'));
+		$this->redirect(array('action'
+			=> 'index'));
 	}
 
 	/**
@@ -439,7 +449,8 @@ class TurmasController extends AppController {
 		if ($this->request->is('post') || $this->request->is('put')) {
 
 			if ($this->Turma->adicionaDocente($this->request->data)) {
-				$this->Session->setFlash('Os docentes desta turma foram actualizados com sucesso', 'default', array('class' => 'alert alert-success'));
+				$this->Session->setFlash('Os docentes desta turma foram actualizados com sucesso', 'default', array
+					('class' => 'alert alert-success'));
 				$this->redirect(array('controller' => 'turmas', 'action' => 'ver_turma', $turma_id));
 			} else {
 				$this->Session->setFlash('Problemas ao adicionar a turma', 'default', array('class' => 'alert alert-danger'));
@@ -470,7 +481,8 @@ class TurmasController extends AppController {
 		}
 		if (!$this->request->is('post') && !$this->request->is('put')) {
 
-			$this->Session->setFlash(__('Não Possui Permissão para aceder esta página'), 'default', array('class' => 'alert error'));
+			$this->Session->setFlash(__('Não Possui Permissão para aceder esta página'), 'default', array('class' => 'alert error'
+			));
 			$this->redirect($this->referer());
 		}
 

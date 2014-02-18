@@ -46,8 +46,32 @@ class MatriculasController extends AppController {
 		$this->set(compact('matriculas'));
 	}
 
-	public function exportar_matriculas() {
+	public function renovar_matricula($alunoId) {
+		$this->Matricula->Aluno->id = $alunoId;
+		if (!$this->Matricula->Aluno->exists()) {
+			throw new NotFoundException(__('Aluno Invalido'));
+		}
 
+		if ($this->request->is('post') || $this->request->is('put')) {
+
+			if ($this->Matricula->renovaMatricula($this->request->data)) {
+				$this->Session->setFlash(__('A Matricula do Aluno foi renovada com Sucesso'), 'default', array('class' => 'alert alert-success'));
+			} else {
+				$this->Session->setFlash(__('Problemas na renovacao de matricula'), 'default', array('class' => 'alert alert-danger'));
+			}
+
+			$this->redirect(array('controller' => 'alunos', 'action' => 'perfil_estudante', $this->request->data['Matricula']['aluno_id']));
+		}
+
+		$aluno = $this->Matricula->Aluno->getAlunoForAction($alunoId);
+		$renovacoesFalta = $this->Matricula->getStatusRenovacao($alunoId, true);
+		$this->Matricula->contain('AnoLectivo', 'EstadoMatricula', 'Curso', 'TipoMatricula');
+		$matriculas = $this->Matricula->find('all', array('conditions' => array('aluno_id' => $alunoId), 'order' => 'AnoLectivo.ano'));
+
+		$this->set(compact('aluno', 'renovacoesFalta', 'matriculas'));
+	}
+
+	public function exportar_matriculas() {
 		$this->Matricula->contain(array(
 			'AnoLectivo'
 		));
