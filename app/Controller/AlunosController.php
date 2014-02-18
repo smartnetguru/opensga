@@ -1475,6 +1475,8 @@ class AlunosController extends AppController {
 		if ($this->action == 'pesquisar_candidato') {
 
 		}
+		$this->Security->csrfCheck = false;
+		$this->Security->validatePost = false;
 	}
 
 }
