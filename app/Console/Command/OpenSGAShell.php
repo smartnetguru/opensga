@@ -1669,4 +1669,72 @@ class OpenSGAShell extends AppShell {
 		);
 	}
 
+	public function ajusta_inscricao_agronomia() {
+		$this->Inscricao->contain('Turma');
+		$inscricaos = $this->Inscricao->find('all', array('conditions' => array('Turma.ano_lectivo_id' => 30)));
+		$ajustados = 0;
+		$naoEncontrados = 0;
+		foreach ($inscricaos as $inscricao) {
+			if ($inscricao['Turma']['plano_estudo_id'] == 30) {
+				$turmaNova = $this->Turma->find('first', array('conditions' => array('Turma.ano_lectivo_id' => 30, 'Turma.curso_id' => $inscricao['Turma']['curso_id'], 'Turma.disciplina_id' => $inscricao['Turma']['disciplina_id'], 'Turma.plano_estudo_id' => 31)));
+				if (!empty($turmaNova)) {
+					$this->Inscricao->id = $inscricao['Inscricao']['id'];
+					$this->Inscricao->set('turma_id', $turmaNova['Turma']['id']);
+					$this->Inscricao->set('turma_inscricao_id', $turmaNova['Turma']['id']);
+					$this->Inscricao->set('turma_frequencia_id', $turmaNova['Turma']['id']);
+					$this->Inscricao->save();
+					$this->out('Turma Ajustada -----' . $ajustados++);
+				} else {
+					$turma = array();
+					$turma['ano_lectivo_id'] = 30;
+					$turma['ano_curricular'] = $inscricao['Turma']['ano_curricular'];
+					$turma['semestre_curricular'] = $inscricao['Turma']['semestre_curricular'];
+					$turma['curso_id'] = $inscricao['Turma']['curso_id'];
+					$turma['escola_id'] = $inscricao['Turma']['escola_id'];
+					$turma['plano_estudo_id'] = 31;
+					$turma['turno_id'] = $inscricao['Turma']['turno_id'];
+					$turma['disciplina_id'] = $inscricao['Turma']['disciplina_id'];
+					$turma['estado_turma_id'] = 1;
+					$turma['semestre_lectivo_id'] = $inscricao['Turma']['semestre_lectivo_id'];
+					$turma['name'] = $inscricao['Turma']['name'];
+
+					$turmas = array('Turma' => $turma);
+					$this->Turma->create();
+					$this->Turma->save($turmas);
+					$naoEncontrados++;
+				}
+			}
+			if ($inscricao['Turma']['plano_estudo_id'] == 32) {
+				$turmaNova = $this->Turma->find('first', array('conditions' => array('Turma.ano_lectivo_id' => 30, 'Turma.curso_id' => $inscricao['Turma']['curso_id'], 'Turma.disciplina_id' => $inscricao['Turma']['disciplina_id'], 'Turma.plano_estudo_id' => 29)));
+				if (!empty($turmaNova)) {
+					$this->Inscricao->id = $inscricao['Inscricao']['id'];
+					$this->Inscricao->set('turma_id', $turmaNova['Turma']['id']);
+					$this->Inscricao->set('turma_inscricao_id', $turmaNova['Turma']['id']);
+					$this->Inscricao->set('turma_frequencia_id', $turmaNova['Turma']['id']);
+					$this->Inscricao->save();
+					$this->out('Turma Ajustada -----' . $ajustados++);
+				} else {
+					$turma = array();
+					$turma['ano_lectivo_id'] = 30;
+					$turma['ano_curricular'] = $inscricao['Turma']['ano_curricular'];
+					$turma['semestre_curricular'] = $inscricao['Turma']['semestre_curricular'];
+					$turma['curso_id'] = $inscricao['Turma']['curso_id'];
+					$turma['escola_id'] = $inscricao['Turma']['escola_id'];
+					$turma['plano_estudo_id'] = 29;
+					$turma['turno_id'] = $inscricao['Turma']['turno_id'];
+					$turma['disciplina_id'] = $inscricao['Turma']['disciplina_id'];
+					$turma['estado_turma_id'] = 1;
+					$turma['semestre_lectivo_id'] = $inscricao['Turma']['semestre_lectivo_id'];
+					$turma['name'] = $inscricao['Turma']['name'];
+
+					$turmas = array('Turma' => $turma);
+					$this->Turma->create();
+					$this->Turma->save($turmas);
+					$naoEncontrados++;
+				}
+			}
+		}
+		$this->out('Nao encontrados----' . $naoEncontrados);
+	}
+
 }
