@@ -984,44 +984,25 @@ class AlunosController extends AppController {
 		$this->set(compact('actionSeguinte', 'codigos'));
 	}
 
-	public function mudanca_curso($aluno_id) {
-
-		$this->Aluno->id = $aluno_id;
+	public function mudanca_curso($alunoId) {
+		$this->Aluno->id = $alunoId;
 		if (!$this->Aluno->exists()) {
 			throw new NotFoundException('Este aluno não existe no Sistema');
 		}
 
 		if ($this->request->is('post')) {
 			if ($this->Aluno->mudaCurso($this->request->data)) {
-				$this->Session->setFlash(__('Mudança de Curso efectuada com sucesso'), 'default', array('class' => 'alert success'));
-				$this->set('mudanca_sucesso', 1);
-				$this->set('mudanca_curso_id', $this->Aluno->MudancaCurso->id);
-			}
-		}
-		$this->Aluno->contain(array(
-			'Entidade' => array(
-				'Genero'
-			),
-			'Curso' => array(
-				'UnidadeOrganica'
-			)
-		));
-		$aluno = $this->Aluno->findById($aluno_id);
-		$cursos = $this->Aluno->Curso->find('list');
-		$is_regular = $this->Aluno->isRegular($aluno_id);
-		$user_id = $this->Session->read('Auth');
-
-		$funcionario = $this->Aluno->User->getFuncionarioActivoId($this->Session->read('Auth.User.id'));
-
-		if (count($is_regular) == 1 && $is_regular[0]['regular'] == true) {
-			if ($is_regular[0]['estado'] == 1) {
-				$classe_estado = "alert note no-margin";
-			} else {
-				$classe_estado = "alert success";
+				$this->Session->setFlash(__('Mudança de Curso efectuada com sucesso'), 'default', array('class' => 'alert alert-success'));
+				$this->set('mudancaSucesso', 1);
+				$this->set('mudancaCursoId', $this->Aluno->MudancaCurso->id);
 			}
 		} else {
-			$classe_estado = "alert error";
+			$this->set('mudancaSucesso', 0);
 		}
+
+		$aluno = $this->Aluno->getAlunoForAction($alunoId);
+		$cursos = $this->Aluno->Curso->find('list');
+		//$isRegular = $this->Aluno->isRegular($alunoId);
 
 		$this->set(compact('aluno', 'is_regular', 'classe_estado', 'cursos', 'funcionario'));
 	}
