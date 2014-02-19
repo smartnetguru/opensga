@@ -55,3 +55,89 @@ SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 ---------------------------------------------------------------------------------------------------------------------
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
+
+ALTER TABLE `opensga_eseg`.`mudanca_cursos` DROP COLUMN `funcionario_id` ;
+
+CREATE  TABLE IF NOT EXISTS `opensga_eseg`.`roles` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT ,
+  `name` VARCHAR(100) NULL DEFAULT NULL ,
+  `created` DATETIME NULL DEFAULT NULL ,
+  `modified` DATETIME NULL DEFAULT NULL ,
+  `created_by` INT(11) NULL DEFAULT NULL ,
+  `modified_by` INT(11) NULL DEFAULT NULL ,
+  `estado_objecto_id` TINYINT(4) NULL DEFAULT NULL ,
+  PRIMARY KEY (`id`) )
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_general_ci;
+
+CREATE  TABLE IF NOT EXISTS `opensga_eseg`.`user_roles` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT ,
+  `user_id` INT(11) NULL DEFAULT NULL ,
+  `role_id` INT(11) NULL DEFAULT NULL ,
+  `created` DATETIME NULL DEFAULT NULL ,
+  `modified` DATETIME NULL DEFAULT NULL ,
+  `created_by` INT(11) NULL DEFAULT NULL ,
+  `modified_by` INT(11) NULL DEFAULT NULL ,
+  `estado_objecto_id` TINYINT(4) NULL DEFAULT NULL ,
+  PRIMARY KEY (`id`) )
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_general_ci;
+
+CREATE  TABLE IF NOT EXISTS `opensga_eseg`.`unidade_organica_roles` (
+  `id` INT(11) NOT NULL ,
+  `unidade_organica_id` INT(11) NULL DEFAULT NULL ,
+  `role_id` INT(11) NULL DEFAULT NULL ,
+  `created_by` INT(11) NULL DEFAULT NULL ,
+  `modified_by` INT(11) NULL DEFAULT NULL ,
+  `created` DATETIME NULL DEFAULT NULL ,
+  `modified` DATETIME NULL DEFAULT NULL ,
+  `estado_objecto_id` TINYINT(4) NULL DEFAULT NULL ,
+  PRIMARY KEY (`id`) )
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_general_ci;
+
+CREATE  TABLE IF NOT EXISTS `opensga_eseg`.`funcao_profissional_roles` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT ,
+  `funcao_profissional_id` INT(11) NULL DEFAULT NULL ,
+  `role_id` INT(11) NULL DEFAULT NULL ,
+  `created` DATETIME NULL DEFAULT NULL ,
+  `modified` DATETIME NULL DEFAULT NULL ,
+  `created_by` INT(11) NULL DEFAULT NULL ,
+  `modified_by` INT(11) NULL DEFAULT NULL ,
+  `estado_objecto_id` TINYINT(4) NULL DEFAULT NULL ,
+  PRIMARY KEY (`id`) )
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_general_ci;
+
+CREATE  TABLE IF NOT EXISTS `opensga_eseg`.`group_roles` (
+  `id` INT(11) NOT NULL ,
+  `group_id` INT(11) NULL DEFAULT NULL ,
+  `role_id` INT(11) NULL DEFAULT NULL ,
+  `created` DATETIME NULL DEFAULT NULL ,
+  `modified` DATETIME NULL DEFAULT NULL ,
+  `created_by` INT(11) NULL DEFAULT NULL ,
+  `modified_by` INT(11) NULL DEFAULT NULL ,
+  `estado_objecto_id` TINYINT(4) NULL DEFAULT NULL ,
+  PRIMARY KEY (`id`) ,
+  INDEX `group_roles_groups_idx` (`group_id` ASC) ,
+  CONSTRAINT `group_roles_groups`
+    FOREIGN KEY (`group_id` )
+    REFERENCES `opensga_eseg`.`groups` (`id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_general_ci;
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+-----------------------------------------------------------------------------------------------------------------
