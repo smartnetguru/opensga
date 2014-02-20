@@ -35,12 +35,16 @@ class MatriculasController extends AppController {
 	 * Mostra o grafico de Novos ingressos por Curso
 	 */
 	function index() {
+		$this->paginate = array(
+			'contain' => array(
+				'Aluno' => array(
+					'Entidade'
+				), 'Curso', 'EstadoMatricula', 'AnoLectivo', 'TipoMatricula'
+			),
+			'order' => 'Matricula.data DESC',
+			'limit' => '10'
+		);
 
-		$this->Matricula->contain(array(
-			'Aluno' => array(
-				'Entidade'
-			), 'Curso', 'EstadoMatricula', 'AnoLectivo', 'TipoMatricula'
-		));
 		$matriculas = $this->paginate('Matricula');
 
 		$this->set(compact('matriculas'));
@@ -69,6 +73,35 @@ class MatriculasController extends AppController {
 		$matriculas = $this->Matricula->find('all', array('conditions' => array('aluno_id' => $alunoId), 'order' => 'AnoLectivo.ano'));
 
 		$this->set(compact('aluno', 'renovacoesFalta', 'matriculas'));
+	}
+
+	public function fazer_reingresso($alunoId) {
+		$this->Matricula->Aluno->id = $alunoId;
+		if (!$this->Matricula->Aluno->exists()) {
+			throw new NotFoundException(__('Aluno Invalido'));
+		}
+
+		if ($this->request->is('post') || $this->request->is('put')) {
+			$this->Matricula->create();
+			$this->Matricula->save($this->request->data);
+			$this->Session->setFlash(__('Reingresso realizado com sucesso'), 'default', array('class' => 'alert alert-success'));
+			$this->redirect(array('controller' => 'alunos', 'action' => 'perfil_estudante', $this->request->data['Matricula']['aluno_id']));
+		}
+
+		$aluno = $this->Matricula->Aluno->getAlunoForAction($alunoId);
+		$renovacoesFalta = $this->Matricula->getStatusRenovacao($alunoId);
+		if (count($renovacoesFalta) < 2) {
+			$this->Session->setFlash(__('Este estudante tem menos de 2 anos fora da Universidade. Deve renovar a matricula em vez de reingresso'), 'default', array('class' => 'alert info'));
+			$this->redirect(array('controller' => 'alunos', 'action' => 'perfil_estudante', $alunoId));
+		}
+		$anoRenovacoes = array();
+		foreach ($renovacoesFalta as $k => $v) {
+			$anoRenovacoes[$v['AnoLectivo']['id']] = $v['AnoLectivo']['ano'];
+		}
+		$this->Matricula->contain('AnoLectivo', 'EstadoMatricula', 'Curso', 'TipoMatricula');
+		$matriculas = $this->Matricula->find('all', array('conditions' => array('aluno_id' => $alunoId), 'order' => 'AnoLectivo.ano'));
+
+		$this->set(compact('aluno', 'renovacoesFalta', 'matriculas', 'anoRenovacoes'));
 	}
 
 	public function exportar_matriculas() {
@@ -111,6 +144,56 @@ class MatriculasController extends AppController {
 
 	public function processa_ficheiro_renovacao_teste() {
 		$this->Matricula->processaFicheiroRenovacao('uploads/renovacao/P770011001.txt');
+	}
+
+	public function print_boletim_matricula($alunoId) {
+		$this->Matricula->Aluno->contain(array(
+			'Entidade' => array(
+				'Genero', 'PaisNascimento', 'EstadoCivil', 'EntidadeIdentificacao' => array(
+					'DocumentoIdentificacao'
+				)
+			),
+			'Curso' => array(
+				'UnidadeOrganica'
+			),
+			'AlunoNivelMedio' => array(
+				'EscolaNivelMedio' => array(
+					'Provincia'
+				)
+			)
+		));
+		$aluno = $this->Matricula->Aluno->findById($alunoId);
+
+		$faculdade = $this->Matricula->Aluno->Curso->UnidadeOrganica->findById($aluno['Curso']['unidade_organica_id']);
+		if ($faculdade['UnidadeOrganica']['tipo_unidade_organica_id'] != 1) {
+			$faculdade = $this->Matricula->Aluno->Curso->UnidadeOrganica->findById($faculdade['UnidadeOrganica']['parent_id']);
+		}
+
+		$contactos = $this->Matricula->Aluno->processaContacto($alunoId);
+		$this->set(compact('aluno', 'faculdade', 'contactos'));
+	}
+
+	public function print_comprovativo_matricula($alunoId) {
+		$this->Aluno->contain(array(
+			'Entidade' => array('User'), 'Curso'
+		));
+
+		$aluno = $this->Aluno->findById($alunoId);
+		$this->set(compact('aluno', 'faculdade'));
+	}
+
+	public function print_comprovativo_renovacao_matricula($matriculaId) {
+		$this->Matricula->contain(array(
+			'Aluno' => array(
+				'Entidade', 'User'
+			),
+			'AnoLectivo', 'Curso', 'User' => array(
+				'Entidade'
+			)
+		));
+		$aluno = $this->Matricula->findById($matriculaId);
+
+		$this->set(compact('aluno'));
 	}
 
 	public function renovacao_matriculas($ano = null) {

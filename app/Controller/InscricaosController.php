@@ -44,21 +44,25 @@ class InscricaosController extends AppController {
 	}
 
 	/**
-	 * Por enquanto o inscrever nao eh seguro
-	 * @todo verificar o security no inscrever
+	 *
+	 * @param type $inscricaoId
+	 * @throws MethodNotAllowedException
+	 * @todo Ver a questao de 30 dias para anulacao da Inscricao
 	 */
-	public function beforeFilter() {
-		parent::beforeFilter();
-
-		//No security no inscrever
-		if ($this->action == 'faculdade_inscrever' || $this->action == 'faculdade_adicionar_cadeiras_inscricao') {
-			//$this->Security->csrfCheck = false;
-			//$this->Security->validatePost = false;
+	public function faculdade_anular_inscricao($inscricaoId) {
+		if ($this->request->is('post')) {
+			$this->Inscricao->id = $inscricaoId;
+			$this->Inscricao->set('estado_inscricao_id', 9);
+			$this->Inscricao->save();
+			$this->Session->setFlash(__('Inscricao Anulada com Sucesso'), 'default', array('class' => 'alert alert-success'));
+			$alunoId = $this->Inscricao->field('aluno_id');
+			$this->redirect(array('controller' => 'inscricaos', 'action' => 'ver_inscricoes_aluno', 'faculdade' => true, $alunoId));
+		} else {
+			throw new MethodNotAllowedException('Erro no Sistema');
 		}
 	}
 
 	function index() {
-
 		if ($this->request->is('post') || $this->request->is('put')) {
 
 			$this->Pagamento->Aluno->contain(array('Entidade', 'Curso', 'Matricula'));
@@ -189,14 +193,13 @@ class InscricaosController extends AppController {
 	 * @param type $aluno_id
 	 * @param type $anolectivo_ano
 	 *
-	 * @fixme ver o ano lectivo que esta estatico
+	 * @throws NotFoundException
 	 */
-	public function faculdade_print_comprovativo_inscricao($aluno_id, $matricula_id, $anolectivo_ano = null) {
-
-		if ($anolectivo_ano == null) {
-			$anolectivo = $this->Inscricao->Turma->AnoLectivo->findByAno(Configure::read('OpenSGA.ano_lectivo'));
+	public function faculdade_print_comprovativo_inscricao($alunoId, $anolectivoAno = null) {
+		if ($anolectivoAno == null) {
+			$anoLectivo = $this->Inscricao->Turma->AnoLectivo->findByAno(Configure::read('OpenSGA.ano_lectivo'));
 		} else {
-			$anolectivo = $this->Inscricao->Turma->AnoLectivo->findByAno($anolectivo_ano);
+			$anoLectivo = $this->Inscricao->Turma->AnoLectivo->findByAno($anolectivoAno);
 		}
 
 		$this->Inscricao->Aluno->contain(array(
@@ -204,8 +207,8 @@ class InscricaosController extends AppController {
 				'User'
 			)
 		));
-		$aluno = $this->Inscricao->Aluno->findById($aluno_id);
-		$matricula = $this->Inscricao->Aluno->Matricula->findByAlunoIdAndAnoLectivoId($aluno_id, $anolectivo['AnoLectivo']['id']);
+		$aluno = $this->Inscricao->Aluno->findById($alunoId);
+		$matricula = $this->Inscricao->Aluno->Matricula->findByAlunoIdAndAnoLectivoId($alunoId, $anoLectivo['AnoLectivo']['id']);
 
 		//Pegamos todas inscricoes activas
 		$this->Inscricao->contain(array(
@@ -221,13 +224,18 @@ class InscricaosController extends AppController {
 				), 'PlanoEstudo', 'Turno'
 			), 'TipoInscricao'
 		));
-		$inscricoes_activas = $this->Inscricao->find('all', array('conditions' => array('estado_inscricao_id' => 1, 'aluno_id' => $aluno_id, 'Turma.ano_lectivo_id' => 30)));
+		$inscricoesActivas = $this->Inscricao->find('all', array('conditions' => array('estado_inscricao_id' => 1, 'aluno_id' => $alunoId, 'Turma.ano_lectivo_id' => $anoLectivo['AnoLectivo']['id'])));
+
+		if (empty($inscricoesActivas)) {
+			$this->Session->setFlash(__('Este estudante nao possui inscricoes para este ano'), 'default', array('class' => 'alert alert-warning'));
+			$this->redirect(array('action' => 'ver_inscricoes_aluno', 'faculdade' => true, $alunoId));
+		}
 
 		$this->loadModel('Funcionario');
 		$this->Funcionario->contain('Entidade');
-		$funcionario = $this->Funcionario->getByUserId($inscricoes_activas[0]['Inscricao']['created_by']);
+		$funcionario = $this->Funcionario->getByUserId($inscricoesActivas[0]['Inscricao']['created_by']);
 
-		$this->set(compact('inscricoes_activas', 'aluno', 'anolectivo', 'funcionario'));
+		$this->set(compact('inscricoesActivas', 'aluno', 'anoLectivo', 'funcionario'));
 	}
 
 	function faculdade_editar_inscricao($inscricao_id = null) {
