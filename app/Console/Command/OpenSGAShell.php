@@ -1,5 +1,4 @@
-<?php
-
+lo<?php
 ini_set('memory_limit', "2048M");
 ini_set('xdebug.max_nesting_level', 20000);
 App::uses('AuditableConfig', 'Auditable.Lib');

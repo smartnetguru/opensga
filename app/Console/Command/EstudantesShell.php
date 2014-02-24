@@ -41,7 +41,11 @@ class EstudantesShell extends AppShell {
 					'verificar_permissoes' => 1,
 					'estado_email' => 0,
 					'estado_objecto_id' => 1,
-					'timezone' => 'Africa/Maputo'
+					'timezone' => 'Africa/Maputo',
+					'created' => $aluno['Entidade']['User']['created'],
+					'modified' => $aluno['Entidade']['User']['modified'],
+					'created_by' => $aluno['Entidade']['User']['created_by'],
+					'modified_by' => $aluno['Entidade']['User']['modified_by'],
 				),
 				'Aluno' => array(
 					'numero_estudante' => $aluno['Aluno']['codigo'],
@@ -55,7 +59,11 @@ class EstudantesShell extends AppShell {
 					'curso_id' => $aluno['Aluno']['curso_id'],
 					'unidade_organica_id' => $aluno['Curso']['unidade_organica_id'],
 					'aluno_via_admissao_id' => $aluno['Aluno']['aluno_via_admissao_id'],
-					'ano_ingresso' => $aluno['Aluno']['ano_ingresso']
+					'ano_ingresso' => $aluno['Aluno']['ano_ingresso'],
+					'created' => $aluno['Aluno']['created'],
+					'modified' => $aluno['Aluno']['modified'],
+					'created_by' => $aluno['Aluno']['created_by'],
+					'modified_by' => $aluno['Aluno']['modified_by'],
 				),
 				'Entidade' => array(
 					'name' => $aluno['Entidade']['name'],
@@ -69,7 +77,11 @@ class EstudantesShell extends AppShell {
 					'naturalidade' => $aluno['Entidade']['naturalidade'],
 					'pais_nascimento' => $aluno['Entidade']['pais_nascimento'],
 					'provincia_nascimento' => $aluno['Entidade']['provincia_nascimento'],
-					'cidade_nascimento' => $aluno['Entidade']['cidade_nascimento']
+					'cidade_nascimento' => $aluno['Entidade']['cidade_nascimento'],
+					'created' => $aluno['Entidade']['created'],
+					'modified' => $aluno['Entidade']['modified'],
+					'created_by' => $aluno['Entidade']['created_by'],
+					'modified_by' => $aluno['Entidade']['modified_by'],
 				),
 				'AlunoNivelMedio' => array(
 					'EscolaNivelMedio' => array(
