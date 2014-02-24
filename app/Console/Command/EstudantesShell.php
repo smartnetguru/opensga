@@ -9,6 +9,7 @@ class EstudantesShell extends AppShell {
 	public $uses = array('Aluno', 'Candidatura');
 
 	public function importa_novos_ingressos() {
+		AuditableConfig::$Logger = ClassRegistry::init('Auditable.Logger');
 		$this->Aluno->setDataSource('novos_ingressos');
 		$this->Aluno->Entidade->setDataSource('novos_ingressos');
 		$this->Aluno->Entidade->User->setDataSource('novos_ingressos');
