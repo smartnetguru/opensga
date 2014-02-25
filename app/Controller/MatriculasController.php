@@ -221,27 +221,33 @@ class MatriculasController extends AppController {
 		$anoLectivoIds = array_keys($anoLectivos);
 
 		$matriculas = array();
+		$novosIngressos = $renovacao = $reingresso = array();
 		foreach ($anoLectivos as $k => $v) {
 			$this->Matricula->contain(array(
-				'TipoMatricula'
+				'TipoMatricula', 'AnoLectivo'
 			));
 			$matricula = $this->Matricula->find('all', array('conditions' => array('Matricula.ano_lectivo_id' => $k),
-				'fields' => array('TipoMatricula.name', 'count(*) as total'),
+				'fields' => array('TipoMatricula.name', 'count(*) as total', 'AnoLectivo.ano'),
 				'group' => array('TipoMatricula.name'),
 				'order' => array('TipoMatricula.id ASC'),
 			));
+			foreach ($matricula as $m) {
+				if ($m['TipoMatricula']['id'] == 1) {
+					$novosIngressos[$m['AnoLectivo']['ano']] = $m[0]['total'];
+				} elseif ($m['TipoMatricula']['id'] == 2) {
+					$renovacao[$m['AnoLectivo']['ano']] = $m[0]['total'];
+				} elseif ($m['TipoMatricula']['id'] == 3) {
+					$reingresso[$m['AnoLectivo']['ano']] = $m[0]['total'];
+				}
+			}
+
 			$matriculas[$v] = $matricula;
 		}
 		$this->Matricula->contain(array(
 			'AnoLectivo', 'TipoMatricula'
 		));
-		$matriculas2 = $this->Matricula->find('all', array('conditions' => array('Matricula.ano_lectivo_id' => $anoLectivoIds),
-			'group' => array('Matricula.ano_lectivo_id', 'Matricula.tipo_matricula_id'),
-			'fields' => array('AnoLectivo.ano', 'Count(*) as total', 'Matricula.ano_lectivo_id', 'TipoMatricula.name'),
-			'order' => array('AnoLectivo.ano ASC', 'TipoMatricula.id ASC')
-		));
 
-		$this->set(compact('anoLectivos', 'matriculas', 'matriculas2'));
+		$this->set(compact('anoLectivos', 'matriculas', 'novosIngressos', 'renovacao', 'reingresso'));
 	}
 
 	public function report_matriculados_curso() {
