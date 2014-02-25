@@ -29,13 +29,6 @@ class OpenSGAShell extends AppShell {
 				->send();
 	}
 
-	/**
-	 * Comando temporario para organizar a tabela de matriculas
-	 */
-	public function organiza_tabela_matriculas() {
-
-	}
-
 	public function autenticidades() {
 		App::import('Vendor', 'PHPExcel', array('file' => 'PHPExcel.php'));
 		if (!class_exists('PHPExcel'))
@@ -1517,6 +1510,58 @@ class OpenSGAShell extends AppShell {
 		$this->out($nao_encontrados);
 	}
 
+	public function importa_admitidos_via_admissao() {
+		AuditableConfig::$Logger = ClassRegistry::init('Auditable.Logger');
+		App::import('Vendor', 'PHPExcel', array('file' => 'PHPExcel.php'));
+		if (!class_exists('PHPExcel'))
+			throw new CakeException('Vendor class PHPExcel not found!');
+
+		$xls = PHPExcel_IOFactory::load(APP . 'Imports' . DS . 'admitidos_server.xlsx');
+
+		$worksheet = $xls->getActiveSheet();
+//debug($xls->getActiveSheetIndex());
+		$linha_actual = 2;
+		foreach ($worksheet->getRowIterator() as $row) {
+			if ($worksheet->getCell('A' . $linha_actual)->getValue() == '') {
+				break;
+			}
+
+			$nao_encontrados = array();
+			$numeroEstudante = $worksheet->getCell('A' . $linha_actual)->getCalculatedValue();
+			$viaAdmissao = $worksheet->getCell('E' . $linha_actual)->getCalculatedValue();
+			if ($viaAdmissao != '') {
+				$viaAdmissaoExiste = $this->Aluno->AlunoViaAdmissao->findByName($viaAdmissao);
+				if (empty($viaAdmissaoExiste)) {
+					$arrayViaAdmissao = array(
+						'AlunoViaAdmissao' => array(
+							'name' => $viaAdmissao
+						)
+					);
+					$this->Aluno->AlunoViaAdmissao->create();
+					$this->Aluno->AlunoViaAdmissao->save($arrayViaAdmissao);
+					$viaAdmissaoId = $this->Aluno->AlunoViaAdmissao->id;
+				} else {
+					$viaAdmissaoId = $viaAdmissaoExiste['AlunoViaAdmissao']['id'];
+				}
+				$candidato = $this->Candidatura->findByNumeroEstudante($numeroEstudante);
+				if (!empty($candidato)) {
+					$this->Candidatura->id = $candidato['Candidatura']['id'];
+					$this->Candidatura->set('aluno_via_admissao_id', $viaAdmissaoId);
+					$this->Candidatura->save();
+				}
+				$aluno = $this->Aluno->findByCodigo($numeroEstudante);
+				if (!empty($aluno)) {
+					$this->Aluno->id = $aluno['Aluno']['id'];
+					$this->Aluno->set('aluno_via_admissao_id', $viaAdmissaoId);
+					$this->Aluno->save();
+				}
+				$this->out($numeroEstudante . '------------' . $viaAdmissaoId);
+			}
+			$linha_actual++;
+		}
+		$this->out($nao_encontrados);
+	}
+
 	public function exporta_candidatos_boletins() {
 		App::import('Vendor', 'PHPExcel', array('file' => 'PHPExcel.php'));
 		if (!class_exists('PHPExcel'))
@@ -1734,6 +1779,36 @@ class OpenSGAShell extends AppShell {
 			}
 		}
 		$this->out('Nao encontrados----' . $naoEncontrados);
+	}
+
+	public function verifica_ano_ingresso() {
+
+	}
+
+	public function actualiza_matriculas() {
+		AuditableConfig::$Logger = ClassRegistry::init('Auditable.Logger');
+
+		$matriculasCount = $this->Matricula->find('count', array('conditions' => array('Matricula.tipo_matricula_id' => array(0, null))));
+		while ($matriculasCount > 0) {
+			$this->Matricula->contain(array(
+				'AnoLectivo', 'Aluno', 'TipoMatricula'
+			));
+			$matriculas = $this->Matricula->find('all', array('conditions' => array('Matricula.tipo_matricula_id' => array(0, null)), 'limit' => 10000));
+			foreach ($matriculas as $matricula) {
+				$anoLectivo = $matricula['AnoLectivo']['ano'];
+				$anoIngresso = $matricula['Aluno']['ano_ingresso'];
+				$this->Matricula->id = $matricula['Matricula']['id'];
+
+				if ($anoLectivo == $anoIngresso) {
+					$this->Matricula->set('tipo_matricula_id', 1);
+				} else {
+					$this->Matricula->set('tipo_matricula_id', 2);
+				}
+				$this->Matricula->save();
+				$matriculasCount = $this->Matricula->find('count', array('conditions' => array('Matricula.tipo_matricula_id' => array(0, null))));
+				$this->out($matriculasCount);
+			}
+		}
 	}
 
 }

@@ -6,27 +6,16 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/var/www/opensga/app/View/Disciplinas/faculdade_adicionar_disciplina.ctp</file>
+            <file>file:/var/www/opensga/app/Console/Command/OpenSGAShell.php</file>
             <file>file:/var/www/opensga/app/View/Cursos/faculdade_index.ctp</file>
-            <file>file:/var/www/opensga/app/Controller/PagesController.php</file>
-            <file>file:/var/www/opensga/app/View/Alunos/alterar_status.ctp</file>
-            <file>file:/var/www/opensga/app/Controller/AppController.php</file>
-            <file>file:/var/www/opensga/app/Model/Curso.php</file>
-            <file>file:/var/www/opensga/app/Model/Aluno.php</file>
-            <file>file:/var/www/opensga/app/Model/Entidade.php</file>
-            <file>file:/var/www/opensga/app/Config/email.php</file>
-            <file>file:/var/www/opensga/app/Controller/MatriculasController.php</file>
-            <file>file:/var/www/opensga/app/View/Matriculas/index.ctp</file>
-            <file>file:/var/www/opensga/app/View/Alunos/alterar_nome.ctp</file>
             <file>file:/var/www/opensga/app/View/Alunos/index.ctp</file>
             <file>file:/var/www/opensga/app/View/Pages/home.ctp</file>
             <file>file:/var/www/opensga/app/View/Disciplinas/faculdade_index.ctp</file>
-            <file>file:/var/www/opensga/app/View/Turmas/faculdade_index.ctp</file>
-            <file>file:/var/www/opensga/app/Console/Command/GDataShell.php</file>
             <file>file:/var/www/opensga/app/Console/Command/OpenSGAAclShell.php</file>
+            <file>file:/var/www/opensga/app/Model/Curso.php</file>
+            <file>file:/var/www/opensga/app/Config/email.php</file>
+            <file>file:/var/www/opensga/app/Model/Entidade.php</file>
             <file>file:/var/www/opensga/app/Controller/AlunosController.php</file>
-            <file>file:/var/www/opensga/app/View/Elements/header.ctp</file>
-            <file>file:/var/www/opensga/app/View/Common/aluno_action.ctp</file>
-            <file>file:/var/www/opensga/app/View/Alunos/mudanca_curso.ctp</file>
         </group>
     </open-files>
 </project-private>

@@ -744,10 +744,10 @@ class AlunosController extends AppController {
 
 		$mudanca = $this->Aluno->MudancaCurso->findById($mudanca_curso_id);
 		$this->Aluno->Entidade->Funcionario->contain('Entidade');
-		$funcionario = $this->Aluno->Entidade->Funcionario->find('first',array('conditions'=>array('Entidade.user_id'=>$mudanca['MudancaCurso']['created_by'])));
+		$funcionario = $this->Aluno->Entidade->Funcionario->find('first', array('conditions' => array('Entidade.user_id' => $mudanca['MudancaCurso']['created_by'])));
 		$mudanca['Funciocario'] = $funcionario['Funcionario'];
 		$mudanca['Funcionario']['Entidade'] = $funcionario['Entidade'];
-		
+
 		if ($mudanca['CursoNovo']['UnidadeOrganica']['tipo_unidade_organica_id'] > 1) {
 			$this->Aluno->Curso->UnidadeOrganica->contain();
 			$unidadeMae = $this->Aluno->Curso->UnidadeOrganica->findById($mudanca['CursoNovo']['UnidadeOrganica']['parent_id']);
@@ -1311,8 +1311,20 @@ class AlunosController extends AppController {
 		$this->set(compact('bolseiros'));
 	}
 
-	public function beforeFilter() {
-		parent::beforeFilter();
+	public function print_alunos_sem_certificado() {
+
+	}
+
+	public function print_alunos_sem_smo() {
+
+	}
+
+	public function report_alunos_sem_certificado() {
+
+	}
+
+	public function report_alunos_sem_smo() {
+
 	}
 
 }

@@ -214,6 +214,41 @@ class MatriculasController extends AppController {
 		$this->set(compact('anolectivo', 'matriculas', 'total'));
 	}
 
+	public function report_matriculados_ano() {
+		$anoLectivoAno = Configure::read('OpenSGA.ano_lectivo');
+		$anoLectivos = $this->Matricula->AnoLectivo->find('list', array('conditions' => array('AnoLectivo.ano >=' => $anoLectivoAno - 10), 'fields' => array('AnoLectivo.ano'), 'order' => array('AnoLectivo.ano Desc')));
+
+		$anoLectivoIds = array_keys($anoLectivos);
+
+		$matriculas = array();
+		foreach ($anoLectivos as $k => $v) {
+			$this->Matricula->contain(array(
+				'TipoMatricula'
+			));
+			$matricula = $this->Matricula->find('all', array('conditions' => array('Matricula.ano_lectivo_id' => $k),
+				'fields' => array('TipoMatricula.name', 'count(*) as total'),
+				'group' => array('TipoMatricula.name'),
+				'order' => array('TipoMatricula.id ASC'),
+			));
+			$matriculas[$v] = $matricula;
+		}
+		$this->Matricula->contain(array(
+			'AnoLectivo', 'TipoMatricula'
+		));
+		$matriculas2 = $this->Matricula->find('all', array('conditions' => array('Matricula.ano_lectivo_id' => $anoLectivoIds),
+			'group' => array('Matricula.ano_lectivo_id', 'Matricula.tipo_matricula_id'),
+			'fields' => array('AnoLectivo.ano', 'Count(*) as total', 'Matricula.ano_lectivo_id', 'TipoMatricula.name'),
+			'order' => array('AnoLectivo.ano ASC', 'TipoMatricula.id ASC')
+		));
+
+		$this->set(compact('anoLectivos', 'matriculas', 'matriculas2'));
+	}
+
+	public function report_matriculados_curso() {
+		$anoLectivoAno = Configure::read('OpenSGA.ano_lectivo');
+		debug($anoLectivoAno);
+	}
+
 }
 
 ?>

@@ -31,6 +31,13 @@ class Aluno extends AppModel {
 		)
 	);
 	public $belongsTo = array(
+		'AlunoViaAdmissao' => array(
+			'className' => 'AlunoViaAdmissao',
+			'foreignKey' => 'aluno_via_admissao_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
+		),
 		'User' => array(
 			'className' => 'User',
 			'foreignKey' => 'user_id',

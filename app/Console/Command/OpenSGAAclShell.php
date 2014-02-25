@@ -57,7 +57,7 @@ class OpenSGAAclShell extends AppShell {
 
 				$unidadesOrganicas[] = $unidadeOrganica['UnidadeOrganica']['codigo'];
 			} else {
-				$unidadeOrganicas = array($unidadeOrganica['UnidadeOrganica']['codigo']);
+				$unidadesOrganicas = array($unidadeOrganica['UnidadeOrganica']['codigo']);
 			}
 
 			$comandos = array();
@@ -98,7 +98,6 @@ class OpenSGAAclShell extends AppShell {
 				$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Inscricaos/faculdade_adicionar_cadeiras_inscricao";
 				$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Inscricaos/faculdade_print_comprovativo_inscricao";
 
-
 				$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Pages/faculdade_home";
 
 				$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/PlanoEstudos/faculdade_index";
@@ -120,18 +119,23 @@ class OpenSGAAclShell extends AppShell {
 				$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/faculdade_perfil_estudante";
 				$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/faculdade_pesquisa_aluno_action";
 			} else {
-				$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Pages/home";
+				$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/pesquisa_aluno_action";
+				$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/report_alunos_sem_certificado";
+				$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/report_alunos_sem_smo";
 
+				$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Pages/home";
 				$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Users/trocar_senha";
 
-				$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/pesquisa_aluno_action";
-
 				$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Requisicoes/RequisicoesPedidos/entregar_cartao_novo_ingresso";
+
+				$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Matriculas/report_matriculados_ano";
+				$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Matriculas/report_matriculados_curso";
 
 				/*
 				 * Permissoes comuns para todos Funcionarios da DRA
 				 */
-				if (in_array('DRA', $unidadeOrganicas)) {
+
+				if (in_array('DRA', $unidadesOrganicas)) {
 
 					$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/pesquisa_aluno_action";
 					$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Candidaturas/index";
@@ -142,14 +146,18 @@ class OpenSGAAclShell extends AppShell {
 					$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/busca_candidato";
 					$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/matricular_candidato";
 					$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/matricula_novo_ingresso_sucesso";
+
 					$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Matriculas/print_boletim_matricula";
 					$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Matriculas/print_comprovativo_matricula";
+					$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Matriculas/report_matriculados_ano";
+					$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Matriculas/report_matriculados_curso";
+
 					$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Candidaturas/candidatos_admitidos";
 					$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Candidaturas/print_lista_admitidos";
 
 					$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Matriculas/index";
 				}
-				if (in_array('DRA_DI', $unidadeOrganicas)) {
+				if (in_array('DRA_DI', $unidadesOrganicas)) {
 					$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/index";
 
 					$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/alterar_status";
@@ -207,7 +215,7 @@ class OpenSGAAclShell extends AppShell {
 					$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Matriculas/index";
 					$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Matriculas/renovacao_matriculas";
 					$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Requisicoes/RequisicoesPedidos/cartao_estudantes";
-				} elseif (in_array('DRA_DR', $unidadeOrganicas)) {
+				} elseif (in_array('DRA_DR', $unidadesOrganicas)) {
 					$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/index";
 
 					$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/perfil_estudante";
