@@ -1,4 +1,5 @@
 <?php
+
 /**
  * OpenSGA - Sistema de Gestão Académica
  *   Copyright (C) 2010-2011  INFOmoz (Informática-Moçambique)
@@ -17,7 +18,7 @@
  * devem manter está informação legal, assim como a licença original do software.
  *
  * @copyright     Copyright 2010-2011, INFOmoz (Informática-Moçambique) (http://infomoz.net)
- ** @link          http://opensga.com OpenSGA  - Sistema de Gestão Académica
+ * * @link          http://opensga.com OpenSGA  - Sistema de Gestão Académica
  * @author		  Elisio Leonardo (elisio.leonardo@gmail.com)
  * @package       opensga
  * @subpackage    opensga.core.controller
@@ -29,23 +30,21 @@
  * Bibliotecas incluidas
  */
 
-
- /**
+/**
  * Modelo Turma
  *
  * Modelo para a manipulação da turma
  * Executa todas as conexões á base de dados que envolvam directamente a tabela turmas.
-  * Todas as funções para a manipulação da tabela turmas devem ser definidas aqui
+ * Todas as funções para a manipulação da tabela turmas devem ser definidas aqui
  *
  *
  * @package       opensga
  * @subpackage    opensga.core.modelo
  * @link          http://book.cakephp.org/view/1000/Models
-  * @Todo Colocar o link para a documentação aqui
+ * @Todo Colocar o link para a documentação aqui
  */
 class Turma extends AppModel {
-	
-      
+
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 
 	public $belongsTo = array(
@@ -56,7 +55,7 @@ class Turma extends AppModel {
 			'fields' => '',
 			'order' => ''
 		),
-        'SemestreLectivo' => array(
+		'SemestreLectivo' => array(
 			'className' => 'SemestreLectivo',
 			'foreignKey' => 'semestre_lectivo_id',
 			'conditions' => '',
@@ -98,30 +97,28 @@ class Turma extends AppModel {
 			'fields' => '',
 			'order' => ''
 		),
-        'AnoLectivo' => array(
+		'AnoLectivo' => array(
 			'className' => 'AnoLectivo',
 			'foreignKey' => 'ano_lectivo_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
 		),
-        'PlanoEstudo' => array(
+		'PlanoEstudo' => array(
 			'className' => 'PlanoEstudo',
 			'foreignKey' => 'plano_estudo_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
 		),
-        'EstadoTurma' => array(
+		'EstadoTurma' => array(
 			'className' => 'EstadoTurma',
 			'foreignKey' => 'estado_turma_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
 		)
-
 	);
-
 	public $hasMany = array(
 		'Inscricao' => array(
 			'className' => 'Inscricao',
@@ -136,7 +133,7 @@ class Turma extends AppModel {
 			'finderQuery' => '',
 			'counterQuery' => ''
 		),
-        'Avaliacao' => array(
+		'Avaliacao' => array(
 			'className' => 'Avaliacao',
 			'foreignKey' => 'turma_id',
 			'dependent' => false,
@@ -149,7 +146,7 @@ class Turma extends AppModel {
 			'finderQuery' => '',
 			'counterQuery' => ''
 		),
-        'TurmaTipoAvaliacao' => array(
+		'TurmaTipoAvaliacao' => array(
 			'className' => 'TurmaTipoAvaliacao',
 			'foreignKey' => 'turma_id',
 			'dependent' => false,
@@ -162,7 +159,7 @@ class Turma extends AppModel {
 			'finderQuery' => '',
 			'counterQuery' => ''
 		),
-        'DocenteTurma' => array(
+		'DocenteTurma' => array(
 			'className' => 'DocenteTurma',
 			'foreignKey' => 'turma_id',
 			'dependent' => false,
@@ -177,253 +174,261 @@ class Turma extends AppModel {
 		)
 	);
 
-		
-    
-    
-        /**
-         *Adiciona um Docente a Uma turma. 
-         * @todo falta validar
-         * @todo Uma turma so pode ter um regente
-         * 
-         * @todo se calhar limitar o numero de assistentes
-         * @param type $data
-         * @return type 
-         */
-        public function adicionaDocente($data){
-            if($this->DocenteTurma->save($data)){
-                return TRUE;
-            } else{
-                return false;
-            }
-        }
-        /**
-		 * Cria todas as turmas referentes a aquele ano lectivo e aquele semestre
-		 * @Todo Testar essa funcao
-		 * @Todo Para facilitar vamos considerar so um plano de estudos activo
-         * @todo Podemos usar transactions aqui ;)
-		 */
-		function criarTurmas($plano_estudo_id){
-				$datasource = $this->getDataSource();
-                $datasource->begin();
+	/**
+	 * Adiciona um Docente a Uma turma.
+	 * @todo falta validar
+	 * @todo Uma turma so pode ter um regente
+	 *
+	 * @todo se calhar limitar o numero de assistentes
+	 * @param type $data
+	 * @return type
+	 */
+	public function adicionaDocente($data) {
+		if ($this->DocenteTurma->save($data)) {
+			return TRUE;
+		} else {
+			return false;
+		}
+	}
 
-                $ano_lectivo_id = Configure::read('OpenSGA.ano_lectivo_id');
-                $semestre_id = Configure::read('OpenSGA.semestre_lectivo_id');
-                $disciplinas = $this->PlanoEstudo->getAllDisciplinasByPlanoestudo($plano_estudo_id);
-                //$semestre = $this->SemestreLectivo->findById($semestre_id);
-                $turnos = $this->Turno->find('list');
-                foreach($turnos as $turno_id=>$turno){
-                    foreach($disciplinas as $disciplina){
+	/**
+	 * Cria todas as turmas referentes a aquele ano lectivo e aquele semestre
+	 * @Todo Testar essa funcao
+	 * @Todo Para facilitar vamos considerar so um plano de estudos activo
+	 * @todo Podemos usar transactions aqui ;)
+	 */
+	function criarTurmas($plano_estudo_id) {
+		$datasource = $this->getDataSource();
+		$datasource->begin();
 
-                                $turma = array();
-                                $turma['ano_lectivo_id']=$ano_lectivo_id;
-                                $turma['ano_curricular']=$disciplina['p']['ano'];
-                                $turma['semestre_curricular']=$disciplina['p']['semestre'];
-                                $turma['curso_id']=$disciplina['pe']['curso_id'];
-                                $turma['escola_id']=1;
-                                $turma['plano_estudo_id']=$plano_estudo_id;
-                                $turma['turno_id']=$turno_id;
-                                $turma['disciplina_id']=$disciplina['d']['id'];
-                                $turma['estado_turma_id']=1;
-                                $turma['semestre_lectivo_id']=$semestre_id;
-                                $nome = $disciplina['d']['name']." - ".$disciplina['pe']['name'];
-                                $turma['name']=$nome;
+		$ano_lectivo_id = Configure::read('OpenSGA.ano_lectivo_id');
+		$semestre_id = Configure::read('OpenSGA.semestre_lectivo_id');
+		$disciplinas = $this->PlanoEstudo->getAllDisciplinasByPlanoestudo($plano_estudo_id);
+		//$semestre = $this->SemestreLectivo->findById($semestre_id);
+		$turnos = $this->Turno->find('list');
+		foreach ($turnos as $turno_id => $turno) {
+			foreach ($disciplinas as $disciplina) {
 
-                                $turmas=array('Turma'=>$turma);
+				$turma = array();
+				$turma['ano_lectivo_id'] = $ano_lectivo_id;
+				$turma['ano_curricular'] = $disciplina['p']['ano'];
+				$turma['semestre_curricular'] = $disciplina['p']['semestre'];
+				$turma['curso_id'] = $disciplina['pe']['curso_id'];
+				$turma['escola_id'] = 1;
+				$turma['plano_estudo_id'] = $plano_estudo_id;
+				$turma['turno_id'] = $turno_id;
+				$turma['disciplina_id'] = $disciplina['d']['id'];
+				$turma['estado_turma_id'] = 1;
+				$turma['semestre_lectivo_id'] = $semestre_id;
+				$nome = $disciplina['d']['name'] . " - " . $disciplina['pe']['name'];
+				$turma['name'] = $nome;
 
-                                //Primeiro precisamos ver se a turma nao esta criada ainda
-                                $turma_existe = $this->find('first',array('recursive'=>-1,'conditions'=>array('ano_lectivo_id'=>$ano_lectivo_id,'plano_estudo_id'=>$plano_estudo_id,'disciplina_id'=>$disciplina['d']['id'],'ano_curricular'=>$turma['ano_curricular'],'semestre_curricular'=>$turma['semestre_curricular'],'turno_id'=>$turma['turno_id'],'semestre_lectivo_id'=>$semestre_id)));
+				$turmas = array('Turma' => $turma);
 
-                                if(!$turma_existe){
-                                    $this->create();
-                                    $this->save($turmas);
-                                }
+				//Primeiro precisamos ver se a turma nao esta criada ainda
+				$turma_existe = $this->find('first', array('recursive' => -1, 'conditions' => array('ano_lectivo_id' => $ano_lectivo_id, 'plano_estudo_id' => $plano_estudo_id, 'disciplina_id' => $disciplina['d']['id'], 'ano_curricular' => $turma['ano_curricular'], 'semestre_curricular' => $turma['semestre_curricular'], 'turno_id' => $turma['turno_id'], 'semestre_lectivo_id' => $semestre_id)));
 
-                        }
-                }
-                $datasource->commit();
+				if (!$turma_existe) {
+					$this->create();
+					$this->save($turmas);
+				}
+			}
+		}
+		$datasource->commit();
+	}
 
+	/**
+	 * Esta função retorna todas as turmas do plano curricular do aluno
+	 *
+	 * A função filtra as turmas existentes no sistema de acordo com as condições da
+	 * matricula do aluno.
+	 * Retorna um array contendo o ID da turma e o nome da disciplina correspondente a turma
+	 *
+	 * @param int $aluno_id o ID do aluno em questão
+	 * @return array Um array contendo todas as turmas do plano curricular do aluno
+	 * @access public
+	 * @link http://book.cakephp.org/view/1031/Saving-Your-Data
+	 * @Todo Colocar o link para a documentação aqui
+	 * @Todo Filtrar para apenas mostrar as turmas em que o aluno pode se inscrever
+	 */
+	function getAllByAlunoForInscricao($aluno_id, $matricula_id) {
+		$matricula = $this->Inscricao->Matricula->findByAlunoId($aluno_id);
+		$this->Inscricao->Aluno->recursive = -1;
+		//Primeiro vamos pegar todas as disciplinas do plano de estudos
+
+		$todas_disciplinas = $this->PlanoEstudo->getAllDisciplinas($matricula['Matricula']['plano_estudo_id']);
+
+
+		$conditions = array('Turma.plano_estudo_id' => $matricula['Matricula']['plano_estudo_id'], 'Turma.estado_turma_id' => 1, 'Turma.ano_lectivo_id' => Configure::read('OpenSGA.ano_lectivo_id'));
+
+		$this->contain(array(
+			'Disciplina', 'PlanoEstudo'
+		));
+		$turmas = $this->find('all', array('conditions' => $conditions, 'fields' => array('Turma.id', 'Disciplina.name', 'Disciplina.id', 'Turma.ano_curricular', 'Turma.semestre_curricular', 'PlanoEstudo.name'), 'order' => array('Turma.ano_curricular', 'Turma.semestre_curricular')));
+
+		return $turmas;
+	}
+
+	function getAllByPlanoEstudoAntigo($aluno_id) {
+		$matricula = $this->Inscricao->Matricula->findByAlunoId($aluno_id);
+		$this->Inscricao->Aluno->recursive = -1;
+		//Primeiro vamos pegar todas as disciplinas do plano de estudos
+
+		$todas_disciplinas = $this->PlanoEstudo->getAllDisciplinas($matricula['Matricula']['plano_estudo_id']);
+
+
+		$conditions = array('Turma.plano_estudo_id' => $matricula['Matricula']['plano_estudo_id'], 'Turma.estado_turma_id' => 1, 'Turma.ano_lectivo_id' => Configure::read('OpenSGA.ano_lectivo_id'));
+
+		$this->contain(array(
+			'Disciplina', 'PlanoEstudo'
+		));
+		$turmas = $this->find('all', array('conditions' => $conditions, 'fields' => array('Turma.id', 'Disciplina.name', 'Disciplina.id', 'Turma.ano_curricular', 'Turma.semestre_curricular', 'PlanoEstudo.name'), 'order' => array('Turma.ano_curricular', 'Turma.semestre_curricular')));
+
+		$turmaIds = Hash::extract($turmas, '{n}.Disciplina.id');
+		$conditions2 = array('Turma.curso_id' => $matricula['Matricula']['curso_id'], 'Turma.estado_turma_id' => 1, 'Turma.ano_lectivo_id' => Configure::read('OpenSGA.ano_lectivo_id'), 'Turma.disciplina_id NOT' => $turmaIds);
+
+		$this->contain(array(
+			'Disciplina', 'PlanoEstudo'
+		));
+		$turmas2 = $this->find('all', array('conditions' => $conditions2, 'fields' => array('Turma.id', 'Disciplina.name', 'Disciplina.id', 'Turma.ano_curricular', 'Turma.semestre_curricular', 'PlanoEstudo.name'), 'order' => array('Turma.ano_curricular', 'Turma.semestre_curricular')));
+
+
+		return $turmas2;
+	}
+
+	function getAllTurmasInscritas() {
+
+	}
+
+	function getAllTurmasActivasByPlanoEstudo($plano) {
+		$this->recursive = 0;
+		$turmas = $this->find('all', array('conditions' => array('plano_estudo_id' => $plano, 'estado' => 1), 'fields' => array('Turma.id', 'Disciplina.name')));
+
+
+		return $turmas;
+	}
+
+	// Faz o update do estado da turma para fechada
+	function upDateTurma($t0009anolectivo_id, $curso_id) {
+		$query = "update t0010turmas tt set tt.estado = 3 where tt.t0003curso_id = {$curso_id} and tt.t0009anolectivo_id = {$t0009anolectivo_id}";
+		$resultado = $this->query($query);
+		//var_dump($query);
+		return $resultado;
+	}
+
+	// Contacta os alunos inscritos numa determinada turma
+	function getAlunosInscritos($turma_id) {
+		$query = "select count(*) from t0013inscricaos ti, t0010turmas tt where ti.t0010turma_id = tt.id and ti.t0010turma_id = {$turma_id}";
+		$resultado = $this->query($query);
+		//var_dump($resultado);
+		return $resultado;
+	}
+
+	// Devolve todos os estudante aprovados
+	function getAlunosAprovados($turma_id) {
+		$query = "select count(*) from t0013inscricaos ti, t0010turmas tt where ti.t0010turma_id = tt.id and ti.tg0020estadoinscricao_id =2 and ti.t0010turma_id = {$turma_id}";
+		$resultado = $this->query($query);
+		return $resultado;
+	}
+
+	// Devolve todos os estudante reprovados
+	function getAlunosReprovados($turma_id) {
+		$query = "select count(*) from t0013inscricaos ti, t0010turmas tt where ti.t0010turma_id = tt.id and ti.tg0020estadoinscricao_id =3 and ti.t0010turma_id = {$turma_id}";
+		$resultado = $this->query($query);
+		return $resultado;
+	}
+
+	// Devolve a media da turma
+	function getSomaNotaFinal($turma_id) {
+		$query = "select sum(notafinal) from t0013inscricaos ti, t0010turmas tt where ti.t0010turma_id = tt.id and ti.t0010turma_id = {$turma_id}";
+		//var_dump($query);
+		$resultado = $this->query($query);
+		return $resultado;
+	}
+
+	// Devolve o nome do docente da turma
+	function getDocente($turma_id) {
+		$query = "select tf.name from t0010turmas tt, t0013inscricaos ti, funcionarios tf where ti.t0010turma_id = tt.id and tt.funcionario_id = tf.id and ti.t0010turma_id = {$turma_id}";
+		//var_dump($query);
+		$resultado = $this->query($query);
+		return $resultado;
+	}
+
+	// Devolve o nome do assistente da turma
+	function getAssistente($turma_id) {
+		$query = "select tf.name from t0010turmas tt, t0013inscricaos ti, funcionarios tf where ti.t0010turma_id = tt.id and tt.funcionario_ass_id = tf.id and ti.t0010turma_id = {$turma_id}";
+		//var_dump($query);
+		$resultado = $this->query($query);
+		return $resultado;
+	}
+
+	// Devolve o nome do plano
+	function getPlanoEstudo($turma_id) {
+		$query = "select tp.name from t0010turmas tt, t0005planoestudos tp, t0013inscricaos ti where ti.t0010turma_id = tt.id and  tt.t0005planoestudo_id = tp.id and ti.t0010turma_id = {$turma_id}";
+		//var_dump($query);
+		$resultado = $this->query($query);
+		return $resultado;
+	}
+
+	public function getRegente($turma_id) {
+		$this->DocenteTurma->contain(array(
+			'Docente' => array(
+				'Entidade'
+			)
+		));
+		return $this->DocenteTurma->find('first', array('conditions' => array('turma_id' => $turma_id, 'estado_docente_turma_id' => 1, 'tipo_docente_turma_id' => 1)));
+	}
+
+	/**
+	 * Fecha todas as turmas e inscricoes de um dado semestre.
+	 */
+	public function fecharTodasTurmas($semestre = null) {
+		if ($semestre == null) {
+			$semestre = Configure::read('OpenSGA.semestre_lectivo_id');
+		}
+		$dataSource = $this->getDataSource();
+		$dataSource->begin();
+
+		$this->contain('Inscricao');
+		$turmas = $this->find('all', array('conditions' => array('Turma.semestre_lectivo_id' => $semestre, 'Turma.estado_turma_id' => 1), 'limit' => 100));
+
+
+
+		foreach ($turmas as $turma) {
+			$inscricaos = $turma['Inscricao'];
+			foreach ($inscricaos as $inscricao) {
+				if ($inscricao['estadoinscricao_id'] == 1) {
+					$this->Inscricao->id = $inscricao['id'];
+					$this->Inscricao->set('estadoinscricao_id', 6);
+					$this->Inscricao->save();
+				}
+			}
+
+			//Fechamos a turma tambem
+			$this->id = $turma['Turma']['id'];
+			$this->set('estado_turma_id', 3);
+			$this->save();
 		}
 
-/**
- * Esta função retorna todas as turmas do plano curricular do aluno
- *
- * A função filtra as turmas existentes no sistema de acordo com as condições da
- * matricula do aluno.
- * Retorna um array contendo o ID da turma e o nome da disciplina correspondente a turma
- *
- * @param int $aluno_id o ID do aluno em questão
- * @return array Um array contendo todas as turmas do plano curricular do aluno
- * @access public
- * @link http://book.cakephp.org/view/1031/Saving-Your-Data
- * @Todo Colocar o link para a documentação aqui
- * @Todo Filtrar para apenas mostrar as turmas em que o aluno pode se inscrever
- */
-        function getAllByAlunoForInscricao($aluno_id,$matricula_id){
-        	$matricula=$this->Inscricao->Matricula->findByAlunoId($aluno_id);
-			$this->Inscricao->Aluno->recursive=-1;
-			//Primeiro vamos pegar todas as disciplinas do plano de estudos
-                        
-            $todas_disciplinas = $this->PlanoEstudo->getAllDisciplinas($matricula['Matricula']['plano_estudo_id']);
-           
+		//return $dataSource->rollback();
+		return $dataSource->commit();
+	}
 
-            $conditions = array('Turma.plano_estudo_id'=>$matricula['Matricula']['plano_estudo_id'],'Turma.estado_turma_id'=>1,'Turma.ano_lectivo_id'=>Configure::read('OpenSGA.ano_lectivo_id'));
-            
-           $this->contain(array(
-               'Disciplina'
-           ));             
-			$turmas = $this->find('all', array('conditions'=>$conditions,'fields'=>array('Turma.id','Disciplina.name','Disciplina.id','Turma.ano_curricular','Turma.semestre_curricular'),'order'=>array('Turma.ano_curricular','Turma.semestre_curricular')));
-            
-                         
-			return $turmas;
+	function getTurmasByFuncionario($funcionario_id) {
+		$query = "SELECT tt.id FROM t0010turmas tt, funcionarios tf where (tf.id = tt.funcionario_id or tt.funcionario_ass_id = tf.id) and tf.id  = {$funcionario_id} ";
+		$resultado = $this->query($query);
+		return $resultado;
+	}
 
-        }
+	public function hasAvaliacoesAbertas($turma_id) {
+		$avaliacoes = $this->TurmaTipoAvaliacao->find('all', array('conditions' => array('TurmaTipoAvaliacao.turma_id' => $turma_id)));
+		debug($avaliacoes);
+	}
 
+	public function getTotalAlunosInscritosByTurma($turma_id = null) {
 
-
-		function getAllTurmasInscritas(){
-
-		}
-        function getAllTurmasActivasByPlanoEstudo($plano){
-			$this->recursive=0;
-			$turmas = $this->find('all',array('conditions'=>array('plano_estudo_id'=>$plano,'estado'=>1),'fields'=>array('Turma.id','Disciplina.name')));
-
-
-			return $turmas;
-
-        }
-
-
-		// Faz o update do estado da turma para fechada
-		function upDateTurma($t0009anolectivo_id, $curso_id){
-            $query = "update t0010turmas tt set tt.estado = 3 where tt.t0003curso_id = {$curso_id} and tt.t0009anolectivo_id = {$t0009anolectivo_id}";
-            $resultado = $this->query($query);
-			//var_dump($query);
-			return $resultado;
-
-        }
-
-
-				// Contacta os alunos inscritos numa determinada turma
-		function getAlunosInscritos($turma_id){
-            $query = "select count(*) from t0013inscricaos ti, t0010turmas tt where ti.t0010turma_id = tt.id and ti.t0010turma_id = {$turma_id}";
-            $resultado = $this->query($query);
-			//var_dump($resultado);
-			return $resultado;
-        }
-
-				// Devolve todos os estudante aprovados
-		function getAlunosAprovados($turma_id){
-            $query = "select count(*) from t0013inscricaos ti, t0010turmas tt where ti.t0010turma_id = tt.id and ti.tg0020estadoinscricao_id =2 and ti.t0010turma_id = {$turma_id}";
-            $resultado = $this->query($query);
-			return $resultado;
-
-		}
-
-		// Devolve todos os estudante reprovados
-		function getAlunosReprovados($turma_id){
-            $query = "select count(*) from t0013inscricaos ti, t0010turmas tt where ti.t0010turma_id = tt.id and ti.tg0020estadoinscricao_id =3 and ti.t0010turma_id = {$turma_id}";
-            $resultado = $this->query($query);
-			return $resultado;
-
-		}
-
-		// Devolve a media da turma
-		function getSomaNotaFinal($turma_id){
-            $query = "select sum(notafinal) from t0013inscricaos ti, t0010turmas tt where ti.t0010turma_id = tt.id and ti.t0010turma_id = {$turma_id}";
-			//var_dump($query);
-            $resultado = $this->query($query);
-			return $resultado;
-
-		}
-
-
-		// Devolve o nome do docente da turma
-		function getDocente($turma_id){
-            $query = "select tf.name from t0010turmas tt, t0013inscricaos ti, funcionarios tf where ti.t0010turma_id = tt.id and tt.funcionario_id = tf.id and ti.t0010turma_id = {$turma_id}";
-			//var_dump($query);
-            $resultado = $this->query($query);
-			return $resultado;
-
-		}
-
-		// Devolve o nome do assistente da turma
-		function getAssistente($turma_id){
-            $query = "select tf.name from t0010turmas tt, t0013inscricaos ti, funcionarios tf where ti.t0010turma_id = tt.id and tt.funcionario_ass_id = tf.id and ti.t0010turma_id = {$turma_id}";
-			//var_dump($query);
-            $resultado = $this->query($query);
-			return $resultado;
-		}
-
-
-		// Devolve o nome do plano
-		function getPlanoEstudo($turma_id){
-            $query = "select tp.name from t0010turmas tt, t0005planoestudos tp, t0013inscricaos ti where ti.t0010turma_id = tt.id and  tt.t0005planoestudo_id = tp.id and ti.t0010turma_id = {$turma_id}";
-			//var_dump($query);
-            $resultado = $this->query($query);
-			return $resultado;
-		}
-
-        public function getRegente($turma_id){
-            $this->DocenteTurma->contain(array(
-                'Docente'=>array(
-                    'Entidade'
-                )
-            ));
-            return $this->DocenteTurma->find('first',array('conditions'=>array('turma_id'=>$turma_id,'estado_docente_turma_id'=>1,'tipo_docente_turma_id'=>1)));
-        }
-    /**
-     *Fecha todas as turmas e inscricoes de um dado semestre.
-     */
-    public function fecharTodasTurmas($semestre=null){
-        if($semestre==null){
-            $semestre = Configure::read('OpenSGA.semestre_lectivo_id');
-        }
-        $dataSource = $this->getDataSource();
-        $dataSource->begin();
-
-        $this->contain('Inscricao');
-        $turmas = $this->find('all',array('conditions'=>array('Turma.semestre_lectivo_id'=>$semestre,'Turma.estado_turma_id'=>1),'limit'=>100));
-
-
-
-        foreach($turmas as $turma){
-            $inscricaos = $turma['Inscricao'];
-            foreach($inscricaos as $inscricao){
-                if($inscricao['estadoinscricao_id']==1){
-                    $this->Inscricao->id = $inscricao['id'];
-                    $this->Inscricao->set('estadoinscricao_id',6);
-                    $this->Inscricao->save();
-                }
-            }
-
-            //Fechamos a turma tambem
-            $this->id = $turma['Turma']['id'];
-            $this->set('estado_turma_id',3);
-            $this->save();
-        }
-
-        //return $dataSource->rollback();
-        return $dataSource->commit();
-    }
-
-
-
-		function getTurmasByFuncionario($funcionario_id){
-            $query = "SELECT tt.id FROM t0010turmas tt, funcionarios tf where (tf.id = tt.funcionario_id or tt.funcionario_ass_id = tf.id) and tf.id  = {$funcionario_id} ";
-           	$resultado = $this->query($query);
-			return $resultado;
-        }
-
-        public function hasAvaliacoesAbertas($turma_id){
-            $avaliacoes = $this->TurmaTipoAvaliacao->find('all',array('conditions'=>array('TurmaTipoAvaliacao.turma_id'=>$turma_id)));
-            debug($avaliacoes);
-        }
-        
-        public function getTotalAlunosInscritosByTurma($turma_id = null){
-            
-        }
-        
-       
+	}
 
 }
+
 ?>
