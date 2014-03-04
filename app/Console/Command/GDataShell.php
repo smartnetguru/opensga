@@ -72,7 +72,7 @@ class GDataShell extends AppShell {
 					$user = $user->save();
 				}
 			} catch (Exception $e) {
-				var_dump($u);
+				var_dump($u['User']);
 				//var_dump($e);
 			}
 
