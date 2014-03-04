@@ -77,10 +77,7 @@ class GDataShell extends AppShell {
 			}
 
 			$user = $gdata->retrieveUser($usernames[0]);
-			print_r($user);
-			print_r("----------------------Em cima");
 			if ($user) {
-				//$user->login->changePasswordAtNextLogin = true;
 				$user = $user->save();
 				if ($user != NULL) {
 					$this->User->id = $u['User']['id'];
