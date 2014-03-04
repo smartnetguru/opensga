@@ -123,6 +123,8 @@ class OpenSGAAclShell extends AppShell {
 				$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/report_alunos_sem_certificado";
 				$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/report_alunos_sem_smo";
 
+				$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Funcionarios/index";
+
 				$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Pages/home";
 				$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Users/trocar_senha";
 
@@ -162,7 +164,7 @@ class OpenSGAAclShell extends AppShell {
 					$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/index";
 
 					$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/alterar_status";
-
+					$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/adicionar_estudante";
 					$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/editar_estudante";
 					$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/exportar_alunos";
 					$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/exportar_alunos_excel";
@@ -174,6 +176,9 @@ class OpenSGAAclShell extends AppShell {
 					$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/concluir_nivel";
 
 					$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/perfil_estudante";
+
+					$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Funcionarios/adicionar_funcionario";
+					$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Funcionarios/index";
 
 					$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Matriculas/renovar_matricula";
 

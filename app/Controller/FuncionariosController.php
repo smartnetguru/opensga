@@ -76,7 +76,7 @@ class FuncionariosController extends AppController {
 		$this->set(compact('funcionario'));
 	}
 
-	function registar_funcionario() {
+	function adicionar_funcionario() {
 
 		if (!empty($this->data)) {
 			if ($this->Funcionario->cadastraFuncionario($this->request->data)) {

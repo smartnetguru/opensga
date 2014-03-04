@@ -338,13 +338,12 @@ class AlunosController extends AppController {
 
 
 		$cursos = $this->Aluno->Curso->find('list');
-
+		$unidadeOrganicas = $this->Aluno->Curso->UnidadeOrganica->find('list');
 		$planoestudos = $this->Aluno->Matricula->PlanoEstudo->find('list');
-		$users = $this->Aluno->Entidade->User->find('list');
 
 		$paises = $this->Aluno->Entidade->PaisNascimento->find('list');
 		$escolaNivelMedios = $this->Aluno->AlunoNivelMedio->EscolaNivelMedio->find('list');
-		$cidades = $this->Aluno->Entidade->CidadeNascimento->find('list');
+		$cidadeNascimentos = $this->Aluno->Entidade->CidadeNascimento->find('list');
 		$provincias = $this->Aluno->Entidade->ProvinciaNascimento->find('list');
 		$provenienciacidades = $this->Aluno->AlunoNivelMedio->EscolaNivelMedio->Distrito->find('list');
 		$proveniencianomes = $this->Aluno->AlunoNivelMedio->EscolaNivelMedio->Provincia->find('list');
@@ -352,9 +351,13 @@ class AlunosController extends AppController {
 		$areatrabalhos = $this->Aluno->AreaTrabalho->find('list');
 		$generos = $this->Aluno->Entidade->Genero->find('list');
 		$turnos = $this->Aluno->Matricula->Turno->find('list');
-		$estado_civil = $this->Aluno->Entidade->EstadoCivil->find('list');
+		$estadoCivil = $this->Aluno->Entidade->EstadoCivil->find('list');
 		$cidadenascimentos = $this->Aluno->Entidade->CidadeNascimento->find('list');
-		$this->set(compact('nacionalidades', 'cursos', 'planoestudos', 'users', 'paises', 'cidades', 'provincias', 'documento_identificacaos', 'areatrabalhos', 'generos', 'cidadenascimentos', 'proveniencianomes', 'provenienciacidades', 'turnos', 'escolaNivelMedios', 'estado_civil'));
+		$grauParentescos = $this->Aluno->GrauParentesco->find('list');
+		$naturalidade = '';
+		$this->loadModel('SimNaoResposta');
+		$simNaoRespostas = $this->SimNaoResposta->find('list');
+		$this->set(compact('grauParentescos', 'simNaoRespostas', 'naturalidade', 'nacionalidades', 'cursos', 'planoestudos', 'unidadeOrganicas', 'paises', 'cidadeNascimentos', 'provincias', 'documento_identificacaos', 'areatrabalhos', 'generos', 'cidadenascimentos', 'proveniencianomes', 'provenienciacidades', 'turnos', 'escolaNivelMedios', 'estadoCivil'));
 	}
 
 	/**

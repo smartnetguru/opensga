@@ -456,9 +456,9 @@ class Aluno extends AppModel {
 		if ($data['Aluno']['numero_estudante'] == '') {
 			$data['Aluno']['codigo'] = $this->geraCodigo();
 		} else {
-			if ($data['Aluno']['codigo'] == '' || $data['Aluno']['codigo'] == NULL)
+			if ($data['Aluno']['codigo'] == '' || $data['Aluno']['codigo'] == NULL) {
 				$data['Aluno']['codigo'] = $data['Aluno']['numero_estudante'];
-			$data['Aluno']['numero_estudante_antigo'] = $data['Aluno']['numero_estudante'];
+			}
 		}
 
 		if (!isset($data['Entidade']['name'])) {
@@ -467,28 +467,143 @@ class Aluno extends AppModel {
 
 		//Grava os dados do Usuario
 		$this->User->create();
-		$data['User']['username'] = $this->User->geraEmailUem($data['Entidade']['apelido'], $data['Entidade']['nomes']);
-		$data['User']['password'] = Security::hash($data['Aluno']['codigo'], 'blowfish');
+		if (!isset($data['User']['username']) || $data['User']['username'] == '') {
+			$data['User']['username'] = $this->User->geraEmailUem($data['Entidade']['apelido'], $data['Entidade']['nomes']);
+		}
+		if (!isset($data['User']['password']) || $data['User']['password'] == '') {
+			$data['User']['password'] = Security::hash($data['Aluno']['codigo'], 'blowfish');
+		}
+
 		$data['User']['codigocartao'] = $data['Aluno']['codigo'];
 		$data['User']['name'] = $data['Entidade']['name'];
 		$data['User']['group_id'] = 3;
+		$data['User']['verificar_permissoes'] = 1;
+		$data['User']['estado_email'] = 0;
+		$data['User']['estado_objecto_id'] = 1;
+		$data['User']['timezone'] = 'Africa/Maputo';
 		if ($this->User->save($data)) {
+			//Grava Bairro e Avenida
+			$bairro_existe = $this->Entidade->CidadeMorada->Bairro->find('first', array('conditions' => array('cidade_id' => $data['EntidadeContacto'][9], 'name' => $data['EntidadeContacto'][6])));
+			if (empty($bairro_existe)) {
+				$array_novo_bairro = array(
+					'Bairro' => array(
+						'name' => $data['EntidadeContacto'][6],
+						'cidade_id' => $data['EntidadeContacto'][9]
+					)
+				);
+				$this->Entidade->CidadeMorada->Bairro->create();
+				$this->Entidade->CidadeMorada->Bairro->save($array_novo_bairro);
+				$bairro_morada_id = $this->Entidade->CidadeMorada->Bairro->id;
+			} else {
+				$bairro_morada_id = $bairro_existe['Bairro']['id'];
+			}
+
+			$rua_existe = $this->Entidade->CidadeMorada->Rua->find('first', array('conditions' => array('cidade_id' => $data['EntidadeContacto'][9], 'name' => $data['EntidadeContacto'][5])));
+			if (empty($rua_existe)) {
+				$array_nova_rua = array(
+					'Rua' => array(
+						'name' => $data['EntidadeContacto'][5],
+						'cidade_id' => $data['EntidadeContacto'][9]
+					)
+				);
+				$this->Entidade->CidadeMorada->Rua->create();
+				$this->Entidade->CidadeMorada->Rua->save($array_nova_rua);
+				$rua_morada_id = $this->Entidade->CidadeMorada->Rua->id;
+			} else {
+				$rua_morada_id = $rua_existe['Rua']['id'];
+			}
+
 			//Grava os dados da Entidade
-			$data['Aluno']['user_id'] = $this->User->getLastInsertID();
+			//Grava os dados da Entidade
 			$data['Entidade']['user_id'] = $this->User->getLastInsertID();
+			$data['Entidade']['telemovel'] = $data['EntidadeContacto'][2];
+			$data['Entidade']['documento_identificacao_id'] = $data['EntidadeIdentificacao']['documento_identificacao_id'];
+			$data['Entidade']['documento_identificacao_numero'] = $data['EntidadeIdentificacao']['numero'];
+			$data['Entidade']['cidade_morada'] = $data['EntidadeContacto'][9];
+			$data['Entidade']['bairro_morada'] = $bairro_morada_id;
+			$data['Entidade']['caixa_postal_morada'] = $data['EntidadeContacto'][8];
+			$data['Entidade']['email'] = $data['EntidadeContacto'][1];
+			$data['Entidade']['documento_identificacao_data_emissao'] = $data['EntidadeIdentificacao']['data_emissao'];
+			$data['Entidade']['estado_entidade_id'] = 1;
+			$data['Entidade']['documento_identificacao_local_emissao'] = $data['EntidadeIdentificacao']['local_emissao'];
+			$data['Entidade']['avenida_rua'] = $rua_morada_id;
+			//$data['Entidade']['documento_identificacao_validade'] = $data['EntidadeIdentificacao']['documento_identificacao_id'];
+
+			if (!isset($data['Entidade']['nacionalidade'])) {
+				$data['Entidade']['nacionalidade'] = $data['Entidade']['pais_nascimento'];
+			}
 			$this->Entidade->create();
 			if ($this->Entidade->save($data)) {
 
 				//Grava os dados do Aluno
+				$data['Aluno']['user_id'] = $this->User->getLastInsertID();
 				$data['Aluno']['entidade_id'] = $this->Entidade->getLastInsertID();
+				$data['Aluno']['data_ingresso'] = date('Y-m-d');
+				$data['Aluno']['curso_ingresso_id'] = $data['Aluno']['curso_id'];
 
-				$planoestudo = $this->Curso->getPlanoEstudoRecente($data['Aluno']['curso_id']);
-				if (!empty($planoestudo))
-					$data['Aluno']['plano_estudo_id'] = $planoestudo['PlanoEstudo']['id'];
+				$plano_estudo_id = $this->Curso->getPlanoEstudoIdRecente($data['Aluno']['curso_id']);
+				if (!empty($plano_estudo_id)) {
+					$data['Aluno']['plano_estudo_id'] = $plano_estudo_id;
+				}
 				$data['Aluno']['estado_aluno_id'] = 1;
 
 				$this->create();
 				if ($this->save($data)) {
+					//O estado do aluno tem que ver com o certificado e com o recenseamento militar
+					$certificado = $data['Aluno']['certificado_nivel_anterior'];
+					$recenseamento = $data['Aluno']['recenseamento_militar'];
+					if ($certificado == 1 && $recenseamento == 1) {
+						$data['Aluno']['estado_aluno_id'] = 1;
+					} elseif ($certificado == 2 && $recenseamento == 1) {
+						$data['Aluno']['estado_aluno_id'] = 11;
+						$array_estado = array(
+							'AlunoEstado' => array(
+								'aluno_id' => $this->id,
+								'estado_anterior' => 1,
+								'estado_actual' => 11,
+								'motivo_estado_aluno_id' => 1,
+								'data_mudanca' => date('Y-m-d H:i:s')
+							)
+						);
+
+						$this->AlunoEstado->create();
+						$this->AlunoEstado->save($array_estado);
+						$this->set('estado_aluno_id', 11);
+						$this->save();
+					} elseif ($certificado == 1 && $recenseamento == 2) {
+						$data['Aluno']['estado_aluno_id'] = 11;
+						$array_estado = array(
+							'AlunoEstado' => array(
+								'aluno_id' => $this->id,
+								'estado_anterior' => 1,
+								'estado_actual' => 11,
+								'motivo_estado_aluno_id' => 21,
+								'data_mudanca' => date('Y-m-d H:i:s')
+							)
+						);
+
+						$this->AlunoEstado->create();
+						$this->AlunoEstado->save($array_estado);
+						$this->set('estado_aluno_id', 11);
+						$this->save();
+					} else {
+						$data['Aluno']['estado_aluno_id'] = 11;
+						$array_estado = array(
+							'AlunoEstado' => array(
+								'aluno_id' => $this->id,
+								'estado_anterior' => 1,
+								'estado_actual' => 11,
+								'motivo_estado_aluno_id' => 22,
+								'data_mudanca' => date('Y-m-d H:i:s')
+							)
+						);
+
+						$this->AlunoEstado->create();
+						$this->AlunoEstado->save($array_estado);
+						$this->set('estado_aluno_id', 11);
+						$this->save();
+					}
+
 					//Grava os dados de Identificacao
 
 					$identificacao = array('EntidadeIdentificacao' => $data['EntidadeIdentificacao']);
@@ -542,7 +657,7 @@ class Aluno extends AppModel {
 					$this->AlunoNivelMedio->create();
 					$this->AlunoNivelMedio->save($aluno_nivel_medio);
 
-
+					$anoLectivo = $this->Matricula->AnoLectivo->findByAno($data['Aluno']['ano_ingresso']);
 					/**
 					 * @fixme desactivamos temporariamente o o turno e o regime e o nivel
 					 */
@@ -551,9 +666,9 @@ class Aluno extends AppModel {
 					$data_matricula['curso_id'] = $data['Aluno']['curso_id'];
 					$data_matricula['plano_estudo_id'] = $data['Aluno']['plano_estudo_id'];
 					$data_matricula['estado_matricula_id'] = 1;
-					$data_matricula['data'] = date('Y-m-d');
+					$data_matricula['data'] = $data['Aluno']['data_matricula'];
 					$data_matricula['user_id'] = $data['Matricula']['user_id'];
-					$data_matricula['ano_lectivo_id'] = Configure::read('OpenSGA.ano_lectivo_id');
+					$data_matricula['ano_lectivo_id'] = $anoLectivo['AnoLectivo']['id'];
 					// $data_matricula['turno_id'] = $data['Aluno']['turno_id'];
 					//$data_matricula['nivel'] = $data['Aluno']['nivel'];
 					$data_matricula['tipo_matricula_id'] = 1;
@@ -571,6 +686,7 @@ class Aluno extends AppModel {
 						);
 						$this->HistoricoCurso->create();
 						$this->HistoricoCurso->save($historico_array);
+
 						return $dataSource->commit();
 					}
 				}
