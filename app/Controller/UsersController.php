@@ -95,17 +95,119 @@ class UsersController extends AppController {
 		$this->redirect(array('action' => 'logout', 'estudante' => FALSE));
 	}
 
-	function delete($id = null) {
-		if (!$id) {
-			$this->Session->setFlash(sprintf(__('ID do Usuário Inválido', true), 'user'), 'flasherror');
-			$this->redirect(array('action' => 'index'));
+	public function mostrar_foto($codigo) {
+		$this->viewClass = 'Media';
+		App::uses('Folder', 'Utility');
+		App::uses('File', 'Utility');
+		$this->loadModel('Aluno');
+		$this->Aluno->contain();
+		$aluno = $this->Aluno->findByCodigo($codigo);
+		if (!empty($aluno)) {
+			App::uses('File', 'Utility');
+			$path = APP . 'Assets' . DS . 'Fotos' . DS . 'Estudantes' . DS . $aluno['Aluno']['ano_ingresso'] . DS;
+
+			$file_path = $path . $codigo . '.jpg';
+			$folder_novo = new Folder($path);
+
+			$file = new File($file_path);
+
+			if (!$file->exists()) {
+				$codigo = 'default_profile_picture';
+				$path = WWW_ROOT . DS . 'img' . DS;
+			}
+
+
+			$params = array(
+				'id' => $codigo . '.jpg',
+				'name' => 'fotografia',
+				'extension' => 'jpg',
+				'mimeType' => array(
+					'docx' => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+				),
+				'path' => $path
+			);
+			$this->set($params);
+		} else {
+			throw new NotFoundException('Estudante não encontrado. Mostrar foto');
 		}
-		if ($this->User->delete($id)) {
-			$this->Session->setFlash(sprintf(__('Usuário removido com sucesso', true), 'user'), 'flashok');
-			$this->redirect(array('action' => 'index'));
+	}
+
+	public function estudante_perfil() {
+		$this->redirect(array('controller' => 'alunos', 'action' => 'perfil', 'estudante' => true));
+	}
+
+	public function estudante_mostrar_foto($userId) {
+		$this->viewClass = 'Media';
+		App::uses('Folder', 'Utility');
+		App::uses('File', 'Utility');
+		$this->loadModel('Aluno');
+		$this->Aluno->contain('Entidade');
+		$aluno = $this->User->Entidade->Aluno->find('first', array('conditions' => array('Entidade.user_id' => $userId)));
+		if (!empty($aluno)) {
+			App::uses('File', 'Utility');
+			$path = APP . 'Assets' . DS . 'Fotos' . DS . 'Estudantes' . DS . $aluno['Aluno']['ano_ingresso'] . DS;
+
+			$file_path = $path . $aluno['Aluno']['codigo'] . '.jpg';
+			$folder_novo = new Folder($path);
+
+			$file = new File($file_path);
+
+			if (!$file->exists()) {
+				$codigo = 'default_profile_picture';
+				$path = WWW_ROOT . DS . 'img' . DS;
+			}
+
+
+			$params = array(
+				'id' => $aluno['Aluno']['codigo'] . '.jpg',
+				'name' => 'fotografia',
+				'extension' => 'jpg',
+				'mimeType' => array(
+					'docx' => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+				),
+				'path' => $path
+			);
+			$this->set($params);
+		} else {
+			throw new NotFoundException('Estudante não encontrado. Mostrar foto');
 		}
-		$this->Session->setFlash(sprintf(__('O usuário não foi removido', true), 'user'), 'flasherror');
-		$this->redirect(array('action' => 'index'));
+	}
+
+	public function faculdade_mostrar_foto($codigo) {
+		$this->viewClass = 'Media';
+		App::uses('Folder', 'Utility');
+		App::uses('File', 'Utility');
+		$this->loadModel('Aluno');
+		$this->Aluno->contain();
+		$aluno = $this->Aluno->findByCodigo($codigo);
+		if (!empty($aluno)) {
+			App::uses('File', 'Utility');
+			$path = APP . 'Assets' . DS . 'Fotos' . DS . 'Estudantes' . DS . $aluno['Aluno']['ano_ingresso'] . DS;
+
+			$file_path = $path . $codigo . '.jpg';
+			$folder_novo = new Folder($path);
+
+			$file = new File($file_path);
+
+			if (!$file->exists()) {
+				$codigo = 'default_profile_picture';
+				$path = WWW_ROOT . DS . 'img' . DS;
+			}
+
+
+			$params = array(
+				'id' => $codigo . '.jpg',
+				'name' => 'fotografia',
+				'extension' => 'jpg',
+				'mimeType' => array(
+					'docx' => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+				),
+				'path' => $path
+			);
+			$this->set($params);
+		} else {
+			throw new NotFoundException('Estudante não encontrado. Mostrar foto');
+		}
 	}
 
 	public function docente_login() {

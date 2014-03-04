@@ -252,4 +252,20 @@ class OpenSGAAclShell extends AppShell {
 		}
 	}
 
+	public function estudantes() {
+		$grupo = $this->User->Group;
+		$grupo->id = 3;
+		$comandos[] = "acl deny Group.3 controllers";
+		$comandos[] = "acl grant Group.3 controllers/Alunos/estudante_perfil";
+		$comandos[] = "acl grant Group.3 controllers/Alunos/estudante_editar_perfil";
+		$comandos[] = "acl grant Group.3 controllers/Alunos/estudante_mostrar_foto";
+		$comandos[] = "acl grant Group.3 controllers/users/estudante_mostrar_foto";
+		$comandos[] = "acl grant Group.3 controllers/users/estudante_perfil";
+
+		foreach ($comandos as $comando) {
+			$this->out($comando);
+			$this->dispatchShell($comando);
+		}
+	}
+
 }

@@ -151,122 +151,51 @@ class AlunosController extends AppController {
 		$this->set(compact('inscricoes_activas', 'todas_inscricoes', 'cadeiras_aprovadas', 'pagamentos', 'is_bolseiro', 'is_regular', 'classe_estado', 'requisicoes', 'matriculas'));
 	}
 
-	public function estudante_perfil($id = null) {
-		$this->Aluno->id = $id;
-		if (!$this->Aluno->exists()) {
+	public function estudante_perfil() {
+		$userId = $this->Session->read('Auth.User.id');
+		$this->Aluno->contain(array(
+			'Entidade'
+		));
+		$aluno = $this->Aluno->find('first', array('conditions' => array('Entidade.user_id' => $userId)));
+		if (empty($aluno)) {
 			throw new NotFoundException('Este aluno não existe no Sistema');
 		}
+		$aluno = $this->Aluno->getAlunoForPerfil($aluno['Aluno']['id']);
+		$matriculas = $this->Aluno->Matricula->getAllMatriculasByAluno($aluno['Aluno']['id']);
 
+		$inscricoesActivas = $this->Aluno->Inscricao->getAllInscricoesByAlunoAndEstado($aluno['Aluno']['id'], 1);
+		$cadeirasAprovadas = $this->Aluno->Inscricao->getAllInscricoesByAlunoAndEstado($aluno['Aluno']['id']);
+		$todasInscricoes = $this->Aluno->Inscricao->getAllInscricoesByAlunoAndEstado($aluno['Aluno']['id']);
 
-
-		$this->Aluno->getNivelAcademicoElevado($id);
-
-		$this->Aluno->contain(array(
-			'Matricula' => array(
-				'PlanoEstudo', 'Turno'
-			),
-			'Curso', 'Entidade' => array(
-				'ProvinciaNascimento', 'CidadeNascimento', 'PaisNascimento', 'Genero', 'DocumentoIdentificacao'
-			),
-			'AlunoNivelMedio' => array(
-				'EscolaNivelMedio' => array('Provincia', 'Distrito')
-			)
-		));
-		$aluno = $this->Aluno->find('first', array('conditions' => array('Aluno.id' => $id)));
-		//debug($aluno);
-		if ($aluno['Aluno']['user_id'] != $this->Session->read('Auth.User.id')) {
-			$this->Session->setFlash(__('Tentativa de fraude'), 'default', array('class' => 'alert error'));
-			$this->redirect(array('controller' => 'users', 'action' => 'logout'));
-		}
-		$this->Aluno->Inscricao->contain(array(
-			'Turma' => array(
-				'fields' => array(
-					'id', 'disciplina_id', 'ano_curricular', 'semestre_curricular'),
-				'Disciplina' => array(
-					'fields' => array('id', 'name')
-				)
-			),
-			'Matricula' => array(
-				'fields' => array('id', 'ano_lectivo_id'),
-				'AnoLectivo' => array(
-					'fields' => array('id', 'ano')
-				)
-			)
-				)
-		);
-		$inscricoes_activas = $this->Aluno->Inscricao->find('all', array('conditions' => array('Inscricao.aluno_id' => $id, 'Inscricao.estado_inscricao_id' => 1)));
-
-		$this->Aluno->Inscricao->contain(array(
-			'Turma' => array(
-				'fields' => array(
-					'id', 'disciplina_id', 'ano_curricular', 'semestre_curricular'),
-				'Disciplina' => array(
-					'fields' => array('id', 'name')
-				)
-			),
-			'Matricula' => array(
-				'fields' => array('id', 'ano_lectivo_id'),
-				'AnoLectivo' => array(
-					'fields' => array('id', 'ano')
-				)
-			)
-				)
-		);
-		$todas_inscricoes = $this->Aluno->Inscricao->find('all', array('conditions' => array('Inscricao.aluno_id' => $id)));
-
-		$this->Aluno->Inscricao->contain(array(
-			'Turma' => array(
-				'fields' => array(
-					'id', 'disciplina_id', 'ano_curricular', 'semestre_curricular'),
-				'Disciplina' => array(
-					'fields' => array('id', 'name')
-				)
-			),
-			'Matricula' => array(
-				'fields' => array('id', 'ano_lectivo_id'),
-				'AnoLectivo' => array(
-					'fields' => array('id', 'ano')
-				)
-			)
-				)
-		);
-		$cadeiras_aprovadas = $this->Aluno->Inscricao->find('all', array('conditions' => array('Inscricao.aluno_id' => $id)));
-
-
-
-		if ($this->Aluno->isMatriculado($id, $this->Session->read('SGAConfig.ano_lectivo_id'))) {
+		if ($this->Aluno->isMatriculado($aluno['Aluno']['id'], Configure::read('OpenSGA.ano_lectivo_id'))) {
 			$this->set('is_matriculado', 1);
 		} else {
 			$this->set('is_matriculado', 0);
 		}
+		$is_bolseiro = $this->Aluno->isBolseiro($aluno['Aluno']['id']) ? 1 : 0;
+		$is_regular = $this->Aluno->isRegular($aluno['Aluno']['id']);
 
-		$is_bolseiro = $this->Aluno->isBolseiro($id) ? 1 : 0;
-
+		if (count($is_regular) == 1 && $is_regular[0]['regular'] == true) {
+			if ($is_regular[0]['estado'] == 1) {
+				$classe_estado = "alert alert-info";
+			} else {
+				$classe_estado = "alert alert-success";
+			}
+		} else {
+			$classe_estado = "alert alert-danger";
+		}
 		//Requisicoes
-		$requisicoes = $this->Aluno->RequisicoesPedido->find('all', array('conditions' => array('aluno_id' => $id)));
+
+		$requisicoes = $this->Aluno->RequisicoesPedido->getAllRequisicoesPedidoByEstudante($aluno['Aluno']['id']);
 
 		$this->Aluno->FinanceiroPagamento->contain(array(
 			'FinanceiroTipoPagamento'
 		));
-		$pagamentos = $this->Aluno->FinanceiroPagamento->find('all', array('conditions' => array('FinanceiroPagamento.aluno_id' => $id)));
+		$pagamentos = $this->Aluno->FinanceiroPagamento->find('all', array('conditions' => array('FinanceiroPagamento.aluno_id' => $aluno['Aluno']['id'])));
 		//debug($pagamentos);
-		$this->set('aluno', $aluno);
-		$users = $this->Aluno->User->find('list');
-		$paises = $this->Aluno->Entidade->PaisNascimento->find('list');
-		$cidades = $this->Aluno->Entidade->CidadeNascimento->find('list');
-		$provincias = $this->Aluno->Entidade->ProvinciaNascimento->find('list');
-		$provenienciacidades = $this->Aluno->Entidade->CidadeNascimento->find('list');
-		$proveniencianomes = $this->Aluno->Entidade->ProvinciaNascimento->find('list');
-		$documentos = $this->Aluno->Entidade->DocumentoIdentificacao->find('list');
-		$areatrabalhos = $this->Aluno->AreaTrabalho->find('list');
-		$generos = $this->Aluno->Entidade->Genero->find('list');
-		$cidadenascimentos = $this->Aluno->Entidade->CidadeNascimento->find('list');
-		$cursos = $this->Aluno->Curso->find('list');
-		$planoestudos = $this->Aluno->Matricula->PlanoEstudo->find('list');
+		$is_bolseiro = $this->Aluno->isBolseiro($aluno['Aluno']['id'], $this->Session->read('SGAConfig.ano_lectivo_id'));
 
-		$is_bolseiro = $this->Aluno->isBolseiro($id, $this->Session->read('SGAConfig.ano_lectivo_id'));
-
-		$this->set(compact('cursos', 'planoestudos', 'users', 'paises', 'cidades', 'provincias', 'documentos', 'areatrabalhos', 'generos', 'cidadenascimentos', 'proveniencianomes', 'provenienciacidades', 'inscricoes_activas', 'todas_inscricoes', 'cadeiras_aprovadas', 'pagamentos', 'is_bolseiro'));
+		$this->set(compact('aluno', 'inscricoes_activas', 'todas_inscricoes', 'cadeiras_aprovadas', 'pagamentos', 'is_bolseiro', 'is_regular', 'classe_estado', 'requisicoes', 'matriculas'));
 	}
 
 	public function exportar_alunos() {
@@ -453,11 +382,43 @@ class AlunosController extends AppController {
 		$this->set(compact('cursos', 'planoestudos', 'anolectivos', 'turnos'));
 	}
 
-	/**
-	 * @fixme Deprecated... mudar o mais rapido possivel para entidades
-	 * @param string $codigo
-	 */
 	public function mostrar_foto($codigo) {
+		$this->viewClass = 'Media';
+		App::uses('Folder', 'Utility');
+		App::uses('File', 'Utility');
+		$this->Aluno->contain();
+		$aluno = $this->Aluno->findByCodigo($codigo);
+		if (!empty($aluno)) {
+			App::uses('File', 'Utility');
+			$path = APP . 'Assets' . DS . 'Fotos' . DS . 'Estudantes' . DS . $aluno['Aluno']['ano_ingresso'] . DS;
+
+			$file_path = $path . $codigo . '.jpg';
+			$folder_novo = new Folder($path);
+
+			$file = new File($file_path);
+
+			if (!$file->exists()) {
+				$codigo = 'default_profile_picture';
+				$path = WWW_ROOT . DS . 'img' . DS;
+			}
+
+
+			$params = array(
+				'id' => $codigo . '.jpg',
+				'name' => 'fotografia',
+				'extension' => 'jpg',
+				'mimeType' => array(
+					'docx' => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+				),
+				'path' => $path
+			);
+			$this->set($params);
+		} else {
+			throw new NotFoundException('Estudante não encontrado. Mostrar foto');
+		}
+	}
+
+	public function estudante_mostrar_foto($codigo) {
 		$this->viewClass = 'Media';
 		App::uses('Folder', 'Utility');
 		App::uses('File', 'Utility');
