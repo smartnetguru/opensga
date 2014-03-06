@@ -72,7 +72,9 @@ class GDataShell extends AppShell {
 					$user = $user->save();
 				}
 			} catch (Exception $e) {
-				var_dump($u['User']);
+				var_dump($usernames[0]);
+				var_dump($u['Entidade']['nomes']);
+				var_dump($u['Entidade']['apelido']);
 				var_dump($e->getMessage());
 				continue;
 			}
