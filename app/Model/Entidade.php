@@ -257,8 +257,36 @@ class Entidade extends AppModel {
 	 * @todo implementar
 	 * @param type $entidade_id
 	 */
-	public function getMorada($entidade_id) {
-		return '';
+	public function getMorada($entidadeId) {
+		$morada = array();
+		$paisMorada = $this->EntidadeContacto->findByEntidadeIdAndTipoContactoIdAndEstadoObjectoId($entidadeId, 11, 1);
+		if (!empty($paisMorada)) {
+			$morada['pais_morada'] = $paisMorada['EntidadeContacto']['valor'];
+		} else {
+			$morada['pais_morada'] = null;
+		}
+
+		$provinciaMorada = $this->EntidadeContacto->findByEntidadeIdAndTipoContactoIdAndEstadoObjectoId($entidadeId, 10, 1);
+		if (!empty($provinciaMorada)) {
+			$morada['provincia_morada'] = $provinciaMorada['EntidadeContacto']['valor'];
+		} else {
+			$morada['provincia_morada'] = null;
+		}
+
+		$cidadeMorada = $this->EntidadeContacto->findByEntidadeIdAndTipoContactoIdAndEstadoObjectoId($entidadeId, 9, 1);
+		if (!empty($cidadeMorada)) {
+			$morada['cidade_morada'] = $cidadeMorada['EntidadeContacto']['valor'];
+		} else {
+			$morada['cidade_morada'] = null;
+		}
+
+		$quarteiraoMorada = $this->EntidadeContacto->findByEntidadeIdAndTipoContactoIdAndEstadoObjectoId($entidadeId, 7, 1);
+		if (!empty($quarteiraoMorada)) {
+			$morada['quarteirao'] = $quarteiraoMorada['EntidadeContacto']['valor'];
+		} else {
+			$morada['quarteirao'] = null;
+		}
+		return $morada;
 	}
 
 	/**

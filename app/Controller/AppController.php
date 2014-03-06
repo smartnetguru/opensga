@@ -77,7 +77,9 @@ class AppController extends Controller {
 
 //Devemos forcar o prefixo para funcionarios da faculdade, docente e estudantes
 		$general_actions = array('logout', 'trocar_senha', 'autocomplete', 'altera_unidade_organica_admin');
-		if (!in_array($this->action, $general_actions)) {
+		if ($this->request->is('ajax')) {
+
+		} elseif (!in_array($this->action, $general_actions)) {
 			$grupo_id = $this->Session->read('Auth.User.group_id');
 			if ($grupo_id == 1) {
 				$this->loadModel('User');

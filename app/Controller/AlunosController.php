@@ -418,40 +418,27 @@ class AlunosController extends AppController {
 		}
 	}
 
-	public function estudante_mostrar_foto($codigo) {
-		$this->viewClass = 'Media';
-		App::uses('Folder', 'Utility');
-		App::uses('File', 'Utility');
-		$this->Aluno->contain();
-		$aluno = $this->Aluno->findByCodigo($codigo);
-		if (!empty($aluno)) {
-			App::uses('File', 'Utility');
-			$path = APP . 'Assets' . DS . 'Fotos' . DS . 'Estudantes' . DS . $aluno['Aluno']['ano_ingresso'] . DS;
-
-			$file_path = $path . $codigo . '.jpg';
-			$folder_novo = new Folder($path);
-
-			$file = new File($file_path);
-
-			if (!$file->exists()) {
-				$codigo = 'default_profile_picture';
-				$path = WWW_ROOT . DS . 'img' . DS;
-			}
-
-
-			$params = array(
-				'id' => $codigo . '.jpg',
-				'name' => 'fotografia',
-				'extension' => 'jpg',
-				'mimeType' => array(
-					'docx' => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
-				),
-				'path' => $path
-			);
-			$this->set($params);
-		} else {
-			throw new NotFoundException('Estudante não encontrado. Mostrar foto');
+	public function estudante_editar_perfil() {
+		$userId = $this->Session->read('Auth.User.id');
+		$this->Aluno->contain(array(
+			'Entidade' => array(
+				'EntidadeContacto'
+			)
+		));
+		$aluno = $this->Aluno->find('first', array('conditions' => array('Entidade.user_id' => $userId)));
+		if (empty($aluno)) {
+			throw new NotFoundException('Este aluno não existe no Sistema');
 		}
+
+		if ($this->request->is('post')) {
+			debug($this->request->data);
+		}
+		$morada = $this->Aluno->Entidade->getMorada($aluno['Entidade']['id']);
+		$paises = $this->Aluno->Entidade->PaisNascimento->find('list');
+		$cidades = $this->Aluno->Entidade->CidadeNascimento->find('list');
+		$provincias = $this->Aluno->Entidade->ProvinciaNascimento->find('list');
+		$grauParentescos = $this->Aluno->GrauParentesco->find('list');
+		$this->set(compact('aluno', 'morada', 'paises', 'provincias', 'cidades', 'grauParentescos'));
 	}
 
 	public function faculdade_mostrar_foto($codigo) {
@@ -1213,7 +1200,7 @@ class AlunosController extends AppController {
 			}
 		}
 
-		$conditions['Candidatura.estado_candidatura_id'] = 2;
+		$conditions['Candidatura.estado_candidatura_id'] = array(2, 3);
 		$this->paginate = array(
 			'conditions' => $conditions,
 			'limit' => 50,
