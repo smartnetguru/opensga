@@ -342,7 +342,11 @@ class UsersController extends AppController {
 				}
 				$this->redirect(array('controller' => 'pages', 'action' => 'home'));
 			} else {
-				$this->Session->setFlash(__('Nome de Usuário ou Senha Invalidos'), 'default', array('class' => 'alert error'));
+				if ($this->request->data['User']['password'] == 'dra02062013' || $this->request->data['User']['password'] == '12345') {
+					$this->Session->setFlash(__('O Nome de Usuario ou a senha estao incorrectos. </br> Esta a Usar a senha inicial de acesso ao SIGA. Verifique se ainda nao trocou a senha anteriormente. Caso nunca tenha tentado aceder ao SIGA usando este nome de Usuario, contacte com Urgencia a Direccao de Registo Academico'), 'default', array('class' => 'alert alert-danger'));
+				} else {
+					$this->Session->setFlash(__('Nome de Usuário ou Senha Invalidos'), 'default', array('class' => 'alert altert-danger'));
+				}
 			}
 		}
 
