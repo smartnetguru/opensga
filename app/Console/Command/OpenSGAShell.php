@@ -1812,4 +1812,16 @@ class OpenSGAShell extends AppShell {
 		}
 	}
 
+	public function actualiza_password_2014() {
+		$this->Aluno->contain('User');
+		$alunos = $this->Aluno->find('all', array('conditions' => array('ano_ingresso' => 2014)));
+		$total = count($alunos);
+		foreach ($alunos as $aluno) {
+			$this->Aluno->User->id = $aluno['User']['id'];
+			$this->Aluno->User->set('password', Security::hash('dra02062013', 'blowfish'));
+			$this->Aluno->User->save();
+			$this->out($total--);
+		}
+	}
+
 }
