@@ -422,7 +422,7 @@ class AlunosController extends AppController {
 		$userId = $this->Session->read('Auth.User.id');
 		$this->Aluno->contain(array(
 			'Entidade' => array(
-				'EntidadeContacto'
+				'EntidadeContacto', 'Bairro', 'Rua'
 			)
 		));
 		$aluno = $this->Aluno->find('first', array('conditions' => array('Entidade.user_id' => $userId)));
@@ -431,7 +431,12 @@ class AlunosController extends AppController {
 		}
 
 		if ($this->request->is('post')) {
-			debug($this->request->data);
+			if ($this->Aluno->actualizaContactos($this->request->data)) {
+				$this->Session->setFlash(__('Seus dados de contacto foram actualizados com sucesso'), 'default', array('class' => 'alert alert-success'));
+				$this->redirect(array('action' => 'perfil', 'estudante' => true));
+			} else {
+				$this->Session->setFlash(__('Seus dados de contacto foram actualizados com sucesso'), 'default', array('class' => 'alert alert-success'));
+			}
 		}
 		$morada = $this->Aluno->Entidade->getMorada($aluno['Entidade']['id']);
 		$paises = $this->Aluno->Entidade->PaisNascimento->find('list');

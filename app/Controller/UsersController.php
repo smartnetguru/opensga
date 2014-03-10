@@ -91,6 +91,41 @@ class UsersController extends AppController {
 		$this->redirect(array('action' => 'login', 'estudante' => FALSE));
 	}
 
+	public function estudante_trocar_senha($id = null) {
+		$this->User->id = $id;
+		if (!$this->User->exists()) {
+			throw new NotFoundException('Usuário não encontrado');
+		}
+
+		if ($this->request->is('post') || $this->request->is('put')) {
+			$senhAntiga = $this->request->data['User']['senhaantiga'];
+			$senhaNova1 = $this->request->data['User']['novasenha1'];
+			$senhaNova2 = $this->request->data['User']['novasenha2'];
+
+			$senhaBd = $this->User->findById($this->Session->read('Auth.User.id'));
+			$storedHash = $senhaBd['User']['password'];
+			$newHash = Security::hash($senhAntiga, 'blowfish', $storedHash);
+			$correct = $storedHash == $newHash;
+			if ($correct) {
+				if ($senhaNova1 == $senhaNova2) {
+					$this->request->data['User']['password'] = Security::hash($senhaNova1, 'blowfish');
+					$this->User->id = $id;
+					$this->User->set('password', Security::hash($senhaNova1, 'blowfish'));
+					if ($this->User->save()) {
+						$this->Session->setFlash(__('Senha alterada com sucesso'), 'default', array('class' => 'alert alert-success'));
+						$this->redirect(array('controller' => 'pages', 'action' => 'home', 'estudante' => true));
+					} else {
+						$this->Session->setFlash(sprintf(__('Erro ao alterar a senha. Por favor, tente de novo', true), 'user'), 'default', array('class' => 'alert alert-danger'));
+					}
+				} else {
+					$this->Session->setFlash(sprintf(__('As senhas introduzidas não são idênticas', true), 'user'), 'default', array('class' => 'alert alert-danger'));
+				}
+			} else {
+				$this->Session->setFlash(sprintf(__('A senha antiga nao confere', true), 'user'), 'default', array('class' => 'alert alert-danger'));
+			}
+		}
+	}
+
 	public function estudante_logout() {
 		$this->redirect(array('action' => 'logout', 'estudante' => FALSE));
 	}
@@ -276,7 +311,9 @@ class UsersController extends AppController {
 					//die(var_dump($unidade_organicas));
 				}
 				if ($User['group_id'] == 3) {
-
+					if ($password_login == 'dra02062013') {
+						$this->redirect(array('controller' => 'users', 'action' => 'trocar_senha', $User['id'], 'estudante' => true));
+					}
 					$this->redirect(array('controller' => 'pages', 'action' => 'home', 'estudante' => TRUE));
 				}
 				if ($User['group_id'] == 4) {

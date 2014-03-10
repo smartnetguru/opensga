@@ -67,7 +67,7 @@ class Entidade extends AppModel {
 			'order' => ''
 		),
 		'Rua' => array(
-			'className' => 'Cidade',
+			'className' => 'Rua',
 			'foreignKey' => 'avenida_rua',
 			'conditions' => '',
 			'fields' => '',
@@ -224,10 +224,6 @@ class Entidade extends AppModel {
 		return implode(' ', $nomes);
 	}
 
-	public function gravaContactos($data, $tipo_entidade = 'aluno') {
-
-	}
-
 	public function getCellNumber($entidade_id) {
 		$entidade = $this->findById($entidade_id);
 		if ($entidade['Entidade']['telemovel']) {
@@ -259,13 +255,13 @@ class Entidade extends AppModel {
 	 */
 	public function getMorada($entidadeId) {
 		$morada = array();
-		$paisMorada = $this->EntidadeContacto->findByEntidadeIdAndTipoContactoIdAndEstadoObjectoId($entidadeId, 11, 1);
+		$paisMorada = $this->EntidadeContacto->findByEntidadeIdAndTipoContactoIdAndEstadoObjectoId($entidadeId, 11, 1, null, 'id DESC');
 		if (!empty($paisMorada)) {
 			$morada['pais_morada'] = $paisMorada['EntidadeContacto']['valor'];
 		} else {
 			$morada['pais_morada'] = null;
 		}
-
+		debug($paisMorada);
 		$provinciaMorada = $this->EntidadeContacto->findByEntidadeIdAndTipoContactoIdAndEstadoObjectoId($entidadeId, 10, 1);
 		if (!empty($provinciaMorada)) {
 			$morada['provincia_morada'] = $provinciaMorada['EntidadeContacto']['valor'];

@@ -76,7 +76,7 @@ class AppController extends Controller {
 
 
 //Devemos forcar o prefixo para funcionarios da faculdade, docente e estudantes
-		$general_actions = array('logout', 'trocar_senha', 'autocomplete', 'altera_unidade_organica_admin');
+		$general_actions = array('logout', 'trocar_senha', 'autocomplete', 'altera_unidade_organica_admin', 'display', 'email_oficial_uem', 'webmail', 'email');
 		if ($this->request->is('ajax')) {
 
 		} elseif (!in_array($this->action, $general_actions)) {

@@ -449,7 +449,6 @@ class Aluno extends AppModel {
 	 */
 	public function cadastraAluno(array $data) {
 		$dataSource = $this->getDataSource();
-
 		$dataSource->begin();
 
 		$data_matricula = array();
@@ -746,6 +745,22 @@ class Aluno extends AppModel {
 
 
 		return $alunos_curso;
+	}
+
+	public function actualizaContactos($data) {
+		$dataSource = $this->getDataSource();
+		$dataSource->begin();
+
+		$this->id = $data['Aluno']['aluno_id'];
+		$this->set('nome_emergencia', $data['Aluno']['nome_emergencia']);
+		$this->set('telemovel_emergencia', $data['Aluno']['telemovel_emergencia']);
+		$this->set('parentesco_encarregado', $data['Aluno']['parentesco_encarregado']);
+		$this->save();
+
+		if ($this->Entidade->EntidadeContacto->actualizaContactos($data)) {
+			return $dataSource->commit();
+		}
+		return $dataSource->rollback();
 	}
 
 	public function getTotalAlunosActivosPorCurso() {
