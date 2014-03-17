@@ -174,11 +174,11 @@ class MatriculasController extends AppController {
 	}
 
 	public function print_comprovativo_matricula($alunoId) {
-		$this->Aluno->contain(array(
+		$this->Matricula->Aluno->contain(array(
 			'Entidade' => array('User'), 'Curso'
 		));
 
-		$aluno = $this->Aluno->findById($alunoId);
+		$aluno = $this->Matricula->Aluno->findById($alunoId);
 		$this->set(compact('aluno', 'faculdade'));
 	}
 
