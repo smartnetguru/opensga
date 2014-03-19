@@ -7,13 +7,13 @@
         <group>
             <file>file:/var/www/opensga/app/Console/Command/OpenSGAShell.php</file>
             <file>file:/var/www/opensga/app/View/Alunos/index.ctp</file>
-            <file>file:/var/www/opensga/app/Controller/UsersController.php</file>
             <file>file:/var/www/opensga/app/View/Pages/estudante_home.ctp</file>
             <file>file:/var/www/opensga/app/View/Disciplinas/faculdade_index.ctp</file>
             <file>file:/var/www/opensga/app/View/Common/Alunos/perfil_estudante_common.ctp</file>
             <file>file:/var/www/opensga/app/Console/Command/GDataShell.php</file>
             <file>file:/var/www/opensga/app/View/Alunos/estudante_perfil.ctp</file>
             <file>file:/var/www/opensga/app/Console/Command/OpenSGAAclShell.php</file>
+            <file>file:/var/www/opensga/app/Config/core.php</file>
             <file>file:/var/www/opensga/app/Model/Aluno.php</file>
             <file>file:/var/www/opensga/app/Controller/AlunosController.php</file>
             <file>file:/var/www/opensga/app/View/Elements/header.ctp</file>

@@ -1198,7 +1198,7 @@ class AlunosController extends AppController {
 		$conditions = array();
 		if ($this->request->is('post')) {
 			if ($this->request->data['Candidatura']['numero_candidato'] != '') {
-				$conditions['Candidatura.numero_candidato'] = $this->request->data['Candidatura']['numero_candidato'];
+				$conditions['Candidatura.numero_estudante'] = $this->request->data['Candidatura']['numero_candidato'];
 			} else {
 				$conditions['Candidatura.nomes LIKE'] = '%' . $this->request->data['Candidatura']['nomes'] . '%';
 				$conditions['Candidatura.apelido LIKE'] = '%' . $this->request->data['Candidatura']['apelido'] . '%';
