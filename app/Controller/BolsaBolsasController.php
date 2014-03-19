@@ -133,7 +133,7 @@ class BolsaBolsasController extends AppController {
 					'ProvinciaNascimento', 'Genero'
 				), 'Curso'
 			));
-			$aluno = $this->BolsaBolsa->Aluno->find('first', array('conditions' => array('Aluno.ano_ingresso' => $anoIngresso));
+			$aluno = $this->BolsaBolsa->Aluno->find('first', array('conditions' => array('Aluno.ano_ingresso' => $anoIngresso)));
 			debug($aluno);
 		}
 	}
