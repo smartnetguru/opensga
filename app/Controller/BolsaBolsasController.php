@@ -1,5 +1,7 @@
 <?php
+
 App::uses('AppController', 'Controller');
+
 /**
  * BolsaBolsas Controller
  *
@@ -7,23 +9,23 @@ App::uses('AppController', 'Controller');
  */
 class BolsaBolsasController extends AppController {
 
-/**
- * index method
- *
- * @return void
- */
+	/**
+	 * index method
+	 *
+	 * @return void
+	 */
 	public function index() {
 		$this->BolsaBolsa->recursive = 0;
 		$this->set('bolsaBolsas', $this->paginate());
 	}
 
-/**
- * view method
- *
- * @throws NotFoundException
- * @param string $id
- * @return void
- */
+	/**
+	 * view method
+	 *
+	 * @throws NotFoundException
+	 * @param string $id
+	 * @return void
+	 */
 	public function view($id = null) {
 		$this->BolsaBolsa->id = $id;
 		if (!$this->BolsaBolsa->exists()) {
@@ -32,11 +34,11 @@ class BolsaBolsasController extends AppController {
 		$this->set('bolsaBolsa', $this->BolsaBolsa->read(null, $id));
 	}
 
-/**
- * add method
- *
- * @return void
- */
+	/**
+	 * add method
+	 *
+	 * @return void
+	 */
 	public function add() {
 		if ($this->request->is('post')) {
 			$this->BolsaBolsa->create();
@@ -58,13 +60,13 @@ class BolsaBolsasController extends AppController {
 		$this->set(compact('alunos', 'bolsaCandidaturas', 'anolectivos', 'bancos', 'bolsaFonteBolsas', 'bolsaCriadorContas', 'bolsaEstadoBolsas', 'bolsaResultados'));
 	}
 
-/**
- * edit method
- *
- * @throws NotFoundException
- * @param string $id
- * @return void
- */
+	/**
+	 * edit method
+	 *
+	 * @throws NotFoundException
+	 * @param string $id
+	 * @return void
+	 */
 	public function edit($id = null) {
 		$this->BolsaBolsa->id = $id;
 		if (!$this->BolsaBolsa->exists()) {
@@ -91,14 +93,14 @@ class BolsaBolsasController extends AppController {
 		$this->set(compact('alunos', 'bolsaCandidaturas', 'anolectivos', 'bancos', 'bolsaFonteBolsas', 'bolsaCriadorContas', 'bolsaEstadoBolsas', 'bolsaResultados'));
 	}
 
-/**
- * delete method
- *
- * @throws MethodNotAllowedException
- * @throws NotFoundException
- * @param string $id
- * @return void
- */
+	/**
+	 * delete method
+	 *
+	 * @throws MethodNotAllowedException
+	 * @throws NotFoundException
+	 * @param string $id
+	 * @return void
+	 */
 	public function delete($id = null) {
 		if (!$this->request->is('post')) {
 			throw new MethodNotAllowedException();
@@ -114,4 +116,26 @@ class BolsaBolsasController extends AppController {
 		$this->Session->setFlash(__('Bolsa bolsa was not deleted'));
 		$this->redirect(array('action' => 'index'));
 	}
+
+	public function exportar_bolseiros_ano_ingresso($anoIngresso = null) {
+		if ($anoIngresso == null) {
+			$anoIngresso = Configure::read('OpenSGA.ano_lectivo');
+		}
+
+		$this->loadModel('BolsaTemporaria');
+		$this->BolsaTemporaria->contain(array(
+			'BolsaTipoBolsa'
+		));
+		$bolsas = $this->BolsaTemporaria->find('all');
+		foreach ($bolsas as $k => $bolsa) {
+			$this->BolsaBolsa->Aluno->contain(array(
+				'Entidade' => array(
+					'ProvinciaNascimento', 'Genero'
+				), 'Curso'
+			));
+			$aluno = $this->BolsaBolsa->Aluno->find('first', array('conditions' => array('Aluno.ano_ingresso' => $anoIngresso));
+			debug($aluno);
+		}
+	}
+
 }

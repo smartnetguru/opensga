@@ -69,10 +69,13 @@ class OpenSGAAclShell extends AppShell {
 			$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/pesquisar_candidato";
 			$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/atribuir_bolsa_candidato";
 			$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/print_bolsas_novo_ingresso";
+			$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/BolsaBolsas/exportar_bolseiros_ano_ingresso";
 			$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Users/login";
 			$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Users/logout";
 			$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Users/faculdade_logout";
 			$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Users/trocar_senha";
+			$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/matricula_novo_ingresso_sucesso";
+			$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/matricular_candidato";
 
 			//Permissoes para funcionarios da faculdade
 			if ($this->User->isFromFaculdade($funcionario['User']['id'])) {
