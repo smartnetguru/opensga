@@ -638,7 +638,7 @@ class AlunosController extends AppController {
 			$this->request->data['Dados']['numero_candidato'] = $candidato_id;
 			if ($this->Aluno->matriculaNovoIngresso($this->request->data)) {
 				$this->Session->setFlash("Aluno Registrado com Sucesso", 'default', array('class' => 'alert alert-success'));
-				$this->redirect(array('controller' => 'alunos', 'action' => 'matricula_novo_ingresso_sucesso', $this->Aluno->id));
+				$this->redirect(array('controller' => 'alunos', 'action' => 'perfil_estudante', $this->Aluno->id));
 			} else {
 				$this->Session->setFlash('Problemas ao registrar os dados do Aluno', 'default', array('class' => 'alert alert-danger'));
 			}

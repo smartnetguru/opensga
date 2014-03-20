@@ -186,10 +186,6 @@ class EstudantesShell extends AppShell {
 		$objWriter = PHPExcel_IOFactory::createWriter($xls, 'Excel2007');
 
 		$objWriter->save(Configure::read('OpenSGA.save_path') . DS . 'renovacao' . Configure::read('OpenSGA.ano_lectivo') . '.xlsx');
-
-		foreach ($alunos as $aluno) {
-			debug($aluno);
-		}
 	}
 
 }
