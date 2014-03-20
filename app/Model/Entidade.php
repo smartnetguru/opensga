@@ -290,7 +290,7 @@ class Entidade extends AppModel {
 	 * @todo implementar o metodo
 	 */
 	public function getNumeroDocumentoIdentificacao($entidade_id) {
-		return 0;
+		return '0';
 	}
 
 }
