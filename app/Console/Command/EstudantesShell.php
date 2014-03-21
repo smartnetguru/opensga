@@ -391,7 +391,7 @@ class EstudantesShell extends AppShell {
 			$this->out('Faculdade------------------------------' . $faculdadeNome);
 			$ws->getHeaderFooter()->setOddFooter('&L&D  &RPagina &P de &N');
 			$objWriter = PHPExcel_IOFactory::createWriter($xls, 'Excel2007');
-			$objWriter->save(Configure::read('OpenSGA.save_path') . DS . 'Estudantes' . DS . Inflector::slug($faculdadeNome) . '_' . Configure::read('OpenSGA.ano_lectivo') . '.xlsx');
+			$objWriter->save(Configure::read('OpenSGA.save_path') . DS . 'Estudantes' . DS . Configure::read('OpenSGA.ano_lectivo') . DS . Inflector::slug($faculdadeNome) . '.xlsx');
 		}
 	}
 
