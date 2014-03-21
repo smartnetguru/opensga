@@ -184,7 +184,7 @@ class EstudantesShell extends AppShell {
 		}
 
 		$objWriter = PHPExcel_IOFactory::createWriter($xls, 'Excel2007');
-		$objWriter->save(APP . 'webroot' . DS . 'import_' . date('Y_m_d') . '.xlsx');
+		$objWriter->save(Configure::read('OpenSGA.save_path') . DS . 'Estudantes' . DS . 'import_' . date('Y_m_d') . '.xlsx');
 	}
 
 	public function exporta_novos_ingressos_por_curso() {
@@ -192,18 +192,97 @@ class EstudantesShell extends AppShell {
 		if (!class_exists('PHPExcel')) {
 			throw new CakeException('Vendor class PHPExcel not found!');
 		}
-		$xls = PHPExcel_IOFactory::load(APP . 'Reports' . DS . 'Estudantes' . DS . 'novos_ingressos_curso.xlsx');
-		$worksheet = $xls->getActiveSheet();
-		$linhaActual = 2;
+
+
+		$linhaUem = 1;
+		$linhaFaculdade = 3;
+		$linhaCurso = 4;
+		$linhaTitulo = 5;
+		$linhaC = 7;
+
+		$linhaActual = 1;
 
 		$faculdades = $this->Aluno->Curso->UnidadeOrganica->find('list', array('conditions' => array('tipo_unidade_organica_id' => 1)));
 		foreach ($faculdades as $faculdadeId => $faculdadeNome) {
 			$departamentos = $this->Aluno->Curso->UnidadeOrganica->children($faculdadeId);
 			$arrayDepartamentos = Hash::extract($departamentos, '{n}.UnidadeOrganica.id');
 			$arrayDepartamentos[] = $faculdadeId;
+			$xls = PHPExcel_IOFactory::load(APP . 'Reports' . DS . 'Estudantes' . DS . 'novos_ingressos_curso.xlsx');
+			$ws = $xls->getActiveSheet();
+			$paginaActual = 1;
 
 			$cursos = $this->Aluno->Curso->find('list', array('conditions' => array('unidade_organica_id' => $arrayDepartamentos)));
 			foreach ($cursos as $cursoID => $cursoNome) {
+				$ws->setCellValue('A' . $linhaActual, 'UNIVERSIDADE EDUARDO MONDLANE');
+				if ($paginaActual != 1) {
+					$ws->mergeCells('A' . $linhaActual . ':K' . $linhaActual);
+					$ws->duplicateStyle($ws->getStyle('A' . $linhaUem), 'A' . $linhaActual);
+					$ws->getStyle('A' . $linhaActual . ':K' . $linhaActual)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+					$ws->getStyle('A' . $linhaActual . ':K' . $linhaActual)->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
+				}
+				$linhaActual++;
+				$ws->setCellValue('A' . $linhaActual, $faculdadeNome);
+				if ($paginaActual != 1) {
+					$ws->mergeCells('A' . $linhaActual . ':K' . $linhaActual);
+					$ws->duplicateStyle($ws->getStyle('A' . $linhaFaculdade), 'A' . $linhaActual);
+					$ws->getStyle('A' . $linhaActual . ':K' . $linhaActual)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+					$ws->getStyle('A' . $linhaActual . ':K' . $linhaActual)->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
+				}
+				$linhaActual++;
+				$linhaActual++;
+				$ws->setCellValue('A' . $linhaActual, $cursoNome);
+				if ($paginaActual != 1) {
+					$ws->mergeCells('A' . $linhaActual . ':K' . $linhaActual);
+					$ws->duplicateStyle($ws->getStyle('A' . $linhaCurso), 'A' . $linhaActual);
+					$ws->getStyle('A' . $linhaActual . ':K' . $linhaActual)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+					$ws->getStyle('A' . $linhaActual . ':K' . $linhaActual)->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
+				}
+				$linhaActual++;
+				$ws->setCellValue('A' . $linhaActual, 'Novos Ingressos  - 2014');
+				if ($paginaActual != 1) {
+					$ws->mergeCells('A' . $linhaActual . ':K' . $linhaActual);
+					$ws->duplicateStyle($ws->getStyle('A' . $linhaTitulo), 'A' . $linhaActual);
+					$ws->getStyle('A' . $linhaActual . ':K' . $linhaActual)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+					$ws->getStyle('A' . $linhaActual . ':K' . $linhaActual)->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
+				}
+				$linhaActual++;
+				$linhaActual++;
+				$ws->setCellValue('A' . $linhaActual, '#');
+				if ($paginaActual != 1) {
+					$ws->mergeCells('A' . $linhaActual . ':A' . $linhaActual);
+					$ws->getStyle('A' . $linhaActual . ':A' . $linhaActual)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
+					$ws->duplicateStyle($ws->getStyle('A' . $linhaC), 'A' . $linhaActual);
+					$ws->getStyle('A' . $linhaActual . ':A' . $linhaActual)->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
+				}
+				$ws->setCellValue('B' . $linhaActual, 'Codigo');
+				if ($paginaActual != 1) {
+					$ws->mergeCells('B' . $linhaActual . ':B' . $linhaActual);
+					$ws->getStyle('B' . $linhaActual . ':B' . $linhaActual)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
+					$ws->duplicateStyle($ws->getStyle('B' . $linhaC), 'B' . $linhaActual);
+					$ws->getStyle('B' . $linhaActual . ':B' . $linhaActual)->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
+				}
+				$ws->setCellValue('C' . $linhaActual, 'Apelido');
+				if ($paginaActual != 1) {
+					$ws->mergeCells('C' . $linhaActual . ':E' . $linhaActual);
+					$ws->getStyle('C' . $linhaActual . ':E' . $linhaActual)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
+					$ws->duplicateStyle($ws->getStyle('C' . $linhaC), 'C' . $linhaActual);
+					$ws->getStyle('C' . $linhaActual . ':E' . $linhaActual)->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
+				}
+				$ws->setCellValue('F' . $linhaActual, 'Outros Nomes');
+				if ($paginaActual != 1) {
+					$ws->mergeCells('F' . $linhaActual . ':J' . $linhaActual);
+					$ws->getStyle('F' . $linhaActual . ':J' . $linhaActual)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
+					$ws->duplicateStyle($ws->getStyle('F' . $linhaC), 'F' . $linhaActual);
+					$ws->getStyle('F' . $linhaActual . ':J' . $linhaActual)->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
+				}
+				$ws->setCellValue('K' . $linhaActual, 'Sexo');
+				if ($paginaActual != 1) {
+					$ws->mergeCells('K' . $linhaActual . ':K' . $linhaActual);
+					$ws->getStyle('K' . $linhaActual . ':K' . $linhaActual)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
+					$ws->duplicateStyle($ws->getStyle('K' . $linhaC), 'K' . $linhaActual);
+					$ws->getStyle('K' . $linhaActual . ':K' . $linhaActual)->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
+				}
+				$linhaActual++;
 				$this->Aluno->contain(array(
 					'Curso', 'Entidade' => array(
 						'Genero'
@@ -211,35 +290,109 @@ class EstudantesShell extends AppShell {
 						)
 				);
 				$alunos = $this->Aluno->find('all', array('conditions' => array('Aluno.ano_ingresso' => Configure::read('OpenSGA.ano_lectivo'), 'curso_id' => $cursoID)));
+				$i = 1;
+				$homens = 0;
+				$mulheres = 0;
+				$idades = 0;
 				foreach ($alunos as $aluno) {
-					$this->out($aluno['Entidade']['name']);
+					if ($aluno['Entidade']['genero_id'] == 1) {
+						$homens++;
+					} elseif ($aluno['Entidade']['genero_id'] == 2) {
+						$mulheres++;
+					}
+					$from = new DateTime($aluno['Entidade']['data_nascimento']);
+					$to = new DateTime('today');
+					$idades += $from->diff($to)->y;
+					$ws->setCellValue('A' . $linhaActual, $i);
+					$i++;
+					$ws->mergeCells('A' . $linhaActual . ':A' . $linhaActual);
+					$ws->getStyle('A' . $linhaActual . ':A' . $linhaActual)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
+					//$ws->duplicateStyle($ws->getStyle('A' . $linhaC), 'A' . $linhaActual);
+					$ws->getStyle('A' . $linhaActual . ':A' . $linhaActual)->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
+
+					$ws->setCellValue('B' . $linhaActual, $aluno['Aluno']['codigo']);
+
+					$ws->mergeCells('B' . $linhaActual . ':B' . $linhaActual);
+					$ws->getStyle('B' . $linhaActual . ':B' . $linhaActual)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
+					//$ws->duplicateStyle($ws->getStyle('B' . $linhaC), 'B' . $linhaActual);
+					$ws->getStyle('B' . $linhaActual . ':B' . $linhaActual)->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
+
+					$ws->setCellValue('C' . $linhaActual, $aluno['Entidade']['apelido']);
+
+					$ws->mergeCells('C' . $linhaActual . ':E' . $linhaActual);
+					$ws->getStyle('C' . $linhaActual . ':E' . $linhaActual)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
+					//$ws->duplicateStyle($ws->getStyle('C' . $linhaC), 'C' . $linhaActual);
+					$ws->getStyle('C' . $linhaActual . ':E' . $linhaActual)->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
+
+					$ws->setCellValue('F' . $linhaActual, $aluno['Entidade']['nomes']);
+
+					$ws->mergeCells('F' . $linhaActual . ':J' . $linhaActual);
+					$ws->getStyle('F' . $linhaActual . ':J' . $linhaActual)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
+					//$ws->duplicateStyle($ws->getStyle('F' . $linhaC), 'F' . $linhaActual);
+					$ws->getStyle('F' . $linhaActual . ':J' . $linhaActual)->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
+
+					$ws->setCellValue('K' . $linhaActual, $aluno['Entidade']['Genero']['name']);
+
+					$ws->mergeCells('K' . $linhaActual . ':K' . $linhaActual);
+					$ws->getStyle('K' . $linhaActual . ':K' . $linhaActual)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
+					//$ws->duplicateStyle($ws->getStyle('K' . $linhaC), 'K' . $linhaActual);
+					$ws->getStyle('K' . $linhaActual . ':K' . $linhaActual)->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
+
+					$linhaActual++;
+					$this->out('Aluno-----' . $i . '-------' . $aluno['Entidade']['name']);
 				}
+				$this->out('Curso-----------' . $cursoNome);
+				$paginaActual++;
+				$linhaActual++;
+				$linhaActual++;
+				$linhaActual++;
+				if ($i > 1) {
+					$ws->setCellValue('A' . $linhaActual, 'Total de Estudantes');
+					$ws->mergeCells('A' . $linhaActual . ':B' . $linhaActual);
+					$ws->getStyle('A' . $linhaActual . ':B' . $linhaActual)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_RIGHT);
+					$ws->getStyle('A' . $linhaActual . ':B' . $linhaActual)->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
+					$ws->setCellValue('C' . $linhaActual, $i - 1);
+					$ws->mergeCells('C' . $linhaActual . ':C' . $linhaActual);
+					$ws->getStyle('C' . $linhaActual . ':C' . $linhaActual)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
+					$ws->getStyle('C' . $linhaActual . ':C' . $linhaActual)->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
+					$linhaActual++;
+					$ws->setCellValue('A' . $linhaActual, 'Total Homens');
+					$ws->mergeCells('A' . $linhaActual . ':B' . $linhaActual);
+					$ws->getStyle('A' . $linhaActual . ':B' . $linhaActual)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_RIGHT);
+					$ws->getStyle('A' . $linhaActual . ':B' . $linhaActual)->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
+					$ws->setCellValue('C' . $linhaActual, $homens);
+					$ws->mergeCells('C' . $linhaActual . ':C' . $linhaActual);
+					$ws->getStyle('C' . $linhaActual . ':C' . $linhaActual)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
+					$ws->getStyle('C' . $linhaActual . ':C' . $linhaActual)->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
+					$linhaActual++;
+					$ws->setCellValue('A' . $linhaActual, 'Total de Mulheres');
+					$ws->mergeCells('A' . $linhaActual . ':B' . $linhaActual);
+					$ws->getStyle('A' . $linhaActual . ':B' . $linhaActual)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_RIGHT);
+					$ws->getStyle('A' . $linhaActual . ':B' . $linhaActual)->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
+					$ws->setCellValue('C' . $linhaActual, $mulheres);
+					$ws->mergeCells('C' . $linhaActual . ':C' . $linhaActual);
+					$ws->getStyle('C' . $linhaActual . ':C' . $linhaActual)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
+					$ws->getStyle('C' . $linhaActual . ':C' . $linhaActual)->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
+					$linhaActual++;
+					$linhaActual++;
+					$ws->setCellValue('A' . $linhaActual, 'Media de Idades');
+					$ws->mergeCells('A' . $linhaActual . ':B' . $linhaActual);
+					$ws->getStyle('A' . $linhaActual . ':B' . $linhaActual)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_RIGHT);
+					$ws->getStyle('A' . $linhaActual . ':B' . $linhaActual)->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
+					$ws->setCellValue('C' . $linhaActual, intval($idades / ($i - 1)));
+					$ws->mergeCells('C' . $linhaActual . ':C' . $linhaActual);
+					$ws->getStyle('C' . $linhaActual . ':C' . $linhaActual)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
+					$ws->getStyle('C' . $linhaActual . ':C' . $linhaActual)->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
+					$linhaActual++;
+				}
+				$ws->setBreak('A' . $linhaActual, PHPExcel_Worksheet::BREAK_ROW);
+				$linhaActual++;
 			}
+			$this->out('Faculdade------------------------------' . $faculdadeNome);
+			$ws->getHeaderFooter()->setOddFooter('&L&D  &RPagina &P de &N');
+			$objWriter = PHPExcel_IOFactory::createWriter($xls, 'Excel2007');
+			$objWriter->save(Configure::read('OpenSGA.save_path') . DS . 'Estudantes' . DS . Inflector::slug($faculdadeNome) . '_' . Configure::read('OpenSGA.ano_lectivo') . '.xlsx');
 		}
-		die();
-
-
-		foreach ($alunos as $aluno) {
-			$worksheet->setCellValue('A' . $linhaActual, $matricula['Aluno']['codigo']);
-			$worksheet->setCellValue('B' . $linhaActual, $matricula['Aluno']['Entidade']['apelido']);
-			$worksheet->setCellValue('C' . $linhaActual, $matricula['Aluno']['Entidade']['nomes']);
-			$worksheet->setCellValue('D' . $linhaActual, $matricula['AnoLectivo']['ano']);
-			$worksheet->setCellValue('E' . $linhaActual, $matricula['Matricula']['data']);
-			$worksheet->setCellValue('F' . $linhaActual, $matricula['Curso']['name']);
-			$unidade_organica = $matricula['Curso']['UnidadeOrganica'];
-			$faculdade = $unidade_organica;
-			if ($unidade_organica['tipo_unidade_organica_id'] == 2) {
-				$unidade_organica_nova = $this->Aluno->Curso->UnidadeOrganica->findById($unidade_organica['parent_id']);
-				$faculdade = $unidade_organica_nova['UnidadeOrganica'];
-			}
-			$xls->getActiveSheet()->setCellValue('G' . $linhaActual, $faculdade['name']);
-			$this->out($linhaActual . "---" . $matricula['Aluno']['codigo']);
-			$linhaActual++;
-			$xls->getActiveSheet()->setBreak('G' . $linhaActual, 2);
-		}
-		$objWriter = PHPExcel_IOFactory::createWriter($xls, 'Excel2007');
-
-		$objWriter->save(Configure::read('OpenSGA.save_path') . DS . 'renovacao' . Configure::read('OpenSGA.ano_lectivo') . '.xlsx');
 	}
 
 }
