@@ -58,7 +58,7 @@ class Curso extends AppModel {
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
-		),
+		)
 	);
 	var $hasMany = array(
 		'PlanoEstudo' => array(
@@ -102,6 +102,19 @@ class Curso extends AppModel {
 		),
 		'Matricula' => array(
 			'className' => 'Matricula',
+			'foreignKey' => 'curso_id',
+			'dependent' => false,
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'exclusive' => '',
+			'finderQuery' => '',
+			'counterQuery' => ''
+		),
+		'Aluno' => array(
+			'className' => 'Aluno',
 			'foreignKey' => 'curso_id',
 			'dependent' => false,
 			'conditions' => '',

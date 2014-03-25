@@ -149,11 +149,14 @@ class EstudantesShell extends AppShell {
 				'UnidadeOrganica'
 			)
 		));
-		$alunos = $this->Aluno->find('all');
+		$alunos = $this->Aluno->find('all', array('conditions' => array("NOT" => array('Aluno.codigo' => null))));
 		$totalAlunos = count($alunos);
 		$linhaActual = 2;
 		foreach ($alunos as $aluno) {
 			$xls->getActiveSheet()->setCellValue('A' . $linhaActual, $aluno['Aluno']['codigo']);
+			if (!$aluno['Entidade']['apelido']) {
+				$aluno['Entidade']['apelido'] = '..';
+			}
 			$xls->getActiveSheet()->setCellValue('B' . $linhaActual, $aluno['Entidade']['apelido']);
 			$xls->getActiveSheet()->setCellValue('C' . $linhaActual, $aluno['Entidade']['nomes']);
 			$bi = $this->Aluno->Entidade->getNumeroDocumentoIdentificacao($aluno['Entidade']['id']);
@@ -161,11 +164,18 @@ class EstudantesShell extends AppShell {
 			$xls->getActiveSheet()->setCellValue('E' . $linhaActual, $aluno['Entidade']['data_nascimento']);
 			$xls->getActiveSheet()->setCellValue('F' . $linhaActual, $aluno['Aluno']['ano_ingresso']);
 			$morada = $this->Aluno->Entidade->getMorada($aluno['Entidade']['id']);
+			$morada = '0A';
 			$xls->getActiveSheet()->setCellValue('G' . $linhaActual, $morada);
 			$telefone = $this->Aluno->Entidade->getCellNumber($aluno['Entidade']['id']);
+			if (!$telefone) {
+				$telefone = '0A';
+			}
 			$xls->getActiveSheet()->setCellValue('H' . $linhaActual, $telefone);
 			$xls->getActiveSheet()->setCellValue('I' . $linhaActual, $telefone);
 			$xls->getActiveSheet()->setCellValue('J' . $linhaActual, $aluno['Curso']['codigo']);
+			if (!$aluno['Entidade']['PaisNascimento']['name']) {
+				$aluno['Entidade']['PaisNascimento']['name'] = '0A';
+			}
 			$xls->getActiveSheet()->setCellValue('K' . $linhaActual, $aluno['Entidade']['PaisNascimento']['name']);
 			$xls->getActiveSheet()->setCellValue('L' . $linhaActual, $aluno['Entidade']['User']['username']);
 			$unidadeOrganica = $aluno['Curso']['UnidadeOrganica'];
