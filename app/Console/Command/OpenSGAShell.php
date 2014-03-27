@@ -1751,13 +1751,21 @@ class OpenSGAShell extends AppShell {
 	}
 
 	public function actualiza_password_2014() {
+		AuditableConfig::$Logger = ClassRegistry::init('Auditable.Logger');
 		$this->Aluno->contain('User');
-		$alunos = $this->Aluno->find('all', array('conditions' => array('ano_ingresso' => 2014)));
+		$alunos = $this->Aluno->find('all');
 		$total = count($alunos);
 		foreach ($alunos as $aluno) {
 			$this->Aluno->User->id = $aluno['User']['id'];
-			$this->Aluno->User->set('password', Security::hash('dra02062013', 'blowfish'));
-			$this->Aluno->User->save();
+			$passwordAntiga = 'dra02062013';
+			$storedHash = $aluno['User']['password'];
+			$newHash = Security::hash($passwordAntiga, 'blowfish', $storedHash);
+			$correct = $storedHash == $newHash;
+			if ($correct) {
+				$this->out('Mudando a senha de -----' . $aluno['Aluno']['codigo']);
+				$this->Aluno->User->set('password', Security::hash($aluno['Aluno']['codigo'], 'blowfish'));
+				$this->Aluno->User->save();
+			}
 			$this->out($total--);
 		}
 	}
