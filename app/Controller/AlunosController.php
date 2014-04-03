@@ -1232,7 +1232,7 @@ class AlunosController extends AppController {
 			$this->request->data['BolsaTemporaria']['apelido'] = $candidato['Candidatura']['apelido'];
 			$this->request->data['BolsaTemporaria']['nomes'] = $candidato['Candidatura']['nomes'];
 
-			$bolsa_existe = $this->BolsaTemporaria->findByNumeroCandidato($this->request->data['BolsaTemporaria']['numero_candidato']);
+			$bolsa_existe = $this->BolsaTemporaria->findByCandidaturaId($this->request->data['BolsaTemporaria']['candidatura_id']);
 			debug($bolsa_existe);
 			die();
 			if (!$bolsa_existe) {
