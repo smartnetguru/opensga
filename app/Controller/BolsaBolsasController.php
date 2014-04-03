@@ -134,11 +134,12 @@ class BolsaBolsasController extends AppController {
 				), 'Curso'
 			));
 			$aluno = $this->BolsaBolsa->Aluno->find('first', array('conditions' => array('Aluno.ano_ingresso' => $anoIngresso)));
-
+			print_r($k);
 			$bolsas[$k]['Aluno'] = $aluno['Aluno'];
 			$bolsas[$k]['Entidade'] = $aluno['Entidade'];
 			$bolsas[$k]['Curso'] = $aluno['Curso'];
 		}
+		die();
 
 		$this->set(compact('bolsas'));
 	}
