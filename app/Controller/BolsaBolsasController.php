@@ -133,11 +133,12 @@ class BolsaBolsasController extends AppController {
 					'ProvinciaNascimento', 'Genero'
 				), 'Curso'
 			));
-			$aluno = $this->BolsaBolsa->Aluno->find('first', array('conditions' => array('Aluno.ano_ingresso' => $anoIngresso, 'codigo' => $bolsa['BolsaTemporaria']['numero_estudante'])));
-
-			$bolsas[$k]['Aluno'] = $aluno['Aluno'];
-			$bolsas[$k]['Entidade'] = $aluno['Entidade'];
-			$bolsas[$k]['Curso'] = $aluno['Curso'];
+			$aluno = $this->BolsaBolsa->Aluno->find('first', array('conditions' => array('Aluno.ano_ingresso' => $anoIngresso, 'Aluno.codigo' => $bolsa['BolsaTemporaria']['numero_estudante'])));
+			if (!empty($aluno)) {
+				$bolsas[$k]['Aluno'] = $aluno['Aluno'];
+				$bolsas[$k]['Entidade'] = $aluno['Entidade'];
+				$bolsas[$k]['Curso'] = $aluno['Curso'];
+			}
 		}
 
 

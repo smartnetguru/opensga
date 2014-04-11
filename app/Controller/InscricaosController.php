@@ -359,6 +359,8 @@ class InscricaosController extends AppController {
 		}
 		if ($this->request->is('post') || $this->request->is('put')) {
 
+			debug($this->request->data);
+			die();
 			$aluno_id = $this->request->data['Inscricao']['aluno_id'];
 			$matricula_id = $this->request->data['Inscricao']['matricula_id'];
 			$inscricao_nova = array();
