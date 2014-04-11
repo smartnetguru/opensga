@@ -152,7 +152,7 @@ class BolsaBolsasController extends AppController {
 
 		$this->loadModel('BolsaTemporaria');
 		$this->BolsaTemporaria->contain(array(
-			'BolsaTipoBolsa', 'Candidatura'
+			'BolsaTipoBolsa', 'Candidatura'=>array('Genero')
 		));
 		$bolsas = $this->BolsaTemporaria->find('all');
 		foreach ($bolsas as $k => $bolsa) {
@@ -166,6 +166,7 @@ class BolsaBolsasController extends AppController {
 				unset($bolsas[$k]);
 			}
 		}
+
 
 		$this->set(compact('bolsas'));
 	}
