@@ -145,4 +145,29 @@ class BolsaBolsasController extends AppController {
 		$this->set(compact('bolsas'));
 	}
 
+	public function exportar_bolseiros_ano_ingresso_escolas($anoIngresso = null) {
+		if ($anoIngresso == null) {
+			$anoIngresso = Configure::read('OpenSGA.ano_lectivo');
+		}
+
+		$this->loadModel('BolsaTemporaria');
+		$this->BolsaTemporaria->contain(array(
+			'BolsaTipoBolsa', 'Candidatura'
+		));
+		$bolsas = $this->BolsaTemporaria->find('all');
+		foreach ($bolsas as $k => $bolsa) {
+			$this->BolsaBolsa->Aluno->contain(array(
+				'Entidade' => array(
+					'ProvinciaNascimento', 'Genero'
+				), 'Curso'
+			));
+			$aluno = $this->BolsaBolsa->Aluno->find('first', array('conditions' => array('Aluno.ano_ingresso' => $anoIngresso, 'Aluno.codigo' => $bolsa['BolsaTemporaria']['numero_estudante'])));
+			if (!empty($aluno)) {
+				unset($bolsas[$k]);
+			}
+		}
+
+		$this->set(compact('bolsas'));
+	}
+
 }
