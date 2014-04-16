@@ -95,7 +95,8 @@ class TurmasController extends AppController {
 			'contain' => array(
 				'AnoLectivo', 'Disciplina', 'PlanoEstudo', 'Curso' => array('UnidadeOrganica')
 			),
-			'limit' => 20
+			'limit' => 20,
+			'order' => 'Turma.created DESC'
 		);
 
 		$turmas = $this->paginate('Turma');
