@@ -6,14 +6,23 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/var/www/opensga/app/Console/Command/DbsecShell.php</file>
-            <file>file:/var/www/opensga/app/Console/Command/OpenSGAShell.php</file>
             <file>file:/var/www/opensga/app/Controller/PagesController.php</file>
-            <file>file:/var/www/opensga/app/Console/Command/DraShell.php</file>
-            <file>file:/var/www/opensga/app/Controller/InscricaosController.php</file>
+            <file>file:/var/www/opensga/app/Console/Command/OpenSGAShell.php</file>
+            <file>file:/var/www/opensga/app/View/PlanoEstudos/faculdade_index.ctp</file>
+            <file>file:/var/www/opensga/app/Controller/PlanoEstudosController.php</file>
+            <file>file:/var/www/opensga/app/View/Common/form_basic_common.ctp</file>
             <file>file:/var/www/opensga/app/Controller/AppController.php</file>
-            <file>file:/var/www/opensga/app/Controller/AlunosController.php</file>
-            <file>file:/var/www/opensga/app/View/Alunos/adicionar_estudante.ctp</file>
+            <file>file:/var/www/opensga/app/Controller/DocentesController.php</file>
+            <file>file:/var/www/opensga/app/View/PlanoEstudos/faculdade_adicionar_disciplinas.ctp</file>
             <file>file:/var/www/opensga/app/Console/Command/EstudantesShell.php</file>
+            <file>file:/var/www/opensga/app/Model/PlanoEstudo.php</file>
+            <file>file:/var/www/opensga/app/Console/Command/DraShell.php</file>
+            <file>file:/var/www/opensga/app/Controller/UsersController.php</file>
+            <file>file:/var/www/opensga/app/Controller/InscricaosController.php</file>
+            <file>file:/var/www/opensga/app/Console/Command/OpenSGAAclShell.php</file>
+            <file>file:/var/www/opensga/app/View/PlanoEstudos/faculdade_adicionar_precedencias.ctp</file>
+            <file>file:/var/www/opensga/app/View/Alunos/adicionar_estudante.ctp</file>
+            <file>file:/var/www/opensga/app/View/Docentes/faculdade_adicionar_docente.ctp</file>
         </group>
     </open-files>
 </project-private>

@@ -403,7 +403,7 @@ class TurmasController extends AppController {
 				), 'Disciplina', 'Turno', 'AnoLectivo'
 			)
 		));
-		$inscricaos = $this->Turma->Inscricao->find('all', array('conditions' => array('turma_id' => $turma_id)));
+		$inscricaos = $this->Turma->Inscricao->find('all', array('conditions' => array('turma_id' => $turma_id, 'Inscricao.estado_inscricao_id' => 1)));
 
 		$this->set(compact('inscricaos'));
 	}
@@ -423,7 +423,7 @@ class TurmasController extends AppController {
 				), 'Disciplina', 'Turno', 'AnoLectivo'
 			)
 		));
-		$inscricaos = $this->Turma->Inscricao->find('all', array('conditions' => array('turma_id' => $turma_id)));
+		$inscricaos = $this->Turma->Inscricao->find('all', array('conditions' => array('turma_id' => $turma_id, 'Inscricao.estado_inscricao_id' => 1)));
 		$inscricaos = Hash::sort($inscricaos, '{n}.Matricula.Aluno.Entidade.apelido', 'asc');
 
 		$this->set(compact('inscricaos'));

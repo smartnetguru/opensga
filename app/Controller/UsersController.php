@@ -167,6 +167,43 @@ class UsersController extends AppController {
 		}
 	}
 
+	public function docente_mostrar_foto($codigo) {
+		$this->viewClass = 'Media';
+		App::uses('Folder', 'Utility');
+		App::uses('File', 'Utility');
+		$this->loadModel('Aluno');
+		$this->Aluno->contain();
+		$aluno = $this->Aluno->findByCodigo($codigo);
+		if (!empty($aluno)) {
+			App::uses('File', 'Utility');
+			$path = APP . 'Assets' . DS . 'Fotos' . DS . 'Estudantes' . DS . $aluno['Aluno']['ano_ingresso'] . DS;
+
+			$file_path = $path . $codigo . '.jpg';
+			$folder_novo = new Folder($path);
+
+			$file = new File($file_path);
+
+			if (!$file->exists()) {
+				$codigo = 'default_profile_picture';
+				$path = WWW_ROOT . DS . 'img' . DS;
+			}
+
+
+			$params = array(
+				'id' => $codigo . '.jpg',
+				'name' => 'fotografia',
+				'extension' => 'jpg',
+				'mimeType' => array(
+					'docx' => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+				),
+				'path' => $path
+			);
+			$this->set($params);
+		} else {
+			throw new NotFoundException('Estudante não encontrado. Mostrar foto');
+		}
+	}
+
 	public function estudante_perfil() {
 		$this->redirect(array('controller' => 'alunos', 'action' => 'perfil', 'estudante' => true));
 	}

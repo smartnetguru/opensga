@@ -14,7 +14,7 @@ App::uses('AuditableConfig', 'Auditable.Lib');
 class AppShell extends Shell {
 
 	public function perform() {
-		AuditableConfig::$Logger = ClassRegistry::init('Auditable.Logger');
+
 		$this->initialize();
 		$this->{array_shift($this->args)}();
 	}
