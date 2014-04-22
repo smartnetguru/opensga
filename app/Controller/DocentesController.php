@@ -47,62 +47,6 @@ class DocentesController extends AppController {
 		$this->set(compact('docente'));
 	}
 
-	/**
-	 * Registra um novo docente no Sistema
-	 *
-	 * @todo Terminar a optimizacao dos views
-	 *
-	 * @todo testar todos os campos
-	 */
-	function adicionar_docente() {
-		if ($this->request->is('post') || $this->request->is('put')) {
-			$this->request->data['Entidade']['name'] = $this->request->data['Entidade']['nomes'] . ' ' . $this->request->data['Entidade']['apelido'];
-			if ($this->Docente->cadastraDocente($this->request->data)) {
-				$this->Session->setFlash("Dados registrados com sucesso", 'default', array('class' => 'alert_success'));
-				$this->redirect(array('controller' => 'docentes', 'action' => 'perfil_docente', $this->Docente->id));
-			} else {
-				$this->Session->setFlash('Problemas ao registrar dados', 'default', array('class' => 'alert_error'));
-			}
-		}
-
-		$entidades = $this->Docente->Entidade->find('list');
-		$docenteCategorias = $this->Docente->DocenteCategoria->find('list');
-		$paises = $this->Docente->Entidade->PaisNascimento->find('list');
-		$cidades = $this->Docente->Entidade->CidadeNascimento->find('list');
-		$provincias = $this->Docente->Entidade->ProvinciaNascimento->find('list');
-		$documento_identificacaos = $this->Docente->Entidade->DocumentoIdentificacao->find('list');
-		$generos = $this->Docente->Entidade->Genero->find('list');
-		$unidadeOrganicas = $this->Docente->UnidadeOrganica->find('list');
-		$this->set(compact('entidades', 'docenteCategorias', 'paises', 'provincias', 'cidades', 'generos', 'documento_identificacaos', 'unidadeOrganicas'));
-	}
-
-	function editar_docente($id = null) {
-		if (!$id && empty($this->data)) {
-			$this->Session->setFlash(__('Invalid docente', true));
-			$this->redirect(array('action' => 'index'));
-		}
-		if (!empty($this->data)) {
-			if ($this->Docente->save($this->data)) {
-				$this->Session->setFlash(__('The docente has been saved', true));
-				$this->redirect(array('action' => 'index'));
-			} else {
-				$this->Session->setFlash(__('The docente could not be saved. Please, try again.', true));
-			}
-		}
-		if (empty($this->data)) {
-			$this->data = $this->Docente->read(null, $id);
-		}
-		$entidades = $this->Docente->Entidade->find('list');
-		$docenteCategorias = $this->Docente->DocenteCategoria->find('list');
-		$paises = $this->Docente->Entidade->PaisNascimento->find('list');
-		$cidades = $this->Docente->Entidade->CidadeNascimento->find('list');
-		$provincias = $this->Docente->Entidade->ProvinciaNascimento->find('list');
-		$documento_identificacaos = $this->Docente->Entidade->DocumentoIdentificacao->find('list');
-		$generos = $this->Docente->Entidade->Genero->find('list');
-		$unidadeOrganicas = $this->Docente->UnidadeOrganica->find('list');
-		$this->set(compact('entidades', 'docenteCategorias', 'paises', 'provincias', 'cidades', 'generos', 'documento_identificacaos', 'unidadeOrganicas'));
-	}
-
 	public function docente_meu_perfil() {
 
 
@@ -182,19 +126,19 @@ class DocentesController extends AppController {
 	/**
 	 * Registra um novo docente no Sistema
 	 *
-	 * @todo Terminar a optimizacao dos views
+	 * @todo Validar campos
 	 *
 	 * @todo testar todos os campos
 	 */
 	function faculdade_adicionar_docente() {
-		ini_set('memory_limit', "2048M");
 		if ($this->request->is('post') || $this->request->is('put')) {
 			$this->request->data['Entidade']['name'] = $this->request->data['Entidade']['nomes'] . ' ' . $this->request->data['Entidade']['apelido'];
+
 			if ($this->Docente->cadastraDocente($this->request->data)) {
-				$this->Session->setFlash("Dados registrados com sucesso", 'default', array('class' => 'alert_success'));
-				$this->redirect(array('controller' => 'docentes', 'action' => 'perfil_docente', $this->Docente->id));
+				$this->Session->setFlash("Dados registrados com sucesso", 'default', array('class' => 'alert alert-success'));
+				//$this->redirect(array('controller' => 'docentes', 'action' => 'perfil_docente', $this->Docente->id));
 			} else {
-				$this->Session->setFlash('Problemas ao registrar dados', 'default', array('class' => 'alert_error'));
+				$this->Session->setFlash('Problemas ao registrar dados', 'default', array('class' => 'alert alert-danger'));
 			}
 		}
 
@@ -208,7 +152,7 @@ class DocentesController extends AppController {
 		$unidadeOrganicas = $this->Docente->UnidadeOrganica->find('list');
 		$naturalidade = '';
 		$estadoCivil = $this->Docente->Entidade->EstadoCivil->find('list');
-		$this->set(compact('entidades', 'docenteCategorias', 'paises', 'provincias', 'cidadeNascimentos', 'generos', 'documento_identificacaos', 'unidadeOrganicas', 'naturalidade', 'estadoCivil'));
+		$this->set(compact('entidades', 'docenteCategorias', 'paises', 'provincias', 'cidadeNascimentos', 'generos', 'documentoIdentificacaos', 'unidadeOrganicas', 'naturalidade', 'estadoCivil'));
 	}
 
 	function faculdade_editar_docente($id = null) {

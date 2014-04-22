@@ -37,7 +37,6 @@ class AppController extends Controller {
 
 	public function beforeFilter() {
 		parent::beforeFilter();
-		CakeResque::enqueue('default', 'NotificationShell', array('test'));
 		$config_language = $this->Session->read('Config.language');
 
 		if ($config_language == null) {

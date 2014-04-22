@@ -19,120 +19,120 @@
  */
 class Docente extends AppModel {
 
-    var $name = 'Docente';
-    //The Associations below have been created with all possible keys, those that are not needed can be removed
+	var $name = 'Docente';
+	//The Associations below have been created with all possible keys, those that are not needed can be removed
 
-    var $belongsTo = array(
-        'Entidade' => array(
-            'className' => 'Entidade',
-            'foreignKey' => 'entidade_id',
-            'conditions' => '',
-            'fields' => '',
-            'order' => ''
-        ),
-        'DocenteCategoria' => array(
-            'className' => 'DocenteCategoria',
-            'foreignKey' => 'docente_categoria_id',
-            'conditions' => '',
-            'fields' => '',
-            'order' => ''
-        ),
-        'UnidadeOrganica' => array(
-            'className' => 'UnidadeOrganica',
-            'foreignKey' => 'unidade_organica_id',
-            'conditions' => '',
-            'fields' => '',
-            'order' => ''
-        )
-    );
+	var $belongsTo = array(
+		'Entidade' => array(
+			'className' => 'Entidade',
+			'foreignKey' => 'entidade_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
+		),
+		'DocenteCategoria' => array(
+			'className' => 'DocenteCategoria',
+			'foreignKey' => 'docente_categoria_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
+		),
+		'UnidadeOrganica' => array(
+			'className' => 'UnidadeOrganica',
+			'foreignKey' => 'unidade_organica_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
+		)
+	);
 
-    function getByUserID($user_id) {
-        //Primeiro retornamos a entidade
-      
-        $this->contain(array('Entidade'));
-        $docente = $this->find('first', array('conditions' => array('Entidade.user_id' => $user_id),));
+	function getByUserID($user_id) {
+		//Primeiro retornamos a entidade
 
-        return $docente['Docente']['id'];
-    }
+		$this->contain(array('Entidade'));
+		$docente = $this->find('first', array('conditions' => array('Entidade.user_id' => $user_id),));
 
-    public function cadastraDocente(array $data) {
-        $dataSource = $this->getDataSource();
+		return $docente['Docente']['id'];
+	}
 
-        $dataSource->begin();
+	public function cadastraDocente(array $data) {
+		$dataSource = $this->getDataSource();
 
-
-        if (!isset($data['Docente']['codigo']) || $data['Docente']['codigo'] == '') {
-            $data['Docente']['codigo'] = $this->Entidade->User->geraEmailUem($data['Entidade']['apelido'],$data['Entidade']['nomes']);
-        }
-
-        //Grava os dados do Usuario
-        $this->Entidade->User->create();
-        $data['User']['username'] = $data['Docente']['codigo'];
-        $data['User']['password'] = Security::hash('uem2013','blowfish');
-        $data['User']['codigocartao'] = $data['Docente']['codigo'];
-        $data['User']['name'] = $data['Entidade']['name'];
-        $data['User']['group_id'] = 4;
-        if ($this->Entidade->User->save($data)) {
-            //Grava os dados da Entidade
-            $data['Docente']['user_id'] = $this->Entidade->User->getLastInsertID();
-            $data['Entidade']['user_id'] = $this->Entidade->User->getLastInsertID();
-            $this->Entidade->create();
-            if ($this->Entidade->save($data)) {
-
-                //Grava os dados do Docente
-                $data['Docente']['entidade_id'] = $this->Entidade->getLastInsertID();
-                $this->create();
-                if ($this->save($data)) {
-                    //Grava os dados de Identificacao
-
-                    $identificacao = array('EntidadeIdentificacao' => $data['EntidadeIdentificacao']);
-                    $identificacao['EntidadeIdentificacao']['entidade_id'] = $this->Entidade->getLastInsertID();
-                    $identificacao['EntidadeIdentificacao']['estado_objecto_id'] = 1;
-
-                    $this->Entidade->EntidadeIdentificacao->create();
-                    $this->Entidade->EntidadeIdentificacao->save($identificacao);
+		$dataSource->begin();
 
 
-                    //Grava os dados de Morada e Contactos
+		if (!isset($data['Docente']['codigo']) || $data['Docente']['codigo'] == '') {
+			$data['Docente']['codigo'] = $this->Entidade->User->geraEmailUem($data['Entidade']['apelido'], $data['Entidade']['nomes']);
+		}
 
-                    $contactos = $data['EntidadeContacto'];
-                    foreach ($contactos as $k => $v) {
-                        $this->Entidade->EntidadeContacto->create();
-                        $this->Entidade->EntidadeContacto->save(
-                                array(
-                                    'EntidadeContacto' => array(
-                                        'entidade_id' => $this->Entidade->getLastInsertID(),
-                                        'tipo_contacto_id' => $k,
-                                        'valor' => $v,
-                                        'estado_objecto_id' => 1
-                                    )
-                                )
-                        );
-                    }
+		//Grava os dados do Usuario
+		$this->Entidade->User->create();
+		$data['User']['username'] = $data['Docente']['codigo'];
+		$data['User']['password'] = Security::hash('uem2013', 'blowfish');
+		$data['User']['codigocartao'] = $data['Docente']['codigo'];
+		$data['User']['name'] = $data['Entidade']['name'];
+		$data['User']['group_id'] = 4;
+		if ($this->Entidade->User->save($data)) {
+			//Grava os dados da Entidade
+			$data['Docente']['user_id'] = $this->Entidade->User->getLastInsertID();
+			$data['Entidade']['user_id'] = $this->Entidade->User->getLastInsertID();
+			$this->Entidade->create();
+			if ($this->Entidade->save($data)) {
 
-                    return $dataSource->commit();
-                }
-            }
-        }
+				//Grava os dados do Docente
+				$data['Docente']['entidade_id'] = $this->Entidade->getLastInsertID();
+				$this->create();
+				if ($this->save($data)) {
+					//Grava os dados de Identificacao
+
+					$identificacao = array('EntidadeIdentificacao' => $data['EntidadeIdentificacao']);
+					$identificacao['EntidadeIdentificacao']['entidade_id'] = $this->Entidade->getLastInsertID();
+					$identificacao['EntidadeIdentificacao']['estado_objecto_id'] = 1;
+
+					$this->Entidade->EntidadeIdentificacao->create();
+					$this->Entidade->EntidadeIdentificacao->save($identificacao);
 
 
-        $dataSource->rollback();
-    }
+					//Grava os dados de Morada e Contactos
 
-        /**
-     *Esta funcao faz o mesmo que find list, mas busca o name a partir da tabela entidades
-         *@todo ver way de passar conditions como argumento
-     */
-    public function listaDocentes(){
+					$contactos = $data['EntidadeContacto'];
+					foreach ($contactos as $k => $v) {
+						$this->Entidade->EntidadeContacto->create();
+						$this->Entidade->EntidadeContacto->save(
+								array(
+									'EntidadeContacto' => array(
+										'entidade_id' => $this->Entidade->getLastInsertID(),
+										'tipo_contacto_id' => $k,
+										'valor' => $v,
+										'estado_objecto_id' => 1
+									)
+								)
+						);
+					}
+					CakeResque::enqueue('default', 'DocenteShell', array('enviaEmailCadastro', $this->id));
+					return $dataSource->commit();
+				}
+			}
+		}
 
-        $funcionarios = $this->find('all',array('fields'=>array('id','Entidade.name')));
 
-        $f=array();
-        foreach($funcionarios as $funcionario){
+		$dataSource->rollback();
+	}
 
-            $f[$funcionario[$this->alias]['id']]=$funcionario['Entidade']['name'];
-        }
-        return $f;
-    }
+	/**
+	 * Esta funcao faz o mesmo que find list, mas busca o name a partir da tabela entidades
+	 * @todo ver way de passar conditions como argumento
+	 */
+	public function listaDocentes() {
+
+		$funcionarios = $this->find('all', array('fields' => array('id', 'Entidade.name')));
+
+		$f = array();
+		foreach ($funcionarios as $funcionario) {
+
+			$f[$funcionario[$this->alias]['id']] = $funcionario['Entidade']['name'];
+		}
+		return $f;
+	}
 
 }
