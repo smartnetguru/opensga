@@ -251,15 +251,21 @@ class Turma extends AppModel {
 	 * @Todo Colocar o link para a documentação aqui
 	 * @Todo Filtrar para apenas mostrar as turmas em que o aluno pode se inscrever
 	 */
-	function getAllByAlunoForInscricao($aluno_id, $matricula_id) {
-		$matricula = $this->Inscricao->Matricula->findByAlunoId($aluno_id);
-		$this->Inscricao->Aluno->recursive = -1;
+	function getAllByAlunoForInscricao($alunoId, $anoLectivoId = null) {
+		if ($anoLectivoId == null) {
+			$anoLectivo = $this->AnoLectivo->findByAno(Configure::read('OpenSGA.ano_lectivo'));
+			$anoLectivoId = $anoLectivo['AnoLectivo']['id'];
+		}
+		$matricula = $this->Inscricao->Matricula->findByAlunoIdAndAnoLectivoId($alunoId, $anoLectivoId);
+		//Se nao renovou matricula naquele ano, nao aparece nenhuma cadeira para se inscrever
+		if (empty($matricula)) {
+			return array();
+		}
 		//Primeiro vamos pegar todas as disciplinas do plano de estudos
+		$todasDisciplinas = $this->PlanoEstudo->getAllDisciplinas($matricula['Matricula']['plano_estudo_id']);
 
-		$todas_disciplinas = $this->PlanoEstudo->getAllDisciplinas($matricula['Matricula']['plano_estudo_id']);
 
-
-		$conditions = array('Turma.plano_estudo_id' => $matricula['Matricula']['plano_estudo_id'], 'Turma.estado_turma_id' => 1, 'Turma.ano_lectivo_id' => Configure::read('OpenSGA.ano_lectivo_id'));
+		$conditions = array('Turma.plano_estudo_id' => $matricula['Matricula']['plano_estudo_id'], 'Turma.estado_turma_id' => 1, 'Turma.ano_lectivo_id' => $anoLectivoId);
 
 		$this->contain(array(
 			'Disciplina', 'PlanoEstudo'

@@ -359,8 +359,7 @@ class InscricaosController extends AppController {
 		}
 		if ($this->request->is('post') || $this->request->is('put')) {
 
-			debug($this->request->data);
-			die();
+
 			$aluno_id = $this->request->data['Inscricao']['aluno_id'];
 			$matricula_id = $this->request->data['Inscricao']['matricula_id'];
 			$inscricao_nova = array();
@@ -369,6 +368,12 @@ class InscricaosController extends AppController {
 					$inscricao_nova[] = $v;
 				}
 			}
+			foreach ($this->request->data['disciplinas2'] as $k => $v) {
+				if ($v > 0) {
+					$inscricao_nova[] = $v;
+				}
+			}
+
 
 			$this->Session->write('OpenSGA.inscricao.cadeiras', $inscricao_nova);
 			$this->Session->write('OpenSGA.inscricao.matricula_id', $matricula_id);
@@ -377,7 +382,7 @@ class InscricaosController extends AppController {
 		}
 
 
-		$turmas = $this->Turma->getAllByAlunoForInscricao($aluno_id, $matricula_id);
+		$turmas = $this->Turma->getAllByAlunoForInscricao($aluno_id);
 
 		$turmas2 = $this->Turma->getAllByPlanoEstudoAntigo($aluno_id);
 
@@ -513,10 +518,11 @@ class InscricaosController extends AppController {
 		$inscricoes_activas = $this->Inscricao->find('all', array('conditions' => array('estado_inscricao_id' => 1, 'aluno_id' => $aluno_id), 'order' => 'Inscricao.id DESC'));
 
 
+		$anoLectivo = $this->Inscricao->Matricula->AnoLectivo->findByAno(Configure::read('OpenSGA.ano_lectivo'));
 
+		$matricula = $this->Inscricao->Matricula->findByAlunoIdAndCursoIdAndAnoLectivoId($aluno_id, $aluno['Aluno']['curso_id'], $anoLectivo['AnoLectivo']['id']);
 
-		$matricula = $this->Inscricao->Matricula->findByAlunoIdAndCursoId($aluno_id, $aluno['Aluno']['curso_id']);
-		$cadeiras_pendentes = $this->Inscricao->Turma->getAllByAlunoForInscricao($aluno_id, $matricula['Matricula']['id']);
+		$cadeiras_pendentes = $this->Inscricao->Turma->getAllByAlunoForInscricao($aluno_id);
 		$isRegular = $this->Inscricao->Aluno->isRegular($aluno_id);
 
 		if (count($isRegular) == 1 && $isRegular[0]['regular'] == true) {
