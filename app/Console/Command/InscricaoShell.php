@@ -51,7 +51,7 @@ class InscricaoShell extends AppShell {
 								$turma['turno_id'] = null;
 								$turma['disciplina_id'] = $disciplina['Disciplina']['id'];
 								$turma['estado_turma_id'] = 1;
-								$turma['semestrelectivo_id'] = Configure::read('OpenSGA.semestre_lectivo_id');
+								$turma['semestre_lectivo_id'] = Configure::read('OpenSGA.semestre_lectivo_id');
 								$nome = $disciplina['Disciplina']['name'] . " - " . $planoEstudo['PlanoEstudo']['name'];
 								$turma['name'] = $nome;
 
