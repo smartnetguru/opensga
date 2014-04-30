@@ -77,7 +77,7 @@ class FuncionariosController extends AppController {
 	}
 
 	function adicionar_funcionario() {
-
+		ini_set('memory_limit', "2048M");
 		if (!empty($this->data)) {
 			if ($this->Funcionario->cadastraFuncionario($this->request->data)) {
 				$this->Session->setFlash('Funcionário registrado com sucesso', 'default', array('class' => 'alert success'));
@@ -87,21 +87,18 @@ class FuncionariosController extends AppController {
 			}
 		}
 
-		$users = $this->Funcionario->User->find('list');
-		$grauacademicos = $this->Funcionario->GrauAcademico->find('list');
-
-
+		$grausAcademicos = $this->Funcionario->GrauAcademico->find('list');
 		$tipofuncionarios = $this->Funcionario->TipoFuncionario->find('list');
-		$documento_identificacaos = $this->Funcionario->Entidade->DocumentoIdentificacao->find('list');
-		$unidades_organicas = $this->Funcionario->UnidadeOrganica->find('list');
+		$documentoIdentificacaos = $this->Funcionario->Entidade->DocumentoIdentificacao->find('list');
+		$unidadesOrganicas = $this->Funcionario->UnidadeOrganica->find('list');
 		$paises = $this->Funcionario->Entidade->PaisNascimento->find('list');
 		$cidades = $this->Funcionario->Entidade->CidadeNascimento->find('list');
 		$provincias = $this->Funcionario->Entidade->ProvinciaNascimento->find('list');
 		$generos = $this->Funcionario->Entidade->Genero->find('list');
-		$unidadeOrganicas = $this->Funcionario->UnidadeOrganica->find('list');
-
-
-		$this->set(compact('users', 'Grauacademicos', 'tipofuncionarios', 'departamentos', 'cargos', 'faculdades', 'seccaos', 'unidadeOrganicas', 'documento_identificacaos', 'paises', 'cidades', 'provincias', 'generos'));
+		$estadoCivil = $this->Funcionario->Entidade->EstadoCivil->find('list');
+		$naturalidade = '';
+		$grauParentescos = '';
+		$this->set(compact('grauParentescos', 'naturalidade', 'estadoCivil', 'grausAcademicos', 'tipofuncionarios', 'departamentos', 'cargos', 'faculdades', 'seccaos', 'unidadesOrganicas', 'documentoIdentificacaos', 'paises', 'cidades', 'provincias', 'generos'));
 	}
 
 	function editar_funcionario($id = null) {

@@ -365,7 +365,13 @@ class TurmasController extends AppController {
 		$this->set(compact('inscricaos'));
 	}
 
-	public function faculdade_print_pauta($turma_id) {
+	public function faculdade_print_pauta($turmaId) {
+		$this->Turma->id = $turmaId;
+		$turma = $this->Turma->read();
+
+		$todasTurmas = $this->Turma->find('list', array('conditions' => array('Turma.curso_id' => $turma['Turma']['curso_id'], 'Turma.disciplina_id' => $turma['Turma']['disciplina_id'], 'Turma.ano_lectivo_id' => $turma['Turma']['ano_lectivo_id'], 'Turma.semestre_curricular' => $turma['Turma']['semestre_curricular'])));
+		$todasTurmasIds = array_keys($todasTurmas);
+
 		$this->Turma->Inscricao->contain(array(
 			'EstadoInscricao',
 			'Matricula' => array(
@@ -380,14 +386,14 @@ class TurmasController extends AppController {
 				), 'Disciplina', 'Turno', 'AnoLectivo'
 			)
 		));
-		$inscricaos2 = $this->Turma->Inscricao->find('all', array('conditions' => array('turma_id' => $turma_id, 'Inscricao.estado_inscricao_id' => 1)));
+		$inscricaos2 = $this->Turma->Inscricao->find('all', array('conditions' => array('turma_id' => $todasTurmasIds, 'Inscricao.estado_inscricao_id' => 1)));
 		$inscricaos = Hash::sort($inscricaos2, '{n}.Matricula.Aluno.Entidade.apelido', 'asc');
+
 		$faculdade = $this->Turma->Curso->getFaculdadeByCursoId($inscricaos[0] ['Turma']['curso_id']);
 		$this->set(compact('inscricaos', 'faculdade'));
 	}
 
-	public
-			function print_lista_estudantes($turma_id) {
+	public function print_lista_estudantes($turma_id) {
 		$this->Turma->Inscricao->contain(array(
 			'EstadoInscricao',
 			'Matricula' => array(
@@ -403,12 +409,18 @@ class TurmasController extends AppController {
 				), 'Disciplina', 'Turno', 'AnoLectivo'
 			)
 		));
+
 		$inscricaos = $this->Turma->Inscricao->find('all', array('conditions' => array('turma_id' => $turma_id, 'Inscricao.estado_inscricao_id' => 1)));
 
 		$this->set(compact('inscricaos'));
 	}
 
-	public function print_pauta($turma_id) {
+	public function print_pauta($turmaId) {
+
+		$this->Turma->id = $turmaId;
+		$turma = $this->Turma->read();
+		debug($turma);
+		die();
 		$this->Turma->Inscricao->contain(array(
 			'EstadoInscricao',
 			'Matricula' => array(
@@ -423,7 +435,9 @@ class TurmasController extends AppController {
 				), 'Disciplina', 'Turno', 'AnoLectivo'
 			)
 		));
-		$inscricaos = $this->Turma->Inscricao->find('all', array('conditions' => array('turma_id' => $turma_id, 'Inscricao.estado_inscricao_id' => 1)));
+
+
+		$inscricaos = $this->Turma->Inscricao->find('all', array('conditions' => array('turma_id' => $turmaId, 'Inscricao.estado_inscricao_id' => 1)));
 		$inscricaos = Hash::sort($inscricaos, '{n}.Matricula.Aluno.Entidade.apelido', 'asc');
 
 		$this->set(compact('inscricaos'));

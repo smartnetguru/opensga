@@ -165,7 +165,15 @@ class InscricaosController extends AppController {
 			$aluno_id = $this->request->data['Inscricao']['aluno_id'];
 			$matricula_id = $this->request->data['Inscricao']['matricula_id'];
 			$inscricao_nova = array();
-			foreach ($this->request->data['disciplinas'] as $k => $v) {
+
+			if (isset($this->request->data['disciplinas'])) {
+				foreach ($this->request->data['disciplinas'] as $k => $v) {
+					if ($v > 0) {
+						$inscricao_nova[] = $v;
+					}
+				}
+			}
+			foreach ($this->request->data['disciplinas2'] as $k => $v) {
 				if ($v > 0) {
 					$inscricao_nova[] = $v;
 				}
@@ -363,6 +371,7 @@ class InscricaosController extends AppController {
 			$aluno_id = $this->request->data['Inscricao']['aluno_id'];
 			$matricula_id = $this->request->data['Inscricao']['matricula_id'];
 			$inscricao_nova = array();
+
 			foreach ($this->request->data['disciplinas'] as $k => $v) {
 				if ($v > 0) {
 					$inscricao_nova[] = $v;

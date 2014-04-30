@@ -39,11 +39,12 @@ class InscricaoShell extends AppShell {
 									'Turma.semestre_curricular' => 1
 								)
 							));
+
 							if (empty($turmaExiste)) {
 								$turma = array();
 								$turma['ano_lectivo_id'] = $anoLectivoId['AnoLectivo']['id'];
-								$turma['anocurricular'] = $disciplina['DisciplinaPlanoEstudo']['ano'];
-								$turma['semestrecurricular'] = $disciplina['DisciplinaPlanoEstudo']['semestre'];
+								$turma['an_ocurricular'] = $disciplina['DisciplinaPlanoEstudo']['ano'];
+								$turma['semestre_curricular'] = $disciplina['DisciplinaPlanoEstudo']['semestre'];
 								$turma['curso_id'] = $curso['Curso']['id'];
 								$turma['escola_id'] = 1;
 								$turma['plano_estudo_id'] = $planoEstudo['PlanoEstudo']['id'];
