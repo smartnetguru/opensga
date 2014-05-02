@@ -15,12 +15,10 @@
             <file>file:/var/www/opensga/app/Controller/DocentesController.php</file>
             <file>file:/var/www/opensga/app/View/PlanoEstudos/faculdade_adicionar_disciplinas.ctp</file>
             <file>file:/var/www/opensga/app/Model/PlanoEstudo.php</file>
-            <file>file:/var/www/opensga/app/Controller/FuncionariosController.php</file>
             <file>file:/var/www/opensga/app/Console/Command/DraShell.php</file>
             <file>file:/var/www/opensga/app/View/Funcionarios/adicionar_funcionario.ctp</file>
             <file>file:/var/www/opensga/app/Controller/UsersController.php</file>
             <file>file:/var/www/opensga/app/Model/Funcionario.php</file>
-            <file>file:/var/www/opensga/app/Controller/InscricaosController.php</file>
             <file>file:/var/www/opensga/app/Console/Command/OpenSGAAclShell.php</file>
             <file>file:/var/www/opensga/app/Controller/AlunosController.php</file>
             <file>file:/var/www/opensga/app/View/PlanoEstudos/faculdade_adicionar_precedencias.ctp</file>

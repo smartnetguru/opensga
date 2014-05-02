@@ -16,6 +16,17 @@ class OpenSGAAclShell extends AppShell {
 	}
 
 	public function docentes() {
+		$grupo = $this->User->Group;
+		$grupo->id = 4;
+		$comandos[] = "acl deny Group.4 controllers";
+		$comandos[] = "acl grant Group.4 controllers/Docentes/docente_meu_perfil";
+		$comandos[] = "acl grant Group.4 controllers/Pages/docente_home";
+
+
+		foreach ($comandos as $comando) {
+			$this->out($comando);
+			$this->dispatchShell($comando);
+		}
 		$this->Docente->contain(array(
 			'Entidade' => array(
 				'User' => array(
@@ -26,13 +37,19 @@ class OpenSGAAclShell extends AppShell {
 			)
 		));
 		$docentes = $this->Docente->find('all', array());
+		$comandos = array();
 		foreach ($docentes as $docente) {
-			$userId = $docente['Entidade']['User']['id'];
-			$this->out($userId);
-			$comandos = array();
+
 			$comandos[] = "acl deny User.{$docente['Entidade']['User']['id']} controllers";
 
+			$comandos[] = "acl grant User.{$docente['Entidade']['User']['id']} controllers/Alunos/docente_index";
+
 			$comandos[] = "acl grant User.{$docente['Entidade']['User']['id']} controllers/Docentes/docente_meu_perfil";
+
+			$comandos[] = "acl grant User.{$docente['Entidade']['User']['id']} controllers/Pages/docente_home";
+
+			$comandos[] = "acl grant User.{$docente['Entidade']['User']['id']} controllers/Turmas/docente_index";
+			$comandos[] = "acl grant User.{$docente['Entidade']['User']['id']} controllers/Turmas/docente_ver_turma";
 		}
 
 		foreach ($comandos as $comando) {
@@ -127,6 +144,7 @@ class OpenSGAAclShell extends AppShell {
 				$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Turmas/faculdade_print_pauta";
 				$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Turmas/faculdade_ver_turma";
 				$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Turmas/faculdade_print_lista_estudantes";
+				$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Turmas/faculdade_adicionar_docente";
 
 				$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/faculdade_index";
 				$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/faculdade_perfil_estudante";

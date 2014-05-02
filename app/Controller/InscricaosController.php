@@ -401,6 +401,89 @@ class InscricaosController extends AppController {
 	}
 
 	/**
+	 * Inscreve alunos depois da primeira matricula
+	 * @param type $aluno_id
+	 * @param type $matricula_id
+	 *
+	 *
+	 * @todo garantir que so se inscreve quem nao tem dividas no semestre anterior
+	 * @todo A lista de disciplinas deve ter em consideracao  a tabela de precedencias
+	 * @todo Deve existir possibilidade de inscricao condicional
+	 */
+	public function faculdade_inscrever_aluno($aluno_id, $matricula_id) {
+		$this->loadModel('Turma');
+		$this->loadModel('Aluno');
+		$this->loadModel('FinanceiroPagamento');
+		$this->loadModel('Matricula');
+
+		$unidade_organica_id = $this->Session->read('Auth.User.unidade_organica_id');
+
+		$is_regular = $this->Inscricao->Aluno->isRegular($aluno_id);
+		if (!$is_regular[0]['regular'] == true) {
+			$this->Session->setFlash(__('So pode fazer Inscricoes depois de renovar a matricula para o ano lectivo actual'), 'default', array('class' => 'alert error'));
+			$this->redirect($this->referer());
+		}
+		$this->Inscricao->Aluno->contain(array(
+			'Entidade', 'PlanoEstudo', 'Curso' => array('UnidadeOrganica')
+		));
+		$aluno = $this->Inscricao->Aluno->findById($aluno_id);
+
+		if ($aluno['Curso']['unidade_organica_id'] != $unidade_organica_id) {
+			$this->Session->setFlash(__('Nao Possui permissao para aceder a pagina anterior'));
+			$this->redirect($this->referer());
+		}
+
+
+
+
+		$matricula = $this->Inscricao->Matricula->findById($matricula_id);
+
+		//Primeiro vemos se ainda nao se matriculou no ano lectivo em questao
+
+		$this->Inscricao->contain(array(
+			'Turma'
+		));
+		$inscricoes_activas = $this->Inscricao->find('all', array('conditions' => array('Inscricao.aluno_id' => $aluno_id, 'Turma.ano_lectivo_id' => Configure::read('OpenSGA.ano_lectivo_id'), 'Turma.semestre_lectivo_id' => Configure::read('OpenSGA.semestre_lectivo_id'))));
+		if (!empty($inscricoes_activas)) {
+			$this->Session->setFlash(__('Este Aluno já fez inscrições neste ano. As cadeiras seguintes serão adicionadas ás inscrições anteriores, e o valor da inscrição será recalculado'), 'default', array('class' => 'alert info'));
+			$this->redirect(array('controller' => 'inscricaos', 'action' => 'adicionar_cadeiras_inscricao', $aluno_id, $matricula_id));
+		}
+		if ($this->request->is('post') || $this->request->is('put')) {
+
+
+			$aluno_id = $this->request->data['Inscricao']['aluno_id'];
+			$matricula_id = $this->request->data['Inscricao']['matricula_id'];
+			$inscricao_nova = array();
+
+			foreach ($this->request->data['disciplinas'] as $k => $v) {
+				if ($v > 0) {
+					$inscricao_nova[] = $v;
+				}
+			}
+			foreach ($this->request->data['disciplinas2'] as $k => $v) {
+				if ($v > 0) {
+					$inscricao_nova[] = $v;
+				}
+			}
+
+
+			$this->Session->write('OpenSGA.inscricao.cadeiras', $inscricao_nova);
+			$this->Session->write('OpenSGA.inscricao.matricula_id', $matricula_id);
+			$this->Session->write('OpenSGA.inscricao.aluno_id', $aluno_id);
+			$this->redirect(array('controller' => 'inscricaos', 'action' => 'valida_inscricao'));
+		}
+
+
+		$turmas = $this->Turma->getAllByAlunoForInscricao($aluno_id);
+
+		$turmas2 = $this->Turma->getAllByPlanoEstudoAntigo($aluno_id);
+
+		$this->set('aluno_id', $aluno_id);
+		$this->set('matricula_id', $matricula_id);
+		$this->set(compact('turmas', 'disciplinas', 'turmas2'));
+	}
+
+	/**
 	 * Verifica se esta tudo bem com a inscricao e o pagamento
 	 */
 	public function faculdade_valida_inscricao() {

@@ -149,7 +149,7 @@ class TurmasController extends AppController {
 		$this->set(compact('inscricaos', 'TurmaTipoAvaliacaos', 'anolectivos', 'estados', 'mediaTurma', 'anosemestrecurr', 'cursos', 'planoestudos', 'turnos', 'disciplinas', 'docentes', 'ano_curricular', 'regente'));
 	}
 
-	function faculdade_ver_turma($id = null) {
+	public function faculdade_ver_turma($id = null) {
 		$this->Turma->id = $id;
 		if (!$this->Turma->exists()) {
 			throw new NotFoundException(__('Turma Inválida'));
@@ -197,9 +197,10 @@ class TurmasController extends AppController {
 		$turnos = $this->Turma->Turno->find('list');
 		$disciplinas = $this->Turma->Disciplina->find('list');
 		$regente = $this->Turma->getRegente($id);
+		$assistentes = $this->Turma->getAllAssistentes($id);
 
 		$this->set('turma', $this->data);
-		$this->set(compact('inscricaos', 'TurmaTipoAvaliacaos', 'anolectivos', 'estados', 'mediaTurma', 'anosemestrecurr', 'cursos', 'planoestudos', 'turnos', 'disciplinas', 'docentes', 'ano_curricular', 'regente'));
+		$this->set(compact('inscricaos', 'TurmaTipoAvaliacaos', 'anolectivos', 'estados', 'mediaTurma', 'anosemestrecurr', 'cursos', 'planoestudos', 'turnos', 'disciplinas', 'docentes', 'ano_curricular', 'regente', 'assistentes'));
 	}
 
 	function add() {
@@ -269,78 +270,33 @@ class TurmasController extends AppController {
 	 * @param type $id
 	 * @throws NotFoundException
 	 */
-	public
-			function docente_ver_turma($id = null) {
-		$this->Turma->id = $id;
-		if (!$this->Turma->exists()) {
-			throw new NotFoundException(__('Turma Inválida'));
-		}
-
-		if (empty($this->data)) {
-			$this->Turma->contain(array(
-				'Docente' => array(
-					'Entidade'
-				),
-				'Assistente' => array(
-					'Entidade'
-				),
-				'Turno', 'PlanoEstudo', 'AnoLectivo', 'EstadoTurma'
-			));
-			$this->data = $this->Turma->read(null, $id);
-		}
-
-		$this->loadModel('DisciplinaPlanoEstudo');
-		$planoestudoanos = $this->DisciplinaPlanoEstudo->find('first', array('conditions' => array('plano_estudo_id' => $this->data['PlanoEstudo']['id'], 'disciplina_id' => $this->data['Turma']['disciplina_id'])));
-
-		//$this->loadModel('Inscricao');
-		//$this->Turma->bindModel(array('belongsTo'=>array('Matricula')));
-		$this->Turma->Inscricao->contain(array(
-			'EstadoInscricao',
-			'Matricula' => array(
-				'Aluno' => array(
-					'Entidade'
-				)
-			),
-			'Turma' => array(
-				'Curso' => array(
-					'UnidadeOrganica'
-				), 'Disciplina', 'Turno', 'AnoLectivo'
-			)
-		));
-		$inscricaos = $this->Turma->Inscricao->find('all', array('conditions' => array('turma_id' => $id)));
-		$ano_curricular = $planoestudoanos['DisciplinaPlanoEstudo']['ano'];
-		$semestre_curricular = $planoestudoanos['DisciplinaPlanoEstudo']['semestre'];
-
-		$this->loadModel('TurmaTipoAvaliacao');
-		$TurmaTipoAvaliacaos = $this->TurmaTipoAvaliacao->find('all', array('conditions' => array('turma_id' => $this->data['Turma']['id'])));
-		$estados = array('1' => 'Activa', '2' => 'Cancelada', '3' => 'Fechada');
-		$anosemestrecurr = array('1' => '1', '2' => '2', '3' => '3', '4' => '4');
-		$anolectivos = $this->Turma->AnoLectivo->find('list');
-		$cursos = $this->Turma->Curso->find('list');
-		$planoestudos = $this->Turma->PlanoEstudo->find('list');
-		$turnos = $this->Turma->Turno->find('list');
-		$disciplinas = $this->Turma->Disciplina->find('list');
-		$docentes = $this->Turma->Docente->find('list');
-		$disciplinas = array();
-		$this->set('turma', $this->data);
-		$this->set(compact('inscricaos', 'TurmaTipoAvaliacaos', 'anolectivos', 'estados', 'mediaTurma', 'anosemestrecurr', 'cursos', 'planoestudos', 'turnos', 'disciplinas', 'docentes', 'ano_curricular', 'semestre_curricular'));
-	}
 
 	/**
 	 * Lista de turmas atribuidas a um dado docente
 	 */
 	public function docente_index() {
-		$this->Turma->recursive = 0;
-		$grupo = $this->Session->read('Auth.User.group_id');
+		$userId = $this->Session->read('Auth.User.id');
 
-		$conditions = array()
+		$docente = $this->Turma->DocenteTurma->Docente->getByUserID($userId);
+		if (empty($docente)) {
+			throw new NotFoundException('Docente Invalido ou tentativa de Fraude');
+		}
 
-		;
+		$turmasDocente = $this->Turma->DocenteTurma->find('all', array('conditions' => array('DocenteTurma.docente_id' => $docente['Docente']['id'], 'DocenteTurma.estado_docente_turma_id' => 1)));
+		$turmaIds = Hash::extract($turmasDocente, '{n}.DocenteTurma.turma_id');
 
-		$docente_id = $this->Turma->Docente->getByUserID($this->Session->read('Auth.User.id'));
-		$conditions['Turma.docente_id'] = $docente_id;
 
-		$this->paginate = array('conditions' => $conditions);
+		$conditions['Turma.estado_turma_id'] = 1;
+		$conditions['Turma.id'] = $turmaIds;
+		$this->paginate = array(
+			'conditions' => $conditions,
+			'contain' => array(
+				'Disciplina', 'AnoLectivo', 'PlanoEstudo', 'Curso' => array('UnidadeOrganica')
+			),
+			'limit' => 20,
+			'order' => 'Turma.created DESC'
+		);
+
 		$this->set('turmas', $this->paginate());
 	}
 
@@ -360,7 +316,8 @@ class TurmasController extends AppController {
 				), 'Disciplina', 'Turno', 'AnoLectivo'
 			)
 		));
-		$inscricaos = $this->Turma->Inscricao->find('all', array('conditions' => array('turma_id' => $turma_id)));
+		$inscricaos = $this->Turma->Inscricao->find('all', array('conditions' => array('turma_id' => $turma_id, 'Inscricao.estado_inscricao_id' => 1)));
+
 
 		$this->set(compact('inscricaos'));
 	}
@@ -520,8 +477,32 @@ class TurmasController extends AppController {
 
 	}
 
-	public function faculdade_adicionar_docente($turma_id) {
+	public function faculdade_adicionar_docente($turmaId) {
+		$this->Turma->id = $turmaId;
+		if (!$this->Turma->exists()) {
+			throw new NotFoundException(__('Turma Invalida'));
+		}
+		if ($this->request->is('post') || $this->request->is('put')) {
 
+			if ($this->Turma->adicionaDocente($this->request->data)) {
+				$this->Session->setFlash('Os docentes desta turma foram actualizados com sucesso', 'default', array
+					('class' => 'alert alert-success'));
+				$this->redirect(array('controller' => 'turmas', 'action' => 'ver_turma', $turmaId));
+			} else {
+				$this->Session->setFlash('Problemas ao adicionar a turma', 'default', array('class' => 'alert alert-danger'));
+			}
+		}
+
+		$turma = $this->Turma->findById($turmaId);
+		$this->Turma->DocenteTurma->Docente->contain(array(
+			'Entidade', 'UnidadeOrganica'
+		));
+		$docentes = $this->Turma->DocenteTurma->Docente->find('list', array('fields' => array("Entidade.name")));
+		$tipoDocenteTurmas = $this->Turma->DocenteTurma->TipoDocenteTurma->find('list');
+
+		$this->set('siga_page_title', 'Adicionar Docente a Turma');
+		$this->set('siga_page_overview', '');
+		$this->set(compact('turma', 'docentes', 'tipoDocenteTurmas', 'turmaId'));
 	}
 
 	public function docente_print_lista_estudantes() {
@@ -542,6 +523,62 @@ class TurmasController extends AppController {
 
 	public function docente_print_pauta() {
 
+	}
+
+	public function docente_ver_turma($turmaId = null) {
+		$this->Turma->id = $turmaId;
+		if (!$this->Turma->exists()) {
+			throw new NotFoundException(__('Turma Inválida'));
+		}
+
+		if (empty($this->data)) {
+			$this->Turma->contain(array(
+				'Turno', 'PlanoEstudo', 'AnoLectivo', 'EstadoTurma', 'Curso' => array
+					(
+					'UnidadeOrganica'
+				), 'Disciplina', 'AnoLectivo'
+			));
+			$this->data = $this->Turma->read(null, $turmaId);
+		}
+		$docente = $this->Turma->DocenteTurma->Docente->getByUserId($this->Session->read('Auth.User.id'));
+
+		if (!$this->Turma->isDocente($turmaId, $docente['Docente']['id'])) {
+			$this->Session->SetFlash('Nao tem permissao para aceder a pagina anterior');
+			$this->redirect(array('action' => 'index'));
+		}
+
+		$this->Turma->Inscricao->contain(array(
+			'EstadoInscricao',
+			'Matricula' => array(
+				'Aluno' => array(
+					'Entidade' => array(
+						'User'
+					)
+				)
+			),
+			'Turma' => array(
+				'Curso' => array(
+					'fields' => array('name')
+				), 'Disciplina', 'Turno', 'AnoLectivo'
+			)
+		));
+		$inscricaos = $this->Turma->Inscricao->find('all', array('conditions' => array('turma_id' => $turmaId)));
+
+
+		$this->loadModel('TurmaTipoAvaliacao');
+		$TurmaTipoAvaliacaos = $this->TurmaTipoAvaliacao->find('all', array('conditions' => array('turma_id' => $this->data['Turma']['id'])));
+		$estados = array('1' => 'Activa', '2' => 'Cancelada', '3' => 'Fechada');
+		$anosemestrecurr = array('1' => '1', '2' => '2', '3' => '3', '4' => '4');
+		$anolectivos = $this->Turma->AnoLectivo->find('list');
+		$cursos = $this->Turma->Curso->find('list');
+		$planoestudos = $this->Turma->PlanoEstudo->find('list');
+		$turnos = $this->Turma->Turno->find('list');
+		$disciplinas = $this->Turma->Disciplina->find('list');
+		$regente = $this->Turma->getRegente($turmaId);
+		$assistentes = $this->Turma->getAllAssistentes($turmaId);
+
+		$this->set('turma', $this->data);
+		$this->set(compact('inscricaos', 'TurmaTipoAvaliacaos', 'anolectivos', 'estados', 'mediaTurma', 'anosemestrecurr', 'cursos', 'planoestudos', 'turnos', 'disciplinas', 'docentes', 'ano_curricular', 'regente', 'assistentes'));
 	}
 
 }

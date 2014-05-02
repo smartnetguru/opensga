@@ -136,7 +136,7 @@ class DocentesController extends AppController {
 
 			if ($this->Docente->cadastraDocente($this->request->data)) {
 				$this->Session->setFlash("Dados registrados com sucesso", 'default', array('class' => 'alert alert-success'));
-				//$this->redirect(array('controller' => 'docentes', 'action' => 'perfil_docente', $this->Docente->id));
+				$this->redirect(array('controller' => 'docentes', 'action' => 'perfil_docente', $this->Docente->id));
 			} else {
 				$this->Session->setFlash('Problemas ao registrar dados', 'default', array('class' => 'alert alert-danger'));
 			}
@@ -184,7 +184,7 @@ class DocentesController extends AppController {
 
 	public function beforeFilter() {
 		parent::beforeFilter();
-		//$this->layout = 'clipone_default';
+		$this->Security->csrfCheck = false;
 	}
 
 }

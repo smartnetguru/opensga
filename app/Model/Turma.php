@@ -314,6 +314,15 @@ class Turma extends AppModel {
 		return $turmas;
 	}
 
+	public function getAllTurmasByDocente($docenteId, $estadoTurmaId = 1) {
+		$turmasDocente = $this->DocenteTurma->findAllByDocenteId($docenteId);
+
+		$turmaIds = Hash::extract($turmasDocente, '{n}.DocenteTurma.turma_id');
+
+		$turmas = $this->find('all', array('conditions' => array('Turma.id' => $turmaIds, 'Turma.estado_turma_id' => $estadoTurmaId)));
+		return $turmas;
+	}
+
 	// Faz o update do estado da turma para fechada
 	function upDateTurma($t0009anolectivo_id, $curso_id) {
 		$query = "update t0010turmas tt set tt.estado = 3 where tt.t0003curso_id = {$curso_id} and tt.t0009anolectivo_id = {$t0009anolectivo_id}";
@@ -376,13 +385,27 @@ class Turma extends AppModel {
 		return $resultado;
 	}
 
-	public function getRegente($turma_id) {
+	public function getRegente($turmaId) {
 		$this->DocenteTurma->contain(array(
 			'Docente' => array(
 				'Entidade'
 			)
 		));
-		return $this->DocenteTurma->find('first', array('conditions' => array('turma_id' => $turma_id, 'estado_docente_turma_id' => 1, 'tipo_docente_turma_id' => 1)));
+		return $this->DocenteTurma->find('first', array('conditions' => array('turma_id' => $turmaId, 'estado_docente_turma_id' => 1, 'tipo_docente_turma_id' => 1)));
+	}
+
+	/**
+	 * Retorna todos os assistentes de uma turma
+	 * @param type $turma_id
+	 * @return type
+	 */
+	public function getAllAssistentes($turmaId) {
+		$this->DocenteTurma->contain(array(
+			'Docente' => array(
+				'Entidade'
+			)
+		));
+		return $this->DocenteTurma->find('all', array('conditions' => array('turma_id' => $turmaId, 'estado_docente_turma_id' => 1, 'tipo_docente_turma_id' => 2)));
 	}
 
 	/**
@@ -429,6 +452,14 @@ class Turma extends AppModel {
 	public function hasAvaliacoesAbertas($turma_id) {
 		$avaliacoes = $this->TurmaTipoAvaliacao->find('all', array('conditions' => array('TurmaTipoAvaliacao.turma_id' => $turma_id)));
 		debug($avaliacoes);
+	}
+
+	public function isDocente($turmaId, $docenteId) {
+		$docenteTurma = $this->DocenteTurma->find('first', array('conditions' => array('turma_id' => $turmaId, 'docente_id' => $docenteId, 'estado_docente_turma_id' => 1)));
+		if ($docenteTurma) {
+			return true;
+		}
+		return false;
 	}
 
 	public function getTotalAlunosInscritosByTurma($turma_id = null) {

@@ -1770,4 +1770,40 @@ class OpenSGAShell extends AppShell {
 		}
 	}
 
+	public function remove_turmas_sem_inscricao() {
+
+	}
+
+	public function ajusta_inscricao_curriculum() {
+		$this->Aluno->Inscricao->contain(array(
+			'Turma'
+		));
+		$inscricaos = $this->Aluno->Inscricao->find('all', array('conditions' => array('Turma.plano_estudo_id' => array(30, 32), 'Turma.ano_lectivo_id' => 30)));
+		debug(count($inscricaos));
+		die();
+		foreach ($inscricaos as $inscricao) {
+			if ($inscricao['Turma']['plano_estudo_id'] == 30) {
+				$novoPlanoEstudo = 31;
+			} else {
+				$novoPlanoEstudo = 29;
+			}
+
+			$turmaNovoCurriculum = $this->Aluno->Inscricao->Turma->find('first', array('conditions' => array(
+					'Turma.ano_lectivo_id' => $inscricao['Turma']['ano_lectivo_id'],
+					'Turma.curso_id' => $inscricao['Turma']['curso_id'],
+					'Turma.plano_estudo_id' => $novoPlanoEstudo,
+					'Turma.disciplina_id' => $inscricao['Turma']['disciplina_id'],
+					'Turma.ano_curricular' => $inscricao['Turma']['ano_curricular'],
+					'Turma.semestre_curricular' => $inscricao['Turma']['semestre_curricular'],
+			)));
+
+			if ($turmaNovoCurriculum) {
+				$this->Aluno->Inscricao->id = $inscricao['Inscricao']['id'];
+				$this->Aluno->Inscricao->set('turma_inscricao_id', $inscricao['Inscricao']['turma_id']);
+				$this->Aluno->Inscricao->set('turma_id', $turmaNovoCurriculum['Turma']['id']);
+				$this->Aluno->Inscricao->set('turma_frequencia_id', $turmaNovoCurriculum['Turma']['id']);
+			}
+		}
+	}
+
 }
