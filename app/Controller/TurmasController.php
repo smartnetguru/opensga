@@ -317,7 +317,8 @@ class TurmasController extends AppController {
 			)
 		));
 		$inscricaos = $this->Turma->Inscricao->find('all', array('conditions' => array('turma_id' => $turma_id, 'Inscricao.estado_inscricao_id' => 1)));
-
+		//debug($inscricaos);
+		//debug();
 
 		$this->set(compact('inscricaos'));
 	}
@@ -465,15 +466,41 @@ class TurmasController extends AppController {
 		}
 	}
 
-	public function importar_pauta($turma_id) {
-
-	}
-
 	public function faculdade_importar_pauta($turma_id) {
 
 	}
 
-	public function docente_importar_pauta($turma_id) {
+	public function docente_importar_pauta($turmaId) {
+		$this->loadModel('Upload');
+		if ($this->request->is('post')) {
+
+			$type = $this->request->data['Upload']['file']['type'];
+			if ($type == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet') {
+
+				$upload_sucesso = $this->Upload->uploadFiles('uploads', array($this->request->data['Upload']['file']), 'pautas');
+				if (isset($upload_sucesso['urls'])) {
+
+
+					$this->request->data['Upload']['name'] = $this->request->data['Upload']['file']['name'];
+					$this->request->data['Upload']['size'] = $this->request->data['Upload']['file']['size'];
+					$this->request->data['Upload']['file_url'] = $upload_sucesso['urls'][0];
+					$this->request->data['Upload']['tipo_upload_id'] = 2;
+					$this->Upload->create();
+					$this->Upload->save($this->request->data);
+
+					$processado = $this->Turma->processaPauta($upload_sucesso['urls'][0], $turmaId);
+					if ($processado) {
+						$this->Session->setFlash(__('Pauta Processada com Sucesso'), 'default', array('class' => 'alert alert-success'));
+						$this->redirect(array('action' => 'ver_turma', $turmaId));
+					}
+				}
+			} else {
+				$this->Session->setFlash(__('Tentou carregar um ficheiro no formato errado.'), 'default', array('class' => 'alert error'));
+			}
+		}
+	}
+
+	public function docente_fechar_turma($turmaId) {
 
 	}
 
@@ -505,24 +532,89 @@ class TurmasController extends AppController {
 		$this->set(compact('turma', 'docentes', 'tipoDocenteTurmas', 'turmaId'));
 	}
 
-	public function docente_print_lista_estudantes() {
-
-	}
-
-	public function criar_avaliacao() {
-
+	public function docente_print_lista_estudantes($turmaId) {
+		$this->Turma->Inscricao->contain(array(
+			'EstadoInscricao',
+			'Matricula' => array(
+				'Aluno' => array(
+					'Entidade' => array(
+						'User'
+					)
+				)
+			),
+			'Turma' => array(
+				'Curso' => array(
+					'UnidadeOrganica'
+				), 'Disciplina', 'Turno', 'AnoLectivo'
+			)
+		));
+		$inscricaos = $this->Turma->Inscricao->find('all', array('conditions' => array('turma_id' => $turmaId, 'Inscricao.estado_inscricao_id' => 1)));
+		$this->set(compact('inscricaos'));
 	}
 
 	public function faculdade_criar_avaliacao() {
 
 	}
 
-	public function docente_criar_avaliacao() {
+	public function docente_criar_avaliacao($turmaId) {
+		$this->Turma->id = $turmaId;
+		if (!$this->Turma->exists()) {
+			throw new NotFoundException(__('Turma Inválida'));
+		}
 
+		$this->Turma->contain(array(
+			'Turno', 'PlanoEstudo', 'AnoLectivo', 'EstadoTurma', 'Curso' => array
+				(
+				'UnidadeOrganica'
+			), 'Disciplina', 'AnoLectivo'
+		));
+		$turma = $this->Turma->read(null, $turmaId);
+
+		$docente = $this->Turma->DocenteTurma->Docente->getByUserId($this->Session->read('Auth.User.id'));
+
+		if (!$this->Turma->isDocente($turmaId, $docente['Docente']['id'])) {
+			$this->Session->SetFlash('Nao tem permissao para aceder a pagina anterior');
+			$this->redirect(array('action' => 'index'));
+		}
+
+		if ($this->request->is('post')) {
+			$this->Turma->TurmaTipoAvaliacao->create();
+			if ($this->Turma->TurmaTipoAvaliacao->save($this->request->data)) {
+				$this->Session->setFlash('Avaliacao Criada com Sucesso');
+				$this->redirect(array('action' => 'ver_turma', $turmaId));
+			}
+		}
+		$tipoAvaliacaos = $this->Turma->TurmaTipoAvaliacao->TipoAvaliacao->find('list');
+
+		$this->set(compact('tipoAvaliacaos', 'turma', 'docente'));
 	}
 
-	public function docente_print_pauta() {
+	public function docente_print_pauta($turmaId) {
+		$this->Turma->id = $turmaId;
+		$turma = $this->Turma->read();
 
+		$todasTurmas = $this->Turma->find('list', array('conditions' => array('Turma.curso_id' => $turma['Turma']['curso_id'], 'Turma.disciplina_id' => $turma['Turma']['disciplina_id'], 'Turma.ano_lectivo_id' => $turma['Turma']['ano_lectivo_id'], 'Turma.semestre_curricular' => $turma['Turma']['semestre_curricular'])));
+		$todasTurmasIds = array_keys($todasTurmas);
+
+		$this->Turma->Inscricao->contain(array(
+			'EstadoInscricao',
+			'Matricula' => array(
+				'Aluno' => array(
+					'Entidade' => array(
+					)
+				)
+			),
+			'Turma' => array(
+				'Curso' => array(
+					'fields' => array('name')
+				), 'Disciplina', 'Turno', 'AnoLectivo'
+			)
+		));
+		$inscricaos2 = $this->Turma->Inscricao->find('all', array('conditions' => array('turma_id' => $todasTurmasIds, 'Inscricao.estado_inscricao_id' => 1)));
+		$inscricaos = Hash::sort($inscricaos2, '{n}.Matricula.Aluno.Entidade.apelido', 'asc');
+
+		$faculdade = $this->Turma->Curso->getFaculdadeByCursoId($inscricaos[0] ['Turma']['curso_id']);
+		$this->set(compact('inscricaos', 'faculdade'));
 	}
 
 	public function docente_ver_turma($turmaId = null) {
@@ -565,8 +657,10 @@ class TurmasController extends AppController {
 		$inscricaos = $this->Turma->Inscricao->find('all', array('conditions' => array('turma_id' => $turmaId)));
 
 
-		$this->loadModel('TurmaTipoAvaliacao');
-		$TurmaTipoAvaliacaos = $this->TurmaTipoAvaliacao->find('all', array('conditions' => array('turma_id' => $this->data['Turma']['id'])));
+		$this->Turma->TurmaTipoAvaliacao->contain(array(
+			'TipoAvaliacao'
+		));
+		$turmaTipoAvaliacaos = $this->Turma->TurmaTipoAvaliacao->find('all', array('conditions' => array('turma_id' => $this->data['Turma']['id'])));
 		$estados = array('1' => 'Activa', '2' => 'Cancelada', '3' => 'Fechada');
 		$anosemestrecurr = array('1' => '1', '2' => '2', '3' => '3', '4' => '4');
 		$anolectivos = $this->Turma->AnoLectivo->find('list');
@@ -578,7 +672,7 @@ class TurmasController extends AppController {
 		$assistentes = $this->Turma->getAllAssistentes($turmaId);
 
 		$this->set('turma', $this->data);
-		$this->set(compact('inscricaos', 'TurmaTipoAvaliacaos', 'anolectivos', 'estados', 'mediaTurma', 'anosemestrecurr', 'cursos', 'planoestudos', 'turnos', 'disciplinas', 'docentes', 'ano_curricular', 'regente', 'assistentes'));
+		$this->set(compact('inscricaos', 'turmaTipoAvaliacaos', 'anolectivos', 'estados', 'mediaTurma', 'anosemestrecurr', 'cursos', 'planoestudos', 'turnos', 'disciplinas', 'docentes', 'ano_curricular', 'regente', 'assistentes'));
 	}
 
 }

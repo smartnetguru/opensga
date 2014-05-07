@@ -140,11 +140,26 @@ class AppController extends Controller {
 		$this->set(compact('paginationOptions'));
 	}
 
+	/**
+	 * Estamos a ler mensagens, notificacoes e tarefas em todas as requisicoes :(
+	 * @Todo ver a melhor maneira de resolver isto
+	 */
 	public function beforeRender() {
 		parent::beforeRender();
+
+		//Lemos as mensagens, notificacoes e tarefas em todas as requisicoes :(
+		$totalMessages = 0;
+		$totalNotificacoes = 0;
+		$totalTarefas = 0;
+		$messages = array();
+		$notificacoes = array();
+		$tarefas = array();
+
+
 		if (isset($this->request->prefix) && !$this->request->is('ajax')) {
 			$this->layout = $this->request->prefix;
 		}
+		$this->set(compact('totalMessages', 'totalTarefas', 'totalNotificacoes', 'messages', 'tarefas', 'notificacoes'));
 	}
 
 }

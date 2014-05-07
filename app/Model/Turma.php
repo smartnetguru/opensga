@@ -462,7 +462,103 @@ class Turma extends AppModel {
 		return false;
 	}
 
-	public function getTotalAlunosInscritosByTurma($turma_id = null) {
+	public function processaPauta($pautaURL, $turmaId) {
+		AuditableConfig::$Logger = ClassRegistry::init('Auditable.Logger');
+		App::import('Vendor', 'PHPExcel', array('file' => 'PHPExcel.php'));
+		if (!class_exists('PHPExcel')) {
+			throw new CakeException('Vendor class PHPExcel not found!');
+		}
+
+
+		$xls = PHPExcel_IOFactory::load(APP . $pautaURL);
+
+		$ws = $xls->getSheetByName('avaliacoes');
+
+		//Primeiro vamos ver todos os testes feitos
+		$testeExiste = true;
+		$mapaTodosTestes = array('F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O');
+		$mapaTestes = array();
+		$ordemTeste = 0;
+		foreach ($mapaTodosTestes as $k => $v) {
+			$verificaTeste = $ws->getCell($v . '6')->getCalculatedValue();
+
+			if ($verificaTeste == 0) {
+
+			} else {
+				$ordemTeste += 1;
+
+				$turmaTipoAvaliacao = $this->TurmaTipoAvaliacao->find('first', array('conditions' => array('turma_id' => $turmaId, 'ordem' => $ordemTeste)));
+				if (empty($turmaTipoAvaliacao)) {
+					$arrayNovaAvaliacao = array(
+						'TurmaTipoAvaliacao' => array(
+							'turma_id' => $turmaId,
+							'tipo_avaliacao_id' => 1,
+							'peso' => $verificaTeste * 100,
+							'ordem' => $ordemTeste,
+							'estado_turma_avaliacao_id' => 1
+						)
+					);
+					$this->TurmaTipoAvaliacao->create();
+					$this->TurmaTipoAvaliacao->save($arrayNovaAvaliacao);
+					$turmaTipoAvaliacao = $this->TurmaTipoAvaliacao->find('first', array('conditions' => array('turma_id' => $turmaId, 'ordem' => $ordemTeste)));
+				} else {
+					$pesoOriginal = $turmaTipoAvaliacao['TurmaTipoAvaliacao']['peso'];
+					if ($pesoOriginal != $verificaTeste * 100) {
+						$this->TurmaTipoAvaliacao->id = $turmaTipoAvaliacao['TurmaTipoAvaliacao']['id'];
+						$this->TurmaTipoAvaliacao->set('peso', $verificaTeste * 100);
+						$this->TurmaTipoAvaliacao->save();
+					}
+				}
+				$mapaTestes[] = array(
+					'letra' => $v,
+					'peso' => $verificaTeste * 100,
+					'ordem' => $ordemTeste,
+					'turma_tipo_avaliacao_id' => $turmaTipoAvaliacao['TurmaTipoAvaliacao']['id'],
+					'tipo_avaliacao_id' => $turmaTipoAvaliacao['TurmaTipoAvaliacao']['tipo_avaliacao_id'],
+					'data_marcada' => $turmaTipoAvaliacao['TurmaTipoAvaliacao']['data_marcada'],
+					'data_realizada' => $turmaTipoAvaliacao['TurmaTipoAvaliacao']['data_realizada']
+				);
+			}
+		}
+
+		$linhaActual = 9;
+		foreach ($ws->getRowIterator() as $row) {
+			if ($ws->getCell('A' . $linhaActual)->getValue() == '') {
+				break;
+			}
+			$numeroEstudante = $ws->getCell('C' . $linhaActual)->getCalculatedValue();
+			$aluno = $this->Inscricao->Aluno->findByCodigo($numeroEstudante);
+			if (!empty($aluno)) {
+				foreach ($mapaTestes as $mapaTeste) {
+					$nota = $ws->getCell($mapaTeste['letra'] . $linhaActual)->getCalculatedValue();
+					$avaliacaoExiste = $this->TurmaTipoAvaliacao->Avaliacao->find('first', array('conditions' => array('turma_tipo_avaliacao_id' => $mapaTeste['turma_tipo_avaliacao_id'], 'aluno_id' => $aluno['Aluno']['id'], 'estado_avaliacao_id' => 1)));
+					if (!$avaliacaoExiste) {
+						$arrayNovaAvaliacao = array(
+							'Avaliacao' => array(
+								'turma_tipo_avaliacao_id' => $mapaTeste['turma_tipo_avaliacao_id'],
+								'nota' => $nota,
+								'data_avaliacao' => $mapaTeste['data_realizada'],
+								'aluno_id' => $aluno['Aluno']['id'],
+								'estado_avaliacao_id' => 1
+							)
+						);
+						$this->TurmaTipoAvaliacao->Avaliacao->create();
+						$this->TurmaTipoAvaliacao->Avaliacao->save($arrayNovaAvaliacao);
+					} else {
+						$this->TurmaTipoAvaliacao->Avaliacao->id = $avaliacaoExiste['Avaliacao']['id'];
+						$this->TurmaTipoAvaliacao->Avaliacao->set('nota', $nota);
+						$this->TurmaTipoAvaliacao->Avaliacao->set('data_avaliacao', $mapaTeste['data_realizada']);
+						$this->TurmaTipoAvaliacao->Avaliacao->save();
+					}
+				}
+			}
+
+			$linhaActual++;
+		}
+		return true;
+	}
+
+	function getTotalAlunosInscritosByTurma($turma_id = null) {
 
 	}
 

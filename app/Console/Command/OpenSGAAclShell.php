@@ -42,14 +42,27 @@ class OpenSGAAclShell extends AppShell {
 
 			$comandos[] = "acl deny User.{$docente['Entidade']['User']['id']} controllers";
 
+			$comandos[] = "acl grant User.{$docente['Entidade']['User']['id']} controllers/Avaliacaos/docente_ver_avaliacao";
+
 			$comandos[] = "acl grant User.{$docente['Entidade']['User']['id']} controllers/Alunos/docente_index";
 
 			$comandos[] = "acl grant User.{$docente['Entidade']['User']['id']} controllers/Docentes/docente_meu_perfil";
 
+			$comandos[] = "acl grant User.{$docente['Entidade']['User']['id']} controllers/Messages/docente_index";
+			$comandos[] = "acl grant User.{$docente['Entidade']['User']['id']} controllers/Messages/docente_criar_mensagem";
+			$comandos[] = "acl grant User.{$docente['Entidade']['User']['id']} controllers/Messages/docente_ver_mensagem";
+			$comandos[] = "acl grant User.{$docente['Entidade']['User']['id']} controllers/Messages/docente_editar_mensagem";
+
 			$comandos[] = "acl grant User.{$docente['Entidade']['User']['id']} controllers/Pages/docente_home";
 
+			$comandos[] = "acl grant User.{$docente['Entidade']['User']['id']} controllers/Turmas/docente_criar_avaliacao";
 			$comandos[] = "acl grant User.{$docente['Entidade']['User']['id']} controllers/Turmas/docente_index";
 			$comandos[] = "acl grant User.{$docente['Entidade']['User']['id']} controllers/Turmas/docente_ver_turma";
+			$comandos[] = "acl grant User.{$docente['Entidade']['User']['id']} controllers/Turmas/docente_print_pauta";
+			$comandos[] = "acl grant User.{$docente['Entidade']['User']['id']} controllers/Turmas/docente_print_lista_estudantes";
+			$comandos[] = "acl grant User.{$docente['Entidade']['User']['id']} controllers/Turmas/docente_ver_turma";
+			$comandos[] = "acl grant User.{$docente['Entidade']['User']['id']} controllers/Turmas/docente_importar_pauta";
+			$comandos[] = "acl grant User.{$docente['Entidade']['User']['id']} controllers/Turmas/docente_fechar_turma";
 		}
 
 		foreach ($comandos as $comando) {

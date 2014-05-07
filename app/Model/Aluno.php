@@ -96,6 +96,19 @@ class Aluno extends AppModel {
 		),
 	);
 	public $hasMany = array(
+		'Avaliacao' => array(
+			'className' => 'Avaliacao',
+			'foreignKey' => 'aluno_id',
+			'dependent' => false,
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'exclusive' => '',
+			'finderQuery' => '',
+			'counterQuery' => ''
+		),
 		'Matricula' => array(
 			'className' => 'Matricula',
 			'foreignKey' => 'aluno_id',
