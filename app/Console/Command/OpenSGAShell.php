@@ -1402,10 +1402,10 @@ class OpenSGAShell extends AppShell {
 		if (!class_exists('PHPExcel'))
 			throw new CakeException('Vendor class PHPExcel not found!');
 
-		$xls = PHPExcel_IOFactory::load(APP . 'Imports' . DS . 'admitidos_2204.xlsx');
+		$xls = PHPExcel_IOFactory::load(APP . 'Imports' . DS . 'admitidos_0805.xlsx');
 
 		$worksheet = $xls->getActiveSheet();
-//debug($xls->getActiveSheetIndex());
+		//debug($xls->getActiveSheetIndex());
 		$linha_actual = 2;
 		foreach ($worksheet->getRowIterator() as $row) {
 			if ($worksheet->getCell('A' . $linha_actual)->getValue() == '') {
