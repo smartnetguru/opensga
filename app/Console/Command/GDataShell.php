@@ -1,6 +1,6 @@
 <?php
 
-ini_set('memory_limit', "512M");
+ini_set('memory_limit', "2512M");
 App::import('Vendor', 'zend_include_path');
 App::import('Vendor', 'Zend_Loader', true, false, 'Zend/Loader.php');
 
@@ -92,6 +92,39 @@ class GDataShell extends AppShell {
 				}
 				$this->out($ii++);
 				var_dump($user->login->userName);
+			}
+		}
+	}
+
+	public function altera_contas() {
+		Zend_Loader::loadClass('Zend_Gdata');
+		Zend_Loader::loadClass('Zend_Gdata_ClientLogin');
+		Zend_Loader::loadClass('Zend_Gdata_Gapps');
+
+		$service = Zend_Gdata_Gapps::AUTH_SERVICE_NAME;
+		$client = Zend_Gdata_ClientLogin::getHttpClient('elisio.leonardo@uem.ac.mz', 'Tesc&eatsop1', $service);
+		$gdata = new Zend_Gdata_Gapps($client, 'uem.ac.mz');
+
+		$this->Entidade->contain(array('User', 'Aluno'));
+		$users = $this->Entidade->find('all', array('conditions' => array('User.codigo_activacao' => 1), 'order' => 'User.id DESC'));
+		var_dump(count($users));
+		$ii = 0;
+		foreach ($users as $u) {
+
+			$usernames = explode('@', $u['User']['username']);
+			$usernames[0] = str_replace(' ', '', $usernames[0]);
+			$user = $gdata->retrieveUser($usernames[0]);
+			if ($user) {
+				$user->login->password = $u['Aluno']['codigo'];
+				$user->login->changePasswordAtNextLogin = true;
+				$user = $user->save();
+				if ($user != null) {
+					$this->User->id = $u['User']['id'];
+					$this->User->set('codigo_activacao', 2);
+					$this->User->save();
+				}
+				$this->out($ii++);
+				$this->out($user->login->userName);
 			}
 		}
 	}

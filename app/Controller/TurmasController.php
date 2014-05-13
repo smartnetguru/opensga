@@ -327,7 +327,7 @@ class TurmasController extends AppController {
 		$this->Turma->id = $turmaId;
 		$turma = $this->Turma->read();
 
-		$todasTurmas = $this->Turma->find('list', array('conditions' => array('Turma.curso_id' => $turma['Turma']['curso_id'], 'Turma.disciplina_id' => $turma['Turma']['disciplina_id'], 'Turma.ano_lectivo_id' => $turma['Turma']['ano_lectivo_id'], 'Turma.semestre_curricular' => $turma['Turma']['semestre_curricular'])));
+		$todasTurmas = $this->Turma->find('list', array('conditions' => array('Turma.curso_id' => $turma['Turma']['curso_id'], 'Turma.disciplina_id' => $turma['Turma']['disciplina_id'], 'Turma.ano_lectivo_id' => $turma['Turma']['ano_lectivo_id'])));
 		$todasTurmasIds = array_keys($todasTurmas);
 
 		$this->Turma->Inscricao->contain(array(
@@ -593,7 +593,7 @@ class TurmasController extends AppController {
 		$this->Turma->id = $turmaId;
 		$turma = $this->Turma->read();
 
-		$todasTurmas = $this->Turma->find('list', array('conditions' => array('Turma.curso_id' => $turma['Turma']['curso_id'], 'Turma.disciplina_id' => $turma['Turma']['disciplina_id'], 'Turma.ano_lectivo_id' => $turma['Turma']['ano_lectivo_id'], 'Turma.semestre_curricular' => $turma['Turma']['semestre_curricular'])));
+		$todasTurmas = $this->Turma->find('list', array('conditions' => array('Turma.curso_id' => $turma['Turma']['curso_id'], 'Turma.disciplina_id' => $turma['Turma']['disciplina_id'], 'Turma.ano_lectivo_id' => $turma['Turma']['ano_lectivo_id'])));
 		$todasTurmasIds = array_keys($todasTurmas);
 
 		$this->Turma->Inscricao->contain(array(
