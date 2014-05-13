@@ -78,17 +78,8 @@ class OpenSGAAclShell extends AppShell {
 
 		foreach ($funcionarios as $funcionario) {
 			$this->out($funcionario['User']['username']);
-
-			$unidadeOrganica = $this->UnidadeOrganica->findById($funcionario['Funcionario']['unidade_organica_id']);
-			$unidadeOrganicas = $this->UnidadeOrganica->find('all', array('conditions' => array('parent_id' => $unidadeOrganica['UnidadeOrganica']['id'])));
-
-			if ($unidadeOrganicas) {
-				$unidadesOrganicas = Hash::extract($unidadeOrganicas, '{n}.UnidadeOrganica.codigo');
-
-				$unidadesOrganicas[] = $unidadeOrganica['UnidadeOrganica']['codigo'];
-			} else {
-				$unidadesOrganicas = array($unidadeOrganica['UnidadeOrganica']['codigo']);
-			}
+			$path = $this->UnidadeOrganica->getPath($funcionario['Funcionario']['unidade_organica_id'], array('id', 'codigo'));
+			$unidadesOrganicas = Hash::extract($path, '{n}.UnidadeOrganica.codigo');
 
 			$comandos = array();
 			$comandos[] = "acl deny User.{$funcionario['User']['id']} controllers";
@@ -169,6 +160,8 @@ class OpenSGAAclShell extends AppShell {
 				$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/report_alunos_sem_certificado";
 				$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/report_alunos_sem_smo";
 
+				$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Cursos/index";
+
 				$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Funcionarios/index";
 
 				$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Pages/home";
@@ -216,14 +209,11 @@ class OpenSGAAclShell extends AppShell {
 					$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/editar_estudante";
 					$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/exportar_alunos";
 					$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/exportar_alunos_excel";
-
 					$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/alterar_nome";
-
 					$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/mudanca_curso";
-
 					$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/concluir_nivel";
-
 					$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/perfil_estudante";
+					$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Cursos/adicionar_curso";
 
 					$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Funcionarios/adicionar_funcionario";
 					$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Funcionarios/index";

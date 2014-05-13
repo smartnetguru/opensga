@@ -1761,6 +1761,7 @@ class OpenSGAShell extends AppShell {
 			$storedHash = $aluno['User']['password'];
 			$newHash = Security::hash($passwordAntiga, 'blowfish', $storedHash);
 			$correct = $storedHash == $newHash;
+			$this->out($storedHash . '-----------------' . $newHash);
 			if ($correct) {
 				$this->out('Mudando a senha de -----' . $aluno['Aluno']['codigo']);
 				$this->Aluno->User->set('password', Security::hash($aluno['Aluno']['codigo'], 'blowfish'));
