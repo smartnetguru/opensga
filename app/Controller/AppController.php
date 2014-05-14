@@ -100,11 +100,11 @@ class AppController extends Controller {
 				}
 			} elseif ($grupo_id == 4) {
 				if ($this->request->prefix != 'docente') {
-					$this->Security->blackHole($this);
+					$this->request->prefix = 'docente';
 				}
 			} elseif ($grupo_id == 3) {
 				if ($this->request->prefix != 'estudante') {
-					$this->Security->blackHole($this);
+					$this->request->prefix = 'estudante';
 				}
 			} elseif ($grupo_id == 2) {
 				$this->loadModel('User');

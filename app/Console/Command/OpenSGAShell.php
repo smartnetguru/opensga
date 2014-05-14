@@ -1807,4 +1807,15 @@ class OpenSGAShell extends AppShell {
 		}
 	}
 
+	public function envia_sms_estrangeiros() {
+		$this->Aluno->contain('Entidade');
+		$alunos = $this->Aluno->find('all', array('conditions' => array('Entidade.pais_nascimento NOT' => 152, 'Aluno.estado_aluno_id' => 1)));
+		debug(count($alunos));
+		foreach ($alunos as $aluno) {
+			if ($aluno['Entidade']['telemovel']) {
+				debug('a');
+			}
+		}
+	}
+
 }

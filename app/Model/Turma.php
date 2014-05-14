@@ -532,6 +532,7 @@ class Turma extends AppModel {
 				foreach ($mapaTestes as $mapaTeste) {
 					$nota = $ws->getCell($mapaTeste['letra'] . $linhaActual)->getCalculatedValue();
 					$avaliacaoExiste = $this->TurmaTipoAvaliacao->Avaliacao->find('first', array('conditions' => array('turma_tipo_avaliacao_id' => $mapaTeste['turma_tipo_avaliacao_id'], 'aluno_id' => $aluno['Aluno']['id'], 'estado_avaliacao_id' => 1)));
+					debug($nota);
 					if (!$avaliacaoExiste) {
 						$arrayNovaAvaliacao = array(
 							'Avaliacao' => array(

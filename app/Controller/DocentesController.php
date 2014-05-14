@@ -50,13 +50,13 @@ class DocentesController extends AppController {
 	public function docente_meu_perfil() {
 
 
-		$docente_id = $this->Docente->getByUserID($this->Session->read('Auth.User.id'));
+		$docente = $this->Docente->getByUserID($this->Session->read('Auth.User.id'));
 		$this->Docente->contain(array(
 			'Entidade' => array(
 				'User', 'PaisNascimento', 'CidadeNascimento', 'ProvinciaNascimento', 'DocumentoIdentificacao', 'Genero'
 			), 'UnidadeOrganica'
 		));
-		$docente = $this->Docente->findById($docente_id);
+		$docente = $this->Docente->findById($docente['Docente']['id']);
 		$this->set(compact('docente'));
 	}
 
