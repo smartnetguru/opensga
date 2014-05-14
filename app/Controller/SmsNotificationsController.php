@@ -104,9 +104,9 @@ class SmsNotificationsController extends AppController {
 			if (isset($aluno['Entidade']['EntidadeContacto'][0]['valor'])) {
 				$numero = $aluno['Entidade']['EntidadeContacto'][0]['valor'];
 				if (is_numeric($numero)) {
-					debug($numero);
+					print_r($numero);
 					$mensagem = "Bom dia! A DRA o convida a participar da reunião com estudantes estrangeiros, na 6 feira ( 16/05/1 4), às 14h, no Complexto Pedagógico. www.dra.uem.mz";
-					debug($mensagem);
+
 					$this->SmsEnviada->sendSMS($numero, $mensagem);
 				}
 			}
