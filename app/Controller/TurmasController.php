@@ -466,8 +466,36 @@ class TurmasController extends AppController {
 		}
 	}
 
-	public function faculdade_importar_pauta($turma_id) {
+	public function faculdade_importar_pauta($turmaId) {
+		$this->loadModel('Upload');
+		if ($this->request->is('post')) {
 
+			$type = $this->request->data['Upload']['file']['type'];
+			debug($type);
+			if ($type == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet') {
+
+				$uploadSucesso = $this->Upload->uploadFiles('uploads', array($this->request->data['Upload']['file']), 'pautas_pendentes');
+				if (isset($uploadSucesso['urls'])) {
+					$this->request->data['Upload']['name'] = $this->request->data['Upload']['file']['name'];
+					$this->request->data['Upload']['size'] = $this->request->data['Upload']['file']['size'];
+					$this->request->data['Upload']['file_url'] = $uploadSucesso['urls'][0];
+					$this->request->data['Upload']['tipo_upload_id'] = 2;
+					$this->Upload->create();
+					$this->Upload->save($this->request->data);
+
+					CakeResque::enqueue(
+							'default', 'TurmaShell', array('processaPauta', $turmaId, $this->Upload->id, $uploadSucesso['urls'][0])
+					);
+					//$processado = $this->Turma->processaPauta($uploadSucesso['urls'][0], $turmaId);
+					//if ($processado) {
+					$this->Session->setFlash(__('Pauta Carregada com Sucesso. A Pauta Sera processada dentro de alguns minutos'), 'default', array('class' => 'alert alert-info'));
+					$this->redirect(array('action' => 'ver_turma', $turmaId));
+					//}
+				}
+			} else {
+				$this->Session->setFlash(__('Tentou carregar um ficheiro no formato errado.'), 'default', array('class' => 'alert error'));
+			}
+		}
 	}
 
 	public function docente_importar_pauta($turmaId) {
@@ -501,6 +529,10 @@ class TurmasController extends AppController {
 	}
 
 	public function docente_fechar_turma($turmaId) {
+
+	}
+
+	public function faculdade_fechar_turma($turmaId) {
 
 	}
 

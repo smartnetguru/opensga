@@ -1,6 +1,7 @@
 /app/Assets/Fotos
 /app/tmp
 /app/Config/database.php
+/app/Config/bootstrap_siga.php
 /app/Config/core.php
 /app/tmp/logs/error.log
 /app/tmp

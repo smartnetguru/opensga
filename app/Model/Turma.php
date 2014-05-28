@@ -469,7 +469,7 @@ class Turma extends AppModel {
 			throw new CakeException('Vendor class PHPExcel not found!');
 		}
 
-
+		$this->log($pautaURL);
 		$xls = PHPExcel_IOFactory::load(APP . $pautaURL);
 
 		$ws = $xls->getSheetByName('avaliacoes');
