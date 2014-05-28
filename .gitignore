@@ -9,6 +9,8 @@
 /app/tmp/cache/persistent/cake_core_method_cache
 /app/tmp
 Assets
+uploads
+/app/uploads
 tmp
 /app/Config/core.php
 /lib/Cake/Console/Templates/skel/tmp
