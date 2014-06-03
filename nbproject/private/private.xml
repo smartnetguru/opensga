@@ -5,6 +5,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/var/www/opensga/app/View/Disciplinas/faculdade_adicionar_disciplina.ctp</file>
             <file>file:/var/www/opensga/app/Controller/PagesController.php</file>
             <file>file:/var/www/opensga/app/View/PlanoEstudos/faculdade_index.ctp</file>
             <file>file:/var/www/opensga/app/Controller/PlanoEstudosController.php</file>
@@ -12,12 +13,14 @@
             <file>file:/var/www/opensga/app/Model/Turma.php</file>
             <file>file:/var/www/opensga/app/Model/PlanoEstudo.php</file>
             <file>file:/var/www/opensga/app/Console/Command/DraShell.php</file>
+            <file>file:/var/www/opensga/app/Plugin/Requisicoes/View/RequisicoesPedidos/nova_requisicao.ctp</file>
             <file>file:/var/www/opensga/app/Controller/AlunosController.php</file>
             <file>file:/var/www/opensga/app/View/Turmas/docente_ver_turma.ctp</file>
             <file>file:/var/www/opensga/app/View/Alunos/mudanca_curso.ctp</file>
             <file>file:/var/www/opensga/app/Console/Command/DbsecShell.php</file>
-            <file>file:/var/www/opensga/app/Console/Command/OpenSGAShell.php</file>
             <file>file:/var/www/opensga/app/View/Common/form_basic_common.ctp</file>
+            <file>file:/var/www/opensga/app/Plugin/Requisicoes/View/RequisicoesPedidos/index.ctp</file>
+            <file>file:/var/www/opensga/app/Model/Docente.php</file>
             <file>file:/var/www/opensga/app/Controller/AppController.php</file>
             <file>file:/var/www/opensga/app/Config/core.php</file>
             <file>file:/var/www/opensga/app/Controller/MatriculasController.php</file>
@@ -32,6 +35,7 @@
             <file>file:/var/www/opensga/app/View/Turmas/docente_importar_pauta.ctp</file>
             <file>file:/var/www/opensga/app/Model/Upload.php</file>
             <file>file:/var/www/opensga/app/View/Docentes/faculdade_adicionar_docente.ctp</file>
+            <file>file:/var/www/opensga/app/Plugin/Requisicoes/Controller/RequisicoesPedidosController.php</file>
             <file>file:/var/www/opensga/app/View/Turmas/docente_criar_avaliacao.ctp</file>
         </group>
     </open-files>

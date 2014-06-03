@@ -483,6 +483,11 @@ class TurmasController extends AppController {
 					$this->Upload->create();
 					$this->Upload->save($this->request->data);
 
+					$pautaPath = Configure::read('OpenSGA.save_path') . DS . 'Pautas' . DS . date('Y');
+					if (!is_dir($pautaPath)) {
+						mkdir($pautaPath, 0777, true);
+						chmod($pautaPath, 0755);
+					}
 					CakeResque::enqueue(
 							'default', 'TurmaShell', array('processaPauta', $turmaId, $this->Upload->id, $uploadSucesso['urls'][0])
 					);

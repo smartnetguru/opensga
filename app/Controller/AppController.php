@@ -31,7 +31,7 @@ class AppController extends Controller {
 			'panels' => array('DebugKitEx.Resque')
 		)
 	);
-	public $helpers = array('Html', 'AclLink', 'Print', 'BreadCumbs', 'Form', 'Session', 'Js' => array('MyJquery'), 'EventsCalendar', 'Javascript', 'Ajax', 'PhpExcel', 'HighCharts.HighCharts', 'AclLink');
+	public $helpers = array('Html', 'AclLink', 'Print', 'BreadCumbs', 'Form', 'Session', 'Js' => array('MyJquery'), 'EventsCalendar', 'Javascript', 'Ajax', 'PhpExcel', 'HighCharts.HighCharts', 'AclLink', 'Time');
 	public $pdfConfig = array('engine' => 'CakePdf.Tcpdf');
 	public $cacheAction = '1 hour';
 

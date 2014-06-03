@@ -15,13 +15,16 @@ class TurmaShell extends AppShell {
 		$turmaId = $this->args[0];
 		$uploadId = $this->args[1];
 		$pautaURL = $this->args[2];
-
 		if ($this->Turma->processaPauta($pautaURL, $turmaId)) {
 
-			$pautaFile = new File($pautaURL);
+			$pautaFile = new File(Configure::read('OpenSGA.save_path') . DS . $pautaURL);
 			if ($pautaFile->exists()) {
-				$dir = new Folder('folder_inside_webroot', true);
-				$pautaFile->copy($dir->path . DS . $pautaFile->name);
+
+				$pautaPath = Configure::read('OpenSGA.save_path') . DS . 'Pautas' . DS . date('Y');
+				rename(Configure::read('OpenSGA.save_path') . DS . $pautaURL, $pautaPath . DS . $pautaFile->name);
+				if ($pautaFile->copy($pautaPath . DS . $pautaFile->name)) {
+					$pautaFile->delete();
+				}
 			}
 			$this->Upload->id = $uploadId;
 			$this->Upload->set('estado_upload_id', 3);

@@ -42,35 +42,35 @@ class Upload extends AppModel {
 	 * @return:
 	 * 		will return an array with the success of each file upload
 	 */
-	function uploadFiles($folder, $formdata, $itemId = null) {
+	public function uploadFiles($folder, $formdata, $itemId = null) {
 		// setup dir names absolute and relative
-		$folder_url = APP . $folder;
-		$rel_url = $folder;
+		$folderUrl = Configure::read('OpenSGA.save_path') . DS . $folder;
+		$relUrl = $folder;
 
 		// create the folder if it does not exist
-		if (!is_dir($folder_url)) {
-			mkdir($folder_url);
+		if (!is_dir($folderUrl)) {
+			mkdir($folderUrl, 0777, true);
 		}
 
-		$folder_url = APP . $folder . '/' . date('Y');
-		$rel_url = $folder . '/' . date('Y');
-		if (!is_dir($folder_url)) {
-			mkdir($folder_url, '0777', true);
-			chmod($folder_url, 0755);
+		$folderUrl = Configure::read('OpenSGA.save_path') . DS . $folder . DS . date('Y');
+		$relUrl = $folder . '/' . date('Y');
+		if (!is_dir($folderUrl)) {
+			mkdir($folderUrl, 0777, true);
+			chmod($folderUrl, 0755);
 		}
-		chmod($folder_url, 0755);
+		chmod($folderUrl, 0755);
 
 		// if itemId is set create an item folder
 		if ($itemId) {
 			// set new absolute folder
-			$folder_url = APP . $folder . '/' . date('Y') . '/' . $itemId;
+			$folderUrl = Configure::read('OpenSGA.save_path') . DS . $folder . DS . $itemId . DS . date('Y');
 			// set new relative folder
-			$rel_url = $folder . '/' . date('Y') . '/' . $itemId;
+			$relUrl = $folder . DS . $itemId . DS . date('Y');
 			// create directory
-			if (!is_dir($folder_url)) {
+			if (!is_dir($folderUrl)) {
 
-				mkdir($folder_url, '0777', true);
-				chmod($folder_url, 0755);
+				mkdir($folderUrl, 0777, true);
+				chmod($folderUrl, 0755);
 			}
 		}
 
@@ -91,28 +91,26 @@ class Upload extends AppModel {
 				}
 			}
 
-
 			// if file type ok upload the file
 			if ($typeOK) {
-
 
 				// switch based on error code
 				switch ($file['error']) {
 					case 0:
 						// check filename already exists
-						if (!file_exists($folder_url . '/' . $filename)) {
+						if (!file_exists($folderUrl . '/' . $filename)) {
 							// create full filename
-							$full_url = $folder_url . '/' . $filename;
-							$url = $rel_url . '/' . $filename;
+							$fullUrl = $folderUrl . '/' . $filename;
+							$url = $relUrl . '/' . $filename;
 							// upload the file
-							$success = move_uploaded_file($file['tmp_name'], $full_url);
+							$success = move_uploaded_file($file['tmp_name'], $fullUrl);
 						} else {
 							// create unique filename and upload file
 							ini_set('date.timezone', 'Europe/London');
 							$now = date('Y-m-d-His');
-							$full_url = $folder_url . '/' . $now . $filename;
-							$url = $rel_url . '/' . $now . $filename;
-							$success = move_uploaded_file($file['tmp_name'], $full_url);
+							$fullUrl = $folderUrl . '/' . $now . $filename;
+							$url = $relUrl . '/' . $now . $filename;
+							$success = move_uploaded_file($file['tmp_name'], $fullUrl);
 						}
 						// if upload was successful
 						if ($success) {

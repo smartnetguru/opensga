@@ -469,8 +469,7 @@ class Turma extends AppModel {
 			throw new CakeException('Vendor class PHPExcel not found!');
 		}
 
-		$this->log($pautaURL);
-		$xls = PHPExcel_IOFactory::load(APP . $pautaURL);
+		$xls = PHPExcel_IOFactory::load(Configure::read('OpenSGA.save_path') . DS . $pautaURL);
 
 		$ws = $xls->getSheetByName('avaliacoes');
 
@@ -488,6 +487,7 @@ class Turma extends AppModel {
 				$ordemTeste += 1;
 
 				$turmaTipoAvaliacao = $this->TurmaTipoAvaliacao->find('first', array('conditions' => array('turma_id' => $turmaId, 'ordem' => $ordemTeste)));
+				Debugger::log($turmaTipoAvaliacao);
 				if (empty($turmaTipoAvaliacao)) {
 					$arrayNovaAvaliacao = array(
 						'TurmaTipoAvaliacao' => array(
