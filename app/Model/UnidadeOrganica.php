@@ -1,5 +1,7 @@
 <?php
+
 App::uses('AppModel', 'Model');
+
 /**
  * UnidadeOrganica Model
  *
@@ -15,14 +17,14 @@ App::uses('AppModel', 'Model');
  */
 class UnidadeOrganica extends AppModel {
 
-public $actsAs = array('Tree','Containable','Auditable');
+	public $actsAs = array('Tree', 'Containable', 'Auditable');
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 
-/**
- * belongsTo associations
- *
- * @var array
- */
+	/**
+	 * belongsTo associations
+	 *
+	 * @var array
+	 */
 	public $belongsTo = array(
 		'TipoUnidadeOrganica' => array(
 			'className' => 'TipoUnidadeOrganica',
@@ -68,11 +70,11 @@ public $actsAs = array('Tree','Containable','Auditable');
 		)
 	);
 
-/**
- * hasMany associations
- *
- * @var array
- */
+	/**
+	 * hasMany associations
+	 *
+	 * @var array
+	 */
 	public $hasMany = array(
 		'Docente' => array(
 			'className' => 'Docente',
@@ -114,45 +116,38 @@ public $actsAs = array('Tree','Containable','Auditable');
 			'counterQuery' => ''
 		)
 	);
+	public $virtualFields = array(
+		'nome_codigo' => 'CONCAT(UnidadeOrganica.codigo," - ",UnidadeOrganica.name)'
+	);
 
+	public function isFromFaculdade($unidade_organica_id) {
 
-        public $virtualFields = array(
-            'nome_codigo' => 'CONCAT(UnidadeOrganica.codigo," - ",UnidadeOrganica.name)'
-        );
-        
-        public function isFromFaculdade($unidade_organica_id){
-            
-            $unidades = $this->getPath($unidade_organica_id);
-            if($unidades[1]['UnidadeOrganica']['tipo_unidade_organica_id']==1){
-                return true;
-            } else{
-                return false;
-            }
-            
-        }
-        
-        public function getFaculdadeByCursoId($curso_id){
-            $curso = $this->Curso->findById($curso_id);
-            $unidadeOrganica = $this->findById($curso['Curso']['unidade_organica_id']);
-            if($unidadeOrganica['UnidadeOrganica']['tipo_unidade_organica_id']==2){
-                $unidadeOrganica = $this->findById($unidadeOrganica['UnidadeOrganica']['parent_id']);
-            }
-            return $unidadeOrganica;
-        }
-        
-        public function getWithChilds($unidade_organica_id){
-            $unidadeOrganicas = $this->find('all',array('conditions'=>array('parent_id'=>$unidade_organica_id)));
-      
-            
-        if($unidadeOrganicas){
-           $unidades_organicas = Hash::extract($unidadeOrganicas,'{n}.UnidadeOrganica.id');
-          
-           $unidades_organicas[] = $unidade_organica_id;
-          
-           return $unidades_organicas;
-        } else{
-            return $unidade_organica_id;
-        }
-        }
+		$unidades = $this->getPath($unidade_organica_id);
+		if ($unidades[1]['UnidadeOrganica']['tipo_unidade_organica_id'] == 1) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public function getFaculdadeByCursoId($curso_id) {
+		$curso = $this->Curso->findById($curso_id);
+		$unidadeOrganica = $this->findById($curso['Curso']['unidade_organica_id']);
+		if ($unidadeOrganica['UnidadeOrganica']['tipo_unidade_organica_id'] == 2) {
+			$unidadeOrganica = $this->findById($unidadeOrganica['UnidadeOrganica']['parent_id']);
+		}
+		return $unidadeOrganica;
+	}
+
+	public function getWithChilds($unidadeOrganicaId) {
+		$unidadeOrganicas = $this->find('all', array('conditions' => array('parent_id' => $unidadeOrganicaId)));
+		if ($unidadeOrganicas) {
+			$unidadesOrganicas = Hash::extract($unidadeOrganicas, '{n}.UnidadeOrganica.id');
+			$unidadesOrganicas[] = $unidadeOrganicaId;
+			return $unidadesOrganicas;
+		} else {
+			return [$unidadeOrganicaId];
+		}
+	}
 
 }

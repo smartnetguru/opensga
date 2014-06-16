@@ -17,41 +17,69 @@ App::uses('AppController', 'Controller');
  */
 class UsersController extends AppController {
 
-	var $name = 'Users';
-
-	function index() {
-		$this->User->recursive = 0;
-		$this->set('users', $this->paginate());
-		$this->set('current_section', 'administracao');
-	}
-
-	function view($id = null) {
-		if (!$id) {
-			$this->Session->setFlash(sprintf(__('ID do Usuário Inválido', true), 'user'), 'flasherror');
-			$this->redirect(array('action' => 'index'));
-		}
-		if (empty($this->data)) {
-			//$this->set('user', $this->User->read(null, $id));
-			$this->data = $this->User->read(null, $id);
-		}
-		$users = $this->User->find('list');
-		//$this->set(compact('users'));
-		$groups = $this->User->Group->find('list');
-		$this->set(compact('users', 'groups'));
-	}
-
-	function add() {
-		if (!empty($this->data)) {
-			$this->User->create();
-			if ($this->User->save($this->data)) {
-				$this->Session->setFlash(sprintf(__('Usuário Registrado com Sucesso', true), 'user'), 'flashok');
-				$this->redirect(array('action' => 'index'));
+	public function alterar_senha_sistema($userId, $defaultPassword = '') {
+		if ($this->request->is('post')) {
+			if ($this->request->data['User']['definir_nova_senha'] == 1) {
+				if ($this->User->alteraPassword($this->request->data)) {
+					$this->Session->setFlash('Senha Alterada Com Sucesso. Uma SMS e um Email serao enviados para o usuario com a notificacao', 'default', array('class' => 'alert alert-success'));
+					CakeResque::enqueue(
+							'default', 'UserShell', array('afterChangePassword', $userId, $this->request->data['User']['senhanova1'])
+					);
+					$this->Redirect('/');
+				} else {
+					$this->Session->setFlash('Problemas com a Password. Tente novamente', 'default', array('class' => 'alert alert-danger'));
+				}
+			} elseif ($this->request->data['User']['usar_senha_aleatoria']) {
+				$this->request->data['User']['novasenha1'] = $this->request->data['User']['senha_aleatoria'];
+				$this->request->data['User']['novasenha2'] = $this->request->data['User']['senha_aleatoria'];
+				$this->User->alteraPassword($this->request->data);
+				$this->Session->setFlash('Senha Alterada Com Sucesso. Uma SMS e um Email serao enviados para o usuario com a notificacao', 'default', array('class' => 'alert alert-success'));
+				CakeResque::enqueue(
+						'default', 'UserShell', array('afterChangePassword', $userId, $this->request->data['User']['senhanova1'])
+				);
+				$this->Redirect('/');
+			} elseif ($this->request->data['User']['usar_senha_padrao']) {
+				$this->request->data['User']['novasenha1'] = $this->request->data['User']['senha_padrao'];
+				$this->request->data['User']['novasenha2'] = $this->request->data['User']['senha_padrao'];
+				$this->User->alteraPassword($this->request->data);
+				$this->Session->setFlash('Senha Alterada Com Sucesso. Uma SMS e um Email serao enviados para o usuario com a notificacao', 'default', array('class' => 'alert alert-success'));
+				CakeResque::enqueue(
+						'default', 'UserShell', array('afterChangePassword', $userId, $this->request->data['User']['senhanova1'])
+				);
+				$this->Redirect('/');
 			} else {
-				$this->Session->setFlash(sprintf(__('Erro ao registrar usuário. Tente de novo', true), 'user'), 'flasherror');
+				$this->Session->setFlash('Nao foi solicitada nenhuma opcao de senha. Tente Novamente', 'default', array('class' => 'alert alert-success'));
 			}
 		}
-		$groups = $this->User->Group->find('list');
-		$this->set(compact('groups'));
+		$randomPassword = $this->User->generatePassword();
+		$this->set(compact('randomPassword', 'defaultPassword', 'userId'));
+	}
+
+	public function alterar_senha_email($userId) {
+		if ($this->request->is('post')) {
+			if ($this->request->data['User']['definir_nova_senha'] == 1) {
+				if ($this->request->data['User']['novasenha1'] == $this->request->data['User']['novasenha2']) {
+					$this->Session->setFlash('A senha do Email do Usuario sera alterada em breve. Os dados serao enviados por sms', 'default', array('class' => 'alert alert-success'));
+					CakeResque::enqueue(
+							'default', 'UserShell', array('changeEmailPassword', $userId, $this->request->data['User']['senhanova1'])
+					);
+					$this->Redirect('/');
+				} else {
+					$this->Session->setFlash('Problemas com a Password. Tente novamente', 'default', array('class' => 'alert alert-danger'));
+				}
+			} elseif ($this->request->data['User']['usar_senha_aleatoria']) {
+				$this->request->data['User']['novasenha1'] = $this->request->data['User']['senha_aleatoria'];
+				$this->User->alteraPassword($this->request->data);
+				$this->Session->setFlash('A senha do Email do Usuario sera alterada em breve. Os dados serao enviados por sms', 'default', array('class' => 'alert alert-success'));
+				CakeResque::enqueue(
+						'default', 'UserShell', array('changeEmailPassword', $userId, $this->request->data['User']['senhanova1'])
+				);
+				$this->Redirect('/');
+			}
+		}
+
+		$randomPassword = $this->User->generatePassword();
+		$this->set(compact('randomPassword', 'userId'));
 	}
 
 	public function altera_unidade_organica_admin() {
@@ -134,36 +162,39 @@ class UsersController extends AppController {
 		$this->viewClass = 'Media';
 		App::uses('Folder', 'Utility');
 		App::uses('File', 'Utility');
-		$this->loadModel('Aluno');
-		$this->Aluno->contain();
-		$aluno = $this->Aluno->findByCodigo($codigo);
-		if (!empty($aluno)) {
-			App::uses('File', 'Utility');
-			$path = APP . 'Assets' . DS . 'Fotos' . DS . 'Estudantes' . DS . $aluno['Aluno']['ano_ingresso'] . DS;
+		if ($this->User->isAluno($codigo)) {
+			$this->loadModel('Aluno');
+			$this->Aluno->contain('Entidade');
+			$aluno = $this->Aluno->find('first', array('conditions' => array('Entidade.user_id' => $codigo)));
 
-			$file_path = $path . $codigo . '.jpg';
-			$folder_novo = new Folder($path);
+			if (!empty($aluno)) {
+				App::uses('File', 'Utility');
+				$path = APP . 'Assets' . DS . 'Fotos' . DS . 'Estudantes' . DS . $aluno['Aluno']['ano_ingresso'] . DS;
+				//	die(debug($path));
+				$file_path = $path . $aluno['Aluno']['codigo'] . '.jpg';
+				$folder_novo = new Folder($path);
 
-			$file = new File($file_path);
+				$file = new File($file_path);
 
-			if (!$file->exists()) {
-				$codigo = 'default_profile_picture';
-				$path = WWW_ROOT . DS . 'img' . DS;
+				if (!$file->exists()) {
+					$codigo = 'default_profile_picture';
+					$path = WWW_ROOT . DS . 'img' . DS;
+				}
+
+
+				$params = array(
+					'id' => $aluno['Aluno']['codigo'] . '.jpg',
+					'name' => 'fotografia',
+					'extension' => 'jpg',
+					'mimeType' => array(
+						'docx' => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+					),
+					'path' => $path
+				);
+				$this->set($params);
+			} else {
+				throw new NotFoundException('Estudante não encontrado. Mostrar foto');
 			}
-
-
-			$params = array(
-				'id' => $codigo . '.jpg',
-				'name' => 'fotografia',
-				'extension' => 'jpg',
-				'mimeType' => array(
-					'docx' => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
-				),
-				'path' => $path
-			);
-			$this->set($params);
-		} else {
-			throw new NotFoundException('Estudante não encontrado. Mostrar foto');
 		}
 	}
 

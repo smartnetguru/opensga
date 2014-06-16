@@ -60,6 +60,7 @@ class GDataShell extends AppShell {
 			}
 
 			try {
+				debug($u);
 				$usuario = $gdata->createUser($usernames[0], $u['Entidade']['nomes'], $u['Entidade']['apelido'], 'dra02062013');
 			} catch (Zend_Gdata_Gapps_ServiceException $ex) {
 				$codigo = $ex->getErrors();
@@ -125,6 +126,38 @@ class GDataShell extends AppShell {
 				}
 				$this->out($ii++);
 				$this->out($user->login->userName);
+			}
+		}
+	}
+
+	/**
+	 * Altera senha do email e envia por sms
+	 * Parametros: UserID e SenhaNova
+	 */
+	public function changeEmailPassword() {
+		Zend_Loader::loadClass('Zend_Gdata');
+		Zend_Loader::loadClass('Zend_Gdata_ClientLogin');
+		Zend_Loader::loadClass('Zend_Gdata_Gapps');
+
+		$service = Zend_Gdata_Gapps::AUTH_SERVICE_NAME;
+		$client = Zend_Gdata_ClientLogin::getHttpClient(Configure::read('OpenSGA.dgata.admin.email'), Configure::read('OpenSGA.gdata.admin.password'), $service);
+		$gdata = new Zend_Gdata_Gapps($client, Configure::read('OpenSGA.gdata.client'));
+
+		$this->Entidade->contain(array('User', 'Aluno'));
+		$entidade = $this->Entidade->find('first', array('conditions' => array('User.id' => $this->args[0]), 'order' => 'User.id DESC'));
+
+		$usernames = explode('@', $entidade['User']['username']);
+		$usernames[0] = str_replace(' ', '', $usernames[0]);
+		$user = $gdata->retrieveUser($usernames[0]);
+		if ($user) {
+			$user->login->password = $entidade['Aluno']['codigo'];
+			$user->login->changePasswordAtNextLogin = true;
+			$user = $user->save();
+			if ($user != null) {
+				$telemovel = $entidade['Entidade']['telemovel'];
+				$mensagem = "Caro Usuario, a sua senha do email institucional da UEM foi alterada para: {$this->args[1]}. www.siga.uem.mz/webmail";
+			} else {
+				
 			}
 		}
 	}

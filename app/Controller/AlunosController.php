@@ -607,8 +607,6 @@ class AlunosController extends AppController {
 				$this->Session->setFlash(__('Candidato Invalido'));
 			}
 		}
-
-		//$this->layout = 'clipone_default';
 	}
 
 	public function matricular_candidato($candidato_id) {
@@ -673,7 +671,78 @@ class AlunosController extends AppController {
 		//$this->layout = 'clipone_default';
 	}
 
+	public function faculdade_matricular_candidato($candidatoId) {
+		$this->Aluno->Candidatura->id = $candidatoId;
+		if (!$this->Aluno->Candidatura->exists()) {
+			throw new NotFoundException('Candidato Nao encontrado');
+		}
+		$candidato = $this->Aluno->Candidatura->findByIdAndEstadoCandidaturaId($candidatoId, 2);
+		if (!$candidato) {
+			$this->Session->setFlash(__('Este candidato nao tem permissao para matricular ou ja esta matriculado'));
+			$this->redirect(array('action' => 'index'));
+		}
+		$alunoExiste = $this->Aluno->findByCodigo($candidato['Candidatura']['numero_estudante']);
+		if (!empty($alunoExiste)) {
+			$this->Session->setFlash(__('Este candidato já está matriculado'));
+			$this->redirect(array('action' => 'perfil_estudante', $alunoExiste['Aluno']['id']));
+		}
+
+		if ($this->request->is('post')) {
+			$this->request->data['Entidade']['name'] = $this->request->data['Entidade']['nomes'] . ' ' . $this->request->data['Entidade']['apelido'];
+			$this->request->data['Dados']['user_id'] = $this->Session->read('Auth.User.id');
+			$this->request->data['Dados']['numero_candidato'] = $candidatoId;
+			$this->request->data['Aluno']['estado_aluno_id'] = 14;
+			if ($this->Aluno->matriculaNovoIngresso($this->request->data)) {
+				$this->Session->setFlash("Aluno Registrado com Sucesso. Os dados foram submetidos ao Registo Academico Central para Validacao", 'default', array('class' => 'alert alert-success'));
+				$this->redirect(array('controller' => 'alunos', 'action' => 'perfil_estudante', $this->Aluno->id));
+			} else {
+				$this->Session->setFlash('Problemas ao registrar os dados do Aluno', 'default', array('class' => 'alert alert-danger'));
+			}
+		}
+
+		$cursos = $this->Aluno->Curso->find('list');
+		$paises = $this->Aluno->Entidade->PaisNascimento->find('list');
+		$escolaNivelMedios = $this->Aluno->AlunoNivelMedio->EscolaNivelMedio->find('list');
+		$provincias = $this->Aluno->Entidade->ProvinciaNascimento->find('list');
+		$cidades = $this->Aluno->AlunoNivelMedio->EscolaNivelMedio->Distrito->find('list');
+		$proveniencianomes = $this->Aluno->AlunoNivelMedio->EscolaNivelMedio->Provincia->find('list');
+		$documento_identificacaos = $this->Aluno->Entidade->DocumentoIdentificacao->find('list');
+		$areatrabalhos = $this->Aluno->AreaTrabalho->find('list');
+		$generos = $this->Aluno->Entidade->Genero->find('list');
+		$turnos = $this->Aluno->Matricula->Turno->find('list');
+		$estado_civil = $this->Aluno->Entidade->EstadoCivil->find('list');
+		$cidadeNascimentos = $this->Aluno->Entidade->CidadeNascimento->find('list', array(
+			'conditions' => array(
+				'provincia_id' => $candidato['Candidatura']['provincia_nascimento']
+			)
+				)
+		);
+		$grauParentescos = $this->Aluno->GrauParentesco->find('list');
+		$this->loadModel('SimNaoResposta');
+		$simNaoRespostas = $this->SimNaoResposta->find('list');
+
+		$naturalidade = '';
+		$this->set(compact('candidato', 'cursos', 'paises', 'provincias', 'documento_identificacaos', 'areatrabalhos', 'generos', 'cidadeNascimentos', 'proveniencianomes', 'cidades', 'turnos', 'escolaNivelMedios', 'estado_civil', 'naturalidade', 'grauParentescos', 'simNaoRespostas'));
+
+		$this->set('siga_page_title', 'Matriculas');
+		$this->set('siga_page_overview', 'Formulario de Matricula de Novos Ingressos');
+		//$this->layout = 'clipone_default';
+	}
+
 	public function matricula_novo_ingresso_sucesso($aluno_id) {
+
+		$this->Aluno->contain(array('Entidade' => array('User'), 'Curso'));
+		$this->Aluno->id = $aluno_id;
+		if (!$this->Aluno->exists()) {
+			throw new NotFoundException('Aluno nao Encontrado');
+		}
+		$aluno = $this->Aluno->read();
+		$this->set(compact('aluno'));
+
+		//$this->layout = 'clipone_default';
+	}
+
+	public function faculdade_matricula_novo_ingresso_sucesso($aluno_id) {
 
 		$this->Aluno->contain(array('Entidade' => array('User'), 'Curso'));
 		$this->Aluno->id = $aluno_id;
@@ -936,21 +1005,17 @@ class AlunosController extends AppController {
 	 * @Todo Colocar os links para as opcoes do estudante
 	 * @param type $id
 	 */
-	function faculdade_perfil_estudante($id = null) {
+	public function faculdade_perfil_estudante($id = null) {
 		$this->Aluno->id = $id;
 		if (!$this->Aluno->exists()) {
 			throw new NotFoundException('Este aluno não existe no Sistema');
 		}
-
-
-
-
 		$this->Aluno->contain(array(
 			'Matricula' => array(
 				'PlanoEstudo', 'Turno'
 			),
 			'Curso', 'Entidade' => array(
-				'ProvinciaNascimento', 'CidadeNascimento', 'PaisNascimento', 'Genero', 'DocumentoIdentificacao'
+				'ProvinciaNascimento', 'CidadeNascimento', 'PaisNascimento', 'Genero', 'DocumentoIdentificacao', 'User'
 			),
 			'AlunoNivelMedio' => array(
 				'EscolaNivelMedio' => array('Provincia', 'Distrito')
@@ -1058,6 +1123,27 @@ class AlunosController extends AppController {
 			$candidato = $this->Candidatura->findByNumeroEstudante($this->request->data['Candidatura']['numero_estudante']);
 			if (!empty($candidato)) {
 				$this->redirect(array('action' => $action_seguinte, $candidato['Candidatura']['id']));
+			} else {
+				$this->Session->setFlash(__('Candidato Invalido'));
+			}
+		}
+	}
+
+	public function faculdade_pesquisa_candidatos_action($actionSeguinte) {
+		if ($this->request->is('post')) {
+			$this->loadModel('Candidatura');
+			$candidato = $this->Candidatura->findByNumeroEstudante($this->request->data['Candidatura']['numero_estudante']);
+			if (!empty($candidato)) {
+				$cursoId = $candidato['Candidatura']['curso_id'];
+				$curso = $this->Candidatura->Curso->findById($cursoId);
+				$unidadeOrganicaUser = $this->Session->read('Auth.User.unidade_organica_id');
+				$unidadeOrganicas = $this->Candidatura->Curso->UnidadeOrganica->getWithChilds($unidadeOrganicaUser);
+
+				if (!in_array($curso['Curso']['unidade_organica_id'], $unidadeOrganicas)) {
+					$this->Session->setFlash('Este Candidato nao Pertence a nenhum curso da sua faculdade');
+				} else {
+					$this->redirect(array('action' => $actionSeguinte, $candidato['Candidatura']['id']));
+				}
 			} else {
 				$this->Session->setFlash(__('Candidato Invalido'));
 			}

@@ -194,7 +194,7 @@ class EstudanteShell extends AppShell {
 		}
 
 		$objWriter = PHPExcel_IOFactory::createWriter($xls, 'Excel2007');
-		$objWriter->save(Configure::read('OpenSGA.save_path') . DS . 'Estudantes' . DS . 'import_' . date('Y_m_d') . '.xlsx');
+		$objWriter->save('import_' . date('Y_m_d') . '.xlsx');
 	}
 
 	public function exporta_novos_ingressos_por_curso() {
@@ -410,7 +410,9 @@ class EstudanteShell extends AppShell {
 		if (!class_exists('PHPExcel'))
 			throw new CakeException('Vendor class PHPExcel not found!');
 
-		$xls = PHPExcel_IOFactory::load(APP . 'Reports' . DS . 'Faculdades' . DS . 'renovacao.xlsx');
+		$xls = PHPExcel_IOFactory::load(APP . 'Reports' . DS . 'template_bci.xlsx');
+
+		App::import('Vendor', 'phpqrcode', array('file' => 'phpqrcode' . DS . 'qrlib.php'));
 
 		$worksheet = $xls->getActiveSheet();
 		$linhaActual = 2;
@@ -427,7 +429,7 @@ class EstudanteShell extends AppShell {
 		$unidadeOrganicas = $this->Aluno->Curso->UnidadeOrganica->getWithChilds(15);
 		debug($unidadeOrganicas);
 
-		$alunos = $this->Aluno->find('all', array('conditions' => array('Curso.unidade_organica_id' => $unidadeOrganicas)));
+		$alunos = $this->Aluno->find('all', array('conditions' => array('Curso.unidade_organica_id' => $unidadeOrganicas, 'Aluno.ano_ingresso NOT' => array(2014)), 'limit' => 6, 'order' => 'Aluno.ano_ingresso DESC'));
 		debug(count($alunos));
 		foreach ($alunos as $aluno) {
 			$xls->getActiveSheet()->setCellValue('A' . $linhaActual, $aluno['Aluno']['codigo']);
@@ -443,7 +445,7 @@ class EstudanteShell extends AppShell {
 			$xls->getActiveSheet()->setCellValue('I' . $linhaActual, date('d-m-Y', $phpdate2));
 
 
-			$xls->getActiveSheet()->setCellValue('H' . $linhaActual, $aluno['Entidade']['telemovel']);
+			$xls->getActiveSheet()->setCellValue('M' . $linhaActual, $aluno['Entidade']['telemovel']);
 
 			$genero = $aluno['Entidade']['genero_id'];
 			if ($genero == 1) {
@@ -463,38 +465,53 @@ class EstudanteShell extends AppShell {
 			$xls->getActiveSheet()->setCellValue('Q' . $linhaActual, $faculdade['codigo']);
 
 			$xls->getActiveSheet()->setCellValue('R' . $linhaActual, $aluno['Curso']['name']);
-			$xls->getActiveSheet()->setCellValue('O' . $linhaActual, 'L');
+			$xls->getActiveSheet()->setCellValue('S' . $linhaActual, 'L');
 
 			$path = APP . 'Assets' . DS . 'Fotos' . DS . 'Estudantes' . DS . $aluno['Aluno']['ano_ingresso'] . DS;
-			$file_path = $path . $codigo . '.jpg';
+			$file_path = $path . $aluno['Aluno']['codigo'] . '.jpg';
+			$type = pathinfo($file_path, PATHINFO_EXTENSION);
+			if (file_exists($file_path)) {
+				$file_codigo = file_get_contents($file_path);
+				$base64 = 'data:image/' . $type . ';base64,' . base64_encode($file_codigo);
+				debug($base64);
+				$xls->getActiveSheet()->setCellValue('U' . $linhaActual, $base64);
+			}
 
-			debug($aluno);
+
+			$path = APP . 'Assets' . DS . 'QRCodes' . DS . 'Estudantes' . DS . $aluno['Aluno']['ano_ingresso'] . DS;
+			$file_path = $path . $aluno['Aluno']['codigo'] . '.jpg';
+			$type = pathinfo($file_path, PATHINFO_EXTENSION);
+			if (file_exists($file_path)) {
+				$file_codigo = file_get_contents($file_path);
+				$base64 = 'data:image/' . $type . ';base64,' . base64_encode($file_codigo);
+				debug($base64);
+				$xls->getActiveSheet()->setCellValue('T' . $linhaActual, $base64);
+			} else {
+				$path = APP . 'Assets' . DS . 'QRCodes' . DS . 'Estudantes' . DS . $aluno['Aluno']['ano_ingresso'] . DS;
+				if (!is_dir($path)) {
+					mkdir($path, 0777, true);
+				}
+				$file_path = $path . $aluno['Aluno']['codigo'] . '.png';
+				QRcode::png($aluno['Aluno']['codigo'], $file_path, 'L', 4, 2);
+				$type = pathinfo($file_path, PATHINFO_EXTENSION);
+				if (file_exists($file_path)) {
+					$file_codigo = file_get_contents($file_path);
+					$base64 = 'data:image/' . $type . ';base64,' . base64_encode($file_codigo);
+					debug($base64);
+					$xls->getActiveSheet()->setCellValue('T' . $linhaActual, $base64);
+				}
+			}
+
+			$linhaActual++;
+
+
+			debug($file_path);
 		}
 
-		/**
-		  $matriculas = $this->Aluno->Matricula->find('all', array('conditions' => array('Matricula.ano_lectivo_id' => Configure::read('OpenSGA.ano_lectivo_id'))));
-		  foreach ($matriculas as $matricula) {
-		  $xls->getActiveSheet()->setCellValue('A' . $linha_actual, $matricula['Aluno']['codigo']);
-		  $xls->getActiveSheet()->setCellValue('B' . $linha_actual, $matricula['Aluno']['Entidade']['apelido']);
-		  $xls->getActiveSheet()->setCellValue('C' . $linha_actual, $matricula['Aluno']['Entidade']['nomes']);
-		  $xls->getActiveSheet()->setCellValue('D' . $linha_actual, $matricula['AnoLectivo']['ano']);
-		  $xls->getActiveSheet()->setCellValue('E' . $linha_actual, $matricula['Matricula']['data']);
-		  $xls->getActiveSheet()->setCellValue('F' . $linha_actual, $matricula['Curso']['name']);
-		  $unidade_organica = $matricula['Curso']['UnidadeOrganica'];
-		  $faculdade = $unidade_organica;
-		  if ($unidade_organica['tipo_unidade_organica_id'] == 2) {
-		  $unidade_organica_nova = $this->Aluno->Curso->UnidadeOrganica->findById($unidade_organica['parent_id']);
-		  $faculdade = $unidade_organica_nova['UnidadeOrganica'];
-		  }
-		  $xls->getActiveSheet()->setCellValue('G' . $linha_actual, $faculdade['name']);
-		  $this->out($linha_actual . "---" . $matricula['Aluno']['codigo']);
-		  $linha_actual++;
-		  }
-		 *
-		 */
+
 		$objWriter = PHPExcel_IOFactory::createWriter($xls, 'Excel2007');
 
-		$objWriter->save(Configure::read('OpenSGA.save_path') . DS . 'template_bci_' . Configure::read('OpenSGA.ano_lectivo') . '.xlsx');
+		$objWriter->save('template_bci_' . Configure::read('OpenSGA.ano_lectivo') . '.xlsx');
 	}
 
 }

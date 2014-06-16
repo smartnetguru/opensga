@@ -133,9 +133,10 @@ class TurmasController extends AppController {
 		));
 		$inscricaos = $this->Turma->Inscricao->find('all', array('conditions' => array('turma_id' => $id)));
 
-
-		$this->loadModel('TurmaTipoAvaliacao');
-		$TurmaTipoAvaliacaos = $this->TurmaTipoAvaliacao->find('all', array('conditions' => array('turma_id' => $this->data['Turma']['id'])));
+		$this->Turma->TurmaTipoAvaliacao->contain(array(
+			'TipoAvaliacao'
+		));
+		$TurmaTipoAvaliacaos = $this->Turma->TurmaTipoAvaliacao->find('all', array('conditions' => array('turma_id' => $this->data['Turma']['id'])));
 		$estados = array('1' => 'Activa', '2' => 'Cancelada', '3' => 'Fechada');
 		$anosemestrecurr = array('1' => '1', '2' => '2', '3' => '3', '4' => '4');
 		$anolectivos = $this->Turma->AnoLectivo->find('list');
@@ -175,7 +176,9 @@ class TurmasController extends AppController {
 			'EstadoInscricao',
 			'Matricula' => array(
 				'Aluno' => array(
-					'Entidade'
+					'Entidade' => array(
+						'User'
+					)
 				)
 			),
 			'Turma' => array(
@@ -186,9 +189,10 @@ class TurmasController extends AppController {
 		));
 		$inscricaos = $this->Turma->Inscricao->find('all', array('conditions' => array('turma_id' => $id)));
 
-
-		$this->loadModel('TurmaTipoAvaliacao');
-		$TurmaTipoAvaliacaos = $this->TurmaTipoAvaliacao->find('all', array('conditions' => array('turma_id' => $this->data['Turma']['id'])));
+		$this->Turma->TurmaTipoAvaliacao->contain(array(
+			'TipoAvaliacao'
+		));
+		$turmaTipoAvaliacaos = $this->Turma->TurmaTipoAvaliacao->find('all', array('conditions' => array('turma_id' => $this->data['Turma']['id'])));
 		$estados = array('1' => 'Activa', '2' => 'Cancelada', '3' => 'Fechada');
 		$anosemestrecurr = array('1' => '1', '2' => '2', '3' => '3', '4' => '4');
 		$anolectivos = $this->Turma->AnoLectivo->find('list');
@@ -200,7 +204,7 @@ class TurmasController extends AppController {
 		$assistentes = $this->Turma->getAllAssistentes($id);
 
 		$this->set('turma', $this->data);
-		$this->set(compact('inscricaos', 'TurmaTipoAvaliacaos', 'anolectivos', 'estados', 'mediaTurma', 'anosemestrecurr', 'cursos', 'planoestudos', 'turnos', 'disciplinas', 'docentes', 'ano_curricular', 'regente', 'assistentes'));
+		$this->set(compact('inscricaos', 'turmaTipoAvaliacaos', 'anolectivos', 'estados', 'mediaTurma', 'anosemestrecurr', 'cursos', 'planoestudos', 'turnos', 'disciplinas', 'docentes', 'ano_curricular', 'regente', 'assistentes'));
 	}
 
 	function add() {

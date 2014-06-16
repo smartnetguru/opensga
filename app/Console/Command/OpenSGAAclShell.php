@@ -110,6 +110,11 @@ class OpenSGAAclShell extends AppShell {
 			if ($this->User->isFromFaculdade($funcionario['User']['id'])) {
 
 				$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/faculdade_mostrar_foto";
+				$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/faculdade_pesquisa_candidatos_action";
+				$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/faculdade_matricular_candidato";
+				$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/faculdade_matricula_novo_ingresso_sucesso";
+
+				$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Avaliacaos/faculdade_ver_avaliacao";
 
 				$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Cursos/faculdade_index";
 				$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Cursos/faculdade_ver_curso";
@@ -176,6 +181,9 @@ class OpenSGAAclShell extends AppShell {
 				$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Requisicoes/RequisicoesPedidos/entregar_cartao_novo_ingresso";
 				$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Requisicoes/RequisicoesPedidos/index";
 				$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Requisicoes/RequisicoesPedidos/nova_requisicao";
+				$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Requisicoes/RequisicoesPedidos/registar_requisicao_estudante";
+				$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Requisicoes/RequisicoesPedidos/registar_requisicao_entidade";
+				$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Requisicoes/RequisicoesPedidos/registar_requisicao_nova_entidade";
 
 				$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Matriculas/index";
 				$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Matriculas/report_matriculados_ano";
@@ -265,6 +273,9 @@ class OpenSGAAclShell extends AppShell {
 					$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Matriculas/index";
 					$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Matriculas/renovacao_matriculas";
 					$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Requisicoes/RequisicoesPedidos/cartao_estudantes";
+
+					$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Users/alterar_senha_sistema";
+					$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Users/alterar_senha_email";
 				} elseif (in_array('DRA_DR', $unidadesOrganicas)) {
 					$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/index";
 

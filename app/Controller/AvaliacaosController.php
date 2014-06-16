@@ -97,6 +97,57 @@ class AvaliacaosController extends AppController {
 		$this->set(compact('inscricaos', 'turmaTipoAvaliacao', 'docente'));
 	}
 
+	public function faculdade_ver_avaliacao($turmaTipoAvaliacaoId = null) {
+		$this->Avaliacao->TurmaTipoAvaliacao->id = $turmaTipoAvaliacaoId;
+		if (!$this->Avaliacao->TurmaTipoAvaliacao->exists()) {
+			throw new NotFoundException(__('Avaliacao Invalida'));
+		}
+
+		$this->Avaliacao->TurmaTipoAvaliacao->contain(array(
+			'Turma' => array(
+				'AnoLectivo',
+				'Curso' => array
+					(
+					'UnidadeOrganica'
+				),
+				'Disciplina',
+				'AnoLectivo'
+			),
+			'TipoAvaliacao'
+		));
+		$turmaTipoAvaliacao = $this->Avaliacao->TurmaTipoAvaliacao->read(null, $turmaTipoAvaliacaoId);
+		$docente = $this->Avaliacao->TurmaTipoAvaliacao->Turma->DocenteTurma->Docente->getByUserId($this->Session->read('Auth.User.id'));
+
+		if (!$this->Avaliacao->TurmaTipoAvaliacao->Turma->isDocente($turmaTipoAvaliacao['Turma']['id'], $docente['Docente']['id'])) {
+			$this->Session->SetFlash('Nao tem permissao para aceder a pagina anterior');
+			$this->redirect(array('action' => 'index'));
+		}
+
+		$this->Avaliacao->TurmaTipoAvaliacao->Turma->Inscricao->contain(array(
+			'EstadoInscricao',
+			'Matricula' => array(
+				'Aluno' => array(
+					'Entidade' => array(
+						'User'
+					), 'Avaliacao' => array(
+						'conditions' => array(
+							'turma_tipo_avaliacao_id' => $turmaTipoAvaliacaoId,
+							'estado_avaliacao_id' => 1
+						)
+					)
+				)
+			),
+			'Turma' => array(
+				'Curso' => array(
+					'fields' => array('name')
+				), 'Disciplina', 'Turno', 'AnoLectivo'
+			)
+		));
+		$inscricaos = $this->Avaliacao->TurmaTipoAvaliacao->Turma->Inscricao->find('all', array('conditions' => array('turma_id' => $turmaTipoAvaliacao['Turma']['id'])));
+
+		$this->set(compact('inscricaos', 'turmaTipoAvaliacao', 'docente'));
+	}
+
 }
 
 ?>
