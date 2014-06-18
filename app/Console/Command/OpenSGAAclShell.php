@@ -77,7 +77,13 @@ class OpenSGAAclShell extends AppShell {
 	public function funcionarios() {
 		//Pegamos todos funcionarios
 		$this->Funcionario->contain(array('User'));
-		$funcionarios = $this->Funcionario->find('all', array('conditions' => array('group_id' => 2)));
+		$userId = $this->args[0];
+		if ($userId) {
+			$funcionarios = $this->Funcionario->find('all', array('conditions' => array('User.id' => $userId)));
+		} else {
+			$funcionarios = $this->Funcionario->find('all', array('conditions' => array('group_id' => 2)));
+		}
+
 
 		foreach ($funcionarios as $funcionario) {
 			$this->out($funcionario['User']['username']);
@@ -115,6 +121,9 @@ class OpenSGAAclShell extends AppShell {
 				$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/faculdade_matricula_novo_ingresso_sucesso";
 
 				$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Avaliacaos/faculdade_ver_avaliacao";
+				$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Avaliacaos/faculdade_editar_notas_avaliacao";
+				$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Avaliacaos/faculdade_publicar_avaliacao";
+				$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Avaliacaos/faculdade_print_pauta_avaliacao";
 
 				$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Cursos/faculdade_index";
 				$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Cursos/faculdade_ver_curso";

@@ -116,11 +116,10 @@ class AvaliacaosController extends AppController {
 			'TipoAvaliacao'
 		));
 		$turmaTipoAvaliacao = $this->Avaliacao->TurmaTipoAvaliacao->read(null, $turmaTipoAvaliacaoId);
-		$docente = $this->Avaliacao->TurmaTipoAvaliacao->Turma->DocenteTurma->Docente->getByUserId($this->Session->read('Auth.User.id'));
-
-		if (!$this->Avaliacao->TurmaTipoAvaliacao->Turma->isDocente($turmaTipoAvaliacao['Turma']['id'], $docente['Docente']['id'])) {
-			$this->Session->SetFlash('Nao tem permissao para aceder a pagina anterior');
-			$this->redirect(array('action' => 'index'));
+		$userId = $this->Session->read('Auth.User.id');
+		if (!$this->Avaliacao->Aluno->Entidade->Funcionario->isFromUnidadeOrganica($userId, $turmaTipoAvaliacao['Turma']['Curso']['unidade_organica_id'])) {
+			$this->Session->setFlash('Nao tem permissao para aceder a pagina anterior');
+			$this->redirect('/');
 		}
 
 		$this->Avaliacao->TurmaTipoAvaliacao->Turma->Inscricao->contain(array(
@@ -146,6 +145,71 @@ class AvaliacaosController extends AppController {
 		$inscricaos = $this->Avaliacao->TurmaTipoAvaliacao->Turma->Inscricao->find('all', array('conditions' => array('turma_id' => $turmaTipoAvaliacao['Turma']['id'])));
 
 		$this->set(compact('inscricaos', 'turmaTipoAvaliacao', 'docente'));
+	}
+
+	public function faculdade_editar_notas_avaliacao($turmaTipoAvaliacaoId = null) {
+		$this->Avaliacao->TurmaTipoAvaliacao->id = $turmaTipoAvaliacaoId;
+		if (!$this->Avaliacao->TurmaTipoAvaliacao->exists()) {
+			throw new NotFoundException(__('Avaliacao Invalida'));
+		}
+
+		$this->Avaliacao->TurmaTipoAvaliacao->contain(array(
+			'Turma' => array(
+				'AnoLectivo',
+				'Curso' => array
+					(
+					'UnidadeOrganica'
+				),
+				'Disciplina',
+				'AnoLectivo'
+			),
+			'TipoAvaliacao'
+		));
+		$turmaTipoAvaliacao = $this->Avaliacao->TurmaTipoAvaliacao->read(null, $turmaTipoAvaliacaoId);
+		$userId = $this->Session->read('Auth.User.id');
+		if (!$this->Avaliacao->Aluno->Entidade->Funcionario->isFromUnidadeOrganica($userId, $turmaTipoAvaliacao['Turma']['Curso']['unidade_organica_id'])) {
+			$this->Session->setFlash('Nao tem permissao para aceder a pagina anterior');
+			$this->redirect('/');
+		}
+
+		if ($this->request->is('post')) {
+			if ($this->Avaliacao->editaNotasAvaliacao($this->request->data)) {
+				$this->Session->setFlash('Dados Processados com sucesso');
+				$this->redirect(array('action' => 'ver_avaliacao', $turmaTipoAvaliacaoId));
+			}
+		}
+
+		$this->Avaliacao->TurmaTipoAvaliacao->Turma->Inscricao->contain(array(
+			'EstadoInscricao',
+			'Matricula' => array(
+				'Aluno' => array(
+					'Entidade' => array(
+						'User'
+					), 'Avaliacao' => array(
+						'conditions' => array(
+							'turma_tipo_avaliacao_id' => $turmaTipoAvaliacaoId,
+							'estado_avaliacao_id' => 1
+						)
+					)
+				)
+			),
+			'Turma' => array(
+				'Curso' => array(
+					'fields' => array('name')
+				), 'Disciplina', 'Turno', 'AnoLectivo'
+			)
+		));
+		$inscricaos = $this->Avaliacao->TurmaTipoAvaliacao->Turma->Inscricao->find('all', array('conditions' => array('turma_id' => $turmaTipoAvaliacao['Turma']['id'])));
+
+		$this->set(compact('inscricaos', 'turmaTipoAvaliacao', 'docente'));
+	}
+
+	public function faculdade_publicar_avaliacao() {
+
+	}
+
+	public function faculdade_print_pauta_avaliacao() {
+
 	}
 
 }

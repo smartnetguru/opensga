@@ -411,7 +411,7 @@ class Aluno extends AppModel {
 		return $aluno;
 	}
 
-	public function getAlunoForPerfil($id) {
+	public function getAlunoForPerfil($alunoId) {
 		$this->contain(array(
 			'Matricula' => array(
 				'PlanoEstudo', 'Turno'
@@ -421,10 +421,12 @@ class Aluno extends AppModel {
 			),
 			'AlunoNivelMedio' => array(
 				'EscolaNivelMedio' => array('Provincia', 'Distrito')
-			)
+			),
+			'HistoricoCurso' => array('Curso', 'MotivoTerminoCurso')
 		));
 
-		$aluno = $this->find('first', array('conditions' => array('Aluno.id' => $id)));
+		$aluno = $this->find('first', array('conditions' => array('Aluno.id' => $alunoId)));
+
 		$faculdade = $this->Curso->getFaculdadeByCursoId($aluno['Aluno']['curso_id']);
 		$aluno['Faculdade'] = $faculdade['UnidadeOrganica'];
 		$aluno['Curso']['UnidadeOrganica'] = $faculdade['UnidadeOrganica'];

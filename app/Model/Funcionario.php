@@ -153,6 +153,10 @@ class Funcionario extends AppModel {
 		return $funcionario;
 	}
 
+	public function isFromUnidadeOrganica($useId, $unidadeOriganicaId) {
+		return true;
+	}
+
 }
 
 ?>

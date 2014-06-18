@@ -1771,8 +1771,42 @@ class OpenSGAShell extends AppShell {
 		}
 	}
 
-	public function remove_turmas_sem_inscricao() {
+	public function cancela_turmas_sem_inscricao() {
+		$turmas = $this->Aluno->Inscricao->Turma->find('all', array('conditions' => array('Turma.estado_turma_id' => 1)));
+		$total_apagadas = 0;
+		foreach ($turmas as $turma) {
+			$inscricaos = $this->Aluno->Inscricao->find('count', array('conditions' => array('Inscricao.turma_id' => $turma['Turma']['id'])));
+			if ($inscricaos == 0) {
+				$inscricaos = $this->Aluno->Inscricao->find('count', array('conditions' => array('Inscricao.turma_frequencia_id' => $turma['Turma']['id'])));
+				if ($inscricaos == 0) {
+					$this->Aluno->Inscricao->Turma->id = $turma['Turma']['id'];
+					$this->Aluno->Inscricao->Turma->set('estado_turma_id', 3);
+					$this->Aluno->Inscricao->Turma->save();
+					$total_apagadas++;
+				}
+			}
+		}
+		$this->out('Total Apagadas--' . $total_apagadas);
+	}
 
+	public function actualiza_historico_curso() {
+		$historicos = $this->Aluno->HistoricoCurso->find('all', array('conditions' => array('motivo_termino_curso_id' => null)));
+		foreach ($historicos as $historico) {
+			if ($historico['HistoricoCurso']['ano_fim'] != null) {
+				if ($historico['HistoricoCurso']['nota_final'] != null) {
+					$this->Aluno->HistoricoCurso->id = $historico['HistoricoCurso']['id'];
+					$this->Aluno->HistoricoCurso->set('motivo_termino_curso_id', 1);
+					$this->Aluno->HistoricoCurso->save();
+				} else {
+					$mudancaCurso = $this->Aluno->MudancaCurso->findByAlunoIdAndCursoAntigo($historico['HistoricoCurso']['aluno_id'], $historico['HistoricoCurso']['curso_id']);
+					if ($mudancaCurso) {
+						$this->Aluno->HistoricoCurso->id = $historico['HistoricoCurso']['id'];
+						$this->Aluno->HistoricoCurso->set('motivo_termino_curso_id', 2);
+						$this->Aluno->HistoricoCurso->save();
+					}
+				}
+			}
+		}
 	}
 
 	public function ajusta_inscricao_curriculum() {

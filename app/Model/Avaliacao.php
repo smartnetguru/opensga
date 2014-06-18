@@ -48,6 +48,22 @@ class Avaliacao extends AppModel {
 		)
 	);
 
+	public function editaNotasAvaliacao($data) {
+		$dataSource = $this->getDataSource();
+		$dataSource->begin();
+		foreach ($data['Avaliacao'] as $avaliacao) {
+			$avaliacaoExiste = $this->findByAlunoIdAndTurmaTipoAvaliacaoId($avaliacao['aluno_id'], $avaliacao['turma_tipo_avaliacao_id']);
+			if ($avaliacaoExiste) {
+				$avaliacao['id'] = $avaliacaoExiste['Avaliacao']['id'];
+				$this->save(array('Avaliacao' => $avaliacao));
+			} else {
+				$this->create();
+				$this->save(array('Avaliacao' => $avaliacao));
+			}
+		}
+		return $dataSource->commit();
+	}
+
 	//Devolve o ano lectivo
 	function getAnoLectivo($ano_lectivo_id) {
 		$query = "select codigo from anolectivos where id = {$ano_lectivo_id}";

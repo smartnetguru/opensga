@@ -51,13 +51,12 @@ class AlunosController extends AppController {
 	 * @Todo Colocar os links para as opcoes do estudante
 	 * @param type $id
 	 */
-	function perfil_estudante($id = null) {
-		$this->Aluno->id = $id;
-		if (!$this->Aluno->exists()) {
+	function perfil_estudante($alunoId = null) {
+		$aluno = $this->Aluno->getAlunoForPerfil($alunoId);
+		if (!$aluno) {
 			throw new NotFoundException('Este aluno não existe no Sistema');
 		}
-		$aluno = $this->Aluno->getAlunoForPerfil($id);
-		$matriculas = $this->Aluno->Matricula->getAllMatriculasByAluno($id);
+		$matriculas = $this->Aluno->Matricula->getAllMatriculasByAluno($alunoId);
 
 		$this->Aluno->Inscricao->contain(array(
 			'Turma' => array(
@@ -75,7 +74,7 @@ class AlunosController extends AppController {
 			)
 				)
 		);
-		$inscricoes_activas = $this->Aluno->Inscricao->find('all', array('conditions' => array('Inscricao.aluno_id' => $id, 'Inscricao.estado_inscricao_id' => 1)));
+		$inscricoes_activas = $this->Aluno->Inscricao->find('all', array('conditions' => array('Inscricao.aluno_id' => $alunoId, 'Inscricao.estado_inscricao_id' => 1)));
 
 		$this->Aluno->Inscricao->contain(array(
 			'Turma' => array(
@@ -93,7 +92,7 @@ class AlunosController extends AppController {
 			)
 				)
 		);
-		$todas_inscricoes = $this->Aluno->Inscricao->find('all', array('conditions' => array('Inscricao.aluno_id' => $id),
+		$todas_inscricoes = $this->Aluno->Inscricao->find('all', array('conditions' => array('Inscricao.aluno_id' => $alunoId),
 			'order' => array(
 				'Turma.ano_curricular',
 				'Turma.semestre_curricular'
@@ -115,16 +114,16 @@ class AlunosController extends AppController {
 			)
 				)
 		);
-		$cadeiras_aprovadas = $this->Aluno->Inscricao->find('all', array('conditions' => array('Inscricao.aluno_id' => $id)));
+		$cadeiras_aprovadas = $this->Aluno->Inscricao->find('all', array('conditions' => array('Inscricao.aluno_id' => $alunoId)));
 
-		if ($this->Aluno->isMatriculado($id, Configure::read('OpenSGA.ano_lectivo_id'))) {
+		if ($this->Aluno->isMatriculado($alunoId, Configure::read('OpenSGA.ano_lectivo_id'))) {
 			$this->set('is_matriculado', 1);
 		} else {
 			$this->set('is_matriculado', 0);
 		}
 
-		$is_bolseiro = $this->Aluno->isBolseiro($id) ? 1 : 0;
-		$is_regular = $this->Aluno->isRegular($id);
+		$is_bolseiro = $this->Aluno->isBolseiro($alunoId) ? 1 : 0;
+		$is_regular = $this->Aluno->isRegular($alunoId);
 
 		if (count($is_regular) == 1 && $is_regular[0]['regular'] == true) {
 			if ($is_regular[0]['estado'] == 1) {
@@ -137,18 +136,16 @@ class AlunosController extends AppController {
 		}
 		//Requisicoes
 
-		$requisicoes = $this->Aluno->RequisicoesPedido->getAllRequisicoesPedidoByEstudante($id);
+		$requisicoes = $this->Aluno->RequisicoesPedido->getAllRequisicoesPedidoByEstudante($alunoId);
 
 
 		$this->Aluno->FinanceiroPagamento->contain(array(
 			'FinanceiroTipoPagamento'
 		));
-		$pagamentos = $this->Aluno->FinanceiroPagamento->find('all', array('conditions' => array('FinanceiroPagamento.aluno_id' => $id)));
-		//debug($pagamentos);
-		$this->set('aluno', $aluno);
-		$is_bolseiro = $this->Aluno->isBolseiro($id, $this->Session->read('SGAConfig.ano_lectivo_id'));
+		$pagamentos = $this->Aluno->FinanceiroPagamento->find('all', array('conditions' => array('FinanceiroPagamento.aluno_id' => $alunoId)));
+		$is_bolseiro = $this->Aluno->isBolseiro($alunoId, $this->Session->read('SGAConfig.ano_lectivo_id'));
 
-		$this->set(compact('inscricoes_activas', 'todas_inscricoes', 'cadeiras_aprovadas', 'pagamentos', 'is_bolseiro', 'is_regular', 'classe_estado', 'requisicoes', 'matriculas'));
+		$this->set(compact('aluno', 'inscricoes_activas', 'todas_inscricoes', 'cadeiras_aprovadas', 'pagamentos', 'is_bolseiro', 'is_regular', 'classe_estado', 'requisicoes', 'matriculas'));
 	}
 
 	public function estudante_perfil() {
