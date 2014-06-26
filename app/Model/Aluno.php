@@ -408,6 +408,20 @@ class Aluno extends AppModel {
 		$faculdade = $this->Curso->getFaculdadeByCursoId($aluno['Aluno']['curso_id']);
 		$aluno['Faculdade'] = $faculdade['UnidadeOrganica'];
 
+		$isRegular = $this->isRegular($alunoId);
+
+		if (count($isRegular) == 1 && $isRegular[0]['regular'] == true) {
+			if ($isRegular[0]['estado'] == 1) {
+				$classeEstado = "alert alert-info";
+			} else {
+				$classeEstado = "alert alert-success";
+			}
+		} else {
+			$classeEstado = "alert alert-danger";
+		}
+		$aluno['isRegular'] = $isRegular;
+		$aluno['classeEstado'] = $classeEstado;
+
 		return $aluno;
 	}
 

@@ -20,6 +20,7 @@
             <file>file:/var/www/opensga/app/View/Alunos/mudanca_curso.ctp</file>
             <file>file:/var/www/opensga/app/View/Alunos/faculdade_perfil_estudante.ctp</file>
             <file>file:/var/www/opensga/app/Console/Command/DbsecShell.php</file>
+            <file>file:/var/www/opensga/app/Console/Command/OpenSGAShell.php</file>
             <file>file:/var/www/opensga/app/View/Common/form_basic_common.ctp</file>
             <file>file:/var/www/opensga/app/Plugin/Requisicoes/View/RequisicoesPedidos/index.ctp</file>
             <file>file:/var/www/opensga/app/Model/Docente.php</file>
