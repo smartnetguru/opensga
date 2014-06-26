@@ -67,6 +67,9 @@ class SmsNotificationsController extends AppController {
 			case "ojm":
 				$this->SmsNotification->getTesteOJM($this->SmsNotification->id, $origin, $message_explode[1]);
 				break;
+			case "pagar":
+				$this->SmsNotification->getTesteOJM($this->SmsNotification->id, $origin, $message_explode[1]);
+				break;
 		}
 
 
