@@ -331,28 +331,38 @@ class TurmasController extends AppController {
 		$this->Turma->id = $turmaId;
 		$turma = $this->Turma->read();
 
-		$todasTurmas = $this->Turma->find('list', array('conditions' => array('Turma.curso_id' => $turma['Turma']['curso_id'], 'Turma.disciplina_id' => $turma['Turma']['disciplina_id'], 'Turma.ano_lectivo_id' => $turma['Turma']['ano_lectivo_id'])));
-		$todasTurmasIds = array_keys($todasTurmas);
+        //primeiro vamos ver se nenhuma pauta foi gerada previamente
+        $pautaFile = new File($turma['Turma']['pauta_path']);
+        if($pautaFile->exists()){
+               $this->response->file($pautaFile,array('name'=>Inflector::slug($turma['Turma']['name']),'download'=>true));
+            return $this->response;
+        } else{
+            CakeResque::enqueue(
+                'default', 'TurmaShell', array('geraPauta', $turmaId)
+            );
+            $todasTurmas = $this->Turma->find('list', array('conditions' => array('Turma.curso_id' => $turma['Turma']['curso_id'], 'Turma.disciplina_id' => $turma['Turma']['disciplina_id'], 'Turma.ano_lectivo_id' => $turma['Turma']['ano_lectivo_id'])));
+            $todasTurmasIds = array_keys($todasTurmas);
 
-		$this->Turma->Inscricao->contain(array(
-			'EstadoInscricao',
-			'Matricula' => array(
-				'Aluno' => array(
-					'Entidade' => array(
-					)
-				)
-			),
-			'Turma' => array(
-				'Curso' => array(
-					'fields' => array('name')
-				), 'Disciplina', 'Turno', 'AnoLectivo'
-			)
-		));
-		$inscricaos2 = $this->Turma->Inscricao->find('all', array('conditions' => array('turma_id' => $todasTurmasIds, 'Inscricao.estado_inscricao_id' => 1)));
-		$inscricaos = Hash::sort($inscricaos2, '{n}.Matricula.Aluno.Entidade.apelido', 'asc');
+            $this->Turma->Inscricao->contain(array(
+                'EstadoInscricao',
+                'Matricula' => array(
+                    'Aluno' => array(
+                        'Entidade' => array(
+                        )
+                    )
+                ),
+                'Turma' => array(
+                    'Curso' => array(
+                        'fields' => array('name')
+                    ), 'Disciplina', 'Turno', 'AnoLectivo'
+                )
+            ));
+            $inscricaos2 = $this->Turma->Inscricao->find('all', array('conditions' => array('turma_id' => $todasTurmasIds, 'Inscricao.estado_inscricao_id' => 1)));
+            $inscricaos = Hash::sort($inscricaos2, '{n}.Matricula.Aluno.Entidade.apelido', 'asc');
 
-		$faculdade = $this->Turma->Curso->getFaculdadeByCursoId($inscricaos[0] ['Turma']['curso_id']);
-		$this->set(compact('inscricaos', 'faculdade'));
+            $faculdade = $this->Turma->Curso->getFaculdadeByCursoId($inscricaos[0] ['Turma']['curso_id']);
+            $this->set(compact('inscricaos', 'faculdade'));
+        }
 	}
 
 	public function print_lista_estudantes($turma_id) {
@@ -487,7 +497,7 @@ class TurmasController extends AppController {
 					$this->Upload->create();
 					$this->Upload->save($this->request->data);
 
-					$pautaPath = Configure::read('OpenSGA.save_path') . DS . 'Pautas' . DS . date('Y');
+					$pautaPath = Configure::read('OpenSGA.Pautas.save_path');
 					if (!is_dir($pautaPath)) {
 						mkdir($pautaPath, 0777, true);
 						chmod($pautaPath, 0755);
@@ -495,11 +505,8 @@ class TurmasController extends AppController {
 					CakeResque::enqueue(
 							'default', 'TurmaShell', array('processaPauta', $turmaId, $this->Upload->id, $uploadSucesso['urls'][0])
 					);
-					//$processado = $this->Turma->processaPauta($uploadSucesso['urls'][0], $turmaId);
-					//if ($processado) {
 					$this->Session->setFlash(__('Pauta Carregada com Sucesso. A Pauta Sera processada dentro de alguns minutos'), 'default', array('class' => 'alert alert-info'));
 					$this->redirect(array('action' => 'ver_turma', $turmaId));
-					//}
 				}
 			} else {
 				$this->Session->setFlash(__('Tentou carregar um ficheiro no formato errado.'), 'default', array('class' => 'alert error'));
@@ -629,6 +636,7 @@ class TurmasController extends AppController {
 
 		$this->set(compact('tipoAvaliacaos', 'turma', 'docente'));
 	}
+
 
 	public function docente_print_pauta($turmaId) {
 		$this->Turma->id = $turmaId;

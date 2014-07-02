@@ -1,5 +1,5 @@
 <?php
-
+    ini_set('memory_limit', "2048M");
 App::uses('AuditableConfig', 'Auditable.Lib');
 App::uses('AppShell', 'Console/Command');
 
@@ -32,4 +32,19 @@ class TurmaShell extends AppShell {
 		}
 	}
 
+    /**
+     * Job Para Gerar Pauta e Guardar no Ficheiro
+     * Parametros TurmaId
+     */
+    public function geraPauta(){
+        $turmaId = $this->args[0];
+        $pautaXls = $this->Turma->geraPautaExcel($turmaId);
+
+        $objWriter = PHPExcel_IOFactory::createWriter($pautaXls, 'Excel2007');
+        $objWriter->save(Configure::read('OpenSGA.Pautas.save_path').DS.$turmaId.'.xlsx');
+        $this->Turma->id = $turmaId;
+        $this->Turma->set('pauta_path',Configure::read('OpenSGA.Pautas.save_path').DS.$turmaId.'.xlsx');
+        $this->Turma->save();
+
+    }
 }

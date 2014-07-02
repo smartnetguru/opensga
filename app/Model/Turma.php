@@ -237,6 +237,84 @@ class Turma extends AppModel {
 		$datasource->commit();
 	}
 
+
+    public function geraPautaExcel($turmaId){
+        $this->id = $turmaId;
+        $turma = $this->read();
+        $todasTurmas = $this->find('list', array('conditions' => array('Turma.curso_id' => $turma['Turma']['curso_id'], 'Turma.disciplina_id' => $turma['Turma']['disciplina_id'], 'Turma.ano_lectivo_id' => $turma['Turma']['ano_lectivo_id'])));
+        $todasTurmasIds = array_keys($todasTurmas);
+
+        $this->Inscricao->contain(array(
+            'EstadoInscricao',
+            'Matricula' => array(
+                'Aluno' => array(
+                    'Entidade' => array(
+                    )
+                )
+            ),
+            'Turma' => array(
+                'Curso' => array(
+                    'fields' => array('name')
+                ), 'Disciplina', 'Turno', 'AnoLectivo'
+            )
+        ));
+        $inscricaos2 = $this->Inscricao->find('all', array('conditions' => array('turma_id' => $todasTurmasIds, 'Inscricao.estado_inscricao_id' => 1)));
+        $inscricaos = Hash::sort($inscricaos2, '{n}.Matricula.Aluno.Entidade.apelido', 'asc');
+        $faculdade = $this->Curso->getFaculdadeByCursoId($inscricaos[0] ['Turma']['curso_id']);
+
+        App::import('Vendor', 'PHPExcel', array('file' => 'PHPExcel.php'));
+        if (!class_exists('PHPExcel'))
+            throw new CakeException('Vendor class PHPExcel not found!');
+
+        $xls = PHPExcel_IOFactory::load(APP . 'Reports' . DS . 'Turmas' . DS . 'faculdade_print_pauta.xlsx');
+
+        $xls->setActiveSheetIndexByName('avaliacoes');
+        $xls->getActiveSheet()->setCellValue('A2', $faculdade['UnidadeOrganica']['name']);
+        $xls->getActiveSheet()->setCellValue('A3', $inscricaos[0]['Turma']['Curso']['name']);
+        $xls->getActiveSheet()->setCellValue('A4', $inscricaos[0]['Turma']['Disciplina']['name']);
+        $xls->getActiveSheet()->setCellValue('A5', "Ano lectivo: {$inscricaos[0]['Turma']['AnoLectivo']['ano']}. Semestre: {$inscricaos[0]['Turma']['semestre_curricular']}");
+
+
+
+        $linha_actual = 9;
+        $i = 1;
+        $xls->getActiveSheet()->getColumnDimension('B')->setVisible(false);
+        foreach ($inscricaos as $inscricao) {
+
+            $xls->getActiveSheet()->setCellValue('A' . $linha_actual, $i);
+
+            $xls->getActiveSheet()->setCellValue('C' . $linha_actual, $inscricao['Matricula']['Aluno']['codigo']);
+            $xls->getActiveSheet()->setCellValue('D' . $linha_actual, $inscricao['Matricula']['Aluno']['Entidade']['apelido']);
+            $xls->getActiveSheet()->setCellValue('E' . $linha_actual, $inscricao['Matricula']['Aluno']['Entidade']['name']);
+            $linha_actual++;
+            $i++;
+        }
+
+
+        $xls->setActiveSheetIndexByName("pauta");
+        $linha_actual = 9;
+        $i = 1;
+        $xls->getActiveSheet()->getColumnDimension('B')->setVisible(false);
+        foreach ($inscricaos as $inscricao) {
+
+            $xls->getActiveSheet()->setCellValue('A' . $linha_actual, $i);
+
+            $xls->getActiveSheet()->setCellValue('C' . $linha_actual, $inscricao['Matricula']['Aluno']['codigo']);
+            $xls->getActiveSheet()->setCellValue('D' . $linha_actual, $inscricao['Matricula']['Aluno']['Entidade']['apelido']);
+            $xls->getActiveSheet()->setCellValue('E' . $linha_actual, $inscricao['Matricula']['Aluno']['Entidade']['name']);
+            $linha_actual++;
+            $i++;
+        }
+        // $this->PhpExcel->addImage(WWW_ROOT . 'img' . DS . 'logo_login_' . Configure::read('OpenSGA.instituicao.sigla') . '.png', 'A2', 10, 108, 115); //Logotipo
+
+
+        //$this->PhpExcel->addWorksheetMeta($this->Session->read('Auth.User.name'), 'Lista de Estudantes');
+//$xls->getActiveSheet()->setShowGridlines(false);
+
+
+        return $xls;
+
+    }
 	/**
 	 * Esta função retorna todas as turmas do plano curricular do aluno
 	 *
@@ -487,7 +565,6 @@ class Turma extends AppModel {
 				$ordemTeste += 1;
 
 				$turmaTipoAvaliacao = $this->TurmaTipoAvaliacao->find('first', array('conditions' => array('turma_id' => $turmaId, 'ordem' => $ordemTeste)));
-				Debugger::log($turmaTipoAvaliacao);
 				if (empty($turmaTipoAvaliacao)) {
 					$arrayNovaAvaliacao = array(
 						'TurmaTipoAvaliacao' => array(
@@ -532,7 +609,6 @@ class Turma extends AppModel {
 				foreach ($mapaTestes as $mapaTeste) {
 					$nota = $ws->getCell($mapaTeste['letra'] . $linhaActual)->getCalculatedValue();
 					$avaliacaoExiste = $this->TurmaTipoAvaliacao->Avaliacao->find('first', array('conditions' => array('turma_tipo_avaliacao_id' => $mapaTeste['turma_tipo_avaliacao_id'], 'aluno_id' => $aluno['Aluno']['id'], 'estado_avaliacao_id' => 1)));
-					debug($nota);
 					if (!$avaliacaoExiste) {
 						$arrayNovaAvaliacao = array(
 							'Avaliacao' => array(
@@ -552,6 +628,31 @@ class Turma extends AppModel {
 						$this->TurmaTipoAvaliacao->Avaliacao->save();
 					}
 				}
+                $mediaFrequencia =  $ws->getCell('P' . $linhaActual)->getCalculatedValue();
+                $inscricao = $this->Inscricao->findByAlunoIdAndTurmaId($aluno['Aluno']['id'],$turmaId);
+                if(!empty($inscricao)){
+                    $this->Inscricao->id = $inscricao['Inscricao']['id'];
+                    $this->Inscricao->set('nota_frequencia',$mediaFrequencia);
+
+                    $notaExameNormal = $xls->getSheetByName('pauta')->getCell('G' . $linhaActual)->getCalculatedValue();
+                    if($notaExameNormal){
+                        $this->Inscricao->set('nota_exame_normal',$notaExameNormal);
+                    }
+                    $notaExameRecorrencia = $xls->getSheetByName('pauta')->getCell('H' . $linhaActual)->getCalculatedValue();
+                    if($notaExameRecorrencia){
+                        $this->Inscricao->set('nota_exame_normal',$notaExameRecorrencia);
+                    }
+                    $notaExameEspecial = $xls->getSheetByName('pauta')->getCell('I' . $linhaActual)->getCalculatedValue();
+                    if($notaExameEspecial){
+                        $this->Inscricao->set('nota_exame_especial',$notaExameEspecial);
+                    }
+                    $notaFinal = $xls->getSheetByName('pauta')->getCell('J' . $linhaActual)->getCalculatedValue();
+                    if($notaFinal){
+                        $this->Inscricao->set('nota_final',$notaFinal);
+                    }
+
+                    $this->Inscricao->save();
+                }
 			}
 
 			$linhaActual++;

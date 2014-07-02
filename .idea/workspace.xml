@@ -2,19 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8a188e33-7e6f-48bc-b82d-3dfcef9f88fa" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/deployment.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/opensga.iml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/scopes/scope_settings.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Model/Aluno.php" afterPath="$PROJECT_DIR$/app/Model/Aluno.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Plugin/Requisicoes/Controller/RequisicoesPedidosController.php" afterPath="$PROJECT_DIR$/app/Plugin/Requisicoes/Controller/RequisicoesPedidosController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/View/Common/aluno_action.ctp" afterPath="$PROJECT_DIR$/app/View/Common/aluno_action.ctp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Plugin/Requisicoes/View/RequisicoesPedidos/index.ctp" afterPath="$PROJECT_DIR$/app/Plugin/Requisicoes/View/RequisicoesPedidos/index.ctp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nbproject/private/private.xml" afterPath="$PROJECT_DIR$/nbproject/private/private.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Plugin/Requisicoes/View/RequisicoesPedidos/registar_requisicao_estudante.ctp" afterPath="$PROJECT_DIR$/app/Plugin/Requisicoes/View/RequisicoesPedidos/registar_requisicao_estudante.ctp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/codeStyleSettings.xml" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/template_bci_2014.xlsx" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Reports/Turmas/faculdade_print_pauta.xlsx" afterPath="$PROJECT_DIR$/app/Reports/Turmas/faculdade_print_pauta.xlsx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Model/Turma.php" afterPath="$PROJECT_DIR$/app/Model/Turma.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Console/Command/TurmaShell.php" afterPath="$PROJECT_DIR$/app/Console/Command/TurmaShell.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Controller/TurmasController.php" afterPath="$PROJECT_DIR$/app/Controller/TurmasController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Config/bootstrap.php" afterPath="$PROJECT_DIR$/app/Config/bootstrap.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Plugin/CakeResque/Config/config.php" afterPath="$PROJECT_DIR$/app/Plugin/CakeResque/Config/config.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/View/Pages/faculdade_home.ctp" afterPath="$PROJECT_DIR$/app/View/Pages/faculdade_home.ctp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/View/Elements/header.ctp" afterPath="$PROJECT_DIR$/app/View/Elements/header.ctp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/webroot/assets/css/lists.css" afterPath="$PROJECT_DIR$/app/webroot/assets/css/lists.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/View/Common/Turmas/ver_turma.ctp" afterPath="$PROJECT_DIR$/app/View/Common/Turmas/ver_turma.ctp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="opensga.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -37,10 +37,101 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="AlunosController.php" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/Controller/AlunosController.php">
+      <file leaf-file-name="Config-Default.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Config/Config-Default.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="100" column="37" selection-start="2966" selection-end="2966" vertical-scroll-proportion="0.6367713" vertical-offset="1232" max-vertical-offset="24750">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1206">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Upload.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Model/Upload.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="97" column="41" selection-start="2703" selection-end="2703" vertical-scroll-proportion="0.0" vertical-offset="1746" max-vertical-offset="2700">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Config-UEM.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Config/Config-UEM.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1062">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="bootstrap.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Config/bootstrap.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="36" column="37" selection-start="1213" selection-end="1213" vertical-scroll-proportion="0.0" vertical-offset="648" max-vertical-offset="1584">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="bootstrap_siga.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Config/bootstrap_siga.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="18" column="109" selection-start="670" selection-end="670" vertical-scroll-proportion="0.0" vertical-offset="324" max-vertical-offset="468">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Turma.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Model/Turma.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="654" column="17" selection-start="25064" selection-end="25064" vertical-scroll-proportion="-19.703703" vertical-offset="10790" max-vertical-offset="11682">
+              <folding>
+                <marker date="1404198876350" expanded="true" signature="14822:14948" placeholder="update t0010..." />
+                <marker date="1404198876350" expanded="true" signature="15145:15266" placeholder="select count..t0013inscricaos..." />
+                <marker date="1404198876350" expanded="true" signature="15452:15608" placeholder="select count..t0013inscricaos..." />
+                <marker date="1404198876350" expanded="true" signature="15770:15926" placeholder="select count..t0013inscricaos..." />
+                <marker date="1404198876350" expanded="true" signature="16072:16199" placeholder="select sum(n..t0013inscricaos..." />
+                <marker date="1404198876350" expanded="true" signature="16371:16538" placeholder="select tf.na..t0010turmas..." />
+                <marker date="1404198876350" expanded="true" signature="16716:16887" placeholder="select tf.na..t0010turmas..." />
+                <marker date="1404198876350" expanded="true" signature="17052:17230" placeholder="select tp.na..t0010turmas..." />
+                <marker date="1404198876350" expanded="true" signature="19038:19185" placeholder="SELECT tt.id..t0010turmas..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="lists.css" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/webroot/assets/css/lists.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="246" column="15" selection-start="4793" selection-end="4793" vertical-scroll-proportion="0.35388127" vertical-offset="4118" max-vertical-offset="6642">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="faculdade_ver_turma.ctp" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/View/Turmas/faculdade_ver_turma.ctp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="33" column="0" selection-start="1498" selection-end="1498" vertical-scroll-proportion="0.0" vertical-offset="594" max-vertical-offset="954">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="faculdade_print_pauta.ctp" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/View/Turmas/faculdade_print_pauta.ctp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="101" column="0" selection-start="62" selection-end="4905" vertical-scroll-proportion="0.0" vertical-offset="972" max-vertical-offset="1926">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="home.ctp" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/View/Pages/home.ctp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="135" column="16" selection-start="6662" selection-end="6670" vertical-scroll-proportion="0.0" vertical-offset="1952" max-vertical-offset="2844">
               <folding />
             </state>
           </provider>
@@ -60,6 +151,16 @@
     <option name="changedFiles">
       <list>
         <option value="$PROJECT_DIR$/app/Plugin/Requisicoes/View/RequisicoesPedidos/registar_requisicao_estudante.ctp" />
+        <option value="$PROJECT_DIR$/app/View/Elements/header.ctp" />
+        <option value="$PROJECT_DIR$/app/View/Pages/faculdade_home.ctp" />
+        <option value="$PROJECT_DIR$/app/Config/bootstrap_siga.php" />
+        <option value="$PROJECT_DIR$/app/Config/bootstrap.php" />
+        <option value="$PROJECT_DIR$/app/Model/Upload.php" />
+        <option value="$PROJECT_DIR$/app/Controller/TurmasController.php" />
+        <option value="$PROJECT_DIR$/app/Console/Command/TurmaShell.php" />
+        <option value="$PROJECT_DIR$/app/View/Common/Turmas/ver_turma.ctp" />
+        <option value="$PROJECT_DIR$/app/Model/Turma.php" />
+        <option value="$PROJECT_DIR$/app/webroot/assets/css/lists.css" />
       </list>
     </option>
   </component>
@@ -95,6 +196,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -124,6 +226,204 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webroot" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webroot" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="assets" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webroot" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="assets" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="css" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="View" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="View" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Turmas" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="View" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Pages" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="View" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Elements" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="View" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Common" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="View" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Common" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Turmas" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -237,7 +537,83 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="Model" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="Controller" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Console" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Console" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Command" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Config" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -261,17 +637,31 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="options.lastSelected" value="preferences.fileTypes" />
+    <property name="options.lastSelected" value="appearance" />
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.searchVisible" value="true" />
+    <property name="FullScreen" value="false" />
+    <property name="LayoutCode.rearrangeEntriesPHP" value="false" />
   </component>
   <component name="RunManager">
+    <configuration default="true" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
+      <TestRunner />
+      <method />
+    </configuration>
+    <configuration default="true" type="PhpLocalRunConfigurationType" factoryName="PHP Console">
+      <method />
+    </configuration>
+    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug" singleton="true">
+      <method />
+    </configuration>
+    <configuration default="true" type="PhpUnitRemoteRunConfigurationType" factoryName="PHPUnit on Server" server_id="a6620724-7088-4813-92dc-c875ec9382f2" server_name="OpenSGA">
+      <method />
+    </configuration>
     <list size="0" />
   </component>
   <component name="ShelveChangesManager" show_recycled="false" />
@@ -300,28 +690,48 @@
     </task>
     <servers />
   </component>
+  <component name="TodoView" selected-index="0">
+    <todo-panel id="selected-file">
+      <are-packages-shown value="false" />
+      <are-modules-shown value="false" />
+      <flatten-packages value="false" />
+      <is-autoscroll-to-source value="false" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="false" />
+      <are-modules-shown value="false" />
+      <flatten-packages value="false" />
+      <is-autoscroll-to-source value="false" />
+    </todo-panel>
+    <todo-panel id="default-changelist">
+      <are-packages-shown value="false" />
+      <are-modules-shown value="false" />
+      <flatten-packages value="false" />
+      <is-autoscroll-to-source value="false" />
+    </todo-panel>
+  </component>
   <component name="ToolWindowManager">
     <frame x="-1" y="0" width="1922" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3295099" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18177083" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18477103" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18477103" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24973376" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -341,11 +751,146 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/Controller/AlunosController.php">
+    <entry file="file://$PROJECT_DIR$/app/Config/Config-Default.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="116" column="17" selection-start="3335" selection-end="3335" vertical-scroll-proportion="0.0" vertical-offset="1232" max-vertical-offset="24750">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1206">
           <folding />
         </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Model/Upload.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="97" column="41" selection-start="2703" selection-end="2703" vertical-scroll-proportion="0.0" vertical-offset="1746" max-vertical-offset="2700">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Config/Config-UEM.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1062">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Config/bootstrap.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="36" column="37" selection-start="1213" selection-end="1213" vertical-scroll-proportion="0.0" vertical-offset="648" max-vertical-offset="1584">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Config/bootstrap_siga.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="18" column="109" selection-start="670" selection-end="670" vertical-scroll-proportion="0.0" vertical-offset="324" max-vertical-offset="468">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Model/Turma.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="654" column="17" selection-start="25064" selection-end="25064" vertical-scroll-proportion="0.0" vertical-offset="11682" max-vertical-offset="11682">
+          <folding>
+            <marker date="1404198876350" expanded="true" signature="14822:14948" placeholder="update t0010..." />
+            <marker date="1404198876350" expanded="true" signature="15145:15266" placeholder="select count..t0013inscricaos..." />
+            <marker date="1404198876350" expanded="true" signature="15452:15608" placeholder="select count..t0013inscricaos..." />
+            <marker date="1404198876350" expanded="true" signature="15770:15926" placeholder="select count..t0013inscricaos..." />
+            <marker date="1404198876350" expanded="true" signature="16072:16199" placeholder="select sum(n..t0013inscricaos..." />
+            <marker date="1404198876350" expanded="true" signature="16371:16538" placeholder="select tf.na..t0010turmas..." />
+            <marker date="1404198876350" expanded="true" signature="16716:16887" placeholder="select tf.na..t0010turmas..." />
+            <marker date="1404198876350" expanded="true" signature="17052:17230" placeholder="select tp.na..t0010turmas..." />
+            <marker date="1404198876350" expanded="true" signature="19038:19185" placeholder="SELECT tt.id..t0010turmas..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/View/Turmas/faculdade_ver_turma.ctp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="33" column="0" selection-start="1498" selection-end="1498" vertical-scroll-proportion="0.0" vertical-offset="594" max-vertical-offset="954">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/View/Turmas/faculdade_print_pauta.ctp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="101" column="0" selection-start="62" selection-end="4905" vertical-scroll-proportion="0.0" vertical-offset="972" max-vertical-offset="1926">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/View/Pages/home.ctp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="135" column="16" selection-start="6662" selection-end="6670" vertical-scroll-proportion="0.0" vertical-offset="1952" max-vertical-offset="2844">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Controller/AlunosController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="80" column="34" selection-start="2420" selection-end="2420" vertical-scroll-proportion="0.0" vertical-offset="1268" max-vertical-offset="24750" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/View/Elements/header.ctp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="56" column="137" selection-start="2789" selection-end="2789" vertical-scroll-proportion="0.0" vertical-offset="390" max-vertical-offset="3240" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Controller/TurmasController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="361" column="0" selection-start="12746" selection-end="12746" vertical-scroll-proportion="0.0" vertical-offset="5892" max-vertical-offset="13266" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Console/Command/TurmaShell.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="162" column="124" selection-start="7203" selection-end="7203" vertical-scroll-proportion="0.0" vertical-offset="2119" max-vertical-offset="3096" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Console/Command/OpenSGAShell.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="98" column="41" selection-start="3096" selection-end="3216" vertical-scroll-proportion="0.0" vertical-offset="1417" max-vertical-offset="33498" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/View/Turmas/faculdade_print_pauta.ctp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="101" column="0" selection-start="62" selection-end="4905" vertical-scroll-proportion="0.0" vertical-offset="972" max-vertical-offset="1926">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/View/Pages/home.ctp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="135" column="16" selection-start="6662" selection-end="6670" vertical-scroll-proportion="0.0" vertical-offset="1952" max-vertical-offset="2844">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Controller/AlunosController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="80" column="34" selection-start="2420" selection-end="2420" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="24750" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/View/Elements/header.ctp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="57" column="0" selection-start="2790" selection-end="2790" vertical-scroll-proportion="0.0" vertical-offset="1026" max-vertical-offset="3258" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Controller/AlunosController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="80" column="34" selection-start="2420" selection-end="2420" vertical-scroll-proportion="0.0" vertical-offset="1268" max-vertical-offset="24750" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/View/Elements/header.ctp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="57" column="0" selection-start="2790" selection-end="2790" vertical-scroll-proportion="0.0" vertical-offset="1026" max-vertical-offset="3258" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Controller/AlunosController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="100" column="37" selection-start="2966" selection-end="2966" vertical-scroll-proportion="0.0" vertical-offset="1232" max-vertical-offset="24750" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Controller/AlunosController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="116" column="17" selection-start="3335" selection-end="3335" vertical-scroll-proportion="0.0" vertical-offset="1232" max-vertical-offset="24750" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Plugin/Requisicoes/View/RequisicoesPedidos/registar_requisicao_estudante.ctp">
@@ -358,7 +903,125 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Controller/AlunosController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="100" column="37" selection-start="2966" selection-end="2966" vertical-scroll-proportion="0.6367713" vertical-offset="1232" max-vertical-offset="24750">
+        <state line="80" column="34" selection-start="2420" selection-end="2420" vertical-scroll-proportion="0.0" vertical-offset="1268" max-vertical-offset="24750" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/View/Pages/home.ctp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="135" column="16" selection-start="6662" selection-end="6670" vertical-scroll-proportion="0.0" vertical-offset="1952" max-vertical-offset="2844">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/View/Pages/faculdade_home.ctp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="99" column="24" selection-start="6479" selection-end="6479" vertical-scroll-proportion="0.71748877" vertical-offset="1142" max-vertical-offset="2268" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/View/Elements/header.ctp">
+      <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="56" column="137" selection-start="2789" selection-end="2789" vertical-scroll-proportion="0.0" vertical-offset="390" max-vertical-offset="3240" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/View/Turmas/faculdade_print_pauta.ctp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="101" column="0" selection-start="62" selection-end="4905" vertical-scroll-proportion="0.0" vertical-offset="972" max-vertical-offset="1926">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Console/Command/OpenSGAShell.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="98" column="41" selection-start="3096" selection-end="3216" vertical-scroll-proportion="0.0" vertical-offset="1417" max-vertical-offset="33498" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Config/bootstrap_siga.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="18" column="109" selection-start="670" selection-end="670" vertical-scroll-proportion="0.0" vertical-offset="324" max-vertical-offset="468">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Config/Config-Default.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1170">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Config/Config-UEM.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1026">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Config/bootstrap.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="36" column="37" selection-start="1213" selection-end="1213" vertical-scroll-proportion="0.0" vertical-offset="648" max-vertical-offset="1584">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendors/PHPExcel/Cell.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="274" column="20" selection-start="6473" selection-end="6473" vertical-scroll-proportion="0.34338748" vertical-offset="4204" max-vertical-offset="17280">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Model/Upload.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="97" column="41" selection-start="2703" selection-end="2703" vertical-scroll-proportion="0.0" vertical-offset="1746" max-vertical-offset="2700">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Controller/TurmasController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="334" column="15" selection-start="11235" selection-end="11235" vertical-scroll-proportion="-6.7777777" vertical-offset="5829" max-vertical-offset="13212" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Console/Command/TurmaShell.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="42" column="78" selection-start="1311" selection-end="1311" vertical-scroll-proportion="-27.925926" vertical-offset="2" max-vertical-offset="1008" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/View/Common/Turmas/ver_turma.ctp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="287" column="28" selection-start="10492" selection-end="10492" vertical-scroll-proportion="0.9575972" vertical-offset="4137" max-vertical-offset="5886" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/View/Turmas/faculdade_ver_turma.ctp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="33" column="0" selection-start="1498" selection-end="1498" vertical-scroll-proportion="0.0" vertical-offset="594" max-vertical-offset="954">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Model/Turma.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="654" column="17" selection-start="25064" selection-end="25064" vertical-scroll-proportion="-19.703703" vertical-offset="10790" max-vertical-offset="11682">
+          <folding>
+            <marker date="1404198876350" expanded="true" signature="14822:14948" placeholder="update t0010..." />
+            <marker date="1404198876350" expanded="true" signature="15145:15266" placeholder="select count..t0013inscricaos..." />
+            <marker date="1404198876350" expanded="true" signature="15452:15608" placeholder="select count..t0013inscricaos..." />
+            <marker date="1404198876350" expanded="true" signature="15770:15926" placeholder="select count..t0013inscricaos..." />
+            <marker date="1404198876350" expanded="true" signature="16072:16199" placeholder="select sum(n..t0013inscricaos..." />
+            <marker date="1404198876350" expanded="true" signature="16371:16538" placeholder="select tf.na..t0010turmas..." />
+            <marker date="1404198876350" expanded="true" signature="16716:16887" placeholder="select tf.na..t0010turmas..." />
+            <marker date="1404198876350" expanded="true" signature="17052:17230" placeholder="select tp.na..t0010turmas..." />
+            <marker date="1404198876350" expanded="true" signature="19038:19185" placeholder="SELECT tt.id..t0010turmas..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/webroot/assets/css/lists.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="246" column="15" selection-start="4793" selection-end="4793" vertical-scroll-proportion="0.35388127" vertical-offset="4118" max-vertical-offset="6642">
           <folding />
         </state>
       </provider>
