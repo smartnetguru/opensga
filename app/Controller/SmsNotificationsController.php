@@ -111,13 +111,14 @@ class SmsNotificationsController extends AppController {
 					print_r($numero);
 					$mensagem = "A DRA, DSS, DF e a  AEU,pretende reunir com  estudantes que perderam a bolsa no dia 07/07/2014 pelas 11h no anfiteatro da Faculdade de Medicina.";
 
-					$this->SmsEnviada->sendSMS($numero, $mensagem);
+					//$this->SmsEnviada->sendSMS($numero, $mensagem);
 				}
 			}
 
 
-			$this->SmsEnviada->sendSMS(826489374, "Todas SMS foram enviadas.");
+
 		}
+        //$this->SmsEnviada->sendSMS(826489374, "Todas SMS foram enviadas.");
 	}
 
 	public function testa_sms() {

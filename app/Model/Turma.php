@@ -664,6 +664,34 @@ class Turma extends AppModel {
 
 	}
 
+    public function getAllDisciplinasForInscricao($aluno_id){
+        $anoLectivoAno = Configure::read('OpenSGA.ano_lectivo');
+        $anoLectivo = $this->AnoLectivo->findByAno($anoLectivoAno);
+        $matricula = $this->Inscricao->Matricula->findByAlunoIdAndAnoLectivoId($aluno_id,$anoLectivo['AnoLectivo']['id']);
+        $aluno = $this->Inscricao->Aluno->findById($aluno_id);
+
+        //Pegamos todos os planos de estudos do aluno
+        $this->PlanoEstudo->contain(array(
+            'DisciplinaPlanoEstudo'=>array(
+                'Disciplina',
+                'order'=>array(
+                    'DisciplinaPlanoEstudo.ano_curricular ASC',
+                    'DisciplinaPlanoEstudo.semestre_curricular ASC'
+                )
+            )
+        ));
+        $planoEstudos = $this->PlanoEstudo->find('all',array(
+            'conditions'=>array(
+                'PlanoEstudo.curso_id'=>$aluno['Aluno']['curso_id']
+            ),
+            'order'=>'PlanoEstudo.ano_criacao DESC'
+
+        ));
+
+       return $planoEstudos;
+
+    }
+
 }
 
 ?>
