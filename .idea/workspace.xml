@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8a188e33-7e6f-48bc-b82d-3dfcef9f88fa" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/View/Inscricaos/faculdade_ver_inscricoes_aluno.ctp" afterPath="$PROJECT_DIR$/app/View/Inscricaos/faculdade_ver_inscricoes_aluno.ctp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Controller/SmsNotificationsController.php" afterPath="$PROJECT_DIR$/app/Controller/SmsNotificationsController.php" />
     </list>
     <ignored path="opensga.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -25,34 +25,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Turma.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Model/Turma.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="199" column="35" selection-start="5275" selection-end="5275" vertical-scroll-proportion="-1.3703704" vertical-offset="3095" max-vertical-offset="12276">
-              <folding>
-                <marker date="1404888884807" expanded="true" signature="14872:14998" placeholder="update t0010..." />
-                <marker date="1404888884807" expanded="true" signature="15195:15316" placeholder="select count..t0013inscricaos..." />
-                <marker date="1404888884807" expanded="true" signature="15502:15658" placeholder="select count..t0013inscricaos..." />
-                <marker date="1404888884807" expanded="true" signature="15820:15976" placeholder="select count..t0013inscricaos..." />
-                <marker date="1404888884807" expanded="true" signature="16122:16249" placeholder="select sum(n..t0013inscricaos..." />
-                <marker date="1404888884807" expanded="true" signature="16421:16588" placeholder="select tf.na..t0010turmas..." />
-                <marker date="1404888884807" expanded="true" signature="16766:16937" placeholder="select tf.na..t0010turmas..." />
-                <marker date="1404888884807" expanded="true" signature="17102:17280" placeholder="select tp.na..t0010turmas..." />
-                <marker date="1404888884807" expanded="true" signature="19088:19235" placeholder="SELECT tt.id..t0010turmas..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TurmasController.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Controller/TurmasController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="252" column="40" selection-start="8649" selection-end="8649" vertical-scroll-proportion="-13.555555" vertical-offset="4170" max-vertical-offset="13176">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="PlanoEstudo.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Model/PlanoEstudo.php">
           <provider selected="true" editor-type-id="text-editor">
@@ -115,10 +87,19 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="faculdade_ver_inscricoes_aluno.ctp" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="faculdade_ver_inscricoes_aluno.ctp" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/View/Inscricaos/faculdade_ver_inscricoes_aluno.ctp">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="150" column="285" selection-start="5739" selection-end="5739" vertical-scroll-proportion="0.4456929" vertical-offset="2343" max-vertical-offset="5670">
+            <state line="150" column="285" selection-start="5739" selection-end="5739" vertical-scroll-proportion="-6.490909" vertical-offset="2343" max-vertical-offset="5670">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SmsNotification.php" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/Model/SmsNotification.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="200" column="37" selection-start="7415" selection-end="7415" vertical-scroll-proportion="0.9565742" vertical-offset="2807" max-vertical-offset="5040">
               <folding />
             </state>
           </provider>
@@ -158,7 +139,6 @@
         <option value="$PROJECT_DIR$/app/Config/bootstrap_siga.php" />
         <option value="$PROJECT_DIR$/app/Console/Command/EstudanteShell.php" />
         <option value="$PROJECT_DIR$/app/View/Alunos/faculdade_perfil_estudante.ctp" />
-        <option value="$PROJECT_DIR$/app/Controller/SmsNotificationsController.php" />
         <option value="$PROJECT_DIR$/app/View/Inscricaos/faculdade_inscrever2.ctp" />
         <option value="$PROJECT_DIR$/app/Controller/InscricaosController.php" />
         <option value="$PROJECT_DIR$/app/Model/Turma.php" />
@@ -167,6 +147,7 @@
         <option value="$PROJECT_DIR$/app/Model/PlanoEstudo.php" />
         <option value="$PROJECT_DIR$/app/Console/Command/OpenSGAShell.php" />
         <option value="$PROJECT_DIR$/app/View/Inscricaos/faculdade_ver_inscricoes_aluno.ctp" />
+        <option value="$PROJECT_DIR$/app/Controller/SmsNotificationsController.php" />
       </list>
     </option>
   </component>
@@ -806,11 +787,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/Config/Config-Default.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1206" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Model/Upload.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="97" column="41" selection-start="2703" selection-end="2703" vertical-scroll-proportion="0.0" vertical-offset="1746" max-vertical-offset="2700" />
@@ -835,15 +811,15 @@
       <provider selected="true" editor-type-id="text-editor">
         <state line="654" column="17" selection-start="25064" selection-end="25064" vertical-scroll-proportion="0.0" vertical-offset="11682" max-vertical-offset="11682">
           <folding>
-            <marker date="1404888884807" expanded="true" signature="14872:14998" placeholder="update t0010..." />
-            <marker date="1404888884807" expanded="true" signature="15195:15316" placeholder="select count..t0013inscricaos..." />
-            <marker date="1404888884807" expanded="true" signature="15502:15658" placeholder="select count..t0013inscricaos..." />
-            <marker date="1404888884807" expanded="true" signature="15820:15976" placeholder="select count..t0013inscricaos..." />
-            <marker date="1404888884807" expanded="true" signature="16122:16249" placeholder="select sum(n..t0013inscricaos..." />
-            <marker date="1404888884807" expanded="true" signature="16421:16588" placeholder="select tf.na..t0010turmas..." />
-            <marker date="1404888884807" expanded="true" signature="16766:16937" placeholder="select tf.na..t0010turmas..." />
-            <marker date="1404888884807" expanded="true" signature="17102:17280" placeholder="select tp.na..t0010turmas..." />
-            <marker date="1404888884807" expanded="true" signature="19088:19235" placeholder="SELECT tt.id..t0010turmas..." />
+            <marker date="1404888884807" expanded="true" signature="-1:-1" placeholder="update t0010..." />
+            <marker date="1404888884807" expanded="true" signature="-1:-1" placeholder="select count..t0013inscricaos..." />
+            <marker date="1404888884807" expanded="true" signature="-1:-1" placeholder="select count..t0013inscricaos..." />
+            <marker date="1404888884807" expanded="true" signature="-1:-1" placeholder="select count..t0013inscricaos..." />
+            <marker date="1404888884807" expanded="true" signature="-1:-1" placeholder="select sum(n..t0013inscricaos..." />
+            <marker date="1404888884807" expanded="true" signature="-1:-1" placeholder="select tf.na..t0010turmas..." />
+            <marker date="1404888884807" expanded="true" signature="-1:-1" placeholder="select tf.na..t0010turmas..." />
+            <marker date="1404888884807" expanded="true" signature="-1:-1" placeholder="select tp.na..t0010turmas..." />
+            <marker date="1404888884807" expanded="true" signature="-1:-1" placeholder="SELECT tt.id..t0010turmas..." />
           </folding>
         </state>
       </provider>
@@ -1035,11 +1011,6 @@
         <state line="42" column="14" selection-start="2285" selection-end="2285" vertical-scroll-proportion="0.5339088" vertical-offset="323" max-vertical-offset="1170" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Controller/SmsNotificationsController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="120" column="77" selection-start="5422" selection-end="5422" vertical-scroll-proportion="0.7437425" vertical-offset="1536" max-vertical-offset="2520" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Config/core.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="108" column="2" selection-start="4171" selection-end="4171" vertical-scroll-proportion="-0.40140846" vertical-offset="1944" max-vertical-offset="6732" />
@@ -1089,15 +1060,15 @@
       <provider selected="true" editor-type-id="text-editor">
         <state line="199" column="35" selection-start="5275" selection-end="5275" vertical-scroll-proportion="-1.3703704" vertical-offset="3095" max-vertical-offset="12276">
           <folding>
-            <marker date="1404888884807" expanded="true" signature="14872:14998" placeholder="update t0010..." />
-            <marker date="1404888884807" expanded="true" signature="15195:15316" placeholder="select count..t0013inscricaos..." />
-            <marker date="1404888884807" expanded="true" signature="15502:15658" placeholder="select count..t0013inscricaos..." />
-            <marker date="1404888884807" expanded="true" signature="15820:15976" placeholder="select count..t0013inscricaos..." />
-            <marker date="1404888884807" expanded="true" signature="16122:16249" placeholder="select sum(n..t0013inscricaos..." />
-            <marker date="1404888884807" expanded="true" signature="16421:16588" placeholder="select tf.na..t0010turmas..." />
-            <marker date="1404888884807" expanded="true" signature="16766:16937" placeholder="select tf.na..t0010turmas..." />
-            <marker date="1404888884807" expanded="true" signature="17102:17280" placeholder="select tp.na..t0010turmas..." />
-            <marker date="1404888884807" expanded="true" signature="19088:19235" placeholder="SELECT tt.id..t0010turmas..." />
+            <marker date="1404888884807" expanded="true" signature="-1:-1" placeholder="update t0010..." />
+            <marker date="1404888884807" expanded="true" signature="-1:-1" placeholder="select count..t0013inscricaos..." />
+            <marker date="1404888884807" expanded="true" signature="-1:-1" placeholder="select count..t0013inscricaos..." />
+            <marker date="1404888884807" expanded="true" signature="-1:-1" placeholder="select count..t0013inscricaos..." />
+            <marker date="1404888884807" expanded="true" signature="-1:-1" placeholder="select sum(n..t0013inscricaos..." />
+            <marker date="1404888884807" expanded="true" signature="-1:-1" placeholder="select tf.na..t0010turmas..." />
+            <marker date="1404888884807" expanded="true" signature="-1:-1" placeholder="select tf.na..t0010turmas..." />
+            <marker date="1404888884807" expanded="true" signature="-1:-1" placeholder="select tp.na..t0010turmas..." />
+            <marker date="1404888884807" expanded="true" signature="-1:-1" placeholder="SELECT tt.id..t0010turmas..." />
           </folding>
         </state>
       </provider>
@@ -1135,7 +1106,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/View/Inscricaos/faculdade_ver_inscricoes_aluno.ctp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="150" column="285" selection-start="5739" selection-end="5739" vertical-scroll-proportion="0.4456929" vertical-offset="2343" max-vertical-offset="5670">
+        <state line="150" column="285" selection-start="5739" selection-end="5739" vertical-scroll-proportion="-6.490909" vertical-offset="2343" max-vertical-offset="5670">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Controller/SmsNotificationsController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="70" column="72" selection-start="2234" selection-end="2234" vertical-scroll-proportion="0.47768396" vertical-offset="864" max-vertical-offset="2520">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Model/SmsNotification.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="200" column="37" selection-start="7415" selection-end="7415" vertical-scroll-proportion="0.9565742" vertical-offset="2807" max-vertical-offset="5040">
           <folding />
         </state>
       </provider>
