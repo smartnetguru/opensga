@@ -98,7 +98,7 @@ class PlanoEstudo extends AppModel {
 	function getAllDisciplinasByPlanoEstudo($plano_id) {
 		trigger_error("Deprecated function called.", E_USER_NOTICE);
 		App::import('Model', 'planoestudoano');
-		$planoestudoano = new DisciplinaPlanoEstudo;
+		//$planoestudoano = new DisciplinaPlanoEstudo;
 		$query = "Select p.id,plano_estudo_id,ano,semestre,cargahorariateoricas,cargahorariapraticas,d.id,d.name,d.codigo,pe.curso_id,pe.name ";
 		$query .="from planoestudoanos p,disciplinas d,planoestudos pe ";
 		$query .="where p.disciplina_id = d.id and p.plano_estudo_id = {$plano_id} and p.plano_estudo_id=pe.id ";

@@ -370,7 +370,11 @@ class Turma extends AppModel {
 		$turmas = $this->find('all', array('conditions' => $conditions, 'fields' => array('Turma.id', 'Disciplina.name', 'Disciplina.id', 'Turma.ano_curricular', 'Turma.semestre_curricular', 'PlanoEstudo.name'), 'order' => array('Turma.ano_curricular', 'Turma.semestre_curricular')));
 
 		$turmaIds = Hash::extract($turmas, '{n}.Disciplina.id');
-		$conditions2 = array('Turma.curso_id' => $matricula['Matricula']['curso_id'], 'Turma.estado_turma_id' => 1, 'Turma.ano_lectivo_id' => Configure::read('OpenSGA.ano_lectivo_id'), 'Turma.disciplina_id NOT' => $turmaIds);
+		$conditions2 = array(
+            'Turma.curso_id' => $matricula['Matricula']['curso_id'],
+            'Turma.estado_turma_id' => 1,
+            'Turma.ano_lectivo_id' => Configure::read('OpenSGA.ano_lectivo_id'),
+            'Turma.disciplina_id NOT' => $turmaIds);
 
 		$this->contain(array(
 			'Disciplina', 'PlanoEstudo'
