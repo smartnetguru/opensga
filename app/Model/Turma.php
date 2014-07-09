@@ -330,11 +330,14 @@ class Turma extends AppModel {
 	 * @Todo Filtrar para apenas mostrar as turmas em que o aluno pode se inscrever
 	 */
 	function getAllByAlunoForInscricao($alunoId, $anoLectivoId = null) {
+
 		if ($anoLectivoId == null) {
 			$anoLectivo = $this->AnoLectivo->findByAno(Configure::read('OpenSGA.ano_lectivo'));
 			$anoLectivoId = $anoLectivo['AnoLectivo']['id'];
 		}
+
 		$matricula = $this->Inscricao->Matricula->findByAlunoIdAndAnoLectivoId($alunoId, $anoLectivoId);
+
 		//Se nao renovou matricula naquele ano, nao aparece nenhuma cadeira para se inscrever
 		if (empty($matricula)) {
 			return array();
@@ -342,14 +345,13 @@ class Turma extends AppModel {
 		//Primeiro vamos pegar todas as disciplinas do plano de estudos
 		$todasDisciplinas = $this->PlanoEstudo->getAllDisciplinas($matricula['Matricula']['plano_estudo_id']);
 
-
 		$conditions = array('Turma.plano_estudo_id' => $matricula['Matricula']['plano_estudo_id'], 'Turma.estado_turma_id' => 1, 'Turma.ano_lectivo_id' => $anoLectivoId);
 
 		$this->contain(array(
 			'Disciplina', 'PlanoEstudo'
 		));
-		$turmas = $this->find('all', array('conditions' => $conditions, 'fields' => array('Turma.id', 'Disciplina.name', 'Disciplina.id', 'Turma.ano_curricular', 'Turma.semestre_curricular', 'PlanoEstudo.name'), 'order' => array('Turma.ano_curricular', 'Turma.semestre_curricular')));
 
+		$turmas = $this->find('all', array('conditions' => $conditions, 'fields' => array('Turma.id', 'Disciplina.name', 'Disciplina.id', 'Turma.ano_curricular', 'Turma.semestre_curricular', 'PlanoEstudo.name'), 'order' => array('Turma.ano_curricular', 'Turma.semestre_curricular')));
 		return $turmas;
 	}
 
@@ -359,7 +361,6 @@ class Turma extends AppModel {
 		//Primeiro vamos pegar todas as disciplinas do plano de estudos
 
 		$todas_disciplinas = $this->PlanoEstudo->getAllDisciplinas($matricula['Matricula']['plano_estudo_id']);
-
 
 		$conditions = array('Turma.plano_estudo_id' => $matricula['Matricula']['plano_estudo_id'], 'Turma.estado_turma_id' => 1, 'Turma.ano_lectivo_id' => Configure::read('OpenSGA.ano_lectivo_id'));
 

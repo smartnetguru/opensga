@@ -178,10 +178,13 @@ class InscricaosController extends AppController
                     }
                 }
             }
-            foreach ($this->request->data['disciplinas2'] as $k => $v) {
-                if ($v > 0) {
-                    $inscricao_nova[] = $v;
+            if(isset($this->request->data['disciplinas2'])){
+                foreach ($this->request->data['disciplinas2'] as $k => $v) {
+                    if ($v > 0) {
+                        $inscricao_nova[] = $v;
+                    }
                 }
+
             }
 
             $this->Session->write('OpenSGA.inscricao.cadeiras', $inscricao_nova);
@@ -191,11 +194,10 @@ class InscricaosController extends AppController
         }
 
 
-        $turmas = $this->Turma->getAllByAlunoForInscricao($aluno_id, $matricula_id);
+        $turmas = $this->Turma->getAllByAlunoForInscricao($aluno_id);
+
 
         $turmas2 = $this->Turma->getAllByPlanoEstudoAntigo($aluno_id);
-
-
         $this->set('aluno_id', $aluno_id);
         $this->set('matricula_id', $matricula_id);
         $this->set(compact('turmas', 'disciplinas', 'turmas2'));
@@ -239,7 +241,7 @@ class InscricaosController extends AppController
                 ), 'PlanoEstudo', 'Turno'
             ), 'TipoInscricao'
         ));
-        $inscricoesActivas = $this->Inscricao->find('all', array('conditions' => array('estado_inscricao_id' => 1, 'aluno_id' => $alunoId, 'Turma.ano_lectivo_id' => $anoLectivo['AnoLectivo']['id'])));
+        $inscricoesActivas = $this->Inscricao->find('all', array('conditions' => array('estado_inscricao_id' => 1, 'aluno_id' => $alunoId, 'Turma.ano_lectivo_id' => $anoLectivo['AnoLectivo']['id'],'Inscricao.data >'=>'2014-06-01')));
 
         if (empty($inscricoesActivas)) {
             $this->Session->setFlash(__('Este estudante nao possui inscricoes para este ano'), 'default', array('class' => 'alert alert-warning'));
