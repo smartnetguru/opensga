@@ -18,9 +18,35 @@ class CursosController extends AppController {
 
 	function index() {
 
+            if($this->request->is('post')){
+                $conditions = $this->__filterIndexConditions($this->request->data);
+            }
+            $this->paginate = array(
+                'conditions'=>$conditions,
+                'contain'=>array(
+                    'UnidadeOrganica'
+                )
+            );
 
-		$this->set('cursos', $this->paginate());
+        $unidadeOrganicas = $this->Curso->UnidadeOrganica->find('list',array('conditions'=>array('tipo_unidade_organica_id'=>1)));
+		$this->set('cursos', $this->paginate('Curso'));
+        $this->set(compact('unidadeOrganicas'));
 	}
+
+    public function __filterIndexConditions($data){
+        $conditions = array();
+        if($this->request->data['Curso']['codigo']!=''){
+            $conditions['Curso.codigo LIKE'] ='%'.$this->request->data['Curso']['codigo'].'%';
+        }
+        if($this->request->data['Curso']['name']!=''){
+            $conditions['Curso.name LIKE'] ='%'.$this->request->data['Curso']['name'].'%';
+        }
+        if($this->request->data['Curso']['unidade_organica_id']!=''){
+            $conditions['Curso.unidade_organica_id'] =$this->request->data['Curso']['unidade_organica_id'];
+        }
+
+        return $conditions;
+    }
 
 	function faculdade_index() {
 		$this->paginate = array(
@@ -100,21 +126,21 @@ class CursosController extends AppController {
 		$this->set(compact('GrauAcademicos', 'tipocursos', 'escolas'));
 	}
 
-	function ver_curso($id = null) {
+	function ver_curso($cursoId = null) {
 
-		if (!$id) {
+		if (!$cursoId) {
 			$this->Session->setFlash('Curso Invalido', 'flasherror');
 			$this->redirect(array('action' => 'index'));
 		}
-		$this->set('cursos', $this->Curso->read(null, $id));
+		$this->set('cursos', $this->Curso->read(null, $cursoId));
 		if (empty($this->data)) {
 
-			$this->data = $this->Curso->read(null, $id);
+			$this->data = $this->Curso->read(null, $cursoId);
 		}
 
 		$grauacademicos = $this->Curso->GrauAcademico->find('list');
 		$tipocursos = $this->Curso->TipoCurso->find('list');
-		$escolas = $this->Curso->Escola->find('list');
+		$unidadeOrganicas = $this->Curso->UnidadeOrganica->find('list');
 		$this->set(compact('grauacademicos', 'tipocursos', 'escolas'));
 	}
 

@@ -2,7 +2,459 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8a188e33-7e6f-48bc-b82d-3dfcef9f88fa" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Controller/SmsNotificationsController.php" afterPath="$PROJECT_DIR$/app/Controller/SmsNotificationsController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Imports/admitidos_0807.xlsx" afterPath="$PROJECT_DIR$/app/Imports/admitidos_0807.xlsx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/alunos_fora_do_tempo.xlsx" afterPath="$PROJECT_DIR$/alunos_fora_do_tempo.xlsx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/alunos_fora_do_tempo.xlsx" afterPath="$PROJECT_DIR$/app/alunos_fora_do_tempo.xlsx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_1.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_1.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_1.png" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_1.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_10.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_10.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_10.png" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_10.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_11.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_11.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_11.png" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_11.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_12.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_12.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_12.png" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_12.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_13.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_13.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_13.png" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_13.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_14.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_14.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_14.png" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_14.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_15.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_15.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_15.png" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_15.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_16.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_16.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_16.png" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_16.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_17.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_17.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_17.png" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_17.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_18.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_18.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_18.png" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_18.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_19.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_19.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_19.png" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_19.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_2.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_2.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_2.png" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_2.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_20.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_20.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_20.png" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_20.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_21.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_21.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_21.png" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_21.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_22.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_22.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_22.png" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_22.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_23.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_23.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_23.png" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_23.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_24.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_24.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_24.png" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_24.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_25.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_25.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_25.png" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_25.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_26.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_26.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_26.png" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_26.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_27.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_27.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_27.png" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_27.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_28.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_28.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_28.png" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_28.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_29.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_29.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_29.png" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_29.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_3.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_3.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_3.png" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_3.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_30.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_30.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_30.png" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_30.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_31.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_31.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_31.png" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_31.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_32.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_32.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_32.png" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_32.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_33.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_33.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_33.png" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_33.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_34.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_34.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_34.png" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_34.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_35.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_35.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_35.png" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_35.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_36.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_36.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_36.png" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_36.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_37.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_37.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_37.png" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_37.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_38.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_38.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_38.png" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_38.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_39.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_39.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_39.png" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_39.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_4.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_4.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_4.png" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_4.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_40.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_40.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_40.png" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_40.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_5.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_5.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_5.png" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_5.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_6.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_6.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_6.png" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_6.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_7.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_7.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_7.png" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_7.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_8.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_8.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_8.png" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_8.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_9.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_9.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_9.png" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/frame_9.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_0/mask_101_0.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_0/mask_101_0.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_1/mask_101_1.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_1/mask_101_1.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_2/mask_101_2.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_2/mask_101_2.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_3/mask_101_3.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_3/mask_101_3.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_4/mask_101_4.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_4/mask_101_4.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_5/mask_101_5.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_5/mask_101_5.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_6/mask_101_6.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_6/mask_101_6.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_7/mask_101_7.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_7/mask_101_7.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_0/mask_105_0.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_0/mask_105_0.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_1/mask_105_1.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_1/mask_105_1.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_2/mask_105_2.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_2/mask_105_2.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_3/mask_105_3.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_3/mask_105_3.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_4/mask_105_4.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_4/mask_105_4.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_5/mask_105_5.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_5/mask_105_5.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_6/mask_105_6.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_6/mask_105_6.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_7/mask_105_7.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_7/mask_105_7.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_0/mask_109_0.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_0/mask_109_0.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_1/mask_109_1.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_1/mask_109_1.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_2/mask_109_2.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_2/mask_109_2.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_3/mask_109_3.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_3/mask_109_3.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_4/mask_109_4.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_4/mask_109_4.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_5/mask_109_5.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_5/mask_109_5.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_6/mask_109_6.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_6/mask_109_6.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_7/mask_109_7.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_7/mask_109_7.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_0/mask_113_0.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_0/mask_113_0.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_1/mask_113_1.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_1/mask_113_1.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_2/mask_113_2.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_2/mask_113_2.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_3/mask_113_3.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_3/mask_113_3.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_4/mask_113_4.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_4/mask_113_4.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_5/mask_113_5.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_5/mask_113_5.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_6/mask_113_6.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_6/mask_113_6.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_7/mask_113_7.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_7/mask_113_7.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_0/mask_117_0.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_0/mask_117_0.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_1/mask_117_1.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_1/mask_117_1.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_2/mask_117_2.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_2/mask_117_2.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_3/mask_117_3.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_3/mask_117_3.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_4/mask_117_4.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_4/mask_117_4.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_5/mask_117_5.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_5/mask_117_5.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_6/mask_117_6.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_6/mask_117_6.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_7/mask_117_7.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_7/mask_117_7.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_0/mask_121_0.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_0/mask_121_0.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_1/mask_121_1.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_1/mask_121_1.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_2/mask_121_2.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_2/mask_121_2.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_3/mask_121_3.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_3/mask_121_3.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_4/mask_121_4.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_4/mask_121_4.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_5/mask_121_5.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_5/mask_121_5.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_6/mask_121_6.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_6/mask_121_6.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_7/mask_121_7.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_7/mask_121_7.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_0/mask_125_0.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_0/mask_125_0.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_1/mask_125_1.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_1/mask_125_1.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_2/mask_125_2.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_2/mask_125_2.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_3/mask_125_3.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_3/mask_125_3.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_4/mask_125_4.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_4/mask_125_4.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_5/mask_125_5.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_5/mask_125_5.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_6/mask_125_6.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_6/mask_125_6.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_7/mask_125_7.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_7/mask_125_7.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_0/mask_129_0.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_0/mask_129_0.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_1/mask_129_1.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_1/mask_129_1.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_2/mask_129_2.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_2/mask_129_2.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_3/mask_129_3.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_3/mask_129_3.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_4/mask_129_4.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_4/mask_129_4.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_5/mask_129_5.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_5/mask_129_5.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_6/mask_129_6.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_6/mask_129_6.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_7/mask_129_7.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_7/mask_129_7.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_0/mask_133_0.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_0/mask_133_0.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_1/mask_133_1.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_1/mask_133_1.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_2/mask_133_2.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_2/mask_133_2.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_3/mask_133_3.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_3/mask_133_3.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_4/mask_133_4.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_4/mask_133_4.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_5/mask_133_5.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_5/mask_133_5.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_6/mask_133_6.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_6/mask_133_6.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_7/mask_133_7.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_7/mask_133_7.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_0/mask_137_0.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_0/mask_137_0.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_1/mask_137_1.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_1/mask_137_1.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_2/mask_137_2.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_2/mask_137_2.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_3/mask_137_3.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_3/mask_137_3.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_4/mask_137_4.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_4/mask_137_4.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_5/mask_137_5.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_5/mask_137_5.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_6/mask_137_6.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_6/mask_137_6.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_7/mask_137_7.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_7/mask_137_7.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_0/mask_141_0.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_0/mask_141_0.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_1/mask_141_1.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_1/mask_141_1.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_2/mask_141_2.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_2/mask_141_2.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_3/mask_141_3.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_3/mask_141_3.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_4/mask_141_4.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_4/mask_141_4.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_5/mask_141_5.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_5/mask_141_5.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_6/mask_141_6.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_6/mask_141_6.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_7/mask_141_7.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_7/mask_141_7.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_0/mask_145_0.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_0/mask_145_0.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_1/mask_145_1.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_1/mask_145_1.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_2/mask_145_2.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_2/mask_145_2.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_3/mask_145_3.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_3/mask_145_3.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_4/mask_145_4.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_4/mask_145_4.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_5/mask_145_5.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_5/mask_145_5.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_6/mask_145_6.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_6/mask_145_6.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_7/mask_145_7.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_7/mask_145_7.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_0/mask_149_0.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_0/mask_149_0.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_1/mask_149_1.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_1/mask_149_1.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_2/mask_149_2.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_2/mask_149_2.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_3/mask_149_3.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_3/mask_149_3.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_4/mask_149_4.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_4/mask_149_4.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_5/mask_149_5.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_5/mask_149_5.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_6/mask_149_6.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_6/mask_149_6.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_7/mask_149_7.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_7/mask_149_7.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_0/mask_153_0.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_0/mask_153_0.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_1/mask_153_1.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_1/mask_153_1.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_2/mask_153_2.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_2/mask_153_2.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_3/mask_153_3.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_3/mask_153_3.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_4/mask_153_4.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_4/mask_153_4.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_5/mask_153_5.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_5/mask_153_5.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_6/mask_153_6.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_6/mask_153_6.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_7/mask_153_7.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_7/mask_153_7.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_0/mask_157_0.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_0/mask_157_0.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_1/mask_157_1.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_1/mask_157_1.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_2/mask_157_2.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_2/mask_157_2.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_3/mask_157_3.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_3/mask_157_3.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_4/mask_157_4.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_4/mask_157_4.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_5/mask_157_5.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_5/mask_157_5.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_6/mask_157_6.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_6/mask_157_6.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_7/mask_157_7.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_7/mask_157_7.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_0/mask_161_0.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_0/mask_161_0.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_1/mask_161_1.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_1/mask_161_1.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_2/mask_161_2.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_2/mask_161_2.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_3/mask_161_3.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_3/mask_161_3.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_4/mask_161_4.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_4/mask_161_4.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_5/mask_161_5.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_5/mask_161_5.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_6/mask_161_6.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_6/mask_161_6.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_7/mask_161_7.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_7/mask_161_7.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_0/mask_165_0.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_0/mask_165_0.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_1/mask_165_1.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_1/mask_165_1.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_2/mask_165_2.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_2/mask_165_2.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_3/mask_165_3.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_3/mask_165_3.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_4/mask_165_4.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_4/mask_165_4.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_5/mask_165_5.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_5/mask_165_5.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_6/mask_165_6.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_6/mask_165_6.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_7/mask_165_7.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_7/mask_165_7.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_0/mask_169_0.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_0/mask_169_0.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_1/mask_169_1.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_1/mask_169_1.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_2/mask_169_2.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_2/mask_169_2.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_3/mask_169_3.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_3/mask_169_3.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_4/mask_169_4.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_4/mask_169_4.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_5/mask_169_5.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_5/mask_169_5.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_6/mask_169_6.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_6/mask_169_6.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_7/mask_169_7.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_7/mask_169_7.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_0/mask_173_0.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_0/mask_173_0.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_1/mask_173_1.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_1/mask_173_1.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_2/mask_173_2.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_2/mask_173_2.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_3/mask_173_3.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_3/mask_173_3.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_4/mask_173_4.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_4/mask_173_4.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_5/mask_173_5.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_5/mask_173_5.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_6/mask_173_6.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_6/mask_173_6.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_7/mask_173_7.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_7/mask_173_7.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_0/mask_177_0.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_0/mask_177_0.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_1/mask_177_1.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_1/mask_177_1.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_2/mask_177_2.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_2/mask_177_2.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_3/mask_177_3.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_3/mask_177_3.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_4/mask_177_4.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_4/mask_177_4.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_5/mask_177_5.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_5/mask_177_5.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_6/mask_177_6.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_6/mask_177_6.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_7/mask_177_7.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_7/mask_177_7.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_0/mask_21_0.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_0/mask_21_0.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_1/mask_21_1.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_1/mask_21_1.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_2/mask_21_2.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_2/mask_21_2.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_3/mask_21_3.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_3/mask_21_3.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_4/mask_21_4.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_4/mask_21_4.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_5/mask_21_5.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_5/mask_21_5.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_6/mask_21_6.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_6/mask_21_6.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_7/mask_21_7.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_7/mask_21_7.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_0/mask_25_0.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_0/mask_25_0.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_1/mask_25_1.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_1/mask_25_1.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_2/mask_25_2.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_2/mask_25_2.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_3/mask_25_3.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_3/mask_25_3.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_4/mask_25_4.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_4/mask_25_4.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_5/mask_25_5.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_5/mask_25_5.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_6/mask_25_6.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_6/mask_25_6.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_7/mask_25_7.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_7/mask_25_7.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_0/mask_29_0.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_0/mask_29_0.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_1/mask_29_1.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_1/mask_29_1.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_2/mask_29_2.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_2/mask_29_2.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_3/mask_29_3.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_3/mask_29_3.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_4/mask_29_4.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_4/mask_29_4.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_5/mask_29_5.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_5/mask_29_5.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_6/mask_29_6.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_6/mask_29_6.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_7/mask_29_7.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_7/mask_29_7.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_0/mask_33_0.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_0/mask_33_0.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_1/mask_33_1.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_1/mask_33_1.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_2/mask_33_2.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_2/mask_33_2.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_3/mask_33_3.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_3/mask_33_3.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_4/mask_33_4.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_4/mask_33_4.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_5/mask_33_5.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_5/mask_33_5.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_6/mask_33_6.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_6/mask_33_6.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_7/mask_33_7.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_7/mask_33_7.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_0/mask_37_0.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_0/mask_37_0.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_1/mask_37_1.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_1/mask_37_1.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_2/mask_37_2.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_2/mask_37_2.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_3/mask_37_3.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_3/mask_37_3.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_4/mask_37_4.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_4/mask_37_4.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_5/mask_37_5.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_5/mask_37_5.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_6/mask_37_6.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_6/mask_37_6.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_7/mask_37_7.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_7/mask_37_7.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_0/mask_41_0.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_0/mask_41_0.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_1/mask_41_1.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_1/mask_41_1.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_2/mask_41_2.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_2/mask_41_2.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_3/mask_41_3.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_3/mask_41_3.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_4/mask_41_4.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_4/mask_41_4.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_5/mask_41_5.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_5/mask_41_5.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_6/mask_41_6.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_6/mask_41_6.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_7/mask_41_7.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_7/mask_41_7.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_0/mask_45_0.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_0/mask_45_0.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_1/mask_45_1.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_1/mask_45_1.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_2/mask_45_2.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_2/mask_45_2.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_3/mask_45_3.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_3/mask_45_3.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_4/mask_45_4.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_4/mask_45_4.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_5/mask_45_5.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_5/mask_45_5.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_6/mask_45_6.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_6/mask_45_6.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_7/mask_45_7.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_7/mask_45_7.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_0/mask_49_0.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_0/mask_49_0.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_1/mask_49_1.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_1/mask_49_1.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_2/mask_49_2.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_2/mask_49_2.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_3/mask_49_3.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_3/mask_49_3.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_4/mask_49_4.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_4/mask_49_4.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_5/mask_49_5.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_5/mask_49_5.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_6/mask_49_6.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_6/mask_49_6.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_7/mask_49_7.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_7/mask_49_7.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_0/mask_53_0.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_0/mask_53_0.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_1/mask_53_1.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_1/mask_53_1.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_2/mask_53_2.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_2/mask_53_2.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_3/mask_53_3.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_3/mask_53_3.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_4/mask_53_4.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_4/mask_53_4.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_5/mask_53_5.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_5/mask_53_5.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_6/mask_53_6.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_6/mask_53_6.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_7/mask_53_7.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_7/mask_53_7.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_0/mask_57_0.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_0/mask_57_0.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_1/mask_57_1.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_1/mask_57_1.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_2/mask_57_2.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_2/mask_57_2.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_3/mask_57_3.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_3/mask_57_3.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_4/mask_57_4.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_4/mask_57_4.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_5/mask_57_5.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_5/mask_57_5.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_6/mask_57_6.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_6/mask_57_6.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_7/mask_57_7.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_7/mask_57_7.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_0/mask_61_0.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_0/mask_61_0.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_1/mask_61_1.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_1/mask_61_1.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_2/mask_61_2.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_2/mask_61_2.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_3/mask_61_3.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_3/mask_61_3.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_4/mask_61_4.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_4/mask_61_4.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_5/mask_61_5.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_5/mask_61_5.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_6/mask_61_6.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_6/mask_61_6.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_7/mask_61_7.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_7/mask_61_7.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_0/mask_65_0.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_0/mask_65_0.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_1/mask_65_1.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_1/mask_65_1.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_2/mask_65_2.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_2/mask_65_2.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_3/mask_65_3.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_3/mask_65_3.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_4/mask_65_4.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_4/mask_65_4.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_5/mask_65_5.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_5/mask_65_5.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_6/mask_65_6.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_6/mask_65_6.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_7/mask_65_7.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_7/mask_65_7.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_0/mask_69_0.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_0/mask_69_0.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_1/mask_69_1.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_1/mask_69_1.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_2/mask_69_2.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_2/mask_69_2.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_3/mask_69_3.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_3/mask_69_3.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_4/mask_69_4.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_4/mask_69_4.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_5/mask_69_5.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_5/mask_69_5.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_6/mask_69_6.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_6/mask_69_6.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_7/mask_69_7.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_7/mask_69_7.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_0/mask_73_0.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_0/mask_73_0.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_1/mask_73_1.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_1/mask_73_1.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_2/mask_73_2.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_2/mask_73_2.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_3/mask_73_3.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_3/mask_73_3.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_4/mask_73_4.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_4/mask_73_4.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_5/mask_73_5.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_5/mask_73_5.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_6/mask_73_6.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_6/mask_73_6.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_7/mask_73_7.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_7/mask_73_7.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_0/mask_77_0.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_0/mask_77_0.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_1/mask_77_1.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_1/mask_77_1.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_2/mask_77_2.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_2/mask_77_2.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_3/mask_77_3.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_3/mask_77_3.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_4/mask_77_4.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_4/mask_77_4.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_5/mask_77_5.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_5/mask_77_5.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_6/mask_77_6.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_6/mask_77_6.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_7/mask_77_7.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_7/mask_77_7.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_0/mask_81_0.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_0/mask_81_0.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_1/mask_81_1.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_1/mask_81_1.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_2/mask_81_2.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_2/mask_81_2.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_3/mask_81_3.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_3/mask_81_3.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_4/mask_81_4.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_4/mask_81_4.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_5/mask_81_5.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_5/mask_81_5.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_6/mask_81_6.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_6/mask_81_6.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_7/mask_81_7.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_7/mask_81_7.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_0/mask_85_0.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_0/mask_85_0.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_1/mask_85_1.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_1/mask_85_1.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_2/mask_85_2.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_2/mask_85_2.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_3/mask_85_3.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_3/mask_85_3.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_4/mask_85_4.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_4/mask_85_4.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_5/mask_85_5.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_5/mask_85_5.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_6/mask_85_6.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_6/mask_85_6.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_7/mask_85_7.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_7/mask_85_7.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_0/mask_89_0.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_0/mask_89_0.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_1/mask_89_1.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_1/mask_89_1.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_2/mask_89_2.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_2/mask_89_2.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_3/mask_89_3.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_3/mask_89_3.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_4/mask_89_4.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_4/mask_89_4.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_5/mask_89_5.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_5/mask_89_5.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_6/mask_89_6.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_6/mask_89_6.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_7/mask_89_7.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_7/mask_89_7.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_0/mask_93_0.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_0/mask_93_0.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_1/mask_93_1.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_1/mask_93_1.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_2/mask_93_2.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_2/mask_93_2.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_3/mask_93_3.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_3/mask_93_3.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_4/mask_93_4.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_4/mask_93_4.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_5/mask_93_5.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_5/mask_93_5.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_6/mask_93_6.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_6/mask_93_6.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_7/mask_93_7.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_7/mask_93_7.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_0/mask_97_0.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_0/mask_97_0.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_1/mask_97_1.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_1/mask_97_1.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_2/mask_97_2.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_2/mask_97_2.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_3/mask_97_3.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_3/mask_97_3.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_4/mask_97_4.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_4/mask_97_4.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_5/mask_97_5.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_5/mask_97_5.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_6/mask_97_6.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_6/mask_97_6.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_7/mask_97_7.dat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/cache/mask_7/mask_97_7.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/.name" afterPath="$PROJECT_DIR$/.idea/.name" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Console/Templates/skel/Test/Case/AllTestsTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Console/Templates/skel/Test/Case/AllTestsTest.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/CHANGELOG" afterPath="$PROJECT_DIR$/vendors/phpqrcode/CHANGELOG" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/TestSuite/Fixture/CakeFixtureManagerTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/TestSuite/Fixture/CakeFixtureManagerTest.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Console/Command/Task/CommandTask.php" afterPath="$PROJECT_DIR$/lib/Cake/Console/Command/Task/CommandTask.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/Console/Command/Task/CommandTaskTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/Console/Command/Task/CommandTaskTest.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Console/Command/CompletionShell.php" afterPath="$PROJECT_DIR$/lib/Cake/Console/Command/CompletionShell.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/Console/Command/CompletionShellTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/Console/Command/CompletionShellTest.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Controller/CursosController.php" afterPath="$PROJECT_DIR$/app/Controller/CursosController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/test_app/Model/Extract.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/test_app/Model/Extract.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/INSTALL" afterPath="$PROJECT_DIR$/vendors/phpqrcode/INSTALL" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/LICENSE" afterPath="$PROJECT_DIR$/vendors/phpqrcode/LICENSE" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Console/Command/OpenSGAAclShell.php" afterPath="$PROJECT_DIR$/app/Console/Command/OpenSGAAclShell.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Console/Command/OpenSGAShell.php" afterPath="$PROJECT_DIR$/app/Console/Command/OpenSGAShell.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/ChromePhp/README.md" afterPath="$PROJECT_DIR$/vendors/ChromePhp/README.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/README" afterPath="$PROJECT_DIR$/vendors/phpqrcode/README" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Fixture/UnsignedFixture.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Fixture/UnsignedFixture.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/VERSION" afterPath="$PROJECT_DIR$/vendors/phpqrcode/VERSION" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/codeStyleSettings.xml" afterPath="$PROJECT_DIR$/.idea/codeStyleSettings.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/ChromePhp/composer.json" afterPath="$PROJECT_DIR$/vendors/ChromePhp/composer.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/test_app/Plugin/TestPluginTwo/View/Layouts/Emails/text/default.ctp" afterPath="$PROJECT_DIR$/lib/Cake/Test/test_app/Plugin/TestPluginTwo/View/Layouts/Emails/text/default.ctp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/deployment.xml" afterPath="$PROJECT_DIR$/.idea/deployment.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/encodings.xml" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/View/Cursos/index.ctp" afterPath="$PROJECT_DIR$/app/View/Cursos/index.ctp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/index.php" afterPath="$PROJECT_DIR$/vendors/phpqrcode/index.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/tools/merge.bat" afterPath="$PROJECT_DIR$/vendors/phpqrcode/tools/merge.bat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/tools/merge.php" afterPath="$PROJECT_DIR$/vendors/phpqrcode/tools/merge.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/tools/merge.sh" afterPath="$PROJECT_DIR$/vendors/phpqrcode/tools/merge.sh" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/tools/merged_config.php" afterPath="$PROJECT_DIR$/vendors/phpqrcode/tools/merged_config.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/tools/merged_header.php" afterPath="$PROJECT_DIR$/vendors/phpqrcode/tools/merged_header.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/opensga.iml" afterPath="$PROJECT_DIR$/.idea/opensga.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/phpqrcode.php" afterPath="$PROJECT_DIR$/vendors/phpqrcode/phpqrcode.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/qrbitstream.php" afterPath="$PROJECT_DIR$/vendors/phpqrcode/qrbitstream.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/bindings/tcpdf/qrcode.php" afterPath="$PROJECT_DIR$/vendors/phpqrcode/bindings/tcpdf/qrcode.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/qrconfig.php" afterPath="$PROJECT_DIR$/vendors/phpqrcode/qrconfig.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/qrconst.php" afterPath="$PROJECT_DIR$/vendors/phpqrcode/qrconst.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/qrencode.php" afterPath="$PROJECT_DIR$/vendors/phpqrcode/qrencode.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/qrimage.php" afterPath="$PROJECT_DIR$/vendors/phpqrcode/qrimage.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/qrinput.php" afterPath="$PROJECT_DIR$/vendors/phpqrcode/qrinput.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/qrlib.php" afterPath="$PROJECT_DIR$/vendors/phpqrcode/qrlib.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/qrmask.php" afterPath="$PROJECT_DIR$/vendors/phpqrcode/qrmask.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/qrrscode.php" afterPath="$PROJECT_DIR$/vendors/phpqrcode/qrrscode.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/qrspec.php" afterPath="$PROJECT_DIR$/vendors/phpqrcode/qrspec.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/qrsplit.php" afterPath="$PROJECT_DIR$/vendors/phpqrcode/qrsplit.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/phpqrcode/qrtools.php" afterPath="$PROJECT_DIR$/vendors/phpqrcode/qrtools.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/scopes/scope_settings.xml" afterPath="$PROJECT_DIR$/.idea/scopes/scope_settings.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="opensga.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -28,19 +480,7 @@
       <file leaf-file-name="PlanoEstudo.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Model/PlanoEstudo.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="100" column="10" selection-start="2571" selection-end="2571" vertical-scroll-proportion="-20.703703" vertical-offset="1241" max-vertical-offset="4356">
-              <folding>
-                <marker date="1404889746395" expanded="true" signature="5047:5111" placeholder="delete from ..." />
-                <marker date="1404889746395" expanded="true" signature="5335:5399" placeholder="delete from ..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TurmaShell.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Console/Command/TurmaShell.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="50" column="0" selection-start="1584" selection-end="1584" vertical-scroll-proportion="-29.851852" vertical-offset="94" max-vertical-offset="1008">
+            <state line="100" column="10" selection-start="2571" selection-end="2571" vertical-scroll-proportion="0.0" vertical-offset="1241" max-vertical-offset="4356">
               <folding />
             </state>
           </provider>
@@ -50,20 +490,18 @@
         <entry file="file://$PROJECT_DIR$/app/View/Inscricaos/faculdade_inscrever2.ctp">
           <provider selected="true" editor-type-id="text-editor">
             <state line="68" column="17" selection-start="3269" selection-end="3269" vertical-scroll-proportion="0.0" vertical-offset="1224" max-vertical-offset="1440">
-              <folding>
-                <marker date="1404680488490" expanded="true" signature="2013:2087" placeholder="..." />
-                <marker date="1404680488490" expanded="true" signature="2037:2087" placeholder="..." />
-                <marker date="1404680488490" expanded="true" signature="2932:3013" placeholder="..." />
-                <marker date="1404680488490" expanded="true" signature="2974:3013" placeholder="..." />
-              </folding>
+              <folding />
             </state>
+          </provider>
+          <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
+            <state />
           </provider>
         </entry>
       </file>
       <file leaf-file-name="OpenSGAAclShell.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Console/Command/OpenSGAAclShell.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="287" column="103" selection-start="19709" selection-end="19709" vertical-scroll-proportion="-9.890909" vertical-offset="4622" max-vertical-offset="6228">
+            <state line="211" column="107" selection-start="13876" selection-end="13876" vertical-scroll-proportion="-14.666667" vertical-offset="3402" max-vertical-offset="6300">
               <folding />
             </state>
           </provider>
@@ -72,7 +510,16 @@
       <file leaf-file-name="InscricaosController.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Controller/InscricaosController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="243" column="94" selection-start="9715" selection-end="9715" vertical-scroll-proportion="-19.37037" vertical-offset="3851" max-vertical-offset="13572">
+            <state line="243" column="94" selection-start="9715" selection-end="9715" vertical-scroll-proportion="0.0" vertical-offset="3851" max-vertical-offset="13572">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.ctp" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/View/Cursos/index.ctp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="25" column="187" selection-start="1448" selection-end="1448" vertical-scroll-proportion="0.0" vertical-offset="134" max-vertical-offset="1062">
               <folding />
             </state>
           </provider>
@@ -81,7 +528,16 @@
       <file leaf-file-name="OpenSGAShell.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Console/Command/OpenSGAShell.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="747" column="37" selection-start="25908" selection-end="25908" vertical-scroll-proportion="-8.181818" vertical-offset="12996" max-vertical-offset="33678">
+            <state line="773" column="23" selection-start="27526" selection-end="27526" vertical-scroll-proportion="-24.703703" vertical-offset="13247" max-vertical-offset="34416">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CursosController.php" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/Controller/CursosController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="130" column="24" selection-start="4505" selection-end="4505" vertical-scroll-proportion="0.67933494" vertical-offset="1768" max-vertical-offset="3762">
               <folding />
             </state>
           </provider>
@@ -90,25 +546,28 @@
       <file leaf-file-name="faculdade_ver_inscricoes_aluno.ctp" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/View/Inscricaos/faculdade_ver_inscricoes_aluno.ctp">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="150" column="285" selection-start="5739" selection-end="5739" vertical-scroll-proportion="-6.490909" vertical-offset="2343" max-vertical-offset="5670">
+            <state line="150" column="285" selection-start="5739" selection-end="5739" vertical-scroll-proportion="0.0" vertical-offset="2343" max-vertical-offset="5670">
               <folding />
             </state>
           </provider>
+          <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
+            <state />
+          </provider>
         </entry>
       </file>
-      <file leaf-file-name="SmsNotification.php" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="SmsNotification.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Model/SmsNotification.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="200" column="37" selection-start="7415" selection-end="7415" vertical-scroll-proportion="0.9565742" vertical-offset="2807" max-vertical-offset="5040">
+            <state line="112" column="40" selection-start="3880" selection-end="3880" vertical-scroll-proportion="-25.333334" vertical-offset="1332" max-vertical-offset="5040">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="EstudanteShell.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Console/Command/EstudanteShell.php">
+      <file leaf-file-name="core.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Config/core.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="195" column="11" selection-start="9740" selection-end="9740" vertical-scroll-proportion="0.0" vertical-offset="2779" max-vertical-offset="13284">
+            <state line="94" column="6" selection-start="3167" selection-end="3167" vertical-scroll-proportion="-8.2" vertical-offset="917" max-vertical-offset="5868">
               <folding />
             </state>
           </provider>
@@ -135,19 +594,21 @@
         <option value="$PROJECT_DIR$/app/Console/Command/TurmaShell.php" />
         <option value="$PROJECT_DIR$/app/View/Common/Turmas/ver_turma.ctp" />
         <option value="$PROJECT_DIR$/app/webroot/assets/css/lists.css" />
-        <option value="$PROJECT_DIR$/app/Config/core.php" />
         <option value="$PROJECT_DIR$/app/Config/bootstrap_siga.php" />
         <option value="$PROJECT_DIR$/app/Console/Command/EstudanteShell.php" />
         <option value="$PROJECT_DIR$/app/View/Alunos/faculdade_perfil_estudante.ctp" />
         <option value="$PROJECT_DIR$/app/View/Inscricaos/faculdade_inscrever2.ctp" />
         <option value="$PROJECT_DIR$/app/Controller/InscricaosController.php" />
         <option value="$PROJECT_DIR$/app/Model/Turma.php" />
-        <option value="$PROJECT_DIR$/app/Console/Command/OpenSGAAclShell.php" />
         <option value="$PROJECT_DIR$/app/Controller/TurmasController.php" />
         <option value="$PROJECT_DIR$/app/Model/PlanoEstudo.php" />
-        <option value="$PROJECT_DIR$/app/Console/Command/OpenSGAShell.php" />
         <option value="$PROJECT_DIR$/app/View/Inscricaos/faculdade_ver_inscricoes_aluno.ctp" />
         <option value="$PROJECT_DIR$/app/Controller/SmsNotificationsController.php" />
+        <option value="$PROJECT_DIR$/app/Config/core.php" />
+        <option value="$PROJECT_DIR$/app/View/Cursos/index.ctp" />
+        <option value="$PROJECT_DIR$/app/Console/Command/OpenSGAAclShell.php" />
+        <option value="$PROJECT_DIR$/app/Console/Command/OpenSGAShell.php" />
+        <option value="$PROJECT_DIR$/app/Controller/CursosController.php" />
       </list>
     </option>
   </component>
@@ -183,6 +644,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -405,6 +867,28 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="Cursos" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="View" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="Common" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -454,102 +938,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="Alunos" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="opensga" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="opensga" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Plugin" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Requisicoes" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="opensga" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="opensga" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Plugin" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Requisicoes" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="View" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="opensga" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="opensga" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Plugin" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Requisicoes" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="View" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="RequisicoesPedidos" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="opensga" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="opensga" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Plugin" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -647,27 +1035,8 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="opensga" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="opensga" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Assets" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -678,6 +1047,22 @@
     <property name="options.searchVisible" value="true" />
     <property name="FullScreen" value="false" />
     <property name="LayoutCode.rearrangeEntriesPHP" value="true" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth0" value="260" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder0" value="0" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth1" value="280" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder1" value="1" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth2" value="284" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder2" value="2" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth3" value="1064" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder3" value="3" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth0" value="263" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder0" value="0" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth1" value="279" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder1" value="1" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth2" value="283" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder2" value="2" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="1063" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder3" value="3" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -754,13 +1139,13 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3295099" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22627737" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22627737" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22627737" sideWeight="0.50108695" order="1" side_tool="true" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22627737" sideWeight="0.49891305" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24973376" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32934782" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -787,16 +1172,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/Model/Upload.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="97" column="41" selection-start="2703" selection-end="2703" vertical-scroll-proportion="0.0" vertical-offset="1746" max-vertical-offset="2700" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Config/Config-UEM.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1062" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Config/bootstrap.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="36" column="37" selection-start="1213" selection-end="1213" vertical-scroll-proportion="0.0" vertical-offset="648" max-vertical-offset="1584" />
@@ -809,40 +1184,22 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Model/Turma.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="654" column="17" selection-start="25064" selection-end="25064" vertical-scroll-proportion="0.0" vertical-offset="11682" max-vertical-offset="11682">
-          <folding>
-            <marker date="1404888884807" expanded="true" signature="-1:-1" placeholder="update t0010..." />
-            <marker date="1404888884807" expanded="true" signature="-1:-1" placeholder="select count..t0013inscricaos..." />
-            <marker date="1404888884807" expanded="true" signature="-1:-1" placeholder="select count..t0013inscricaos..." />
-            <marker date="1404888884807" expanded="true" signature="-1:-1" placeholder="select count..t0013inscricaos..." />
-            <marker date="1404888884807" expanded="true" signature="-1:-1" placeholder="select sum(n..t0013inscricaos..." />
-            <marker date="1404888884807" expanded="true" signature="-1:-1" placeholder="select tf.na..t0010turmas..." />
-            <marker date="1404888884807" expanded="true" signature="-1:-1" placeholder="select tf.na..t0010turmas..." />
-            <marker date="1404888884807" expanded="true" signature="-1:-1" placeholder="select tp.na..t0010turmas..." />
-            <marker date="1404888884807" expanded="true" signature="-1:-1" placeholder="SELECT tt.id..t0010turmas..." />
-          </folding>
-        </state>
+        <state line="654" column="17" selection-start="25064" selection-end="25064" vertical-scroll-proportion="0.0" vertical-offset="11682" max-vertical-offset="11682" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/View/Turmas/faculdade_ver_turma.ctp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="33" column="0" selection-start="1498" selection-end="1498" vertical-scroll-proportion="0.0" vertical-offset="594" max-vertical-offset="954">
-          <folding />
-        </state>
+        <state line="33" column="0" selection-start="1498" selection-end="1498" vertical-scroll-proportion="0.0" vertical-offset="594" max-vertical-offset="954" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/View/Turmas/faculdade_print_pauta.ctp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="101" column="0" selection-start="62" selection-end="4905" vertical-scroll-proportion="0.0" vertical-offset="972" max-vertical-offset="1926">
-          <folding />
-        </state>
+        <state line="101" column="0" selection-start="62" selection-end="4905" vertical-scroll-proportion="0.0" vertical-offset="972" max-vertical-offset="1926" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/View/Pages/home.ctp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="135" column="16" selection-start="6662" selection-end="6670" vertical-scroll-proportion="0.0" vertical-offset="1952" max-vertical-offset="2844">
-          <folding />
-        </state>
+        <state line="135" column="16" selection-start="6662" selection-end="6670" vertical-scroll-proportion="0.0" vertical-offset="1952" max-vertical-offset="2844" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Controller/AlunosController.php">
@@ -872,16 +1229,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/View/Turmas/faculdade_print_pauta.ctp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="101" column="0" selection-start="62" selection-end="4905" vertical-scroll-proportion="0.0" vertical-offset="972" max-vertical-offset="1926">
-          <folding />
-        </state>
+        <state line="101" column="0" selection-start="62" selection-end="4905" vertical-scroll-proportion="0.0" vertical-offset="972" max-vertical-offset="1926" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/View/Pages/home.ctp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="135" column="16" selection-start="6662" selection-end="6670" vertical-scroll-proportion="0.0" vertical-offset="1952" max-vertical-offset="2844">
-          <folding />
-        </state>
+        <state line="135" column="16" selection-start="6662" selection-end="6670" vertical-scroll-proportion="0.0" vertical-offset="1952" max-vertical-offset="2844" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Controller/AlunosController.php">
@@ -922,16 +1275,9 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Controller/AlunosController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="80" column="34" selection-start="2420" selection-end="2420" vertical-scroll-proportion="0.0" vertical-offset="1268" max-vertical-offset="24750" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/View/Pages/home.ctp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="135" column="16" selection-start="6662" selection-end="6670" vertical-scroll-proportion="0.0" vertical-offset="1952" max-vertical-offset="2844">
-          <folding />
-        </state>
+        <state line="135" column="16" selection-start="6662" selection-end="6670" vertical-scroll-proportion="0.0" vertical-offset="1952" max-vertical-offset="2844" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/View/Pages/faculdade_home.ctp">
@@ -949,9 +1295,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/View/Turmas/faculdade_print_pauta.ctp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="101" column="0" selection-start="62" selection-end="4905" vertical-scroll-proportion="0.0" vertical-offset="972" max-vertical-offset="1926">
-          <folding />
-        </state>
+        <state line="101" column="0" selection-start="62" selection-end="4905" vertical-scroll-proportion="0.0" vertical-offset="972" max-vertical-offset="1926" />
       </provider>
       <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
         <state />
@@ -984,9 +1328,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/View/Turmas/faculdade_ver_turma.ctp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="33" column="0" selection-start="1498" selection-end="1498" vertical-scroll-proportion="0.0" vertical-offset="594" max-vertical-offset="954">
-          <folding />
-        </state>
+        <state line="33" column="0" selection-start="1498" selection-end="1498" vertical-scroll-proportion="0.0" vertical-offset="594" max-vertical-offset="954" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Config/bootstrap_siga.php">
@@ -1011,116 +1353,117 @@
         <state line="42" column="14" selection-start="2285" selection-end="2285" vertical-scroll-proportion="0.5339088" vertical-offset="323" max-vertical-offset="1170" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Config/core.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="108" column="2" selection-start="4171" selection-end="4171" vertical-scroll-proportion="-0.40140846" vertical-offset="1944" max-vertical-offset="6732" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/webroot/assets/css/lists.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="260" column="0" selection-start="5067" selection-end="5067" vertical-scroll-proportion="0.0" vertical-offset="4118" max-vertical-offset="6660">
-          <folding />
-        </state>
+        <state line="260" column="0" selection-start="5067" selection-end="5067" vertical-scroll-proportion="0.0" vertical-offset="4118" max-vertical-offset="6660" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/View/Inscricaos/faculdade_inscrever2.ctp">
       <provider selected="true" editor-type-id="text-editor">
         <state line="68" column="17" selection-start="3269" selection-end="3269" vertical-scroll-proportion="0.0" vertical-offset="1224" max-vertical-offset="1440">
-          <folding>
-            <marker date="1404680488490" expanded="true" signature="2013:2087" placeholder="..." />
-            <marker date="1404680488490" expanded="true" signature="2037:2087" placeholder="..." />
-            <marker date="1404680488490" expanded="true" signature="2932:3013" placeholder="..." />
-            <marker date="1404680488490" expanded="true" signature="2974:3013" placeholder="..." />
-          </folding>
+          <folding />
         </state>
+      </provider>
+      <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Controller/InscricaosController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="243" column="94" selection-start="9715" selection-end="9715" vertical-scroll-proportion="-19.37037" vertical-offset="3851" max-vertical-offset="13572">
+        <state line="243" column="94" selection-start="9715" selection-end="9715" vertical-scroll-proportion="0.0" vertical-offset="3851" max-vertical-offset="13572">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Console/Command/TurmaShell.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="50" column="0" selection-start="1584" selection-end="1584" vertical-scroll-proportion="-29.851852" vertical-offset="94" max-vertical-offset="1008">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Console/Command/OpenSGAAclShell.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="287" column="103" selection-start="19709" selection-end="19709" vertical-scroll-proportion="-9.890909" vertical-offset="4622" max-vertical-offset="6228">
+        <state line="50" column="0" selection-start="1584" selection-end="1584" vertical-scroll-proportion="0.0" vertical-offset="94" max-vertical-offset="1008">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Model/Turma.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="199" column="35" selection-start="5275" selection-end="5275" vertical-scroll-proportion="-1.3703704" vertical-offset="3095" max-vertical-offset="12276">
-          <folding>
-            <marker date="1404888884807" expanded="true" signature="-1:-1" placeholder="update t0010..." />
-            <marker date="1404888884807" expanded="true" signature="-1:-1" placeholder="select count..t0013inscricaos..." />
-            <marker date="1404888884807" expanded="true" signature="-1:-1" placeholder="select count..t0013inscricaos..." />
-            <marker date="1404888884807" expanded="true" signature="-1:-1" placeholder="select count..t0013inscricaos..." />
-            <marker date="1404888884807" expanded="true" signature="-1:-1" placeholder="select sum(n..t0013inscricaos..." />
-            <marker date="1404888884807" expanded="true" signature="-1:-1" placeholder="select tf.na..t0010turmas..." />
-            <marker date="1404888884807" expanded="true" signature="-1:-1" placeholder="select tf.na..t0010turmas..." />
-            <marker date="1404888884807" expanded="true" signature="-1:-1" placeholder="select tp.na..t0010turmas..." />
-            <marker date="1404888884807" expanded="true" signature="-1:-1" placeholder="SELECT tt.id..t0010turmas..." />
-          </folding>
-        </state>
+        <state line="199" column="35" selection-start="5275" selection-end="5275" vertical-scroll-proportion="-1.3703704" vertical-offset="3095" max-vertical-offset="12276" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/View/Turmas/gerar_turmas.ctp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="50" column="119" selection-start="2246" selection-end="2255" vertical-scroll-proportion="0.33333334" vertical-offset="183" max-vertical-offset="1170">
-          <folding />
-        </state>
+        <state line="50" column="119" selection-start="2246" selection-end="2255" vertical-scroll-proportion="0.33333334" vertical-offset="183" max-vertical-offset="1170" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Controller/TurmasController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="252" column="40" selection-start="8649" selection-end="8649" vertical-scroll-proportion="-13.555555" vertical-offset="4170" max-vertical-offset="13176">
-          <folding />
-        </state>
+        <state line="252" column="40" selection-start="8649" selection-end="8649" vertical-scroll-proportion="-13.555555" vertical-offset="4170" max-vertical-offset="13176" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Model/PlanoEstudo.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="100" column="10" selection-start="2571" selection-end="2571" vertical-scroll-proportion="-20.703703" vertical-offset="1241" max-vertical-offset="4356">
-          <folding>
-            <marker date="1404889746395" expanded="true" signature="5047:5111" placeholder="delete from ..." />
-            <marker date="1404889746395" expanded="true" signature="5335:5399" placeholder="delete from ..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Console/Command/OpenSGAShell.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="747" column="37" selection-start="25908" selection-end="25908" vertical-scroll-proportion="-8.181818" vertical-offset="12996" max-vertical-offset="33678">
+        <state line="100" column="10" selection-start="2571" selection-end="2571" vertical-scroll-proportion="0.0" vertical-offset="1241" max-vertical-offset="4356">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/View/Inscricaos/faculdade_ver_inscricoes_aluno.ctp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="150" column="285" selection-start="5739" selection-end="5739" vertical-scroll-proportion="-6.490909" vertical-offset="2343" max-vertical-offset="5670">
+        <state line="150" column="285" selection-start="5739" selection-end="5739" vertical-scroll-proportion="0.0" vertical-offset="2343" max-vertical-offset="5670">
           <folding />
         </state>
+      </provider>
+      <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Controller/SmsNotificationsController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="70" column="72" selection-start="2234" selection-end="2234" vertical-scroll-proportion="0.47768396" vertical-offset="864" max-vertical-offset="2520">
-          <folding />
-        </state>
+        <state line="70" column="72" selection-start="2234" selection-end="2234" vertical-scroll-proportion="0.47768396" vertical-offset="864" max-vertical-offset="2520" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Model/SmsNotification.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="200" column="37" selection-start="7415" selection-end="7415" vertical-scroll-proportion="0.9565742" vertical-offset="2807" max-vertical-offset="5040">
+        <state line="112" column="40" selection-start="3880" selection-end="3880" vertical-scroll-proportion="-25.333334" vertical-offset="1332" max-vertical-offset="5040">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Config/core.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="94" column="6" selection-start="3167" selection-end="3167" vertical-scroll-proportion="-8.2" vertical-offset="917" max-vertical-offset="5868">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/View/Cursos/index.ctp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="25" column="187" selection-start="1448" selection-end="1448" vertical-scroll-proportion="0.0" vertical-offset="134" max-vertical-offset="1062">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Controller/AlunosController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="25" column="20" selection-start="666" selection-end="666" vertical-scroll-proportion="-10.222222" vertical-offset="174" max-vertical-offset="24750">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Console/Command/OpenSGAAclShell.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="211" column="107" selection-start="13876" selection-end="13876" vertical-scroll-proportion="-14.666667" vertical-offset="3402" max-vertical-offset="6300">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Console/Command/OpenSGAShell.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="773" column="23" selection-start="27526" selection-end="27526" vertical-scroll-proportion="-24.703703" vertical-offset="13247" max-vertical-offset="34416">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Controller/CursosController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="130" column="24" selection-start="4505" selection-end="4505" vertical-scroll-proportion="0.67933494" vertical-offset="1768" max-vertical-offset="3762">
           <folding />
         </state>
       </provider>
