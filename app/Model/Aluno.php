@@ -279,6 +279,148 @@ class Aluno extends AppModel {
 		return $disciplinas;
 	}
 
+    /**
+     * @param PHPExcel_Worksheet $worksheet
+     * Actualiza os estudantes que teem matricula condicional.
+     *
+     * Recebe como parametro um ficheiro Excel contendo os dados a actualizar:
+     * A-Certificado
+     * B-SMO
+     * C-Numero de Estudante
+     * I - Data
+     *
+     */
+    public function actualizaMatriculaCondicionalFromFile(PHPExcel_Worksheet $worksheet){
+        $linha_actual = 2;
+        $naoCobertos = 0;
+        foreach ($worksheet->getRowIterator() as $row) {
+
+            $numero_estudante = $worksheet->getCell('C' . $linha_actual)->getValue();
+            if ($numero_estudante == '') {
+                break;
+            }
+            $this->contain('AlunoEstado');
+            $aluno = $this->findByCodigo($numero_estudante);
+            $datasource = $this->getDataSource();
+            $datasource->begin();
+            $certificado = $worksheet->getCell('A' . $linha_actual)->getCalculatedValue();
+            $smo = $worksheet->getCell('B' . $linha_actual)->getCalculatedValue();
+            $motivoEstadoAlunoId = $aluno['AlunoEstado']['0']['motivo_estado_aluno_id'];
+            if($motivoEstadoAlunoId==null){
+                if($aluno['Aluno']['estado_aluno_id']!=1){
+                    debug('problemas');
+                    debug($numero_estudante);
+                    debug($aluno);
+                }
+            }
+            elseif($certificado !='' && ($motivoEstadoAlunoId==1 || $motivoEstadoAlunoId==6)){
+                $array_estado = array(
+                    'AlunoEstado' => array(
+                        'aluno_id'               => $aluno['Aluno']['id'],
+                        'estado_anterior'        => $aluno['Aluno']['estado_aluno_id'],
+                        'estado_actual'          => 1,
+                        'motivo_estado_aluno_id' => 15,
+                        'observacao'             => "Entregou Certificado",
+                        'data_mudanca'           => date('Y-m-d'),
+                        // 'anexo_url'=>$data['anexo_url'],
+                        'funcionario_id'         => 1
+                    )
+                );
+
+
+                $this->AlunoEstado->create();
+                $this->AlunoEstado->save($array_estado);
+
+                $this->id = $aluno['Aluno']['id'];
+                $this->set('estado_aluno_id', 1);
+                $this->set('estado_entidade_id', 1);
+                $this->save();
+            } elseif($certificado!='' && $motivoEstadoAlunoId==22){
+                if($smo!=''){
+                    $array_estado = array(
+                        'AlunoEstado' => array(
+                            'aluno_id'               => $aluno['Aluno']['id'],
+                            'estado_anterior'        => $aluno['Aluno']['estado_aluno_id'],
+                            'estado_actual'          => 1,
+                            'motivo_estado_aluno_id' => 15,
+                            'observacao'             => "Entregou Certificado e Servico Militar",
+                            'data_mudanca'           => date('Y-m-d'),
+                            // 'anexo_url'=>$data['anexo_url'],
+                            'funcionario_id'         => 1
+                        )
+                    );
+
+
+                    $this->AlunoEstado->create();
+                    $this->AlunoEstado->save($array_estado);
+
+                    $this->id = $aluno['Aluno']['id'];
+                    $this->set('estado_aluno_id', 1);
+                    $this->set('estado_entidade_id', 1);
+                    $this->save();
+                }
+            } elseif($certificado=='' && $motivoEstadoAlunoId==22){
+                if($smo!=''){
+                    $array_estado = array(
+                        'AlunoEstado' => array(
+                            'aluno_id'               => $aluno['Aluno']['id'],
+                            'estado_anterior'        => $aluno['Aluno']['estado_aluno_id'],
+                            'estado_actual'          => 1,
+                            'motivo_estado_aluno_id' => 15,
+                            'observacao'             => "Entregou Certificado",
+                            'data_mudanca'           => date('Y-m-d'),
+                            // 'anexo_url'=>$data['anexo_url'],
+                            'funcionariod_id'         => 1
+                        )
+                    );
+
+
+                    $this->AlunoEstado->create();
+                    $this->AlunoEstado->save($array_estado);
+
+                    $this->id = $aluno['Aluno']['id'];
+                    $this->set('estado_aluno_id', 1);
+                    $this->set('estado_entidade_id', 1);
+                    $this->save();
+                }
+            } elseif($smo!='' && $motivoEstadoAlunoId==21){
+                $array_estado = array(
+                    'AlunoEstado' => array(
+                        'aluno_id'               => $aluno['Aluno']['id'],
+                        'estado_anterior'        => $aluno['Aluno']['estado_aluno_id'],
+                        'estado_actual'          => 1,
+                        'motivo_estado_aluno_id' => 15,
+                        'observacao'             => "Entregou Certificado",
+                        'data_mudanca'           => date('Y-m-d'),
+                        // 'anexo_url'=>$data['anexo_url'],
+                        'funcionario_id'         => 1
+                    )
+                );
+
+
+                $this->AlunoEstado->create();
+                $this->AlunoEstado->save($array_estado);
+
+                $this->id = $aluno['Aluno']['id'];
+                $this->set('estado_aluno_id', 1);
+                $this->set('estado_entidade_id', 1);
+                $this->save();
+            } elseif($smo=='' && $certificado==''){
+
+            } else {
+                $naoCobertos++;
+            }
+
+
+            $datasource->commit();
+
+            debug($linha_actual.' --------- '.$numero_estudante);
+            $linha_actual++;
+        }
+
+        return true;
+    }
+
 	/**
 	 * Retorna todas as cadeiras que o aluno ja aprovou para a inscricao
 	 * @return type
