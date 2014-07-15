@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8a188e33-7e6f-48bc-b82d-3dfcef9f88fa" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Controller/AlunosController.php" afterPath="$PROJECT_DIR$/app/Controller/AlunosController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Console/Command/OpenSGAAclShell.php" afterPath="$PROJECT_DIR$/app/Console/Command/OpenSGAAclShell.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/View/Layouts/default.ctp" afterPath="$PROJECT_DIR$/app/View/Layouts/default.ctp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/manuais/source/faculdade/docente.rst" afterPath="$PROJECT_DIR$/docs/manuais/source/faculdade/docente.rst" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Console/Command/OpenSGAShell.php" afterPath="$PROJECT_DIR$/app/Console/Command/OpenSGAShell.php" />
     </list>
     <ignored path="opensga.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -92,10 +88,19 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="acesso.rst" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="acesso.rst" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/docs/manuais/source/acesso.rst">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="26" column="0" selection-start="2207" selection-end="2207" vertical-scroll-proportion="0.54672897" vertical-offset="0" max-vertical-offset="856">
+            <state line="26" column="0" selection-start="2207" selection-end="2207" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="576">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="OpenSGAShell.php" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/Console/Command/OpenSGAShell.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="1271" column="41" selection-start="54897" selection-end="54897" vertical-scroll-proportion="0.5805243" vertical-offset="22413" max-vertical-offset="34416">
               <folding />
             </state>
           </provider>
@@ -143,12 +148,12 @@
         <option value="$PROJECT_DIR$/app/Controller/SmsNotificationsController.php" />
         <option value="$PROJECT_DIR$/app/Config/core.php" />
         <option value="$PROJECT_DIR$/app/View/Cursos/index.ctp" />
-        <option value="$PROJECT_DIR$/app/Console/Command/OpenSGAShell.php" />
         <option value="$PROJECT_DIR$/app/Controller/CursosController.php" />
         <option value="$PROJECT_DIR$/app/View/Layouts/default.ctp" />
         <option value="$PROJECT_DIR$/app/Controller/AlunosController.php" />
         <option value="$PROJECT_DIR$/app/Console/Command/OpenSGAAclShell.php" />
         <option value="$PROJECT_DIR$/docs/manuais/source/faculdade/docente.rst" />
+        <option value="$PROJECT_DIR$/app/Console/Command/OpenSGAShell.php" />
       </list>
     </option>
   </component>
@@ -213,7 +218,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="docs" />
+              <option name="myItemId" value="app" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -227,33 +232,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="docs" />
+              <option name="myItemId" value="app" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="manuais" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="opensga" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="opensga" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="docs" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="manuais" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="source" />
+              <option name="myItemId" value="Console" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -267,75 +250,15 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="docs" />
+              <option name="myItemId" value="app" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="manuais" />
+              <option name="myItemId" value="Console" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="source" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="faculdade" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="opensga" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="opensga" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="docs" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="manuais" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="source" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dra" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tecnico_ra" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="opensga" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="opensga" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="docs" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="manuais" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="source" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="administrador" />
+              <option name="myItemId" value="Command" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -670,11 +593,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Console/Command/OpenSGAShell.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="773" column="23" selection-start="27526" selection-end="27526" vertical-scroll-proportion="-24.703703" vertical-offset="13247" max-vertical-offset="34416" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Model/PlanoEstudo.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="86" column="13" selection-start="2266" selection-end="2267" vertical-scroll-proportion="-11.37037" vertical-offset="1241" max-vertical-offset="4356">
@@ -791,7 +709,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/docs/manuais/source/acesso.rst">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="26" column="0" selection-start="2207" selection-end="2207" vertical-scroll-proportion="0.54672897" vertical-offset="0" max-vertical-offset="856">
+        <state line="26" column="0" selection-start="2207" selection-end="2207" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="576">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Console/Command/OpenSGAShell.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1271" column="41" selection-start="54897" selection-end="54897" vertical-scroll-proportion="0.5805243" vertical-offset="22413" max-vertical-offset="34416">
           <folding />
         </state>
       </provider>
