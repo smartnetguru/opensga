@@ -2,7 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8a188e33-7e6f-48bc-b82d-3dfcef9f88fa" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/cake_config_setting_v0_5.xml" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/Imports/.~lock.admitidos_1507.xlsx#" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Model/Aluno.php" afterPath="$PROJECT_DIR$/app/Model/Aluno.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Config/Config-Default.php" afterPath="$PROJECT_DIR$/app/Config/Config-Default.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Config/Config-UEM.php" afterPath="$PROJECT_DIR$/app/Config/Config-UEM.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Console/Command/EstudanteShell.php" afterPath="$PROJECT_DIR$/app/Console/Command/EstudanteShell.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Controller/FuncionariosController.php" afterPath="$PROJECT_DIR$/app/Controller/FuncionariosController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Controller/InscricaosController.php" afterPath="$PROJECT_DIR$/app/Controller/InscricaosController.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Console/Command/OpenSGAShell.php" afterPath="$PROJECT_DIR$/app/Console/Command/OpenSGAShell.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Model/Turma.php" afterPath="$PROJECT_DIR$/app/Model/Turma.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/View/Funcionarios/adicionar_funcionario.ctp" afterPath="$PROJECT_DIR$/app/View/Funcionarios/adicionar_funcionario.ctp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/opensga.iml" afterPath="$PROJECT_DIR$/.idea/opensga.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="opensga.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -25,24 +37,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="OpenSGAAclShell.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Console/Command/OpenSGAAclShell.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="214" column="56" selection-start="14216" selection-end="14216" vertical-scroll-proportion="-13.333333" vertical-offset="3492" max-vertical-offset="6444">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AlunoNivelMediosController.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Controller/AlunoNivelMediosController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="2016">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="index.rst" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/docs/manuais/source/estudante/index.rst">
           <provider selected="true" editor-type-id="text-editor">
@@ -52,64 +46,88 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="director_curso.rst" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/docs/manuais/source/faculdade/director_curso.rst">
+      <file leaf-file-name="InscricaosController.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Controller/InscricaosController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="126">
+            <state line="400" column="0" selection-start="16923" selection-end="16923" vertical-scroll-proportion="0.0" vertical-offset="6492" max-vertical-offset="13590">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.rst" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/docs/manuais/source/administrador/index.rst">
+      <file leaf-file-name="Turma.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Model/Turma.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="468">
+            <state line="451" column="11" selection-start="16106" selection-end="16106" vertical-scroll-proportion="0.0" vertical-offset="8118" max-vertical-offset="12870">
+              <folding>
+                <marker date="1405420651740" expanded="true" signature="17305:17461" placeholder="select count..t0013inscricaos..." />
+                <marker date="1405420651740" expanded="true" signature="17610:17731" placeholder="select count..t0013inscricaos..." />
+                <marker date="1405420651740" expanded="true" signature="17917:18073" placeholder="select count..t0013inscricaos..." />
+                <marker date="1405420651740" expanded="true" signature="18230:18401" placeholder="select tf.na..t0010turmas..." />
+                <marker date="1405420651740" expanded="true" signature="18563:18730" placeholder="select tf.na..t0010turmas..." />
+                <marker date="1405420651740" expanded="true" signature="18867:19045" placeholder="select tp.na..t0010turmas..." />
+                <marker date="1405420651740" expanded="true" signature="19476:19603" placeholder="select sum(n..t0013inscricaos..." />
+                <marker date="1405420651740" expanded="true" signature="19820:19967" placeholder="SELECT tt.id..t0010turmas..." />
+                <marker date="1405420651740" expanded="true" signature="25963:26089" placeholder="update t0010..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="adicionar_funcionario.ctp" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/View/Funcionarios/adicionar_funcionario.ctp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="194" column="76" selection-start="11281" selection-end="11281" vertical-scroll-proportion="0.0" vertical-offset="2871" max-vertical-offset="13410">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="instalacao2.rst" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/docs/manuais/source/administrador/instalacao2.rst">
+      <file leaf-file-name="FuncionariosController.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Controller/FuncionariosController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="17" column="10" selection-start="1226" selection-end="1226" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="954">
+            <state line="12" column="25" selection-start="403" selection-end="403" vertical-scroll-proportion="-8.0" vertical-offset="0" max-vertical-offset="4194">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="docente.rst" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/docs/manuais/source/faculdade/docente.rst">
+      <file leaf-file-name="Funcionario.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Model/Funcionario.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="23" column="21" selection-start="526" selection-end="526" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="522">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="3006">
+              <folding>
+                <marker date="1405082476859" expanded="true" signature="2845:2992" placeholder="SELECT tt.id..t0010turmas..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="EstudanteShell.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Console/Command/EstudanteShell.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="736" column="54" selection-start="43512" selection-end="43512" vertical-scroll-proportion="-19.37037" vertical-offset="12725" max-vertical-offset="13554">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="acesso.rst" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/docs/manuais/source/acesso.rst">
+      <file leaf-file-name="Aluno.php" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/Model/Aluno.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="26" column="0" selection-start="2207" selection-end="2207" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="576">
-              <folding />
+            <state line="372" column="41" selection-start="11083" selection-end="11083" vertical-scroll-proportion="0.9565742" vertical-offset="5903" max-vertical-offset="26496">
+              <folding>
+                <marker date="1405436927576" expanded="true" signature="13726:13790" placeholder="Select plano..matriculas..." />
+                <marker date="1405436927576" expanded="true" signature="14228:14292" placeholder="Select plano..matriculas..." />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="OpenSGAShell.php" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/Console/Command/OpenSGAShell.php">
+      <file leaf-file-name="bootstrap_siga.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Config/bootstrap_siga.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="1271" column="41" selection-start="54897" selection-end="54897" vertical-scroll-proportion="0.5805243" vertical-offset="22413" max-vertical-offset="34416">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CursosController.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Controller/CursosController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="115" column="20" selection-start="4020" selection-end="4020" vertical-scroll-proportion="-11.185185" vertical-offset="1768" max-vertical-offset="3762">
+            <state line="15" column="0" selection-start="415" selection-end="415" vertical-scroll-proportion="0.0" vertical-offset="270" max-vertical-offset="378">
               <folding />
             </state>
           </provider>
@@ -137,11 +155,8 @@
         <option value="$PROJECT_DIR$/app/View/Common/Turmas/ver_turma.ctp" />
         <option value="$PROJECT_DIR$/app/webroot/assets/css/lists.css" />
         <option value="$PROJECT_DIR$/app/Config/bootstrap_siga.php" />
-        <option value="$PROJECT_DIR$/app/Console/Command/EstudanteShell.php" />
         <option value="$PROJECT_DIR$/app/View/Alunos/faculdade_perfil_estudante.ctp" />
         <option value="$PROJECT_DIR$/app/View/Inscricaos/faculdade_inscrever2.ctp" />
-        <option value="$PROJECT_DIR$/app/Controller/InscricaosController.php" />
-        <option value="$PROJECT_DIR$/app/Model/Turma.php" />
         <option value="$PROJECT_DIR$/app/Controller/TurmasController.php" />
         <option value="$PROJECT_DIR$/app/Model/PlanoEstudo.php" />
         <option value="$PROJECT_DIR$/app/View/Inscricaos/faculdade_ver_inscricoes_aluno.ctp" />
@@ -153,7 +168,15 @@
         <option value="$PROJECT_DIR$/app/Controller/AlunosController.php" />
         <option value="$PROJECT_DIR$/app/Console/Command/OpenSGAAclShell.php" />
         <option value="$PROJECT_DIR$/docs/manuais/source/faculdade/docente.rst" />
+        <option value="$PROJECT_DIR$/app/Config/Config-Default.php" />
+        <option value="$PROJECT_DIR$/app/Config/Config-UEM.php" />
+        <option value="$PROJECT_DIR$/app/Controller/InscricaosController.php" />
+        <option value="$PROJECT_DIR$/app/Model/Turma.php" />
+        <option value="$PROJECT_DIR$/app/View/Funcionarios/adicionar_funcionario.ctp" />
+        <option value="$PROJECT_DIR$/app/Controller/FuncionariosController.php" />
         <option value="$PROJECT_DIR$/app/Console/Command/OpenSGAShell.php" />
+        <option value="$PROJECT_DIR$/app/Console/Command/EstudanteShell.php" />
+        <option value="$PROJECT_DIR$/app/Model/Aluno.php" />
       </list>
     </option>
   </component>
@@ -236,6 +259,82 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="View" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="View" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Funcionarios" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Model" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Controller" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="Console" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -262,13 +361,31 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Config" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="options.lastSelected" value="preferences.sourceCode.General" />
+    <property name="options.lastSelected" value="web-ide.project.structure" />
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.searchVisible" value="true" />
@@ -360,7 +477,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="27" width="1920" height="1026" extended-state="0" />
+    <frame x="0" y="27" width="1920" height="1026" extended-state="1" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -400,26 +517,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/View/Pages/home.ctp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="135" column="16" selection-start="6662" selection-end="6670" vertical-scroll-proportion="0.0" vertical-offset="1952" max-vertical-offset="2844" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Controller/AlunosController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="80" column="34" selection-start="2420" selection-end="2420" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="24750" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/View/Elements/header.ctp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="57" column="0" selection-start="2790" selection-end="2790" vertical-scroll-proportion="0.0" vertical-offset="1026" max-vertical-offset="3258" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Controller/AlunosController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="80" column="34" selection-start="2420" selection-end="2420" vertical-scroll-proportion="0.0" vertical-offset="1268" max-vertical-offset="24750" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/View/Elements/header.ctp">
       <provider selected="true" editor-type-id="text-editor">
         <state line="57" column="0" selection-start="2790" selection-end="2790" vertical-scroll-proportion="0.0" vertical-offset="1026" max-vertical-offset="3258" />
@@ -436,11 +533,11 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Plugin/Requisicoes/View/RequisicoesPedidos/registar_requisicao_estudante.ctp">
-      <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state line="14" column="74" selection-start="842" selection-end="842" vertical-scroll-proportion="0.18141097" vertical-offset="90" max-vertical-offset="1242" />
+      </provider>
+      <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/View/Pages/home.ctp">
@@ -454,34 +551,19 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/View/Elements/header.ctp">
-      <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state line="56" column="137" selection-start="2789" selection-end="2789" vertical-scroll-proportion="0.0" vertical-offset="390" max-vertical-offset="3240" />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/View/Turmas/faculdade_print_pauta.ctp">
       <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
         <state />
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/View/Turmas/faculdade_print_pauta.ctp">
       <provider selected="true" editor-type-id="text-editor">
         <state line="101" column="0" selection-start="62" selection-end="4905" vertical-scroll-proportion="0.0" vertical-offset="972" max-vertical-offset="1926" />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Config/Config-Default.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1170" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Config/Config-UEM.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1026" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendors/PHPExcel/Cell.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="274" column="20" selection-start="6473" selection-end="6473" vertical-scroll-proportion="0.34338748" vertical-offset="4204" max-vertical-offset="17280" />
+      <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Model/Upload.php">
@@ -499,19 +581,9 @@
         <state line="33" column="0" selection-start="1498" selection-end="1498" vertical-scroll-proportion="0.0" vertical-offset="594" max-vertical-offset="954" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Config/bootstrap_siga.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="40" selection-start="398" selection-end="398" vertical-scroll-proportion="0.28398058" vertical-offset="0" max-vertical-offset="824" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Config/bootstrap.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="36" column="37" selection-start="1213" selection-end="1213" vertical-scroll-proportion="0.0" vertical-offset="648" max-vertical-offset="1584" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Console/Command/EstudanteShell.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="195" column="11" selection-start="9740" selection-end="9740" vertical-scroll-proportion="0.0" vertical-offset="2779" max-vertical-offset="13284" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/View/Alunos/faculdade_perfil_estudante.ctp">
@@ -525,26 +597,16 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/View/Inscricaos/faculdade_inscrever2.ctp">
-      <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state line="68" column="17" selection-start="3269" selection-end="3269" vertical-scroll-proportion="0.0" vertical-offset="1224" max-vertical-offset="1440" />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Controller/InscricaosController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="243" column="94" selection-start="9715" selection-end="9715" vertical-scroll-proportion="0.0" vertical-offset="3851" max-vertical-offset="13572" />
+      <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Console/Command/TurmaShell.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="50" column="0" selection-start="1584" selection-end="1584" vertical-scroll-proportion="0.0" vertical-offset="94" max-vertical-offset="1008" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Model/Turma.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="199" column="35" selection-start="5275" selection-end="5275" vertical-scroll-proportion="-1.3703704" vertical-offset="3095" max-vertical-offset="12276" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/View/Turmas/gerar_turmas.ctp">
@@ -558,13 +620,11 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/View/Inscricaos/faculdade_ver_inscricoes_aluno.ctp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="150" column="285" selection-start="5739" selection-end="5739" vertical-scroll-proportion="0.0" vertical-offset="2343" max-vertical-offset="5670" />
+      </provider>
       <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
         <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="150" column="285" selection-start="5739" selection-end="5739" vertical-scroll-proportion="0.0" vertical-offset="2343" max-vertical-offset="5670">
-          <folding />
-        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Controller/SmsNotificationsController.php">
@@ -574,40 +634,27 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Model/SmsNotification.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="112" column="40" selection-start="3880" selection-end="3880" vertical-scroll-proportion="0.0" vertical-offset="1332" max-vertical-offset="5040">
-          <folding />
-        </state>
+        <state line="112" column="40" selection-start="3880" selection-end="3880" vertical-scroll-proportion="0.0" vertical-offset="1332" max-vertical-offset="5040" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Config/core.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="94" column="6" selection-start="3167" selection-end="3167" vertical-scroll-proportion="0.0" vertical-offset="1692" max-vertical-offset="6192">
-          <folding />
-        </state>
+        <state line="94" column="6" selection-start="3167" selection-end="3167" vertical-scroll-proportion="0.0" vertical-offset="1692" max-vertical-offset="6192" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/View/Cursos/index.ctp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="25" column="187" selection-start="1448" selection-end="1448" vertical-scroll-proportion="0.0" vertical-offset="134" max-vertical-offset="1062">
-          <folding />
-        </state>
+        <state line="25" column="187" selection-start="1448" selection-end="1448" vertical-scroll-proportion="0.0" vertical-offset="134" max-vertical-offset="1062" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Model/PlanoEstudo.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="86" column="13" selection-start="2266" selection-end="2267" vertical-scroll-proportion="-11.37037" vertical-offset="1241" max-vertical-offset="4356">
-          <folding>
-            <marker date="1405082476859" expanded="true" signature="-1:-1" placeholder="delete from ..." />
-            <marker date="1405082476859" expanded="true" signature="-1:-1" placeholder="delete from ..." />
-          </folding>
-        </state>
+        <state line="86" column="13" selection-start="2266" selection-end="2267" vertical-scroll-proportion="-11.37037" vertical-offset="1241" max-vertical-offset="4356" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Controller/AlunoViaAdmissaosController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1836">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1836" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Controller/AlunoNivelMediosController.php">
@@ -619,17 +666,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/View/Layouts/default.ctp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="170" column="47" selection-start="13336" selection-end="13336" vertical-scroll-proportion="0.6996381" vertical-offset="2480" max-vertical-offset="5220">
-          <folding>
-            <marker date="1405376808922" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1405376808922" expanded="true" signature="-1:-1" placeholder="..." />
-          </folding>
-        </state>
+        <state line="170" column="47" selection-start="13336" selection-end="13336" vertical-scroll-proportion="0.6996381" vertical-offset="2480" max-vertical-offset="5220" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Controller/CursosController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="115" column="20" selection-start="4020" selection-end="4020" vertical-scroll-proportion="-11.185185" vertical-offset="1768" max-vertical-offset="3762">
+        <state line="115" column="20" selection-start="4020" selection-end="4020" vertical-scroll-proportion="0.0" vertical-offset="1768" max-vertical-offset="3762">
           <folding />
         </state>
       </provider>
@@ -643,9 +685,67 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Controller/AlunosController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="1369" column="37" selection-start="53452" selection-end="53452" vertical-scroll-proportion="-24.37037" vertical-offset="23984" max-vertical-offset="24840">
+        <state line="1369" column="37" selection-start="53452" selection-end="53452" vertical-scroll-proportion="-24.37037" vertical-offset="23984" max-vertical-offset="24840" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/manuais/source/administrador/pedagogica/index.rst">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="3" column="0" selection-start="113" selection-end="327" vertical-scroll-proportion="0.06214039" vertical-offset="0" max-vertical-offset="869" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/manuais/source/administrador/pedagogica/cursos.rst">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="856" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/manuais/source/conf.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="368" column="0" selection-start="11615" selection-end="11615" vertical-scroll-proportion="0.9565742" vertical-offset="5831" max-vertical-offset="7182" />
+      </provider>
+      <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/manuais/source/acesso.rst">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="26" column="0" selection-start="2207" selection-end="2207" vertical-scroll-proportion="0.54672897" vertical-offset="0" max-vertical-offset="856" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/manuais/source/faculdade/docente.rst">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="23" column="21" selection-start="526" selection-end="526" vertical-scroll-proportion="0.47640967" vertical-offset="0" max-vertical-offset="869" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/manuais/source/administrador/instalacao2.rst">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="17" column="10" selection-start="1226" selection-end="1226" vertical-scroll-proportion="0.34812286" vertical-offset="0" max-vertical-offset="954" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/manuais/source/administrador/index.rst">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="869" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Config/Config-UEM.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="18" column="41" selection-start="591" selection-end="591" vertical-scroll-proportion="0.34204274" vertical-offset="0" max-vertical-offset="1026" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Config/bootstrap_siga.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="15" column="0" selection-start="415" selection-end="415" vertical-scroll-proportion="0.0" vertical-offset="270" max-vertical-offset="378">
           <folding />
         </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Config/Config-Default.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="18" column="42" selection-start="591" selection-end="591" vertical-scroll-proportion="0.34204274" vertical-offset="0" max-vertical-offset="1170" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/manuais/source/faculdade/director_curso.rst">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1" column="42" selection-start="84" selection-end="84" vertical-scroll-proportion="0.020179372" vertical-offset="0" max-vertical-offset="892" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/docs/manuais/source/estudante/index.rst">
@@ -655,69 +755,81 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/docs/manuais/source/faculdade/director_curso.rst">
+    <entry file="file://$PROJECT_DIR$/app/Controller/InscricaosController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="869">
+        <state line="400" column="0" selection-start="16923" selection-end="16923" vertical-scroll-proportion="0.0" vertical-offset="6492" max-vertical-offset="13590">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/docs/manuais/source/administrador/instalacao2.rst">
+    <entry file="file://$PROJECT_DIR$/app/Model/Turma.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="10" selection-start="1226" selection-end="1226" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="954">
+        <state line="451" column="11" selection-start="16106" selection-end="16106" vertical-scroll-proportion="0.0" vertical-offset="8118" max-vertical-offset="12870">
+          <folding>
+            <marker date="1405420651740" expanded="true" signature="17305:17461" placeholder="select count..t0013inscricaos..." />
+            <marker date="1405420651740" expanded="true" signature="17610:17731" placeholder="select count..t0013inscricaos..." />
+            <marker date="1405420651740" expanded="true" signature="17917:18073" placeholder="select count..t0013inscricaos..." />
+            <marker date="1405420651740" expanded="true" signature="18230:18401" placeholder="select tf.na..t0010turmas..." />
+            <marker date="1405420651740" expanded="true" signature="18563:18730" placeholder="select tf.na..t0010turmas..." />
+            <marker date="1405420651740" expanded="true" signature="18867:19045" placeholder="select tp.na..t0010turmas..." />
+            <marker date="1405420651740" expanded="true" signature="19476:19603" placeholder="select sum(n..t0013inscricaos..." />
+            <marker date="1405420651740" expanded="true" signature="19820:19967" placeholder="SELECT tt.id..t0010turmas..." />
+            <marker date="1405420651740" expanded="true" signature="25963:26089" placeholder="update t0010..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/View/Funcionarios/adicionar_funcionario.ctp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="194" column="76" selection-start="11281" selection-end="11281" vertical-scroll-proportion="0.0" vertical-offset="2871" max-vertical-offset="13410">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/docs/manuais/source/administrador/pedagogica/index.rst">
+    <entry file="file://$PROJECT_DIR$/app/Controller/FuncionariosController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="0" selection-start="113" selection-end="327" vertical-scroll-proportion="0.06214039" vertical-offset="0" max-vertical-offset="869">
+        <state line="12" column="25" selection-start="403" selection-end="403" vertical-scroll-proportion="-8.0" vertical-offset="0" max-vertical-offset="4194">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/docs/manuais/source/administrador/pedagogica/cursos.rst">
+    <entry file="file://$PROJECT_DIR$/app/Model/Funcionario.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="856">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/docs/manuais/source/administrador/index.rst">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="869">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/docs/manuais/source/faculdade/docente.rst">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="21" selection-start="526" selection-end="526" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="522">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/docs/manuais/source/conf.py">
-      <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="368" column="0" selection-start="11615" selection-end="11615" vertical-scroll-proportion="0.9565742" vertical-offset="5831" max-vertical-offset="7182">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/docs/manuais/source/acesso.rst">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="26" column="0" selection-start="2207" selection-end="2207" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="576">
-          <folding />
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3006">
+          <folding>
+            <marker date="1405082476859" expanded="true" signature="2845:2992" placeholder="SELECT tt.id..t0010turmas..." />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Console/Command/OpenSGAShell.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="1271" column="41" selection-start="54897" selection-end="54897" vertical-scroll-proportion="0.5805243" vertical-offset="22413" max-vertical-offset="34416">
+        <state line="516" column="7" selection-start="28462" selection-end="28462" vertical-scroll-proportion="0.8426966" vertical-offset="8613" max-vertical-offset="33390">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Console/Command/EstudanteShell.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="736" column="54" selection-start="43512" selection-end="43512" vertical-scroll-proportion="-19.37037" vertical-offset="12725" max-vertical-offset="13554">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendors/PHPExcel/Cell.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="274" column="20" selection-start="6473" selection-end="6473" vertical-scroll-proportion="0.3432304" vertical-offset="4211" max-vertical-offset="17280">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Model/Aluno.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="372" column="41" selection-start="11083" selection-end="11083" vertical-scroll-proportion="0.9565742" vertical-offset="5903" max-vertical-offset="26496">
+          <folding>
+            <marker date="1405436927576" expanded="true" signature="13726:13790" placeholder="Select plano..matriculas..." />
+            <marker date="1405436927576" expanded="true" signature="14228:14292" placeholder="Select plano..matriculas..." />
+          </folding>
         </state>
       </provider>
     </entry>

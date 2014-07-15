@@ -400,7 +400,8 @@ class InscricaosController extends AppController
         $turmas = $this->Turma->getAllByAlunoForInscricao($aluno_id);
 
         $turmas2 = $this->Turma->getAllByPlanoEstudoAntigo($aluno_id);
-
+        debug($turmas);
+        debug($turmas2);
         $this->set('aluno_id', $aluno_id);
         $this->set('matricula_id', $matricula_id);
         $this->set(compact('turmas', 'disciplinas', 'turmas2'));

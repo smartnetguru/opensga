@@ -729,4 +729,19 @@ class EstudanteShell extends AppShell {
         }
     }
 
+    public function actualiza_matricula_condicional() {
+        App::import('Vendor', 'PHPExcel', array('file' => 'PHPExcel.php'));
+        if (!class_exists('PHPExcel'))
+            throw new CakeException('Vendor class PHPExcel not found!');
+
+        $xls = PHPExcel_IOFactory::load(APP . 'Imports' . DS . 'matricula_condicional_20140715.xlsx');
+
+        $worksheet = $xls->getActiveSheet();
+
+        $resultado = $this->Aluno->actualizaMatriculaCondicionalFromFile($worksheet);
+        return $resultado;
+
+    }
+
+
 }

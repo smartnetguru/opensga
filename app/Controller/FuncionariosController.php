@@ -9,6 +9,9 @@
  * @package       opensga
  * @subpackage    opensga.core.controller
  * @since         OpenSGA v 0.10.0.0
+ *
+ * @property Funcionario $Funcionario
+ *
 
  *
  */
@@ -90,7 +93,7 @@ class FuncionariosController extends AppController {
 		$grausAcademicos = $this->Funcionario->GrauAcademico->find('list');
 		$tipofuncionarios = $this->Funcionario->TipoFuncionario->find('list');
 		$documentoIdentificacaos = $this->Funcionario->Entidade->DocumentoIdentificacao->find('list');
-		$unidadesOrganicas = $this->Funcionario->UnidadeOrganica->find('list');
+		$unidadeOrganicas = $this->Funcionario->UnidadeOrganica->find('list');
 		$paises = $this->Funcionario->Entidade->PaisNascimento->find('list');
 		$cidades = $this->Funcionario->Entidade->CidadeNascimento->find('list');
 		$provincias = $this->Funcionario->Entidade->ProvinciaNascimento->find('list');
@@ -98,7 +101,7 @@ class FuncionariosController extends AppController {
 		$estadoCivil = $this->Funcionario->Entidade->EstadoCivil->find('list');
 		$naturalidade = '';
 		$grauParentescos = '';
-		$this->set(compact('grauParentescos', 'naturalidade', 'estadoCivil', 'grausAcademicos', 'tipofuncionarios', 'departamentos', 'cargos', 'faculdades', 'seccaos', 'unidadesOrganicas', 'documentoIdentificacaos', 'paises', 'cidades', 'provincias', 'generos'));
+		$this->set(compact('grauParentescos', 'naturalidade', 'estadoCivil', 'grausAcademicos', 'tipofuncionarios', 'departamentos', 'cargos', 'faculdades', 'seccaos', 'unidadeOrganicas', 'documentoIdentificacaos', 'paises', 'cidades', 'provincias', 'generos'));
 	}
 
 	function editar_funcionario($id = null) {
