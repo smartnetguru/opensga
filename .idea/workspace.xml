@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8a188e33-7e6f-48bc-b82d-3dfcef9f88fa" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Model/Aluno.php" afterPath="$PROJECT_DIR$/app/Model/Aluno.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Controller/FuncionariosController.php" afterPath="$PROJECT_DIR$/app/Controller/FuncionariosController.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Console/Command/OpenSGAShell.php" afterPath="$PROJECT_DIR$/app/Console/Command/OpenSGAShell.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Model/Turma.php" afterPath="$PROJECT_DIR$/app/Model/Turma.php" />
     </list>
     <ignored path="opensga.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -38,17 +39,17 @@
       <file leaf-file-name="Turma.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Model/Turma.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="451" column="11" selection-start="16106" selection-end="16106" vertical-scroll-proportion="0.0" vertical-offset="8118" max-vertical-offset="12870">
+            <state line="388" column="26" selection-start="13068" selection-end="13068" vertical-scroll-proportion="-6.0" vertical-offset="6372" max-vertical-offset="12420">
               <folding>
-                <marker date="1405420651740" expanded="true" signature="17305:17461" placeholder="select count..t0013inscricaos..." />
-                <marker date="1405420651740" expanded="true" signature="17610:17731" placeholder="select count..t0013inscricaos..." />
-                <marker date="1405420651740" expanded="true" signature="17917:18073" placeholder="select count..t0013inscricaos..." />
-                <marker date="1405420651740" expanded="true" signature="18230:18401" placeholder="select tf.na..t0010turmas..." />
-                <marker date="1405420651740" expanded="true" signature="18563:18730" placeholder="select tf.na..t0010turmas..." />
-                <marker date="1405420651740" expanded="true" signature="18867:19045" placeholder="select tp.na..t0010turmas..." />
-                <marker date="1405420651740" expanded="true" signature="19476:19603" placeholder="select sum(n..t0013inscricaos..." />
-                <marker date="1405420651740" expanded="true" signature="19820:19967" placeholder="SELECT tt.id..t0010turmas..." />
-                <marker date="1405420651740" expanded="true" signature="25963:26089" placeholder="update t0010..." />
+                <marker date="1405500943407" expanded="true" signature="17331:17487" placeholder="select count..t0013inscricaos..." />
+                <marker date="1405500943407" expanded="true" signature="17636:17757" placeholder="select count..t0013inscricaos..." />
+                <marker date="1405500943407" expanded="true" signature="17943:18099" placeholder="select count..t0013inscricaos..." />
+                <marker date="1405500943407" expanded="true" signature="18256:18427" placeholder="select tf.na..t0010turmas..." />
+                <marker date="1405500943407" expanded="true" signature="18589:18756" placeholder="select tf.na..t0010turmas..." />
+                <marker date="1405500943407" expanded="true" signature="18893:19071" placeholder="select tp.na..t0010turmas..." />
+                <marker date="1405500943407" expanded="true" signature="19502:19629" placeholder="select sum(n..t0013inscricaos..." />
+                <marker date="1405500943407" expanded="true" signature="19846:19993" placeholder="SELECT tt.id..t0010turmas..." />
+                <marker date="1405500943407" expanded="true" signature="25989:26115" placeholder="update t0010..." />
               </folding>
             </state>
           </provider>
@@ -66,7 +67,7 @@
       <file leaf-file-name="FuncionariosController.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Controller/FuncionariosController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="12" column="25" selection-start="403" selection-end="403" vertical-scroll-proportion="0.0" vertical-offset="216" max-vertical-offset="4194">
+            <state line="90" column="67" selection-start="2566" selection-end="2566" vertical-scroll-proportion="-16.222221" vertical-offset="1182" max-vertical-offset="4230">
               <folding />
             </state>
           </provider>
@@ -83,10 +84,19 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AlunosController.php" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="AlunosController.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Controller/AlunosController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="581" column="20" selection-start="24684" selection-end="24684" vertical-scroll-proportion="0.33293125" vertical-offset="10182" max-vertical-offset="24840">
+            <state line="581" column="20" selection-start="24684" selection-end="24684" vertical-scroll-proportion="-10.222222" vertical-offset="10182" max-vertical-offset="24840">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="OpenSGAShell.php" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/Console/Command/OpenSGAShell.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="259" column="106" selection-start="15333" selection-end="15333" vertical-scroll-proportion="0.21833535" vertical-offset="4481" max-vertical-offset="33984">
               <folding />
             </state>
           </provider>
@@ -148,12 +158,12 @@
         <option value="$PROJECT_DIR$/app/Config/Config-Default.php" />
         <option value="$PROJECT_DIR$/app/Config/Config-UEM.php" />
         <option value="$PROJECT_DIR$/app/Controller/InscricaosController.php" />
-        <option value="$PROJECT_DIR$/app/Model/Turma.php" />
         <option value="$PROJECT_DIR$/app/View/Funcionarios/adicionar_funcionario.ctp" />
-        <option value="$PROJECT_DIR$/app/Controller/FuncionariosController.php" />
         <option value="$PROJECT_DIR$/app/Console/Command/EstudanteShell.php" />
-        <option value="$PROJECT_DIR$/app/Console/Command/OpenSGAShell.php" />
         <option value="$PROJECT_DIR$/app/Model/Aluno.php" />
+        <option value="$PROJECT_DIR$/app/Controller/FuncionariosController.php" />
+        <option value="$PROJECT_DIR$/app/Model/Turma.php" />
+        <option value="$PROJECT_DIR$/app/Console/Command/OpenSGAShell.php" />
       </list>
     </option>
   </component>
@@ -720,33 +730,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Model/Turma.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="451" column="11" selection-start="16106" selection-end="16106" vertical-scroll-proportion="0.0" vertical-offset="8118" max-vertical-offset="12870">
-          <folding>
-            <marker date="1405420651740" expanded="true" signature="17305:17461" placeholder="select count..t0013inscricaos..." />
-            <marker date="1405420651740" expanded="true" signature="17610:17731" placeholder="select count..t0013inscricaos..." />
-            <marker date="1405420651740" expanded="true" signature="17917:18073" placeholder="select count..t0013inscricaos..." />
-            <marker date="1405420651740" expanded="true" signature="18230:18401" placeholder="select tf.na..t0010turmas..." />
-            <marker date="1405420651740" expanded="true" signature="18563:18730" placeholder="select tf.na..t0010turmas..." />
-            <marker date="1405420651740" expanded="true" signature="18867:19045" placeholder="select tp.na..t0010turmas..." />
-            <marker date="1405420651740" expanded="true" signature="19476:19603" placeholder="select sum(n..t0013inscricaos..." />
-            <marker date="1405420651740" expanded="true" signature="19820:19967" placeholder="SELECT tt.id..t0010turmas..." />
-            <marker date="1405420651740" expanded="true" signature="25963:26089" placeholder="update t0010..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/View/Funcionarios/adicionar_funcionario.ctp">
       <provider selected="true" editor-type-id="text-editor">
         <state line="194" column="76" selection-start="11281" selection-end="11281" vertical-scroll-proportion="0.0" vertical-offset="2871" max-vertical-offset="13410">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Controller/FuncionariosController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="25" selection-start="403" selection-end="403" vertical-scroll-proportion="0.0" vertical-offset="216" max-vertical-offset="4194">
           <folding />
         </state>
       </provider>
@@ -782,20 +768,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Console/Command/OpenSGAShell.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="260" column="24" selection-start="15366" selection-end="15366" vertical-scroll-proportion="0.4681648" vertical-offset="4305" max-vertical-offset="33948">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Console/Command/EstudanteShell.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="736" column="54" selection-start="43512" selection-end="43512" vertical-scroll-proportion="0.6308806" vertical-offset="12725" max-vertical-offset="13554">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Model/Funcionario.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3006">
@@ -805,9 +777,47 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/Console/Command/EstudanteShell.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="736" column="54" selection-start="43512" selection-end="43512" vertical-scroll-proportion="0.66344994" vertical-offset="12698" max-vertical-offset="13554">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/Controller/AlunosController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="581" column="20" selection-start="24684" selection-end="24684" vertical-scroll-proportion="0.33293125" vertical-offset="10182" max-vertical-offset="24840">
+        <state line="581" column="20" selection-start="24684" selection-end="24684" vertical-scroll-proportion="-10.222222" vertical-offset="10182" max-vertical-offset="24840">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Controller/FuncionariosController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="90" column="67" selection-start="2566" selection-end="2566" vertical-scroll-proportion="-16.222221" vertical-offset="1182" max-vertical-offset="4230">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Model/Turma.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="388" column="26" selection-start="13068" selection-end="13068" vertical-scroll-proportion="-6.0" vertical-offset="6372" max-vertical-offset="12420">
+          <folding>
+            <marker date="1405500943407" expanded="true" signature="17331:17487" placeholder="select count..t0013inscricaos..." />
+            <marker date="1405500943407" expanded="true" signature="17636:17757" placeholder="select count..t0013inscricaos..." />
+            <marker date="1405500943407" expanded="true" signature="17943:18099" placeholder="select count..t0013inscricaos..." />
+            <marker date="1405500943407" expanded="true" signature="18256:18427" placeholder="select tf.na..t0010turmas..." />
+            <marker date="1405500943407" expanded="true" signature="18589:18756" placeholder="select tf.na..t0010turmas..." />
+            <marker date="1405500943407" expanded="true" signature="18893:19071" placeholder="select tp.na..t0010turmas..." />
+            <marker date="1405500943407" expanded="true" signature="19502:19629" placeholder="select sum(n..t0013inscricaos..." />
+            <marker date="1405500943407" expanded="true" signature="19846:19993" placeholder="SELECT tt.id..t0010turmas..." />
+            <marker date="1405500943407" expanded="true" signature="25989:26115" placeholder="update t0010..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Console/Command/OpenSGAShell.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="259" column="106" selection-start="15333" selection-end="15333" vertical-scroll-proportion="0.21833535" vertical-offset="4481" max-vertical-offset="33984">
           <folding />
         </state>
       </provider>
