@@ -386,7 +386,7 @@ class Turma extends AppModel {
 		}
 
 		$matricula = $this->Inscricao->Matricula->findByAlunoIdAndAnoLectivoId($alunoId, $anoLectivoId);
-
+        debug($matricula);
 		//Se nao renovou matricula naquele ano, nao aparece nenhuma cadeira para se inscrever
 		if (empty($matricula)) {
 			return array();

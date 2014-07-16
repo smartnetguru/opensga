@@ -83,10 +83,12 @@ class FuncionariosController extends AppController {
 		ini_set('memory_limit', "2048M");
 		if (!empty($this->data)) {
 			if ($this->Funcionario->cadastraFuncionario($this->request->data)) {
-				$this->Session->setFlash('Funcionário registrado com sucesso', 'default', array('class' => 'alert success'));
+				$this->Session->setFlash('Funcionário registrado com sucesso', 'default',
+                    array('class' => 'alert alert-success'));
 				$this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash('Problemas ao registar funcionario. Verifique o formulário e tente de novo', 'default', array('class' => 'alert error'));
+				$this->Session->setFlash('Problemas ao registar funcionario. Verifique o formulário e tente de novo',
+                    'default', array('class' => 'alert alert-danger'));
 			}
 		}
 

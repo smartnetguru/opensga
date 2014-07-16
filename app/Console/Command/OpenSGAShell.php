@@ -257,8 +257,7 @@
             $this->Matricula->contain(array(
                 'Curso','Aluno'
             ));
-            $matriculas = $this->Matricula->find('all', array('conditions' => array('Matricula.plano_estudo_id' =>
-                                                                                        null, 'Curso.unidade_organica_id' => 1)));
+            $matriculas = $this->Matricula->find('all', array('conditions' => array('Matricula.id'=>131336)));
             debug(count($matriculas));
             foreach ($matriculas as $matricula) {
                 if($matricula['Aluno']['plano_estudo_id']!=null){
@@ -272,6 +271,7 @@
                         ),
                         'order' => 'ano_criacao desc'
                     ));
+                    debug($planoEstudo);
                     if(empty($planoEstudo)){
                         $planoEstudo  = $this->PlanoEstudo->find('first', array(
                             'conditions' => array(
@@ -287,6 +287,8 @@
                     $this->Matricula->set('plano_estudo_id',$planoEstudo['PlanoEstudo']['id']);
                     $this->Matricula->save();
                     $this->out($planoEstudo['PlanoEstudo']['name']);
+                } else{
+                    die(debug($matricula));
                 }
 
 
