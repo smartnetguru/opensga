@@ -1187,61 +1187,63 @@ class Aluno extends AppModel {
 
 						$this->AlunoEstado->create();
 						$this->AlunoEstado->save($arrayEstado);
-					}
-					//O estado do aluno tem que ver com o certificado e com o recenseamento militar
-					$certificado = $data['Aluno']['certificado_nivel_anterior'];
-					$recenseamento = $data['Aluno']['recenseamento_militar'];
-					if ($certificado == 1 && $recenseamento == 1) {
-						$data['Aluno']['estado_aluno_id'] = 1;
-					} elseif ($certificado == 2 && $recenseamento == 1) {
-						$data['Aluno']['estado_aluno_id'] = 11;
-						$array_estado = array(
-							'AlunoEstado' => array(
-								'aluno_id' => $this->id,
-								'estado_anterior' => 1,
-								'estado_actual' => 11,
-								'motivo_estado_aluno_id' => 1,
-								'data_mudanca' => date('Y-m-d H:i:s')
-							)
-						);
+					} else{
+                        //O estado do aluno tem que ver com o certificado e com o recenseamento militar
+                        $certificado = $data['Aluno']['certificado_nivel_anterior'];
+                        $recenseamento = $data['Aluno']['recenseamento_militar'];
+                        if ($certificado == 1 && $recenseamento == 1) {
+                            $data['Aluno']['estado_aluno_id'] = 1;
+                        } elseif ($certificado == 2 && $recenseamento == 1) {
+                            $data['Aluno']['estado_aluno_id'] = 11;
+                            $array_estado = array(
+                                'AlunoEstado' => array(
+                                    'aluno_id' => $this->id,
+                                    'estado_anterior' => 1,
+                                    'estado_actual' => 11,
+                                    'motivo_estado_aluno_id' => 1,
+                                    'data_mudanca' => date('Y-m-d H:i:s')
+                                )
+                            );
 
-						$this->AlunoEstado->create();
-						$this->AlunoEstado->save($array_estado);
-						$this->set('estado_aluno_id', 11);
-						$this->save();
-					} elseif ($certificado == 1 && $recenseamento == 2) {
-						$data['Aluno']['estado_aluno_id'] = 11;
-						$array_estado = array(
-							'AlunoEstado' => array(
-								'aluno_id' => $this->id,
-								'estado_anterior' => 1,
-								'estado_actual' => 11,
-								'motivo_estado_aluno_id' => 21,
-								'data_mudanca' => date('Y-m-d H:i:s')
-							)
-						);
+                            $this->AlunoEstado->create();
+                            $this->AlunoEstado->save($array_estado);
+                            $this->set('estado_aluno_id', 11);
+                            $this->save();
+                        } elseif ($certificado == 1 && $recenseamento == 2) {
+                            $data['Aluno']['estado_aluno_id'] = 11;
+                            $array_estado = array(
+                                'AlunoEstado' => array(
+                                    'aluno_id' => $this->id,
+                                    'estado_anterior' => 1,
+                                    'estado_actual' => 11,
+                                    'motivo_estado_aluno_id' => 21,
+                                    'data_mudanca' => date('Y-m-d H:i:s')
+                                )
+                            );
 
-						$this->AlunoEstado->create();
-						$this->AlunoEstado->save($array_estado);
-						$this->set('estado_aluno_id', 11);
-						$this->save();
-					} else {
-						$data['Aluno']['estado_aluno_id'] = 11;
-						$array_estado = array(
-							'AlunoEstado' => array(
-								'aluno_id' => $this->id,
-								'estado_anterior' => 1,
-								'estado_actual' => 11,
-								'motivo_estado_aluno_id' => 22,
-								'data_mudanca' => date('Y-m-d H:i:s')
-							)
-						);
+                            $this->AlunoEstado->create();
+                            $this->AlunoEstado->save($array_estado);
+                            $this->set('estado_aluno_id', 11);
+                            $this->save();
+                        } else {
+                            $data['Aluno']['estado_aluno_id'] = 11;
+                            $array_estado = array(
+                                'AlunoEstado' => array(
+                                    'aluno_id' => $this->id,
+                                    'estado_anterior' => 1,
+                                    'estado_actual' => 11,
+                                    'motivo_estado_aluno_id' => 22,
+                                    'data_mudanca' => date('Y-m-d H:i:s')
+                                )
+                            );
 
-						$this->AlunoEstado->create();
-						$this->AlunoEstado->save($array_estado);
-						$this->set('estado_aluno_id', 11);
-						$this->save();
-					}
+                            $this->AlunoEstado->create();
+                            $this->AlunoEstado->save($array_estado);
+                            $this->set('estado_aluno_id', 11);
+                            $this->save();
+                        }
+
+                    }
 
 					//Grava os dados de Identificacao
 					$identificacao = array('EntidadeIdentificacao' => $data['EntidadeIdentificacao']);
