@@ -233,4 +233,14 @@ class PlanoEstudo extends AppModel {
 		return $disciplinasPrecedentes;
 	}
 
+
+    public function getPlanoEstudoIdealForAluno($alunoId){
+        $this->Curso->Aluno->contain(array(
+            'Curso'
+        ));
+        $aluno = $ths->Curso->Aluno->findById($alunoId);
+        debug($aluno);
+
+    }
+
 }
