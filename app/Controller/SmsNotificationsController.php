@@ -109,14 +109,14 @@ class SmsNotificationsController extends AppController {
 					print_r($numero);
 					$mensagem = "Para se proceder o pagamento da sua bolsa, favor contactar a Direcção do Registo Académico–Reitoria para abertura de conta bancária ate dia 25/07";
 
-					$this->SmsEnviada->sendSMS($numero, $mensagem);
+					//$this->SmsEnviada->sendSMS($numero, $mensagem);
 				}
 			}
 
 
 
 		}
-        $this->SmsEnviada->sendSMS(826489374, "Todas SMS foram enviadas.");
+        //$this->SmsEnviada->sendSMS(826489374, "Todas SMS foram enviadas.");
 	}
 
 	public function testa_sms() {
