@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module type="WEB_MODULE" version="4">
   <component name="NewModuleRootManager">
-    <content url="file:///home/backstageel/Development/docs/siga.wiki" />
+    <content url="file://$USER_HOME$/Development/docs/siga.wiki" />
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/app/Test" isTestSource="true" />
       <excludeFolder url="file://$MODULE_DIR$/lib/Cake/Console" />
@@ -13,9 +13,11 @@
       <library name="PHARS">
         <CLASSES>
           <root url="phar://$MODULE_DIR$/app/Plugin/CakeResque/composer.phar" />
+          <root url="phar://$MODULE_DIR$/plugins/GraphVizRelations/composer.phar" />
         </CLASSES>
         <SOURCES>
           <root url="phar://$MODULE_DIR$/app/Plugin/CakeResque/composer.phar" />
+          <root url="phar://$MODULE_DIR$/plugins/GraphVizRelations/composer.phar" />
         </SOURCES>
       </library>
     </orderEntry>
