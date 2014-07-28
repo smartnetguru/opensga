@@ -1,3 +1,6 @@
 [submodule "plugins/Migrations"]
 	path = plugins/Migrations
 	url = git@github.com:CakeDC/migrations.git
+[submodule "docs/manuais/source"]
+	path = docs/manuais/source
+	url = git@github.com:backstageel/siga.wiki.git

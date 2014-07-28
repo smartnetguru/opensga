@@ -1417,7 +1417,13 @@ class Aluno extends AppModel
         } else {
             $mudancaArray['MudancaCurso']['forma_mudanca_id'] = 2;
         }
-        $dataAno = DateTime::createFromFormat("Y-m-d", $data['Aluno']['data_mudanca']);
+        try{
+            $dataAno = DateTime::createFromFormat("Y-m-d", $data['Aluno']['data_mudanca']);
+
+        } catch(Exception $e){
+            $this->out($e->getMessage());
+        }
+
         //Finaliza o historico
         $historicoActual = $this->HistoricoCurso->find('first', array('conditions' => array(
                 'aluno_id' => $data['Aluno']['aluno_id'], 'curso_id' => $data['Aluno']['curso_antigo'],

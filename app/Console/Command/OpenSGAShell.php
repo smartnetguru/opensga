@@ -309,6 +309,31 @@
             }
         }
 
+        public function altera_cursos_agronomia(){
+            $alunos = $this->Aluno->find('all',array('conditions'=>array('curso_id'=>array(7,8),
+                'estado_aluno_id'=>1)));
+            foreach($alunos as $aluno){
+                $data = [
+                        'data_mudanca'=>date('Y-m-d'),
+                        'observacao'=>"Mudanca de Curso para novo Curso. Inscricoes",
+                        'curso_antigo'=>$aluno['Aluno']['curso_id'],
+                        'aluno_id'=>$aluno['Aluno']['id'],
+                    'numero_estudante_atribuido'=>''
+
+                    ];
+                if($aluno['Aluno']['curso_id']==7){
+                    $data['curso_id']=5;
+                } else{
+                    $data['curso_id']=15;
+                }
+
+                $dados = ['Aluno'=>$data];
+                $this->Aluno->mudaCurso($dados);
+                $this->out($aluno['Aluno']['codigo']);
+
+    }
+        }
+
         public function aproveitamento() {
 
 
@@ -546,7 +571,6 @@
                 }
             }
         }
-
 
         public function envia_sms_estrangeiros() {
             $this->Aluno->contain('Entidade');
@@ -1878,7 +1902,6 @@
             $this->out("fim");
             $this->out($zeros);
         }
-
 
 
     }

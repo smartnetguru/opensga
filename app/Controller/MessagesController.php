@@ -35,6 +35,10 @@ class MessagesController extends AppController {
 		$this->set('tg0017messages', $this->paginate());
 	}
 
+    public function sms_index(){
+
+    }
+
 	public function docente_index() {
 
 		$this->set('messages', $this->paginate());
