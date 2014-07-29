@@ -170,7 +170,8 @@ class User extends AppModel {
 	}
 
 	public function alteraPassword($data) {
-		$user_id = $data['User']['user_id'];
+
+        $user_id = $data['User']['user_id'];
 		$this->id = $user_id;
 		if ($data['User']['novasenha1'] != $data['User']['novasenha2']) {
 			return false;
@@ -181,7 +182,36 @@ class User extends AppModel {
 		return true;
 	}
 
-	//Verifica se um dado Estudante é aluno
+    /**
+     * Faz o reset da password de um Usuario.
+     * Coloca uma senha gerada aleatoriamente
+     * @param $userId
+     * @param $novaPassword  Caso nao seja passado nenhuma password, o sistema gera senha aleatoria
+     * @return string $novaPassword
+     */
+    public function resetPassword($userId, $novaPassword = null)
+    {
+        $datasource = $this->getDataSource();
+        $datasource->begin();
+
+        $this->id = $userId;
+        if (!$this->exists()) {
+            return false;
+        }
+        if ($novaPassword == null) {
+            $novaPassword = $this->generatePassword(5);
+        }
+
+        $this->set('password', Security::hash($novaPassword, 'blowfish'));
+        $this->save();
+
+        //Invocamos o after Change Password para notificar o User
+        CakeResque::enqueue('default', 'UserShell', array('afterChangePassword', $userId, $novaPassword));
+        $datasource->commit();
+        return $novaPassword;
+    }
+
+    //Verifica se um dado Estudante é aluno
 	public function isAluno($userId) {
 		$this->Entidade->Aluno->contain('Entidade');
 		if ($this->Entidade->Aluno->find('first', array('conditions' => array('Entidade.user_id' => $userId)))) {
