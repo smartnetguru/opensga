@@ -2,14 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fc9bff1a-fcc4-4747-ab16-ab64e9734a11" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/docs/manuais/source" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/Migrations" afterPath="$PROJECT_DIR$/plugins/Migrations" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/database/opensga_modelo_database.mwb" afterPath="$PROJECT_DIR$/docs/database/opensga_modelo_database.mwb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/manuais/source" afterPath="$PROJECT_DIR$/docs/manuais/source" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitmodules" afterPath="$PROJECT_DIR$/.gitmodules" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Config/Migration/1406189658_first_migration.php" afterPath="$PROJECT_DIR$/app/Config/Migration/1406189658_first_migration.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Model/Aluno.php" afterPath="$PROJECT_DIR$/app/Model/Aluno.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Config/Migration/1406190161_duracao_curso.php" afterPath="$PROJECT_DIR$/app/Config/Migration/1406190161_duracao_curso.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Controller/MessagesController.php" afterPath="$PROJECT_DIR$/app/Controller/MessagesController.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Console/Command/OpenSGAAclShell.php" afterPath="$PROJECT_DIR$/app/Console/Command/OpenSGAAclShell.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Console/Command/OpenSGAShell.php" afterPath="$PROJECT_DIR$/app/Console/Command/OpenSGAShell.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/opensga.iml" afterPath="$PROJECT_DIR$/.idea/opensga.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Config/Schema/schema.php" afterPath="$PROJECT_DIR$/app/Config/Schema/schema.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="opensga.iws" />
@@ -36,25 +38,16 @@
       <file leaf-file-name="bootstrap.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Config/bootstrap.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="82" column="0" selection-start="2767" selection-end="2767" vertical-scroll-proportion="-30.814816" vertical-offset="644" max-vertical-offset="1584">
+            <state line="82" column="0" selection-start="2767" selection-end="2767" vertical-scroll-proportion="0.0" vertical-offset="667" max-vertical-offset="1584">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="1406189658_first_migration.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Config/Migration/1406189658_first_migration.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="20" column="0" selection-start="289" selection-end="289" vertical-scroll-proportion="0.0" vertical-offset="360" max-vertical-offset="918">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MessagesController.php" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="MessagesController.php" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/Controller/MessagesController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="42" column="0" selection-start="1537" selection-end="1537" vertical-scroll-proportion="0.0" vertical-offset="756" max-vertical-offset="2412">
+            <state line="43" column="0" selection-start="1656" selection-end="1656" vertical-scroll-proportion="0.021301774" vertical-offset="756" max-vertical-offset="2466">
               <folding />
             </state>
           </provider>
@@ -63,16 +56,16 @@
       <file leaf-file-name="OpenSGAAclShell.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Console/Command/OpenSGAAclShell.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="188" column="99" selection-start="12120" selection-end="12120" vertical-scroll-proportion="-0.6666667" vertical-offset="3366" max-vertical-offset="6462">
+            <state line="217" column="0" selection-start="14183" selection-end="14183" vertical-scroll-proportion="0.0" vertical-offset="3906" max-vertical-offset="6444">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="OpenSGAShell.php" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="OpenSGAShell.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Console/Command/OpenSGAShell.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="313" column="40" selection-start="17892" selection-end="17892" vertical-scroll-proportion="0.37514794" vertical-offset="5407" max-vertical-offset="34740">
+            <state line="865" column="12" selection-start="50095" selection-end="50162" vertical-scroll-proportion="0.0" vertical-offset="15295" max-vertical-offset="34434">
               <folding />
             </state>
           </provider>
@@ -81,11 +74,8 @@
       <file leaf-file-name="Aluno.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Model/Aluno.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="1425" column="0" selection-start="59212" selection-end="59212" vertical-scroll-proportion="-16.62963" vertical-offset="25201" max-vertical-offset="28026">
-              <folding>
-                <marker date="1406533727584" expanded="true" signature="15617:15681" placeholder="Select plano..matriculas..." />
-                <marker date="1406533727584" expanded="true" signature="16189:16253" placeholder="Select plano..matriculas..." />
-              </folding>
+            <state line="1430" column="0" selection-start="59476" selection-end="59476" vertical-scroll-proportion="0.0" vertical-offset="25740" max-vertical-offset="27774">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -107,10 +97,12 @@
         <option value="$PROJECT_DIR$/app/Config/Migration/1406189658_first_migration.php" />
         <option value="$PROJECT_DIR$/docs/manuais/source/desenvolvedor.rst" />
         <option value="$PROJECT_DIR$/docs/manuais/source/docente/turmas.rst" />
-        <option value="$PROJECT_DIR$/app/Controller/MessagesController.php" />
-        <option value="$PROJECT_DIR$/app/Console/Command/OpenSGAAclShell.php" />
         <option value="$PROJECT_DIR$/app/Model/Aluno.php" />
         <option value="$PROJECT_DIR$/app/Console/Command/OpenSGAShell.php" />
+        <option value="$PROJECT_DIR$/app/Controller/MessagesController.php" />
+        <option value="$PROJECT_DIR$/app/Console/Command/OpenSGAAclShell.php" />
+        <option value="$PROJECT_DIR$/app/Console/Command/UserShell.php" />
+        <option value="$PROJECT_DIR$/app/Model/User.php" />
       </list>
     </option>
   </component>
@@ -146,7 +138,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -377,11 +368,16 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="FullScreen" value="false" />
+    <property name="options.lastSelected" value="editor.preferences.folding" />
+    <property name="options.splitter.main.proportions" value="0.3" />
+    <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="options.searchVisible" value="true" />
   </component>
   <component name="RunManager">
     <configuration default="true" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
@@ -406,6 +402,19 @@
       <created>1406188445227</created>
       <updated>1406188445227</updated>
     </task>
+    <task id="LOCAL-00001" summary="Nova Função para alterar Password da Linha de comando">
+      <created>1406661214257</created>
+      <updated>1406661214257</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Nova função para alterar Password do Usuário, mais consistentemente">
+      <created>1406661435436</created>
+      <updated>1406661435436</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Agora a função generatePassword aceita configurar a força da senha">
+      <created>1406661741103</created>
+      <updated>1406661741103</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -416,8 +425,8 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25" sideWeight="0.49944383" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25" sideWeight="0.5005562" order="0" side_tool="true" content_ui="combo" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2553305" sideWeight="0.4983315" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2553305" sideWeight="0.5016685" order="0" side_tool="true" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -427,6 +436,7 @@
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -444,11 +454,172 @@
     <option name="myTodoPanelSettings">
       <TodoPanelSettings />
     </option>
+    <MESSAGE value="Nova Função para alterar Password da Linha de comando" />
+    <MESSAGE value="Nova função para alterar Password do Usuário, mais consistentemente" />
+    <MESSAGE value="Agora a função generatePassword aceita configurar a força da senha" />
+    <option name="LAST_COMMIT_MESSAGE" value="Agora a função generatePassword aceita configurar a força da senha" />
+    <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
+    <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/app/Config/bootstrap.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="82" column="0" selection-start="2767" selection-end="2767" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1584">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Controller/MessagesController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="43" column="0" selection-start="1656" selection-end="1656" vertical-scroll-proportion="0.0" vertical-offset="774" max-vertical-offset="2466">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Console/Command/OpenSGAAclShell.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="217" column="0" selection-start="14183" selection-end="14183" vertical-scroll-proportion="0.0" vertical-offset="3906" max-vertical-offset="6444">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Console/Command/OpenSGAShell.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="865" column="12" selection-start="50095" selection-end="50162" vertical-scroll-proportion="0.0" vertical-offset="15295" max-vertical-offset="34434">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Model/Aluno.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1430" column="0" selection-start="59476" selection-end="59476" vertical-scroll-proportion="0.0" vertical-offset="25740" max-vertical-offset="27774">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Config/bootstrap.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="82" column="0" selection-start="2767" selection-end="2767" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1584">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Controller/MessagesController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="43" column="0" selection-start="1656" selection-end="1656" vertical-scroll-proportion="0.0" vertical-offset="774" max-vertical-offset="2466">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Console/Command/OpenSGAAclShell.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="217" column="0" selection-start="14183" selection-end="14183" vertical-scroll-proportion="0.0" vertical-offset="3376" max-vertical-offset="6444">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Console/Command/UserShell.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="18" column="0" selection-start="317" selection-end="317" vertical-scroll-proportion="0.0" vertical-offset="324" max-vertical-offset="432" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Model/User.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="187" column="24" selection-start="5021" selection-end="5021" vertical-scroll-proportion="0.0" vertical-offset="3366" max-vertical-offset="5346" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Console/Command/OpenSGAShell.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="865" column="12" selection-start="50095" selection-end="50162" vertical-scroll-proportion="0.0" vertical-offset="15295" max-vertical-offset="34434">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Model/Aluno.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1430" column="0" selection-start="59476" selection-end="59476" vertical-scroll-proportion="0.0" vertical-offset="25740" max-vertical-offset="27774">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Config/bootstrap.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="82" column="0" selection-start="2767" selection-end="2767" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1584">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Controller/MessagesController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="43" column="0" selection-start="1656" selection-end="1656" vertical-scroll-proportion="0.0" vertical-offset="774" max-vertical-offset="2466">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Console/Command/OpenSGAAclShell.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="217" column="0" selection-start="14183" selection-end="14183" vertical-scroll-proportion="0.0" vertical-offset="3376" max-vertical-offset="6444">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Console/Command/UserShell.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="24" column="0" selection-start="466" selection-end="466" vertical-scroll-proportion="0.0" vertical-offset="432" max-vertical-offset="540" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Console/Command/OpenSGAShell.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="364" column="0" selection-start="20160" selection-end="20160" vertical-scroll-proportion="0.0" vertical-offset="6552" max-vertical-offset="34434">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Model/Aluno.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1430" column="0" selection-start="59476" selection-end="59476" vertical-scroll-proportion="0.0" vertical-offset="25740" max-vertical-offset="27774">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Config/bootstrap.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="82" column="0" selection-start="2767" selection-end="2767" vertical-scroll-proportion="0.0" vertical-offset="667" max-vertical-offset="1584">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Controller/MessagesController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="40" column="0" selection-start="1501" selection-end="1501" vertical-scroll-proportion="0.0" vertical-offset="720" max-vertical-offset="2412">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Console/Command/OpenSGAAclShell.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="213" column="78" selection-start="14010" selection-end="14010" vertical-scroll-proportion="0.0" vertical-offset="3376" max-vertical-offset="6462">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Console/Command/OpenSGAShell.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="340" column="0" selection-start="19317" selection-end="19317" vertical-scroll-proportion="0.0" vertical-offset="6120" max-vertical-offset="34020">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Model/Aluno.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1425" column="0" selection-start="59388" selection-end="59388" vertical-scroll-proportion="0.0" vertical-offset="25650" max-vertical-offset="27666">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/Config/bootstrap.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="82" column="0" selection-start="2725" selection-end="2725" vertical-scroll-proportion="0.0" vertical-offset="644" max-vertical-offset="1584">
@@ -458,9 +629,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Config/Migration/1406189658_first_migration.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="0" selection-start="289" selection-end="289" vertical-scroll-proportion="0.0" vertical-offset="360" max-vertical-offset="918">
-          <folding />
-        </state>
+        <state line="20" column="0" selection-start="289" selection-end="289" vertical-scroll-proportion="0.0" vertical-offset="360" max-vertical-offset="918" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Controller/MessagesController.php">
@@ -486,9 +655,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Config/Migration/1406189658_first_migration.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="0" selection-start="289" selection-end="289" vertical-scroll-proportion="0.0" vertical-offset="50" max-vertical-offset="918">
-          <folding />
-        </state>
+        <state line="20" column="0" selection-start="289" selection-end="289" vertical-scroll-proportion="0.0" vertical-offset="50" max-vertical-offset="918" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Config/bootstrap.php">
@@ -500,66 +667,70 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Config/Migration/1406189658_first_migration.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="0" selection-start="289" selection-end="289" vertical-scroll-proportion="0.0" vertical-offset="50" max-vertical-offset="918">
-          <folding />
-        </state>
+        <state line="20" column="0" selection-start="289" selection-end="289" vertical-scroll-proportion="0.0" vertical-offset="50" max-vertical-offset="918" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Config/bootstrap.php">
+    <entry file="file://$PROJECT_DIR$/app/View/Alunos/mudanca_curso.ctp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="82" column="0" selection-start="2767" selection-end="2767" vertical-scroll-proportion="-30.814816" vertical-offset="644" max-vertical-offset="1584">
+        <state line="64" column="0" selection-start="862" selection-end="2476" vertical-scroll-proportion="0.87218934" vertical-offset="451" max-vertical-offset="1368" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Controller/AlunosController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1112" column="27" selection-start="44664" selection-end="44671" vertical-scroll-proportion="0.33251834" vertical-offset="19942" max-vertical-offset="25056" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Model/Aluno.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1430" column="0" selection-start="59476" selection-end="59476" vertical-scroll-proportion="0.0" vertical-offset="25740" max-vertical-offset="27774">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Config/Migration/1406189658_first_migration.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="0" selection-start="289" selection-end="289" vertical-scroll-proportion="0.0" vertical-offset="50" max-vertical-offset="918">
+        <state line="20" column="0" selection-start="289" selection-end="289" vertical-scroll-proportion="0.33964497" vertical-offset="73" max-vertical-offset="918" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Config/bootstrap.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="82" column="0" selection-start="2767" selection-end="2767" vertical-scroll-proportion="0.0" vertical-offset="667" max-vertical-offset="1584">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Controller/TurmasController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="359" column="20" selection-start="13093" selection-end="13232" vertical-scroll-proportion="0.33252722" vertical-offset="6187" max-vertical-offset="13230" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Console/Command/OpenSGAShell.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="865" column="12" selection-start="50095" selection-end="50162" vertical-scroll-proportion="0.0" vertical-offset="15295" max-vertical-offset="34434">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Console/Command/UserShell.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="17" column="7" selection-start="322" selection-end="322" vertical-scroll-proportion="0.2769231" vertical-offset="72" max-vertical-offset="1296" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Model/User.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="118" column="31" selection-start="3114" selection-end="3114" vertical-scroll-proportion="0.63076925" vertical-offset="1591" max-vertical-offset="6012" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Console/Command/OpenSGAAclShell.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="217" column="0" selection-start="14183" selection-end="14183" vertical-scroll-proportion="0.0" vertical-offset="3906" max-vertical-offset="6444">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Controller/MessagesController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="42" column="0" selection-start="1537" selection-end="1537" vertical-scroll-proportion="0.0" vertical-offset="756" max-vertical-offset="2412">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Console/Command/OpenSGAAclShell.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="188" column="99" selection-start="12120" selection-end="12120" vertical-scroll-proportion="-0.6666667" vertical-offset="3366" max-vertical-offset="6462">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/View/Alunos/mudanca_curso.ctp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="64" column="0" selection-start="862" selection-end="2476" vertical-scroll-proportion="0.87218934" vertical-offset="451" max-vertical-offset="1368">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Controller/AlunosController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1112" column="27" selection-start="44664" selection-end="44671" vertical-scroll-proportion="0.33251834" vertical-offset="19942" max-vertical-offset="25056">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Model/Aluno.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1425" column="0" selection-start="59212" selection-end="59212" vertical-scroll-proportion="-16.62963" vertical-offset="25201" max-vertical-offset="28026">
-          <folding>
-            <marker date="1406533727584" expanded="true" signature="15617:15681" placeholder="Select plano..matriculas..." />
-            <marker date="1406533727584" expanded="true" signature="16189:16253" placeholder="Select plano..matriculas..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Console/Command/OpenSGAShell.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="313" column="40" selection-start="17892" selection-end="17892" vertical-scroll-proportion="0.37514794" vertical-offset="5407" max-vertical-offset="34740">
+        <state line="43" column="0" selection-start="1656" selection-end="1656" vertical-scroll-proportion="0.021301774" vertical-offset="756" max-vertical-offset="2466">
           <folding />
         </state>
       </provider>

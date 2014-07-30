@@ -36,6 +36,9 @@ class MessagesController extends AppController {
 	}
 
     public function sms_index(){
+        $this->loadModel('SmsNotification');
+        $smsRecebidas = $this->SmsNotification->find('all',array('limit'=>20));
+        debug($smsRecebidas);
 
     }
 
