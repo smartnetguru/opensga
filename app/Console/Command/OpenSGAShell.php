@@ -910,7 +910,7 @@
             if (!class_exists('PHPExcel'))
                 throw new CakeException('Vendor class PHPExcel not found!');
 
-            $xls = PHPExcel_IOFactory::load(APP . 'Imports' . DS . 'admitidos_0408.xlsx');
+            $xls = PHPExcel_IOFactory::load(APP . 'Imports' . DS . 'admitidos_quelimane_2013.xlsx');
 
             $worksheet = $xls->getActiveSheet();
             //debug($xls->getActiveSheetIndex());
@@ -933,7 +933,7 @@
                 $array_candidato['Candidatura']['apelido']               = trim($nomes['surname']);
                 $array_candidato['Candidatura']['nomes']                 = trim($nomes['firstname']);
                 $array_candidato['Candidatura']['estado_matricula_id']   = 5;
-                $array_candidato['Candidatura']['ano_lectivo_admissao']  = $nome_completo2 = $worksheet->getCell('F' . $linha_actual)->getCalculatedValue();
+                $array_candidato['Candidatura']['ano_lectivo_admissao']  = $worksheet->getCell('F' . $linha_actual)->getCalculatedValue();
                 $array_candidato['Candidatura']['tipo_ingresso_id']      = 2;
                 $array_candidato['Candidatura']['estado_candidatura_id'] = 2;
                 $curso_nome                                              = $worksheet->getCell('D' . $linha_actual)->getCalculatedValue();

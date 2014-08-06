@@ -13,7 +13,9 @@ App::uses('AppController', 'Controller');
 class CandidaturasController extends AppController {
 
 	/**
-	 * index method
+	 * Lista de Candidatos não Matriculados.
+     *
+     * @todo Pesquisar Candidatos ainda não funciona!
 	 *
 	 * @return void
 	 */
@@ -27,6 +29,14 @@ class CandidaturasController extends AppController {
 		);
 		$this->set('candidaturas', $this->Paginator->paginate());
 	}
+
+    public function importar_candidatos(){
+
+    }
+
+    public function importar_candidatos_2(){
+
+    }
 
 	public function candidatos_admitidos() {
 		$this->paginate = array(
