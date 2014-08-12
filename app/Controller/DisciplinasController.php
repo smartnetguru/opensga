@@ -25,17 +25,26 @@ class DisciplinasController extends AppController {
 
 	/**
 	 * Lista de Disciplinas para funcionarios das faculdades
-	 * @todo Ainda nao filtra por faculdade
-	 */
+     * @todo Melhorar a forma como as disciplinas sao filtradas por faculdade
+     *
+     */
 	function faculdade_index() {
 
-		$this->paginate = array(
-			'conditions' => array(
-			//'DisciplinaUnidadeOrganica.unidade_organica_id' => $this->Session->read('Auth.User.unidade_organica_id')
-			),
-			'contain' => array(
-				'DisciplinaUnidadeOrganica'
-			)
+        $unidadeOrganicaId = $this->Session->read("Auth.User.unidade_organica_id");
+        $disciplinaUnidadeOrganicas = $this->Disciplina->DisciplinaUnidadeOrganica->find('list', array(
+            'conditions' => array(
+                'unidade_organica_id' => $unidadeOrganicaId
+            ),
+            'fields' => array('disciplina_id')
+        ));
+        $disciplinaUnidadeOrganicaIds = array_values($disciplinaUnidadeOrganicas);
+
+        $this->paginate = array(
+            'conditions' => array('Disciplina.id' => $disciplinaUnidadeOrganicaIds),
+            'order' => 'Disciplina.name ASC',
+            'contain' => array(
+                'DisciplinaUnidadeOrganica.unidade_organica_id =' . $unidadeOrganicaId
+            )
 		);
 		$disciplinas = $this->paginate('Disciplina');
 		$this->set('disciplinas', $disciplinas);
@@ -56,9 +65,16 @@ class DisciplinasController extends AppController {
 		$this->set(compact('grupodisciplinars'));
 	}
 
-	function faculdade_adicionar_disciplina() {
 
-		if ($this->request->is('post')) {
+    /**
+     *Adiciona disciplinas de uma determinada Faculdade á Base de Dados.
+     * Alem de adicionar a tabela Disciplinas, adiciona tambem na disciplina_unidade_organicas
+     *
+     */
+    function faculdade_adicionar_disciplina()
+    {
+
+        if ($this->request->is('post')) {
 			$unidade_organica_id = $this->Session->read('Auth.User.unidade_organica_id');
 			//Primeiro ver se a disciplina existe
 			$disciplina = $this->Disciplina->findByName($this->request->data['Disciplina']['name']);
@@ -87,9 +103,7 @@ class DisciplinasController extends AppController {
 					$this->redirect(array('action' => 'index'));
 				}
 			} else {
-				$this->Disciplina->create();
 				$this->request->data['Disciplina']['unidade_organica_id'] = $unidade_organica_id;
-
 				if ($this->Disciplina->cadastraDisciplina($this->request->data)) {
 					$this->Session->setFlash(__('Dados Gravados com Sucesso'), 'default', array('class' => 'alert alert-success'));
 					$this->redirect(array('action' => 'index'));

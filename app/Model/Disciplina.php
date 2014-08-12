@@ -72,12 +72,13 @@ class Disciplina extends AppModel {
     var $validate = array(
         'codigo' => array(
             'rule' => 'isUnique',
-            'message' => 'Este codigo ja foi usado por outra disciplina.'
+            'message' => 'Este codigo ja foi usado por outra disciplina.',
+            'allowEmpty' => false,
         ),
         'name' => array(
             'rule' => 'isUnique',
             'message' => 'Ja existe uma disciplina com este nome.',
-            'required' => true,
+            'required' => 'create',
             'allowEmpty' => false,
         )
     );
@@ -88,13 +89,13 @@ class Disciplina extends AppModel {
         
         $this->create();
         if($this->save($data)){
-            $array_disciplina_unidade = array(
+            $arrayDisciplinaUnidade = array(
                 'disciplina_id'=>$this->id,
                 'unidade_organica_id'=>$data['Disciplina']['unidade_organica_id'],
                 'estado_objecto_id'=>1
             );
             $this->DisciplinaUnidadeOrganica->create();
-            if($this->DisciplinaUnidadeOrganica->save($array_disciplina_unidade)){
+            if ($this->DisciplinaUnidadeOrganica->save($arrayDisciplinaUnidade)) {
                 return $datasource->commit();
             }
             return $datasource->rollback();
