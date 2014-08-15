@@ -293,6 +293,30 @@ class Entidade extends AppModel {
 		return '0';
 	}
 
+    /**
+     * Retorna todas entidades que fazem anos numa determinada data
+     * @param null $diaNascimento
+     * @param null $mesNascimento
+     * @return array
+     */
+    public function getAllAniversariantes($diaNascimento=null,$mesNascimento=null){
+        if($diaNascimento==null){
+            $diaNascimento = date('d');
+        }
+        if($mesNascimento==null){
+            $mesNascimento=date('m');
+        }
+        $entidades = $this->find('all',array(
+            'conditions'=>array(
+                'DAY(Entidade.data_nascimento)'=>$diaNascimento,
+            'MONTH(Entidade.data_nascimento)'=>$mesNascimento
+            ),
+                'fields'=>array('Entidade.id','Entidade.name','Entidade.data_nascimento','Entidade.telemovel')
+        )
+        );
+        return $entidades;
+    }
+
 }
 
 ?>

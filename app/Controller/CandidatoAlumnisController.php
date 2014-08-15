@@ -24,7 +24,7 @@ class CandidatoAlumnisController extends AppController {
  * @param string $id
  * @return void
  */
-	public function view($id = null) {
+	public function perfil_candidato_alumni($id = null) {
 		if (!$this->CandidatoAlumni->exists($id)) {
 			throw new NotFoundException(__('Invalid candidato alumni'));
 		}
@@ -75,7 +75,7 @@ class CandidatoAlumnisController extends AppController {
  * @param string $id
  * @return void
  */
-	public function edit($id = null) {
+	public function editar_candidato_alumni($id = null) {
 		if (!$this->CandidatoAlumni->exists($id)) {
 			throw new NotFoundException(__('Invalid candidato alumni'));
 		}
@@ -105,7 +105,7 @@ class CandidatoAlumnisController extends AppController {
  * @param string $id
  * @return void
  */
-	public function delete($id = null) {
+	public function cancelar_candidatura_alumni($id = null) {
 		$this->CandidatoAlumni->id = $id;
 		if (!$this->CandidatoAlumni->exists()) {
 			throw new NotFoundException(__('Invalid candidato alumni'));
@@ -118,7 +118,10 @@ class CandidatoAlumnisController extends AppController {
 		$this->Session->setFlash(__('Candidato alumni was not deleted'));
 		$this->redirect(array('action' => 'index'));
 	}
-        
+
+    public function aprovar_candidatura_alumni(){
+
+    }
         public function beforeFilter() {
             parent::beforeFilter();
             

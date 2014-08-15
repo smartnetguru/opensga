@@ -19,7 +19,10 @@ class FuncionariosController extends AppController {
 
 	var $name = 'Funcionarios';
 
-	public function autocomplete() {
+    /**
+     * @deprecated temos de ver se isso tem alguma valia
+     */
+    public function autocomplete() {
 
 		$this->Funcionario->contain('Entidade');
 		$funcionarios = $this->Funcionario->find('all', array('conditions' => array('Entidade.name LIKE' => "%" . $this->request->query['term'] . "%"), 'fields' => array('CONCAT(Funcionario.codigo,"-",Entidade.name) as nome')));
@@ -32,17 +35,22 @@ class FuncionariosController extends AppController {
 		$this->set(compact('funcionarios2'));
 	}
 
+
 	function index() {
 
 		$conditions = array();
 		if ($this->request->is('post')) {
-			if ($this->request->data['Funcionario']['codigo'] != '') {
-				$conditions['Funcionario.codigo'] = $this->request->data['Funcionario']['codigo'];
+            debug($this->request->data);
+			if ($this->request->data['Funcionario']['unidade_organica_id'] != '') {
+				$conditions['Funcionario.unidade_organica_id'] =
+                    $this->request->data['Funcionario']['unidade_organica_id'];
 			} else {
 				$conditions['Entidade.nomes LIKE'] = '%' . $this->request->data['Funcionario']['nomes'] . '%';
 				$conditions['Entidade.apelido LIKE'] = '%' . $this->request->data['Funcionario']['apelido'] . '%';
 			}
 		}
+
+        debug($conditions);
 		$this->paginate = array(
 			'conditions' => $conditions,
 			'contain' => array('Entidade' => array(
@@ -54,7 +62,8 @@ class FuncionariosController extends AppController {
 
 
 
-		$this->set('groups', $this->Funcionario->User->Group->find('list'));
+        $unidadeOrganicas = $this->Funcionario->UnidadeOrganica->find('list');
+		$this->set(compact('unidadeOrganicas'));
 		$this->set('funcionarios', $this->paginate());
 	}
 

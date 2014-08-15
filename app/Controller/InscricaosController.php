@@ -58,8 +58,8 @@ class InscricaosController extends AppController
             $this->Inscricao->set('estado_inscricao_id', 9);
             $this->Inscricao->save();
             $this->Session->setFlash(__('Inscricao Anulada com Sucesso'), 'default', array('class' => 'alert alert-success'));
-            $alunoId = $this->Inscricao->field('aluno_id');
-            $this->redirect(array('controller' => 'inscricaos', 'action' => 'ver_inscricoes_aluno', 'faculdade' => true, $alunoId));
+            //$alunoId = $this->Inscricao->field('aluno_id');
+            $this->redirect($this->referer());
         } else {
             throw new MethodNotAllowedException('Erro no Sistema');
         }
@@ -75,6 +75,62 @@ class InscricaosController extends AppController
             $this->set(compact('alunos'));
             $this->set('mostrar_resultado', true);
         }
+    }
+
+    function faculdade_index()
+    {
+
+        $unidadeOrganicaId = $this->Session->read('Auth.User.unidade_organica_id');
+        $conditions = array();
+        $this->Inscricao->Turma->contain('Curso');
+        $cursosFaculdade = $this->Inscricao->Turma->Curso->find('list',array(
+            'conditions'=>array(
+                'Curso.unidade_organica_id'=>$unidadeOrganicaId,
+                //'Curso.estado_objecto_id NOT'=>2
+            )
+        ));
+        $turmasFaculdade = $this->Inscricao->Turma->find('list',array(
+            'conditions'=>array(
+                'Curso.unidade_organica_id' =>$unidadeOrganicaId,
+                'Turma.estado_turma_id' =>1
+            )
+        ));
+        $turmasFilter = array_keys($turmasFaculdade);
+        $conditions['Inscricao.turma_id'] = $turmasFilter;
+
+        if ($this->request->is('post') || $this->request->is('put')) {
+            if($this->request->data['Inscricao']['curso_id']!=''){
+                $conditions['Turma.curso_id'] = $this->request->data['Inscricao']['curso_id'];
+                $turmasFaculdade = $this->Inscricao->Turma->find('list',array(
+                    'conditions'=>array(
+                        'Turma.curso_id' =>$this->request->data['Inscricao']['curso_id'],
+                        'Turma.estado_turma_id' =>1
+                    )
+                ));
+            }
+            if($this->request->data['Inscricao']['turma_id']!=''){
+                $conditions['Inscricao.turma_id'] = $this->request->data['Inscricao']['turma_id'];
+            }
+            if($this->request->data['Inscricao']['numero_estudante']!=''){
+                $conditions['Aluno.codigo'] = $this->request->data['Inscricao']['numero_estudante'];
+            }
+        }
+
+
+        $this->paginate = array(
+            'conditions'=>$conditions,
+            'contain'=>array(
+                'Aluno'=>array(
+                    'Entidade'
+                ),'Turma'=>array(
+                    'Curso','Disciplina','AnoLectivo','SemestreLectivo'
+                ),
+                'EstadoInscricao'
+            ),
+            'order'=>'Inscricao.modified Desc'
+        );
+        $inscricaos = $this->paginate();
+        $this->set(compact('inscricaos','turmasFaculdade','cursosFaculdade'));
     }
 
     function view($id = null)

@@ -145,6 +145,7 @@ class OpenSGAAclShell extends AppShell {
 				$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Docentes/faculdade_editar_docente";
 
 				$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Inscricaos/faculdade_anular_inscricao";
+                $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Inscricaos/faculdade_index";
 				$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Inscricaos/faculdade_inscrever";
                 $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Inscricaos/faculdade_inscrever2";
 				$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Inscricaos/faculdade_valida_inscricao";
@@ -214,6 +215,14 @@ class OpenSGAAclShell extends AppShell {
                     $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/report_estudantes_sem_certificado";
                     $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/report_estudantes_sem_smo";
                     $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/report_estudantes_fora_tempo_estudos";
+
+
+                    $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/CandidatoAlumnis/index";
+                    $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/CandidatoAlumnis/perfil_candidato_alumni";
+                    $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/CandidatoAlumnis/editar_candidato_alumni";
+                    $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/CandidatoAlumnis/aprovar_candidatura_alumni";
+                    $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/CandidatoAlumnis/cancelar_candidatura_alumni";
+
                     $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Messages/sms_index";
                     $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Messages/send_mass_sms";
 
