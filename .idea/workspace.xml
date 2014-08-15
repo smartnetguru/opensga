@@ -40,6 +40,7 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/Migrations/Test/test_app/Plugin/TestMigrationPlugin/Config/Schema/Schema.php" afterPath="$PROJECT_DIR$/plugins/Migrations/Test/test_app/Plugin/TestMigrationPlugin/Config/Schema/Schema.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/Migrations/Model/SchemaMigration.php" afterPath="$PROJECT_DIR$/plugins/Migrations/Model/SchemaMigration.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/Migrations/Test/Fixture/SchemaMigrationsFixture.php" afterPath="$PROJECT_DIR$/plugins/Migrations/Test/Fixture/SchemaMigrationsFixture.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Controller/SmsNotificationsController.php" afterPath="$PROJECT_DIR$/app/Controller/SmsNotificationsController.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/Migrations/Test/test_app/Plugin/TestMigrationPlugin/Config/Migration/blank_file.php" afterPath="$PROJECT_DIR$/plugins/Migrations/Test/test_app/Plugin/TestMigrationPlugin/Config/Migration/blank_file.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/Migrations/composer.json" afterPath="$PROJECT_DIR$/plugins/Migrations/composer.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/Migrations/Test/test_app/Plugin/TestMigrationPlugin/Config/Migration/map.php" afterPath="$PROJECT_DIR$/plugins/Migrations/Test/test_app/Plugin/TestMigrationPlugin/Config/Migration/map.php" />
@@ -53,7 +54,6 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/Migrations/Locale/spa/LC_MESSAGES/migrations.po" afterPath="$PROJECT_DIR$/plugins/Migrations/Locale/spa/LC_MESSAGES/migrations.po" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/Migrations/Locale/migrations.pot" afterPath="$PROJECT_DIR$/plugins/Migrations/Locale/migrations.pot" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/Migrations/View/Elements/migrations_panel.ctp" afterPath="$PROJECT_DIR$/plugins/Migrations/View/Elements/migrations_panel.ctp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Config/Schema/schema.php" afterPath="$PROJECT_DIR$/app/Config/Schema/schema.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/Migrations/Test/test_app/Plugin/TestMigrationPlugin4/Config/Schema/schema.php" afterPath="$PROJECT_DIR$/plugins/Migrations/Test/test_app/Plugin/TestMigrationPlugin4/Config/Schema/schema.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/Migrations/Test/Fixture/test_migration.txt" afterPath="$PROJECT_DIR$/plugins/Migrations/Test/Fixture/test_migration.txt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/Migrations/Test/Fixture/test_migration_add_fields_from_cli.txt" afterPath="$PROJECT_DIR$/plugins/Migrations/Test/Fixture/test_migration_add_fields_from_cli.txt" />
@@ -143,10 +143,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="OpenSGAAclShell.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Console/Command/OpenSGAAclShell.php">
+      <file leaf-file-name="SmsNotificationsController.php" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/Controller/SmsNotificationsController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="146" column="100" selection-start="8797" selection-end="8797" vertical-scroll-proportion="-16.88889" vertical-offset="2172" max-vertical-offset="6786">
+            <state line="125" column="44" selection-start="3566" selection-end="3566" vertical-scroll-proportion="0.8469016" vertical-offset="1553" max-vertical-offset="2646">
               <folding />
             </state>
           </provider>
@@ -161,16 +161,18 @@
                 <marker date="1408078603670" expanded="true" signature="1546:1593" placeholder="..." />
                 <marker date="1408078603670" expanded="true" signature="1812:1863" placeholder="..." />
                 <marker date="1408078603670" expanded="true" signature="2065:2074" placeholder="..." />
+                <marker date="1408078603670" expanded="true" signature="2616:4099" placeholder="..." />
                 <marker date="1408078603670" expanded="true" signature="2631:2687" placeholder="..." />
+                <marker date="1408078603670" expanded="true" signature="3831:4049" placeholder="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="1408082904_anular_inscricao.php" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="1408082904_anular_inscricao.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Config/Migration/1408082904_anular_inscricao.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-1.6245444" vertical-offset="1337" max-vertical-offset="2160">
+            <state line="112" column="0" selection-start="5441" selection-end="5441" vertical-scroll-proportion="-26.481482" vertical-offset="1301" max-vertical-offset="2160">
               <folding />
             </state>
           </provider>
@@ -239,6 +241,8 @@
         <option value="$PROJECT_DIR$/app/View/Pages/faculdade_home.ctp" />
         <option value="$PROJECT_DIR$/app/View/Inscricaos/faculdade_index.ctp" />
         <option value="$PROJECT_DIR$/app/Controller/InscricaosController.php" />
+        <option value="$PROJECT_DIR$/app/Config/Migration/1408082904_anular_inscricao.php" />
+        <option value="$PROJECT_DIR$/app/Controller/SmsNotificationsController.php" />
       </list>
     </option>
   </component>
@@ -510,46 +514,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="opensga" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="opensga" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Config" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="opensga" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="opensga" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Config" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Migration" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
       <pane id="Scope" />
@@ -806,16 +770,6 @@
         <state line="22" column="12" selection-start="811" selection-end="811" vertical-scroll-proportion="0.03327172" vertical-offset="72" max-vertical-offset="1152" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Console/Command/OpenSGAShell.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="907" column="33" selection-start="52209" selection-end="52212" vertical-scroll-proportion="0.332" vertical-offset="16160" max-vertical-offset="34434" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Controller/SmsNotificationsController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="94" column="8" selection-start="2711" selection-end="2742" vertical-scroll-proportion="0.0" vertical-offset="1560" max-vertical-offset="2484" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Model/SmsEnviada.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="22" column="21" selection-start="543" selection-end="543" vertical-scroll-proportion="0.0" vertical-offset="396" max-vertical-offset="1728" />
@@ -941,9 +895,31 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/View/Inscricaos/faculdade_index.ctp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="75" column="19" selection-start="4071" selection-end="4071" vertical-scroll-proportion="-25.814816" vertical-offset="653" max-vertical-offset="1674">
+          <folding>
+            <marker date="1408078603670" expanded="true" signature="1260:1307" placeholder="..." />
+            <marker date="1408078603670" expanded="true" signature="1546:1593" placeholder="..." />
+            <marker date="1408078603670" expanded="true" signature="1812:1863" placeholder="..." />
+            <marker date="1408078603670" expanded="true" signature="2065:2074" placeholder="..." />
+            <marker date="1408078603670" expanded="true" signature="2616:4099" placeholder="..." />
+            <marker date="1408078603670" expanded="true" signature="2631:2687" placeholder="..." />
+            <marker date="1408078603670" expanded="true" signature="3831:4049" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/Console/Command/OpenSGAAclShell.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="146" column="100" selection-start="8797" selection-end="8797" vertical-scroll-proportion="-16.88889" vertical-offset="2172" max-vertical-offset="6786">
+        <state line="146" column="100" selection-start="8797" selection-end="8797" vertical-scroll-proportion="0.5759417" vertical-offset="2172" max-vertical-offset="6786">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Console/Command/OpenSGAShell.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="8" column="293" selection-start="478" selection-end="481" vertical-scroll-proportion="0.20351759" vertical-offset="0" max-vertical-offset="34758">
           <folding />
         </state>
       </provider>
@@ -955,22 +931,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/View/Inscricaos/faculdade_index.ctp">
+    <entry file="file://$PROJECT_DIR$/app/Config/Migration/1408082904_anular_inscricao.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="75" column="19" selection-start="4071" selection-end="4071" vertical-scroll-proportion="-25.814816" vertical-offset="653" max-vertical-offset="1674">
-          <folding>
-            <marker date="1408078603670" expanded="true" signature="1260:1307" placeholder="..." />
-            <marker date="1408078603670" expanded="true" signature="1546:1593" placeholder="..." />
-            <marker date="1408078603670" expanded="true" signature="1812:1863" placeholder="..." />
-            <marker date="1408078603670" expanded="true" signature="2065:2074" placeholder="..." />
-            <marker date="1408078603670" expanded="true" signature="2631:2687" placeholder="..." />
-          </folding>
+        <state line="112" column="0" selection-start="5441" selection-end="5441" vertical-scroll-proportion="-26.481482" vertical-offset="1301" max-vertical-offset="2160">
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Config/Migration/1408082904_anular_inscricao.php">
+    <entry file="file://$PROJECT_DIR$/app/Controller/SmsNotificationsController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-1.6245444" vertical-offset="1337" max-vertical-offset="2160">
+        <state line="125" column="44" selection-start="3566" selection-end="3566" vertical-scroll-proportion="0.8469016" vertical-offset="1553" max-vertical-offset="2646">
           <folding />
         </state>
       </provider>
