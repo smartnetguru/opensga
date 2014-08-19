@@ -112,7 +112,7 @@ class SmsNotificationsController extends AppController {
 					$mensagem = "A UEM, o convida a cerimónia de lançamento da iniciativa Alumni no dia 22/08/2014, no Centro Cultural e Universitário,
 pelas 14.00 horas.";
 
-					$this->SmsEnviada->sendSMS($numero, $mensagem);
+					//$this->SmsEnviada->sendSMS($numero, $mensagem);
 				}
 
 
@@ -122,10 +122,10 @@ pelas 14.00 horas.";
 
 
 		}
-        $this->SmsEnviada->sendSMS(826489374, "Todas SMS foram enviadas.");
-        $this->SmsEnviada->sendSMS(844213948, "A UEM, o convida a cerimónia de lançamento da iniciativa Alumni no dia
-        22/08/2014, no Centro Cultural e Universitário,
-pelas 14.00 horas.");
+        //$this->SmsEnviada->sendSMS(826489374, "Todas SMS foram enviadas.");
+        //$this->SmsEnviada->sendSMS(844213948, "A UEM, o convida a cerimónia de lançamento da iniciativa Alumni no dia
+        //22/08/2014, no Centro Cultural e Universitário,
+//pelas 14.00 horas.");
 	}
 
 	public function testa_sms() {
