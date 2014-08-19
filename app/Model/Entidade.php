@@ -23,7 +23,14 @@ class Entidade extends AppModel {
 		'apelido' => array('rule' => 'notempty', 'message' => 'campo obrigatorio'),
 		'nomes' => array('rule' => 'notempty', 'message' => 'campo obrigatório'),
 		'genero_id' => array('rule' => 'notempty', 'message' => 'seleccione o sexo'),
-		'data_nascimento' => array('rule' => 'notempty', 'message' => 'seleccione a data de nascimento')
+		'data_nascimento' => array('rule' => 'notempty', 'message' => 'seleccione a data de nascimento'),
+                                  
+        'name'=>array('rule'=>array('minLength', 8),
+                      'required'=>true,
+                      'message'=>'Nome deve ter pelomenos 8 caracteres'),
+                                   
+        'email'=>array('rule'=>'email','required'=>true,'message'=>'campo obrigatorio')
+        
 	);
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 
