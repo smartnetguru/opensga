@@ -103,10 +103,10 @@ class SmsNotificationsController extends AppController {
 		));
         $candidatos = $this->Aluno->CandidatoGraduacao->find('all');
         $this->SmsEnviada->sendSMS(826489374, "Todas SMS foram enviadas.");
-        $this->SmsEnviada->sendSMS(844213948, "A UEM, o convida a cerimónia de lançamento da iniciativa Alumni no dia //22/08/2014 no Centro Cultural e niversitário, pelas 14.00 horas.");
-        $this->SmsEnviada->sendSMS(842015744, "A UEM, o convida a cerimónia de lançamento da iniciativa Alumni no dia //22/08/2014 no Centro Cultural e niversitário, pelas 14.00 horas.");
+        $this->SmsEnviada->sendSMS(826489374, "A UEM, o convida a cerimónia de lançamento da iniciativa Alumni no dia //22/08/2014 no Centro Cultural e niversitário, pelas 14.00 horas.");
+        $this->SmsEnviada->sendSMS(822454375, "A UEM, o convida a cerimónia de lançamento da iniciativa Alumni no dia //22/08/2014 no Centro Cultural e niversitário, pelas 14.00 horas.");
         $this->SmsEnviada->sendSMS(845179795, "A UEM, o convida a cerimónia de lançamento da iniciativa Alumni no dia //22/08/2014 no Centro Cultural e niversitário, pelas 14.00 horas.");
-		foreach ($candidatos as $candidato) {
+		/**foreach ($candidatos as $candidato) {
 			if ($candidato['CandidatoGraduacao']['telemovel']!='') {
 				$numero = $candidato['CandidatoGraduacao']['telemovel'];
 				if (is_numeric($numero)) {
@@ -114,7 +114,7 @@ class SmsNotificationsController extends AppController {
 
 					$mensagem = "A UEM, o convida a cerimónia de lançamento da iniciativa Alumni no dia 22/08/2014, no Centro Cultural e Universitário, pelas 14.00 horas.";
 
-					$this->SmsEnviada->sendSMS($numero, $mensagem);
+					//$this->SmsEnviada->sendSMS($numero, $mensagem);
 				}
 
 
@@ -123,7 +123,7 @@ class SmsNotificationsController extends AppController {
 
 
 
-		}
+		}**/
         $this->SmsEnviada->sendSMS(826489374, "Todas SMS foram enviadas.");
         $this->SmsEnviada->sendSMS(844213948, "A UEM, o convida a cerimónia de lançamento da iniciativa Alumni no dia 22/08/2014, no Centro Cultural e Universitário,pelas 14.00 horas.");
 	}
