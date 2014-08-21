@@ -67,6 +67,19 @@ class AjaxController extends AppController {
 		$this->set(compact('distritos'));
 	}
 
+    public function get_cursos_by_faculdade() {
+        foreach ($this->request->data as $k => $v) {
+
+            $faculdadeId = reset($v);
+        }
+        $this->loadModel('Curso');
+        $departamentos = $this->Curso->UnidadeOrganica->children($faculdadeId);
+        $unidadeOrganicas = Hash::extract($departamentos,'{n}.UnidadeOrganica.id');
+        $unidadeOrganicas[] = $faculdadeId;
+        $cursos = $this->Curso->find('list',array('conditions'=>array('unidade_organica_id'=>$unidadeOrganicas)));
+        $this->set(compact('cursos'));
+    }
+
 	public function beforeFilter() {
 		parent::beforeFilter();
 		if ($this->request->is('ajax')) {

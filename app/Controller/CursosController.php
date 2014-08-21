@@ -126,6 +126,19 @@ class CursosController extends AppController {
 		$this->set(compact('GrauAcademicos', 'tipocursos', 'escolas'));
 	}
 
+    public function getByFaculdade(){
+
+        foreach($this->request->data as $k=>$v){
+
+            $faculdadeId = reset($v);
+        }
+        $departamentos = $this->Curso->UnidadeOrganica->children($faculdadeId);
+        debug($departamentos);
+        $provincias = $this->Provincia->find('list',array('conditions'=>array('paise_id'=>$pais_id)));
+        $this->set(compact('provincias'));
+        $this->layout = 'ajax';
+    }
+
 	function ver_curso($cursoId = null) {
 
 		if (!$cursoId) {

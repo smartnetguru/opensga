@@ -97,7 +97,14 @@ class CandidatoAlumni extends AppModel {
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
-		)
+		),
+        'DoumentoIdentificacao' => array(
+            'className' => 'DocumentoIdentificacao',
+            'foreignKey' => 'documento_identificacao_id',
+            'conditions' => '',
+            'fields' => '',
+            'order' => ''
+        )
 	);
 
 /**
@@ -121,4 +128,35 @@ class CandidatoAlumni extends AppModel {
 		)
 	);
 
+
+    public $validate = array(
+        'apelido' => array(
+            'apelidoRule-1' => array(
+                'rule'    => 'notEmpty',
+                'required' =>'create',
+                'message' => 'O Preenchimento do campo Apelido é obrigatório',
+            ),
+        ),
+        'nomes' => array(
+            'nomesRule-1' => array(
+                'rule'    => 'notEmpty',
+                'required' =>'create',
+                'message' => 'O Preenchimento do campo Outros nomes é obrigatório',
+            ),
+        ),
+        'genero_id' => array(
+            'generoRule-1' => array(
+                'rule'    => 'notEmpty',
+                'required' =>'create',
+                'message' => 'O preenchimento do Campo Sexo é obrigatório',
+            ),
+        ),
+        'data_nascimento' => array(
+            'dataNascimentoRule-1' => array(
+                'rule'    => 'notEmpty',
+                'required' =>'create',
+                'message' => 'O preenchimento do Campo de data de Nascimento é obrigatório',
+            ),
+        )
+    );
 }
