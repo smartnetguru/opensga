@@ -98,6 +98,7 @@ class OpenSGAAclShell extends AppShell {
 			$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/autocomplete";
 			$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/mostrar_foto";
 			$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/enviar_sms";
+            $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/exportar_alunos_autenticidades";
 			$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/pesquisar_candidato";
 			$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/atribuir_bolsa_candidato";
 			$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/print_bolsas_novo_ingresso";

@@ -98,9 +98,11 @@ class Disciplina extends AppModel {
             if ($this->DisciplinaUnidadeOrganica->save($arrayDisciplinaUnidade)) {
                 return $datasource->commit();
             }
-            return $datasource->rollback();
+            $datasource->rollback();
+            return false;
         }
-        return $datasource->rollback();
+        $datasource->rollback();;
+        return false;
     }
 
 }

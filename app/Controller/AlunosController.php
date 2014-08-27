@@ -1,7 +1,7 @@
 <?php
 
-ini_set('memory_limit', "2048M");
-set_time_limit(300);
+ini_set('memory_limit', "6048M");
+set_time_limit(3000);
 App::uses('AppController', 'Controller');
 App::uses('Sanitize', 'Utility');
 
@@ -578,6 +578,11 @@ class AlunosController extends AppController {
 	}
 
 
+    public function exportar_alunos_autenticidades($anoIngresso=null){
+        $alunos = $this->Aluno->getAllAlunosForAutenticidades($anoIngresso);
+
+        $this->set(compact('alunos'));
+    }
     /**
      * Função para docentes enviarem SMS para estudantes.
      *

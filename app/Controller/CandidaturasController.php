@@ -20,18 +20,58 @@ class CandidaturasController extends AppController {
 	 * @return void
 	 */
 	public function index() {
+
+        $conditions = array();
 		$this->paginate = array(
-			'conditions' => array(
-			),
+			'conditions' => $conditions,
+            'order'=>array('Candidatura.id'=>'DESC'),
 			'contain' => array(
 				'AlunoViaAdmissao', 'EscolaNivelMedio', 'Curso', 'UnidadeOrganica', 'Genero', 'ProvinciaNascimento'
 			)
 		);
-		$this->set('candidaturas', $this->Paginator->paginate());
+		$this->set('candidaturas', $this->paginate());
 	}
 
+    /**
+     * Importa Candidatos de um Ficheiro Excel
+     */
     public function importar_candidatos(){
+        $this->loadModel('Upload');
+        if ($this->request->is('post')) {
 
+            $type = $this->request->data['Upload']['file']['type'];
+
+            if ($type == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet') {
+
+                $uploadSucesso = $this->Upload->uploadFiles('uploads', array($this->request->data['Upload']['file']),
+                    'candidatos');
+
+                if (isset($uploadSucesso['urls'])) {
+
+
+                    $this->request->data['Upload']['name'] = $this->request->data['Upload']['file']['name'];
+                    $this->request->data['Upload']['size'] = $this->request->data['Upload']['file']['size'];
+                    $this->request->data['Upload']['file_url'] = $uploadSucesso['urls'][0];
+                    $this->request->data['Upload']['tipo_upload_id'] = 3;
+                    $this->Upload->create();
+                    $this->Upload->save($this->request->data);
+
+
+                    $candidatos = $this->Candidatura->processaFicheiroExcelCandidatos($uploadSucesso['urls'][0]);
+                    if (is_array($candidatos)) {
+                        $this->Session->setFlash(__('Ficheiro de Renovação Processado com Sucesso'), 'default',
+                            array('class' => 'alert alert-success'));
+                        $this->redirect(array('action' => 'renovacao_matriculas', 2014));
+                    } else{
+                        $this->Session->setFlash(__('O Curso '.$candidatos.' Nao existe na BD'), 'default',
+                            array('class' => 'alert alert-danger'));
+                    }
+                }
+            } else {
+                $this->Session->setFlash(__('Tentou carregar um ficheiro no formato errado.'), 'default',
+                    array('class' => 'alert alert-danger'));
+            }
+        }
     }
 
     public function importar_candidatos_2(){

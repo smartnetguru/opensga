@@ -324,6 +324,26 @@ class User extends AppModel {
 		return $password;
 	}
 
+    function splitName($name, $prefix = '') {
+        $pos = strrpos($name, ' ');
+
+        if ($pos === false) {
+            return array(
+                $prefix . 'firstname' => $name,
+                $prefix . 'surname'   => null
+            );
+        }
+
+        $firstname = substr($name, 0, $pos + 1);
+        $surname   = substr($name, $pos);
+
+        return array(
+            $prefix . 'firstname' => $firstname,
+            $prefix . 'surname'   => $surname
+        );
+    }
+
+
 }
 
 ?>

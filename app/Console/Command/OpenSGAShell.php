@@ -257,7 +257,7 @@
             $this->Matricula->contain(array(
                 'Curso','Aluno'
             ));
-            $matriculas = $this->Matricula->find('all', array('conditions' => array('Matricula.id'=>131336)));
+            $matriculas = $this->Matricula->find('all', array('conditions' => array('Aluno.id'=>26747)));
             debug(count($matriculas));
             foreach ($matriculas as $matricula) {
                 if($matricula['Aluno']['plano_estudo_id']!=null){
@@ -957,24 +957,6 @@
             $this->out($nao_encontrados);
         }
 
-        function split_name($name, $prefix = '') {
-            $pos = strrpos($name, ' ');
-
-            if ($pos === false) {
-                return array(
-                    $prefix . 'firstname' => $name,
-                    $prefix . 'surname'   => null
-                );
-            }
-
-            $firstname = substr($name, 0, $pos + 1);
-            $surname   = substr($name, $pos);
-
-            return array(
-                $prefix . 'firstname' => $firstname,
-                $prefix . 'surname'   => $surname
-            );
-        }
 
         public function importa_admitidos_via_admissao() {
             AuditableConfig::$Logger = ClassRegistry::init('Auditable.Logger');

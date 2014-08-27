@@ -123,4 +123,84 @@ class Candidatura extends AppModel {
 		)
 	);
 
+
+    public function processaFicheiroExcelCandidatos($filePath){
+        AuditableConfig::$Logger = ClassRegistry::init('Auditable.Logger');
+        App::import('Vendor', 'PHPExcel', array('file' => 'PHPExcel.php'));
+        if (!class_exists('PHPExcel')) {
+            throw new CakeException('Vendor class PHPExcel not found!');
+        }
+
+        $xls = PHPExcel_IOFactory::load(Configure::read('OpenSGA.save_path') . DS . $filePath);
+
+        $worksheet = $xls->getActiveSheet();
+        $linha_actual = 2;
+        $candidatos = array();
+        foreach ($worksheet->getRowIterator() as $row) {
+            if ($worksheet->getCell('A' . $linha_actual)->getValue() == '') {
+                break;
+            }
+
+            $numeroEstudante = $worksheet->getCell('A' . $linha_actual)->getCalculatedValue();
+            $candidatoExiste = $this->findByNumeroEstudante($numeroEstudante);
+            if($candidatoExiste){
+                return 'O número de Estudante '.$numeroEstudante.' Já foi usado por outro candidato. Nenhum Candidato foi importado';
+            } else{
+                $alunoExiste = $this->Entidade->Aluno->findByCodigo($numeroEstudante);
+                if($alunoExiste){
+                    return 'O número de Estudante '.$numeroEstudante.' pertence a um estudante já matriculado. Nenhum Candidato foi importado';
+                } else{
+                    $arrayCandidato  = array(
+                        'Candidatura' => array(
+                            'numero_estudante' => $numeroEstudante,
+                        )
+                    );
+                    $nomeCompleto2                                          = $worksheet->getCell('B' . $linha_actual)
+                        ->getCalculatedValue();
+                    $nomeCompleto                                           = trim($nomeCompleto2);
+                    $nomes                                                   = $this->Entidade->User->splitName($nomeCompleto);
+                    $arrayCandidato['Candidatura']['apelido']               = trim($nomes['surname']);
+                    $arrayCandidato['Candidatura']['nomes']                 = trim($nomes['firstname']);
+                    $arrayCandidato['Candidatura']['estado_matricula_id']   = 5;
+                    $arrayCandidato['Candidatura']['ano_lectivo_admissao']  = $worksheet->getCell('F' . $linha_actual)
+                        ->getCalculatedValue();
+                    $arrayCandidato['Candidatura']['tipo_ingresso_id']      = 2;
+                    $arrayCandidato['Candidatura']['estado_candidatura_id'] = 2;
+                    $cursoNome                                              = $worksheet->getCell('D' . $linha_actual)
+                        ->getCalculatedValue();
+                    $curso                                                   = $this->Curso->findByName($cursoNome);
+                    if ($curso) {
+                        $arrayCandidato['Candidatura']['curso_id']   = $curso['Curso']['id'];
+                        $arrayCandidato['Candidatura']['nome_curso'] = $curso['Curso']['name'];
+                    } else {
+
+
+                        return 'O Curso '.$cursoNome.' ainda não está cadastrado, ou está mal escrito no ficheiro.
+                        Nenhum Candidato foi importado';
+                    }
+                    $candidatos[] = $arrayCandidato;
+
+                    $linha_actual++;
+                }
+            }
+
+        }
+
+        if($this->saveAll($candidatos)){
+            CakeResque::enqueue(
+                'default', 'CandidatoShell', array('afterImportCandidato', $candidatos, $filePath)
+            );
+            /*$this->loadModel('Upload');
+            $upload = $this->Upload->findByFileUrl($filePath);
+            if($upload){
+                $this->Upload->id = $upload['Upload']['id'];
+                $this->Upload->set('estado_upload_id',3);
+                $this->Upload->save();
+            }*/
+
+            return $candidatos;
+        } else{
+            return 'Erro ao gravar Candidatos';
+        }
+    }
 }

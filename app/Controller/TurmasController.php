@@ -470,9 +470,15 @@ class TurmasController extends AppController {
                     ), 'Disciplina', 'Turno', 'AnoLectivo'
                 )
             ));
-            $inscricaos2 = $this->Turma->Inscricao->find('all', array('conditions' => array('turma_id' => $todasTurmasIds, 'Inscricao.estado_inscricao_id' => 1)));
+            $inscricaos2 = $this->Turma->Inscricao->find('all', array('conditions' => array('turma_id' =>
+                                                                                                $todasTurmasIds,
+                                                                                            'Inscricao
+                                                                                            .estado_inscricao_id' =>
+                                                                                                1,
+                'Inscricao.data >'=>'2014-06-01')));
             $inscricaos = Hash::sort($inscricaos2, '{n}.Matricula.Aluno.Entidade.apelido', 'asc');
-
+             debug($inscricaos);
+            die();
             $faculdade = $this->Turma->Curso->getFaculdadeByCursoId($inscricaos[0] ['Turma']['curso_id']);
             $this->set(compact('inscricaos', 'faculdade'));
         }

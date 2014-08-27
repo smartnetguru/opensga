@@ -104,9 +104,12 @@ class DisciplinasController extends AppController {
 				}
 			} else {
 				$this->request->data['Disciplina']['unidade_organica_id'] = $unidade_organica_id;
-				if ($this->Disciplina->cadastraDisciplina($this->request->data)) {
+                $resultado = $this->Disciplina->cadastraDisciplina($this->request->data);
+
+				if ($resultado) {
+
 					$this->Session->setFlash(__('Dados Gravados com Sucesso'), 'default', array('class' => 'alert alert-success'));
-					$this->redirect(array('action' => 'index'));
+					//$this->redirect(array('action' => 'index'));
 				} else {
 					$this->Session->setFlash(__('Problemas ao Registrar dados.'), 'default', array('class' => 'alert alert-danger'));
 				}

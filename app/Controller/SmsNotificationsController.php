@@ -101,7 +101,9 @@ class SmsNotificationsController extends AppController {
 				)
 			)
 		));
-        $candidatos = $this->Aluno->CandidatoGraduacao->find('all');
+        $candidatos = $this->Aluno->find('all',array('conditions'=>array('estado_aluno_id'=>3)));
+        debug($count($candidatos));
+        die();
         $this->SmsEnviada->sendSMS(826489374, "Todas SMS foram enviadas.");
         $this->SmsEnviada->sendSMS(826489374, "A UEM, o convida a cerimónia de lançamento da iniciativa Alumni no dia //22/08/2014 no Centro Cultural e niversitário, pelas 14.00 horas.");
         $this->SmsEnviada->sendSMS(822454375, "A UEM, o convida a cerimónia de lançamento da iniciativa Alumni no dia //22/08/2014 no Centro Cultural e niversitário, pelas 14.00 horas.");

@@ -128,5 +128,6 @@ class CandidatoAlumnisController extends AppController {
             parent::beforeFilter();
             
             $this->Auth->allow(array('cadastro_alumni'));
+            $this->disableCache();
         }
 }

@@ -584,6 +584,21 @@ class Aluno extends AppModel
         return $aluno;
     }
 
+
+    public function getAllAlunosForAutenticidades($anoIngresso = null){
+        if($anoIngresso==null){
+            $anoIngresso = Configure::read('OpenSGA.ano_lectivo');
+        }
+        $this->contain(array(
+            'AlunoNivelMedio'=>array('EscolaNivelMedio'),
+            'Entidade'=>array('Genero','ProvinciaNascimento'),
+            'Curso'=>array('UnidadeOrganica')
+        ));
+        $alunos = $this->find('all',array('conditions'=>array('Aluno.ano_ingresso'=>$anoIngresso),
+            'order'=>array('AlunoNivelMedio.escola_nivel_medio_id')));
+
+        return $alunos;
+    }
     public function getAlunoForPerfil($alunoId)
     {
         $this->contain(array(
