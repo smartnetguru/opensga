@@ -61,8 +61,9 @@ class Upload extends AppModel {
 			// set new relative folder
 			$relUrl = $folder . DS . $itemId . DS . date('Y');
 			// create directory
+            $isDir = is_dir($folderUrl);
 			if (!is_dir($folderUrl)) {
-
+                debug($isDir);
 				mkdir($folderUrl, 0777, true);
 				chmod($folderUrl, 0755);
 			}
