@@ -44,7 +44,7 @@ class Upload extends AppModel {
 	 */
 	public function uploadFiles($folder, $formdata, $itemId = null) {
 		// setup dir names absolute and relative
-		$folderUrl = Configure::read('OpenSGA.save_path') . DS . $folder;
+		$folderUrl = Configure::read('OpenSGA.save_path') . DS . $folder.DS;
 		$relUrl = $folder;
 
 		// create the folder if it does not exist
@@ -57,7 +57,7 @@ class Upload extends AppModel {
 		// if itemId is set create an item folder
 		if ($itemId) {
 			// set new absolute folder
-			$folderUrl = Configure::read('OpenSGA.save_path') . DS . $folder . DS . $itemId . DS . date('Y');
+			$folderUrl = Configure::read('OpenSGA.save_path') . DS . $folder . DS . $itemId . DS . date('Y').DS;
 			// set new relative folder
 			$relUrl = $folder . DS . $itemId . DS . date('Y');
 			// create directory
@@ -68,7 +68,7 @@ class Upload extends AppModel {
 				chmod($folderUrl, 0755);
 			}
 		} else{
-            $folderUrl = Configure::read('OpenSGA.save_path') . DS . $folder . DS . date('Y');
+            $folderUrl = Configure::read('OpenSGA.save_path') . DS . $folder . DS . date('Y').DS;
             $relUrl = $folder . '/' . date('Y');
             if (!is_dir($folderUrl)) {
                 mkdir($folderUrl, 0777, true);
