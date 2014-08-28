@@ -52,13 +52,7 @@ class Upload extends AppModel {
 			mkdir($folderUrl, 0777, true);
 		}
 
-		$folderUrl = Configure::read('OpenSGA.save_path') . DS . $folder . DS . date('Y');
-		$relUrl = $folder . '/' . date('Y');
-		if (!is_dir($folderUrl)) {
-			mkdir($folderUrl, 0777, true);
-			chmod($folderUrl, 0755);
-		}
-		chmod($folderUrl, 0755);
+
 
 		// if itemId is set create an item folder
 		if ($itemId) {
@@ -72,7 +66,15 @@ class Upload extends AppModel {
 				mkdir($folderUrl, 0777, true);
 				chmod($folderUrl, 0755);
 			}
-		}
+		} else{
+            $folderUrl = Configure::read('OpenSGA.save_path') . DS . $folder . DS . date('Y');
+            $relUrl = $folder . '/' . date('Y');
+            if (!is_dir($folderUrl)) {
+                mkdir($folderUrl, 0777, true);
+                chmod($folderUrl, 0755);
+            }
+            chmod($folderUrl, 0755);
+        }
 
 		// list of permitted file types, this is only images but documents can be added
 		$permitted = array('image/gif', 'image/jpeg', 'image/pjpeg', 'image/png', 'text/plain', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
