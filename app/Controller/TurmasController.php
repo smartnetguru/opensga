@@ -477,8 +477,6 @@ class TurmasController extends AppController {
                                                                                                 1,
                 'Inscricao.data >'=>'2014-06-01')));
             $inscricaos = Hash::sort($inscricaos2, '{n}.Matricula.Aluno.Entidade.apelido', 'asc');
-             debug($inscricaos);
-            die();
             $faculdade = $this->Turma->Curso->getFaculdadeByCursoId($inscricaos[0] ['Turma']['curso_id']);
             $this->set(compact('inscricaos', 'faculdade'));
         }

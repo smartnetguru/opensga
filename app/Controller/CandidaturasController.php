@@ -61,7 +61,7 @@ class CandidaturasController extends AppController {
                     if (is_array($candidatos)) {
                         $this->Session->setFlash(__('Ficheiro de Renovação Processado com Sucesso'), 'default',
                             array('class' => 'alert alert-success'));
-                        $this->redirect(array('action' => 'renovacao_matriculas', 2014));
+                        $this->redirect(array('action' => 'index'));
                     } else{
                         $this->Session->setFlash(__('O Curso '.$candidatos.' Nao existe na BD'), 'default',
                             array('class' => 'alert alert-danger'));
