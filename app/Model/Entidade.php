@@ -29,7 +29,7 @@ class Entidade extends AppModel {
                       'required'=>'create',
                       'message'=>'Nome deve ter pelomenos 8 caracteres'),
                                    
-        'email'=>array('rule'=>'email','required'=>'create','message'=>'campo obrigatorio')
+        //'email'=>array('rule'=>'email','required'=>'create','message'=>'campo obrigatorio')
         
 	);
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
