@@ -26,10 +26,10 @@ class Entidade extends AppModel {
 		'data_nascimento' => array('rule' => 'notempty', 'message' => 'seleccione a data de nascimento'),
                                   
         'name'=>array('rule'=>array('minLength', 8),
-                      'required'=>true,
+                      'required'=>'create',
                       'message'=>'Nome deve ter pelomenos 8 caracteres'),
                                    
-        'email'=>array('rule'=>'email','required'=>true,'message'=>'campo obrigatorio')
+        'email'=>array('rule'=>'email','required'=>'create','message'=>'campo obrigatorio')
         
 	);
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
@@ -217,7 +217,8 @@ class Entidade extends AppModel {
 		$this->set('apelido', $apelido);
 		$this->set('nomes', $nomes);
 		$this->set('name', $nomes . " " . $apelido);
-		return $this->save();
+        $save = $this->save();
+		return $save;
 	}
 
 	public function getApelidoFromName($name) {
