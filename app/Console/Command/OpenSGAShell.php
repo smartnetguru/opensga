@@ -220,6 +220,30 @@
             $this->out('Nao encontrados----' . $naoEncontrados);
         }
 
+
+        public function actualiza_inscricao_matricula(){
+            $inscricaos = $this->Aluno->Inscricao->find("all",array('conditions'=>array('Inscricao
+            .matricula_id is NULL')));
+
+            $dbo = $this->Aluno->Inscricao->getDatasource();
+            $logs = $dbo->getLog();
+            $lastLog = end($logs['log']);
+           // debug($lastLog['query']);
+
+            foreach($inscricaos as $inscricao){
+                $alunoId = $inscricao['Inscricao']['aluno_id'];
+                $matricula = $this->Aluno->Matricula->find('first',array('conditions'=>array('Matricula
+                .ano_lectivo_id'=>30,'Matricula.aluno_id'=>$alunoId)));
+                 if($matricula){
+                     $this->Aluno->Inscricao->id = $inscricao['Inscricao']['id'];
+                     $this->Aluno->Inscricao->set('matricula_id',$matricula['Matricula']['id']);
+                     $this->Aluno->Inscricao->save();
+                 }
+                debug($matricula);
+
+            }
+        }
+
         public function ajusta_inscricao_curriculum() {
             $this->Aluno->Inscricao->contain(array(
                 'Turma'
