@@ -2,8 +2,39 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fc9bff1a-fcc4-4747-ab16-ab64e9734a11" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Model/Behavior/AuditableBehavior.php" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/Reports/Turmas/.~lock.faculdade_print_pauta.xlsx#" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/Test/Case/Controller/FuncaoProfissionalRolesControllerTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/Test/Case/Controller/GroupRolesControllerTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/Test/Case/Controller/HistoricoCursosControllerTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/Test/Case/Controller/RuasControllerTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/Test/Case/Controller/UnidadeOrganicaRolesControllerTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/Test/Case/Controller/UserRolesControllerTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/Test/Case/Model/AdministracaoTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/Test/Case/Model/CursoTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/Test/Case/Model/FuncaoProfissionalRoleTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/Test/Case/Model/GroupRoleTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/Test/Case/Model/HistoricoCursoTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/Test/Case/Model/PaisTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/Test/Case/Model/RuaTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/Test/Case/Model/UnidadeOrganicaRoleTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/Test/Case/Model/UserRoleTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/View/Anolectivos/edit.ctp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/View/Anolectivos/menu.ctp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/View/Anolectivos/pdf_index.ctp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/View/Anolectivos/viewpdf.ctp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/alunos_fora_do_tempo.xlsx" afterPath="" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/Controller/AnolectivosController.php" afterPath="$PROJECT_DIR$/app/Controller/AnoLectivosController.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/View/Anolectivos/index.ctp" afterPath="$PROJECT_DIR$/app/View/AnoLectivos/index.ctp" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/View/Anolectivos/novo_ano_lectivo.ctp" afterPath="$PROJECT_DIR$/app/View/AnoLectivos/novo_ano_lectivo.ctp" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/View/Anolectivos/view.ctp" afterPath="$PROJECT_DIR$/app/View/AnoLectivos/ver_ano_lectivo.ctp" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/View/Errors/error400.ctp" afterPath="$PROJECT_DIR$/app/View/Errors/error4.ctp" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/View/Errors/error500.ctp" afterPath="$PROJECT_DIR$/app/View/Errors/error5.ctp" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/Migrations" afterPath="$PROJECT_DIR$/plugins/Migrations" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/Migrations/Test/test_app/Plugin/TestMigrationPlugin2/empty" afterPath="$PROJECT_DIR$/plugins/Migrations/Test/test_app/Plugin/TestMigrationPlugin2/empty" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Reports/Turmas/faculdade_print_pauta.xlsx" afterPath="$PROJECT_DIR$/app/Reports/Turmas/faculdade_print_pauta.xlsx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/database/opensga_modelo_database.mwb.bak" afterPath="$PROJECT_DIR$/docs/database/opensga_modelo_database.mwb.bak" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/database/opensga_modelo_database.mwb" afterPath="$PROJECT_DIR$/docs/database/opensga_modelo_database.mwb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/manuais/source" afterPath="$PROJECT_DIR$/docs/manuais/source" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/Migrations/.gitignore" afterPath="$PROJECT_DIR$/plugins/Migrations/.gitignore" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/Migrations/.semver" afterPath="$PROJECT_DIR$/plugins/Migrations/.semver" />
@@ -14,12 +45,129 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/Migrations/Config/Migration/002_convert_version_to_class_names.php" afterPath="$PROJECT_DIR$/plugins/Migrations/Config/Migration/002_convert_version_to_class_names.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/Migrations/Config/Migration/003_increase_class_name_length.php" afterPath="$PROJECT_DIR$/plugins/Migrations/Config/Migration/003_increase_class_name_length.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/Migrations/Test/Case/AllMigrationsTest.php" afterPath="$PROJECT_DIR$/plugins/Migrations/Test/Case/AllMigrationsTest.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Test/Fixture/AlumniFixture.php" afterPath="$PROJECT_DIR$/app/Test/Fixture/AlumniFixture.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Test/Fixture/AlumnisAreaPesquisaFixture.php" afterPath="$PROJECT_DIR$/app/Test/Fixture/AlumnisAreaPesquisaFixture.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Model/Aluno.php" afterPath="$PROJECT_DIR$/app/Model/Aluno.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Test/Fixture/AlunoEstadoFixture.php" afterPath="$PROJECT_DIR$/app/Test/Fixture/AlunoEstadoFixture.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Test/Fixture/AlunoFixture.php" afterPath="$PROJECT_DIR$/app/Test/Fixture/AlunoFixture.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Test/Fixture/AlunoNivelMedioFixture.php" afterPath="$PROJECT_DIR$/app/Test/Fixture/AlunoNivelMedioFixture.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Test/Case/Model/AlunoTest.php" afterPath="$PROJECT_DIR$/app/Test/Case/Model/AlunoTest.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Test/Fixture/AlunoViaAdmissaoFixture.php" afterPath="$PROJECT_DIR$/app/Test/Fixture/AlunoViaAdmissaoFixture.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Model/AnoLectivo.php" afterPath="$PROJECT_DIR$/app/Model/AnoLectivo.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Test/Fixture/AnoLectivoEpocaFixture.php" afterPath="$PROJECT_DIR$/app/Test/Fixture/AnoLectivoEpocaFixture.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Test/Fixture/AnoLectivoFixture.php" afterPath="$PROJECT_DIR$/app/Test/Fixture/AnoLectivoFixture.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Test/Fixture/AreaAcademicaFixture.php" afterPath="$PROJECT_DIR$/app/Test/Fixture/AreaAcademicaFixture.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Test/Fixture/AreaPesquisaFixture.php" afterPath="$PROJECT_DIR$/app/Test/Fixture/AreaPesquisaFixture.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Test/Fixture/AreaTrabalhoFixture.php" afterPath="$PROJECT_DIR$/app/Test/Fixture/AreaTrabalhoFixture.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Test/Fixture/AreaUnidadeFixture.php" afterPath="$PROJECT_DIR$/app/Test/Fixture/AreaUnidadeFixture.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/Auditable/Model/Behavior/AuditableBehavior.php" afterPath="$PROJECT_DIR$/plugins/Auditable/Model/Behavior/AuditableBehavior.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Test/Fixture/AvaliacaoFixture.php" afterPath="$PROJECT_DIR$/app/Test/Fixture/AvaliacaoFixture.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Test/Fixture/BairroFixture.php" afterPath="$PROJECT_DIR$/app/Test/Fixture/BairroFixture.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Test/Fixture/BancoFixture.php" afterPath="$PROJECT_DIR$/app/Test/Fixture/BancoFixture.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Test/Fixture/BolsaBolsaFixture.php" afterPath="$PROJECT_DIR$/app/Test/Fixture/BolsaBolsaFixture.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Test/Fixture/BolsaCandidatoFamiliaFixture.php" afterPath="$PROJECT_DIR$/app/Test/Fixture/BolsaCandidatoFamiliaFixture.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Test/Fixture/BolsaFonteBolsaFixture.php" afterPath="$PROJECT_DIR$/app/Test/Fixture/BolsaFonteBolsaFixture.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Test/Fixture/BolsaMotivoIndeferimentoFixture.php" afterPath="$PROJECT_DIR$/app/Test/Fixture/BolsaMotivoIndeferimentoFixture.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Test/Fixture/BolsaPedidoFixture.php" afterPath="$PROJECT_DIR$/app/Test/Fixture/BolsaPedidoFixture.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Test/Fixture/BolsaResultadoFixture.php" afterPath="$PROJECT_DIR$/app/Test/Fixture/BolsaResultadoFixture.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Test/Fixture/BolsaTemporariaFixture.php" afterPath="$PROJECT_DIR$/app/Test/Fixture/BolsaTemporariaFixture.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Test/Fixture/BolsaTipoBolsaFixture.php" afterPath="$PROJECT_DIR$/app/Test/Fixture/BolsaTipoBolsaFixture.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Test/Fixture/BolsaValorBolsaFixture.php" afterPath="$PROJECT_DIR$/app/Test/Fixture/BolsaValorBolsaFixture.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/Migrations/CHANGELOG.md" afterPath="$PROJECT_DIR$/plugins/Migrations/CHANGELOG.md" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/Migrations/CONTRIBUTING.md" afterPath="$PROJECT_DIR$/plugins/Migrations/CONTRIBUTING.md" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/Migrations/Lib/CakeMigration.php" afterPath="$PROJECT_DIR$/plugins/Migrations/Lib/CakeMigration.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/Migrations/Test/Case/Lib/Model/CakeMigrationTest.php" afterPath="$PROJECT_DIR$/plugins/Migrations/Test/Case/Lib/Model/CakeMigrationTest.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Model/CandidatoAlumni.php" afterPath="$PROJECT_DIR$/app/Model/CandidatoAlumni.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Test/Fixture/CandidatoAlumniFixture.php" afterPath="$PROJECT_DIR$/app/Test/Fixture/CandidatoAlumniFixture.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Test/Fixture/CandidatoAlumnisAreaPesquisaFixture.php" afterPath="$PROJECT_DIR$/app/Test/Fixture/CandidatoAlumnisAreaPesquisaFixture.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Controller/CandidatoAlumnisController.php" afterPath="$PROJECT_DIR$/app/Controller/CandidatoAlumnisController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Test/Fixture/CandidatoGraduacaoFixture.php" afterPath="$PROJECT_DIR$/app/Test/Fixture/CandidatoGraduacaoFixture.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Test/Fixture/CandidaturaFixture.php" afterPath="$PROJECT_DIR$/app/Test/Fixture/CandidaturaFixture.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Controller/CandidaturasController.php" afterPath="$PROJECT_DIR$/app/Controller/CandidaturasController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Test/Fixture/CategoriaCientificaFixture.php" afterPath="$PROJECT_DIR$/app/Test/Fixture/CategoriaCientificaFixture.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Test/Fixture/CategoriaFuncionarioFixture.php" afterPath="$PROJECT_DIR$/app/Test/Fixture/CategoriaFuncionarioFixture.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Test/Fixture/CerimoniaGraduacaoFixture.php" afterPath="$PROJECT_DIR$/app/Test/Fixture/CerimoniaGraduacaoFixture.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Test/Fixture/CicloPlanoEstudoFixture.php" afterPath="$PROJECT_DIR$/app/Test/Fixture/CicloPlanoEstudoFixture.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Test/Fixture/CidadeFixture.php" afterPath="$PROJECT_DIR$/app/Test/Fixture/CidadeFixture.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Test/Fixture/ConfigFixture.php" afterPath="$PROJECT_DIR$/app/Test/Fixture/ConfigFixture.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Test/Fixture/ContaFixture.php" afterPath="$PROJECT_DIR$/app/Test/Fixture/ContaFixture.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Test/Fixture/ContinenteFixture.php" afterPath="$PROJECT_DIR$/app/Test/Fixture/ContinenteFixture.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Test/Fixture/CooperacaoAcordoAreaFixture.php" afterPath="$PROJECT_DIR$/app/Test/Fixture/CooperacaoAcordoAreaFixture.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Test/Fixture/CooperacaoAcordoFixture.php" afterPath="$PROJECT_DIR$/app/Test/Fixture/CooperacaoAcordoFixture.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Test/Fixture/CooperacaoAcordoObservacaoFixture.php" afterPath="$PROJECT_DIR$/app/Test/Fixture/CooperacaoAcordoObservacaoFixture.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Test/Fixture/CooperacaoAcordoUnidadeOrganicaFixture.php" afterPath="$PROJECT_DIR$/app/Test/Fixture/CooperacaoAcordoUnidadeOrganicaFixture.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Test/Fixture/CooperacaoAreaFixture.php" afterPath="$PROJECT_DIR$/app/Test/Fixture/CooperacaoAreaFixture.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Test/Fixture/CooperacaoObjectivoAcordoFixture.php" afterPath="$PROJECT_DIR$/app/Test/Fixture/CooperacaoObjectivoAcordoFixture.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Test/Fixture/CooperacaoTipoAcordoFixture.php" afterPath="$PROJECT_DIR$/app/Test/Fixture/CooperacaoTipoAcordoFixture.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Test/Fixture/CursoFixture.php" afterPath="$PROJECT_DIR$/app/Test/Fixture/CursoFixture.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Test/Fixture/CursoResponsavelFixture.php" afterPath="$PROJECT_DIR$/app/Test/Fixture/CursoResponsavelFixture.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Test/Fixture/CursoTipoPagamentoFixture.php" afterPath="$PROJECT_DIR$/app/Test/Fixture/CursoTipoPagamentoFixture.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Test/Fixture/CursosEscolaFixture.php" afterPath="$PROJECT_DIR$/app/Test/Fixture/CursosEscolaFixture.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Test/Fixture/CursosTurnoFixture.php" afterPath="$PROJECT_DIR$/app/Test/Fixture/CursosTurnoFixture.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Test/Fixture/DisciplinaDocenteFixture.php" afterPath="$PROJECT_DIR$/app/Test/Fixture/DisciplinaDocenteFixture.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Test/Fixture/DisciplinaFixture.php" afterPath="$PROJECT_DIR$/app/Test/Fixture/DisciplinaFixture.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Test/Fixture/DisciplinaPlanoEstudoFixture.php" afterPath="$PROJECT_DIR$/app/Test/Fixture/DisciplinaPlanoEstudoFixture.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Test/Fixture/DisciplinaUnidadeOrganicaFixture.php" afterPath="$PROJECT_DIR$/app/Test/Fixture/DisciplinaUnidadeOrganicaFixture.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Test/Fixture/DocenteCategoriaFixture.php" afterPath="$PROJECT_DIR$/app/Test/Fixture/DocenteCategoriaFixture.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Test/Fixture/DocenteFixture.php" afterPath="$PROJECT_DIR$/app/Test/Fixture/DocenteFixture.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Test/Fixture/DocenteFuncaoFixture.php" afterPath="$PROJECT_DIR$/app/Test/Fixture/DocenteFuncaoFixture.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Test/Fixture/DocenteTurmaFixture.php" afterPath="$PROJECT_DIR$/app/Test/Fixture/DocenteTurmaFixture.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Test/Fixture/DocumentoIdentificacaoFixture.php" afterPath="$PROJECT_DIR$/app/Test/Fixture/DocumentoIdentificacaoFixture.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Model/Entidade.php" afterPath="$PROJECT_DIR$/app/Model/Entidade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Test/Fixture/EntidadeContactoFixture.php" afterPath="$PROJECT_DIR$/app/Test/Fixture/EntidadeContactoFixture.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Test/Fixture/EntidadeFixture.php" afterPath="$PROJECT_DIR$/app/Test/Fixture/EntidadeFixture.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Test/Fixture/EntidadeIdentificacaoFixture.php" afterPath="$PROJECT_DIR$/app/Test/Fixture/EntidadeIdentificacaoFixture.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Test/Fixture/EpocaAvaliacaoFixture.php" afterPath="$PROJECT_DIR$/app/Test/Fixture/EpocaAvaliacaoFixture.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Test/Fixture/EscolaFixture.php" afterPath="$PROJECT_DIR$/app/Test/Fixture/EscolaFixture.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Test/Fixture/EscolaNivelMedioFixture.php" afterPath="$PROJECT_DIR$/app/Test/Fixture/EscolaNivelMedioFixture.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Test/Fixture/EscolasTipopagamentoFixture.php" afterPath="$PROJECT_DIR$/app/Test/Fixture/EscolasTipopagamentoFixture.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Test/Fixture/EstadoAlunoFixture.php" afterPath="$PROJECT_DIR$/app/Test/Fixture/EstadoAlunoFixture.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Test/Fixture/EstadoAvaliacaoFixture.php" afterPath="$PROJECT_DIR$/app/Test/Fixture/EstadoAvaliacaoFixture.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Test/Fixture/EstadoCandidaturaFixture.php" afterPath="$PROJECT_DIR$/app/Test/Fixture/EstadoCandidaturaFixture.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Test/Fixture/EstadoCivilFixture.php" afterPath="$PROJECT_DIR$/app/Test/Fixture/EstadoCivilFixture.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Test/Fixture/EstadoDocenteTurmaFixture.php" afterPath="$PROJECT_DIR$/app/Test/Fixture/EstadoDocenteTurmaFixture.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Test/Fixture/EstadoEntidadeFixture.php" afterPath="$PROJECT_DIR$/app/Test/Fixture/EstadoEntidadeFixture.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Test/Fixture/EstadoInscricaoFixture.php" afterPath="$PROJECT_DIR$/app/Test/Fixture/EstadoInscricaoFixture.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Test/Fixture/EstadoMatriculaFixture.php" afterPath="$PROJECT_DIR$/app/Test/Fixture/EstadoMatriculaFixture.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Controller/EstadoMatriculasController.php" afterPath="$PROJECT_DIR$/app/Controller/EstadoMatriculasController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Test/Fixture/EstadoMessageFixture.php" afterPath="$PROJECT_DIR$/app/Test/Fixture/EstadoMessageFixture.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Test/Fixture/EstadoObjectoFixture.php" afterPath="$PROJECT_DIR$/app/Test/Fixture/EstadoObjectoFixture.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Test/Fixture/EstadoTurmaAvaliacaoFixture.php" afterPath="$PROJECT_DIR$/app/Test/Fixture/EstadoTurmaAvaliacaoFixture.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Test/Fixture/EstadoTurmaFixture.php" afterPath="$PROJECT_DIR$/app/Test/Fixture/EstadoTurmaFixture.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Test/Fixture/EstadoUploadFixture.php" afterPath="$PROJECT_DIR$/app/Test/Fixture/EstadoUploadFixture.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Console/Command/EstudanteShell.php" afterPath="$PROJECT_DIR$/app/Console/Command/EstudanteShell.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Test/Fixture/EventoFixture.php" afterPath="$PROJECT_DIR$/app/Test/Fixture/EventoFixture.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/Migrations/Docs/Documentation/Examples.md" afterPath="$PROJECT_DIR$/plugins/Migrations/Docs/Documentation/Examples.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Test/Fixture/FaculdadeTipoPagamentoFixture.php" afterPath="$PROJECT_DIR$/app/Test/Fixture/FaculdadeTipoPagamentoFixture.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Test/Fixture/FeriadoFixture.php" afterPath="$PROJECT_DIR$/app/Test/Fixture/FeriadoFixture.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Test/Fixture/FinanceiroBancoFixture.php" afterPath="$PROJECT_DIR$/app/Test/Fixture/FinanceiroBancoFixture.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Test/Fixture/FinanceiroContaFixture.php" afterPath="$PROJECT_DIR$/app/Test/Fixture/FinanceiroContaFixture.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Test/Fixture/FinanceiroDepositoFixture.php" afterPath="$PROJECT_DIR$/app/Test/Fixture/FinanceiroDepositoFixture.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Test/Fixture/FinanceiroEstadoDepositoFixture.php" afterPath="$PROJECT_DIR$/app/Test/Fixture/FinanceiroEstadoDepositoFixture.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Test/Fixture/FinanceiroEstadoPagamentoFixture.php" afterPath="$PROJECT_DIR$/app/Test/Fixture/FinanceiroEstadoPagamentoFixture.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Test/Fixture/FinanceiroEstadoTransacaoFixture.php" afterPath="$PROJECT_DIR$/app/Test/Fixture/FinanceiroEstadoTransacaoFixture.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Test/Fixture/FinanceiroFormaDepositoFixture.php" afterPath="$PROJECT_DIR$/app/Test/Fixture/FinanceiroFormaDepositoFixture.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Test/Fixture/FinanceiroPagamentoFixture.php" afterPath="$PROJECT_DIR$/app/Test/Fixture/FinanceiroPagamentoFixture.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Test/Fixture/FinanceiroTipoPagamentoFixture.php" afterPath="$PROJECT_DIR$/app/Test/Fixture/FinanceiroTipoPagamentoFixture.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Test/Fixture/FinanceiroTipoTransacaoFixture.php" afterPath="$PROJECT_DIR$/app/Test/Fixture/FinanceiroTipoTransacaoFixture.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Test/Fixture/FinanceiroTransacaoFixture.php" afterPath="$PROJECT_DIR$/app/Test/Fixture/FinanceiroTransacaoFixture.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Console/Command/Task/FixtureTask.php" afterPath="$PROJECT_DIR$/lib/Cake/Console/Command/Task/FixtureTask.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Test/Fixture/FormaMudancaCursoFixture.php" afterPath="$PROJECT_DIR$/app/Test/Fixture/FormaMudancaCursoFixture.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Test/Fixture/FormaPagamentoFixture.php" afterPath="$PROJECT_DIR$/app/Test/Fixture/FormaPagamentoFixture.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Test/Fixture/FuncaoProfissionalFixture.php" afterPath="$PROJECT_DIR$/app/Test/Fixture/FuncaoProfissionalFixture.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Test/Fixture/FuncaoProfissionalRoleFixture.php" afterPath="$PROJECT_DIR$/app/Test/Fixture/FuncaoProfissionalRoleFixture.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Test/Fixture/FuncionarioFixture.php" afterPath="$PROJECT_DIR$/app/Test/Fixture/FuncionarioFixture.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Test/Fixture/FuncionariosFuncaoProfissionalFixture.php" afterPath="$PROJECT_DIR$/app/Test/Fixture/FuncionariosFuncaoProfissionalFixture.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/Migrations/Docs/Documentation/Generate-Migrations-Without-DB-Interaction.md" afterPath="$PROJECT_DIR$/plugins/Migrations/Docs/Documentation/Generate-Migrations-Without-DB-Interaction.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Test/Fixture/GeneroFixture.php" afterPath="$PROJECT_DIR$/app/Test/Fixture/GeneroFixture.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Test/Fixture/GrauAcademicoFixture.php" afterPath="$PROJECT_DIR$/app/Test/Fixture/GrauAcademicoFixture.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Test/Fixture/GrauParentescoFixture.php" afterPath="$PROJECT_DIR$/app/Test/Fixture/GrauParentescoFixture.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Test/Fixture/GroupFixture.php" afterPath="$PROJECT_DIR$/app/Test/Fixture/GroupFixture.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Test/Fixture/GroupRoleFixture.php" afterPath="$PROJECT_DIR$/app/Test/Fixture/GroupRoleFixture.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Test/Fixture/GroupsUserFixture.php" afterPath="$PROJECT_DIR$/app/Test/Fixture/GroupsUserFixture.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Test/Fixture/GrupodisciplinaFixture.php" afterPath="$PROJECT_DIR$/app/Test/Fixture/GrupodisciplinaFixture.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Test/Fixture/GrupodisciplinarFixture.php" afterPath="$PROJECT_DIR$/app/Test/Fixture/GrupodisciplinarFixture.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Test/Fixture/HistoricoCursoFixture.php" afterPath="$PROJECT_DIR$/app/Test/Fixture/HistoricoCursoFixture.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/Migrations/Docs/Home.md" afterPath="$PROJECT_DIR$/plugins/Migrations/Docs/Home.md" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/Migrations/Docs/Documentation/Installation.md" afterPath="$PROJECT_DIR$/plugins/Migrations/Docs/Documentation/Installation.md" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/Migrations/LICENSE.txt" afterPath="$PROJECT_DIR$/plugins/Migrations/LICENSE.txt" />
@@ -29,7 +177,7 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/Migrations/Test/Case/Lib/MigrationVersionTest.php" afterPath="$PROJECT_DIR$/plugins/Migrations/Test/Case/Lib/MigrationVersionTest.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/Migrations/Docs/Documentation/Migrations.md" afterPath="$PROJECT_DIR$/plugins/Migrations/Docs/Documentation/Migrations.md" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/Migrations/Lib/Panel/MigrationsPanel.php" afterPath="$PROJECT_DIR$/plugins/Migrations/Lib/Panel/MigrationsPanel.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Console/Command/OpenSGAShell.php" afterPath="$PROJECT_DIR$/app/Console/Command/OpenSGAShell.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Console/Command/OpenSGAAclShell.php" afterPath="$PROJECT_DIR$/app/Console/Command/OpenSGAAclShell.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/Migrations/Docs/Documentation/Overview.md" afterPath="$PROJECT_DIR$/plugins/Migrations/Docs/Documentation/Overview.md" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/Migrations/Docs/Documentation/Pre-Migration-Checks.md" afterPath="$PROJECT_DIR$/plugins/Migrations/Docs/Documentation/Pre-Migration-Checks.md" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/Migrations/Lib/Migration/PrecheckBase.php" afterPath="$PROJECT_DIR$/plugins/Migrations/Lib/Migration/PrecheckBase.php" />
@@ -38,11 +186,27 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/Migrations/Lib/Migration/PrecheckException.php" afterPath="$PROJECT_DIR$/plugins/Migrations/Lib/Migration/PrecheckException.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/Migrations/Docs/Tutorials/Quick-Start.md" afterPath="$PROJECT_DIR$/plugins/Migrations/Docs/Tutorials/Quick-Start.md" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/Migrations/README.md" afterPath="$PROJECT_DIR$/plugins/Migrations/README.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Test/Fixture/RuaFixture.php" afterPath="$PROJECT_DIR$/app/Test/Fixture/RuaFixture.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/Migrations/Test/test_app/Plugin/TestMigrationPlugin/Config/Schema/Schema.php" afterPath="$PROJECT_DIR$/plugins/Migrations/Test/test_app/Plugin/TestMigrationPlugin/Config/Schema/Schema.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/Migrations/Model/SchemaMigration.php" afterPath="$PROJECT_DIR$/plugins/Migrations/Model/SchemaMigration.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/Migrations/Test/Fixture/SchemaMigrationsFixture.php" afterPath="$PROJECT_DIR$/plugins/Migrations/Test/Fixture/SchemaMigrationsFixture.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Test/Fixture/UnidadeOrganicaFixture.php" afterPath="$PROJECT_DIR$/app/Test/Fixture/UnidadeOrganicaFixture.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Test/Fixture/UnidadeOrganicaRoleFixture.php" afterPath="$PROJECT_DIR$/app/Test/Fixture/UnidadeOrganicaRoleFixture.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Model/User.php" afterPath="$PROJECT_DIR$/app/Model/User.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Test/Fixture/UserRoleFixture.php" afterPath="$PROJECT_DIR$/app/Test/Fixture/UserRoleFixture.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/Migrations/Test/test_app/Plugin/TestMigrationPlugin/Config/Migration/blank_file.php" afterPath="$PROJECT_DIR$/plugins/Migrations/Test/test_app/Plugin/TestMigrationPlugin/Config/Migration/blank_file.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/View/CandidatoAlumnis/cadastro_alumni.ctp" afterPath="$PROJECT_DIR$/app/View/CandidatoAlumnis/cadastro_alumni.ctp" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/Migrations/composer.json" afterPath="$PROJECT_DIR$/plugins/Migrations/composer.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/View/Layouts/default.ctp" afterPath="$PROJECT_DIR$/app/View/Layouts/default.ctp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/View/Turmas/docente_print_pauta.ctp" afterPath="$PROJECT_DIR$/app/View/Turmas/docente_print_pauta.ctp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/View/Elements/footer.ctp" afterPath="$PROJECT_DIR$/app/View/Elements/footer.ctp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/webroot/assets/js/form-cadastro-alumni-wizard.js" afterPath="$PROJECT_DIR$/app/webroot/assets/js/form-cadastro-alumni-wizard.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/View/Elements/header.ctp" afterPath="$PROJECT_DIR$/app/View/Elements/header.ctp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/View/Pages/home.ctp" afterPath="$PROJECT_DIR$/app/View/Pages/home.ctp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/View/Candidaturas/index.ctp" afterPath="$PROJECT_DIR$/app/View/Candidaturas/index.ctp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/View/Configs/index.ctp" afterPath="$PROJECT_DIR$/app/View/Configs/index.ctp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/View/Matriculas/index.ctp" afterPath="$PROJECT_DIR$/app/View/Matriculas/index.ctp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/webroot/assets/js/main.js" afterPath="$PROJECT_DIR$/app/webroot/assets/js/main.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/Migrations/Test/test_app/Plugin/TestMigrationPlugin/Config/Migration/map.php" afterPath="$PROJECT_DIR$/plugins/Migrations/Test/test_app/Plugin/TestMigrationPlugin/Config/Migration/map.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/Migrations/Test/test_app/Plugin/TestMigrationPlugin3/Config/Migration/map.php" afterPath="$PROJECT_DIR$/plugins/Migrations/Test/test_app/Plugin/TestMigrationPlugin3/Config/Migration/map.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/Migrations/Console/Command/Templates/migration.ctp" afterPath="$PROJECT_DIR$/plugins/Migrations/Console/Command/Templates/migration.ctp" />
@@ -54,7 +218,10 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/Migrations/Locale/spa/LC_MESSAGES/migrations.po" afterPath="$PROJECT_DIR$/plugins/Migrations/Locale/spa/LC_MESSAGES/migrations.po" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/Migrations/Locale/migrations.pot" afterPath="$PROJECT_DIR$/plugins/Migrations/Locale/migrations.pot" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/Migrations/View/Elements/migrations_panel.ctp" afterPath="$PROJECT_DIR$/plugins/Migrations/View/Elements/migrations_panel.ctp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Config/Schema/schema.php" afterPath="$PROJECT_DIR$/app/Config/Schema/schema.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/Migrations/Test/test_app/Plugin/TestMigrationPlugin4/Config/Schema/schema.php" afterPath="$PROJECT_DIR$/plugins/Migrations/Test/test_app/Plugin/TestMigrationPlugin4/Config/Schema/schema.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/api/structure.xml" afterPath="$PROJECT_DIR$/docs/api/structure.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/webroot/test.php" afterPath="$PROJECT_DIR$/app/webroot/test.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/Migrations/Test/Fixture/test_migration.txt" afterPath="$PROJECT_DIR$/plugins/Migrations/Test/Fixture/test_migration.txt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/Migrations/Test/Fixture/test_migration_add_fields_from_cli.txt" afterPath="$PROJECT_DIR$/plugins/Migrations/Test/Fixture/test_migration_add_fields_from_cli.txt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/Migrations/Test/Fixture/test_migration_create_table_from_cli.txt" afterPath="$PROJECT_DIR$/plugins/Migrations/Test/Fixture/test_migration_create_table_from_cli.txt" />
@@ -83,108 +250,281 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
+      <file leaf-file-name="OpenSGAAclShell.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Console/Command/OpenSGAAclShell.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="255" column="61" selection-start="17074" selection-end="17074" vertical-scroll-proportion="-6.296296" vertical-offset="4420" max-vertical-offset="6894">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="default.ctp" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/View/Layouts/default.ctp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="265" column="0" selection-start="19210" selection-end="19210" vertical-scroll-proportion="-10.407408" vertical-offset="4489" max-vertical-offset="5220">
+              <folding>
+                <marker date="1412024474619" expanded="true" signature="18637:18762" placeholder="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.ctp" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/View/Matriculas/index.ctp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="13" column="82" selection-start="687" selection-end="687" vertical-scroll-proportion="-6.6666665" vertical-offset="54" max-vertical-offset="2268">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MatriculasController.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Controller/MatriculasController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="132" column="63" selection-start="5444" selection-end="5536" vertical-scroll-proportion="-7.0740743" vertical-offset="2185" max-vertical-offset="4770">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Matricula.php" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/Model/Matricula.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="257" column="34" selection-start="8151" selection-end="8151" vertical-scroll-proportion="0.056782335" vertical-offset="4608" max-vertical-offset="6138">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AnoLectivo.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Model/AnoLectivo.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="100" column="9" selection-start="3965" selection-end="3965" vertical-scroll-proportion="-10.888889" vertical-offset="1506" max-vertical-offset="1998">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="cadastro_alumni.ctp" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/View/CandidatoAlumnis/cadastro_alumni.ctp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="818" column="0" selection-start="37590" selection-end="37999" vertical-scroll-proportion="-8.407408" vertical-offset="14497" max-vertical-offset="14886">
+              <folding>
+                <marker date="1412023133103" expanded="true" signature="912:30986" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="936:30947" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="1004:30940" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="1032:1735" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="1132:1728" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="1206:1219" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="1313:1366" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="1429:1483" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="1545:1603" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="1664:1717" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="1760:30925" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="2320:30917" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="2325:3628" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="2334:2636" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="2361:2626" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="2398:2435" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="2491:2613" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="2645:2968" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="2672:2958" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="2709:2746" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="2802:2945" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="2977:3299" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="3004:3289" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="3041:3078" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="3134:3276" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="3308:3622" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="3335:3612" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="3372:3409" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="3465:3599" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="3687:3883" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="3805:3876" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="3901:9970" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="3916:9678" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="9742:9963" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="9789:9952" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="9851:9937" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="9988:14808" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="10003:14336" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="14366:14801" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="14413:14580" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="14481:14565" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="14627:14790" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="14689:14775" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="14826:19754" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="14842:19745" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="14948:15868" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="14983:15240" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="15275:15553" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="15588:15853" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="15894:16763" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="15929:16171" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="16206:16463" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="16498:16748" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="16789:17316" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="16824:17039" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="17074:17301" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="17343:19217" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="17378:17746" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="17781:18121" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="18156:18830" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="18197:18811" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="18380:18788" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="18865:19202" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="19250:19729" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="19301:19484" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="19373:19465" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="19535:19714" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="19601:19695" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="19772:30897" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="19783:30891" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="19844:30890" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="19867:23743" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="19882:23736" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="19954:20254" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="20005:20063" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="20099:20239" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="20287:20566" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="20338:20384" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="20420:20551" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="20599:20874" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="20650:20694" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="20730:20859" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="20907:21227" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="20958:21002" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="21038:21212" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="21260:21571" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="21311:21359" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="21395:21556" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="21472:21537" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="21604:21919" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="21655:21709" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="21745:21904" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="21820:21885" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="21952:22265" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="22003:22058" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="22094:22250" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="22166:22231" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="22298:22620" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="22349:22409" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="22445:22605" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="22521:22586" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="22653:22979" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="22704:22764" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="22800:22964" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="22880:22945" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="23012:23341" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="23063:23126" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="23162:23326" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="23242:23307" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="23374:23719" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="23425:23495" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="23531:23704" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="23620:23685" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="23766:26794" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="23781:26787" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="23857:24135" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="23908:23951" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="23987:24120" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="24168:24466" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="24219:24276" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="24312:24451" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="24499:24788" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="24550:24601" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="24637:24773" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="24822:25111" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="24873:24924" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="24960:25096" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="25144:25442" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="25195:25252" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="25288:25427" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="25475:25788" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="25526:25574" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="25610:25773" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="25689:25754" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="25821:26137" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="25872:25926" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="25962:26122" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="26038:26103" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="26170:26454" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="26221:26271" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="26307:26439" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="26487:26771" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="26538:26588" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="26624:26756" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="26817:30044" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="26832:30037" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="26903:27212" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="26954:27007" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="27043:27197" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="27113:27178" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="27245:27545" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="27296:27354" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="27390:27530" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="27578:27892" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="27629:27685" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="27721:27877" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="27793:27858" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="27925:28238" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="27976:28031" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="28067:28223" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="28139:28204" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="28271:28589" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="28322:28377" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="28413:28574" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="28490:28555" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="28622:28947" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="28673:28725" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="28761:28932" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="28980:29282" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="29031:29079" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="29115:29267" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="29183:29248" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="29315:29652" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="29366:29428" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="29464:29637" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="29553:29618" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="29685:30020" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="29736:29790" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="29826:30005" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="29921:29986" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="30068:30883" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="30097:30454" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="30123:30443" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="30175:30427" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="30483:30876" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="30530:30697" placeholder="..." />
+                <marker date="1412023133103" expanded="true" signature="30598:30682" placeholder="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CooperacaoAcordosController.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Plugin/Cooperacao/Controller/CooperacaoAcordosController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="55.88889" vertical-offset="1509" max-vertical-offset="2808">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="header.ctp" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/View/Elements/header.ctp">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="91" column="64" selection-start="3880" selection-end="3880" vertical-scroll-proportion="0.0" vertical-offset="1044" max-vertical-offset="3546">
+            <state line="178" column="71" selection-start="7797" selection-end="7797" vertical-scroll-proportion="-16.074074" vertical-offset="2770" max-vertical-offset="3528">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Turma.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Model/Turma.php">
+      <file leaf-file-name="AnoLectivosController.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Controller/AnoLectivosController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="616" column="49" selection-start="21870" selection-end="21870" vertical-scroll-proportion="0.0" vertical-offset="11088" max-vertical-offset="12870">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TurmasController.php" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/Controller/TurmasController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="478" column="98" selection-start="17889" selection-end="17889" vertical-scroll-proportion="0.6525935" vertical-offset="8063" max-vertical-offset="13302">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="alterar_nome_candidato.ctp" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/View/Alunos/alterar_nome_candidato.ctp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1458">
-              <folding>
-                <marker date="1405082476887" expanded="true" signature="491:2615" placeholder="..." />
-                <marker date="1405082476887" expanded="true" signature="517:994" placeholder="..." />
-                <marker date="1405082476887" expanded="true" signature="552:983" placeholder="..." />
-                <marker date="1405082476887" expanded="true" signature="592:968" placeholder="..." />
-                <marker date="1405082476887" expanded="true" signature="635:907" placeholder="..." />
-                <marker date="1405082476887" expanded="true" signature="660:885" placeholder="..." />
-                <marker date="1405082476887" expanded="true" signature="1025:2560" placeholder="..." />
-                <marker date="1405082476887" expanded="true" signature="1064:2545" placeholder="..." />
-                <marker date="1405082476887" expanded="true" signature="1107:1285" placeholder="..." />
-                <marker date="1405082476887" expanded="true" signature="1132:1228" placeholder="..." />
-                <marker date="1405082476887" expanded="true" signature="2153:2502" placeholder="..." />
-                <marker date="1405082476887" expanded="true" signature="2199:2227" placeholder="..." />
-                <marker date="1405082476887" expanded="true" signature="2274:2479" placeholder="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="alterar_nome.ctp" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/View/Alunos/alterar_nome.ctp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="7" column="0" selection-start="276" selection-end="276" vertical-scroll-proportion="0.0" vertical-offset="126" max-vertical-offset="666">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AlunosController.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Controller/AlunosController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="77" column="16" selection-start="3828" selection-end="3828" vertical-scroll-proportion="0.0" vertical-offset="957" max-vertical-offset="28548">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Aluno.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Model/Aluno.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="1285" column="42" selection-start="52404" selection-end="52404" vertical-scroll-proportion="0.0" vertical-offset="22334" max-vertical-offset="28044">
-              <folding>
-                <marker date="1409033490955" expanded="true" signature="15617:15681" placeholder="Select plano..matriculas..." />
-                <marker date="1409033490955" expanded="true" signature="16189:16253" placeholder="Select plano..matriculas..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Entidade.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Model/Entidade.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="24" column="26" selection-start="740" selection-end="740" vertical-scroll-proportion="-16.0" vertical-offset="0" max-vertical-offset="6048">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="core.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Config/core.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="34" column="30" selection-start="1102" selection-end="1102" vertical-scroll-proportion="0.0" vertical-offset="612" max-vertical-offset="6174">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="OpenSGAShell.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Console/Command/OpenSGAShell.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="241" column="34" selection-start="14220" selection-end="14220" vertical-scroll-proportion="-11.727273" vertical-offset="3693" max-vertical-offset="34542">
+            <state line="26" column="3" selection-start="1281" selection-end="1281" vertical-scroll-proportion="-0.6666667" vertical-offset="0" max-vertical-offset="1440">
               <folding />
             </state>
           </provider>
@@ -203,36 +543,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/app/View/Messages/sms_index.ctp" />
-        <option value="$PROJECT_DIR$/app/Controller/MessagesController.php" />
-        <option value="$PROJECT_DIR$/app/View/Messages/send_mass_sms.ctp" />
-        <option value="$PROJECT_DIR$/app/View/Candidaturas/index.ctp" />
-        <option value="$PROJECT_DIR$/app/Model/SmsEnviada.php" />
-        <option value="$PROJECT_DIR$/app/Console/Command/EntidadeShell.php" />
-        <option value="$PROJECT_DIR$/docs/manuais/source/docente/turmas.rst" />
-        <option value="$PROJECT_DIR$/app/View/Funcionarios/index.ctp" />
-        <option value="$PROJECT_DIR$/app/Controller/FuncionariosController.php" />
-        <option value="$PROJECT_DIR$/app/View/Pages/home.ctp" />
-        <option value="$PROJECT_DIR$/lib/Cake/View/Helper/FormHelper.php" />
-        <option value="$PROJECT_DIR$/app/View/CandidatoAlumnis/index.ctp" />
-        <option value="$PROJECT_DIR$/app/View/Pages/faculdade_home.ctp" />
-        <option value="$PROJECT_DIR$/app/Controller/InscricaosController.php" />
-        <option value="$PROJECT_DIR$/app/Config/Migration/1408082904_anular_inscricao.php" />
-        <option value="$PROJECT_DIR$/app/View/Layouts/login2.ctp" />
-        <option value="$PROJECT_DIR$/app/webroot/assets/css/login_fb.css" />
-        <option value="$PROJECT_DIR$/app/View/Layouts/docente.ctp" />
-        <option value="$PROJECT_DIR$/app/View/Pages/docente_home.ctp" />
-        <option value="$PROJECT_DIR$/app/Controller/CursosController.php" />
-        <option value="$PROJECT_DIR$/app/Controller/AjaxController.php" />
-        <option value="$PROJECT_DIR$/app/View/Ajax/get_cursos_by_faculdade.ctp" />
-        <option value="$PROJECT_DIR$/app/webroot/assets/js/form-cadastro-alumni-wizard.js" />
-        <option value="$PROJECT_DIR$/app/View/CandidatoAlumnis/cadastro_alumni.ctp" />
-        <option value="$PROJECT_DIR$/app/Model/CandidatoAlumni.php" />
-        <option value="$USER_HOME$/Desktop/alumni/completo.html" />
-        <option value="$PROJECT_DIR$/app/Controller/SmsNotificationsController.php" />
-        <option value="$PROJECT_DIR$/app/Controller/CandidatoAlumnisController.php" />
-        <option value="$PROJECT_DIR$/app/Console/Command/OpenSGAAclShell.php" />
-        <option value="$PROJECT_DIR$/app/Model/Aluno.php" />
         <option value="$PROJECT_DIR$/app/View/Alunos/exportar_alunos_autenticidades.ctp" />
         <option value="$PROJECT_DIR$/app/Model/Disciplina.php" />
         <option value="$PROJECT_DIR$/app/Controller/DisciplinasController.php" />
@@ -240,28 +550,58 @@
         <option value="$PROJECT_DIR$/app/View/Layouts/login.ctp" />
         <option value="$PROJECT_DIR$/app/Config/bootstrap_siga.php" />
         <option value="$PROJECT_DIR$/app/Config/bootstrap.php" />
-        <option value="$PROJECT_DIR$/app/Model/User.php" />
         <option value="$PROJECT_DIR$/app/View/Candidaturas/importar_candidatos.ctp" />
         <option value="$PROJECT_DIR$/app/webroot/assets/css/opensga.css" />
-        <option value="$PROJECT_DIR$/app/View/Elements/header.ctp" />
         <option value="$PROJECT_DIR$/app/webroot/index.php" />
         <option value="$PROJECT_DIR$/app/Console/Command/CandidatoShell.php" />
         <option value="$PROJECT_DIR$/app/Model/Candidatura.php" />
-        <option value="$PROJECT_DIR$/app/Config/core.php" />
         <option value="$PROJECT_DIR$/app/Model/Upload.php" />
-        <option value="$PROJECT_DIR$/app/Controller/CandidaturasController.php" />
         <option value="$PROJECT_DIR$/app/Controller/AlunosController.php" />
-        <option value="$PROJECT_DIR$/app/Model/Entidade.php" />
         <option value="$PROJECT_DIR$/app/Console/Command/OpenSGAShell.php" />
         <option value="$PROJECT_DIR$/app/Controller/TurmasController.php" />
+        <option value="$PROJECT_DIR$/app/webroot/.htaccess" />
+        <option value="$PROJECT_DIR$/app/Test/Case/Controller/BolsaPedidosControllerTest.php" />
+        <option value="$PROJECT_DIR$/app/Test/Case/Model/BairroTest.php" />
+        <option value="$PROJECT_DIR$/app/Test/Case/Controller/BairrosControllerTest.php" />
+        <option value="$PROJECT_DIR$/app/webroot/test.php" />
+        <option value="$PROJECT_DIR$/app/Test/Fixture/AlunoFixture.php" />
+        <option value="$PROJECT_DIR$/app/View/Elements/footer.ctp" />
+        <option value="$PROJECT_DIR$/app/webroot/assets/js/main.js" />
+        <option value="$PROJECT_DIR$/app/View/Candidaturas/index.ctp" />
+        <option value="$PROJECT_DIR$/app/Controller/CandidaturasController.php" />
+        <option value="$PROJECT_DIR$/lib/Cake/Console/Command/Task/FixtureTask.php" />
+        <option value="$PROJECT_DIR$/app/Model/User.php" />
+        <option value="$PROJECT_DIR$/app/Model/Entidade.php" />
+        <option value="$PROJECT_DIR$/app/Model/CandidatoAlumni.php" />
+        <option value="$PROJECT_DIR$/app/Console/Command/EstudanteShell.php" />
+        <option value="$PROJECT_DIR$/app/View/Turmas/docente_print_pauta.ctp" />
+        <option value="$PROJECT_DIR$/app/Model/Aluno.php" />
+        <option value="$PROJECT_DIR$/app/Test/Case/Model/UserTest.php" />
+        <option value="$PROJECT_DIR$/app/Test/Case/Model/AlunoTest.php" />
+        <option value="$PROJECT_DIR$/plugins/Auditable/Model/Behavior/AuditableBehavior.php" />
+        <option value="$PROJECT_DIR$/app/webroot/assets/js/form-cadastro-alumni-wizard.js" />
+        <option value="$PROJECT_DIR$/app/Controller/CandidatoAlumnisController.php" />
+        <option value="$PROJECT_DIR$/app/View/Pages/home.ctp" />
+        <option value="$PROJECT_DIR$/app/Config/core.php" />
+        <option value="$PROJECT_DIR$/app/View/Configs/index.ctp" />
+        <option value="$PROJECT_DIR$/app/Console/Command/OpenSGAAclShell.php" />
+        <option value="$PROJECT_DIR$/app/View/Elements/header.ctp" />
+        <option value="$PROJECT_DIR$/app/View/CandidatoAlumnis/cadastro_alumni.ctp" />
+        <option value="$PROJECT_DIR$/app/View/Common/form_basic_common.ctp" />
+        <option value="$PROJECT_DIR$/app/Model/AnoLectivo.php" />
+        <option value="$PROJECT_DIR$/app/Controller/AnoLectivosController.php" />
+        <option value="$PROJECT_DIR$/app/View/AnoLectivos/novo_ano_lectivo.ctp" />
+        <option value="$PROJECT_DIR$/app/View/AnoLectivos/index.ctp" />
+        <option value="$PROJECT_DIR$/app/View/Layouts/default.ctp" />
+        <option value="$PROJECT_DIR$/app/View/Matriculas/index.ctp" />
       </list>
     </option>
   </component>
-  <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
+  <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" interpreter_name="PHP 5.4" />
   <component name="ProjectFrameBounds">
     <option name="y" value="27" />
-    <option name="width" value="1920" />
-    <option name="height" value="1026" />
+    <option name="width" value="1366" />
+    <option name="height" value="714" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
@@ -318,7 +658,701 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="plugins" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="plugins" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Auditable" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="plugins" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Auditable" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Model" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="plugins" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Auditable" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Model" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Behavior" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lib" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Cake" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lib" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Cake" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Console" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lib" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Cake" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Console" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Templates" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lib" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Cake" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Console" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Templates" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="default" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lib" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Cake" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Console" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Command" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lib" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Cake" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Console" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Command" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Task" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webroot" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webroot" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="assets" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webroot" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="assets" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="js" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="View" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="View" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Turmas" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="View" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Pages" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="View" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Matriculas" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="View" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Layouts" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="View" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Helper" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="View" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Elements" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="View" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Cursos" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="View" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Configs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="View" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Common" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="View" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Common" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Turmas" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="View" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Candidaturas" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="View" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="CandidatoAlumnis" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="View" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="AnoLectivos" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="View" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Alunos" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Test" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Test" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Case" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Test" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Case" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Model" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -398,6 +1432,24 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Config" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
     </panes>
@@ -411,15 +1463,15 @@
     <property name="options.searchVisible" value="true" />
     <property name="LayoutCode.rearrangeEntriesPHP" value="true" />
     <property name="LayoutCode.rearrangeEntriesCSS" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../in" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../craviation" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/app/Model/Behavior" />
       <recent name="$PROJECT_DIR$/app/Console/Command" />
       <recent name="$PROJECT_DIR$/app/View/Alunos" />
       <recent name="$PROJECT_DIR$/app/View/Ajax" />
       <recent name="$PROJECT_DIR$/app/View/Inscricaos" />
-      <recent name="$PROJECT_DIR$/app/View/Candidaturas" />
     </key>
   </component>
   <component name="RunManager">
@@ -465,15 +1517,16 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="27" width="1920" height="1026" extended-state="0" />
+    <frame x="0" y="27" width="1366" height="714" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32925472" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32894737" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.26903024" sideWeight="0.49347827" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.26903024" sideWeight="0.5054348" order="0" side_tool="true" content_ui="combo" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2536657" sideWeight="0.49019608" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2536657" sideWeight="0.50735295" order="0" side_tool="true" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -482,11 +1535,10 @@
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32936078" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -513,294 +1565,538 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/View/Elements/copyright.ctp">
+    <entry file="file://$PROJECT_DIR$/lib/Cake/Console/Templates/default/classes/fixture.ctp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="295" selection-start="711" selection-end="775" vertical-scroll-proportion="0.0" vertical-offset="306" max-vertical-offset="540" />
+        <state line="39" column="9" selection-start="1029" selection-end="1029" vertical-scroll-proportion="-1.2962962" vertical-offset="361" max-vertical-offset="972" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/View/Layouts/docente.ctp">
+    <entry file="file://$PROJECT_DIR$/lib/Cake/Console/Command/Task/TemplateTask.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="38" column="15" selection-start="1922" selection-end="1922" vertical-scroll-proportion="0.0" vertical-offset="684" max-vertical-offset="3060" />
+        <state line="150" column="20" selection-start="4069" selection-end="4069" vertical-scroll-proportion="-18.62963" vertical-offset="1945" max-vertical-offset="3762" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/View/Pages/docente_home.ctp">
+    <entry file="file://$PROJECT_DIR$/lib/Cake/Console/Command/Task/FixtureTask.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="33" column="28" selection-start="1708" selection-end="1708" vertical-scroll-proportion="0.0" vertical-offset="594" max-vertical-offset="954" />
+        <state line="254" column="20" selection-start="7805" selection-end="7805" vertical-scroll-proportion="-14.0" vertical-offset="3942" max-vertical-offset="8298" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Config/routes.php">
+    <entry file="file://$PROJECT_DIR$/app/Test/Fixture/BairroFixture.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="34" column="17" selection-start="1400" selection-end="1419" vertical-scroll-proportion="-9.333333" vertical-offset="0" max-vertical-offset="846" />
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1422" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Controller/CursosController.php">
+    <entry file="file://$PROJECT_DIR$/app/Model/AppModel.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="139" column="5" selection-start="4878" selection-end="4878" vertical-scroll-proportion="-25.814816" vertical-offset="1805" max-vertical-offset="3996" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Controller/ProvinciasController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="109" column="2" selection-start="3825" selection-end="3825" vertical-scroll-proportion="0.0" vertical-offset="1962" max-vertical-offset="2070" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Controller/AppController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="80" column="9" selection-start="3037" selection-end="3037" vertical-scroll-proportion="0.0" vertical-offset="1440" max-vertical-offset="3114" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Controller/AjaxController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="79" column="34" selection-start="2669" selection-end="2669" vertical-scroll-proportion="0.9343864" vertical-offset="653" max-vertical-offset="1800" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Controller/AlumnisController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2070" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/View/Alunos/matricular_candidato.ctp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="397" column="20" selection-start="28225" selection-end="37731" vertical-scroll-proportion="0.0" vertical-offset="7146" max-vertical-offset="13500" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/View/CandidatoAlumnis/cadastro_alumni.ctp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="335" column="0" selection-start="16795" selection-end="16795" vertical-scroll-proportion="0.0" vertical-offset="6030" max-vertical-offset="14760" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Model/CandidatoAlumni.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="162" column="0" selection-start="3954" selection-end="3954" vertical-scroll-proportion="0.0" vertical-offset="2916" max-vertical-offset="3024" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Controller/SmsNotificationsController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="107" column="14" selection-start="3168" selection-end="3168" vertical-scroll-proportion="0.0" vertical-offset="1926" max-vertical-offset="2682" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/webroot/assets/js/form-cadastro-alumni-wizard.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="158" column="27" selection-start="6521" selection-end="6521" vertical-scroll-proportion="0.0" vertical-offset="2570" max-vertical-offset="3492" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Controller/CandidatoAlumnisController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="80" column="20" selection-start="3008" selection-end="3008" vertical-scroll-proportion="-0.0" vertical-offset="1440" max-vertical-offset="2520" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Console/Command/OpenSGAAclShell.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="101" column="71" selection-start="4918" selection-end="4918" vertical-scroll-proportion="0.0" vertical-offset="1818" max-vertical-offset="6786" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/View/Alunos/exportar_alunos.ctp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1152" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/View/Alunos/exportar_alunos_excel.ctp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1638" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/View/Alunos/exportar_alunos_autenticidades.ctp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="89" column="46" selection-start="4840" selection-end="4840" vertical-scroll-proportion="0.0" vertical-offset="1602" max-vertical-offset="1728" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Model/DisciplinaPlanoEstudo.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1350" />
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="630" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/Cake/Model/Datasource/DataSource.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="157" column="20" selection-start="3608" selection-end="3608" vertical-scroll-proportion="0.34319526" vertical-offset="2266" max-vertical-offset="7704" />
+        <state line="169" column="0" selection-start="3828" selection-end="3828" vertical-scroll-proportion="0.93320966" vertical-offset="2269" max-vertical-offset="7704" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Model/Disciplina.php">
+    <entry file="file://$PROJECT_DIR$/app/View/Alunos/matricular_candidato.ctp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="98" column="39" selection-start="3201" selection-end="3201" vertical-scroll-proportion="-24.296297" vertical-offset="1108" max-vertical-offset="2070" />
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="1794" max-vertical-offset="13500" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Controller/DisciplinasController.php">
+    <entry file="file://$PROJECT_DIR$/app/Model/Entidade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="126" column="9" selection-start="4610" selection-end="4610" vertical-scroll-proportion="-29.962963" vertical-offset="1459" max-vertical-offset="2592" />
+        <state line="49" column="87" selection-start="1734" selection-end="1734" vertical-scroll-proportion="0.0" vertical-offset="770" max-vertical-offset="6750" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/View/Inscricaos/faculdade_index.ctp">
+    <entry file="file://$PROJECT_DIR$/app/Model/CandidatoAlumni.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="55" column="33" selection-start="2613" selection-end="2613" vertical-scroll-proportion="0.0" vertical-offset="680" max-vertical-offset="1602" />
+        <state line="223" column="0" selection-start="6335" selection-end="6335" vertical-scroll-proportion="0.0" vertical-offset="3511" max-vertical-offset="4194" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Controller/InscricaosController.php">
+    <entry file="file://$USER_HOME$/Development/SIGA/clipone_v1.4.1/admin/clip-one/form_wizard.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="290" column="46" selection-start="11504" selection-end="11504" vertical-scroll-proportion="0.0" vertical-offset="4622" max-vertical-offset="14598" />
+        <state line="1338" column="94" selection-start="46486" selection-end="46494" vertical-scroll-proportion="0.0" vertical-offset="23817" max-vertical-offset="27180" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Controller/MatriculasController.php">
+    <entry file="file://$USER_HOME$/Development/SIGA/clipone_v1.4.1/admin/clip-one/assets/js/form-wizard.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="141" column="9" selection-start="4718" selection-end="5923" vertical-scroll-proportion="0.0" vertical-offset="1775" max-vertical-offset="4770" />
+        <state line="108" column="25" selection-start="2802" selection-end="2808" vertical-scroll-proportion="0.33333334" vertical-offset="1668" max-vertical-offset="3708" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/View/Layouts/login.ctp">
+    <entry file="file://$PROJECT_DIR$/app/Model/EscolaNivelMedio.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="13" selection-start="110" selection-end="114" vertical-scroll-proportion="0.1119403" vertical-offset="0" max-vertical-offset="3654" />
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1458" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Config/bootstrap_siga.php">
+    <entry file="file://$PROJECT_DIR$/app/Console/Command/OpenSGAShell.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="53" selection-start="212" selection-end="212" vertical-scroll-proportion="0.0" vertical-offset="180" max-vertical-offset="378" />
+        <state line="503" column="0" selection-start="26116" selection-end="26116" vertical-scroll-proportion="0.0" vertical-offset="8289" max-vertical-offset="34542" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Config/bootstrap.php">
+    <entry file="file://$PROJECT_DIR$/app/Console/Command/UserShell.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="0" selection-start="149" selection-end="149" vertical-scroll-proportion="0.10650887" vertical-offset="0" max-vertical-offset="1602" />
+        <state line="38" column="45" selection-start="1216" selection-end="1216" vertical-scroll-proportion="0.0" vertical-offset="271" max-vertical-offset="1296" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/webroot/phpunit.php">
+    <entry file="file://$PROJECT_DIR$/app/Console/Command/EstudanteShell.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1782" />
+        <state line="674" column="0" selection-start="38439" selection-end="38439" vertical-scroll-proportion="0.0" vertical-offset="12132" max-vertical-offset="14616" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Model/TurmaTipoAvaliacao.php">
+    <entry file="file://$PROJECT_DIR$/app/Test/Fixture/UserFixture.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1314" />
+        <state line="39" column="27" selection-start="752" selection-end="775" vertical-scroll-proportion="0.0" vertical-offset="2740" max-vertical-offset="3582">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../bigdump/bigdump.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="676" column="0" selection-start="22502" selection-end="22502" vertical-scroll-proportion="0.9550562" vertical-offset="11403" max-vertical-offset="21168" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Model/User.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="331" column="25" selection-start="10078" selection-end="10078" vertical-scroll-proportion="0.6804734" vertical-offset="5383" max-vertical-offset="6372" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/View/Common/form_basic_common.ctp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="36" column="60" selection-start="1633" selection-end="1633" vertical-scroll-proportion="-13.592592" vertical-offset="281" max-vertical-offset="1458" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/webroot/assets/css/opensga.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="20" selection-start="28" selection-end="28" vertical-scroll-proportion="0.020642202" vertical-offset="0" max-vertical-offset="872" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/webroot/assets/css/main.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="1" selection-start="791" selection-end="791" vertical-scroll-proportion="0.41909197" vertical-offset="0" max-vertical-offset="85932" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Model/Candidatura.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="198" column="15" selection-start="6993" selection-end="6993" vertical-scroll-proportion="0.8295858" vertical-offset="2863" max-vertical-offset="3816" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/View/Candidaturas/importar_candidatos.ctp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="54" column="32" selection-start="2502" selection-end="2502" vertical-scroll-proportion="0.6591716" vertical-offset="415" max-vertical-offset="1476" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/View/Elements/header.ctp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="91" column="64" selection-start="3880" selection-end="3880" vertical-scroll-proportion="0.0" vertical-offset="1044" max-vertical-offset="3546">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Console/Command/CandidatoShell.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="15" selection-start="146" selection-end="146" vertical-scroll-proportion="0.124423966" vertical-offset="0" max-vertical-offset="868" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Model/Turma.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="616" column="49" selection-start="21870" selection-end="21870" vertical-scroll-proportion="0.0" vertical-offset="11088" max-vertical-offset="12870">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/webroot/index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="45" column="5" selection-start="1319" selection-end="1319" vertical-scroll-proportion="0.56842107" vertical-offset="0" max-vertical-offset="1584" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Config/core.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="34" column="30" selection-start="1102" selection-end="1102" vertical-scroll-proportion="0.0" vertical-offset="612" max-vertical-offset="6174">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Controller/CandidaturasController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="63" column="65" selection-start="2238" selection-end="2238" vertical-scroll-proportion="0.46432748" vertical-offset="737" max-vertical-offset="2988" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Model/Upload.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="65" column="0" selection-start="1709" selection-end="1709" vertical-scroll-proportion="0.50345623" vertical-offset="733" max-vertical-offset="2754" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/View/Alunos/alterar_nome_candidato.ctp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1224">
+        <state line="300" column="31" selection-start="9304" selection-end="9304" vertical-scroll-proportion="0.0" vertical-offset="5094" max-vertical-offset="6678">
           <folding>
-            <marker date="1405082476887" expanded="true" signature="491:2615" placeholder="..." />
-            <marker date="1405082476887" expanded="true" signature="517:994" placeholder="..." />
-            <marker date="1405082476887" expanded="true" signature="552:983" placeholder="..." />
-            <marker date="1405082476887" expanded="true" signature="592:968" placeholder="..." />
-            <marker date="1405082476887" expanded="true" signature="635:907" placeholder="..." />
-            <marker date="1405082476887" expanded="true" signature="660:885" placeholder="..." />
-            <marker date="1405082476887" expanded="true" signature="1025:2560" placeholder="..." />
-            <marker date="1405082476887" expanded="true" signature="1064:2545" placeholder="..." />
-            <marker date="1405082476887" expanded="true" signature="1107:1285" placeholder="..." />
-            <marker date="1405082476887" expanded="true" signature="1132:1228" placeholder="..." />
-            <marker date="1405082476887" expanded="true" signature="2153:2502" placeholder="..." />
-            <marker date="1405082476887" expanded="true" signature="2199:2227" placeholder="..." />
-            <marker date="1405082476887" expanded="true" signature="2274:2479" placeholder="..." />
+            <marker date="1410393852936" expanded="true" signature="-1:-1" placeholder="SELECT us.id..users..." />
+            <marker date="1410393852936" expanded="true" signature="-1:-1" placeholder="SELECT ta.id..users..." />
+            <marker date="1410393852936" expanded="true" signature="-1:-1" placeholder="SELECT tf.id..users..." />
+            <marker date="1410393852936" expanded="true" signature="-1:-1" placeholder="delete from ..." />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/View/Alunos/alterar_nome.ctp">
+    <entry file="file://$PROJECT_DIR$/app/View/Helper/PhpExcelHelper.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="0" selection-start="276" selection-end="276" vertical-scroll-proportion="0.0" vertical-offset="126" max-vertical-offset="666">
+        <state line="215" column="28" selection-start="7082" selection-end="7082" vertical-scroll-proportion="0.0" vertical-offset="3594" max-vertical-offset="4806">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/View/Turmas/docente_print_pauta.ctp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1926">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Controller/AlunosController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="77" column="16" selection-start="3828" selection-end="3828" vertical-scroll-proportion="0.0" vertical-offset="957" max-vertical-offset="28548">
+        <state line="1246" column="43" selection-start="50998" selection-end="50998" vertical-scroll-proportion="-22.703703" vertical-offset="21815" max-vertical-offset="28548">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Model/Aluno.php">
+    <entry file="file://$PROJECT_DIR$/app/Test/Case/Model/UserTest.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="1285" column="42" selection-start="52404" selection-end="52404" vertical-scroll-proportion="0.0" vertical-offset="22334" max-vertical-offset="28044">
-          <folding>
-            <marker date="1409033490955" expanded="true" signature="15617:15681" placeholder="Select plano..matriculas..." />
-            <marker date="1409033490955" expanded="true" signature="16189:16253" placeholder="Select plano..matriculas..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Model/Entidade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="26" selection-start="740" selection-end="740" vertical-scroll-proportion="-16.0" vertical-offset="0" max-vertical-offset="6048">
+        <state line="316" column="5" selection-start="6816" selection-end="6816" vertical-scroll-proportion="0.0" vertical-offset="5008" max-vertical-offset="5850">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Console/Command/OpenSGAShell.php">
+    <entry file="file://$PROJECT_DIR$/app/Test/Case/Model/AlunoTest.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="241" column="34" selection-start="14220" selection-end="14220" vertical-scroll-proportion="-11.727273" vertical-offset="3693" max-vertical-offset="34542">
+        <state line="442" column="38" selection-start="9307" selection-end="9307" vertical-scroll-proportion="0.0" vertical-offset="7734" max-vertical-offset="9810">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/plugins/Auditable/Model/Behavior/AuditableBehavior.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="92" column="7" selection-start="2279" selection-end="2279" vertical-scroll-proportion="-18.296297" vertical-offset="1162" max-vertical-offset="9342">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/webroot/assets/js/form-cadastro-alumni-wizard.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="110" column="102" selection-start="5867" selection-end="5867" vertical-scroll-proportion="0.33333334" vertical-offset="1808" max-vertical-offset="2754">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Controller/InscricaosController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="151" column="33" selection-start="5873" selection-end="5873" vertical-scroll-proportion="-7.148148" vertical-offset="2525" max-vertical-offset="14598">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Controller/PagesController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3276">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Controller/CandidatoAlumnisController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="137" column="0" selection-start="5164" selection-end="5164" vertical-scroll-proportion="-14.111111" vertical-offset="2085" max-vertical-offset="2628">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/View/Common/Turmas/ver_turma.ctp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="115" column="0" selection-start="3881" selection-end="3881" vertical-scroll-proportion="-16.11111" vertical-offset="1419" max-vertical-offset="5886">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/View/Turmas/faculdade_ver_turma.ctp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="28" column="276" selection-start="1186" selection-end="1186" vertical-scroll-proportion="-10.666667" vertical-offset="0" max-vertical-offset="810">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Config/core.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="34" column="30" selection-start="1102" selection-end="1102" vertical-scroll-proportion="0.56804734" vertical-offset="0" max-vertical-offset="5868">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Controller/TurmasController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="478" column="98" selection-start="17889" selection-end="17889" vertical-scroll-proportion="0.6525935" vertical-offset="8063" max-vertical-offset="13302">
+        <state line="478" column="32" selection-start="17823" selection-end="17823" vertical-scroll-proportion="-12.111111" vertical-offset="8277" max-vertical-offset="13302">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/View/Pages/home.ctp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="0" selection-start="95" selection-end="5181" vertical-scroll-proportion="-3.3333333" vertical-offset="0" max-vertical-offset="1764">
+          <folding>
+            <element signature="tag#div#0" expanded="false" />
+            <element signature="n#style#0;n#span#0;n#a#0;n#li#3;n#ul#0;n#div#1;n#div#0;n#div#2;n#div#1;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#a#0;n#li#4;n#ul#0;n#div#1;n#div#0;n#div#2;n#div#1;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/View/Configs/index.ctp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="34" column="0" selection-start="1066" selection-end="1066" vertical-scroll-proportion="-14.777778" vertical-offset="213" max-vertical-offset="720">
+          <folding>
+            <element signature="e#6#399#0" expanded="true" />
+            <marker date="1412017760260" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1412017760260" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1412017760260" expanded="true" signature="-1:-1" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/View/Cursos/index.ctp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="8" column="26" selection-start="0" selection-end="2139" vertical-scroll-proportion="0.29149798" vertical-offset="0" max-vertical-offset="1062">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Plugin/Cooperacao/Controller/CooperacaoAcordosController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="55.88889" vertical-offset="1509" max-vertical-offset="2808">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/View/Elements/header.ctp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="178" column="71" selection-start="7797" selection-end="7797" vertical-scroll-proportion="-16.074074" vertical-offset="2770" max-vertical-offset="3528">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/View/Cursos/adicionar_curso.ctp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="990">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Plugin/Requisicoes/View/RequisicoesPedidos/nova_requisicao.ctp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="10" column="24" selection-start="0" selection-end="7055" vertical-scroll-proportion="0.56782335" vertical-offset="0" max-vertical-offset="4572">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/View/CandidatoAlumnis/cadastro_alumni.ctp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="818" column="0" selection-start="37590" selection-end="37999" vertical-scroll-proportion="-8.407408" vertical-offset="14497" max-vertical-offset="14886">
+          <folding>
+            <marker date="1412023133103" expanded="true" signature="912:30986" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="936:30947" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="1004:30940" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="1032:1735" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="1132:1728" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="1206:1219" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="1313:1366" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="1429:1483" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="1545:1603" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="1664:1717" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="1760:30925" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="2320:30917" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="2325:3628" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="2334:2636" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="2361:2626" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="2398:2435" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="2491:2613" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="2645:2968" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="2672:2958" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="2709:2746" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="2802:2945" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="2977:3299" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="3004:3289" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="3041:3078" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="3134:3276" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="3308:3622" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="3335:3612" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="3372:3409" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="3465:3599" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="3687:3883" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="3805:3876" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="3901:9970" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="3916:9678" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="9742:9963" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="9789:9952" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="9851:9937" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="9988:14808" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="10003:14336" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="14366:14801" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="14413:14580" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="14481:14565" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="14627:14790" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="14689:14775" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="14826:19754" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="14842:19745" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="14948:15868" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="14983:15240" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="15275:15553" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="15588:15853" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="15894:16763" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="15929:16171" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="16206:16463" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="16498:16748" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="16789:17316" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="16824:17039" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="17074:17301" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="17343:19217" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="17378:17746" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="17781:18121" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="18156:18830" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="18197:18811" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="18380:18788" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="18865:19202" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="19250:19729" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="19301:19484" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="19373:19465" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="19535:19714" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="19601:19695" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="19772:30897" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="19783:30891" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="19844:30890" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="19867:23743" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="19882:23736" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="19954:20254" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="20005:20063" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="20099:20239" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="20287:20566" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="20338:20384" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="20420:20551" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="20599:20874" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="20650:20694" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="20730:20859" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="20907:21227" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="20958:21002" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="21038:21212" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="21260:21571" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="21311:21359" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="21395:21556" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="21472:21537" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="21604:21919" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="21655:21709" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="21745:21904" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="21820:21885" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="21952:22265" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="22003:22058" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="22094:22250" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="22166:22231" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="22298:22620" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="22349:22409" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="22445:22605" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="22521:22586" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="22653:22979" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="22704:22764" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="22800:22964" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="22880:22945" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="23012:23341" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="23063:23126" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="23162:23326" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="23242:23307" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="23374:23719" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="23425:23495" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="23531:23704" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="23620:23685" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="23766:26794" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="23781:26787" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="23857:24135" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="23908:23951" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="23987:24120" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="24168:24466" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="24219:24276" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="24312:24451" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="24499:24788" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="24550:24601" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="24637:24773" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="24822:25111" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="24873:24924" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="24960:25096" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="25144:25442" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="25195:25252" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="25288:25427" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="25475:25788" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="25526:25574" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="25610:25773" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="25689:25754" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="25821:26137" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="25872:25926" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="25962:26122" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="26038:26103" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="26170:26454" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="26221:26271" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="26307:26439" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="26487:26771" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="26538:26588" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="26624:26756" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="26817:30044" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="26832:30037" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="26903:27212" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="26954:27007" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="27043:27197" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="27113:27178" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="27245:27545" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="27296:27354" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="27390:27530" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="27578:27892" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="27629:27685" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="27721:27877" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="27793:27858" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="27925:28238" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="27976:28031" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="28067:28223" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="28139:28204" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="28271:28589" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="28322:28377" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="28413:28574" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="28490:28555" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="28622:28947" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="28673:28725" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="28761:28932" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="28980:29282" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="29031:29079" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="29115:29267" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="29183:29248" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="29315:29652" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="29366:29428" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="29464:29637" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="29553:29618" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="29685:30020" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="29736:29790" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="29826:30005" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="29921:29986" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="30068:30883" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="30097:30454" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="30123:30443" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="30175:30427" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="30483:30876" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="30530:30697" placeholder="..." />
+            <marker date="1412023133103" expanded="true" signature="30598:30682" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Model/Aluno.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="249" column="6" selection-start="6955" selection-end="7632" vertical-scroll-proportion="0.81632656" vertical-offset="4242" max-vertical-offset="28080">
+          <folding>
+            <marker date="1411413388753" expanded="true" signature="-1:-1" placeholder="Select plano..matriculas..." />
+            <marker date="1411413388753" expanded="true" signature="-1:-1" placeholder="Select plano..matriculas..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Controller/AnoLectivosController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="26" column="3" selection-start="1281" selection-end="1281" vertical-scroll-proportion="-0.6666667" vertical-offset="0" max-vertical-offset="1440">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/View/AnoLectivos/index.ctp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="64" column="55" selection-start="3373" selection-end="3373" vertical-scroll-proportion="0.6025237" vertical-offset="961" max-vertical-offset="1350">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/View/Common/form_basic_common.ctp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="75" column="0" selection-start="4627" selection-end="4627" vertical-scroll-proportion="1.6246057" vertical-offset="835" max-vertical-offset="1458">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Model/AnoLectivo.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="100" column="9" selection-start="3965" selection-end="3965" vertical-scroll-proportion="-10.888889" vertical-offset="1506" max-vertical-offset="1998">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/View/AnoLectivos/novo_ano_lectivo.ctp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="32" column="34" selection-start="1230" selection-end="1230" vertical-scroll-proportion="0.09148265" vertical-offset="547" max-vertical-offset="1674">
+          <folding>
+            <marker date="1412024167323" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1412024167323" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1412024167323" expanded="true" signature="-1:-1" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Console/Command/OpenSGAAclShell.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="255" column="61" selection-start="17074" selection-end="17074" vertical-scroll-proportion="-6.296296" vertical-offset="4420" max-vertical-offset="6894">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/View/Layouts/default.ctp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="265" column="0" selection-start="19210" selection-end="19210" vertical-scroll-proportion="-10.407408" vertical-offset="4489" max-vertical-offset="5220">
+          <folding>
+            <marker date="1412024474619" expanded="true" signature="18637:18762" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/View/Matriculas/index.ctp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="13" column="82" selection-start="687" selection-end="687" vertical-scroll-proportion="-6.6666665" vertical-offset="54" max-vertical-offset="2268">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Controller/MatriculasController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="132" column="63" selection-start="5444" selection-end="5536" vertical-scroll-proportion="-7.0740743" vertical-offset="2185" max-vertical-offset="4770">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Model/Matricula.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="257" column="34" selection-start="8151" selection-end="8151" vertical-scroll-proportion="0.056782335" vertical-offset="4608" max-vertical-offset="6138">
           <folding />
         </state>
       </provider>

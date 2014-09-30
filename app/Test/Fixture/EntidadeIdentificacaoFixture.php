@@ -6,28 +6,11 @@
 class EntidadeIdentificacaoFixture extends CakeTestFixture {
 
 /**
- * Fields
+ * Import
  *
  * @var array
  */
-	public $fields = array(
-		'id' => array('type' => 'integer', 'null' => false, 'default' => null, 'key' => 'primary'),
-		'entidade_id' => array('type' => 'integer', 'null' => true, 'default' => null),
-		'documento_identificacao_id' => array('type' => 'integer', 'null' => true, 'default' => null),
-		'data_emissao' => array('type' => 'date', 'null' => true, 'default' => null),
-		'data_validade' => array('type' => 'date', 'null' => true, 'default' => null),
-		'numero' => array('type' => 'string', 'null' => true, 'default' => null, 'length' => 45, 'collate' => 'utf8_general_ci', 'charset' => 'utf8'),
-		'created' => array('type' => 'datetime', 'null' => true, 'default' => null),
-		'modified' => array('type' => 'datetime', 'null' => true, 'default' => null),
-		'created_by' => array('type' => 'integer', 'null' => true, 'default' => null),
-		'modified_by' => array('type' => 'integer', 'null' => true, 'default' => null),
-		'estado_objecto_id' => array('type' => 'integer', 'null' => true, 'default' => null),
-		'local_emissao' => array('type' => 'string', 'null' => true, 'default' => null, 'length' => 150, 'collate' => 'utf8_general_ci', 'charset' => 'utf8'),
-		'indexes' => array(
-			'PRIMARY' => array('column' => 'id', 'unique' => 1)
-		),
-		'tableParameters' => array('charset' => 'utf8', 'collate' => 'utf8_general_ci', 'engine' => 'InnoDB')
-	);
+	public $import = array('model' => 'EntidadeIdentificacao');
 
 /**
  * Records
@@ -174,146 +157,6 @@ class EntidadeIdentificacaoFixture extends CakeTestFixture {
 			'modified_by' => null,
 			'estado_objecto_id' => '1',
 			'local_emissao' => 'Nampula'
-		),
-		array(
-			'id' => '13',
-			'entidade_id' => '42356',
-			'documento_identificacao_id' => '1',
-			'data_emissao' => '2011-04-11',
-			'data_validade' => null,
-			'numero' => '090201170231I',
-			'created' => '2013-07-04 08:14:45',
-			'modified' => '2013-07-04 08:14:45',
-			'created_by' => '1',
-			'modified_by' => null,
-			'estado_objecto_id' => '1',
-			'local_emissao' => 'Xai-Xai'
-		),
-		array(
-			'id' => '14',
-			'entidade_id' => '42357',
-			'documento_identificacao_id' => '1',
-			'data_emissao' => '2012-05-03',
-			'data_validade' => null,
-			'numero' => '110102082626A',
-			'created' => '2013-07-04 08:23:47',
-			'modified' => '2013-07-04 08:23:47',
-			'created_by' => '1',
-			'modified_by' => null,
-			'estado_objecto_id' => '1',
-			'local_emissao' => 'Maputo'
-		),
-		array(
-			'id' => '15',
-			'entidade_id' => '42358',
-			'documento_identificacao_id' => '1',
-			'data_emissao' => '2011-07-19',
-			'data_validade' => null,
-			'numero' => '090101336295F',
-			'created' => '2013-07-04 08:33:21',
-			'modified' => '2013-07-04 08:33:21',
-			'created_by' => '1',
-			'modified_by' => null,
-			'estado_objecto_id' => '1',
-			'local_emissao' => 'Xai-Xai'
-		),
-		array(
-			'id' => '16',
-			'entidade_id' => '42359',
-			'documento_identificacao_id' => '1',
-			'data_emissao' => '2011-02-02',
-			'data_validade' => null,
-			'numero' => '110100842595N',
-			'created' => '2013-07-04 08:42:21',
-			'modified' => '2013-07-04 08:42:21',
-			'created_by' => '1',
-			'modified_by' => null,
-			'estado_objecto_id' => '1',
-			'local_emissao' => 'Maputo'
-		),
-		array(
-			'id' => '17',
-			'entidade_id' => '42360',
-			'documento_identificacao_id' => '1',
-			'data_emissao' => '2010-08-17',
-			'data_validade' => null,
-			'numero' => '110100400221B',
-			'created' => '2013-07-04 08:52:10',
-			'modified' => '2013-07-04 08:52:10',
-			'created_by' => '1',
-			'modified_by' => null,
-			'estado_objecto_id' => '1',
-			'local_emissao' => 'Maputo'
-		),
-		array(
-			'id' => '18',
-			'entidade_id' => '42361',
-			'documento_identificacao_id' => '1',
-			'data_emissao' => '2012-01-09',
-			'data_validade' => null,
-			'numero' => '110101796591J',
-			'created' => '2013-07-04 08:59:46',
-			'modified' => '2013-07-04 08:59:46',
-			'created_by' => '1',
-			'modified_by' => null,
-			'estado_objecto_id' => '1',
-			'local_emissao' => 'Maputo'
-		),
-		array(
-			'id' => '19',
-			'entidade_id' => '42362',
-			'documento_identificacao_id' => '1',
-			'data_emissao' => '2010-04-08',
-			'data_validade' => null,
-			'numero' => '040100145402I',
-			'created' => '2013-07-04 09:09:23',
-			'modified' => '2013-07-04 09:09:23',
-			'created_by' => '1',
-			'modified_by' => null,
-			'estado_objecto_id' => '1',
-			'local_emissao' => 'Quelimane'
-		),
-		array(
-			'id' => '20',
-			'entidade_id' => '42363',
-			'documento_identificacao_id' => '1',
-			'data_emissao' => '2011-02-23',
-			'data_validade' => null,
-			'numero' => '110100895125N',
-			'created' => '2013-07-04 09:22:36',
-			'modified' => '2013-07-04 09:22:36',
-			'created_by' => '1',
-			'modified_by' => null,
-			'estado_objecto_id' => '1',
-			'local_emissao' => 'Maputo'
-		),
-		array(
-			'id' => '21',
-			'entidade_id' => '42364',
-			'documento_identificacao_id' => '1',
-			'data_emissao' => '2013-05-03',
-			'data_validade' => null,
-			'numero' => '080100184400I',
-			'created' => '2013-07-04 09:26:37',
-			'modified' => '2013-07-04 09:26:37',
-			'created_by' => '42313',
-			'modified_by' => null,
-			'estado_objecto_id' => '1',
-			'local_emissao' => 'Inhambane'
-		),
-		array(
-			'id' => '22',
-			'entidade_id' => '42365',
-			'documento_identificacao_id' => '1',
-			'data_emissao' => '0200-12-28',
-			'data_validade' => null,
-			'numero' => '070100035857Q',
-			'created' => '2013-07-04 09:38:01',
-			'modified' => '2013-07-04 09:38:01',
-			'created_by' => '1',
-			'modified_by' => null,
-			'estado_objecto_id' => '1',
-			'local_emissao' => 'Beira'
 		),
 	);
 

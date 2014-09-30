@@ -48,6 +48,8 @@ class OpenSGAAclShell extends AppShell {
             $comandos[] = "acl grant User.{$docente['Entidade']['User']['id']} controllers/Alunos/docente_perfil_estudante";
             $comandos[] = "acl grant User.{$docente['Entidade']['User']['id']} controllers/Alunos/docente_enviar_sms";
 
+
+
 			$comandos[] = "acl grant User.{$docente['Entidade']['User']['id']} controllers/Docentes/docente_meu_perfil";
 
 			$comandos[] = "acl grant User.{$docente['Entidade']['User']['id']} controllers/Messages/docente_index";
@@ -250,6 +252,7 @@ class OpenSGAAclShell extends AppShell {
 
 					$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Matriculas/index";
 				}
+
 				if (in_array('DRA_DI', $unidadesOrganicas)) {
 					$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/index";
 
@@ -263,10 +266,13 @@ class OpenSGAAclShell extends AppShell {
 					$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/concluir_nivel";
 					$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/perfil_estudante";
 
+                    $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/AnoLectivos/index";
+                    $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/AnoLectivos/novo_ano_lectivo";
 
                     $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Candidaturas/importar_candidatos";
-                    $comandos[] = "acl grant User.{$funcionario['User']['id']}
-                    controllers/Candidaturas/importar_candidatos_2";
+                    $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Candidaturas/importar_candidatos_2";
+
+                    $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Configs/index";
 
 					$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Cursos/adicionar_curso";
 

@@ -17,25 +17,64 @@
 class Entidade extends AppModel {
 
 	var $name = 'Entidade';
-	//validations
 
-	public $validate = array(
-		'apelido' => array('rule' => 'notempty', 'message' => 'campo obrigatorio'),
-		'nomes' => array('rule' => 'notempty', 'message' => 'campo obrigatório'),
-		'genero_id' => array('rule' => 'notempty', 'message' => 'seleccione o sexo'),
-		'data_nascimento' => array('rule' => 'notempty', 'message' => 'seleccione a data de nascimento'),
-                                  
-        'name'=>array('rule'=>array('minLength', 8),
-                      'required'=>'create',
-                      'message'=>'Nome deve ter pelomenos 8 caracteres'),
-                                   
-        //'email'=>array('rule'=>'email','required'=>'create','message'=>'campo obrigatorio')
-        
-	);
-	//The Associations below have been created with all possible keys, those that are not needed can be removed
+    public $validate = array(
+        'apelido' => array(
+            'apelidoNotEmpty' => array(
+                'rule' => 'notEmpty',
+                'required'=>'create',
+                'message'=>'O Campo Apelido é de Preenchimento Obrigatório',
+                // extra keys like on, required, etc. go here...
+            )
+        ),
+        'nomes' => array(
+            'nomesNotEmpty' => array(
+                'rule' => 'notEmpty',
+                'required'=>'create',
+                'message'=>'O Campo Outros Nomes é de Preenchimento Obrigatório',
+                // extra keys like on, required, etc. go here...
+            )
+        ),
+        'genero_id' => array(
+            'generoIdNotEmpty' => array(
+                'rule' => 'notEmpty',
+                'required'=>'create',
+                'message'=>'O Campo Sexo é de Preenchimento Obrigatório',
+                // extra keys like on, required, etc. go here...
+            )
+        ),
+        'data_nascimento' => array(
+            'dataNascimentoNotEmpty' => array(
+                'rule' => 'notEmpty',
+                'required'=>'create',
+                'message'=>'O Campo Data de Nascimento é de Preenchimento Obrigatório',
+                // extra keys like on, required, etc. go here...
+            ),
+            'dataNascimentoDate' => array(
+                'rule' => array('date', 'ymd'),
+                'message'=>'Introduza uma data no formato certo',
+                // extra keys like on, required, etc. go here...
+            )
 
+        ),
+        'name' => array(
+            'nameNotEmpty' => array(
+                'rule' => 'notEmpty',
+                'required'=>'create',
+                'message'=>'O Campo Nome Completo é de Preenchimento Obrigatório',
+                // extra keys like on, required, etc. go here...
+            )
+        ),
+        'email' => array(
+            'emailValid' => array(
+                'rule' => 'email',
+                'required'=>'create',
+                'message'=>'O Campo Email de Preenchimento Obrigatório',
+                // extra keys like on, required, etc. go here...
+            )
+        ),
 
-
+    );
 
 	var $belongsTo = array(
 		'User' => array(

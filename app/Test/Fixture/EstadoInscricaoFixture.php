@@ -6,18 +6,11 @@
 class EstadoInscricaoFixture extends CakeTestFixture {
 
 /**
- * Fields
+ * Import
  *
  * @var array
  */
-	public $fields = array(
-		'id' => array('type' => 'integer', 'null' => false, 'default' => null, 'key' => 'primary'),
-		'name' => array('type' => 'string', 'null' => true, 'default' => null, 'length' => 45, 'collate' => 'utf8_general_ci', 'charset' => 'utf8'),
-		'indexes' => array(
-			'PRIMARY' => array('column' => 'id', 'unique' => 1)
-		),
-		'tableParameters' => array('charset' => 'utf8', 'collate' => 'utf8_general_ci', 'engine' => 'InnoDB')
-	);
+	public $import = array('model' => 'EstadoInscricao');
 
 /**
  * Records
@@ -64,18 +57,6 @@ class EstadoInscricaoFixture extends CakeTestFixture {
 		array(
 			'id' => '10',
 			'name' => 'Reprovado'
-		),
-		array(
-			'id' => '11',
-			'name' => 'Reprovado por Faltas'
-		),
-		array(
-			'id' => '12',
-			'name' => 'Reprovado na Recorrencia'
-		),
-		array(
-			'id' => '13',
-			'name' => 'Aprovado Sem Exames'
 		),
 	);
 

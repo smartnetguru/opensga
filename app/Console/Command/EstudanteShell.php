@@ -744,4 +744,63 @@ class EstudanteShell extends AppShell {
     }
 
 
+    /**
+     * @throws CakeException
+     * Exporta estudantes do novo ingresso para efeitos de autenticidade
+     * @todo padronizar as condicoes do find do aluno
+     * @todo Verificar onde o ficheiro eh gravado. Tem que ir para o save_path
+     */
+    public function exporta_estudantes_autenticidades() {
+        App::import('Vendor', 'PHPExcel', array('file' => 'PHPExcel.php'));
+        if (!class_exists('PHPExcel'))
+            throw new CakeException('Vendor class PHPExcel not found!');
+
+        $xls = PHPExcel_IOFactory::load(APP . 'Reports' . DS . 'autenticidades2.xlsx');
+
+        $worksheet = $xls->getActiveSheet();
+//debug($xls->getActiveSheetIndex());
+        $linhaActual = 2;
+
+        $this->Aluno->contain(array('AlunoNivelMedio'=>array(
+            'EscolaNivelMedio'=>array(
+                'Distrito'=>array(
+                    'Provincia'
+                )
+            )
+        ),'Entidade','Curso'));
+        $alunos = $this->Aluno->find('all',array('conditions'=>array('or'=>array('ano_ingresso'=>'2013',
+            'Aluno.codigo LIKE '=>'2013%'))));
+
+        foreach($alunos as $aluno){
+            $xls->getActiveSheet()->setCellValue('A' . $linhaActual, $aluno['Aluno']['codigo']);
+            $xls->getActiveSheet()->setCellValue('B' . $linhaActual, $aluno['AlunoNivelMedio']['ano_conclusao']);
+            $xls->getActiveSheet()->setCellValue('C' . $linhaActual, $aluno['AlunoNivelMedio']['nota_final']);
+            $xls->getActiveSheet()->setCellValue('D' . $linhaActual,
+                $aluno['AlunoNivelMedio']['EscolaNivelMedio']['name']);
+            $xls->getActiveSheet()->setCellValue('E' . $linhaActual, $aluno['Entidade']['name']);
+            $xls->getActiveSheet()->setCellValue('F' . $linhaActual, $aluno['Entidade']['telemovel']);
+            $xls->getActiveSheet()->setCellValue('G' . $linhaActual, $aluno['Entidade']['data_nascimento']);
+            $xls->getActiveSheet()->setCellValue('H' . $linhaActual, $aluno['Entidade']['naturalidade']);
+            $xls->getActiveSheet()->setCellValue('I' . $linhaActual, $aluno['Curso']['name']);
+            $xls->getActiveSheet()->setCellValue('J' . $linhaActual,
+                $aluno['AlunoNivelMedio']['EscolaNivelMedio']['Distrito']['Provincia']['name']);
+            $xls->getActiveSheet()->setCellValue('K' . $linhaActual,
+                $aluno['AlunoNivelMedio']['EscolaNivelMedio']['Distrito']['name']);
+
+            $linhaActual++;
+            $this->out($linhaActual);
+
+
+        }
+
+
+        $objWriter = PHPExcel_IOFactory::createWriter($xls, 'Excel2007');
+        debug(getcwd());
+        $objWriter->save('ficheiro.xlsx');
+// clear memory
+        $xls->disconnectWorksheets();
+    }
+
+
+
 }

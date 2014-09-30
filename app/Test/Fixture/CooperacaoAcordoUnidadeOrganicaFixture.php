@@ -6,25 +6,11 @@
 class CooperacaoAcordoUnidadeOrganicaFixture extends CakeTestFixture {
 
 /**
- * Fields
+ * Import
  *
  * @var array
  */
-	public $fields = array(
-		'id' => array('type' => 'integer', 'null' => false, 'default' => null, 'key' => 'primary'),
-		'unidade_organica_id' => array('type' => 'integer', 'null' => true, 'default' => null, 'key' => 'index'),
-		'cooperacao_acordo_id' => array('type' => 'integer', 'null' => true, 'default' => null, 'key' => 'index'),
-		'created' => array('type' => 'datetime', 'null' => true, 'default' => null),
-		'modified' => array('type' => 'datetime', 'null' => true, 'default' => null),
-		'created_by' => array('type' => 'integer', 'null' => true, 'default' => null),
-		'modified_by' => array('type' => 'integer', 'null' => true, 'default' => null),
-		'indexes' => array(
-			'PRIMARY' => array('column' => 'id', 'unique' => 1),
-			'cooperacao_acordo_unidade_acordo_idx' => array('column' => 'cooperacao_acordo_id', 'unique' => 0),
-			'cooperacao_acordo_unidade_unidade_idx' => array('column' => 'unidade_organica_id', 'unique' => 0)
-		),
-		'tableParameters' => array('charset' => 'utf8', 'collate' => 'utf8_general_ci', 'engine' => 'InnoDB')
-	);
+	public $import = array('table' => 'cooperacao_acordo_unidade_organicas');
 
 /**
  * Records

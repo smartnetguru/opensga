@@ -6,25 +6,11 @@
 class EscolaNivelMedioFixture extends CakeTestFixture {
 
 /**
- * Fields
+ * Import
  *
  * @var array
  */
-	public $fields = array(
-		'id' => array('type' => 'integer', 'null' => false, 'default' => null, 'key' => 'primary'),
-		'name' => array('type' => 'string', 'null' => true, 'default' => null, 'collate' => 'utf8_general_ci', 'charset' => 'utf8'),
-		'distrito_id' => array('type' => 'integer', 'null' => true, 'default' => null),
-		'provincia_id' => array('type' => 'integer', 'null' => true, 'default' => null),
-		'pais_id' => array('type' => 'integer', 'null' => true, 'default' => null),
-		'created' => array('type' => 'datetime', 'null' => true, 'default' => null),
-		'modified' => array('type' => 'datetime', 'null' => true, 'default' => null),
-		'created_by' => array('type' => 'integer', 'null' => true, 'default' => null),
-		'modified_by' => array('type' => 'integer', 'null' => true, 'default' => null),
-		'indexes' => array(
-			'PRIMARY' => array('column' => 'id', 'unique' => 1)
-		),
-		'tableParameters' => array('charset' => 'utf8', 'collate' => 'utf8_general_ci', 'engine' => 'InnoDB')
-	);
+	public $import = array('model' => 'EscolaNivelMedio');
 
 /**
  * Records
@@ -41,7 +27,9 @@ class EscolaNivelMedioFixture extends CakeTestFixture {
 			'created' => null,
 			'modified' => null,
 			'created_by' => null,
-			'modified_by' => null
+			'modified_by' => null,
+			'codigo' => null,
+			'codigo_admissao' => null
 		),
 		array(
 			'id' => '2',
@@ -52,7 +40,9 @@ class EscolaNivelMedioFixture extends CakeTestFixture {
 			'created' => null,
 			'modified' => null,
 			'created_by' => null,
-			'modified_by' => null
+			'modified_by' => null,
+			'codigo' => null,
+			'codigo_admissao' => null
 		),
 		array(
 			'id' => '3',
@@ -63,7 +53,9 @@ class EscolaNivelMedioFixture extends CakeTestFixture {
 			'created' => null,
 			'modified' => null,
 			'created_by' => null,
-			'modified_by' => null
+			'modified_by' => null,
+			'codigo' => null,
+			'codigo_admissao' => null
 		),
 		array(
 			'id' => '4',
@@ -74,7 +66,9 @@ class EscolaNivelMedioFixture extends CakeTestFixture {
 			'created' => null,
 			'modified' => null,
 			'created_by' => null,
-			'modified_by' => null
+			'modified_by' => null,
+			'codigo' => null,
+			'codigo_admissao' => null
 		),
 		array(
 			'id' => '5',
@@ -85,7 +79,9 @@ class EscolaNivelMedioFixture extends CakeTestFixture {
 			'created' => null,
 			'modified' => null,
 			'created_by' => null,
-			'modified_by' => null
+			'modified_by' => null,
+			'codigo' => null,
+			'codigo_admissao' => null
 		),
 		array(
 			'id' => '6',
@@ -96,7 +92,9 @@ class EscolaNivelMedioFixture extends CakeTestFixture {
 			'created' => null,
 			'modified' => null,
 			'created_by' => null,
-			'modified_by' => null
+			'modified_by' => null,
+			'codigo' => null,
+			'codigo_admissao' => null
 		),
 		array(
 			'id' => '7',
@@ -107,7 +105,9 @@ class EscolaNivelMedioFixture extends CakeTestFixture {
 			'created' => null,
 			'modified' => null,
 			'created_by' => null,
-			'modified_by' => null
+			'modified_by' => null,
+			'codigo' => null,
+			'codigo_admissao' => null
 		),
 		array(
 			'id' => '8',
@@ -118,7 +118,9 @@ class EscolaNivelMedioFixture extends CakeTestFixture {
 			'created' => null,
 			'modified' => null,
 			'created_by' => null,
-			'modified_by' => null
+			'modified_by' => null,
+			'codigo' => null,
+			'codigo_admissao' => null
 		),
 		array(
 			'id' => '9',
@@ -129,7 +131,9 @@ class EscolaNivelMedioFixture extends CakeTestFixture {
 			'created' => null,
 			'modified' => null,
 			'created_by' => null,
-			'modified_by' => null
+			'modified_by' => null,
+			'codigo' => null,
+			'codigo_admissao' => null
 		),
 		array(
 			'id' => '10',
@@ -140,117 +144,9 @@ class EscolaNivelMedioFixture extends CakeTestFixture {
 			'created' => null,
 			'modified' => null,
 			'created_by' => null,
-			'modified_by' => null
-		),
-		array(
-			'id' => '11',
-			'name' => 'Centro Piloto de Muaguide',
-			'distrito_id' => '106',
-			'provincia_id' => '1',
-			'pais_id' => '152',
-			'created' => null,
-			'modified' => null,
-			'created_by' => null,
-			'modified_by' => null
-		),
-		array(
-			'id' => '12',
-			'name' => 'Escola Secundária de Montepuez',
-			'distrito_id' => '108',
-			'provincia_id' => '1',
-			'pais_id' => '152',
-			'created' => null,
-			'modified' => null,
-			'created_by' => null,
-			'modified_by' => null
-		),
-		array(
-			'id' => '13',
-			'name' => 'Escola de Artes e Ofícios de Montepuez',
-			'distrito_id' => '108',
-			'provincia_id' => '1',
-			'pais_id' => '152',
-			'created' => null,
-			'modified' => null,
-			'created_by' => null,
-			'modified_by' => null
-		),
-		array(
-			'id' => '14',
-			'name' => 'Escola Industrial de Montepuez',
-			'distrito_id' => '108',
-			'provincia_id' => '1',
-			'pais_id' => '152',
-			'created' => null,
-			'modified' => null,
-			'created_by' => null,
-			'modified_by' => null
-		),
-		array(
-			'id' => '15',
-			'name' => 'Escola Agrária de Bilibiza',
-			'distrito_id' => '113',
-			'provincia_id' => '1',
-			'pais_id' => '152',
-			'created' => null,
-			'modified' => null,
-			'created_by' => null,
-			'modified_by' => null
-		),
-		array(
-			'id' => '16',
-			'name' => 'Escola Comunitária S. Carlos Luanga',
-			'distrito_id' => '114',
-			'provincia_id' => '1',
-			'pais_id' => '152',
-			'created' => null,
-			'modified' => null,
-			'created_by' => null,
-			'modified_by' => null
-		),
-		array(
-			'id' => '17',
-			'name' => 'Escola Comunitária da ADEMO Pemba',
-			'distrito_id' => '114',
-			'provincia_id' => '1',
-			'pais_id' => '152',
-			'created' => null,
-			'modified' => null,
-			'created_by' => null,
-			'modified_by' => null
-		),
-		array(
-			'id' => '18',
-			'name' => 'Escola Secundária de Pemba',
-			'distrito_id' => '114',
-			'provincia_id' => '1',
-			'pais_id' => '152',
-			'created' => null,
-			'modified' => null,
-			'created_by' => null,
-			'modified_by' => null
-		),
-		array(
-			'id' => '19',
-			'name' => 'Colégio Liceal Dom José Garcia',
-			'distrito_id' => '114',
-			'provincia_id' => '1',
-			'pais_id' => '152',
-			'created' => null,
-			'modified' => null,
-			'created_by' => null,
-			'modified_by' => null
-		),
-		array(
-			'id' => '20',
-			'name' => 'Seminário de S. José',
-			'distrito_id' => '114',
-			'provincia_id' => '1',
-			'pais_id' => '152',
-			'created' => null,
-			'modified' => null,
-			'created_by' => null,
-			'modified_by' => null
+			'modified_by' => null,
+			'codigo' => null,
+			'codigo_admissao' => null
 		),
 	);
 

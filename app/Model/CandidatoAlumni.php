@@ -157,6 +157,71 @@ class CandidatoAlumni extends AppModel {
                 'required' =>'create',
                 'message' => 'O preenchimento do Campo de data de Nascimento é obrigatório',
             ),
-        )
+        ),
+        'estado_civil_id' => array(
+            'estadoCivilIdNotEmpty' => array(
+                'rule'    => 'notEmpty',
+                'required' =>'create',
+                'message' => 'O preenchimento do Estado Civil é obrigatório',
+            ),
+        ),
+        'nome_pai' => array(
+            'nomePaiNotEmpty' => array(
+                'rule'    => 'notEmpty',
+                'required' =>'create',
+                'message' => 'O preenchimento do Nome do Pai é obrigatório',
+            ),
+        ),
+        'nome_mae' => array(
+            'nomeMaeNotEmpty' => array(
+                'rule'    => 'notEmpty',
+                'required' =>'create',
+                'message' => 'O preenchimento do da Maẽ é obrigatório',
+            ),
+        ),
+        'naturalidade' => array(
+            'naturalidadeNotEmpty' => array(
+                'rule'    => 'notEmpty',
+                'required' =>'create',
+                'message' => 'O preenchimento da naturalidade é obrigatório',
+            ),
+        ),
+        'pais_nascimento' => array(
+            'paisNascimentoNotEmpty' => array(
+                'rule'    => 'notEmpty',
+                'required' =>'create',
+                'message' => 'O preenchimento do Pais de Nascimento é obrigatório',
+            ),
+        ),
+        'provincia_nascimento' => array(
+            'provinciaNascimentoNotEmpty' => array(
+                'rule'    => 'notEmpty',
+                'required' =>'create',
+                'message' => 'O preenchimento da Provincia de Nascimento é obrigatório',
+            ),
+        ),
+        'cidade_nascimento' => array(
+            'cidadeNascimentoNotEmpty' => array(
+                'rule'    => 'notEmpty',
+                'required' =>'create',
+                'message' => 'O preenchimento da Cidade de Nascimento é obrigatório',
+            ),
+        ),
+        'unidade_organica_id' => array(
+            'unidadeOrganicaNotEmpty' => array(
+                'rule'    => 'notEmpty',
+                'required' =>'create',
+                'message' => 'O preenchimento da Unidade Organica é obrigatório',
+            ),
+        ),
+        'curso_id' => array(
+            'cursoIdNotEmpty' => array(
+                'rule'    => 'notEmpty',
+                'required' =>'create',
+                'message' => 'O preenchimento do Curso é obrigatório',
+            ),
+        ),
+
+
     );
 }

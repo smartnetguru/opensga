@@ -6,25 +6,11 @@
 class DisciplinaFixture extends CakeTestFixture {
 
 /**
- * Fields
+ * Import
  *
  * @var array
  */
-	public $fields = array(
-		'id' => array('type' => 'integer', 'null' => false, 'default' => null, 'key' => 'primary'),
-		'name' => array('type' => 'string', 'null' => true, 'default' => null, 'length' => 200, 'collate' => 'utf8_general_ci', 'charset' => 'utf8'),
-		'codigo' => array('type' => 'string', 'null' => true, 'default' => null, 'length' => 25, 'collate' => 'utf8_general_ci', 'charset' => 'utf8'),
-		'unidade_organica_id' => array('type' => 'integer', 'null' => true, 'default' => null),
-		'codigo_antigo' => array('type' => 'string', 'null' => true, 'default' => null, 'length' => 45, 'collate' => 'utf8_general_ci', 'charset' => 'utf8'),
-		'created' => array('type' => 'string', 'null' => true, 'default' => null, 'length' => 45, 'collate' => 'utf8_general_ci', 'charset' => 'utf8'),
-		'modified' => array('type' => 'string', 'null' => true, 'default' => null, 'length' => 45, 'collate' => 'utf8_general_ci', 'charset' => 'utf8'),
-		'created_by' => array('type' => 'string', 'null' => true, 'default' => null, 'length' => 45, 'collate' => 'utf8_general_ci', 'charset' => 'utf8'),
-		'modified_by' => array('type' => 'string', 'null' => true, 'default' => null, 'length' => 45, 'collate' => 'utf8_general_ci', 'charset' => 'utf8'),
-		'indexes' => array(
-			'PRIMARY' => array('column' => 'id', 'unique' => 1)
-		),
-		'tableParameters' => array('charset' => 'utf8', 'collate' => 'utf8_general_ci', 'engine' => 'InnoDB')
-	);
+	public $import = array('model' => 'Disciplina');
 
 /**
  * Records
@@ -137,116 +123,6 @@ class DisciplinaFixture extends CakeTestFixture {
 			'codigo' => 'AE',
 			'unidade_organica_id' => null,
 			'codigo_antigo' => 'AE',
-			'created' => null,
-			'modified' => null,
-			'created_by' => null,
-			'modified_by' => null
-		),
-		array(
-			'id' => '11',
-			'name' => 'Análise Funcional',
-			'codigo' => 'AF',
-			'unidade_organica_id' => null,
-			'codigo_antigo' => 'AF',
-			'created' => null,
-			'modified' => null,
-			'created_by' => null,
-			'modified_by' => null
-		),
-		array(
-			'id' => '12',
-			'name' => 'Analise Funcional I',
-			'codigo' => 'AF I',
-			'unidade_organica_id' => null,
-			'codigo_antigo' => 'AF I',
-			'created' => null,
-			'modified' => null,
-			'created_by' => null,
-			'modified_by' => null
-		),
-		array(
-			'id' => '13',
-			'name' => 'Analise Funcional II',
-			'codigo' => 'AF II',
-			'unidade_organica_id' => null,
-			'codigo_antigo' => 'AF II',
-			'created' => null,
-			'modified' => null,
-			'created_by' => null,
-			'modified_by' => null
-		),
-		array(
-			'id' => '14',
-			'name' => 'Algebra Geral ',
-			'codigo' => 'AG ',
-			'unidade_organica_id' => null,
-			'codigo_antigo' => 'AG ',
-			'created' => null,
-			'modified' => null,
-			'created_by' => null,
-			'modified_by' => null
-		),
-		array(
-			'id' => '15',
-			'name' => 'Astronomia Geodésica',
-			'codigo' => 'AGD',
-			'unidade_organica_id' => null,
-			'codigo_antigo' => 'AGD',
-			'created' => null,
-			'modified' => null,
-			'created_by' => null,
-			'modified_by' => null
-		),
-		array(
-			'id' => '16',
-			'name' => 'Álgebra Linear',
-			'codigo' => 'AL',
-			'unidade_organica_id' => null,
-			'codigo_antigo' => 'AL',
-			'created' => null,
-			'modified' => null,
-			'created_by' => null,
-			'modified_by' => null
-		),
-		array(
-			'id' => '17',
-			'name' => 'Álgebra Linear I',
-			'codigo' => 'AL I',
-			'unidade_organica_id' => null,
-			'codigo_antigo' => 'AL I',
-			'created' => null,
-			'modified' => null,
-			'created_by' => null,
-			'modified_by' => null
-		),
-		array(
-			'id' => '18',
-			'name' => 'Álgebra Linear II',
-			'codigo' => 'AL II',
-			'unidade_organica_id' => null,
-			'codigo_antigo' => 'AL II',
-			'created' => null,
-			'modified' => null,
-			'created_by' => null,
-			'modified_by' => null
-		),
-		array(
-			'id' => '19',
-			'name' => 'Álgebra Linear e Geometria Analítica',
-			'codigo' => 'ALGA',
-			'unidade_organica_id' => null,
-			'codigo_antigo' => 'ALGA',
-			'created' => null,
-			'modified' => null,
-			'created_by' => null,
-			'modified_by' => null
-		),
-		array(
-			'id' => '20',
-			'name' => 'Análise Matemática I',
-			'codigo' => 'AM I',
-			'unidade_organica_id' => null,
-			'codigo_antigo' => 'AM I',
 			'created' => null,
 			'modified' => null,
 			'created_by' => null,

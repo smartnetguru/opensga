@@ -6,24 +6,11 @@
 class FinanceiroTipoPagamentoFixture extends CakeTestFixture {
 
 /**
- * Fields
+ * Import
  *
  * @var array
  */
-	public $fields = array(
-		'id' => array('type' => 'integer', 'null' => false, 'default' => null, 'key' => 'primary'),
-		'name' => array('type' => 'string', 'null' => true, 'default' => null, 'length' => 45, 'collate' => 'utf8_general_ci', 'charset' => 'utf8'),
-		'valor' => array('type' => 'float', 'null' => true, 'default' => null, 'length' => '10,2'),
-		'codigo' => array('type' => 'string', 'null' => true, 'default' => null, 'length' => 45, 'collate' => 'utf8_general_ci', 'charset' => 'utf8'),
-		'month_id' => array('type' => 'integer', 'null' => true, 'default' => null),
-		'data_limite' => array('type' => 'date', 'null' => true, 'default' => null),
-		'mes_limite' => array('type' => 'integer', 'null' => true, 'default' => null),
-		'dia_limite' => array('type' => 'integer', 'null' => true, 'default' => null),
-		'indexes' => array(
-			'PRIMARY' => array('column' => 'id', 'unique' => 1)
-		),
-		'tableParameters' => array('charset' => 'utf8', 'collate' => 'utf8_general_ci', 'engine' => 'InnoDB')
-	);
+	public $import = array('model' => 'FinanceiroTipoPagamento');
 
 /**
  * Records
@@ -130,106 +117,6 @@ class FinanceiroTipoPagamentoFixture extends CakeTestFixture {
 			'data_limite' => null,
 			'mes_limite' => '10',
 			'dia_limite' => '5'
-		),
-		array(
-			'id' => '11',
-			'name' => 'Propina de Novembro',
-			'valor' => '5000.00',
-			'codigo' => '20',
-			'month_id' => '11',
-			'data_limite' => null,
-			'mes_limite' => '11',
-			'dia_limite' => '5'
-		),
-		array(
-			'id' => '12',
-			'name' => 'Propina de Dezembro',
-			'valor' => '5000.00',
-			'codigo' => '21',
-			'month_id' => '12',
-			'data_limite' => null,
-			'mes_limite' => '12',
-			'dia_limite' => '5'
-		),
-		array(
-			'id' => '13',
-			'name' => 'Taxa de Exame Normal',
-			'valor' => '0.00',
-			'codigo' => '22',
-			'month_id' => null,
-			'data_limite' => null,
-			'mes_limite' => null,
-			'dia_limite' => null
-		),
-		array(
-			'id' => '14',
-			'name' => 'Taxa de Exame de Recorrência',
-			'valor' => '1200.00',
-			'codigo' => '23',
-			'month_id' => null,
-			'data_limite' => null,
-			'mes_limite' => null,
-			'dia_limite' => null
-		),
-		array(
-			'id' => '15',
-			'name' => 'Taxa de Certificado',
-			'valor' => '2800.00',
-			'codigo' => '24',
-			'month_id' => null,
-			'data_limite' => null,
-			'mes_limite' => null,
-			'dia_limite' => null
-		),
-		array(
-			'id' => '16',
-			'name' => 'Taxa de Declaração',
-			'valor' => '750.00',
-			'codigo' => '25',
-			'month_id' => null,
-			'data_limite' => null,
-			'mes_limite' => null,
-			'dia_limite' => null
-		),
-		array(
-			'id' => '17',
-			'name' => 'Taxa de Diploma',
-			'valor' => '0.00',
-			'codigo' => '26',
-			'month_id' => null,
-			'data_limite' => null,
-			'mes_limite' => null,
-			'dia_limite' => null
-		),
-		array(
-			'id' => '18',
-			'name' => 'Multa',
-			'valor' => '0.00',
-			'codigo' => '27',
-			'month_id' => null,
-			'data_limite' => null,
-			'mes_limite' => null,
-			'dia_limite' => null
-		),
-		array(
-			'id' => '19',
-			'name' => 'Declaração Simples',
-			'valor' => '750.00',
-			'codigo' => '28',
-			'month_id' => null,
-			'data_limite' => null,
-			'mes_limite' => null,
-			'dia_limite' => null
-		),
-		array(
-			'id' => '20',
-			'name' => 'Declaração com Notas Por Ano',
-			'valor' => '1000.00',
-			'codigo' => '29',
-			'month_id' => null,
-			'data_limite' => null,
-			'mes_limite' => null,
-			'dia_limite' => null
 		),
 	);
 

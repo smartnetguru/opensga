@@ -6,20 +6,11 @@
 class BairroFixture extends CakeTestFixture {
 
 /**
- * Fields
+ * Import
  *
  * @var array
  */
-	public $fields = array(
-		'id' => array('type' => 'integer', 'null' => false, 'default' => null, 'key' => 'primary'),
-		'name' => array('type' => 'string', 'null' => true, 'default' => null, 'collate' => 'utf8_general_ci', 'charset' => 'utf8'),
-		'cidade_id' => array('type' => 'integer', 'null' => true, 'default' => null, 'key' => 'index'),
-		'indexes' => array(
-			'PRIMARY' => array('column' => 'id', 'unique' => 1),
-			'bairros_cidades_fk_idx' => array('column' => 'cidade_id', 'unique' => 0)
-		),
-		'tableParameters' => array('charset' => 'utf8', 'collate' => 'utf8_general_ci', 'engine' => 'InnoDB')
-	);
+	public $import = array('model' => 'Bairro');
 
 /**
  * Records
@@ -28,9 +19,54 @@ class BairroFixture extends CakeTestFixture {
  */
 	public $records = array(
 		array(
+			'id' => '1',
+			'name' => 'Ndlavela',
+			'cidade_id' => '144'
+		),
+		array(
+			'id' => '2',
+			'name' => 'mafalala',
+			'cidade_id' => '144'
+		),
+		array(
+			'id' => '3',
+			'name' => 'Central C',
+			'cidade_id' => '144'
+		),
+		array(
+			'id' => '4',
+			'name' => 'Alto mae',
+			'cidade_id' => '144'
+		),
+		array(
+			'id' => '5',
+			'name' => 'Central',
+			'cidade_id' => '144'
+		),
+		array(
 			'id' => '6',
-			'name' => 'Bairro 4',
-			'cidade_id' => '44'
+			'name' => 'Alto - Maé',
+			'cidade_id' => '144'
+		),
+		array(
+			'id' => '7',
+			'name' => 'Aeroporto',
+			'cidade_id' => null
+		),
+		array(
+			'id' => '8',
+			'name' => 'Chamanculo D',
+			'cidade_id' => null
+		),
+		array(
+			'id' => '9',
+			'name' => 'Somershield',
+			'cidade_id' => '144'
+		),
+		array(
+			'id' => '10',
+			'name' => 'Belo Horizonte',
+			'cidade_id' => '58'
 		),
 	);
 

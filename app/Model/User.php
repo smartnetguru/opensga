@@ -287,6 +287,23 @@ class User extends AppModel {
 		return strtolower($email);
 	}
 
+
+    /**
+     * Cadastra novo User na BD. Esta funcao deve ser chamada ao cadastrar alunos, docentes,etc
+     * @param $data
+     */
+    public function cadastraUser($data){
+        //Grava os dados do Usuario
+        $this->create();
+        if (!isset($data['User']['username']) || $data['User']['username'] == '') {
+            $data['User']['username'] = $this->geraEmailUem($data['Entidade']['apelido'], $data['Entidade']['nomes']);
+        }
+        if($this->save($data)){
+            return $this->id;
+        }
+        return false;
+    }
+
 	public function getFuncionarioActivoId($user_id) {
 		if ($user_id == 1)
 			return array('Funcionario' => array('id' => 0));

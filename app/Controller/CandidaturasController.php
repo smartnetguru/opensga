@@ -21,7 +21,8 @@ class CandidaturasController extends AppController {
 	 */
 	public function index() {
 
-        $conditions = array();
+        $conditions = ['Candidatura.estado_candidatura_id'=>2];
+
 		$this->paginate = array(
 			'conditions' => $conditions,
             'order'=>array('Candidatura.id'=>'DESC'),

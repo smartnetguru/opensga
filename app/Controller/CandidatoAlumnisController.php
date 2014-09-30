@@ -41,15 +41,18 @@ class CandidatoAlumnisController extends AppController {
 		if ($this->request->is('post')) {
 			$this->CandidatoAlumni->create();
 			if ($this->CandidatoAlumni->save($this->request->data)) {
-				$this->Session->setFlash(__('The candidato alumni has been saved'));
-				//$this->redirect(array('action' => 'index'));
+				$this->Session->setFlash(__('Os seus dados foram gravados com sucesso. Brevemente entraremos em
+				contacto'));
+			    $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The candidato alumni could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('Problemas ao gravar dados. Por favor corrija os erros e tente novamente
+				.'));
 			}
 		}
 		$generos = $this->CandidatoAlumni->Genero->find('list');
 		$estadoCivils = $this->CandidatoAlumni->EstadoCivil->find('list');
-		$unidadeOrganicas = $this->CandidatoAlumni->UnidadeOrganica->find('list');
+		$unidadeOrganicas = $this->CandidatoAlumni->UnidadeOrganica->find('list',
+            array('conditions'=>array('tipo_unidade_organica_id'=>1)));
 		$cursos = $this->CandidatoAlumni->Curso->find('list');
 		$grauAcademicos = $this->CandidatoAlumni->GrauAcademico->find('list');
                 $paisNascimentos = $this->CandidatoAlumni->PaisNascimento->find('list');
@@ -127,7 +130,11 @@ class CandidatoAlumnisController extends AppController {
         public function beforeFilter() {
             parent::beforeFilter();
             
-            $this->Auth->allow(array('cadastro_alumni'));
+            $this->Auth->allow(array('cadastro_alumni','agradecimento'));
             $this->disableCache();
         }
+
+    public function agradecimento(){
+
+    }
 }

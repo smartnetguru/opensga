@@ -6,18 +6,11 @@
 class EstadoAlunoFixture extends CakeTestFixture {
 
 /**
- * Fields
+ * Import
  *
  * @var array
  */
-	public $fields = array(
-		'id' => array('type' => 'integer', 'null' => false, 'default' => null, 'key' => 'primary'),
-		'name' => array('type' => 'string', 'null' => true, 'default' => null, 'length' => 45, 'collate' => 'utf8_general_ci', 'charset' => 'utf8'),
-		'indexes' => array(
-			'PRIMARY' => array('column' => 'id', 'unique' => 1)
-		),
-		'tableParameters' => array('charset' => 'utf8', 'collate' => 'utf8_general_ci', 'engine' => 'InnoDB')
-	);
+	public $import = array('table' => 'estado_alunos');
 
 /**
  * Records
@@ -64,18 +57,6 @@ class EstadoAlunoFixture extends CakeTestFixture {
 		array(
 			'id' => '10',
 			'name' => 'Mudou de curso a maneira antiga - novo numero'
-		),
-		array(
-			'id' => '11',
-			'name' => 'Matricula Condicional'
-		),
-		array(
-			'id' => '12',
-			'name' => 'nao esta registado na bd'
-		),
-		array(
-			'id' => '13',
-			'name' => 'Matricula Anulada'
 		),
 	);
 

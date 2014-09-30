@@ -255,17 +255,14 @@ class Aluno extends AppModel
      * @param int $id
      * @return int
      */
-    public function getPlanoEstudoCorrente($id)
+    public function getPlanoEstudoCorrente($alunoId)
     {
-        App::import('Model', 'Matricula');
-        $matriculas = new Matricula;
-        $matriculas->recursive = -1;
+        $aluno = $this->findById($alunoId);
+        if($aluno){
+            return $aluno['Aluno']['plano_estudo_id'];
+        }
+        else return false;
 
-        $matricula = $matriculas->find('first', array('conditions' => array('estado_matricula_id' => 1, 'Aluno_id' => $id)));
-
-        $plano_estudo = $matricula['Matricula']['plano_estudo_id'];
-
-        return $plano_estudo;
     }
 
     /**
@@ -1148,15 +1145,6 @@ class Aluno extends AppModel
         if (!isset($data['Entidade']['name'])) {
             $data['Entidade']['name'] = $data['Entidade']['nomes'] . " " . $data['Entidade']['apelido'];
         }
-
-        //Grava os dados do Usuario
-        $this->User->create();
-        if (!isset($data['User']['username']) || $data['User']['username'] == '') {
-            $data['User']['username'] = $this->User->geraEmailUem($data['Entidade']['apelido'], $data['Entidade']['nomes']);
-        }
-        if (!isset($data['User']['password']) || $data['User']['password'] == '') {
-            $data['User']['password'] = Security::hash($data['Aluno']['codigo'], 'blowfish');
-        }
         $data['User']['codigocartao'] = $data['Aluno']['codigo'];
         $data['User']['name'] = $data['Entidade']['name'];
         $data['User']['group_id'] = 3;
@@ -1164,8 +1152,10 @@ class Aluno extends AppModel
         $data['User']['estado_email'] = 0;
         $data['User']['estado_objecto_id'] = 1;
         $data['User']['timezone'] = 'Africa/Maputo';
-        if ($this->User->save($data)) {
+        $data['User']['password'] = $data['Aluno']['codigo'];
+        $dadosUser = ['User'=>$data['User'],'Entidade'=>$data['Entidade']];
 
+        if ($this->User->cadastraUser($dadosUser)) {
             //Grava Bairro e Avenida
             $bairroExiste = $this->Entidade->CidadeMorada->Bairro->find('first', array('conditions' => array('cidade_id' => $data['EntidadeContacto'][9], 'name' => $data['EntidadeContacto'][6])));
             if (empty($bairroExiste)) {
@@ -1214,8 +1204,14 @@ class Aluno extends AppModel
             if (!isset($data['Entidade']['nacionalidade'])) {
                 $data['Entidade']['nacionalidade'] = $data['Entidade']['pais_nascimento'];
             }
+            if(empty($data['Entidade']['email'])){
+                $this->User->id  = $this->User->getLastInsertID();
+                $data['Entidade']['email'] = $this->User->field('username');
+            }
 
             $this->Entidade->create();
+
+
             if ($this->Entidade->save($data)) {
 
                 //Grava os dados do Aluno
@@ -1223,7 +1219,6 @@ class Aluno extends AppModel
                 $data['Aluno']['entidade_id'] = $this->Entidade->getLastInsertID();
                 $data['Aluno']['data_ingresso'] = date('Y-m-d');
                 $data['Aluno']['curso_ingresso_id'] = $data['Aluno']['curso_id'];
-
                 $planoEstudoId = $this->Curso->getPlanoEstudoIdRecente($data['Aluno']['curso_id']);
                 if (!empty($planoEstudoId)) {
                     $data['Aluno']['plano_estudo_id'] = $planoEstudoId;
@@ -1390,16 +1385,23 @@ class Aluno extends AppModel
 
                             $this->Candidatura->set('data_matricula', date('Y-m-d H:m:s'));
                             if ($this->Candidatura->save()) {
-                                return $dataSource->commit();
+                                $dataSource->commit();
+                                return true;
                             }
                         }
                     }
+                } else{
+                    debug($this->invalidFields());
+                    die();
                 }
+            } else{
+                return false;
             }
         }
 
 
         $dataSource->rollback();
+        return false;
     }
 
     public function mudaCurso($data)
