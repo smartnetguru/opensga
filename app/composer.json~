@@ -1,0 +1,10 @@
+{
+    "name": "opensga",
+    "require": {
+        "cakephp/cakephp": "2.5.*",
+        "videlalvaro/php-amqplib": "2.2.*",
+    },
+    "config": {
+        "vendor-dir": "Vendor/"
+    }
+}
