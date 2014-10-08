@@ -206,7 +206,7 @@ class User extends AppModel {
         $this->save();
 
         //Invocamos o after Change Password para notificar o User
-        CakeResque::enqueue('default', 'UserShell', array('afterChangePassword', $userId, $novaPassword));
+        //CakeResque::enqueue('default', 'UserShell', array('afterChangePassword', $userId, $novaPassword));
         $datasource->commit();
         return $novaPassword;
     }
