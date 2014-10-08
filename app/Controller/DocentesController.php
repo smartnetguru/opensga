@@ -139,6 +139,9 @@ class DocentesController extends AppController {
 				$this->redirect(array('controller' => 'docentes', 'action' => 'perfil_docente', $this->Docente->id));
 			} else {
 				$this->Session->setFlash('Problemas ao registrar dados', 'default', array('class' => 'alert alert-danger'));
+                debug($this->Docente->invalidFields());
+                debug($this->Docente->Entidade->invalidFields());
+                debug($this->request->data);
 			}
 		}
 

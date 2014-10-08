@@ -130,7 +130,8 @@ class MatriculasController extends AppController {
 					$this->Upload->create();
 					$this->Upload->save($this->request->data);
 
-					$processado = $this->Matricula->processaFicheiroRenovacao($upload_sucesso['urls'][0]);
+					$processado = $this->Matricula->processaFicheiroRenovacao($upload_sucesso['urls'][0],
+                        $this->request->data['Upload']['ano_lectivo']);
 					if ($processado) {
 						$this->Session->setFlash(__('Ficheiro de Renovação Processado com Sucesso'), 'default', array('class' => 'alert success'));
 						$this->redirect(array('action' => 'renovacao_matriculas', 2014));
@@ -140,10 +141,10 @@ class MatriculasController extends AppController {
 				$this->Session->setFlash(__('Tentou carregar um ficheiro no formato errado.'), 'default', array('class' => 'alert error'));
 			}
 		}
-	}
 
-	public function processa_ficheiro_renovacao_teste() {
-		$this->Matricula->processaFicheiroRenovacao('uploads/renovacao/P770011001.txt');
+        $anoLectivos = $this->Matricula->AnoLectivo->find('list',array('order'=>'ano DESC','fields'=>array('ano',
+            'ano')));
+        $this->set(compact('anoLectivos'));
 	}
 
 	public function print_boletim_matricula($alunoId) {

@@ -7,6 +7,7 @@ class AppModel extends Model {
     public $recursive = -1;
     public $actsAs = array('Containable', 'Auditable.Auditable');
 
+
     function checkUnique($data, $fields) {
 // check if the param contains multiple columns or a single one
         if (!is_array($fields)) {

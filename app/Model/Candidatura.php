@@ -185,7 +185,6 @@ class Candidatura extends AppModel {
             }
 
         }
-
         if($this->saveAll($candidatos)){
             CakeResque::enqueue(
                 'default', 'CandidatoShell', array('afterImportCandidato', $candidatos, $filePath)

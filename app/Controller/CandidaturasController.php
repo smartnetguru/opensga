@@ -75,10 +75,6 @@ class CandidaturasController extends AppController {
         }
     }
 
-    public function importar_candidatos_2(){
-
-    }
-
 	public function candidatos_admitidos() {
 		$this->paginate = array(
 			'conditions' => array(

@@ -36,6 +36,7 @@ class AppController extends Controller {
 	public $cacheAction = '1 hour';
 
 	public function beforeFilter() {
+        CakeRabbit::enqueue();
 		parent::beforeFilter();
 		$config_language = $this->Session->read('Config.language');
 
