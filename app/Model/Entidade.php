@@ -17,7 +17,7 @@
 class Entidade extends AppModel {
 
 	var $name = 'Entidade';
-/*
+
     public $validate = array(
         'apelido' => array(
             'apelidoNotEmpty' => array(
@@ -75,7 +75,6 @@ class Entidade extends AppModel {
         ),
 
     );
-*/
 	var $belongsTo = array(
 		'User' => array(
 			'className' => 'User',

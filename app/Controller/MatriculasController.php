@@ -130,6 +130,8 @@ class MatriculasController extends AppController {
 					$this->Upload->create();
 					$this->Upload->save($this->request->data);
 
+
+                    CakeRabbit::publish();
 					$processado = $this->Matricula->processaFicheiroRenovacao($upload_sucesso['urls'][0],
                         $this->request->data['Upload']['ano_lectivo']);
 					if ($processado) {

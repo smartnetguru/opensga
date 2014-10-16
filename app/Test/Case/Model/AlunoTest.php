@@ -437,7 +437,7 @@ class AlunoTest extends CakeTestCase {
  * @return void
  */
     public function testMatriculaNovoIngresso() {
-        $this->loadFixtures('Candidatura','User');
+        $this->loadFixtures('Candidatura','User','Cidade');
         $data = [
             'Aluno'=>[
                 'codigo' => '201462262',
@@ -448,7 +448,7 @@ class AlunoTest extends CakeTestCase {
                 'parentesco_encarregado' => 1,
                 'curso_id' => '257',
                 'unidade_organica_id' => '257',
-                'numero_estudante' => '20146226',
+                'numero_estudante' => '201462262',
                 'aluno_via_admissao_id' => '13',
                 'ano_ingresso' => '2014'
             ],

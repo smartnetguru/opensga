@@ -85,6 +85,19 @@ class User extends AppModel {
 		)
 	);
 
+
+    public function afterSave($created,$options=array()){
+        //die(debug($this->data));
+        $message = array(
+            'Option1'=>'Message',
+            'Type'=>'Shell',
+            'Command'=>'UserShell',
+            'Action'=>'updatePermissions',
+            'userId'=>$this->data['User']['id']
+        );
+        CakeRabbit::publish($message);
+
+    }
 	function parentNode() {
 		if (!$this->id && empty($this->data)) {
 			return null;

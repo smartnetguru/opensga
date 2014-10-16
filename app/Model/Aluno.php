@@ -1391,6 +1391,7 @@ class Aluno extends AppModel
                         }
                     }
                 } else{
+                    debug($this->data);
                     debug($this->invalidFields());
                     die();
                 }
