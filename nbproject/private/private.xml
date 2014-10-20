@@ -5,13 +5,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/xampp/htdocs/opensga/app/Plugin/Cooperacao/Controller/CooperacaoAcordosController.php</file>
-            <file>file:/C:/xampp/htdocs/opensga/app/Plugin/Cooperacao/View/CooperacaoTipoAcordos/index.ctp</file>
-            <file>file:/C:/xampp/htdocs/opensga/app/Plugin/Cooperacao/View/CooperacaoAcordos/index.ctp</file>
-            <file>file:/C:/xampp/htdocs/opensga/app/Plugin/Cooperacao/Controller/CooperacaoTipoAcordosController.php</file>
-            <file>file:/C:/xampp/htdocs/opensga/app/Plugin/Cooperacao/Controller/CooperacaoAppController.php</file>
-            <file>file:/C:/xampp/htdocs/opensga/app/Plugin/Cooperacao/Controller/CooperacaoAreasController.php</file>
-            <file>file:/C:/xampp/htdocs/opensga/app/Plugin/Cooperacao/View/CooperacaoAcordos/home.ctp</file>
+            <file>file:/C:/xampp/htdocs/www/opensga/app/Plugin/Cooperacao/Model/CooperacaoAcordoArea.php</file>
+            <file>file:/C:/xampp/htdocs/www/opensga/app/Plugin/Cooperacao/Model/CooperacaoAcordo.php</file>
+            <file>file:/C:/xampp/htdocs/www/opensga/app/Plugin/Cooperacao/View/CooperacaoAcordos/novo_acordo.ctp</file>
+            <file>file:/C:/xampp/htdocs/www/opensga/app/Plugin/Cooperacao/Controller/CooperacaoAcordosController.php</file>
+            <file>file:/C:/xampp/htdocs/www/opensga/app/Plugin/Cooperacao/View/CooperacaoAcordos/ver_acordo.ctp</file>
+            <file>file:/C:/xampp/htdocs/www/opensga/app/Plugin/Cooperacao/Model/CooperacaoAcordoInstituicao.php</file>
         </group>
     </open-files>
 </project-private>
