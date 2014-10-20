@@ -450,9 +450,6 @@ class TurmasController extends AppController {
                $this->response->file($pautaFile,array('name'=>Inflector::slug($turma['Turma']['name']),'download'=>true));
             return $this->response;
         } else{
-            CakeResque::enqueue(
-                'default', 'TurmaShell', array('geraPauta', $turmaId)
-            );
             $todasTurmas = $this->Turma->find('list', array('conditions' => array('Turma.curso_id' => $turma['Turma']['curso_id'], 'Turma.disciplina_id' => $turma['Turma']['disciplina_id'], 'Turma.ano_lectivo_id' => $turma['Turma']['ano_lectivo_id'])));
             $todasTurmasIds = array_keys($todasTurmas);
 

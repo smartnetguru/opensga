@@ -41,9 +41,9 @@ class TurmaShell extends AppShell {
         $pautaXls = $this->Turma->geraPautaExcel($turmaId);
 
         $objWriter = PHPExcel_IOFactory::createWriter($pautaXls, 'Excel2007');
-        $objWriter->save(Configure::read('OpenSGA.Pautas.save_path').DS.$turmaId.'.xlsx');
+        $objWriter->save(Configure::read('OpenSGA.save_path').DS.$turmaId.'.xlsx');
         $this->Turma->id = $turmaId;
-        $this->Turma->set('pauta_path',Configure::read('OpenSGA.Pautas.save_path').DS.$turmaId.'.xlsx');
+        $this->Turma->set('pauta_path',Configure::read('OpenSGA.save_path').DS.$turmaId.'.xlsx');
         $this->Turma->save();
 
     }

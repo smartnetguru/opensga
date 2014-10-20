@@ -313,13 +313,11 @@ class UsersController extends AppController {
 
 
 		if ($this->request->is('post')) {
+
 			if ($this->Auth->login()) {
 				$password_login = $this->request->data['User']['password'];
-
-
 				$this->loadModel('Config');
 				$configs = $this->Config->find('all');
-				$sgaconfigs = array();
 				foreach ($configs as $c) {
 					$name = "SGAConfig." . $c['Config']['name'];
 
@@ -329,10 +327,11 @@ class UsersController extends AppController {
 				$this->Session->write('SGAConfig.ano_lectivo', Configure::read('OpenSGA.ano_lectivo'));
 				$this->Session->write('Config.language', 'por');
 
-
 				$User = $this->Session->read('Auth.User');
+
 				$entidade = $this->User->Entidade->findByUserId($User['id']);
 				$this->Session->write('Auth.User.name', $entidade['Entidade']['name']);
+
 
 
 				//Temos de Certificar que o Aro existe, principalmente para estudantes importados
@@ -346,37 +345,34 @@ class UsersController extends AppController {
 				// Vamos pegar todos os grupos e colocar na Sessao
 				$this->User->GroupsUser->contain('Group');
 				$grupos = $this->User->GroupsUser->find('all', array('conditions' => array('user_id' => $User['id']), 'fields' => array('GroupsUser.group_id', 'Group.name')));
-
 				$grupos_combine = Hash::combine($grupos, '{n}.Group.id', '{n}.Group.name');
 
 				//Actualizamos o Ultimos Login
 				$this->User->id = $User['id'];
 				$this->User->set('ultimo_login', date('Y-m-d H:i:s'));
 				$this->User->save();
+
 				$this->Session->write('Auth.User.Groups', $grupos_combine);
+
 				if ($User['group_id'] == 1) {
 					$unidade_organicas = $this->User->Funcionario->UnidadeOrganica->find('list');
 					$this->Session->write('Auth.User.unidade_organicas', $unidade_organicas);
 					$this->Session->write('Auth.User.unidade_organica_id', 29);
 					//die(var_dump($unidade_organicas));
-				}
-				if ($User['group_id'] == 3) {
+				} elseif ($User['group_id'] == 3) {
 					if ($password_login == 'dra02062013') {
 						$this->redirect(array('controller' => 'users', 'action' => 'trocar_senha', $User['id'], 'estudante' => true));
 					}
 					$this->redirect(array('controller' => 'pages', 'action' => 'home', 'estudante' => TRUE));
-				}
-				if ($User['group_id'] == 4) {
+				} elseif ($User['group_id'] == 4) {
 					$this->redirect(array('controller' => 'pages', 'action' => 'home', 'docente' => TRUE));
-				}
-				if ($User['group_id'] == 2) {
+				} elseif ($User['group_id'] == 2) {
 					$this->User->contain(array(
 						'Funcionario' => array(
 							'UnidadeOrganica'
 						)
 					));
 					$user_data = $this->User->findById($User['id']);
-
 					$this->Session->write('Auth.User.unidade_organica_id', $user_data['Funcionario'][0]['unidade_organica_id']);
 					$this->Session->write('Auth.User.unidade_organica', $user_data['Funcionario'][0]['UnidadeOrganica']['name']);
 
@@ -508,7 +504,7 @@ class UsersController extends AppController {
 		$this->Auth->allow(array('login', 'logout', 'opauth_complete'));
 		if ($this->action == 'login' or $this->action == 'logout') {
 
-			Configure::write('debug', 0);
+			//Configure::write('debug', 0);
 		}
 	}
 
