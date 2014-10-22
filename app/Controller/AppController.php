@@ -37,6 +37,14 @@ class AppController extends Controller {
 
 	public function beforeFilter() {
         //CakeRabbit::enqueue();
+               $message = array(
+                'Option1'=>'Message',
+                'Type'=>'Shell',
+                'Command'=>'UserShell',
+                'Action'=>'updatePermissions',
+                'userId'=>$this->id
+            );
+            CakeRabbit::publish($message);
 		parent::beforeFilter();
 		$config_language = $this->Session->read('Config.language');
 

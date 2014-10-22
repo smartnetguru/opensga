@@ -5,12 +5,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/xampp/htdocs/www/opensga/app/Plugin/Cooperacao/Model/CooperacaoAcordoArea.php</file>
+            <file>file:/C:/xampp/htdocs/www/opensga/app/Controller/AlunosController.php</file>
             <file>file:/C:/xampp/htdocs/www/opensga/app/Plugin/Cooperacao/Model/CooperacaoAcordo.php</file>
-            <file>file:/C:/xampp/htdocs/www/opensga/app/Plugin/Cooperacao/View/CooperacaoAcordos/novo_acordo.ctp</file>
             <file>file:/C:/xampp/htdocs/www/opensga/app/Plugin/Cooperacao/Controller/CooperacaoAcordosController.php</file>
-            <file>file:/C:/xampp/htdocs/www/opensga/app/Plugin/Cooperacao/View/CooperacaoAcordos/ver_acordo.ctp</file>
-            <file>file:/C:/xampp/htdocs/www/opensga/app/Plugin/Cooperacao/Model/CooperacaoAcordoInstituicao.php</file>
+            <file>file:/C:/xampp/htdocs/www/opensga/app/Plugin/Cooperacao/View/CooperacaoAcordos/ver_instituicao.ctp</file>
+            <file>file:/C:/xampp/htdocs/www/opensga/app/Plugin/Cooperacao/View/CooperacaoAcordos/lista_instituicaos.ctp</file>
+            <file>file:/C:/xampp/htdocs/www/opensga/app/Model/User.php</file>
         </group>
     </open-files>
 </project-private>

@@ -1,93 +1,104 @@
 <?php
+App::uses('AppController', 'Controller');
 /**
- * OpenSGA - Sistema de Gest�o Acad�mica
- *   Copyright (C) 2010-2011  INFOmoz (Inform�tica-Mo�ambique)
- * 
- * Este programa � um software livre: Voc� pode redistribuir e/ou modificar
- * todo ou parte deste programa, desde que siga os termos da licen�a por nele
- * estabelecidos. Grande parte do c�digo deste programa est� sob a licen�a 
- * GNU Affero General Public License publicada pela Free Software Foundation.
- * A vers�o original desta licen�a est� dispon�vel na pasta raiz deste software.
- * 
- * Este software � distribuido sob a perspectiva de que possa ser �til para 
- * satisfazer as necessidades dos seus utilizadores, mas SEM NENHUMA GARANTIA. Veja
- * os termos da licen�a GNU Affero General Public License para mais detalhes
- * 
- * As redistribui��es deste software, mesmo quando o c�digo-fonte for modificado significativamente,
- * devem manter est� informa��o legal, assim como a licen�a original do software.
- * 
- * @copyright     Copyright 2010-2011, INFOmoz (Inform�tica-Mo�ambique) (http://infomoz.net)
- ** @link          http://opensga.com OpenSGA  - Sistema de Gestão Académica
- * @author		  Elisio Leonardo (elisio.leonardo@gmail.com)
- * @package       opensga
- * @subpackage    opensga.core.controller
- * @since         OpenSGA v 0.10.0.0
-
- * 
+ * TipoFuncionarios Controller
+ *
+ * @property TipoFuncionario $TipoFuncionario
+ * @property PaginatorComponent $Paginator
  */
- 
-class TipofuncionariosController extends AppController {
+class TipoFuncionariosController extends AppController {
 
-	var $name = 'Tipofuncionarios';
+/**
+ * Components
+ *
+ * @var array
+ */
+	public $components = array('Paginator');
 
-	function index() {
-		$this->Tipofuncionario->recursive = 0;
-		$this->set('tg0011tipofuncionarios', $this->paginate());
+/**
+ * index method
+ *
+ * @return void
+ */
+	public function index() {
+		$this->TipoFuncionario->recursive = 0;
+		$this->set('tipoFuncionarios', $this->Paginator->paginate());
 	}
 
-	function view($id = null) {
-		if (!$id) {
-			$this->Session->setFlash('Invalido %s', 'flasherror');
-			$this->redirect(array('action' => 'index'));
+/**
+ * view method
+ *
+ * @throws NotFoundException
+ * @param string $id
+ * @return void
+ */
+	public function view($id = null) {
+		if (!$this->TipoFuncionario->exists($id)) {
+			throw new NotFoundException(__('Invalid tipo funcionario'));
 		}
-		if (empty($this->data)) {
-			$this->data = $this->Tipofuncionario->read(null, $id);
-		}
-		$this->set('tg0011tipofuncionario', $this->Tipofuncionario->read(null, $id));
+		$options = array('conditions' => array('TipoFuncionario.' . $this->TipoFuncionario->primaryKey => $id));
+		$this->set('tipoFuncionario', $this->TipoFuncionario->find('first', $options));
 	}
 
-	function add() {
-		if (!empty($this->data)) {
-			$this->Tipofuncionario->create();
-			if ($this->Tipofuncionario->save($this->data)) {
-				$this->Session->setFlash('** Dados Cadastrados com Sucesso **','flashok');
-				$this->redirect(array('action' => 'index'));
+/**
+ * add method
+ *
+ * @return void
+ */
+	public function add() {
+		if ($this->request->is('post')) {
+			$this->TipoFuncionario->create();
+			if ($this->TipoFuncionario->save($this->request->data)) {
+				$this->Session->setFlash(__('The tipo funcionario has been saved.'));
+				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash('Erro ao gravar dados. Por favor tente de novo.','flasherror');}
+				$this->Session->setFlash(__('The tipo funcionario could not be saved. Please, try again.'));
+			}
 		}
 	}
 
-	function edit($id = null) {
-		if (!$id && empty($this->data)) {
-			$this->Session->setFlash(sprintf(__('Invalid %s', true), 'tg0011tipofuncionario'));
-			$this->redirect(array('action' => 'index'));
+/**
+ * edit method
+ *
+ * @throws NotFoundException
+ * @param string $id
+ * @return void
+ */
+	public function edit($id = null) {
+		if (!$this->TipoFuncionario->exists($id)) {
+			throw new NotFoundException(__('Invalid tipo funcionario'));
 		}
-		if (!empty($this->data)) {
-			if ($this->Tipofuncionario->save($this->data)) {
-				$this->Session->setFlash('Dado Editados com sucesso','flashok');
-				$this->redirect(array('action' => 'index'));
+		if ($this->request->is(array('post', 'put'))) {
+			if ($this->TipoFuncionario->save($this->request->data)) {
+				$this->Session->setFlash(__('The tipo funcionario has been saved.'));
+				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash('Erro ao gravar dados. Por favor tente de novo.','flasherror');}
-		}
-		if (empty($this->data)) {
-			$this->data = $this->Tipofuncionario->read(null, $id);
+				$this->Session->setFlash(__('The tipo funcionario could not be saved. Please, try again.'));
+			}
+		} else {
+			$options = array('conditions' => array('TipoFuncionario.' . $this->TipoFuncionario->primaryKey => $id));
+			$this->request->data = $this->TipoFuncionario->find('first', $options);
 		}
 	}
 
-	function delete($id = null) {
-		if (!$id) {
-			$this->Session->setFlash(sprintf(__('Invalid id for %s', true), 'tg0011tipofuncionario'));
-			$this->redirect(array('action'=>'index'));
+/**
+ * delete method
+ *
+ * @throws NotFoundException
+ * @param string $id
+ * @return void
+ */
+	public function delete($id = null) {
+		$this->TipoFuncionario->id = $id;
+		if (!$this->TipoFuncionario->exists()) {
+			throw new NotFoundException(__('Invalid tipo funcionario'));
 		}
-		if ($this->Tipofuncionario->delete($id)) {
-			$this->Session->setFlash('Dados deletedos com sucesso ','flashok');
-			$this->redirect(array('action'=>'index'));
+		$this->request->allowMethod('post', 'delete');
+		if ($this->TipoFuncionario->delete()) {
+			$this->Session->setFlash(__('The tipo funcionario has been deleted.'));
+		} else {
+			$this->Session->setFlash(__('The tipo funcionario could not be deleted. Please, try again.'));
 		}
-		$this->Session->setFlash(sprintf(__('%s was not deleted', true), 'Tipofuncionario'));
-		$this->redirect(array('action' => 'index'));
+		return $this->redirect(array('action' => 'index'));
 	}
-        function beforeRender(){
-            $this->set('current_section','administracao');
-        }
 }
-?>
