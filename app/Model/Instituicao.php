@@ -65,5 +65,13 @@ class Instituicao extends AppModel {
     public $validade = array(
         
     );
+    
+    public function getInstituicaoById($id) {
+        $instituicao = $this->findById($id);
+        if($instituicao){
+            return $instituicao['Instituicao'];
+        }
+        else            return false;
+    }
 
 }
