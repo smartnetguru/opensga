@@ -3,6 +3,7 @@
 ini_set('memory_limit', "2048M");
 App::uses('AuditableConfig', 'Auditable.Lib');
 App::uses('AppShell', 'Console/Command');
+    App::uses('CakeEmail', 'Network/Email');
 
 class EstudanteShell extends AppShell {
 
@@ -799,6 +800,22 @@ class EstudanteShell extends AppShell {
         $objWriter->save('ficheiro.xlsx');
 // clear memory
         $xls->disconnectWorksheets();
+    }
+
+    public function enviar_email_alerta_renovacao(){
+        $this->Aluno->contain(array('Entidade'=>array('User')));
+        $alunos = $this->Aluno->find('all',array('conditions'=>array()));
+        foreach($alunos as $aluno){
+            die(debug($aluno));
+        }
+        $email = new CakeEmail();
+        $email->config('smtp')
+            ->template('test_template', 'test_layout') //I'm assuming these were created
+            ->emailFormat('html')
+            ->to('elisio.leonardo@gmail.com')
+            //->from(array('no-reply@example.com' => 'Example'))
+            ->subject('I\'m just testing something');
+            //->send();
     }
 
 

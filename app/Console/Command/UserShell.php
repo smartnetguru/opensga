@@ -51,6 +51,30 @@ class UserShell extends AppShell {
     }
 
 
+    public function ajusta_password(){
+        $users = $this->User->find('all',array('conditions'=>array('group_id'=>3,'ultimo_login is null')));
+        $total = count($users);
+        foreach($users as $user){
+            $hash = $user['User']['password'];
+            debug($total--);
+            if (password_verify('dra02062013', $hash)) {
+                $arrayUser = array(
+                    'User'=>[
+                        'user_id'=>$user['User']['id'],
+                        'novasenha1'=>$user['User']['codigocartao'],
+                        'novasenha2'=>$user['User']['codigocartao']
+                    ]
+                );
+                $this->User->alteraPassword($arrayUser);
+
+            } else {
+
+            }
+
+        }
+    }
+
+
     public function getOptionParser()
     {
         $parser = parent::getOptionParser();

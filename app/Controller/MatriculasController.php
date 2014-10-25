@@ -75,6 +75,13 @@ class MatriculasController extends AppController {
 		$this->set(compact('aluno', 'renovacoesFalta', 'matriculas'));
 	}
 
+    /**
+     * Instrucoes sobre como o aluno fazer a renovacao de matricula
+     */
+    public function estudante_como_renovar(){
+        echo "Detalhes até amanha";
+    }
+
 	public function fazer_reingresso($alunoId) {
 		$this->Matricula->Aluno->id = $alunoId;
 		if (!$this->Matricula->Aluno->exists()) {

@@ -1405,6 +1405,24 @@ class Aluno extends AppModel
         return false;
     }
 
+    /**
+     * Retorna o array de alunos dado o UserId
+     * @param $userId
+     */
+    public function getByUserId($userId){
+        $this->contain('Entidade');
+        $aluno = $this->find('first',array('Entidade.usern_id'=>$userId));
+        return $aluno;
+    }
+
+    /**
+     *Retorna todas as renovacoes pendentes para um aluno
+     *
+     */
+    public function getAllMatriculasPendentes($alunoId){
+        $renovacoesFalta = $this->Matricula->getStatusRenovacao($alunoId, true);
+        return $renovacoesFalta;
+    }
     public function mudaCurso($data)
     {
         $datasource = $this->getDataSource();

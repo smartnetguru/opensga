@@ -364,6 +364,9 @@ class OpenSGAAclShell extends AppShell {
 		$comandos[] = "acl grant Group.3 controllers/Alunos/estudante_perfil";
 		$comandos[] = "acl grant Group.3 controllers/Alunos/estudante_editar_perfil";
 		$comandos[] = "acl grant Group.3 controllers/Alunos/estudante_mostrar_foto";
+
+        $comandos[] = "acl grant Group.3 controllers/Matriculas/estudante_como_renovar";
+
 		$comandos[] = "acl grant Group.3 controllers/users/estudante_mostrar_foto";
 		$comandos[] = "acl grant Group.3 controllers/users/estudante_perfil";
 		$comandos[] = "acl grant Group.3 controllers/users/estudante_trocar_senha";

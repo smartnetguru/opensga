@@ -2,68 +2,22 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fc9bff1a-fcc4-4747-ab16-ab64e9734a11" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/Migrations" afterPath="$PROJECT_DIR$/plugins/Migrations" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/Migrations/Test/test_app/Plugin/TestMigrationPlugin2/empty" afterPath="$PROJECT_DIR$/plugins/Migrations/Test/test_app/Plugin/TestMigrationPlugin2/empty" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/View/Matriculas/estudante_como_renovar.ctp" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.clover/clover.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.gitmodules" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.ohloh" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/composer.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/composer.lock" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/plugins/Migrations" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/manuais/source" afterPath="$PROJECT_DIR$/docs/manuais/source" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/Migrations/.gitignore" afterPath="$PROJECT_DIR$/plugins/Migrations/.gitignore" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/Migrations/.semver" afterPath="$PROJECT_DIR$/plugins/Migrations/.semver" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/Migrations/.travis.yml" afterPath="$PROJECT_DIR$/plugins/Migrations/.travis.yml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/Migrations/Config/Migration/001_init_migrations.php" afterPath="$PROJECT_DIR$/plugins/Migrations/Config/Migration/001_init_migrations.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/Migrations/Test/test_app/Plugin/TestMigrationPlugin/Config/Migration/001_schema_dump.php" afterPath="$PROJECT_DIR$/plugins/Migrations/Test/test_app/Plugin/TestMigrationPlugin/Config/Migration/001_schema_dump.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/Migrations/Test/test_app/Plugin/TestMigrationPlugin/Config/Migration/002_another_migration_plugin_test_migration.php" afterPath="$PROJECT_DIR$/plugins/Migrations/Test/test_app/Plugin/TestMigrationPlugin/Config/Migration/002_another_migration_plugin_test_migration.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/Migrations/Config/Migration/002_convert_version_to_class_names.php" afterPath="$PROJECT_DIR$/plugins/Migrations/Config/Migration/002_convert_version_to_class_names.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/Migrations/Config/Migration/003_increase_class_name_length.php" afterPath="$PROJECT_DIR$/plugins/Migrations/Config/Migration/003_increase_class_name_length.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/Migrations/Test/Case/AllMigrationsTest.php" afterPath="$PROJECT_DIR$/plugins/Migrations/Test/Case/AllMigrationsTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/Auditable/Model/Behavior/AuditableBehavior.php" afterPath="$PROJECT_DIR$/plugins/Auditable/Model/Behavior/AuditableBehavior.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/Migrations/CHANGELOG.md" afterPath="$PROJECT_DIR$/plugins/Migrations/CHANGELOG.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/Migrations/CONTRIBUTING.md" afterPath="$PROJECT_DIR$/plugins/Migrations/CONTRIBUTING.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/Migrations/Lib/CakeMigration.php" afterPath="$PROJECT_DIR$/plugins/Migrations/Lib/CakeMigration.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/Migrations/Test/Case/Lib/Model/CakeMigrationTest.php" afterPath="$PROJECT_DIR$/plugins/Migrations/Test/Case/Lib/Model/CakeMigrationTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/Migrations/Docs/Documentation/Examples.md" afterPath="$PROJECT_DIR$/plugins/Migrations/Docs/Documentation/Examples.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/Migrations/Docs/Documentation/Generate-Migrations-Without-DB-Interaction.md" afterPath="$PROJECT_DIR$/plugins/Migrations/Docs/Documentation/Generate-Migrations-Without-DB-Interaction.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/Migrations/Docs/Home.md" afterPath="$PROJECT_DIR$/plugins/Migrations/Docs/Home.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/Migrations/Docs/Documentation/Installation.md" afterPath="$PROJECT_DIR$/plugins/Migrations/Docs/Documentation/Installation.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/Migrations/LICENSE.txt" afterPath="$PROJECT_DIR$/plugins/Migrations/LICENSE.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/Migrations/Console/Command/MigrationShell.php" afterPath="$PROJECT_DIR$/plugins/Migrations/Console/Command/MigrationShell.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/Migrations/Test/Case/Console/Command/MigrationShellTest.php" afterPath="$PROJECT_DIR$/plugins/Migrations/Test/Case/Console/Command/MigrationShellTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/Migrations/Lib/MigrationVersion.php" afterPath="$PROJECT_DIR$/plugins/Migrations/Lib/MigrationVersion.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/Migrations/Test/Case/Lib/MigrationVersionTest.php" afterPath="$PROJECT_DIR$/plugins/Migrations/Test/Case/Lib/MigrationVersionTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/Migrations/Docs/Documentation/Migrations.md" afterPath="$PROJECT_DIR$/plugins/Migrations/Docs/Documentation/Migrations.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/Migrations/Lib/Panel/MigrationsPanel.php" afterPath="$PROJECT_DIR$/plugins/Migrations/Lib/Panel/MigrationsPanel.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/Migrations/Docs/Documentation/Overview.md" afterPath="$PROJECT_DIR$/plugins/Migrations/Docs/Documentation/Overview.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/Migrations/Docs/Documentation/Pre-Migration-Checks.md" afterPath="$PROJECT_DIR$/plugins/Migrations/Docs/Documentation/Pre-Migration-Checks.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/Migrations/Lib/Migration/PrecheckBase.php" afterPath="$PROJECT_DIR$/plugins/Migrations/Lib/Migration/PrecheckBase.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/Migrations/Lib/Migration/PrecheckCondition.php" afterPath="$PROJECT_DIR$/plugins/Migrations/Lib/Migration/PrecheckCondition.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/Migrations/Test/Case/Lib/Migration/PrecheckConditionTest.php" afterPath="$PROJECT_DIR$/plugins/Migrations/Test/Case/Lib/Migration/PrecheckConditionTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/Migrations/Lib/Migration/PrecheckException.php" afterPath="$PROJECT_DIR$/plugins/Migrations/Lib/Migration/PrecheckException.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/Migrations/Docs/Tutorials/Quick-Start.md" afterPath="$PROJECT_DIR$/plugins/Migrations/Docs/Tutorials/Quick-Start.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/Migrations/README.md" afterPath="$PROJECT_DIR$/plugins/Migrations/README.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/Migrations/Test/test_app/Plugin/TestMigrationPlugin/Config/Schema/Schema.php" afterPath="$PROJECT_DIR$/plugins/Migrations/Test/test_app/Plugin/TestMigrationPlugin/Config/Schema/Schema.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/Migrations/Model/SchemaMigration.php" afterPath="$PROJECT_DIR$/plugins/Migrations/Model/SchemaMigration.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/Migrations/Test/Fixture/SchemaMigrationsFixture.php" afterPath="$PROJECT_DIR$/plugins/Migrations/Test/Fixture/SchemaMigrationsFixture.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Console/Command/TurmaShell.php" afterPath="$PROJECT_DIR$/app/Console/Command/TurmaShell.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Controller/TurmasController.php" afterPath="$PROJECT_DIR$/app/Controller/TurmasController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Model/User.php" afterPath="$PROJECT_DIR$/app/Model/User.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Controller/UsersController.php" afterPath="$PROJECT_DIR$/app/Controller/UsersController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/Migrations/Test/test_app/Plugin/TestMigrationPlugin/Config/Migration/blank_file.php" afterPath="$PROJECT_DIR$/plugins/Migrations/Test/test_app/Plugin/TestMigrationPlugin/Config/Migration/blank_file.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/Migrations/composer.json" afterPath="$PROJECT_DIR$/plugins/Migrations/composer.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/Migrations/Test/test_app/Plugin/TestMigrationPlugin/Config/Migration/map.php" afterPath="$PROJECT_DIR$/plugins/Migrations/Test/test_app/Plugin/TestMigrationPlugin/Config/Migration/map.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/Migrations/Test/test_app/Plugin/TestMigrationPlugin3/Config/Migration/map.php" afterPath="$PROJECT_DIR$/plugins/Migrations/Test/test_app/Plugin/TestMigrationPlugin3/Config/Migration/map.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/Migrations/Console/Command/Templates/migration.ctp" afterPath="$PROJECT_DIR$/plugins/Migrations/Console/Command/Templates/migration.ctp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/Migrations/Console/Templates/classes/migration.ctp" afterPath="$PROJECT_DIR$/plugins/Migrations/Console/Templates/classes/migration.ctp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/Migrations/Locale/deu/LC_MESSAGES/migrations.po" afterPath="$PROJECT_DIR$/plugins/Migrations/Locale/deu/LC_MESSAGES/migrations.po" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/Migrations/Locale/fre/LC_MESSAGES/migrations.po" afterPath="$PROJECT_DIR$/plugins/Migrations/Locale/fre/LC_MESSAGES/migrations.po" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/Migrations/Locale/ita/LC_MESSAGES/migrations.po" afterPath="$PROJECT_DIR$/plugins/Migrations/Locale/ita/LC_MESSAGES/migrations.po" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/Migrations/Locale/por/LC_MESSAGES/migrations.po" afterPath="$PROJECT_DIR$/plugins/Migrations/Locale/por/LC_MESSAGES/migrations.po" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/Migrations/Locale/spa/LC_MESSAGES/migrations.po" afterPath="$PROJECT_DIR$/plugins/Migrations/Locale/spa/LC_MESSAGES/migrations.po" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/Migrations/Locale/migrations.pot" afterPath="$PROJECT_DIR$/plugins/Migrations/Locale/migrations.pot" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/Migrations/View/Elements/migrations_panel.ctp" afterPath="$PROJECT_DIR$/plugins/Migrations/View/Elements/migrations_panel.ctp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/Migrations/Test/test_app/Plugin/TestMigrationPlugin4/Config/Schema/schema.php" afterPath="$PROJECT_DIR$/plugins/Migrations/Test/test_app/Plugin/TestMigrationPlugin4/Config/Schema/schema.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/Migrations/Test/Fixture/test_migration.txt" afterPath="$PROJECT_DIR$/plugins/Migrations/Test/Fixture/test_migration.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/Migrations/Test/Fixture/test_migration_add_fields_from_cli.txt" afterPath="$PROJECT_DIR$/plugins/Migrations/Test/Fixture/test_migration_add_fields_from_cli.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/Migrations/Test/Fixture/test_migration_create_table_from_cli.txt" afterPath="$PROJECT_DIR$/plugins/Migrations/Test/Fixture/test_migration_create_table_from_cli.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/Migrations/Test/Fixture/test_migration_drop_table_from_cli.txt" afterPath="$PROJECT_DIR$/plugins/Migrations/Test/Fixture/test_migration_drop_table_from_cli.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/Migrations/Test/Fixture/test_migration_remove_fields_from_cli.txt" afterPath="$PROJECT_DIR$/plugins/Migrations/Test/Fixture/test_migration_remove_fields_from_cli.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Model/Aluno.php" afterPath="$PROJECT_DIR$/app/Model/Aluno.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Controller/AppController.php" afterPath="$PROJECT_DIR$/app/Controller/AppController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Console/Command/EstudanteShell.php" afterPath="$PROJECT_DIR$/app/Console/Command/EstudanteShell.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Controller/MatriculasController.php" afterPath="$PROJECT_DIR$/app/Controller/MatriculasController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Console/Command/OpenSGAAclShell.php" afterPath="$PROJECT_DIR$/app/Console/Command/OpenSGAAclShell.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Controller/PagesController.php" afterPath="$PROJECT_DIR$/app/Controller/PagesController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Console/Command/UserShell.php" afterPath="$PROJECT_DIR$/app/Console/Command/UserShell.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/View/Pages/estudante_home.ctp" afterPath="$PROJECT_DIR$/app/View/Pages/estudante_home.ctp" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="opensga.iws" />
@@ -87,10 +41,46 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
+      <file leaf-file-name="core.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Config/core.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="339" column="0" selection-start="13432" selection-end="13665" vertical-scroll-proportion="0.0" vertical-offset="6102" max-vertical-offset="6390">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="email.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Config/email.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="95" column="0" selection-start="2588" selection-end="2588" vertical-scroll-proportion="0.0" vertical-offset="1710" max-vertical-offset="1818">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="estudante_como_renovar.ctp" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/View/Matriculas/estudante_como_renovar.ctp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="19" selection-start="19" selection-end="19" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="108">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="EstudanteShell.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Console/Command/EstudanteShell.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="805" column="43" selection-start="46566" selection-end="46566" vertical-scroll-proportion="0.0" vertical-offset="14090" max-vertical-offset="14922">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="User.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Model/User.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="97" column="42" selection-start="2475" selection-end="2475" vertical-scroll-proportion="-15.333333" vertical-offset="1332" max-vertical-offset="6966">
+            <state line="88" column="20" selection-start="2134" selection-end="2134" vertical-scroll-proportion="0.0" vertical-offset="1411" max-vertical-offset="6966">
               <folding>
                 <marker date="1413734708063" expanded="true" signature="2901:2999" placeholder="SELECT us.id..users..." />
                 <marker date="1413734708063" expanded="true" signature="3116:3201" placeholder="SELECT ta.id..users..." />
@@ -101,84 +91,50 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="OpenSGAShell.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Console/Command/OpenSGAShell.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="354" column="37" selection-start="19569" selection-end="19569" vertical-scroll-proportion="0.0" vertical-offset="5974" max-vertical-offset="34542">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TurmasController.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Controller/TurmasController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="415" column="31" selection-start="15176" selection-end="15176" vertical-scroll-proportion="-25.703703" vertical-offset="6776" max-vertical-offset="13248">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="faculdade_index.ctp" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/View/Turmas/faculdade_index.ctp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="67" column="44" selection-start="3199" selection-end="3199" vertical-scroll-proportion="-14.37037" vertical-offset="818" max-vertical-offset="1692">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TurmaShell.php" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/Console/Command/TurmaShell.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="26" column="17" selection-start="892" selection-end="892" vertical-scroll-proportion="0.57223266" vertical-offset="163" max-vertical-offset="1008">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Turma.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Model/Turma.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="337" column="35" selection-start="11173" selection-end="11173" vertical-scroll-proportion="-16.37037" vertical-offset="5174" max-vertical-offset="12420">
-              <folding>
-                <marker date="1405500943407" expanded="true" signature="17331:17487" placeholder="select count..t0013inscricaos..." />
-                <marker date="1405500943407" expanded="true" signature="17636:17757" placeholder="select count..t0013inscricaos..." />
-                <marker date="1405500943407" expanded="true" signature="17943:18099" placeholder="select count..t0013inscricaos..." />
-                <marker date="1405500943407" expanded="true" signature="18256:18427" placeholder="select tf.na..t0010turmas..." />
-                <marker date="1405500943407" expanded="true" signature="18589:18756" placeholder="select tf.na..t0010turmas..." />
-                <marker date="1405500943407" expanded="true" signature="18893:19071" placeholder="select tp.na..t0010turmas..." />
-                <marker date="1405500943407" expanded="true" signature="19502:19629" placeholder="select sum(n..t0013inscricaos..." />
-                <marker date="1405500943407" expanded="true" signature="19846:19993" placeholder="SELECT tt.id..t0010turmas..." />
-                <marker date="1405500943407" expanded="true" signature="25989:26115" placeholder="update t0010..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="faculdade_print_pauta.ctp" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/View/Turmas/faculdade_print_pauta.ctp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="1926">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AppController.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Controller/AppController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="112" column="76" selection-start="4649" selection-end="4649" vertical-scroll-proportion="-28.37037" vertical-offset="1250" max-vertical-offset="3132">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="UsersController.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Controller/UsersController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="401" column="28" selection-start="16192" selection-end="16192" vertical-scroll-proportion="-28.37037" vertical-offset="6452" max-vertical-offset="9990">
+            <state line="324" column="17" selection-start="12324" selection-end="12324" vertical-scroll-proportion="-14.592592" vertical-offset="5438" max-vertical-offset="9990">
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name=".gitignore" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="468">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="composer.json" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/composer.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="20" column="53" selection-start="562" selection-end="562" vertical-scroll-proportion="0.67542213" vertical-offset="0" max-vertical-offset="540">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="UserShell.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Console/Command/UserShell.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="56" column="33" selection-start="1981" selection-end="1981" vertical-scroll-proportion="0.0" vertical-offset="889" max-vertical-offset="1728">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Aluno.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Model/Aluno.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="1157" column="31" selection-start="45149" selection-end="45149" vertical-scroll-proportion="0.0" vertical-offset="20442" max-vertical-offset="28422">
+              <folding>
+                <marker date="1413794073964" expanded="true" signature="15435:15499" placeholder="Select plano..matriculas..." />
+                <marker date="1413794073964" expanded="true" signature="16007:16071" placeholder="Select plano..matriculas..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -196,17 +152,10 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/app/View/Candidaturas/index.ctp" />
-        <option value="$PROJECT_DIR$/lib/Cake/Console/Command/Task/FixtureTask.php" />
-        <option value="$PROJECT_DIR$/app/Model/CandidatoAlumni.php" />
-        <option value="$PROJECT_DIR$/app/Console/Command/EstudanteShell.php" />
-        <option value="$PROJECT_DIR$/app/View/Turmas/docente_print_pauta.ctp" />
-        <option value="$PROJECT_DIR$/app/Test/Case/Model/UserTest.php" />
         <option value="$PROJECT_DIR$/app/webroot/assets/js/form-cadastro-alumni-wizard.js" />
         <option value="$PROJECT_DIR$/app/Controller/CandidatoAlumnisController.php" />
         <option value="$PROJECT_DIR$/app/View/Pages/home.ctp" />
         <option value="$PROJECT_DIR$/app/View/Configs/index.ctp" />
-        <option value="$PROJECT_DIR$/app/Console/Command/OpenSGAAclShell.php" />
         <option value="$PROJECT_DIR$/app/View/Elements/header.ctp" />
         <option value="$PROJECT_DIR$/app/View/Common/form_basic_common.ctp" />
         <option value="$PROJECT_DIR$/app/Model/AnoLectivo.php" />
@@ -228,7 +177,6 @@
         <option value="$PROJECT_DIR$/app/Config/bootstrap.php" />
         <option value="$PROJECT_DIR$/app/Plugin/CakeRabbit/Config/bootstrap.php" />
         <option value="$PROJECT_DIR$/app/Model/AppModel.php" />
-        <option value="$PROJECT_DIR$/app/Controller/AppController.php" />
         <option value="$PROJECT_DIR$/app/Model/Entidade.php" />
         <option value="$PROJECT_DIR$/app/webroot/assets/css/main.css" />
         <option value="$PROJECT_DIR$/app/Model/Session.php" />
@@ -237,16 +185,24 @@
         <option value="$PROJECT_DIR$/app/Model/Upload.php" />
         <option value="$PROJECT_DIR$/app/Plugin/CakeRabbit/Lib/CakeRabbit.php" />
         <option value="$PROJECT_DIR$/app/Plugin/CakeRabbit/Console/Command/CakeRabbitShell.php" />
-        <option value="$PROJECT_DIR$/app/Model/Aluno.php" />
         <option value="$PROJECT_DIR$/app/Test/Case/Model/AlunoTest.php" />
         <option value="$PROJECT_DIR$/app/Plugin/CakeRabbit/Config/config.php" />
         <option value="$PROJECT_DIR$/app/Config/core.php" />
-        <option value="$PROJECT_DIR$/app/Controller/MatriculasController.php" />
         <option value="$PROJECT_DIR$/plugins/Auditable/Model/Behavior/AuditableBehavior.php" />
         <option value="$PROJECT_DIR$/app/Model/User.php" />
         <option value="$PROJECT_DIR$/app/Controller/UsersController.php" />
         <option value="$PROJECT_DIR$/app/Controller/TurmasController.php" />
         <option value="$PROJECT_DIR$/app/Console/Command/TurmaShell.php" />
+        <option value="$PROJECT_DIR$/app/Controller/AppController.php" />
+        <option value="$PROJECT_DIR$/app/Model/Aluno.php" />
+        <option value="$PROJECT_DIR$/app/Controller/PagesController.php" />
+        <option value="$PROJECT_DIR$/app/View/Pages/estudante_home.ctp" />
+        <option value="$PROJECT_DIR$/app/Controller/MatriculasController.php" />
+        <option value="$PROJECT_DIR$/app/Console/Command/OpenSGAAclShell.php" />
+        <option value="$PROJECT_DIR$/app/View/Matriculas/estudante_como_renovar.ctp" />
+        <option value="$PROJECT_DIR$/app/Console/Command/UserShell.php" />
+        <option value="$PROJECT_DIR$/app/Console/Command/EstudanteShell.php" />
+        <option value="$PROJECT_DIR$/composer.json" />
       </list>
     </option>
   </component>
@@ -393,6 +349,28 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="Turmas" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="View" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Pages" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -682,6 +660,24 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="Controller" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="Console" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -708,6 +704,24 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Config" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
     </panes>
@@ -721,16 +735,16 @@
     <property name="options.searchVisible" value="true" />
     <property name="LayoutCode.rearrangeEntriesPHP" value="true" />
     <property name="LayoutCode.rearrangeEntriesCSS" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../opengov" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/.." />
     <property name="SearchEverywhereHistory" value="//" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/app/View/Matriculas" />
       <recent name="$PROJECT_DIR$/app/Model" />
       <recent name="$PROJECT_DIR$/app/Model/Behavior" />
       <recent name="$PROJECT_DIR$/app/Console/Command" />
       <recent name="$PROJECT_DIR$/app/View/Alunos" />
-      <recent name="$PROJECT_DIR$/app/View/Ajax" />
     </key>
   </component>
   <component name="RunManager">
@@ -776,7 +790,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1" y="26" width="1368" height="717" extended-state="6" />
+    <frame x="-1" y="26" width="1368" height="717" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -792,12 +806,12 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32569557" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32569557" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -824,56 +838,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/Model/Notification.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="42" column="40" selection-start="1114" selection-end="1114" vertical-scroll-proportion="0.0" vertical-offset="991" max-vertical-offset="1836" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Controller/AlunosController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1246" column="43" selection-start="50998" selection-end="50998" vertical-scroll-proportion="0.73677886" vertical-offset="21815" max-vertical-offset="28548" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/View/Matriculas/index.ctp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="82" selection-start="687" selection-end="687" vertical-scroll-proportion="0.21634616" vertical-offset="54" max-vertical-offset="2268" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/View/Layouts/default.ctp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="265" column="0" selection-start="19210" selection-end="19210" vertical-scroll-proportion="0.0" vertical-offset="4388" max-vertical-offset="5220" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Event/NotificationListener.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="28" selection-start="376" selection-end="376" vertical-scroll-proportion="0.0" vertical-offset="216" max-vertical-offset="396" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/composer.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="0" selection-start="188" selection-end="188" vertical-scroll-proportion="0.0" vertical-offset="180" max-vertical-offset="288" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Controller/DocentesController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="143" column="44" selection-start="4403" selection-end="4403" vertical-scroll-proportion="0.0" vertical-offset="1866" max-vertical-offset="3582" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Console/Command/UserShell.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="38" column="45" selection-start="1216" selection-end="1216" vertical-scroll-proportion="-15.296296" vertical-offset="271" max-vertical-offset="1296" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Plugin/CakeRabbit/Lib/CakeResqueBootstrap.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="872" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/View/Candidaturas/importar_candidatos.ctp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="31" selection-start="0" selection-end="3172" vertical-scroll-proportion="0.4052533" vertical-offset="0" max-vertical-offset="1476" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/View/Matriculas/carregar_ficheiro_renovacao.ctp">
       <provider selected="true" editor-type-id="text-editor">
         <state line="42" column="39" selection-start="2079" selection-end="2079" vertical-scroll-proportion="0.0" vertical-offset="259" max-vertical-offset="1044" />
@@ -954,13 +918,6 @@
         <state line="25" column="32" selection-start="616" selection-end="616" vertical-scroll-proportion="0.0" vertical-offset="450" max-vertical-offset="1494" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Model/Aluno.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1393" column="39" selection-start="58010" selection-end="58010" vertical-scroll-proportion="0.0" vertical-offset="24701" max-vertical-offset="28098">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Test/Fixture/AnoLectivoFixture.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="378" />
@@ -969,13 +926,6 @@
     <entry file="file://$PROJECT_DIR$/app/Test/Case/Model/AlunoTest.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="130" column="3" selection-start="2921" selection-end="2921" vertical-scroll-proportion="-23.592592" vertical-offset="1703" max-vertical-offset="9810" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Model/Docente.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="116" column="5" selection-start="3628" selection-end="3628" vertical-scroll-proportion="0.0" vertical-offset="1655" max-vertical-offset="2538">
-          <folding />
-        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Test/Case/Model/TurmaTest.php">
@@ -988,18 +938,9 @@
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="100.03704" vertical-offset="2701" max-vertical-offset="3330" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Model/Matricula.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="199" column="33" selection-start="8096" selection-end="8096" vertical-scroll-proportion="0.0" vertical-offset="3438" max-vertical-offset="6390">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Plugin/CakeRabbit/Config/config.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="66" column="51" selection-start="2196" selection-end="2196" vertical-scroll-proportion="0.0" vertical-offset="1188" max-vertical-offset="1314">
-          <folding />
-        </state>
+        <state line="66" column="51" selection-start="2196" selection-end="2196" vertical-scroll-proportion="0.0" vertical-offset="1188" max-vertical-offset="1314" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Config/database.php">
@@ -1009,98 +950,146 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Test/Fixture/AlunoFixture.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="27" selection-start="263" selection-end="265" vertical-scroll-proportion="0.0" vertical-offset="228" max-vertical-offset="6462">
+        <state line="22" column="27" selection-start="263" selection-end="265" vertical-scroll-proportion="0.0" vertical-offset="228" max-vertical-offset="6462" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Console/Command/OpenSGAShell.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="354" column="37" selection-start="19569" selection-end="19569" vertical-scroll-proportion="0.0" vertical-offset="5974" max-vertical-offset="34542" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/View/Turmas/faculdade_print_pauta.ctp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1926" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/Cake/Model/Model.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="3658" column="15" selection-start="110445" selection-end="110445" vertical-scroll-proportion="0.31007752" vertical-offset="65298" max-vertical-offset="67554" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/View/Turmas/faculdade_index.ctp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="67" column="44" selection-start="3199" selection-end="3199" vertical-scroll-proportion="-14.37037" vertical-offset="818" max-vertical-offset="1692" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Controller/TurmasController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="415" column="31" selection-start="15176" selection-end="15176" vertical-scroll-proportion="-25.703703" vertical-offset="6776" max-vertical-offset="13248" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/Cake/Model/ModelBehavior.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="4122" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Model/Turma.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="337" column="35" selection-start="11173" selection-end="11173" vertical-scroll-proportion="-16.37037" vertical-offset="5174" max-vertical-offset="12420" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Console/Command/TurmaShell.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="19" column="34" selection-start="517" selection-end="517" vertical-scroll-proportion="-6.6296296" vertical-offset="163" max-vertical-offset="1008" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Controller/DocentesController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="136" column="36" selection-start="3854" selection-end="3854" vertical-scroll-proportion="-7.3333335" vertical-offset="2250" max-vertical-offset="3582" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Model/Docente.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="81" column="31" selection-start="2544" selection-end="2544" vertical-scroll-proportion="-17.925926" vertical-offset="974" max-vertical-offset="2538" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Controller/AppController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="29" column="45" selection-start="805" selection-end="805" vertical-scroll-proportion="-0.6666667" vertical-offset="504" max-vertical-offset="3114" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Controller/AlunosController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="662" column="55" selection-start="29037" selection-end="29084" vertical-scroll-proportion="-7.0740743" vertical-offset="11725" max-vertical-offset="28548" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Model/Matricula.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="139" column="0" selection-start="5373" selection-end="5373" vertical-scroll-proportion="-3.925926" vertical-offset="2396" max-vertical-offset="6390" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Controller/PagesController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="142" column="51" selection-start="4904" selection-end="4904" vertical-scroll-proportion="-15.259259" vertical-offset="2144" max-vertical-offset="3402" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/View/Pages/estudante_home.ctp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="86" selection-start="530" selection-end="530" vertical-scroll-proportion="0.0" vertical-offset="252" max-vertical-offset="1170" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Controller/MatriculasController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="80" column="42" selection-start="3044" selection-end="3066" vertical-scroll-proportion="0.0" vertical-offset="1010" max-vertical-offset="4950">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Console/Command/OpenSGAAclShell.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="343" column="104" selection-start="23498" selection-end="23498" vertical-scroll-proportion="0.0" vertical-offset="5902" max-vertical-offset="6948">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/View/Matriculas/estudante_como_renovar.ctp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="19" selection-start="19" selection-end="19" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="533">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Model/Aluno.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1157" column="31" selection-start="45149" selection-end="45149" vertical-scroll-proportion="0.0" vertical-offset="20442" max-vertical-offset="28422">
+          <folding>
+            <marker date="1413794073964" expanded="true" signature="15435:15499" placeholder="Select plano..matriculas..." />
+            <marker date="1413794073964" expanded="true" signature="16007:16071" placeholder="Select plano..matriculas..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Console/Command/UserShell.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="56" column="33" selection-start="1981" selection-end="1981" vertical-scroll-proportion="0.0" vertical-offset="889" max-vertical-offset="1728">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Config/core.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="349" column="0" selection-start="13667" selection-end="13667" vertical-scroll-proportion="-18.407408" vertical-offset="5785" max-vertical-offset="6390">
+        <state line="339" column="0" selection-start="13432" selection-end="13665" vertical-scroll-proportion="0.0" vertical-offset="6102" max-vertical-offset="6390">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Controller/MatriculasController.php">
+    <entry file="file://$PROJECT_DIR$/app/Config/email.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="132" column="0" selection-start="5444" selection-end="5444" vertical-scroll-proportion="-9.925926" vertical-offset="2108" max-vertical-offset="4824">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Console/Command/OpenSGAShell.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="354" column="37" selection-start="19569" selection-end="19569" vertical-scroll-proportion="0.0" vertical-offset="5974" max-vertical-offset="34542">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/View/Turmas/faculdade_print_pauta.ctp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1926">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Controller/AppController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="112" column="76" selection-start="4649" selection-end="4649" vertical-scroll-proportion="-28.37037" vertical-offset="1250" max-vertical-offset="3132">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/plugins/Auditable/Model/Behavior/AuditableBehavior.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="391" column="21" selection-start="12197" selection-end="12197" vertical-scroll-proportion="0.7791411" vertical-offset="6403" max-vertical-offset="9000">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/Cake/Model/Model.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="3658" column="15" selection-start="110445" selection-end="110445" vertical-scroll-proportion="0.31007752" vertical-offset="65298" max-vertical-offset="67554">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Controller/UsersController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="401" column="28" selection-start="16192" selection-end="16192" vertical-scroll-proportion="-28.37037" vertical-offset="6452" max-vertical-offset="9990">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/View/Turmas/faculdade_index.ctp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="67" column="44" selection-start="3199" selection-end="3199" vertical-scroll-proportion="-14.37037" vertical-offset="818" max-vertical-offset="1692">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Controller/TurmasController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="415" column="31" selection-start="15176" selection-end="15176" vertical-scroll-proportion="-25.703703" vertical-offset="6776" max-vertical-offset="13248">
+        <state line="95" column="0" selection-start="2588" selection-end="2588" vertical-scroll-proportion="0.0" vertical-offset="1710" max-vertical-offset="1818">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Console/Command/EstudanteShell.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="20" selection-start="237" selection-end="237" vertical-scroll-proportion="0.21571073" vertical-offset="7" max-vertical-offset="14616">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/Cake/Model/ModelBehavior.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="4122">
+        <state line="805" column="43" selection-start="46566" selection-end="46566" vertical-scroll-proportion="0.0" vertical-offset="14090" max-vertical-offset="14922">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Model/User.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="97" column="42" selection-start="2475" selection-end="2475" vertical-scroll-proportion="-15.333333" vertical-offset="1332" max-vertical-offset="6966">
+        <state line="88" column="20" selection-start="2134" selection-end="2134" vertical-scroll-proportion="0.0" vertical-offset="1411" max-vertical-offset="6966">
           <folding>
             <marker date="1413734708063" expanded="true" signature="2901:2999" placeholder="SELECT us.id..users..." />
             <marker date="1413734708063" expanded="true" signature="3116:3201" placeholder="SELECT ta.id..users..." />
@@ -1110,26 +1099,23 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Model/Turma.php">
+    <entry file="file://$PROJECT_DIR$/app/Controller/UsersController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="337" column="35" selection-start="11173" selection-end="11173" vertical-scroll-proportion="-16.37037" vertical-offset="5174" max-vertical-offset="12420">
-          <folding>
-            <marker date="1405500943407" expanded="true" signature="17331:17487" placeholder="select count..t0013inscricaos..." />
-            <marker date="1405500943407" expanded="true" signature="17636:17757" placeholder="select count..t0013inscricaos..." />
-            <marker date="1405500943407" expanded="true" signature="17943:18099" placeholder="select count..t0013inscricaos..." />
-            <marker date="1405500943407" expanded="true" signature="18256:18427" placeholder="select tf.na..t0010turmas..." />
-            <marker date="1405500943407" expanded="true" signature="18589:18756" placeholder="select tf.na..t0010turmas..." />
-            <marker date="1405500943407" expanded="true" signature="18893:19071" placeholder="select tp.na..t0010turmas..." />
-            <marker date="1405500943407" expanded="true" signature="19502:19629" placeholder="select sum(n..t0013inscricaos..." />
-            <marker date="1405500943407" expanded="true" signature="19846:19993" placeholder="SELECT tt.id..t0010turmas..." />
-            <marker date="1405500943407" expanded="true" signature="25989:26115" placeholder="update t0010..." />
-          </folding>
+        <state line="324" column="17" selection-start="12324" selection-end="12324" vertical-scroll-proportion="-14.592592" vertical-offset="5438" max-vertical-offset="9990">
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Console/Command/TurmaShell.php">
+    <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="26" column="17" selection-start="892" selection-end="892" vertical-scroll-proportion="0.57223266" vertical-offset="163" max-vertical-offset="1008">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="560">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/composer.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="20" column="53" selection-start="562" selection-end="562" vertical-scroll-proportion="0.67542213" vertical-offset="0" max-vertical-offset="540">
           <folding />
         </state>
       </provider>

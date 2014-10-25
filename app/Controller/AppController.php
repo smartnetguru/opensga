@@ -36,10 +36,8 @@ class AppController extends Controller {
 	public $cacheAction = '1 hour';
 
 	public function beforeFilter() {
-        //CakeRabbit::enqueue();
 		parent::beforeFilter();
 		$config_language = $this->Session->read('Config.language');
-
 		if ($config_language == null) {
 			$config_language = 'por';
 		}
@@ -51,9 +49,6 @@ class AppController extends Controller {
 
 // Caso deseje usar o modelo padrão, utilize como abaixo, caso contrário você pode usar qualquer modelo
 		AuditableConfig::$Logger = ClassRegistry::init('Auditable.Logger');
-
-
-
 		$this->Security->csrfExpires = "+10 minutes";
 		$this->Auth->authorize = array('Actions' => array('actionPath' => 'controllers'));
 		$this->Auth->autoRedirect = false;
@@ -81,6 +76,7 @@ class AppController extends Controller {
 
 		} elseif (!in_array($this->action, $general_actions)) {
 			$grupo_id = $this->Session->read('Auth.User.group_id');
+
 			if ($grupo_id == 1) {
 				$this->loadModel('User');
 				$unidade_organica = $this->User->Funcionario->UnidadeOrganica->findById($this->Session->read('Auth.User.unidade_organica_id'));
@@ -104,9 +100,12 @@ class AppController extends Controller {
 					$this->request->prefix = 'docente';
 				}
 			} elseif ($grupo_id == 3) {
+
 				if ($this->request->prefix != 'estudante') {
 					$this->request->prefix = 'estudante';
+
 				}
+
 			} elseif ($grupo_id == 2) {
 				$this->loadModel('User');
 				$unidade_organica = $this->User->Funcionario->UnidadeOrganica->findById($this->Session->read('Auth.User.unidade_organica_id'));

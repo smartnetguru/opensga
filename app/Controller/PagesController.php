@@ -134,7 +134,14 @@ class PagesController extends AppController {
 	}
 
 	public function estudante_home() {
+        $this->loadModel('Aluno');
 
+        $userId = $this->Session->read('Auth.User.id');
+        $aluno = $this->Aluno->getByUserId($userId);
+        $matriculasPendentes = $this->Aluno->getAllMatriculasPendentes($aluno['Aluno']['id']);
+        if(!empty($matriculasPendentes)){
+            $this->set(compact('matriculasPendentes'));
+        }
 	}
 
 	public function faculdade_home() {
