@@ -19,5 +19,3 @@ tmp
 /.clover/
 /nbproject/private/
 /docs/manuais/build/pdf/.doctrees/
-/plugins
-/vendors
