@@ -28,7 +28,7 @@ class AppController extends Controller {
 		'Security', 'Acl', 'Auth' => array(
 			'authenticate' => 'Blowfish'
 		), 'Session', 'RequestHandler', 'Paginator', 'Cookie', 'HighCharts.HighCharts', 'DebugKit.Toolbar' => array(
-			'panels' => array('DebugKitEx.Resque')
+			'panels' => array()
 		)
 	);
 	public $helpers = array('Html', 'AclLink', 'Print', 'BreadCumbs', 'Form', 'Session', 'Js' => array('MyJquery'), 'EventsCalendar', 'Javascript', 'Ajax', 'PhpExcel', 'HighCharts.HighCharts', 'AclLink', 'Time');
@@ -46,8 +46,6 @@ class AppController extends Controller {
 		if ($this->Auth->loggedIn()) {
 			AuditableConfig::$responsibleId = $this->Auth->user('id');
 		}
-
-// Caso deseje usar o modelo padrão, utilize como abaixo, caso contrário você pode usar qualquer modelo
 		AuditableConfig::$Logger = ClassRegistry::init('Auditable.Logger');
 		$this->Security->csrfExpires = "+10 minutes";
 		$this->Auth->authorize = array('Actions' => array('actionPath' => 'controllers'));

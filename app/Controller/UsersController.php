@@ -502,16 +502,12 @@ class UsersController extends AppController {
 		parent::beforeFilter();
 
 		$this->Auth->allow(array('login', 'logout', 'opauth_complete'));
+        $this->Security->unlockedActions = ['login'];
+
 		if ($this->action == 'login' or $this->action == 'logout') {
 
-			//Configure::write('debug', 0);
-		}
-	}
 
-	public function configura_permissoes($user_id) {
-		$permissoes = $this->Acl->Aro->find('all', array('conditions' => array('Aro.foreign_key' => $this->Session->read('Auth.User.id'))));
-		debug($permissoes);
-		exit;
+		}
 	}
 
 	/**
