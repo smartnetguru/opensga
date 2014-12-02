@@ -1,3 +1,4 @@
+
 <?php
 
 App::uses('AppController', 'Controller');
@@ -170,5 +171,28 @@ class BolsaBolsasController extends AppController {
 
 		$this->set(compact('bolsas'));
 	}
+        
+        
+        
+        //funcai para introducao de dados...
+        public function registar_candidatura (){
+            $this->loadModel('Aluno');
+            	if ($this->request->is('post')) {
+                    $id = $this->request->data('discritivo');
+                   $array =array('conteudo'=>$id); 
+                   echo json_encode($array);
+                    
+//                    $value = array('name'=>$name,'cooperacao_acordo_id'=>$cooperacao_acordo_id);
+//			$this->CooperacaoObjectivoAcordo->create();
+//                        $this->CooperacaoObjectivoAcordo->save($value);
+//			if ($this->CooperacaoObjectivoAcordo->save($this->request->data)) {
+//				$this->Session->setFlash(__('The cooperacao objectivo acordo has been saved.'));
+//				return $this->redirect(array('action' => 'index'));
+//			} else {
+//				$this->Session->setFlash(__('The cooperacao objectivo acordo could not be saved. Please, try again.'));
+//			}
+		}
+            
+        }
 
 }
