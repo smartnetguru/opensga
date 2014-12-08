@@ -223,9 +223,7 @@
                         $atm_id           = substr($linha, 65, 10);
                         $localizacao_atm  = substr($linha, 75, 16);
                         $montante_decimal = substr($montante, -2);
-                        debug($montante_decimal);
                         $montante_real = ltrim(substr($montante, 0, -2), '0');
-                        debug($montante_real);
                         $montante = $montante_real . '.' . $montante_decimal;
 
 
@@ -233,8 +231,14 @@
                         $deposito                       = array();
                         $transacao['tipo_transacao_id'] = 1;
                         $transacao['valor']             = $montante;
+
+                        //Temos de gravar deposito antes
+                        $aluno = $this->Aluno->getByReferenciaRenovacaoMatricula($referencia);
+                        $deposito = $this->Aluno->Entidade->FinanceiroTransacao->FinanceiroDeposito->setNovoDeposito
+                            ();
                         $this->Aluno->Entidade->FinanceiroTransacao->FinanceiroPagamento->contain('Aluno');
                         $pagamento = $this->Aluno->Entidade->FinanceiroTransacao->FinanceiroPagamento->findByReferenciaPagamento($referencia);
+                        die(debug($pagamento));
                         if ($pagamento) {
 
                             $transacao['entidade_id']                    = $pagamento['FinanceiroPagamento']['entidade_id'];
@@ -263,7 +267,8 @@
                                             'estado_matricula_id' => 1,
                                             'ano_lectivo_id'      => $anolectivo['AnoLectivo']['id'],
                                             'tipo_matricula_id'   => 2,
-                                            'user_id'             => 1
+                                            'user_id'             => 1,
+                                            'financeiro_pagamento_id'=>$pagamento['FinanceiroPagamento']['id']
                                         );
                                         $this->save(array('Matricula' => $matricula));
                                     } else {

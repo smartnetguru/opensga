@@ -17,6 +17,13 @@ class Funcionario extends AppModel {
 	var $name = 'Funcionario';
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 	var $belongsTo = array(
+        'Entidade' => array(
+            'className' => 'Entidade',
+            'foreignKey' => 'entidade_id',
+            'conditions' => '',
+            'fields' => '',
+            'order' => ''
+        ),
 		'User' => array(
 			'className' => 'User',
 			'foreignKey' => 'user_id',
@@ -34,13 +41,6 @@ class Funcionario extends AppModel {
 		'TipoFuncionario' => array(
 			'className' => 'TipoFuncionario',
 			'foreignKey' => 'tipo_funcionario_id',
-			'conditions' => '',
-			'fields' => '',
-			'order' => ''
-		),
-		'Entidade' => array(
-			'className' => 'Entidade',
-			'foreignKey' => 'entidade_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
@@ -156,6 +156,21 @@ class Funcionario extends AppModel {
 	public function isFromUnidadeOrganica($useId, $unidadeOriganicaId) {
 		return true;
 	}
+
+    public function getAllFuncionariosForResponsavelCurso(){
+        $this->contain(['UnidadeOrganica','Entidade'=>['User'],'User']);
+        $funcionarios = $this->find('list',[
+            'conditions'=>[
+                'UnidadeOrganica.codigo'=>['DRA','DRA_DR','DRA_DI']
+            ],
+            'fields'=>[
+                'User.id','Entidade.name'
+            ],
+            'order'=>['Entidade.name']
+        ]);
+
+        return $funcionarios;
+    }
 
 }
 

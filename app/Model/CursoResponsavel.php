@@ -38,6 +38,25 @@ class CursoResponsavel extends AppModel {
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
-		)
+		),
+        'User' => array(
+            'className' => 'user',
+            'foreignKey' => 'user_id',
+            'conditions' => '',
+            'fields' => '',
+            'order' => ''
+        )
 	);
+
+    var $validate = array
+    (
+        'curso_id' => array
+        (
+            'naoRepetirFuncionarioCurso' => array
+            (
+                'rule' => array('checkUnique', array('curso_id', 'user_id', 'estado_objecto_id')),
+                'message' => 'Este Funcionário já é encarregado deste curso.',
+            )
+        ),
+    );
 }

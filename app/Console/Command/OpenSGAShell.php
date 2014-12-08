@@ -790,6 +790,54 @@
             }
         }
 
+
+        public function mestres(){
+            App::import('Vendor', 'PHPExcel', array('file' => 'PHPExcel.php'));
+            if (!class_exists('PHPExcel'))
+                throw new CakeException('Vendor class PHPExcel not found!');
+
+            $xls = PHPExcel_IOFactory::load(APP  . 'mestres.xlsx');
+
+            $worksheet = $xls->getActiveSheet();
+//debug($xls->getActiveSheetIndex());
+            $linha_actual = 2;
+            $numeros      = array();
+            foreach ($worksheet->getRowIterator() as $row) {
+                if ($worksheet->getCell('B' . $linha_actual)->getValue() == '') {
+
+                } else {
+                    $numero = $worksheet->getCell('B' . $linha_actual)->getCalculatedValue();
+                    $this->Aluno->contain('Entidade');
+                    $aluno = $this->Aluno->findByCodigo($numero);
+                    if($aluno){
+                        if($aluno['Entidade']['email']!=''){
+                            $worksheet->setCellValue('F' . $linha_actual, $aluno['Entidade']['email']);
+                        } else{
+                            $worksheet->setCellValue('F' . $linha_actual, 'NULL');
+                        }
+                        if($aluno['Entidade']['telemovel']!=''){
+                            $worksheet->setCellValue('G' . $linha_actual, $aluno['Entidade']['telemovel']);
+                        } else{
+                            $worksheet->setCellValue('G' . $linha_actual, 'NULL');
+                        }
+
+                        $this->out($linha_actual);
+                    }
+
+
+                }
+
+                $linha_actual++;
+                if($linha_actual==275){
+                    break;
+                }
+            }
+
+            $objWriter = PHPExcel_IOFactory::createWriter($xls, 'Excel2007');
+
+            $objWriter->save('mestres2.xlsx');
+    }
+
         public function gerar_turmas() {
             $plano_estudos = $this->Turma->PlanoEstudo->find('list', array('conditions' => array('PlanoEstudo.id' => 35)));
             debug($plano_estudos);
@@ -1907,6 +1955,24 @@
             }
             $this->out("fim");
             $this->out($zeros);
+        }
+
+
+        public function ajusta_pagamento_matricula(){
+            $pagamentos = $this->Aluno->FinanceiroPagamento->find('all');
+            $encontrados = 0;
+            foreach($pagamentos as $pagamento){
+               $matricula  = $this->Aluno->Matricula->find('first',
+                    array('Matricula.aluno_id'=>$pagamento['FinanceiroPagamento']['aluno_id'],
+                          'Matricula.data'=>$pagamento['FinanceiroPagamento']['created'],
+                        'Matricula.financeiro_pagamento_id is null'));
+                if(!empty($matricula)){
+                    $this->Aluno->Matricula->id = $matricula['Matricula']['id'];
+                    $this->Matricula->set('financeiro_pagamento_id',$pagamento['FinanceiroPagamento']['id']);
+                        $this->Matricula->save();
+                }
+            }
+            debug($encontrados);
         }
 
 

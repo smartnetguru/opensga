@@ -550,6 +550,15 @@ class Aluno extends AppModel
         return $this->Matricula->find('first', array('conditions' => array('Matricula.aluno_id' => $aluno_id, 'Matricula.ano_lectivo_id' => Configure::read('OpenSGA.ano_lectivo_id'), 'Matricula.estado_matricula_id' => 1), 'recursive' => -1));
     }
 
+    public function getByReferenciaRenovacaoMatricula($referencia){
+        debug($referencia);
+        if(substr($referencia,0,1)=='0'){
+            $codigoAluno = substr($referencia,1,-2);
+        } elseif(substr($referencia,0,2)=='20'){
+            $codigoAluno = substr($referencia,0,-2);
+        }
+        debug($codigoAluno);
+    }
     public function getAlunoForAction($alunoId)
     {
         $this->contain(array(

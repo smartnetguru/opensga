@@ -31,6 +31,7 @@
  * @property Matricula $Matricula
  * @property CursosTurno $CursosTurno
  * @property Turma $Turma
+ * @property CursoResponsavel $CursoResponsavel
  */
 class Curso extends AppModel {
 
@@ -58,7 +59,14 @@ class Curso extends AppModel {
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
-		)
+		),
+        'CursoResponsavel' => array(
+            'className' => 'CursoResponsavel',
+            'foreignKey' => 'curso_responsavel_id',
+            'conditions' => '',
+            'fields' => '',
+            'order' => ''
+        )
 	);
 	var $hasMany = array(
 		'PlanoEstudo' => array(
@@ -200,6 +208,57 @@ class Curso extends AppModel {
 		}
 		return $faculdade;
 	}
+
+    public function getCursoForView($cursoId){
+        $this->contain(['TipoCurso','GrauAcademico','UnidadeOrganica','CursoResponsavel'=>[
+            'User'=>['Entidade'=>['Funcionario']]
+        ]]);
+        $curso = $this->read(null, $cursoId);
+
+       return $curso;
+    }
+
+    /**
+     * Define Encarregado de Um dado Curso
+     *
+     * Actualiza as tabelas Curso e Curso_responsavel
+     * @param $data
+     */
+    public function setResponsavelCurso($data){
+        $dataSource = $this->getDataSource();
+        $dataSource->begin();
+
+            $funcionario = $this->CursoResponsavel->Funcionario->getByUserId($data['CursoResponsavel']['user_id']);
+            $data['CursoResponsavel']['funcionario_id'] = $funcionario['Funcionario']['id'];
+            $this->CursoResponsavel->create();
+            if($this->CursoResponsavel->save($data)){
+                $this->id = $data['CursoResponsavel']['curso_id'];
+                $this->set('user_responsavel_curso',$data['CursoResponsavel']['user_id']);
+                $this->set('curso_responsavel_id',$this->CursoResponsavel->id);
+                if($this->save()){
+                $dataSource->commit();
+                return true;
+            } else{
+                $dataSource->rollback();
+                return false;
+            }
+
+        } else{
+            $dataSource->rollback();
+            return false;
+        }
+
+    }
+
+    public function getAllCursosSemEncarregado(){
+        $cursos = $this->find('all',[
+            'conditions'=>[
+                'Curso.user_responsavel_curso is null'
+            ]
+        ]);
+
+        return $cursos;
+    }
 
 }
 

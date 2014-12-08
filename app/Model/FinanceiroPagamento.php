@@ -176,4 +176,72 @@ class FinanceiroPagamento extends AppModel {
         }
     }
 
+
+    public function geraPagamentoRenovacaoMatriculas($anoLectivo = null){
+        $this->Aluno->contain();
+        $alunos = $this->Aluno->find('all',['conditions'=>['estado_aluno_id'=>[1,11]]]);
+
+        foreach ($alunos as $aluno) {
+
+
+            $ano_ingresso = $aluno['Aluno']['ano_ingresso'];
+            if ($ano_ingresso >= 2000 && $ano_ingresso <= 2007) {
+                $referencia = substr($aluno['Aluno']['codigo'], 2);
+            } elseif ($ano_ingresso > 2007) {
+                $referencia = "0" . $aluno['Aluno']['codigo'];
+            } else {
+                $referencia = $aluno['Aluno']['codigo'];
+            }
+
+            $datasource = $this->Aluno->getDatasource();
+            $datasource->begin();
+            $transacao = array();
+            $pagamento = array();
+
+            $curso_turno = $this->Aluno->Curso->CursosTurno->find('first', array('conditions' => array('curso_id' => $aluno['Aluno']['curso_id'])));
+            if ($curso_turno['CursosTurno']['turno_id'] == 1) {
+                $transacao['financeiro_tipo_transacao_id'] = 2;
+                $pagamento['tipo_pagamento_id']            = 37;
+                $transacao['valor']                        = 80;
+                $referencia                                = $referencia . "02";
+            } else {
+                $transacao['financeiro_tipo_transacao_id'] = 2;
+                $pagamento['tipo_pagamento_id']            = 38;
+                $transacao['valor']                        = 160;
+                $referencia                                = $referencia . "03";
+            }
+            $transacao['entidade_id'] = $aluno['Aluno']['entidade_id'];
+
+            $conta_existe = $this->Aluno->Entidade->FinanceiroTransacao->FinanceiroConta->find('first', array('conditions' => array('entidade_id' => $aluno['Aluno']['entidade_id'], 'unidade_organica_id' => 29)));
+            if (empty($conta_existe)) {
+                $this->Aluno->Entidade->FinanceiroTransacao->FinanceiroConta->create();
+                $this->Aluno->Entidade->FinanceiroTransacao->FinanceiroConta->save(array('FinanceiroConta' => array('entidade_id' => $aluno['Aluno']['entidade_id'], 'unidade_organica_id' => 29)));
+                $conta_existe = $this->Aluno->Entidade->FinanceiroTransacao->FinanceiroConta->find('first', array('conditions' => array('entidade_id' => $aluno['Aluno']['entidade_id'], 'unidade_organica_id' => 29)));
+            }
+            $transacao['financeiro_conta_id']            = $conta_existe['FinanceiroConta']['id'];
+            $transacao['financeiro_estado_transacao_id'] = 1;
+            $this->Aluno->Entidade->FinanceiroTransacao->create();
+            $this->Aluno->Entidade->FinanceiroTransacao->save(array('FinanceiroTransacao' => $transacao));
+
+            $pagamento['aluno_id']                       = $aluno['Aluno']['id'];
+            $pagamento['financeiro_conta_id']            = $conta_existe['FinanceiroConta']['id'];
+            $pagamento['valor']                          = $transacao['valor'];
+            $pagamento['data_limite']                    = '2013-12-31';
+            $pagamento['data_emissao']                   = '2013-09-30';
+            $anolectivo                                  = $this->Aluno->Matricula->AnoLectivo->findByAno('2014');
+            $pagamento['ano_lectivo_id']                 = $anolectivo['AnoLectivo']['id'];
+            $pagamento['financeiro_estado_pagamento_id'] = 1;
+            $pagamento['codigo']                         = $referencia;
+            $pagamento['financeiro_transacao_id']        = $this->Aluno->Entidade->FinanceiroTransacao->id;
+            $pagamento['referencia_pagamento']           = $referencia;
+            $pagamento['entidade_id']                    = $aluno['Aluno']['entidade_id'];
+
+            $this->Aluno->Entidade->FinanceiroTransacao->FinanceiroPagamento->create();
+            $this->Aluno->Entidade->FinanceiroTransacao->FinanceiroPagamento->save(array('FinanceiroPagamento' => $pagamento));
+
+            $datasource->commit();
+            debug($aluno);
+    }
+
+}
 }
