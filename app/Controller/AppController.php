@@ -37,6 +37,7 @@ class AppController extends Controller {
 
 	public function beforeFilter() {
 		parent::beforeFilter();
+                
 		$config_language = $this->Session->read('Config.language');
 		if ($config_language == null) {
 			$config_language = 'por';
@@ -63,8 +64,9 @@ class AppController extends Controller {
 			$this->layout = false;
 			$this->Security->csrfCheck = false;
 			$this->Security->validatePost = false;
+                         Configure::write ( 'debug', 0 );
 		}
-
+        
 
 
 
