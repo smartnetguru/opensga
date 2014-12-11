@@ -188,7 +188,8 @@ class AlunosController extends AppController {
 			$this->loadModel('Candidatura');
 			$candidato = $this->Candidatura->findByNumeroEstudante($this->request->data['Candidatura']['numero_estudante']);
 			if (!empty($candidato)) {
-				$this->redirect(array('action' => $action_seguinte, $candidato['Candidatura']['id']));
+				$this->redirect(array('action' => $action_seguinte, $candidato[''
+                                    . '']['id']));
 			} else {
 				$this->Session->setFlash(__('Candidato Invalido'));
 			}

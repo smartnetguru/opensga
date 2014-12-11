@@ -176,15 +176,32 @@ class BolsaBolsasController extends AppController {
 
     //funcai para introducao de dados...
     public function registar_candidatura() {
-      
-       $this->loadModel('Aluno');
-       if($this->request->is('post')){
-           $dis = $this->request->data('discritivo');
-           $array = array('nome'=>$dis);
-           return new CakeResponse(array('body' => json_encode($array)));
-       }
-  
-      
+
+        $this->loadModel('Aluno');
+        
+        if ($this->request->is('post')) {
+            $this->loadModel('Candidatura');
+            $dis = $this->request->data('discritivo');
+            
+            //Recuperando o canditado atraves do numero_do estudante
+
+            $array = array();
+            $candidato = $this->Candidatura->findByNumeroEstudante($dis);
+            if (!empty($candidato)) {
+                $options = array('conditions' => array('Candidatura.' . $this->Candidatura->primaryKey => $candidato['Candidatura']['id']));
+		$array = $this->Candidatura->find('first', $options);
+             
+            } else {
+                $array = array('invalido'=>'Invalido', 'candidatura'=> $dis);
+            }
+
+          
+
+
+            return new CakeResponse(array('body' => json_encode($array)));
+        }
+
+
 
         //  $this->render('view_dados_registar');
 //                    $value = array('name'=>$name,'cooperacao_acordo_id'=>$cooperacao_acordo_id);
@@ -198,6 +215,4 @@ class BolsaBolsasController extends AppController {
 //			}
     }
 
-  
-   
 }
