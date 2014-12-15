@@ -65,6 +65,13 @@ class BolsaBolsa extends AppModel {
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
+		),
+		'BolsaTipoBolsa' => array(
+			'className' => 'BolsaTipoBolsa',
+			'foreignKey' => 'bolsa_tipo_bolsa_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
 		)
 	);
 

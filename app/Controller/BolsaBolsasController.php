@@ -15,7 +15,7 @@ class BolsaBolsasController extends AppController {
      *
      * @return void
      */
-    var $components = array("RequestHandler");
+   // var $components = array("RequestHandler");
 
     public function index() {
         $this->BolsaBolsa->recursive = 0;
@@ -178,41 +178,55 @@ class BolsaBolsasController extends AppController {
     public function registar_candidatura() {
 
         $this->loadModel('Aluno');
-        
+
         if ($this->request->is('post')) {
             $this->loadModel('Candidatura');
+            $this->loadModel('Curso');
+            $this->loadModel('Genero');
             $dis = $this->request->data('discritivo');
-            
+
             //Recuperando o canditado atraves do numero_do estudante
 
             $array = array();
             $candidato = $this->Candidatura->findByNumeroEstudante($dis);
             if (!empty($candidato)) {
                 $options = array('conditions' => array('Candidatura.' . $this->Candidatura->primaryKey => $candidato['Candidatura']['id']));
-		$array = $this->Candidatura->find('first', $options);
-             
+                $candidatura = $this->Candidatura->find('first', $options);
+
+                //Buscando o curso
+                $options_Curso = array('conditions' => array('Curso.' . $this->Curso->primaryKey => $candidatura['Candidatura']['curso_id']));
+                $curso = $this->Curso->find('first', $options_Curso);
+                
+                //Buscando o genero
+                $options_Genero = array('conditions' => array('Genero.' . $this->Genero->primaryKey => $candidatura['Candidatura']['genero_id']));
+               $genero = $this->Genero->find('first', $options_Genero);
+               $genero1 = array();
+               if(empty($genero)){
+                   $genero1 = array('Genero' => array('name'=>'Indefinido'));
+               }else{
+                   $genero1 = $genero;
+               }
+
+                $array = array('candidatos' => $candidatura, 'curso' => $curso, 'genero'=> $genero1);
             } else {
-                $array = array('invalido'=>'Invalido', 'candidatura'=> $dis);
+                $array = array('invalido' => 'Invalido', 'candidatura' => $dis);
             }
 
-          
+
 
 
             return new CakeResponse(array('body' => json_encode($array)));
+            
         }
-
-
-
-        //  $this->render('view_dados_registar');
-//                    $value = array('name'=>$name,'cooperacao_acordo_id'=>$cooperacao_acordo_id);
-//			$this->CooperacaoObjectivoAcordo->create();
-//                        $this->CooperacaoObjectivoAcordo->save($value);
-//			if ($this->CooperacaoObjectivoAcordo->save($this->request->data)) {
-//				$this->Session->setFlash(__('The cooperacao objectivo acordo has been saved.'));
-//				return $this->redirect(array('action' => 'index'));
-//			} else {
-//				$this->Session->setFlash(__('The cooperacao objectivo acordo could not be saved. Please, try again.'));
-//			}
+        
+        
+        $bolsaTipoBolsa = $this->BolsaBolsa->BolsaTipoBolsa->find('all');
+         $bolsaFonteBolsa = $this->BolsaBolsa->BolsaFonteBolsa->find('all');
+         $this->set(compact('bolsaFonteBolsa','bolsaTipoBolsa'));
+        
+        
+        
+         
     }
 
 }
