@@ -25,4 +25,10 @@ class AppModel extends Model {
         return $this->isUnique($unique, false);
     }
 
+    public function lastQuery(){
+        $dbo = $this->getDataSource();
+        $logs = $dbo->getLog(false,false);
+        return end($logs['log']);
+    }
+
 }

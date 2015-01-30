@@ -74,6 +74,13 @@
                 'conditions' => '',
                 'fields'     => '',
                 'order'      => ''
+            ),
+            'FinanceiroPagamento'   => array(
+                'className'  => 'FinanceiroPagamento',
+                'foreignKey' => 'financeiro_pagamento_id',
+                'conditions' => '',
+                'fields'     => '',
+                'order'      => ''
             )
         );
         var $name = 'Matricula';
@@ -196,16 +203,10 @@
         public function processaFicheiroRenovacao($file_url, $anoLectivoAno) {
             App::uses('File', 'Utility');
             $linhas     = file(Configure::read('OpenSGA.save_path') . DS . $file_url, FILE_IGNORE_NEW_LINES);
-            $datasource = $this->getDataSource();
-            $datasource->begin();
             foreach ($linhas as $linha) {
 
                 switch ($linha[0]) {
                     case '0': //Primeira Linha
-                        $dia  = substr($linha, 6, 2);
-                        $mes  = substr($linha, 8, 2);
-                        $ano  = substr($linha, 10, 4);
-                        $data = $ano . '-' . $mes . '-' . $dia;
                         break;
                     case '1':
                         $referencia = substr($linha, 1, 11);
@@ -219,7 +220,7 @@
                         $segundo    = substr($linha, 56, 2);
                         $data       = $ano . '-' . $mes . '-' . $dia . " " . $hora . ":" . $minuto . ":" . $segundo;
 
-                        $transacao_id     = substr($linha, 58, 7);
+                        $transacaoId     = substr($linha, 58, 7);
                         $atm_id           = substr($linha, 65, 10);
                         $localizacao_atm  = substr($linha, 75, 16);
                         $montante_decimal = substr($montante, -2);
@@ -234,84 +235,35 @@
 
                         //Temos de gravar deposito antes
                         $aluno = $this->Aluno->getByReferenciaRenovacaoMatricula($referencia);
-                        $deposito = $this->Aluno->Entidade->FinanceiroTransacao->FinanceiroDeposito->setNovoDeposito
-                            ();
-                        $this->Aluno->Entidade->FinanceiroTransacao->FinanceiroPagamento->contain('Aluno');
-                        $pagamento = $this->Aluno->Entidade->FinanceiroTransacao->FinanceiroPagamento->findByReferenciaPagamento($referencia);
-                        die(debug($pagamento));
-                        if ($pagamento) {
-
-                            $transacao['entidade_id']                    = $pagamento['FinanceiroPagamento']['entidade_id'];
-                            $transacao['financeiro_conta_id']            = $pagamento['FinanceiroPagamento']['financeiro_conta_id'];
-                            $deposito['entidade_id']                     = $pagamento['FinanceiroPagamento']['entidade_id'];
-                            $deposito['financeiro_conta_id']             = $pagamento['FinanceiroPagamento']['financeiro_conta_id'];
-                            $transacao['financeiro_estado_transacao_id'] = 4;
-
-                            $deposito['financeiro_estado_deposito_id'] = 2;
-                            $anolectivo                                = $this->AnoLectivo->findByAno($anoLectivoAno);
-
-                            //Renova a Matricula se o valor for aceitavel.
-                            if ($pagamento['FinanceiroPagamento']['valor'] == $montante) {
-                                $deposito['data_reconciliacao'] = date('Y-m-d H:i:s');
-                                $matricula_existe               = $this->find('first', array('conditions' => array('aluno_id' => $pagamento['FinanceiroPagamento']['aluno_id'], 'ano_lectivo_id' => $anolectivo['AnoLectivo']['id'])));
-                                if (empty($matricula_existe)) {
-
-                                    //verifica se o aluno é regular
-                                    if ($this->Aluno->isRegular($pagamento['Aluno']['aluno_id'])) {
-                                        $this->create();
-                                        $matricula = array(
-                                            'aluno_id'            => $pagamento['Aluno']['id'],
-                                            'curso_id'            => $pagamento['Aluno']['curso_id'],
-                                            'plano_estudo_id'     => $pagamento['Aluno']['plano_estudo_id'],
-                                            'data'                => $data,
-                                            'estado_matricula_id' => 1,
-                                            'ano_lectivo_id'      => $anolectivo['AnoLectivo']['id'],
-                                            'tipo_matricula_id'   => 2,
-                                            'user_id'             => 1,
-                                            'financeiro_pagamento_id'=>$pagamento['FinanceiroPagamento']['id']
-                                        );
-                                        $this->save(array('Matricula' => $matricula));
-                                    } else {
-                                        $deposito['financeiro_estado_deposito_id'] = 6;
-                                    }
-                                } else {
-                                    $deposito['financeiro_estado_deposito_id'] = 5;
-                                }
-                            } else {
-                                $deposito['financeiro_estado_deposito_id'] = 4;
+                        $anoLectivo = $this->AnoLectivo->findByAno(Configure::read('OpenSGA.ano_lectivo'));
+                        if($this->Aluno->Entidade->FinanceiroTransacao->FinanceiroDeposito->setNovoDeposito(
+                            $aluno['Aluno']['entidade_id'],$transacaoId,$montante,$referencia,$data
+                        )){
+                            $pagamento = $this->FinanceiroPagamento->setPagamentoRenovacaoMatricula(
+                                $aluno['Aluno']['id'],$aluno['Aluno']['curso_id'],$montante,$data,$referencia,
+                            $aluno['Aluno']['entidade_id']
+                            );
+                            if($pagamento){
+                                //verifica se o aluno é regular
+                                if ($aluno && $this->Aluno->isRegular($aluno['Aluno']['id'])) {
+                                    $this->create();
+                                    $matricula = array(
+                                        'aluno_id'            => $aluno['Aluno']['id'],
+                                        'curso_id'            => $aluno['Aluno']['curso_id'],
+                                        'plano_estudo_id'     => $aluno['Aluno']['plano_estudo_id'],
+                                        'data'                => $data,
+                                        'estado_matricula_id' => 1,
+                                        'ano_lectivo_id'      => $anoLectivo['AnoLectivo']['id'],
+                                        'tipo_matricula_id'   => 2,
+                                        'user_id'             => CakeSession::read('Auth.User.id'),
+                                        'financeiro_pagamento_id'=>$pagamento
+                                    );
+                                   $this->save(array('Matricula'=>$matricula));
                             }
-                        } else {
-                            $transacao['financeiro_estado_transacao_id'] = 5;
-                            $deposito['financeiro_estado_deposito_id']   = 3;
                         }
-                        $this->Aluno->Entidade->FinanceiroTransacao->create();
-                        $this->Aluno->Entidade->FinanceiroTransacao->save(array('FinanceiroTransacao' => $transacao));
-
-                        $deposito['data_deposito']                = $data;
-                        $deposito['numero_comprovativo']          = $referencia;
-                        $deposito['financeiro_forma_deposito_id'] = 1;
-                        $deposito['financeiro_transacao_id']      = $this->Aluno->Entidade->FinanceiroTransacao->id;
-                        $deposito['financeiro_banco_id']          = 1;
-                        $deposito['valor']                        = $montante;
-                        $deposito['referencia_deposito']          = $referencia;
-                        $deposito['id_transacao_banco']           = $transacao_id;
-                        $this->Aluno->Entidade->FinanceiroTransacao->FinanceiroDeposito->create();
-                        $this->Aluno->Entidade->FinanceiroTransacao->FinanceiroDeposito->save(array('FinanceiroDeposito' => $deposito));
-
-
-                        break;
-                    case '9':
-                        $total_pagamentos = substr($linha, 1, 7);
-                        $valor_total      = substr($linha, 8, 16);
-                        $total_commissoes = substr($linha, 24, 16);
-
-
-                        break;
+                        }
                 }
             }
-            $datasource->commit();
-
-            return true;
         }
 
         /**
@@ -319,11 +271,44 @@
          * @param type $data
          */
         public function renovaMatricula($data) {
+
+            debug($data);
+            die();
+
             $dataSource = $this->getDataSource();
             $dataSource->begin();
 
             foreach ($data['AnoLectivo'] as $k => $v) {
                 if ($v != 0) {
+                    //Temos de gravar deposito antes
+                    $aluno = $this->Aluno->getByReferenciaRenovacaoMatricula($referencia);
+                    $anoLectivo = $this->AnoLectivo->findByAno(Configure::read('OpenSGA.ano_lectivo'));
+                    if($this->Aluno->Entidade->FinanceiroTransacao->FinanceiroDeposito->setNovoDeposito(
+                        $aluno['Aluno']['entidade_id'],$transacaoId,$montante,$referencia,$data
+                    )){
+                        $pagamento = $this->FinanceiroPagamento->setPagamentoRenovacaoMatricula(
+                            $aluno['Aluno']['id'],$aluno['Aluno']['curso_id'],$montante,$data,$referencia,
+                            $aluno['Aluno']['entidade_id']
+                        );
+                        if($pagamento){
+                            //verifica se o aluno é regular
+                            if ($aluno && $this->Aluno->isRegular($aluno['Aluno']['id'])) {
+                                $this->create();
+                                $matricula = array(
+                                    'aluno_id'            => $aluno['Aluno']['id'],
+                                    'curso_id'            => $aluno['Aluno']['curso_id'],
+                                    'plano_estudo_id'     => $aluno['Aluno']['plano_estudo_id'],
+                                    'data'                => $data,
+                                    'estado_matricula_id' => 1,
+                                    'ano_lectivo_id'      => $anoLectivo['AnoLectivo']['id'],
+                                    'tipo_matricula_id'   => 2,
+                                    'user_id'             => CakeSession::read('Auth.User.id'),
+                                    'financeiro_pagamento_id'=>$pagamento
+                                );
+                                $this->save(array('Matricula'=>$matricula));
+                            }
+                        }
+                    }
                     $data['Matricula']['ano_lectivo_id'] = $v;
                     $this->Aluno->Matricula->create();
                     $this->Aluno->Matricula->save($data);

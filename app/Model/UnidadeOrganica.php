@@ -102,6 +102,19 @@ class UnidadeOrganica extends AppModel {
 			'finderQuery' => '',
 			'counterQuery' => ''
 		),
+        'Curso' => array(
+            'className' => 'Curso',
+            'foreignKey' => 'unidade_organica_id',
+            'dependent' => false,
+            'conditions' => '',
+            'fields' => '',
+            'order' => '',
+            'limit' => '',
+            'offset' => '',
+            'exclusive' => '',
+            'finderQuery' => '',
+            'counterQuery' => ''
+        ),
 		'ChildUnidadeOrganica' => array(
 			'className' => 'UnidadeOrganica',
 			'foreignKey' => 'parent_id',

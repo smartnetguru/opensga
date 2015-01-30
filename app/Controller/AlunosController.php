@@ -1501,6 +1501,7 @@ class AlunosController extends AppController {
 		}
 
 		$conditions['Candidatura.estado_candidatura_id'] = array(2, 3);
+        $conditions['Candidatura.ano_lectivo_admissao'] = 2015;
 		$this->paginate = array(
 			'conditions' => $conditions,
 			'limit' => 50,

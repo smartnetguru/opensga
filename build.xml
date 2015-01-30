@@ -1,181 +1,262 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
+<?xml version="1.0" encoding="utf-8"?>
 <project name="CakePHP" default="build">
-<property name="basedir" value="." />
- <target name="build"
-   depends="prepare,lint,phploc,pdepend,phpmd-ci,phpcs-ci,phpcpd,phpdoc,cake,phpcb"/>
+	<!--
+	Build.xml file for CakePHP
 
- <target name="build-parallel"
-   depends="prepare,lint,tools-parallel,cake,phpcb"/>
+	Uses phing to create releases, and pear packages.
+	Based off of build.xml in doctrine.
 
- <target name="tools-parallel"
-         description="Run tools in parallel">
-  <parallel threadCount="2">
-   <sequential>
-    <antcall target="pdepend"/>
-    <antcall target="phpmd-ci"/>
-   </sequential>
-   <antcall target="phpcpd"/>
-   <antcall target="phpcs-ci"/>
-   <antcall target="phploc"/>
-   <antcall target="phpdoc"/>
-  </parallel>
- </target>
+	Requires the cakephp/d51PearPkg2 to be installed:
 
- <target name="clean" description="Cleanup build artifacts">
-  <delete dir="${basedir}/build/api"/>
-  <delete dir="${basedir}/build/code-browser"/>
-  <delete dir="${basedir}/build/coverage"/>
-  <delete dir="${basedir}/build/pdepend"/>
-  <delete dir="${basedir}/build/logs"/>
- </target>
+	pear channel-discover pear.domain51.com
+	pear install cakephp/Phing_d51PearPkg2Task
 
- <target name="prepare" depends="clean"
-         description="Prepare for build">
-  <mkdir dir="${basedir}/build/api"/>
-  <mkdir dir="${basedir}/build/code-browser"/>
-  <mkdir dir="${basedir}/build/coverage"/>
-  <mkdir dir="${basedir}/build/pdepend"/>
-  <mkdir dir="${basedir}/build/logs"/>
- </target>
+	Use the `release` task to update VERSION.txt, and create a new tag.
+	Use the `build` task to create a pear package based on the current working copy.
+	Use the `clean` task to clean up packaging artifacts.
 
- <target name="lint">
-  <apply executable="php" failonerror="true">
-   <arg value="-l" />
+	-->
 
-   <fileset dir="${basedir}/lib/Cake">
-    <include name="**/*.php" />
-    <modified />
-   </fileset>
+	<taskdef classname="phing.tasks.ext.d51PearPkg2Task" name="d51pearpkg2" />
+	<property file="build.properties" />
 
-  </apply>
- </target>
+	<!--
+		The set of files we're going to package
+		Exclude the cli scripts, as they get installed separately.
+	 -->
+	<fileset id="libs" dir="./lib/Cake">
+		<include name="**" />
+		<exclude name="Console/cake.bat" />
+		<exclude name="Console/cake.php" />
+		<exclude name="Console/cake" />
+		<exclude name="Test/bake_compare/**" />
+		<exclude name="Test/Case/**" />
+		<exclude name="Test/test_app/**" />
+	</fileset>
 
- <target name="phploc" description="Measure project size using PHPLOC">
-  <exec executable="phploc">
-   <arg value="--exclude" />
-   <arg value="${basedir}/lib/Cake/Test" />
-   <arg value="--exclude" />
-   <arg value="${basedir}/lib/Cake/Templates" />
-   <arg value="--log-csv" />
-   <arg value="${basedir}/build/logs/phploc.csv" />
-   <arg path="${basedir}/lib/Cake" />
-  </exec>
- </target>
+	<!--
+		CLI scripts to package and install
+	-->
+	<fileset id="cli" dir="./lib/Cake/Console">
+		<include name="cake.bat" />
+		<include name="cake.php" />
+		<include name="cake" />
+	</fileset>
 
- <target name="pdepend"
-         description="Calculate software metrics using PHP_Depend">
-  <exec executable="pdepend">
-   <arg value="--ignore=${basedir}/lib/Cake/Test,${basedir}/lib/Cake/Console/Templates" />
-   <arg value="--jdepend-xml=${basedir}/build/logs/jdepend.xml" />
-   <arg value="--jdepend-chart=${basedir}/build/pdepend/dependencies.svg" />
-   <arg value="--overview-pyramid=${basedir}/build/pdepend/overview-pyramid.svg" />
-   <arg path="${basedir}/lib/Cake" />
-  </exec>
- </target>
+	<!-- start fresh each time.  Remove the dist and build dirs -->
+	<target name="clean">
+		<delete dir="${build.dir}" includeemptydirs="true" />
+		<delete dir="${dist.dir}" includeemptydirs="true" />
+	</target>
 
- <target name="phpmd"
-         description="Perform project mess detection using PHPMD and print human readable output. Intended for usage on the command line before committing.">
-  <exec executable="phpmd">
-   <arg path="${basedir}/lib/Cake" />
-   <arg value="text" />
-   <arg value="codesize,design,naming,unusedcode" />
-   <arg value="--exclude" />
-   <arg value="${basedir}/lib/Cake/Test" />
-   <arg value="--exclude" />
-   <arg value="${basedir}/lib/Cake/Console/Templates" />
-  </exec>
- </target>
+	<!-- Read the current version, so we can replace it -->
+	<target name="current-version">
+		<exec executable="php" outputProperty="version">
+			<arg value="-r" />
+			<arg value="$fh = file('./lib/Cake/VERSION.txt'); echo array_pop($fh);" />
+		</exec>
+	</target>
 
- <target name="phpmd-ci"
-         description="Perform project mess detection using PHPMD creating a log file for the continuous integration server">
-  <exec executable="phpmd">
-   <arg path="${basedir}" />
-   <arg value="xml" />
-   <arg value="codesize,design,naming,unusedcode" />
-   <arg value="--reportfile" />
-   <arg value="${basedir}/build/logs/pmd.xml" />
-   <arg value="--exclude" />
-   <arg value="${basedir}/lib/Cake/Test" />
-   <arg value="--exclude" />
-   <arg value="${basedir}/lib/Cake/Console/Templates" />
-  </exec>
- </target>
+	<!-- Makes directories and sets properties -->
+	<target name="prepare" depends="current-version">
+		<!-- set PEAR stability based on version number. -->
+		<condition property="pear.stability" value="beta">
+			<contains string="${version}" substring="beta" casesensitive="false"/>
+		</condition>
+		<condition property="pear.stability" value="alpha">
+			<contains string="${version}" substring="alpha" casesensitive="false"/>
+		</condition>
+		<condition property="pear.stability" value="devel">
+			<contains string="${version}" substring="dev" casesensitive="false"/>
+		</condition>
+		<condition property="pear.stability" value="beta">
+			<contains string="${version}" substring="rc" casesensitive="false" />
+		</condition>
+		<condition property="pear.stability" value="stable">
+			<not><isset property="pear.stability"/></not>
+		</condition>
 
- <target name="phpcs"
-         description="Find coding standard violations using PHP_CodeSniffer and print human readable output. Intended for usage on the command line before committing.">
-  <exec executable="phpcs">
-   <arg value="--standard=CakePHP" />
-   <arg value="--encoding=utf-8" />
-   <arg value="--ignore=${basedir}/lib/Cake/Console/Templates,${basedir}/lib/Cake/Test,*.txt,*.bat,*js" />
-   <arg path="${basedir}/lib/Cake" />
-  </exec>
- </target>
+		<!-- pear versions need to not have '-' -->
+		<exec executable="php" outputProperty="pear.version">
+			<arg value="-r" />
+			<arg value="echo str_replace(array('-'), array(''), '${version}');" />
+		</exec>
 
- <target name="phpcs-ci"
-         description="Find coding standard violations using PHP_CodeSniffer creating a log file for the continuous integration server">
-  <exec executable="phpcs" output="/dev/null">
-   <arg value="--report=checkstyle" />
-   <arg value="--report-file=${basedir}/build/logs/checkstyle.xml" />
-   <arg value="--standard=CakePHP" />
-   <arg value="--encoding=utf-8" />
-   <arg value="--ignore=${basedir}/lib/Cake/Console/Templates,${basedir}/lib/Cake/Test,*.txt,*.bat,*js" /> 
-   <arg path="${basedir}/lib/Cake" />
-  </exec>
- </target>
+		<!-- Used for other targets -->
+		<property name="pear.package" value="${project.name}-${pear.version}" />
 
- <target name="phpcpd" description="Find duplicate code using PHPCPD">
-  <exec executable="phpcpd">
-   <arg value="--log-pmd" />
-   <arg value="${basedir}/build/logs/pmd-cpd.xml" />
-   <arg value="--exclude" />
-   <arg value="${basedir}/lib/Cake/Test" />
-   <arg value="--exclude" />
-   <arg value="${basedir}/lib/Cake/Console/Templates" />
-   <arg path="${basedir}/lib/Cake" />
-  </exec>
- </target>
+		<echo msg="Preparing package of ${version} (${pear.version}+${pear.stability})" />
 
- <target name="phpdoc"
-         description="Generate API documentation using PHPDocumentor">
-  <exec executable="phpdoc">
-   <arg value="--directory" />
-   <arg path="${basedir}/lib/Cake" />
-   <arg value="--target" />
-   <arg path="${basedir}/build/api" />
-   <arg value="--ignore" />
-   <arg value="Console/cake.php,Test/,Console/Templates/skel/,Config/unicode/" />
-   </exec>
- </target>
+		<!-- Get the current git branch -->
+		<exec command="git name-rev HEAD 2>/dev/null | awk '{ print $2 }'" outputProperty="git.branch" />
+	</target>
 
- <target name="cake" description="Run unit tests">
-  <exec executable="app/Console/cake">
-   <arg value="test" />
-   <arg value="core" />
-   <arg value="AllTests" />
-   <arg value="--stderr" />
-   <arg value="--log-junit" />
-   <arg path="build/logs/junit.xml" />
-   <arg value="--coverage-clover" />
-   <arg path="build/logs/clover.xml" />
-   <arg value="--coverage-html" />
-   <arg path="build/coverage/" />
-  </exec>
- </target>
+	<!--
+		Copy all the files to build/ so they can be packaged up.
+	-->
+	<target name="copy-files" depends="clean,prepare">
+		<echo msg="Creating build + dist directories." />
+		<mkdir dir="${build.dir}" />
+		<mkdir dir="${dist.dir}" />
 
- <target name="phpcb"
-         description="Aggregate tool output with PHP_CodeBrowser">
-  <exec executable="phpcb">
-   <arg value="--log" />
-   <arg path="${basedir}/build/logs" />
-   <arg value="--source" />
-   <arg path="${basedir}/lib/Cake" />
-   <arg value="--output" />
-   <arg path="${basedir}/build/code-browser" />
-   <arg value="-S" />
-   <arg value="php" />
-   <arg value="-i" />
-   <arg value="lib/Cake/Console/cake,lib/Cake/Console/cake.php,lib/Cake/Test/,lib/Cake/LICENSE.txt,lib/Cake/VERSION.txt,lib/Cake/Console/Templates/skel/" />
-  </exec>
- </target>
+		<echo msg="Copying files to build directory" />
+		<copy todir="${build.dir}/${pear.package}/Cake">
+			<fileset refid="libs" />
+		</copy>
+		<copy todir="${build.dir}/${pear.package}/bin">
+			<fileset refid="cli" />
+		</copy>
+	</target>
+
+	<!--
+		Define the package.xml.  Using xml to make xml is fun!
+	-->
+	<target name="define-pear-package" depends="copy-files">
+		<d51pearpkg2 addhiddenfiles="true" baseinstalldir="/" dir="${build.dir}/${pear.package}">
+			<name>CakePHP</name>
+			<summary>CakePHP Rapid Development Framework</summary>
+			<channel>pear.cakephp.org</channel>
+			<description>CakePHP is an application development framework for PHP 5.2+</description>
+
+			<lead user="mark_story" name="Mark Story" email="mark@mark-story.com" />
+			<lead user="lorenzo" name="José Lorenzo Rodríguez" email="jose.zap@gmail.com" />
+			<lead user="PhpNut" name="Larry Masters" email="phpnut@cakephp.org" />
+			<developer user="ADmad" name="Adnan Sarela" email="admad.coder@gmail.com" />
+			<developer user="AD7six" name="Andy Dawson" email="andydawson76@gmail.com" />
+			<developer user="Ceeram" name="Marc Ypes" email="c33ram@gmail.com" />
+			<developer user="jrbasso" name="Juan Basso" email="" />
+			<developer user="Predominant" name="Graham Weldon" email="graham@grahamweldon.com" />
+			<developer user="renan.saddam" name="Renan Gonçalves" email="renan.saddam@gmail.com" />
+			<developer user="rchavik" name="Rachman Chavik" email="rchavik@xintesa.com" />
+
+			<license>MIT License</license>
+			<version release="${pear.version}" api="${pear.version}" />
+			<stability release="${pear.stability}" api="${pear.stability}" />
+			<notes>https://github.com/cakephp/cakephp/blob/master/README</notes>
+			<dependencies>
+				<php minimum_version="5.2.8" />
+				<pear minimum_version="1.9.0" recommended_version="1.9.4" />
+				<package name="PHPUnit" channel="pear.phpunit.de" minimum_version="3.5.0" type="optional" />
+			</dependencies>
+			<dirroles key="bin">script</dirroles>
+			<dirroles key="Cake/Console/Templates/skel">php</dirroles>
+			<dirroles key="Cake/Console/Templates/default">php</dirroles>
+			<dirroles key="Cake/View">php</dirroles>
+			<release>
+				<install as="cake.bat" name="bin/cake.bat" />
+				<install as="cake.php" name="bin/cake.php" />
+				<install as="cake" name="bin/cake" />
+			</release>
+			<exceptions key="Cake/VERSION.txt">php</exceptions>
+			<exceptions key="Cake/LICENSE.txt">php</exceptions>
+			<exceptions key="Cake/Config/cacert.pem">php</exceptions>
+			<exceptions key="Cake/Console/Templates/skel/.htaccess">php</exceptions>
+			<exceptions key="Cake/Console/Templates/skel/webroot/.htaccess">php</exceptions>
+		</d51pearpkg2>
+	</target>
+
+	<!-- Generate the PEAR package from a directory and move the files to the dist folder -->
+	<target name="generate-package" depends="define-pear-package">
+		<exec command="pear package" dir="${build.dir}/${pear.package}" passthru="true"/>
+		<echo msg="Moving ${pear.package}.tgz"/>
+		<move file="${build.dir}/${pear.package}/${pear.package}.tgz" todir="${dist.dir}" />
+	</target>
+
+	<!--
+		Updates the local copy to the latest head.
+	-->
+	<target name="update-branch">
+		<echo msg="Updating to latest master." />
+		<exec executable="git pull">
+			<arg value="${git.remote}" />
+			<arg value="master" />
+		</exec>
+	</target>
+
+	<!--
+		Bump the version number and commit that.
+	-->
+	<target name="next-version" depends="current-version">
+		<echo msg="Incrementing version." />
+		<propertyprompt propertyName="release_version" defaultValue="${version}" promptText="Enter version to be released."/>
+		<echo msg="$file = file_get_contents('./lib/Cake/VERSION.txt'); $file = str_replace('${version}', '${release_version}', $file); file_put_contents('./lib/Cake/VERSION.txt', $file);" />
+		<exec executable="php">
+			<arg value="-r" />
+			<arg value="$file = file_get_contents('./lib/Cake/VERSION.txt'); $file = str_replace('${version}', '${release_version}', $file); file_put_contents('./lib/Cake/VERSION.txt', $file);" />
+		</exec>
+		<echo msg="Version number updated." />
+		<property name="version" value="${release_version}" override="true" />
+	</target>
+
+	<!--
+		Create the release commit that updates the version number and pushes the commits.
+	-->
+	<target name="release-commit" depends="update-branch,next-version,prepare">
+		<echo msg="Creating new release commit" />
+		<exec command="git add ./lib/Cake/VERSION.txt" logoutput="true" checkreturn="true" />
+		<exec command="git commit -m 'Update version number to ${release_version}'" logoutput="true" checkreturn="true" />
+		<exec command="git tag -s ${release_version} -m 'CakePHP ${release_version}'" logoutput="true" checkreturn="true" />
+
+		<propertyprompt propertyName="shipit" defaultValue="n" promptText="Ship the new commit and tag?" />
+		<condition property="noshipit" value="1">
+			<equals arg1="n" arg2="${shipit}" casesensitive="false" />
+		</condition>
+		<fail if="noshipit" msg="You said not to ship it." />
+
+		<echo msg="Pushing commit and tag." />
+		<exec command="git push ${git.remote} ${git.branch}" logoutput="true" checkreturn="true" />
+		<exec command="git push ${git.remote} ${release_version}" logoutput="true" checkreturn="true" />
+		<echo msg="Push complete." />
+	</target>
+
+	<!--
+		Upload to pirum pear channel.
+	-->
+	<target name="distribute" depends="prepare" description="Upload pear packages to pear.cakephp.org">
+		<echo msg="Uploading tgz file to cakephp.org" />
+		<exec command="scp ${dist.dir}/${pear.package}.tgz cakephp@cakephp.org:${pirum.dir}" dir="." checkreturn="true"  />
+
+		<echo msg="Adding new release to pirum" />
+		<exec command="ssh cakephp@cakephp.org pirum add ${pirum.dir} ${pirum.dir}/${pear.package}.tgz" checkreturn="true" />
+	</target>
+
+	<target name="codestyle" description="Check codestyle (human readable format)">
+		<phpcodesniffer
+			standard="CakePHP"
+			allowedFileExtensions="php">
+			<fileset refid="libs" />
+		</phpcodesniffer>
+	</target>
+
+	<target name="reports-ci">
+		<phpcodesniffer
+			standard="CakePHP"
+			allowedFileExtensions="php">
+			<fileset refid="libs" />
+			<formatter type="checkstyle" outfile="checkstyle.xml" />
+		</phpcodesniffer>
+		<phpcpd
+			minLines="4"
+			minTokens="50">
+			<fileset refid="libs" />
+			<formatter type="pmd" outfile="pmd-cpd.xml"/>
+		</phpcpd>
+		<phpdepend>
+			<fileset refid="libs" />
+			<logger type="jdepend-xml" outfile="jdepend.xml"/>
+		</phpdepend>
+		<phpmd rulesets="codesize,unusedcode,design">
+			<fileset refid="libs" />
+			<formatter type="xml" outfile="reports/pmd.html"/>
+		</phpmd>
+	</target>
+
+	<!--
+		Top level easy to type targets
+	-->
+	<target name="build" depends="generate-package" description="Generate a pear package" />
+	<target name="release" depends="release-commit,build,distribute" description="Release a new version of CakePHP" />
+	<target name="code-reports" depends="reports-ci"
+		description="Run the code reports, generating XML output for CI server use." />
+
 </project>

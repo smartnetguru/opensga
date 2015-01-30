@@ -1,34 +1,50 @@
-=OpenSGA - Sistema de Gestão Académica=
+# CakePHP
+
+[![Latest Stable Version](https://poser.pugx.org/cakephp/cakephp/v/stable.svg)](https://packagist.org/packages/cakephp/cakephp)
+[![License](https://poser.pugx.org/cakephp/cakephp/license.svg)](https://packagist.org/packages/cakephp/cakephp)
+[![Bake Status](https://secure.travis-ci.org/cakephp/cakephp.png?branch=master)](http://travis-ci.org/cakephp/cakephp)
+[![Code consistency](http://squizlabs.github.io/PHP_CodeSniffer/analysis/cakephp/cakephp/grade.svg)](http://squizlabs.github.io/PHP_CodeSniffer/analysis/cakephp/cakephp/)
+
+[![CakePHP](http://cakephp.org/img/cake-logo.png)](http://www.cakephp.org)
+
+CakePHP is a rapid development framework for PHP which uses commonly known design patterns like Active Record, Association Data Mapping, Front Controller and MVC.
+Our primary goal is to provide a structured framework that enables PHP users at all levels to rapidly develop robust web applications, without any loss to flexibility.
 
 
-*OpenSGA* é um software para a Gestão Académica em instituições de ensino. É um software completo,que inclui funcionalidades de gestão que envolvem todas as áreas relacionadas ao ramo académico em uma instituição de ensino.
+## Some Handy Links
 
-O OpenSGA é composto por dezenas de módulos interligados, abrangendo todos os departamentos da instituição. O OpenSGA pode ser considerado um verdadeiro ERP para a Gestão Académica, uma vez que foi concebido tendo em mente todos os detalhes que envolvem a gestão eficiente de uma instituição académica. Com o OpenSGA, instituições académicas podem facilitar a gestão interna, automatizando todas as tarefas que são dificeis de executar usando meios manuais.
+[CakePHP](http://www.cakephp.org) - The rapid development PHP framework
 
-==Funcionalidades do OpenSGA==
+[CookBook](http://book.cakephp.org) - THE CakePHP user documentation; start learning here!
 
-Os módulos do OpenSGA permitem que instituições de ensino automatizem todos os seus processos de gestão, incluindo:
+[API](http://api.cakephp.org) - A reference to CakePHP's classes
 
- * Automatização do processo de selecção e admissão de candidatos
- * Gestão eficiente dos dados relacionados ao estudante
- * Gestão eficiente dos Recursos Humanos da instituição
- * Gestão de cursos
- * Gestão de disciplinas
- * Gestão de Planos de estudos
- * Geração automática de horários obedecendo diversos critérios
- * Gestão de transportes para estudantes e funcionarios
- * Gestão de Bibliotecas
- * Gestão de despesas e salários de funcionários
- * Sistema de gestão de processos de exame
- * Avaliação e análise do desempenho de estudantes
- * Avaliação e análise do desempenho de docentes e funcionários
- * Gestão de residências universitárias
- * Gestão dos critérios de segurançado sistema
- * Geração de relatórios diferenciados
+[Plugins](http://plugins.cakephp.org/) - A repository of extensions to the framework
 
-==Download do OpenSGA==
-Por enquanto, o OpenSGA apenas está disponível no repositório Git aqui do Google Code. Para testar o software terá de criar um clone do repositório Git deste projecto.
+[The Bakery](http://bakery.cakephp.org) - Tips, tutorials and articles
 
-Brevemente disponibilizaremos a versão para download no formato zip, e mais tarde incluiremos um instalador automatizado para o sistema.
+[Community Center](http://community.cakephp.org) - A source for everything community related
 
-A versão actual é apenas uma prévia para ser testada em laboratório e *NUNCA* em ambientes de produção.
+[Training](http://training.cakephp.org) - Join a live session and get skilled with the framework
+
+[CakeFest](http://cakefest.org) - Don't miss our annual CakePHP conference
+
+[Cake Software Foundation](http://cakefoundation.org) - Promoting development related to CakePHP
+
+
+## Get Support!
+
+[#cakephp](http://webchat.freenode.net/?channels=#cakephp) on irc.freenode.net - Come chat with us, we have cake
+
+[Google Group](https://groups.google.com/group/cake-php) - Community mailing list and forum
+
+[GitHub Issues](https://github.com/cakephp/cakephp/issues) - Got issues? Please tell us!
+
+[Roadmaps](https://github.com/cakephp/cakephp/wiki#roadmaps) - Want to contribute? Get involved!
+
+
+## Contributing
+
+[CONTRIBUTING.md](CONTRIBUTING.md) - Quick pointers for contributing to the CakePHP project
+
+[CookBook "Contributing" Section (2.x)](http://book.cakephp.org/2.0/en/contributing.html) [(3.0)](http://book.cakephp.org/3.0/en/contributing.html) - Version-specific details about contributing to the project

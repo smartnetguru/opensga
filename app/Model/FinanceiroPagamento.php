@@ -54,6 +54,13 @@ class FinanceiroPagamento extends AppModel {
             'conditions' => '',
             'fields' => '',
             'order' => ''
+        ),
+        'SemestreLectivo' => array(
+            'className' => 'SemestreLectivo',
+            'foreignKey' => 'semestre_lectivo_id',
+            'conditions' => '',
+            'fields' => '',
+            'order' => ''
         )
     );
 
@@ -244,4 +251,68 @@ class FinanceiroPagamento extends AppModel {
     }
 
 }
+
+    public function setPagamentoRenovacaoMatricula($alunoId,$cursoId,$montante,$data,$referencia,$entidadeId){
+        $datasource = $this->Aluno->getDatasource();
+        $datasource->begin();
+        $transacao = array();
+        $pagamento = array();
+
+        $curso_turno = $this->Aluno->Curso->CursosTurno->find('first', array('conditions' => array('curso_id' => $cursoId)));
+        if ($curso_turno['CursosTurno']['turno_id'] == 1) {
+            $tipoPagamento = $this->FinanceiroTipoPagamento->findById(37);
+            $pagamento['tipo_pagamento_id']            = 37;
+            $transacao['valor']                        = $tipoPagamento['FinanceiroTipoPagamento']['valor'];
+        } else {
+            $tipoPagamento  = $this->FinanceiroTipoPagamento->findById(38);
+            $pagamento['tipo_pagamento_id']            = 38;
+            $transacao['valor']                        = $tipoPagamento['FinanceiroTipoPagamento']['valor'];
+        }
+
+        $transacao['entidade_id'] = $entidadeId;
+        $transacao['financeiro_tipo_transacao_id'] = 2;
+
+        $financeiroConta = $this->Aluno->Entidade->FinanceiroTransacao->FinanceiroConta->getByEntidadeId($entidadeId);
+        $transacao['financeiro_conta_id']            = $financeiroConta['FinanceiroConta']['id'];
+        $transacao['financeiro_estado_transacao_id'] = 2;
+        $this->Aluno->Entidade->FinanceiroTransacao->create();
+        $this->Aluno->Entidade->FinanceiroTransacao->save(array('FinanceiroTransacao' => $transacao));
+
+        $pagamento['aluno_id']                       = $alunoId;
+        $pagamento['financeiro_conta_id']            = $financeiroConta['FinanceiroConta']['id'];
+        $pagamento['valor']                          = $transacao['valor'];
+        $pagamento['data_limite']                    = $data;
+        $pagamento['data_emissao']                   = $data;
+        $pagamento['data_pagamento']                   = $data;
+        $anolectivo                                  = $this->Aluno->Matricula->AnoLectivo->findByAno(
+            Configure::read('OpenSGA.ano_lectivo')
+        );
+        $pagamento['ano_lectivo_id']                 = $anolectivo['AnoLectivo']['id'];
+        $pagamento['financeiro_estado_pagamento_id'] = 2;
+        $pagamento['codigo']                         = $referencia;
+        $pagamento['financeiro_transacao_id']        = $this->Aluno->Entidade->FinanceiroTransacao->id;
+        $pagamento['referencia_pagamento']           = $referencia;
+        $pagamento['entidade_id']                    = $entidadeId;
+        $semestre = Configure::read('OpenSGA.semestre_lectivo');
+        $semestreLectivo = $this->SemestreLectivo->findByAnoLectivoIdAndSemestre($anolectivo['AnoLectivo']['id'],
+            $semestre);
+        $pagamento['semestre_lectivo_id'] = $semestreLectivo['SemestreLectivo']['id'];
+
+        //verificar antes se o pagamento ainda nao foi registado
+        $pagamentoExiste = $this->find('first',array('conditions'=>array(
+            'aluno_id'=>$alunoId,
+            'referencia_pagamento'=>$referencia,
+            'data_pagamento'=>$data,
+        )));
+        if(!$pagamentoExiste){
+            $this->Aluno->Entidade->FinanceiroTransacao->FinanceiroPagamento->create();
+            $this->Aluno->Entidade->FinanceiroTransacao->FinanceiroPagamento->save(array('FinanceiroPagamento' => $pagamento));
+            $datasource->commit();
+            return $this->id;
+        } else{
+            $datasource->rollback();
+            return $pagamentoExiste['FinanceiroPagamento']['id'];
+        }
+
+    }
 }

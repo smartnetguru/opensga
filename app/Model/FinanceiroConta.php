@@ -85,4 +85,12 @@ class FinanceiroConta extends AppModel {
         return $conta;
     }
 
+    public function getByEntidadeId($entidadeId){
+        $conta = $this->findByEntidadeId($entidadeId);
+        if(!$conta){
+            $conta = $this->criarConta($entidadeId);
+        }
+        return $conta;
+    }
+
 }

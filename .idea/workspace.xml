@@ -2,43 +2,274 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fc9bff1a-fcc4-4747-ab16-ab64e9734a11" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Console/Command/PagamentoShell.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Lib/Permissions.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/View/Cursos/cursos_sem_encarregado.ctp" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/View/Cursos/definir_encarregado.ctp" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/View/Matriculas/exportar_extracto_renovacao.ctp" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/View/Matriculas/exportar_extracto_renovacao_excel.ctp" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/View/Common/form_basic.ctp" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/View/Elements/form_errors.ctp" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/View/Common/index_no_pagination.ctp" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/View/Cursos/manutencao.ctp" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/webroot/assets/js/opensga.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Config/siga_constants.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/View/Common/Cursos/ver_curso.ctp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Console/Command/ManutencaoShell.php" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/app/Controller/EpocaAvaliacaosController.php" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/app/Controller/RegimeLectivosController.php" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/app/Controller/SemestreLectivosController.php" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/database/opensga_modelo_database.mwb.bak" afterPath="$PROJECT_DIR$/docs/database/opensga_modelo_database.mwb.bak" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/database/opensga_modelo_database.mwb" afterPath="$PROJECT_DIR$/docs/database/opensga_modelo_database.mwb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/manuais/source" afterPath="$PROJECT_DIR$/docs/manuais/source" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.htaccess" afterPath="$PROJECT_DIR$/.htaccess" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Model/Behavior/AclBehavior.php" afterPath="$PROJECT_DIR$/lib/Cake/Model/Behavior/AclBehavior.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Controller/Component/AclComponent.php" afterPath="$PROJECT_DIR$/lib/Cake/Controller/Component/AclComponent.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Model/AclNode.php" afterPath="$PROJECT_DIR$/lib/Cake/Model/AclNode.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Console/Command/AclShell.php" afterPath="$PROJECT_DIR$/lib/Cake/Console/Command/AclShell.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Model/Administracao.php" afterPath="$PROJECT_DIR$/app/Model/Administracao.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Fixture/AfterTreeFixture.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Fixture/AfterTreeFixture.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Model/Aluno.php" afterPath="$PROJECT_DIR$/app/Model/Aluno.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Controller/AlunosController.php" afterPath="$PROJECT_DIR$/app/Controller/AlunosController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Model/AnoLectivo.php" afterPath="$PROJECT_DIR$/app/Model/AnoLectivo.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Model/Anolectivoepoca.php" afterPath="$PROJECT_DIR$/app/Model/Anolectivoepoca.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Cache/Engine/ApcEngine.php" afterPath="$PROJECT_DIR$/lib/Cake/Cache/Engine/ApcEngine.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Core/App.php" afterPath="$PROJECT_DIR$/lib/Cake/Core/App.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Controller/AppController.php" afterPath="$PROJECT_DIR$/app/Controller/AppController.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Model/AppModel.php" afterPath="$PROJECT_DIR$/app/Model/AppModel.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Model/Areatrabalho.php" afterPath="$PROJECT_DIR$/app/Model/Areatrabalho.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/Routing/Filter/AssetDispatcherTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/Routing/Filter/AssetDispatcherTest.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Controller/Component/AuthComponent.php" afterPath="$PROJECT_DIR$/lib/Cake/Controller/Component/AuthComponent.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/Controller/Component/AuthComponentTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/Controller/Component/AuthComponentTest.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Model/Avaliacao.php" afterPath="$PROJECT_DIR$/app/Model/Avaliacao.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Controller/Component/Auth/BaseAuthenticate.php" afterPath="$PROJECT_DIR$/lib/Cake/Controller/Component/Auth/BaseAuthenticate.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/Controller/Component/Auth/BasicAuthenticateTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/Controller/Component/Auth/BasicAuthenticateTest.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/BasicsTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/BasicsTest.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Model/BehaviorCollection.php" afterPath="$PROJECT_DIR$/lib/Cake/Model/BehaviorCollection.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Controller/Component/Auth/BlowfishAuthenticate.php" afterPath="$PROJECT_DIR$/lib/Cake/Controller/Component/Auth/BlowfishAuthenticate.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Cache/Cache.php" afterPath="$PROJECT_DIR$/lib/Cake/Cache/Cache.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/View/Helper/CacheHelper.php" afterPath="$PROJECT_DIR$/lib/Cake/View/Helper/CacheHelper.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/TestSuite/Reporter/CakeBaseReporter.php" afterPath="$PROJECT_DIR$/lib/Cake/TestSuite/Reporter/CakeBaseReporter.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Network/Email/CakeEmail.php" afterPath="$PROJECT_DIR$/lib/Cake/Network/Email/CakeEmail.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/Network/Email/CakeEmailTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/Network/Email/CakeEmailTest.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Event/CakeEventManager.php" afterPath="$PROJECT_DIR$/lib/Cake/Event/CakeEventManager.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/Event/CakeEventManagerTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/Event/CakeEventManagerTest.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/Event/CakeEventTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/Event/CakeEventTest.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Log/CakeLog.php" afterPath="$PROJECT_DIR$/lib/Cake/Log/CakeLog.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Core/CakePlugin.php" afterPath="$PROJECT_DIR$/lib/Cake/Core/CakePlugin.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Network/CakeRequest.php" afterPath="$PROJECT_DIR$/lib/Cake/Network/CakeRequest.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/Network/CakeRequestTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/Network/CakeRequestTest.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Network/CakeResponse.php" afterPath="$PROJECT_DIR$/lib/Cake/Network/CakeResponse.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/Network/CakeResponseTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/Network/CakeResponseTest.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Routing/Route/CakeRoute.php" afterPath="$PROJECT_DIR$/lib/Cake/Routing/Route/CakeRoute.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/Routing/Route/CakeRouteTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/Routing/Route/CakeRouteTest.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Model/CakeSchema.php" afterPath="$PROJECT_DIR$/lib/Cake/Model/CakeSchema.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/Model/CakeSchemaTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/Model/CakeSchemaTest.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Model/Datasource/CakeSession.php" afterPath="$PROJECT_DIR$/lib/Cake/Model/Datasource/CakeSession.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/Model/Datasource/CakeSessionTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/Model/Datasource/CakeSessionTest.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Network/CakeSocket.php" afterPath="$PROJECT_DIR$/lib/Cake/Network/CakeSocket.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/Network/CakeSocketTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/Network/CakeSocketTest.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/TestSuite/CakeTestCase.php" afterPath="$PROJECT_DIR$/lib/Cake/TestSuite/CakeTestCase.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/TestSuite/CakeTestCaseTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/TestSuite/CakeTestCaseTest.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/TestSuite/Fixture/CakeTestFixture.php" afterPath="$PROJECT_DIR$/lib/Cake/TestSuite/Fixture/CakeTestFixture.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/TestSuite/CakeTestRunner.php" afterPath="$PROJECT_DIR$/lib/Cake/TestSuite/CakeTestRunner.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/TestSuite/CakeTestSuiteCommand.php" afterPath="$PROJECT_DIR$/lib/Cake/TestSuite/CakeTestSuiteCommand.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/TestSuite/CakeTestSuiteDispatcher.php" afterPath="$PROJECT_DIR$/lib/Cake/TestSuite/CakeTestSuiteDispatcher.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Utility/CakeTime.php" afterPath="$PROJECT_DIR$/lib/Cake/Utility/CakeTime.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/Utility/CakeTimeTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/Utility/CakeTimeTest.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Model/Validator/CakeValidationRule.php" afterPath="$PROJECT_DIR$/lib/Cake/Model/Validator/CakeValidationRule.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Model/Validator/CakeValidationSet.php" afterPath="$PROJECT_DIR$/lib/Cake/Model/Validator/CakeValidationSet.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Model/Cargo.php" afterPath="$PROJECT_DIR$/app/Model/Cargo.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Model/Cidade.php" afterPath="$PROJECT_DIR$/app/Model/Cidade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Utility/ClassRegistry.php" afterPath="$PROJECT_DIR$/lib/Cake/Utility/ClassRegistry.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Model/Config.php" afterPath="$PROJECT_DIR$/app/Model/Config.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Model/ConnectionManager.php" afterPath="$PROJECT_DIR$/lib/Cake/Model/ConnectionManager.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Console/ConsoleErrorHandler.php" afterPath="$PROJECT_DIR$/lib/Cake/Console/ConsoleErrorHandler.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Log/Engine/ConsoleLog.php" afterPath="$PROJECT_DIR$/lib/Cake/Log/Engine/ConsoleLog.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/Log/Engine/ConsoleLogTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/Log/Engine/ConsoleLogTest.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Console/ConsoleOptionParser.php" afterPath="$PROJECT_DIR$/lib/Cake/Console/ConsoleOptionParser.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/Console/ConsoleOptionParserTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/Console/ConsoleOptionParserTest.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Console/ConsoleOutput.php" afterPath="$PROJECT_DIR$/lib/Cake/Console/ConsoleOutput.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Console/Command/ConsoleShell.php" afterPath="$PROJECT_DIR$/lib/Cake/Console/Command/ConsoleShell.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Model/Conta.php" afterPath="$PROJECT_DIR$/app/Model/Conta.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Controller/Controller.php" afterPath="$PROJECT_DIR$/lib/Cake/Controller/Controller.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Console/Command/Task/ControllerTask.php" afterPath="$PROJECT_DIR$/lib/Cake/Console/Command/Task/ControllerTask.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/TestSuite/ControllerTestCase.php" afterPath="$PROJECT_DIR$/lib/Cake/TestSuite/ControllerTestCase.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Controller/Component/CookieComponent.php" afterPath="$PROJECT_DIR$/lib/Cake/Controller/Component/CookieComponent.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Model/Curso.php" afterPath="$PROJECT_DIR$/app/Model/Curso.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Model/CursoResponsavel.php" afterPath="$PROJECT_DIR$/app/Model/CursoResponsavel.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Controller/CursosController.php" afterPath="$PROJECT_DIR$/app/Controller/CursosController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Model/Datasource/DataSource.php" afterPath="$PROJECT_DIR$/lib/Cake/Model/Datasource/DataSource.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Model/Datasource/DboSource.php" afterPath="$PROJECT_DIR$/lib/Cake/Model/Datasource/DboSource.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/Model/Datasource/DboSourceTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/Model/Datasource/DboSourceTest.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Utility/Debugger.php" afterPath="$PROJECT_DIR$/lib/Cake/Utility/Debugger.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/Utility/DebuggerTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/Utility/DebuggerTest.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Fixture/DependencyFixture.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Fixture/DependencyFixture.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Controller/Component/Auth/DigestAuthenticate.php" afterPath="$PROJECT_DIR$/lib/Cake/Controller/Component/Auth/DigestAuthenticate.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/Controller/Component/Auth/DigestAuthenticateTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/Controller/Component/Auth/DigestAuthenticateTest.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Model/Disciplina.php" afterPath="$PROJECT_DIR$/app/Model/Disciplina.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Model/DisciplinaPlanoEstudo.php" afterPath="$PROJECT_DIR$/app/Model/DisciplinaPlanoEstudo.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Routing/Dispatcher.php" afterPath="$PROJECT_DIR$/lib/Cake/Routing/Dispatcher.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/Routing/DispatcherTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/Routing/DispatcherTest.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Model/Docente.php" afterPath="$PROJECT_DIR$/app/Model/Docente.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Model/DocumentoIdentificacao.php" afterPath="$PROJECT_DIR$/app/Model/DocumentoIdentificacao.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Controller/Component/EmailComponent.php" afterPath="$PROJECT_DIR$/lib/Cake/Controller/Component/EmailComponent.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Model/Entidade.php" afterPath="$PROJECT_DIR$/app/Model/Entidade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Model/EstadoInscricao.php" afterPath="$PROJECT_DIR$/app/Model/EstadoInscricao.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Model/Estadoentidade.php" afterPath="$PROJECT_DIR$/app/Model/Estadoentidade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Model/Estadomessage.php" afterPath="$PROJECT_DIR$/app/Model/Estadomessage.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Console/Command/EstudanteShell.php" afterPath="$PROJECT_DIR$/app/Console/Command/EstudanteShell.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Error/ExceptionRenderer.php" afterPath="$PROJECT_DIR$/lib/Cake/Error/ExceptionRenderer.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/test_app/Model/Extract.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/test_app/Model/Extract.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Console/Command/Task/ExtractTask.php" afterPath="$PROJECT_DIR$/lib/Cake/Console/Command/Task/ExtractTask.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/Console/Command/Task/ExtractTaskTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/Console/Command/Task/ExtractTaskTest.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Model/Feriado.php" afterPath="$PROJECT_DIR$/app/Model/Feriado.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Utility/File.php" afterPath="$PROJECT_DIR$/lib/Cake/Utility/File.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Cache/Engine/FileEngine.php" afterPath="$PROJECT_DIR$/lib/Cake/Cache/Engine/FileEngine.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/Utility/FileTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/Utility/FileTest.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Model/FinanceiroConta.php" afterPath="$PROJECT_DIR$/app/Model/FinanceiroConta.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Model/FinanceiroDeposito.php" afterPath="$PROJECT_DIR$/app/Model/FinanceiroDeposito.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Model/FinanceiroPagamento.php" afterPath="$PROJECT_DIR$/app/Model/FinanceiroPagamento.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Model/FinanceiroTransacao.php" afterPath="$PROJECT_DIR$/app/Model/FinanceiroTransacao.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Console/Command/Task/FixtureTask.php" afterPath="$PROJECT_DIR$/lib/Cake/Console/Command/Task/FixtureTask.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Utility/Folder.php" afterPath="$PROJECT_DIR$/lib/Cake/Utility/Folder.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/Utility/FolderTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/Utility/FolderTest.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/View/Helper/FormHelper.php" afterPath="$PROJECT_DIR$/lib/Cake/View/Helper/FormHelper.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/View/Helper/FormHelperTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/View/Helper/FormHelperTest.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Model/Funcionario.php" afterPath="$PROJECT_DIR$/app/Model/Funcionario.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Model/Genero.php" afterPath="$PROJECT_DIR$/app/Model/Genero.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Model/Group.php" afterPath="$PROJECT_DIR$/app/Model/Group.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Model/Grupodisciplina.php" afterPath="$PROJECT_DIR$/app/Model/Grupodisciplina.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Model/Grupodisciplinar.php" afterPath="$PROJECT_DIR$/app/Model/Grupodisciplinar.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Utility/Hash.php" afterPath="$PROJECT_DIR$/lib/Cake/Utility/Hash.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/Utility/HashTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/Utility/HashTest.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Console/HelpFormatter.php" afterPath="$PROJECT_DIR$/lib/Cake/Console/HelpFormatter.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/View/Helper.php" afterPath="$PROJECT_DIR$/lib/Cake/View/Helper.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/View/Helper/HtmlHelper.php" afterPath="$PROJECT_DIR$/lib/Cake/View/Helper/HtmlHelper.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/View/Helper/HtmlHelperTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/View/Helper/HtmlHelperTest.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Network/Http/HttpResponse.php" afterPath="$PROJECT_DIR$/lib/Cake/Network/Http/HttpResponse.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/Network/Http/HttpResponseTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/Network/Http/HttpResponseTest.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Network/Http/HttpSocket.php" afterPath="$PROJECT_DIR$/lib/Cake/Network/Http/HttpSocket.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Network/Http/HttpSocketResponse.php" afterPath="$PROJECT_DIR$/lib/Cake/Network/Http/HttpSocketResponse.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/Network/Http/HttpSocketTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/Network/Http/HttpSocketTest.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/I18n/I18n.php" afterPath="$PROJECT_DIR$/lib/Cake/I18n/I18n.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/I18n/I18nTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/I18n/I18nTest.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Utility/Inflector.php" afterPath="$PROJECT_DIR$/lib/Cake/Utility/Inflector.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/Utility/InflectorTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/Utility/InflectorTest.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Model/Inscricao.php" afterPath="$PROJECT_DIR$/app/Model/Inscricao.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/View/Helper/JsBaseEngineHelper.php" afterPath="$PROJECT_DIR$/lib/Cake/View/Helper/JsBaseEngineHelper.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/View/Helper/JsHelper.php" afterPath="$PROJECT_DIR$/lib/Cake/View/Helper/JsHelper.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Model/Matricula.php" afterPath="$PROJECT_DIR$/app/Model/Matricula.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Controller/MatriculasController.php" afterPath="$PROJECT_DIR$/app/Controller/MatriculasController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Console/Command/OpenSGAAclShell.php" afterPath="$PROJECT_DIR$/app/Console/Command/OpenSGAAclShell.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/View/MediaView.php" afterPath="$PROJECT_DIR$/lib/Cake/View/MediaView.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/View/MediaViewTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/View/MediaViewTest.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Cache/Engine/MemcacheEngine.php" afterPath="$PROJECT_DIR$/lib/Cake/Cache/Engine/MemcacheEngine.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Cache/Engine/MemcachedEngine.php" afterPath="$PROJECT_DIR$/lib/Cake/Cache/Engine/MemcachedEngine.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/Cache/Engine/MemcachedEngineTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/Cache/Engine/MemcachedEngineTest.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Model/Mensalidade.php" afterPath="$PROJECT_DIR$/app/Model/Mensalidade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Model/Message.php" afterPath="$PROJECT_DIR$/app/Model/Message.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Model/Model.php" afterPath="$PROJECT_DIR$/lib/Cake/Model/Model.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/Model/ModelIntegrationTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/Model/ModelIntegrationTest.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/Model/ModelReadTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/Model/ModelReadTest.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Console/Command/Task/ModelTask.php" afterPath="$PROJECT_DIR$/lib/Cake/Console/Command/Task/ModelTask.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/Console/Command/Task/ModelTaskTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/Console/Command/Task/ModelTaskTest.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/Model/ModelValidationTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/Model/ModelValidationTest.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Model/ModelValidator.php" afterPath="$PROJECT_DIR$/lib/Cake/Model/ModelValidator.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/Model/ModelWriteTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/Model/ModelWriteTest.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Model/Month.php" afterPath="$PROJECT_DIR$/app/Model/Month.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/View/Helper/MootoolsEngineHelper.php" afterPath="$PROJECT_DIR$/lib/Cake/View/Helper/MootoolsEngineHelper.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Model/Movimentoentidade.php" afterPath="$PROJECT_DIR$/app/Model/Movimentoentidade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/I18n/Multibyte.php" afterPath="$PROJECT_DIR$/lib/Cake/I18n/Multibyte.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Model/Datasource/Database/Mysql.php" afterPath="$PROJECT_DIR$/lib/Cake/Model/Datasource/Database/Mysql.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/Model/Datasource/Database/MysqlTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/Model/Datasource/Database/MysqlTest.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Core/Object.php" afterPath="$PROJECT_DIR$/lib/Cake/Core/Object.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Utility/ObjectCollection.php" afterPath="$PROJECT_DIR$/lib/Cake/Utility/ObjectCollection.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/Utility/ObjectCollectionTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/Utility/ObjectCollectionTest.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Console/Command/OpenSGAShell.php" afterPath="$PROJECT_DIR$/app/Console/Command/OpenSGAShell.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Config/bootstrap.php" afterPath="$PROJECT_DIR$/app/Config/bootstrap.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/View/Elements/footer.ctp" afterPath="$PROJECT_DIR$/app/View/Elements/footer.ctp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/View/Cursos/index.ctp" afterPath="$PROJECT_DIR$/app/View/Cursos/index.ctp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/webroot/assets/js/main.js" afterPath="$PROJECT_DIR$/app/webroot/assets/js/main.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/webroot/assets/css/opensga.css" afterPath="$PROJECT_DIR$/app/webroot/assets/css/opensga.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/View/Matriculas/renovacao_matriculas.ctp" afterPath="$PROJECT_DIR$/app/View/Matriculas/renovacao_matriculas.ctp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/View/Cursos/ver_curso.ctp" afterPath="$PROJECT_DIR$/app/View/Cursos/ver_curso.ctp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Controller/Component/PaginatorComponent.php" afterPath="$PROJECT_DIR$/lib/Cake/Controller/Component/PaginatorComponent.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/View/Helper/PaginatorHelper.php" afterPath="$PROJECT_DIR$/lib/Cake/View/Helper/PaginatorHelper.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/View/Helper/PaginatorHelperTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/View/Helper/PaginatorHelperTest.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/test_app/Model/PersisterOne.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/test_app/Model/PersisterOne.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Model/PlanoEstudo.php" afterPath="$PROJECT_DIR$/app/Model/PlanoEstudo.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Console/Command/Task/PluginTask.php" afterPath="$PROJECT_DIR$/lib/Cake/Console/Command/Task/PluginTask.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/Console/Command/Task/PluginTaskTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/Console/Command/Task/PluginTaskTest.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Model/Datasource/Database/Postgres.php" afterPath="$PROJECT_DIR$/lib/Cake/Model/Datasource/Database/Postgres.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/Model/Datasource/Database/PostgresTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/Model/Datasource/Database/PostgresTest.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Console/Command/Task/ProjectTask.php" afterPath="$PROJECT_DIR$/lib/Cake/Console/Command/Task/ProjectTask.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Model/Provincia.php" afterPath="$PROJECT_DIR$/app/Model/Provincia.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Model/Ramo.php" afterPath="$PROJECT_DIR$/app/Model/Ramo.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Cache/Engine/RedisEngine.php" afterPath="$PROJECT_DIR$/lib/Cake/Cache/Engine/RedisEngine.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/Cache/Engine/RedisEngineTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/Cache/Engine/RedisEngineTest.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Model/Regimelectivo.php" afterPath="$PROJECT_DIR$/app/Model/Regimelectivo.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Controller/Component/RequestHandlerComponent.php" afterPath="$PROJECT_DIR$/lib/Cake/Controller/Component/RequestHandlerComponent.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/Controller/Component/RequestHandlerComponentTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/Controller/Component/RequestHandlerComponentTest.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Routing/Router.php" afterPath="$PROJECT_DIR$/lib/Cake/Routing/Router.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/Routing/RouterTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/Routing/RouterTest.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Utility/Sanitize.php" afterPath="$PROJECT_DIR$/lib/Cake/Utility/Sanitize.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Controller/Scaffold.php" afterPath="$PROJECT_DIR$/lib/Cake/Controller/Scaffold.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/Controller/ScaffoldTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/Controller/ScaffoldTest.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/View/ScaffoldView.php" afterPath="$PROJECT_DIR$/lib/Cake/View/ScaffoldView.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Console/Command/SchemaShell.php" afterPath="$PROJECT_DIR$/lib/Cake/Console/Command/SchemaShell.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/Console/Command/SchemaShellTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/Console/Command/SchemaShellTest.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Utility/Security.php" afterPath="$PROJECT_DIR$/lib/Cake/Utility/Security.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Controller/Component/SecurityComponent.php" afterPath="$PROJECT_DIR$/lib/Cake/Controller/Component/SecurityComponent.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Model/Seqmovimento.php" afterPath="$PROJECT_DIR$/app/Model/Seqmovimento.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/View/Helper/SessionHelper.php" afterPath="$PROJECT_DIR$/lib/Cake/View/Helper/SessionHelper.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Utility/Set.php" afterPath="$PROJECT_DIR$/lib/Cake/Utility/Set.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Console/Shell.php" afterPath="$PROJECT_DIR$/lib/Cake/Console/Shell.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/Console/ShellTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/Console/ShellTest.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Network/Email/SmtpTransport.php" afterPath="$PROJECT_DIR$/lib/Cake/Network/Email/SmtpTransport.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/Network/Email/SmtpTransportTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/Network/Email/SmtpTransportTest.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Model/Datasource/Database/Sqlite.php" afterPath="$PROJECT_DIR$/lib/Cake/Model/Datasource/Database/Sqlite.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/Model/Datasource/Database/SqliteTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/Model/Datasource/Database/SqliteTest.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Model/Datasource/Database/Sqlserver.php" afterPath="$PROJECT_DIR$/lib/Cake/Model/Datasource/Database/Sqlserver.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Utility/String.php" afterPath="$PROJECT_DIR$/lib/Cake/Utility/String.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Fixture/TagFixture.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Fixture/TagFixture.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/test_app/Plugin/TestPlugin/Model/TestPluginAuthors.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/test_app/Plugin/TestPlugin/Model/TestPluginAuthors.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/test_app/Plugin/TestPlugin/Model/TestPluginComment.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/test_app/Plugin/TestPlugin/Model/TestPluginComment.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/test_app/Plugin/TestPlugin/Model/Behavior/TestPluginPersisterOneBehavior.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/test_app/Plugin/TestPlugin/Model/Behavior/TestPluginPersisterOneBehavior.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/test_app/Plugin/TestPlugin/Model/Behavior/TestPluginPersisterTwoBehavior.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/test_app/Plugin/TestPlugin/Model/Behavior/TestPluginPersisterTwoBehavior.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/View/Helper/TextHelper.php" afterPath="$PROJECT_DIR$/lib/Cake/View/Helper/TextHelper.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/View/Helper/TextHelperTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/View/Helper/TextHelperTest.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/View/ThemeView.php" afterPath="$PROJECT_DIR$/lib/Cake/View/ThemeView.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/View/Helper/TimeHelper.php" afterPath="$PROJECT_DIR$/lib/Cake/View/Helper/TimeHelper.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/View/Helper/TimeHelperTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/View/Helper/TimeHelperTest.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Model/TipoAvaliacao.php" afterPath="$PROJECT_DIR$/app/Model/TipoAvaliacao.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Model/TipoCurso.php" afterPath="$PROJECT_DIR$/app/Model/TipoCurso.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Model/Tipofuncionario.php" afterPath="$PROJECT_DIR$/app/Model/Tipofuncionario.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Model/Tipomovimento.php" afterPath="$PROJECT_DIR$/app/Model/Tipomovimento.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Model/Tipoprecedencia.php" afterPath="$PROJECT_DIR$/app/Model/Tipoprecedencia.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Model/Behavior/TranslateBehavior.php" afterPath="$PROJECT_DIR$/lib/Cake/Model/Behavior/TranslateBehavior.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/Model/Behavior/TranslateBehaviorTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/Model/Behavior/TranslateBehaviorTest.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Fixture/TranslateWithPrefixFixture.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Fixture/TranslateWithPrefixFixture.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Model/Behavior/TreeBehavior.php" afterPath="$PROJECT_DIR$/lib/Cake/Model/Behavior/TreeBehavior.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/Model/Behavior/TreeBehaviorNumberTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/Model/Behavior/TreeBehaviorNumberTest.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/Model/Behavior/TreeBehaviorScopedTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/Model/Behavior/TreeBehaviorScopedTest.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Model/Turma.php" afterPath="$PROJECT_DIR$/app/Model/Turma.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Model/TurmaTipoAvaliacao.php" afterPath="$PROJECT_DIR$/app/Model/TurmaTipoAvaliacao.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Model/Turno.php" afterPath="$PROJECT_DIR$/app/Model/Turno.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Model/UnidadeOrganica.php" afterPath="$PROJECT_DIR$/app/Model/UnidadeOrganica.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/VERSION.txt" afterPath="$PROJECT_DIR$/lib/Cake/VERSION.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Utility/Validation.php" afterPath="$PROJECT_DIR$/lib/Cake/Utility/Validation.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/Utility/ValidationTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/Utility/ValidationTest.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/View/View.php" afterPath="$PROJECT_DIR$/lib/Cake/View/View.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/View/ViewBlock.php" afterPath="$PROJECT_DIR$/lib/Cake/View/ViewBlock.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Console/Command/Task/ViewTask.php" afterPath="$PROJECT_DIR$/lib/Cake/Console/Command/Task/ViewTask.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/View/ViewTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/View/ViewTest.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Cache/Engine/WincacheEngine.php" afterPath="$PROJECT_DIR$/lib/Cake/Cache/Engine/WincacheEngine.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Cache/Engine/XcacheEngine.php" afterPath="$PROJECT_DIR$/lib/Cake/Cache/Engine/XcacheEngine.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Utility/Xml.php" afterPath="$PROJECT_DIR$/lib/Cake/Utility/Xml.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/View/Alunos/adicionar_estudante.ctp" afterPath="$PROJECT_DIR$/app/View/Alunos/adicionar_estudante.ctp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/basics.php" afterPath="$PROJECT_DIR$/lib/Cake/basics.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/bootstrap.php" afterPath="$PROJECT_DIR$/lib/Cake/bootstrap.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build.xml" afterPath="$PROJECT_DIR$/build.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Console/cake.bat" afterPath="$PROJECT_DIR$/lib/Cake/Console/cake.bat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Console/Templates/skel/Console/cake.bat" afterPath="$PROJECT_DIR$/lib/Cake/Console/Templates/skel/Console/cake.bat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/composer.json" afterPath="$PROJECT_DIR$/composer.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Console/Templates/skel/Config/Schema/db_acl.sql" afterPath="$PROJECT_DIR$/lib/Cake/Console/Templates/skel/Config/Schema/db_acl.sql" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/View/Elements/exception_stack_trace.ctp" afterPath="$PROJECT_DIR$/lib/Cake/View/Elements/exception_stack_trace.ctp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/test_app/View/Pages/extract.ctp" afterPath="$PROJECT_DIR$/lib/Cake/Test/test_app/View/Pages/extract.ctp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/View/Errors/fatal_error.ctp" afterPath="$PROJECT_DIR$/lib/Cake/View/Errors/fatal_error.ctp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Console/Templates/skel/View/Layouts/flash.ctp" afterPath="$PROJECT_DIR$/lib/Cake/Console/Templates/skel/View/Layouts/flash.ctp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/test_app/View/Layouts/flash.ctp" afterPath="$PROJECT_DIR$/lib/Cake/Test/test_app/View/Layouts/flash.ctp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.php" afterPath="$PROJECT_DIR$/index.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Console/Templates/skel/webroot/index.php" afterPath="$PROJECT_DIR$/lib/Cake/Console/Templates/skel/webroot/index.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/View/Cursos/manutencao.ctp" afterPath="$PROJECT_DIR$/app/View/Cursos/manutencao.ctp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/View/Errors/missing_layout.ctp" afterPath="$PROJECT_DIR$/lib/Cake/View/Errors/missing_layout.ctp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/View/Errors/missing_view.ctp" afterPath="$PROJECT_DIR$/lib/Cake/View/Errors/missing_view.ctp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/Model/models.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/Model/models.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Config/routes.php" afterPath="$PROJECT_DIR$/lib/Cake/Config/routes.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/View/Errors/scaffold_error.ctp" afterPath="$PROJECT_DIR$/lib/Cake/View/Errors/scaffold_error.ctp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Console/Templates/skel/webroot/test.php" afterPath="$PROJECT_DIR$/lib/Cake/Console/Templates/skel/webroot/test.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/View/BolsaBolsas/view_dados_registar.php" afterPath="$PROJECT_DIR$/app/View/BolsaBolsas/view_dados_registar.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="opensga.iws" />
@@ -62,95 +293,287 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="MatriculasController.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Controller/MatriculasController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="85" column="76" selection-start="4143" selection-end="4143" vertical-scroll-proportion="0.0" vertical-offset="1159" max-vertical-offset="5400">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="OpenSGAShell.php" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/Console/Command/OpenSGAShell.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="831" column="26" selection-start="45885" selection-end="45885" vertical-scroll-proportion="0.8101266" vertical-offset="14574" max-vertical-offset="35730">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PagamentoShell.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Console/Command/PagamentoShell.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="14" column="37" selection-start="395" selection-end="395" vertical-scroll-proportion="-9.333333" vertical-offset="0" max-vertical-offset="702">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="FinanceiroPagamento.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Model/FinanceiroPagamento.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="231" column="71" selection-start="10341" selection-end="10341" vertical-scroll-proportion="-21.962963" vertical-offset="3565" max-vertical-offset="4554">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="exportar_extracto_renovacao_excel.ctp" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/View/Matriculas/exportar_extracto_renovacao_excel.ctp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="17" column="41" selection-start="668" selection-end="668" vertical-scroll-proportion="0.4029536" vertical-offset="115" max-vertical-offset="792">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="Matricula.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Model/Matricula.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="235" column="94" selection-start="10026" selection-end="10026" vertical-scroll-proportion="0.0" vertical-offset="3848" max-vertical-offset="6480">
+            <state line="277" column="21" selection-start="12239" selection-end="12239" vertical-scroll-proportion="0.0" vertical-offset="4698" max-vertical-offset="6210">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Aluno.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Model/Aluno.php">
+      <file leaf-file-name="TurmaShell.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Console/Command/TurmaShell.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="576" column="0" selection-start="19271" selection-end="19271" vertical-scroll-proportion="0.0" vertical-offset="9752" max-vertical-offset="28584">
+            <state line="50" column="0" selection-start="1570" selection-end="1570" vertical-scroll-proportion="0.0" vertical-offset="900" max-vertical-offset="1008">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CursosController.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Controller/CursosController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="43" column="42" selection-start="1819" selection-end="1819" vertical-scroll-proportion="0.0" vertical-offset="774" max-vertical-offset="4500">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Curso.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Model/Curso.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="253" column="8" selection-start="8781" selection-end="8781" vertical-scroll-proportion="0.0" vertical-offset="4289" max-vertical-offset="4878">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="OpenSGAShell.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Console/Command/OpenSGAShell.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="1041" column="44" selection-start="57506" selection-end="57506" vertical-scroll-proportion="-6.2181816" vertical-offset="18396" max-vertical-offset="38088">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AlunoViaAdmissaosController.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Controller/AlunoViaAdmissaosController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="1836">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AlunosController.php" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/Controller/AlunosController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="1503" column="62" selection-start="60693" selection-end="60693" vertical-scroll-proportion="0.50214595" vertical-offset="26820" max-vertical-offset="28584">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="UnidadeOrganica.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Model/UnidadeOrganica.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="113" column="30" selection-start="2736" selection-end="2736" vertical-scroll-proportion="-16.296297" vertical-offset="1594" max-vertical-offset="3096">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CartaoEstudantesController.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Plugin/Api/Controller/CartaoEstudantesController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="50" column="0" selection-start="1828" selection-end="1828" vertical-scroll-proportion="0.0" vertical-offset="900" max-vertical-offset="1926">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="adicionar_estudante.ctp" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/View/Alunos/adicionar_estudante.ctp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="720" column="36" selection-start="38560" selection-end="38560" vertical-scroll-proportion="-0.6666667" vertical-offset="12942" max-vertical-offset="13842">
               <folding>
-                <marker date="1415782949240" expanded="true" signature="15435:15499" placeholder="Select plano..matriculas..." />
-                <marker date="1415782949240" expanded="true" signature="16007:16071" placeholder="Select plano..matriculas..." />
+                <marker date="1422340776906" expanded="true" signature="871:35051" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="899:35044" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="983:35036" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="1023:1963" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="1168:1944" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="1254:1279" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="1385:1462" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="1537:1615" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="1689:1771" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="1844:1921" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="2000:34992" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="2364:34982" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="2389:4665" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="2418:2840" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="2465:2810" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="2522:2599" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="2655:2777" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="2869:3292" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="2916:3262" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="2973:3050" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="3106:3229" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="3321:3739" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="3368:3709" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="3425:3502" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="3558:3676" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="3768:4190" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="3815:4160" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="3872:3949" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="4005:4127" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="4219:4639" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="4266:4609" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="4323:4400" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="4456:4576" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="4744:5020" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="4882:4993" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="5058:12346" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="5107:11931" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="5146:11900" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="5280:6216" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="5339:5597" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="5656:5890" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="5949:6177" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="6266:7219" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="6325:6588" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="6647:6882" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="6914:7178" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="7270:9460" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="7329:7564" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="7623:8343" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="7688:8299" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="7853:8252" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="8375:9086" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="8440:9042" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="8600:8995" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="9145:9421" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="9511:10235" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="9570:9844" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="9903:10195" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="10287:11859" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="10346:10705" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="10764:11068" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="11127:11442" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="11501:11820" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="11981:12319" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="12048:12288" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="12130:12253" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="12384:17116" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="12433:16390" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="12472:16359" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="12619:13825" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="12661:13012" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="13073:13386" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="13445:13783" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="13876:14757" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="13935:14332" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="14391:14718" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="14807:16319" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="14866:15153" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="15212:15476" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="15535:15880" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="15939:16279" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="16439:17089" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="16506:16751" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="16594:16716" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="16818:17058" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="16900:17023" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="17154:23081" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="17203:22352" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="17237:20507" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="20568:20808" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="20846:21155" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="21207:22281" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="21266:21532" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="21591:21882" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="21941:22241" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="22401:23051" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="22468:22713" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="22556:22678" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="22780:23020" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="22862:22985" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="23119:26332" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="23168:25606" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="23207:25575" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="23353:24501" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="23412:23760" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="23819:24089" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="24148:24462" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="24551:25535" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="24610:25193" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="24777:25176" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="25208:25518" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="25655:26305" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="25722:25967" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="25810:25932" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="26034:26274" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="26116:26239" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="26370:34958" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="26485:34945" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="26536:28960" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="26579:28925" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="26707:26969" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="26756:26807" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="26840:26953" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="27030:27284" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="27079:27118" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="27151:27268" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="27345:27595" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="27394:27431" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="27464:27579" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="27656:27914" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="27705:27742" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="27775:27898" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="27975:28241" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="28024:28065" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="28098:28225" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="28302:28561" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="28351:28394" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="28427:28545" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="28622:28881" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="28671:28714" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="28747:28865" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="29011:31500" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="29054:31465" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="29186:29439" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="29235:29271" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="29304:29423" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="29500:29773" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="29549:29599" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="29632:29757" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="29834:30098" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="29883:29927" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="29960:30082" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="30160:30424" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="30209:30253" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="30286:30408" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="30485:30758" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="30534:30584" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="30617:30742" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="30819:31088" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="30868:30909" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="30942:31072" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="31149:31421" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="31198:31245" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="31278:31405" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="31551:34717" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="31594:34682" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="31721:32004" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="31770:31817" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="31850:31988" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="32065:32341" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="32114:32162" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="32195:32325" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="32402:32677" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="32451:32500" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="32533:32661" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="32711:32995" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="32760:32813" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="32846:32979" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="33029:33309" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="33078:33132" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="33165:33293" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="33370:33635" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="33419:33467" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="33500:33619" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="33696:33954" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="33745:33786" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="33819:33938" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="34015:34297" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="34064:34119" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="34152:34281" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="34358:34638" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="34407:34454" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="34487:34622" placeholder="..." />
+                <marker date="1422340776906" expanded="true" signature="34749:34932" placeholder="..." />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="bootstrap_siga.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Config/bootstrap_siga.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="378">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="bootstrap.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Config/bootstrap.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="6" column="35" selection-start="156" selection-end="156" vertical-scroll-proportion="0.0" vertical-offset="108" max-vertical-offset="2178">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="siga_constants.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Config/siga_constants.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="10" column="22" selection-start="181" selection-end="181" vertical-scroll-proportion="0.0" vertical-offset="180" max-vertical-offset="378">
-              <folding />
             </state>
           </provider>
         </entry>
@@ -168,14 +591,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/app/Model/Session.php" />
-        <option value="$PROJECT_DIR$/app/View/CandidatoAlumnis/cadastro_alumni.ctp" />
-        <option value="$PROJECT_DIR$/app/View/Docentes/faculdade_adicionar_docente.ctp" />
-        <option value="$PROJECT_DIR$/app/Model/Upload.php" />
-        <option value="$PROJECT_DIR$/app/Plugin/CakeRabbit/Lib/CakeRabbit.php" />
-        <option value="$PROJECT_DIR$/app/Plugin/CakeRabbit/Console/Command/CakeRabbitShell.php" />
-        <option value="$PROJECT_DIR$/app/Test/Case/Model/AlunoTest.php" />
-        <option value="$PROJECT_DIR$/app/Plugin/CakeRabbit/Config/config.php" />
         <option value="$PROJECT_DIR$/app/Config/core.php" />
         <option value="$PROJECT_DIR$/plugins/Auditable/Model/Behavior/AuditableBehavior.php" />
         <option value="$PROJECT_DIR$/app/Model/User.php" />
@@ -185,7 +600,6 @@
         <option value="$PROJECT_DIR$/app/View/Pages/estudante_home.ctp" />
         <option value="$PROJECT_DIR$/app/View/Matriculas/estudante_como_renovar.ctp" />
         <option value="$PROJECT_DIR$/app/Console/Command/UserShell.php" />
-        <option value="$PROJECT_DIR$/app/Console/Command/EstudanteShell.php" />
         <option value="$PROJECT_DIR$/composer.json" />
         <option value="$PROJECT_DIR$/app/Controller/AppController.php" />
         <option value="$PROJECT_DIR$/app/Controller/UsersController.php" />
@@ -193,7 +607,6 @@
         <option value="$PROJECT_DIR$/app/webroot/assets/js/opensga.js" />
         <option value="$PROJECT_DIR$/app/View/Elements/footer.ctp" />
         <option value="$PROJECT_DIR$/app/View/Cursos/index.ctp" />
-        <option value="$PROJECT_DIR$/app/View/Cursos/manutencao.ctp" />
         <option value="$PROJECT_DIR$/app/View/Common/index_no_pagination.ctp" />
         <option value="$PROJECT_DIR$/app/View/Cursos/cursos_sem_encarregado.ctp" />
         <option value="$PROJECT_DIR$/app/Model/Funcionario.php" />
@@ -202,32 +615,41 @@
         <option value="$PROJECT_DIR$/app/Model/Curso.php" />
         <option value="$PROJECT_DIR$/app/View/Common/Cursos/ver_curso.ctp" />
         <option value="$PROJECT_DIR$/app/View/Cursos/ver_curso.ctp" />
-        <option value="$PROJECT_DIR$/app/Model/AppModel.php" />
         <option value="$PROJECT_DIR$/app/Model/CursoResponsavel.php" />
         <option value="$PROJECT_DIR$/app/View/Common/form_basic.ctp" />
         <option value="$PROJECT_DIR$/app/View/Elements/form_errors.ctp" />
-        <option value="$PROJECT_DIR$/app/Controller/CursosController.php" />
         <option value="$PROJECT_DIR$/app/View/Matriculas/renovacao_matriculas.ctp" />
         <option value="$PROJECT_DIR$/app/Console/Command/OpenSGAAclShell.php" />
         <option value="$PROJECT_DIR$/app/View/Matriculas/exportar_extracto_renovacao.ctp" />
         <option value="$PROJECT_DIR$/app/View/Matriculas/exportar_extracto_renovacao_excel.ctp" />
-        <option value="$PROJECT_DIR$/app/Controller/MatriculasController.php" />
         <option value="$PROJECT_DIR$/app/Config/bootstrap.php" />
         <option value="$PROJECT_DIR$/app/Config/siga_constants.php" />
-        <option value="$PROJECT_DIR$/app/Model/Matricula.php" />
-        <option value="$PROJECT_DIR$/app/Model/Aluno.php" />
         <option value="$PROJECT_DIR$/app/Console/Command/PagamentoShell.php" />
+        <option value="$PROJECT_DIR$/app/Controller/MatriculasController.php" />
+        <option value="$PROJECT_DIR$/app/Console/Command/EstudanteShell.php" />
+        <option value="$PROJECT_DIR$/app/Model/Aluno.php" />
+        <option value="$PROJECT_DIR$/app/Model/AppModel.php" />
+        <option value="$PROJECT_DIR$/app/Model/Behavior/AuditableBehavior.php" />
+        <option value="$PROJECT_DIR$/app/Model/FinanceiroConta.php" />
+        <option value="$PROJECT_DIR$/lib/Cake/Model/Datasource/DboSource.php" />
+        <option value="$PROJECT_DIR$/app/Model/FinanceiroDeposito.php" />
         <option value="$PROJECT_DIR$/app/Model/FinanceiroPagamento.php" />
+        <option value="$PROJECT_DIR$/app/Console/Command/ManutencaoShell.php" />
+        <option value="$PROJECT_DIR$/app/View/Cursos/manutencao.ctp" />
+        <option value="$PROJECT_DIR$/app/Controller/CursosController.php" />
+        <option value="$PROJECT_DIR$/app/Model/Matricula.php" />
+        <option value="$PROJECT_DIR$/app/View/Alunos/adicionar_estudante.ctp" />
+        <option value="$PROJECT_DIR$/app/Model/UnidadeOrganica.php" />
         <option value="$PROJECT_DIR$/app/Console/Command/OpenSGAShell.php" />
+        <option value="$PROJECT_DIR$/app/Controller/AlunosController.php" />
       </list>
     </option>
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" interpreter_name="PHP 5.4" />
   <component name="ProjectFrameBounds">
-    <option name="x" value="-1" />
-    <option name="y" value="26" />
-    <option name="width" value="1368" />
-    <option name="height" value="717" />
+    <option name="y" value="27" />
+    <option name="width" value="1366" />
+    <option name="height" value="714" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
@@ -255,7 +677,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -284,643 +705,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="lib" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Cake" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="opensga" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="opensga" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="lib" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Cake" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Model" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="opensga" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="opensga" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="opensga" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="opensga" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="webroot" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="opensga" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="opensga" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="webroot" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="assets" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="opensga" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="opensga" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="webroot" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="assets" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="opensga" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="opensga" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="webroot" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="assets" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="css" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="opensga" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="opensga" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="View" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="opensga" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="opensga" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="View" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Turmas" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="opensga" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="opensga" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="View" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Pages" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="opensga" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="opensga" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="View" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Matriculas" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="opensga" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="opensga" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="View" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Helper" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="opensga" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="opensga" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="View" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Elements" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="opensga" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="opensga" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="View" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Docentes" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="opensga" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="opensga" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="View" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Cursos" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="opensga" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="opensga" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="View" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Common" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="opensga" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="opensga" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="View" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Common" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Cursos" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="opensga" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="opensga" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="View" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Common" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Alunos" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="opensga" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="opensga" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="View" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Candidaturas" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="opensga" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="opensga" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="View" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="CandidatoAlumnis" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="opensga" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="opensga" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="View" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Alunos" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="opensga" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="opensga" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Test" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Fixture" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="opensga" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="opensga" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Test" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Case" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="opensga" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="opensga" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Test" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Case" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Model" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="opensga" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="opensga" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Plugin" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="opensga" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="opensga" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Plugin" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="CakeRabbit" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="opensga" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="opensga" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Plugin" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="CakeRabbit" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Lib" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="opensga" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="opensga" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Plugin" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="CakeRabbit" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Console" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Command" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="opensga" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="opensga" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Plugin" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="CakeRabbit" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Config" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -939,24 +724,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="Model" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="opensga" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="opensga" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Lib" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -978,66 +745,9 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="opensga" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="opensga" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Console" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="opensga" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="opensga" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Console" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Command" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="opensga" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="opensga" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Config" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -1049,7 +759,7 @@
     <property name="options.searchVisible" value="true" />
     <property name="LayoutCode.rearrangeEntriesPHP" value="true" />
     <property name="LayoutCode.rearrangeEntriesCSS" value="false" />
-    <property name="last_opened_file_path" value="$USER_HOME$/Desktop/IREX Website/exquisite-wp-3" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Desktop/CidadedeQuelimane" />
     <property name="SearchEverywhereHistory" value="//" />
   </component>
   <component name="RecentsManager">
@@ -1104,25 +814,25 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1" y="26" width="1368" height="717" extended-state="6" />
+    <frame x="0" y="27" width="1366" height="714" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32925472" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32925472" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.41434845" sideWeight="0.47954175" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.41434845" sideWeight="0.5188216" order="0" side_tool="true" content_ui="combo" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25146627" sideWeight="0.32072368" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25146627" sideWeight="0.6792763" order="0" side_tool="true" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3289689" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32569557" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3256579" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -1153,96 +863,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/Console/Command/UserShell.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="56" column="33" selection-start="1981" selection-end="1981" vertical-scroll-proportion="0.0" vertical-offset="889" max-vertical-offset="1728" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Config/core.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="339" column="0" selection-start="13432" selection-end="13665" vertical-scroll-proportion="0.0" vertical-offset="6102" max-vertical-offset="6390" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Config/email.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="95" column="0" selection-start="2588" selection-end="2588" vertical-scroll-proportion="0.0" vertical-offset="1710" max-vertical-offset="1818" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Console/Command/EstudanteShell.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="805" column="43" selection-start="46566" selection-end="46566" vertical-scroll-proportion="0.0" vertical-offset="14090" max-vertical-offset="14922" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Model/User.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="88" column="20" selection-start="2134" selection-end="2134" vertical-scroll-proportion="0.0" vertical-offset="1411" max-vertical-offset="6966" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="0" selection-start="52" selection-end="52" vertical-scroll-proportion="0.0" vertical-offset="54" max-vertical-offset="522" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/composer.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="53" selection-start="562" selection-end="562" vertical-scroll-proportion="0.0" vertical-offset="10" max-vertical-offset="540" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Controller/AppController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="47" column="9" selection-start="1581" selection-end="1581" vertical-scroll-proportion="0.0" vertical-offset="468" max-vertical-offset="3078" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Controller/UsersController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="510" column="5" selection-start="20181" selection-end="20181" vertical-scroll-proportion="-15.037037" vertical-offset="8774" max-vertical-offset="9918" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/webroot/assets/css/opensga.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="16" selection-start="48" selection-end="48" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="234" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/webroot/assets/js/opensga.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="10962" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/View/Elements/footer.ctp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="42" column="54" selection-start="2579" selection-end="2579" vertical-scroll-proportion="0.58220506" vertical-offset="455" max-vertical-offset="1440" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/View/Common/Alunos/perfil_estudante.ctp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="12628" vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="6552" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/View/Alunos/index.ctp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="162" vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="1638" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/View/Cursos/manutencao.ctp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="79" selection-start="227" selection-end="227" vertical-scroll-proportion="-2.0" vertical-offset="0" max-vertical-offset="666" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/View/Common/index_common.ctp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="842" max-vertical-offset="1404" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/View/Common/index_no_pagination.ctp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="55" column="0" selection-start="1878" selection-end="1878" vertical-scroll-proportion="-4.6296296" vertical-offset="865" max-vertical-offset="1404" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/View/Alunos/perfil_estudante.ctp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="75" column="22" selection-start="880" selection-end="4520" vertical-scroll-proportion="0.9271255" vertical-offset="892" max-vertical-offset="1476" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Lib/Permissions.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="557" />
@@ -1273,11 +893,6 @@
         <state line="150" column="20" selection-start="4119" selection-end="4119" vertical-scroll-proportion="-6.4074073" vertical-offset="2527" max-vertical-offset="3276" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Model/Curso.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="213" column="46" selection-start="6409" selection-end="6409" vertical-scroll-proportion="0.0" vertical-offset="3541" max-vertical-offset="4860" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/View/Cursos/index.ctp">
       <provider selected="true" editor-type-id="text-editor">
         <state line="22" column="28" selection-start="1177" selection-end="1177" vertical-scroll-proportion="0.0" vertical-offset="165" max-vertical-offset="1170" />
@@ -1286,11 +901,6 @@
     <entry file="file://$PROJECT_DIR$/app/View/Cursos/ver_curso.ctp">
       <provider selected="true" editor-type-id="text-editor">
         <state line="11" column="58" selection-start="445" selection-end="445" vertical-scroll-proportion="0.0" vertical-offset="198" max-vertical-offset="504" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Model/AppModel.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="9" selection-start="755" selection-end="755" vertical-scroll-proportion="0.0" vertical-offset="396" max-vertical-offset="594" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/View/Common/form_basic.ctp">
@@ -1311,11 +921,6 @@
     <entry file="file://$PROJECT_DIR$/app/View/Elements/table_footer.ctp">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="702" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Controller/CursosController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="70" column="28" selection-start="3039" selection-end="3039" vertical-scroll-proportion="-14.555555" vertical-offset="867" max-vertical-offset="4410" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/View/Matriculas/index.ctp">
@@ -1345,18 +950,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/View/Matriculas/exportar_extracto_renovacao.ctp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="44" column="5" selection-start="1679" selection-end="1679" vertical-scroll-proportion="0.0" vertical-offset="308" max-vertical-offset="990">
-          <folding>
-            <marker date="1414741965413" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1414741965413" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1414741965413" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1414741965413" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1414741965413" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1414741965413" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1414741965413" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1414741965413" expanded="true" signature="-1:-1" placeholder="..." />
-          </folding>
-        </state>
+        <state line="44" column="5" selection-start="1679" selection-end="1679" vertical-scroll-proportion="0.0" vertical-offset="308" max-vertical-offset="990" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/View/Alunos/print_comprovativo_mudanca_curso.ctp">
@@ -1366,80 +960,381 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/View/Helper/PhpExcelHelper.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="559" max-vertical-offset="4806">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="559" max-vertical-offset="4806" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/View/Matriculas/exportar_extracto_renovacao_excel.ctp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="41" selection-start="668" selection-end="668" vertical-scroll-proportion="0.4029536" vertical-offset="115" max-vertical-offset="792">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Controller/MatriculasController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="85" column="76" selection-start="4143" selection-end="4143" vertical-scroll-proportion="0.0" vertical-offset="1159" max-vertical-offset="5400">
-          <folding />
-        </state>
+        <state line="17" column="41" selection-start="668" selection-end="668" vertical-scroll-proportion="0.0" vertical-offset="115" max-vertical-offset="792" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Config/bootstrap_siga.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="692">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="692" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Config/bootstrap.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="35" selection-start="156" selection-end="156" vertical-scroll-proportion="0.0" vertical-offset="108" max-vertical-offset="2178">
-          <folding />
-        </state>
+        <state line="6" column="35" selection-start="156" selection-end="156" vertical-scroll-proportion="0.0" vertical-offset="108" max-vertical-offset="2178" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Config/siga_constants.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="22" selection-start="181" selection-end="181" vertical-scroll-proportion="0.0" vertical-offset="180" max-vertical-offset="378">
+        <state line="10" column="22" selection-start="181" selection-end="181" vertical-scroll-proportion="0.0" vertical-offset="180" max-vertical-offset="378" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Console/Command/PagamentoShell.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="37" selection-start="395" selection-end="395" vertical-scroll-proportion="0.0" vertical-offset="252" max-vertical-offset="702" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Console/Command/EstudanteShell.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="819" column="0" selection-start="47123" selection-end="47123" vertical-scroll-proportion="0.0" vertical-offset="14672" max-vertical-offset="15210" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Model/Aluno.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="553" column="0" selection-start="18497" selection-end="18497" vertical-scroll-proportion="0.0" vertical-offset="9756" max-vertical-offset="29250" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/Cake/Model/Datasource/DataSource.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="416" column="6" selection-start="10142" selection-end="10144" vertical-scroll-proportion="0.33333334" vertical-offset="7065" max-vertical-offset="7704" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Controller/MatriculasController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="27" column="6" selection-start="1395" selection-end="1395" vertical-scroll-proportion="0.0" vertical-offset="157" max-vertical-offset="5436" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/Cake/Model/Model.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1805" column="0" selection-start="54082" selection-end="54082" vertical-scroll-proportion="0.85365856" vertical-offset="32070" max-vertical-offset="67860" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/View/Matriculas/renovar_matricula.ctp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="33" column="131" selection-start="1092" selection-end="2271" vertical-scroll-proportion="0.0" vertical-offset="241" max-vertical-offset="1008" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Model/Behavior/AuditableBehavior.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="200" column="8" selection-start="4619" selection-end="4619" vertical-scroll-proportion="0.70446736" vertical-offset="3395" max-vertical-offset="9252" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/Cake/Model/Behavior/TranslateBehavior.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="485" column="40" selection-start="15336" selection-end="15336" vertical-scroll-proportion="0.87628865" vertical-offset="8241" max-vertical-offset="12690" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../craviation/lib/Cake/Model/Datasource/DboSource.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="63648" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Model/AppModel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="29" column="40" selection-start="985" selection-end="985" vertical-scroll-proportion="0.0" vertical-offset="190" max-vertical-offset="720" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Model/FinanceiroConta.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="92" column="22" selection-start="2184" selection-end="2184" vertical-scroll-proportion="0.9320755" vertical-offset="1162" max-vertical-offset="1836" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/Cake/Model/Datasource/DboSource.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2279" column="2" selection-start="66904" selection-end="66904" vertical-scroll-proportion="0.06963249" vertical-offset="40716" max-vertical-offset="64044" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Model/FinanceiroDeposito.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="132" column="36" selection-start="4318" selection-end="4318" vertical-scroll-proportion="0.0" vertical-offset="1954" max-vertical-offset="2574" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Model/FinanceiroPagamento.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="312" column="36" selection-start="14768" selection-end="14768" vertical-scroll-proportion="0.0" vertical-offset="5261" max-vertical-offset="5832">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Console/Command/ManutencaoShell.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="15" column="9" selection-start="696" selection-end="696" vertical-scroll-proportion="0.0" vertical-offset="270" max-vertical-offset="432">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/View/Cursos/manutencao.ctp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="3" column="68" selection-start="216" selection-end="216" vertical-scroll-proportion="0.0" vertical-offset="54" max-vertical-offset="756">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Controller/CursosController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="43" column="42" selection-start="1819" selection-end="1819" vertical-scroll-proportion="0.0" vertical-offset="504" max-vertical-offset="4500">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Model/Curso.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="253" column="8" selection-start="8781" selection-end="8781" vertical-scroll-proportion="0.0" vertical-offset="4289" max-vertical-offset="4878">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Model/Matricula.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="235" column="94" selection-start="10026" selection-end="10026" vertical-scroll-proportion="0.0" vertical-offset="3848" max-vertical-offset="6480">
+        <state line="277" column="21" selection-start="12239" selection-end="12239" vertical-scroll-proportion="0.0" vertical-offset="4698" max-vertical-offset="6210">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Model/Aluno.php">
+    <entry file="file://$PROJECT_DIR$/app/Console/Command/TurmaShell.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="576" column="0" selection-start="19271" selection-end="19271" vertical-scroll-proportion="0.0" vertical-offset="9752" max-vertical-offset="28584">
+        <state line="50" column="0" selection-start="1570" selection-end="1570" vertical-scroll-proportion="0.0" vertical-offset="900" max-vertical-offset="1008">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Plugin/Api/Controller/CartaoEstudantesController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="50" column="0" selection-start="1828" selection-end="1828" vertical-scroll-proportion="0.0" vertical-offset="900" max-vertical-offset="1926">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/View/Alunos/adicionar_estudante.ctp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="720" column="36" selection-start="38560" selection-end="38560" vertical-scroll-proportion="-0.6666667" vertical-offset="12942" max-vertical-offset="13842">
           <folding>
-            <marker date="1415782949240" expanded="true" signature="15435:15499" placeholder="Select plano..matriculas..." />
-            <marker date="1415782949240" expanded="true" signature="16007:16071" placeholder="Select plano..matriculas..." />
+            <marker date="1422340776906" expanded="true" signature="871:35051" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="899:35044" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="983:35036" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="1023:1963" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="1168:1944" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="1254:1279" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="1385:1462" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="1537:1615" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="1689:1771" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="1844:1921" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="2000:34992" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="2364:34982" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="2389:4665" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="2418:2840" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="2465:2810" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="2522:2599" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="2655:2777" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="2869:3292" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="2916:3262" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="2973:3050" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="3106:3229" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="3321:3739" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="3368:3709" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="3425:3502" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="3558:3676" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="3768:4190" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="3815:4160" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="3872:3949" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="4005:4127" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="4219:4639" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="4266:4609" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="4323:4400" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="4456:4576" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="4744:5020" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="4882:4993" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="5058:12346" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="5107:11931" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="5146:11900" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="5280:6216" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="5339:5597" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="5656:5890" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="5949:6177" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="6266:7219" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="6325:6588" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="6647:6882" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="6914:7178" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="7270:9460" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="7329:7564" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="7623:8343" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="7688:8299" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="7853:8252" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="8375:9086" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="8440:9042" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="8600:8995" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="9145:9421" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="9511:10235" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="9570:9844" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="9903:10195" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="10287:11859" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="10346:10705" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="10764:11068" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="11127:11442" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="11501:11820" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="11981:12319" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="12048:12288" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="12130:12253" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="12384:17116" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="12433:16390" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="12472:16359" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="12619:13825" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="12661:13012" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="13073:13386" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="13445:13783" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="13876:14757" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="13935:14332" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="14391:14718" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="14807:16319" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="14866:15153" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="15212:15476" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="15535:15880" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="15939:16279" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="16439:17089" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="16506:16751" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="16594:16716" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="16818:17058" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="16900:17023" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="17154:23081" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="17203:22352" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="17237:20507" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="20568:20808" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="20846:21155" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="21207:22281" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="21266:21532" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="21591:21882" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="21941:22241" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="22401:23051" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="22468:22713" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="22556:22678" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="22780:23020" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="22862:22985" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="23119:26332" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="23168:25606" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="23207:25575" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="23353:24501" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="23412:23760" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="23819:24089" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="24148:24462" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="24551:25535" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="24610:25193" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="24777:25176" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="25208:25518" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="25655:26305" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="25722:25967" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="25810:25932" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="26034:26274" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="26116:26239" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="26370:34958" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="26485:34945" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="26536:28960" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="26579:28925" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="26707:26969" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="26756:26807" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="26840:26953" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="27030:27284" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="27079:27118" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="27151:27268" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="27345:27595" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="27394:27431" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="27464:27579" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="27656:27914" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="27705:27742" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="27775:27898" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="27975:28241" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="28024:28065" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="28098:28225" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="28302:28561" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="28351:28394" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="28427:28545" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="28622:28881" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="28671:28714" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="28747:28865" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="29011:31500" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="29054:31465" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="29186:29439" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="29235:29271" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="29304:29423" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="29500:29773" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="29549:29599" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="29632:29757" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="29834:30098" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="29883:29927" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="29960:30082" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="30160:30424" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="30209:30253" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="30286:30408" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="30485:30758" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="30534:30584" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="30617:30742" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="30819:31088" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="30868:30909" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="30942:31072" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="31149:31421" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="31198:31245" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="31278:31405" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="31551:34717" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="31594:34682" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="31721:32004" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="31770:31817" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="31850:31988" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="32065:32341" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="32114:32162" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="32195:32325" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="32402:32677" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="32451:32500" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="32533:32661" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="32711:32995" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="32760:32813" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="32846:32979" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="33029:33309" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="33078:33132" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="33165:33293" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="33370:33635" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="33419:33467" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="33500:33619" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="33696:33954" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="33745:33786" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="33819:33938" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="34015:34297" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="34064:34119" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="34152:34281" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="34358:34638" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="34407:34454" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="34487:34622" placeholder="..." />
+            <marker date="1422340776906" expanded="true" signature="34749:34932" placeholder="..." />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Console/Command/PagamentoShell.php">
+    <entry file="file://$PROJECT_DIR$/app/Model/UnidadeOrganica.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="37" selection-start="395" selection-end="395" vertical-scroll-proportion="-9.333333" vertical-offset="0" max-vertical-offset="702">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Model/FinanceiroPagamento.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="231" column="71" selection-start="10341" selection-end="10341" vertical-scroll-proportion="-21.962963" vertical-offset="3565" max-vertical-offset="4554">
+        <state line="113" column="30" selection-start="2736" selection-end="2736" vertical-scroll-proportion="-16.296297" vertical-offset="1594" max-vertical-offset="3096">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Console/Command/OpenSGAShell.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="831" column="26" selection-start="45885" selection-end="45885" vertical-scroll-proportion="0.8101266" vertical-offset="14574" max-vertical-offset="35730">
+        <state line="1041" column="44" selection-start="57506" selection-end="57506" vertical-scroll-proportion="-6.2181816" vertical-offset="18396" max-vertical-offset="38088">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Controller/AlunoViaAdmissaosController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1836">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Controller/AlunosController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1503" column="62" selection-start="60693" selection-end="60693" vertical-scroll-proportion="0.50214595" vertical-offset="26820" max-vertical-offset="28584">
           <folding />
         </state>
       </provider>

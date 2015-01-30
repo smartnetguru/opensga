@@ -1,23 +1,27 @@
-/app/Assets/Fotos
-/app/tmp
+# User specific & automatically generated files #
+#################################################
 /app/Config/database.php
-/app/Config/bootstrap_siga.php
-/app/Config/core.php
-/app/tmp/logs/error.log
 /app/tmp
-/app/tmp/cache/persistent/cake_core_file_map
-/app/tmp/cache/persistent/cake_core_method_cache
-/app/tmp
-/app/Assets
-Assets
-uploads
-/app/uploads
-tmp
-/app/Config/core.php
-/lib/Cake/Console/Templates/skel/tmp
-/.settings/
-/.clover/
-/nbproject/private/
-/docs/manuais/build/pdf/.doctrees/
+/lib/Cake/Console/Templates/skel/tmp/
 /plugins
 /vendors
+/build
+/dist
+/tags
+*.mo
+
+# IDE and editor specific files #
+#################################
+/nbproject
+.idea
+
+# OS generated files #
+######################
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Icon?
+ehthumbs.db
+Thumbs.db

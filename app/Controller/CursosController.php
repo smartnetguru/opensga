@@ -34,8 +34,13 @@
             $this->set(compact('grauacademicos', 'tipocursos', 'escolas', 'unidadeOrganicas'));
         }
 
-        public function cursos_sem_encarregado() {
+        public function manutencao_cursos_sem_encarregado() {
             $cursos = $this->Curso->getAllCursosSemEncarregado();
+            $this->set(compact('cursos'));
+        }
+
+        public function manutencao_cursos_sem_turno(){
+            $cursos = $this->Curso->getAllCursosSemTurno();
             $this->set(compact('cursos'));
         }
 

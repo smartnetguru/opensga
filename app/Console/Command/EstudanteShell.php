@@ -819,5 +819,21 @@ class EstudanteShell extends AppShell {
     }
 
 
+    public function gera_referencia_renovacao(){
+        $this->Aluno->contain();
+
+            $alunos = $this->Aluno->find('all',array('conditions'=>array('OR'=>array('Aluno.referencia_renovacao is
+            null','Aluno.referencia_renovacao'=>''))));
+        $total = count($alunos);
+
+        foreach ($alunos as $aluno) {
+            if($referencia = $this->Aluno->geraReferenciaRenovacao($aluno['Aluno']['id'])){
+                $this->out($total--.'----------'.$referencia);
+            }
+        }
+
+    }
+
+
 
 }

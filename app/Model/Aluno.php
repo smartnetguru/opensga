@@ -551,14 +551,51 @@ class Aluno extends AppModel
     }
 
     public function getByReferenciaRenovacaoMatricula($referencia){
-        debug($referencia);
-        if(substr($referencia,0,1)=='0'){
-            $codigoAluno = substr($referencia,1,-2);
-        } elseif(substr($referencia,0,2)=='20'){
-            $codigoAluno = substr($referencia,0,-2);
+
+        $aluno = $this->findByReferenciaRenovacao($referencia);
+        if($aluno){
+            return $aluno;
+        } else{
+            return false;
         }
-        debug($codigoAluno);
     }
+
+
+    public function geraReferenciaRenovacao($alunoId=null){
+        $this->contain();
+            $aluno = $this->findById($alunoId);
+            $ano_ingresso = $aluno['Aluno']['ano_ingresso'];
+            if ($ano_ingresso >= 2000 && $ano_ingresso <= 2007) {
+                $referencia = substr($aluno['Aluno']['codigo'], 2);
+            } elseif ($ano_ingresso > 2007) {
+                $referencia = "0" . $aluno['Aluno']['codigo'];
+            } else {
+                $referencia = $aluno['Aluno']['codigo'];
+            }
+
+            $datasource = $this->getDatasource();
+            $datasource->begin();
+            $curso_turno = $this->Curso->CursosTurno->find('first', array('conditions' => array('curso_id' => $aluno['Aluno']['curso_id'])));
+            if ($curso_turno['CursosTurno']['turno_id'] == 1) {
+                $transacao['financeiro_tipo_transacao_id'] = 2;
+                $pagamento['tipo_pagamento_id']            = 37;
+                $transacao['valor']                        = 80;
+                $referencia                                = $referencia . "02";
+            } else {
+                $transacao['financeiro_tipo_transacao_id'] = 2;
+                $pagamento['tipo_pagamento_id']            = 38;
+                $transacao['valor']                        = 160;
+                $referencia                                = $referencia . "03";
+            }
+            $this->id = $alunoId;
+            $this->set('referencia_renovacao',$referencia);
+            $this->save();
+        $datasource->commit();
+        return $referencia;
+
+        }
+
+
     public function getAlunoForAction($alunoId)
     {
         $this->contain(array(

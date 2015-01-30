@@ -64,6 +64,41 @@
             }
         }
 
+
+        public function ama(){
+            $this->Aluno->contain('Curso');
+            $alunos = $this->Aluno->find('all',array('conditions'=>array('Curso.unidade_organica_id'=>1)));
+            foreach($alunos as $aluno){
+                $data = array(
+                    'aluno_id'=>$aluno['Aluno']['id'],
+                    'curso_id'=>$aluno['Aluno']['curso_id'],
+                    'plano_estudo_id'=>$aluno['Aluno']['plano_estudo_id'],
+                    'data'=>date('Y-m-d H:i:s'),
+                    'estado_matricula_id'=>1,
+                    'user_id'=>1,
+                    'turno_id'=>1,
+                    'tipo_matricula_id'=>2,
+                    'ano_lectivo_id'=>31
+
+                );
+                $matricular = false;
+                if($aluno['Aluno']['ano_ingresso']==2014){
+                    $matricular=true;
+                } else{
+                    $matricula2014= $this->Aluno->Matricula->find('first',
+                        array('conditions'=>array('aluno_id'=>$aluno['Aluno']['id'],'ano_lectivo_id'=>30)));
+                    if(!empty($matricula2014)){
+                        $matricular=true;
+                    }
+                }
+
+                if($matricular){
+                    $arrayMatricula=array('Matricula'=>$data);
+                    $this->Aluno->Matricula->create();
+                    $this->Aluno->Matricula->save($arrayMatricula);
+                }
+            }
+        }
         public function actualiza_matriculas() {
             AuditableConfig::$Logger = ClassRegistry::init('Auditable.Logger');
 
@@ -934,16 +969,16 @@
             }
         }
 
-        public function importa_admitidos_2014() {
+        public function importa_admitidos_base() {
             AuditableConfig::$Logger = ClassRegistry::init('Auditable.Logger');
             App::import('Vendor', 'PHPExcel', array('file' => 'PHPExcel.php'));
             if (!class_exists('PHPExcel'))
                 throw new CakeException('Vendor class PHPExcel not found!');
 
-            $xls = PHPExcel_IOFactory::load(APP . 'Imports' . DS . 'admitidos.xlsx');
+            $xls = PHPExcel_IOFactory::load(APP . 'Imports' . DS .'Admitidos'.DS.'2015'.DS. 'admitidos.xlsx');
+
 
             $worksheet = $xls->getActiveSheet();
-//debug($xls->getActiveSheetIndex());
             $linha_actual = 2;
             foreach ($worksheet->getRowIterator() as $row) {
                 if ($worksheet->getCell('A' . $linha_actual)->getValue() == '') {
@@ -951,23 +986,119 @@
                 }
 
                 $nao_encontrados  = array();
-                $numero_candidato = $worksheet->getCell('A' . $linha_actual)->getCalculatedValue();
+                $numero_candidato = $worksheet->getCell('C' . $linha_actual)->getCalculatedValue();
+
                 $candidato        = $this->Candidatura->findByNumeroCandidato($numero_candidato);
+                $codigo_curso_admissao = $worksheet->getCell('E' . $linha_actual)->getCalculatedValue();
+
+                if(in_array($codigo_curso_admissao,array(1150,1151,1155,1148,1149,1152,1154))){
+                    $codigo_curso_admissao=1153;
+                }
+
+                if(in_array($codigo_curso_admissao,array(1142))){
+                    $codigo_curso_admissao=1141;
+                }
+                if(in_array($codigo_curso_admissao,array(1133))){
+                    $codigo_curso_admissao=1042;
+                }
+
+                if(in_array($codigo_curso_admissao,array(1098,1099))){
+                    $codigo_curso_admissao=1097;
+                }
+                if(in_array($codigo_curso_admissao,array(1046))){
+                    $codigo_curso_admissao=1156;
+                }
+                if(in_array($codigo_curso_admissao,array(1136))){
+                    $codigo_curso_admissao=1054;
+                }
+
+                if(in_array($codigo_curso_admissao,array(1104))){
+                    $codigo_curso_admissao=1103;
+                }
+                if(in_array($codigo_curso_admissao,array(1115))){
+                    $codigo_curso_admissao=1114;
+                }
+                if(in_array($codigo_curso_admissao,array(1121))){
+                    $codigo_curso_admissao=1120;
+                }
+                if(in_array($codigo_curso_admissao,array(1119))){
+                    $codigo_curso_admissao=1118;
+                }
+                if(in_array($codigo_curso_admissao,array(1126,1146))){
+                    $codigo_curso_admissao=1125;
+                }
+                if(in_array($codigo_curso_admissao,array(1017,1139))){
+                    $codigo_curso_admissao=1015;
+                }
+                if(in_array($codigo_curso_admissao,array(1018,1147))){
+                    $codigo_curso_admissao=1016;
+                }
+                if(in_array($codigo_curso_admissao,array(1093))){
+                    $codigo_curso_admissao=1091;
+                }
+                if(in_array($codigo_curso_admissao,array(1068,1069))){
+                    $codigo_curso_admissao=1067;
+                }
+                if(in_array($codigo_curso_admissao,array(1134))){
+                    $codigo_curso_admissao=1045;
+                }
+                if(in_array($codigo_curso_admissao,array(1135))){
+                    $codigo_curso_admissao=1048;
+                }
+
+                $curso = $this->Curso->findByCodigoAdmissao($codigo_curso_admissao);
+                if(empty($curso)){
+                    debug('empty');
+                    debug($codigo_curso_admissao);
+                    $curso_zero[] =$codigo_curso_admissao;
+                    die();
+                }
+
+                $faculdade = $this->Curso->UnidadeOrganica->getFaculdadeByCursoId($curso['Curso']['id']);
+
                 if ($candidato) {
                     $this->Candidatura->id = $candidato['Candidatura']['id'];
-
-                    $this->Candidatura->set('numero_estudante', $worksheet->getCell('B' . $linha_actual)->getCalculatedValue());
-                    $this->Candidatura->set('codigo_curso_admitido_admissao', $worksheet->getCell('D' . $linha_actual)->getCalculatedValue());
-                    $this->Candidatura->set('data_nascimento', $worksheet->getCell('O' . $linha_actual)->getFormattedValue());
+                    $this->Candidatura->set('numero_estudante', $worksheet->getCell('A' . $linha_actual)
+                        ->getCalculatedValue());
+                    $this->Candidatura->set('codigo_curso_admitido_admissao',
+                        $worksheet->getCell('E' . $linha_actual)->getCalculatedValue());
+                    $this->Candidatura->set('name', $worksheet->getCell('O' . $linha_actual)
+                        ->getFormattedValue());
                     $this->Candidatura->set('aluno_via_admissao_id', 1);
                     $this->Candidatura->set('tipo_ingresso_id', 1);
                     $this->Candidatura->set('estado_candidatura_id', 2);
+                    $this->Candidatura->set('ano_lectivo_admissao', 2015);
+                    $this->Candidatura->set('curso_id', $curso['Curso']['id']);
+                    $this->Candidatura->set('ano_candidatura', 2014);
+                    $this->Candidatura->set('nome_faculdade',$faculdade['UnidadeOrganica']['name']);
+                    $this->Candidatura->set('nome_curso',$curso['Curso']['name']);
+                    $this->Candidatura->set('estado_matricula_id',5);
+
 
                     $this->Candidatura->save();
                     $this->out($linha_actual . '--------------------------------' . $this->Candidatura->id);
-
-// debug($this->Candidatura->data);
                 } else {
+                    $this->Candidatura->create();
+                    $arrayCandidatura = [
+                        'Candidatura'=>[
+                            'numero_estudante'=>$worksheet->getCell('A' . $linha_actual)->getCalculatedValue(),
+                            'numero_candidato'=>$worksheet->getCell('C' . $linha_actual)->getCalculatedValue(),
+                            'codigo_curso_admitido_admissao'=>$worksheet->getCell('E' . $linha_actual)->getCalculatedValue(),
+                            'aluno_via_admissao_id'=>1,
+                            'tipo_ingresso_id'=>1,
+                            'estado_candidatura_id'=>2,
+                            'name'=>$worksheet->getCell('O' . $linha_actual)->getFormattedValue(),
+                            'ano_lectivo_admissao'=>2015,
+                            'curso_id'=>$curso['Curso']['id'],
+                            'ano_candidatura'=>2014,
+                            'nome_faculdade'=>$faculdade['UnidadeOrganica']['name'],
+                            'nome_curso'=>$curso['Curso']['name'],
+                            'estado_matricula_id'=>5,
+
+                        ]
+                    ];
+                    $this->Candidatura->save($arrayCandidatura);
+                    $this->out($linha_actual . '-----------------NOVO---------------' . $this->Candidatura->id);
                     $nao_encontrados[] = $numero_candidato;
                 }
 
