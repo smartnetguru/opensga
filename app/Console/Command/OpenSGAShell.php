@@ -1055,6 +1055,17 @@
                 }
 
                 $faculdade = $this->Curso->UnidadeOrganica->getFaculdadeByCursoId($curso['Curso']['id']);
+                $nome = $worksheet->getCell('D' . $linha_actual)->getFormattedValue();
+                $nome = trim($nome);
+                $nomes = explode(' ', $nome);
+                $apelido = array_pop($nomes);
+
+                $first_names = implode(' ',$nomes);
+
+                debug($apelido);
+                debug($first_names);
+                debug($nome);
+
 
                 if ($candidato) {
                     $this->Candidatura->id = $candidato['Candidatura']['id'];
@@ -1062,7 +1073,7 @@
                         ->getCalculatedValue());
                     $this->Candidatura->set('codigo_curso_admitido_admissao',
                         $worksheet->getCell('E' . $linha_actual)->getCalculatedValue());
-                    $this->Candidatura->set('name', $worksheet->getCell('O' . $linha_actual)
+                    $this->Candidatura->set('name', $worksheet->getCell('D' . $linha_actual)
                         ->getFormattedValue());
                     $this->Candidatura->set('aluno_via_admissao_id', 1);
                     $this->Candidatura->set('tipo_ingresso_id', 1);
@@ -1073,6 +1084,8 @@
                     $this->Candidatura->set('nome_faculdade',$faculdade['UnidadeOrganica']['name']);
                     $this->Candidatura->set('nome_curso',$curso['Curso']['name']);
                     $this->Candidatura->set('estado_matricula_id',5);
+                    $this->Candidatura->set('nomes',$first_names);
+                    $this->Candidatura->set('apelido',$apelido);
 
 
                     $this->Candidatura->save();
@@ -1094,6 +1107,8 @@
                             'nome_faculdade'=>$faculdade['UnidadeOrganica']['name'],
                             'nome_curso'=>$curso['Curso']['name'],
                             'estado_matricula_id'=>5,
+                            'nomes'=>$first_names,
+                            'apelido'=>$apelido
 
                         ]
                     ];
@@ -1312,40 +1327,94 @@
             if (!class_exists('PHPExcel'))
                 throw new CakeException('Vendor class PHPExcel not found!');
 
-            $xls = PHPExcel_IOFactory::load(APP . 'Imports' . DS . 'candidatos.xlsx');
+            $xls = PHPExcel_IOFactory::load(APP . 'Imports' . DS .'Admitidos'.DS.'2015'.DS. 'candidatos.xlsx');
 
             $worksheet = $xls->getActiveSheet();
 //debug($xls->getActiveSheetIndex());
             $linha_actual = 2;
+
             foreach ($worksheet->getRowIterator() as $row) {
-                if ($worksheet->getCell('A' . $linha_actual)->getValue() == '') {
+                if ($worksheet->getCell('B' . $linha_actual)->getValue() == '') {
                     break;
                 }
 
-                $array_candidato = array(
-                    'Candidatura' => array(
-                        'numero_estudante' => $worksheet->getCell('A' . $linha_actual)->getCalculatedValue(),
-                        'nomes'            => $worksheet->getCell('B' . $linha_actual)->getValue(),
-                        //   'apelido' => $worksheet->getCell('C' . $linha_actual)->getValue(),
-//   'nome_curso' => $worksheet->getCell('D' . $linha_actual)->getValue()
-                    )
-                );
-
-                $curso                                      = $this->Curso->findByName($worksheet->getCell('D' . $linha_actual)->getValue());
-                $array_candidato['Candidatura']['curso_id'] = $curso['Curso']['id'];
-
-                $faculdade = $this->UnidadeOrganica->findById($curso['Curso']['unidade_organica_id']);
-                if ($faculdade['UnidadeOrganica']['tipo_unidade_organica_id'] != 1) {
-                    $faculdade = $this->UnidadeOrganica->findById($faculdade['UnidadeOrganica']['parent_id']);
+                $numero_candidato = $worksheet->getCell('B' . $linha_actual)->getCalculatedValue();
+                $apelido = $worksheet->getCell('C' . $linha_actual)->getCalculatedValue();
+                $apelido = ucwords(strtolower($apelido));
+                $nomes = $worksheet->getCell('D' . $linha_actual)->getCalculatedValue();
+                $nomes = ucwords(strtolower($nomes));
+                $tipoDocumento = $worksheet->getCell('E' . $linha_actual)->getCalculatedValue();
+                $numeroDocumento = $worksheet->getCell('F' . $linha_actual)->getCalculatedValue();
+                $dataNascimento = $worksheet->getCell('G' . $linha_actual)->getCalculatedValue();
+                $sexo = $worksheet->getCell('H' . $linha_actual)->getCalculatedValue();
+                if($sexo =='M'){
+                    $genero = 1;
+                } elseif($sexo=='F'){
+                    $genero = 2;
+                }
+                $estadoCivil = $worksheet->getCell('I' . $linha_actual)->getCalculatedValue();
+                if($estadoCivil=='C'){
+                    $estadoCivilId = 2;
+                } elseif($estadoCivil=='D'){
+                    $estadoCivilId = 4;
+                } elseif($estadoCivil=='S'){
+                    $estadoCivilId = 1;
+                } elseif($estadoCivil=='V'){
+                    $estadoCivilId = 6;
                 }
 
-                $array_candidato['Candidatura']['unidade_organica_id'] = $curso['Curso']['unidade_organica_id'];
-                $array_candidato['Candidatura']['nome_faculdade']      = $faculdade['UnidadeOrganica']['name'];
+                $provinciaNascimento = $worksheet->getCell('K' . $linha_actual)->getCalculatedValue();
+                $provincia = $this->Aluno->Entidade->ProvinciaNascimento->findByCodigoAdmissao($provinciaNascimento);
+                if($provincia){
+                    $provinciaNascimentoId = $provincia['ProvinciaNascimento']['id'];
+                }
+                $provinciaResidencia = $worksheet->getCell('L' . $linha_actual)->getCalculatedValue();
+                $provincia = $this->Aluno->Entidade->ProvinciaNascimento->findByCodigoAdmissao($provinciaResidencia);
+                if($provincia){
+                    $provinciaResidenciaId = $provincia['ProvinciaNascimento']['id'];
+                }
+                $provinciaCandidatura = $worksheet->getCell('M' . $linha_actual)->getCalculatedValue();
+                $provincia = $this->Aluno->Entidade->ProvinciaNascimento->findByCodigoAdmissao($provinciaCandidatura);
+                if($provincia){
+                    $provinciaCandidaturaId = $provincia['ProvinciaNascimento']['id'];
+                }
+                $escolaNivelMedio = $worksheet->getCell('N' . $linha_actual)->getCalculatedValue();
+                $anoConclusao = $worksheet->getCell('P' . $linha_actual)->getCalculatedValue();
+                $escolaN = $this->Aluno->AlunoNivelMedio->EscolaNivelMedio->findByCodigoAdmissao($escolaNivelMedio);
+                if($escolaN){
+                    $escolaNivelMedioId = $escolaN['EscolaNivelMedio']['id'];
+                }
+                $email = $worksheet->getCell('V' . $linha_actual)->getCalculatedValue();
+                $telemovel = $worksheet->getCell('X' . $linha_actual)->getCalculatedValue().$worksheet->getCell('W' .$linha_actual)->getCalculatedValue();;
+                $nacionalidade = 152;
 
-                $this->Candidatura->create();
-                $this->Candidatura->save($array_candidato);
-                debug($this->Candidatura->id);
 
+                $candidatoExiste = $this->Candidatura->findByNumeroCandidato($numero_candidato);
+                if($candidatoExiste){
+                    $this->out('Existente');
+                    $this->Candidatura->id = $candidatoExiste['Candidatura']['id'];
+                } else{
+                    $this->Candidatura->create();
+                }
+                $this->Candidatura->set('apelido', $apelido);
+                $this->Candidatura->set('nomes', $nomes);
+                $this->Candidatura->set('name', $nomes.' '.$apelido);
+                $this->Candidatura->set('documento_identificacao_id',$tipoDocumento);
+                $this->Candidatura->set('documento_identificacao_numero', $numeroDocumento);
+                $this->Candidatura->set('data_nascimento',$dataNascimento);
+                $this->Candidatura->set('estado_civil_id', $estadoCivilId);
+                $this->Candidatura->set('genero_id', $genero);
+                $this->Candidatura->set('provincia_nascimento', $provinciaNascimentoId);
+                $this->Candidatura->set('provincia_candidatura', $provinciaCandidaturaId);
+                $this->Candidatura->set('provincia_residencia', $provinciaResidenciaId);
+                $this->Candidatura->set('escola_nivel_medio_id', $escolaNivelMedioId);
+                $this->Candidatura->set('nota_conclusao', $anoConclusao);
+                $this->Candidatura->set('email', $email);
+                $this->Candidatura->set('telemovel', $telemovel);
+                $this->Candidatura->set('nacionalidade', $nacionalidade);
+                $this->Candidatura->set('pais_nascimento', $nacionalidade);
+                $this->Candidatura->save();
+                $this->out($linha_actual. '----------------Candidato Criado---------------'.$this->Candidatura->id);
                 $linha_actual++;
             }
         }
@@ -2105,6 +2174,61 @@
             }
             debug($encontrados);
         }
+
+
+        public function separa_apelido_candidatos(){
+            $candidatos  = $this->Candidatura->find('all',array('conditions'=>array('ano_lectivo_admissao'=>2015)));
+            $numero = count($candidatos);
+            foreach($candidatos as $candidato){
+                $nome = $candidato['Candidatura']['name'];
+                $nome = trim($nome);
+                $nomes = explode(' ', $nome);
+
+                $this->Candidatura->id = $candidato['Candidatura']['id'];
+                $this->Candidatura->set('nomes',$nomes[0]);
+                $this->Candidatura->set('apelido',strtolower(end($nomes)));
+                debug($nome);
+                debug($nomes);
+                $this->Candidatura->save();
+
+                $this->out($numero--);
+
+
+
+            }
+        }
+
+
+        public function importa_escola_nivel_medios() {
+            AuditableConfig::$Logger = ClassRegistry::init('Auditable.Logger');
+            App::import('Vendor', 'PHPExcel', array('file' => 'PHPExcel.php'));
+            if (!class_exists('PHPExcel'))
+                throw new CakeException('Vendor class PHPExcel not found!');
+
+            $xls = PHPExcel_IOFactory::load(APP . 'Imports' . DS .'Admitidos'.DS.'2015'.DS.
+                'escola_nivel_medios.xlsx');
+
+            $worksheet = $xls->getActiveSheet();
+
+            $linha_actual = 2;
+            foreach ($worksheet->getRowIterator() as $row) {
+                if ($worksheet->getCell('A' . $linha_actual)->getValue() == '') {
+                    break;
+                }
+
+                $arrayNovaEscola = [
+                    'EscolaNivelMedio'=>[
+                        'codigo_admissao'=>$worksheet->getCell('A' . $linha_actual)->getCalculatedValue(),
+                        'name'=>$worksheet->getCell('B' . $linha_actual)->getCalculatedValue()
+                    ]
+                ];
+                $this->Aluno->AlunoNivelMedio->EscolaNivelMedio->create();
+                $this->Aluno->AlunoNivelMedio->EscolaNivelMedio->save($arrayNovaEscola);
+                $this->out($arrayNovaEscola['EscolaNivelMedio']['name']);
+                $linha_actual++;
+            }
+        }
+
 
 
     }
