@@ -1533,13 +1533,13 @@
             $worksheet = $xls->getActiveSheet();
         }
 
-        public function importa_parentes_2014() {
+        public function importa_parentes() {
             AuditableConfig::$Logger = ClassRegistry::init('Auditable.Logger');
             App::import('Vendor', 'PHPExcel', array('file' => 'PHPExcel.php'));
             if (!class_exists('PHPExcel'))
                 throw new CakeException('Vendor class PHPExcel not found!');
 
-            $xls = PHPExcel_IOFactory::load(APP . 'Imports' . DS . 'parentes.xlsx');
+            $xls = PHPExcel_IOFactory::load(APP . 'Imports' . DS .'Admitidos'.DS.'2015'.DS. 'Agregado_familiar.xlsx');
 
             $worksheet = $xls->getActiveSheet();
 //debug($xls->getActiveSheetIndex());
@@ -1548,29 +1548,73 @@
                 if ($worksheet->getCell('A' . $linha_actual)->getValue() == '') {
                     break;
                 }
-
-                $nao_encontrados  = array();
                 $numero_candidato = $worksheet->getCell('A' . $linha_actual)->getCalculatedValue();
                 $candidato        = $this->Candidatura->findByNumeroCandidato($numero_candidato);
+
                 if ($candidato) {
                     $this->Candidatura->id = $candidato['Candidatura']['id'];
 
-                    $this->Candidatura->set('nome_pai', ucwords(strtolower($worksheet->getCell('D' . $linha_actual)->getCalculatedValue())));
-                    $this->Candidatura->set('nome_mae', ucwords(strtolower($worksheet->getCell('E' . $linha_actual)->getCalculatedValue())));
-                    $this->Candidatura->set('cidade_nascimento', $worksheet->getCell('D' . $linha_actual)->getCalculatedValue());
+                    $this->Candidatura->set('nome_pai', ucwords(strtolower($worksheet->getCell('F' . $linha_actual)
+                        ->getCalculatedValue())));
+                    $this->Candidatura->set('nome_mae', ucwords(strtolower($worksheet->getCell('G' . $linha_actual)
+                        ->getCalculatedValue())));
+                    $cidadeNascimento = $worksheet->getCell('K' . $linha_actual)->getCalculatedValue();
+                    $cidade = $this->Aluno->Entidade->CidadeNascimento->findByCodigoAdmissao($cidadeNascimento);
+                    if($cidade){
+                        $cidadeNascimentoId  = $cidade['CidadeNascimento']['id'];
+                    }
+                    $this->Candidatura->set('cidade_nascimento',$cidadeNascimentoId );
+
+                    $cidadeMorada = $worksheet->getCell('M' . $linha_actual)->getCalculatedValue();
+                    $cidade = $this->Aluno->Entidade->CidadeNascimento->findByCodigoAdmissao($cidadeMorada);
+                    if($cidade){
+                        $cidadeMoradaId  = $cidade['CidadeNascimento']['id'];
+                    }
+                    $this->Candidatura->set('cidade_nascimento',$cidadeMoradaId );
 
                     $this->Candidatura->save();
                     $this->out($linha_actual . '--------------------------------' . $this->Candidatura->id);
-
-// debug($this->Candidatura->data);
-                } else {
-                    $nao_encontrados[] = $numero_candidato;
                 }
 
                 $linha_actual++;
             }
-            $this->out($nao_encontrados);
         }
+
+        public function importa_nuit() {
+            AuditableConfig::$Logger = ClassRegistry::init('Auditable.Logger');
+            App::import('Vendor', 'PHPExcel', array('file' => 'PHPExcel.php'));
+            if (!class_exists('PHPExcel'))
+                throw new CakeException('Vendor class PHPExcel not found!');
+
+            $xls = PHPExcel_IOFactory::load(APP . 'Imports' . DS .'Admitidos'.DS.'2015'.DS. 'nuit.xlsx');
+
+            $worksheet = $xls->getActiveSheet();
+//debug($xls->getActiveSheetIndex());
+            $linha_actual = 1;
+            foreach ($worksheet->getRowIterator() as $row) {
+                if ($worksheet->getCell('B' . $linha_actual)->getValue() == '') {
+                    break;
+                }
+
+                $numero_candidato = $worksheet->getCell('B' . $linha_actual)->getCalculatedValue();
+                $candidato        = $this->Candidatura->findByNumeroCandidato($numero_candidato);
+
+                if ($candidato) {
+                    $this->Candidatura->id = $candidato['Candidatura']['id'];
+
+                    $nuit = $worksheet->getCell('E' . $linha_actual)->getCalculatedValue();
+                    $this->Candidatura->set('cidade_nascimento',$nuit );
+
+                    $this->Candidatura->save();
+                    $this->out($linha_actual . '--------------------------------' . $this->Candidatura->id);
+                } else {
+
+                }
+
+                $linha_actual++;
+            }
+        }
+
 
         public function importa_plano_estudo_excel() {
             App::import('Vendor', 'PHPExcel', array('file' => 'PHPExcel.php'));

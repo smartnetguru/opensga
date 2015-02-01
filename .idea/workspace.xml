@@ -5,14 +5,10 @@
       <change type="DELETED" beforePath="$PROJECT_DIR$/app/Controller/EpocaAvaliacaosController.php" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/app/Controller/RegimeLectivosController.php" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/app/Controller/SemestreLectivosController.php" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Reports/bolsas_novos_ingressos.xlsx" afterPath="$PROJECT_DIR$/app/Reports/bolsas_novos_ingressos.xlsx" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/database/opensga_modelo_database.mwb.bak" afterPath="$PROJECT_DIR$/docs/database/opensga_modelo_database.mwb.bak" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/database/opensga_modelo_database.mwb" afterPath="$PROJECT_DIR$/docs/database/opensga_modelo_database.mwb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/manuais/source" afterPath="$PROJECT_DIR$/docs/manuais/source" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Model/EscolaNivelMedio.php" afterPath="$PROJECT_DIR$/app/Model/EscolaNivelMedio.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Console/Command/OpenSGAShell.php" afterPath="$PROJECT_DIR$/app/Console/Command/OpenSGAShell.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/View/Alunos/print_bolsas_novo_ingresso.ctp" afterPath="$PROJECT_DIR$/app/View/Alunos/print_bolsas_novo_ingresso.ctp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="opensga.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -38,7 +34,7 @@
       <file leaf-file-name="OpenSGAShell.php" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/Console/Command/OpenSGAShell.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="1410" column="45" selection-start="77827" selection-end="77827" vertical-scroll-proportion="0.58220506" vertical-offset="25079" max-vertical-offset="40320">
+            <state line="1592" column="29" selection-start="87729" selection-end="87729" vertical-scroll-proportion="0.88957053" vertical-offset="28221" max-vertical-offset="41112">
               <folding />
             </state>
           </provider>
@@ -1119,7 +1115,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Console/Command/OpenSGAShell.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="1410" column="45" selection-start="77827" selection-end="77827" vertical-scroll-proportion="0.58220506" vertical-offset="25079" max-vertical-offset="40320">
+        <state line="1592" column="29" selection-start="87729" selection-end="87729" vertical-scroll-proportion="0.88957053" vertical-offset="28221" max-vertical-offset="41112">
           <folding />
         </state>
       </provider>
