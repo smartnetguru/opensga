@@ -1395,6 +1395,7 @@
                     $this->Candidatura->id = $candidatoExiste['Candidatura']['id'];
                 } else{
                     $this->Candidatura->create();
+                    $this->Candidatura->set('numero_candidato', $numero_candidato);
                 }
                 $this->Candidatura->set('apelido', $apelido);
                 $this->Candidatura->set('nomes', $nomes);

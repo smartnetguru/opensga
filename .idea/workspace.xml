@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fc9bff1a-fcc4-4747-ab16-ab64e9734a11" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/View/Candidaturas/print_boletim_matriculas.ctp" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/app/Controller/EpocaAvaliacaosController.php" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/app/Controller/RegimeLectivosController.php" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/app/Controller/SemestreLectivosController.php" afterPath="" />
@@ -10,18 +9,7 @@
       <change type="DELETED" beforePath="$PROJECT_DIR$/app/mestres.xlsx" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/app/mestres2.xlsx" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/manuais/source" afterPath="$PROJECT_DIR$/docs/manuais/source" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Model/Aluno.php" afterPath="$PROJECT_DIR$/app/Model/Aluno.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Controller/AlunosController.php" afterPath="$PROJECT_DIR$/app/Controller/AlunosController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Model/Candidatura.php" afterPath="$PROJECT_DIR$/app/Model/Candidatura.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Controller/CandidaturasController.php" afterPath="$PROJECT_DIR$/app/Controller/CandidaturasController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Config/Config-Default.php" afterPath="$PROJECT_DIR$/app/Config/Config-Default.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Config/Config-UEM.php" afterPath="$PROJECT_DIR$/app/Config/Config-UEM.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Console/Command/OpenSGAAclShell.php" afterPath="$PROJECT_DIR$/app/Console/Command/OpenSGAAclShell.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Console/Command/OpenSGAShell.php" afterPath="$PROJECT_DIR$/app/Console/Command/OpenSGAShell.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Model/User.php" afterPath="$PROJECT_DIR$/app/Model/User.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/View/Candidaturas/index.ctp" afterPath="$PROJECT_DIR$/app/View/Candidaturas/index.ctp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/View/Alunos/matricular_candidato.ctp" afterPath="$PROJECT_DIR$/app/View/Alunos/matricular_candidato.ctp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="opensga.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -44,10 +32,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="OpenSGAShell.php" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="OpenSGAShell.php" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/Console/Command/OpenSGAShell.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="1572" column="58" selection-start="86923" selection-end="86923" vertical-scroll-proportion="0.0" vertical-offset="27925" max-vertical-offset="43614">
+            <state line="1397" column="81" selection-start="76905" selection-end="76905" vertical-scroll-proportion="0.31235954" vertical-offset="25007" max-vertical-offset="43632">
               <folding />
             </state>
           </provider>
@@ -98,14 +86,23 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Aluno.php" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="Aluno.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Model/Aluno.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="1202" column="38" selection-start="46868" selection-end="46868" vertical-scroll-proportion="0.41860464" vertical-offset="21438" max-vertical-offset="28530">
+            <state line="1202" column="38" selection-start="46868" selection-end="46868" vertical-scroll-proportion="-7.3333335" vertical-offset="21438" max-vertical-offset="28530">
               <folding>
                 <marker date="1422835336837" expanded="true" signature="15444:15508" placeholder="Select plano..matriculas..." />
                 <marker date="1422835336837" expanded="true" signature="16016:16080" placeholder="Select plano..matriculas..." />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="core.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Config/core.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="34" column="30" selection-start="1239" selection-end="1239" vertical-scroll-proportion="-10.666667" vertical-offset="0" max-vertical-offset="6066">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -141,7 +138,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/app/Controller/AppController.php" />
         <option value="$PROJECT_DIR$/app/Controller/UsersController.php" />
         <option value="$PROJECT_DIR$/app/webroot/assets/css/opensga.css" />
         <option value="$PROJECT_DIR$/app/webroot/assets/js/opensga.js" />
@@ -187,11 +183,12 @@
         <option value="$PROJECT_DIR$/app/View/Candidaturas/print_boletim_matriculas.ctp" />
         <option value="$PROJECT_DIR$/app/Controller/CandidaturasController.php" />
         <option value="$PROJECT_DIR$/app/Model/Candidatura.php" />
-        <option value="$PROJECT_DIR$/app/Console/Command/OpenSGAShell.php" />
         <option value="$PROJECT_DIR$/app/Controller/AlunosController.php" />
         <option value="$PROJECT_DIR$/app/Model/User.php" />
         <option value="$PROJECT_DIR$/app/View/Alunos/matricular_candidato.ctp" />
         <option value="$PROJECT_DIR$/app/Model/Aluno.php" />
+        <option value="$PROJECT_DIR$/app/Config/core.php" />
+        <option value="$PROJECT_DIR$/app/Console/Command/OpenSGAShell.php" />
       </list>
     </option>
   </component>
@@ -278,6 +275,24 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Config" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
     </panes>
@@ -354,7 +369,7 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.27836612" sideWeight="0.318569" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.27836612" sideWeight="0.681431" order="0" side_tool="true" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.27836612" sideWeight="0.681431" order="0" side_tool="true" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3289689" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
@@ -397,11 +412,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/View/Matriculas/index.ctp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="30" selection-start="0" selection-end="5072" vertical-scroll-proportion="0.0" vertical-offset="234" max-vertical-offset="2268" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/View/Matriculas/renovacao_matriculas.ctp">
       <provider selected="true" editor-type-id="text-editor">
         <state line="16" column="88" selection-start="836" selection-end="836" vertical-scroll-proportion="0.0" vertical-offset="288" max-vertical-offset="1440" />
@@ -641,13 +651,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Console/Command/OpenSGAShell.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1572" column="58" selection-start="86923" selection-end="86923" vertical-scroll-proportion="0.0" vertical-offset="27925" max-vertical-offset="43614">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Model/User.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="88" column="25" selection-start="2134" selection-end="2139" vertical-scroll-proportion="0.33258426" vertical-offset="1436" max-vertical-offset="6966">
@@ -671,11 +674,25 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Model/Aluno.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="1202" column="38" selection-start="46868" selection-end="46868" vertical-scroll-proportion="0.41860464" vertical-offset="21438" max-vertical-offset="28530">
+        <state line="1202" column="38" selection-start="46868" selection-end="46868" vertical-scroll-proportion="-7.3333335" vertical-offset="21438" max-vertical-offset="28530">
           <folding>
             <marker date="1422835336837" expanded="true" signature="15444:15508" placeholder="Select plano..matriculas..." />
             <marker date="1422835336837" expanded="true" signature="16016:16080" placeholder="Select plano..matriculas..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Config/core.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="34" column="30" selection-start="1239" selection-end="1239" vertical-scroll-proportion="-10.666667" vertical-offset="0" max-vertical-offset="6066">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Console/Command/OpenSGAShell.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1397" column="81" selection-start="76905" selection-end="76905" vertical-scroll-proportion="0.31235954" vertical-offset="25007" max-vertical-offset="43632">
+          <folding />
         </state>
       </provider>
     </entry>
