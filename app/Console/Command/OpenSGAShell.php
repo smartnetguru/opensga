@@ -1408,7 +1408,7 @@
                 $this->Candidatura->set('provincia_candidatura', $provinciaCandidaturaId);
                 $this->Candidatura->set('provincia_residencia', $provinciaResidenciaId);
                 $this->Candidatura->set('escola_nivel_medio_id', $escolaNivelMedioId);
-                $this->Candidatura->set('nota_conclusao', $anoConclusao);
+                $this->Candidatura->set('ano_conclusao', $anoConclusao);
                 $this->Candidatura->set('email', $email);
                 $this->Candidatura->set('telemovel', $telemovel);
                 $this->Candidatura->set('nacionalidade', $nacionalidade);
@@ -1570,7 +1570,7 @@
                     if($cidade){
                         $cidadeMoradaId  = $cidade['CidadeNascimento']['id'];
                     }
-                    $this->Candidatura->set('cidade_nascimento',$cidadeMoradaId );
+                    $this->Candidatura->set('cidade_morada',$cidadeMoradaId );
 
                     $this->Candidatura->save();
                     $this->out($linha_actual . '--------------------------------' . $this->Candidatura->id);
@@ -2273,6 +2273,145 @@
             }
         }
 
+
+
+
+        public function print_boletim_matriculas() {
+            $this->Candidatura->contain('Curso');
+            $cursos = $this->Candidatura->find('list', array('conditions' => array('estado_candidatura_id' => 2, 'ano_lectivo_admissao' => Configure::read('OpenSGA.ano_lectivo')), 'fields' => array('curso_id', 'Curso.name'), 'group' => 'curso_id', 'order' => 'Curso.name'));
+
+            $this->out('Comecando..................');
+            foreach ($cursos as $k => $v) {
+                $candidatos = array();
+                App::import('Vendor', 'PHPExcel', array('file' => 'PHPExcel.php'));
+                if (!class_exists('PHPExcel'))
+                    throw new CakeException('Vendor class PHPExcel not found!');
+
+                $this->out('Lendo o excel..............'.$v);
+                $xls = PHPExcel_IOFactory::load(APP.'Reports'.DS.'print_boletim_matricula.xlsx');
+                $this->Candidatura->contain(array(
+                    'Genero','CidadeNascimento','ProvinciaNascimento','PaisNascimento','EscolaNivelMedio',
+                    'EstadoCivil','DocumentoIdentificacao'
+                ));
+                $candidatos = $this->Candidatura->find('all',
+                    array('conditions' => array(
+                        'estado_candidatura_id' => 2,
+                        'ano_lectivo_admissao' =>Configure::read('OpenSGA.ano_lectivo'),
+                        'curso_id' => $k
+                    ),
+                          'order' => array('apelido', 'nomes')
+                    ,'limit'=>5
+                    )
+                );
+
+
+                foreach($candidatos as $candidato){
+
+
+                    debug($candidato);
+                    die();
+                    $this->out('Candidato................ '.$candidato['Candidatura']['numero_estudante']);
+                    $worksheet = clone $xls->getSheetByName("Sheet1");
+                    $worksheet->setTitle($candidato['Candidatura']['numero_estudante']);
+                    $newSheetIndex = 1;
+                    $xls->addSheet($worksheet,$newSheetIndex);
+
+                    //$xls->addImage(WWW_ROOT.'img'.DS.'logo_login_'.Configure::read('OpenSGA.instituicao.sigla').'
+                    //.png','A1',10,210,135); //Logotipo
+                    $worksheet->setCellValue('A1', Configure::read('OpenSGA.instituicao.nome')); //Nome da Instituicao
+
+
+                    //Faculdade
+                    $worksheet->setCellValue('A3', $candidato['Candidatura']['nome_faculdade']); //Nome da Instituicao
+                    //Curso
+                    $worksheet->setCellValue('A4', $candidato['Candidatura']['nome_curso']); //Nome da Instituicao
+                    //Ano Lectivo
+                    $worksheet->setCellValue('B7', $candidato['Candidatura']['ano_lectivo_admissao']);
+                    //Numero de estudante
+                    $worksheet->setCellValue('F7', $candidato['Candidatura']['numero_estudante']);
+                    //Apelido
+                    $worksheet->setCellValue('C10', $candidato['Candidatura']['apelido']);
+                    //Nomes
+                    $worksheet->setCellValue('C11', $candidato['Candidatura']['nomes']);
+                    //Data de Nascimento
+                    $worksheet->setCellValue('C12', $candidato['Candidatura']['data_nascimento']);
+                    //Pai
+                    $worksheet->setCellValue('C13', $candidato['Candidatura']['nome_pai']);
+                    //Mae
+                    $worksheet->setCellValue('C14', $candidato['Candidatura']['nome_mae']);
+                    //Natural de
+                    $worksheet->setCellValue('C15', $candidato['CidadeNascimento']['name']);
+                    //Nacionalidade
+                    $worksheet->setCellValue('C16', $candidato['PaisNascimento']['name']);
+                    //Documento Identificacao
+                    $worksheet->setCellValue('D17', $candidato['DocumentoIdentificacao']['name']);
+                    //Emitido Por
+                    //$worksheet->setCellValue('C18', $aluno['Entidade']['EntidadeIdentificacao'][0]['local_emissao']);
+                    //Numero Identificacao
+                    $worksheet->setCellValue('H17', $candidato['Candidatura']['documento_identificacao_numero']);
+                    //Data Emissao
+                    //$worksheet->setCellValue('H18', $aluno['Entidade']['EntidadeIdentificacao'][0]['data_emissao']);
+                    //Sexo
+                    $worksheet->setCellValue('H15', $candidato['Genero']['name']);
+                    //Estado Civil
+                    $worksheet->setCellValue('H16', $candidato['EstadoCivil']['name']);
+                    //Distrito
+                    //$worksheet->setCellValue('C21', $contactos['distrito']);
+                    //Rua
+                    //$worksheet->setCellValue('C22', $contactos['rua']);
+                    //Numero
+                    //$worksheet->setCellValue('C23', $contactos['numero']);
+                    //Quarteirao
+                    //$worksheet->setCellValue('C24', $contactos['quarteirao']);
+                    //Bairro
+                    //$worksheet->setCellValue('H21', $contactos['bairro']);
+                    //Celular
+                    //$worksheet->setCellValue('H22', $contactos['telemovel']);
+                    //Telefone Fixo
+                    //$worksheet->setCellValue('H23', $contactos['telefone']);
+                    //Telefone de Emergencia
+                    $worksheet->setCellValue('H24', $candidato['Candidatura']['telemovel']);
+                    //ANO DE Conclusao
+                    $worksheet->setCellValue('E27', $candidato['Candidatura']['ano_conclusao']);
+                    //Escola de Conclusao
+                    $worksheet->setCellValue('C28', $candidato['EscolaNivelMedio']['name']);
+                    //Provincia de Conclusao
+                    //$worksheet->setCellValue('B29', $aluno['AlunoNivelMedio']['EscolaNivelMedio']['Provincia']['name']);
+                    //Nota
+                    $worksheet->setCellValue('I27', $candidato['Candidatura']['nota_conclusao']);
+                    //Data Assinatura
+                    $worksheet->setCellValue('A33', '');
+
+                    //$xls->addWorksheetMeta($this->Session->read('Auth.User.name'),'Boletim de Matrícula');
+                    $worksheet->setShowGridlines(false);
+
+
+                    $xls->getSecurity()->setLockWindows(true);
+                    $xls->getSecurity()->setLockStructure(true);
+                    $xls->getSecurity()->setWorkbookPassword("PHPExcel");
+
+
+                    $worksheet->getProtection()->setPassword('PHPExcel');
+                    $worksheet->getProtection()->setSheet(true); // This should be enabled in order to enable any of the following!
+                    $worksheet->getProtection()->setSort(true);
+                    $worksheet->getProtection()->setObjects(true);
+                    $worksheet->getProtection()->setInsertRows(true);
+                    $worksheet->getProtection()->setFormatCells(true);
+
+                }
+                $objWriter = PHPExcel_IOFactory::createWriter($xls, 'Excel2007');
+
+                $objWriter->save(Inflector::slug($v) . '.xlsx');
+
+                $xls->disconnectWorksheets();
+                unset($xls);
+
+            }
+
+
+
+
+        }
 
 
     }

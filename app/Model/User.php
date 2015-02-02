@@ -88,14 +88,14 @@ class User extends AppModel {
 
     public function afterSave($created,$options=array()){
         if($created){
-            $message = array(
+           /** $message = array(
                 'Option1'=>'Message',
                 'Type'=>'Shell',
                 'Command'=>'UserShell',
                 'Action'=>'updatePermissions',
                 'userId'=>$this->id
             );
-            CakeRabbit::publish($message);
+            CakeRabbit::publish($message);**/
         }
 
 

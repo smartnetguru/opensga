@@ -228,7 +228,7 @@ class Aluno extends AppModel
             'counterQuery' => ''
         )
     );
-    public $validate = array(
+    /**  public $validate = array(
         'curso_id' => array(
             'loginRule-3' => array(
                 'rule' => 'notEmpty',
@@ -247,7 +247,7 @@ class Aluno extends AppModel
                 'message' => 'Todo estudante deve ter um código atribuido'
             )
         )
-    );
+    ); **/
     public $virtualFields = array();
 
     /**
@@ -1178,6 +1178,8 @@ class Aluno extends AppModel
         $dataSource = $this->getDataSource();
         $dataSource->begin();
 
+
+
         $dataMatricula = array();
         if ($data['Aluno']['numero_estudante'] == '') {
             $data['Aluno']['codigo'] = $this->geraCodigo();
@@ -1198,54 +1200,20 @@ class Aluno extends AppModel
         $data['User']['estado_email'] = 0;
         $data['User']['estado_objecto_id'] = 1;
         $data['User']['timezone'] = 'Africa/Maputo';
-        $data['User']['password'] = $data['Aluno']['codigo'];
+        $data['User']['password'] = 'e'.$data['Aluno']['codigo'];
         $dadosUser = ['User'=>$data['User'],'Entidade'=>$data['Entidade']];
 
         if ($this->User->cadastraUser($dadosUser)) {
-            //Grava Bairro e Avenida
-            $bairroExiste = $this->Entidade->CidadeMorada->Bairro->find('first', array('conditions' => array('cidade_id' => $data['EntidadeContacto'][9], 'name' => $data['EntidadeContacto'][6])));
-            if (empty($bairroExiste)) {
-                $arrayNovoBairro = array(
-                    'Bairro' => array(
-                        'name' => $data['EntidadeContacto'][6],
-                        'cidade_id' => $data['EntidadeContacto'][9]
-                    )
-                );
-                $this->Entidade->CidadeMorada->Bairro->create();
-                $this->Entidade->CidadeMorada->Bairro->save($arrayNovoBairro);
-                $bairroMoradaId = $this->Entidade->CidadeMorada->Bairro->id;
-            } else {
-                $bairroMoradaId = $bairroExiste['Bairro']['id'];
-            }
-
-            $ruaExiste = $this->Entidade->CidadeMorada->Rua->find('first', array('conditions' => array('cidade_id' => $data['EntidadeContacto'][9], 'name' => $data['EntidadeContacto'][5])));
-            if (empty($ruaExiste)) {
-                $arrayNovaRua = array(
-                    'Rua' => array(
-                        'name' => $data['EntidadeContacto'][5],
-                        'cidade_id' => $data['EntidadeContacto'][9]
-                    )
-                );
-                $this->Entidade->CidadeMorada->Rua->create();
-                $this->Entidade->CidadeMorada->Rua->save($arrayNovaRua);
-                $ruaMoradaId = $this->Entidade->CidadeMorada->Rua->id;
-            } else {
-                $ruaMoradaId = $ruaExiste['Rua']['id'];
-            }
             //Grava os dados da Entidade
             $data['Entidade']['user_id'] = $this->User->getLastInsertID();
             $data['Entidade']['telemovel'] = $data['EntidadeContacto'][2];
             $data['Entidade']['documento_identificacao_id'] = $data['EntidadeIdentificacao']['documento_identificacao_id'];
             $data['Entidade']['documento_identificacao_numero'] = $data['EntidadeIdentificacao']['numero'];
-            $data['Entidade']['cidade_morada'] = $data['EntidadeContacto'][9];
-            $data['Entidade']['bairro_morada'] = $bairroMoradaId;
-            $data['Entidade']['caixa_postal_morada'] = $data['EntidadeContacto'][8];
-            $data['Entidade']['email'] = $data['EntidadeContacto'][1];
-            $data['Entidade']['documento_identificacao_data_emissao'] = $data['EntidadeIdentificacao']['data_emissao'];
+            //$data['Entidade']['documento_identificacao_data_emissao'] =
+                //$data['EntidadeIdentificacao']['data_emissao'];
             $data['Entidade']['estado_entidade_id'] = 1;
-            $data['Entidade']['documento_identificacao_local_emissao'] = $data['EntidadeIdentificacao']['local_emissao'];
-            $data['Entidade']['avenida_rua'] = $ruaMoradaId;
-            //$data['Entidade']['documento_identificacao_validade'] = $data['EntidadeIdentificacao']['documento_identificacao_id'];
+            //$data['Entidade']['documento_identificacao_local_emissao'] =
+                //$data['EntidadeIdentificacao']['local_emissao'];
 
             if (!isset($data['Entidade']['nacionalidade'])) {
                 $data['Entidade']['nacionalidade'] = $data['Entidade']['pais_nascimento'];
@@ -1273,7 +1241,9 @@ class Aluno extends AppModel
                     $data['Aluno']['estado_aluno_id'] = 1;
                 }
                 $this->create();
+
                 if ($this->save($data)) {
+
                     if ($data['Aluno']['estado_aluno_id'] == 14) {
                         $arrayEstado = array(
                             'AlunoEstado' => array(
@@ -1345,6 +1315,7 @@ class Aluno extends AppModel
 
                     }
 
+
                     //Grava os dados de Identificacao
                     $identificacao = array('EntidadeIdentificacao' => $data['EntidadeIdentificacao']);
                     $identificacao['EntidadeIdentificacao']['entidade_id'] = $this->Entidade->getLastInsertID();
@@ -1372,23 +1343,11 @@ class Aluno extends AppModel
                     }
 
 
+
+
                     $aluno_nivel_medio = array(
                         'AlunoNivelMedio' => $data['AlunoNivelMedio']
                     );
-                    //Grava os dados do Nivel Medio
-                    if ($data['AlunoNivelMedio']['nova_escola_anterior'] != '') {
-                        $array_nova_escola = array(
-                            'name' => $data['AlunoNivelMedio']['nova_escola_anterior'],
-                            'pais_id' => $data['AlunoNivelMedio']['EscolaNivelMedio']['pais_id'],
-                            'provincia_id' => $data['AlunoNivelMedio']['EscolaNivelMedio']['provincia_id'],
-                            'distrito_id' => $data['AlunoNivelMedio']['EscolaNivelMedio']['distrito_id']
-                        );
-
-                        $this->AlunoNivelMedio->EscolaNivelMedio->create();
-                        $this->AlunoNivelMedio->EscolaNivelMedio->save(array('EscolaNivelMedio' => $array_nova_escola));
-                        $aluno_nivel_medio['AlunoNivelMedio']['escola_nivel_medio_id'] = $this->AlunoNivelMedio->EscolaNivelMedio->id;
-                    }
-
 
                     $aluno_nivel_medio['AlunoNivelMedio']['provincia_id'] = $data['AlunoNivelMedio']['EscolaNivelMedio']['provincia_id'];
                     $aluno_nivel_medio['AlunoNivelMedio']['aluno_id'] = $this->id;
@@ -1436,7 +1395,8 @@ class Aluno extends AppModel
                             }
                         }
                     }
-                } else{
+                }
+                else{
                     debug($this->data);
                     debug($this->invalidFields());
                     die();

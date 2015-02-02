@@ -170,6 +170,11 @@ class AlunosController extends AppController {
 		$this->set('current_section', 'estudantes');
 	}
 
+    public function beforeFilter(){
+        parent::beforeFilter();
+        $this->Security->unlockedActions = array('matricular_candidato');
+    }
+
 	public function busca_candidato() {
 
 		if ($this->request->is('post')) {
@@ -1227,6 +1232,9 @@ class AlunosController extends AppController {
 			throw new NotFoundException('Candidato Nao encontrado');
 		}
 
+        $this->Aluno->Candidatura->contain([
+            'CidadeNascimento'
+        ]);
 		$candidato = $this->Aluno->Candidatura->findByIdAndEstadoCandidaturaId($candidato_id, 2);
 
 		if (!$candidato) {

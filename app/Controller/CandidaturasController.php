@@ -103,6 +103,7 @@ class CandidaturasController extends AppController {
 
 	public function print_lista_admitidos() {
 		$this->Candidatura->contain('Curso');
+
 		$cursos = $this->Candidatura->find('list', array('conditions' => array('estado_candidatura_id' => 2, 'ano_lectivo_admissao' => Configure::read('OpenSGA.ano_lectivo')), 'fields' => array('curso_id', 'Curso.name'), 'group' => 'curso_id', 'order' => 'Curso.name'));
 
 
@@ -117,6 +118,7 @@ class CandidaturasController extends AppController {
 
 		$this->set(compact('candidatos'));
 	}
+
 
 	public function relatorios() {
 

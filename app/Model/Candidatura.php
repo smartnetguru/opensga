@@ -50,6 +50,20 @@ class Candidatura extends AppModel {
 			'fields' => '',
 			'order' => ''
 		),
+        'CidadeNascimento' => array(
+            'className' => 'Cidade',
+            'foreignKey' => 'cidade_nascimento',
+            'conditions' => '',
+            'fields' => '',
+            'order' => ''
+        ),
+        'PaisNascimento' => array(
+            'className' => 'Pais',
+            'foreignKey' => 'pais_nascimento',
+            'conditions' => '',
+            'fields' => '',
+            'order' => ''
+        ),
 		'AlunoViaAdmissao' => array(
 			'className' => 'AlunoViaAdmissao',
 			'foreignKey' => 'aluno_via_admissao_id',
@@ -64,6 +78,20 @@ class Candidatura extends AppModel {
 			'fields' => '',
 			'order' => ''
 		),
+        'EstadoCivil' => array(
+            'className' => 'EstadoCivil',
+            'foreignKey' => 'estado_civil_id',
+            'conditions' => '',
+            'fields' => '',
+            'order' => ''
+        ),
+        'DocumentoIdentificacao' => array(
+            'className' => 'DocumentoIdentificacao',
+            'foreignKey' => 'documento_identificacao_id',
+            'conditions' => '',
+            'fields' => '',
+            'order' => ''
+        ),
 		'TipoIngresso' => array(
 			'className' => 'TipoIngresso',
 			'foreignKey' => 'tipo_ingresso_id',
