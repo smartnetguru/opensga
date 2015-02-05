@@ -133,6 +133,7 @@ class Funcionario extends AppModel {
 
 		$this->User->create();
 		if ($this->User->save($data)) {
+            //die(debug($this->User->id));
 			$data['Entidade']['user_id'] = $this->User->id;
 			$this->Entidade->create();
 			if ($this->Entidade->save($data)) {
@@ -141,11 +142,13 @@ class Funcionario extends AppModel {
 
 				$this->create();
 				if ($this->save($data)) {
-					return $dataSource->commit();
+					 $dataSource->commit();
+                    return true;
 				}
 			}
 		}
 		$dataSource->rollback();
+        return false;
 	}
 
 	public function getByUserId($user_id) {

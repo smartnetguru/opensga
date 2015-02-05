@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fc9bff1a-fcc4-4747-ab16-ab64e9734a11" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/View/Matriculas/faculdade_print_comprovativo_matricula.ctp" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/app/Controller/EpocaAvaliacaosController.php" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/app/Controller/RegimeLectivosController.php" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/app/Controller/SemestreLectivosController.php" afterPath="" />
@@ -15,367 +14,9 @@
       <change type="DELETED" beforePath="$PROJECT_DIR$/lib/Cake/Test/test_app/Locale/rule_15_po/LC_MESSAGES/default.po" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/lib/Cake/Test/test_app/Plugin/TestPlugin/View/Errors/error500.ctp" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/lib/Cake/Test/test_app/tmp/dir_map" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/Especificações do Webservice para impressão de Cartões.docx" afterPath="$PROJECT_DIR$/docs/Especificações do Webservice para impressão de Cartões.docx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/manuais/build/html/_static/Museo_Slab_500-webfont.ttf" afterPath="$PROJECT_DIR$/docs/manuais/build/html/_static/Museo_Slab_500-webfont.ttf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/manuais/themes/cakephp/static/Museo_Slab_500-webfont.ttf" afterPath="$PROJECT_DIR$/docs/manuais/themes/cakephp/static/Museo_Slab_500-webfont.ttf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/test_app/tmp/empty" afterPath="$PROJECT_DIR$/lib/Cake/Test/test_app/tmp/empty" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/manuais/build/doctrees/environment.pickle" afterPath="$PROJECT_DIR$/docs/manuais/build/doctrees/environment.pickle" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/manuais/source" afterPath="$PROJECT_DIR$/docs/manuais/source" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Controller/Component/Auth/AbstractPasswordHasher.php" afterPath="$PROJECT_DIR$/lib/Cake/Controller/Component/Auth/AbstractPasswordHasher.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Network/Email/AbstractTransport.php" afterPath="$PROJECT_DIR$/lib/Cake/Network/Email/AbstractTransport.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Model/Behavior/AclBehavior.php" afterPath="$PROJECT_DIR$/lib/Cake/Model/Behavior/AclBehavior.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Controller/Component/AclComponent.php" afterPath="$PROJECT_DIR$/lib/Cake/Controller/Component/AclComponent.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Controller/Component/Acl/AclInterface.php" afterPath="$PROJECT_DIR$/lib/Cake/Controller/Component/Acl/AclInterface.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Model/AclNode.php" afterPath="$PROJECT_DIR$/lib/Cake/Model/AclNode.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/Model/AclNodeTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/Model/AclNodeTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Console/Command/AclShell.php" afterPath="$PROJECT_DIR$/lib/Cake/Console/Command/AclShell.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Model/Aco.php" afterPath="$PROJECT_DIR$/lib/Cake/Model/Aco.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Model/AcoAction.php" afterPath="$PROJECT_DIR$/lib/Cake/Model/AcoAction.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Controller/Component/Auth/ActionsAuthorize.php" afterPath="$PROJECT_DIR$/lib/Cake/Controller/Component/Auth/ActionsAuthorize.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Fixture/AfterTreeFixture.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Fixture/AfterTreeFixture.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Console/Templates/skel/Test/Case/AllTestsTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Console/Templates/skel/Test/Case/AllTestsTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Cache/Engine/ApcEngine.php" afterPath="$PROJECT_DIR$/lib/Cake/Cache/Engine/ApcEngine.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Core/App.php" afterPath="$PROJECT_DIR$/lib/Cake/Core/App.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/Core/AppTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/Core/AppTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Fixture/ArmorFixture.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Fixture/ArmorFixture.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Fixture/ArmorsPlayerFixture.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Fixture/ArmorsPlayerFixture.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Model/Aro.php" afterPath="$PROJECT_DIR$/lib/Cake/Model/Aro.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Routing/Filter/AssetDispatcher.php" afterPath="$PROJECT_DIR$/lib/Cake/Routing/Filter/AssetDispatcher.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/Routing/Filter/AssetDispatcherTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/Routing/Filter/AssetDispatcherTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Controller/Component/AuthComponent.php" afterPath="$PROJECT_DIR$/lib/Cake/Controller/Component/AuthComponent.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/Controller/Component/AuthComponentTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/Controller/Component/AuthComponentTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Console/Command/Task/BakeTask.php" afterPath="$PROJECT_DIR$/lib/Cake/Console/Command/Task/BakeTask.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Controller/Component/Auth/BaseAuthenticate.php" afterPath="$PROJECT_DIR$/lib/Cake/Controller/Component/Auth/BaseAuthenticate.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Controller/Component/Auth/BaseAuthorize.php" afterPath="$PROJECT_DIR$/lib/Cake/Controller/Component/Auth/BaseAuthorize.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/TestSuite/Coverage/BaseCoverageReport.php" afterPath="$PROJECT_DIR$/lib/Cake/TestSuite/Coverage/BaseCoverageReport.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Controller/Component/Auth/BasicAuthenticate.php" afterPath="$PROJECT_DIR$/lib/Cake/Controller/Component/Auth/BasicAuthenticate.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/Controller/Component/Auth/BasicAuthenticateTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/Controller/Component/Auth/BasicAuthenticateTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Network/Http/BasicAuthentication.php" afterPath="$PROJECT_DIR$/lib/Cake/Network/Http/BasicAuthentication.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/BasicsTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/BasicsTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Model/BehaviorCollection.php" afterPath="$PROJECT_DIR$/lib/Cake/Model/BehaviorCollection.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/Model/BehaviorCollectionTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/Model/BehaviorCollectionTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Controller/Component/Auth/BlowfishAuthenticate.php" afterPath="$PROJECT_DIR$/lib/Cake/Controller/Component/Auth/BlowfishAuthenticate.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Controller/Component/Auth/BlowfishPasswordHasher.php" afterPath="$PROJECT_DIR$/lib/Cake/Controller/Component/Auth/BlowfishPasswordHasher.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Cache/Cache.php" afterPath="$PROJECT_DIR$/lib/Cake/Cache/Cache.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Routing/Filter/CacheDispatcher.php" afterPath="$PROJECT_DIR$/lib/Cake/Routing/Filter/CacheDispatcher.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Cache/CacheEngine.php" afterPath="$PROJECT_DIR$/lib/Cake/Cache/CacheEngine.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/View/Helper/CacheHelper.php" afterPath="$PROJECT_DIR$/lib/Cake/View/Helper/CacheHelper.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Model/Datasource/Session/CacheSession.php" afterPath="$PROJECT_DIR$/lib/Cake/Model/Datasource/Session/CacheSession.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/TestSuite/Reporter/CakeBaseReporter.php" afterPath="$PROJECT_DIR$/lib/Cake/TestSuite/Reporter/CakeBaseReporter.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Network/Email/CakeEmail.php" afterPath="$PROJECT_DIR$/lib/Cake/Network/Email/CakeEmail.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/Network/Email/CakeEmailTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/Network/Email/CakeEmailTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Controller/CakeErrorController.php" afterPath="$PROJECT_DIR$/lib/Cake/Controller/CakeErrorController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Event/CakeEvent.php" afterPath="$PROJECT_DIR$/lib/Cake/Event/CakeEvent.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Event/CakeEventListener.php" afterPath="$PROJECT_DIR$/lib/Cake/Event/CakeEventListener.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Event/CakeEventManager.php" afterPath="$PROJECT_DIR$/lib/Cake/Event/CakeEventManager.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/Event/CakeEventManagerTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/Event/CakeEventManagerTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/Event/CakeEventTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/Event/CakeEventTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/TestSuite/Fixture/CakeFixtureManager.php" afterPath="$PROJECT_DIR$/lib/Cake/TestSuite/Fixture/CakeFixtureManager.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/TestSuite/Reporter/CakeHtmlReporter.php" afterPath="$PROJECT_DIR$/lib/Cake/TestSuite/Reporter/CakeHtmlReporter.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Log/CakeLog.php" afterPath="$PROJECT_DIR$/lib/Cake/Log/CakeLog.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Log/CakeLogInterface.php" afterPath="$PROJECT_DIR$/lib/Cake/Log/CakeLogInterface.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Utility/CakeNumber.php" afterPath="$PROJECT_DIR$/lib/Cake/Utility/CakeNumber.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Core/CakePlugin.php" afterPath="$PROJECT_DIR$/lib/Cake/Core/CakePlugin.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Network/CakeRequest.php" afterPath="$PROJECT_DIR$/lib/Cake/Network/CakeRequest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/Network/CakeRequestTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/Network/CakeRequestTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Network/CakeResponse.php" afterPath="$PROJECT_DIR$/lib/Cake/Network/CakeResponse.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/Network/CakeResponseTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/Network/CakeResponseTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Routing/Route/CakeRoute.php" afterPath="$PROJECT_DIR$/lib/Cake/Routing/Route/CakeRoute.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/Routing/Route/CakeRouteTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/Routing/Route/CakeRouteTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Model/CakeSchema.php" afterPath="$PROJECT_DIR$/lib/Cake/Model/CakeSchema.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/Model/CakeSchemaTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/Model/CakeSchemaTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Model/Datasource/CakeSession.php" afterPath="$PROJECT_DIR$/lib/Cake/Model/Datasource/CakeSession.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Model/Datasource/Session/CakeSessionHandlerInterface.php" afterPath="$PROJECT_DIR$/lib/Cake/Model/Datasource/Session/CakeSessionHandlerInterface.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/Model/Datasource/CakeSessionTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/Model/Datasource/CakeSessionTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Network/CakeSocket.php" afterPath="$PROJECT_DIR$/lib/Cake/Network/CakeSocket.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/Network/CakeSocketTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/Network/CakeSocketTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/TestSuite/CakeTestCase.php" afterPath="$PROJECT_DIR$/lib/Cake/TestSuite/CakeTestCase.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/TestSuite/CakeTestCaseTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/TestSuite/CakeTestCaseTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/TestSuite/Fixture/CakeTestFixture.php" afterPath="$PROJECT_DIR$/lib/Cake/TestSuite/Fixture/CakeTestFixture.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/TestSuite/CakeTestFixtureTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/TestSuite/CakeTestFixtureTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/TestSuite/CakeTestLoader.php" afterPath="$PROJECT_DIR$/lib/Cake/TestSuite/CakeTestLoader.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/TestSuite/Fixture/CakeTestModel.php" afterPath="$PROJECT_DIR$/lib/Cake/TestSuite/Fixture/CakeTestModel.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/TestSuite/CakeTestRunner.php" afterPath="$PROJECT_DIR$/lib/Cake/TestSuite/CakeTestRunner.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/TestSuite/CakeTestSuiteCommand.php" afterPath="$PROJECT_DIR$/lib/Cake/TestSuite/CakeTestSuiteCommand.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/TestSuite/CakeTestSuiteDispatcher.php" afterPath="$PROJECT_DIR$/lib/Cake/TestSuite/CakeTestSuiteDispatcher.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Utility/CakeTime.php" afterPath="$PROJECT_DIR$/lib/Cake/Utility/CakeTime.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/Utility/CakeTimeTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/Utility/CakeTimeTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Model/Validator/CakeValidationRule.php" afterPath="$PROJECT_DIR$/lib/Cake/Model/Validator/CakeValidationRule.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/Model/Validator/CakeValidationRuleTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/Model/Validator/CakeValidationRuleTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Model/Validator/CakeValidationSet.php" afterPath="$PROJECT_DIR$/lib/Cake/Model/Validator/CakeValidationSet.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Utility/ClassRegistry.php" afterPath="$PROJECT_DIR$/lib/Cake/Utility/ClassRegistry.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/Utility/ClassRegistryTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/Utility/ClassRegistryTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Console/Command/CommandListShell.php" afterPath="$PROJECT_DIR$/lib/Cake/Console/Command/CommandListShell.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Console/Command/Task/CommandTask.php" afterPath="$PROJECT_DIR$/lib/Cake/Console/Command/Task/CommandTask.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Console/Command/CompletionShell.php" afterPath="$PROJECT_DIR$/lib/Cake/Console/Command/CompletionShell.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Controller/Component.php" afterPath="$PROJECT_DIR$/lib/Cake/Controller/Component.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/Controller/ComponentTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/Controller/ComponentTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Configure/ConfigReaderInterface.php" afterPath="$PROJECT_DIR$/lib/Cake/Configure/ConfigReaderInterface.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Core/Configure.php" afterPath="$PROJECT_DIR$/lib/Cake/Core/Configure.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Model/ConnectionManager.php" afterPath="$PROJECT_DIR$/lib/Cake/Model/ConnectionManager.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Console/ConsoleErrorHandler.php" afterPath="$PROJECT_DIR$/lib/Cake/Console/ConsoleErrorHandler.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/Console/ConsoleErrorHandlerTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/Console/ConsoleErrorHandlerTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Console/ConsoleInput.php" afterPath="$PROJECT_DIR$/lib/Cake/Console/ConsoleInput.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Console/ConsoleInputArgument.php" afterPath="$PROJECT_DIR$/lib/Cake/Console/ConsoleInputArgument.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Console/ConsoleInputOption.php" afterPath="$PROJECT_DIR$/lib/Cake/Console/ConsoleInputOption.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Console/ConsoleInputSubcommand.php" afterPath="$PROJECT_DIR$/lib/Cake/Console/ConsoleInputSubcommand.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Log/Engine/ConsoleLog.php" afterPath="$PROJECT_DIR$/lib/Cake/Log/Engine/ConsoleLog.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/Log/Engine/ConsoleLogTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/Log/Engine/ConsoleLogTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Console/ConsoleOptionParser.php" afterPath="$PROJECT_DIR$/lib/Cake/Console/ConsoleOptionParser.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/Console/ConsoleOptionParserTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/Console/ConsoleOptionParserTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Console/ConsoleOutput.php" afterPath="$PROJECT_DIR$/lib/Cake/Console/ConsoleOutput.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Console/Command/ConsoleShell.php" afterPath="$PROJECT_DIR$/lib/Cake/Console/Command/ConsoleShell.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Model/Behavior/ContainableBehavior.php" afterPath="$PROJECT_DIR$/lib/Cake/Model/Behavior/ContainableBehavior.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Controller/Controller.php" afterPath="$PROJECT_DIR$/lib/Cake/Controller/Controller.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Controller/Component/Auth/ControllerAuthorize.php" afterPath="$PROJECT_DIR$/lib/Cake/Controller/Component/Auth/ControllerAuthorize.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Console/Command/Task/ControllerTask.php" afterPath="$PROJECT_DIR$/lib/Cake/Console/Command/Task/ControllerTask.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/Controller/ControllerTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/Controller/ControllerTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/TestSuite/ControllerTestCase.php" afterPath="$PROJECT_DIR$/lib/Cake/TestSuite/ControllerTestCase.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Controller/Component/CookieComponent.php" afterPath="$PROJECT_DIR$/lib/Cake/Controller/Component/CookieComponent.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Controller/Component/Auth/CrudAuthorize.php" afterPath="$PROJECT_DIR$/lib/Cake/Controller/Component/Auth/CrudAuthorize.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Model/Datasource/DataSource.php" afterPath="$PROJECT_DIR$/lib/Cake/Model/Datasource/DataSource.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/Model/Datasource/DataSourceTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/Model/Datasource/DataSourceTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Model/Datasource/Session/DatabaseSession.php" afterPath="$PROJECT_DIR$/lib/Cake/Model/Datasource/Session/DatabaseSession.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Controller/Component/Acl/DbAcl.php" afterPath="$PROJECT_DIR$/lib/Cake/Controller/Component/Acl/DbAcl.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/Controller/Component/Acl/DbAclTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/Controller/Component/Acl/DbAclTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Console/Command/Task/DbConfigTask.php" afterPath="$PROJECT_DIR$/lib/Cake/Console/Command/Task/DbConfigTask.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Model/Datasource/DboSource.php" afterPath="$PROJECT_DIR$/lib/Cake/Model/Datasource/DboSource.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/Model/Datasource/DboSourceTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/Model/Datasource/DboSourceTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Utility/Debugger.php" afterPath="$PROJECT_DIR$/lib/Cake/Utility/Debugger.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/Utility/DebuggerTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/Utility/DebuggerTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Fixture/DependencyFixture.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Fixture/DependencyFixture.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Controller/Component/Auth/DigestAuthenticate.php" afterPath="$PROJECT_DIR$/lib/Cake/Controller/Component/Auth/DigestAuthenticate.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/Controller/Component/Auth/DigestAuthenticateTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/Controller/Component/Auth/DigestAuthenticateTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Network/Http/DigestAuthentication.php" afterPath="$PROJECT_DIR$/lib/Cake/Network/Http/DigestAuthentication.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/Network/Http/DigestAuthenticationTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/Network/Http/DigestAuthenticationTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Routing/Dispatcher.php" afterPath="$PROJECT_DIR$/lib/Cake/Routing/Dispatcher.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Routing/DispatcherFilter.php" afterPath="$PROJECT_DIR$/lib/Cake/Routing/DispatcherFilter.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/Routing/DispatcherTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/Routing/DispatcherTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Controller/Component/EmailComponent.php" afterPath="$PROJECT_DIR$/lib/Cake/Controller/Component/EmailComponent.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/Controller/Component/EmailComponentTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/Controller/Component/EmailComponentTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Error/ErrorHandler.php" afterPath="$PROJECT_DIR$/lib/Cake/Error/ErrorHandler.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Error/ExceptionRenderer.php" afterPath="$PROJECT_DIR$/lib/Cake/Error/ExceptionRenderer.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/Error/ExceptionRendererTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/Error/ExceptionRendererTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/test_app/Model/Extract.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/test_app/Model/Extract.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Console/Command/Task/ExtractTask.php" afterPath="$PROJECT_DIR$/lib/Cake/Console/Command/Task/ExtractTask.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/Console/Command/Task/ExtractTaskTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/Console/Command/Task/ExtractTaskTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Utility/File.php" afterPath="$PROJECT_DIR$/lib/Cake/Utility/File.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Cache/Engine/FileEngine.php" afterPath="$PROJECT_DIR$/lib/Cake/Cache/Engine/FileEngine.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Log/Engine/FileLog.php" afterPath="$PROJECT_DIR$/lib/Cake/Log/Engine/FileLog.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/Utility/FileTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/Utility/FileTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Console/Command/Task/FixtureTask.php" afterPath="$PROJECT_DIR$/lib/Cake/Console/Command/Task/FixtureTask.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/Console/Command/Task/FixtureTaskTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/Console/Command/Task/FixtureTaskTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Utility/Folder.php" afterPath="$PROJECT_DIR$/lib/Cake/Utility/Folder.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/Utility/FolderTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/Utility/FolderTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Controller/Component/Auth/FormAuthenticate.php" afterPath="$PROJECT_DIR$/lib/Cake/Controller/Component/Auth/FormAuthenticate.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/Controller/Component/Auth/FormAuthenticateTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/Controller/Component/Auth/FormAuthenticateTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/View/Helper/FormHelper.php" afterPath="$PROJECT_DIR$/lib/Cake/View/Helper/FormHelper.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/View/Helper/FormHelperTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/View/Helper/FormHelperTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Utility/Hash.php" afterPath="$PROJECT_DIR$/lib/Cake/Utility/Hash.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/Utility/HashTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/Utility/HashTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Console/HelpFormatter.php" afterPath="$PROJECT_DIR$/lib/Cake/Console/HelpFormatter.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/View/Helper.php" afterPath="$PROJECT_DIR$/lib/Cake/View/Helper.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/View/HelperCollection.php" afterPath="$PROJECT_DIR$/lib/Cake/View/HelperCollection.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/View/HelperTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/View/HelperTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/TestSuite/Coverage/HtmlCoverageReport.php" afterPath="$PROJECT_DIR$/lib/Cake/TestSuite/Coverage/HtmlCoverageReport.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/View/Helper/HtmlHelper.php" afterPath="$PROJECT_DIR$/lib/Cake/View/Helper/HtmlHelper.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/View/Helper/HtmlHelperTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/View/Helper/HtmlHelperTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Network/Http/HttpResponse.php" afterPath="$PROJECT_DIR$/lib/Cake/Network/Http/HttpResponse.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/Network/Http/HttpResponseTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/Network/Http/HttpResponseTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Network/Http/HttpSocket.php" afterPath="$PROJECT_DIR$/lib/Cake/Network/Http/HttpSocket.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Network/Http/HttpSocketResponse.php" afterPath="$PROJECT_DIR$/lib/Cake/Network/Http/HttpSocketResponse.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/Network/Http/HttpSocketTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/Network/Http/HttpSocketTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/I18n/I18n.php" afterPath="$PROJECT_DIR$/lib/Cake/I18n/I18n.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/I18n/I18nTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/I18n/I18nTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Utility/Inflector.php" afterPath="$PROJECT_DIR$/lib/Cake/Utility/Inflector.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/Utility/InflectorTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/Utility/InflectorTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Controller/Component/Acl/IniAcl.php" afterPath="$PROJECT_DIR$/lib/Cake/Controller/Component/Acl/IniAcl.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Configure/IniReader.php" afterPath="$PROJECT_DIR$/lib/Cake/Configure/IniReader.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Fixture/JoinABFixture.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Fixture/JoinABFixture.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Fixture/JoinACFixture.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Fixture/JoinACFixture.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/View/Helper/JqueryEngineHelper.php" afterPath="$PROJECT_DIR$/lib/Cake/View/Helper/JqueryEngineHelper.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/View/Helper/JsBaseEngineHelper.php" afterPath="$PROJECT_DIR$/lib/Cake/View/Helper/JsBaseEngineHelper.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/View/Helper/JsHelper.php" afterPath="$PROJECT_DIR$/lib/Cake/View/Helper/JsHelper.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/View/JsonView.php" afterPath="$PROJECT_DIR$/lib/Cake/View/JsonView.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/I18n/L10n.php" afterPath="$PROJECT_DIR$/lib/Cake/I18n/L10n.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Model/Matricula.php" afterPath="$PROJECT_DIR$/app/Model/Matricula.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Controller/MatriculasController.php" afterPath="$PROJECT_DIR$/app/Controller/MatriculasController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/View/MediaView.php" afterPath="$PROJECT_DIR$/lib/Cake/View/MediaView.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/View/MediaViewTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/View/MediaViewTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Cache/Engine/MemcacheEngine.php" afterPath="$PROJECT_DIR$/lib/Cake/Cache/Engine/MemcacheEngine.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Cache/Engine/MemcachedEngine.php" afterPath="$PROJECT_DIR$/lib/Cake/Cache/Engine/MemcachedEngine.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/Cache/Engine/MemcachedEngineTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/Cache/Engine/MemcachedEngineTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Model/Model.php" afterPath="$PROJECT_DIR$/lib/Cake/Model/Model.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Model/ModelBehavior.php" afterPath="$PROJECT_DIR$/lib/Cake/Model/ModelBehavior.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/Model/ModelCrossSchemaHabtmTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/Model/ModelCrossSchemaHabtmTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/Model/ModelIntegrationTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/Model/ModelIntegrationTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/Model/ModelReadTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/Model/ModelReadTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Console/Command/Task/ModelTask.php" afterPath="$PROJECT_DIR$/lib/Cake/Console/Command/Task/ModelTask.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/Console/Command/Task/ModelTaskTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/Console/Command/Task/ModelTaskTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/Model/ModelTestBase.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/Model/ModelTestBase.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/Model/ModelValidationTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/Model/ModelValidationTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Model/ModelValidator.php" afterPath="$PROJECT_DIR$/lib/Cake/Model/ModelValidator.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/Model/ModelWriteTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/Model/ModelWriteTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/View/Helper/MootoolsEngineHelper.php" afterPath="$PROJECT_DIR$/lib/Cake/View/Helper/MootoolsEngineHelper.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/I18n/Multibyte.php" afterPath="$PROJECT_DIR$/lib/Cake/I18n/Multibyte.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Model/Datasource/Database/Mysql.php" afterPath="$PROJECT_DIR$/lib/Cake/Model/Datasource/Database/Mysql.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/Model/Datasource/Database/MysqlTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/Model/Datasource/Database/MysqlTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/View/Helper/NumberHelper.php" afterPath="$PROJECT_DIR$/lib/Cake/View/Helper/NumberHelper.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Core/Object.php" afterPath="$PROJECT_DIR$/lib/Cake/Core/Object.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Utility/ObjectCollection.php" afterPath="$PROJECT_DIR$/lib/Cake/Utility/ObjectCollection.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/Utility/ObjectCollectionTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/Utility/ObjectCollectionTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Console/Command/OpenSGAAclShell.php" afterPath="$PROJECT_DIR$/app/Console/Command/OpenSGAAclShell.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Console/Command/OpenSGAShell.php" afterPath="$PROJECT_DIR$/app/Console/Command/OpenSGAShell.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Console/Templates/skel/Controller/PagesController.php" afterPath="$PROJECT_DIR$/lib/Cake/Console/Templates/skel/Controller/PagesController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Controller/Component/PaginatorComponent.php" afterPath="$PROJECT_DIR$/lib/Cake/Controller/Component/PaginatorComponent.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/Controller/Component/PaginatorComponentTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/Controller/Component/PaginatorComponentTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/View/Helper/PaginatorHelper.php" afterPath="$PROJECT_DIR$/lib/Cake/View/Helper/PaginatorHelper.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/View/Helper/PaginatorHelperTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/View/Helper/PaginatorHelperTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Model/Permission.php" afterPath="$PROJECT_DIR$/lib/Cake/Model/Permission.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/test_app/Model/PersisterOne.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/test_app/Model/PersisterOne.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Controller/Component/Acl/PhpAcl.php" afterPath="$PROJECT_DIR$/lib/Cake/Controller/Component/Acl/PhpAcl.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Configure/PhpReader.php" afterPath="$PROJECT_DIR$/lib/Cake/Configure/PhpReader.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Console/Command/Task/PluginTask.php" afterPath="$PROJECT_DIR$/lib/Cake/Console/Command/Task/PluginTask.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/Console/Command/Task/PluginTaskTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/Console/Command/Task/PluginTaskTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Model/Datasource/Database/Postgres.php" afterPath="$PROJECT_DIR$/lib/Cake/Model/Datasource/Database/Postgres.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/Model/Datasource/Database/PostgresTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/Model/Datasource/Database/PostgresTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Console/Command/Task/ProjectTask.php" afterPath="$PROJECT_DIR$/lib/Cake/Console/Command/Task/ProjectTask.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/View/Helper/PrototypeEngineHelper.php" afterPath="$PROJECT_DIR$/lib/Cake/View/Helper/PrototypeEngineHelper.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Routing/Route/RedirectRoute.php" afterPath="$PROJECT_DIR$/lib/Cake/Routing/Route/RedirectRoute.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Cache/Engine/RedisEngine.php" afterPath="$PROJECT_DIR$/lib/Cake/Cache/Engine/RedisEngine.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/Cache/Engine/RedisEngineTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/Cache/Engine/RedisEngineTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Controller/Component/RequestHandlerComponent.php" afterPath="$PROJECT_DIR$/lib/Cake/Controller/Component/RequestHandlerComponent.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/Controller/Component/RequestHandlerComponentTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/Controller/Component/RequestHandlerComponentTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Routing/Router.php" afterPath="$PROJECT_DIR$/lib/Cake/Routing/Router.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/Routing/RouterTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/Routing/RouterTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/View/Helper/RssHelper.php" afterPath="$PROJECT_DIR$/lib/Cake/View/Helper/RssHelper.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Utility/Sanitize.php" afterPath="$PROJECT_DIR$/lib/Cake/Utility/Sanitize.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/Utility/SanitizeTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/Utility/SanitizeTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Controller/Scaffold.php" afterPath="$PROJECT_DIR$/lib/Cake/Controller/Scaffold.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/Controller/ScaffoldTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/Controller/ScaffoldTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/View/ScaffoldView.php" afterPath="$PROJECT_DIR$/lib/Cake/View/ScaffoldView.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Console/Command/SchemaShell.php" afterPath="$PROJECT_DIR$/lib/Cake/Console/Command/SchemaShell.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/Console/Command/SchemaShellTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/Console/Command/SchemaShellTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Utility/Security.php" afterPath="$PROJECT_DIR$/lib/Cake/Utility/Security.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Controller/Component/SecurityComponent.php" afterPath="$PROJECT_DIR$/lib/Cake/Controller/Component/SecurityComponent.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/Controller/Component/SecurityComponentTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/Controller/Component/SecurityComponentTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/Utility/SecurityTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/Utility/SecurityTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Console/Command/ServerShell.php" afterPath="$PROJECT_DIR$/lib/Cake/Console/Command/ServerShell.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Controller/Component/SessionComponent.php" afterPath="$PROJECT_DIR$/lib/Cake/Controller/Component/SessionComponent.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/View/Helper/SessionHelper.php" afterPath="$PROJECT_DIR$/lib/Cake/View/Helper/SessionHelper.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Utility/Set.php" afterPath="$PROJECT_DIR$/lib/Cake/Utility/Set.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Console/Shell.php" afterPath="$PROJECT_DIR$/lib/Cake/Console/Shell.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Console/ShellDispatcher.php" afterPath="$PROJECT_DIR$/lib/Cake/Console/ShellDispatcher.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/Console/ShellTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/Console/ShellTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Controller/Component/Auth/SimplePasswordHasher.php" afterPath="$PROJECT_DIR$/lib/Cake/Controller/Component/Auth/SimplePasswordHasher.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Network/Email/SmtpTransport.php" afterPath="$PROJECT_DIR$/lib/Cake/Network/Email/SmtpTransport.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/Network/Email/SmtpTransportTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/Network/Email/SmtpTransportTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Model/Datasource/Database/Sqlite.php" afterPath="$PROJECT_DIR$/lib/Cake/Model/Datasource/Database/Sqlite.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/Model/Datasource/Database/SqliteTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/Model/Datasource/Database/SqliteTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Model/Datasource/Database/Sqlserver.php" afterPath="$PROJECT_DIR$/lib/Cake/Model/Datasource/Database/Sqlserver.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/Model/Datasource/Database/SqlserverTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/Model/Datasource/Database/SqlserverTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Utility/String.php" afterPath="$PROJECT_DIR$/lib/Cake/Utility/String.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Log/Engine/SyslogLog.php" afterPath="$PROJECT_DIR$/lib/Cake/Log/Engine/SyslogLog.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/Log/Engine/SyslogLogTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/Log/Engine/SyslogLogTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Fixture/TagFixture.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Fixture/TagFixture.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Console/TaskCollection.php" afterPath="$PROJECT_DIR$/lib/Cake/Console/TaskCollection.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/test_app/Plugin/TestPlugin/Lib/Routing/Filter/Test2DispatcherFilter.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/test_app/Plugin/TestPlugin/Lib/Routing/Filter/Test2DispatcherFilter.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/test_app/Plugin/TestPlugin/Lib/Routing/Filter/TestDispatcherFilter.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/test_app/Plugin/TestPlugin/Lib/Routing/Filter/TestDispatcherFilter.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/test_app/Plugin/TestPlugin/Model/TestPluginAuthUser.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/test_app/Plugin/TestPlugin/Model/TestPluginAuthUser.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/test_app/Plugin/TestPlugin/Model/TestPluginAuthors.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/test_app/Plugin/TestPlugin/Model/TestPluginAuthors.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/test_app/Plugin/TestPlugin/Model/TestPluginComment.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/test_app/Plugin/TestPlugin/Model/TestPluginComment.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/test_app/Plugin/TestPlugin/Model/Behavior/TestPluginPersisterOneBehavior.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/test_app/Plugin/TestPlugin/Model/Behavior/TestPluginPersisterOneBehavior.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/test_app/Plugin/TestPlugin/Model/Behavior/TestPluginPersisterTwoBehavior.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/test_app/Plugin/TestPlugin/Model/Behavior/TestPluginPersisterTwoBehavior.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Console/Command/TestShell.php" afterPath="$PROJECT_DIR$/lib/Cake/Console/Command/TestShell.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Console/Command/Task/TestTask.php" afterPath="$PROJECT_DIR$/lib/Cake/Console/Command/Task/TestTask.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/View/Helper/TextHelper.php" afterPath="$PROJECT_DIR$/lib/Cake/View/Helper/TextHelper.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/View/Helper/TextHelperTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/View/Helper/TextHelperTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/View/ThemeView.php" afterPath="$PROJECT_DIR$/lib/Cake/View/ThemeView.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/View/Helper/TimeHelper.php" afterPath="$PROJECT_DIR$/lib/Cake/View/Helper/TimeHelper.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/View/Helper/TimeHelperTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/View/Helper/TimeHelperTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Fixture/TranslateArticleFixture.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Fixture/TranslateArticleFixture.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Model/Behavior/TranslateBehavior.php" afterPath="$PROJECT_DIR$/lib/Cake/Model/Behavior/TranslateBehavior.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/Model/Behavior/TranslateBehaviorTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/Model/Behavior/TranslateBehaviorTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Fixture/TranslateFixture.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Fixture/TranslateFixture.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Fixture/TranslateTableFixture.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Fixture/TranslateTableFixture.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Fixture/TranslateWithPrefixFixture.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Fixture/TranslateWithPrefixFixture.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Model/Behavior/TreeBehavior.php" afterPath="$PROJECT_DIR$/lib/Cake/Model/Behavior/TreeBehavior.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/Model/Behavior/TreeBehaviorAfterTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/Model/Behavior/TreeBehaviorAfterTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/Model/Behavior/TreeBehaviorNumberTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/Model/Behavior/TreeBehaviorNumberTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/Model/Behavior/TreeBehaviorScopedTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/Model/Behavior/TreeBehaviorScopedTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/Model/Behavior/TreeBehaviorUuidTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/Model/Behavior/TreeBehaviorUuidTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Console/Command/UpgradeShell.php" afterPath="$PROJECT_DIR$/lib/Cake/Console/Command/UpgradeShell.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/VERSION.txt" afterPath="$PROJECT_DIR$/lib/Cake/VERSION.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Utility/Validation.php" afterPath="$PROJECT_DIR$/lib/Cake/Utility/Validation.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/Utility/ValidationTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/Utility/ValidationTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/View/View.php" afterPath="$PROJECT_DIR$/lib/Cake/View/View.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/View/ViewBlock.php" afterPath="$PROJECT_DIR$/lib/Cake/View/ViewBlock.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Console/Command/Task/ViewTask.php" afterPath="$PROJECT_DIR$/lib/Cake/Console/Command/Task/ViewTask.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/View/ViewTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/View/ViewTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Cache/Engine/WincacheEngine.php" afterPath="$PROJECT_DIR$/lib/Cake/Cache/Engine/WincacheEngine.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Cache/Engine/XcacheEngine.php" afterPath="$PROJECT_DIR$/lib/Cake/Cache/Engine/XcacheEngine.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Utility/Xml.php" afterPath="$PROJECT_DIR$/lib/Cake/Utility/Xml.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/Utility/XmlTest.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/Utility/XmlTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/View/XmlView.php" afterPath="$PROJECT_DIR$/lib/Cake/View/XmlView.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Console/Templates/skel/View/Layouts/ajax.ctp" afterPath="$PROJECT_DIR$/lib/Cake/Console/Templates/skel/View/Layouts/ajax.ctp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/basics.php" afterPath="$PROJECT_DIR$/lib/Cake/basics.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/bootstrap.php" afterPath="$PROJECT_DIR$/lib/Cake/bootstrap.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Console/cake.php" afterPath="$PROJECT_DIR$/lib/Cake/Console/cake.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Console/Templates/skel/Console/cake.php" afterPath="$PROJECT_DIR$/lib/Cake/Console/Templates/skel/Console/cake.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Plugin/GraphVizRelations/vendor/bin/cake" afterPath="$PROJECT_DIR$/app/Plugin/GraphVizRelations/vendor/bin/cake" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Vendor/bin/cake" afterPath="$PROJECT_DIR$/app/Vendor/bin/cake" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Console/cake" afterPath="$PROJECT_DIR$/lib/Cake/Console/cake" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Console/Templates/skel/Config/core.php" afterPath="$PROJECT_DIR$/lib/Cake/Console/Templates/skel/Config/core.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Console/Templates/skel/Config/Schema/db_acl.php" afterPath="$PROJECT_DIR$/lib/Cake/Console/Templates/skel/Config/Schema/db_acl.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Console/Templates/skel/Config/Schema/db_acl.sql" afterPath="$PROJECT_DIR$/lib/Cake/Console/Templates/skel/Config/Schema/db_acl.sql" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Console/Templates/skel/View/Emails/html/default.ctp" afterPath="$PROJECT_DIR$/lib/Cake/Console/Templates/skel/View/Emails/html/default.ctp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Console/Templates/skel/View/Emails/text/default.ctp" afterPath="$PROJECT_DIR$/lib/Cake/Console/Templates/skel/View/Emails/text/default.ctp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Console/Templates/skel/View/Layouts/default.ctp" afterPath="$PROJECT_DIR$/lib/Cake/Console/Templates/skel/View/Layouts/default.ctp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Console/Templates/skel/View/Layouts/Emails/html/default.ctp" afterPath="$PROJECT_DIR$/lib/Cake/Console/Templates/skel/View/Layouts/Emails/html/default.ctp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Console/Templates/skel/View/Layouts/Emails/text/default.ctp" afterPath="$PROJECT_DIR$/lib/Cake/Console/Templates/skel/View/Layouts/Emails/text/default.ctp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Console/Templates/skel/View/Layouts/error.ctp" afterPath="$PROJECT_DIR$/lib/Cake/Console/Templates/skel/View/Layouts/error.ctp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Console/Templates/skel/View/Errors/error400.ctp" afterPath="$PROJECT_DIR$/lib/Cake/Console/Templates/skel/View/Errors/error400.ctp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Console/Templates/skel/View/Errors/error500.ctp" afterPath="$PROJECT_DIR$/lib/Cake/Console/Templates/skel/View/Errors/error500.ctp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/View/Elements/exception_stack_trace.ctp" afterPath="$PROJECT_DIR$/lib/Cake/View/Elements/exception_stack_trace.ctp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Error/exceptions.php" afterPath="$PROJECT_DIR$/lib/Cake/Error/exceptions.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/test_app/View/Pages/extract.ctp" afterPath="$PROJECT_DIR$/lib/Cake/Test/test_app/View/Pages/extract.ctp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/View/Alunos/faculdade_matricular_candidato.ctp" afterPath="$PROJECT_DIR$/app/View/Alunos/faculdade_matricular_candidato.ctp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/View/Errors/fatal_error.ctp" afterPath="$PROJECT_DIR$/lib/Cake/View/Errors/fatal_error.ctp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Console/Templates/skel/View/Layouts/flash.ctp" afterPath="$PROJECT_DIR$/lib/Cake/Console/Templates/skel/View/Layouts/flash.ctp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/test_app/View/Layouts/flash.ctp" afterPath="$PROJECT_DIR$/lib/Cake/Test/test_app/View/Layouts/flash.ctp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Console/Templates/default/views/form.ctp" afterPath="$PROJECT_DIR$/lib/Cake/Console/Templates/default/views/form.ctp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/View/Scaffolds/form.ctp" afterPath="$PROJECT_DIR$/lib/Cake/View/Scaffolds/form.ctp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Console/Templates/skel/View/Pages/home.ctp" afterPath="$PROJECT_DIR$/lib/Cake/Console/Templates/skel/View/Pages/home.ctp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Console/Templates/skel/Config/Schema/i18n.php" afterPath="$PROJECT_DIR$/lib/Cake/Console/Templates/skel/Config/Schema/i18n.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Console/Templates/default/views/index.ctp" afterPath="$PROJECT_DIR$/lib/Cake/Console/Templates/default/views/index.ctp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/View/Scaffolds/index.ctp" afterPath="$PROJECT_DIR$/lib/Cake/View/Scaffolds/index.ctp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/webroot/index.php" afterPath="$PROJECT_DIR$/app/webroot/index.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Console/Templates/skel/index.php" afterPath="$PROJECT_DIR$/lib/Cake/Console/Templates/skel/index.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Console/Templates/skel/webroot/index.php" afterPath="$PROJECT_DIR$/lib/Cake/Console/Templates/skel/webroot/index.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/View/Errors/missing_action.ctp" afterPath="$PROJECT_DIR$/lib/Cake/View/Errors/missing_action.ctp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/View/Errors/missing_behavior.ctp" afterPath="$PROJECT_DIR$/lib/Cake/View/Errors/missing_behavior.ctp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/View/Errors/missing_component.ctp" afterPath="$PROJECT_DIR$/lib/Cake/View/Errors/missing_component.ctp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/View/Errors/missing_connection.ctp" afterPath="$PROJECT_DIR$/lib/Cake/View/Errors/missing_connection.ctp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/View/Errors/missing_controller.ctp" afterPath="$PROJECT_DIR$/lib/Cake/View/Errors/missing_controller.ctp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/View/Errors/missing_database.ctp" afterPath="$PROJECT_DIR$/lib/Cake/View/Errors/missing_database.ctp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/View/Errors/missing_datasource.ctp" afterPath="$PROJECT_DIR$/lib/Cake/View/Errors/missing_datasource.ctp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/View/Errors/missing_datasource_config.ctp" afterPath="$PROJECT_DIR$/lib/Cake/View/Errors/missing_datasource_config.ctp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/View/Errors/missing_helper.ctp" afterPath="$PROJECT_DIR$/lib/Cake/View/Errors/missing_helper.ctp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/View/Errors/missing_layout.ctp" afterPath="$PROJECT_DIR$/lib/Cake/View/Errors/missing_layout.ctp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/View/Errors/missing_plugin.ctp" afterPath="$PROJECT_DIR$/lib/Cake/View/Errors/missing_plugin.ctp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/View/Errors/missing_table.ctp" afterPath="$PROJECT_DIR$/lib/Cake/View/Errors/missing_table.ctp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/View/Errors/missing_view.ctp" afterPath="$PROJECT_DIR$/lib/Cake/View/Errors/missing_view.ctp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Test/Case/Model/models.php" afterPath="$PROJECT_DIR$/lib/Cake/Test/Case/Model/models.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/View/Errors/pdo_error.ctp" afterPath="$PROJECT_DIR$/lib/Cake/View/Errors/pdo_error.ctp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Vendor/bin/phpunit" afterPath="$PROJECT_DIR$/app/Vendor/bin/phpunit" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/View/Errors/private_action.ctp" afterPath="$PROJECT_DIR$/lib/Cake/View/Errors/private_action.ctp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Config/routes.php" afterPath="$PROJECT_DIR$/lib/Cake/Config/routes.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/View/Errors/scaffold_error.ctp" afterPath="$PROJECT_DIR$/lib/Cake/View/Errors/scaffold_error.ctp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Console/Templates/skel/Config/Schema/sessions.php" afterPath="$PROJECT_DIR$/lib/Cake/Console/Templates/skel/Config/Schema/sessions.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Console/Templates/skel/webroot/test.php" afterPath="$PROJECT_DIR$/lib/Cake/Console/Templates/skel/webroot/test.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/Console/Templates/default/views/view.ctp" afterPath="$PROJECT_DIR$/lib/Cake/Console/Templates/default/views/view.ctp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Cake/View/Scaffolds/view.ctp" afterPath="$PROJECT_DIR$/lib/Cake/View/Scaffolds/view.ctp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Model/Entidade.php" afterPath="$PROJECT_DIR$/app/Model/Entidade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Model/Funcionario.php" afterPath="$PROJECT_DIR$/app/Model/Funcionario.php" />
     </list>
     <ignored path="opensga.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -434,17 +75,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Matricula.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Model/Matricula.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="286" column="58" selection-start="12777" selection-end="12777" vertical-scroll-proportion="-6.4814816" vertical-offset="4919" max-vertical-offset="5490">
-              <folding>
-                <element signature="e#11976#12121#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="faculdade_matricular_candidato.ctp" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/View/Alunos/faculdade_matricular_candidato.ctp">
           <provider selected="true" editor-type-id="text-editor">
@@ -454,40 +84,49 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="core.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Config/core.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="34" column="30" selection-start="1239" selection-end="1239" vertical-scroll-proportion="-5.2363634" vertical-offset="0" max-vertical-offset="6066">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="bootstrap.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Config/bootstrap.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="2" column="0" selection-start="7" selection-end="7" vertical-scroll-proportion="0.6666667" vertical-offset="54" max-vertical-offset="2178">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="OpenSGAAclShell.php" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="OpenSGAAclShell.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Console/Command/OpenSGAAclShell.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="125" column="75" selection-start="6754" selection-end="6754" vertical-scroll-proportion="0.37276787" vertical-offset="2083" max-vertical-offset="7074">
+            <state line="125" column="75" selection-start="6754" selection-end="6754" vertical-scroll-proportion="-3.0363636" vertical-offset="2083" max-vertical-offset="7074">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/webroot/index.php">
+      <file leaf-file-name="Funcionario.php" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/Model/Funcionario.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="99" column="0" selection-start="2753" selection-end="2753" vertical-scroll-proportion="-5.6296296" vertical-offset="1630" max-vertical-offset="2106">
+            <state line="135" column="14" selection-start="3745" selection-end="3745" vertical-scroll-proportion="0.38655463" vertical-offset="2246" max-vertical-offset="3330">
               <folding>
-                <element signature="e#6#700#0" expanded="true" />
+                <marker date="1423115362797" expanded="true" signature="2902:3049" placeholder="SELECT tt.id..t0010turmas..." />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="User.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Model/User.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="88" column="25" selection-start="2134" selection-end="2139" vertical-scroll-proportion="-16.333334" vertical-offset="1143" max-vertical-offset="6966">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Entidade.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Model/Entidade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="20" column="6" selection-start="530" selection-end="530" vertical-scroll-proportion="-7.814815" vertical-offset="149" max-vertical-offset="6732">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="UserShell.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Console/Command/UserShell.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="15.0" vertical-offset="405" max-vertical-offset="1728">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -505,12 +144,9 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/app/webroot/assets/js/opensga.js" />
-        <option value="$PROJECT_DIR$/app/View/Elements/footer.ctp" />
         <option value="$PROJECT_DIR$/app/View/Cursos/index.ctp" />
         <option value="$PROJECT_DIR$/app/View/Common/index_no_pagination.ctp" />
         <option value="$PROJECT_DIR$/app/View/Cursos/cursos_sem_encarregado.ctp" />
-        <option value="$PROJECT_DIR$/app/Model/Funcionario.php" />
         <option value="$PROJECT_DIR$/app/webroot/assets/js/main.js" />
         <option value="$PROJECT_DIR$/app/View/Cursos/definir_encarregado.ctp" />
         <option value="$PROJECT_DIR$/app/Model/Curso.php" />
@@ -544,7 +180,6 @@
         <option value="$PROJECT_DIR$/app/View/Candidaturas/print_boletim_matriculas.ctp" />
         <option value="$PROJECT_DIR$/app/Controller/CandidaturasController.php" />
         <option value="$PROJECT_DIR$/app/Model/Candidatura.php" />
-        <option value="$PROJECT_DIR$/app/Model/User.php" />
         <option value="$PROJECT_DIR$/app/View/Alunos/matricular_candidato.ctp" />
         <option value="$PROJECT_DIR$/app/Model/Aluno.php" />
         <option value="$PROJECT_DIR$/app/Config/bootstrap.php" />
@@ -556,6 +191,10 @@
         <option value="$PROJECT_DIR$/app/Controller/AlunosController.php" />
         <option value="$PROJECT_DIR$/app/Controller/MatriculasController.php" />
         <option value="$PROJECT_DIR$/app/Console/Command/OpenSGAAclShell.php" />
+        <option value="$PROJECT_DIR$/app/Console/Command/UserShell.php" />
+        <option value="$PROJECT_DIR$/app/Model/User.php" />
+        <option value="$PROJECT_DIR$/app/Model/Entidade.php" />
+        <option value="$PROJECT_DIR$/app/Model/Funcionario.php" />
       </list>
     </option>
   </component>
@@ -900,21 +539,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/View/Helper/PhpExcelHelper.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="559" max-vertical-offset="4806" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/View/Matriculas/exportar_extracto_renovacao_excel.ctp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="41" selection-start="668" selection-end="668" vertical-scroll-proportion="0.0" vertical-offset="115" max-vertical-offset="792" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Config/siga_constants.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="22" selection-start="181" selection-end="181" vertical-scroll-proportion="0.0" vertical-offset="180" max-vertical-offset="378" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Console/Command/PagamentoShell.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="14" column="37" selection-start="395" selection-end="395" vertical-scroll-proportion="0.0" vertical-offset="252" max-vertical-offset="702" />
@@ -1092,11 +716,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Model/User.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="88" column="25" selection-start="2134" selection-end="2139" vertical-scroll-proportion="0.33258426" vertical-offset="1436" max-vertical-offset="6966" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Model/Aluno.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="1202" column="38" selection-start="46868" selection-end="46868" vertical-scroll-proportion="0.0" vertical-offset="21438" max-vertical-offset="28530">
@@ -1197,8 +816,38 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Console/Command/OpenSGAAclShell.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="125" column="75" selection-start="6754" selection-end="6754" vertical-scroll-proportion="0.37276787" vertical-offset="2083" max-vertical-offset="7074">
+        <state line="125" column="75" selection-start="6754" selection-end="6754" vertical-scroll-proportion="-3.0363636" vertical-offset="2083" max-vertical-offset="7074">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Console/Command/UserShell.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="15.0" vertical-offset="405" max-vertical-offset="1728">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Model/User.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="88" column="25" selection-start="2134" selection-end="2139" vertical-scroll-proportion="-16.333334" vertical-offset="1143" max-vertical-offset="6966">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Model/Entidade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="20" column="6" selection-start="530" selection-end="530" vertical-scroll-proportion="-7.814815" vertical-offset="149" max-vertical-offset="6732">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Model/Funcionario.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="135" column="14" selection-start="3745" selection-end="3745" vertical-scroll-proportion="0.38655463" vertical-offset="2246" max-vertical-offset="3330">
+          <folding>
+            <marker date="1423115362797" expanded="true" signature="2902:3049" placeholder="SELECT tt.id..t0010turmas..." />
+          </folding>
         </state>
       </provider>
     </entry>
