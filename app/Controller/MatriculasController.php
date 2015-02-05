@@ -182,6 +182,16 @@
             $this->set(compact('aluno', 'faculdade'));
         }
 
+        public function faculdade_print_comprovativo_matricula($alunoId) {
+            $this->Matricula->Aluno->contain(array(
+                'Entidade' => array('User'), 'Curso'
+            ));
+
+            $aluno = $this->Matricula->Aluno->findById($alunoId);
+            $this->set(compact('aluno', 'faculdade'));
+
+        }
+
         public function print_comprovativo_renovacao_matricula($matriculaId) {
             $this->Matricula->contain(array(
                 'Aluno'                       => array(
@@ -227,6 +237,7 @@
         }
 
         public function renovar_matricula($alunoId) {
+
             $this->Matricula->Aluno->id = $alunoId;
             if (!$this->Matricula->Aluno->exists()) {
                 throw new NotFoundException(__('Aluno Invalido'));

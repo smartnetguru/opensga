@@ -271,59 +271,22 @@
          * @param type $data
          */
         public function renovaMatricula($data) {
-
-            debug($data);
-            die();
-
             $dataSource = $this->getDataSource();
             $dataSource->begin();
-
             foreach ($data['AnoLectivo'] as $k => $v) {
                 if ($v != 0) {
-                    //Temos de gravar deposito antes
-                    $aluno = $this->Aluno->getByReferenciaRenovacaoMatricula($referencia);
-                    $anoLectivo = $this->AnoLectivo->findByAno(Configure::read('OpenSGA.ano_lectivo'));
-                    if($this->Aluno->Entidade->FinanceiroTransacao->FinanceiroDeposito->setNovoDeposito(
-                        $aluno['Aluno']['entidade_id'],$transacaoId,$montante,$referencia,$data
-                    )){
-                        $pagamento = $this->FinanceiroPagamento->setPagamentoRenovacaoMatricula(
-                            $aluno['Aluno']['id'],$aluno['Aluno']['curso_id'],$montante,$data,$referencia,
-                            $aluno['Aluno']['entidade_id']
-                        );
-                        if($pagamento){
-                            //verifica se o aluno é regular
-                            if ($aluno && $this->Aluno->isRegular($aluno['Aluno']['id'])) {
-                                $this->create();
-                                $matricula = array(
-                                    'aluno_id'            => $aluno['Aluno']['id'],
-                                    'curso_id'            => $aluno['Aluno']['curso_id'],
-                                    'plano_estudo_id'     => $aluno['Aluno']['plano_estudo_id'],
-                                    'data'                => $data,
-                                    'estado_matricula_id' => 1,
-                                    'ano_lectivo_id'      => $anoLectivo['AnoLectivo']['id'],
-                                    'tipo_matricula_id'   => 2,
-                                    'user_id'             => CakeSession::read('Auth.User.id'),
-                                    'financeiro_pagamento_id'=>$pagamento
-                                );
-                                $this->save(array('Matricula'=>$matricula));
-                            }
-                        }
-                    }
                     $data['Matricula']['ano_lectivo_id'] = $v;
                     $this->Aluno->Matricula->create();
                     $this->Aluno->Matricula->save($data);
                 }
             }
             $dataSource->commit();
-
-            $event = new CakeEvent('Model.Matricula.afterRenovacao', $this, array(
+            /**$event = new CakeEvent('Model.Matricula.afterRenovacao', $this, array(
                 'data' => $data
             ));
-            $this->getEventManager()->dispatch($event);
-
+            $this->getEventManager()->dispatch($event); */
             return true;
         }
-
         function validaMatricula($check) {
             $aluno  = $check['aluno_id'];
             $alunos = $this->find('all', array('conditions' => array('aluno_id' => $aluno, 'estado_matricula_id' => 4)));

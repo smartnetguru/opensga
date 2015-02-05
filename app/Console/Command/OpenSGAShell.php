@@ -2281,12 +2281,17 @@
             $this->Candidatura->contain('Curso');
             $cursos = $this->Candidatura->find('list', array('conditions' => array('estado_candidatura_id' => 2, 'ano_lectivo_admissao' => Configure::read('OpenSGA.ano_lectivo')), 'fields' => array('curso_id', 'Curso.name'), 'group' => 'curso_id', 'order' => 'Curso.name'));
 
+            App::import('Vendor', 'PHPExcel', array('file' => 'PHPExcel.php'));
+            if (!class_exists('PHPExcel'))
+                throw new CakeException('Vendor class PHPExcel not found!');
             $this->out('Comecando..................');
+
+
+            $count_c = count($cursos);
             foreach ($cursos as $k => $v) {
                 $candidatos = array();
-                App::import('Vendor', 'PHPExcel', array('file' => 'PHPExcel.php'));
-                if (!class_exists('PHPExcel'))
-                    throw new CakeException('Vendor class PHPExcel not found!');
+
+
 
                 $this->out('Lendo o excel..............'.$v);
                 $xls = PHPExcel_IOFactory::load(APP.'Reports'.DS.'print_boletim_matricula.xlsx');
@@ -2300,17 +2305,13 @@
                         'ano_lectivo_admissao' =>Configure::read('OpenSGA.ano_lectivo'),
                         'curso_id' => $k
                     ),
-                          'order' => array('apelido', 'nomes')
-                    ,'limit'=>5
+                          'order' => array('Candidatura.apelido', 'Candidatura.nomes')
+                    ,
                     )
                 );
 
 
                 foreach($candidatos as $candidato){
-
-
-                    debug($candidato);
-                    die();
                     $this->out('Candidato................ '.$candidato['Candidatura']['numero_estudante']);
                     $worksheet = clone $xls->getSheetByName("Sheet1");
                     $worksheet->setTitle($candidato['Candidatura']['numero_estudante']);
@@ -2371,7 +2372,12 @@
                     //Telefone Fixo
                     //$worksheet->setCellValue('H23', $contactos['telefone']);
                     //Telefone de Emergencia
-                    $worksheet->setCellValue('H24', $candidato['Candidatura']['telemovel']);
+                    $worksheet->setCellValue('H24', '+'.$candidato['Candidatura']['telemovel']);
+                    $worksheet->getStyle('H24')
+                        ->getNumberFormat()
+                        ->setFormatCode(
+                            PHPExcel_Style_NumberFormat::FORMAT_TEXT
+                        );
                     //ANO DE Conclusao
                     $worksheet->setCellValue('E27', $candidato['Candidatura']['ano_conclusao']);
                     //Escola de Conclusao
@@ -2402,12 +2408,13 @@
                 }
                 $objWriter = PHPExcel_IOFactory::createWriter($xls, 'Excel2007');
 
-                $objWriter->save(Inflector::slug($v) . '.xlsx');
+                $objWriter->save( Inflector::slug($v).'.xlsx');
 
                 $xls->disconnectWorksheets();
                 unset($xls);
 
             }
+
 
 
 
