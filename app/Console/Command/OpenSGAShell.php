@@ -1128,7 +1128,7 @@
             if (!class_exists('PHPExcel'))
                 throw new CakeException('Vendor class PHPExcel not found!');
 
-            $xls = PHPExcel_IOFactory::load(APP . 'Imports' . DS . 'admitidos_2108.xlsx');
+            $xls = PHPExcel_IOFactory::load(APP . 'Imports' . DS .'Admitidos'.DS.'2015'.DS. 'admitidos_20150209.xlsx');
 
             $worksheet = $xls->getActiveSheet();
             //debug($xls->getActiveSheetIndex());
@@ -1147,7 +1147,7 @@
                 );
                 $nome_completo2                                          = $worksheet->getCell('B' . $linha_actual)->getCalculatedValue();
                 $nome_completo                                           = trim($nome_completo2);
-                $nomes                                                   = $this->split_name($nome_completo);
+                $nomes                                                   = $this->User->splitName($nome_completo);
                 $array_candidato['Candidatura']['apelido']               = trim($nomes['surname']);
                 $array_candidato['Candidatura']['nomes']                 = trim($nomes['firstname']);
                 $array_candidato['Candidatura']['estado_matricula_id']   = 5;
