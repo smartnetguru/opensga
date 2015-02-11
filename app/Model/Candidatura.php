@@ -50,6 +50,13 @@ class Candidatura extends AppModel {
 			'fields' => '',
 			'order' => ''
 		),
+        'ProvinciaCandidatura' => array(
+            'className' => 'Provincia',
+            'foreignKey' => 'provincia_candidatura',
+            'conditions' => '',
+            'fields' => '',
+            'order' => ''
+        ),
         'CidadeNascimento' => array(
             'className' => 'Cidade',
             'foreignKey' => 'cidade_nascimento',
@@ -229,5 +236,9 @@ class Candidatura extends AppModel {
         } else{
             return 'Erro ao gravar Candidatos';
         }
+    }
+
+    public function getAllCandidatosByStatus($status){
+
     }
 }

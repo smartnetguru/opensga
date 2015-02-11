@@ -102,20 +102,15 @@ class CandidaturasController extends AppController {
 	}
 
 	public function print_lista_admitidos() {
-		$this->Candidatura->contain('Curso');
-
-		$cursos = $this->Candidatura->find('list', array('conditions' => array('estado_candidatura_id' => 2, 'ano_lectivo_admissao' => Configure::read('OpenSGA.ano_lectivo')), 'fields' => array('curso_id', 'Curso.name'), 'group' => 'curso_id', 'order' => 'Curso.name'));
-
-
-		$candidatos = array();
-		foreach ($cursos as $k => $v) {
-			$this->Candidatura->contain(array(
-				'Genero'
-			));
-			$candidatos2 = $this->Candidatura->find('all', array('conditions' => array('estado_candidatura_id' => 2, 'ano_lectivo_admissao' => Configure::read('OpenSGA.ano_lectivo'), 'curso_id' => $k), 'order' => array('apelido', 'nomes')));
-			$candidatos[$v] = $candidatos2;
-		}
-
+		$this->Candidatura->contain(['Curso','Genero','ProvinciaCandidatura']);
+			$candidatos = $this->Candidatura->find('all', array(
+                'conditions' => array(
+                    'estado_candidatura_id' => 2,
+                    'ano_lectivo_admissao' =>Configure::read('OpenSGA.ano_lectivo')
+                ),
+                'order' => array('nome_faculdade','nome_curso','apelido','nomes')
+            )
+            );
 		$this->set(compact('candidatos'));
 	}
 
