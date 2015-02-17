@@ -1128,7 +1128,7 @@
             if (!class_exists('PHPExcel'))
                 throw new CakeException('Vendor class PHPExcel not found!');
 
-            $xls = PHPExcel_IOFactory::load(APP . 'Imports' . DS .'Admitidos'.DS.'2015'.DS. 'admitidos_20150212.xlsx');
+            $xls = PHPExcel_IOFactory::load(APP . 'Imports' . DS .'Admitidos'.DS.'2015'.DS. 'admitidos_20150217.xlsx');
 
             $worksheet = $xls->getActiveSheet();
             //debug($xls->getActiveSheetIndex());
@@ -1154,7 +1154,8 @@
                 $array_candidato['Candidatura']['ano_lectivo_admissao']  = $worksheet->getCell('F' . $linha_actual)->getCalculatedValue();
                 $array_candidato['Candidatura']['tipo_ingresso_id']      = 2;
                 $array_candidato['Candidatura']['estado_candidatura_id'] = 2;
-                $curso_nome                                              = $worksheet->getCell('D' . $linha_actual)->getCalculatedValue();
+                $curso_nome                                              = trim($worksheet->getCell('D' .
+                    $linha_actual)->getCalculatedValue());
                 $curso                                                   = $this->Curso->findByName($curso_nome);
                 if ($curso) {
                     $array_candidato['Candidatura']['curso_id']   = $curso['Curso']['id'];
