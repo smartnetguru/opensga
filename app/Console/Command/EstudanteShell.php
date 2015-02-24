@@ -150,7 +150,8 @@ class EstudanteShell extends AppShell {
 				'UnidadeOrganica'
 			)
 		));
-		$alunos = $this->Aluno->find('all', array('conditions' => array('Aluno.ano_ingresso' => 2014, "NOT" => array('Aluno.codigo' => null))));
+		$alunos = $this->Aluno->find('all', array('conditions' => array('Aluno.ano_ingresso' => 2015,
+                                                                        "NOT" => array('Aluno.codigo' => null))));
 		$totalAlunos = count($alunos);
 		$linhaActual = 2;
 		foreach ($alunos as $aluno) {
