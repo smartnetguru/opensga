@@ -191,6 +191,7 @@ class EstudanteShell extends AppShell {
 			$xls->getActiveSheet()->setCellValue('O' . $linhaActual, $aluno['Entidade']['Genero']['name']);
 			$xls->getActiveSheet()->setCellValue('P' . $linhaActual, $aluno['Aluno']['estado_aluno_id']);
 			$xls->getActiveSheet()->setCellValue('Q' . $linhaActual, $aluno['Aluno']['codigo']);
+            $xls->getActiveSheet()->setCellValue('R' . $linhaActual, $aluno['Curso']['name']);
 			$this->out($totalAlunos-- . "---" . $aluno['Aluno']['codigo']);
 			$linhaActual++;
 		}
