@@ -207,16 +207,17 @@ class EstudanteShell extends AppShell {
 		}
 
 
-		$linhaUem = 1;
-		$linhaFaculdade = 3;
-		$linhaCurso = 4;
-		$linhaTitulo = 5;
-		$linhaC = 7;
 
-		$linhaActual = 1;
 
 		$faculdades = $this->Aluno->Curso->UnidadeOrganica->find('list', array('conditions' => array('tipo_unidade_organica_id' => 1)));
 		foreach ($faculdades as $faculdadeId => $faculdadeNome) {
+            $linhaUem = 1;
+            $linhaFaculdade = 3;
+            $linhaCurso = 4;
+            $linhaTitulo = 5;
+            $linhaC = 7;
+
+            $linhaActual = 1;
 			$departamentos = $this->Aluno->Curso->UnidadeOrganica->children($faculdadeId);
 			$arrayDepartamentos = Hash::extract($departamentos, '{n}.UnidadeOrganica.id');
 			$arrayDepartamentos[] = $faculdadeId;
@@ -303,6 +304,7 @@ class EstudanteShell extends AppShell {
 						)
 				);
 				$alunos = $this->Aluno->find('all', array('conditions' => array('Aluno.ano_ingresso' => Configure::read('OpenSGA.ano_lectivo'), 'curso_id' => $cursoID)));
+                debug($this->Aluno->lastQuery());
 				$i = 1;
 				$homens = 0;
 				$mulheres = 0;
