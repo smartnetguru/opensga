@@ -3,7 +3,7 @@
 ini_set('memory_limit', "512M");
 App::uses('AppController', 'Controller');
 App::uses('HttpSocket', 'Network/Http');
-ini_set('max_execution_time', 300);
+ini_set('max_execution_time', 3000);
 
 /**
  * SmsNotifications Controller
@@ -101,22 +101,23 @@ class SmsNotificationsController extends AppController {
 				)
 			)
 		));
-        $candidatos = $this->Aluno->find('all',array('conditions'=>array('estado_aluno_id'=>3)));
-        debug($count($candidatos));
-        die();
+        $candidatos = $this->Aluno->find('all',array('conditions'=>array('ano_ingresso'=>2015)));
+        debug(count($candidatos));
+
+        $mensagem = "A DRA informa que a reuniao de orientacao de estudantes, foi alterada para as 13h, no Pavilhao Gimnodesportivo";
         $this->SmsEnviada->sendSMS(826489374, "Todas SMS foram enviadas.");
         $this->SmsEnviada->sendSMS(826489374, "A UEM, o convida a cerimónia de lançamento da iniciativa Alumni no dia //22/08/2014 no Centro Cultural e niversitário, pelas 14.00 horas.");
         $this->SmsEnviada->sendSMS(822454375, "A UEM, o convida a cerimónia de lançamento da iniciativa Alumni no dia //22/08/2014 no Centro Cultural e niversitário, pelas 14.00 horas.");
         $this->SmsEnviada->sendSMS(845179795, "A UEM, o convida a cerimónia de lançamento da iniciativa Alumni no dia //22/08/2014 no Centro Cultural e niversitário, pelas 14.00 horas.");
-		/**foreach ($candidatos as $candidato) {
-			if ($candidato['CandidatoGraduacao']['telemovel']!='') {
-				$numero = $candidato['CandidatoGraduacao']['telemovel'];
+		foreach ($candidatos as $candidato) {
+			if ($candidato['Entidade']['telemovel']!='') {
+				$numero = $candidato['Entidade']['EntidadeContacto']['telemovel'];
 				if (is_numeric($numero)) {
 					debug($numero);
 
-					$mensagem = "A UEM, o convida a cerimónia de lançamento da iniciativa Alumni no dia 22/08/2014, no Centro Cultural e Universitário, pelas 14.00 horas.";
 
-					//$this->SmsEnviada->sendSMS($numero, $mensagem);
+
+					$this->SmsEnviada->sendSMS($numero, $mensagem);
 				}
 
 
@@ -125,7 +126,7 @@ class SmsNotificationsController extends AppController {
 
 
 
-		}**/
+		}
         $this->SmsEnviada->sendSMS(826489374, "Todas SMS foram enviadas.");
         $this->SmsEnviada->sendSMS(844213948, "A UEM, o convida a cerimónia de lançamento da iniciativa Alumni no dia 22/08/2014, no Centro Cultural e Universitário,pelas 14.00 horas.");
 	}
