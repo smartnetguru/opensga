@@ -353,6 +353,22 @@ class EstudanteShell extends AppShell {
 					//$ws->duplicateStyle($ws->getStyle('K' . $linhaC), 'K' . $linhaActual);
 					$ws->getStyle('K' . $linhaActual . ':K' . $linhaActual)->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
 
+
+                    $ws->setCellValue('L' . $linhaActual, $aluno['Entidade']['telemovel']);
+                    $ws->setCellValue('M' . $linhaActual, $aluno['Entidade']['email']);
+
+                    $ws->setCellValue('O' . $linhaActual, $aluno['Entidade']['data_nascimento']);
+
+                    $this->Candidatura->contain('ProvinciaCandidatura');
+
+                    $candidato = $this->Candidatura->findByNumeroEstudante($aluno['Aluno']['codigo']);
+                    if($candidato){
+
+                        $ws->setCellValue('N' . $linhaActual, $candidato['ProvinciaCandidatura']['name']);
+                    }
+
+
+
 					$linhaActual++;
 					$this->out('Aluno-----' . $i . '-------' . $aluno['Entidade']['name']);
 				}
