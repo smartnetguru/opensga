@@ -106,7 +106,7 @@ class Docente extends AppModel {
 								)
 						);
 					}
-					CakeResque::enqueue('default', 'DocenteShell', array('enviaEmailCadastro', $this->id));
+					//CakeResque::enqueue('default', 'DocenteShell', array('enviaEmailCadastro', $this->id));
 					return $dataSource->commit();
 				}
 			}
