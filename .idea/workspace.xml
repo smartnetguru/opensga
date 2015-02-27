@@ -2,11 +2,30 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fc9bff1a-fcc4-4747-ab16-ab64e9734a11" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/Config.zip" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/app/Controller/EpocaAvaliacaosController.php" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/app/Controller/RegimeLectivosController.php" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/app/Controller/SemestreLectivosController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/Doutoramento_em_Linguistica.xlsx" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/app/Imports/dmi/Backup of inscricao.xlk" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/app/Imports/dmi/Backup of leccionamento.xlk" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/Licenciatura_em_Turismo.xlsx" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/Mestrado_em_Ciencias_Juridicas.xlsx" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/Mestrado_em_Desenvolvimento_Rural.xlsx" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/Mestrado_em_Economia_Agraria.xlsx" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/Mestrado_em_Economia_do_Desenvolvimento.xlsx" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/Mestrado_em_Gestao_Empresarial.xlsx" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/Mestrado_em_Governacao_e_Administracao_Publica.xlsx" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/Mestrado_em_Linguistica.xlsx" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/Mestrado_em_Maneio_e_Conservacao_de_Biodiversidade.xlsx" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/Mestrado_em_Planeamento_e_Gestao_de_Assentamentos_Informais.xlsx" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/Mestrado_em_Planeamento_e_Gestao_de_Assentamentos_Informais_Distancia.xlsx" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/Mestrado_em_Proteccao_Vegetal.xlsx" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/Mestrado_em_Quimica_e_Processamento_de_Recursos_Locais.xlsx" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/Mestrado_em_Saude_Mental_e_de_Pisicointervencoes.xlsx" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/Mestrado_em_Saude_Pulblica.xlsx" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/Mestrado_em_Sociologia_Rural_e_Gestao_de_Desenvolvimento.xlsx" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/Mestrado_em_Tecnologia_e_Utilizacao_de_Madeira.xlsx" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/app/ficheiro.xlsx" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/app/mestres.xlsx" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/app/mestres2.xlsx" afterPath="" />
@@ -17,6 +36,7 @@
       <change type="DELETED" beforePath="$PROJECT_DIR$/lib/Cake/Test/test_app/Plugin/TestPlugin/View/Errors/error500.ctp" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/lib/Cake/Test/test_app/tmp/dir_map" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/manuais/source" afterPath="$PROJECT_DIR$/docs/manuais/source" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Console/Command/OpenSGAShell.php" afterPath="$PROJECT_DIR$/app/Console/Command/OpenSGAShell.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="opensga.iws" />
@@ -40,46 +60,28 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Funcionario.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Model/Funcionario.php">
+      <file leaf-file-name="EstudanteShell.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Console/Command/EstudanteShell.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="135" column="14" selection-start="3745" selection-end="3745" vertical-scroll-proportion="0.0" vertical-offset="2246" max-vertical-offset="3330">
+            <state line="366" column="17" selection-start="19561" selection-end="19561" vertical-scroll-proportion="-15.62963" vertical-offset="6166" max-vertical-offset="15570">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Candidatura.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Model/Candidatura.php">
+      <file leaf-file-name="EstudantesController.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Plugin/Api/Controller/EstudantesController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="54" column="50" selection-start="1496" selection-end="1496" vertical-scroll-proportion="0.0" vertical-offset="972" max-vertical-offset="4500">
+            <state line="51" column="42" selection-start="1973" selection-end="1973" vertical-scroll-proportion="-11.555555" vertical-offset="606" max-vertical-offset="2016">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CandidaturasController.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Controller/CandidaturasController.php">
+      <file leaf-file-name="routes.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Config/routes.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="112" column="12" selection-start="4050" selection-end="4050" vertical-scroll-proportion="0.0" vertical-offset="1666" max-vertical-offset="2880">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="print_lista_admitidos.ctp" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/View/Candidaturas/print_lista_admitidos.ctp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="12" column="22" selection-start="373" selection-end="373" vertical-scroll-proportion="0.0" vertical-offset="44" max-vertical-offset="1278">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.ctp" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/View/Candidaturas/index.ctp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="12" column="10" selection-start="626" selection-end="626" vertical-scroll-proportion="0.0" vertical-offset="216" max-vertical-offset="1656">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="14.925926" vertical-offset="403" max-vertical-offset="828">
               <folding />
             </state>
           </provider>
@@ -88,46 +90,61 @@
       <file leaf-file-name="OpenSGAShell.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Console/Command/OpenSGAShell.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="1132" column="35" selection-start="62223" selection-end="62223" vertical-scroll-proportion="-4.6666665" vertical-offset="20250" max-vertical-offset="43776">
+            <state line="1131" column="12" selection-start="62191" selection-end="62191" vertical-scroll-proportion="-4.690909" vertical-offset="20100" max-vertical-offset="43794">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DbsecShell.php" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/Console/Command/DbsecShell.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="12" column="40" selection-start="459" selection-end="459" vertical-scroll-proportion="0.4556962" vertical-offset="0" max-vertical-offset="16596">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Aluno.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Model/Aluno.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="1175" column="20" selection-start="45738" selection-end="45738" vertical-scroll-proportion="0.0" vertical-offset="24647" max-vertical-offset="28530">
-              <folding>
-                <marker date="1422835336000" expanded="true" signature="15444:15508" placeholder="Select plano..matriculas..." />
-                <marker date="1422835336000" expanded="true" signature="16016:16080" placeholder="Select plano..matriculas..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Entidade.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Model/Entidade.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="20" column="6" selection-start="530" selection-end="530" vertical-scroll-proportion="0.0" vertical-offset="149" max-vertical-offset="6732">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="UserShell.php" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="UserShell.php" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/Console/Command/UserShell.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="405" max-vertical-offset="1728">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.24328147" vertical-offset="172" max-vertical-offset="1728">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ApiAppController.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Plugin/Api/Controller/ApiAppController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="10" column="0" selection-start="202" selection-end="202" vertical-scroll-proportion="-6.6666665" vertical-offset="0" max-vertical-offset="360">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CartaoEstudantesController.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Plugin/Api/Controller/CartaoEstudantesController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="50" column="0" selection-start="1828" selection-end="1828" vertical-scroll-proportion="4.4814816" vertical-offset="1021" max-vertical-offset="1926">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="core.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Config/core.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="34" column="30" selection-start="1239" selection-end="1239" vertical-scroll-proportion="-10.666667" vertical-offset="0" max-vertical-offset="6120">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="get_dados_estudante.ctp" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Plugin/Api/View/Estudantes/json/get_dados_estudante.ctp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="108">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="get_dados_estudante.ctp" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Plugin/Api/View/Estudantes/get_dados_estudante.ctp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="108">
               <folding />
             </state>
           </provider>
@@ -146,13 +163,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/app/View/Common/index_no_pagination.ctp" />
-        <option value="$PROJECT_DIR$/app/View/Cursos/cursos_sem_encarregado.ctp" />
-        <option value="$PROJECT_DIR$/app/webroot/assets/js/main.js" />
-        <option value="$PROJECT_DIR$/app/View/Cursos/definir_encarregado.ctp" />
-        <option value="$PROJECT_DIR$/app/Model/Curso.php" />
-        <option value="$PROJECT_DIR$/app/View/Common/Cursos/ver_curso.ctp" />
-        <option value="$PROJECT_DIR$/app/View/Cursos/ver_curso.ctp" />
         <option value="$PROJECT_DIR$/app/Model/CursoResponsavel.php" />
         <option value="$PROJECT_DIR$/app/View/Common/form_basic.ctp" />
         <option value="$PROJECT_DIR$/app/View/Elements/form_errors.ctp" />
@@ -161,7 +171,6 @@
         <option value="$PROJECT_DIR$/app/View/Matriculas/exportar_extracto_renovacao_excel.ctp" />
         <option value="$PROJECT_DIR$/app/Config/siga_constants.php" />
         <option value="$PROJECT_DIR$/app/Console/Command/PagamentoShell.php" />
-        <option value="$PROJECT_DIR$/app/Console/Command/EstudanteShell.php" />
         <option value="$PROJECT_DIR$/app/Model/AppModel.php" />
         <option value="$PROJECT_DIR$/app/Model/Behavior/AuditableBehavior.php" />
         <option value="$PROJECT_DIR$/app/Model/FinanceiroConta.php" />
@@ -182,7 +191,6 @@
         <option value="$PROJECT_DIR$/app/Model/Aluno.php" />
         <option value="$PROJECT_DIR$/app/Config/bootstrap.php" />
         <option value="$PROJECT_DIR$/app/webroot/index.php" />
-        <option value="$PROJECT_DIR$/app/Config/core.php" />
         <option value="$PROJECT_DIR$/app/Model/Matricula.php" />
         <option value="$PROJECT_DIR$/app/View/Alunos/faculdade_matricular_candidato.ctp" />
         <option value="$PROJECT_DIR$/app/Controller/AlunosController.php" />
@@ -196,6 +204,15 @@
         <option value="$PROJECT_DIR$/app/Controller/CandidaturasController.php" />
         <option value="$PROJECT_DIR$/app/View/Candidaturas/print_lista_admitidos.ctp" />
         <option value="$PROJECT_DIR$/app/View/Candidaturas/index.ctp" />
+        <option value="$PROJECT_DIR$/app/Config/bootstrap_siga.php" />
+        <option value="$PROJECT_DIR$/app/Controller/SmsNotificationsController.php" />
+        <option value="$PROJECT_DIR$/app/Console/Command/EstudanteShell.php" />
+        <option value="$PROJECT_DIR$/app/webroot/assets/js/main.js" />
+        <option value="$PROJECT_DIR$/app/webroot/assets/js/form-adicionar-docente-wizard.js" />
+        <option value="$PROJECT_DIR$/app/Model/Docente.php" />
+        <option value="$PROJECT_DIR$/app/Plugin/Api/Controller/ApiAppController.php" />
+        <option value="$PROJECT_DIR$/app/Config/core.php" />
+        <option value="$PROJECT_DIR$/app/Plugin/Api/Controller/EstudantesController.php" />
         <option value="$PROJECT_DIR$/app/Console/Command/OpenSGAShell.php" />
       </list>
     </option>
@@ -204,8 +221,8 @@
   <component name="ProjectFrameBounds">
     <option name="x" value="-1" />
     <option name="y" value="26" />
-    <option name="width" value="1368" />
-    <option name="height" value="717" />
+    <option name="width" value="1282" />
+    <option name="height" value="973" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
@@ -279,6 +296,268 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="webroot" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webroot" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="assets" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webroot" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="assets" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="js" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="View" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="View" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Docentes" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Plugin" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Plugin" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Api" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Plugin" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Api" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="View" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Plugin" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Api" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="View" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Estudantes" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Plugin" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Api" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="View" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Estudantes" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="json" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Plugin" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Api" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Controller" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="Console" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -305,6 +584,24 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opensga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Config" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
       <pane id="Scope" />
@@ -324,11 +621,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/app/Plugin/Api/View/Estudantes" />
+      <recent name="$PROJECT_DIR$/app/Plugin/Api/View" />
       <recent name="$PROJECT_DIR$/app/View/Matriculas" />
       <recent name="$PROJECT_DIR$/app/View/Candidaturas" />
       <recent name="$PROJECT_DIR$/app/Console/Command" />
-      <recent name="$PROJECT_DIR$/app/Config" />
-      <recent name="$PROJECT_DIR$/app/View/Common" />
     </key>
   </component>
   <component name="RunManager">
@@ -374,15 +671,15 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1" y="26" width="1368" height="717" extended-state="7" />
+    <frame x="-1" y="26" width="1282" height="973" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32925472" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.42069486" sideWeight="0.31632653" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.42069486" sideWeight="0.68367344" order="0" side_tool="true" content_ui="combo" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.35056543" sideWeight="0.31398106" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.35056543" sideWeight="0.68601894" order="0" side_tool="true" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3289689" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
@@ -390,12 +687,12 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3256579" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -425,56 +722,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/lib/Cake/Model/Datasource/DataSource.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="416" column="6" selection-start="10142" selection-end="10144" vertical-scroll-proportion="0.33333334" vertical-offset="7065" max-vertical-offset="7704" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/Cake/Model/Model.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1805" column="0" selection-start="54082" selection-end="54082" vertical-scroll-proportion="0.85365856" vertical-offset="32070" max-vertical-offset="67860" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/View/Matriculas/renovar_matricula.ctp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="33" column="131" selection-start="1092" selection-end="2271" vertical-scroll-proportion="0.0" vertical-offset="241" max-vertical-offset="1008" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Model/Behavior/AuditableBehavior.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="200" column="8" selection-start="4619" selection-end="4619" vertical-scroll-proportion="0.70446736" vertical-offset="3395" max-vertical-offset="9252" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/Cake/Model/Behavior/TranslateBehavior.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="485" column="40" selection-start="15336" selection-end="15336" vertical-scroll-proportion="0.87628865" vertical-offset="8241" max-vertical-offset="12690" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../craviation/lib/Cake/Model/Datasource/DboSource.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="63648" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Model/FinanceiroConta.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="92" column="22" selection-start="2184" selection-end="2184" vertical-scroll-proportion="0.9320755" vertical-offset="1162" max-vertical-offset="1836" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/Cake/Model/Datasource/DboSource.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2279" column="2" selection-start="66904" selection-end="66904" vertical-scroll-proportion="0.06963249" vertical-offset="40716" max-vertical-offset="64044" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Model/FinanceiroDeposito.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="132" column="36" selection-start="4318" selection-end="4318" vertical-scroll-proportion="0.0" vertical-offset="1954" max-vertical-offset="2574" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Model/FinanceiroPagamento.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="312" column="36" selection-start="14768" selection-end="14768" vertical-scroll-proportion="0.0" vertical-offset="5261" max-vertical-offset="5832" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Console/Command/ManutencaoShell.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="15" column="9" selection-start="696" selection-end="696" vertical-scroll-proportion="0.0" vertical-offset="270" max-vertical-offset="432" />
@@ -498,11 +745,6 @@
     <entry file="file://$PROJECT_DIR$/app/Console/Command/TurmaShell.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="50" column="0" selection-start="1570" selection-end="1570" vertical-scroll-proportion="0.0" vertical-offset="900" max-vertical-offset="1008" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Plugin/Api/Controller/CartaoEstudantesController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="50" column="0" selection-start="1828" selection-end="1828" vertical-scroll-proportion="0.0" vertical-offset="900" max-vertical-offset="1926" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/View/Alunos/adicionar_estudante.ctp">
@@ -530,16 +772,6 @@
         <state line="64" column="4" selection-start="1289" selection-end="1289" vertical-scroll-proportion="0.6804734" vertical-offset="807" max-vertical-offset="1314" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Console/Command/EstudanteShell.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="309" column="16" selection-start="16111" selection-end="16111" vertical-scroll-proportion="0.9235669" vertical-offset="5127" max-vertical-offset="15210" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Model/AppModel.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="9" selection-start="174" selection-end="174" vertical-scroll-proportion="0.0" vertical-offset="54" max-vertical-offset="720" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Config/Config-UEM.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="18" column="41" selection-start="591" selection-end="591" vertical-scroll-proportion="0.59504133" vertical-offset="0" max-vertical-offset="1080" />
@@ -548,11 +780,6 @@
     <entry file="file://$PROJECT_DIR$/app/Config/Config-Default.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="18" column="43" selection-start="592" selection-end="592" vertical-scroll-proportion="0.58299595" vertical-offset="0" max-vertical-offset="1170" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Config/bootstrap_siga.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="342" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/View/Candidaturas/print_boletim_matriculas.ctp">
@@ -585,11 +812,6 @@
         <state line="99" column="0" selection-start="2753" selection-end="2753" vertical-scroll-proportion="-5.6296296" vertical-offset="1630" max-vertical-offset="2106" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Config/core.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="34" column="30" selection-start="1239" selection-end="1239" vertical-scroll-proportion="-5.2363634" vertical-offset="0" max-vertical-offset="6066" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Model/Matricula.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="286" column="58" selection-start="12777" selection-end="12777" vertical-scroll-proportion="-6.4814816" vertical-offset="4919" max-vertical-offset="5490" />
@@ -620,28 +842,49 @@
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1350" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Console/Command/OpenSGAAclShell.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="125" column="75" selection-start="6754" selection-end="6754" vertical-scroll-proportion="0.0" vertical-offset="2083" max-vertical-offset="7074" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Model/User.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="88" column="25" selection-start="2134" selection-end="2139" vertical-scroll-proportion="0.0" vertical-offset="1143" max-vertical-offset="6966">
-          <folding />
-        </state>
+        <state line="88" column="25" selection-start="2134" selection-end="2139" vertical-scroll-proportion="0.0" vertical-offset="1143" max-vertical-offset="6966" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Model/Entidade.php">
+    <entry file="file://$PROJECT_DIR$/app/Controller/CandidaturasController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="6" selection-start="530" selection-end="530" vertical-scroll-proportion="0.0" vertical-offset="149" max-vertical-offset="6732">
-          <folding />
-        </state>
+        <state line="112" column="12" selection-start="4050" selection-end="4050" vertical-scroll-proportion="0.0" vertical-offset="1666" max-vertical-offset="2880" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Model/Funcionario.php">
+    <entry file="file://$PROJECT_DIR$/app/Model/Aluno.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="135" column="14" selection-start="3745" selection-end="3745" vertical-scroll-proportion="0.0" vertical-offset="2246" max-vertical-offset="3330">
+        <state line="1175" column="20" selection-start="45738" selection-end="45738" vertical-scroll-proportion="0.0" vertical-offset="24647" max-vertical-offset="28530" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/View/Candidaturas/print_lista_admitidos.ctp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="12" column="22" selection-start="373" selection-end="373" vertical-scroll-proportion="0.0" vertical-offset="44" max-vertical-offset="1278" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/View/Candidaturas/index.ctp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="12" column="10" selection-start="626" selection-end="626" vertical-scroll-proportion="0.0" vertical-offset="216" max-vertical-offset="1656" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Console/Command/DbsecShell.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="12" column="40" selection-start="459" selection-end="459" vertical-scroll-proportion="-0.0" vertical-offset="216" max-vertical-offset="16596" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Model/AppModel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="10" column="9" selection-start="174" selection-end="174" vertical-scroll-proportion="3.2222223" vertical-offset="267" max-vertical-offset="720" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Config/bootstrap_siga.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="0" selection-start="158" selection-end="158" vertical-scroll-proportion="-4.6666665" vertical-offset="0" max-vertical-offset="306" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Controller/SmsNotificationsController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="110" column="187" selection-start="3837" selection-end="3837" vertical-scroll-proportion="0.0" vertical-offset="411" max-vertical-offset="2700">
           <folding />
         </state>
       </provider>
@@ -653,54 +896,121 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Controller/CandidaturasController.php">
+    <entry file="file://$PROJECT_DIR$/app/Model/Entidade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="112" column="12" selection-start="4050" selection-end="4050" vertical-scroll-proportion="0.0" vertical-offset="1666" max-vertical-offset="2880">
+        <state line="20" column="6" selection-start="530" selection-end="530" vertical-scroll-proportion="0.0" vertical-offset="2368" max-vertical-offset="6732">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Model/Aluno.php">
+    <entry file="file://$PROJECT_DIR$/app/Model/Funcionario.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="1175" column="20" selection-start="45738" selection-end="45738" vertical-scroll-proportion="0.0" vertical-offset="24647" max-vertical-offset="28530">
-          <folding>
-            <marker date="1422835336000" expanded="true" signature="15444:15508" placeholder="Select plano..matriculas..." />
-            <marker date="1422835336000" expanded="true" signature="16016:16080" placeholder="Select plano..matriculas..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/View/Candidaturas/print_lista_admitidos.ctp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="22" selection-start="373" selection-end="373" vertical-scroll-proportion="0.0" vertical-offset="44" max-vertical-offset="1278">
+        <state line="135" column="14" selection-start="3745" selection-end="3745" vertical-scroll-proportion="15.703704" vertical-offset="2854" max-vertical-offset="3330">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/View/Candidaturas/index.ctp">
+    <entry file="file://$PROJECT_DIR$/app/webroot/assets/js/main.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="10" selection-start="626" selection-end="626" vertical-scroll-proportion="0.0" vertical-offset="216" max-vertical-offset="1656">
+        <state line="592" column="2" selection-start="24317" selection-end="24317" vertical-scroll-proportion="0.0" vertical-offset="10369" max-vertical-offset="10872">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Console/Command/UserShell.php">
+    <entry file="file://$PROJECT_DIR$/app/View/Docentes/faculdade_adicionar_docente.ctp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="405" max-vertical-offset="1728">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="11679" max-vertical-offset="12708">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/webroot/assets/js/form-adicionar-docente-wizard.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="47" column="13" selection-start="1993" selection-end="1993" vertical-scroll-proportion="0.0" vertical-offset="713" max-vertical-offset="1746">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Model/Docente.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="108" column="28" selection-start="3461" selection-end="3467" vertical-scroll-proportion="0.0" vertical-offset="922" max-vertical-offset="2538">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Console/Command/EstudanteShell.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="366" column="17" selection-start="19561" selection-end="19561" vertical-scroll-proportion="-15.62963" vertical-offset="6166" max-vertical-offset="15570">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Plugin/Api/Controller/ApiAppController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="10" column="0" selection-start="202" selection-end="202" vertical-scroll-proportion="-6.6666665" vertical-offset="0" max-vertical-offset="360">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Config/core.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="34" column="30" selection-start="1239" selection-end="1239" vertical-scroll-proportion="-10.666667" vertical-offset="0" max-vertical-offset="6120">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Plugin/Api/View/Estudantes/json/get_dados_estudante.ctp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="490">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Plugin/Api/View/Estudantes/get_dados_estudante.ctp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="442">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Plugin/Api/Controller/CartaoEstudantesController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="50" column="0" selection-start="1828" selection-end="1828" vertical-scroll-proportion="4.4814816" vertical-offset="1021" max-vertical-offset="1926">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Config/routes.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="14.925926" vertical-offset="403" max-vertical-offset="828">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Plugin/Api/Controller/EstudantesController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="51" column="42" selection-start="1973" selection-end="1973" vertical-scroll-proportion="-11.555555" vertical-offset="606" max-vertical-offset="2016">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Console/Command/OpenSGAAclShell.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="125" column="75" selection-start="6754" selection-end="6754" vertical-scroll-proportion="5.022321" vertical-offset="0" max-vertical-offset="7074">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Console/Command/OpenSGAShell.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="1132" column="35" selection-start="62223" selection-end="62223" vertical-scroll-proportion="-4.6666665" vertical-offset="20250" max-vertical-offset="43776">
+        <state line="1131" column="12" selection-start="62191" selection-end="62191" vertical-scroll-proportion="-4.690909" vertical-offset="20100" max-vertical-offset="43794">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Console/Command/DbsecShell.php">
+    <entry file="file://$PROJECT_DIR$/app/Console/Command/UserShell.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="40" selection-start="459" selection-end="459" vertical-scroll-proportion="0.4556962" vertical-offset="0" max-vertical-offset="16596">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.24328147" vertical-offset="172" max-vertical-offset="1728">
           <folding />
         </state>
       </provider>
