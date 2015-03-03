@@ -125,6 +125,34 @@
             }
         }
 
+        public function actualiza_matriculas_2015(){
+            $matriculas = $this->Matricula->find('all',array('conditions'=>array('ano_lectivo_id'=>30)));
+            $totalMatriculas = count($matriculas);
+            foreach($matriculas as $matricula){
+                $alunoId = $matricula['Matricula']['aluno_id'];
+                //verifica se ja renovou 2015
+                $matricula2015 = $this->Matricula->findByAlunoIdAndAnoLectivoId($alunoId,31);
+                if(empty($matricula2015)){
+                    //verifica se se inscreveu para graduacao
+                    $graduando = $this->Aluno->CandidatoGraduacao->findByAlunoId($alunoId);
+                    if(empty($graduando)){
+                        //matricula
+                        $arrayMatricula = $matricula;
+                        $arrayMatricula['Matricula']['ano_lectivo_id'] = 31;
+                        $arrayMatricula['Matricula']['tipo_matricula_id']=2;
+                        $arrayMatricula['Matricula']['data'] = date('Y-m-d H:i:s',strtotime('+1 year',
+                            strtotime($matricula['Matricula']['data'])));
+                        unset($arrayMatricula['Matricula']['id']);
+                        unset($arrayMatricula['Matricula']['created']);
+                        unset($arrayMatricula['Matricula']['modified']);
+
+                        $this->Matricula->create();
+                        $this->Matricula->save($arrayMatricula);
+                    }
+                }
+              $this->out($totalMatriculas--);
+            }
+        }
         public function actualiza_password_2014() {
             AuditableConfig::$Logger = ClassRegistry::init('Auditable.Logger');
             $this->Aluno->contain('User');
