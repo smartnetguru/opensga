@@ -24,143 +24,141 @@ App::uses('Controller', 'Controller');
  */
 class AppController extends Controller {
 
-	public $components = array(
-		'Security', 'Acl', 'Auth' => array(
-			'authenticate' => 'Blowfish'
-		), 'Session', 'RequestHandler', 'Paginator', 'Cookie', 'HighCharts.HighCharts', 'DebugKit.Toolbar' => array(
-			'panels' => array()
-		)
-	);
-	public $helpers = array('Html', 'AclLink', 'Print', 'BreadCumbs', 'Form', 'Session', 'Js' => array('MyJquery'), 'EventsCalendar', 'Javascript', 'Ajax', 'PhpExcel', 'HighCharts.HighCharts', 'AclLink', 'Time');
-	public $pdfConfig = array('engine' => 'CakePdf.Tcpdf');
-	public $cacheAction = '1 hour';
+    public $components = array(
+        'Security', 'Acl', 'Auth' => array(
+            'authenticate' => 'Blowfish'
+        ), 'Session', 'RequestHandler' => array( 'viewClassMap' => array( 'xlsx' => 'CakeExcel.Excel' ) ), 'Paginator', 'Cookie', 'HighCharts.HighCharts', 'DebugKit.Toolbar' => array(
+            'panels' => array()
+        )
+    );
+    public $helpers = array('Html', 'AclLink', 'Print', 'BreadCumbs', 'Form', 'Session', 'Js' => array('MyJquery'), 'EventsCalendar', 'Javascript', 'Ajax', 'PhpExcel', 'HighCharts.HighCharts', 'AclLink', 'Time');
+    public $pdfConfig = array('engine' => 'CakePdf.Tcpdf');
+    public $cacheAction = '1 hour';
 
-	public function beforeFilter() {
-		parent::beforeFilter();
-                
-		$config_language = $this->Session->read('Config.language');
-		if ($config_language == null) {
-			$config_language = 'por';
-		}
-		Configure::write('Config.language', $config_language);
-		setlocale(LC_ALL, 'ptb');
-		if ($this->Auth->loggedIn()) {
-			AuditableConfig::$responsibleId = $this->Auth->user('id');
-		}
-		AuditableConfig::$Logger = ClassRegistry::init('Auditable.Logger');
-		$this->Security->csrfExpires = "+10 minutes";
-		$this->Auth->authorize = array('Actions' => array('actionPath' => 'controllers'));
-		$this->Auth->autoRedirect = false;
-		$this->Auth->loginError = "Nome de Usuário ou senha incorrectas";
-		$this->Auth->authError = "Não tem permissão para aceder a essa página";
-		$this->Auth->flash = array('element' => 'default', 'key' => 'auth', 'params' => array('class' => 'alert_error'));
-		$this->Auth->loginAction = array('plugin' => false, 'controller' => 'users', 'action' => 'login');
-		$this->Auth->logoutRedirect = array('plugin' => false, 'controller' => 'users', 'action' => 'login');
-		$this->Auth->loginRedirect = array(array('plugin' => false, 'controller' => 'pages', 'action' => 'display', 'home'));
-		$this->Auth->unauthorizedRedirect = false;
-		$paginationOptions = array();
+    public function beforeFilter() {
+        parent::beforeFilter();
 
-		if ($this->request->is('ajax')) {
-			$this->layout = false;
-			$this->Security->csrfCheck = false;
-			$this->Security->validatePost = false;
-                         Configure::write ( 'debug', 0 );
-		}
-        
+        $config_language = $this->Session->read('Config.language');
+        if ($config_language == null) {
+            $config_language = 'por';
+        }
+        Configure::write('Config.language', $config_language);
+        setlocale(LC_ALL, 'ptb');
+        if ($this->Auth->loggedIn()) {
+            AuditableConfig::$responsibleId = $this->Auth->user('id');
+        }
+        AuditableConfig::$Logger = ClassRegistry::init('Auditable.Logger');
+        $this->Security->csrfExpires = "+10 minutes";
+        $this->Auth->authorize = array('Actions' => array('actionPath' => 'controllers'));
+        $this->Auth->autoRedirect = false;
+        $this->Auth->loginError = "Nome de Usuário ou senha incorrectas";
+        $this->Auth->authError = "Não tem permissão para aceder a essa página";
+        $this->Auth->flash = array('element' => 'default', 'key' => 'auth', 'params' => array('class' => 'alert_error'));
+        $this->Auth->loginAction = array('plugin' => false, 'controller' => 'users', 'action' => 'login');
+        $this->Auth->logoutRedirect = array('plugin' => false, 'controller' => 'users', 'action' => 'login');
+        $this->Auth->loginRedirect = array(array('plugin' => false, 'controller' => 'pages', 'action' => 'display', 'home'));
+        $this->Auth->unauthorizedRedirect = false;
+        $paginationOptions = array();
+
+        if ($this->request->is('ajax')) {
+            $this->layout = false;
+            $this->Security->csrfCheck = false;
+            $this->Security->validatePost = false;
+            Configure::write('debug', 0);
+        }
+
 
 
 
 //Devemos forcar o prefixo para funcionarios da faculdade, docente e estudantes
-		$general_actions = array('logout', 'trocar_senha', 'autocomplete', 'altera_unidade_organica_admin', 'display', 'email_oficial_uem', 'webmail', 'email');
-		if ($this->request->is('ajax')) {
+        $general_actions = array('logout', 'trocar_senha', 'autocomplete', 'altera_unidade_organica_admin', 'display', 'email_oficial_uem', 'webmail', 'email');
+        if ($this->request->is('ajax')) {
+            
+        } elseif (!in_array($this->action, $general_actions)) {
+            $grupo_id = $this->Session->read('Auth.User.group_id');
 
-		} elseif (!in_array($this->action, $general_actions)) {
-			$grupo_id = $this->Session->read('Auth.User.group_id');
+            if ($grupo_id == 1) {
+                $this->loadModel('User');
+                $unidade_organica = $this->User->Funcionario->UnidadeOrganica->findById($this->Session->read('Auth.User.unidade_organica_id'));
+                $codigo_unidade = $unidade_organica['UnidadeOrganica']['codigo_interno'];
 
-			if ($grupo_id == 1) {
-				$this->loadModel('User');
-				$unidade_organica = $this->User->Funcionario->UnidadeOrganica->findById($this->Session->read('Auth.User.unidade_organica_id'));
-				$codigo_unidade = $unidade_organica['UnidadeOrganica']['codigo_interno'];
+                switch ($codigo_unidade) {
+                    case 'cooperacao':
+                        if ($this->request->plugin != 'cooperacao') {
+                            $this->Session->setFlash(__('Não tem Permissão para acessar a area anterior'), 'default', array('class' => 'alert info'));
+                            $this->redirect(array('controller' => 'cooperacao_acordos', 'action' => 'home', 'plugin' => 'cooperacao'));
+                        }
+                        break;
+                    case 'faculdade':
+                        if ($this->request->prefix != 'faculdade') {
+                            $this->Session->setFlash(__('Não tem Permissão para acessar a area anterior'), 'default', array('class' => 'alert info'));
+                            $this->redirect(array('controller' => 'pages', 'action' => 'home', 'faculdade' => true));
+                        }
+                }
+            } elseif ($grupo_id == 4) {
+                if ($this->request->prefix != 'docente') {
+                    $this->request->prefix = 'docente';
+                }
+            } elseif ($grupo_id == 3) {
 
-				switch ($codigo_unidade) {
-					case 'cooperacao':
-						if ($this->request->plugin != 'cooperacao') {
-							$this->Session->setFlash(__('Não tem Permissão para acessar a area anterior'), 'default', array('class' => 'alert info'));
-							$this->redirect(array('controller' => 'cooperacao_acordos', 'action' => 'home', 'plugin' => 'cooperacao'));
-						}
-						break;
-					case 'faculdade':
-						if ($this->request->prefix != 'faculdade') {
-							$this->Session->setFlash(__('Não tem Permissão para acessar a area anterior'), 'default', array('class' => 'alert info'));
-							$this->redirect(array('controller' => 'pages', 'action' => 'home', 'faculdade' => true));
-						}
-				}
-			} elseif ($grupo_id == 4) {
-				if ($this->request->prefix != 'docente') {
-					$this->request->prefix = 'docente';
-				}
-			} elseif ($grupo_id == 3) {
+                if ($this->request->prefix != 'estudante') {
+                    $this->request->prefix = 'estudante';
+                }
+            } elseif ($grupo_id == 2) {
+                $this->loadModel('User');
+                $unidade_organica = $this->User->Funcionario->UnidadeOrganica->findById($this->Session->read('Auth.User.unidade_organica_id'));
+                $codigo_unidade = $unidade_organica['UnidadeOrganica']['codigo_interno'];
 
-				if ($this->request->prefix != 'estudante') {
-					$this->request->prefix = 'estudante';
-
-				}
-
-			} elseif ($grupo_id == 2) {
-				$this->loadModel('User');
-				$unidade_organica = $this->User->Funcionario->UnidadeOrganica->findById($this->Session->read('Auth.User.unidade_organica_id'));
-				$codigo_unidade = $unidade_organica['UnidadeOrganica']['codigo_interno'];
-
-				switch ($codigo_unidade) {
-					case 'cooperacao':
-						if ($this->request->plugin != 'cooperacao') {
-							$this->Session->setFlash(__('Não tem Permissão para acessar a area anterior'), 'default', array('class' => 'alert info'));
-							$this->redirect(array('controller' => 'cooperacao_acordos', 'action' => 'home', 'plugin' => 'cooperacao'));
-						}
-						break;
-					case 'faculdade':
-						if ($this->request->prefix != 'faculdade') {
-							$this->Session->setFlash(__('Não tem Permissão para acessar a area anterior'), 'default', array('class' => 'alert info'));
-							$this->redirect(array('controller' => 'pages', 'action' => 'home', 'faculdade' => true));
-						}
-				}
-				if ($this->User->isFromFaculdade($this->Session->read('Auth.User.id'))) {
+                switch ($codigo_unidade) {
+                    case 'cooperacao':
+                        if ($this->request->plugin != 'cooperacao') {
+                            $this->Session->setFlash(__('Não tem Permissão para acessar a area anterior'), 'default', array('class' => 'alert info'));
+                            $this->redirect(array('controller' => 'cooperacao_acordos', 'action' => 'home', 'plugin' => 'cooperacao'));
+                        }
+                        break;
+                    case 'faculdade':
+                        if ($this->request->prefix != 'faculdade') {
+                            $this->Session->setFlash(__('Não tem Permissão para acessar a area anterior'), 'default', array('class' => 'alert info'));
+                            $this->redirect(array('controller' => 'pages', 'action' => 'home', 'faculdade' => true));
+                        }
+                }
+                if ($this->User->isFromFaculdade($this->Session->read('Auth.User.id'))) {
 
 
-					if ($this->request->prefix != 'faculdade') {
-						$this->Session->setFlash(__('Não tem Permissão para acessar a area anterior'), 'default', array('class' => 'alert info'));
-						$this->redirect(array('controller' => 'pages', 'action' => 'home', 'faculdade' => true));
-					}
-				}
-			}
-		}
+                    if ($this->request->prefix != 'faculdade') {
+                        $this->Session->setFlash(__('Não tem Permissão para acessar a area anterior'), 'default', array('class' => 'alert info'));
+                        $this->redirect(array('controller' => 'pages', 'action' => 'home', 'faculdade' => true));
+                    }
+                }
+            }
+        }
 
 
-		$this->set('title_for_layout', '');
-		$this->set(compact('paginationOptions'));
-	}
+        $this->set('title_for_layout', '');
+        $this->set(compact('paginationOptions'));
+    }
 
-	/**
-	 * Estamos a ler mensagens, notificacoes e tarefas em todas as requisicoes :(
-	 * @Todo ver a melhor maneira de resolver isto
-	 */
-	public function beforeRender() {
-		parent::beforeRender();
+    /**
+     * Estamos a ler mensagens, notificacoes e tarefas em todas as requisicoes :(
+     * @Todo ver a melhor maneira de resolver isto
+     */
+    public function beforeRender() {
+        parent::beforeRender();
 
-		//Lemos as mensagens, notificacoes e tarefas em todas as requisicoes :(
-		$totalMessages = 0;
-		$totalNotificacoes = 0;
-		$totalTarefas = 0;
-		$messages = array();
-		$notificacoes = array();
-		$tarefas = array();
+//Lemos as mensagens, notificacoes e tarefas em todas as requisicoes :(
+        $totalMessages = 0;
+        $totalNotificacoes = 0;
+        $totalTarefas = 0;
+        $messages = array();
+        $notificacoes = array();
+        $tarefas = array();
 
 
-		if (isset($this->request->prefix) && !$this->request->is('ajax')) {
-			$this->layout = $this->request->prefix;
-		}
-		$this->set(compact('totalMessages', 'totalTarefas', 'totalNotificacoes', 'messages', 'tarefas', 'notificacoes'));
-	}
+        if (isset($this->request->prefix) && !$this->request->is('ajax')) {
+            $this->layout = $this->request->prefix;
+        }
+        $this->set(compact('totalMessages', 'totalTarefas', 'totalNotificacoes', 'messages', 'tarefas', 'notificacoes'));
+    }
 
 }
 
