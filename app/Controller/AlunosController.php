@@ -39,25 +39,30 @@ class AlunosController extends AppController {
         $this->loadModel('BolsaTemporaria');
 
 
-            $this->BolsaTemporaria->contain( array ('BolsaTipoBolsa', 'Curso'));
-            $bolsas = $this->BolsaTemporaria->find('all',array( 'order' => array('apelido', 'nomes')));
+        $this->BolsaTemporaria->contain(array('BolsaTipoBolsa', 'Curso'));
+        $bolsas = $this->BolsaTemporaria->find('all', array('order' => array('apelido', 'nomes')));
 
-//            debug($bolsas);
-            
-            foreach ($bolsas as $k => $bolsa) {
+
+
+        foreach ($bolsas as $k => $bolsa) {
+//            $ano_ = date_parse($bolsa['BolsaTemporaria']['created']);
+//            if ( 2014 == $ano_['year']) {
                 $this->Aluno->contain('Entidade');
                 $aluno = $this->Aluno->findByCodigo($bolsa['BolsaTemporaria']['numero_estudante']);
-                if(!empty($aluno)){
-                    
+
+
+                if (!empty($aluno)) {
+
+
                     $bolsa['BolsaTemporaria']['apelido'] = $aluno['Entidade']['apelido'];
                     $bolsa['BolsaTemporaria']['nomes'] = $aluno['Entidade']['nomes'];
                 }
-                
-            }
+//            }
+        }
 
-//        die();
-        
-        
+
+
+
 
         $this->set(compact('bolsas'));
     }
