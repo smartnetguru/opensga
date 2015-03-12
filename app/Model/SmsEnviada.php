@@ -81,6 +81,7 @@
             $resultado = $results->body;
             $this->set('resultado', $resultado);
             $this->set('url_final', $url_final);
+
             $this->save();
             if (is_numeric($resultado) && $resultado > 0) {
                 return 1;

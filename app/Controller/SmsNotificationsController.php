@@ -131,6 +131,49 @@ class SmsNotificationsController extends AppController {
         $this->SmsEnviada->sendSMS(844213948, "A UEM, o convida a cerimónia de lançamento da iniciativa Alumni no dia 22/08/2014, no Centro Cultural e Universitário,pelas 14.00 horas.");
 	}
 
+
+    public function send_sms_array() {
+
+
+        $this->loadModel('SmsEnviada');
+        $this->loadModel('Aluno');
+        $this->Aluno->contain(array(
+            'Entidade' => array(
+                'EntidadeContacto' => array(
+                    'conditions' => array('tipo_contacto_id' => 2)
+                )
+            )
+        ));
+        $candidatos = $this->Aluno->find('all',array('conditions'=>array('ano_ingresso'=>2015)));
+        debug(count($candidatos));
+
+        $mensagem = "A DRA solicita bolseiros de 2013-2015 a vir a reuniao no ambito da iniciativa um 'estudante um comoutador' no centro cultural as 13:30 de 13/03/15";
+        $this->SmsEnviada->sendSMS(826489374, "Todas SMS foram enviadas.");
+        $this->SmsEnviada->sendSMS(826489374, "A UEM, o convida a cerimónia de lançamento da iniciativa Alumni no dia //22/08/2014 no Centro Cultural e niversitário, pelas 14.00 horas.");
+        $this->SmsEnviada->sendSMS(822454375, "A UEM, o convida a cerimónia de lançamento da iniciativa Alumni no dia //22/08/2014 no Centro Cultural e niversitário, pelas 14.00 horas.");
+        $this->SmsEnviada->sendSMS(845179795, "A UEM, o convida a cerimónia de lançamento da iniciativa Alumni no dia //22/08/2014 no Centro Cultural e niversitário, pelas 14.00 horas.");
+        foreach ($candidatos as $candidato) {
+            if ($candidato['Entidade']['telemovel']!='') {
+                $numero = $candidato['Entidade']['EntidadeContacto']['telemovel'];
+                if (is_numeric($numero)) {
+                    debug($numero);
+
+
+
+                    $this->SmsEnviada->sendSMS($numero, $mensagem);
+                }
+
+
+
+            }
+
+
+
+        }
+        $this->SmsEnviada->sendSMS(826489374, "Todas SMS foram enviadas.");
+        $this->SmsEnviada->sendSMS(844213948, "A UEM, o convida a cerimónia de lançamento da iniciativa Alumni no dia 22/08/2014, no Centro Cultural e Universitário,pelas 14.00 horas.");
+    }
+
 	public function testa_sms() {
 
 		$this->SmsNotification->processaSMSConfirmacaoRenovacao(10000000000000000, 258842569523, 20092946);
