@@ -2328,7 +2328,7 @@
                 $xls = PHPExcel_IOFactory::load(APP.'Reports'.DS.'print_boletim_matricula.xlsx');
                 $this->Candidatura->contain(array(
                     'Genero','CidadeNascimento','ProvinciaNascimento','PaisNascimento','EscolaNivelMedio',
-                    'EstadoCivil','DocumentoIdentificacao'
+                    'EstadoCivil','DocumentoIdentificacao','Curso'
                 ));
                 $candidatos = $this->Candidatura->find('all',
                     array('conditions' => array(
@@ -2357,7 +2357,7 @@
                     //Faculdade
                     $worksheet->setCellValue('A3', $candidato['Candidatura']['nome_faculdade']); //Nome da Instituicao
                     //Curso
-                    $worksheet->setCellValue('A4', $candidato['Candidatura']['nome_curso']); //Nome da Instituicao
+                    $worksheet->setCellValue('A4', $candidato['Curso']['name']); //Nome da Instituicao
                     //Ano Lectivo
                     $worksheet->setCellValue('B7', $candidato['Candidatura']['ano_lectivo_admissao']);
                     //Numero de estudante
