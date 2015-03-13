@@ -156,11 +156,6 @@
       <change type="DELETED" beforePath="$PROJECT_DIR$/lib/Cake/Test/test_app/tmp/dir_map" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/manuais/source" afterPath="$PROJECT_DIR$/docs/manuais/source" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Console/Command/OpenSGAShell.php" afterPath="$PROJECT_DIR$/app/Console/Command/OpenSGAShell.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Model/SmsEnviada.php" afterPath="$PROJECT_DIR$/app/Model/SmsEnviada.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Controller/SmsNotificationsController.php" afterPath="$PROJECT_DIR$/app/Controller/SmsNotificationsController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/composer.json" afterPath="$PROJECT_DIR$/composer.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/composer.lock" afterPath="$PROJECT_DIR$/composer.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="opensga.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -186,7 +181,7 @@
       <file leaf-file-name="OpenSGAShell.php" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/Console/Command/OpenSGAShell.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="2496" column="70" selection-start="132641" selection-end="132641" vertical-scroll-proportion="0.94871795" vertical-offset="43362" max-vertical-offset="44460">
+            <state line="621" column="24" selection-start="32644" selection-end="32644" vertical-scroll-proportion="0.33333334" vertical-offset="10944" max-vertical-offset="45126">
               <folding>
                 <element signature="n#importa_alumnis#0;n#OpenSGAShell#0;n#!!top" expanded="false" />
               </folding>
@@ -861,7 +856,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Console/Command/OpenSGAShell.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="2496" column="70" selection-start="132641" selection-end="132641" vertical-scroll-proportion="0.94871795" vertical-offset="43362" max-vertical-offset="44460">
+        <state line="621" column="24" selection-start="32644" selection-end="32644" vertical-scroll-proportion="0.33333334" vertical-offset="10944" max-vertical-offset="45126">
           <folding>
             <element signature="n#importa_alumnis#0;n#OpenSGAShell#0;n#!!top" expanded="false" />
           </folding>

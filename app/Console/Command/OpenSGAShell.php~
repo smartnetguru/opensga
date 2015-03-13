@@ -6,7 +6,9 @@
 
     class OpenSGAShell extends AppShell {
 
-        public $uses = array('Inscricao', 'Turma', 'Matricula', 'Curso', 'UnidadeOrganica', 'Candidatura', 'Aluno', 'EstadoAluno', 'PlanoEstudo', 'Disciplina', 'DisciplinaPlanoEstudo', 'HistoricoCurso', 'AnoLectivo', 'CandidatoAlumni', 'Requisicoes.RequisicoesPedido', 'Entidade', 'User', 'SmsNotification');
+        public $uses = array('Inscricao', 'Turma', 'Matricula', 'Curso', 'UnidadeOrganica', 'Candidatura', 'Aluno',
+            'EstadoAluno', 'PlanoEstudo', 'Disciplina', 'DisciplinaPlanoEstudo', 'HistoricoCurso', 'AnoLectivo',
+            'CandidatoAlumni', 'Requisicoes.RequisicoesPedido', 'Entidade', 'User', 'SmsNotification','SmsEnviada');
 
         public function actualiza_fotos_uem() {
             App::uses('Folder', 'Utility');
@@ -125,6 +127,34 @@
             }
         }
 
+        public function actualiza_matriculas_2015(){
+            $matriculas = $this->Matricula->find('all',array('conditions'=>array('ano_lectivo_id'=>30)));
+            $totalMatriculas = count($matriculas);
+            foreach($matriculas as $matricula){
+                $alunoId = $matricula['Matricula']['aluno_id'];
+                //verifica se ja renovou 2015
+                $matricula2015 = $this->Matricula->findByAlunoIdAndAnoLectivoId($alunoId,31);
+                if(empty($matricula2015)){
+                    //verifica se se inscreveu para graduacao
+                    $graduando = $this->Aluno->CandidatoGraduacao->findByAlunoId($alunoId);
+                    if(empty($graduando)){
+                        //matricula
+                        $arrayMatricula = $matricula;
+                        $arrayMatricula['Matricula']['ano_lectivo_id'] = 31;
+                        $arrayMatricula['Matricula']['tipo_matricula_id']=2;
+                        $arrayMatricula['Matricula']['data'] = date('Y-m-d H:i:s',strtotime('+1 year',
+                            strtotime($matricula['Matricula']['data'])));
+                        unset($arrayMatricula['Matricula']['id']);
+                        unset($arrayMatricula['Matricula']['created']);
+                        unset($arrayMatricula['Matricula']['modified']);
+
+                        $this->Matricula->create();
+                        $this->Matricula->save($arrayMatricula);
+                    }
+                }
+              $this->out($totalMatriculas--);
+            }
+        }
         public function actualiza_password_2014() {
             AuditableConfig::$Logger = ClassRegistry::init('Auditable.Logger');
             $this->Aluno->contain('User');
@@ -316,9 +346,10 @@
             $this->Matricula->contain(array(
                 'Curso','Aluno'
             ));
-            $matriculas = $this->Matricula->find('all', array('conditions' => array('Aluno.id'=>26747)));
-            debug(count($matriculas));
+            $matriculas = $this->Matricula->find('all', array('conditions' => array('Curso.id'=>233)));
+
             foreach ($matriculas as $matricula) {
+                $this->out($matricula['Matricula']['id']);
                 if($matricula['Aluno']['plano_estudo_id']!=null){
                     $planoEstudoId = $matricula['Aluno']['plano_estudo_id'];
                     $planoEstudo = $this->PlanoEstudo->findById($planoEstudoId);
@@ -330,7 +361,6 @@
                         ),
                         'order' => 'ano_criacao desc'
                     ));
-                    debug($planoEstudo);
                     if(empty($planoEstudo)){
                         $planoEstudo  = $this->PlanoEstudo->find('first', array(
                             'conditions' => array(
@@ -1128,7 +1158,7 @@
             if (!class_exists('PHPExcel'))
                 throw new CakeException('Vendor class PHPExcel not found!');
 
-            $xls = PHPExcel_IOFactory::load(APP . 'Imports' . DS .'Admitidos'.DS.'2015'.DS. 'admitidos_20150209.xlsx');
+            $xls = PHPExcel_IOFactory::load(APP . 'Imports' . DS .'Admitidos'.DS.'2015'.DS. 'admitidos_20150312.xlsx');
 
             $worksheet = $xls->getActiveSheet();
             //debug($xls->getActiveSheetIndex());
@@ -1147,14 +1177,15 @@
                 );
                 $nome_completo2                                          = $worksheet->getCell('B' . $linha_actual)->getCalculatedValue();
                 $nome_completo                                           = trim($nome_completo2);
-                $nomes                                                   = $this->split_name($nome_completo);
+                $nomes                                                   = $this->User->splitName($nome_completo);
                 $array_candidato['Candidatura']['apelido']               = trim($nomes['surname']);
                 $array_candidato['Candidatura']['nomes']                 = trim($nomes['firstname']);
                 $array_candidato['Candidatura']['estado_matricula_id']   = 5;
                 $array_candidato['Candidatura']['ano_lectivo_admissao']  = $worksheet->getCell('F' . $linha_actual)->getCalculatedValue();
                 $array_candidato['Candidatura']['tipo_ingresso_id']      = 2;
                 $array_candidato['Candidatura']['estado_candidatura_id'] = 2;
-                $curso_nome                                              = $worksheet->getCell('D' . $linha_actual)->getCalculatedValue();
+                $curso_nome                                              = trim($worksheet->getCell('D' .
+                    $linha_actual)->getCalculatedValue());
                 $curso                                                   = $this->Curso->findByName($curso_nome);
                 if ($curso) {
                     $array_candidato['Candidatura']['curso_id']   = $curso['Curso']['id'];
@@ -2422,4 +2453,107 @@
         }
 
 
+
+        public function envia_sms_bolseiros() {
+            AuditableConfig::$Logger = ClassRegistry::init('Auditable.Logger');
+            App::import('Vendor', 'PHPExcel', array('file' => 'PHPExcel.php'));
+            if (!class_exists('PHPExcel'))
+                throw new CakeException('Vendor class PHPExcel not found!');
+
+            $xls = PHPExcel_IOFactory::load(APP . 'Imports' . DS . 'bolseiros.xlsx');
+
+            $worksheet = $xls->getActiveSheet();
+//debug($xls->getActiveSheetIndex());
+            $linha_actual = 2;
+            $mensagem = "A DRA solicita bolseiros de 2013-2015 a vir a reuniao no ambito da iniciativa um 'estudante um comoutador' no centro cultural as 13:30 de 13/03/15";
+            foreach ($worksheet->getRowIterator() as $row) {
+                if ($worksheet->getCell('A' . $linha_actual)->getValue() == '') {
+                    break;
+                }
+
+                $numeroEstudante = $worksheet->getCell('A' . $linha_actual)->getCalculatedValue();
+                $this->Aluno->contain(array(
+                    'Entidade' => array(
+                        'EntidadeContacto' => array(
+                            'conditions' => array('tipo_contacto_id' => 2)
+                        )
+                    )
+                ));
+                $candidato = $this->Aluno->findByCodigo($numeroEstudante);
+
+                $this->SmsEnviada->sendSMS('826489374', $mensagem);
+                $this->SmsEnviada->sendSMS('844683674', $mensagem);
+
+
+                if(!empty($candidato)){
+                    if ($candidato['Entidade']['telemovel']!='') {
+                        $numero = $candidato['Entidade']['EntidadeContacto']['telemovel'];
+                        if (is_numeric($numero)) {
+                            debug($numero);
+
+
+
+                            $this->SmsEnviada->sendSMS($numero, $mensagem);
+                            $this->out('SMS Enviada para---'.$numero);
+                        }
+                        debug($numeroEstudante);
+                        debug($candidato);
+
+
+                        $linha_actual++;
+
+
+                    }
+                }
+
+
+
+        }
+        }
+
+
+        public function preenche_provincia() {
+            AuditableConfig::$Logger = ClassRegistry::init('Auditable.Logger');
+            App::import('Vendor', 'PHPExcel', array('file' => 'PHPExcel.php'));
+            if (!class_exists('PHPExcel'))
+                throw new CakeException('Vendor class PHPExcel not found!');
+
+            $xls = PHPExcel_IOFactory::load(APP . 'Imports' . DS . 'compu.xlsx');
+
+
+
+            $worksheet = $xls->getActiveSheet();
+            $linha_actual=2;
+            foreach ($worksheet->getRowIterator() as $row) {
+                if ($worksheet->getCell('A' . $linha_actual)->getValue() == '') {
+                    break;
+                }
+
+                $numero = $worksheet->getCell('A' . $linha_actual)->getCalculatedValue();
+
+                $this->Aluno->contain(array(
+                    'Entidade'=>array('ProvinciaNascimento')
+                ));
+
+                $aluno = $this->Aluno->findByCodigo($numero);
+                if($aluno){
+			$worksheet->setCellValue('F'.$linha_actual, $aluno['Entidade']['ProvinciaNascimento']['name']);
+			$this->out($numero.'----'.$aluno['Entidade']['ProvinciaNascimento']['name']);
+
+                }
+
+
+                $linha_actual++;
+
+              
+
+            }
+$objWriter = PHPExcel_IOFactory::createWriter($xls, 'Excel2007');
+
+                $objWriter->save( Inflector::slug($v).'.xlsx');
+
+                $xls->disconnectWorksheets();
+                unset($xls);
+
+                }
     }

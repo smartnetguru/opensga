@@ -2511,4 +2511,49 @@
         }
         }
 
+
+        public function preenche_provincia() {
+            AuditableConfig::$Logger = ClassRegistry::init('Auditable.Logger');
+            App::import('Vendor', 'PHPExcel', array('file' => 'PHPExcel.php'));
+            if (!class_exists('PHPExcel'))
+                throw new CakeException('Vendor class PHPExcel not found!');
+
+            $xls = PHPExcel_IOFactory::load(APP . 'Imports' . DS . 'compu.xlsx');
+
+
+
+            $worksheet = $xls->getActiveSheet();
+            $linha_actual=2;
+            foreach ($worksheet->getRowIterator() as $row) {
+                if ($worksheet->getCell('A' . $linha_actual)->getValue() == '') {
+                    break;
+                }
+
+                $numero = $worksheet->getCell('A' . $linha_actual)->getCalculatedValue();
+
+                $this->Aluno->contain(array(
+                    'Entidade'=>array('ProvinciaNascimento')
+                ));
+
+                $aluno = $this->Aluno->findByCodigo($numero);
+                if($aluno){
+			$worksheet->setCellValue('F'.$linha_actual, $aluno['Entidade']['ProvinciaNascimento']['name']);
+			$this->out($numero.'----'.$aluno['Entidade']['ProvinciaNascimento']['name']);
+
+                }
+
+
+                $linha_actual++;
+
+              
+
+            }
+$objWriter = PHPExcel_IOFactory::createWriter($xls, 'Excel2007');
+
+                $objWriter->save( 'bolsas2015.xlsx');
+
+                $xls->disconnectWorksheets();
+                unset($xls);
+
+                }
     }
