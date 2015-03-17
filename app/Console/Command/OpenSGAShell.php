@@ -2518,7 +2518,7 @@
             if (!class_exists('PHPExcel'))
                 throw new CakeException('Vendor class PHPExcel not found!');
 
-            $xls = PHPExcel_IOFactory::load(APP . 'Imports' . DS . 'compu.xlsx');
+            $xls = PHPExcel_IOFactory::load(APP . 'Imports' . DS . 'ELISIO.xlsx');
 
 
 
@@ -2536,8 +2536,8 @@
                 ));
 
                 $aluno = $this->Aluno->findByCodigo($numero);
-                if($aluno){
-			$worksheet->setCellValue('F'.$linha_actual, $aluno['Entidade']['ProvinciaNascimento']['name']);
+                if(empty($aluno)){
+			$worksheet->setCellValue('F'.$linha_actual, 'Nao Matriculado');
 			$this->out($numero.'----'.$aluno['Entidade']['ProvinciaNascimento']['name']);
 
                 }
