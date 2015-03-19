@@ -33,11 +33,11 @@ class BolsaShell extends AppShell {
             ));
 
             $aluno = $this->Aluno->findByCodigo($numero);
-            if(empty($aluno)){
+            if(!empty($aluno)){
                 $worksheet->setCellValue('F'.$linha_actual,$aluno['Entidade']['Genero']['name']);
                 $worksheet->setCellValue('G'.$linha_actual,$aluno['Entidade']['data_nascimento']);
-                $worksheet->setCellValue('F'.$linha_actual,$aluno['Entidade']['ProvinciaNascimento']['name']);
-                $worksheet->setCellValue('F'.$linha_actual,$aluno['Entidade']['PaisNascimento']['name']);
+                $worksheet->setCellValue('I'.$linha_actual,$aluno['Entidade']['ProvinciaNascimento']['name']);
+                $worksheet->setCellValue('J'.$linha_actual,$aluno['Entidade']['PaisNascimento']['name']);
                 $this->out($numero.'----'.$aluno['Entidade']['ProvinciaNascimento']['name']);
 
             }
