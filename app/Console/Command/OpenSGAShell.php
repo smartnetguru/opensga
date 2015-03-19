@@ -2,6 +2,7 @@
 
     ini_set('memory_limit', "2048M");
     ini_set('xdebug.max_nesting_level', 20000);
+    set_time_limit(10000);
     App::uses('AuditableConfig', 'Auditable.Lib');
 
     class OpenSGAShell extends AppShell {
@@ -44,8 +45,96 @@
                     $this->out($i++);
                 }
             }
+			
         }
+		
+		//Exportar dados actualizados para tabela alunos e ou entidades
+		
+		 public function importa_estudantes_actualizados() {
+                       AuditableConfig::$Logger = ClassRegistry::init('Auditable.Logger');
+            App::import('Vendor', 'PHPExcel', array('file' => 'PHPExcel.php'));
+            if (!class_exists('PHPExcel'))
+                throw new CakeException('Vendor class PHPExcel not found!');
 
+            $xls = PHPExcel_IOFactory::load(APP . 'Imports' . DS .'Update_Dados'.DS.'Campanha2014'.DS.'LP1'.DS.'alunos_todos_estudantes.xlsx');
+
+            $worksheet = $xls->getActiveSheet();
+            $linha_actual = 2;
+
+          
+            
+
+            foreach ($worksheet->getRowIterator() as $row) {
+               
+
+                $status = $worksheet->getCell('A' . $linha_actual)->getCalculatedValue();
+                $numero_estudante = $worksheet->getCell('B' . $linha_actual)->getCalculatedValue();
+              
+                
+                $ano_ingresso =  $worksheet->getCell('E' . $linha_actual)->getCalculatedValue();
+                $sexo = $worksheet->getCell('F' . $linha_actual)->getCalculatedValue();
+                  if($sexo =='Masculino'){
+                    $genero = 1;
+                } elseif($sexo=='Feminino'){
+                    $genero = 2;
+                }
+                $dataNascimento = $worksheet->getCell('G' . $linha_actual)->getCalculatedValue();
+                $nome_pai = $worksheet->getCell('H' . $linha_actual)->getCalculatedValue();
+                $nomes_pai = ucwords(strtolower($nome_pai));
+                 $nome_mae = $worksheet->getCell('I' . $linha_actual)->getCalculatedValue();
+                $nomes_mae = ucwords(strtolower($nome_mae));
+                $naturalidade = $worksheet->getCell('J' . $linha_actual)->getCalculatedValue();
+                
+
+                $provinciaNascimento = $worksheet->getCell('L' . $linha_actual)->getCalculatedValue();
+                $provincia = $this->Aluno->Entidade->ProvinciaNascimento->findByname($provinciaNascimento);
+                if($provincia){
+                    $provinciaNascimentoId = $provincia['ProvinciaNascimento']['id'];
+                }
+               
+                 $paisNascimento = $worksheet->getCell('K' . $linha_actual)->getCalculatedValue();
+                $pais = $this->Aluno->Entidade->PaisNascimento->findByname($paisNascimento);
+                if($pais){
+                    $paisNascimentoId = $pais['PaisNascimento']['id'];
+                }
+              
+                $telemovel = $worksheet->getCell('M' . $linha_actual)->getCalculatedValue();
+                  $documento_identificacao = $worksheet->getCell('N' . $linha_actual)->getCalculatedValue();
+                $Conclusao = $worksheet->getCell('O' . $linha_actual)->getCalculatedValue();
+                $observacao = $worksheet->getCell('T' . $linha_actual)->getCalculatedValue();
+                
+                if($status == 1){
+              
+                   
+                    $entidadesExiste = $this->Aluno->findByCodigo($numero_estudante);
+                    if($entidadesExiste){
+                        
+                        $entidade_id = $entidadesExiste['Aluno']['entidade_id'];
+                        
+                        $this->Aluno->id = $entidadesExiste['Aluno']['id'];
+                        $this->Aluno->set('ano_ingresso', $ano_ingresso);
+                        $this->Aluno->save();
+                        
+                        $this->Entidade->id = $entidade_id;
+                        $this->Entidade->set('nome_pai',$nome_pai);
+                        $this->Entidade->set('nome_mae',$nome_mae);
+                        $this->Entidade->set('provincia_nascimento',$provinciaNascimentoId);
+                        $this->Entidade->set('pais_nascimento',$paisNascimentoId);
+                       $this->Entidade->set('telemovel',$telemovel);
+                       $this->Entidade->set('data_nascimento',$dataNascimento);
+                       $this->Entidade->set('genero_id',$genero);
+                       $this->Entidade->set('naturalidade',$naturalidade);
+                       $this->Entidade->set('documento_identificacao_numero',$documento_identificacao);
+                      $this->Entidade->save();
+                      $this->out($linha_actual. '----------------Update Feito---------------'.$this->Aluno->id);
+                      
+                   }
+                    
+                }
+                $linha_actual++;
+            }
+        }
+		/*---------------------------------------------------*/
         public function actualiza_historico_curso() {
             $historicos = $this->Aluno->HistoricoCurso->find('all', array('conditions' => array('motivo_termino_curso_id' => null)));
             foreach ($historicos as $historico) {
