@@ -316,13 +316,6 @@ class UsersController extends AppController {
 
 			if ($this->Auth->login()) {
 				$password_login = $this->request->data['User']['password'];
-//				$this->loadModel('Config');
-//				$configs = $this->Config->find('all');
-//				foreach ($configs as $c) {
-//					$name = "SGAConfig." . $c['Config']['name'];
-//
-//					$this->Session->write($name, $c['Config']['value']);
-//				}
 				$this->Session->write('SGAConfig.ano_lectivo_id', Configure::read('OpenSGA.ano_lectivo_id'));
 				$this->Session->write('SGAConfig.ano_lectivo', Configure::read('OpenSGA.ano_lectivo'));
 				$this->Session->write('Config.language', 'por');
