@@ -2,152 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fc9bff1a-fcc4-4747-ab16-ab64e9734a11" name="Default" comment="">
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Licenciatura_Em_Engenharia_do_Ambiente.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Licenciatura_Em_Engenharia_do_Ambiente_Pos_Laboral.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Licenciatura_em_Administracao_Publica.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Licenciatura_em_Administracao_Publica_Distancia.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Licenciatura_em_Administracao_Publica_Pos_Laboral.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Licenciatura_em_Agricultura_Comercial.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Licenciatura_em_Agro_Negocios.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Licenciatura_em_Agro_Processamento.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Licenciatura_em_Agroeconomia_e_Extensao_Agraria.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Licenciatura_em_Animacao_Turistica.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Licenciatura_em_Antropologia.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Licenciatura_em_Antropologia_Pos_Laboral.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Licenciatura_em_Arqueologia_e_Gestao_do_Patrimonio_Cultural.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Licenciatura_em_Arquitectura_e_Planeamento_Fisico.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Licenciatura_em_Biologia_Aplicada.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Licenciatura_em_Biologia_Marinha.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Licenciatura_em_Biologia_Marinha_Aquatica_e_Costeira.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Licenciatura_em_Biologia_e_Saude.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Licenciatura_em_Cartografia_e_Pesquisa_Geologica.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Licenciatura_em_Ciencia_e_Tecnologia_de_Alimentos.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Licenciatura_em_Ciencias_Politicas.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Licenciatura_em_Ciencias_Politicas_Pos_Laboral.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Licenciatura_em_Ciencias_de_Informacao.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Licenciatura_em_Ciencias_de_Informacao_Geografica.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Licenciatura_em_Ciencias_de_Informacao_Geografica_Pos_Laboral.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Licenciatura_em_Ciencias_do_Desporto.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Licenciatura_em_Contabilidade_e_Financas.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Licenciatura_em_Contabilidade_e_Financas_Pos_Laboral.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Licenciatura_em_Desenvolvimento_e_Educacao_de_Infancia.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Licenciatura_em_Direito.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Licenciatura_em_Direito_Pos_Laboral.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Licenciatura_em_Ecologia_e_Conservacao_da_Biodiversidade_Terrestre.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Licenciatura_em_Economia.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Licenciatura_em_Economia_Agraria.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Licenciatura_em_Economia_Pos_Laboral.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Licenciatura_em_Educacao_Ambiental.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Licenciatura_em_Educacao_Ambiental_Pos_Laboral.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Licenciatura_em_Engenharia_Agronomica.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Licenciatura_em_Engenharia_Civil.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Licenciatura_em_Engenharia_Civil_Pos_Laboral.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Licenciatura_em_Engenharia_Electrica.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Licenciatura_em_Engenharia_Electrica_Pos_Laboral.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Licenciatura_em_Engenharia_Electronica.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Licenciatura_em_Engenharia_Electronica_Pos_Laboral.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Licenciatura_em_Engenharia_Florestal.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Licenciatura_em_Engenharia_Informatica.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Licenciatura_em_Engenharia_Informatica_Pos_Laboral.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Licenciatura_em_Engenharia_Mecanica.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Licenciatura_em_Engenharia_Quimica.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Licenciatura_em_Engenharia_Rural.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Licenciatura_em_Engenharia_e_Gestao_Industrial_Pos_Laboral.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Licenciatura_em_Ensino_de_Frances.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Licenciatura_em_Ensino_de_Frances_Pos_Laboral.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Licenciatura_em_Ensino_de_Ingles.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Licenciatura_em_Ensino_de_Ingles_Pos_Laboral.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Licenciatura_em_Ensino_de_Linguas_Bantu.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Licenciatura_em_Ensino_de_Portugues.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Licenciatura_em_Ensino_de_Portugues_Pos_Laboral.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Licenciatura_em_Estatistica.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Licenciatura_em_Estatistica_Pos_Laboral.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Licenciatura_em_Filosofia.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Licenciatura_em_Filosofia_Pos_Laboral.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Licenciatura_em_Financas.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Licenciatura_em_Financas_Pos_Laboral.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Licenciatura_em_Fisica.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Licenciatura_em_Fisica_Pos_Laboral.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Licenciatura_em_Geografia.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Licenciatura_em_Geografia_Pos_Laboral.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Licenciatura_em_Geologia_Aplicada.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Licenciatura_em_Geologia_Marinha.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Licenciatura_em_Gestao.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Licenciatura_em_Gestao_Comercial.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Licenciatura_em_Gestao_Hoteleira.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Licenciatura_em_Gestao_Inhambane_Pos_Laboral.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Licenciatura_em_Gestao_Pos_Laboral.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Licenciatura_em_Gestao_de_Empresas.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Licenciatura_em_Gestao_de_Empresas_Pos_Laboral.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Licenciatura_em_Gestao_de_Mercados_Turisticos.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Licenciatura_em_Gestao_de_Negocios_Distancia.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Licenciatura_em_Historia.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Licenciatura_em_Historia_Pos_Laboral.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Licenciatura_em_Informacao_Turistica.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Licenciatura_em_Informatica.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Licenciatura_em_Informatica_Pos_Laboral.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Licenciatura_em_Jornalismo.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Licenciatura_em_Jornalismo_Pos_Laboral.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Licenciatura_em_Lingua_de_Sinais_de_Mocambique_Vertente_de_Ensino.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Licenciatura_em_Lingua_de_Sinais_de_Mocambique_Vertente_de_Interpretacao.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Licenciatura_em_Linguistica.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Licenciatura_em_Linguistica_Pos_Laboral.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Licenciatura_em_Literatura_Mocambicana.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Licenciatura_em_Literatura_Mocambicana_Pos_Laboral.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Licenciatura_em_Matematica.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Licenciatura_em_Medicina.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Licenciatura_em_Medicina_Veterinaria.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Licenciatura_em_Meteorologia.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Licenciatura_em_Meteorologia_Pos_Laboral.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Licenciatura_em_Musica.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Licenciatura_em_Oceanografia.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Licenciatura_em_Organizacao_e_Gestao_da_Educacao.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Licenciatura_em_Organizacao_e_Gestao_da_Educacao_Distancia.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Licenciatura_em_Organizacao_e_Gestao_da_Educacao_Pos_Laboral.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Licenciatura_em_Producao_Agricola.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Licenciatura_em_Producao_Animal.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Licenciatura_em_Producao_Pesqueira.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Licenciatura_em_Psicologia_Escolar_e_de_Necessidades_Educativas_Especiais.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Licenciatura_em_Psicologia_Escolar_e_de_Necessidades_Educativas_Especiais_Pos_Laboral.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Licenciatura_em_Psicologia_Social_e_Comunitaria.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Licenciatura_em_Psicologia_Social_e_Comunitaria_Pos_Laboral.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Licenciatura_em_Psicologia_das_Organizacoes.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Licenciatura_em_Psicologia_das_Organizacoes_Pos_Laboral.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Licenciatura_em_Quimica.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Licenciatura_em_Quimica_Industrial.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Licenciatura_em_Quimica_Marinha.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Licenciatura_em_Servico_Social.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Licenciatura_em_Sociologia.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Licenciatura_em_Sociologia_Pos_Laboral.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Licenciatura_em_Teatro.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Licenciatura_em_Traducao_Frances_Portugues.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Licenciatura_em_Traducao_Frances_Portugues_Pos_Laboral.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Licenciatura_em_Traducao_Ingles_Portugues.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Licenciatura_em_Traducao_Ingles_Portugues_Pos_Laboral.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Licenciatura_em_Turismo.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Licenciatura_em_comunicacao_rural.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Mestrado_em_Ciencias_Juridicas.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Mestrado_em_Desenvolvimento_Rural.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Mestrado_em_Economia_Agraria.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Mestrado_em_Economia_do_Desenvolvimento.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Mestrado_em_Gestao_Empresarial.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Mestrado_em_Governacao_e_Administracao_Publica.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Mestrado_em_Linguistica.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Mestrado_em_Maneio_e_Conservacao_de_Biodiversidade.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Mestrado_em_Planeamento_e_Gestao_de_Assentamentos_Informais.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Mestrado_em_Planeamento_e_Gestao_de_Assentamentos_Informais_Distancia.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Mestrado_em_Proteccao_Vegetal.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Mestrado_em_Quimica_e_Processamento_de_Recursos_Locais.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Mestrado_em_Saude_Mental_e_de_Pisicointervencoes.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Mestrado_em_Saude_Pulblica.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Mestrado_em_Sociologia_Rural_e_Gestao_de_Desenvolvimento.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\Mestrado_em_Tecnologia_e_Utilizacao_de_Madeira.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\mestres.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\opensga\app\mestres2.xlsx" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Config/bootstrap.php" afterPath="$PROJECT_DIR$/app/Config/bootstrap.php" />
-      <change type="MODIFICATION" beforePath="C:\xampp\htdocs\opensga\app\Config\Schema\db_acl.php" afterPath="$PROJECT_DIR$/app/Config/Schema/db_acl.php" />
-      <change type="MODIFICATION" beforePath="C:\xampp\htdocs\opensga\app\Config\Schema\i18n.php" afterPath="$PROJECT_DIR$/app/Config/Schema/i18n.php" />
-      <change type="MODIFICATION" beforePath="C:\xampp\htdocs\opensga\app\Config\Schema\sessions.php" afterPath="$PROJECT_DIR$/app/Config/Schema/sessions.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Console/Command/CursoShell.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Console/Command/OpenSGAShell.php" afterPath="$PROJECT_DIR$/app/Console/Command/OpenSGAShell.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="opensga.iws" />
@@ -176,8 +32,8 @@
       <file leaf-file-name="OpenSGAShell.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Console/Command/OpenSGAShell.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="42141" max-vertical-offset="42755">
-              <caret line="2559" column="0" selection-start-line="2559" selection-start-column="0" selection-end-line="2559" selection-end-column="0" />
+            <state vertical-scroll-proportion="-0.3148148" vertical-offset="42398" max-vertical-offset="43333">
+              <caret line="2545" column="0" selection-start-line="2545" selection-start-column="0" selection-end-line="2545" selection-end-column="0" />
               <folding>
                 <element signature="n#importa_alumnis#0;n#OpenSGAShell#0;n#!!top" expanded="false" />
               </folding>
@@ -185,21 +41,31 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BolsaShell.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Console/Command/BolsaShell.php">
+      <file leaf-file-name="database.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Config/database.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="155" max-vertical-offset="1122">
-              <caret line="39" column="43" selection-start-line="39" selection-start-column="43" selection-end-line="39" selection-end-column="43" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="1025" max-vertical-offset="1632">
+              <caret line="48" column="37" selection-start-line="48" selection-start-column="37" selection-end-line="48" selection-end-column="37" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="database.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Config/database.php">
+      <file leaf-file-name="CursoShell.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Console/Command/CursoShell.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.0" vertical-offset="391" max-vertical-offset="1632">
-              <caret line="48" column="37" selection-start-line="48" selection-start-column="37" selection-end-line="48" selection-end-column="37" />
+            <state vertical-scroll-proportion="-10.384615" vertical-offset="70" max-vertical-offset="646">
+              <caret line="20" column="12" selection-start-line="0" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SMSShell.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/Console/Command/SMSShell.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.5714286" vertical-offset="317" max-vertical-offset="918">
+              <caret line="37" column="20" selection-start-line="37" selection-start-column="20" selection-end-line="37" selection-end-column="20" />
               <folding />
             </state>
           </provider>
@@ -208,7 +74,7 @@
       <file leaf-file-name="bootstrap.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Config/bootstrap.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-7.1153846" vertical-offset="1498" max-vertical-offset="2057">
+            <state vertical-scroll-proportion="0.0" vertical-offset="1498" max-vertical-offset="2057">
               <caret line="99" column="0" selection-start-line="99" selection-start-column="0" selection-end-line="109" selection-end-column="0" />
               <folding />
             </state>
@@ -218,7 +84,7 @@
       <file leaf-file-name="bootstrap.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Plugin/CakeRabbit/Config/bootstrap.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="170">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="170">
               <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
@@ -228,7 +94,7 @@
       <file leaf-file-name="CakeRabbit.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Plugin/CakeRabbit/Lib/CakeRabbit.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="21.653847" vertical-offset="563" max-vertical-offset="1122">
+            <state vertical-scroll-proportion="0.0" vertical-offset="563" max-vertical-offset="1122">
               <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
@@ -238,14 +104,14 @@
       <file leaf-file-name="CakeResqueBootstrap.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Plugin/CakeRabbit/Lib/CakeResqueBootstrap.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="697">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="697">
               <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Resque_Job_Creator.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Resque_Job_Creator.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Plugin/CakeRabbit/Lib/Resque_Job_Creator.php">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1224">
@@ -258,18 +124,8 @@
       <file leaf-file-name="config.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Plugin/CakeRabbit/Config/config.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="15.115385" vertical-offset="393" max-vertical-offset="952">
+            <state vertical-scroll-proportion="0.0" vertical-offset="393" max-vertical-offset="952">
               <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SmsEnviada.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Model/SmsEnviada.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1411" max-vertical-offset="1649">
-              <caret line="83" column="0" selection-start-line="83" selection-start-column="0" selection-end-line="83" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -288,9 +144,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/app/View/Matriculas/exportar_extracto_renovacao.ctp" />
-        <option value="$PROJECT_DIR$/app/View/Matriculas/exportar_extracto_renovacao_excel.ctp" />
-        <option value="$PROJECT_DIR$/app/Config/siga_constants.php" />
         <option value="$PROJECT_DIR$/app/Console/Command/PagamentoShell.php" />
         <option value="$PROJECT_DIR$/app/Model/AppModel.php" />
         <option value="$PROJECT_DIR$/app/Model/Behavior/AuditableBehavior.php" />
@@ -336,9 +189,12 @@
         <option value="$PROJECT_DIR$/composer.json" />
         <option value="$PROJECT_DIR$/app/Controller/SmsNotificationsController.php" />
         <option value="$PROJECT_DIR$/app/Model/SmsEnviada.php" />
-        <option value="$PROJECT_DIR$/app/Console/Command/OpenSGAShell.php" />
         <option value="$PROJECT_DIR$/app/Console/Command/BolsaShell.php" />
         <option value="$PROJECT_DIR$/app/Config/database.php" />
+        <option value="$PROJECT_DIR$/app/Console/Command/CursoShell.php" />
+        <option value="$PROJECT_DIR$/app/Console/Command/OpenSGAShell.php" />
+        <option value="$PROJECT_DIR$/app/Console/Command/SmsShell.php" />
+        <option value="$PROJECT_DIR$/app/Console/Command/SMSShell.php" />
       </list>
     </option>
   </component>
@@ -375,7 +231,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -422,98 +277,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Plugin" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="opensga" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="opensga" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Plugin" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="CakeRabbit" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="opensga" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="opensga" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Plugin" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="CakeRabbit" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Lib" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="opensga" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="opensga" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Plugin" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="CakeRabbit" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Config" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="opensga" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="opensga" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="Console" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -540,26 +303,9 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="opensga" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="opensga" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Config" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -598,15 +344,15 @@
       <BehatRunner />
       <method />
     </configuration>
+    <configuration default="true" type="PhpUnitRemoteRunConfigurationType" factoryName="PHPUnit on Server">
+      <method />
+    </configuration>
     <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
       <node-options />
       <gulpfile />
       <tasks />
       <pass-parent-env-vars>false</pass-parent-env-vars>
       <envs />
-      <method />
-    </configuration>
-    <configuration default="true" type="PhpUnitRemoteRunConfigurationType" factoryName="PHPUnit on Server">
       <method />
     </configuration>
     <list size="0" />
@@ -650,29 +396,29 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="false" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32925472" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3023426" sideWeight="0.31132075" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3001464" sideWeight="0.31132075" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3023426" sideWeight="0.6886792" order="0" side_tool="true" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3001464" sideWeight="0.6886792" order="0" side_tool="true" content_ui="combo" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3289689" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3256579" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3256579" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -706,20 +452,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/View/Matriculas/print_boletim_matricula.ctp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="198" max-vertical-offset="1926">
-          <caret line="11" column="9" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="516">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/.htaccess">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="516">
@@ -955,7 +687,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="6035" max-vertical-offset="11730">
           <caret line="380" column="22" selection-start-line="380" selection-start-column="22" selection-end-line="380" selection-end-column="22" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -963,7 +694,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="246" max-vertical-offset="3312">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -971,7 +701,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="5307" max-vertical-offset="6894">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -979,7 +708,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="374" max-vertical-offset="646">
           <caret line="22" column="33" selection-start-line="22" selection-start-column="33" selection-end-line="22" selection-end-column="33" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -987,7 +715,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="2312" max-vertical-offset="14705">
           <caret line="136" column="31" selection-start-line="136" selection-start-column="31" selection-end-line="136" selection-end-column="31" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -995,7 +722,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="2533" max-vertical-offset="3281">
           <caret line="149" column="169" selection-start-line="149" selection-start-column="169" selection-end-line="149" selection-end-column="169" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1003,17 +729,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="1411" max-vertical-offset="1649">
           <caret line="83" column="0" selection-start-line="83" selection-start-column="0" selection-end-line="83" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Console/Command/OpenSGAShell.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="42141" max-vertical-offset="42755">
-          <caret line="2559" column="0" selection-start-line="2559" selection-start-column="0" selection-end-line="2559" selection-end-column="0" />
-          <folding>
-            <element signature="n#importa_alumnis#0;n#OpenSGAShell#0;n#!!top" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1025,17 +740,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Config/database.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="391" max-vertical-offset="1632">
-          <caret line="48" column="37" selection-start-line="48" selection-start-column="37" selection-end-line="48" selection-end-column="37" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Config/bootstrap.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.1153846" vertical-offset="1498" max-vertical-offset="2057">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1498" max-vertical-offset="2057">
           <caret line="99" column="0" selection-start-line="99" selection-start-column="0" selection-end-line="109" selection-end-column="0" />
           <folding />
         </state>
@@ -1043,7 +750,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Plugin/CakeRabbit/Config/config.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="15.115385" vertical-offset="393" max-vertical-offset="952">
+        <state vertical-scroll-proportion="0.0" vertical-offset="393" max-vertical-offset="952">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
@@ -1059,7 +766,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Plugin/CakeRabbit/Lib/CakeRabbit.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="21.653847" vertical-offset="563" max-vertical-offset="1122">
+        <state vertical-scroll-proportion="0.0" vertical-offset="563" max-vertical-offset="1122">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
@@ -1077,6 +784,40 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1224">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Config/database.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1025" max-vertical-offset="1632">
+          <caret line="48" column="37" selection-start-line="48" selection-start-column="37" selection-end-line="48" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Console/Command/CursoShell.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-10.384615" vertical-offset="70" max-vertical-offset="646">
+          <caret line="20" column="12" selection-start-line="0" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Console/Command/OpenSGAShell.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.3148148" vertical-offset="42398" max-vertical-offset="43333">
+          <caret line="2545" column="0" selection-start-line="2545" selection-start-column="0" selection-end-line="2545" selection-end-column="0" />
+          <folding>
+            <element signature="n#importa_alumnis#0;n#OpenSGAShell#0;n#!!top" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Console/Command/SMSShell.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5714286" vertical-offset="317" max-vertical-offset="918">
+          <caret line="37" column="20" selection-start-line="37" selection-start-column="20" selection-end-line="37" selection-end-column="20" />
           <folding />
         </state>
       </provider>

@@ -2543,62 +2543,7 @@
 
 
 
-        public function envia_sms_bolseiros() {
-            AuditableConfig::$Logger = ClassRegistry::init('Auditable.Logger');
-            App::import('Vendor', 'PHPExcel', array('file' => 'PHPExcel.php'));
-            if (!class_exists('PHPExcel'))
-                throw new CakeException('Vendor class PHPExcel not found!');
 
-            $xls = PHPExcel_IOFactory::load(APP . 'Imports' . DS . 'bolseiros.xlsx');
-
-            $worksheet = $xls->getActiveSheet();
-//debug($xls->getActiveSheetIndex());
-            $linha_actual = 2;
-            $mensagem = "A DRA solicita bolseiros de 2013-2015 a vir a reuniao no ambito da iniciativa um 'estudante um comoutador' no centro cultural as 13:30 de 13/03/15";
-            foreach ($worksheet->getRowIterator() as $row) {
-                if ($worksheet->getCell('A' . $linha_actual)->getValue() == '') {
-                    break;
-                }
-
-                $numeroEstudante = $worksheet->getCell('A' . $linha_actual)->getCalculatedValue();
-                $this->Aluno->contain(array(
-                    'Entidade' => array(
-                        'EntidadeContacto' => array(
-                            'conditions' => array('tipo_contacto_id' => 2)
-                        )
-                    )
-                ));
-                $candidato = $this->Aluno->findByCodigo($numeroEstudante);
-
-                $this->SmsEnviada->sendSMS('826489374', $mensagem);
-                $this->SmsEnviada->sendSMS('844683674', $mensagem);
-
-
-                if(!empty($candidato)){
-                    if ($candidato['Entidade']['telemovel']!='') {
-                        $numero = $candidato['Entidade']['EntidadeContacto']['telemovel'];
-                        if (is_numeric($numero)) {
-                            debug($numero);
-
-
-
-                            $this->SmsEnviada->sendSMS($numero, $mensagem);
-                            $this->out('SMS Enviada para---'.$numero);
-                        }
-                        debug($numeroEstudante);
-                        debug($candidato);
-
-
-                        $linha_actual++;
-
-
-                    }
-                }
-
-
-
-        }
-        }
 
 
         public function preenche_provincia() {
