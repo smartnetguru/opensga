@@ -70,9 +70,11 @@ class Docente extends AppModel {
 		$data['User']['name'] = $data['Entidade']['name'];
 		$data['User']['group_id'] = 4;
 		if ($this->Entidade->User->save($data)) {
+
 			//Grava os dados da Entidade
 			$data['Docente']['user_id'] = $this->Entidade->User->getLastInsertID();
 			$data['Entidade']['user_id'] = $this->Entidade->User->getLastInsertID();
+            $data['Entidade']['email'] = $data['EntidadeContacto'][1];
 			$this->Entidade->create();
 			if ($this->Entidade->save($data)) {
 
