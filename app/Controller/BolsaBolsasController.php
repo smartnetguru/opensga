@@ -191,10 +191,35 @@ class BolsaBolsasController extends AppController {
             //Recuperando o canditado atraves do numero_do estudante
 
             $array = array();
-            $candidato = $this->Candidatura->findByNumeroEstudante($dis);
-            if (!empty($candidato)) {
-                $options = array('conditions' => array('Candidatura.' . $this->Candidatura->primaryKey => $candidato['Candidatura']['id'], 'Candidatura.ano_lectivo_admissao' => 2015));
-                $candidatura = $this->Candidatura->find('first', $options);
+//            $candidat = $this->Candidatura->findByNumeroEstudante($dis);
+//            if(!empty($candidat)){
+//                $candidato = $candidat;
+//
+//            }else{
+//                $candidat = $this->Candidatura->findByNomes($dis);
+//                if(!empty($candidat)){
+//                    $candidato = $candidat;
+//                }else{
+//                    $candidato = $this->Candidatura->findByApelido($dis);
+//                }
+//            }
+
+            $conditions = array();
+
+            $candidat = $this->Candidatura->findByNumeroEstudante($dis);
+                if (!empty($candidat)) {
+                    $conditions['Candidatura.numero_estudante'] = $dis;
+                } else {
+                    $conditions['Candidatura.nomes LIKE'] = '%' .$dis. '%';
+                   // $conditions['Candidatura.apelido LIKE'] = '%' .$dis. '%';
+                }
+            $conditions['Candidatura.ano_lectivo_admissao'] = 2015;
+            $options = array('conditions' => $conditions);
+            $candidatura = $this->Candidatura->find('first', $options);
+
+
+            if (!empty($candidatura)) {
+
 
                 //Buscando o curso
                 $options_Curso = array('conditions' => array('Curso.' . $this->Curso->primaryKey => $candidatura['Candidatura']['curso_id']));
