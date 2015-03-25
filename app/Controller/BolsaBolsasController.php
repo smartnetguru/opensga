@@ -180,43 +180,29 @@ class BolsaBolsasController extends AppController {
     public function atribuir_bolsas() {
 
         $this->loadModel('Aluno');
-
+        //Requisicao de busca de dados...
         if ($this->request->is('post')) {
             $this->loadModel('Candidatura');
             $this->loadModel('Curso');
             $this->loadModel('Genero');
-            $dis = $this->request->data('discritivo');
-
-
-            //Recuperando o canditado atraves do numero_do estudante
-
-            $array = array();
-//            $candidat = $this->Candidatura->findByNumeroEstudante($dis);
-//            if(!empty($candidat)){
-//                $candidato = $candidat;
-//
-//            }else{
-//                $candidat = $this->Candidatura->findByNomes($dis);
-//                if(!empty($candidat)){
-//                    $candidato = $candidat;
-//                }else{
-//                    $candidato = $this->Candidatura->findByApelido($dis);
-//                }
-//            }
+            $numero_candidato = $this->request->data('numero');
+            $nome_candidato = $this->request->data('nome');
+            $apelido_candidato = $this->request->data('apelido');
 
             $conditions = array();
 
-            $candidat = $this->Candidatura->findByNumeroEstudante($dis);
-                if (!empty($candidat)) {
-                    $conditions['Candidatura.numero_estudante'] = $dis;
+                if ($numero_candidato != '') {
+                    $conditions['Candidatura.numero_estudante'] = $numero_candidato;
                 } else {
-                    $conditions['Candidatura.nomes LIKE'] = '%' .$dis. '%';
-                   // $conditions['Candidatura.apelido LIKE'] = '%' .$dis. '%';
+                    $conditions['Candidatura.nomes LIKE'] = '%' . $nome_candidato . '%';
+                    $conditions['Candidatura.apelido LIKE'] = '%' . $apelido_candidato . '%';
                 }
-            $conditions['Candidatura.ano_lectivo_admissao'] = 2015;
-            $options = array('conditions' => $conditions);
-            $candidatura = $this->Candidatura->find('first', $options);
 
+
+           // $conditions['Candidatura.estado_candidatura_id'] = array(2, 3);
+            $conditions['Candidatura.ano_lectivo_admissao'] = 2015;
+            $option = array('conditions' => $conditions);
+            $candidatura = $this->Candidatura->find('first',$option);
 
             if (!empty($candidatura)) {
 
@@ -237,7 +223,7 @@ class BolsaBolsasController extends AppController {
 
                 $array = array('candidatos' => $candidatura, 'curso' => $curso, 'genero'=> $genero1);
             } else {
-                $array = array('invalido' => 'Invalido', 'candidatura' => $dis);
+                $array = array('invalido' => 'Invalido', 'candidatura' => $numero_candidato.' '. $nome_candidato.' '. $apelido_candidato);
             }
 
 
@@ -246,7 +232,7 @@ class BolsaBolsasController extends AppController {
             return new CakeResponse(array('body' => json_encode($array)));
             
         }
-        
+        //atribuindo a bolsa... tabela bolsa_temporaria
         
         $bolsaTipoBolsa = $this->BolsaBolsa->BolsaTipoBolsa->find('all');
          $bolsaFonteBolsa = $this->BolsaBolsa->BolsaFonteBolsa->find('all');
