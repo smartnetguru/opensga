@@ -155,7 +155,7 @@ class DocentesController extends AppController {
 		$unidadeOrganicas = $this->Docente->UnidadeOrganica->find('list',array('conditions'=>array('tipo_unidade_organica_id'=>1)));
 		$naturalidade = '';
 		$estadoCivil = $this->Docente->Entidade->EstadoCivil->find('list');
-        $unidadeOrganicaId = $this->Session->read('')
+        $unidadeOrganicaId = $this->Session->read('');
 		$this->set(compact('entidades', 'docenteCategorias', 'paises', 'provincias', 'cidadeNascimentos', 'generos', 'documentoIdentificacaos', 'unidadeOrganicas', 'naturalidade', 'estadoCivil'));
 	}
 
