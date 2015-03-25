@@ -157,6 +157,7 @@ class DocentesController extends AppController {
 		$estadoCivil = $this->Docente->Entidade->EstadoCivil->find('list');
         $unidadeOrganicaId = $this->Session->read('Auth.User.unidade_prganica_id');
 		$this->set(compact('entidades', 'docenteCategorias', 'paises', 'provincias', 'cidadeNascimentos', 'generos', 'documentoIdentificacaos', 'unidadeOrganicas', 'naturalidade', 'estadoCivil','unidadeOrganicaId'));
+
 	}
 
 	function faculdade_editar_docente($id = null) {
