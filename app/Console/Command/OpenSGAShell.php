@@ -1247,7 +1247,7 @@
             if (!class_exists('PHPExcel'))
                 throw new CakeException('Vendor class PHPExcel not found!');
 
-            $xls = PHPExcel_IOFactory::load(APP . 'Imports' . DS .'Admitidos'.DS.'2015'.DS. 'admitidos_20150323.xlsx');
+            $xls = PHPExcel_IOFactory::load(APP . 'Imports' . DS .'Admitidos'.DS.'2015'.DS. 'admitidos_20150325.xlsx');
 
             $worksheet = $xls->getActiveSheet();
             //debug($xls->getActiveSheetIndex());
@@ -2559,19 +2559,20 @@
             $worksheet = $xls->getActiveSheet();
             $linha_actual=2;
             foreach ($worksheet->getRowIterator() as $row) {
-                if ($worksheet->getCell('A' . $linha_actual)->getValue() == '') {
+                if ($worksheet->getCell('K' . $linha_actual)->getValue() == '') {
                     break;
                 }
 
-                $numero = $worksheet->getCell('A' . $linha_actual)->getCalculatedValue();
+                $numero = $worksheet->getCell('K' . $linha_actual)->getCalculatedValue();
 
                 $this->Aluno->contain(array(
                     'Entidade'=>array('ProvinciaNascimento')
                 ));
 
                 $aluno = $this->Aluno->findByCodigo($numero);
-                if(empty($aluno)){
-			$worksheet->setCellValue('F'.$linha_actual, 'Nao Matriculado');
+                if(!empty($aluno)){
+			$worksheet->setCellValue('G'.$linha_actual, $aluno['Entidade']['data_nascimento']);
+			$worksheet->setCellValue('H'.$linha_actual, $aluno['Entidade']['ProvinciaNascimento']['name']);
 			$this->out($numero.'----'.$aluno['Entidade']['ProvinciaNascimento']['name']);
 
                 }
