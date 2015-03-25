@@ -177,7 +177,7 @@ class BolsaBolsasController extends AppController {
     }
 
     //funcai para introducao de dados...
-    public function registar_candidatura() {
+    public function atribuir_bolsas() {
 
         $this->loadModel('Aluno');
 
@@ -187,12 +187,13 @@ class BolsaBolsasController extends AppController {
             $this->loadModel('Genero');
             $dis = $this->request->data('discritivo');
 
+
             //Recuperando o canditado atraves do numero_do estudante
 
             $array = array();
             $candidato = $this->Candidatura->findByNumeroEstudante($dis);
             if (!empty($candidato)) {
-                $options = array('conditions' => array('Candidatura.' . $this->Candidatura->primaryKey => $candidato['Candidatura']['id']));
+                $options = array('conditions' => array('Candidatura.' . $this->Candidatura->primaryKey => $candidato['Candidatura']['id'], 'Candidatura.ano_lectivo_admissao' => 2015));
                 $candidatura = $this->Candidatura->find('first', $options);
 
                 //Buscando o curso
