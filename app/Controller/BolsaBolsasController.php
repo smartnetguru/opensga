@@ -176,30 +176,43 @@ class BolsaBolsasController extends AppController {
         $this->set(compact('bolsas'));
     }
 
-    //funcai para introducao de dados...
     public function atribuir_bolsas() {
-
+        $this->loadModel('Cidade');
         $this->loadModel('Aluno');
-
-        if ($this->request->is('post')) {
+        //Requisicao de busca de dados...
+        if ($this->request->is('POST')) {
             $this->loadModel('Candidatura');
             $this->loadModel('Curso');
             $this->loadModel('Genero');
-            $dis = $this->request->data('discritivo');
+
+            $numero_candidato = $this->request->data('numero');
+            $nome_candidato = $this->request->data('nome');
+            $apelido_candidato = $this->request->data('apelido');
+
+            $conditions = array();
+
+                if ($numero_candidato != '') {
+                    $conditions['Candidatura.numero_estudante'] = $numero_candidato;
+                } else {
+                    $conditions['Candidatura.nomes LIKE'] = '%' . $nome_candidato . '%';
+                    $conditions['Candidatura.apelido LIKE'] = '%' . $apelido_candidato . '%';
+                }
 
 
-            //Recuperando o canditado atraves do numero_do estudante
+           // $conditions['Candidatura.estado_candidatura_id'] = array(2, 3);
+            $conditions['Candidatura.ano_lectivo_admissao'] = 2015;
+            $option = array('conditions' => $conditions);
+            $candidatura = $this->Candidatura->find('first',$option);
 
-            $array = array();
-            $candidato = $this->Candidatura->findByNumeroEstudante($dis);
-            if (!empty($candidato)) {
-                $options = array('conditions' => array('Candidatura.' . $this->Candidatura->primaryKey => $candidato['Candidatura']['id'], 'Candidatura.ano_lectivo_admissao' => 2015));
-                $candidatura = $this->Candidatura->find('first', $options);
+            if (!empty($candidatura)) {
+
 
                 //Buscando o curso
                 $options_Curso = array('conditions' => array('Curso.' . $this->Curso->primaryKey => $candidatura['Candidatura']['curso_id']));
                 $curso = $this->Curso->find('first', $options_Curso);
-                
+
+                //Buscando cidade
+
                 //Buscando o genero
                 $options_Genero = array('conditions' => array('Genero.' . $this->Genero->primaryKey => $candidatura['Candidatura']['genero_id']));
                $genero = $this->Genero->find('first', $options_Genero);
@@ -212,7 +225,7 @@ class BolsaBolsasController extends AppController {
 
                 $array = array('candidatos' => $candidatura, 'curso' => $curso, 'genero'=> $genero1);
             } else {
-                $array = array('invalido' => 'Invalido', 'candidatura' => $dis);
+                $array = array('invalido' => 'Invalido', 'candidatura' => $numero_candidato.' '. $nome_candidato.' '. $apelido_candidato);
             }
 
 
@@ -221,15 +234,19 @@ class BolsaBolsasController extends AppController {
             return new CakeResponse(array('body' => json_encode($array)));
             
         }
-        
-        
+
+
+
         $bolsaTipoBolsa = $this->BolsaBolsa->BolsaTipoBolsa->find('all');
          $bolsaFonteBolsa = $this->BolsaBolsa->BolsaFonteBolsa->find('all');
-         $this->set(compact('bolsaFonteBolsa','bolsaTipoBolsa'));
+        $cidade = $this->Cidade->find('all');
+         $this->set(compact('bolsaFonteBolsa','bolsaTipoBolsa','cidade'));
         
         
         
          
     }
+
+
 
 }

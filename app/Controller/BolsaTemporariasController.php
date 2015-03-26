@@ -47,13 +47,21 @@ class BolsaTemporariasController extends AppController {
  */
 	public function add() {
 		if ($this->request->is('post')) {
-			$this->BolsaTemporaria->create();
+            $conditions['BolsaTemporaria.numero_estudante'] = $this->request->data('numero_estudante');
+            $options = array('conditions' => $conditions);
+            $exist = $this->BolsaTemporaria->find('first', $options);
+            if(!empty($exist)){
+                $this->Session->setFlash(__('Este "'. $this->request->data('nomes') .'" candidato ja foi atribuido bolsa'));
+            }else{
+             $this->BolsaTemporaria->create();
 			if ($this->BolsaTemporaria->save($this->request->data)) {
 				$this->Session->setFlash(__('The bolsa temporaria has been saved.'));
-				return $this->redirect(array('action' => 'index'));
+                //return $this->redirect(array('action' => 'index'));
 			} else {
 				$this->Session->setFlash(__('The bolsa temporaria could not be saved. Please, try again.'));
 			}
+            }
+
 		}
 		$bolsaTipoBolsas = $this->BolsaTemporaria->BolsaTipoBolsa->find('list');
 		$candidaturas = $this->BolsaTemporaria->Candidatura->find('list');
