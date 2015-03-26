@@ -176,15 +176,15 @@ class BolsaBolsasController extends AppController {
         $this->set(compact('bolsas'));
     }
 
-    //funcai para introducao de dados...
     public function atribuir_bolsas() {
-
+        $this->loadModel('Cidade');
         $this->loadModel('Aluno');
         //Requisicao de busca de dados...
-        if ($this->request->is('post')) {
+        if ($this->request->is('POST')) {
             $this->loadModel('Candidatura');
             $this->loadModel('Curso');
             $this->loadModel('Genero');
+
             $numero_candidato = $this->request->data('numero');
             $nome_candidato = $this->request->data('nome');
             $apelido_candidato = $this->request->data('apelido');
@@ -210,7 +210,9 @@ class BolsaBolsasController extends AppController {
                 //Buscando o curso
                 $options_Curso = array('conditions' => array('Curso.' . $this->Curso->primaryKey => $candidatura['Candidatura']['curso_id']));
                 $curso = $this->Curso->find('first', $options_Curso);
-                
+
+                //Buscando cidade
+
                 //Buscando o genero
                 $options_Genero = array('conditions' => array('Genero.' . $this->Genero->primaryKey => $candidatura['Candidatura']['genero_id']));
                $genero = $this->Genero->find('first', $options_Genero);
@@ -232,15 +234,25 @@ class BolsaBolsasController extends AppController {
             return new CakeResponse(array('body' => json_encode($array)));
             
         }
-        //atribuindo a bolsa... tabela bolsa_temporaria
-        
+
+
+
         $bolsaTipoBolsa = $this->BolsaBolsa->BolsaTipoBolsa->find('all');
          $bolsaFonteBolsa = $this->BolsaBolsa->BolsaFonteBolsa->find('all');
-         $this->set(compact('bolsaFonteBolsa','bolsaTipoBolsa'));
+        $cidade = $this->Cidade->find('all');
+         $this->set(compact('bolsaFonteBolsa','bolsaTipoBolsa','cidade'));
         
         
         
          
+    }
+
+    public function candidato_bolseiro_temporario(){
+
+        $this->loadModel('Aluno');
+        if($this->request->is('post')) {
+            return new CakeResponse(array('body' => 'gggggg'));
+        }
     }
 
 }
