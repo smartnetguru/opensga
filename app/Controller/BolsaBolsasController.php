@@ -179,11 +179,13 @@ class BolsaBolsasController extends AppController {
     public function atribuir_bolsas() {
         $this->loadModel('Cidade');
         $this->loadModel('Aluno');
+        $this->loadModel('BolsaTemporaria');
+        $this->loadModel('Candidatura');
+        $this->loadModel('Curso');
+        $this->loadModel('Genero');
         //Requisicao de busca de dados...
         if ($this->request->is('POST')) {
-            $this->loadModel('Candidatura');
-            $this->loadModel('Curso');
-            $this->loadModel('Genero');
+
 
             $numero_candidato = $this->request->data('numero');
             $nome_candidato = $this->request->data('nome');
@@ -191,18 +193,18 @@ class BolsaBolsasController extends AppController {
 
             $conditions = array();
 
-                if ($numero_candidato != '') {
-                    $conditions['Candidatura.numero_estudante'] = $numero_candidato;
-                } else {
-                    $conditions['Candidatura.nomes LIKE'] = '%' . $nome_candidato . '%';
-                    $conditions['Candidatura.apelido LIKE'] = '%' . $apelido_candidato . '%';
-                }
+            if ($numero_candidato != '') {
+                $conditions['Candidatura.numero_estudante'] = $numero_candidato;
+            } else {
+                $conditions['Candidatura.nomes LIKE'] = '%' . $nome_candidato . '%';
+                $conditions['Candidatura.apelido LIKE'] = '%' . $apelido_candidato . '%';
+            }
 
 
-           // $conditions['Candidatura.estado_candidatura_id'] = array(2, 3);
+            // $conditions['Candidatura.estado_candidatura_id'] = array(2, 3);
             $conditions['Candidatura.ano_lectivo_admissao'] = 2015;
             $option = array('conditions' => $conditions);
-            $candidatura = $this->Candidatura->find('first',$option);
+            $candidatura = $this->Candidatura->find('first', $option);
 
             if (!empty($candidatura)) {
 
@@ -215,32 +217,36 @@ class BolsaBolsasController extends AppController {
 
                 //Buscando o genero
                 $options_Genero = array('conditions' => array('Genero.' . $this->Genero->primaryKey => $candidatura['Candidatura']['genero_id']));
-               $genero = $this->Genero->find('first', $options_Genero);
-               $genero1 = array();
-               if(empty($genero)){
-                   $genero1 = array('Genero' => array('name'=>'Indefinido'));
-               }else{
-                   $genero1 = $genero;
-               }
+                $genero = $this->Genero->find('first', $options_Genero);
+                $genero1 = array();
+                if (empty($genero)) {
+                    $genero1 = array('Genero' => array('name' => 'Indefinido'));
+                } else {
+                    $genero1 = $genero;
+                }
 
-                $array = array('candidatos' => $candidatura, 'curso' => $curso, 'genero'=> $genero1);
+                $array = array('candidatos' => $candidatura, 'curso' => $curso, 'genero' => $genero1);
             } else {
-                $array = array('invalido' => 'Invalido', 'candidatura' => $numero_candidato.' '. $nome_candidato.' '. $apelido_candidato);
+                $array = array('invalido' => 'Invalido', 'candidatura' => $numero_candidato . ' ' . $nome_candidato . ' ' . $apelido_candidato);
             }
 
 
-
-
             return new CakeResponse(array('body' => json_encode($array)));
-            
+
         }
+
+
+       $this->BolsaTemporaria->contain(array('BolsaTipoBolsa', 'Curso'));
+
+        $bolsas = $this->BolsaTemporaria->find('all', array('order' => array('apelido', 'nomes'), 'conditions'=> array('BolsaTemporaria.ano_ingresso' => 2015)));
 
 
 
         $bolsaTipoBolsa = $this->BolsaBolsa->BolsaTipoBolsa->find('all');
          $bolsaFonteBolsa = $this->BolsaBolsa->BolsaFonteBolsa->find('all');
         $cidade = $this->Cidade->find('all');
-         $this->set(compact('bolsaFonteBolsa','bolsaTipoBolsa','cidade'));
+         $this->set('bolsas', $this->paginate());
+        $this->set(compact('bolsaFonteBolsa','bolsaTipoBolsa','cidade','bolsas'));
         
         
         
