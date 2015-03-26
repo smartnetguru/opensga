@@ -247,12 +247,6 @@ class BolsaBolsasController extends AppController {
          
     }
 
-    public function candidato_bolseiro_temporario(){
 
-        $this->loadModel('Aluno');
-        if($this->request->is('post')) {
-            return new CakeResponse(array('body' => 'gggggg'));
-        }
-    }
 
 }
