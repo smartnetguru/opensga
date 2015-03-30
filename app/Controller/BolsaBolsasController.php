@@ -235,11 +235,14 @@ class BolsaBolsasController extends AppController {
 
         }
 
-
-       $this->BolsaTemporaria->contain(array('BolsaTipoBolsa', 'Curso'));
-
-        $bolsas = $this->BolsaTemporaria->find('all', array('order' => array('apelido', 'nomes'), 'conditions'=> array('BolsaTemporaria.ano_ingresso' => 2015)));
-
+        $this->BolsaTemporaria->contain('Curso');
+        $cursos = $this->BolsaTemporaria->find('list', array('fields' => array('BolsaTemporaria.curso_id', 'Curso.name'), 'order' => 'Curso.name'));
+        $bolsas = array();
+        foreach ($cursos as $k => $v) {
+            $this->BolsaTemporaria->contain('BolsaTipoBolsa');
+            $bolsa = $this->BolsaTemporaria->find('all', array('conditions' => array('curso_id' => $k), 'order' => array('apelido', 'nomes')));
+            $bolsas[$v] = $bolsa;
+        }
 
 
         $bolsaTipoBolsa = $this->BolsaBolsa->BolsaTipoBolsa->find('all');
