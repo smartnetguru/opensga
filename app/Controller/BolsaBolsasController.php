@@ -248,7 +248,7 @@ class BolsaBolsasController extends AppController {
         $bolsaTipoBolsa = $this->BolsaBolsa->BolsaTipoBolsa->find('all');
          $bolsaFonteBolsa = $this->BolsaBolsa->BolsaFonteBolsa->find('all');
         $cidade = $this->Cidade->find('all');
-         $this->set('bolsas', $this->paginate());
+
         $this->set(compact('bolsaFonteBolsa','bolsaTipoBolsa','cidade','bolsas'));
         
         
