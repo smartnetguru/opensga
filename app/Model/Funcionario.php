@@ -135,6 +135,8 @@ class Funcionario extends AppModel {
 		if ($this->User->save($data)) {
             //die(debug($this->User->id));
 			$data['Entidade']['user_id'] = $this->User->id;
+            $data['Entidade']['name'] = $data['Entidade']['nomes']." ".$data['Entidade']['apelido'];
+            $data['Entidade']['email'] = $data['EntidadeContacto'][1];
 			$this->Entidade->create();
 			if ($this->Entidade->save($data)) {
 				$data['Funcionario']['user_id'] = $this->User->id;

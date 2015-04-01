@@ -96,6 +96,7 @@ class FuncionariosController extends AppController {
                     array('class' => 'alert alert-success'));
 				$this->redirect(array('action' => 'index'));
 			} else {
+
 				$this->Session->setFlash('Problemas ao registar funcionario. Verifique o formulário e tente de novo',
                     'default', array('class' => 'alert alert-danger'));
 			}
