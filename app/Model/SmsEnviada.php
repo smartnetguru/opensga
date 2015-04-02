@@ -54,6 +54,10 @@
             $params .= "&Destination=" . $destination;
             $params .= "&ExtTxId=" . $this->id;
             $operator = substr($destination, 0, 2);
+            if($operator==25){
+                $destination = substr($destination,2);
+                $operator = substr($destination, 0, 2);
+            }
             if ($operator == 82) {
                 $params .= "&OpId=241";
             } elseif ($operator == 84) {
