@@ -1,0 +1,96 @@
+=========================Importar dados da UEM========
+
+O Curso 20461 no Disciplina Curso deve ser mudado para 2046
+
+=====================Duvidas=========================
+O k define o nivel academico de um estudante?
+
+Podemos considerar salas de aulas como Unidades Organicas?
+Ver se se podem colocar itens relacionados nas paginas de visualizacoess
+---Analisar sistema financeiro
+
+---Analisar Sistema de Exame de Admissao
+
+
+=====================Campos novos para funcionarios=========
+Grupo Sanguineo
+Linguas faladas
+Alias para Nome??
+NUIC??
+Titulo Civil
+Titulo Academico
+Reside no Campus?
+Contractos
+Funcoes
+
+=========================Usuarios com Multiplas Funcoes==============
+Para casos em que um docente eh funcionario ou eh estudante ao mesmo tempo, podemos implementar a ideia de por botoes no topo de sistema para mudar de funcao
+Assim, quando ele entra no sistema, entra sempre com a funcao configurada no group_id da base de dados, e quando clica no botao trocar de funcao, mudamos apenas o group_id na session.
+
+============================Copyright=================================
+O copyright ainda da problemas em algumas paginas, devido a má formatacao dos views. É necessário passar de todos os views e ver se todos os divs abertos estao fechados, e se nao existem fechos  a mais.
+
+=====================Turmas========================
+Quem define assistentes para as turmas?? O docente tambem pode definir?
+
+---Funcoes do docente: Imprimir Lista de Estudantes, Criar Avaliacoes, Introduzir notas, fechar avaliacoes, Solicitar Fecho da turma.
+
+================Avaliacoes===================
+Ainda Falta re-implementar.
+Tentar sempre usar o campo turmatipoavaliacao, em vez de turma e tipoavaliacao separados
+
+=============TurmatipoAvaliacao==================
+Ver a questao do scan da pauta
+
+======================Entidade=====================
+A tabela enderecos foi separada, agora podem-se acrescentar N enderecos
+
+
+===========================Faculdade e Departamento============
+Ver a melhor forma de representar as chefias
+
+=======================Equivalencias de Cursos================
+Seria interessante no futuro gerir equivalencias internas automaticamente no Sistema
+﻿
+==Modulo Financeiro==
+
+
+
+===============Nivel Academico=================
+É necessário estudar os critérios de definição de nível academico de um aluno e implementar a solução mais viável no OpenSGA
+
+
+============ Rever e Documentar a Secção de Matriculas===============
+
+
+=====================Inscricoes=================================
+----IMPORTANTE: Por agora um aluno so pode se inscrever 1 UMA vez por semestre. Mais tarde, ver a possibilidade dele aumentar ou reduzir cadeiras, recalculando assim as mensalidades.
+
+O k acontece quando vem adicionar cadeiras depois de uma mensalidade.
+---Rever a forma como as cadeiras em atraso sao determinadas
+
+
+=============================Usuarios=======================
+Uma dica eh criptografar todas as senhas no BeforeSave do User Model em vez de em varios sitios difentes. Pensar nisso
+
+
+============================eSURA==============================
+[18/10/12 11:08:24] Eude Tsamba: Create a  School, Faculty or Central Unit (First Level Organizational Unit)
+Create Office of Dean (Second Level Unit)
+Create User  Role "Dean"
+Create Department (Second Level Unit)
+Create User Role "Head of Department"
+Create User Role  "Lecturer"
+Create Programme of Study
+Register Courses (Subjects)
+Defining Fee information
+On line Registration by Students (Admission) (UNZA version)
+On line Registration by Students (CBU version)
+Admission Flow control
+Continued Registration Flow control
+
+(Explanation of the 2 Workflows (processes) mentioned above - Powerpoint)
+
+Results Registration (Exams)
+Transfer of Curriculum (to the next Academic year)
+Transfer of Students (from one semester/trimester to the next)

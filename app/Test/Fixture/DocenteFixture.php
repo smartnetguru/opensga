@@ -1,0 +1,23 @@
+<?php
+/**
+ * DocenteFixture
+ *
+ */
+class DocenteFixture extends CakeTestFixture {
+
+/**
+ * Import
+ *
+ * @var array
+ */
+	public $import = array('model' => 'Docente');
+
+/**
+ * Records
+ *
+ * @var array
+ */
+	public $records = array(
+	);
+
+}
