@@ -31,4 +31,10 @@ class AppModel extends Model {
         return end($logs['log']);
     }
 
+    public function getLog(){
+        $dbo = $this->getDataSource();
+        $logs = $dbo->getLog(false,false);
+        return $logs['log'];
+    }
+
 }
