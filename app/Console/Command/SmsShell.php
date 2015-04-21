@@ -59,11 +59,11 @@ class SMSShell extends AppShell {
             $linha_actual=2;
 			$mensagem = "A A DRA-UEM, informa que para o pagamento do seu subsidio de bolsa deve trazer a esta Direccao o seu NIB, NUIT e nr de conta";
             foreach ($worksheet->getRowIterator() as $row) {
-                if ($worksheet->getCell('K' . $linha_actual)->getValue() == '') {
+                if ($worksheet->getCell('A' . $linha_actual)->getValue() == '') {
                     break;
                 }
 
-                $numero = $worksheet->getCell('K' . $linha_actual)->getCalculatedValue();
+                $numero = $worksheet->getCell('A' . $linha_actual)->getCalculatedValue();
 
                
         $this->Aluno->contain(array(

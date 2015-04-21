@@ -547,12 +547,6 @@ class AlunosController extends AppController {
             $this->redirect(array('controller' => 'alunos', 'action' => 'perfil_estudante', $this->request->data['Aluno']['aluno_id']));
         }
 
-
-        $cursos = $this->Aluno->Curso->find('list');
-
-        $planoestudos = $this->Aluno->Matricula->PlanoEstudo->find('list');
-        $users = $this->Aluno->Entidade->User->find('list');
-
         $paises = $this->Aluno->Entidade->PaisNascimento->find('list');
         $escolaNivelMedios = $this->Aluno->AlunoNivelMedio->EscolaNivelMedio->find('list');
         $cidades = $this->Aluno->Entidade->CidadeNascimento->find('list');
