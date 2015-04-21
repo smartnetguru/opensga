@@ -48,10 +48,10 @@ class BolsaBolsasController extends AppController {
         if ($this->request->is('post')) {
             $this->BolsaBolsa->create();
             if ($this->BolsaBolsa->save($this->request->data)) {
-                $this->Session->setFlash(__('The bolsa bolsa has been saved'));
+                $this->Session->setFlash(__('<div class="alerta alert-success">Bolsa gravada com sucesso!</div>'));
                 $this->redirect(array('action' => 'index'));
             } else {
-                $this->Session->setFlash(__('The bolsa bolsa could not be saved. Please, try again.'));
+                $this->Session->setFlash(__('<div class="alerta alert-danger">A bolsa nao foi atribuida. Por favor, Tente novamente.</div>'));
             }
         }
         $alunos = $this->BolsaBolsa->Aluno->find('list');
@@ -235,7 +235,9 @@ class BolsaBolsasController extends AppController {
 
         }
 
-        $this->BolsaTemporaria->contain('Curso');
+
+
+       $this->BolsaTemporaria->contain('Curso');
         $cursos = $this->BolsaTemporaria->find('list', array('fields' => array('BolsaTemporaria.curso_id', 'Curso.name'), 'order' => 'Curso.name'));
         $bolsas = array();
         foreach ($cursos as $k => $v) {
@@ -245,11 +247,15 @@ class BolsaBolsasController extends AppController {
         }
 
 
+
+
+
         $bolsaTipoBolsa = $this->BolsaBolsa->BolsaTipoBolsa->find('all');
          $bolsaFonteBolsa = $this->BolsaBolsa->BolsaFonteBolsa->find('all');
         $cidade = $this->Cidade->find('all');
 
         $this->set(compact('bolsaFonteBolsa','bolsaTipoBolsa','cidade','bolsas'));
+
         
         
         

@@ -1545,10 +1545,7 @@ class AlunosController extends AppController {
         $conditions['Candidatura.ano_lectivo_admissao'] = 2015;
         $this->paginate = array(
             'conditions' => $conditions,
-            'limit' => 50,
-            'contain' => array('Curso', 'BolsaTemporaria' => array(
-                    'BolsaTipoBolsa'
-                ))
+            'limit' => 50, 
         );
         $candidatos = $this->paginate('Candidatura');
 

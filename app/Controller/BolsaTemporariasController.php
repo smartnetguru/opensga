@@ -1,6 +1,8 @@
 <?php
+
 App::uses('AppController', 'Controller');
 /**
+ * @auhor: CRISTIANO GILBERTO JOAO
  * BolsaTemporarias Controller
  *
  * @property BolsaTemporaria $BolsaTemporaria
@@ -51,14 +53,14 @@ class BolsaTemporariasController extends AppController {
             $options = array('conditions' => $conditions);
             $exist = $this->BolsaTemporaria->find('first', $options);
             if(!empty($exist)){
-                $this->Session->setFlash(__('Este "'. $this->request->data('nomes') .'" candidato ja foi atribuido bolsa'));
+                $this->Session->setFlash(__('<div class="alert alert-warning">Este candidato (<b>'. $this->request->data('nomes') .'</b>) ja foi atribuido bolsa</div>'));
             }else{
              $this->BolsaTemporaria->create();
 			if ($this->BolsaTemporaria->save($this->request->data)) {
-				$this->Session->setFlash(__('The bolsa temporaria has been saved.'));
+				$this->Session->setFlash(__('<div class="alert alert-success">Bolsa gravada com sucesso!</div>'));
                 //return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The bolsa temporaria could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('<div class="alert alert-danger">A bolsa nao foi atribuida. Por favor, Tente novamente.</div>'));
 			}
             }
 
