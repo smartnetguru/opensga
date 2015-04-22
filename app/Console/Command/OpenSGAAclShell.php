@@ -23,6 +23,7 @@ class OpenSGAAclShell extends AppShell {
 		$comandos[] = "acl grant Group.4 controllers/Pages/docente_home";
 
 
+
 		foreach ($comandos as $comando) {
 			$this->out($comando);
 			$this->dispatchShell($comando);
