@@ -46,6 +46,17 @@ class Docente extends AppModel {
 		)
 	);
 
+    public $validate = array(
+        'unidade_organica_id' => array(
+            'unidadeOrganicaNotEmpty' => array(
+                'rule' => 'notEmpty',
+                'required'=>'create',
+                'message'=>'O Campo Unidade Organica é de Preenchimento Obrigatório',
+                // extra keys like on, required, etc. go here...
+            )
+        ),
+
+    );
 	public function getByUserID($userId) {
 		$this->contain(array('Entidade'));
 		$docente = $this->find('first', array('conditions' => array('Entidade.user_id' => $userId)));
