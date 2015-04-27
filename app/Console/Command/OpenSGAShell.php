@@ -435,7 +435,7 @@
             $this->Matricula->contain(array(
                 'Curso','Aluno'
             ));
-            $matriculas = $this->Matricula->find('all', array('conditions' => array('Curso.id'=>233)));
+            $matriculas = $this->Matricula->find('all', array('conditions' => array('Curso.unidade_organica_id'=>1,'Matricula.plano_estudo_id is null')));
 
             foreach ($matriculas as $matricula) {
                 $this->out($matricula['Matricula']['id']);
@@ -466,7 +466,7 @@
                     $this->Matricula->save();
                     $this->out($planoEstudo['PlanoEstudo']['name']);
                 } else{
-                    die(debug($matricula));
+                   // die(debug($matricula));
                 }
 
 
