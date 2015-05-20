@@ -732,37 +732,6 @@ class Aluno extends AppModel
         $data['User']['estado_objecto_id'] = 1;
         $data['User']['timezone'] = 'Africa/Maputo';
         if ($this->User->save($data)) {
-            //Grava Bairro e Avenida
-            $bairro_existe = $this->Entidade->CidadeMorada->Bairro->find('first', array('conditions' => array('cidade_id' => $data['EntidadeContacto'][9], 'name' => $data['EntidadeContacto'][6])));
-            if (empty($bairro_existe)) {
-                $array_novo_bairro = array(
-                    'Bairro' => array(
-                        'name' => $data['EntidadeContacto'][6],
-                        'cidade_id' => $data['EntidadeContacto'][9]
-                    )
-                );
-                $this->Entidade->CidadeMorada->Bairro->create();
-                $this->Entidade->CidadeMorada->Bairro->save($array_novo_bairro);
-                $bairro_morada_id = $this->Entidade->CidadeMorada->Bairro->id;
-            } else {
-                $bairro_morada_id = $bairro_existe['Bairro']['id'];
-            }
-
-            $rua_existe = $this->Entidade->CidadeMorada->Rua->find('first', array('conditions' => array('cidade_id' => $data['EntidadeContacto'][9], 'name' => $data['EntidadeContacto'][5])));
-            if (empty($rua_existe)) {
-                $array_nova_rua = array(
-                    'Rua' => array(
-                        'name' => $data['EntidadeContacto'][5],
-                        'cidade_id' => $data['EntidadeContacto'][9]
-                    )
-                );
-                $this->Entidade->CidadeMorada->Rua->create();
-                $this->Entidade->CidadeMorada->Rua->save($array_nova_rua);
-                $rua_morada_id = $this->Entidade->CidadeMorada->Rua->id;
-            } else {
-                $rua_morada_id = $rua_existe['Rua']['id'];
-            }
-
             //Grava os dados da Entidade
             //Grava os dados da Entidade
             $data['Entidade']['user_id'] = $this->User->getLastInsertID();
