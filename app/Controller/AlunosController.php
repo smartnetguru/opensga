@@ -1613,7 +1613,7 @@ class AlunosController extends AppController {
     }
 
 
-    public function get_estudante_azgo(){
+    /**public function get_estudante_azgo(){
         $this->Aluno->contain(array('Entidade'=>array('Genero'),'Curso'=>array('UnidadeOrganica')));
         if($this->request->is('post')){
             debug($this->request->data);
@@ -1626,5 +1626,5 @@ class AlunosController extends AppController {
 
         $this->layout = 'guest_users';
     }
-
+*/
 }

@@ -548,10 +548,11 @@ class EstudanteShell extends AppShell {
         $linhaTitulo = 5;
         $linhaC = 7;
 
-        $linhaActual = 1;
+
 
         $faculdades = $this->Aluno->Curso->UnidadeOrganica->find('list', array('conditions' => array('tipo_unidade_organica_id' => 1)));
         foreach ($faculdades as $faculdadeId => $faculdadeNome) {
+            $linhaActual = 1;
             $departamentos = $this->Aluno->Curso->UnidadeOrganica->children($faculdadeId);
             $arrayDepartamentos = Hash::extract($departamentos, '{n}.UnidadeOrganica.id');
             $arrayDepartamentos[] = $faculdadeId;
@@ -566,6 +567,8 @@ class EstudanteShell extends AppShell {
             } else{
                 $limiteEstudos=7;
             }
+            debug($arrayDepartamentos);
+            sleep(3);
             $cursos = $this->Aluno->Curso->find('list', array('conditions' => array('unidade_organica_id' => $arrayDepartamentos)));
             foreach ($cursos as $cursoID => $cursoNome) {
                 $ws->setCellValue('A' . $linhaActual, 'UNIVERSIDADE EDUARDO MONDLANE');
@@ -746,7 +749,8 @@ class EstudanteShell extends AppShell {
             $this->out('Faculdade------------------------------' . $faculdadeNome);
             $ws->getHeaderFooter()->setOddFooter('&L&D  &RPagina &P de &N');
             $objWriter = PHPExcel_IOFactory::createWriter($xls, 'Excel2007');
-            $objWriter->save(Configure::read('OpenSGA.save_path') . DS . 'Estudantes' . DS . Configure::read('OpenSGA.ano_lectivo') . DS . Inflector::slug($faculdadeNome) . '.xlsx');
+            $objWriter->save( Inflector::slug($faculdadeNome) . '.xlsx');
+            $xls->disconnectWorksheets();
         }
     }
 
