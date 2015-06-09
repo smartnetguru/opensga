@@ -50,7 +50,7 @@ class FuncionariosController extends AppController {
 			}
 		}
 
-        debug($conditions);
+
 		$this->paginate = array(
 			'conditions' => $conditions,
 			'contain' => array('Entidade' => array(
