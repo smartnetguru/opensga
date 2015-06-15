@@ -759,7 +759,7 @@ class EstudanteShell extends AppShell {
         if (!class_exists('PHPExcel'))
             throw new CakeException('Vendor class PHPExcel not found!');
 
-        $xls = PHPExcel_IOFactory::load(APP . 'Imports' . DS . 'matricula_condicional_20140715.xlsx');
+        $xls = PHPExcel_IOFactory::load(APP . 'Imports' . DS . 'matricula_condicional.xlsx');
 
         $worksheet = $xls->getActiveSheet();
 
