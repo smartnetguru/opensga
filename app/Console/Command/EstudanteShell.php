@@ -9,6 +9,62 @@ class EstudanteShell extends AppShell {
 
 	public $uses = array('Aluno', 'Candidatura');
 
+    public function exporta_fora_tempo_estudos_ano(){
+
+        App::import('Vendor', 'PHPExcel', array('file' => 'PHPExcel.php'));
+        if (!class_exists('PHPExcel'))
+            throw new CakeException('Vendor class PHPExcel not found!');
+
+        $xls = PHPExcel_IOFactory::load(APP . 'Reports' . DS . 'tempo_estudos.xlsx');
+
+        $worksheet = $xls->getActiveSheet();
+
+        $anoLectivo = 2013;
+        $linhaActual = 3;
+
+
+        $cursos = $this->Aluno->Curso->find('all');
+        foreach($cursos as $curso){
+            $faculdadeId = $curso['Curso']['unidade_organica_id'];
+            if($faculdadeId==2 || $faculdadeId==9){
+                $limiteEstudos = 8;
+            } elseif($faculdadeId==17){
+                $limiteEstudos=9;
+            } else{
+                $limiteEstudos=7;
+            }
+            $novosIngressos = $this->Aluno->find('count',array('conditions'=>array('ano_ingresso'=>$anoLectivo,
+                                                                                   'curso_id'=>$curso['Curso']['id'])));
+            $foraTempo =  $this->Aluno->find('count',array('conditions'=>array('ano_ingresso <
+             '=>$anoLectivo-$limiteEstudos,
+                                                                               'curso_id'=>$curso['Curso']['id'])));
+
+            $dentroTempo =  $this->Aluno->find('count',array('conditions'=>array('ano_ingresso >='
+                                                                                           =>$anoLectivo-$limiteEstudos,
+                                                                                 'curso_id'=>$curso['Curso']['id'])));
+
+            $xls->getActiveSheet()->setCellValue('A' . $linhaActual, $curso['Curso']['name']);
+            $xls->getActiveSheet()->setCellValue('B' . $linhaActual, $novosIngressos);
+            $xls->getActiveSheet()->setCellValue('C' . $linhaActual, $dentroTempo);
+            $xls->getActiveSheet()->setCellValue('D' . $linhaActual, $foraTempo);
+            $xls->getActiveSheet()->setCellValue('E' . $linhaActual, $limiteEstudos-3);
+            $linhaActual++;
+            debug($curso);
+            debug($novosIngressos);
+            debug($foraTempo);
+            debug($dentroTempo);
+
+
+
+
+
+        }
+        $objWriter = PHPExcel_IOFactory::createWriter($xls, 'Excel2007');
+
+        $objWriter->save('ficheiro_'.$anoLectivo.'.xlsx');
+
+
+    }
 	public function importa_novos_ingressos() {
 		AuditableConfig::$Logger = ClassRegistry::init('Auditable.Logger');
 		$this->Aluno->setDataSource('novos_ingressos');
