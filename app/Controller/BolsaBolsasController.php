@@ -20,8 +20,46 @@ class BolsaBolsasController extends AppController {
    // var $components = array("RequestHandler");
 
     public function index() {
-        $this->BolsaBolsa->recursive = 0;
-        $this->set('bolsaBolsas', $this->paginate());
+        $this->loadModel('BolsaPedido');
+        $this->loadModel('BolsaTemporaria');
+        $this->loadModel('BolsaTipoBolsa');
+        $this->loadModel('Cidade');
+        $this->loadModel('Aluno');
+
+        $this->loadModel('Candidatura');
+        $this->loadModel('Curso');
+        $this->loadModel('Genero');
+
+        $numero_bolsaPedido = $this->BolsaPedido->find('count');
+        $numero_bolseiros = $this->BolsaTemporaria->find('count');
+        $bolsas_ = $this->BolsaBolsa->find('all', array('fields' => array('BolsaBolsa.bolsa_tipo_bolsa_id'), 'order' => 'BolsaBolsa.bolsa_tipo_bolsa_id'));
+        $merito = $this->BolsaBolsa->find('count', array('conditions' => array('BolsaBolsa.bolsa_tipo_bolsa_id' => 1)));
+        $completa = $this->BolsaBolsa->find('count', array('conditions' => array('BolsaBolsa.bolsa_tipo_bolsa_id' => 2)));
+        $reduzida = $this->BolsaBolsa->find('count', array('conditions' => array('BolsaBolsa.bolsa_tipo_bolsa_id' => 3)));
+        $isencao = $this->BolsaBolsa->find('count', array('conditions' => array('BolsaBolsa.bolsa_tipo_bolsa_id' => 4)));
+        $indeferido = $this->BolsaBolsa->find('count', array('conditions' => array('BolsaBolsa.bolsa_tipo_bolsa_id' => 5)));
+        $reducao = $this->BolsaBolsa->find('count', array('conditions' => array('BolsaBolsa.bolsa_tipo_bolsa_id' => 6)));
+        $alojamento = $this->BolsaBolsa->find('count', array('conditions' => array('BolsaBolsa.bolsa_tipo_bolsa_id' => 7)));
+        $alojamento_isencao = $this->BolsaBolsa->find('count', array('conditions' => array('BolsaBolsa.bolsa_tipo_bolsa_id' => 8)));
+
+
+
+        $this->BolsaTemporaria->contain('Curso');
+        $cursos = $this->BolsaTemporaria->find('list', array('fields' => array('BolsaTemporaria.curso_id', 'Curso.name'), 'order' => 'Curso.name'));
+        $bolsas = array();
+        foreach ($cursos as $k => $v) {
+            $this->BolsaTemporaria->contain('BolsaTipoBolsa');
+            $bolsa = $this->BolsaTemporaria->find('all', array('conditions' => array('curso_id' => $k), 'order' => array('apelido', 'nomes')));
+            $bolsas[$v] = $bolsa;
+        }
+
+
+
+        $bolsaTipoBolsa = $this->BolsaBolsa->BolsaTipoBolsa->find('all');
+        $bolsaFonteBolsa = $this->BolsaBolsa->BolsaFonteBolsa->find('all');
+        $cidade = $this->Cidade->find('all');
+
+        $this->set(compact('bolsaFonteBolsa','bolsaTipoBolsa','cidade','bolsas','numero_bolsaPedido','numero_bolseiros','merito','completa','reduzida','isencao','indeferido','reducao','alojamento','alojamento_isencao'));
     }
 
     /**
@@ -263,9 +301,36 @@ class BolsaBolsasController extends AppController {
     }
 
 
-    public function renovar_bolsas(){
+    public function pedido_renovar_bolsas(){
 
+
+        $this->loadModel('Aluno');
+        $this->loadModel('Curso');
+        $this->loadModel('Entidade');
+        $this->loadModel('BolsaPedido');
+        $this->loadModel('BolsaTipoBolsa');
+        $this->loadModel('EstadoObjecto');
+
+        $bolsaTipoBolsa = $this->BolsaTipoBolsa->find('all');
+        $bolsaPedido = $this->BolsaPedido->find('all');
+
+
+        foreach($bolsaPedido as $k => $pedidos){
+            $aluno = $this->Aluno->find('first',array('conditions'=> array( 'Aluno.id' => $pedidos['BolsaPedido']['aluno_id']),'fields' => array('entidade_id')));
+            if($aluno)
+                $entidade = $this->Entidade->find('first',array('conditions' => array('Entidade.id'=>$aluno['Aluno']['entidade_id'])));
+
+                $bolsa_tipo_actual = $this->BolsaTipoBolsa->find('first',array('conditions' => array('BolsaTipoBolsa.id'=>$pedidos['BolsaPedido']['tipo_bolsa_actual'])));
+                $estado = $this->EstadoObjecto->find('first',array('conditions' => array('EstadoObjecto.id'=>$pedidos['BolsaPedido']['estado_objecto_id'])));
+            $bolsaPedido[$k]['Entidade'] = $entidade['Entidade'];
+          if($bolsa_tipo_actual)
+            $bolsaPedido[$k]['BolsaTipoActual'] = $bolsa_tipo_actual['BolsaTipoBolsa'];
+
+            $bolsaPedido[$k]['Estado'] = $estado['EstadoObjecto'];
+
+        }
+//
+        $this->set(compact('bolsaTipoBolsa','bolsaPedido'));
     }
-
 
 }

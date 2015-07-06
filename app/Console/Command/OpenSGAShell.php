@@ -9,7 +9,53 @@
 
         public $uses = array('Inscricao', 'Turma', 'Matricula', 'Curso', 'UnidadeOrganica', 'Candidatura', 'Aluno',
             'EstadoAluno', 'PlanoEstudo', 'Disciplina', 'DisciplinaPlanoEstudo', 'HistoricoCurso', 'AnoLectivo',
-            'CandidatoAlumni', 'Requisicoes.RequisicoesPedido', 'Entidade', 'User', 'SmsNotification','SmsEnviada');
+            'CandidatoAlumni', 'Requisicoes.RequisicoesPedido', 'Entidade', 'User', 'SmsNotification','SmsEnviada','BolsaBolsa','BolsaTemporaria','AnoLectivo');
+
+
+        /**
+         * Bolsas temporarias para bolsas e desactivar bolsas descontinuadas
+         */
+        public function actualizar_bolsas(){
+
+            echo 'Progresso';
+            $countTrue = 0;
+            $countfalse = 0;
+
+            AuditableConfig::$Logger = ClassRegistry::init('Auditable.Logger');
+            $bolsas_temporarias = $this->BolsaTemporaria->find('all');
+
+
+            foreach($bolsas_temporarias as $bolsas){
+                $alunos_bolsa = $this->Aluno->find('first', array('conditions'=> array('Aluno.numero_estudante' => $bolsas['BolsaTemporaria']['numero_estudante'], 'Aluno.estado_aluno_id'=> 1)));
+
+                if($alunos_bolsa){
+                    $BOLSAs_es = $this->BolsaBolsa->find('first', array('conditions' => array('BolsaBolsa.aluno_id' => $alunos_bolsa['Aluno']['id'])));
+                    if(!$BOLSAs_es){
+                        $ano_lectivo = $this->AnoLectivo->find('first',array('conditions'=> array ('ano'=> date('Y'))));
+                            $array_save = array(
+                                'aluno_id' =>$alunos_bolsa['Aluno']['id'],
+                                'anolectivo_id' => $ano_lectivo['AnoLectivo']['id'],
+                                'bolsa_tipo_bolsa_id' => $bolsas['BolsaTemporaria']['bolsa_tipo_bolsa_id'],
+                                'data_atribuicao' => $bolsas['BolsaTemporaria']['created'],
+                                'bolsa_estado_bolsa_id' => 1);
+                            $this->BolsaBolsa->create();
+                           $true_ =  $this->BolsaBolsa->save($array_save);
+                            if($true_){
+                                $countTrue++;
+                                echo ('=');
+                            }else{  echo ('*');
+                                $countfalse ++;
+                            }
+                    }
+                }
+
+            }
+            $this->out('');
+            $this->out($countTrue); echo '-> Sucesso';
+            $this->out('');
+            $this->out($countfalse); echo ' -> inSucesso';
+
+        }
 
         public function actualiza_fotos_uem() {
             App::uses('Folder', 'Utility');
