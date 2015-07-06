@@ -206,7 +206,8 @@ class AlunosController extends AppController {
 
     public function beforeFilter() {
         parent::beforeFilter();
-        $this->Security->unlockedActions = array('matricular_candidato');
+        $this->Security->unlockedActions = array('matricular_candidato','adicionar_estudante');
+        $this->Auth->allow('get_estudante_azgo');
     }
 
     public function busca_candidato() {
@@ -1611,4 +1612,19 @@ class AlunosController extends AppController {
         
     }
 
+
+    /**public function get_estudante_azgo(){
+        $this->Aluno->contain(array('Entidade'=>array('Genero'),'Curso'=>array('UnidadeOrganica')));
+        if($this->request->is('post')){
+            debug($this->request->data);
+            $aluno = $this->Aluno->findByCodigo($this->request->data['Aluno']['numero_estudante']);
+
+            if($aluno){
+                $this->set(compact('aluno'));
+            }
+        }
+
+        $this->layout = 'guest_users';
+    }
+*/
 }

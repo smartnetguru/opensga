@@ -159,43 +159,29 @@ class UsersController extends AppController {
 	}
 
 	public function mostrar_foto($codigo) {
-		$this->viewClass = 'Media';
-		App::uses('Folder', 'Utility');
-		App::uses('File', 'Utility');
-		if ($this->User->isAluno($codigo)) {
-			$this->loadModel('Aluno');
-			$this->Aluno->contain('Entidade');
-			$aluno = $this->Aluno->find('first', array('conditions' => array('Entidade.user_id' => $codigo)));
-
+        $this->User->Entidade->Aluno->contain('Entidade');
+			$aluno = $this->User->Entidade->Aluno->find('first', array('conditions' => array('Entidade.user_id' => $codigo)));
 			if (!empty($aluno)) {
-				App::uses('File', 'Utility');
-				$path = APP . 'Assets' . DS . 'Fotos' . DS . 'Estudantes' . DS . $aluno['Aluno']['ano_ingresso'] . DS;
-				//	die(debug($path));
-				$file_path = $path . $aluno['Aluno']['codigo'] . '.jpg';
-				$folder_novo = new Folder($path);
+                $path = S3BUCKET.'/Fotos/Estudantes/'.$aluno['Aluno']['ano_ingresso'].'/'.$aluno['Aluno']['codigo']. '.jpg';
+                $path = S3BUCKET.'/Fotos/profile2.png';
+                $s3Client = Aws\S3\S3Client::factory([
+                    'key'    => S3KEY,
+                    'secret' => S3SECRET,
+                    'region' => S3REGION
+                ]);
 
-				$file = new File($file_path);
+                $request = $s3Client->get($path);
+                $signedUrl = $s3Client->createPresignedUrl($request, '+10 minutes');
+                $this->autoRender = false;
 
-				if (!$file->exists()) {
-					$codigo = 'default_profile_picture';
-					$path = WWW_ROOT . DS . 'img' . DS;
-				}
+                return $signedUrl;
 
 
-				$params = array(
-					'id' => $aluno['Aluno']['codigo'] . '.jpg',
-					'name' => 'fotografia',
-					'extension' => 'jpg',
-					'mimeType' => array(
-						'docx' => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
-					),
-					'path' => $path
-				);
-				$this->set($params);
+
 			} else {
 				throw new NotFoundException('Estudante não encontrado. Mostrar foto');
 			}
-		}
+
 	}
 
 	public function docente_mostrar_foto($codigo) {

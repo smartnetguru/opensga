@@ -102,7 +102,6 @@ class DisciplinasController extends AppController {
 					$this->Session->setFlash(__('Esta Disciplina ja estava cadastrada'), 'default', array('class' => 'alert alert-info'));
 					$this->redirect(array('action' => 'index'));
 				}
-			} else {
 				$this->request->data['Disciplina']['unidade_organica_id'] = $unidade_organica_id;
                 $resultado = $this->Disciplina->cadastraDisciplina($this->request->data);
 

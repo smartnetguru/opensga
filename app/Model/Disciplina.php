@@ -82,7 +82,17 @@ class Disciplina extends AppModel {
             'allowEmpty' => false,
         )
     );
-    
+
+    /**
+     * Cadastra uma disciplina para uma unidade Organica.
+     *
+     * Primeiro preenche na tabela Disciplinas Genericas
+     * @param $data
+     * @return bool
+     * @throws Exception
+     *
+     *
+     */
     public function cadastraDisciplina($data){
         $datasource = $this->getDataSource();
         $datasource->begin();

@@ -481,7 +481,7 @@
             $this->Matricula->contain(array(
                 'Curso','Aluno'
             ));
-            $matriculas = $this->Matricula->find('all', array('conditions' => array('Curso.id'=>233)));
+            $matriculas = $this->Matricula->find('all', array('conditions' => array('Curso.unidade_organica_id'=>1,'Matricula.plano_estudo_id is null')));
 
             foreach ($matriculas as $matricula) {
                 $this->out($matricula['Matricula']['id']);
@@ -512,7 +512,7 @@
                     $this->Matricula->save();
                     $this->out($planoEstudo['PlanoEstudo']['name']);
                 } else{
-                    die(debug($matricula));
+                   // die(debug($matricula));
                 }
 
 
@@ -1293,7 +1293,7 @@
             if (!class_exists('PHPExcel'))
                 throw new CakeException('Vendor class PHPExcel not found!');
 
-            $xls = PHPExcel_IOFactory::load(APP . 'Imports' . DS .'Admitidos'.DS.'2015'.DS. 'admitidos_20150415.xlsx');
+            $xls = PHPExcel_IOFactory::load(APP . 'Imports' . DS .'Admitidos'.DS.'2015'.DS. 'admitidos_20150706.xlsx');
 
             $worksheet = $xls->getActiveSheet();
             //debug($xls->getActiveSheetIndex());
@@ -2598,18 +2598,18 @@
             if (!class_exists('PHPExcel'))
                 throw new CakeException('Vendor class PHPExcel not found!');
 
-            $xls = PHPExcel_IOFactory::load(APP . 'Imports' . DS . 'ELISIO.xlsx');
+            $xls = PHPExcel_IOFactory::load(APP . 'Imports' . DS . 'Contacto.xlsx');
 
 
 
             $worksheet = $xls->getActiveSheet();
-            $linha_actual=2;
+            $linha_actual=1;
             foreach ($worksheet->getRowIterator() as $row) {
-                if ($worksheet->getCell('K' . $linha_actual)->getValue() == '') {
+                if ($worksheet->getCell('A' . $linha_actual)->getValue() == '') {
                     break;
                 }
 
-                $numero = $worksheet->getCell('K' . $linha_actual)->getCalculatedValue();
+                $numero = $worksheet->getCell('A' . $linha_actual)->getCalculatedValue();
 
                 $this->Aluno->contain(array(
                     'Entidade'=>array('ProvinciaNascimento')
@@ -2617,8 +2617,8 @@
 
                 $aluno = $this->Aluno->findByCodigo($numero);
                 if(!empty($aluno)){
-			$worksheet->setCellValue('G'.$linha_actual, $aluno['Entidade']['data_nascimento']);
-			$worksheet->setCellValue('H'.$linha_actual, $aluno['Entidade']['ProvinciaNascimento']['name']);
+			$worksheet->setCellValue('H'.$linha_actual, $aluno['Entidade']['telemovel']);
+			//$worksheet->setCellValue('H'.$linha_actual, $aluno['Entidade']['ProvinciaNascimento']['name']);
 			$this->out($numero.'----'.$aluno['Entidade']['ProvinciaNascimento']['name']);
 
                 }
