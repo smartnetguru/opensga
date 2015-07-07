@@ -84,6 +84,11 @@ class ConfigsController extends AppController {
 		$this->Session->setFlash(__('O idioma do sistema foi alterado com sucesso'),'default',array('class'=>'alert info'));
 		$this->redirect($this->referer());
 	}
+
+    public function geral(){
+        $configs  =  $this->Config->find('all');
+        debug($configs);
+    }
 }
 
 
