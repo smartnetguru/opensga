@@ -70,11 +70,6 @@ class Disciplina extends AppModel {
         )
     );
     var $validate = array(
-        'codigo' => array(
-            'rule' => 'isUnique',
-            'message' => 'Este codigo ja foi usado por outra disciplina.',
-            'allowEmpty' => false,
-        ),
         'name' => array(
             'rule' => 'isUnique',
             'message' => 'Ja existe uma disciplina com este nome.',

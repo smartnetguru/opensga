@@ -23,30 +23,19 @@ class DisciplinasController extends AppController {
 		$this->set('disciplinas', $disciplinas);
 	}
 
-	/**
-	 * Lista de Disciplinas para funcionarios das faculdades
-     * @todo Melhorar a forma como as disciplinas sao filtradas por faculdade
-     *
-     */
+
 	function faculdade_index() {
 
         $unidadeOrganicaId = $this->Session->read("Auth.User.unidade_organica_id");
-        $disciplinaUnidadeOrganicas = $this->Disciplina->DisciplinaUnidadeOrganica->find('list', array(
-            'conditions' => array(
-                'unidade_organica_id' => $unidadeOrganicaId
-            ),
-            'fields' => array('disciplina_id')
-        ));
-        $disciplinaUnidadeOrganicaIds = array_values($disciplinaUnidadeOrganicas);
 
         $this->paginate = array(
-            'conditions' => array('Disciplina.id' => $disciplinaUnidadeOrganicaIds),
+            'conditions' => array('DisciplinaUnidadeOrganica.unidade_organica_id' => $unidadeOrganicaId),
             'order' => 'Disciplina.name ASC',
             'contain' => array(
-                'DisciplinaUnidadeOrganica.unidade_organica_id =' . $unidadeOrganicaId
+                'Disciplina'
             )
 		);
-		$disciplinas = $this->paginate('Disciplina');
+		$disciplinas = $this->paginate('DisciplinaUnidadeOrganica');
 		$this->set('disciplinas', $disciplinas);
 	}
 
