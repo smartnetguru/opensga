@@ -1545,4 +1545,15 @@ class Aluno extends AppModel
         debug($alunos);
     }
 
+    public function isFromUnidadeOrganica($alunoId,$unidadeOrganicaId){
+        $unidadeOrganicas = $this->Curso->UnidadeOrganica->getWithChilds($unidadeOrganicaId);
+
+        $this->contain('Curso');
+        $aluno = $this->findById($alunoId);
+        if(in_array($aluno['Curso']['unidade_organica_id'],$unidadeOrganicas)){
+            return true;
+        }
+        return false;
+    }
+
 }
