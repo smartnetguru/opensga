@@ -1612,19 +1612,67 @@ class AlunosController extends AppController {
         
     }
 
+    public function faculdade_alunos_sem_plano_estudo(){
+        $unidadeOrganicaId = $this->Session->read('Auth.User.unidade_organica_id');
+        $unidadeOrganicas = $this->Aluno->Curso->UnidadeOrganica->getWithChilds($unidadeOrganicaId);
 
-    /**public function get_estudante_azgo(){
-        $this->Aluno->contain(array('Entidade'=>array('Genero'),'Curso'=>array('UnidadeOrganica')));
-        if($this->request->is('post')){
-            debug($this->request->data);
-            $aluno = $this->Aluno->findByCodigo($this->request->data['Aluno']['numero_estudante']);
 
-            if($aluno){
-                $this->set(compact('aluno'));
+        $conditions = [
+            'Curso.unidade_organica_id'=>$unidadeOrganicas,
+            'Aluno.plano_estudo_id is null'
+        ];
+
+
+        $this->paginate = array(
+            'conditions' => $conditions,
+            'contain' => array('Entidade', 'Curso', 'EstadoAluno'),
+        );
+
+        $alunos = $this->paginate('Aluno');
+
+        if (count($alunos) == 1) {
+            $this->redirect(array('action' => 'perfil_estudante', $alunos[0]['Aluno']['id']));
+        }
+        $this->set('alunos', $alunos);
+    }
+
+    public function alunos_sem_plano_estudo(){
+
+    }
+
+    public function faculdade_atribuir_plano_estudo($alunoId){
+        $unidadeOrganicaId = $this->Session->read('Auth.User.unidade_organica_id');
+        $this->Aluno->contain([
+            'Entidade'=>[
+                'User'
+            ]
+        ]);
+        $aluno = $this->Aluno->getAlunoForAction($alunoId);
+        if(!$this->Aluno->isFromUnidadeOrganica($alunoId,$unidadeOrganicaId)){
+            throw new NotFoundException('Este Aluno Nao pertence a Esta Unidade Organica');
+        }
+        if($aluno['Aluno']['plano_estudo_id']!=null){
+            $this->Aluno->PlanoEstudo->id = $aluno['Aluno']['plano_estudo_id'];
+            if($this->Aluno->PlanoEstudo->exists()){
+                $this->Session->setFlash('Este Aluno Ja possui um Plano de Estudos','default',array('class'=>'alert alert-danger'));
+                $this->redirect(array('action'=>'perfil_estudante','faculdade'=>true,$alunoId));
             }
         }
+        if($this->request->is('post')){
+            $this->Aluno->id = $this->request->data['Aluno']['aluno_id'];
+            $this->Aluno->set('plano_estudo_id',$this->request->data['Aluno']['plano_estudo_id']);
+            $this->Aluno->save();
+            $this->Session->setFlash('Plano de Estudos Atribuido com Sucesso','default',array('class'=>'alert alert-success'));
+            $this->redirect(array('action'=>'perfil_estudante','faculdade'=>true,$alunoId));
+        }
+        $planoEstudos = $this->Aluno->PlanoEstudo->find('list',array('conditions'=>array('PlanoEstudo.curso_id'=>$aluno['Aluno']['curso_id'])));
+        $this->set('siga_page_title','Atribuir Plano de Estudo a Estudante');
+        $this->set('siga_page_overview','Atribuir Plano de Estudos a um estudante que ainda nao possui plano de Estudos');
+        $this->set(compact('aluno','planoEstudos'));
 
-        $this->layout = 'guest_users';
     }
-*/
+
+    public function atribuir_plano_estudo($aluno_id){
+
+    }
 }
