@@ -88,7 +88,14 @@
             'Aluno_id' => array(
                 'rule'    => 'validaMatricula',
                 'message' => 'Este aluno ja possui uma matricula activa'
-            )
+            ),
+            'ano_lectivo_id' => array(
+                'EvitaDuplicadosCursoAno' => array(
+                    'rule' => array('checkUnique', array('aluno_id', 'ano_lectivo_id')),
+
+                    'message' => 'Este Aluno Ja possui Matricula Para este ano'
+                )
+            ),
         );
 
         /**
