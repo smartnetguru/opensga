@@ -92,9 +92,104 @@ class AnoLectivosController extends AppController {
 		
 	}
 
+    public function definir_ano_lectivo_actual(){
+        $this->loadModel('Config');
 
-        function beforeRender(){
-           parent::beforeFilter();
+        if($this->request->is('post')){
+            $anoLectivo = $this->AnoLectivo->findById($this->request->data['AnoLectivo']['ano_lectivo_id']);
+
+            //Altar primeiro o ano_lectivo
+            $config = $this->Config->findByName('ano_lectivo');
+            if($config){
+                $this->Config->id = $config['Config']['id'];
+                $this->Config->set('value',$anoLectivo['AnoLectivo']['ano']);
+                $this->Config->save();
+            } else{
+                $this->Config->create();
+                $this->Config->save([
+                    'name'=>'ano_lectivo',
+                    'value'=>$anoLectivo['AnoLectivo']['ano']
+                ]);
+            }
+
+            //Agora Alterar o Ano Lectivo ID
+            $config = $this->Config->findByName('ano_lectivo_id');
+            if($config){
+                $this->Config->id = $config['Config']['id'];
+                $this->Config->set('value',$anoLectivo['AnoLectivo']['id']);
+                $this->Config->save();
+            } else{
+                $this->Config->create();
+                $this->Config->save([
+                    'name'=>'ano_lectivo_id',
+                    'value'=>$anoLectivo['AnoLectivo']['id']
+                ]);
+            }
+            $this->Session->setFlash('Ano Lectivo Alterado com Sucesso','default',['class'=>'alert alert-success']);
+            $this->redirect(['action'=>'index']);
+
+
         }
+        $anoLectivos = $this->AnoLectivo->find('list',array('order'=>'ano DESC'));
+
+        $this->set(compact('anoLectivos'));
+    }
+
+    /**
+     * @Todo definir o ano a partir das Configuracoes Gerais
+     * Define o Semestre Lectivo Actualmente em vigor, baseado no Ano Lectivo Activo
+     */
+    public function definir_semestre_actual(){
+        $this->loadModel('Config');
+
+        if($this->request->is('post')){
+
+            $semestreLectivo = $this->AnoLectivo->SemestreLectivo->findById($this->request->data['SemestreLectivo']['semestre_lectivo_id']);
+
+            //Altar primeiro o ano_lectivo
+            $config = $this->Config->findByName('semestre_lectivo');
+            if($config){
+                $this->Config->id = $config['Config']['id'];
+                $this->Config->set('value',$semestreLectivo['SemestreLectivo']['semestre']);
+                $this->Config->save();
+            } else{
+                $this->Config->create();
+                $this->Config->save([
+                    'name'=>'semestre_lectivo',
+                    'value'=>$semestreLectivo['SemestreLectivo']['semestre']
+                ]);
+            }
+
+            //Agora Alterar o Ano Lectivo ID
+            $config = $this->Config->findByName('semestre_lectivo_id');
+            if($config){
+                $this->Config->id = $config['Config']['id'];
+                $this->Config->set('value',$semestreLectivo['SemestreLectivo']['id']);
+                $this->Config->save();
+            } else{
+                $this->Config->create();
+                $this->Config->save([
+                    'name'=>'semestre_lectivo_id',
+                    'value'=>$semestreLectivo['SemestreLectivo']['id']
+                ]);
+            }
+            $this->Session->setFlash('Semestre Lectivo Alterado com Sucesso','default',['class'=>'alert alert-success']);
+            $this->redirect(['action'=>'index']);
+
+        }
+        $anoLectivos = $this->AnoLectivo->find('list',array('order'=>'ano DESC'));
+
+        $semestreLectivos = $this->AnoLectivo->SemestreLectivo->find('list',[
+            'conditions'=>[
+                'ano_lectivo_id'=>Configure::read('OpenSGA.ano_lectivo_id')
+            ],
+            'fields'=>['id','semestre']
+        ]);
+
+
+        $this->set(compact('anoLectivos','semestreLectivos'));
+
+    }
+
 }
 ?>
