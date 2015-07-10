@@ -52,11 +52,16 @@ class PlanoEstudo extends AppModel {
 	);
 	public $validate = array(
 		'name' => array(
-			'duracaoRule-1' => array(
+			'nameRule-1' => array(
 				'rule' => 'notEmpty',
 				'required' => 'create',
 				'message' => 'O nome do Plano de Estudos e obrigatorio'
-			)
+			),
+            'nameRule-2'=>[
+                'rule'=>'isUnique',
+                'required'=>true,
+                'message'=>'Nao podem existir dois planos de estudo com mesmo nome'
+            ]
 		),
 		'curso_id' => array(
 			'CursoRule-1' => array(
@@ -72,7 +77,7 @@ class PlanoEstudo extends AppModel {
 				'message' => 'A Duracao do Plano tem que ser um Numero Natural'
 			)
 		),
-		'semestresano' => array(
+		'semestres_ano' => array(
 			'semestresAnoRule-1' => array(
 				'rule' => 'naturalNumber',
 				'required' => 'create',
@@ -80,11 +85,16 @@ class PlanoEstudo extends AppModel {
 			)
 		),
 		'ano_criacao' => array(
-			'duracaoRule-1' => array(
+			'anoCriacaoRule-1' => array(
 				'rule' => 'naturalNumber',
 				'required' => 'create',
 				'message' => 'Ano de Criacao Invalido'
-			)
+			),
+            'EvitaDuplicadosCursoAno' => array(
+                'rule' => array('checkUnique', array('curso_id', 'ano_criacao')),
+
+                'message' => 'Nao podem existir dois planos de estudo para o mesmo curso, no mesmo ano'
+            )
 		),
 	);
 
@@ -241,6 +251,22 @@ class PlanoEstudo extends AppModel {
         $aluno = $ths->Curso->Aluno->findById($alunoId);
         debug($aluno);
 
+    }
+
+    /**
+     * Retorna o total de creditos para um plano de Estudos
+     *
+     * @Todo implementar isso usando Virtual Fields
+     * @param $planoEstudoId
+     * @return mixed
+     */
+    public function getTotalCreditos($planoEstudoId){
+        $totalCreditos = $this->DisciplinaPlanoEstudo->find('all',array(
+        'conditions'=>array(
+            'plano_estudo_id'=>$planoEstudoId
+        ),
+        'fields'=>array('sum(creditos) as total_creditos')));
+        return $totalCreditos[0][0]['total_creditos'];
     }
 
 }
