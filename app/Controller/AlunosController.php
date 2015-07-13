@@ -1684,4 +1684,48 @@ class AlunosController extends AppController {
     public function atribuir_plano_estudo($aluno_id){
 
     }
+
+    public function matriculados_pela_faculdade(){
+
+        if($this->request->is('post')){
+            $alunoId = $this->request->params['named']['aluno_id'];
+            $mode = $this->request->params['named']['mode'];
+            if($mode=='confirmar'){
+                $aluno = $this->Aluno->findById($alunoId);
+                if(!$aluno['Aluno']['estado_aluno_id']==14){
+                    throw new MethodNotAllowedException('Erro no Sistema');
+                }
+                $dataEstado = [
+                    'aluno_id'=>$alunoId,
+                    'estado_actual'=>1,
+                    'motivo_estado_aluno_id'=>15,
+                    'observacao'=>'Matricula Confirmada a Nivel Central',
+                    'data_mudanca'=>date('Y-m-d H:i:s')
+                ];
+                if($this->Aluno->alteraStatus($dataEstado)){
+                    $this->Session->setFlash('Matricula Confirmada com Sucesso','default',['class'=>'alert alert-success']);
+                    $this->redirect(['action'=>'matriculados_pela_faculdade']);
+                }
+
+            }
+
+        }
+        $conditions = [
+            'Aluno.estado_aluno_id'=>14
+        ];
+
+        $this->paginate = array(
+            'conditions' => $conditions,
+            'contain' => array('Entidade', 'Curso', 'EstadoAluno'),
+        );
+
+        $alunos = $this->paginate('Aluno');
+
+        if (count($alunos) == 1) {
+            $this->redirect(array('action' => 'perfil_estudante', $alunos[0]['Aluno']['id']));
+        }
+
+        $this->set('alunos', $alunos);
+
+    }
 }
