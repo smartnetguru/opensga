@@ -386,7 +386,7 @@ class Turma extends AppModel {
 		}
 
 		$matricula = $this->Inscricao->Matricula->findByAlunoIdAndAnoLectivoId($alunoId, $anoLectivoId);
-        debug($matricula);
+
 		//Se nao renovou matricula naquele ano, nao aparece nenhuma cadeira para se inscrever
 		if (empty($matricula)) {
 			return array();
@@ -397,9 +397,9 @@ class Turma extends AppModel {
 		$this->contain(array(
 			'Disciplina', 'PlanoEstudo'
 		));
-        debug($conditions);
+
 		$turmas = $this->find('all', array('conditions' => $conditions, 'fields' => array('Turma.id', 'Disciplina.name', 'Disciplina.id', 'Turma.ano_curricular', 'Turma.semestre_curricular', 'PlanoEstudo.name'), 'order' => array('Turma.ano_curricular', 'Turma.semestre_curricular')));
-        debug($turmas);
+
 		return $turmas;
 	}
 

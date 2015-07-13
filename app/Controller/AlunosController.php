@@ -1662,6 +1662,15 @@ class AlunosController extends AppController {
             $this->Aluno->id = $this->request->data['Aluno']['aluno_id'];
             $this->Aluno->set('plano_estudo_id',$this->request->data['Aluno']['plano_estudo_id']);
             $this->Aluno->save();
+            $anoLectivo = Configure::read('OpenSGA.ano_lectivo');
+            $anoLectivo = $this->Aluno->Matricula->AnoLectivo->findByAno($anoLectivo);
+
+            $matricula = $this->Aluno->Matricula->findByAlunoIdAndAnoLectivoId($this->request->data['Aluno']['aluno_id'],$anoLectivo['AnoLectivo']['id']);
+            if(!empty($matricula)){
+                $this->Aluno->Matricula->id = $matricula['Matricula']['id'];
+                $this->Aluno->Matricula->set('plano_estudo_id',$this->request->data['Aluno']['plano_estudo_id']);
+                $this->Aluno->Matricula->save();
+            }
             $this->Session->setFlash('Plano de Estudos Atribuido com Sucesso','default',array('class'=>'alert alert-success'));
             $this->redirect(array('action'=>'perfil_estudante','faculdade'=>true,$alunoId));
         }

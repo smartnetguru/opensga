@@ -91,17 +91,18 @@ class DisciplinasController extends AppController {
 					$this->Session->setFlash(__('Esta Disciplina ja estava cadastrada'), 'default', array('class' => 'alert alert-info'));
 					$this->redirect(array('action' => 'index'));
 				}
-				$this->request->data['Disciplina']['unidade_organica_id'] = $unidade_organica_id;
+			} else{
+                $this->request->data['Disciplina']['unidade_organica_id'] = $unidade_organica_id;
                 $resultado = $this->Disciplina->cadastraDisciplina($this->request->data);
 
-				if ($resultado) {
+                if ($resultado) {
 
-					$this->Session->setFlash(__('Dados Gravados com Sucesso'), 'default', array('class' => 'alert alert-success'));
-					//$this->redirect(array('action' => 'index'));
-				} else {
-					$this->Session->setFlash(__('Problemas ao Registrar dados.'), 'default', array('class' => 'alert alert-danger'));
-				}
-			}
+                    $this->Session->setFlash(__('Dados Gravados com Sucesso'), 'default', array('class' => 'alert alert-success'));
+                    $this->redirect(array('action' => 'index'));
+                } else {
+                    $this->Session->setFlash(__('Problemas ao Registrar dados.'), 'default', array('class' => 'alert alert-danger'));
+                }
+            }
 		}
 		$unidadeOrganicas = $this->Disciplina->UnidadeOrganica->find('list');
 		$this->set(compact('unidadeOrganicas'));

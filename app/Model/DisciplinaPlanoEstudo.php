@@ -72,7 +72,8 @@ class DisciplinaPlanoEstudo extends AppModel {
                 
                 'message' => 'Uma Disciplina nao pode estar no mesmo plano de Estudo duas vezes'
             )
-        )
+        ),
+
     );
 
     

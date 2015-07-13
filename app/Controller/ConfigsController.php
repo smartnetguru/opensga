@@ -87,7 +87,23 @@ class ConfigsController extends AppController {
 
     public function geral(){
         $configs  =  $this->Config->find('all');
-        debug($configs);
+        $this->set(compact('configs'));
+    }
+
+    public function faculdade_manutencao(){
+
+    }
+
+    public function manutencao(){
+
+    }
+
+    public function docente_manutencao(){
+
+    }
+
+    public function estudante_manutencao(){
+
     }
 }
 

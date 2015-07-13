@@ -130,7 +130,8 @@ class Inscricao extends AppModel {
 		$this->contain(array(
 			'Turma'
 		));
-		return $this->find('all', array('conditions' => array('Inscricao.aluno_id' => $aluno_id, 'Turma.semestre_lectivo_id' => $semestre_id)));
+		$inscricaos =  $this->find('all', array('conditions' => array('Inscricao.aluno_id' => $aluno_id, 'Turma.semestre_lectivo_id' => $semestre_id)));
+        return $inscricaos;
 	}
 
 	public function getAllInscricoesByAlunoAndEstado($alunoId, $estadoInscricao = null) {
@@ -154,7 +155,7 @@ class Inscricao extends AppModel {
 		if ($estadoInscricao != null) {
 			$conditions['Inscricao.estado_inscricao_id'] = $estadoInscricao;
 		}
-		$inscricoes = $this->Aluno->Inscricao->find('all', array('conditions' => $conditions));
+		$inscricoes = $this->find('all', array('conditions' => $conditions));
 		return $inscricoes;
 	}
 
@@ -194,7 +195,10 @@ class Inscricao extends AppModel {
 
 		$dataSource->begin();
 		$this->FinanceiroTransacao = ClassRegistry::init('FinanceiroTransacao');
-
+        $this->Aluno->contain([
+            'PlanoEstudo'
+        ]);
+        $aluno = $this->Aluno->findById($data['aluno_id']);
 		//Primeiro Realizamos o deposito
 		if ($this->FinanceiroTransacao->processarDeposito($data)) {
 
@@ -206,10 +210,13 @@ class Inscricao extends AppModel {
 			  return false;
 			  }
 			 */
-			foreach ($data['turmas'] as $turma_id) {
+
+
+
+			foreach ($data['Disciplina'] as $disciplinaId) {
 
 				//Primeiro gravamos o pagamento ;)
-				if ($data['turmas_tipo'][$turma_id] == 1) {
+				if ($data['turmas_tipo'][$disciplinaId['id']] == 1) {
 					$tipo_pagamento_id = 35;
 					$this->FinanceiroTransacao->FinanceiroPagamento->FinanceiroTipoPagamento->id = 35;
 					$valor = $this->FinanceiroTransacao->FinanceiroPagamento->FinanceiroTipoPagamento->field('valor');
@@ -221,7 +228,7 @@ class Inscricao extends AppModel {
 
 				//Mas antes do Pagamento, a Transacao
 
-				$pagamento_inscricao = array(
+				$pagamentoInscricao = array(
 					'aluno_id' => $data['FinanceiroTransacao']['aluno_id'],
 					'financeiro_conta_id' => $conta['FinanceiroConta']['id'],
 					'valor' => $valor,
@@ -235,21 +242,92 @@ class Inscricao extends AppModel {
 					'entidade_id' => $conta['FinanceiroConta']['entidade_id']
 				);
 
-				$pagamento_id = $this->FinanceiroTransacao->processarPagamento($pagamento_inscricao);
-				if ($pagamento_inscricao) {
+				$pagamento_id = $this->FinanceiroTransacao->processarPagamento($pagamentoInscricao);
+				if ($pagamentoInscricao) {
 
-					$inscricao_save = array('Inscricao' => array('aluno_id' => $data['aluno_id'], 'turma_id' => $turma_id, 'estado_inscricao_id' => 1, 'matricula_id' => $data['matricula_id'], 'data' => date('Y-m-d'), 'pagamento_id' => $pagamento_id, 'tipo_inscricao_id' => 1));
 
-					if ($this->validaInscricao($inscricao_save)) {
-						$this->create();
-						if (!$this->save($inscricao_save)) {
-							$dataSource->rollback();
-							return false;
-						}
-					} else {
-						$dataSource->rollback();
-						return false;
-					}
+                    $this->Turma->PlanoEstudo->DisciplinaPlanoEstudo->contain(['Disciplina']);
+                    $disciplinaPlanoEstudo = $this->Turma->PlanoEstudo->DisciplinaPlanoEstudo->findById($disciplinaId['id']);
+
+                    /* @todo pegar esse ano lectivo duma forma mais consistente */
+                    $anoLectivoAno = Configure::read('OpenSGA.ano_lectivo');
+                    $anoLectivo = $this->Turma->AnoLectivo->findByAno($anoLectivoAno);
+
+                    //Vamos verificar se a turma existe, e criar caso contrario
+                    $turmaExisteConditions = array(
+                        'Turma.ano_lectivo_id' => $anoLectivo['AnoLectivo']['id'],
+                        'Turma.curso_id' => $aluno['Aluno']['curso_id'],
+                        'Turma.plano_estudo_id' => $aluno['Aluno']['plano_estudo_id'],
+                        'Turma.disciplina_id' => $disciplinaPlanoEstudo['DisciplinaPlanoEstudo']['disciplina_id'],
+                        'Turma.estado_turma_id' => 1,
+                        'Turma.ano_curricular' => $disciplinaPlanoEstudo['DisciplinaPlanoEstudo']['ano_curricular'],
+                        'Turma.semestre_curricular' =>  $disciplinaPlanoEstudo['DisciplinaPlanoEstudo']['semestre_curricular'],
+                        'Turma.semestre_lectivo_id'=>Configure::read('OpenSGA.semestre_lectivo_id')
+                    );
+                    $turmaExiste = $this->Turma->find('first', array(
+                        'conditions' => $turmaExisteConditions
+                    ));
+
+
+                    if (empty($turmaExiste)) {
+
+
+                        $turma = array();
+                        $turma['ano_lectivo_id'] = $anoLectivo['AnoLectivo']['id'];
+                        $turma['ano_curricular'] = $disciplinaPlanoEstudo['DisciplinaPlanoEstudo']['ano_curricular'];
+                        $turma['semestre_curricular'] = $disciplinaPlanoEstudo['DisciplinaPlanoEstudo']['semestre_curricular'];
+                        $turma['curso_id'] = $aluno['Aluno']['curso_id'];
+                        $turma['escola_id'] = 1;
+                        $turma['plano_estudo_id'] = $aluno['Aluno']['plano_estudo_id'];
+                        $turma['turno_id'] = null;
+                        $turma['disciplina_id'] = $disciplinaPlanoEstudo['DisciplinaPlanoEstudo']['disciplina_id'];
+                        $turma['estado_turma_id'] = 1;
+                        $turma['semestre_lectivo_id'] = Configure::read('OpenSGA.semestre_lectivo_id');
+                        $nome = $disciplinaPlanoEstudo['Disciplina']['name'] . " - " . $aluno['PlanoEstudo']['name'];
+                        $turma['name'] = $nome;
+
+                        $turmas = array('Turma' => $turma);
+                        $this->Aluno->Curso->Turma->create();
+                        $this->Aluno->Curso->Turma->save($turmas);
+                        $turmaId = $this->Aluno->Curso->Turma->id;
+                        debug($turma);
+                    } else {
+                        $turmaId = $turmaExiste['Turma']['id'];
+                    }
+                    $matricula = $this->Aluno->Matricula->findByAlunoIdAndAnoLectivoId($aluno['Aluno']['id'], $anoLectivo['AnoLectivo']['id']);
+                    $inscricaoExiste = $this->Aluno->Inscricao->find('first', array(
+                        'conditions' => array(
+                            'aluno_id' => $aluno['Aluno']['id'],
+                            'turma_id' => $turmaId,
+                            'estado_inscricao_id' => 1
+                        )
+                    ));
+                    $inscricaoSave = array(
+                        'Inscricao' => array(
+                            'aluno_id' => $data['aluno_id'],
+                            'turma_id' => $turmaId,
+                            'estado_inscricao_id' => 1,
+                            'matricula_id' => $data['matricula_id'],
+                            'data' => date('Y-m-d'),
+                            'pagamento_id' => $pagamento_id,
+                            'tipo_inscricao_id' => 1
+                        )
+                    );
+                    if (empty($inscricaoExiste)) {
+                        if ($this->validaInscricao($inscricaoSave)) {
+                            $this->create();
+                            if (!$this->save($inscricaoSave)) {
+                                $dataSource->rollback();
+                                return false;
+                            }
+                        } else {
+                            $dataSource->rollback();
+                            return false;
+                        }
+
+                    }
+
+
 				} else {
 					$dataSource->rollback();
 					return false;
@@ -266,6 +344,45 @@ class Inscricao extends AppModel {
 
 		$dataSource->rollback();
 	}
+
+    public function getAllDisciplinasForInscricao($alunoId,$anoLectivoId=null){
+        if(!$anoLectivoId){
+            $anoLectivo = Configure::read('OpenSGA.ano_lectivo');
+            $anoLectivo  = $this->Turma->AnoLectivo->findByAno($anoLectivo);
+            $anoLectivoId = $anoLectivo['AnoLectivo']['id'];
+        }
+
+        $this->Aluno->contain([
+            'Matricula'=>[
+                'conditions'=>[
+                    'ano_lectivo_id'=>$anoLectivoId
+                ]
+            ]
+        ]);
+        $aluno = $this->Aluno->findById($alunoId);
+        $cadeirasInscritas = $this->getAllCadeirasInscritasByAlunoSemestre($alunoId);
+
+        $disciplinasFeitas = $this->getAllInscricoesByAlunoAndEstado($alunoId,[4,5,6,13]);
+        $inscricaosExcluir = Hash::merge($cadeirasInscritas,$disciplinasFeitas);
+
+        $disciplinasExcluir = Hash::extract($inscricaosExcluir,'{n}.Turma.disciplina_id');
+        debug($disciplinasExcluir);
+        $this->Aluno->PlanoEstudo->DisciplinaPlanoEstudo->contain([
+            'Disciplina'
+        ]);
+
+        $disciplinaPlanoEstudo = $this->Aluno->PlanoEstudo->DisciplinaPlanoEstudo->find('all',[
+            'conditions'=>[
+                'plano_estudo_id'=>$aluno['Matricula'][0]['plano_estudo_id'],
+                'Disciplina.id NOT'=>$disciplinasExcluir
+            ],
+            'order'=>[
+                'ano_curricular','semestre_curricular'
+            ]
+
+        ]);
+        return $disciplinaPlanoEstudo;
+    }
 
 }
 

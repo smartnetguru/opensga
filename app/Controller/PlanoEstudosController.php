@@ -106,6 +106,9 @@ class PlanoEstudosController extends AppController {
 	public function faculdade_adicionar_plano_estudo() {
 		if ($this->request->is('post')) {
 			$this->request->data['PlanoEstudo']['ano_criacao'] = $this->request->data['PlanoEstudo']['ano_criacao']['year'];
+            $curso = $this->PlanoEstudo->Curso->findById($this->request->data['PlanoEstudo']['curso_id']);
+            $this->request->data['PlanoEstudo']['name'] = $curso['Curso']['name']." - ".$this->request->data['PlanoEstudo']['ano_criacao'];
+
 			$this->PlanoEstudo->create();
 			if ($this->PlanoEstudo->save($this->request->data)) {
 				$this->Session->setFlash('Adicione as  disciplinas deste plano de estudos. ', 'default', array('class' => 'alert alert-success'));
@@ -157,6 +160,7 @@ class PlanoEstudosController extends AppController {
 			'Curso'
 		));
 		$planoEstudo = $this->PlanoEstudo->findById($planoEstudoId);
+        $planoEstudo['PlanoEstudo']['total_creditos'] = $this->PlanoEstudo->getTotalCreditos($planoEstudoId);
 		if (empty($planoEstudo)) {
 			throw new NotFoundException(__('Plano de Estudos Nao encontrado'));
 		}
@@ -189,8 +193,7 @@ class PlanoEstudosController extends AppController {
 			}
 		}
 
-		$this->request->data['PlanoEstudo'] = $planoEstudo['PlanoEstudo'];
-		$cursos = $this->PlanoEstudo->Curso->find('list');
+		$this->request->data = $planoEstudo;
 
 		$disciplinasAdicionadas = $this->PlanoEstudo->getAllDisciplinas($planoEstudoId);
 		$disciplinasExcluir = Hash::extract($disciplinasAdicionadas, '{n}.Disciplina.id');
@@ -200,12 +203,12 @@ class PlanoEstudosController extends AppController {
 		for ($i = 1; $i <= $planoEstudo['PlanoEstudo']['duracao']; $i++) {
 			$anos[$i] = $i;
 		}
-		for ($i = 1; $i <= $planoEstudo['PlanoEstudo']['semestresano']; $i++) {
+		for ($i = 1; $i <= $planoEstudo['PlanoEstudo']['semestres_ano']; $i++) {
 			$semestres[$i] = $i;
 		}
 
 		$this->set('planoId', $planoEstudoId);
-		$this->set(compact('cursos', 'disciplinasAdicionadas', 'anos', 'semestres', 'disciplinas'));
+		$this->set(compact('disciplinasAdicionadas', 'anos', 'semestres', 'disciplinas'));
 	}
 
 	function faculdade_editar_plano_estudo($id = null) {

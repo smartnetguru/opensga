@@ -126,11 +126,15 @@ class OpenSGAAclShell extends AppShell {
 				$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/faculdade_matricular_candidato";
                 $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Matriculas/faculdade_print_comprovativo_matricula";
 				$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/faculdade_matricula_novo_ingresso_sucesso";
+                $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/faculdade_alunos_sem_plano_estudo";
+                $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/faculdade_atribuir_plano_estudo";
 
 				$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Avaliacaos/faculdade_ver_avaliacao";
 				$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Avaliacaos/faculdade_editar_notas_avaliacao";
 				$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Avaliacaos/faculdade_publicar_avaliacao";
 				$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Avaliacaos/faculdade_print_pauta_avaliacao";
+
+                $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Configs/faculdade_manutencao";
 
 				$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Cursos/faculdade_index";
 				$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Cursos/faculdade_ver_curso";
@@ -276,11 +280,14 @@ class OpenSGAAclShell extends AppShell {
 
                     $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/AnoLectivos/index";
                     $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/AnoLectivos/novo_ano_lectivo";
+                    $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/AnoLectivos/definir_ano_lectivo_actual";
+                    $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/AnoLectivos/definir_semestre_actual";
 
                     $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Candidaturas/importar_candidatos";
                     $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Candidaturas/importar_candidatos_2";
 
                     $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Configs/index";
+                    $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Configs/geral";
 
 					$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Cursos/adicionar_curso";
 
