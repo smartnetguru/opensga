@@ -7,6 +7,8 @@ class DbsecShell extends AppShell {
 
 	public $uses = array('TipoAvaliacao', 'Curso', 'UnidadeOrganica', 'Disciplina', 'PlanoEstudo', 'DisciplinaPlanoEstudo', 'Aluno', 'Turma', 'AnoLectivo', 'SemestreLectivo', 'Turma', 'CursosTurno', 'Matricula', 'Inscricao', 'User', 'Entidade',);
 
+    public $folder = 'economia';
+    public $unidadeOrganicaId = 6;
 	/**
 	 * @todo  Implementar se for necessario
 	 */
@@ -49,7 +51,7 @@ class DbsecShell extends AppShell {
 		if (!class_exists('PHPExcel'))
 			throw new CakeException('Vendor class PHPExcel not found!');
 
-		$xls = PHPExcel_IOFactory::load(APP . 'Imports' . DS . 'agronomia' . DS . 'curso.xlsx');
+		$xls = PHPExcel_IOFactory::load(APP . 'Imports' . DS . 'economia' . DS . 'curso.xlsx');
 
 		$linha_actual = 2;
 		$worksheet = $xls->getActiveSheet();
@@ -58,14 +60,22 @@ class DbsecShell extends AppShell {
 			if ($curso_id instanceof PHPExcel_RichText) {
 				$curso_id = $curso_id->getPlainText();
 			}
-
-			if ($curso_id == '') {
+            $this->out('Comecando a funcao....');
+            $this->out('Verificando o curso----'.$curso_id);
+			if ($curso_id === '') {
+                $this->out('Parando no fim....');
 				break;
 			}
 			$curso_existe = $this->Curso->findByCodigo($curso_id);
 			if (!empty($curso_existe)) {
 				$this->out("Curso Existe-->" . $curso_id);
 			} else {
+                $relevancia = $worksheet->getCell('J' . $linha_actual)->getCalculatedValue();
+                if($relevancia==1){
+
+
+                debug($curso_id);
+                die();
 				$fac_id = $worksheet->getCell('E' . $linha_actual)->getCalculatedValue();
 
 				$faculdade = $this->UnidadeOrganica->find('first', array('conditions' => array('UnidadeOrganica.codigo' => $fac_id)));
@@ -85,17 +95,19 @@ class DbsecShell extends AppShell {
 				$this->Curso->create();
 				$this->Curso->save($curso_array);
 				$this->out('Curso Inserido--' . $this->Curso->id . '---' . $curso_array['Curso']['name']);
+                }
 			}
 			$linha_actual++;
 		}
 	}
 
 	public function importa_disciplinas() {
+        $unidadeOrganicaId = 6;
 		App::import('Vendor', 'PHPExcel', array('file' => 'PHPExcel.php'));
 		if (!class_exists('PHPExcel'))
 			throw new CakeException('Vendor class PHPExcel not found!');
 
-		$xls = PHPExcel_IOFactory::load(APP . 'Imports' . DS . 'agronomia' . DS . 'disciplina.xlsx');
+		$xls = PHPExcel_IOFactory::load(APP . 'Imports' . DS . 'economia' . DS . 'disciplina.xlsx');
 
 		$linha_actual = 2;
 		$worksheet = $xls->getActiveSheet();
@@ -103,7 +115,7 @@ class DbsecShell extends AppShell {
 			$codigo_disciplina = $worksheet->getCell('A' . $linha_actual)->getCalculatedValue();
 			$nome_disciplina = $worksheet->getCell('B' . $linha_actual)->getCalculatedValue();
 
-			if ($codigo_disciplina == '') {
+			if ($codigo_disciplina == '' && !is_numeric($codigo_disciplina)) {
 				break;
 			}
 			$nome_existe = $this->Disciplina->findByName($nome_disciplina);
@@ -111,6 +123,8 @@ class DbsecShell extends AppShell {
 				if (!empty($nome_existe)) {
 
 					$this->out("Ja existe Disciplina com Este nome");
+                    $disciplinaId = $nome_existe['Disciplina']['id'];
+
 				} else {
 					$codigo_existe = $this->Disciplina->findByCodigoAntigo($codigo_disciplina);
 					if (empty($codigo_existe)) {
@@ -123,6 +137,7 @@ class DbsecShell extends AppShell {
 						);
 						$this->Disciplina->create();
 						$this->Disciplina->save($array_disciplina);
+                        $disciplinaId = $this->Disciplina->id;
 					} else {
 						$array_disciplina = array(
 							'Disciplina' => array(
@@ -134,64 +149,37 @@ class DbsecShell extends AppShell {
 						$this->Disciplina->save($array_disciplina);
 						$this->Disciplina->set('codigo', $this->Disciplina->id);
 						$this->Disciplina->save();
+                        $disciplinaId = $this->Disciplina->id;
 					}
 
 					$this->out("Disciplina Criada--" . $nome_disciplina);
 				}
+                //Gravamos a Disciplina Unidade Organica
+                $disciplinaUnidadeExiste = $this->Disciplina->DisciplinaUnidadeOrganica->findByDisciplinaIdAndUnidadeOrganicaId($disciplinaId,$unidadeOrganicaId);
+                if(empty($disciplinaUnidadeExiste)){
+                    $arrayDisciplinaUnidade = [
+                        'disciplina_id'=>$disciplinaId,
+                        'unidade_organica_id'=>$unidadeOrganicaId,
+                        'estado_objecto_id'=>1
+                    ];
+                    $this->Disciplina->DisciplinaUnidadeOrganica->create();
+                    $this->Disciplina->DisciplinaUnidadeOrganica->save($arrayDisciplinaUnidade);
+                    $this->out('DisciplinaUnidadeOrganica Gravada-------------------'.$this->Disciplina->DisciplinaUnidadeOrganica->id);
+                }
 			}
 			$this->out("------------------------------------------------------------------------" . $linha_actual);
 			$linha_actual++;
 		}
 	}
 
-	public function importa_disciplina_unidade() {
-		App::import('Vendor', 'PHPExcel', array('file' => 'PHPExcel.php'));
-		if (!class_exists('PHPExcel'))
-			throw new CakeException('Vendor class PHPExcel not found!');
-
-		$xls = PHPExcel_IOFactory::load(APP . 'Imports' . DS . 'agronomia' . DS . 'disciplina.xlsx');
-
-		$linha_actual = 2;
-		$worksheet = $xls->getActiveSheet();
-		foreach ($worksheet->getRowIterator() as $ow) {
-			$codigo_disciplina = $worksheet->getCell('A' . $linha_actual)->getCalculatedValue();
-			$nome_disciplina = $worksheet->getCell('B' . $linha_actual)->getCalculatedValue();
-
-			if ($codigo_disciplina == '') {
-				break;
-			}
-
-			$unidade_organica_id = 1;
-
-			$disciplina = $this->Disciplina->findByName($nome_disciplina);
-			if (empty($disciplina)) {
-				die($nome_disciplina);
-			}
-			$novo_insert = array(
-				'DisciplinaUnidadeOrganica' => array(
-					'disciplina_id' => $disciplina['Disciplina']['id'],
-					'unidade_organica_id' => $unidade_organica_id,
-					'estado_objecto_id' => 1
-				)
-			);
-			$disciplina_existe = $this->Disciplina->DisciplinaUnidadeOrganica->find('first', array('conditions' => array('disciplina_id' => $disciplina['Disciplina']['id'], 'unidade_organica_id' => $unidade_organica_id)));
-			if (empty($disciplina_existe)) {
-				$this->Disciplina->DisciplinaUnidadeOrganica->create();
-				$this->Disciplina->DisciplinaUnidadeOrganica->save($novo_insert);
-			}
-
-			$this->out("------------------------------------------------------------------------" . $linha_actual);
-			$linha_actual++;
-		}
-	}
 
 	public function importa_plano_estudo() {
 		App::import('Vendor', 'PHPExcel', array('file' => 'PHPExcel.php'));
 		if (!class_exists('PHPExcel'))
 			throw new CakeException('Vendor class PHPExcel not found!');
 
-		$xls = PHPExcel_IOFactory::load(APP . 'Imports' . DS . 'agronomia' . DS . 'disciplina_curso.xlsx');
-		$xls2 = PHPExcel_IOFactory::load(APP . 'Imports' . DS . 'agronomia' . DS . 'disciplina.xlsx');
+		$xls = PHPExcel_IOFactory::load(APP . 'Imports' . DS . 'economia' . DS . 'disciplina_curso.xlsx');
+		$xls2 = PHPExcel_IOFactory::load(APP . 'Imports' . DS . 'economia' . DS . 'disciplina.xlsx');
 		$worksheet2 = $xls2->getActiveSheet();
 		$linha_actual = 2;
 		$worksheet = $xls->getActiveSheet();
@@ -209,11 +197,20 @@ class DbsecShell extends AppShell {
 						'name' => $curso['Curso']['name'] . " - " . $worksheet->getCell('J' . $linha_actual)->getCalculatedValue(),
 						'curso_id' => $curso['Curso']['id'],
 						'ano_criacao' => $worksheet->getCell('J' . $linha_actual)->getCalculatedValue(),
-						'codigo' => $curso['Curso']['codigo'] . "-" . $worksheet->getCell('J' . $linha_actual)->getCalculatedValue()
+						'codigo' => $curso['Curso']['codigo'] . "-" . $worksheet->getCell('J' . $linha_actual)->getCalculatedValue(),
+                        'duracao'=>4,
+                        'semestres_ano'=>2
 					)
 				);
-				$this->PlanoEstudo->save($array_plano_estudo);
-				$plano_estudo_id = $this->PlanoEstudo->id;
+
+				if($this->PlanoEstudo->save($array_plano_estudo)){
+                    $this->out('Plano de Estudos Criado------'.$array_plano_estudo['PlanoEstudo']['name']);
+                    $plano_estudo_id = $this->PlanoEstudo->id;
+                } else{
+                    debug($this->PlanoEstudo->validationErrors);
+                }
+
+
 			} else {
 				$plano_estudo_id = $plano_estudo_existe['PlanoEstudo']['id'];
 			}
@@ -247,24 +244,29 @@ class DbsecShell extends AppShell {
 			if ($worksheet->getCell('G' . $linha_actual)->getCalculatedValue() == 2) {
 				$semestre_sequencial = $worksheet->getCell('D' . $linha_actual)->getCalculatedValue() * $worksheet->getCell('G' . $linha_actual)->getCalculatedValue();
 			}
+            $ramo_id = $worksheet->getCell('L' . $linha_actual)->getCalculatedValue();
+            if($ramo_id==-1){
+                $ramo_id= null;
+            }
 			$array_plano_ano = array(
 				'DisciplinaPlanoEstudo' => array(
 					'plano_estudo_id' => $plano_estudo_id,
-					'ano' => $worksheet->getCell('D' . $linha_actual)->getCalculatedValue(),
-					'semestre' => $worksheet->getCell('G' . $linha_actual)->getCalculatedValue(),
+					'ano_curricular' => $worksheet->getCell('D' . $linha_actual)->getCalculatedValue(),
+					'semestre_curricular' => $worksheet->getCell('G' . $linha_actual)->getCalculatedValue(),
 					'carga_total' => $worksheet->getCell('E' . $linha_actual)->getCalculatedValue(),
-					'creditos' => $worksheet->getCell('F' . $linha_actual)->getCalculatedValue(),
+					'creditos' => $worksheet->getCell('M' . $linha_actual)->getCalculatedValue(),
 					'disciplina_id' => $disciplina['Disciplina']['id'],
 					'codigo' => $disciplina['Disciplina']['codigo'] . "-" . $curso['Curso']['codigo'] . "-" . $worksheet->getCell('J' . $linha_actual)->getCalculatedValue(),
-					'ramo_id' => $worksheet->getCell('L' . $linha_actual)->getCalculatedValue(),
+					'ramo_id' =>$ramo_id,
 					'semestre_sequencial' => $semestre_sequencial
 				)
 			);
-			$plano_ano_existe = $this->DisciplinaPlanoEstudo->find('first', array('conditions' => array('plano_estudo_id' => $plano_estudo_id, 'disciplina_id' => $disciplina['Disciplina']['id'], 'ramo_id' => $worksheet->getCell('L' . $linha_actual)->getCalculatedValue(), 'ano' => $worksheet->getCell('D' . $linha_actual)->getCalculatedValue(), 'semestre' => $worksheet->getCell('G' . $linha_actual)->getCalculatedValue(),)));
+
+			$plano_ano_existe = $this->DisciplinaPlanoEstudo->find('first', array('conditions' => array('plano_estudo_id' => $plano_estudo_id, 'disciplina_id' => $disciplina['Disciplina']['id'], 'ramo_id' => $ramo_id, 'ano_curricular' => $worksheet->getCell('D' . $linha_actual)->getCalculatedValue(), 'semestre_curricular' => $worksheet->getCell('G' . $linha_actual)->getCalculatedValue(),)));
 			if (empty($plano_ano_existe)) {
 				$this->DisciplinaPlanoEstudo->create();
 				$this->DisciplinaPlanoEstudo->save($array_plano_ano);
-				$this->out('Plano Ano Criado');
+				$this->out('Plano Ano Criado---------------'.$this->DisciplinaPlanoEstudo->id);
 			} else {
 				$this->out("Plano existia-------------------------------------");
 				debug($plano_ano_existe);

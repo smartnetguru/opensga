@@ -22,6 +22,23 @@ class Inscricao extends AppModel {
 	var $name = 'Inscricao';
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 
+    public $validate = [
+        'tipo_inscricao_id'=>[
+            'TipoInscricaoNotEmpty'=>[
+                'rule'=>'notEmpty',
+                'required'=>true,
+                'message'=>'O Tipo de Inscricao deve ser Definido'
+            ]
+        ],
+        'estado_inscricao_id'=>[
+            'EstadoInscricaoNotEmpty'=>[
+                'rule'=>'notEmpty',
+                'required'=>true,
+                'message'=>'O Estado da Inscricao deve ser Definido'
+            ]
+        ],
+        ''
+    ];
 	public $actsAs = array('Auditable.Auditable');
 	var $belongsTo = array(
 		'Aluno' => array(

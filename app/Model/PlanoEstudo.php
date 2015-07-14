@@ -86,7 +86,7 @@ class PlanoEstudo extends AppModel {
 		),
 		'ano_criacao' => array(
 			'anoCriacaoRule-1' => array(
-				'rule' => 'naturalNumber',
+				'rule' => ['date','y'],
 				'required' => 'create',
 				'message' => 'Ano de Criacao Invalido'
 			),
