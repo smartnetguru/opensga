@@ -7,8 +7,8 @@ class DbsecShell extends AppShell {
 
 	public $uses = array('HistoricoCurso','TipoAvaliacao', 'Curso', 'UnidadeOrganica', 'Disciplina', 'PlanoEstudo', 'DisciplinaPlanoEstudo', 'Aluno', 'Turma', 'AnoLectivo', 'SemestreLectivo', 'Turma', 'CursosTurno', 'Matricula', 'Inscricao', 'User', 'Entidade',);
 
-    public $folder = 'esuder';
-    public $unidadeOrganicaId = 12;
+    public $folder = 'esnec';
+    public $unidadeOrganicaId = 14;
 	/**
 	 * @todo  Implementar se for necessario
 	 */
