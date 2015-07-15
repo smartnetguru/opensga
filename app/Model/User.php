@@ -142,19 +142,19 @@ class User extends AppModel {
 		return $resultado;
 	}
 
-	function beforeSave($options = array()) {
+	/*function beforeSave($options = array()) {
 		//So gera Password e Username se for novo cadastro
 
 		if (isset($this->request->data['User']['password'])) {
 			$this->request->data['User']['password'] = Security::hash($this->request->data['User']['password'], 'Blowfish');
 		}
 
-		if (isset($this->request->data['User']['username'])) {
+		if (!isset($this->request->data['User']['username'])) {
 			$this->request->data['User']['username'] = $this->geraUsername($this->request->data['User']['name']);
 		}
 		return true;
 	}
-
+*/
 	/**
 	 * Gera o nome de Usuario de Cada Utilizador de acordo com criterios pre-estabelecidos
 	 * Por Enquanto Ele usa a estrutura "primeironome.ultimonome<sequencia>"
@@ -174,7 +174,17 @@ class User extends AppModel {
 			$linha = $users;
 			if ($linha == 0) {
 
-				return $username;
+				//Actualiza o estado do candidato
+
+                                    $this->Candidatura->id = $data['Dados']['numero_candidato'];
+
+                                    $this->Candidatura->set('estado_matricula_id', 1);
+                                    $this->Candidatura->set('estado_candidatura_id', 3);
+
+                                    $this->Candidatura->set('data_matricula', date('Y-m-d H:m:s'));
+                                    if ($this->Candidatura->save()) {
+
+                                    }return $username;
 			} else {
 
 				$username = $username1 . $numero;

@@ -254,8 +254,7 @@ class InscricaosController extends AppController
                 ), 'PlanoEstudo', 'Turno'
             ), 'TipoInscricao'
         ));
-        $inscricoesActivas = $this->Inscricao->find('all', array('conditions' => array('estado_inscricao_id' => 1, 'aluno_id' => $alunoId, 'Turma.ano_lectivo_id' => $anoLectivo['AnoLectivo']['id'],'Inscricao.semestre_lectivo_id'=>Configure::read('OpenSGA.semestre_lectivo_id'))));
-
+gi
 
         if (empty($inscricoesActivas)) {
             $this->Session->setFlash(__('Este estudante nao possui inscricoes para este ano'), 'default', array('class' => 'alert alert-warning'));

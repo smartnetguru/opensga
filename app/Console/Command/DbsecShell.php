@@ -5,7 +5,7 @@ App::uses('AuditableConfig', 'Auditable.Lib');
 
 class DbsecShell extends AppShell {
 
-	public $uses = array('TipoAvaliacao', 'Curso', 'UnidadeOrganica', 'Disciplina', 'PlanoEstudo', 'DisciplinaPlanoEstudo', 'Aluno', 'Turma', 'AnoLectivo', 'SemestreLectivo', 'Turma', 'CursosTurno', 'Matricula', 'Inscricao', 'User', 'Entidade',);
+	public $uses = array('HistoricoCurso','TipoAvaliacao', 'Curso', 'UnidadeOrganica', 'Disciplina', 'PlanoEstudo', 'DisciplinaPlanoEstudo', 'Aluno', 'Turma', 'AnoLectivo', 'SemestreLectivo', 'Turma', 'CursosTurno', 'Matricula', 'Inscricao', 'User', 'Entidade',);
 
     public $folder = 'economia';
     public $unidadeOrganicaId = 6;
@@ -55,14 +55,15 @@ class DbsecShell extends AppShell {
 
 		$linha_actual = 2;
 		$worksheet = $xls->getActiveSheet();
+        $this->out('Comecando a funcao....');
 		foreach ($worksheet->getRowIterator() as $ow) {
 			$curso_id = $worksheet->getCell('A' . $linha_actual)->getCalculatedValue();
 			if ($curso_id instanceof PHPExcel_RichText) {
 				$curso_id = $curso_id->getPlainText();
 			}
-            $this->out('Comecando a funcao....');
+
             $this->out('Verificando o curso----'.$curso_id);
-			if ($curso_id === '') {
+			if ($curso_id == '' && !is_numeric($curso_id)) {
                 $this->out('Parando no fim....');
 				break;
 			}
@@ -281,42 +282,167 @@ class DbsecShell extends AppShell {
 		if (!class_exists('PHPExcel'))
 			throw new CakeException('Vendor class PHPExcel not found!');
 
-		$xls = PHPExcel_IOFactory::load(APP . 'Imports' . DS . 'agronomia' . DS . 'estudante.xlsx');
+		$xls = PHPExcel_IOFactory::load(APP . 'Imports' . DS . $this->folder . DS . 'estudante.xlsx');
 
 		$linha_actual = 2;
 		$worksheet = $xls->getActiveSheet();
 		$existem = 0;
 		$nao_existem = 0;
+        $this->out('Comecanco a verificacao........................');
 		foreach ($worksheet->getRowIterator() as $ow) {
 			$this->Aluno->recursive = -1;
 			$codigo = trim($worksheet->getCell('A' . $linha_actual)->getCalculatedValue());
 			if ($codigo == '') {
 				break;
 			}
-
+            $this->out('Verificando Aluno----------------'.$codigo);
 			$estudante_sga = $this->Aluno->findByCodigo($codigo);
 
 			//debug($estudante_sga);
 			if (empty($estudante_sga)) {
-				$nao_existem++;
-				$this->out($codigo);
+
+                $data = array();
+                $dataSource = $this->Aluno->getDataSource();
+                $dataSource->begin();
+                $data['Aluno']['codigo'] = $codigo;
+                $data['Aluno']['numero_estudante'] = $codigo;
+                $data['Aluno']['numero_estudante_antigo'] = $codigo;
+                $data['Entidade']['apelido'] = trim($worksheet->getCell('B' . $linha_actual)->getCalculatedValue());
+                $data['Entidade']['nomes'] = trim($worksheet->getCell('C' . $linha_actual)->getCalculatedValue());
+                $data['Entidade']['name'] = $data['Entidade']['nomes'] . " " . $data['Entidade']['apelido'];
+                $data['User']['codigocartao'] = $data['Aluno']['codigo'];
+                $data['User']['name'] = $data['Entidade']['name'];
+                $data['User']['group_id'] = 3;
+                $data['User']['verificar_permissoes'] = 1;
+                $data['User']['estado_email'] = 0;
+                $data['User']['estado_objecto_id'] = 1;
+                $data['User']['timezone'] = 'Africa/Maputo';
+                $data['User']['password'] = 'e'.$data['Aluno']['codigo'];
+                $data['User']['password'] = Security::hash($data['User']['password'], 'Blowfish');
+                $dadosUser = ['User'=>$data['User'],'Entidade'=>$data['Entidade']];
+
+                if ($this->User->cadastraUser($dadosUser)) {
+                    $this->out('Gravando User----------'.$this->User->id);
+                    $data['Entidade']['user_id'] = $this->User->getLastInsertID();
+                    $data['Entidade']['telemovel'] = trim($worksheet->getCell('J' . $linha_actual)->getCalculatedValue());
+                    $data['Entidade']['documento_identificacao_id'] = 1;
+                    $data['Entidade']['documento_identificacao_numero'] = trim($worksheet->getCell('E' . $linha_actual)->getCalculatedValue());
+                    $data['Entidade']['estado_entidade_id'] = 1;
+                    $data['Entidade']['email']= trim($worksheet->getCell('M' . $linha_actual)->getCalculatedValue());
+                    $genero = trim($worksheet->getCell('D' . $linha_actual)->getCalculatedValue());
+                    if($genero=='Masculino'){
+                        $data['Entidade']['genero_id'] = 1;
+                    } else{
+                        $data['Entidade']['genero_id'] = 2;
+                    }
+                    if(empty($data['Entidade']['email'])){
+                        $this->User->id  = $this->User->getLastInsertID();
+                        $data['Entidade']['email'] = $this->User->field('username');
+                    }
+
+                    $cell = $worksheet->getCell('F' . $linha_actual);
+                    $InvDate= $cell->getValue();
+                    if(PHPExcel_Shared_Date::isDateTime($cell)) {
+                        $InvDate = date('Y-m-d', PHPExcel_Shared_Date::ExcelToPHP($InvDate));
+                    }
+                    $data['Entidade']['data_nascimento']= $InvDate;
+                    debug($InvDate);
+                    $this->Entidade->create();
+                    if ($this->Entidade->save($data)) {
+                        $this->out('Gravando Entidade------------'.$this->Entidade->id);
+                        $data['Aluno']['user_id'] = $this->User->getLastInsertID();
+                        $data['Aluno']['entidade_id'] = $this->Entidade->getLastInsertID();
+
+                        $cell2 = $worksheet->getCell('O' . $linha_actual);
+                        $InvDate2= $cell->getValue();
+                        if(PHPExcel_Shared_Date::isDateTime($cell2)) {
+                            $InvDate2 = date('Y-m-d', PHPExcel_Shared_Date::ExcelToPHP($InvDate2));
+                        }
+                        $data['Aluno']['data_ingresso'] = $InvDate2;
+                        $curso = $this->Aluno->Curso->findByCodigo(trim($worksheet->getCell('K' . $linha_actual)->getCalculatedValue()));
+                        $data['Aluno']['curso_id'] = $curso['Curso']['id'];
+                        $data['Aluno']['curso_ingresso_id'] = $data['Aluno']['curso_id'];
+                        $data['Aluno']['ano_ingresso']= trim($worksheet->getCell('G' . $linha_actual)->getCalculatedValue());
+                        $planoEstudoId = $this->Curso->getPlanoEstudoIdRecente($data['Aluno']['curso_id']);
+                        if (!empty($planoEstudoId)) {
+                            $data['Aluno']['plano_estudo_id'] = $planoEstudoId;
+                        }
+                        if (!isset($data['Aluno']['estado_aluno_id'])) {
+                            $data['Aluno']['estado_aluno_id'] = 1;
+                        }
+                        $this->Aluno->create();
+
+                        if ($this->Aluno->save($data)) {
+                            $this->out('Gravando Aluno------------------------'.$this->Aluno->id);
+                            $dataMatricula['aluno_id'] = $this->Aluno->getInsertID();
+                            $dataMatricula['curso_id'] = $data['Aluno']['curso_id'];
+                            $dataMatricula['plano_estudo_id'] = $planoEstudoId;
+                            $dataMatricula['estado_matricula_id'] = 1;
+                            $dataMatricula['data'] = trim($worksheet->getCell('O' . $linha_actual)->getCalculatedValue());
+                            $dataMatricula['user_id'] =1;
+                            $anoLectivoMatricula = $this->Aluno->Matricula->AnoLectivo->findByAno(trim($worksheet->getCell('G' . $linha_actual)->getCalculatedValue()));
+                            $dataMatricula['ano_lectivo_id'] = $anoLectivoMatricula['AnoLectivo']['id'];
+                            $dataMatricula['tipo_matricula_id'] = 1;
+                            $matricula_gravar = array('Matricula' => $dataMatricula);
+                            $this->Matricula->create();
+                            if ($this->Matricula->save($matricula_gravar)) {
+                                $this->out('Gravando Matricula---------------------------'.$this->Matricula->id);
+                                $historico_array = array(
+                                    'aluno_id' => $this->Aluno->id,
+                                    'curso_id' => $data['Aluno']['curso_id'],
+                                    'ano_ingresso' => $data['Aluno']['ano_ingresso'],
+                                    'ano_lectivo_ingresso' => $anoLectivoMatricula['AnoLectivo']['id'],
+                                    'plano_estudo_id' => $planoEstudoId
+                                );
+                                $this->HistoricoCurso->create();
+                                if ($this->HistoricoCurso->save($historico_array)) {
+                                    $this->out('Gravando Historico--------------------'.$this->HistoricoCurso->id);
+                                    $dataSource->commit();
+
+                                    $nao_existem++;
+
+                                    $this->out('*************************************************************************');
+
+                                   // return true;
+                                } else{
+                                    debug($this->HistoricoCurso->validationErrors);
+                                }
+
+                            } else{
+                                debug($this->Matricula->validationErrors);
+                            }
+                        } else{
+                            debug($this->Aluno->validationErrors);
+                        }
+                    } else{
+                        debug($this->Entidade->validationErrors);
+                    }
+
+                } else{
+                    debug($this->User->validationErrors);
+                }
+
 			} else {
 				$curriculum = trim($worksheet->getCell('R' . $linha_actual)->getCalculatedValue());
 				$this->PlanoEstudo->contain();
 				$plano_estudo = $this->PlanoEstudo->find('first', array('conditions' => array('curso_id' => $estudante_sga['Aluno']['curso_id'], 'ano_criacao' => $curriculum)));
-				$this->Aluno->id = $estudante_sga['Aluno']['id'];
-				$this->Aluno->set('plano_estudo_id', $plano_estudo['PlanoEstudo']['id']);
-				$this->Aluno->save();
+                if(!empty($plano_estudo)){
+                    $this->Aluno->id = $estudante_sga['Aluno']['id'];
+                    $this->Aluno->set('plano_estudo_id', $plano_estudo['PlanoEstudo']['id']);
+                    $this->Aluno->save();
+                    $this->out('Plano Estuddos Actualizado------------------'.$estudante_sga['Aluno']['codigo']);
 
-				$matriculas = $this->Matricula->find('all', array('conditions' => array('aluno_id' => $estudante_sga['Aluno']['id'])));
-				foreach ($matriculas as $matricula) {
-					$this->Matricula->id = $matricula['Matricula']['id'];
-					if ($matricula['Matricula']['plano_estudo_id'] == '') {
-						$this->Matricula->set('plano_estudo_id', $plano_estudo['PlanoEstudo']['id']);
-						$this->Matricula->save();
-						$this->out('Matricula Actualizada---' . $matricula['Matricula']['id']);
-					}
-				}
+                    $matriculas = $this->Matricula->find('all', array('conditions' => array('aluno_id' => $estudante_sga['Aluno']['id'])));
+                    foreach ($matriculas as $matricula) {
+                        $this->Matricula->id = $matricula['Matricula']['id'];
+                        if ($matricula['Matricula']['plano_estudo_id'] == '') {
+                            $this->Matricula->set('plano_estudo_id', $plano_estudo['PlanoEstudo']['id']);
+                            $this->Matricula->save();
+                            $this->out('Matricula Actualizada---' . $matricula['Matricula']['id']);
+                        }
+                    }
+                }
+
 
 				$existem++;
 			}
@@ -332,29 +458,29 @@ class DbsecShell extends AppShell {
 		if (!class_exists('PHPExcel'))
 			throw new CakeException('Vendor class PHPExcel not found!');
 
-		$xls = PHPExcel_IOFactory::load(APP . 'Imports' . DS . 'agronomia' . DS . 'leccionamento.xlsx');
+		$xls = PHPExcel_IOFactory::load(APP . 'Imports' . DS . $this->folder . DS . 'leccionamento.xlsx');
+
+        $datasource = $this->Turma->getDataSource();
+        $datasource->begin();
 
 		$linha_actual = 2;
 		$worksheet = $xls->getActiveSheet();
-		$xls2 = PHPExcel_IOFactory::load(APP . 'Imports' . DS . 'agronomia' . DS . 'disciplina.xlsx');
+		$xls2 = PHPExcel_IOFactory::load(APP . 'Imports' . DS . $this->folder . DS . 'disciplina.xlsx');
 		$worksheet2 = $xls2->getActiveSheet();
 		foreach ($worksheet->getRowIterator() as $row) {
 			$this->PlanoEstudo->recursive = -1;
 			$this->Curso->recursive = -1;
-			$disciplina_db = trim($worksheet->getCell('A' . $linha_actual)->getCalculatedValue());
-			$curso_db = trim($worksheet->getCell('F' . $linha_actual)->getCalculatedValue());
+			$disciplina_db = trim($worksheet->getCell('C' . $linha_actual)->getCalculatedValue());
+			$curso_db = trim($worksheet->getCell('G' . $linha_actual)->getCalculatedValue());
 			if ($curso_db == '') {
 				break;
 			}
 
 			$curso = $this->Curso->findByCodigo($curso_db);
-			$plano_estudo = $this->PlanoEstudo->find('first', array('conditions' => array('curso_id' => $curso['Curso']['id'], 'ano_criacao' => trim($worksheet->getCell('G' . $linha_actual)->getCalculatedValue()))));
+			$plano_estudo = $this->PlanoEstudo->find('first', array('conditions' => array('curso_id' => $curso['Curso']['id'], 'ano_criacao' => trim($worksheet->getCell('H' . $linha_actual)->getCalculatedValue()))));
 			$this->AnoLectivo->recursive = -1;
-			$anolectivo = $this->AnoLectivo->findByAno(trim($worksheet->getCell('B' . $linha_actual)->getCalculatedValue()));
+			$anolectivo = $this->AnoLectivo->findByAno(trim($worksheet->getCell('D' . $linha_actual)->getCalculatedValue()));
 			$this->Disciplina->recursive = -1;
-
-
-
 			$codigo_disciplina = $disciplina_db;
 
 			$linha_actual2 = 2;
@@ -377,20 +503,24 @@ class DbsecShell extends AppShell {
 				die($nome_disciplina);
 			}
 			if (!empty($disciplina)) {
-				$semestre_lectivo = $this->SemestreLectivo->find('first', array('conditions' => array('ano_lectivo_id' => $anolectivo['AnoLectivo']['id'], 'semestre' => trim($worksheet->getCell('C' . $linha_actual)->getCalculatedValue()))));
+				$semestre_lectivo = $this->SemestreLectivo->find('first', array('conditions' => array('ano_lectivo_id' => $anolectivo['AnoLectivo']['id'], 'semestre' => trim($worksheet->getCell('E' . $linha_actual)->getCalculatedValue()))));
 				if (empty($semestre_lectivo)) {
 					$array_semestre = array(
 						'SemestreLectivo' => array(
-							'codigo' => $anolectivo['AnoLectivo']['ano'] . "-" . trim($worksheet->getCell('C' . $linha_actual)->getCalculatedValue()),
+							'codigo' => $anolectivo['AnoLectivo']['ano'] . "-" . trim($worksheet->getCell('E' . $linha_actual)->getCalculatedValue()),
 							'ano_lectivo_id' => $anolectivo['AnoLectivo']['id'],
-							'semestre' => trim($worksheet->getCell('C' . $linha_actual)->getCalculatedValue()),
-							'semestre_id' => trim($worksheet->getCell('C' . $linha_actual)->getCalculatedValue()),
+							'semestre' => trim($worksheet->getCell('E' . $linha_actual)->getCalculatedValue()),
+							'semestre_id' => trim($worksheet->getCell('E' . $linha_actual)->getCalculatedValue()),
 						)
 					);
 					$this->SemestreLectivo->create();
 					$this->SemestreLectivo->save($array_semestre);
-					$semestre_lectivo = $this->SemestreLectivo->find('first', array('conditions' => array('ano_lectivo_id' => $anolectivo['AnoLectivo']['id'], 'semestre' => trim($worksheet->getCell('C' . $linha_actual)->getCalculatedValue()))));
+					$semestre_lectivo = $this->SemestreLectivo->find('first', array('conditions' => array('ano_lectivo_id' => $anolectivo['AnoLectivo']['id'], 'semestre' => trim($worksheet->getCell('E' . $linha_actual)->getCalculatedValue()))));
 				}
+
+                debug($plano_estudo);
+                debug($disciplina);
+                $disciplinaPlanoEstudo = $this->Disciplina->DisciplinaPlanoEstudo->findByPlanoEstudoIdAndDisciplinaId($plano_estudo['PlanoEstudo']['id'],$disciplina['Disciplina']['id']);
 
 				$array_turma = array(
 					'Turma' => array(
@@ -399,11 +529,11 @@ class DbsecShell extends AppShell {
 						'disciplina_id' => $disciplina['Disciplina']['id'],
 						'curso_id' => $plano_estudo['PlanoEstudo']['curso_id'],
 						'estado_turma_id' => 1,
-						'codigo' => trim($worksheet->getCell('M' . $linha_actual)->getCalculatedValue()),
-						'anocurricular' => trim($worksheet->getCell('N' . $linha_actual)->getCalculatedValue()),
-						'semestrecurricular' => trim($worksheet->getCell('C' . $linha_actual)->getCalculatedValue()),
-						'name' => $disciplina['Disciplina']['name'] . " - " . trim($worksheet->getCell('B' . $linha_actual)->getCalculatedValue()) . " - " . $plano_estudo['PlanoEstudo']['name'],
-						'semestrelectivo_id' => $semestre_lectivo['SemestreLectivo']['id'],
+						'codigo' => trim($worksheet->getCell('F' . $linha_actual)->getCalculatedValue()),
+						'ano_curricular' => $disciplinaPlanoEstudo['DisciplinaPlanoEstudo']['ano_curricular'],
+						'semestre_curricular' => $disciplinaPlanoEstudo['DisciplinaPlanoEstudo']['semestre_curricular'],
+						'name' => $disciplina['Disciplina']['name'] . " - " . trim($worksheet->getCell('D' . $linha_actual)->getCalculatedValue()) . " - " . $plano_estudo['PlanoEstudo']['name'],
+						'semestre_lectivo_id' => $semestre_lectivo['SemestreLectivo']['id'],
 						'unidade_organica_id' => $curso['Curso']['unidade_organica_id']
 					)
 				);
@@ -422,6 +552,9 @@ class DbsecShell extends AppShell {
 			}
 			$this->out("------------------------------------------------------------------------" . $linha_actual);
 			$linha_actual++;
+            debug($array_turma);
+            die();
+           // $datasource->commit();
 		}
 	}
 
