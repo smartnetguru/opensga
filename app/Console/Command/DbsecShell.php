@@ -7,8 +7,8 @@ class DbsecShell extends AppShell {
 
 	public $uses = array('HistoricoCurso','TipoAvaliacao', 'Curso', 'UnidadeOrganica', 'Disciplina', 'PlanoEstudo', 'DisciplinaPlanoEstudo', 'Aluno', 'Turma', 'AnoLectivo', 'SemestreLectivo', 'Turma', 'CursosTurno', 'Matricula', 'Inscricao', 'User', 'Entidade',);
 
-    public $folder = 'economia';
-    public $unidadeOrganicaId = 6;
+    public $folder = 'esuder';
+    public $unidadeOrganicaId = 12;
 	/**
 	 * @todo  Implementar se for necessario
 	 */
@@ -51,7 +51,7 @@ class DbsecShell extends AppShell {
 		if (!class_exists('PHPExcel'))
 			throw new CakeException('Vendor class PHPExcel not found!');
 
-		$xls = PHPExcel_IOFactory::load(APP . 'Imports' . DS . 'economia' . DS . 'curso.xlsx');
+		$xls = PHPExcel_IOFactory::load(APP . 'Imports' . DS . $this->folder . DS . 'curso.xlsx');
 
 		$linha_actual = 2;
 		$worksheet = $xls->getActiveSheet();
@@ -103,12 +103,12 @@ class DbsecShell extends AppShell {
 	}
 
 	public function importa_disciplinas() {
-        $unidadeOrganicaId = 6;
+        $unidadeOrganicaId = $this->unidadeOrganicaId;
 		App::import('Vendor', 'PHPExcel', array('file' => 'PHPExcel.php'));
 		if (!class_exists('PHPExcel'))
 			throw new CakeException('Vendor class PHPExcel not found!');
 
-		$xls = PHPExcel_IOFactory::load(APP . 'Imports' . DS . 'economia' . DS . 'disciplina.xlsx');
+		$xls = PHPExcel_IOFactory::load(APP . 'Imports' . DS . $this->folder . DS . 'disciplina.xlsx');
 
 		$linha_actual = 2;
 		$worksheet = $xls->getActiveSheet();
@@ -179,8 +179,8 @@ class DbsecShell extends AppShell {
 		if (!class_exists('PHPExcel'))
 			throw new CakeException('Vendor class PHPExcel not found!');
 
-		$xls = PHPExcel_IOFactory::load(APP . 'Imports' . DS . 'economia' . DS . 'disciplina_curso.xlsx');
-		$xls2 = PHPExcel_IOFactory::load(APP . 'Imports' . DS . 'economia' . DS . 'disciplina.xlsx');
+		$xls = PHPExcel_IOFactory::load(APP . 'Imports' . DS . $this->folder . DS . 'disciplina_curso.xlsx');
+		$xls2 = PHPExcel_IOFactory::load(APP . 'Imports' . DS . $this->folder. DS . 'disciplina.xlsx');
 		$worksheet2 = $xls2->getActiveSheet();
 		$linha_actual = 2;
 		$worksheet = $xls->getActiveSheet();
@@ -303,6 +303,7 @@ class DbsecShell extends AppShell {
 
                 $data = array();
                 $dataSource = $this->Aluno->getDataSource();
+                $dataSource->useNestedTransactions = false;
                 $dataSource->begin();
                 $data['Aluno']['codigo'] = $codigo;
                 $data['Aluno']['numero_estudante'] = $codigo;
@@ -368,7 +369,7 @@ class DbsecShell extends AppShell {
                             $data['Aluno']['plano_estudo_id'] = $planoEstudoId;
                         }
                         if (!isset($data['Aluno']['estado_aluno_id'])) {
-                            $data['Aluno']['estado_aluno_id'] = 1;
+                            $data['Aluno']['estado_aluno_id'] = 14;
                         }
                         $this->Aluno->create();
 
