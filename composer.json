@@ -1,32 +1,58 @@
 {
-	"name": "cakephp/cakephp",
-	"description": "The CakePHP framework",
-	"type": "library",
-	"keywords": ["framework"],
-	"homepage": "http://cakephp.org",
+    "name": "infomoz/opensga",
+    "description": "Sistema de Gestao Academica de Codigo Aberto",
+	"type": "project",
+	"keywords": ["opensga"],
+	"homepage": "http://infomoz.net",
+  "time": "2015-07-17",
 	"license": "MIT",
-	"authors": [
-		{
-			"name": "CakePHP Community",
-			"homepage": "https://github.com/cakephp/cakephp/graphs/contributors"
-		}
-	],
-	"support": {
-		"issues": "https://github.com/cakephp/cakephp/issues",
-		"forum": "http://stackoverflow.com/tags/cakephp",
-		"irc": "irc://irc.freenode.org/cakephp",
-		"source": "https://github.com/cakephp/cakephp"
-	},
-	"require": {
-		"php": ">=5.2.8",
-		"ext-mcrypt": "*",
-        "dompdf/dompdf" : "0.6.*"
-	},
-	"require-dev": {
-		"phpunit/phpunit": "3.7.*",
-		"cakephp/debug_kit" : "2.2.*"
-	},
-	"bin": [
-		"lib/Cake/Console/cake"
-	]
+  "authors": [
+    {
+      "name": "Elisio Leonardo",
+      "email": "elisio.leonardo@gmail.com",
+      "homepage": "http://www.infomoz.net",
+      "role": "Developer"
+    },
+    {
+      "name": "Jose Leopoldo Nhampossa",
+      "email": "jose.nhampossa@gmail.com",
+      "homepage": "http://nhampossa.com",
+      "role": "Manager"
+    },
+    {
+      "name": "Universidade Eduardo Mondlane - Direccao do Registo Academico",
+      "email": "dra@uem.mz",
+      "homepage": "http://dra.uem.mz",
+      "role": "Manager"
+    }
+  ],
+  "support": {
+    "email": "opensga@infomoz.net",
+    "issues": "http://infomoz.net",
+    "forum": "http://infomoz.net",
+    "wiki": "http://infomoz.net",
+    "source": "http://infomoz.net",
+    "docs": "http://infomoz.net"
+
+  },
+
+    "require": {
+        "cakephp/cakephp": "2.7.*",
+       "radig/auditable": "@stable",
+      "tracy/tracy": "@stable",
+      "markstory/acl_extras": "@dev",
+      "cakedc/migrations": "@stable",
+      "friendsofcake/cakepdf": "@dev",
+      "aws/aws-sdk-php": "2.*"
+    },
+  "require-dev": {
+    "phpunit/phpunit": "3.7.*",
+    "cakephp/debug_kit" : "2.2.*"
+  },
+  "bin": [
+    "lib/Cake/Console/cake"
+  ],
+    "config": {
+        "vendor-dir": "Vendor/"
+    }
 }

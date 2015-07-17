@@ -27,11 +27,11 @@ class AppController extends Controller {
     public $components = array(
         'Security', 'Acl', 'Auth' => array(
             'authenticate' => 'Blowfish'
-        ), 'Session', 'RequestHandler' => array( 'viewClassMap' => array( 'xlsx' => 'CakeExcel.Excel' ) ), 'Paginator', 'Cookie', 'HighCharts.HighCharts', 'DebugKit.Toolbar' => array(
+        ), 'Session', 'RequestHandler' => array( 'viewClassMap' => array( 'xlsx' => 'CakeExcel.Excel' ) ), 'Paginator', 'Cookie', 'DebugKit.Toolbar' => array(
             'panels' => array()
         )
     );
-    public $helpers = array('Html', 'AclLink', 'Print', 'BreadCumbs', 'Form', 'Session', 'Js' => array('MyJquery'), 'EventsCalendar', 'Javascript', 'Ajax', 'PhpExcel', 'HighCharts.HighCharts', 'AclLink', 'Time');
+    public $helpers = array('Html', 'AclLink', 'Print', 'BreadCumbs', 'Form', 'Session', 'Js' => array('MyJquery'), 'EventsCalendar', 'Javascript', 'Ajax', 'PhpExcel', 'AclLink', 'Time');
     public $pdfConfig = array('engine' => 'CakePdf.Tcpdf');
     public $cacheAction = '1 hour';
 
