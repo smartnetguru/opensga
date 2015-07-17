@@ -7,8 +7,8 @@ class DbsecShell extends AppShell {
 
 	public $uses = array('HistoricoCurso','TipoAvaliacao', 'Curso', 'UnidadeOrganica', 'Disciplina', 'PlanoEstudo', 'DisciplinaPlanoEstudo', 'Aluno', 'Turma', 'AnoLectivo', 'SemestreLectivo', 'Turma', 'CursosTurno', 'Matricula', 'Inscricao', 'User', 'Entidade',);
 
-    public $folder = 'esnec';
-    public $unidadeOrganicaId = 14;
+    public $folder = 'economia';
+    public $unidadeOrganicaId = 6;
 	/**
 	 * @todo  Implementar se for necessario
 	 */
@@ -278,6 +278,7 @@ class DbsecShell extends AppShell {
 	}
 
 	public function verifica_estudantes() {
+        AuditableConfig::$Logger = ClassRegistry::init('Auditable.Logger');
 		App::import('Vendor', 'PHPExcel', array('file' => 'PHPExcel.php'));
 		if (!class_exists('PHPExcel'))
 			throw new CakeException('Vendor class PHPExcel not found!');
@@ -407,20 +408,25 @@ class DbsecShell extends AppShell {
                                    // return true;
                                 } else{
                                     debug($this->HistoricoCurso->validationErrors);
+                                    $dataSource->rollback();
                                 }
 
                             } else{
                                 debug($this->Matricula->validationErrors);
+                                $dataSource->rollback();
                             }
                         } else{
                             debug($this->Aluno->validationErrors);
+                            $dataSource->rollback();
                         }
                     } else{
                         debug($this->Entidade->validationErrors);
+                        $dataSource->rollback();
                     }
 
                 } else{
                     debug($this->User->validationErrors);
+                    $dataSource->rollback();
                 }
 
 			} else {

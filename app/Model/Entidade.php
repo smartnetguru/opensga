@@ -21,7 +21,7 @@ class Entidade extends AppModel {
     public $validate = array(
         'apelido' => array(
             'apelidoNotEmpty' => array(
-                'rule' => 'notEmpty',
+                'rule' => 'notBlank',
                 'required'=>'create',
                 'message'=>'O Campo Apelido é de Preenchimento Obrigatório',
                 // extra keys like on, required, etc. go here...
@@ -29,7 +29,7 @@ class Entidade extends AppModel {
         ),
         'nomes' => array(
             'nomesNotEmpty' => array(
-                'rule' => 'notEmpty',
+                'rule' => 'notBlank',
                 'required'=>'create',
                 'message'=>'O Campo Outros Nomes é de Preenchimento Obrigatório',
                 // extra keys like on, required, etc. go here...
@@ -37,7 +37,7 @@ class Entidade extends AppModel {
         ),
         'genero_id' => array(
             'generoIdNotEmpty' => array(
-                'rule' => 'notEmpty',
+                'rule' => 'notBlank',
                 'required'=>'create',
                 'message'=>'O Campo Sexo é de Preenchimento Obrigatório',
                 // extra keys like on, required, etc. go here...
@@ -45,7 +45,7 @@ class Entidade extends AppModel {
         ),
         'data_nascimento' => array(
             'dataNascimentoNotEmpty' => array(
-                'rule' => 'notEmpty',
+                'rule' => 'notBlank',
                 'required'=>'create',
                 'message'=>'O Campo Data de Nascimento é de Preenchimento Obrigatório',
                 // extra keys like on, required, etc. go here...
@@ -59,7 +59,7 @@ class Entidade extends AppModel {
         ),
         'name' => array(
             'nameNotEmpty' => array(
-                'rule' => 'notEmpty',
+                'rule' => 'notBlank',
                 'required'=>'create',
                 'message'=>'O Campo Nome Completo é de Preenchimento Obrigatório',
                 // extra keys like on, required, etc. go here...

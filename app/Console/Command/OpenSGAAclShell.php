@@ -345,13 +345,21 @@ class OpenSGAAclShell extends AppShell {
 					$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Users/alterar_senha_email";
 				} elseif (in_array('DRA_DR', $unidadesOrganicas)) {
 					$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/index";
+                    $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/alterar_status";
+                    $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/adicionar_estudante";
+                    $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/editar_estudante";
+                    $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/exportar_alunos";
+                    $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/exportar_alunos_excel";
+                    $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/alterar_nome";
+                    $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/mudanca_curso";
+                    $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/concluir_nivel";
 
 					$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/perfil_estudante";
-				} elseif ($unidadeOrganica['UnidadeOrganica']['codigo'] == 'DRA_DA') {
+				} elseif (in_array('DRA_DR', $unidadesOrganicas)) {
 					$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/index";
 
 					$comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/perfil_estudante";
-				} elseif ($unidadeOrganica['UnidadeOrganica']['codigo'] == 'GC') {
+				} elseif (in_array('GC', $unidadesOrganicas)) {
 					//Funcionarios do Gabinete de Cooperacao
 
 					$comandos[] = "acl deny User.{$funcionario['User']['id']} controllers";

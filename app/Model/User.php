@@ -79,7 +79,7 @@ class User extends AppModel {
 				'message' => 'Não podem existir 2 usuários com emails iguais'
 			),
 			'loginRule-3' => array(
-				'rule' => 'notEmpty',
+				'rule' => 'notBlank',
 				'message' => 'O Usermane não pode estar vazio'
 			)
 		)
