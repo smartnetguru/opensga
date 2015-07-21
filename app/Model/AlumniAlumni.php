@@ -8,7 +8,7 @@ App::uses('AppModel', 'Model');
  * @property AlumniCandidatoAlumni $AlumniCandidatoAlumni
  * @property User $User
  */
-class Alumni extends AppModel {
+class AlumniAlumni extends AppModel {
 
 
 	//The Associations below have been created with all possible keys, those that are not needed can be removed

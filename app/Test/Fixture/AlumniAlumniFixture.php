@@ -3,14 +3,14 @@
  * AlumniFixture
  *
  */
-class AlumniFixture extends CakeTestFixture {
+class AlumniAlumniFixture extends CakeTestFixture {
 
 /**
  * Import
  *
  * @var array
  */
-	public $import = array('model' => 'Alumni');
+	public $import = array('model' => 'AlumniAlumni');
 
 /**
  * Records

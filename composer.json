@@ -40,12 +40,13 @@
         "cakephp/cakephp": "2.7.*",
        "radig/auditable": "@stable",
       "tracy/tracy": "@stable",
-      "markstory/acl_extras": "@dev",
+      "markstory/acl_extras": "*",
       "cakedc/migrations": "@stable",
-      "friendsofcake/cakepdf": "@dev",
+      "friendsofcake/cakepdf": "*",
       "aws/aws-sdk-php": "2.*",
       "slywalker/boost_cake": "*",
-      "phpoffice/phpexcel":"*"
+      "phpoffice/phpexcel":"*",
+      "phpoffice/phpword":"*"
     },
   "require-dev": {
     "phpunit/phpunit": "3.7.*",

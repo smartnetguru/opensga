@@ -5,7 +5,14 @@ App::uses('Model', 'Model');
 class AppModel extends Model {
 
     public $recursive = -1;
-    public $actsAs = array('Containable', 'Auditable.Auditable');
+    public $actsAs = array('Containable', );
+    public function __construct($id = false, $table = null, $ds = null){
+        if(Configure::read('debug')==0){
+            $this->actsAs[]= 'Auditable.Auditable';
+        }
+        parent::__construct($id,$table,$ds);
+    }
+
 
 
     function checkUnique($data, $fields) {
