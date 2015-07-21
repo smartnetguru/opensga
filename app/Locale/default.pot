@@ -568,23 +568,23 @@ msgstr ""
 msgid "Bolsa valor bolsa was not deleted"
 msgstr ""
 
-#: Controller/CandidatoAlumnisController.php:29;74;105
+#: Controller/AlumniCandidatoAlumnisController.php:29;74;105
 msgid "Invalid candidato alumni"
 msgstr ""
 
-#: Controller/CandidatoAlumnisController.php:44;78
+#: Controller/AlumniCandidatoAlumnisController.php:44;78
 msgid "The candidato alumni has been saved"
 msgstr ""
 
-#: Controller/CandidatoAlumnisController.php:47;81
+#: Controller/AlumniCandidatoAlumnisController.php:47;81
 msgid "The candidato alumni could not be saved. Please, try again."
 msgstr ""
 
-#: Controller/CandidatoAlumnisController.php:109
+#: Controller/AlumniCandidatoAlumnisController.php:109
 msgid "Candidato alumni deleted"
 msgstr ""
 
-#: Controller/CandidatoAlumnisController.php:112
+#: Controller/AlumniCandidatoAlumnisController.php:112
 msgid "Candidato alumni was not deleted"
 msgstr ""
 
@@ -2255,7 +2255,7 @@ msgstr ""
 #: View/BolsaTipoCandidaturas/edit.ctp:10
 #: View/BolsaValorBolsas/add.ctp:12
 #: View/BolsaValorBolsas/edit.ctp:13
-#: View/CandidatoAlumnis/edit.ctp:31
+#: View/AlumniCandidatoAlumnis/edit.ctp:31
 #: View/CandidatoGraduacaos/add.ctp:34
 #: View/CandidatoGraduacaos/edit.ctp:35
 #: View/CerimoniaGraduacaos/edit.ctp:12
@@ -2472,9 +2472,9 @@ msgstr ""
 #: View/BolsaValorBolsas/edit.ctp:16
 #: View/BolsaValorBolsas/index.ctp:10;48
 #: View/BolsaValorBolsas/view.ctp:32
-#: View/CandidatoAlumnis/edit.ctp:34
-#: View/CandidatoAlumnis/index.ctp:30;92
-#: View/CandidatoAlumnis/view.ctp:132;169
+#: View/AlumniCandidatoAlumnis/edit.ctp:34
+#: View/AlumniCandidatoAlumnis/index.ctp:30;92
+#: View/AlumniCandidatoAlumnis/view.ctp:132;169
 #: View/CandidatoGraduacaos/add.ctp:37
 #: View/CandidatoGraduacaos/edit.ctp:38
 #: View/CandidatoGraduacaos/index.ctp:34;106
@@ -2856,9 +2856,9 @@ msgstr ""
 #: View/BolsaTipoCandidaturas/view.ctp:69
 #: View/BolsaValorBolsas/edit.ctp:19
 #: View/BolsaValorBolsas/index.ctp:27
-#: View/CandidatoAlumnis/edit.ctp:37
-#: View/CandidatoAlumnis/index.ctp:72
-#: View/CandidatoAlumnis/view.ctp:190
+#: View/AlumniCandidatoAlumnis/edit.ctp:37
+#: View/AlumniCandidatoAlumnis/index.ctp:72
+#: View/AlumniCandidatoAlumnis/view.ctp:190
 #: View/CandidatoGraduacaos/edit.ctp:41
 #: View/CandidatoGraduacaos/index.ctp:86
 #: View/CerimoniaGraduacaos/edit.ctp:18
@@ -3087,9 +3087,9 @@ msgstr ""
 #: View/BolsaValorBolsas/edit.ctp:19
 #: View/BolsaValorBolsas/index.ctp:27
 #: View/BolsaValorBolsas/view.ctp:35
-#: View/CandidatoAlumnis/edit.ctp:37
-#: View/CandidatoAlumnis/index.ctp:72
-#: View/CandidatoAlumnis/view.ctp:135;190
+#: View/AlumniCandidatoAlumnis/edit.ctp:37
+#: View/AlumniCandidatoAlumnis/index.ctp:72
+#: View/AlumniCandidatoAlumnis/view.ctp:135;190
 #: View/CandidatoGraduacaos/edit.ctp:41
 #: View/CandidatoGraduacaos/index.ctp:86
 #: View/CandidatoGraduacaos/view.ctp:155
@@ -3309,8 +3309,8 @@ msgstr ""
 #: View/BolsaTipoCandidaturas/index.ctp:15
 #: View/BolsaTipoCandidaturas/view.ctp:67
 #: View/BolsaValorBolsas/index.ctp:25
-#: View/CandidatoAlumnis/index.ctp:70
-#: View/CandidatoAlumnis/view.ctp:188
+#: View/AlumniCandidatoAlumnis/index.ctp:70
+#: View/AlumniCandidatoAlumnis/view.ctp:188
 #: View/CandidatoGraduacaos/index.ctp:84
 #: View/Configs/index.ctp:72
 #: View/Contas/index.ctp:58
@@ -3442,8 +3442,8 @@ msgstr ""
 #: View/BolsaTipoCandidaturas/index.ctp:16
 #: View/BolsaTipoCandidaturas/view.ctp:68
 #: View/BolsaValorBolsas/index.ctp:26
-#: View/CandidatoAlumnis/index.ctp:71
-#: View/CandidatoAlumnis/view.ctp:189
+#: View/AlumniCandidatoAlumnis/index.ctp:71
+#: View/AlumniCandidatoAlumnis/view.ctp:189
 #: View/CandidatoGraduacaos/index.ctp:85
 #: View/Configs/index.ctp:73
 #: View/Contas/index.ctp:59
@@ -3558,7 +3558,7 @@ msgstr ""
 #: View/BolsaTipoBolsas/index.ctp:27
 #: View/BolsaTipoCandidaturas/index.ctp:25
 #: View/BolsaValorBolsas/index.ctp:35
-#: View/CandidatoAlumnis/index.ctp:80
+#: View/AlumniCandidatoAlumnis/index.ctp:80
 #: View/CandidatoGraduacaos/index.ctp:94
 #: View/CursoTipoPamentos/index.ctp:33
 #: View/DocenteFuncaos/index.ctp:25
@@ -3627,7 +3627,7 @@ msgstr ""
 #: View/BolsaTipoBolsas/index.ctp:33
 #: View/BolsaTipoCandidaturas/index.ctp:31
 #: View/BolsaValorBolsas/index.ctp:41
-#: View/CandidatoAlumnis/index.ctp:85
+#: View/AlumniCandidatoAlumnis/index.ctp:85
 #: View/CandidatoGraduacaos/index.ctp:99
 #: View/Contas/index.ctp:73
 #: View/CursoTipoPamentos/index.ctp:39
@@ -3710,7 +3710,7 @@ msgstr ""
 #: View/BolsaTipoBolsas/index.ctp:35
 #: View/BolsaTipoCandidaturas/index.ctp:33
 #: View/BolsaValorBolsas/index.ctp:43
-#: View/CandidatoAlumnis/index.ctp:87
+#: View/AlumniCandidatoAlumnis/index.ctp:87
 #: View/CandidatoGraduacaos/index.ctp:101
 #: View/Contas/index.ctp:76
 #: View/CursoTipoPamentos/index.ctp:41
@@ -3811,7 +3811,7 @@ msgstr ""
 #: View/BolsaTipoBolsas/view.ctp:4;41;96;143
 #: View/BolsaTipoCandidaturas/view.ctp:4;32
 #: View/BolsaValorBolsas/view.ctp:4
-#: View/CandidatoAlumnis/view.ctp:4;157
+#: View/AlumniCandidatoAlumnis/view.ctp:4;157
 #: View/CandidatoGraduacaos/view.ctp:4
 #: View/CerimoniaGraduacaos/ver_detalhes.ctp:30
 #: View/Configs/view.ctp:33
@@ -3907,7 +3907,7 @@ msgstr ""
 #: View/BolsaResultados/view.ctp:29;88
 #: View/BolsaTipoBolsas/view.ctp:47;101
 #: View/BolsaTipoCandidaturas/view.ctp:38
-#: View/CandidatoAlumnis/view.ctp:109;162
+#: View/AlumniCandidatoAlumnis/view.ctp:109;162
 #: View/CandidatoGraduacaos/view.ctp:34
 #: View/Contas/view.ctp:48;83
 #: View/EntidadeContactos/view.ctp:29
@@ -3965,7 +3965,7 @@ msgstr ""
 #: View/BolsaResultados/view.ctp:34;89
 #: View/BolsaTipoBolsas/view.ctp:48;102
 #: View/BolsaTipoCandidaturas/view.ctp:39
-#: View/CandidatoAlumnis/view.ctp:114;163
+#: View/AlumniCandidatoAlumnis/view.ctp:114;163
 #: View/CandidatoGraduacaos/view.ctp:39
 #: View/Contas/view.ctp:53;84
 #: View/EntidadeContactos/view.ctp:34
@@ -4019,7 +4019,7 @@ msgstr ""
 #: View/BolsaMotivoIndeferimentos/view.ctp:54
 #: View/BolsaResultados/view.ctp:39;92
 #: View/BolsaTipoBolsas/view.ctp:103
-#: View/CandidatoAlumnis/view.ctp:119;164
+#: View/AlumniCandidatoAlumnis/view.ctp:119;164
 #: View/CandidatoGraduacaos/view.ctp:44
 #: View/EntidadeContactos/view.ctp:39
 #: View/EntidadeIdentificacaos/view.ctp:44
@@ -4061,7 +4061,7 @@ msgstr ""
 #: View/BolsaMotivoIndeferimentos/view.ctp:55
 #: View/BolsaResultados/view.ctp:44;93
 #: View/BolsaTipoBolsas/view.ctp:104
-#: View/CandidatoAlumnis/view.ctp:124;165
+#: View/AlumniCandidatoAlumnis/view.ctp:124;165
 #: View/CandidatoGraduacaos/view.ctp:49
 #: View/EntidadeContactos/view.ctp:44
 #: View/EntidadeIdentificacaos/view.ctp:49
@@ -4196,9 +4196,9 @@ msgstr ""
 #: Plugin/Cooperacao/View/CooperacaoAcordoUnidadeOrganicas/index.ctp:53
 #: Plugin/Cooperacao/View/CooperacaoAcordoUnidadeOrganicas/view.ctp:48
 #: View/AreaAcademicas/edit.ctp:80
-#: View/CandidatoAlumnis/edit.ctp:43
-#: View/CandidatoAlumnis/index.ctp:99
-#: View/CandidatoAlumnis/view.ctp:142
+#: View/AlumniCandidatoAlumnis/edit.ctp:43
+#: View/AlumniCandidatoAlumnis/index.ctp:99
+#: View/AlumniCandidatoAlumnis/view.ctp:142
 msgid "List Unidade Organicas"
 msgstr ""
 
@@ -4207,9 +4207,9 @@ msgstr ""
 #: Plugin/Cooperacao/View/CooperacaoAcordoUnidadeOrganicas/index.ctp:54
 #: Plugin/Cooperacao/View/CooperacaoAcordoUnidadeOrganicas/view.ctp:49
 #: View/AreaAcademicas/edit.ctp:81
-#: View/CandidatoAlumnis/edit.ctp:44
-#: View/CandidatoAlumnis/index.ctp:100
-#: View/CandidatoAlumnis/view.ctp:143
+#: View/AlumniCandidatoAlumnis/edit.ctp:44
+#: View/AlumniCandidatoAlumnis/index.ctp:100
+#: View/AlumniCandidatoAlumnis/view.ctp:143
 msgid "New Unidade Organica"
 msgstr ""
 
@@ -4234,7 +4234,7 @@ msgid "Cooperacao Acordo Unidade Organica"
 msgstr ""
 
 #: Plugin/Cooperacao/View/CooperacaoAcordoUnidadeOrganicas/view.ctp:9
-#: View/CandidatoAlumnis/view.ctp:89
+#: View/AlumniCandidatoAlumnis/view.ctp:89
 #: View/Funcionarios/index.ctp:64
 msgid "Unidade Organica"
 msgstr ""
@@ -4480,7 +4480,7 @@ msgstr ""
 #: View/Areatrabalhos/add.ctp:51
 #: View/Areatrabalhos/edit.ctp:46
 #: View/Avaliacaos/lancamento_de_notas.ctp:124
-#: View/CandidatoAlumnis/cadastro_alumni.ctp:120
+#: View/AlumniCandidatoAlumnis/cadastro_alumni.ctp:120
 #: View/Cargos/add.ctp:50
 #: View/Cargos/edit.ctp:48
 #: View/CerimoniaGraduacaos/nova_cerimonia.ctp:50
@@ -5173,7 +5173,7 @@ msgstr ""
 #: View/BolsaResultados/view.ctp:79
 #: View/BolsaTipoBolsas/view.ctp:42
 #: View/BolsaTipoCandidaturas/view.ctp:33
-#: View/CandidatoAlumnis/view.ctp:159
+#: View/AlumniCandidatoAlumnis/view.ctp:159
 #: View/Contas/view.ctp:79
 #: View/EscolaNivelMedios/view.ctp:54
 #: View/EstadoCandidaturas/view.ctp:33
@@ -5206,7 +5206,7 @@ msgstr ""
 #: View/BolsaBolsas/view.ctp:135
 #: View/BolsaTipoBolsas/view.ctp:50
 #: View/BolsaTipoCandidaturas/view.ctp:41
-#: View/CandidatoAlumnis/view.ctp:158
+#: View/AlumniCandidatoAlumnis/view.ctp:158
 #: View/DocenteCategorias/view.ctp:33
 #: View/DocenteFuncaos/view.ctp:33
 #: View/FinanceiroBancos/view.ctp:33
@@ -5565,9 +5565,9 @@ msgstr ""
 #: Plugin/Requisicoes/View/RequisicoesPedidos/edit.ctp:31
 #: Plugin/Requisicoes/View/RequisicoesPedidos/index.ctp:75
 #: Plugin/Requisicoes/View/RequisicoesPedidos/view.ctp:72
-#: View/CandidatoAlumnis/edit.ctp:45
-#: View/CandidatoAlumnis/index.ctp:101
-#: View/CandidatoAlumnis/view.ctp:144
+#: View/AlumniCandidatoAlumnis/edit.ctp:45
+#: View/AlumniCandidatoAlumnis/index.ctp:101
+#: View/AlumniCandidatoAlumnis/view.ctp:144
 #: View/CursoTipoPamentos/add.ctp:18
 #: View/CursoTipoPamentos/edit.ctp:20
 #: View/CursoTipoPamentos/index.ctp:49
@@ -5587,9 +5587,9 @@ msgstr ""
 #: Plugin/Requisicoes/View/RequisicoesPedidos/edit.ctp:32
 #: Plugin/Requisicoes/View/RequisicoesPedidos/index.ctp:76
 #: Plugin/Requisicoes/View/RequisicoesPedidos/view.ctp:73
-#: View/CandidatoAlumnis/edit.ctp:46
-#: View/CandidatoAlumnis/index.ctp:102
-#: View/CandidatoAlumnis/view.ctp:145
+#: View/AlumniCandidatoAlumnis/edit.ctp:46
+#: View/AlumniCandidatoAlumnis/index.ctp:102
+#: View/AlumniCandidatoAlumnis/view.ctp:145
 #: View/CursoTipoPamentos/add.ctp:19
 #: View/CursoTipoPamentos/edit.ctp:21
 #: View/CursoTipoPamentos/index.ctp:50
@@ -5684,7 +5684,7 @@ msgstr ""
 #: View/Alunos/matricular.ctp:32
 #: View/Alunos/mudanca_curso.ctp:24
 #: View/Alunos/pesquisa_aluno_action.ctp:58
-#: View/CandidatoAlumnis/cadastro_alumni.ctp:117
+#: View/AlumniCandidatoAlumnis/cadastro_alumni.ctp:117
 #: View/Cursos/add.ctp:25;48
 #: View/Cursos/edit.ctp:25;48
 #: View/Cursos/view.ctp:23
@@ -5827,7 +5827,7 @@ msgstr ""
 #: View/Alunos/mudanca_curso.ctp:78
 #: View/Alunos/reingresso.ctp:59
 #: View/Alunos/renovar_matricula.ctp:59
-#: View/CandidatoAlumnis/view.ctp:99
+#: View/AlumniCandidatoAlumnis/view.ctp:99
 #: View/CerimoniaGraduacaos/ver_detalhes.ctp:68
 #: View/CursoTipoPamentos/view.ctp:9
 #: View/Cursos_escolas/view.ctp:43
@@ -5879,7 +5879,7 @@ msgstr ""
 #: Plugin/Requisicoes/View/RequisicoesPedidos/registar_requisicao_entidade.ctp:42
 #: View/Alunos/faculdade_index.ctp:83
 #: View/Alunos/index.ctp:83
-#: View/CandidatoAlumnis/view.ctp:9
+#: View/AlumniCandidatoAlumnis/view.ctp:9
 #: View/CandidatoGraduacaos/view.ctp:74
 #: View/Docentes/adicionar_docente.ctp:51
 #: View/Docentes/editar_docente.ctp:48
@@ -6043,9 +6043,9 @@ msgstr ""
 #: View/Alumnis/add.ctp:23
 #: View/Alumnis/edit.ctp:25
 #: View/Alumnis/view.ctp:71
-#: View/CandidatoAlumnis/edit.ctp:49
-#: View/CandidatoAlumnis/index.ctp:105
-#: View/CandidatoAlumnis/view.ctp:148
+#: View/AlumniCandidatoAlumnis/edit.ctp:49
+#: View/AlumniCandidatoAlumnis/index.ctp:105
+#: View/AlumniCandidatoAlumnis/view.ctp:148
 msgid "List Alumnis"
 msgstr ""
 
@@ -6053,8 +6053,8 @@ msgstr ""
 #: View/Alumnis/edit.ctp:30
 #: View/Alumnis/index.ctp:71
 #: View/Alumnis/view.ctp:77
-#: View/CandidatoAlumnis/edit.ctp:38
-#: View/CandidatoAlumnis/view.ctp:136
+#: View/AlumniCandidatoAlumnis/edit.ctp:38
+#: View/AlumniCandidatoAlumnis/view.ctp:136
 msgid "List Candidato Alumnis"
 msgstr ""
 
@@ -6062,8 +6062,8 @@ msgstr ""
 #: View/Alumnis/edit.ctp:31
 #: View/Alumnis/index.ctp:72
 #: View/Alumnis/view.ctp:78
-#: View/CandidatoAlumnis/index.ctp:94
-#: View/CandidatoAlumnis/view.ctp:137
+#: View/AlumniCandidatoAlumnis/index.ctp:94
+#: View/AlumniCandidatoAlumnis/view.ctp:137
 msgid "New Candidato Alumni"
 msgstr ""
 
@@ -6108,9 +6108,9 @@ msgstr ""
 
 #: View/Alumnis/index.ctp:66
 #: View/Alumnis/view.ctp:72
-#: View/CandidatoAlumnis/edit.ctp:50
-#: View/CandidatoAlumnis/index.ctp:106
-#: View/CandidatoAlumnis/view.ctp:149;199
+#: View/AlumniCandidatoAlumnis/edit.ctp:50
+#: View/AlumniCandidatoAlumnis/index.ctp:106
+#: View/AlumniCandidatoAlumnis/view.ctp:149;199
 msgid "New Alumni"
 msgstr ""
 
@@ -6119,12 +6119,12 @@ msgid "Alumni"
 msgstr ""
 
 #: View/Alumnis/view.ctp:19
-#: View/CandidatoAlumnis/view.ctp:160
+#: View/AlumniCandidatoAlumnis/view.ctp:160
 msgid "Data Registo"
 msgstr ""
 
 #: View/Alumnis/view.ctp:24
-#: View/CandidatoAlumnis/view.ctp:2
+#: View/AlumniCandidatoAlumnis/view.ctp:2
 msgid "Candidato Alumni"
 msgstr ""
 
@@ -6140,12 +6140,12 @@ msgid "User"
 msgstr ""
 
 #: View/Alumnis/view.ctp:54
-#: View/CandidatoAlumnis/view.ctp:167
+#: View/AlumniCandidatoAlumnis/view.ctp:167
 msgid "Data Aprovacao"
 msgstr ""
 
 #: View/Alumnis/view.ctp:59
-#: View/CandidatoAlumnis/view.ctp:168
+#: View/AlumniCandidatoAlumnis/view.ctp:168
 msgid "User Aprovacao"
 msgstr ""
 
@@ -6214,7 +6214,7 @@ msgid "Escola Nivel Medio"
 msgstr ""
 
 #: View/AlunoNivelMedios/view.ctp:19
-#: View/CandidatoAlumnis/view.ctp:94
+#: View/AlumniCandidatoAlumnis/view.ctp:94
 #: View/CandidatoGraduacaos/view.ctp:54
 #: View/EscolaNivelMedios/view.ctp:56
 #: View/EstadoCandidaturas/view.ctp:42
@@ -6264,7 +6264,7 @@ msgid "Related Alunos"
 msgstr ""
 
 #: View/AlunoViaAdmissaos/view.ctp:34
-#: View/CandidatoAlumnis/view.ctp:166
+#: View/AlumniCandidatoAlumnis/view.ctp:166
 #: View/Estadoentidades/view.ctp:35;119
 #: View/FuncaoProfissionals/view.ctp:33
 msgid "User Id"
@@ -6353,7 +6353,7 @@ msgid "Escola Id"
 msgstr ""
 
 #: View/AlunoViaAdmissaos/view.ctp:53
-#: View/CandidatoAlumnis/view.ctp:74
+#: View/AlumniCandidatoAlumnis/view.ctp:74
 msgid "Numero Estudante"
 msgstr ""
 
@@ -6396,7 +6396,7 @@ msgstr ""
 #: View/Alunos/faculdade_pesquisa_aluno_action.ctp:42
 #: View/Alunos/matricular_candidato.ctp:62
 #: View/Alunos/pesquisa_aluno_action.ctp:42
-#: View/CandidatoAlumnis/cadastro_alumni.ctp:39
+#: View/AlumniCandidatoAlumnis/cadastro_alumni.ctp:39
 #: View/Docentes/adicionar_docente.ctp:50
 #: View/Docentes/editar_docente.ctp:47
 msgid "Informação Pessoal"
@@ -6430,21 +6430,21 @@ msgstr ""
 #: View/BolsaResultados/view.ctp:49
 #: View/BolsaTipoBolsas/view.ctp:54;105
 #: View/BolsaTipoCandidaturas/view.ctp:45
-#: View/CandidatoAlumnis/cadastro_alumni.ctp:108
+#: View/AlumniCandidatoAlumnis/cadastro_alumni.ctp:108
 #: View/Docentes/adicionar_docente.ctp:96
 #: View/Docentes/editar_docente.ctp:93
 msgid "Observacoes"
 msgstr ""
 
 #: View/Alunos/adicionar_estudante.ctp:141
-#: View/CandidatoAlumnis/cadastro_alumni.ctp:109
+#: View/AlumniCandidatoAlumnis/cadastro_alumni.ctp:109
 #: View/Docentes/adicionar_docente.ctp:97
 #: View/Docentes/editar_docente.ctp:94
 msgid "Detalhes adicionais"
 msgstr ""
 
 #: View/Alunos/adicionar_estudante.ctp:141
-#: View/CandidatoAlumnis/cadastro_alumni.ctp:109
+#: View/AlumniCandidatoAlumnis/cadastro_alumni.ctp:109
 #: View/Docentes/adicionar_docente.ctp:97
 #: View/Docentes/editar_docente.ctp:94
 msgid "_100"
@@ -6578,7 +6578,7 @@ msgid "Média"
 msgstr ""
 
 #: View/Alunos/cerimonia_graduacao.ctp:137
-#: View/CandidatoAlumnis/view.ctp:39
+#: View/AlumniCandidatoAlumnis/view.ctp:39
 #: View/CandidatoGraduacaos/view.ctp:124
 msgid "Estado Civil"
 msgstr ""
@@ -8730,34 +8730,34 @@ msgstr ""
 msgid "Delete Bolsa Valor Bolsa"
 msgstr ""
 
-#: View/CandidatoAlumnis/cadastro_alumni.ctp:34
+#: View/AlumniCandidatoAlumnis/cadastro_alumni.ctp:34
 msgid "Pré-Registo Alumni"
 msgstr ""
 
-#: View/CandidatoAlumnis/cadastro_alumni.ctp:57
+#: View/AlumniCandidatoAlumnis/cadastro_alumni.ctp:57
 msgid "Nacionalidade e Morada"
 msgstr ""
 
-#: View/CandidatoAlumnis/cadastro_alumni.ctp:69
+#: View/AlumniCandidatoAlumnis/cadastro_alumni.ctp:69
 msgid "Identificação e Contacto"
 msgstr ""
 
-#: View/CandidatoAlumnis/cadastro_alumni.ctp:85
+#: View/AlumniCandidatoAlumnis/cadastro_alumni.ctp:85
 msgid "Informação Sobre o Curso na UEM"
 msgstr ""
 
-#: View/CandidatoAlumnis/cadastro_alumni.ctp:97
+#: View/AlumniCandidatoAlumnis/cadastro_alumni.ctp:97
 msgid "Informação Profissional Actual"
 msgstr ""
 
-#: View/CandidatoAlumnis/edit.ctp:4
-#: View/CandidatoAlumnis/view.ctp:134
+#: View/AlumniCandidatoAlumnis/edit.ctp:4
+#: View/AlumniCandidatoAlumnis/view.ctp:134
 msgid "Edit Candidato Alumni"
 msgstr ""
 
-#: View/CandidatoAlumnis/edit.ctp:39
-#: View/CandidatoAlumnis/index.ctp:95
-#: View/CandidatoAlumnis/view.ctp:138
+#: View/AlumniCandidatoAlumnis/edit.ctp:39
+#: View/AlumniCandidatoAlumnis/index.ctp:95
+#: View/AlumniCandidatoAlumnis/view.ctp:138
 #: View/CandidatoGraduacaos/add.ctp:49
 #: View/CandidatoGraduacaos/edit.ctp:51
 #: View/CandidatoGraduacaos/index.ctp:117
@@ -8765,9 +8765,9 @@ msgstr ""
 msgid "List Generos"
 msgstr ""
 
-#: View/CandidatoAlumnis/edit.ctp:40
-#: View/CandidatoAlumnis/index.ctp:96
-#: View/CandidatoAlumnis/view.ctp:139
+#: View/AlumniCandidatoAlumnis/edit.ctp:40
+#: View/AlumniCandidatoAlumnis/index.ctp:96
+#: View/AlumniCandidatoAlumnis/view.ctp:139
 #: View/CandidatoGraduacaos/add.ctp:50
 #: View/CandidatoGraduacaos/edit.ctp:52
 #: View/CandidatoGraduacaos/index.ctp:118
@@ -8775,9 +8775,9 @@ msgstr ""
 msgid "New Genero"
 msgstr ""
 
-#: View/CandidatoAlumnis/edit.ctp:41
-#: View/CandidatoAlumnis/index.ctp:97
-#: View/CandidatoAlumnis/view.ctp:140
+#: View/AlumniCandidatoAlumnis/edit.ctp:41
+#: View/AlumniCandidatoAlumnis/index.ctp:97
+#: View/AlumniCandidatoAlumnis/view.ctp:140
 #: View/CandidatoGraduacaos/add.ctp:51
 #: View/CandidatoGraduacaos/edit.ctp:53
 #: View/CandidatoGraduacaos/index.ctp:119
@@ -8785,9 +8785,9 @@ msgstr ""
 msgid "List Estado Civils"
 msgstr ""
 
-#: View/CandidatoAlumnis/edit.ctp:42
-#: View/CandidatoAlumnis/index.ctp:98
-#: View/CandidatoAlumnis/view.ctp:141
+#: View/AlumniCandidatoAlumnis/edit.ctp:42
+#: View/AlumniCandidatoAlumnis/index.ctp:98
+#: View/AlumniCandidatoAlumnis/view.ctp:141
 #: View/CandidatoGraduacaos/add.ctp:52
 #: View/CandidatoGraduacaos/edit.ctp:54
 #: View/CandidatoGraduacaos/index.ctp:120
@@ -8795,23 +8795,23 @@ msgstr ""
 msgid "New Estado Civil"
 msgstr ""
 
-#: View/CandidatoAlumnis/edit.ctp:47
-#: View/CandidatoAlumnis/index.ctp:103
-#: View/CandidatoAlumnis/view.ctp:146
+#: View/AlumniCandidatoAlumnis/edit.ctp:47
+#: View/AlumniCandidatoAlumnis/index.ctp:103
+#: View/AlumniCandidatoAlumnis/view.ctp:146
 msgid "List Grau Academicos"
 msgstr ""
 
-#: View/CandidatoAlumnis/edit.ctp:48
-#: View/CandidatoAlumnis/index.ctp:104
-#: View/CandidatoAlumnis/view.ctp:147
+#: View/AlumniCandidatoAlumnis/edit.ctp:48
+#: View/AlumniCandidatoAlumnis/index.ctp:104
+#: View/AlumniCandidatoAlumnis/view.ctp:147
 msgid "New Grau Academico"
 msgstr ""
 
-#: View/CandidatoAlumnis/index.ctp:2
+#: View/AlumniCandidatoAlumnis/index.ctp:2
 msgid "Candidato Alumnis"
 msgstr ""
 
-#: View/CandidatoAlumnis/view.ctp:14
+#: View/AlumniCandidatoAlumnis/view.ctp:14
 #: View/CandidatoGraduacaos/view.ctp:79
 #: View/EstadoCandidaturas/view.ctp:47
 #: View/RegaliaSocials/view.ctp:47
@@ -8819,7 +8819,7 @@ msgstr ""
 msgid "Nomes"
 msgstr ""
 
-#: View/CandidatoAlumnis/view.ctp:19
+#: View/AlumniCandidatoAlumnis/view.ctp:19
 #: View/CandidatoGraduacaos/view.ctp:84
 #: View/EstadoCandidaturas/view.ctp:48
 #: View/RegaliaSocials/view.ctp:48
@@ -8827,21 +8827,21 @@ msgstr ""
 msgid "Data Nascimento"
 msgstr ""
 
-#: View/CandidatoAlumnis/view.ctp:24
+#: View/AlumniCandidatoAlumnis/view.ctp:24
 msgid "Nome Pai"
 msgstr ""
 
-#: View/CandidatoAlumnis/view.ctp:29
+#: View/AlumniCandidatoAlumnis/view.ctp:29
 msgid "Nome Mae"
 msgstr ""
 
-#: View/CandidatoAlumnis/view.ctp:34
+#: View/AlumniCandidatoAlumnis/view.ctp:34
 #: View/CandidatoGraduacaos/view.ctp:114
 #: View/Estadoentidades/view.ctp:38;122
 msgid "Genero"
 msgstr ""
 
-#: View/CandidatoAlumnis/view.ctp:44
+#: View/AlumniCandidatoAlumnis/view.ctp:44
 #: View/CandidatoGraduacaos/view.ctp:109
 #: View/EstadoCandidaturas/view.ctp:53
 #: View/RegaliaSocials/view.ctp:53
@@ -8849,7 +8849,7 @@ msgstr ""
 msgid "Pais Nascimento"
 msgstr ""
 
-#: View/CandidatoAlumnis/view.ctp:49
+#: View/AlumniCandidatoAlumnis/view.ctp:49
 #: View/CandidatoGraduacaos/view.ctp:104
 #: View/EstadoCandidaturas/view.ctp:52
 #: View/RegaliaSocials/view.ctp:52
@@ -8857,28 +8857,28 @@ msgstr ""
 msgid "Provincia Nascimento"
 msgstr ""
 
-#: View/CandidatoAlumnis/view.ctp:54
+#: View/AlumniCandidatoAlumnis/view.ctp:54
 msgid "Cidade Nascimento"
 msgstr ""
 
-#: View/CandidatoAlumnis/view.ctp:59
+#: View/AlumniCandidatoAlumnis/view.ctp:59
 msgid "Pais Morada"
 msgstr ""
 
-#: View/CandidatoAlumnis/view.ctp:64
+#: View/AlumniCandidatoAlumnis/view.ctp:64
 msgid "Provincia Morada"
 msgstr ""
 
-#: View/CandidatoAlumnis/view.ctp:69
+#: View/AlumniCandidatoAlumnis/view.ctp:69
 msgid "Cidade Morada"
 msgstr ""
 
-#: View/CandidatoAlumnis/view.ctp:79
+#: View/AlumniCandidatoAlumnis/view.ctp:79
 #: View/Estadoentidades/view.ctp:48;131
 msgid "Email"
 msgstr ""
 
-#: View/CandidatoAlumnis/view.ctp:84
+#: View/AlumniCandidatoAlumnis/view.ctp:84
 #: View/CandidatoGraduacaos/view.ctp:144
 #: View/EstadoCandidaturas/view.ctp:60
 #: View/Estadoentidades/view.ctp:50;133
@@ -8887,19 +8887,19 @@ msgstr ""
 msgid "Telemovel"
 msgstr ""
 
-#: View/CandidatoAlumnis/view.ctp:104
+#: View/AlumniCandidatoAlumnis/view.ctp:104
 msgid "Grau Academico"
 msgstr ""
 
-#: View/CandidatoAlumnis/view.ctp:135
+#: View/AlumniCandidatoAlumnis/view.ctp:135
 msgid "Delete Candidato Alumni"
 msgstr ""
 
-#: View/CandidatoAlumnis/view.ctp:153
+#: View/AlumniCandidatoAlumnis/view.ctp:153
 msgid "Related Alumnis"
 msgstr ""
 
-#: View/CandidatoAlumnis/view.ctp:161
+#: View/AlumniCandidatoAlumnis/view.ctp:161
 msgid "Candidato Alumni Id"
 msgstr ""
 

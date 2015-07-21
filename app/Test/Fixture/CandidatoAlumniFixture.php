@@ -1,16 +1,16 @@
 <?php
 /**
- * CandidatoAlumniFixture
+ * AlumniCandidatoAlumniFixture
  *
  */
-class CandidatoAlumniFixture extends CakeTestFixture {
+class AlumniCandidatoAlumniFixture extends CakeTestFixture {
 
 /**
  * Import
  *
  * @var array
  */
-	public $import = array('model' => 'CandidatoAlumni');
+	public $import = array('model' => 'AlumniCandidatoAlumni');
 
 /**
  * Records

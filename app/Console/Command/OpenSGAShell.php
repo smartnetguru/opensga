@@ -9,7 +9,7 @@
 
         public $uses = array('Inscricao', 'Turma', 'Matricula', 'Curso', 'UnidadeOrganica', 'Candidatura', 'Aluno',
             'EstadoAluno', 'PlanoEstudo', 'Disciplina', 'DisciplinaPlanoEstudo', 'HistoricoCurso', 'AnoLectivo',
-            'CandidatoAlumni', 'Requisicoes.RequisicoesPedido', 'Entidade', 'User', 'SmsNotification','SmsEnviada');
+            'AlumniCandidatoAlumni', 'Requisicoes.RequisicoesPedido', 'Entidade', 'User', 'SmsNotification','SmsEnviada');
 
         public function actualiza_fotos_uem() {
             App::uses('Folder', 'Utility');
@@ -701,9 +701,9 @@
 
                 $curso_real      = $this->Curso->findByName($curso_nome);
                 $caa['curso_id'] = $curso_real['Curso']['id'];
-                $this->CandidatoAlumni->create();
-                $this->CandidatoAlumni->save($caa);
-                $this->out($this->CandidatoAlumni->id);
+                $this->AlumniCandidatoAlumni->create();
+                $this->AlumniCandidatoAlumni->save($caa);
+                $this->out($this->AlumniCandidatoAlumni->id);
                 $linha_actual++;
             }
         }
@@ -1393,9 +1393,9 @@
 
                 $curso_real      = $this->Curso->findByName($curso_nome);
                 $caa['curso_id'] = $curso_real['Curso']['id'];
-                $this->CandidatoAlumni->create();
-                $this->CandidatoAlumni->save($caa);
-                $this->out($this->CandidatoAlumni->id);
+                $this->AlumniCandidatoAlumni->create();
+                $this->AlumniCandidatoAlumni->save($caa);
+                $this->out($this->AlumniCandidatoAlumni->id);
                 $linha_actual++;
             }
         }

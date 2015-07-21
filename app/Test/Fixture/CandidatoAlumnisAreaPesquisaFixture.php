@@ -1,9 +1,9 @@
 <?php
 /**
- * CandidatoAlumnisAreaPesquisaFixture
+ * AlumniCandidatoAlumnisAreaPesquisaFixture
  *
  */
-class CandidatoAlumnisAreaPesquisaFixture extends CakeTestFixture {
+class AlumniCandidatoAlumnisAreaPesquisaFixture extends CakeTestFixture {
 
 /**
  * Import

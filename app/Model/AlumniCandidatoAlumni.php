@@ -1,16 +1,16 @@
 <?php
 App::uses('AppModel', 'Model');
 /**
- * CandidatoAlumni Model
+ * AlumniCandidatoAlumni Model
  *
  * @property Genero $Genero
  * @property EstadoCivil $EstadoCivil
  * @property UnidadeOrganica $UnidadeOrganica
  * @property Curso $Curso
  * @property GrauAcademico $GrauAcademico
- * @property Alumni $Alumni
+ * @property AlumniAlumni $AlumniAlumni
  */
-class CandidatoAlumni extends AppModel {
+class AlumniCandidatoAlumni extends AppModel {
 
 
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
@@ -20,100 +20,100 @@ class CandidatoAlumni extends AppModel {
  *
  * @var array
  */
-	public $belongsTo = array(
-		'Genero' => array(
+	public $belongsTo = [
+		'Genero' => [
 			'className' => 'Genero',
 			'foreignKey' => 'genero_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
-		),
-		'EstadoCivil' => array(
+		],
+		'EstadoCivil' => [
 			'className' => 'EstadoCivil',
 			'foreignKey' => 'estado_civil_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
-		),
-		'UnidadeOrganica' => array(
+		],
+		'UnidadeOrganica' => [
 			'className' => 'UnidadeOrganica',
 			'foreignKey' => 'unidade_organica_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
-		),
-		'Curso' => array(
+		],
+		'Curso' => [
 			'className' => 'Curso',
 			'foreignKey' => 'curso_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
-		),
-		'GrauAcademico' => array(
+		],
+		'GrauAcademico' => [
 			'className' => 'GrauAcademico',
 			'foreignKey' => 'grau_academico_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
-		),
-		'PaisNascimento' => array(
+		],
+		'PaisNascimento' => [
 			'className' => 'Pais',
 			'foreignKey' => 'pais_nascimento',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
-		),
-		'ProvinciaNascimento' => array(
+		],
+		'ProvinciaNascimento' => [
 			'className' => 'Provincia',
 			'foreignKey' => 'provincia_nascimento',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
-		),
-		'CidadeNascimento' => array(
+		],
+		'CidadeNascimento' => [
 			'className' => 'Cidade',
 			'foreignKey' => 'cidade_nascimento',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
-		),
-		'PaisMorada' => array(
+		],
+		'PaisMorada' => [
 			'className' => 'Pais',
 			'foreignKey' => 'pais_morada',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
-		),
-		'ProvinciaMorada' => array(
+		],
+		'ProvinciaMorada' => [
 			'className' => 'Provincia',
 			'foreignKey' => 'provincia_morada',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
-		),
-		'CidadeMorada' => array(
+		],
+		'CidadeMorada' => [
 			'className' => 'cidade',
 			'foreignKey' => 'cidade_morada',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
-		),
-        'DoumentoIdentificacao' => array(
+		],
+        'DoumentoIdentificacao' => [
             'className' => 'DocumentoIdentificacao',
             'foreignKey' => 'documento_identificacao_id',
             'conditions' => '',
             'fields' => '',
             'order' => ''
-        )
-	);
+        ]
+	];
 
 /**
  * hasMany associations
  *
  * @var array
  */
-	public $hasMany = array(
-		'Alumni' => array(
+	public $hasMany = [
+		'Alumni' => [
 			'className' => 'Alumni',
 			'foreignKey' => 'candidato_alumni_id',
 			'dependent' => false,
@@ -125,103 +125,121 @@ class CandidatoAlumni extends AppModel {
 			'exclusive' => '',
 			'finderQuery' => '',
 			'counterQuery' => ''
-		)
-	);
+		]
+	];
 
 
-    public $validate = array(
-        'apelido' => array(
-            'apelidoRule-1' => array(
-                'rule'    => 'notEmpty',
+    public $validate = [
+        'apelido' => [
+            'apelidoRule-1' => [
+                'rule'    => 'notBlank',
                 'required' =>'create',
                 'message' => 'O Preenchimento do campo Apelido é obrigatório',
-            ),
-        ),
-        'nomes' => array(
-            'nomesRule-1' => array(
-                'rule'    => 'notEmpty',
+            ],
+        ],
+        'nomes' => [
+            'nomesRule-1' => [
+                'rule'    => 'notBlank',
                 'required' =>'create',
                 'message' => 'O Preenchimento do campo Outros nomes é obrigatório',
-            ),
-        ),
-        'genero_id' => array(
-            'generoRule-1' => array(
-                'rule'    => 'notEmpty',
+            ],
+        ],
+        'genero_id' => [
+            'generoRule-1' => [
+                'rule'    => 'notBlank',
                 'required' =>'create',
                 'message' => 'O preenchimento do Campo Sexo é obrigatório',
-            ),
-        ),
-        'data_nascimento' => array(
-            'dataNascimentoRule-1' => array(
-                'rule'    => 'notEmpty',
+            ],
+        ],
+        'data_nascimento' => [
+            'dataNascimentoRule-1' => [
+                'rule'    => 'notBlank',
                 'required' =>'create',
                 'message' => 'O preenchimento do Campo de data de Nascimento é obrigatório',
-            ),
-        ),
-        'estado_civil_id' => array(
-            'estadoCivilIdNotEmpty' => array(
-                'rule'    => 'notEmpty',
+            ],
+            'dataNascimentoRule-2' => [
+                'rule'    => 'date',
+                'required' =>'create',
+                'message' => 'O preenchimento do Campo de data de Nascimento é obrigatório',
+            ],
+        ],
+        'estado_civil_id' => [
+            'estadoCivilIdnotBlank' => [
+                'rule'    => 'notBlank',
                 'required' =>'create',
                 'message' => 'O preenchimento do Estado Civil é obrigatório',
-            ),
-        ),
-        'nome_pai' => array(
-            'nomePaiNotEmpty' => array(
-                'rule'    => 'notEmpty',
+            ],
+        ],
+        'nome_pai' => [
+            'nomePainotBlank' => [
+                'rule'    => 'notBlank',
                 'required' =>'create',
                 'message' => 'O preenchimento do Nome do Pai é obrigatório',
-            ),
-        ),
-        'nome_mae' => array(
-            'nomeMaeNotEmpty' => array(
-                'rule'    => 'notEmpty',
+            ],
+        ],
+        'nome_mae' => [
+            'nomeMaenotBlank' => [
+                'rule'    => 'notBlank',
                 'required' =>'create',
                 'message' => 'O preenchimento do da Maẽ é obrigatório',
-            ),
-        ),
-        'naturalidade' => array(
-            'naturalidadeNotEmpty' => array(
-                'rule'    => 'notEmpty',
+            ],
+        ],
+        'naturalidade' => [
+            'naturalidadenotBlank' => [
+                'rule'    => 'notBlank',
                 'required' =>'create',
                 'message' => 'O preenchimento da naturalidade é obrigatório',
-            ),
-        ),
-        'pais_nascimento' => array(
-            'paisNascimentoNotEmpty' => array(
-                'rule'    => 'notEmpty',
+            ],
+        ],
+        'pais_nascimento' => [
+            'paisNascimentonotBlank' => [
+                'rule'    => 'notBlank',
                 'required' =>'create',
                 'message' => 'O preenchimento do Pais de Nascimento é obrigatório',
-            ),
-        ),
-        'provincia_nascimento' => array(
-            'provinciaNascimentoNotEmpty' => array(
-                'rule'    => 'notEmpty',
+            ],
+        ],
+        'provincia_nascimento' => [
+            'provinciaNascimentonotBlank' => [
+                'rule'    => 'notBlank',
                 'required' =>'create',
                 'message' => 'O preenchimento da Provincia de Nascimento é obrigatório',
-            ),
-        ),
-        'cidade_nascimento' => array(
-            'cidadeNascimentoNotEmpty' => array(
-                'rule'    => 'notEmpty',
+            ],
+        ],
+        'cidade_nascimento' => [
+            'cidadeNascimentonotBlank' => [
+                'rule'    => 'notBlank',
                 'required' =>'create',
                 'message' => 'O preenchimento da Cidade de Nascimento é obrigatório',
-            ),
-        ),
-        'unidade_organica_id' => array(
-            'unidadeOrganicaNotEmpty' => array(
-                'rule'    => 'notEmpty',
+            ],
+        ],
+        'unidade_organica_id' => [
+            'unidadeOrganicanotBlank' => [
+                'rule'    => 'notBlank',
                 'required' =>'create',
                 'message' => 'O preenchimento da Unidade Organica é obrigatório',
-            ),
-        ),
-        'curso_id' => array(
-            'cursoIdNotEmpty' => array(
-                'rule'    => 'notEmpty',
+            ],
+        ],
+        'curso_id' => [
+            'cursoIdnotBlank' => [
+                'rule'    => 'notBlank',
                 'required' =>'create',
                 'message' => 'O preenchimento do Curso é obrigatório',
-            ),
-        ),
+            ],
+        ],
 
 
-    );
+    ];
+
+
+    /**
+* Grava Candidato a Alumni na BD, depois de ver todas as especificacoes
+     */
+    public function saveCandidatoAlumni($data){
+
+
+        if($this->save($data)){
+            return true;
+        }
+
+    }
 }

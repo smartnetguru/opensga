@@ -43,11 +43,13 @@
       "markstory/acl_extras": "@dev",
       "cakedc/migrations": "@stable",
       "friendsofcake/cakepdf": "@dev",
-      "aws/aws-sdk-php": "2.*"
+      "aws/aws-sdk-php": "2.*",
+      "slywalker/boost_cake": "*"
     },
   "require-dev": {
     "phpunit/phpunit": "3.7.*",
-    "cakephp/debug_kit" : "2.2.*"
+    "cakephp/debug_kit" : "2.2.*",
+        "cakephp/cakephp-codesniffer": "2.*"
   },
   "bin": [
     "lib/Cake/Console/cake"

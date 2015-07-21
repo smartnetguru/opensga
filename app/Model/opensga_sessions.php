@@ -5,7 +5,7 @@ App::uses('AppModel', 'Model');
  *
  * @property Entidade $Entidade
  * @property Aluno $Aluno
- * @property CandidatoAlumni $CandidatoAlumni
+ * @property AlumniCandidatoAlumni $AlumniCandidatoAlumni
  * @property User $User
  */
 class opensga_sessions extends AppModel {

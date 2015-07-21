@@ -5,7 +5,7 @@ App::uses('AppModel', 'Model');
  *
  * @property Entidade $Entidade
  * @property Aluno $Aluno
- * @property CandidatoAlumni $CandidatoAlumni
+ * @property AlumniCandidatoAlumni $AlumniCandidatoAlumni
  * @property User $User
  */
 class Alumni extends AppModel {
@@ -33,8 +33,8 @@ class Alumni extends AppModel {
 			'fields' => '',
 			'order' => ''
 		),
-		'CandidatoAlumni' => array(
-			'className' => 'CandidatoAlumni',
+		'AlumniCandidatoAlumni' => array(
+			'className' => 'AlumniCandidatoAlumni',
 			'foreignKey' => 'candidato_alumni_id',
 			'conditions' => '',
 			'fields' => '',

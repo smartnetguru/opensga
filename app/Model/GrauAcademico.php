@@ -3,7 +3,7 @@ App::uses('AppModel', 'Model');
 /**
  * GrauAcademico Model
  *
- * @property CandidatoAlumni $CandidatoAlumni
+ * @property AlumniCandidatoAlumni $AlumniCandidatoAlumni
  * @property Curso $Curso
  * @property Funcionario $Funcionario
  */
@@ -18,8 +18,8 @@ class GrauAcademico extends AppModel {
  * @var array
  */
 	public $hasMany = array(
-		'CandidatoAlumni' => array(
-			'className' => 'CandidatoAlumni',
+		'AlumniCandidatoAlumni' => array(
+			'className' => 'AlumniCandidatoAlumni',
 			'foreignKey' => 'grau_academico_id',
 			'dependent' => false,
 			'conditions' => '',
