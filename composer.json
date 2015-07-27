@@ -46,7 +46,8 @@
       "aws/aws-sdk-php": "2.*",
       "slywalker/boost_cake": "*",
       "phpoffice/phpexcel":"*",
-      "phpoffice/phpword":"*"
+      "phpoffice/phpword":"*",
+      "cakephp/orm":"*"
     },
   "require-dev": {
     "phpunit/phpunit": "3.7.*",

@@ -14,7 +14,8 @@ class DocenteTest extends CakeTestCase {
  */
 	public $fixtures = array(
 		'app.docente',
-		'app.entidade'
+		'app.entidade',
+        'app.user'
 	);
     public $autoFixtures = false;
 
@@ -54,6 +55,12 @@ class DocenteTest extends CakeTestCase {
  * @return void
  */
 	public function testCadastraDocente() {
+        $this->loadFixtures('Docente','User','Entidade');
+        $data = [
+
+        ];
+        $resultado = $this->Docente->cadastraDocente($data);
+        $this->assertTrue($resultado);
 		$this->markTestIncomplete('testCadastraDocente not implemented.');
 	}
 

@@ -12,6 +12,8 @@
      * @subpackage      opensga.core.controller
      * @since           OpenSGA v 0.10.0.0
      *
+     * @property Entidade $Entidade
+     * @property Curso $Curso
      */
     class CursosController extends AppController {
 
@@ -37,6 +39,7 @@
         public function manutencao_cursos_sem_encarregado() {
             $cursos = $this->Curso->getAllCursosSemEncarregado();
             $this->set(compact('cursos'));
+            $this->render('index');
         }
 
         public function manutencao_cursos_sem_turno(){

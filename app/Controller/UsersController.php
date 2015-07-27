@@ -13,6 +13,8 @@ App::uses('AppController', 'Controller');
  * @subpackage    opensga.core.controller
  * @since         OpenSGA v 0.10.0.0
  *
+ * @property User $User
+ *
  */
 class UsersController extends AppController
 {
@@ -473,7 +475,7 @@ class UsersController extends AppController
                         'default', array('class' => 'alert alert-danger'));
                 } else {
                     $this->Session->setFlash(__('Nome de Usuário ou Senha Invalidos'), 'default',
-                        array('class' => 'alert altert-danger'));
+                        array('class' => 'alert alert-danger'));
                 }
             }
         }

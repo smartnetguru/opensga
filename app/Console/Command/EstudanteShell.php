@@ -914,6 +914,34 @@ class EstudanteShell extends AppShell {
 
     }
 
+    public function verifica_passwords(){
+        $this->Aluno->contain(['Entidade'=>'User']);
+
+        $alunos = $this->Aluno->find('all',array('conditions'=>array()));
+        $total = count($alunos);
+
+        foreach ($alunos as $aluno) {
+
+            $ultimo_login = $aluno['Entidade']['User']['ultimo_login'];
+            if($ultimo_login==null){
+                $password = $aluno['Entidade']['User']['password'];
+                $codigo = $aluno['Aluno']['codigo'];
+                if(crypt($codigo,$password)==$password){
+
+                    $this->out($total--.'------------------------------------Apanhamos');
+                } else{
+                    $novaPassword = Security::hash($codigo,'blowfish');
+                    $this->Aluno->Entidade->User->id = $aluno['Entidade']['user_id'];
+                    $this->Aluno->Entidade->User->set('password',$novaPassword);
+                    $this->Aluno->Entidade->User->save();
+                    $this->out($total--.'--------------------------------------Alterando');
+                }
+            }
+
+        }
+
+    }
+
 
 
 }
