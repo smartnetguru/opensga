@@ -40,7 +40,7 @@
         "cakephp/cakephp": "2.7.*",
        "radig/auditable": "@stable",
       "tracy/tracy": "@stable",
-      "markstory/acl_extras": "*",
+      "markstory/acl_extras": "@dev",
       "cakedc/migrations": "@stable",
       "friendsofcake/cakepdf": "*",
       "aws/aws-sdk-php": "2.*",

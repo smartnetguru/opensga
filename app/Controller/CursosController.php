@@ -215,6 +215,9 @@
 
         public function manutencao() {
 
+            $cursosSemEncarregado = $this->Curso->find('count',array('conditions'=>['Curso.user_responsavel_curso is null']));
+
+            $this->set(compact('cursosSemEncarregado'));
         }
 
         public function print_declaracao_nivel($alunoId) {

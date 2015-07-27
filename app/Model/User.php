@@ -1,5 +1,5 @@
 <?php
-
+App::uses('CakeEvent', 'Event');
 /**
  * OpenSGA - Sistema de Gestão Académica
  * Copyright (C) 2010-2012  INFOmoz,Lda(http://infomoz.net)
@@ -205,6 +205,10 @@ class User extends AppModel {
 
 		$this->set('password', Security::hash($data['User']['novasenha1'], 'blowfish'));
 		$this->save();
+        $event = new CakeEvent('Model.User.afterChangePassword', $this, array(
+            'data' => $data
+        ));
+        $this->getEventManager()->dispatch($event);
 		return true;
 	}
 
