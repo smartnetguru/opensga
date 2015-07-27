@@ -24,7 +24,7 @@
             'app.matricula',
             'app.curso',
             'app.grau_academico',
-            'app.alumni_candidato_alumni',
+           // 'app.alumni_candidato_alumni',
             'app.genero',
             'app.estado_civil',
             'app.unidade_organica',
