@@ -340,7 +340,6 @@ class User extends AppModel {
 		$this->Funcionario->contain();
 
 		$funcionario = $this->Funcionario->findByUserId($user_id);
-
 		return $funcionario;
 	}
 

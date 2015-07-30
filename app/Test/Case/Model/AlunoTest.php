@@ -562,6 +562,25 @@
          */
         public function testConcluirNivel()
         {
+            $data = array(
+                'HistoricoCurso' => array(
+                    'data_conclusao' => '2015-07-14',
+                    'nota_final' => '12',
+                    'funcionario_id' => '26'
+                ),
+                'Aluno' => array(
+                    'observacao' => '',
+                    'aluno_id' => '1',
+                    'curso_id' => '40',
+                    'anexo_url' => array(
+                        'name' => '',
+                        'type' => '',
+                        'tmp_name' => '',
+                        'error' => 4,
+                        'size' =>  0,
+                    )
+                )
+            );
             $this->markTestIncomplete('testConcluirNivel not implemented.');
         }
 

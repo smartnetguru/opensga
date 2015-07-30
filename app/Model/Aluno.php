@@ -19,6 +19,7 @@ App::uses('SessionComponent', 'Controller/Component');
  * @property Inscricao $Inscricao
  * @property FinanceiroPagamento $FinanceiroPagamento
  * @property Curso $Curso
+ * @property HistoricoCurso $HistoricoCurso
  *
  *
  */
@@ -1492,9 +1493,13 @@ class Aluno extends AppModel
 
         $datasource = $this->getDataSource();
         $datasource->begin();
-        if ($data['HistoricoCurso']['ano_fim'] == '' || $data['HistoricoCurso']['nota_final'] == '' || $data['HistoricoCurso']['data_conclusao'] == '') {
+        if ($data['HistoricoCurso']['nota_final'] == '' || $data['HistoricoCurso']['data_conclusao'] == '') {
             return false;
         }
+        $date = DateTime::createFromFormat("Y-m-d", $data['HistoricoCurso']['data_conclusao']);
+
+        $data['HistoricoCurso']['ano_fim'] = $date->format("Y");
+
         $this->contain();
         $aluno = $this->findById($data['Aluno']['aluno_id']);
         $this->HistoricoCurso->contain();

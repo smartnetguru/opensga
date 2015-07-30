@@ -12,6 +12,8 @@
  *
  * @todo Txunar ver disciplia
  * @todo funcao de activar/desactivar disciplina
+ *
+ * @property Disciplina $Disciplina
 
  *
  */
@@ -37,6 +39,9 @@ class DisciplinasController extends AppController {
 		);
 		$disciplinas = $this->paginate('DisciplinaUnidadeOrganica');
 		$this->set('disciplinas', $disciplinas);
+        $this->set('siga_page_title','Lista de Disciplinas Cadastradas');
+        $this->set('siga_page_overview','Lista de Disciplinas cadastradas para esta unidade orgânica');
+        $this->render('index');
 	}
 
 	function faculdade_ver_disciplina($id = null) {
