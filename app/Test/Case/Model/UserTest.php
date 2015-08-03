@@ -222,7 +222,7 @@
 
 
             $result = $this->User->cadastraUser($data);
-            $this->AssertEquals(11, $result);
+            $this->AssertEquals(12, $result);
         }
 
     }

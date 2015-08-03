@@ -47,7 +47,8 @@
       "slywalker/boost_cake": "*",
       "phpoffice/phpexcel":"*",
       "phpoffice/phpword":"*",
-      "cakephp/orm":"*"
+      "cakephp/orm":"*",
+      "dereuromark/cakephp-databaselog": "dev-master"
     },
   "require-dev": {
     "phpunit/phpunit": "3.7.*",

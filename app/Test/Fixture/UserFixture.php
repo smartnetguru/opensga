@@ -188,6 +188,23 @@ class UserFixture extends CakeTestFixture {
 			'estado_email' => '0',
 			'timezone' => null
 		),
+        array(
+            'id' => '11',
+            'username' => 'admin.agronomia@uem.ac.mz',
+            'password' => '$2a$10$9aeHbW6b5r3MejqwzpjfMeY6kMjvMszsoGLE7Cwwu0tHglRkTuECe',
+            'codigocartao' => '20094064',
+            'group_id' => '2',
+            'created_by' => null,
+            'modified_by' => null,
+            'ultimo_login' => null,
+            'codigo_activacao' => '1',
+            'estado_objecto_id' => '1',
+            'verificar_permissoes' => '0',
+            'created' => null,
+            'modified' => '2014-03-27 09:43:48',
+            'estado_email' => '0',
+            'timezone' => null
+        ),
 	);
 
 }

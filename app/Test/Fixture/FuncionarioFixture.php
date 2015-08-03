@@ -178,6 +178,22 @@ class FuncionarioFixture extends CakeTestFixture {
 			'funcao_profissional_id' => null,
 			'categoria_funcionario_id' => null
 		),
+        array(
+            'id' => '11',
+            'user_id' => '11',
+            'grau_academico_id' => null,
+            'cargo_id' => null,
+            'superior_hierarquico' => null,
+            'data_inicio' => null,
+            'tipo_funcionario_id' => null,
+            'codigo' => '',
+            'created' => '2013-08-07 11:27:21',
+            'modified' => '2013-08-07 11:27:21',
+            'entidade_id' => '42403',
+            'unidade_organica_id' => '1',
+            'funcao_profissional_id' => null,
+            'categoria_funcionario_id' => null
+        ),
 	);
 
 }

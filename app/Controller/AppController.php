@@ -55,6 +55,7 @@
             'PhpExcel',
             'AclLink',
             'Time',
+            'AmazonS3'
         ];
         public $pdfConfig   = ['engine' => 'CakePdf.Tcpdf'];
         public $cacheAction = '1 hour';

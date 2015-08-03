@@ -1,5 +1,5 @@
 <?php
-
+App::uses('AppController', 'Controller');
 /**
  * Controller de Disciplinas
  *
@@ -14,6 +14,8 @@
  * @todo funcao de activar/desactivar disciplina
  *
  * @property Disciplina $Disciplina
+ *
+ *
 
  *
  */
@@ -65,13 +67,15 @@ class DisciplinasController extends AppController {
      * Alem de adicionar a tabela Disciplinas, adiciona tambem na disciplina_unidade_organicas
      *
      */
-    function faculdade_adicionar_disciplina()
+    public function faculdade_adicionar_disciplina()
     {
 
         if ($this->request->is('post')) {
+
 			$unidade_organica_id = $this->Session->read('Auth.User.unidade_organica_id');
 			//Primeiro ver se a disciplina existe
 			$disciplina = $this->Disciplina->findByName($this->request->data['Disciplina']['name']);
+
 			if (!empty($disciplina)) {
 				$this->Disciplina->id = $disciplina['Disciplina']['id'];
 				$array_disciplina_unidade = array(
@@ -91,10 +95,10 @@ class DisciplinasController extends AppController {
 					$this->Disciplina->DisciplinaUnidadeOrganica->create();
 					$this->Disciplina->DisciplinaUnidadeOrganica->save($array_disciplina_unidade);
 					$this->Session->setFlash(__('Dados Gravados com Sucesso'), 'default', array('class' => 'alert alert-success'));
-					$this->redirect(array('action' => 'index'));
+					 return $this->redirect(array('action' => 'index'));
 				} else {
 					$this->Session->setFlash(__('Esta Disciplina ja estava cadastrada'), 'default', array('class' => 'alert alert-info'));
-					$this->redirect(array('action' => 'index'));
+					 return $this->redirect(array('action' => 'index'));
 				}
 			} else{
                 $this->request->data['Disciplina']['unidade_organica_id'] = $unidade_organica_id;
@@ -103,7 +107,7 @@ class DisciplinasController extends AppController {
                 if ($resultado) {
 
                     $this->Session->setFlash(__('Dados Gravados com Sucesso'), 'default', array('class' => 'alert alert-success'));
-                    $this->redirect(array('action' => 'index'));
+                   return  $this->redirect(array('action' => 'index'));
                 } else {
                     $this->Session->setFlash(__('Problemas ao Registrar dados.'), 'default', array('class' => 'alert alert-danger'));
                 }
@@ -127,6 +131,11 @@ class DisciplinasController extends AppController {
 		$grupodisciplinars = $this->Disciplina->Grupodisciplinar->find('list');
 		$this->set(compact('grupodisciplinars'));
 	}
+
+    public function beforeFilter(){
+        parent::beforeFilter();
+        $this->Auth->allow('faculdade_adicionar_disciplina');
+    }
 
 }
 

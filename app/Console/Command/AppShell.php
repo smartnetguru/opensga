@@ -19,4 +19,6 @@ class AppShell extends Shell {
 		$this->{array_shift($this->args)}();
 	}
 
+
+
 }
