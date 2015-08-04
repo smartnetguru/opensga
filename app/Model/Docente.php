@@ -67,7 +67,7 @@ class Docente extends AppModel {
 		$dataSource = $this->getDataSource();
 
 		$dataSource->begin();
-
+            die(debug($data));
 
 		if (!isset($data['Docente']['codigo']) || $data['Docente']['codigo'] == '') {
 			$data['Docente']['codigo'] = $this->Entidade->User->geraEmailUem($data['Entidade']['apelido'], $data['Entidade']['nomes']);
