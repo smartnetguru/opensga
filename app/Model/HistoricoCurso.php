@@ -50,4 +50,6 @@ class HistoricoCurso extends AppModel {
 		)
 	);
 
+    public $validate = [];
+
 }

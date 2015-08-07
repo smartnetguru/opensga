@@ -1,7 +1,6 @@
 <?php
 /**
- * TipoAvaliacaoFixture
- *
+ * TipoAvaliacao Fixture
  */
 class TipoAvaliacaoFixture extends CakeTestFixture {
 

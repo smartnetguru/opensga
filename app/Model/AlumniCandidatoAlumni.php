@@ -236,7 +236,6 @@ class AlumniCandidatoAlumni extends AppModel {
      */
     public function saveCandidatoAlumni($data){
 
-
         if($this->save($data)){
             return true;
         }

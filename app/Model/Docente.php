@@ -49,7 +49,7 @@ class Docente extends AppModel {
     public $validate = array(
         'unidade_organica_id' => array(
             'unidadeOrganicaNotEmpty' => array(
-                'rule' => 'notEmpty',
+                'rule' => 'notBlank',
                 'required'=>'create',
                 'message'=>'O Campo Unidade Organica é de Preenchimento Obrigatório',
                 // extra keys like on, required, etc. go here...
@@ -67,7 +67,6 @@ class Docente extends AppModel {
 		$dataSource = $this->getDataSource();
 
 		$dataSource->begin();
-            die(debug($data));
 
 		if (!isset($data['Docente']['codigo']) || $data['Docente']['codigo'] == '') {
 			$data['Docente']['codigo'] = $this->Entidade->User->geraEmailUem($data['Entidade']['apelido'], $data['Entidade']['nomes']);
@@ -87,6 +86,18 @@ class Docente extends AppModel {
 			$data['Entidade']['user_id'] = $this->Entidade->User->getLastInsertID();
             $data['Entidade']['email'] = $data['EntidadeContacto'][1];
 			$this->Entidade->create();
+
+            $this->Entidade->validator()
+                ->add('nuit', 'required', array(
+                    'rule' => 'notBlank',
+                    'required' => 'create'
+                ))
+                ->add('nuit', 'size', array(
+                    'rule' => 'isUnique',
+                    'message' => 'Password should be at least 8 chars long'
+                ));
+
+
 			if ($this->Entidade->save($data)) {
 
 				//Grava os dados do Docente
@@ -122,11 +133,19 @@ class Docente extends AppModel {
 					//CakeResque::enqueue('default', 'DocenteShell', array('enviaEmailCadastro', $this->id));
 					return $dataSource->commit();
 				}
-			}
-		}
+			} else{
+                debug($this->Entidade->validationErrors);
+                $dataSource->rollback();
+                return false;
+            }
+		} else{
+
+            $dataSource->rollback();
+            return false;
+        }
 
 
-		$dataSource->rollback();
+
 	}
 
 	/**

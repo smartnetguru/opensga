@@ -16,7 +16,9 @@ class DocenteTest extends CakeTestCase
     public $fixtures = [
         'app.docente',
         'app.entidade',
-        'app.user'
+        'app.user',
+        'app.entidade_identificacao',
+        'app.entidade_contacto'
     ];
     public $autoFixtures = false;
 
@@ -60,7 +62,7 @@ class DocenteTest extends CakeTestCase
      */
     public function testCadastraDocente()
     {
-        $this->loadFixtures('Docente', 'User', 'Entidade');
+        $this->loadFixtures('Docente', 'User', 'Entidade','EntidadeIdentificacao','EntidadeContacto');
         $data = [
 
             'Entidade'              => [
@@ -74,7 +76,8 @@ class DocenteTest extends CakeTestCase
                 'pais_nascimento'      => '152',
                 'provincia_nascimento' => '6',
                 'cidade_nascimento'    => '1',
-                'name'                 => 'Elisio Leonardo Leonardo'
+                'name'                 => 'Elisio Leonardo Leonardo',
+                'nuit'=>'10298087658'
             ],
             'Docente'               => [
                 'unidade_organica_id' => '1',
@@ -89,7 +92,7 @@ class DocenteTest extends CakeTestCase
                 (int)7  => '',
                 (int)8  => '',
                 (int)2  => 'gdfgd',
-                (int)1  => '676575'
+                (int)1  => 'docente.teste.pessoal@gmail.com'
             ],
             'EntidadeIdentificacao' => [
                 'documento_identificacao_id' => '1',

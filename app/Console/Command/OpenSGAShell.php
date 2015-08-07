@@ -1395,7 +1395,7 @@ class OpenSGAShell extends AppShell
             throw new CakeException('Vendor class PHPExcel not found!');
         }
 
-        $xls = PHPExcel_IOFactory::load(APP . 'Imports' . DS . 'Admitidos' . DS . '2015' . DS . 'admitidos_20150804.xlsx');
+        $xls = PHPExcel_IOFactory::load(APP . 'Imports' . DS . 'Admitidos' . DS . '2015' . DS . 'admitidos_20150807.xlsx');
 
         $worksheet = $xls->getActiveSheet();
         //debug($xls->getActiveSheetIndex());

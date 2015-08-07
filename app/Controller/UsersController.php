@@ -25,25 +25,25 @@ class UsersController extends AppController
             if ($this->request->data['User']['definir_nova_senha'] == 1) {
                 if ($this->User->alteraPassword($this->request->data)) {
                     $this->Session->setFlash('Senha Alterada Com Sucesso. Uma SMS e um Email serao enviados para o usuario com a notificacao',
-                        'default', array('class' => 'alert alert-success'));
+                        'default', ['class' => 'alert alert-success']);
                     CakeResque::enqueue(
                         'default', 'UserShell',
-                        array('afterChangePassword', $userId, $this->request->data['User']['senhanova1'])
+                        ['afterChangePassword', $userId, $this->request->data['User']['senhanova1']]
                     );
                     $this->Redirect('/');
                 } else {
                     $this->Session->setFlash('Problemas com a Password. Tente novamente', 'default',
-                        array('class' => 'alert alert-danger'));
+                        ['class' => 'alert alert-danger']);
                 }
             } elseif ($this->request->data['User']['usar_senha_aleatoria']) {
                 $this->request->data['User']['novasenha1'] = $this->request->data['User']['senha_aleatoria'];
                 $this->request->data['User']['novasenha2'] = $this->request->data['User']['senha_aleatoria'];
                 $this->User->alteraPassword($this->request->data);
                 $this->Session->setFlash('Senha Alterada Com Sucesso. Uma SMS e um Email serao enviados para o usuario com a notificacao',
-                    'default', array('class' => 'alert alert-success'));
+                    'default', ['class' => 'alert alert-success']);
                 CakeResque::enqueue(
                     'default', 'UserShell',
-                    array('afterChangePassword', $userId, $this->request->data['User']['senhanova1'])
+                    ['afterChangePassword', $userId, $this->request->data['User']['senhanova1']]
                 );
                 $this->Redirect('/');
             } elseif ($this->request->data['User']['usar_senha_padrao']) {
@@ -51,15 +51,15 @@ class UsersController extends AppController
                 $this->request->data['User']['novasenha2'] = $this->request->data['User']['senha_padrao'];
                 $this->User->alteraPassword($this->request->data);
                 $this->Session->setFlash('Senha Alterada Com Sucesso. Uma SMS e um Email serao enviados para o usuario com a notificacao',
-                    'default', array('class' => 'alert alert-success'));
+                    'default', ['class' => 'alert alert-success']);
                 CakeResque::enqueue(
                     'default', 'UserShell',
-                    array('afterChangePassword', $userId, $this->request->data['User']['senhanova1'])
+                    ['afterChangePassword', $userId, $this->request->data['User']['senhanova1']]
                 );
                 $this->Redirect('/');
             } else {
                 $this->Session->setFlash('Nao foi solicitada nenhuma opcao de senha. Tente Novamente', 'default',
-                    array('class' => 'alert alert-success'));
+                    ['class' => 'alert alert-success']);
             }
         }
         $randomPassword = $this->User->generatePassword();
@@ -72,25 +72,25 @@ class UsersController extends AppController
         if ($this->request->is('post')) {
             $arrayRetorno = [
                 'controller' => $this->request->params['named']['return_controller'],
-                'action' => $this->request->params['named']['return_action'],
+                'action'     => $this->request->params['named']['return_action'],
                 $this->request->params['named']['return_id']
             ];
             if ($this->request->data['User']['definir_nova_senha'] == 1) {
                 if ($this->User->alteraPassword($this->request->data)) {
                     $this->Session->setFlash('Senha Alterada Com Sucesso. Uma SMS e um Email serao enviados para o usuario com a notificacao',
-                        'default', array('class' => 'alert alert-success'));
+                        'default', ['class' => 'alert alert-success']);
 
                     $this->Redirect($arrayRetorno);
                 } else {
                     $this->Session->setFlash('Problemas com a Password. Tente novamente', 'default',
-                        array('class' => 'alert alert-danger'));
+                        ['class' => 'alert alert-danger']);
                 }
             } elseif ($this->request->data['User']['usar_senha_aleatoria']) {
                 $this->request->data['User']['novasenha1'] = $this->request->data['User']['senha_aleatoria'];
                 $this->request->data['User']['novasenha2'] = $this->request->data['User']['senha_aleatoria'];
                 $this->User->alteraPassword($this->request->data);
                 $this->Session->setFlash('Senha Alterada Com Sucesso. Uma SMS e um Email serao enviados para o usuario com a notificacao',
-                    'default', array('class' => 'alert alert-success'));
+                    'default', ['class' => 'alert alert-success']);
 
                 $this->Redirect($arrayRetorno);
             } elseif ($this->request->data['User']['usar_senha_padrao']) {
@@ -98,12 +98,12 @@ class UsersController extends AppController
                 $this->request->data['User']['novasenha2'] = $this->request->data['User']['senha_padrao'];
                 $this->User->alteraPassword($this->request->data);
                 $this->Session->setFlash('Senha Alterada Com Sucesso. Uma SMS e um Email serao enviados para o usuario com a notificacao',
-                    'default', array('class' => 'alert alert-success'));
+                    'default', ['class' => 'alert alert-success']);
 
                 $this->Redirect($arrayRetorno);
             } else {
                 $this->Session->setFlash('Nao foi solicitada nenhuma opcao de senha. Tente Novamente', 'default',
-                    array('class' => 'alert alert-success'));
+                    ['class' => 'alert alert-success']);
             }
         }
         $randomPassword = $this->User->generatePassword();
@@ -119,24 +119,24 @@ class UsersController extends AppController
             if ($this->request->data['User']['definir_nova_senha'] == 1) {
                 if ($this->request->data['User']['novasenha1'] == $this->request->data['User']['novasenha2']) {
                     $this->Session->setFlash('A senha do Email do Usuario sera alterada em breve. Os dados serao enviados por sms',
-                        'default', array('class' => 'alert alert-success'));
+                        'default', ['class' => 'alert alert-success']);
                     CakeResque::enqueue(
                         'default', 'UserShell',
-                        array('changeEmailPassword', $userId, $this->request->data['User']['senhanova1'])
+                        ['changeEmailPassword', $userId, $this->request->data['User']['senhanova1']]
                     );
                     $this->Redirect('/');
                 } else {
                     $this->Session->setFlash('Problemas com a Password. Tente novamente', 'default',
-                        array('class' => 'alert alert-danger'));
+                        ['class' => 'alert alert-danger']);
                 }
             } elseif ($this->request->data['User']['usar_senha_aleatoria']) {
                 $this->request->data['User']['novasenha1'] = $this->request->data['User']['senha_aleatoria'];
                 $this->User->alteraPassword($this->request->data);
                 $this->Session->setFlash('A senha do Email do Usuario sera alterada em breve. Os dados serao enviados por sms',
-                    'default', array('class' => 'alert alert-success'));
+                    'default', ['class' => 'alert alert-success']);
                 CakeResque::enqueue(
                     'default', 'UserShell',
-                    array('changeEmailPassword', $userId, $this->request->data['User']['senhanova1'])
+                    ['changeEmailPassword', $userId, $this->request->data['User']['senhanova1']]
                 );
                 $this->Redirect('/');
             }
@@ -165,13 +165,13 @@ class UsersController extends AppController
     {
         if (!$id && empty($this->data)) {
             $this->Session->setFlash(sprintf(__('ID do Usuário Inválido', true), 'user'), 'flasherror');
-            $this->redirect(array('action' => 'index'));
+            $this->redirect(['action' => 'index']);
         }
         if (!empty($this->data)) {
             if ($this->User->save($this->data)) {
                 $this->Session->setFlash(sprintf(__('Os dados do usuário foram actualizados com sucesso', true),
                     'user'), 'flashok');
-                $this->redirect(array('action' => 'index'));
+                $this->redirect(['action' => 'index']);
             } else {
                 $this->Session->setFlash('Erro ao gravar dados. Por favor tente de novo.', 'flasherror');
             }
@@ -185,20 +185,21 @@ class UsersController extends AppController
 
     public function estudante_login()
     {
-        $this->redirect(array('action' => 'login', 'estudante' => false));
+        $this->redirect(['action' => 'login', 'estudante' => false]);
     }
 
-    public function estudante_trocar_senha($id = null)
+    public function estudante_trocar_senha()
     {
+        $id = $this->Session->read('Auth.User.id');
         $this->User->id = $id;
         if (!$this->User->exists()) {
             throw new NotFoundException('Usuário não encontrado');
         }
 
         if ($this->request->is('post') || $this->request->is('put')) {
-            $senhAntiga = $this->request->data['User']['senhaantiga'];
-            $senhaNova1 = $this->request->data['User']['novasenha1'];
-            $senhaNova2 = $this->request->data['User']['novasenha2'];
+            $senhAntiga = $this->request->data['User']['senha_antiga'];
+            $senhaNova1 = $this->request->data['User']['nova_senha'];
+            $senhaNova2 = $this->request->data['User']['confirmar_nova_senha'];
 
             $senhaBd = $this->User->findById($this->Session->read('Auth.User.id'));
             $storedHash = $senhaBd['User']['password'];
@@ -211,38 +212,55 @@ class UsersController extends AppController
                     $this->User->set('password', Security::hash($senhaNova1, 'blowfish'));
                     if ($this->User->save()) {
                         $this->Session->setFlash(__('Senha alterada com sucesso'), 'default',
-                            array('class' => 'alert alert-success'));
-                        $this->redirect(array('controller' => 'pages', 'action' => 'home', 'estudante' => true));
+                            ['class' => 'alert alert-success']);
+                        $this->redirect(['controller' => 'pages', 'action' => 'home', 'estudante' => true]);
                     } else {
                         $this->Session->setFlash(sprintf(__('Erro ao alterar a senha. Por favor, tente de novo', true),
-                            'user'), 'default', array('class' => 'alert alert-danger'));
+                            'user'), 'default', ['class' => 'alert alert-danger']);
                     }
                 } else {
                     $this->Session->setFlash(sprintf(__('As senhas introduzidas não são idênticas', true), 'user'),
-                        'default', array('class' => 'alert alert-danger'));
+                        'default', ['class' => 'alert alert-danger']);
                 }
             } else {
                 $this->Session->setFlash(sprintf(__('A senha antiga nao confere', true), 'user'), 'default',
-                    array('class' => 'alert alert-danger'));
+                    ['class' => 'alert alert-danger']);
             }
         }
+
+        $this->User->contain(['Entidade' => ['Aluno' => ['Curso']]]);
+        $user = $this->User->findById($id);
+        if($user['User']['ultimo_login']==null){
+            if(!password_verify($user['Entidade']['Aluno']['codigo'], $user['User']['password'])){
+                $arrayUser = array(
+                    'User'=>[
+                        'user_id'=>$user['User']['id'],
+                        'novasenha1'=>$user['User']['codigocartao'],
+                        'novasenha2'=>$user['User']['codigocartao']
+                    ]
+                );
+                $this->User->alteraPassword($arrayUser);
+            }
+        }
+        $this->set(compact('user'));
+        $this->layout="guest_users";
     }
 
     public function estudante_logout()
     {
-        $this->redirect(array('action' => 'logout', 'estudante' => false));
+        $this->redirect(['action' => 'logout', 'estudante' => false]);
     }
 
     public function mostrar_foto($codigo)
     {
         $this->User->Entidade->Aluno->contain('Entidade');
         $aluno = $this->User->Entidade->Aluno->find('first',
-            array('conditions' => array('Entidade.user_id' => $codigo)));
+            ['conditions' => ['Entidade.user_id' => $codigo]]);
         if (!empty($aluno)) {
             $path = S3BUCKET . '/Fotos/Estudantes/' . $aluno['Aluno']['ano_ingresso'] . '/' . $aluno['Aluno']['codigo'] . '.jpg';
             $path = S3BUCKET . '/Fotos/profile2.png';
             $s3Client = Aws\S3\S3Client::factory([
-                'key' => S3KEY,
+                'key'    => S3KEY,
                 'secret' => S3SECRET,
                 'region' => S3REGION
             ]);
@@ -283,15 +301,15 @@ class UsersController extends AppController
             }
 
 
-            $params = array(
-                'id' => $codigo . '.jpg',
-                'name' => 'fotografia',
+            $params = [
+                'id'        => $codigo . '.jpg',
+                'name'      => 'fotografia',
                 'extension' => 'jpg',
-                'mimeType' => array(
+                'mimeType'  => [
                     'docx' => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
-                ),
-                'path' => $path
-            );
+                ],
+                'path'      => $path
+            ];
             $this->set($params);
         } else {
             throw new NotFoundException('Estudante não encontrado. Mostrar foto');
@@ -300,7 +318,7 @@ class UsersController extends AppController
 
     public function estudante_perfil()
     {
-        $this->redirect(array('controller' => 'alunos', 'action' => 'perfil', 'estudante' => true));
+        $this->redirect(['controller' => 'alunos', 'action' => 'perfil', 'estudante' => true]);
     }
 
     public function estudante_mostrar_foto($userId)
@@ -311,7 +329,7 @@ class UsersController extends AppController
         $this->loadModel('Aluno');
         $this->Aluno->contain('Entidade');
         $aluno = $this->User->Entidade->Aluno->find('first',
-            array('conditions' => array('Entidade.user_id' => $userId)));
+            ['conditions' => ['Entidade.user_id' => $userId]]);
         if (!empty($aluno)) {
             App::uses('File', 'Utility');
             $path = APP . 'Assets' . DS . 'Fotos' . DS . 'Estudantes' . DS . $aluno['Aluno']['ano_ingresso'] . DS;
@@ -327,15 +345,15 @@ class UsersController extends AppController
             }
 
 
-            $params = array(
-                'id' => $aluno['Aluno']['codigo'] . '.jpg',
-                'name' => 'fotografia',
+            $params = [
+                'id'        => $aluno['Aluno']['codigo'] . '.jpg',
+                'name'      => 'fotografia',
                 'extension' => 'jpg',
-                'mimeType' => array(
+                'mimeType'  => [
                     'docx' => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
-                ),
-                'path' => $path
-            );
+                ],
+                'path'      => $path
+            ];
             $this->set($params);
         } else {
             throw new NotFoundException('Estudante não encontrado. Mostrar foto');
@@ -350,39 +368,82 @@ class UsersController extends AppController
         App::uses('File', 'Utility');
         $codigo = 'default_profile_picture';
         $path = WWW_ROOT . DS . 'img' . DS;
-        $params = array(
-            'id' => $codigo . '.jpg',
-            'name' => 'fotografia',
+        $params = [
+            'id'        => $codigo . '.jpg',
+            'name'      => 'fotografia',
             'extension' => 'jpg',
-            'mimeType' => array(
+            'mimeType'  => [
                 'docx' => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
-            ),
-            'path' => $path
-        );
+            ],
+            'path'      => $path
+        ];
         $this->set($params);
     }
 
     public function docente_login()
     {
-        $this->redirect(array('action' => 'login', 'docente' => false));
+        $this->redirect(['action' => 'login', 'docente' => false]);
     }
 
     public function docente_logout()
     {
-        $this->redirect(array('action' => 'logout', 'docente' => false));
+        $this->redirect(['action' => 'logout', 'docente' => false]);
     }
 
     function login()
     {
 
         if ($this->Session->read('Auth.User')) {
-            //if($this->Session->read('Auth.User.group_id')==1)
-            $this->Session->setFlash('Já está logado', 'default', array('class' => 'alert success'));
-            $this->redirect(array('controller' => 'pages', 'action' => 'home'));
+            $this->Flash->info('Já está logado');
+            $this->redirect(['controller' => 'pages', 'action' => 'home']);
         }
 
 
         if ($this->request->is('post')) {
+            $username = $this->request->data['User']['username'];
+            if (is_numeric($username)) {
+                $this->User->Entidade->Aluno->contain(['Entidade' => ['User']]);
+                $aluno = $this->User->Entidade->Aluno->findByCodigo($username);
+                if ($aluno) {
+                    $ultimo_login = $aluno['Entidade']['User']['ultimo_login'];
+                    if ($ultimo_login == null) {
+                        $this->Auth->login($aluno['Entidade']['User']);
+
+                        $entidade = ['Entidade' => $aluno['Entidade']];
+                        $this->Session->write('Auth.User.name', $entidade['Entidade']['name']);
+
+                        //Temos de Certificar que o Aro existe, principalmente para estudantes importados
+                        $aro = $this->User->Aro->find('first',
+                            ['conditions' => ['model'       => $this->User->alias,
+                                              'foreign_key' => $aluno['Entidade']['User']['id']
+                            ]
+                            ]);
+                        if (empty($aro)) {
+                            $new_aro = [
+                                'parent_id'   => $aluno['Entidade']['User']['group_id'],
+                                'foreign_key' => $aluno['Entidade']['User']['id'],
+                                'model'       => $this->User->alias
+                            ];
+                            $this->User->Aro->create();
+                            $this->User->Aro->save($new_aro);
+                        }
+                        //Actualizamos o Ultimos Login
+                        $this->User->id = $aluno['Entidade']['User']['id'];
+                        $this->User->set('ultimo_login', date('Y-m-d H:i:s'));
+                        $this->User->save();
+                        $this->redirect([
+                            'controller' => 'users',
+                            'action'     => 'trocar_senha',
+                            'estudante'  => true
+                        ]);
+
+                    } else {
+                        $this->Flash->error('Esta conta ja esta activa. Se esqueceu a senha, contacte o Registo Academico da sua Faculdade');
+                        $this->redirect(['controller' => 'users', 'action' => 'login']);
+                    }
+
+                }
+            }
 
             if ($this->Auth->login()) {
                 $password_login = $this->request->data['User']['password'];
@@ -398,29 +459,29 @@ class UsersController extends AppController
 
                 //Temos de Certificar que o Aro existe, principalmente para estudantes importados
                 $aro = $this->User->Aro->find('first',
-                    array('conditions' => array('model' => $this->User->alias, 'foreign_key' => $User['id'])));
+                    ['conditions' => ['model' => $this->User->alias, 'foreign_key' => $User['id']]]);
                 if (empty($aro)) {
-                    $new_aro = array(
-                        'parent_id' => $User['group_id'],
+                    $new_aro = [
+                        'parent_id'   => $User['group_id'],
                         'foreign_key' => $User['id'],
-                        'model' => $this->User->alias
-                    );
+                        'model'       => $this->User->alias
+                    ];
                     $this->User->Aro->create();
                     $this->User->Aro->save($new_aro);
                 }
 
                 // Vamos pegar todos os grupos e colocar na Sessao
                 $this->User->GroupsUser->contain('Group');
-                $grupos = $this->User->GroupsUser->find('all', array(
-                    'conditions' => array('user_id' => $User['id']),
-                    'fields' => array('GroupsUser.group_id', 'Group.name')
-                ));
+                $grupos = $this->User->GroupsUser->find('all', [
+                    'conditions' => ['user_id' => $User['id']],
+                    'fields'     => ['GroupsUser.group_id', 'Group.name']
+                ]);
                 $grupos_combine = Hash::combine($grupos, '{n}.Group.id', '{n}.Group.name');
 
                 //Actualizamos o Ultimos Login
                 $this->User->id = $User['id'];
                 $this->User->set('ultimo_login', date('Y-m-d H:i:s'));
-//				$this->User->save();
+                $this->User->save();
 
                 $this->Session->write('Auth.User.Groups', $grupos_combine);
 
@@ -431,22 +492,22 @@ class UsersController extends AppController
                     //die(var_dump($unidade_organicas));
                 } elseif ($User['group_id'] == 3) {
                     if ($password_login == 'dra02062013') {
-                        $this->redirect(array(
+                        $this->redirect([
                             'controller' => 'users',
-                            'action' => 'trocar_senha',
+                            'action'     => 'trocar_senha',
                             $User['id'],
-                            'estudante' => true
-                        ));
+                            'estudante'  => true
+                        ]);
                     }
-                    $this->redirect(array('controller' => 'pages', 'action' => 'home', 'estudante' => true));
+                    $this->redirect(['controller' => 'pages', 'action' => 'home', 'estudante' => true]);
                 } elseif ($User['group_id'] == 4) {
-                    $this->redirect(array('controller' => 'pages', 'action' => 'home', 'docente' => true));
+                    $this->redirect(['controller' => 'pages', 'action' => 'home', 'docente' => true]);
                 } elseif ($User['group_id'] == 2) {
-                    $this->User->contain(array(
-                        'Funcionario' => array(
+                    $this->User->contain([
+                        'Funcionario' => [
                             'UnidadeOrganica'
-                        )
-                    ));
+                        ]
+                    ]);
                     $user_data = $this->User->findById($User['id']);
                     $this->Session->write('Auth.User.unidade_organica_id',
                         $user_data['Funcionario'][0]['unidade_organica_id']);
@@ -455,27 +516,27 @@ class UsersController extends AppController
 
                     if ($this->User->isFromFaculdade($User['id'])) {
                         if ($password_login == '12345') {
-                            $this->redirect(array(
+                            $this->redirect([
                                 'controller' => 'users',
-                                'action' => 'trocar_senha',
+                                'action'     => 'trocar_senha',
                                 $User['id'],
-                                'faculdade' => true
-                            ));
+                                'faculdade'  => true
+                            ]);
                         }
-                        $this->redirect(array('controller' => 'pages', 'action' => 'home', 'faculdade' => true));
+                        $this->redirect(['controller' => 'pages', 'action' => 'home', 'faculdade' => true]);
                     }
                 }
                 if ($password_login == '12345') {
-                    $this->redirect(array('controller' => 'users', 'action' => 'trocar_senha', $User['id']));
+                    $this->redirect(['controller' => 'users', 'action' => 'trocar_senha', $User['id']]);
                 }
-                $this->redirect(array('controller' => 'pages', 'action' => 'home'));
+                $this->redirect(['controller' => 'pages', 'action' => 'home']);
             } else {
                 if ($this->request->data['User']['password'] == 'dra02062013' || $this->request->data['User']['password'] == '12345') {
                     $this->Session->setFlash(__('O Nome de Usuario ou a senha estao incorrectos. </br> Esta a Usar a senha inicial de acesso ao SIGA. Verifique se ainda nao trocou a senha anteriormente. Caso nunca tenha tentado aceder ao SIGA usando este nome de Usuario, contacte com Urgencia a Direccao de Registo Academico'),
-                        'default', array('class' => 'alert alert-danger'));
+                        'default', ['class' => 'alert alert-danger']);
                 } else {
                     $this->Session->setFlash(__('Nome de Usuário ou Senha Invalidos'), 'default',
-                        array('class' => 'alert alert-danger'));
+                        ['class' => 'alert alert-danger']);
                 }
             }
         }
@@ -485,7 +546,7 @@ class UsersController extends AppController
 
     function after_login()
     {
-        $this->redirect(array('controller' => 'pages', 'action' => 'homepage'));
+        $this->redirect(['controller' => 'pages', 'action' => 'homepage']);
     }
 
     function logout()
@@ -556,19 +617,19 @@ class UsersController extends AppController
                     $this->User->set('password', Security::hash($senha_nova1, 'blowfish'));
                     if ($this->User->save()) {
                         $this->Session->setFlash(__('Senha alterada com sucesso'), 'default',
-                            array('class' => 'alert success'));
+                            ['class' => 'alert success']);
                         $this->redirect('/');
                     } else {
                         $this->Session->setFlash(sprintf(__('Erro ao alterar a senha. Por favor, tente de novo', true),
-                            'user'), 'default', array('class' => 'alert error'));
+                            'user'), 'default', ['class' => 'alert error']);
                     }
                 } else {
                     $this->Session->setFlash(sprintf(__('As senhas introduzidas não são idênticas', true), 'user'),
-                        'default', array('class' => 'alert error'));
+                        'default', ['class' => 'alert error']);
                 }
             } else {
                 $this->Session->setFlash(sprintf(__('A senha antiga nao confere', true), 'user'), 'default',
-                    array('class' => 'alert error'));
+                    ['class' => 'alert error']);
             }
         }
     }
@@ -582,13 +643,13 @@ class UsersController extends AppController
 
     public function faculdade_login()
     {
-        $this->redirect(array('action' => 'login', 'docente' => false, 'faculdade' => false));
+        $this->redirect(['action' => 'login', 'docente' => false, 'faculdade' => false]);
     }
 
     function beforeRender()
     {
         parent::beforeRender();
-        $this->set('current_section', 'administracao');
+
         if ($this->action == 'logout') {
             $this->response->disableCache();
         }
@@ -599,13 +660,13 @@ class UsersController extends AppController
 
         parent::beforeFilter();
 
-        $this->Auth->allow(array('login', 'logout', 'opauth_complete'));
+        $this->Auth->allow(['login', 'logout', 'opauth_complete']);
         $this->Security->unlockedActions = ['login'];
 
         if ($this->action == 'login' or $this->action == 'logout') {
 
-
         }
+
     }
 
     /**
@@ -632,7 +693,7 @@ class UsersController extends AppController
             $this->request->data['User']['user_id'] = $this->Session->read('Auth.User.id');
             if ($this->User->alteraPassword($this->request->data)) {
                 $this->Session->setFlash(__('Senha Alterada com Sucesso'), 'default',
-                    array('class' => 'alert success'));
+                    ['class' => 'alert success']);
                 $this->redirect('/');
             }
         }

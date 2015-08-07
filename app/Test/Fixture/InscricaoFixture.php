@@ -1,7 +1,6 @@
 <?php
 /**
- * InscricaoFixture
- *
+ * Inscricao Fixture
  */
 class InscricaoFixture extends CakeTestFixture {
 
@@ -26,7 +25,7 @@ class InscricaoFixture extends CakeTestFixture {
 			'estado_inscricao_id' => '4',
 			'nota_frequencia' => '15.00',
 			'nota_final' => '15.00',
-			'epocaavaliacao_id' => null,
+			'epoca_avaliacao_id' => null,
 			'data' => '2004-12-08',
 			'created' => '2013-06-16 17:45:45',
 			'modified' => '2014-01-20 09:42:02',
@@ -49,7 +48,7 @@ class InscricaoFixture extends CakeTestFixture {
 			'estado_inscricao_id' => '4',
 			'nota_frequencia' => '15.00',
 			'nota_final' => '15.00',
-			'epocaavaliacao_id' => null,
+			'epoca_avaliacao_id' => null,
 			'data' => null,
 			'created' => '2013-06-16 17:45:46',
 			'modified' => '2014-01-20 09:42:02',
@@ -72,7 +71,7 @@ class InscricaoFixture extends CakeTestFixture {
 			'estado_inscricao_id' => '5',
 			'nota_frequencia' => '10.00',
 			'nota_final' => '10.00',
-			'epocaavaliacao_id' => null,
+			'epoca_avaliacao_id' => null,
 			'data' => null,
 			'created' => '2013-06-16 17:45:46',
 			'modified' => '2014-01-20 09:42:02',
@@ -95,7 +94,7 @@ class InscricaoFixture extends CakeTestFixture {
 			'estado_inscricao_id' => '5',
 			'nota_frequencia' => '11.00',
 			'nota_final' => '11.00',
-			'epocaavaliacao_id' => null,
+			'epoca_avaliacao_id' => null,
 			'data' => '2003-11-08',
 			'created' => '2013-06-16 17:45:46',
 			'modified' => '2014-01-20 09:42:02',
@@ -118,7 +117,7 @@ class InscricaoFixture extends CakeTestFixture {
 			'estado_inscricao_id' => '7',
 			'nota_frequencia' => '2.00',
 			'nota_final' => '2.00',
-			'epocaavaliacao_id' => null,
+			'epoca_avaliacao_id' => null,
 			'data' => '2003-11-08',
 			'created' => '2013-06-16 17:45:46',
 			'modified' => '2014-01-20 09:42:02',
@@ -141,7 +140,7 @@ class InscricaoFixture extends CakeTestFixture {
 			'estado_inscricao_id' => '5',
 			'nota_frequencia' => '14.00',
 			'nota_final' => '14.00',
-			'epocaavaliacao_id' => null,
+			'epoca_avaliacao_id' => null,
 			'data' => null,
 			'created' => '2013-06-16 17:45:46',
 			'modified' => '2014-01-20 09:42:02',
@@ -164,7 +163,7 @@ class InscricaoFixture extends CakeTestFixture {
 			'estado_inscricao_id' => '7',
 			'nota_frequencia' => '7.00',
 			'nota_final' => '7.00',
-			'epocaavaliacao_id' => null,
+			'epoca_avaliacao_id' => null,
 			'data' => null,
 			'created' => '2013-06-16 17:45:47',
 			'modified' => '2014-01-20 09:42:02',
@@ -187,7 +186,7 @@ class InscricaoFixture extends CakeTestFixture {
 			'estado_inscricao_id' => '4',
 			'nota_frequencia' => '15.00',
 			'nota_final' => '15.00',
-			'epocaavaliacao_id' => null,
+			'epoca_avaliacao_id' => null,
 			'data' => null,
 			'created' => '2013-06-16 17:45:47',
 			'modified' => '2014-01-20 09:42:02',
@@ -210,7 +209,7 @@ class InscricaoFixture extends CakeTestFixture {
 			'estado_inscricao_id' => '5',
 			'nota_frequencia' => '13.00',
 			'nota_final' => '15.00',
-			'epocaavaliacao_id' => null,
+			'epoca_avaliacao_id' => null,
 			'data' => null,
 			'created' => '2013-06-16 17:45:47',
 			'modified' => '2014-01-20 09:42:02',
@@ -233,7 +232,7 @@ class InscricaoFixture extends CakeTestFixture {
 			'estado_inscricao_id' => '5',
 			'nota_frequencia' => '12.00',
 			'nota_final' => '11.00',
-			'epocaavaliacao_id' => null,
+			'epoca_avaliacao_id' => null,
 			'data' => null,
 			'created' => '2013-06-16 17:45:47',
 			'modified' => '2014-01-20 09:42:02',
