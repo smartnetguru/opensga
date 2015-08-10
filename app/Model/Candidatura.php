@@ -152,7 +152,7 @@ class Candidatura extends AppModel {
 				'message' => 'Não podem existir 2 candidatos com mesmo número de estudante'
 			),
 			'notEmptyRule' => array(
-				'rule' => 'notEmpty',
+				'rule' => 'notBlank',
 				'message' => 'Todo candidato deve ter um número de estudante atribuido'
 			)
 		)

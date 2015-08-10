@@ -39,113 +39,113 @@ class Curso extends AppModel
     var $name = 'Curso';
     //The Associations below have been created with all possible keys, those that are not needed can be removed
 
-    var $belongsTo = array(
-        'GrauAcademico' => array(
-            'className' => 'GrauAcademico',
+    var $belongsTo = [
+        'GrauAcademico'    => [
+            'className'  => 'GrauAcademico',
             'foreignKey' => 'grau_academico_id',
             'conditions' => '',
-            'fields' => '',
-            'order' => ''
-        ),
-        'UnidadeOrganica' => array(
-            'className' => 'UnidadeOrganica',
+            'fields'     => '',
+            'order'      => ''
+        ],
+        'UnidadeOrganica'  => [
+            'className'  => 'UnidadeOrganica',
             'foreignKey' => 'unidade_organica_id',
             'conditions' => '',
-            'fields' => '',
-            'order' => ''
-        ),
-        'TipoCurso' => array(
-            'className' => 'TipoCurso',
+            'fields'     => '',
+            'order'      => ''
+        ],
+        'TipoCurso'        => [
+            'className'  => 'TipoCurso',
             'foreignKey' => 'tipo_curso_id',
             'conditions' => '',
-            'fields' => '',
-            'order' => ''
-        ),
-        'CursoResponsavel' => array(
-            'className' => 'CursoResponsavel',
+            'fields'     => '',
+            'order'      => ''
+        ],
+        'CursoResponsavel' => [
+            'className'  => 'CursoResponsavel',
             'foreignKey' => 'curso_responsavel_id',
             'conditions' => '',
-            'fields' => '',
-            'order' => ''
-        )
-    );
-    var $hasMany = array(
-        'PlanoEstudo' => array(
-            'className' => 'PlanoEstudo',
-            'foreignKey' => 'curso_id',
-            'dependent' => false,
-            'conditions' => '',
-            'fields' => '',
-            'order' => '',
-            'limit' => '',
-            'offset' => '',
-            'exclusive' => '',
-            'finderQuery' => '',
+            'fields'     => '',
+            'order'      => ''
+        ]
+    ];
+    var $hasMany = [
+        'PlanoEstudo' => [
+            'className'    => 'PlanoEstudo',
+            'foreignKey'   => 'curso_id',
+            'dependent'    => false,
+            'conditions'   => '',
+            'fields'       => '',
+            'order'        => '',
+            'limit'        => '',
+            'offset'       => '',
+            'exclusive'    => '',
+            'finderQuery'  => '',
             'counterQuery' => ''
-        ),
-        'Turma' => array(
-            'className' => 'Turma',
-            'foreignKey' => 'curso_id',
-            'dependent' => false,
-            'conditions' => '',
-            'fields' => '',
-            'order' => '',
-            'limit' => '',
-            'offset' => '',
-            'exclusive' => '',
-            'finderQuery' => '',
+        ],
+        'Turma'       => [
+            'className'    => 'Turma',
+            'foreignKey'   => 'curso_id',
+            'dependent'    => false,
+            'conditions'   => '',
+            'fields'       => '',
+            'order'        => '',
+            'limit'        => '',
+            'offset'       => '',
+            'exclusive'    => '',
+            'finderQuery'  => '',
             'counterQuery' => ''
-        ),
-        'CursosTurno' => array(
-            'className' => 'CursosTurno',
-            'foreignKey' => 'curso_id',
-            'dependent' => false,
-            'conditions' => '',
-            'fields' => '',
-            'order' => '',
-            'limit' => '',
-            'offset' => '',
-            'exclusive' => '',
-            'finderQuery' => '',
+        ],
+        'CursosTurno' => [
+            'className'    => 'CursosTurno',
+            'foreignKey'   => 'curso_id',
+            'dependent'    => false,
+            'conditions'   => '',
+            'fields'       => '',
+            'order'        => '',
+            'limit'        => '',
+            'offset'       => '',
+            'exclusive'    => '',
+            'finderQuery'  => '',
             'counterQuery' => ''
-        ),
-        'Matricula' => array(
-            'className' => 'Matricula',
-            'foreignKey' => 'curso_id',
-            'dependent' => false,
-            'conditions' => '',
-            'fields' => '',
-            'order' => '',
-            'limit' => '',
-            'offset' => '',
-            'exclusive' => '',
-            'finderQuery' => '',
+        ],
+        'Matricula'   => [
+            'className'    => 'Matricula',
+            'foreignKey'   => 'curso_id',
+            'dependent'    => false,
+            'conditions'   => '',
+            'fields'       => '',
+            'order'        => '',
+            'limit'        => '',
+            'offset'       => '',
+            'exclusive'    => '',
+            'finderQuery'  => '',
             'counterQuery' => ''
-        ),
-        'Aluno' => array(
-            'className' => 'Aluno',
-            'foreignKey' => 'curso_id',
-            'dependent' => false,
-            'conditions' => '',
-            'fields' => '',
-            'order' => '',
-            'limit' => '',
-            'offset' => '',
-            'exclusive' => '',
-            'finderQuery' => '',
+        ],
+        'Aluno'       => [
+            'className'    => 'Aluno',
+            'foreignKey'   => 'curso_id',
+            'dependent'    => false,
+            'conditions'   => '',
+            'fields'       => '',
+            'order'        => '',
+            'limit'        => '',
+            'offset'       => '',
+            'exclusive'    => '',
+            'finderQuery'  => '',
             'counterQuery' => ''
-        )
-    );
-    var $validate = array(
-        'codigo' => array(
-            'rule' => 'isUnique',
+        ]
+    ];
+    var $validate = [
+        'codigo' => [
+            'rule'    => 'isUnique',
             'message' => 'Este codigo ja foi usado por outro curso.'
-        ),
-        'name' => array(
-            'rule' => 'isUnique',
+        ],
+        'name'   => [
+            'rule'    => 'isUnique',
             'message' => 'Ja existe um curso com este nome.'
-        )
-    );
+        ]
+    ];
 
     public function cadastraCurso($data)
     {
@@ -154,12 +154,12 @@ class Curso extends AppModel
 
         $this->create();
         if ($this->save($data)) {
-            $array_curso_turno = array(
-                'CursosTurno' => array(
+            $array_curso_turno = [
+                'CursosTurno' => [
                     'curso_id' => $this->id,
                     'turno_id' => $data['Curso']['turno_id']
-                )
-            );
+                ]
+            ];
 
             $this->CursosTurno->create();
             if ($this->CursosTurno->save($array_curso_turno)) {
@@ -172,7 +172,7 @@ class Curso extends AppModel
 
     function geraCodigo()
     {
-        $id = $this->find('first', array('order' => array('Curso.created DESC'), 'fields' => 'id'));
+        $id = $this->find('first', ['order' => ['Curso.created DESC'], 'fields' => 'id']);
         $ano = date('Y');
         $id_for = str_pad($id['Curso']['id'] + 1, 4, "0", STR_PAD_LEFT);
         $codigo = "C" . $id_for;
@@ -182,19 +182,19 @@ class Curso extends AppModel
 
     public function getPlanoEstudoRecente($curso_id)
     {
-        return $this->PlanoEstudo->find('first', array(
-            'conditions' => array('curso_id' => $curso_id, 'estado_objecto_id' => 1),
-            'order' => 'ano_criacao DESC'
-        ));
+        return $this->PlanoEstudo->find('first', [
+            'conditions' => ['curso_id' => $curso_id, 'estado_objecto_id' => 1],
+            'order'      => 'ano_criacao DESC'
+        ]);
     }
 
 
     public function getPlanoEstudoIdRecente($curso_id)
     {
-        $planoEstudo = $this->PlanoEstudo->find('first', array(
-            'conditions' => array('curso_id' => $curso_id, 'estado_objecto_id' => 1),
-            'order' => 'ano_criacao DESC'
-        ));
+        $planoEstudo = $this->PlanoEstudo->find('first', [
+            'conditions' => ['curso_id' => $curso_id, 'estado_objecto_id' => 1],
+            'order'      => 'ano_criacao DESC'
+        ]);
         if (!empty($planoEstudo)) {
             return $planoEstudo['PlanoEstudo']['id'];
         }
@@ -213,7 +213,7 @@ class Curso extends AppModel
     public function getAllIdsByUnidadeOrganica($unidades_organicas)
     {
 
-        $cursos = $this->find('all', array('conditions' => array('unidade_organica_id' => $unidades_organicas)));
+        $cursos = $this->find('all', ['conditions' => ['unidade_organica_id' => $unidades_organicas]]);
 
         return Hash::extract($cursos, '{n}.Curso.id');
     }
@@ -290,6 +290,44 @@ class Curso extends AppModel
         ]);
 
         return $cursos;
+    }
+
+    public function getCursosSemPlanoEstudos($unidadeOrganicaId=null){
+            $conditions = array();
+        if($unidadeOrganicaId){
+            $conditions['Curso.unidade_organica_id']=$unidadeOrganicaId;
+        }
+
+        $conditionsSubQuery['PlanoEstudo.curso_id'] = 'Curso.id';
+
+        $db = $this->getDataSource();
+        $subQuery = $db->buildStatement(
+            array(
+                'fields'     => array('PlanoEstudo.curso_id'),
+                'table'      => $db->fullTableName($this->PlanoEstudo),
+                'alias'      => 'PlanoEstudo',
+                'limit'      => null,
+                'offset'     => null,
+                'joins'      => array(),
+                'conditions' => $conditionsSubQuery,
+                'order'      => null,
+                'group'      => null
+            ),
+            $this
+        );
+        debug($subQuery);
+        $subQuery = ' Curso.id NOT IN (' . $subQuery . ') ';
+        $subQueryExpression = $db->expression($subQuery);
+
+        $conditions[] = $subQueryExpression;
+
+        debug($conditions);
+
+        $this->contain('PlanoEstudo');
+        $this->find('all', compact('conditions'));
+
+        $cursos=$this->find('list');
+        debug($cursos);
     }
 
 }

@@ -203,8 +203,11 @@
 
 
             if (isset($this->request->prefix) && !$this->request->is('ajax')) {
-                if(!$this->action=='trocar_senha')
-                $this->layout = $this->request->prefix;
+                $action = $this->action;
+                if(strcmp($action,'trocar_senha')){
+                    $this->layout = $this->request->prefix;
+                }
+
             }
             $this->set(compact('totalMessages', 'totalTarefas', 'totalNotificacoes', 'messages', 'tarefas',
                 'notificacoes'));

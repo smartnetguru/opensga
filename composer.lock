@@ -109,16 +109,16 @@
         },
         {
             "name": "cakephp/cakephp",
-            "version": "2.7.1",
+            "version": "2.7.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cakephp/cakephp.git",
-                "reference": "45877df3eb2a0d1f41066262bf2efb6e46a7aaf0"
+                "reference": "f959b7601323065e74c6ec5dd0b63049ae939dac"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cakephp/cakephp/zipball/45877df3eb2a0d1f41066262bf2efb6e46a7aaf0",
-                "reference": "45877df3eb2a0d1f41066262bf2efb6e46a7aaf0",
+                "url": "https://api.github.com/repos/cakephp/cakephp/zipball/f959b7601323065e74c6ec5dd0b63049ae939dac",
+                "reference": "f959b7601323065e74c6ec5dd0b63049ae939dac",
                 "shasum": ""
             },
             "require": {
@@ -148,7 +148,7 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2015-07-24 01:08:54"
+            "time": "2015-08-07 01:43:53"
         },
         {
             "name": "cakephp/collection",

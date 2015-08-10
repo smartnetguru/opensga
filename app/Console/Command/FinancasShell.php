@@ -16,29 +16,23 @@ class FinancasShell extends AppShell
 
     public function base_fund()
     {
+        //Lemos a biblioteca PHPExcel
         App::import('Helper', 'PhpExcel');
         $this->PHPExcel = new PhpExcelHelper(new View());
+        //Lemos o ficheiro excel a preencher. Aquele que foi fornecido pelos financiadores
         $xls = $this->PHPExcel->loadWorksheetFromS3('/Reports/Financas/base_fund.xlsx');
-        /*
-        AuditableConfig::$Logger = ClassRegistry::init('Auditable.Logger');
-        App::import('Vendor', 'PHPExcel', array('file' => 'PHPExcel.php'));
-        if (!class_exists('PHPExcel')) {
-            throw new CakeException('Vendor class PHPExcel not found!');
-        }
 
-        $xls = PHPExcel_IOFactory::load(APP . 'Imports' . DS . 'rafael.xlsx');
-
-*/
         $worksheet = $xls->getActiveSheet();
         $linhaActual = 3;
         $naoEnconttados = [];
+        //Vamos ler linha por linha do ficheiro por preencheer, comecando pela linha 3
         foreach ($worksheet->getRowIterator() as $row) {
+            //Se encontrar uma linha em branco eh porque terminamos o ficheiro todo
             if ($worksheet->getCell('A' . $linhaActual)->getValue() == '') {
-                debug($naoEnconttados);
-                debug(count($naoEnconttados));
                 break;
             }
 
+            //Pegamos o codigo da instuicao para apenas preencher as linhas da UEM(ou da UP nesse caso)
             $codigoInstituicao = $worksheet->getCell('C' . $linhaActual)->getValue();
             if ($codigoInstituicao != 1) {
                 $this->out('Saltando Linha -------' . $linhaActual);
@@ -49,6 +43,7 @@ class FinancasShell extends AppShell
             $nomeCurso = $worksheet->getCell('F' . $linhaActual)->getValue();
             $nomeGrau = $worksheet->getCell('K' . $linhaActual)->getValue();
             $nomeCompletoCurso = $nomeGrau . ' em ' . $nomeCurso;
+            //Pegamos o nome do curso e procuramos por aquele curso na nossa BD MySQL
             $curso = $this->Aluno->Curso->findByName($nomeCompletoCurso);
             if (empty($curso)) {
                 $fim = substr($nomeCompletoCurso, -3);
@@ -69,8 +64,6 @@ class FinancasShell extends AppShell
                     continue;
                 }
 
-
-                //die();
             }
 
 
@@ -85,11 +78,6 @@ class FinancasShell extends AppShell
             $S = $worksheet->getCell('S' . $linhaActual)->getFormattedValue();
             $T = $worksheet->getCell('T' . $linhaActual)->getFormattedValue();
             $AG = $worksheet->getCell('AG' . $linhaActual)->getValue();
-            $Format = $worksheet->getCell('AG' . $linhaActual)->getStyle()->getNumberFormat();
-            debug($S);
-            debug($T);
-            debug($AG);
-            debug($linhaActual);
 
 
             $letras = ['V', 'W', 'X', 'Y', 'Z', 'AA', 'AB', 'AC', 'AD', 'AE'];
@@ -102,6 +90,7 @@ class FinancasShell extends AppShell
                     'Aluno.estado_aluno_id' => [1, 11, 14]
                 ];
                 $this->Aluno->contain(['Entidade']);
+                //Ja temos todos requisitos(Curso, Ano de Ingresso e Sexo) entao podemos fazer um Select count(*)
                 $total = $this->Aluno->find('count', [
                     'conditions' => $conditions
                 ]);
@@ -126,9 +115,6 @@ class FinancasShell extends AppShell
             $worksheet->setCellValue('AF' . $linhaActual, $total);
             $this->out($nomeCompletoCurso . '-----RESTO------------' . $genero . '----------' . $total . '------------'
                 . $letra);
-            debug('formato-------------------'.$worksheet->getStyle('AG'.$linhaActual)
-                ->getNumberFormat()
-                ->getFormatCode());
 
             $worksheet->getStyle('AG'.$linhaActual)
                 ->getNumberFormat()
@@ -144,6 +130,8 @@ class FinancasShell extends AppShell
             $worksheet->setCellValue('T' . $linhaActual, $T);
             $linhaActual++;
         }
+
+        //Por fim gravamos o excel ja preenchido num novo ficheiro.
         $objWriter = PHPExcel_IOFactory::createWriter($xls, 'Excel2007');
 
         $objWriter->save('base_fund2.xlsx');

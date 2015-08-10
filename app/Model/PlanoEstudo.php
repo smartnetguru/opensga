@@ -98,6 +98,10 @@ class PlanoEstudo extends AppModel {
 		),
 	);
 
+    public $virtualFields = array(
+        'total_creditos' => 'SELECT SUM(creditos) FROM disciplina_plano_estudos as DisciplinaPlanoEstudo WHERE DisciplinaPlanoEstudo.plano_estudo_id = PlanoEstudo.id'
+    );
+
 	/**
 	 * Nao usar esta funcao
 	 * @param type $plano_id

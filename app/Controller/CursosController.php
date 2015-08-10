@@ -42,6 +42,10 @@
             $this->render('index');
         }
 
+        public function manutencao_cursos_sem_plano_estudos(){
+            $cursos = $this->Curso->getCursosSemPlanoEstudos();
+        }
+
         public function manutencao_cursos_sem_turno(){
             $cursos = $this->Curso->getAllCursosSemTurno();
             $this->set(compact('cursos'));
@@ -178,8 +182,8 @@
             }
             $departamentos = $this->Curso->UnidadeOrganica->children($faculdadeId);
             debug($departamentos);
-            $provincias = $this->Provincia->find('list', array('conditions' => array('paise_id' => $pais_id)));
-            $this->set(compact('provincias'));
+           // $provincias = $this->Provincia->find('list', array('conditions' => array('paise_id' => $pais_id)));
+           // $this->set(compact('provincias'));
             $this->layout = 'ajax';
         }
 

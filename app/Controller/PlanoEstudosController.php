@@ -70,7 +70,7 @@ class PlanoEstudosController extends AppController {
 		$this->set(compact('cursos', 'disciplinas', 'anos', 'semestres', 'disciplinas', 'pobrigatorias', 'popcionais'));
 	}
 
-	function ver_plano_estudo($id = null) {
+	function ver_plano_estudos($id = null) {
 		App::Import('Model', 'DisciplinaPlanoEstudo');
 		App::Import('Model', 'Disciplina');
 		//App::Import('Model','Logmv');
@@ -247,6 +247,14 @@ class PlanoEstudosController extends AppController {
 			//$this->Security->validatePost=false;
 		}
 	}
+
+    public function manutencao(){
+
+    }
+
+    public function manutencao_plano_estudos_incompletos(){
+
+    }
 
 }
 
