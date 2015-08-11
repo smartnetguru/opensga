@@ -1037,25 +1037,8 @@ class AlunosController extends AppController
         if (!$this->Aluno->exists()) {
             throw new NotFoundException('Este aluno não existe no Sistema');
         }
-        $this->Aluno->contain([
-            'Matricula'       => [
-                'PlanoEstudo',
-                'Turno'
-            ],
-            'Curso',
-            'Entidade'        => [
-                'ProvinciaNascimento',
-                'CidadeNascimento',
-                'PaisNascimento',
-                'Genero',
-                'DocumentoIdentificacao',
-                'User'
-            ],
-            'AlunoNivelMedio' => [
-                'EscolaNivelMedio' => ['Provincia', 'Distrito']
-            ]
-        ]);
-        $aluno = $this->Aluno->find('first', ['conditions' => ['Aluno.id' => $id]]);
+
+        $aluno = $this->Aluno->getAlunoForPerfil($id);
 
         $this->Aluno->Inscricao->contain([
                 'Turma'     => [

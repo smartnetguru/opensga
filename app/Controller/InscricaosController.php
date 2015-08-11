@@ -192,7 +192,7 @@ class InscricaosController extends AppController
         if ($this->request->is('post') || $this->request->is('put')) {
 
             $alunoId = $this->request->data['Inscricao']['aluno_id'];
-            $matricula_id = $this->request->data['Inscricao']['matricula_id'];
+            $matriculaId = $this->request->data['Inscricao']['matricula_id'];
             $inscricao_nova = array();
 
             if (isset($this->request->data['disciplinas'])) {
@@ -208,6 +208,7 @@ class InscricaosController extends AppController
             $this->Session->write('OpenSGA.inscricao.aluno_id', $alunoId);
             $this->redirect(array('controller' => 'inscricaos', 'action' => 'valida_inscricao'));
         }
+
 
 
         $disciplinas = $this->Inscricao->getAllDisciplinasForInscricao($alunoId);

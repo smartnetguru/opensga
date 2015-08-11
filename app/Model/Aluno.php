@@ -675,8 +675,9 @@ class Aluno extends AppModel
     public function getAlunoForPerfil($alunoId)
     {
         $this->contain([
+            'PlanoEstudo',
             'Matricula'       => [
-                'PlanoEstudo',
+
                 'Turno'
             ],
             'Curso',
@@ -1131,9 +1132,10 @@ class Aluno extends AppModel
             }
         } else {
 
-            $irregularidades[] = ["estado"   => 5,
-                                  "mensagem" => $aluno['EstadoAluno']['name'] . " (" . $aluno_estado['MotivoEstadoAluno']['name'] . ")",
-                                  "regular"  => false
+            $irregularidades[] = [
+                "estado"   => 5,
+                "mensagem" => $aluno['EstadoAluno']['name'] . " (" . $aluno_estado['MotivoEstadoAluno']['name'] . ")",
+                "regular"  => false
             ];
         }
 

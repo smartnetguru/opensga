@@ -87,4 +87,29 @@ class UserShell extends AppShell {
 
     }
 
+
+    public function ajustaUserAro(){
+        $users = $this->User->find('all');
+        $count = count($users);
+        foreach($users as $user){
+            //Temos de Certificar que o Aro existe, principalmente para estudantes importados
+            $aro = $this->User->Aro->find('first',
+                ['conditions' => ['model'       => $this->User->alias,
+                                  'foreign_key' => $user['User']['id']
+                ]
+                ]);
+            if (empty($aro)) {
+                $new_aro = [
+                    'parent_id'   => $user['User']['group_id'],
+                    'foreign_key' => $user['User']['id'],
+                    'model'       => $this->User->alias
+                ];
+                $this->User->Aro->create();
+                $this->User->Aro->save($new_aro);
+                $this->out('Aro Salvo');
+            }
+            $this->out($count--);
+        }
+    }
+
 }
