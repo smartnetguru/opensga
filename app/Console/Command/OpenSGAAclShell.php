@@ -229,7 +229,9 @@ class OpenSGAAclShell extends AppShell
 
                 if (in_array('DRA', $unidadesOrganicas)) {
 
-                    $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/DatabaseLog/Logs/admin_index";
+                    $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Logs/admin_index";
+                    $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Logs/admin_view";
+                    $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Logs/admin_delete";
 
                     $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/AlumniAlumnis/index";
                     $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/AlumniAlumnis/perfil_alumni";
