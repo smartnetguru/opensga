@@ -24,6 +24,11 @@
      * @subpackage      opensga.core.controller
      * @since           OpenSGA v 0.10.0.0
      *
+     *
+     * @property SemestreLectivo $SemestreLectivo
+     * @Property Turma $Turma
+     * @property RegimeLectivo $RegimeLectivo
+     * @property Matricula $Matricula
      */
     class AnoLectivo extends AppModel {
         var $belongsTo = array(
@@ -98,6 +103,54 @@
             $anolectivo = $this->findByAno($ano);
 
             return $anolectivo['AnoLectivo']['id'];
+        }
+
+        public function criaAnoLectivo($data){
+            if(empty($data['AnoLectivo']['ano'])){
+                return false;
+            }
+            if(!date_parse($data['AnoLectivo']['ano'])){
+                return false;
+            }
+            if(empty($data['AnoLectivo']['codigo'])){
+                $data['AnoLectivo']['codigo'] = $data['AnoLectivo']['ano'];
+            }
+
+            $dataSource = $this->getDataSource();
+            $dataSource->begin();
+
+            $this->create();
+            if($this->save($data)){
+                $semestres = array();
+                $semestres[] = array(
+                    'SemestreLectivo'=>array(
+                        'ano_lectivo_id'=>$this->id,
+                        'codigo'=>$data['AnoLectivo']['ano'].'-1',
+                        'semestre'=>1,
+                        'semestre_id'=>1
+                    )
+                );
+                $semestres[] = array(
+                    'SemestreLectivo'=>array(
+                        'ano_lectivo_id'=>$this->id,
+                        'codigo'=>$data['AnoLectivo']['ano'].'-2',
+                        'semestre'=>2,
+                        'semestre_id'=>2
+                    )
+                );
+                $this->SemestreLectivo->create();
+                if($this->SemestreLectivo->saveAll($semestres)){
+                    $dataSource->commit();
+
+                    return $this->id;
+                } else{
+                    $dataSource->rollback();
+                    return [false,$this->SemestreLectivo->validationErros];
+                }
+            } else{
+                $dataSource->rollback();
+                return [false,$this->validationErrors];
+            }
         }
 
 

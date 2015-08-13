@@ -332,7 +332,97 @@ class AlunoTest extends CakeTestCase
      */
     public function testCadastraAluno()
     {
-        $this->markTestIncomplete('testCadastraAluno not implemented.');
+        $this->loadFixtures('Candidatura', 'User', 'Cidade', 'Aluno', 'Entidade', 'PlanoEstudo',
+            'EntidadeIdentificacao', 'EntidadeContacto', 'AlunoNivelMedio', 'HistoricoCurso', 'Matricula','AnoLectivo','SemestreLectivo');
+        $data = [
+            'Aluno'                 => [
+                'numero_estudante'           => '20072041017',
+                'curso_id'                   => '49',
+                'ano_ingresso'               => '2007',
+                'data_matricula'             => '2015-08-12',
+                'certificado_nivel_anterior' => '1',
+                'recenseamento_militar'      => '1',
+                'nome_emergencia'            => 'Elisio Leonardo',
+                'telemovel_emergencia'       => '+258826489374',
+                'parentesco_encarregado'     => '1',
+                'codigo'                     => '20072041017'
+            ],
+            'Entidade'              => [
+                'apelido'              => 'Leonardo',
+                'nomes'                => 'Elisio',
+                'genero_id'            => '1',
+                'data_nascimento'      => '1989-02-09',
+                'estado_civil'         => '1',
+                'nome_pai'             => 'Chigalo Sande',
+                'nome_mae'             => 'Chuma Mafanhe',
+                'naturalidade'         => 'Chimoio',
+                'pais_nascimento'      => '152',
+                'provincia_nascimento' => '4',
+                'cidade_nascimento'    => '44',
+                'name'                 => 'Elisio Leonardo'
+            ],
+            'Curso'                 => [
+                'unidade_organica_id' => '3'
+            ],
+            'AlunoNivelMedio'       => [
+                'EscolaNivelMedio'      => [
+                    'provincia_id' => '4',
+                    'distrito_id'  => '44'
+                ],
+                'escola_nivel_medio_id' => '',
+                'nova_escola_anterior'  => 'Escola Secundaria Samora Machel',
+                'ano_conclusao'         => '2006',
+                'nota_final'            => '15'
+            ],
+            'EntidadeContacto'      => [
+                (int)2 => '826489374'
+            ],
+            'EntidadeIdentificacao' => [
+                'documento_identificacao_id' => '1',
+                'numero'                     => '1101023525320',
+                'local_emissao'              => 'Maputo',
+                'data_emissao'               => '2015-08-11'
+            ],
+            'Matricula'             => [
+                'user_id' => '42646'
+            ]
+        ];
+        $resultado = $this->Aluno->cadastraAluno($data);
+        $this->assertSame(true, $resultado);
+        $this->assertTrue($resultado);
+
+        $data2 = [
+            'Aluno'                 => [
+                'numero_estudante'           => '200720410173',
+                'curso_id'                   => '49',
+                'ano_ingresso'               => '2007',
+                'data_matricula'             => '2015-08-12',
+                'certificado_nivel_anterior' => '1',
+                'recenseamento_militar'      => '1',
+                'codigo'                     => '200720410173'
+            ],
+            'Entidade'              => [
+                'apelido'              => 'Leonardo',
+                'nomes'                => 'Elisio',
+                'genero_id'            => '1',
+                'data_nascimento'      => '1989-02-09',
+            ],
+            'Curso'                 => [
+                'unidade_organica_id' => '3'
+            ],
+            'EntidadeContacto'      => [
+                '2' => '826489374'
+            ],
+            'EntidadeIdentificacao' => [
+                'documento_identificacao_id' => '1',
+                'numero'                     => '110102352532034',
+            ],
+            'Matricula'             => [
+                'user_id' => '1'
+            ]
+        ];
+        $resultado2 = $this->Aluno->cadastraAluno($data2);
+        $this->assertSame(true,$resultado2);
     }
 
     /**
@@ -562,7 +652,7 @@ class AlunoTest extends CakeTestCase
      */
     public function testConcluirNivel()
     {
-        $this->loadFixtures('Aluno','HistoricoCurso','AlunoEstado');
+        $this->loadFixtures('Aluno', 'HistoricoCurso', 'AlunoEstado');
         $data = [
             'HistoricoCurso' => [
                 'data_conclusao' => '2015-07-14',

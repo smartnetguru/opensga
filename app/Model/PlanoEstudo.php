@@ -53,7 +53,7 @@ class PlanoEstudo extends AppModel {
 	public $validate = array(
 		'name' => array(
 			'nameRule-1' => array(
-				'rule' => 'notEmpty',
+				'rule' => 'notBlank',
 				'required' => 'create',
 				'message' => 'O nome do Plano de Estudos e obrigatorio'
 			),
@@ -65,7 +65,7 @@ class PlanoEstudo extends AppModel {
 		),
 		'curso_id' => array(
 			'CursoRule-1' => array(
-				'rule' => 'notEmpty',
+				'rule' => 'notBlank',
 				'required' => 'create',
 				'message' => 'O Curso tem de ser indicado'
 			)

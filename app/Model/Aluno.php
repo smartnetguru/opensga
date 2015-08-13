@@ -230,14 +230,14 @@ class Aluno extends AppModel
         ]
     ];
     public $validate = [
-        'curso_id' => [
+        'curso_id'      => [
             'loginRule-3' => [
                 'rule'     => 'notBlank',
                 'required' => 'create',
                 'message'  => 'O Usermane não pode estar vazio'
             ]
         ],
-        'codigo'   => [
+        'codigo'        => [
             'codigoRule-1' => [
                 'rule'     => 'isUnique',
                 'required' => 'create',
@@ -246,6 +246,12 @@ class Aluno extends AppModel
             'codigoRule-2' => [
                 'rule'    => 'notBlank',
                 'message' => 'Todo estudante deve ter um código atribuido'
+            ]
+        ],
+        'data_ingresso' => [
+            'dataIngressoDate' => [
+                'rule'    => 'date',
+                'message' => 'A data de Ingresso deve ser uma data valida'
             ]
         ]
     ];
@@ -479,7 +485,7 @@ class Aluno extends AppModel
         $inscricao = new Inscricao;
         $Matricula = new Matricula;
 
-        $plano_estudo = $this->query("Select plano_estudo_id from matriculas where aluno_id = {$aluno}");
+        $plano_estudo = $this->query("Select plano_estudo_id from matriculas where aluno_id = {$aluno_id}");
         $turma->recursive = -1;
         $turmas = $turma->getAllTurmasByAluno($plano_estudo[0]['matriculas']['plano_estudo_id']);
 
@@ -740,6 +746,7 @@ class Aluno extends AppModel
      */
     public function cadastraAluno(array $data)
     {
+
         $dataSource = $this->getDataSource();
         $dataSource->begin();
 
@@ -780,17 +787,30 @@ class Aluno extends AppModel
             $data['Entidade']['telemovel'] = $data['EntidadeContacto'][2];
             $data['Entidade']['documento_identificacao_id'] = $data['EntidadeIdentificacao']['documento_identificacao_id'];
             $data['Entidade']['documento_identificacao_numero'] = $data['EntidadeIdentificacao']['numero'];
-            $data['Entidade']['cidade_morada'] = $data['EntidadeContacto'][9];
-            $data['Entidade']['bairro_morada'] = $bairro_morada_id;
-            $data['Entidade']['caixa_postal_morada'] = $data['EntidadeContacto'][8];
-            $data['Entidade']['email'] = $data['EntidadeContacto'][1];
-            $data['Entidade']['documento_identificacao_data_emissao'] = $data['EntidadeIdentificacao']['data_emissao'];
-            $data['Entidade']['estado_entidade_id'] = 1;
-            $data['Entidade']['documento_identificacao_local_emissao'] = $data['EntidadeIdentificacao']['local_emissao'];
-            $data['Entidade']['avenida_rua'] = $rua_morada_id;
-            //$data['Entidade']['documento_identificacao_validade'] = $data['EntidadeIdentificacao']['documento_identificacao_id'];
+            if (isset($data['EntidadeContacto'][9])) {
+                $data['Entidade']['cidade_morada'] = $data['EntidadeContacto'][9];
+            }
+            if (isset($data['EntidadeContacto'][8])) {
+                $data['Entidade']['caixa_postal_morada'] = $data['EntidadeContacto'][8];
+            }
 
-            if (!isset($data['Entidade']['nacionalidade'])) {
+
+            if (empty($data['Entidade']['email'])) {
+                $data['Entidade']['email'] = $data['User']['username'];
+            }
+
+            if(!empty($data['EntidadeIdentificacao']['data_emissao'])){
+                $data['Entidade']['documento_identificacao_data_emissao'] = $data['EntidadeIdentificacao']['data_emissao'];
+            }
+            if(!empty($data['EntidadeIdentificacao']['local_emissao'])){
+                $data['Entidade']['documento_identificacao_local_emissao'] = $data['EntidadeIdentificacao']['local_emissao'];
+            }
+
+            $data['Entidade']['estado_entidade_id'] = 1;
+
+
+
+            if (!isset($data['Entidade']['nacionalidade']) && isset($data['Entidade']['pais_nascimento'])) {
                 $data['Entidade']['nacionalidade'] = $data['Entidade']['pais_nascimento'];
             }
             $this->Entidade->create();
@@ -799,14 +819,17 @@ class Aluno extends AppModel
                 //Grava os dados do Aluno
                 $data['Aluno']['user_id'] = $this->User->getLastInsertID();
                 $data['Aluno']['entidade_id'] = $this->Entidade->getLastInsertID();
-                $data['Aluno']['data_ingresso'] = date('Y-m-d');
+                $data['Aluno']['data_ingresso'] = $data['Aluno']['data_matricula'];
                 $data['Aluno']['curso_ingresso_id'] = $data['Aluno']['curso_id'];
 
                 $plano_estudo_id = $this->Curso->getPlanoEstudoIdRecente($data['Aluno']['curso_id']);
                 if (!empty($plano_estudo_id)) {
                     $data['Aluno']['plano_estudo_id'] = $plano_estudo_id;
                 }
-                $data['Aluno']['estado_aluno_id'] = 1;
+                if (empty($data['Aluno']['estado_aluno_id'])) {
+                    $data['Aluno']['estado_aluno_id'] = 1;
+                }
+
 
                 $this->create();
                 if ($this->save($data)) {
@@ -894,31 +917,49 @@ class Aluno extends AppModel
                     }
 
 
-                    $aluno_nivel_medio = [
-                        'AlunoNivelMedio' => $data['AlunoNivelMedio']
-                    ];
-                    //Grava os dados do Nivel Medio
-                    if ($data['AlunoNivelMedio']['nova_escola_anterior'] != '') {
-                        $array_nova_escola = [
-                            'name'         => $data['AlunoNivelMedio']['nova_escola_anterior'],
-                            'pais_id'      => $data['AlunoNivelMedio']['EscolaNivelMedio']['pais_id'],
-                            'provincia_id' => $data['AlunoNivelMedio']['EscolaNivelMedio']['provincia_id'],
-                            'distrito_id'  => $data['AlunoNivelMedio']['EscolaNivelMedio']['distrito_id']
+                    if (isset($data['AlunoNivelMedio'])) {
+                        $aluno_nivel_medio = [
+                            'AlunoNivelMedio' => $data['AlunoNivelMedio']
                         ];
+                        //Grava os dados do Nivel Medio
+                        if ($data['AlunoNivelMedio']['nova_escola_anterior'] != '') {
+                            $array_nova_escola = [
+                                'name'         => $data['AlunoNivelMedio']['nova_escola_anterior'],
+                                'provincia_id' => $data['AlunoNivelMedio']['EscolaNivelMedio']['provincia_id'],
+                                'distrito_id'  => $data['AlunoNivelMedio']['EscolaNivelMedio']['distrito_id']
+                            ];
+                            if(!empty($data['AlunoNivelMedio']['EscolaNivelMedio']['pais_id'])){
+                                $array_nova_escola['pais_id'] = $data['AlunoNivelMedio']['EscolaNivelMedio']['pais_id'];
+                            } else{
+                                $array_nova_escola['pais_id'] = $this->Entidade->ProvinciaNascimento->getPaisByIdProvinciaId($data['AlunoNivelMedio']['EscolaNivelMedio']['provincia_id']);
+                            }
 
-                        $this->AlunoNivelMedio->EscolaNivelMedio->create();
-                        $this->AlunoNivelMedio->EscolaNivelMedio->save(['EscolaNivelMedio' => $array_nova_escola]);
-                        $aluno_nivel_medio['AlunoNivelMedio']['escola_nivel_medio_id'] = $this->AlunoNivelMedio->EscolaNivelMedio->id;
+
+                            $this->AlunoNivelMedio->EscolaNivelMedio->create();
+                            $this->AlunoNivelMedio->EscolaNivelMedio->save(['EscolaNivelMedio' => $array_nova_escola]);
+                            $aluno_nivel_medio['AlunoNivelMedio']['escola_nivel_medio_id'] = $this->AlunoNivelMedio->EscolaNivelMedio->id;
+                        }
+
+
+                        $aluno_nivel_medio['AlunoNivelMedio']['provincia_id'] = $data['AlunoNivelMedio']['EscolaNivelMedio']['provincia_id'];
+                        $aluno_nivel_medio['AlunoNivelMedio']['aluno_id'] = $this->id;
+
+                        $this->AlunoNivelMedio->create();
+                        $this->AlunoNivelMedio->save($aluno_nivel_medio);
                     }
 
 
-                    $aluno_nivel_medio['AlunoNivelMedio']['provincia_id'] = $data['AlunoNivelMedio']['EscolaNivelMedio']['provincia_id'];
-                    $aluno_nivel_medio['AlunoNivelMedio']['aluno_id'] = $this->id;
-
-                    $this->AlunoNivelMedio->create();
-                    $this->AlunoNivelMedio->save($aluno_nivel_medio);
-
                     $anoLectivo = $this->Matricula->AnoLectivo->findByAno($data['Aluno']['ano_ingresso']);
+                    if (empty($anoLectivo)) {
+                        $arrayAnoLectivo = [
+                            'AnoLectivo' => [
+                                'ano' => $data['Aluno']['ano_ingresso']
+                            ]
+                        ];
+                        $anoLectivoId = $this->Matricula->AnoLectivo->criaAnoLectivo($arrayAnoLectivo);
+                    } else {
+                        $anoLectivoId = $anoLectivo['AnoLectivo']['id'];
+                    }
                     /**
                      * @fixme desactivamos temporariamente o o turno e o regime e o nivel
                      */
@@ -929,9 +970,7 @@ class Aluno extends AppModel
                     $data_matricula['estado_matricula_id'] = 1;
                     $data_matricula['data'] = $data['Aluno']['data_matricula'];
                     $data_matricula['user_id'] = $data['Matricula']['user_id'];
-                    $data_matricula['ano_lectivo_id'] = $anoLectivo['AnoLectivo']['id'];
-                    // $data_matricula['turno_id'] = $data['Aluno']['turno_id'];
-                    //$data_matricula['nivel'] = $data['Aluno']['nivel'];
+                    $data_matricula['ano_lectivo_id'] = $anoLectivoId;
                     $data_matricula['tipo_matricula_id'] = 1;
 
 
@@ -948,14 +987,26 @@ class Aluno extends AppModel
                         $this->HistoricoCurso->create();
                         $this->HistoricoCurso->save($historico_array);
 
-                        return $dataSource->commit();
+                        $dataSource->commit();
+
+                        return true;
+
                     }
                 }
+            } else {
+                $dataSource->rollback();
+
+                return [false, $this->Entidade->validationErrors];
+
             }
+        } else {
+            $dataSource->rollback();
+
+            return [false, $this->Entidade->User->validationErrors];
+
         }
 
 
-        $dataSource->rollback();
     }
 
     public function isBolseiro($aluno_id, $ano_lectivo_id = null)

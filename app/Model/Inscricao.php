@@ -25,21 +25,34 @@ class Inscricao extends AppModel {
     public $validate = [
         'tipo_inscricao_id'=>[
             'TipoInscricaoNotEmpty'=>[
-                'rule'=>'notEmpty',
+                'rule'=>'notBlank',
                 'required'=>true,
                 'message'=>'O Tipo de Inscricao deve ser Definido'
             ]
         ],
         'estado_inscricao_id'=>[
             'EstadoInscricaoNotEmpty'=>[
-                'rule'=>'notEmpty',
+                'rule'=>'notBlank',
                 'required'=>true,
                 'message'=>'O Estado da Inscricao deve ser Definido'
             ]
         ],
-        ''
+        'turma_id'=>[
+            'TurmaNotEmpty'=>[
+                'rule'=>'notBlank',
+                'required'=>true,
+                'message'=>'A Turma deve ser Definida'
+            ]
+        ],
+        'turma_frequencia_id'=>[
+            'TurmaFrequenciaNotEmpty'=>[
+                'rule'=>'notBlank',
+                'required'=>true,
+                'message'=>'A turma de frequencia deve ser Definida'
+            ]
+        ],
+
     ];
-	public $actsAs = array('Auditable.Auditable');
 	var $belongsTo = array(
 		'Aluno' => array(
 			'className' => 'Aluno',

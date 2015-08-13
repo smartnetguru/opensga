@@ -41,5 +41,15 @@ class Provincia extends AppModel {
 			'order' => ''
 		)
 	);
+
+
+    public function getPaisByIdProvinciaId($provinciaId){
+        $provincia = $this->findByid($provinciaId);
+        if($provincia){
+            return $provincia['Provincia']['pais_id'];
+        } else return null;
+
+    }
+
 }
 ?>
