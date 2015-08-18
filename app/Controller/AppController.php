@@ -40,7 +40,7 @@
             'Flash'
         ];
         public $helpers     = [
-            'Html',
+            'Html'=> array('className' =>'SigaHtml'),
             'AclLink',
             'Print',
             'BreadCumbs',
