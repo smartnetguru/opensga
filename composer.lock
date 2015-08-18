@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "a808d77324da504d0a0b96078ff0ad78",
+    "hash": "cf2d590b61f3260a8a2b311bd2db4b60",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
-            "version": "2.8.17",
+            "version": "2.8.18",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "2f854073d68ee891c1e582015a423938942aa913"
+                "reference": "f8c68d5de3e204320a2a47d0d786a8ee17b1a8ee"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/2f854073d68ee891c1e582015a423938942aa913",
-                "reference": "2f854073d68ee891c1e582015a423938942aa913",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/f8c68d5de3e204320a2a47d0d786a8ee17b1a8ee",
+                "reference": "f8c68d5de3e204320a2a47d0d786a8ee17b1a8ee",
                 "shasum": ""
             },
             "require": {
@@ -67,7 +67,7 @@
                 "s3",
                 "sdk"
             ],
-            "time": "2015-08-04 21:28:55"
+            "time": "2015-08-12 20:41:18"
         },
         {
             "name": "cakedc/migrations",
@@ -601,6 +601,61 @@
                 "plugin"
             ],
             "time": "2014-12-02 21:44:52"
+        },
+        {
+            "name": "facebook/php-sdk-v4",
+            "version": "5.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/facebook/facebook-php-sdk-v4.git",
+                "reference": "b5d7e5c8b85419f9031b08a161e9030dca35f5a1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/facebook/facebook-php-sdk-v4/zipball/b5d7e5c8b85419f9031b08a161e9030dca35f5a1",
+                "reference": "b5d7e5c8b85419f9031b08a161e9030dca35f5a1",
+                "shasum": ""
+            },
+            "require": {
+                "ext-mbstring": "*",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "guzzlehttp/guzzle": "~5.0",
+                "mockery/mockery": "~0.8",
+                "phpunit/phpunit": "~4.0"
+            },
+            "suggest": {
+                "guzzlehttp/guzzle": "Allows for implementation of the Guzzle HTTP client"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "5.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Facebook\\": "src/Facebook/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Facebook Platform"
+            ],
+            "authors": [
+                {
+                    "name": "Facebook",
+                    "homepage": "https://github.com/facebook/facebook-php-sdk-v4/contributors"
+                }
+            ],
+            "description": "Facebook SDK for PHP",
+            "homepage": "https://github.com/facebook/facebook-php-sdk-v4",
+            "keywords": [
+                "facebook",
+                "sdk"
+            ],
+            "time": "2015-07-08 19:08:57"
         },
         {
             "name": "filp/whoops",

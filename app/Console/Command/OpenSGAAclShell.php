@@ -434,6 +434,7 @@ class OpenSGAAclShell extends AppShell
         $comandos[] = "acl grant Group.3 controllers/users/estudante_mostrar_foto";
         $comandos[] = "acl grant Group.3 controllers/users/estudante_perfil";
         $comandos[] = "acl grant Group.3 controllers/users/estudante_trocar_senha";
+        $comandos[] = "acl grant Group.3 controllers/users/estudante_after_fb_login";
 
         foreach ($comandos as $comando) {
             $this->out($comando);
