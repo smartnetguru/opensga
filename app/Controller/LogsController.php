@@ -83,6 +83,8 @@ class LogsController extends AppController {
 
 
         $logs  = $this->Log->find('all',array('limit'=>25,'order'=>'created DESC'));
+        $totalLogs = $this->Log->find('count');
+        $this->set(compact('totalLogs'));
         $this->set('logs', $logs);
         $this->set('types', $this->Log->getTypes());
         $this->set('filter', $filter);
