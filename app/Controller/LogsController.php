@@ -56,7 +56,8 @@ class LogsController extends AppController {
 	}
 
     public $paginate = array(
-        'order' => array('Log.id' => 'DESC'),
+        'order' => array('Log.created' => 'DESC'),
+        'limit'=>24,
         'fields' => array(
             'Log.created',
             'Log.type',
@@ -80,7 +81,9 @@ class LogsController extends AppController {
             $conditions['type'] = $type;
         }
 
-        $this->set('logs', $this->paginate($conditions));
+
+        $logs  = $this->Log->find('all',array('limit'=>25,'order'=>'created DESC'));
+        $this->set('logs', $logs);
         $this->set('types', $this->Log->getTypes());
         $this->set('filter', $filter);
     }
