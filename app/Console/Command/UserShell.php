@@ -57,8 +57,23 @@ class UserShell extends AppShell {
         foreach($users as $user){
             $hash = $user['User']['password'];
             if(strlen($hash)<12 && strpos($hash,'e')===0){
-                debug('Encontrou------------'.$hash);
+                $this->out('Encontrou------------'.$hash);
                 $this->User->id = $user['User']['id'];
+                //Temos de Certificar que o Aro existe, principalmente para estudantes importados
+                $aro = $this->User->Aro->find('first',
+                    ['conditions' => ['model'       => $this->User->alias,
+                                      'foreign_key' => $user['User']['id']
+                    ]
+                    ]);
+                if (empty($aro)) {
+                    $new_aro = [
+                        'parent_id'   => $user['User']['group_id'],
+                        'foreign_key' => $user['User']['id'],
+                        'model'       => $this->User->alias
+                    ];
+                    $this->User->Aro->create();
+                    $this->User->Aro->save($new_aro);
+                }
                 $this->User->set('password',Security::hash($user['User']['codigocartao'],'blowfish'));
                 $this->User->save();
 
