@@ -80,7 +80,7 @@
                 'host'    => 'mb.timwe.com',
                 'timeout' => 60
             ));
-            $this->log($url_final, 'sms_enviadas');
+
             $results = $HttpSocket->get($url_final);
             $resultado = $results->body;
             $this->set('resultado', $resultado);

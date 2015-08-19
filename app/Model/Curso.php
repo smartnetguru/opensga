@@ -292,42 +292,18 @@ class Curso extends AppModel
         return $cursos;
     }
 
-    public function getCursosSemPlanoEstudos($unidadeOrganicaId=null){
-            $conditions = array();
-        if($unidadeOrganicaId){
-            $conditions['Curso.unidade_organica_id']=$unidadeOrganicaId;
+
+    public function getCursosSemPlanoEstudos($unidadeOrganicaId = null)
+    {
+
+        $dataSource = $this->getDataSource();
+        $query = 'select * from cursos as Curso where Curso.id not in (select curso_id from plano_estudos where Curso.id = plano_estudos.curso_id)';
+        if(isset($unidadeOrganicaId)){
+            $query .=' and unidade_organica_id ='.$unidadeOrganicaId;
         }
+        $cursos = $dataSource->fetchAll($query);
 
-        $conditionsSubQuery['PlanoEstudo.curso_id'] = 'Curso.id';
-
-        $db = $this->getDataSource();
-        $subQuery = $db->buildStatement(
-            array(
-                'fields'     => array('PlanoEstudo.curso_id'),
-                'table'      => $db->fullTableName($this->PlanoEstudo),
-                'alias'      => 'PlanoEstudo',
-                'limit'      => null,
-                'offset'     => null,
-                'joins'      => array(),
-                'conditions' => $conditionsSubQuery,
-                'order'      => null,
-                'group'      => null
-            ),
-            $this
-        );
-        debug($subQuery);
-        $subQuery = ' Curso.id NOT IN (' . $subQuery . ') ';
-        $subQueryExpression = $db->expression($subQuery);
-
-        $conditions[] = $subQueryExpression;
-
-        debug($conditions);
-
-        $this->contain('PlanoEstudo');
-        $this->find('all', compact('conditions'));
-
-        $cursos=$this->find('list');
-        debug($cursos);
+        return $cursos;
     }
 
 }

@@ -875,13 +875,17 @@ class Turma extends AppModel
         return true;
     }
 
-    function upDateTurma($t0009anolectivo_id, $curso_id)
-    {
-        $query = "update t0010turmas tt set tt.estado = 3 where tt.t0003curso_id = {$curso_id} and tt.t0009anolectivo_id = {$t0009anolectivo_id}";
-        $resultado = $this->query($query);
 
-        //var_dump($query);
-        return $resultado;
+
+    public function getTotalTurmasSemDocente($unidadeOrganicaId){
+            $dataSource = $this->getDataSource();
+        $query = 'select count(*) as total from turmas as Turma,cursos as Curso where
+                  Turma.id not in (select turma_id from docente_turmas where Turma.id = docente_turmas.turma_id)
+                  and Turma.curso_id = Curso.id
+                  and Curso.unidade_organica_id = '.$unidadeOrganicaId;
+        $turmas = $dataSource->fetchAll($query);
+
+        return $turmas[0][0]['total'];
     }
 
 }

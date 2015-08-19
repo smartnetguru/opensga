@@ -8,7 +8,10 @@ class AppModel extends Model {
     public $actsAs = array('Containable', );
     public function __construct($id = false, $table = null, $ds = null){
         if(Configure::read('debug')==0){
-            $this->actsAs[]= 'Auditable.Auditable';
+            if($this->alias != 'Session'){
+                $this->actsAs[]= 'Auditable.Auditable';
+            }
+
         }
         parent::__construct($id,$table,$ds);
     }

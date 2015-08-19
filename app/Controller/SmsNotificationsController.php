@@ -74,7 +74,7 @@ class SmsNotificationsController extends AppController {
 
 
 		$response_text = $this->SmsNotification->id . "SIGA";
-		$this->log($response_text, 'sms_timwe');
+		
 		$this->response->type("text/html");
 		$this->response->charset("utf-8");
 

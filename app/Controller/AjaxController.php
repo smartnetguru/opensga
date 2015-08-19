@@ -48,7 +48,7 @@ class AjaxController extends AppController {
 			'name LIKE ' => '%' . $this->request->query['term'] . '%'
 		);
 
-		$results = $this->Aluno->Entidade->find('all', array('fields' => array('name'),
+		$results = $this->Bairro->find('all', array('fields' => array('name'),
 			'conditions' => $conditions,
 			'group' => array('name'), 'limit' => 20
 		));

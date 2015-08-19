@@ -328,6 +328,7 @@ class User extends AppModel {
         if (!isset($data['User']['username']) || $data['User']['username'] == '') {
             $data['User']['username'] = $this->geraEmailUem($data['Entidade']['apelido'], $data['Entidade']['nomes']);
         }
+        $data['User']['password'] = Security::hash($data['User']['password'],'blowfish');
         if($this->save($data)){
             return $this->id;
         }

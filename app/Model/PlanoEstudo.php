@@ -252,7 +252,7 @@ class PlanoEstudo extends AppModel {
         $this->Curso->Aluno->contain(array(
             'Curso'
         ));
-        $aluno = $ths->Curso->Aluno->findById($alunoId);
+        $aluno = $this->Curso->Aluno->findById($alunoId);
         debug($aluno);
 
     }

@@ -39,11 +39,13 @@
         public function manutencao_cursos_sem_encarregado() {
             $cursos = $this->Curso->getAllCursosSemEncarregado();
             $this->set(compact('cursos'));
-            $this->render('index');
+            $this->render('index_no_pagination');
         }
 
         public function manutencao_cursos_sem_plano_estudos(){
             $cursos = $this->Curso->getCursosSemPlanoEstudos();
+            $this->set(compact('cursos'));
+            $this->render('index_no_pagination');
         }
 
         public function manutencao_cursos_sem_turno(){

@@ -8,7 +8,7 @@ App::uses('AuditableConfig', 'Auditable.Lib');
 class OpenSGAShell extends AppShell
 {
 
-    public $uses = array(
+    public $uses = [
         'Inscricao',
         'Turma',
         'Matricula',
@@ -28,7 +28,7 @@ class OpenSGAShell extends AppShell
         'User',
         'SmsNotification',
         'SmsEnviada'
-    );
+    ];
 
     public function actualiza_fotos_uem()
     {
@@ -37,7 +37,7 @@ class OpenSGAShell extends AppShell
 
         $i = 0;
         $this->Aluno->contain('Entidade');
-        $alunos = $this->Aluno->find('all', array('conditions' => array('Entidade.foto' => '0')));
+        $alunos = $this->Aluno->find('all', ['conditions' => ['Entidade.foto' => '0']]);
         die(debug(count($alunos)));
         foreach ($alunos as $aluno) {
             $foto_file = new File('C:' . DS . 'fotos_uem' . DS . $aluno['Aluno']['codigo'] . '.jpg');
@@ -73,7 +73,7 @@ class OpenSGAShell extends AppShell
     public function importa_estudantes_actualizados()
     {
         AuditableConfig::$Logger = ClassRegistry::init('Auditable.Logger');
-        App::import('Vendor', 'PHPExcel', array('file' => 'PHPExcel.php'));
+        App::import('Vendor', 'PHPExcel', ['file' => 'PHPExcel.php']);
         if (!class_exists('PHPExcel')) {
             throw new CakeException('Vendor class PHPExcel not found!');
         }
@@ -159,7 +159,7 @@ class OpenSGAShell extends AppShell
     public function actualiza_historico_curso()
     {
         $historicos = $this->Aluno->HistoricoCurso->find('all',
-            array('conditions' => array('motivo_termino_curso_id' => null)));
+            ['conditions' => ['motivo_termino_curso_id' => null]]);
         foreach ($historicos as $historico) {
             if ($historico['HistoricoCurso']['ano_fim'] != null) {
                 if ($historico['HistoricoCurso']['nota_final'] != null) {
@@ -183,33 +183,33 @@ class OpenSGAShell extends AppShell
     public function ama()
     {
         $this->Aluno->contain('Curso');
-        $alunos = $this->Aluno->find('all', array('conditions' => array('Curso.unidade_organica_id' => 1)));
+        $alunos = $this->Aluno->find('all', ['conditions' => ['Curso.unidade_organica_id' => 1]]);
         foreach ($alunos as $aluno) {
-            $data = array(
-                'aluno_id' => $aluno['Aluno']['id'],
-                'curso_id' => $aluno['Aluno']['curso_id'],
-                'plano_estudo_id' => $aluno['Aluno']['plano_estudo_id'],
-                'data' => date('Y-m-d H:i:s'),
+            $data = [
+                'aluno_id'            => $aluno['Aluno']['id'],
+                'curso_id'            => $aluno['Aluno']['curso_id'],
+                'plano_estudo_id'     => $aluno['Aluno']['plano_estudo_id'],
+                'data'                => date('Y-m-d H:i:s'),
                 'estado_matricula_id' => 1,
-                'user_id' => 1,
-                'turno_id' => 1,
-                'tipo_matricula_id' => 2,
-                'ano_lectivo_id' => 31
+                'user_id'             => 1,
+                'turno_id'            => 1,
+                'tipo_matricula_id'   => 2,
+                'ano_lectivo_id'      => 31
 
-            );
+            ];
             $matricular = false;
             if ($aluno['Aluno']['ano_ingresso'] == 2014) {
                 $matricular = true;
             } else {
                 $matricula2014 = $this->Aluno->Matricula->find('first',
-                    array('conditions' => array('aluno_id' => $aluno['Aluno']['id'], 'ano_lectivo_id' => 30)));
+                    ['conditions' => ['aluno_id' => $aluno['Aluno']['id'], 'ano_lectivo_id' => 30]]);
                 if (!empty($matricula2014)) {
                     $matricular = true;
                 }
             }
 
             if ($matricular) {
-                $arrayMatricula = array('Matricula' => $data);
+                $arrayMatricula = ['Matricula' => $data];
                 $this->Aluno->Matricula->create();
                 $this->Aluno->Matricula->save($arrayMatricula);
             }
@@ -221,15 +221,15 @@ class OpenSGAShell extends AppShell
         AuditableConfig::$Logger = ClassRegistry::init('Auditable.Logger');
 
         $matriculasCount = $this->Matricula->find('count',
-            array('conditions' => array('Matricula.tipo_matricula_id' => array(0, null))));
+            ['conditions' => ['Matricula.tipo_matricula_id' => [0, null]]]);
         while ($matriculasCount > 0) {
-            $this->Matricula->contain(array(
+            $this->Matricula->contain([
                 'AnoLectivo',
                 'Aluno',
                 'TipoMatricula'
-            ));
+            ]);
             $matriculas = $this->Matricula->find('all',
-                array('conditions' => array('Matricula.tipo_matricula_id' => array(0, null)), 'limit' => 10000));
+                ['conditions' => ['Matricula.tipo_matricula_id' => [0, null]], 'limit' => 10000]);
             foreach ($matriculas as $matricula) {
                 $anoLectivo = $matricula['AnoLectivo']['ano'];
                 $anoIngresso = $matricula['Aluno']['ano_ingresso'];
@@ -242,7 +242,7 @@ class OpenSGAShell extends AppShell
                 }
                 $this->Matricula->save();
                 $matriculasCount = $this->Matricula->find('count',
-                    array('conditions' => array('Matricula.tipo_matricula_id' => array(0, null))));
+                    ['conditions' => ['Matricula.tipo_matricula_id' => [0, null]]]);
                 $this->out($matriculasCount);
             }
         }
@@ -250,7 +250,7 @@ class OpenSGAShell extends AppShell
 
     public function actualiza_matriculas_2015()
     {
-        $matriculas = $this->Matricula->find('all', array('conditions' => array('ano_lectivo_id' => 30)));
+        $matriculas = $this->Matricula->find('all', ['conditions' => ['ano_lectivo_id' => 30]]);
         $totalMatriculas = count($matriculas);
         foreach ($matriculas as $matricula) {
             $alunoId = $matricula['Matricula']['aluno_id'];
@@ -304,7 +304,7 @@ class OpenSGAShell extends AppShell
     {
         AuditableConfig::$Logger = ClassRegistry::init('Auditable.Logger');
         $inscricaos = $this->Inscricao->find('all',
-            array('conditions' => array('estado_inscricao_id' => array(null, 0, 1))));
+            ['conditions' => ['estado_inscricao_id' => [null, 0, 1]]]);
         foreach ($inscricaos as $inscricao) {
             $this->Inscricao->id = $inscricao['Inscricao']['id'];
             $nota_frequencia = $inscricao['Inscricao']['nota_frequencia'];
@@ -347,19 +347,19 @@ class OpenSGAShell extends AppShell
     public function ajusta_inscricao_agronomia()
     {
         $this->Inscricao->contain('Turma');
-        $inscricaos = $this->Inscricao->find('all', array('conditions' => array('Turma.ano_lectivo_id' => 30)));
+        $inscricaos = $this->Inscricao->find('all', ['conditions' => ['Turma.ano_lectivo_id' => 30]]);
         $ajustados = 0;
         $naoEncontrados = 0;
         foreach ($inscricaos as $inscricao) {
             if ($inscricao['Turma']['plano_estudo_id'] == 30) {
-                $turmaNova = $this->Turma->find('first', array(
-                    'conditions' => array(
-                        'Turma.ano_lectivo_id' => 30,
-                        'Turma.curso_id' => $inscricao['Turma']['curso_id'],
-                        'Turma.disciplina_id' => $inscricao['Turma']['disciplina_id'],
+                $turmaNova = $this->Turma->find('first', [
+                    'conditions' => [
+                        'Turma.ano_lectivo_id'  => 30,
+                        'Turma.curso_id'        => $inscricao['Turma']['curso_id'],
+                        'Turma.disciplina_id'   => $inscricao['Turma']['disciplina_id'],
                         'Turma.plano_estudo_id' => 31
-                    )
-                ));
+                    ]
+                ]);
                 if (!empty($turmaNova)) {
                     $this->Inscricao->id = $inscricao['Inscricao']['id'];
                     $this->Inscricao->set('turma_id', $turmaNova['Turma']['id']);
@@ -368,7 +368,7 @@ class OpenSGAShell extends AppShell
                     $this->Inscricao->save();
                     $this->out('Turma Ajustada -----' . $ajustados++);
                 } else {
-                    $turma = array();
+                    $turma = [];
                     $turma['ano_lectivo_id'] = 30;
                     $turma['ano_curricular'] = $inscricao['Turma']['ano_curricular'];
                     $turma['semestre_curricular'] = $inscricao['Turma']['semestre_curricular'];
@@ -381,21 +381,21 @@ class OpenSGAShell extends AppShell
                     $turma['semestre_lectivo_id'] = $inscricao['Turma']['semestre_lectivo_id'];
                     $turma['name'] = $inscricao['Turma']['name'];
 
-                    $turmas = array('Turma' => $turma);
+                    $turmas = ['Turma' => $turma];
                     $this->Turma->create();
                     $this->Turma->save($turmas);
                     $naoEncontrados++;
                 }
             }
             if ($inscricao['Turma']['plano_estudo_id'] == 32) {
-                $turmaNova = $this->Turma->find('first', array(
-                    'conditions' => array(
-                        'Turma.ano_lectivo_id' => 30,
-                        'Turma.curso_id' => $inscricao['Turma']['curso_id'],
-                        'Turma.disciplina_id' => $inscricao['Turma']['disciplina_id'],
+                $turmaNova = $this->Turma->find('first', [
+                    'conditions' => [
+                        'Turma.ano_lectivo_id'  => 30,
+                        'Turma.curso_id'        => $inscricao['Turma']['curso_id'],
+                        'Turma.disciplina_id'   => $inscricao['Turma']['disciplina_id'],
                         'Turma.plano_estudo_id' => 29
-                    )
-                ));
+                    ]
+                ]);
                 if (!empty($turmaNova)) {
                     $this->Inscricao->id = $inscricao['Inscricao']['id'];
                     $this->Inscricao->set('turma_id', $turmaNova['Turma']['id']);
@@ -404,7 +404,7 @@ class OpenSGAShell extends AppShell
                     $this->Inscricao->save();
                     $this->out('Turma Ajustada -----' . $ajustados++);
                 } else {
-                    $turma = array();
+                    $turma = [];
                     $turma['ano_lectivo_id'] = 30;
                     $turma['ano_curricular'] = $inscricao['Turma']['ano_curricular'];
                     $turma['semestre_curricular'] = $inscricao['Turma']['semestre_curricular'];
@@ -417,7 +417,7 @@ class OpenSGAShell extends AppShell
                     $turma['semestre_lectivo_id'] = $inscricao['Turma']['semestre_lectivo_id'];
                     $turma['name'] = $inscricao['Turma']['name'];
 
-                    $turmas = array('Turma' => $turma);
+                    $turmas = ['Turma' => $turma];
                     $this->Turma->create();
                     $this->Turma->save($turmas);
                     $naoEncontrados++;
@@ -430,12 +430,12 @@ class OpenSGAShell extends AppShell
 
     public function actualiza_inscricao_matricula()
     {
-        $inscricaos = $this->Aluno->Inscricao->find("all", array(
-            'conditions' => array(
+        $inscricaos = $this->Aluno->Inscricao->find("all", [
+            'conditions' => [
                 'Inscricao
             .matricula_id is NULL'
-            )
-        ));
+            ]
+        ]);
 
         $dbo = $this->Aluno->Inscricao->getDatasource();
         $logs = $dbo->getLog();
@@ -444,13 +444,13 @@ class OpenSGAShell extends AppShell
 
         foreach ($inscricaos as $inscricao) {
             $alunoId = $inscricao['Inscricao']['aluno_id'];
-            $matricula = $this->Aluno->Matricula->find('first', array(
-                'conditions' => array(
+            $matricula = $this->Aluno->Matricula->find('first', [
+                'conditions' => [
                     'Matricula
-                .ano_lectivo_id' => 30,
+                .ano_lectivo_id'         => 30,
                     'Matricula.aluno_id' => $alunoId
-                )
-            ));
+                ]
+            ]);
             if ($matricula) {
                 $this->Aluno->Inscricao->id = $inscricao['Inscricao']['id'];
                 $this->Aluno->Inscricao->set('matricula_id', $matricula['Matricula']['id']);
@@ -463,11 +463,11 @@ class OpenSGAShell extends AppShell
 
     public function ajusta_inscricao_curriculum()
     {
-        $this->Aluno->Inscricao->contain(array(
+        $this->Aluno->Inscricao->contain([
             'Turma'
-        ));
+        ]);
         $inscricaos = $this->Aluno->Inscricao->find('all',
-            array('conditions' => array('Turma.plano_estudo_id' => array(30, 32), 'Turma.ano_lectivo_id' => 30)));
+            ['conditions' => ['Turma.plano_estudo_id' => [30, 32], 'Turma.ano_lectivo_id' => 30]]);
         debug(count($inscricaos));
         die();
         foreach ($inscricaos as $inscricao) {
@@ -477,16 +477,16 @@ class OpenSGAShell extends AppShell
                 $novoPlanoEstudo = 29;
             }
 
-            $turmaNovoCurriculum = $this->Aluno->Inscricao->Turma->find('first', array(
-                'conditions' => array(
-                    'Turma.ano_lectivo_id' => $inscricao['Turma']['ano_lectivo_id'],
-                    'Turma.curso_id' => $inscricao['Turma']['curso_id'],
-                    'Turma.plano_estudo_id' => $novoPlanoEstudo,
-                    'Turma.disciplina_id' => $inscricao['Turma']['disciplina_id'],
-                    'Turma.ano_curricular' => $inscricao['Turma']['ano_curricular'],
+            $turmaNovoCurriculum = $this->Aluno->Inscricao->Turma->find('first', [
+                'conditions' => [
+                    'Turma.ano_lectivo_id'      => $inscricao['Turma']['ano_lectivo_id'],
+                    'Turma.curso_id'            => $inscricao['Turma']['curso_id'],
+                    'Turma.plano_estudo_id'     => $novoPlanoEstudo,
+                    'Turma.disciplina_id'       => $inscricao['Turma']['disciplina_id'],
+                    'Turma.ano_curricular'      => $inscricao['Turma']['ano_curricular'],
                     'Turma.semestre_curricular' => $inscricao['Turma']['semestre_curricular'],
-                )
-            ));
+                ]
+            ]);
 
             if ($turmaNovoCurriculum) {
                 $this->Aluno->Inscricao->id = $inscricao['Inscricao']['id'];
@@ -500,12 +500,12 @@ class OpenSGAShell extends AppShell
     public function ajusta_plano_estudo_matriculas()
     {
         AuditableConfig::$Logger = ClassRegistry::init('Auditable.Logger');
-        $this->Matricula->contain(array(
+        $this->Matricula->contain([
             'Curso',
             'Aluno'
-        ));
+        ]);
         $matriculas = $this->Matricula->find('all',
-            array('conditions' => array('Curso.unidade_organica_id' => 1, 'Matricula.plano_estudo_id is null')));
+            ['conditions' => ['Curso.unidade_organica_id' => 1, 'Matricula.plano_estudo_id is null']]);
 
         foreach ($matriculas as $matricula) {
             $this->out($matricula['Matricula']['id']);
@@ -513,21 +513,21 @@ class OpenSGAShell extends AppShell
                 $planoEstudoId = $matricula['Aluno']['plano_estudo_id'];
                 $planoEstudo = $this->PlanoEstudo->findById($planoEstudoId);
             } else {
-                $planoEstudo = $this->PlanoEstudo->find('first', array(
-                    'conditions' => array(
+                $planoEstudo = $this->PlanoEstudo->find('first', [
+                    'conditions' => [
                         'PlanoEstudo.curso_id' => $matricula['Matricula']['curso_id'],
-                        'ano_criacao <=' => $matricula['Aluno']['ano_ingresso']
-                    ),
-                    'order' => 'ano_criacao desc'
-                ));
+                        'ano_criacao <='       => $matricula['Aluno']['ano_ingresso']
+                    ],
+                    'order'      => 'ano_criacao desc'
+                ]);
                 if (empty($planoEstudo)) {
-                    $planoEstudo = $this->PlanoEstudo->find('first', array(
-                        'conditions' => array(
+                    $planoEstudo = $this->PlanoEstudo->find('first', [
+                        'conditions' => [
                             'PlanoEstudo.curso_id' => $matricula['Matricula']['curso_id'],
-                            'ano_criacao >=' => $matricula['Aluno']['ano_ingresso']
-                        ),
-                        'order' => 'ano_criacao ASC'
-                    ));
+                            'ano_criacao >='       => $matricula['Aluno']['ano_ingresso']
+                        ],
+                        'order'      => 'ano_criacao ASC'
+                    ]);
                 }
             }
             if (!empty($planoEstudo)) {
@@ -546,7 +546,7 @@ class OpenSGAShell extends AppShell
     public function ajusta_turno_matricula()
     {
 
-        $matriculas = $this->Matricula->find('all', array('conditions' => array('turno_id' => null)));
+        $matriculas = $this->Matricula->find('all', ['conditions' => ['turno_id' => null]]);
         $i = 0;
         foreach ($matriculas as $matricula) {
             $curso_turno = $this->Matricula->Curso->CursosTurno->findByCursoId($matricula['Matricula']['curso_id']);
@@ -559,18 +559,18 @@ class OpenSGAShell extends AppShell
 
     public function altera_cursos_agronomia()
     {
-        $alunos = $this->Aluno->find('all', array(
-            'conditions' => array(
-                'curso_id' => array(7, 8),
+        $alunos = $this->Aluno->find('all', [
+            'conditions' => [
+                'curso_id'        => [7, 8],
                 'estado_aluno_id' => 1
-            )
-        ));
+            ]
+        ]);
         foreach ($alunos as $aluno) {
             $data = [
-                'data_mudanca' => date('Y-m-d'),
-                'observacao' => "Mudanca de Curso para novo Curso. Inscricoes",
-                'curso_antigo' => $aluno['Aluno']['curso_id'],
-                'aluno_id' => $aluno['Aluno']['id'],
+                'data_mudanca'               => date('Y-m-d'),
+                'observacao'                 => "Mudanca de Curso para novo Curso. Inscricoes",
+                'curso_antigo'               => $aluno['Aluno']['curso_id'],
+                'aluno_id'                   => $aluno['Aluno']['id'],
                 'numero_estudante_atribuido' => ''
 
             ];
@@ -591,7 +591,7 @@ class OpenSGAShell extends AppShell
     {
 
 
-        App::import('Vendor', 'PHPExcel', array('file' => 'PHPExcel.php'));
+        App::import('Vendor', 'PHPExcel', ['file' => 'PHPExcel.php']);
         if (!class_exists('PHPExcel')) {
             throw new CakeException('Vendor class PHPExcel not found!');
         }
@@ -600,21 +600,21 @@ class OpenSGAShell extends AppShell
 
         $worksheet = $xls->getActiveSheet();
 
-        $cursos = $this->Curso->find('all', array('conditions' => array('unidade_organica_id' => 28)));
+        $cursos = $this->Curso->find('all', ['conditions' => ['unidade_organica_id' => 28]]);
         foreach ($cursos as $curso) {
             $myWorkSheet = new PHPExcel_Worksheet($xls, substr($curso['Curso']['name'], 0, 30));
             $worksheet = $xls->addSheet($myWorkSheet);
 
             $this->PlanoEstudo->contain();
-            $planoestudo = $this->PlanoEstudo->find('first', array(
-                'conditions' => array('curso_id' => $curso['Curso']['id'], 'ano_criacao <' => 2009),
-                'order' => array('ano_criacao DESC')
-            ));
+            $planoestudo = $this->PlanoEstudo->find('first', [
+                'conditions' => ['curso_id' => $curso['Curso']['id'], 'ano_criacao <' => 2009],
+                'order'      => ['ano_criacao DESC']
+            ]);
 
-            $planoestudoano = $this->PlanoEstudo->DisciplinaPlanoEstudo->find('all', array(
-                'conditions' => array('plano_estudo_id' => $planoestudo['PlanoEstudo']['id']),
-                'order' => array('ano', 'semestre')
-            ));
+            $planoestudoano = $this->PlanoEstudo->DisciplinaPlanoEstudo->find('all', [
+                'conditions' => ['plano_estudo_id' => $planoestudo['PlanoEstudo']['id']],
+                'order'      => ['ano', 'semestre']
+            ]);
 
             $linha = 1;
             $coluna = 1;
@@ -635,7 +635,7 @@ class OpenSGAShell extends AppShell
 //die();
 
             $alunos = $this->Aluno->find('all',
-                array('conditions' => array('Aluno.ano_ingresso' => 2009, 'Aluno.curso_id' => $curso['Curso']['id'])));
+                ['conditions' => ['Aluno.ano_ingresso' => 2009, 'Aluno.curso_id' => $curso['Curso']['id']]]);
             $linha = 5;
             $i = 0;
             foreach ($alunos as $aluno) {
@@ -644,16 +644,16 @@ class OpenSGAShell extends AppShell
                 while ($coluna <= $total_colunas) {
                     $codigo_disciplina = $worksheet->getCellByColumnAndRow($coluna, 4)->getValue();
                     $disciplina = $this->Disciplina->findByCodigo($codigo_disciplina);
-                    $this->Aluno->Inscricao->contain(array(
+                    $this->Aluno->Inscricao->contain([
                         'Turma'
-                    ));
-                    $inscricao = $this->Aluno->Inscricao->find('first', array(
-                        'conditions' => array(
-                            'Inscricao.aluno_id' => $aluno['Aluno']['id'],
+                    ]);
+                    $inscricao = $this->Aluno->Inscricao->find('first', [
+                        'conditions' => [
+                            'Inscricao.aluno_id'  => $aluno['Aluno']['id'],
                             'Turma.disciplina_id' => $disciplina['Disciplina']['id']
-                        ),
-                        'order' => 'data DESC'
-                    ));
+                        ],
+                        'order'      => 'data DESC'
+                    ]);
                     if ($inscricao) {
                         $worksheet->setCellValueByColumnAndRow($coluna, $linha, $inscricao['Inscricao']['nota_final']);
                     }
@@ -677,7 +677,7 @@ class OpenSGAShell extends AppShell
 
     public function autenticidades()
     {
-        App::import('Vendor', 'PHPExcel', array('file' => 'PHPExcel.php'));
+        App::import('Vendor', 'PHPExcel', ['file' => 'PHPExcel.php']);
         if (!class_exists('PHPExcel')) {
             throw new CakeException('Vendor class PHPExcel not found!');
         }
@@ -687,7 +687,7 @@ class OpenSGAShell extends AppShell
         $worksheet = $xls->getActiveSheet();
 //debug($xls->getActiveSheetIndex());
         $linha_actual = 1;
-        $numeros = array();
+        $numeros = [];
         foreach ($worksheet->getRowIterator() as $row) {
             if ($worksheet->getCell('A' . $linha_actual)->getValue() == '') {
 
@@ -719,7 +719,7 @@ class OpenSGAShell extends AppShell
 
         $worksheet = $xls->getActiveSheet();
 
-        $colunas = array('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I');
+        $colunas = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I'];
         $linha_actual = 2;
         $array_i = 2;
 
@@ -751,7 +751,7 @@ class OpenSGAShell extends AppShell
 
     public function bolsa_importa_alineas()
     {
-        App::import('Vendor', 'PHPExcel', array('file' => 'PHPExcel.php'));
+        App::import('Vendor', 'PHPExcel', ['file' => 'PHPExcel.php']);
         if (!class_exists('PHPExcel')) {
             throw new CakeException('Vendor class PHPExcel not found!');
         }
@@ -766,7 +766,7 @@ class OpenSGAShell extends AppShell
                 break;
             }
 
-            $caa = array();
+            $caa = [];
             $caa['apelido'] = $worksheet->getCell('C' . $linha_actual)->getCalculatedValue();
             $caa['nomes'] = $worksheet->getCell('D' . $linha_actual)->getCalculatedValue();
             $caa['nome_pai'] = $worksheet->getCell('F' . $linha_actual)->getCalculatedValue();
@@ -806,14 +806,14 @@ class OpenSGAShell extends AppShell
     public function cancela_turmas_sem_inscricao()
     {
         $turmas = $this->Aluno->Inscricao->Turma->find('all',
-            array('conditions' => array('Turma.estado_turma_id' => 1)));
+            ['conditions' => ['Turma.estado_turma_id' => 1]]);
         $total_apagadas = 0;
         foreach ($turmas as $turma) {
             $inscricaos = $this->Aluno->Inscricao->find('count',
-                array('conditions' => array('Inscricao.turma_id' => $turma['Turma']['id'])));
+                ['conditions' => ['Inscricao.turma_id' => $turma['Turma']['id']]]);
             if ($inscricaos == 0) {
                 $inscricaos = $this->Aluno->Inscricao->find('count',
-                    array('conditions' => array('Inscricao.turma_frequencia_id' => $turma['Turma']['id'])));
+                    ['conditions' => ['Inscricao.turma_frequencia_id' => $turma['Turma']['id']]]);
                 if ($inscricaos == 0) {
                     $this->Aluno->Inscricao->Turma->id = $turma['Turma']['id'];
                     $this->Aluno->Inscricao->Turma->set('estado_turma_id', 3);
@@ -829,23 +829,23 @@ class OpenSGAShell extends AppShell
     {
 
         $this->Aluno->contain('Curso');
-        $alunos = $this->Aluno->find('all', array('conditions' => array('ano_ingresso' => 2013)));
+        $alunos = $this->Aluno->find('all', ['conditions' => ['ano_ingresso' => 2013]]);
         foreach ($alunos as $aluno) {
 //Verifica se este aluno nao tem nenhum pedido de novo cartao ja emitido
             $pedido_existe = $this->RequisicoesPedido->find('first',
-                array('conditions' => array('aluno_id' => $aluno['Aluno']['id'], 'requisicoes_tipo_pedido_id' => 6)));
+                ['conditions' => ['aluno_id' => $aluno['Aluno']['id'], 'requisicoes_tipo_pedido_id' => 6]]);
 
             if (empty($pedido_existe)) {
-                $novo_pedido = array(
-                    'aluno_id' => $aluno['Aluno']['id'],
-                    'requisicoes_tipo_pedido_id' => 6,
-                    'data_pedido' => date('Y-m-d H:i:s'),
-                    'curso_id' => $aluno['Aluno']['curso_id'],
+                $novo_pedido = [
+                    'aluno_id'                     => $aluno['Aluno']['id'],
+                    'requisicoes_tipo_pedido_id'   => 6,
+                    'data_pedido'                  => date('Y-m-d H:i:s'),
+                    'curso_id'                     => $aluno['Aluno']['curso_id'],
                     'requisicoes_estado_pedido_id' => 1,
-                    'funcionario_id' => 1,
-                );
+                    'funcionario_id'               => 1,
+                ];
                 $this->RequisicoesPedido->create();
-                $this->RequisicoesPedido->save(array('RequisicoesPedido' => $novo_pedido));
+                $this->RequisicoesPedido->save(['RequisicoesPedido' => $novo_pedido]);
                 $this->out($this->RequisicoesPedido->id);
             }
         }
@@ -854,7 +854,7 @@ class OpenSGAShell extends AppShell
     public function envia_sms_estrangeiros()
     {
         $this->Aluno->contain('Entidade');
-        $alunos = $this->Aluno->find('all', array('conditions' => array('Aluno.ano_ingresso' => 2015)));
+        $alunos = $this->Aluno->find('all', ['conditions' => ['Aluno.ano_ingresso' => 2015]]);
         debug(count($alunos));
         foreach ($alunos as $aluno) {
             if ($aluno['Entidade']['telemovel']) {
@@ -866,7 +866,7 @@ class OpenSGAShell extends AppShell
     public function exporta_bolsas_novo_ingresso()
     {
 
-        App::import('Vendor', 'PHPExcel', array('file' => 'PHPExcel.php'));
+        App::import('Vendor', 'PHPExcel', ['file' => 'PHPExcel.php']);
         if (!class_exists('PHPExcel')) {
             throw new CakeException('Vendor class PHPExcel not found!');
         }
@@ -875,19 +875,19 @@ class OpenSGAShell extends AppShell
 
         $worksheet = $xls->getActiveSheet();
         $linha_actual = 2;
-        $this->Aluno->Matricula->contain(array(
-            'Aluno' => array(
+        $this->Aluno->Matricula->contain([
+            'Aluno' => [
                 'Entidade'
-            ),
+            ],
             'AnoLectivo',
-            'Curso' => array(
+            'Curso' => [
                 'UnidadeOrganica'
-            )
-        ));
-        $matriculas = $this->Aluno->Matricula->find('all', array(
-            'conditions' => array('Matricula.ano_lectivo_id' => Configure::read('OpenSGA.ano_lectivo_id')),
-            'limit' => 10
-        ));
+            ]
+        ]);
+        $matriculas = $this->Aluno->Matricula->find('all', [
+            'conditions' => ['Matricula.ano_lectivo_id' => Configure::read('OpenSGA.ano_lectivo_id')],
+            'limit'      => 10
+        ]);
         foreach ($matriculas as $matricula) {
             $xls->getActiveSheet()->setCellValue('A' . $linha_actual, $matricula['Aluno']['codigo']);
             $xls->getActiveSheet()->setCellValue('B' . $linha_actual, $matricula['Aluno']['Entidade']['apelido']);
@@ -913,7 +913,7 @@ class OpenSGAShell extends AppShell
 
     public function exporta_candidatos_boletins()
     {
-        App::import('Vendor', 'PHPExcel', array('file' => 'PHPExcel.php'));
+        App::import('Vendor', 'PHPExcel', ['file' => 'PHPExcel.php']);
         if (!class_exists('PHPExcel')) {
             throw new CakeException('Vendor class PHPExcel not found!');
         }
@@ -922,14 +922,14 @@ class OpenSGAShell extends AppShell
 
         $worksheet = $xls->getActiveSheet();
         $linha_actual = 2;
-        $this->Candidatura->contain(array(
-            'Curso' => array(
+        $this->Candidatura->contain([
+            'Curso' => [
                 'UnidadeOrganica'
-            ),
+            ],
             'Genero'
-        ));
+        ]);
         $candidatos = $this->Candidatura->find('all',
-            array('conditions' => array('estado_candidatura_id' => 2, 'ano_lectivo_admissao' => 2014)));
+            ['conditions' => ['estado_candidatura_id' => 2, 'ano_lectivo_admissao' => 2014]]);
 
         foreach ($candidatos as $candidato) {
             $xls->getActiveSheet()->setCellValue('A' . $linha_actual, $candidato['Candidatura']['numero_candidato']);
@@ -956,7 +956,7 @@ class OpenSGAShell extends AppShell
 
     public function exporta_renovacao_matriculas()
     {
-        App::import('Vendor', 'PHPExcel', array('file' => 'PHPExcel.php'));
+        App::import('Vendor', 'PHPExcel', ['file' => 'PHPExcel.php']);
         if (!class_exists('PHPExcel')) {
             throw new CakeException('Vendor class PHPExcel not found!');
         }
@@ -965,17 +965,17 @@ class OpenSGAShell extends AppShell
 
         $worksheet = $xls->getActiveSheet();
         $linha_actual = 2;
-        $this->Aluno->Matricula->contain(array(
-            'Aluno' => array(
+        $this->Aluno->Matricula->contain([
+            'Aluno' => [
                 'Entidade'
-            ),
+            ],
             'AnoLectivo',
-            'Curso' => array(
+            'Curso' => [
                 'UnidadeOrganica'
-            )
-        ));
+            ]
+        ]);
         $matriculas = $this->Aluno->Matricula->find('all',
-            array('conditions' => array('Matricula.ano_lectivo_id' => Configure::read('OpenSGA.ano_lectivo_id'))));
+            ['conditions' => ['Matricula.ano_lectivo_id' => Configure::read('OpenSGA.ano_lectivo_id')]]);
         foreach ($matriculas as $matricula) {
             $xls->getActiveSheet()->setCellValue('A' . $linha_actual, $matricula['Aluno']['codigo']);
             $xls->getActiveSheet()->setCellValue('B' . $linha_actual, $matricula['Aluno']['Entidade']['apelido']);
@@ -1014,11 +1014,11 @@ class OpenSGAShell extends AppShell
 
             $datasource = $this->Aluno->getDatasource();
             $datasource->begin();
-            $transacao = array();
-            $pagamento = array();
+            $transacao = [];
+            $pagamento = [];
 
             $curso_turno = $this->Aluno->Curso->CursosTurno->find('first',
-                array('conditions' => array('curso_id' => $aluno['Aluno']['curso_id'])));
+                ['conditions' => ['curso_id' => $aluno['Aluno']['curso_id']]]);
             if ($curso_turno['CursosTurno']['turno_id'] == 1) {
                 $transacao['financeiro_tipo_transacao_id'] = 2;
                 $pagamento['tipo_pagamento_id'] = 37;
@@ -1032,31 +1032,31 @@ class OpenSGAShell extends AppShell
             }
             $transacao['entidade_id'] = $aluno['Aluno']['entidade_id'];
 
-            $conta_existe = $this->Aluno->Entidade->FinanceiroTransacao->FinanceiroConta->find('first', array(
-                'conditions' => array(
-                    'entidade_id' => $aluno['Aluno']['entidade_id'],
+            $conta_existe = $this->Aluno->Entidade->FinanceiroTransacao->FinanceiroConta->find('first', [
+                'conditions' => [
+                    'entidade_id'         => $aluno['Aluno']['entidade_id'],
                     'unidade_organica_id' => 29
-                )
-            ));
+                ]
+            ]);
             if (empty($conta_existe)) {
                 $this->Aluno->Entidade->FinanceiroTransacao->FinanceiroConta->create();
-                $this->Aluno->Entidade->FinanceiroTransacao->FinanceiroConta->save(array(
-                    'FinanceiroConta' => array(
-                        'entidade_id' => $aluno['Aluno']['entidade_id'],
+                $this->Aluno->Entidade->FinanceiroTransacao->FinanceiroConta->save([
+                    'FinanceiroConta' => [
+                        'entidade_id'         => $aluno['Aluno']['entidade_id'],
                         'unidade_organica_id' => 29
-                    )
-                ));
-                $conta_existe = $this->Aluno->Entidade->FinanceiroTransacao->FinanceiroConta->find('first', array(
-                    'conditions' => array(
-                        'entidade_id' => $aluno['Aluno']['entidade_id'],
+                    ]
+                ]);
+                $conta_existe = $this->Aluno->Entidade->FinanceiroTransacao->FinanceiroConta->find('first', [
+                    'conditions' => [
+                        'entidade_id'         => $aluno['Aluno']['entidade_id'],
                         'unidade_organica_id' => 29
-                    )
-                ));
+                    ]
+                ]);
             }
             $transacao['financeiro_conta_id'] = $conta_existe['FinanceiroConta']['id'];
             $transacao['financeiro_estado_transacao_id'] = 1;
             $this->Aluno->Entidade->FinanceiroTransacao->create();
-            $this->Aluno->Entidade->FinanceiroTransacao->save(array('FinanceiroTransacao' => $transacao));
+            $this->Aluno->Entidade->FinanceiroTransacao->save(['FinanceiroTransacao' => $transacao]);
 
             $pagamento['aluno_id'] = $aluno['Aluno']['id'];
             $pagamento['financeiro_conta_id'] = $conta_existe['FinanceiroConta']['id'];
@@ -1072,7 +1072,7 @@ class OpenSGAShell extends AppShell
             $pagamento['entidade_id'] = $aluno['Aluno']['entidade_id'];
 
             $this->Aluno->Entidade->FinanceiroTransacao->FinanceiroPagamento->create();
-            $this->Aluno->Entidade->FinanceiroTransacao->FinanceiroPagamento->save(array('FinanceiroPagamento' => $pagamento));
+            $this->Aluno->Entidade->FinanceiroTransacao->FinanceiroPagamento->save(['FinanceiroPagamento' => $pagamento]);
 
             $datasource->commit();
             debug($aluno);
@@ -1082,7 +1082,7 @@ class OpenSGAShell extends AppShell
 
     public function mestres()
     {
-        App::import('Vendor', 'PHPExcel', array('file' => 'PHPExcel.php'));
+        App::import('Vendor', 'PHPExcel', ['file' => 'PHPExcel.php']);
         if (!class_exists('PHPExcel')) {
             throw new CakeException('Vendor class PHPExcel not found!');
         }
@@ -1092,7 +1092,7 @@ class OpenSGAShell extends AppShell
         $worksheet = $xls->getActiveSheet();
 //debug($xls->getActiveSheetIndex());
         $linha_actual = 2;
-        $numeros = array();
+        $numeros = [];
         foreach ($worksheet->getRowIterator() as $row) {
             if ($worksheet->getCell('B' . $linha_actual)->getValue() == '') {
 
@@ -1131,7 +1131,7 @@ class OpenSGAShell extends AppShell
 
     public function gerar_turmas()
     {
-        $plano_estudos = $this->Turma->PlanoEstudo->find('list', array('conditions' => array('PlanoEstudo.id' => 35)));
+        $plano_estudos = $this->Turma->PlanoEstudo->find('list', ['conditions' => ['PlanoEstudo.id' => 35]]);
         debug($plano_estudos);
         $ano_lectivo_id = Configure::read('OpenSGA.ano_lectivo_id');
         $semestre_id = Configure::read('OpenSGA.semestre_lectivo_id');
@@ -1146,7 +1146,7 @@ class OpenSGAShell extends AppShell
                 $turnos = $this->Turma->Curso->CursosTurno->findAllByCursoId($curso_id);
                 if (empty($turnos)) {
                     $turno_id = null;
-                    $turma = array();
+                    $turma = [];
                     $turma['ano_lectivo_id'] = $ano_lectivo_id;
                     $turma['ano_curricular'] = $disciplina['DisciplinaPlanoEstudo']['ano_curricular'];
                     $turma['semestre_curricular'] = $disciplina['DisciplinaPlanoEstudo']['semestre_curricular'];
@@ -1160,21 +1160,21 @@ class OpenSGAShell extends AppShell
                     $nome = $disciplina['Disciplina']['name'] . " - " . $disciplina['PlanoEstudo']['name'];
                     $turma['name'] = $nome;
 
-                    $turmas = array('Turma' => $turma);
+                    $turmas = ['Turma' => $turma];
 
 //Primeiro precisamos ver se a turma nao esta criada ainda
-                    $turma_existe = $this->Turma->find('first', array(
-                            'recursive' => -1,
-                            'conditions' => array(
-                                'ano_lectivo_id' => $ano_lectivo_id,
-                                'plano_estudo_id' => $plano_estudo_id,
-                                'disciplina_id' => $disciplina['Disciplina']['id'],
-                                'ano_curricular' => $turma['ano_curricular'],
+                    $turma_existe = $this->Turma->find('first', [
+                            'recursive'  => -1,
+                            'conditions' => [
+                                'ano_lectivo_id'      => $ano_lectivo_id,
+                                'plano_estudo_id'     => $plano_estudo_id,
+                                'disciplina_id'       => $disciplina['Disciplina']['id'],
+                                'ano_curricular'      => $turma['ano_curricular'],
                                 'semestre_curricular' => $turma['semestre_curricular'],
-                                'turno_id' => $turma['turno_id'],
+                                'turno_id'            => $turma['turno_id'],
                                 'semestre_lectivo_id' => $semestre_id
-                            )
-                        )
+                            ]
+                        ]
                     );
 
                     if (!$turma_existe) {
@@ -1187,7 +1187,7 @@ class OpenSGAShell extends AppShell
                 } else {
                     foreach ($turnos as $turno) {
                         $turno_id = $turno['CursosTurno']['turno_id'];
-                        $turma = array();
+                        $turma = [];
                         $turma['ano_lectivo_id'] = $ano_lectivo_id;
                         $turma['ano_curricular'] = $disciplina['DisciplinaPlanoEstudo']['ano_curricular'];
                         $turma['semestre_curricular'] = $disciplina['DisciplinaPlanoEstudo']['semestre_curricular'];
@@ -1201,21 +1201,21 @@ class OpenSGAShell extends AppShell
                         $nome = $disciplina['Disciplina']['name'] . " - " . $disciplina['PlanoEstudo']['name'];
                         $turma['name'] = $nome;
 
-                        $turmas = array('Turma' => $turma);
+                        $turmas = ['Turma' => $turma];
 
 //Primeiro precisamos ver se a turma nao esta criada ainda
-                        $turma_existe = $this->Turma->find('first', array(
-                                'recursive' => -1,
-                                'conditions' => array(
-                                    'ano_lectivo_id' => $ano_lectivo_id,
-                                    'plano_estudo_id' => $plano_estudo_id,
-                                    'disciplina_id' => $disciplina['Disciplina']['id'],
-                                    'ano_curricular' => $turma['ano_curricular'],
+                        $turma_existe = $this->Turma->find('first', [
+                                'recursive'  => -1,
+                                'conditions' => [
+                                    'ano_lectivo_id'      => $ano_lectivo_id,
+                                    'plano_estudo_id'     => $plano_estudo_id,
+                                    'disciplina_id'       => $disciplina['Disciplina']['id'],
+                                    'ano_curricular'      => $turma['ano_curricular'],
                                     'semestre_curricular' => $turma['semestre_curricular'],
-                                    'turno_id' => $turma['turno_id'],
+                                    'turno_id'            => $turma['turno_id'],
                                     'semestre_lectivo_id' => $semestre_id
-                                )
-                            )
+                                ]
+                            ]
                         );
 
                         if (!$turma_existe) {
@@ -1235,7 +1235,7 @@ class OpenSGAShell extends AppShell
     public function importa_admitidos_base()
     {
         AuditableConfig::$Logger = ClassRegistry::init('Auditable.Logger');
-        App::import('Vendor', 'PHPExcel', array('file' => 'PHPExcel.php'));
+        App::import('Vendor', 'PHPExcel', ['file' => 'PHPExcel.php']);
         if (!class_exists('PHPExcel')) {
             throw new CakeException('Vendor class PHPExcel not found!');
         }
@@ -1250,64 +1250,64 @@ class OpenSGAShell extends AppShell
                 break;
             }
 
-            $nao_encontrados = array();
+            $nao_encontrados = [];
             $numero_candidato = $worksheet->getCell('C' . $linha_actual)->getCalculatedValue();
 
             $candidato = $this->Candidatura->findByNumeroCandidato($numero_candidato);
             $codigo_curso_admissao = $worksheet->getCell('E' . $linha_actual)->getCalculatedValue();
 
-            if (in_array($codigo_curso_admissao, array(1150, 1151, 1155, 1148, 1149, 1152, 1154))) {
+            if (in_array($codigo_curso_admissao, [1150, 1151, 1155, 1148, 1149, 1152, 1154])) {
                 $codigo_curso_admissao = 1153;
             }
 
-            if (in_array($codigo_curso_admissao, array(1142))) {
+            if (in_array($codigo_curso_admissao, [1142])) {
                 $codigo_curso_admissao = 1141;
             }
-            if (in_array($codigo_curso_admissao, array(1133))) {
+            if (in_array($codigo_curso_admissao, [1133])) {
                 $codigo_curso_admissao = 1042;
             }
 
-            if (in_array($codigo_curso_admissao, array(1098, 1099))) {
+            if (in_array($codigo_curso_admissao, [1098, 1099])) {
                 $codigo_curso_admissao = 1097;
             }
-            if (in_array($codigo_curso_admissao, array(1046))) {
+            if (in_array($codigo_curso_admissao, [1046])) {
                 $codigo_curso_admissao = 1156;
             }
-            if (in_array($codigo_curso_admissao, array(1136))) {
+            if (in_array($codigo_curso_admissao, [1136])) {
                 $codigo_curso_admissao = 1054;
             }
 
-            if (in_array($codigo_curso_admissao, array(1104))) {
+            if (in_array($codigo_curso_admissao, [1104])) {
                 $codigo_curso_admissao = 1103;
             }
-            if (in_array($codigo_curso_admissao, array(1115))) {
+            if (in_array($codigo_curso_admissao, [1115])) {
                 $codigo_curso_admissao = 1114;
             }
-            if (in_array($codigo_curso_admissao, array(1121))) {
+            if (in_array($codigo_curso_admissao, [1121])) {
                 $codigo_curso_admissao = 1120;
             }
-            if (in_array($codigo_curso_admissao, array(1119))) {
+            if (in_array($codigo_curso_admissao, [1119])) {
                 $codigo_curso_admissao = 1118;
             }
-            if (in_array($codigo_curso_admissao, array(1126, 1146))) {
+            if (in_array($codigo_curso_admissao, [1126, 1146])) {
                 $codigo_curso_admissao = 1125;
             }
-            if (in_array($codigo_curso_admissao, array(1017, 1139))) {
+            if (in_array($codigo_curso_admissao, [1017, 1139])) {
                 $codigo_curso_admissao = 1015;
             }
-            if (in_array($codigo_curso_admissao, array(1018, 1147))) {
+            if (in_array($codigo_curso_admissao, [1018, 1147])) {
                 $codigo_curso_admissao = 1016;
             }
-            if (in_array($codigo_curso_admissao, array(1093))) {
+            if (in_array($codigo_curso_admissao, [1093])) {
                 $codigo_curso_admissao = 1091;
             }
-            if (in_array($codigo_curso_admissao, array(1068, 1069))) {
+            if (in_array($codigo_curso_admissao, [1068, 1069])) {
                 $codigo_curso_admissao = 1067;
             }
-            if (in_array($codigo_curso_admissao, array(1134))) {
+            if (in_array($codigo_curso_admissao, [1134])) {
                 $codigo_curso_admissao = 1045;
             }
-            if (in_array($codigo_curso_admissao, array(1135))) {
+            if (in_array($codigo_curso_admissao, [1135])) {
                 $codigo_curso_admissao = 1048;
             }
 
@@ -1359,21 +1359,21 @@ class OpenSGAShell extends AppShell
                 $this->Candidatura->create();
                 $arrayCandidatura = [
                     'Candidatura' => [
-                        'numero_estudante' => $worksheet->getCell('A' . $linha_actual)->getCalculatedValue(),
-                        'numero_candidato' => $worksheet->getCell('C' . $linha_actual)->getCalculatedValue(),
+                        'numero_estudante'               => $worksheet->getCell('A' . $linha_actual)->getCalculatedValue(),
+                        'numero_candidato'               => $worksheet->getCell('C' . $linha_actual)->getCalculatedValue(),
                         'codigo_curso_admitido_admissao' => $worksheet->getCell('E' . $linha_actual)->getCalculatedValue(),
-                        'aluno_via_admissao_id' => 1,
-                        'tipo_ingresso_id' => 1,
-                        'estado_candidatura_id' => 2,
-                        'name' => $worksheet->getCell('O' . $linha_actual)->getFormattedValue(),
-                        'ano_lectivo_admissao' => 2015,
-                        'curso_id' => $curso['Curso']['id'],
-                        'ano_candidatura' => 2014,
-                        'nome_faculdade' => $faculdade['UnidadeOrganica']['name'],
-                        'nome_curso' => $curso['Curso']['name'],
-                        'estado_matricula_id' => 5,
-                        'nomes' => $first_names,
-                        'apelido' => $apelido
+                        'aluno_via_admissao_id'          => 1,
+                        'tipo_ingresso_id'               => 1,
+                        'estado_candidatura_id'          => 2,
+                        'name'                           => $worksheet->getCell('O' . $linha_actual)->getFormattedValue(),
+                        'ano_lectivo_admissao'           => 2015,
+                        'curso_id'                       => $curso['Curso']['id'],
+                        'ano_candidatura'                => 2014,
+                        'nome_faculdade'                 => $faculdade['UnidadeOrganica']['name'],
+                        'nome_curso'                     => $curso['Curso']['name'],
+                        'estado_matricula_id'            => 5,
+                        'nomes'                          => $first_names,
+                        'apelido'                        => $apelido
 
                     ]
                 ];
@@ -1390,7 +1390,7 @@ class OpenSGAShell extends AppShell
     public function importa_admitidos_server()
     {
         AuditableConfig::$Logger = ClassRegistry::init('Auditable.Logger');
-        App::import('Vendor', 'PHPExcel', array('file' => 'PHPExcel.php'));
+        App::import('Vendor', 'PHPExcel', ['file' => 'PHPExcel.php']);
         if (!class_exists('PHPExcel')) {
             throw new CakeException('Vendor class PHPExcel not found!');
         }
@@ -1405,13 +1405,13 @@ class OpenSGAShell extends AppShell
                 break;
             }
 
-            $nao_encontrados = array();
+            $nao_encontrados = [];
             $numero_candidato = $worksheet->getCell('A' . $linha_actual)->getCalculatedValue();
-            $array_candidato = array(
-                'Candidatura' => array(
+            $array_candidato = [
+                'Candidatura' => [
                     'numero_estudante' => $numero_candidato,
-                )
-            );
+                ]
+            ];
             $nome_completo2 = $worksheet->getCell('B' . $linha_actual)->getCalculatedValue();
             $nome_completo = trim($nome_completo2);
             $nomes = $this->User->splitName($nome_completo);
@@ -1447,7 +1447,7 @@ class OpenSGAShell extends AppShell
     public function importa_admitidos_via_admissao()
     {
         AuditableConfig::$Logger = ClassRegistry::init('Auditable.Logger');
-        App::import('Vendor', 'PHPExcel', array('file' => 'PHPExcel.php'));
+        App::import('Vendor', 'PHPExcel', ['file' => 'PHPExcel.php']);
         if (!class_exists('PHPExcel')) {
             throw new CakeException('Vendor class PHPExcel not found!');
         }
@@ -1462,17 +1462,17 @@ class OpenSGAShell extends AppShell
                 break;
             }
 
-            $nao_encontrados = array();
+            $nao_encontrados = [];
             $numeroEstudante = $worksheet->getCell('A' . $linha_actual)->getCalculatedValue();
             $viaAdmissao = $worksheet->getCell('E' . $linha_actual)->getCalculatedValue();
             if ($viaAdmissao != '') {
                 $viaAdmissaoExiste = $this->Aluno->AlunoViaAdmissao->findByName($viaAdmissao);
                 if (empty($viaAdmissaoExiste)) {
-                    $arrayViaAdmissao = array(
-                        'AlunoViaAdmissao' => array(
+                    $arrayViaAdmissao = [
+                        'AlunoViaAdmissao' => [
                             'name' => $viaAdmissao
-                        )
-                    );
+                        ]
+                    ];
                     $this->Aluno->AlunoViaAdmissao->create();
                     $this->Aluno->AlunoViaAdmissao->save($arrayViaAdmissao);
                     $viaAdmissaoId = $this->Aluno->AlunoViaAdmissao->id;
@@ -1500,7 +1500,7 @@ class OpenSGAShell extends AppShell
 
     public function importa_alumnis()
     {
-        App::import('Vendor', 'PHPExcel', array('file' => 'PHPExcel.php'));
+        App::import('Vendor', 'PHPExcel', ['file' => 'PHPExcel.php']);
         if (!class_exists('PHPExcel')) {
             throw new CakeException('Vendor class PHPExcel not found!');
         }
@@ -1515,7 +1515,7 @@ class OpenSGAShell extends AppShell
                 break;
             }
 
-            $caa = array();
+            $caa = [];
             $caa['apelido'] = $worksheet->getCell('C' . $linha_actual)->getCalculatedValue();
             $caa['nomes'] = $worksheet->getCell('D' . $linha_actual)->getCalculatedValue();
             $caa['nome_pai'] = $worksheet->getCell('F' . $linha_actual)->getCalculatedValue();
@@ -1555,7 +1555,7 @@ class OpenSGAShell extends AppShell
     public function importa_apelidos_2014()
     {
         AuditableConfig::$Logger = ClassRegistry::init('Auditable.Logger');
-        App::import('Vendor', 'PHPExcel', array('file' => 'PHPExcel.php'));
+        App::import('Vendor', 'PHPExcel', ['file' => 'PHPExcel.php']);
         if (!class_exists('PHPExcel')) {
             throw new CakeException('Vendor class PHPExcel not found!');
         }
@@ -1570,7 +1570,7 @@ class OpenSGAShell extends AppShell
                 break;
             }
 
-            $nao_encontrados = array();
+            $nao_encontrados = [];
             $numero_candidato = $worksheet->getCell('A' . $linha_actual)->getCalculatedValue();
             $candidato = $this->Candidatura->findByNumeroCandidato($numero_candidato);
             if ($candidato) {
@@ -1599,7 +1599,7 @@ class OpenSGAShell extends AppShell
      */
     public function importa_candidatos_excel()
     {
-        App::import('Vendor', 'PHPExcel', array('file' => 'PHPExcel.php'));
+        App::import('Vendor', 'PHPExcel', ['file' => 'PHPExcel.php']);
         if (!class_exists('PHPExcel')) {
             throw new CakeException('Vendor class PHPExcel not found!');
         }
@@ -1704,7 +1704,7 @@ class OpenSGAShell extends AppShell
      */
     public function importa_candidatos_preregisto()
     {
-        App::import('Vendor', 'PHPExcel', array('file' => 'PHPExcel.php'));
+        App::import('Vendor', 'PHPExcel', ['file' => 'PHPExcel.php']);
         if (!class_exists('PHPExcel')) {
             throw new CakeException('Vendor class PHPExcel not found!');
         }
@@ -1719,14 +1719,14 @@ class OpenSGAShell extends AppShell
                 break;
             }
 
-            $array_candidato = array(
-                'Candidatura' => array(
+            $array_candidato = [
+                'Candidatura' => [
                     'numero_candidato' => $worksheet->getCell('A' . $linha_actual)->getCalculatedValue(),
-                    'nomes' => ucwords(strtolower($worksheet->getCell('B' . $linha_actual)->getValue())),
+                    'nomes'            => ucwords(strtolower($worksheet->getCell('B' . $linha_actual)->getValue())),
                     //   'apelido' => $worksheet->getCell('C' . $linha_actual)->getValue(),
 //   'nome_curso' => $worksheet->getCell('D' . $linha_actual)->getValue()
-                )
-            );
+                ]
+            ];
 
             $sexo = $worksheet->getCell('C' . $linha_actual)->getCalculatedValue();
             if ($sexo == 'M') {
@@ -1785,7 +1785,7 @@ class OpenSGAShell extends AppShell
             $array_candidato['Candidatura']['documento_identificacao_id'] = $documentoIdentificao['DocumentoIdentificacao']['id'];
 
 
-            $existentes = array();
+            $existentes = [];
             $candidato_existe = $this->Candidatura->findByNumeroCandidato($array_candidato['Candidatura']['numero_candidato']);
 
             if (!empty($candidato_existe)) {
@@ -1807,7 +1807,7 @@ class OpenSGAShell extends AppShell
 
     public function importa_dados_unizambeze()
     {
-        App::import('Vendor', 'PHPExcel', array('file' => 'PHPExcel.php'));
+        App::import('Vendor', 'PHPExcel', ['file' => 'PHPExcel.php']);
         if (!class_exists('PHPExcel')) {
             throw new CakeException('Vendor class PHPExcel not found!');
         }
@@ -1820,7 +1820,7 @@ class OpenSGAShell extends AppShell
     public function importa_parentes()
     {
         AuditableConfig::$Logger = ClassRegistry::init('Auditable.Logger');
-        App::import('Vendor', 'PHPExcel', array('file' => 'PHPExcel.php'));
+        App::import('Vendor', 'PHPExcel', ['file' => 'PHPExcel.php']);
         if (!class_exists('PHPExcel')) {
             throw new CakeException('Vendor class PHPExcel not found!');
         }
@@ -1869,7 +1869,7 @@ class OpenSGAShell extends AppShell
     public function importa_nuit()
     {
         AuditableConfig::$Logger = ClassRegistry::init('Auditable.Logger');
-        App::import('Vendor', 'PHPExcel', array('file' => 'PHPExcel.php'));
+        App::import('Vendor', 'PHPExcel', ['file' => 'PHPExcel.php']);
         if (!class_exists('PHPExcel')) {
             throw new CakeException('Vendor class PHPExcel not found!');
         }
@@ -1906,7 +1906,7 @@ class OpenSGAShell extends AppShell
 
     public function importa_plano_estudo_excel()
     {
-        App::import('Vendor', 'PHPExcel', array('file' => 'PHPExcel.php'));
+        App::import('Vendor', 'PHPExcel', ['file' => 'PHPExcel.php']);
         if (!class_exists('PHPExcel')) {
             throw new CakeException('Vendor class PHPExcel not found!');
         }
@@ -1919,11 +1919,11 @@ class OpenSGAShell extends AppShell
         foreach ($worksheets as $ws) {
 //Cria o Plano de estudos
             $curso_nome = $ws->getTitle();
-            $array_plano_estudos = array(
-                'name' => $curso_nome,
-                'duracao' => 5,
+            $array_plano_estudos = [
+                'name'         => $curso_nome,
+                'duracao'      => 5,
                 'semestresano' => 2
-            );
+            ];
             $this->Curso->create();
             $this->Curso->save($array_plano_estudos);
             $array_plano_estudos['curso_id'] = $this->Curso->id;
@@ -1937,32 +1937,35 @@ class OpenSGAShell extends AppShell
                 $verificador = $ws->getCellByColumnAndRow(2, $linha_actual)->getCalculatedValue();
 
                 if (is_numeric($verificador)) {
-                    $array_disciplina = array(
+                    $array_disciplina = [
                         'codigo' => $ws->getCellByColumnAndRow(0, $linha_actual)->getCalculatedValue(),
-                        'name' => $ws->getCellByColumnAndRow(1, $linha_actual)->getCalculatedValue()
-                    );
+                        'name'   => $ws->getCellByColumnAndRow(1, $linha_actual)->getCalculatedValue()
+                    ];
                     $disciplina_existe = $this->Disciplina->findByCodigo($array_disciplina['codigo']);
                     if (empty($disciplina_existe)) {
                         $disciplina_existe = $this->Disciplina->findByName($array_disciplina['name']);
                         if (empty($disciplina_existe)) {
                             $this->Disciplina->create();
-                            $this->Disciplina->save(array('Disciplina' => $array_disciplina));
+                            $this->Disciplina->save(['Disciplina' => $array_disciplina]);
                             $disciplina_existe = $this->Disciplina->findByCodigo($array_disciplina['codigo']);
                         }
                     }
-                    $array_plano_estudo_anos = array(
-                        'DisciplinaPlanoEstudo' => array(
-                            'plano_estudo_id' => $this->PlanoEstudo->id,
-                            'disciplina_id' => $disciplina_existe['Disciplina']['id'],
-                            'semestre_sequencial' => $ws->getCellByColumnAndRow(2, $linha_actual)->getCalculatedValue(),
-                            'carga_total' => $ws->getCellByColumnAndRow(3, $linha_actual)->getCalculatedValue(),
+                    $array_plano_estudo_anos = [
+                        'DisciplinaPlanoEstudo' => [
+                            'plano_estudo_id'      => $this->PlanoEstudo->id,
+                            'disciplina_id'        => $disciplina_existe['Disciplina']['id'],
+                            'semestre_sequencial'  => $ws->getCellByColumnAndRow(2,
+                                $linha_actual)->getCalculatedValue(),
+                            'carga_total'          => $ws->getCellByColumnAndRow(3,
+                                $linha_actual)->getCalculatedValue(),
                             'cargahorariateoricas' => $ws->getCellByColumnAndRow(4,
                                 $linha_actual)->getCalculatedValue(),
                             'cargahorariapraticas' => $ws->getCellByColumnAndRow(5,
                                 $linha_actual)->getCalculatedValue(),
-                            'creditos' => $ws->getCellByColumnAndRow(6, $linha_actual)->getCalculatedValue(),
-                        )
-                    );
+                            'creditos'             => $ws->getCellByColumnAndRow(6,
+                                $linha_actual)->getCalculatedValue(),
+                        ]
+                    ];
                     if ($array_plano_estudo_anos['DisciplinaPlanoEstudo']['semestre_sequencial'] % 2 == 0) {
                         $array_plano_estudo_anos['DisciplinaPlanoEstudo']['ano'] = $array_plano_estudo_anos['DisciplinaPlanoEstudo']['semestre_sequencial'] / 2;
                         $array_plano_estudo_anos['DisciplinaPlanoEstudo']['semestre'] = 2;
@@ -1977,13 +1980,13 @@ class OpenSGAShell extends AppShell
                     $codigo_precedencia = $ws->getCellByColumnAndRow(7, $linha_actual)->getCalculatedValue();
                     if ($codigo_precedencia != null) {
                         $disciplina_precendencia = $this->Disciplina->findByCodigo($codigo_precedencia);
-                        $array_precedencia = array(
-                            'Precedencia' => array(
-                                'planoestudoano_id' => $this->DisciplinaPlanoEstudo->id,
-                                'precedencia' => $disciplina_precendencia['Disciplina']['id'],
+                        $array_precedencia = [
+                            'Precedencia' => [
+                                'planoestudoano_id'  => $this->DisciplinaPlanoEstudo->id,
+                                'precedencia'        => $disciplina_precendencia['Disciplina']['id'],
                                 'tipoprecedencia_id' => 1
-                            )
-                        );
+                            ]
+                        ];
                         $this->Precedencia->create();
                         $this->Precedencia->save($array_precedencia);
                     }
@@ -2013,10 +2016,10 @@ class OpenSGAShell extends AppShell
     public function organiza_curso_candidato()
     {
         $candidatos = $this->Candidatura->find('all',
-            array('conditions' => array('estado_candidatura_id' => 2, 'curso_id' => null)));
+            ['conditions' => ['estado_candidatura_id' => 2, 'curso_id' => null]]);
         foreach ($candidatos as $candidato) {
 
-            $nao_mudados = array();
+            $nao_mudados = [];
             $curso_admissao = $candidato['Candidatura']['codigo_curso_admitido_admissao'];
             $this->Curso->contain('UnidadeOrganica');
             $curso = $this->Curso->findByCodigoAdmissao($curso_admissao);
@@ -2156,12 +2159,12 @@ class OpenSGAShell extends AppShell
 
     public function organiza_curso_codigo()
     {
-        $candidatos = $this->Candidatura->find('all', array(
-            'conditions' => array(
-                'estado_candidatura_id' => 2,
-                'codigo_curso_admitido_admissao' => array(1040, 1096, 1027, 1028, 1029, 1030, 1052, 1041, 1056)
-            )
-        ));
+        $candidatos = $this->Candidatura->find('all', [
+            'conditions' => [
+                'estado_candidatura_id'          => 2,
+                'codigo_curso_admitido_admissao' => [1040, 1096, 1027, 1028, 1029, 1030, 1052, 1041, 1056]
+            ]
+        ]);
         debug(count($candidatos));
 
         foreach ($candidatos as $candidato) {
@@ -2193,7 +2196,7 @@ class OpenSGAShell extends AppShell
 
         $this->Curso->contain('UnidadeOrganica');
         $cursos = $this->Curso->find('all');
-        App::import('Vendor', 'PHPExcel', array('file' => 'PHPExcel.php'));
+        App::import('Vendor', 'PHPExcel', ['file' => 'PHPExcel.php']);
 
         if (!class_exists('PHPExcel')) {
             throw new CakeException('Vendor class PHPExcel not found!');
@@ -2212,11 +2215,11 @@ class OpenSGAShell extends AppShell
             $xls->getActiveSheet()->setCellValue('A4', 'Ano Lectivo de 2013');
             $xls->getActiveSheet()->setCellValue('A6', "EMAIL INSTITUCIONAL");
 
-            $this->Aluno->contain(array('Entidade' => array('User')));
-            $alunos = $this->Aluno->find('all', array(
-                'conditions' => array('Aluno.curso_id' => $curso['Curso']['id']),
-                'order' => array('Entidade.apelido', 'Entidade.nomes')
-            ));
+            $this->Aluno->contain(['Entidade' => ['User']]);
+            $alunos = $this->Aluno->find('all', [
+                'conditions' => ['Aluno.curso_id' => $curso['Curso']['id']],
+                'order'      => ['Entidade.apelido', 'Entidade.nomes']
+            ]);
             $linha_actual = 10;
             $ii = 1;
             foreach ($alunos as $aluno) {
@@ -2299,7 +2302,7 @@ class OpenSGAShell extends AppShell
             ->template('test_template', 'test_layout')//I'm assuming these were created
             ->emailFormat('html')
             ->to('elisio.leonardo@gmail.com')
-            ->from(array('naoresponder@uem.ac.mz'))
+            ->from(['naoresponder@uem.ac.mz'])
             ->subject('just testing something')
             ->send();
     }
@@ -2307,7 +2310,7 @@ class OpenSGAShell extends AppShell
     public function verifica_admitidos_2014()
     {
         AuditableConfig::$Logger = ClassRegistry::init('Auditable.Logger');
-        App::import('Vendor', 'PHPExcel', array('file' => 'PHPExcel.php'));
+        App::import('Vendor', 'PHPExcel', ['file' => 'PHPExcel.php']);
         if (!class_exists('PHPExcel')) {
             throw new CakeException('Vendor class PHPExcel not found!');
         }
@@ -2323,7 +2326,7 @@ class OpenSGAShell extends AppShell
                 break;
             }
 
-            $nao_encontrados = array();
+            $nao_encontrados = [];
 
             $numero_candidato = $worksheet->getCell('A' . $linha_actual)->getValue();
 
@@ -2331,11 +2334,11 @@ class OpenSGAShell extends AppShell
             if ($candidato) {
 
             } else {
-                $array_candidato = array(
-                    'Candidatura' => array(
+                $array_candidato = [
+                    'Candidatura' => [
                         'numero_candidato' => $numero_candidato,
-                    )
-                );
+                    ]
+                ];
                 $array_candidato['Candidatura']['numero_estudante'] = $worksheet->getCell('B' . $linha_actual)->getCalculatedValue();
                 $nome_completo = $worksheet->getCell('C' . $linha_actual)->getCalculatedValue();
                 $nome_explode = explode(" ", $nome_completo);
@@ -2496,19 +2499,19 @@ class OpenSGAShell extends AppShell
         foreach ($alunos as $aluno) {
             $this->HistoricoCurso->contain();
             $historicos = $this->HistoricoCurso->find('first',
-                array('conditions' => array('aluno_id' => $aluno['Aluno']['id'])));
+                ['conditions' => ['aluno_id' => $aluno['Aluno']['id']]]);
             $this->out($aluno['Aluno']['id']);
 
             if (empty($historicos)) {
                 $ano_lectivo = $this->AnoLectivo->findByAno($aluno['Aluno']['ano_ingresso']);
-                $historico_array = array(
-                    'aluno_id' => $aluno['Aluno']['id'],
-                    'curso_id' => $aluno['Aluno']['curso_id'],
-                    'ano_ingresso' => $aluno['Aluno']['ano_ingresso'],
+                $historico_array = [
+                    'aluno_id'             => $aluno['Aluno']['id'],
+                    'curso_id'             => $aluno['Aluno']['curso_id'],
+                    'ano_ingresso'         => $aluno['Aluno']['ano_ingresso'],
                     'ano_lectivo_ingresso' => $ano_lectivo['AnoLectivo']['id']
-                );
+                ];
                 $this->HistoricoCurso->create();
-                $this->HistoricoCurso->save(array('HistoricoCurso' => $historico_array));
+                $this->HistoricoCurso->save(['HistoricoCurso' => $historico_array]);
             }
         }
         $this->out("fim");
@@ -2522,11 +2525,11 @@ class OpenSGAShell extends AppShell
         $encontrados = 0;
         foreach ($pagamentos as $pagamento) {
             $matricula = $this->Aluno->Matricula->find('first',
-                array(
+                [
                     'Matricula.aluno_id' => $pagamento['FinanceiroPagamento']['aluno_id'],
-                    'Matricula.data' => $pagamento['FinanceiroPagamento']['created'],
+                    'Matricula.data'     => $pagamento['FinanceiroPagamento']['created'],
                     'Matricula.financeiro_pagamento_id is null'
-                ));
+                ]);
             if (!empty($matricula)) {
                 $this->Aluno->Matricula->id = $matricula['Matricula']['id'];
                 $this->Matricula->set('financeiro_pagamento_id', $pagamento['FinanceiroPagamento']['id']);
@@ -2539,7 +2542,7 @@ class OpenSGAShell extends AppShell
 
     public function separa_apelido_candidatos()
     {
-        $candidatos = $this->Candidatura->find('all', array('conditions' => array('ano_lectivo_admissao' => 2015)));
+        $candidatos = $this->Candidatura->find('all', ['conditions' => ['ano_lectivo_admissao' => 2015]]);
         $numero = count($candidatos);
         foreach ($candidatos as $candidato) {
             $nome = $candidato['Candidatura']['name'];
@@ -2563,7 +2566,7 @@ class OpenSGAShell extends AppShell
     public function importa_escola_nivel_medios()
     {
         AuditableConfig::$Logger = ClassRegistry::init('Auditable.Logger');
-        App::import('Vendor', 'PHPExcel', array('file' => 'PHPExcel.php'));
+        App::import('Vendor', 'PHPExcel', ['file' => 'PHPExcel.php']);
         if (!class_exists('PHPExcel')) {
             throw new CakeException('Vendor class PHPExcel not found!');
         }
@@ -2582,7 +2585,7 @@ class OpenSGAShell extends AppShell
             $arrayNovaEscola = [
                 'EscolaNivelMedio' => [
                     'codigo_admissao' => $worksheet->getCell('A' . $linha_actual)->getCalculatedValue(),
-                    'name' => $worksheet->getCell('B' . $linha_actual)->getCalculatedValue()
+                    'name'            => $worksheet->getCell('B' . $linha_actual)->getCalculatedValue()
                 ]
             ];
             $this->Aluno->AlunoNivelMedio->EscolaNivelMedio->create();
@@ -2596,17 +2599,17 @@ class OpenSGAShell extends AppShell
     public function print_boletim_matriculas()
     {
         $this->Candidatura->contain('Curso');
-        $cursos = $this->Candidatura->find('list', array(
-            'conditions' => array(
+        $cursos = $this->Candidatura->find('list', [
+            'conditions' => [
                 'estado_candidatura_id' => 2,
-                'ano_lectivo_admissao' => Configure::read('OpenSGA.ano_lectivo')
-            ),
-            'fields' => array('curso_id', 'Curso.name'),
-            'group' => 'curso_id',
-            'order' => 'Curso.name'
-        ));
+                'ano_lectivo_admissao'  => Configure::read('OpenSGA.ano_lectivo')
+            ],
+            'fields'     => ['curso_id', 'Curso.name'],
+            'group'      => 'curso_id',
+            'order'      => 'Curso.name'
+        ]);
 
-        App::import('Vendor', 'PHPExcel', array('file' => 'PHPExcel.php'));
+        App::import('Vendor', 'PHPExcel', ['file' => 'PHPExcel.php']);
         if (!class_exists('PHPExcel')) {
             throw new CakeException('Vendor class PHPExcel not found!');
         }
@@ -2615,12 +2618,12 @@ class OpenSGAShell extends AppShell
 
         $count_c = count($cursos);
         foreach ($cursos as $k => $v) {
-            $candidatos = array();
+            $candidatos = [];
 
 
             $this->out('Lendo o excel..............' . $v);
             $xls = PHPExcel_IOFactory::load(APP . 'Reports' . DS . 'print_boletim_matricula.xlsx');
-            $this->Candidatura->contain(array(
+            $this->Candidatura->contain([
                 'Genero',
                 'CidadeNascimento',
                 'ProvinciaNascimento',
@@ -2629,17 +2632,17 @@ class OpenSGAShell extends AppShell
                 'EstadoCivil',
                 'DocumentoIdentificacao',
                 'Curso'
-            ));
+            ]);
             $candidatos = $this->Candidatura->find('all',
-                array(
-                    'conditions' => array(
+                [
+                    'conditions' => [
                         'estado_candidatura_id' => 2,
-                        'ano_lectivo_admissao' => Configure::read('OpenSGA.ano_lectivo'),
-                        'curso_id' => $k
-                    ),
-                    'order' => array('Candidatura.apelido', 'Candidatura.nomes')
-                ,
-                )
+                        'ano_lectivo_admissao'  => Configure::read('OpenSGA.ano_lectivo'),
+                        'curso_id'              => $k
+                    ],
+                    'order'      => ['Candidatura.apelido', 'Candidatura.nomes']
+                    ,
+                ]
             );
 
 
@@ -2754,7 +2757,7 @@ class OpenSGAShell extends AppShell
     public function preenche_provincia()
     {
         AuditableConfig::$Logger = ClassRegistry::init('Auditable.Logger');
-        App::import('Vendor', 'PHPExcel', array('file' => 'PHPExcel.php'));
+        App::import('Vendor', 'PHPExcel', ['file' => 'PHPExcel.php']);
         if (!class_exists('PHPExcel')) {
             throw new CakeException('Vendor class PHPExcel not found!');
         }
@@ -2771,27 +2774,27 @@ class OpenSGAShell extends AppShell
 
             $numero = $worksheet->getCell('K' . $linha_actual)->getCalculatedValue();
 
-            $this->Aluno->contain(array(
+            $this->Aluno->contain([
                 'EstadoAluno',
                 'AlunoEstado' => ['MotivoEstadoAluno']
-            ));
+            ]);
 
 
             $aluno = $this->Aluno->findByCodigo($numero);
 
             if (!empty($aluno)) {
-                if($aluno['Aluno']['estado_aluno_id']!=1){
+                if ($aluno['Aluno']['estado_aluno_id'] != 1) {
 
-                     $worksheet->setCellValue('M' . $linha_actual, $aluno['EstadoAluno']['name']);
+                    $worksheet->setCellValue('M' . $linha_actual, $aluno['EstadoAluno']['name']);
                     $worksheet->setCellValue('N' . $linha_actual, $aluno['AlunoEstado']['MotivoEstadoAluno']['name']);
                     //$worksheet->setCellValue('H'.$linha_actual, $aluno['Entidade']['ProvinciaNascimento']['name']);
                     $this->out($numero . '----' . $aluno['AlunoEstado']['MotivoEstadoAluno']['name']);
-                } else{
+                } else {
                     $worksheet->setCellValue('M' . $linha_actual, 'REGULAR');
                 }
 
 
-            } else{
+            } else {
                 $worksheet->setCellValue('M' . $linha_actual, 'NAO MATRICULADO');
             }
 

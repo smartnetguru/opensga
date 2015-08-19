@@ -1710,6 +1710,7 @@ class AlunosController extends AppController
         $this->paginate = [
             'conditions' => $conditions,
             'limit'      => 50,
+            'contain'    => ['Curso', 'BolsaTemporaria']
         ];
         $candidatos = $this->paginate('Candidatura');
 
@@ -1915,6 +1916,11 @@ class AlunosController extends AppController
         }
 
         $this->set('alunos', $alunos);
+
+    }
+
+    public function relatorios()
+    {
 
     }
 }
