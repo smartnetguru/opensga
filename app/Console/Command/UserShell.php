@@ -56,20 +56,16 @@ class UserShell extends AppShell {
         $total = count($users);
         foreach($users as $user){
             $hash = $user['User']['password'];
-            debug($total--);
-            if (password_verify('dra02062013', $hash)) {
-                $arrayUser = array(
-                    'User'=>[
-                        'user_id'=>$user['User']['id'],
-                        'novasenha1'=>$user['User']['codigocartao'],
-                        'novasenha2'=>$user['User']['codigocartao']
-                    ]
-                );
-                $this->User->alteraPassword($arrayUser);
+            if(strlen($hash)<12 && strpos($hash,'e')===0){
+                debug('Encontrou------------'.$hash);
+                $this->User->id = $user['User']['id'];
+                $this->User->set('password',Security::hash($user['User']['codigocartao'],'blowfish'));
+                $this->User->save();
 
-            } else {
-
+            } else{
+                $this->out('passou');
             }
+            $this->out($total--);
 
         }
     }

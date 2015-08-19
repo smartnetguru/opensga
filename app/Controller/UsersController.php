@@ -786,6 +786,10 @@ class UsersController extends AppController
 //header('Location: https://example.com/members.php');
     }
 
+    public function admin_login(){
+        $this->redirect(['controller'=>'users','action'=>'login','admin'=>false]);
+    }
+
 }
 
 ?>

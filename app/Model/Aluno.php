@@ -1287,7 +1287,7 @@ class Aluno extends AppModel
         $data['User']['estado_email'] = 0;
         $data['User']['estado_objecto_id'] = 1;
         $data['User']['timezone'] = 'Africa/Maputo';
-        $data['User']['password'] = 'e' . $data['Aluno']['codigo'];
+        $data['User']['password'] = $data['Aluno']['codigo'];
         $dadosUser = ['User' => $data['User'], 'Entidade' => $data['Entidade']];
 
         if ($this->User->cadastraUser($dadosUser)) {

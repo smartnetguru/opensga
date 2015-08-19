@@ -89,7 +89,7 @@ class OpenSGAAclShell extends AppShell
         if ($userId) {
             $funcionarios = $this->Funcionario->find('all', ['conditions' => ['User.id' => $userId]]);
         } else {
-            $funcionarios = $this->Funcionario->find('all', ['conditions' => ['group_id' => 2]]);
+            $funcionarios = $this->Funcionario->find('all', ['conditions' => ['group_id' => 2],'order'=>'User.id DESC']);
         }
 
 
