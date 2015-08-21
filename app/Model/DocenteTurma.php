@@ -48,4 +48,12 @@ class DocenteTurma extends AppModel {
 			'order' => ''
 		)
 	);
+
+    public $validate = array(
+        'docente_id' => array(
+            'rule' => array('isUnique', array('docente_id', 'turma_id','estado_docente_turma_id'), false),
+            'message' => 'Este docente ja pertence a turma seleccionada'
+        )
+    );
+
 }

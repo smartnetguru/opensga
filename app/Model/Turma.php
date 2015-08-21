@@ -197,7 +197,7 @@ class Turma extends AppModel
             ]
         ],
         'disciplina_id'       => [
-            'disciplinaRule-3'     => [
+            'disciplinaRule-3' => [
                 'rule'     => 'notBlank',
                 'required' => 'create',
                 'message'  => 'O Usermane não pode estar vazio'
@@ -238,9 +238,35 @@ class Turma extends AppModel
      */
     public function adicionaDocente($data)
     {
+        $turma = $this->findById($data['DocenteTurma']['turma_id']);
+        $docenteDisciplinaExiste = $this->DocenteTurma->Docente->DocenteDisciplina->find('first', [
+            'conditions' => [
+                'docente_id'        => $data['DocenteTurma']['docente_id'],
+                'disciplina_id'     => $turma['Turma']['disciplina_id'],
+                'estado_objecto_id' => 1
+            ]
+        ]);
+        if(!$docenteDisciplinaExiste){
+            $arrayDocenteDisciplina = [
+                'DocenteDisciplina'=>[
+                    'docente_id'        => $data['DocenteTurma']['docente_id'],
+                    'disciplina_id'     => $turma['Turma']['disciplina_id'],
+                    'estado_objecto_id' => 1,
+                    'data_inicio'=>date('Y-m-d')
+                ]
+            ];
+            $this->DocenteTurma->Docente->DocenteDisciplina->create();
+            if(!$this->DocenteTurma->Docente->DocenteDisciplina->save($arrayDocenteDisciplina)){
+                debug($arrayDocenteDisciplina);
+                return false;
+            }
+        }
+
         if ($this->DocenteTurma->save($data)) {
             return true;
         } else {
+            debug($data);
+            debug($this->DocenteTurma->validationErrors);
             return false;
         }
     }
@@ -876,13 +902,13 @@ class Turma extends AppModel
     }
 
 
-
-    public function getTotalTurmasSemDocente($unidadeOrganicaId){
-            $dataSource = $this->getDataSource();
+    public function getTotalTurmasSemDocente($unidadeOrganicaId)
+    {
+        $dataSource = $this->getDataSource();
         $query = 'select count(*) as total from turmas as Turma,cursos as Curso where
                   Turma.id not in (select turma_id from docente_turmas where Turma.id = docente_turmas.turma_id)
                   and Turma.curso_id = Curso.id
-                  and Curso.unidade_organica_id = '.$unidadeOrganicaId;
+                  and Curso.unidade_organica_id = ' . $unidadeOrganicaId;
         $turmas = $dataSource->fetchAll($query);
 
         return $turmas[0][0]['total'];

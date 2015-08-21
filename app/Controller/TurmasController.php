@@ -12,6 +12,8 @@ ini_set('memory_limit', "2048M");
  * @subpackage    opensga.core.turmas
  * @version       OpenSGA v 0.5.0
  * @since         OpenSGA v 0.1.0
+ *
+ * @property Turma $Turma
 
  *
  * @todo No futuro criar uma tabela docentes_turmas vai ajudar a manter o historico completo das turmas

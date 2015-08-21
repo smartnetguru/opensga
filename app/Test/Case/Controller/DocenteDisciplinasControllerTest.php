@@ -1,10 +1,10 @@
 <?php
-App::uses('DocenteUnidadeOrganica', 'Model');
+App::uses('DocenteDisciplinasController', 'Controller');
 
 /**
- * DocenteUnidadeOrganica Test Case
+ * DocenteDisciplinasController Test Case
  */
-class DocenteUnidadeOrganicaTest extends CakeTestCase {
+class DocenteDisciplinasControllerTest extends ControllerTestCase {
 
 /**
  * Fixtures
@@ -12,39 +12,33 @@ class DocenteUnidadeOrganicaTest extends CakeTestCase {
  * @var array
  */
 	public $fixtures = array(
-		'app.docente_unidade_organica',
-		'app.docente',
-		'app.entidade',
-		'app.user',
-		'app.group',
-		'app.estado_objecto',
-		'app.bolsa_pedido',
-		'app.aluno',
-		'app.aluno_via_admissao',
-		'app.curso',
-		'app.grau_academico',
-		'app.alumni_candidato_alumni',
-		'app.genero',
-		'app.estado_civil',
+		'app.docente_disciplina',
+		'app.disciplina',
 		'app.unidade_organica',
 		'app.tipo_unidade_organica',
 		'app.area_academica',
 		'app.area_unidade',
-		'app.funcionario',
-		'app.tipo_funcionario',
+		'app.estado_objecto',
+		'app.bolsa_pedido',
+		'app.aluno',
+		'app.aluno_via_admissao',
+		'app.user',
+		'app.group',
+		'app.groups_user',
+		'app.entidade',
+		'app.genero',
 		'app.pais',
-		'app.provincia',
-		'app.paise',
-		'app.cidade',
-		'app.bairro',
-		'app.rua',
-		'app.documento_identificacao',
-		'app.alumni_alumni',
+		'app.funcionario',
+		'app.grau_academico',
+		'app.alumni_candidato_alumni',
+		'app.estado_civil',
+		'app.curso',
 		'app.tipo_curso',
 		'app.curso_responsavel',
 		'app.plano_estudo',
 		'app.disciplina_plano_estudo',
-		'app.disciplina',
+		'app.precedencia',
+		'app.tipo_precedencia',
 		'app.turma',
 		'app.ano_lectivo',
 		'app.regime_lectivo',
@@ -52,7 +46,13 @@ class DocenteUnidadeOrganicaTest extends CakeTestCase {
 		'app.estado_matricula',
 		'app.candidatura',
 		'app.escola_nivel_medio',
+		'app.cidade',
+		'app.provincia',
+		'app.paise',
+		'app.bairro',
+		'app.rua',
 		'app.aluno_nivel_medio',
+		'app.documento_identificacao',
 		'app.tipo_ingresso',
 		'app.bolsa_tipo_bolsa',
 		'app.bolsa_resultado',
@@ -88,13 +88,18 @@ class DocenteUnidadeOrganicaTest extends CakeTestCase {
 		'app.turma_tipo_avaliacao',
 		'app.tipo_avaliacao',
 		'app.docente_turma',
+		'app.docente',
+		'app.docente_categoria',
+		'app.docente_unidade_organica',
 		'app.estado_docente_turma',
 		'app.tipo_docente_turma',
-		'app.disciplina_unidade_organica',
-		'app.disciplina_docente',
-		'app.precedencia',
-		'app.tipo_precedencia',
 		'app.cursos_turno',
+		'app.alumni',
+		'app.tipo_funcionario',
+		'app.estado_entidade',
+		'app.entidade_identificacao',
+		'app.entidade_contacto',
+		'app.tipo_contacto',
 		'app.area_trabalho',
 		'app.estado_aluno',
 		'app.grau_parentesco',
@@ -113,40 +118,60 @@ class DocenteUnidadeOrganicaTest extends CakeTestCase {
 		'app.estado_candidatura',
 		'app.regime_estudo',
 		'app.regalia_social',
-		'app.entidade_contacto',
-		'app.tipo_contacto',
-		'app.entidade_identificacao',
+		'app.disciplina_docente',
+		'app.disciplina_unidade_organica',
 		'app.funcao_profissional_role',
 		'app.funcao_profissional',
 		'app.role',
 		'app.group_role',
-		'app.groups_user',
 		'app.message',
 		'app.unidade_organica_role',
-		'app.user_role',
-		'app.estado_entidade',
-		'app.docente_categoria'
+		'app.user_role'
 	);
 
 /**
- * setUp method
+ * testIndex method
  *
  * @return void
  */
-	public function setUp() {
-		parent::setUp();
-		$this->DocenteUnidadeOrganica = ClassRegistry::init('DocenteUnidadeOrganica');
+	public function testIndex() {
+		$this->markTestIncomplete('testIndex not implemented.');
 	}
 
 /**
- * tearDown method
+ * testView method
  *
  * @return void
  */
-	public function tearDown() {
-		unset($this->DocenteUnidadeOrganica);
+	public function testView() {
+		$this->markTestIncomplete('testView not implemented.');
+	}
 
-		parent::tearDown();
+/**
+ * testAdd method
+ *
+ * @return void
+ */
+	public function testAdd() {
+		$this->markTestIncomplete('testAdd not implemented.');
+	}
+
+/**
+ * testEdit method
+ *
+ * @return void
+ */
+	public function testEdit() {
+		$this->markTestIncomplete('testEdit not implemented.');
+	}
+
+/**
+ * testDelete method
+ *
+ * @return void
+ */
+	public function testDelete() {
+		$this->markTestIncomplete('testDelete not implemented.');
 	}
 
 }

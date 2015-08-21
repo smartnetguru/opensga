@@ -15,9 +15,10 @@
          */
         public $fixtures = [
             'app.turma',
-            'app.ano_lectivo'
+            'app.ano_lectivo',
+            'app.docente_disciplina'
         ];
-        public $autoFixtures = false;
+        //public $autoFixtures = false;
 
         /**
          * setUp method
@@ -49,7 +50,19 @@
          */
         public function testAdicionaDocente()
         {
-            $this->markTestIncomplete('testAdicionaDocente not implemented.');
+            $data= array('DocenteTurma'=>[
+                'docente_id'=>1,
+                'turma_id'=>2,
+                'tipo_docente_turma_id'=>1,
+                'estado_docente_turma_id'=>1,
+            ]);
+            $resultado = $this->Turma->adicionaDocente($data);
+
+            debug($resultado);
+            $resultado2 = $this->Turma->adicionaDocente($data);
+            debug($resultado2);
+            $this->assertSame($resultado2,false);
+            $this->assertSame($resultado,true);
         }
 
         /**
