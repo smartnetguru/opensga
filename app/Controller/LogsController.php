@@ -34,9 +34,6 @@ class LogsController extends AppController {
 	public function index()
 	{
             $this->loadModel('Auditable.Logger');
-            $this->Logger->contain(array(
-                'User'=>array('Entidade')
-            ));
             $logs = $this->Logger->find('all',array('conditions'=>array(),'limit'=>1000,'order'=>'Logger.created DESC'));
             
             $this->set('loggers', $logs);

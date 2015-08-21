@@ -64,7 +64,7 @@ class Curso extends AppModel
         'CursoResponsavel' => [
             'className'  => 'CursoResponsavel',
             'foreignKey' => 'curso_responsavel_id',
-            'conditions' => '',
+            'conditions' => array('CursoResponsavel.estado_objecto_id'=>1),
             'fields'     => '',
             'order'      => ''
         ]
@@ -260,6 +260,18 @@ class Curso extends AppModel
 
         $funcionario = $this->CursoResponsavel->Funcionario->getByUserId($data['CursoResponsavel']['user_id']);
         $data['CursoResponsavel']['funcionario_id'] = $funcionario['Funcionario']['id'];
+
+        //Primeiro desactivamos o antigo responsavel, se existir
+        $this->contain('CursoResponsavel');
+        $curso = $this->findById($data['CursoResponsavel']['curso_id']);
+        $responsavel_antigo = $curso['Curso']['user_responsavel_curso'];
+        if($responsavel_antigo!= $data['CursoResponsavel']['user_id']){
+            $this->CursoResponsavel->id = $curso['CursoResponsavel']['id'];
+            $this->CursoResponsavel->set('data_fim',$data['CursoResponsavel']['data_inicio']);
+            $this->CursoResponsavel->set('estado_objecto_id',2);
+            $this->CursoResponsavel->save();
+        }
+
         $this->CursoResponsavel->create();
         if ($this->CursoResponsavel->save($data)) {
             $this->id = $data['CursoResponsavel']['curso_id'];

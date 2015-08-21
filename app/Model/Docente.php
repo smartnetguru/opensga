@@ -6,162 +6,210 @@
  *
  * @copyright     Copyright 2010-2011, INFOmoz (Informática-Moçambique) (http://infomoz.net)
  * @link          http://infomoz.net/opensga OpenSGA - Sistema de Gestão Académica
- * @author		  Elisio Leonardo (elisio.leonardo@gmail.com)
+ * @author          Elisio Leonardo (elisio.leonardo@gmail.com)
  * @package       opensga
  * @subpackage    opensga.core.estudantes.view
  * @version       OpenSGA v 0.5.0
  * @since         OpenSGA v 0.1.0.0
-
  *
  * @property Entidade @Entidade
  * @property Seccao @Seccao
  * @property DocenteCategoria @DocenteCategoria
+ * @property DocenteUnidadeOrganica @DocenteUnidadeOrganica
  */
-class Docente extends AppModel {
+class Docente extends AppModel
+{
 
-	var $name = 'Docente';
-	//The Associations below have been created with all possible keys, those that are not needed can be removed
+    var $name = 'Docente';
+    //The Associations below have been created with all possible keys, those that are not needed can be removed
 
-	var $belongsTo = array(
-		'Entidade' => array(
-			'className' => 'Entidade',
-			'foreignKey' => 'entidade_id',
-			'conditions' => '',
-			'fields' => '',
-			'order' => ''
-		),
-		'DocenteCategoria' => array(
-			'className' => 'DocenteCategoria',
-			'foreignKey' => 'docente_categoria_id',
-			'conditions' => '',
-			'fields' => '',
-			'order' => ''
-		),
-		'UnidadeOrganica' => array(
-			'className' => 'UnidadeOrganica',
-			'foreignKey' => 'unidade_organica_id',
-			'conditions' => '',
-			'fields' => '',
-			'order' => ''
-		)
-	);
+    var $belongsTo = [
+        'Entidade'         => [
+            'className'  => 'Entidade',
+            'foreignKey' => 'entidade_id',
+            'conditions' => '',
+            'fields'     => '',
+            'order'      => ''
+        ],
+        'DocenteCategoria' => [
+            'className'  => 'DocenteCategoria',
+            'foreignKey' => 'docente_categoria_id',
+            'conditions' => '',
+            'fields'     => '',
+            'order'      => ''
+        ],
+        'UnidadeOrganica'  => [
+            'className'  => 'UnidadeOrganica',
+            'foreignKey' => 'unidade_organica_id',
+            'conditions' => '',
+            'fields'     => '',
+            'order'      => ''
+        ]
+    ];
 
-    public $validate = array(
-        'unidade_organica_id' => array(
-            'unidadeOrganicaNotEmpty' => array(
-                'rule' => 'notBlank',
-                'required'=>'create',
-                'message'=>'O Campo Unidade Organica é de Preenchimento Obrigatório',
+    public $hasMany = [
+        'DocenteUnidadeOrganica' => [
+            'className'    => 'DocenteUnidadeOrganica',
+            'foreignKey'   => 'docente_id',
+            'dependent'    => false,
+            'conditions'   => '',
+            'fields'       => '',
+            'order'        => '',
+            'limit'        => '',
+            'offset'       => '',
+            'exclusive'    => '',
+            'finderQuery'  => '',
+            'counterQuery' => ''
+        ]
+    ];
+
+    public $validate = [
+        'unidade_organica_id' => [
+            'unidadeOrganicaNotEmpty' => [
+                'rule'     => 'notBlank',
+                'required' => 'create',
+                'message'  => 'O Campo Unidade Organica é de Preenchimento Obrigatório',
                 // extra keys like on, required, etc. go here...
-            )
-        ),
+            ]
+        ],
+        'entidade_id' => [
+            'entidadeIdNotEmpty' => [
+                'rule'     => 'notBlank',
+                'required' => 'create',
+                'message'  => 'Os dados pessoais do Docente são de Preenchimento Obrigatório',
+                // extra keys like on, required, etc. go here...
+            ]
+        ],
 
-    );
-	public function getByUserID($userId) {
-		$this->contain(array('Entidade'));
-		$docente = $this->find('first', array('conditions' => array('Entidade.user_id' => $userId)));
-		return $docente;
-	}
+    ];
 
-	public function cadastraDocente(array $data) {
-		$dataSource = $this->getDataSource();
+    public function getByUserID($userId)
+    {
+        $this->contain(['Entidade']);
+        $docente = $this->find('first', ['conditions' => ['Entidade.user_id' => $userId]]);
 
-		$dataSource->begin();
+        return $docente;
+    }
 
-		if (!isset($data['Docente']['codigo']) || $data['Docente']['codigo'] == '') {
-			$data['Docente']['codigo'] = $this->Entidade->User->geraEmailUem($data['Entidade']['apelido'], $data['Entidade']['nomes']);
-		}
+    public function cadastraDocente(array $data)
+    {
+        $dataSource = $this->getDataSource();
 
-		//Grava os dados do Usuario
-		$this->Entidade->User->create();
-		$data['User']['username'] = $data['Docente']['codigo'];
-		$data['User']['password'] = Security::hash('uem2013', 'blowfish');
-		$data['User']['codigocartao'] = $data['Docente']['codigo'];
-		$data['User']['name'] = $data['Entidade']['name'];
-		$data['User']['group_id'] = 4;
-		if ($this->Entidade->User->save($data)) {
+        $dataSource->begin();
 
-			//Grava os dados da Entidade
-			$data['Docente']['user_id'] = $this->Entidade->User->getLastInsertID();
-			$data['Entidade']['user_id'] = $this->Entidade->User->getLastInsertID();
+        if (!isset($data['Docente']['codigo']) || $data['Docente']['codigo'] == '') {
+            $data['Docente']['codigo'] = $this->Entidade->User->geraEmailUem($data['Entidade']['apelido'],
+                $data['Entidade']['nomes']);
+        }
+
+        //Grava os dados do Usuario
+        $this->Entidade->User->create();
+        $data['User']['username'] = $data['Docente']['codigo'];
+        $data['User']['password'] = Security::hash('uem2013', 'blowfish');
+        $data['User']['codigocartao'] = $data['Docente']['codigo'];
+        $data['User']['name'] = $data['Entidade']['name'];
+        $data['User']['group_id'] = 4;
+        if ($this->Entidade->User->save($data)) {
+
+            //Grava os dados da Entidade
+            $data['Docente']['user_id'] = $this->Entidade->User->getLastInsertID();
+            $data['Entidade']['user_id'] = $this->Entidade->User->getLastInsertID();
             $data['Entidade']['email'] = $data['EntidadeContacto'][1];
-			$this->Entidade->create();
+            $this->Entidade->create();
 
             $this->Entidade->validator()
-                ->add('nuit', 'required', array(
-                    'rule' => 'notBlank',
+                ->add('nuit', 'required', [
+                    'rule'     => 'notBlank',
                     'required' => 'create'
-                ))
-                ->add('nuit', 'size', array(
-                    'rule' => 'isUnique',
+                ])
+                ->add('nuit', 'size', [
+                    'rule'    => 'isUnique',
                     'message' => 'Password should be at least 8 chars long'
-                ));
+                ]);
 
 
-			if ($this->Entidade->save($data)) {
+            if ($this->Entidade->save($data)) {
 
-				//Grava os dados do Docente
-				$data['Docente']['entidade_id'] = $this->Entidade->getLastInsertID();
-				$this->create();
-				if ($this->save($data)) {
-					//Grava os dados de Identificacao
+                //Grava os dados do Docente
+                $data['Docente']['entidade_id'] = $this->Entidade->getLastInsertID();
+                $this->create();
+                if ($this->save($data)) {
 
-					$identificacao = array('EntidadeIdentificacao' => $data['EntidadeIdentificacao']);
-					$identificacao['EntidadeIdentificacao']['entidade_id'] = $this->Entidade->getLastInsertID();
-					$identificacao['EntidadeIdentificacao']['estado_objecto_id'] = 1;
+                    //Grava os dados de docente_unidade
+                    $arrayDocenteUnidade = [
+                        'DocenteUnidadeOrganica' => [
+                            'docente_id'          => $this->id,
+                            'unidade_organica_id' => $data['Docente']['unidade_organica_id'],
+                            'data_inicio'         => date('Y-d-m'),
+                            'estado_objecto_id'   => 1,
 
-					$this->Entidade->EntidadeIdentificacao->create();
-					$this->Entidade->EntidadeIdentificacao->save($identificacao);
+                        ]
+                    ];
+
+                    $this->DocenteUnidadeOrganica->create();
+                    $this->DocenteUnidadeOrganica->save($arrayDocenteUnidade);
+
+                    //Grava os dados de Identificacao
+                    $identificacao = ['EntidadeIdentificacao' => $data['EntidadeIdentificacao']];
+                    $identificacao['EntidadeIdentificacao']['entidade_id'] = $this->Entidade->getLastInsertID();
+                    $identificacao['EntidadeIdentificacao']['estado_objecto_id'] = 1;
+
+                    $this->Entidade->EntidadeIdentificacao->create();
+                    $this->Entidade->EntidadeIdentificacao->save($identificacao);
 
 
-					//Grava os dados de Morada e Contactos
+                    //Grava os dados de Morada e Contactos
 
-					$contactos = $data['EntidadeContacto'];
-					foreach ($contactos as $k => $v) {
-						$this->Entidade->EntidadeContacto->create();
-						$this->Entidade->EntidadeContacto->save(
-								array(
-									'EntidadeContacto' => array(
-										'entidade_id' => $this->Entidade->getLastInsertID(),
-										'tipo_contacto_id' => $k,
-										'valor' => $v,
-										'estado_objecto_id' => 1
-									)
-								)
-						);
-					}
-					//CakeResque::enqueue('default', 'DocenteShell', array('enviaEmailCadastro', $this->id));
-					return $dataSource->commit();
-				}
-			} else{
+                    $contactos = $data['EntidadeContacto'];
+                    foreach ($contactos as $k => $v) {
+                        $this->Entidade->EntidadeContacto->create();
+                        $this->Entidade->EntidadeContacto->save(
+                            [
+                                'EntidadeContacto' => [
+                                    'entidade_id'       => $this->Entidade->getLastInsertID(),
+                                    'tipo_contacto_id'  => $k,
+                                    'valor'             => $v,
+                                    'estado_objecto_id' => 1
+                                ]
+                            ]
+                        );
+                    }
+
+                    //CakeResque::enqueue('default', 'DocenteShell', array('enviaEmailCadastro', $this->id));
+                    return $dataSource->commit();
+                }
+            } else {
                 debug($this->Entidade->validationErrors);
                 $dataSource->rollback();
+
                 return false;
             }
-		} else{
+        } else {
 
             $dataSource->rollback();
+
             return false;
         }
 
 
+    }
 
-	}
+    /**
+     * Esta funcao faz o mesmo que find list, mas busca o name a partir da tabela entidades
+     * @todo ver way de passar conditions como argumento
+     */
+    public function listaDocentes()
+    {
 
-	/**
-	 * Esta funcao faz o mesmo que find list, mas busca o name a partir da tabela entidades
-	 * @todo ver way de passar conditions como argumento
-	 */
-	public function listaDocentes() {
+        $funcionarios = $this->find('all', ['fields' => ['id', 'Entidade.name']]);
 
-		$funcionarios = $this->find('all', array('fields' => array('id', 'Entidade.name')));
+        $f = [];
+        foreach ($funcionarios as $funcionario) {
 
-		$f = array();
-		foreach ($funcionarios as $funcionario) {
+            $f[$funcionario[$this->alias]['id']] = $funcionario['Entidade']['name'];
+        }
 
-			$f[$funcionario[$this->alias]['id']] = $funcionario['Entidade']['name'];
-		}
-		return $f;
-	}
+        return $f;
+    }
 
 }

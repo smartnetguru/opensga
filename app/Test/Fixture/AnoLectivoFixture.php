@@ -26,7 +26,7 @@ class AnoLectivoFixture extends CakeTestFixture {
 			'data_fim' => null,
 			'created' => '2013-06-10 14:49:07',
 			'modified' => '2013-06-10 14:49:07',
-			'regimelectivo_id' => '0'
+			
 		),
 		array(
 			'id' => '2',
@@ -37,7 +37,7 @@ class AnoLectivoFixture extends CakeTestFixture {
 			'data_fim' => null,
 			'created' => '2013-06-10 14:49:07',
 			'modified' => '2013-06-10 14:49:07',
-			'regimelectivo_id' => '0'
+			
 		),
 		array(
 			'id' => '3',
@@ -48,7 +48,7 @@ class AnoLectivoFixture extends CakeTestFixture {
 			'data_fim' => null,
 			'created' => '2013-06-10 14:54:08',
 			'modified' => '2013-06-10 14:54:08',
-			'regimelectivo_id' => '0'
+			
 		),
 		array(
 			'id' => '4',
@@ -59,7 +59,7 @@ class AnoLectivoFixture extends CakeTestFixture {
 			'data_fim' => null,
 			'created' => '2013-06-10 14:55:29',
 			'modified' => '2013-06-10 14:55:29',
-			'regimelectivo_id' => '0'
+			
 		),
 		array(
 			'id' => '5',
@@ -70,7 +70,7 @@ class AnoLectivoFixture extends CakeTestFixture {
 			'data_fim' => null,
 			'created' => '2013-06-10 14:55:29',
 			'modified' => '2013-06-10 14:55:29',
-			'regimelectivo_id' => '0'
+			
 		),
 		array(
 			'id' => '6',
@@ -81,7 +81,7 @@ class AnoLectivoFixture extends CakeTestFixture {
 			'data_fim' => null,
 			'created' => '2013-06-10 14:55:30',
 			'modified' => '2013-06-10 14:55:30',
-			'regimelectivo_id' => '0'
+			
 		),
 		array(
 			'id' => '7',
@@ -92,7 +92,7 @@ class AnoLectivoFixture extends CakeTestFixture {
 			'data_fim' => null,
 			'created' => '2013-06-10 14:57:10',
 			'modified' => '2013-06-10 14:57:10',
-			'regimelectivo_id' => '0'
+			
 		),
 		array(
 			'id' => '8',
@@ -103,7 +103,7 @@ class AnoLectivoFixture extends CakeTestFixture {
 			'data_fim' => null,
 			'created' => '2013-06-10 14:57:20',
 			'modified' => '2013-06-10 14:57:20',
-			'regimelectivo_id' => '0'
+			
 		),
 		array(
 			'id' => '9',
@@ -114,7 +114,7 @@ class AnoLectivoFixture extends CakeTestFixture {
 			'data_fim' => null,
 			'created' => '2013-06-10 14:57:32',
 			'modified' => '2013-06-10 14:57:32',
-			'regimelectivo_id' => '0'
+			
 		),
 		array(
 			'id' => '10',
@@ -125,7 +125,7 @@ class AnoLectivoFixture extends CakeTestFixture {
 			'data_fim' => null,
 			'created' => '2013-06-10 14:57:34',
 			'modified' => '2013-06-10 14:57:34',
-			'regimelectivo_id' => '0'
+			
 		),
 	);
 

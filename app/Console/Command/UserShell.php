@@ -68,7 +68,6 @@ class UserShell extends AppShell {
                 if (empty($aro)) {
                     $new_aro = [
                         'parent_id'   => $user['User']['group_id'],
-                        'foreign_key' => $user['User']['id'],
                         'model'       => $this->User->alias
                     ];
                     $this->User->Aro->create();

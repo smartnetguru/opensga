@@ -790,6 +790,8 @@ class UsersController extends AppController
         $this->redirect(['controller'=>'users','action'=>'login','admin'=>false]);
     }
 
+
+
 }
 
 ?>

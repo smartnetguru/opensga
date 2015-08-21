@@ -57,6 +57,23 @@ class AjaxController extends AppController {
 		echo json_encode($codigos);
 	}
 
+    public function estudante_get_bairros_autocomplete() {
+        $this->autoRender = false;
+        $this->loadModel('Bairro');
+
+        $conditions = array(
+            'name LIKE ' => '%' . $this->request->query['term'] . '%'
+        );
+
+        $results = $this->Bairro->find('all', array('fields' => array('name'),
+                                                    'conditions' => $conditions,
+                                                    'group' => array('name'), 'limit' => 20
+        ));
+        $codigos = Set::extract('../Bairro/name', $results);
+
+        echo json_encode($codigos);
+    }
+
 	public function get_escolas_by_distrito() {
 		foreach ($this->request->data as $k => $v) {
 

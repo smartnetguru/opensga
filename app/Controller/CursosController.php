@@ -252,6 +252,29 @@
             $this->set(compact('curso'));
         }
 
+        public function definir_estado_curso($cursoId = null){
+            $curso = $this->Curso->findById($cursoId);
+            if (empty($curso)) {
+                $this->Flash->error('Curso Invalido');
+                $this->redirect(array('action' => 'index'));
+            }
+
+            if($this->request->is('post')){
+                $this->Curso->id = $this->request->data['Curso']['curso_id'];
+                $this->Curso->set('estado_objecto_id',$this->request->data['Curso']['estado_objecto_id']);
+                $this->Curso->save();
+                $this->Flash->success('Estado do Curso Alterado com Sucesso');
+                $this->redirect(['controller'=>'cursos','action'=>'ver_curso',$this->request->data['Curso']['curso_id']]);
+
+            }
+
+            $estadoObjectoId = $curso['Curso']['estado_objecto_id'];
+            $this->loadModel('EstadoObjecto');
+            $estadoObjectos = $this->EstadoObjecto->find('list',['conditions'=>['id NOT'=>$estadoObjectoId]]);
+            $this->set(compact('curso','estadoObjectos'));
+
+        }
+
     }
 
 ?>

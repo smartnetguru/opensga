@@ -18,7 +18,8 @@ class DocenteTest extends CakeTestCase
         'app.entidade',
         'app.user',
         'app.entidade_identificacao',
-        'app.entidade_contacto'
+        'app.entidade_contacto',
+        'app.docente_unidade_organica'
     ];
     public $autoFixtures = false;
 
@@ -62,7 +63,7 @@ class DocenteTest extends CakeTestCase
      */
     public function testCadastraDocente()
     {
-        $this->loadFixtures('Docente', 'User', 'Entidade','EntidadeIdentificacao','EntidadeContacto');
+        $this->loadFixtures('Docente', 'User', 'Entidade','EntidadeIdentificacao','EntidadeContacto','DocenteUnidadeOrganica');
         $data = [
 
             'Entidade'              => [
