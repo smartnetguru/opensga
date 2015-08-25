@@ -305,16 +305,36 @@ class Curso extends AppModel
     }
 
 
-    public function getCursosSemPlanoEstudos($unidadeOrganicaId = null)
+    public function getCursosSemPlanoEstudos($unidadeOrganicaId = null,$type='all')
     {
 
-        $dataSource = $this->getDataSource();
-        $query = 'select * from cursos as Curso where Curso.id not in (select curso_id from plano_estudos where Curso.id = plano_estudos.curso_id)';
-        if(isset($unidadeOrganicaId)){
-            $query .=' and unidade_organica_id ='.$unidadeOrganicaId;
-        }
-        $cursos = $dataSource->fetchAll($query);
+        $options['joins'] = array(
+            array('table' => 'plano_estudos',
+                  'alias' => 'PlanoEstudo',
+                  'type' => 'left',
+                  'conditions' => array(
+                      'Curso.id = PlanoEstudo.curso_id'
+                  )
+            ),
+            array('table' => 'unidade_organicas',
+                  'alias' => 'UnidadeOrganica',
+                  'type' => 'left',
+                  'conditions' => array(
+                      'Curso.unidade_organica_id = UnidadeOrganica.id'
+                  )
+            ),
 
+        );
+
+        $options['fields']='*';
+        $options['conditions'] = array(
+            'PlanoEstudo.curso_id' => null
+        );
+        if(isset($unidadeOrganicaId)){
+            $options['conditions']['Curso.unidade_organica_id'] = $unidadeOrganicaId;
+        }
+
+        $cursos = $this->find($type, $options);
         return $cursos;
     }
 

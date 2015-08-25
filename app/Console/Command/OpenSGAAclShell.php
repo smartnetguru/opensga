@@ -109,9 +109,13 @@ class OpenSGAAclShell extends AppShell
             $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/pesquisar_candidato";
             $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/atribuir_bolsa_candidato";
             $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/print_bolsas_novo_ingresso";
+
             $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/BolsaBolsas/exportar_bolseiros_ano_ingresso";
 
             $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/BolsaBolsas/exportar_bolseiros_ano_ingresso_escolas";
+
+
+
             $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Users/login";
             $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Users/logout";
             $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Users/faculdade_logout";
@@ -156,6 +160,7 @@ class OpenSGAAclShell extends AppShell
                 $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Docentes/faculdade_adicionar_docente";
                 $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Docentes/faculdade_perfil_docente";
                 $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Docentes/faculdade_editar_docente";
+
 
                 $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Inscricaos/faculdade_anular_inscricao";
                 $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Inscricaos/faculdade_index";
@@ -282,6 +287,11 @@ class OpenSGAAclShell extends AppShell
                     $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Disciplinas/index";
                     $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Disciplinas/ver_disciplina";
 
+                    $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Docentes/relatorios";
+                    $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Docentes/relatorios_docentes_por_faculdade";
+
+                    $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Inscricaos/cadastro_notas_historico";
+
 
 
                     //Permissoes temporarias para tempo de matriculas
@@ -299,7 +309,11 @@ class OpenSGAAclShell extends AppShell
 
                     $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/PlanoEstudos/index";
                     $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/PlanoEstudos/manutencao_plano_estudos_incompletos";
-                    $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/PlanoEstudos/ver_plano_estudos";
+                    $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/PlanoEstudos/ver_plano_estudo";
+                    $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/PlanoEstudos/adicionar_disciplinas";
+                    $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/PlanoEstudos/editar_plano_estudo";
+                    $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/PlanoEstudos/adicionar_precedencias";
+                    $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/PlanoEstudos/adicionar_plano_estudo";
 
 
 

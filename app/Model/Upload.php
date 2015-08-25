@@ -42,40 +42,8 @@ class Upload extends AppModel {
 	 * @return:
 	 * 		will return an array with the success of each file upload
 	 */
-	public function uploadFiles($folder, $formdata, $itemId = null) {
-		// setup dir names absolute and relative
-		$folderUrl = Configure::read('OpenSGA.save_path') . DS . $folder.DS;
-		$relUrl = $folder;
+	public function uploadFiles($folder, $formdata, $itemId) {
 
-		// create the folder if it does not exist
-		if (!is_dir($folderUrl)) {
-			mkdir($folderUrl, 0777, true);
-		}
-
-
-
-		// if itemId is set create an item folder
-		if ($itemId) {
-			// set new absolute folder
-			$folderUrl = Configure::read('OpenSGA.save_path') . DS . $folder . DS . $itemId . DS . date('Y').DS;
-			// set new relative folder
-			$relUrl = $folder . DS . $itemId . DS . date('Y');
-			// create directory
-            $isDir = is_dir($folderUrl);
-			if (!is_dir($folderUrl)) {
-
-				mkdir($folderUrl, 0777, true);
-				chmod($folderUrl, 0755);
-			}
-		} else{
-            $folderUrl = Configure::read('OpenSGA.save_path') . DS . $folder . DS . date('Y').DS;
-            $relUrl = $folder . '/' . date('Y');
-            if (!is_dir($folderUrl)) {
-                mkdir($folderUrl, 0777, true);
-                chmod($folderUrl, 0755);
-            }
-            chmod($folderUrl, 0755);
-        }
 
 		// list of permitted file types, this is only images but documents can be added
 		$permitted = array('image/gif', 'image/jpeg', 'image/pjpeg', 'image/png', 'text/plain', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
@@ -100,28 +68,37 @@ class Upload extends AppModel {
 				// switch based on error code
 				switch ($file['error']) {
 					case 0:
-						// check filename already exists
-						if (!file_exists($folderUrl . '/' . $filename)) {
-							// create full filename
-							$fullUrl = $folderUrl . '/' . $filename;
-							$url = $relUrl . '/' . $filename;
-							// upload the file
-							$success = move_uploaded_file($file['tmp_name'], $fullUrl);
-						} else {
-							// create unique filename and upload file
-							ini_set('date.timezone', 'Europe/London');
-							$now = date('Y-m-d-His');
-							$fullUrl = $folderUrl . '/' . $now . $filename;
-							$url = $relUrl . '/' . $now . $filename;
-							$success = move_uploaded_file($file['tmp_name'], $fullUrl);
-						}
-						// if upload was successful
-						if ($success) {
-							// save the url of the file
-							$result['urls'][] = $url;
-						} else {
-							$result['errors'][] = "Error uploaded $filename. Please try again.";
-						}
+                        $filePath = $folder.'/'.$itemId;
+                        $s3Client = Aws\S3\S3Client::factory([
+                            'key'    => S3KEY,
+                            'secret' => S3SECRET,
+                            'region' => S3REGION
+                        ]);
+                        $fileExists = $s3Client->doesObjectExist(S3BUCKET, $filePath);
+                        if($fileExists){
+                             $filePath = $folder.'/'.date('Y-m-d-His').$itemId;;
+                        }
+                        try{
+                            // Upload a file.
+                            $upload = $s3Client->putObject(array(
+                                'Bucket'       => S3BUCKET,
+                                'Key'          => $filePath,
+                                'SourceFile'   => $file['tmp_name'],
+                                'ContentType'  => $file['type'],
+                            ));
+
+                            // We can poll the object until it is accessible
+                            $s3Client->waitUntil('ObjectExists', array(
+                                'Bucket' => S3BUCKET,
+                                'Key'    => $filePath
+                            ));
+
+                            $result['urls'][] = $upload['ObjectURL'];
+                            $result['path'][] = $filePath;
+                        } catch(S3Exception $e){
+                            $this->log($e->getMessage());
+                        }
+
 						break;
 					case 3:
 						// an error occured

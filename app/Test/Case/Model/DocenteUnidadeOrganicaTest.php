@@ -91,7 +91,7 @@ class DocenteUnidadeOrganicaTest extends CakeTestCase {
 		'app.estado_docente_turma',
 		'app.tipo_docente_turma',
 		'app.disciplina_unidade_organica',
-		'app.disciplina_docente',
+
 		'app.precedencia',
 		'app.tipo_precedencia',
 		'app.cursos_turno',

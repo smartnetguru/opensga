@@ -11,6 +11,21 @@
  * @package       opensga
  * @subpackage    opensga.core.controller
  * @since         OpenSGA v 0.10.0.0
+ *
+ *
+ *
+ * @property User $User
+ * @property Genero $Genero
+ * @property Cidade $CidadeMorada
+ * @property Docente $Docente
+ * @property Aluno $Aluno
+ * @property Funcionario $Funcionario
+ * @property FinanceiroConta $FinanceiroConta
+ * @property FinanceiroDeposito $FinanceiroDeposito
+ * @property FinanceiroTransacao $FinanceiroTrancasao
+ * @property EntidadeIdentificacao $EntidadeIdentificacao
+ * @property EntidadeContacto $EntidadeContacto
+ *
 
  *
  */
@@ -22,7 +37,7 @@ class Entidade extends AppModel {
         'apelido' => array(
             'apelidoNotEmpty' => array(
                 'rule' => 'notBlank',
-                'required'=>'create',
+
                 'message'=>'O Campo Apelido é de Preenchimento Obrigatório',
                 // extra keys like on, required, etc. go here...
             )
@@ -30,7 +45,7 @@ class Entidade extends AppModel {
         'nomes' => array(
             'nomesNotEmpty' => array(
                 'rule' => 'notBlank',
-                'required'=>'create',
+
                 'message'=>'O Campo Outros Nomes é de Preenchimento Obrigatório',
                 // extra keys like on, required, etc. go here...
             )
@@ -38,18 +53,17 @@ class Entidade extends AppModel {
         'genero_id' => array(
             'generoIdNotEmpty' => array(
                 'rule' => 'notBlank',
-                'required'=>'create',
+
                 'message'=>'O Campo Sexo é de Preenchimento Obrigatório',
                 // extra keys like on, required, etc. go here...
             )
         ),
         'data_nascimento' => array(
-            'dataNascimentoNotEmpty' => array(
+            'dataNascimentoNotEmpty' => [
                 'rule' => 'notBlank',
-                'required'=>'create',
                 'message'=>'O Campo Data de Nascimento é de Preenchimento Obrigatório',
                 // extra keys like on, required, etc. go here...
-            ),
+            ],
             'dataNascimentoDate' => array(
                 'rule' => array('date', 'ymd'),
                 'message'=>'Introduza uma data no formato certo',
@@ -60,7 +74,7 @@ class Entidade extends AppModel {
         'name' => array(
             'nameNotEmpty' => array(
                 'rule' => 'notBlank',
-                'required'=>'create',
+
                 'message'=>'O Campo Nome Completo é de Preenchimento Obrigatório',
                 // extra keys like on, required, etc. go here...
             )
@@ -68,8 +82,9 @@ class Entidade extends AppModel {
         'email' => array(
             'emailValid' => array(
                 'rule' => 'email',
-                'required'=>'create',
-                'message'=>'O Campo Email de Preenchimento Obrigatório',
+
+                'required'=>false,
+                'message'=>'O Campo Email2 de Preenchimento Obrigatório',
                 // extra keys like on, required, etc. go here...
             )
         ),
@@ -361,6 +376,34 @@ class Entidade extends AppModel {
         )
         );
         return $entidades;
+    }
+
+    public function updateDadosEntidade($entidadeId,$data){
+        $dataSource = $this->getDataSource();
+        $dataSource->begin();
+        $this->id =$entidadeId;
+        $this->set($data['Entidade']);
+        if(isset($data['EntidadeContacto'])){
+
+            if(!$this->EntidadeContacto->actualizaContactos($data)){
+                $dataSource->rollback();
+                return false;
+            }
+            $data['EntidadeIdentificacao']['entidade_id'] = $entidadeId;
+            if(!$this->EntidadeIdentificacao->actualizaIdentificacao($data['EntidadeIdentificacao'])){
+                    $dataSource->rollback();
+                return false;
+            }
+        }
+        if($this->save()){
+            $dataSource->commit();
+            return true;
+        } else{
+            $dataSource->rollback();
+            return false;
+        }
+
+
     }
 
 }

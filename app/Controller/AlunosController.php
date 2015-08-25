@@ -587,13 +587,14 @@ class AlunosController extends AppController
     /**
      * Edita os dados de perfil do estudante
      * @todo Funciona sim, mas falta usar transacoes :)
+     * @Todo Dados do Nivel Anterior serao editados a parte
      */
     function editar_estudante($id = null)
     {
         $this->Aluno->id = $id;
 
         if (!$this->Aluno->exists()) {
-            $this->Session->setFlash('Este Aluno não existe', 'default', ['class' => 'alert_error']);
+            $this->Flash->error('Este Aluno não Existe');
 
             $this->redirect(['action' => 'index']);
         }
@@ -601,39 +602,54 @@ class AlunosController extends AppController
         if ($this->request->is('post') || $this->request->is('put')) {
             //Grava os dados do usuario
 
-            $this->Aluno->Entidade->id = $this->request->data['Aluno']['entidade_id'];
-            $this->Aluno->Entidade->save($this->request->data);
-            $this->Aluno->AlunoNivelMedio->id = $this->request->data['Aluno']['aluno_nivel_medio_id'];
-            $this->Aluno->AlunoNivelMedio->save($this->request->data);
+            if($this->Aluno->updateAluno($this->request->data)){
+                $this->Flash->success('Dados do Estudante Actualizados com Sucesso');
+                $this->redirect([
+                    'controller' => 'alunos',
+                    'action'     => 'perfil_estudante',
+                    $this->request->data['Aluno']['aluno_id']
+                ]);
+            } else{
+                $this->Flash->error('Problemas ao Actualizar os dados do Estudante. Verifique o Formulário e Tente novamente');
+            }
 
-            $this->Session->setFlash(__('Dados do Aluno Actualizados com Sucesso'), 'default',
-                ['class' => 'alert success']);
-            $this->redirect([
-                'controller' => 'alunos',
-                'action'     => 'perfil_estudante',
-                $this->request->data['Aluno']['aluno_id']
-            ]);
+
         }
 
+
         $paises = $this->Aluno->Entidade->PaisNascimento->find('list');
-        $escolaNivelMedios = $this->Aluno->AlunoNivelMedio->EscolaNivelMedio->find('list');
-        $cidades = $this->Aluno->Entidade->CidadeNascimento->find('list');
         $provincias = $this->Aluno->Entidade->ProvinciaNascimento->find('list');
-        $provenienciacidades = $this->Aluno->AlunoNivelMedio->EscolaNivelMedio->Distrito->find('list');
-        $proveniencianomes = $this->Aluno->AlunoNivelMedio->EscolaNivelMedio->Provincia->find('list');
         $documento_identificacaos = $this->Aluno->Entidade->DocumentoIdentificacao->find('list');
-        $areatrabalhos = $this->Aluno->AreaTrabalho->find('list');
         $generos = $this->Aluno->Entidade->Genero->find('list');
-        $turnos = $this->Aluno->Matricula->Turno->find('list');
-        $estado_civil = $this->Aluno->Entidade->EstadoCivil->find('list');
-        $cidadenascimentos = $this->Aluno->Entidade->CidadeNascimento->find('list');
+        $estadoCivil = $this->Aluno->Entidade->EstadoCivil->find('list');
+        $cidades = $this->Aluno->Entidade->CidadeNascimento->find('list');
+        $grauParentescos = $this->Aluno->GrauParentesco->find('list');
+        $naturalidade = '';
+        $this->loadModel('SimNaoResposta');
         $this->Aluno->contain(['Entidade', 'AlunoNivelMedio' => ['EscolaNivelMedio'], 'Curso' => ['UnidadeOrganica']]);
         $aluno = $this->Aluno->find('first', ['conditions' => ['Aluno.id' => $id]]);
         $this->request->data = $aluno;
+        $cidadeMoradaId = $this->request->data['Entidade']['cidade_morada'];
+        $provinciaMoradaId = $this->Aluno->Entidade->CidadeNascimento->getProvinciaIdByCidadeId($cidadeMoradaId);
+        $paisMoradaId = $this->Aluno->Entidade->ProvinciaNascimento->getPaisIdByProvinciaId($provinciaMoradaId);
 
-        $this->set(compact('aluno', 'nacionalidades', 'cursos', 'planoestudos', 'users', 'paises', 'cidades',
-            'provincias', 'documento_identificacaos', 'areatrabalhos', 'generos', 'cidadenascimentos',
-            'proveniencianomes', 'provenienciacidades', 'turnos', 'escolaNivelMedios', 'estado_civil'));
+        $entidadeContacto = $this->Aluno->Entidade->EntidadeContacto->find('first', [
+            'conditions' => [
+                'entidade_id'       => $aluno['Aluno']['entidade_id'],
+                'estado_objecto_id' => 1,
+                'tipo_contacto_id'  => 7
+            ]
+        ]);
+        if($entidadeContacto){
+            $quarteirao = $entidadeContacto['EntidadeContacto']['valor'];
+        } else{
+            $quarteirao = '';
+        }
+
+
+
+        $this->set(compact('grauParentescos', 'naturalidade', 'paises', 'provincias', 'documento_identificacaos',
+             'generos', 'cidades', 'estadoCivil', 'provinciaMoradaId', 'paisMoradaId','quarteirao'));
 
         $this->layout = 'default';
     }

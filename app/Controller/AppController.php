@@ -1,5 +1,5 @@
 <?php
-
+App::import('Vendor', 'HighchartsPHP/Highchart');
     /**
      * App Controller
      *
@@ -37,7 +37,8 @@
             'DebugKit.Toolbar' => [
                 'panels' => []
             ],
-            'Flash'
+            'Flash',
+
         ];
         public $helpers     = [
             'Html'=> array('className' =>'SigaHtml'),

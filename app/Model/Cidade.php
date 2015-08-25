@@ -22,6 +22,13 @@
  * @package       opensga
  * @subpackage    opensga.core.controller
  * @since         OpenSGA v 0.10.0.0
+ *
+ *
+ * @property Provincia $Provincia
+ * @property Pais $Pais
+ * @Property Entidade $Entidade
+ * @property Bairro $Bairro
+ * @property Rua $Rua
 
  * 
  */
@@ -34,14 +41,14 @@ class Cidade extends AppModel {
 	var $belongsTo = array(
 		'Provincia' => array(
 			'className' => 'Provincia',
-			'foreignKey' => 'Provincia_id',
+			'foreignKey' => 'provincia_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
 		),
-		'Paise' => array(
-			'className' => 'Paise',
-			'foreignKey' => 'Paise_id',
+		'Pais' => array(
+			'className' => 'Pais',
+			'foreignKey' => 'pais_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
@@ -89,6 +96,11 @@ class Cidade extends AppModel {
 			'counterQuery' => ''
 		)
 	);
+
+    public function getProvinciaIdByCidadeId($cidadeId){
+        $this->id = $cidadeId;
+        return $this->field('provincia_id');
+    }
 
 }
 ?>

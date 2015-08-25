@@ -1,5 +1,6 @@
 <?php
-
+use Ghunti\HighchartsPHP\Highchart;
+use Ghunti\HighchartsPHP\HighchartJsExpr;
 /**
  * Controller do Docente. Todas as funções referentes ao docente devem ser definidas aqui
  *
@@ -272,6 +273,58 @@ class DocentesController extends AppController
     {
         parent::beforeFilter();
         $this->Security->csrfCheck = false;
+    }
+
+
+    public function relatorios(){
+
+    }
+
+    public function relatorios_docentes_por_faculdade(){
+        $unidadeOrganicas = $this->Docente->DocenteUnidadeOrganica->UnidadeOrganica->find('list',array('conditions'=>array('tipo_unidade_organica_id'=>1)));
+        $arrayX = [];
+        $arrayY=[];
+
+        foreach($unidadeOrganicas as $k=>$v){
+            $totalDocentes = $this->Docente->DocenteUnidadeOrganica->find('count',array('conditions'=>array('unidade_organica_id'=>$k,'estado_objecto_id'=>1)));
+            $arrayX[]=$v;
+            $arrayY[]=$totalDocentes;
+        }
+        $chart = new Highchart();
+        $chart->chart->renderTo = "docentes-faculdade";
+        $chart->chart->type = "column";
+        $chart->title->text = "Docentes Cadastrados por Faculdade";
+        $chart->subtitle->text = "Fonte: siga.uem.mz";
+
+
+        $chart->xAxis->categories = $arrayX;
+
+        $chart->yAxis->min = 0;
+        $chart->yAxis->title->text = "Total de Docentes";
+        $chart->legend->layout = "vertical";
+        $chart->legend->backgroundColor = "#FFFFFF";
+        $chart->legend->align = "left";
+        $chart->legend->verticalAlign = "top";
+        $chart->legend->x = 100;
+        $chart->legend->y = 70;
+        $chart->legend->floating = 1;
+        $chart->legend->shadow = 1;
+
+        $chart->tooltip->formatter = new HighchartJsExpr("function() {
+    return '' + this.x +': '+ this.y +'';}");
+
+        $chart->plotOptions->column->pointPadding = 0.2;
+        $chart->plotOptions->column->borderWidth = 0;
+
+        $chart->series[] = array(
+            'name' => "Total de Docentes",
+            'data' =>$arrayY,
+        );
+
+
+
+
+        $this->set( compact( 'chart' ) );
     }
 
 }

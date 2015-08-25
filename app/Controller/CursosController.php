@@ -39,13 +39,14 @@
         public function manutencao_cursos_sem_encarregado() {
             $cursos = $this->Curso->getAllCursosSemEncarregado();
             $this->set(compact('cursos'));
-            $this->render('index_no_pagination');
+            $this->render('index');
         }
 
         public function manutencao_cursos_sem_plano_estudos(){
             $cursos = $this->Curso->getCursosSemPlanoEstudos();
             $this->set(compact('cursos'));
-            $this->render('index_no_pagination');
+            $this->set('noPagination',true);
+            $this->render('index');
         }
 
         public function manutencao_cursos_sem_turno(){
@@ -225,8 +226,9 @@
         public function manutencao() {
 
             $cursosSemEncarregado = $this->Curso->find('count',array('conditions'=>['Curso.user_responsavel_curso is null']));
+            $cursosSemPlanoEstudos = $this->Curso->getCursosSemPlanoEstudos(null,'count');
 
-            $this->set(compact('cursosSemEncarregado'));
+            $this->set(compact('cursosSemEncarregado','cursosSemPlanoEstudos'));
         }
 
         public function print_declaracao_nivel($alunoId) {

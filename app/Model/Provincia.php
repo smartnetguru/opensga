@@ -22,6 +22,8 @@
  * @package       opensga
  * @subpackage    opensga.core.controller
  * @since         OpenSGA v 0.10.0.0
+ *
+ * @property Pais $Pais
 
  * 
  */
@@ -33,9 +35,9 @@ class Provincia extends AppModel {
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 
 	var $belongsTo = array(
-		'Paise' => array(
-			'className' => 'Paise',
-			'foreignKey' => 'Paise_id',
+		'Pais' => array(
+			'className' => 'Pais',
+			'foreignKey' => 'pais_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
@@ -43,10 +45,26 @@ class Provincia extends AppModel {
 	);
 
 
-    public function getPaisByIdProvinciaId($provinciaId){
+    var $hasMany = array(
+        'Cidade' => array(
+            'className' => 'Cidade',
+            'foreignKey' => 'provincia_id',
+            'dependent' => false,
+            'conditions' => '',
+            'fields' => '',
+            'order' => '',
+            'limit' => '',
+            'offset' => '',
+            'exclusive' => '',
+            'finderQuery' => '',
+            'counterQuery' => ''
+        ),
+    );
+
+    public function getPaisIdByProvinciaId($provinciaId){
         $provincia = $this->findByid($provinciaId);
         if($provincia){
-            return $provincia['ProvinciaNascimento']['pais_id'];
+            return $provincia['Provincia']['pais_id'];
         } else return null;
 
     }

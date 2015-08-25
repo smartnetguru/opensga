@@ -118,7 +118,7 @@ class DocenteDisciplinasControllerTest extends ControllerTestCase {
 		'app.estado_candidatura',
 		'app.regime_estudo',
 		'app.regalia_social',
-		'app.disciplina_docente',
+
 		'app.disciplina_unidade_organica',
 		'app.funcao_profissional_role',
 		'app.funcao_profissional',

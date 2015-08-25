@@ -44,10 +44,12 @@ class CandidaturasController extends AppController {
 
             if ($type == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet') {
 
-                $uploadSucesso = $this->Upload->uploadFiles('uploads', array($this->request->data['Upload']['file']),
-                    'candidatos');
+                $filename = 'admitidos'.date('Y_m_d').'.xlsx';
+                $uploadSucesso = $this->Upload->uploadFiles('uploads/Admitidos', array($this->request->data['Upload']['file']),
+                    $filename);
 
                 if (isset($uploadSucesso['urls'])) {
+
 
 
                     $this->request->data['Upload']['name'] = $this->request->data['Upload']['file']['name'];
@@ -58,13 +60,13 @@ class CandidaturasController extends AppController {
                     $this->Upload->save($this->request->data);
 
 
-                    $candidatos = $this->Candidatura->processaFicheiroExcelCandidatos($uploadSucesso['urls'][0]);
+                    $candidatos = $this->Candidatura->processaFicheiroExcelCandidatos($uploadSucesso);
                     if (is_array($candidatos)) {
                         $this->Session->setFlash(__('Ficheiro de Renovação Processado com Sucesso'), 'default',
                             array('class' => 'alert alert-success'));
                         $this->redirect(array('action' => 'index'));
                     } else{
-                        $this->Session->setFlash(__('O Curso '.$candidatos.' Nao existe na BD'), 'default',
+                        $this->Session->setFlash(__($candidatos), 'default',
                             array('class' => 'alert alert-danger'));
                     }
                 }

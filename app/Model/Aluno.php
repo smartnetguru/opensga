@@ -20,6 +20,7 @@ App::uses('SessionComponent', 'Controller/Component');
  * @property FinanceiroPagamento $FinanceiroPagamento
  * @property Curso $Curso
  * @property HistoricoCurso $HistoricoCurso
+ * @property Entidade $Entidade
  *
  *
  */
@@ -233,18 +234,21 @@ class Aluno extends AppModel
         'curso_id'      => [
             'loginRule-3' => [
                 'rule'     => 'notBlank',
-                'required' => 'create',
-                'message'  => 'O Usermane não pode estar vazio'
+
+                'on'=>'create',
+                'message'  => 'O curso é de preenchimento obrigatorio'
             ]
         ],
         'codigo'        => [
             'codigoRule-1' => [
                 'rule'     => 'isUnique',
-                'required' => 'create',
+
+                'on'=>'create',
                 'message'  => 'Não podem existir dois estudantes com mesmo código'
             ],
             'codigoRule-2' => [
                 'rule'    => 'notBlank',
+                'on'=>'create',
                 'message' => 'Todo estudante deve ter um código atribuido'
             ]
         ],
@@ -822,9 +826,9 @@ class Aluno extends AppModel
                 $data['Aluno']['data_ingresso'] = $data['Aluno']['data_matricula'];
                 $data['Aluno']['curso_ingresso_id'] = $data['Aluno']['curso_id'];
 
-                $plano_estudo_id = $this->Curso->getPlanoEstudoIdRecente($data['Aluno']['curso_id']);
-                if (!empty($plano_estudo_id)) {
-                    $data['Aluno']['plano_estudo_id'] = $plano_estudo_id;
+                $planoEstudoId = $this->Curso->getPlanoEstudoIdRecente($data['Aluno']['curso_id']);
+                if (!empty($planoEstudoId)) {
+                    $data['Aluno']['plano_estudo_id'] = $planoEstudoId;
                 }
                 if (empty($data['Aluno']['estado_aluno_id'])) {
                     $data['Aluno']['estado_aluno_id'] = 1;
@@ -931,7 +935,7 @@ class Aluno extends AppModel
                             if(!empty($data['AlunoNivelMedio']['EscolaNivelMedio']['pais_id'])){
                                 $array_nova_escola['pais_id'] = $data['AlunoNivelMedio']['EscolaNivelMedio']['pais_id'];
                             } else{
-                                $array_nova_escola['pais_id'] = $this->Entidade->ProvinciaNascimento->getPaisByIdProvinciaId($data['AlunoNivelMedio']['EscolaNivelMedio']['provincia_id']);
+                                $array_nova_escola['pais_id'] = $this->Entidade->ProvinciaNascimento->getPaisIdByProvinciaId($data['AlunoNivelMedio']['EscolaNivelMedio']['provincia_id']);
                             }
 
 
@@ -966,7 +970,7 @@ class Aluno extends AppModel
                     //Pega os dados da matricula e realiza a matricula
                     $data_matricula['aluno_id'] = $this->getInsertID();
                     $data_matricula['curso_id'] = $data['Aluno']['curso_id'];
-                    $data_matricula['plano_estudo_id'] = $data['Aluno']['plano_estudo_id'];
+                    $data_matricula['plano_estudo_id'] = $planoEstudoId;
                     $data_matricula['estado_matricula_id'] = 1;
                     $data_matricula['data'] = $data['Aluno']['data_matricula'];
                     $data_matricula['user_id'] = $data['Matricula']['user_id'];
@@ -1183,6 +1187,9 @@ class Aluno extends AppModel
             }
         } else {
 
+            if(!isset($aluno_estado['MotivoEstadoAluno'])){
+                $aluno_estado['MotivoEstadoAluno']['name'] = 'Motivo Não Definido';
+            }
             $irregularidades[] = [
                 "estado"   => 5,
                 "mensagem" => $aluno['EstadoAluno']['name'] . " (" . $aluno_estado['MotivoEstadoAluno']['name'] . ")",
@@ -1698,6 +1705,50 @@ class Aluno extends AppModel
         }
 
         return false;
+    }
+
+    public function updateAluno($data){
+        $dataSource = $this->getDataSource();
+        $dataSource->begin();
+        $this->id = $data['Aluno']['aluno_id'];
+        if($this->updateParentesco($data['Aluno']['aluno_id'],$data['Aluno'])){
+            $entidadeId = $this->field('entidade_id');
+            $data['Aluno']['entidade_id'] = $entidadeId;
+            if( $this->Entidade->updateDadosEntidade($entidadeId,$data)){
+                $dataSource->commit();
+                return true;
+            } else{
+                $dataSource->rollback();
+                return [false,$this->Entidade->validationErrors];
+            }
+        } else{
+            $dataSource->rollback();
+            return [false,$this->validationErrors];
+        }
+
+    }
+
+    /**
+     * Actualiza os dados do encarregado de educacao
+     * @param $alunoId
+     * @param $data
+     */
+    public function updateParentesco($alunoId,$data){
+        $this->id = $alunoId;
+        if(isset($data['nome_emergencia'])){
+            $this->set('nome_emergencia',$data['nome_emergencia']);
+        }
+        if(isset($data['telemovel_emergencias'])){
+            $this->set('telemovel_emergencias',$data['telemovel_emergencias']);
+        }
+        if(isset($data['parentesco_encarregado'])){
+            $this->set('parentesco_encarregado',$data['parentesco_encarregado']);
+        }
+        if($this->save()){
+            return true;
+        } else{
+            return false;
+        }
     }
 
 }

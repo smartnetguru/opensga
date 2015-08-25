@@ -1,6 +1,8 @@
 <?php
 
 App::uses('AppModel', 'Model');
+App::uses('OpenSGAExcel', 'Lib');
+
 
 /**
  * Candidatura Model
@@ -159,14 +161,13 @@ class Candidatura extends AppModel {
 	);
 
 
-    public function processaFicheiroExcelCandidatos($filePath){
+    public function processaFicheiroExcelCandidatos($data){
         AuditableConfig::$Logger = ClassRegistry::init('Auditable.Logger');
-        App::import('Vendor', 'PHPExcel', array('file' => 'PHPExcel.php'));
-        if (!class_exists('PHPExcel')) {
-            throw new CakeException('Vendor class PHPExcel not found!');
-        }
 
-        $xls = PHPExcel_IOFactory::load(Configure::read('OpenSGA.save_path') . DS . $filePath);
+        $filePath = $data['path'][0];
+        $fileUrl = $data['urls'][0];
+        $objPHPExcel = new OpenSGAExcel();
+        $xls = $objPHPExcel->loadWorksheetFromS3($filePath);
 
         $worksheet = $xls->getActiveSheet();
         $linha_actual = 2;
@@ -221,16 +222,23 @@ class Candidatura extends AppModel {
 
         }
         if($this->saveAll($candidatos)){
-            CakeResque::enqueue(
+            /*CakeResque::enqueue(
                 'default', 'CandidatoShell', array('afterImportCandidato', $candidatos, $filePath)
-            );
-            /*$this->loadModel('Upload');
-            $upload = $this->Upload->findByFileUrl($filePath);
+            );*/
+            $this->Upload = ClassRegistry::init('Upload');
+            $upload = $this->Upload->findByFileUrl($fileUrl);
             if($upload){
                 $this->Upload->id = $upload['Upload']['id'];
                 $this->Upload->set('estado_upload_id',3);
                 $this->Upload->save();
-            }*/
+            }
+
+            $newPath = 'Imports/Admitidos/'.date('Y').'/admitidos_'.date('Y_m_d_His').'.xlsx';
+            if($objPHPExcel->unloadWorksheetFromS3($filePath,$newPath)){
+                $this->Upload->id = $upload['Upload']['id'];
+                $this->Upload->set('file_dir',$newPath);
+                $this->Upload->save();
+            }
 
             return $candidatos;
         } else{

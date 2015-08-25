@@ -44,7 +44,7 @@ class AlumniCandidatoAlumniTest extends CakeTestCase
         'app.disciplina_plano_estudo',
         'app.disciplina',
         'app.disciplina_unidade_organica',
-        'app.disciplina_docente',
+
         'app.precedencia',
         'app.tipo_precedencia',
         'app.cursos_turno',
