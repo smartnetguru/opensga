@@ -1,6 +1,7 @@
 <?php
 use Ghunti\HighchartsPHP\Highchart;
 use Ghunti\HighchartsPHP\HighchartJsExpr;
+
 /**
  * Controller do Docente. Todas as funções referentes ao docente devem ser definidas aqui
  *
@@ -183,7 +184,7 @@ class DocentesController extends AppController
             $this->redirect(['action' => 'index']);
         }
         $this->Docente->contain([
-            'Entidade' => [
+            'Entidade'               => [
                 'User',
                 'PaisNascimento',
                 'CidadeNascimento',
@@ -191,7 +192,7 @@ class DocentesController extends AppController
                 'DocumentoIdentificacao',
                 'Genero'
             ],
-            'DocenteUnidadeOrganica'=>[
+            'DocenteUnidadeOrganica' => [
                 'UnidadeOrganica'
             ]
         ]);
@@ -276,19 +277,23 @@ class DocentesController extends AppController
     }
 
 
-    public function relatorios(){
+    public function relatorios()
+    {
 
     }
 
-    public function relatorios_docentes_por_faculdade(){
-        $unidadeOrganicas = $this->Docente->DocenteUnidadeOrganica->UnidadeOrganica->find('list',array('conditions'=>array('tipo_unidade_organica_id'=>1)));
+    public function relatorios_docentes_por_faculdade()
+    {
+        $unidadeOrganicas = $this->Docente->DocenteUnidadeOrganica->UnidadeOrganica->find('list',
+            ['conditions' => ['tipo_unidade_organica_id' => 1]]);
         $arrayX = [];
-        $arrayY=[];
+        $arrayY = [];
 
-        foreach($unidadeOrganicas as $k=>$v){
-            $totalDocentes = $this->Docente->DocenteUnidadeOrganica->find('count',array('conditions'=>array('unidade_organica_id'=>$k,'estado_objecto_id'=>1)));
-            $arrayX[]=$v;
-            $arrayY[]=$totalDocentes;
+        foreach ($unidadeOrganicas as $k => $v) {
+            $totalDocentes = $this->Docente->DocenteUnidadeOrganica->find('count',
+                ['conditions' => ['unidade_organica_id' => $k, 'estado_objecto_id' => 1]]);
+            $arrayX[] = $v;
+            $arrayY[] = $totalDocentes;
         }
         $chart = new Highchart();
         $chart->chart->renderTo = "docentes-faculdade";
@@ -316,15 +321,13 @@ class DocentesController extends AppController
         $chart->plotOptions->column->pointPadding = 0.2;
         $chart->plotOptions->column->borderWidth = 0;
 
-        $chart->series[] = array(
+        $chart->series[] = [
             'name' => "Total de Docentes",
-            'data' =>$arrayY,
-        );
+            'data' => $arrayY,
+        ];
 
 
-
-
-        $this->set( compact( 'chart' ) );
+        $this->set(compact('chart'));
     }
 
 }

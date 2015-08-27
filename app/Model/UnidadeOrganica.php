@@ -133,6 +133,37 @@ class UnidadeOrganica extends AppModel {
 		'nome_codigo' => 'CONCAT(UnidadeOrganica.codigo," - ",UnidadeOrganica.name)'
 	];
 
+    public $validate = [
+        'name'      => [
+            'nameNotBlank' => [
+                'rule'     => 'notBlank',
+                'message'  => 'Entidade em branco?'
+            ],
+            'nameIsUnique' => [
+                'rule'     => 'isUnique',
+                'message'  => 'Entidade em branco?'
+            ],
+        ],
+        'nivel_unidade'      => [
+            'nivelUnidadeNotBlank' => [
+                'rule'     => 'notBlank',
+                'message'  => 'Deve-se Indicar a que unidadeOrganica este funcionario pertence'
+            ],
+        ],
+        'tipo_unidade_organica_id'      => [
+            'tipoUnidadeOrganicaIdNotBlank' => [
+                'rule'     => 'notBlank',
+                'message'  => 'Deve-se Indicar a que unidadeOrganica este funcionario pertence'
+            ],
+        ],
+        'parent_id'      => [
+            'parentIdNotBlank' => [
+                'rule'     => 'notBlank',
+                'message'  => 'Deve-se Indicar a que unidadeOrganica este funcionario pertence'
+            ],
+        ],
+    ];
+
     /**
 * @param $unidade_organica_id
  * @return bool

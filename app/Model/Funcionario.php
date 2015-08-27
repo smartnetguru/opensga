@@ -58,11 +58,35 @@ class Funcionario extends AppModel {
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
-		)
-	);
+		),
+        'FuncionarioCategoria' => array(
+            'className' => 'FuncionarioCategoria',
+            'foreignKey' => 'funcionario_categoria_id',
+            'conditions' => '',
+            'fields' => '',
+            'order' => ''
+        ),
+
+
+    );
 	public $hasOne = array(
 		'Docente'
 	);
+
+    public $validate = [
+        'entidade_id'      => [
+            'entidadeIdNotBlank' => [
+                'rule'     => 'notBlank',
+                'message'  => 'Entidade em branco?'
+            ],
+        ],
+        'unidade_organica_id'      => [
+            'unidadeOrganicaNotBlank' => [
+                'rule'     => 'notBlank',
+                'message'  => 'Deve-se Indicar a que unidadeOrganica este funcionario pertence'
+            ],
+        ],
+    ];
 
 	/**
 	 * Esta funcao faz o mesmo que find list, mas busca o name a partir da tabela entidades

@@ -69,16 +69,16 @@ class User extends AppModel {
 	//Regras de Validacao
 	public $validate = array(
 		'username' => array(
-			'loginRule-1' => array(
+			'usernameIsEmail' => array(
 				'rule' => 'email',
 				'required' => 'create',
 				'message' => 'O Username deve ser um email Válido',
 			),
-			'loginRule-2' => array(
+			'usernameIsUnique' => array(
 				'rule' => 'isUnique',
 				'message' => 'Não podem existir 2 usuários com emails iguais'
 			),
-			'loginRule-3' => array(
+			'usernameNotBlank' => array(
 				'rule' => 'notBlank',
 				'message' => 'O Usermane não pode estar vazio'
 			)
@@ -289,8 +289,10 @@ class User extends AppModel {
 
 		//Verificar se existe algum email assim
 		$email_existe = $this->findByUsername($email);
+
 		if ($email_existe) {
 			if (count($nomes) > 1) {
+
 				$segundo_nome = trim($nomes[1]);
 				$email = $nomes[0] . '.' . $segundo_nome[0] . '.' . $apelido . '@uem.ac.mz';
 				$email_existe1 = $this->findByUsername($email);
@@ -302,18 +304,46 @@ class User extends AppModel {
 						$email = $apelido . '.' . $nomes[0] . '@uem.ac.mz';
 						$email_existe2 = $this->findByUsername($email);
 						if ($email_existe2) {
-							$email = $apelido . '.' . $nomes[0] . '.' . $email_existe2['User']['id'] . '@uem.ac.mz';
-						}
+                            $contador = $email_existe2['User']['id'];
+
+                            $encontrado = false;
+                            while(!$encontrado){
+                                $email = $nomes[0] . '.' . $apelido .'.'.$contador. '@uem.ac.mz';
+                                $email_4 = $this->findByUsername($email);
+                                if(empty($email_4)){
+                                    $encontrado=true;
+                                } else{
+                                    $contador++;
+                                }
+                            }
+
+                        }
 					}
 				}
 			} else {
+
 				$email = $apelido . '.' . $nomes[0] . '@uem.ac.mz';
+
 				$email_existe2 = $this->findByUsername($email);
+
 				if ($email_existe2) {
-					$email = $apelido . '.' . $nomes[0] . '.' . $email_existe2['User']['id'] . '@uem.ac.mz';
+                    $contador = $email_existe2['User']['id'];
+
+                    $encontrado = false;
+                    while(!$encontrado){
+                        $email = $nomes[0] . '.' . $apelido .'.'.$contador. '@uem.ac.mz';
+                        $email_4 = $this->findByUsername($email);
+                        if(empty($email_4)){
+                            $encontrado=true;
+                        } else{
+                            $contador++;
+                        }
+                    }
+
 				}
 			}
 		}
+
 		return strtolower($email);
 	}
 

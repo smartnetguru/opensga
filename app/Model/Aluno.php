@@ -257,7 +257,14 @@ class Aluno extends AppModel
                 'rule'    => 'date',
                 'message' => 'A data de Ingresso deve ser uma data valida'
             ]
-        ]
+        ],
+        'ano_ingresso'=> [
+            'AnoIngressoNotBlank' => [
+                'rule'    => 'notBlank',
+                'message' => 'A data de Ingresso deve ser uma data valida'
+            ]
+        ],
+
     ];
     public $virtualFields = [];
 

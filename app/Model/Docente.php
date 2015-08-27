@@ -93,6 +93,14 @@ class Docente extends AppModel
                 // extra keys like on, required, etc. go here...
             ]
         ],
+        'docente_categoria_id' => [
+            'categoriaDocenteNotEmpty' => [
+                'rule'     => 'notBlank',
+                'required' => 'create',
+                'message'  => 'A categoria do Docente é de Preenchimento Obrigatório',
+                // extra keys like on, required, etc. go here...
+            ]
+        ],
 
     ];
 
