@@ -77,14 +77,6 @@ class FuncionariosController extends AppController {
 		$funcionario = $this->Funcionario->read(null, $id);
 
 
-
-
-
-
-
-
-
-
 		$this->set(compact('funcionario'));
 	}
 

@@ -26,8 +26,8 @@ class DbsecShell extends AppShell
         'Entidade',
     ];
 
-    public $folder = 'dcb';
-    public $unidadeOrganicaId = 23;
+    public $folder = 'desporto';
+    public $unidadeOrganicaId = 10;
 
     /**
      * @todo  Implementar se for necessario
@@ -521,10 +521,10 @@ class DbsecShell extends AppShell
                 ]);
                 $anolectivo = $this->AnoLectivo->findByAno($ano);
                 $codigo_disciplina = $idDisciplina;
-
+                $nome_disciplina = '';
                 $linha_actual2 = 2;
                 while (true) {
-                    $codigo2 = $worksheet2->getCell('A' . $linha_actual2)->getCalculatedValue();
+                    $codigo2 = trim($worksheet2->getCell('A' . $linha_actual2)->getCalculatedValue());
 
                     if ($codigo2 == $codigo_disciplina) {
                         $nome_disciplina = $worksheet2->getCell('B' . $linha_actual2)->getCalculatedValue();
@@ -661,7 +661,7 @@ class DbsecShell extends AppShell
 
             $codigo = trim($worksheet->getCell('A' . $linha_actual)->getCalculatedValue());
             $idDisciplina = trim($worksheet->getCell('B' . $linha_actual)->getCalculatedValue());
-            $cellDataInscricao = $worksheet->getCell('O' . $linha_actual);
+            $cellDataInscricao = $worksheet->getCell('L' . $linha_actual);
             $idAnoLectivo = trim($worksheet->getCell('E' . $linha_actual)->getCalculatedValue());
             $idCursoFrequencia = trim($worksheet->getCell('U' . $linha_actual)->getCalculatedValue());
             $idCurso = trim($worksheet->getCell('O' . $linha_actual)->getCalculatedValue());
@@ -782,16 +782,7 @@ class DbsecShell extends AppShell
                         ]
                     ];
 
-                    debug($linha_actual);
-                    debug($codigo);
-                    debug($turma);
-                    debug($idTurma);
 
-                    debug($anolectivo);
-                    debug($curso);
-                    debug($disciplina);
-                    debug($array_inscricao);
-                    die();
                     $this->Inscricao->contain();
                     $inscricao_existe = $this->Inscricao->find('first', [
                         'conditions' => [

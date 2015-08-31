@@ -7,13 +7,7 @@ class Disciplina extends AppModel {
     //The Associations below have been created with all possible keys, those that are not needed can be removed
 
     var $belongsTo = array(
-        'UnidadeOrganica' => array(
-            'className' => 'UnidadeOrganica',
-            'foreignKey' => 'unidade_organica_id',
-            'conditions' => '',
-            'fields' => '',
-            'order' => ''
-        ),
+        
     );
     var $hasMany = array(
         'Turma' => array(

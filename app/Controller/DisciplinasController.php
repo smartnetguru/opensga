@@ -22,8 +22,8 @@ App::uses('AppController', 'Controller');
 class DisciplinasController extends AppController {
 
 	function index() {
-		$this->Disciplina->recursive = 0;
-		$disciplinas = $this->Disciplina->find('all');
+		$this->Disciplina->DisciplinaUnidadeOrganica->contain(array('Disciplina','UnidadeOrganica'));
+		$disciplinas = $this->paginate('DisciplinaUnidadeOrganica');
 		$this->set('disciplinas', $disciplinas);
 	}
 

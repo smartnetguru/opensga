@@ -7,11 +7,12 @@ App::uses('AppShell', 'Console/Command');
  * Class EntidadeShell
  *
  * @property Entidade $Entidade
+ * @property Aluno $Aluno
  */
 class FinancasShell extends AppShell
 {
 
-    public $uses = ['Aluno'];
+    public $uses = ['Aluno','FinanceiroTransacao'];
 
 
     public function base_fund()
@@ -139,6 +140,11 @@ class FinancasShell extends AppShell
         $xls->disconnectWorksheets();
         unset($xls);
 
+    }
+
+    public function testaCheckDigito(){
+        $digito = $this->FinanceiroTransacao->geraCheckDigito();
+        debug($digito);
     }
 
 

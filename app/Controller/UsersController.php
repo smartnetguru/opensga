@@ -453,6 +453,11 @@ class UsersController extends AppController
 
                 $User = $this->Session->read('Auth.User');
 
+                if(!in_array($User['estado_objecto_id'],[1,null])){
+
+                    $this->redirect(['action'=>'logout']);
+                }
+
                 $entidade = $this->User->Entidade->findByUserId($User['id']);
                 $this->Session->write('Auth.User.name', $entidade['Entidade']['name']);
 

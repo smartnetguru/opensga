@@ -23,7 +23,7 @@ class Inscricao extends AppModel
     var $name = 'Inscricao';
     //The Associations below have been created with all possible keys, those that are not needed can be removed
 
-    public $estadoInscricoesAbertas = [1,2,3];
+    public $estadoInscricoesAbertas = [1, 2, 3];
 
     public $validate = [
         'tipo_inscricao_id'   => [
@@ -71,7 +71,7 @@ class Inscricao extends AppModel
         'nota_final'          => [
             'NotaFinalNotEmpty' => [
                 'rule'       => ['range', 0, 20],
-                'message'    => 'A nota de frequencia deve estar entre 0 e 20',
+                'message'    => 'A nota final deve estar entre 0 e 20',
                 'allowEmpty' => true
             ]
         ],
@@ -498,10 +498,12 @@ class Inscricao extends AppModel
         //Pega todas as cadeiras do plano
         $this->Turma->PlanoEstudo->DisciplinaPlanoEstudo->contain(['Disciplina']);
         $disciplinaPlanoEstudos = $this->Turma->PlanoEstudo->DisciplinaPlanoEstudo->find('all',
-            ['conditions' => ['plano_estudo_id'   => $aluno['Aluno']['plano_estudo_id'],
-                              'disciplina_id NOT' => $disciplinasExcluir
-            ],
-             'order'      => ['ano_curricular', 'semestre_curricular']
+            [
+                'conditions' => [
+                    'plano_estudo_id'   => $aluno['Aluno']['plano_estudo_id'],
+                    'disciplina_id NOT' => $disciplinasExcluir
+                ],
+                'order'      => ['ano_curricular', 'semestre_curricular']
             ]);
 
 
@@ -512,6 +514,7 @@ class Inscricao extends AppModel
     public function actualizaDadosInscricao($data)
     {
         $this->id = $data['Inscricao']['inscricao_id'];
+
 
         //Se tiver nota final, entao a cadeira terminou
         if (!empty($data['Inscricao']['nota_final'])) {
@@ -543,7 +546,7 @@ class Inscricao extends AppModel
                             $data['Inscricao']['estado_inscricao_id'] = 5;
                             $data['Inscricao']['nota_final'] = ($data['Inscricao']['nota_frequencia'] + $data['Inscricao']['nota_exame_normal']) / 2;
                         }
-                    } else{
+                    } else {
                         $data['Inscricao']['estado_inscricao_id'] = 2;
                     }
                 } else {
@@ -561,6 +564,161 @@ class Inscricao extends AppModel
             return [false, $this->validationErrors];
         }
 
+
+    }
+
+    public function cadastraNotasHistorico($data)
+    {
+        $dataSource = $this->getDataSource();
+        $alunoId = $data['Inscricao']['aluno_id'];
+        unset($data['Inscricao']['aluno_id']);
+
+        foreach ($data['Inscricao'] as $disciplinaPlanoEstudoId => $inscricao) {
+
+
+            if(isset($inscricao['gravar'])){
+                if($inscricao['gravar']==0)
+                continue;
+            }
+
+            if (isset($inscricao['inscricao_id'])) {
+                $dadosInscricao = [
+                    'Inscricao' => [
+                        'nota_final'   => $inscricao['nota_final'],
+                        'aluno_id'     => $alunoId,
+                        'inscricao_id' => $inscricao['inscricao_id']
+                    ]
+                ];
+                $resultado = $this->actualizaDadosInscricao($dadosInscricao);
+                if ($resultado !== true) {
+                    return $resultado;
+                }
+            } else {
+                //Criamos uma nova Inscricao
+                $dataSource->begin();
+                debug($inscricao);
+                debug($data);
+                $this->Turma->PlanoEstudo->DisciplinaPlanoEstudo->contain(['Disciplina', 'PlanoEstudo']);
+                $disciplinaPlanoEstudo = $this->Turma->PlanoEstudo->DisciplinaPlanoEstudo->findById($disciplinaPlanoEstudoId);
+                $anoLectivo = $this->Turma->AnoLectivo->findByAno($inscricao['ano_lectivo']);
+                $semestreLectivo = $this->Turma->SemestreLectivo->findByAnoLectivoIdAndSemestre($anoLectivo['AnoLectivo']['id'],
+                    $disciplinaPlanoEstudo['DisciplinaPlanoEstudo']['semestre_curricular']);
+                if (empty($semestreLectivo)) {
+                    $arraySemestreLectivo = [
+                        'SemestreLectivo' => [
+                            'ano_lectivo_id' => $anoLectivo['AnoLectivo']['id'],
+                            'semestre'       => $disciplinaPlanoEstudo['DisciplinaPlanoEstudo']['semestre_curricular'],
+                            'codigo'         => $anoLectivo['AnoLectivo']['id'] . '/' . $disciplinaPlanoEstudo['DisciplinaPlanoEstudo']['semestre_curricular']
+                        ]
+                    ];
+                    $this->Turma->SemestreLectivo->create();
+                    if(!$this->Turma->SemestreLectivo->save($arraySemestreLectivo)){
+                        $dataSource->rollback();
+                        return [false,$this->Turma->SemestreLectivo->validationErrors];
+
+                    }
+                    $semestreLectivoId = $this->Turma->SemestreLectivo->id;
+                } else {
+                    $semestreLectivoId = $semestreLectivo['SemestreLectivo']['id'];
+                }
+                $turmaExiste = $this->Turma->find('first', [
+                    'conditions' => [
+                        'disciplina_id'       => $disciplinaPlanoEstudo['DisciplinaPlanoEstudo']['disciplina_id'],
+                        'plano_estudo_id'     => $disciplinaPlanoEstudo['DisciplinaPlanoEstudo']['plano_estudo_id'],
+                        'ano_curricular'      => $disciplinaPlanoEstudo['DisciplinaPlanoEstudo']['ano_curricular'],
+                        'semestre_curricular' => $disciplinaPlanoEstudo['DisciplinaPlanoEstudo']['semestre_curricular'],
+                        'ano_lectivo_id'      => $anoLectivo['AnoLectivo']['id']
+                    ]
+                ]);
+                if (empty($turmaExiste)) {
+                    //Criamos a Turma
+                    $arrayNovaTurma = [
+                        'Turma' => [
+                            'ano_lectivo_id'      => $anoLectivo['AnoLectivo']['id'],
+                            'curso_id'            => $disciplinaPlanoEstudo['PlanoEstudo']['curso_id'],
+                            'plano_estudo_id'     => $disciplinaPlanoEstudo['PlanoEstudo']['id'],
+                            'disciplina_id'       => $disciplinaPlanoEstudo['Disciplina']['id'],
+                            'estado_turma_id'     => 1,
+                            'ano_curricular'      => $disciplinaPlanoEstudo['DisciplinaPlanoEstudo']['ano_curricular'],
+                            'semestre_curricular' => $disciplinaPlanoEstudo['DisciplinaPlanoEstudo']['semestre_curricular'],
+                            'name'                => $disciplinaPlanoEstudo['Disciplina']['name'] . ' - ' . $inscricao['ano_lectivo'] . $disciplinaPlanoEstudo['PlanoEstudo']['name'],
+                            'semestre_lectivo_id' => $semestreLectivoId,
+
+                        ]
+                    ];
+                    $this->Turma->create();
+                    if(!$this->Turma->save($arrayNovaTurma)){
+                        $dataSource->rollback();
+                        return [false,$this->Turma->validationErrors];
+                    }
+                    $turmaId = $this->Turma->id;
+                } else {
+                    $turmaId = $turmaExiste['Turma']['id'];
+                }
+                $matricula = $this->Aluno->Matricula->findByAlunoIdAndAnoLectivoId($alunoId,
+                    $anoLectivo['AnoLectivo']['id']);
+                if (empty($matricula)) {
+                    //Matricula naquele ano Lectivo
+                    $aluno = $this->Aluno->findById($alunoId);
+                    if ($aluno['Aluno']['ano_ingresso'] == $inscricao['ano_lectivo']) {
+                        $tipoMatriculaId = 1;
+                    } else {
+                        $tipoMatriculaId = 2;
+                    }
+                    $arrayMatricula = [
+                        'Matricula' => [
+                            'aluno_id'            => $alunoId,
+                            'curso_id'            => $disciplinaPlanoEstudo['PlanoEstudo']['curso_id'],
+                            'plano_estudo_id'     => $disciplinaPlanoEstudo['PlanoEstudo']['id'],
+                            'data'                => $inscricao['ano_lectivo'] . '-01-01',
+                            'estado_matricula_id' => 1,
+                            'ano_lectivo_id'      => $anoLectivo['AnoLectivo']['id'],
+                            'tipo_matricula_id'   => $tipoMatriculaId
+                        ]
+                    ];
+                    $this->Matricula->create();
+                    if(!$this->Matricula->save($arrayMatricula)){
+                        $dataSource->rollback();
+                        return [false,$this->Matricula->validationErrors];
+                    }
+                    $matriculaId = $this->Matricula->id;
+                } else{
+                    $matriculaId= $matricula['Matricula']['id'];
+                }
+                $arrayNovaInscricao = [
+                    'Inscricao' => [
+                        'aluno_id'            => $alunoId,
+                        'turma_id'            => $turmaId,
+                        'estado_inscricao_id' => 1,
+                        'data'                => $inscricao['data'],
+                        'tipo_inscricao_id'   => 1,
+                        'matricula_id'=>$matriculaId,
+                        'turma_inscricao_id'=>$turmaId,
+                        'turma_frequencia_id'=>$turmaId,
+
+                    ]
+                ];
+                $this->create();
+                if(!$this->save($arrayNovaInscricao)){
+                    $dataSource->rollback();
+                    return [false,$this->validationErrors];
+                }
+                $dadosInscricao = [
+                    'Inscricao' => [
+                        'nota_final'   => $inscricao['nota_final'],
+                        'aluno_id'     => $alunoId,
+                        'inscricao_id' => $this->id
+                    ]
+                ];
+                $resultado = $this->actualizaDadosInscricao($dadosInscricao);
+                if ($resultado !== true) {
+                    return $resultado;
+                }
+                $dataSource->commit();
+            }
+
+        }
+        return true;
 
     }
 

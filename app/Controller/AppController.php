@@ -96,6 +96,9 @@ App::import('Vendor', 'HighchartsPHP/Highchart');
             }
 
 
+
+
+
             //Devemos forcar o prefixo para funcionarios da faculdade, docente e estudantes
             $general_actions = [
                 'logout',

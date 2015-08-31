@@ -95,7 +95,7 @@ class InscricaosController extends AppController
 
         $unidadeOrganicaId = $this->Session->read('Auth.User.unidade_organica_id');
         $conditions = [];
-        $conditions['Inscricao.estado_inscricao_id'] = [1, 2, 3];
+       // $conditions['Inscricao.estado_inscricao_id'] = [1, 2, 3];
         $this->Inscricao->Turma->contain('Curso');
         $cursosFaculdade = $this->Inscricao->Turma->Curso->find('list', [
             'conditions' => [
@@ -917,7 +917,8 @@ class InscricaosController extends AppController
 
 
         if ($this->request->is('post')) {
-            debug($this->request->data);
+            $cadastro = $this->Inscricao->CadastraNotasHistorico($this->request->data);
+            debug($cadastro);
         }
         $this->Inscricao->Aluno->contain(['Entidade' => ['Genero'], 'PlanoEstudo', 'Curso']);
         $aluno = $this->Inscricao->Aluno->findById($alunoId);
@@ -928,7 +929,7 @@ class InscricaosController extends AppController
         }
 
         $totalCreditos = $this->Inscricao->Aluno->PlanoEstudo->getTotalCreditos($aluno['Aluno']['plano_estudo_id']);
-        if ($totalCreditos < 180) {
+       /* if ($totalCreditos < 180) {
             $this->Flash->error('O Plano de Estudos deste Estudante não possui creditos Suficientes. Por favor adicione mais cadeiras ou Ajuste os creditos');
             $this->redirect([
                 'controller' => 'plano_estudos',
@@ -936,7 +937,7 @@ class InscricaosController extends AppController
                 $aluno['Aluno']['plano_estudo_id']
             ]);
         }
-        debug($totalCreditos);
+        */
         $this->Inscricao->Aluno->PlanoEstudo->DisciplinaPlanoEstudo->contain(['Disciplina']);
         $disciplinaPlanoEstudos = $this->Inscricao->Aluno->PlanoEstudo->DisciplinaPlanoEstudo->find('all',
             [
