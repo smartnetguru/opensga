@@ -70,7 +70,6 @@ class PlanoEstudosController extends AppController
     }
 
 
-
     /**
      * Cria um novo Plano de Estudos para uma Unidade Organica
      * Depois direcciona para pagina de adicionar disciplinas
@@ -88,6 +87,16 @@ class PlanoEstudosController extends AppController
                     ['class' => 'alert alert-success']);
                 $this->redirect(['action' => 'adicionar_disciplinas', $this->PlanoEstudo->id]);
             } else {
+                $planoEstudoExiste = $this->PlanoEstudo->find('first', [
+                    'conditions' => [
+                        'curso_id',
+                        $this->request->data['PlanoEstudo']['curso_id'],
+                        'ano_criacao' => $this->request->data['PlanoEstudo']['ano_criacao']
+                    ]
+                ]);
+                if (!empty($planoEstudoExiste)) {
+                    $this->redirect(['actrion' => 'adicionar_disciplinas', $planoEstudoExiste['PlanoEstudo']['id']]);
+                }
                 $this->Session->setFlash('Erro ao gravar dados. Por favor tente de novo.', 'default',
                     ['class' => 'alert alert-success']);
             }
@@ -202,7 +211,7 @@ class PlanoEstudosController extends AppController
         for ($i = 1; $i <= $planoEstudo['PlanoEstudo']['duracao']; $i++) {
             $anos[$i] = $i;
         }
-        $semestres = array();
+        $semestres = [];
         for ($i = 1; $i <= $planoEstudo['PlanoEstudo']['semestres_ano']; $i++) {
             $semestres[$i] = $i;
         }
@@ -269,7 +278,7 @@ class PlanoEstudosController extends AppController
                 'Curso',
                 'EstadoObjecto'
             ],
-            'order' => 'PlanoEstudo.ano_criacao DESC'
+            'order'   => 'PlanoEstudo.ano_criacao DESC'
         ];
         $this->set('planoEstudos', $this->paginate('PlanoEstudo'));
     }
@@ -305,7 +314,6 @@ class PlanoEstudosController extends AppController
     }
 
 
-
     /**
      * Cria um novo Plano de Estudos para uma Unidade Organica
      * Depois direcciona para pagina de adicionar disciplinas
@@ -323,13 +331,23 @@ class PlanoEstudosController extends AppController
                     ['class' => 'alert alert-success']);
                 $this->redirect(['action' => 'adicionar_disciplinas', $this->PlanoEstudo->id]);
             } else {
+                $planoEstudoExiste = $this->PlanoEstudo->find('first', [
+                    'conditions' => [
+                        'curso_id'=> $this->request->data['PlanoEstudo']['curso_id'],
+                        'ano_criacao' => $this->request->data['PlanoEstudo']['ano_criacao']
+                    ]
+                ]);
+                
+                if (!empty($planoEstudoExiste)) {
+                    $this->redirect(['action' => 'adicionar_disciplinas', $planoEstudoExiste['PlanoEstudo']['id']]);
+                }
                 $this->Session->setFlash('Erro ao gravar dados. Por favor tente de novo.', 'default',
                     ['class' => 'alert alert-success']);
             }
         }
         $cursos = $this->PlanoEstudo->Curso->find('list', [
-            'conditions' => ['Curso.unidade_organica_id' => $this->Session->read('Auth.User.unidade_organica_id')],
-            'order'      => 'Curso.name ASC'
+            // 'conditions' => ['Curso.unidade_organica_id' => $this->Session->read('Auth.User.unidade_organica_id')],
+            'order' => 'Curso.name ASC'
         ]);
         $this->set(compact('cursos'));
     }
@@ -352,8 +370,8 @@ class PlanoEstudosController extends AppController
         ]);
         $planoEstudo = $this->PlanoEstudo->find('first', [
             'conditions' => [
-                'Curso.unidade_organica_id' => $this->Session->read('Auth.User.unidade_organica_id'),
-                'PlanoEstudo.id'            => $planoEstudoId
+                //'Curso.unidade_organica_id' => $this->Session->read('Auth.User.unidade_organica_id'),
+                'PlanoEstudo.id' => $planoEstudoId
             ]
         ]);
         if (empty($planoEstudo)) {
@@ -433,7 +451,7 @@ class PlanoEstudosController extends AppController
         for ($i = 1; $i <= $planoEstudo['PlanoEstudo']['duracao']; $i++) {
             $anos[$i] = $i;
         }
-        $semestres = array();
+        $semestres = [];
         for ($i = 1; $i <= $planoEstudo['PlanoEstudo']['semestres_ano']; $i++) {
             $semestres[$i] = $i;
         }
