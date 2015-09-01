@@ -481,6 +481,17 @@ class PlanoEstudosController extends AppController
         $this->set(compact('cursos'));
     }
 
+    public function actualiza_creditos(){
+
+        if($this->request->is('post')||$this->request->is('put')){
+            $this->PlanoEstudo->DisciplinaPlanoEstudo->id = $this->request->data['pk'];
+            $this->PlanoEstudo->DisciplinaPlanoEstudo->set($this->request->data['name'],$this->request->data['value']);
+            $this->PlanoEstudo->DisciplinaPlanoEstudo->save();
+
+            $this->autoRender=false;
+        }
+    }
+
 
 }
 

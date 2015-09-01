@@ -160,6 +160,12 @@ class PagesController extends AppController
         if ($user != null) {
             $this->Auth->allowedActions = ['display', 'email_oficial_uem', 'webmail', 'email'];
         }
+
+
+        if(in_array($this->action,['home','faculdade_home','docente_home','estudante_home'])){
+            $whatsNew = '<p>Inscricoes da Escola Superior de Ciencias do Desporto Importadas</p>';
+            $this->set(compact('whatsNew'));
+        }
     }
 
     public function docente_home()
@@ -209,6 +215,8 @@ class PagesController extends AppController
         $total_turmas_passadas = $total_turmas_activas - $total_turmas_activas_ano;
 
         $total_turmas_sem_docente = $this->Aluno->Inscricao->Turma->getTotalTurmasSemDocente($unidade_organica_id);
+
+
 
         $this->set(compact('total_alunos_faculdade', 'total_alunos_activos_faculdade',
             'total_matriculas_activas_faculdade', 'total_matriculas_nao_renovadas', 'total_inscricoes_activas_ano',

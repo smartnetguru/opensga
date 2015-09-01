@@ -198,6 +198,11 @@ class Docente extends AppModel
 
                     //CakeResque::enqueue('default', 'DocenteShell', array('enviaEmailCadastro', $this->id));
                     return $dataSource->commit();
+                } else{
+                    debug($this->validationErrors);
+                    $dataSource->rollback();
+
+                    return false;
                 }
             } else {
                 debug($this->Entidade->validationErrors);

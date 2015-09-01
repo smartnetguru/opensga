@@ -82,7 +82,8 @@ class DocenteTest extends CakeTestCase
             ],
             'Docente'               => [
                 'unidade_organica_id' => '1',
-                'data_ingresso'       => '2015-08-11'
+                'data_ingresso'       => '2015-08-11',
+                'docente_categoria_id'=>1
             ],
             'EntidadeContacto'      => [
                 (int)11 => '152',

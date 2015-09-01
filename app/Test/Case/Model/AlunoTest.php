@@ -29,7 +29,8 @@ class AlunoTest extends CakeTestCase
         'app.ano_lectivo',
         'app.plano_estudo',
         'app.aluno_nivel_medio',
-        'app.semestre_lectivo'
+        'app.semestre_lectivo',
+        'app.bairro'
     ];
 
 

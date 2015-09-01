@@ -24,46 +24,7 @@ class AlunosController extends AppController
 
     public $name = 'Alunos';
 
-    //public $helpers = array('PhpExcel.PhpExcel');
 
-    /**
-     * Cadastro do aluno
-     *
-     * Registra os dados do aluno, faz a matricula inicial
-     * @Todo Resolver o problema da foto do aluno
-     * @todo garantir que a escola numca seja null
-     * @todo testar bem a funcao que gera codigo
-     * @todo criar manual de utilizador
-     * @todo Nas listagens apenas devem aparecer codificadores e opcoes activas
-     */
-    public function exportar_estudantes_bolseiros()
-    {
-        $this->loadModel('BolsaTemporaria');
-
-
-        $this->BolsaTemporaria->contain(['BolsaTipoBolsa', 'Curso']);
-        $bolsas = $this->BolsaTemporaria->find('all', ['order' => ['apelido', 'nomes']]);
-
-
-        foreach ($bolsas as $k => $bolsa) {
-//            $ano_ = date_parse($bolsa['BolsaTemporaria']['created']);
-//            if ( 2014 == $ano_['year']) {
-            $this->Aluno->contain('Entidade');
-            $aluno = $this->Aluno->findByCodigo($bolsa['BolsaTemporaria']['numero_estudante']);
-
-
-            if (!empty($aluno)) {
-
-
-                $bolsa['BolsaTemporaria']['apelido'] = $aluno['Entidade']['apelido'];
-                $bolsa['BolsaTemporaria']['nomes'] = $aluno['Entidade']['nomes'];
-            }
-//            }
-        }
-
-
-        $this->set(compact('bolsas'));
-    }
 
     function adicionar_estudante()
     {
@@ -142,6 +103,11 @@ class AlunosController extends AppController
         $this->set(compact('aluno', 'cursos', 'funcionario', 'estadoAlunos', 'motivoEstadoAlunos'));
     }
 
+    public function alunos_sem_plano_estudo()
+    {
+
+    }
+
     public function anular_matricula($aluno_id)
     {
 
@@ -180,6 +146,11 @@ class AlunosController extends AppController
         $this->set(compact('candidato', 'tipo_bolsas'));
     }
 
+    public function atribuir_plano_estudo($aluno_id)
+    {
+
+    }
+
     /**
      * Auto Complete Para alunos
      */
@@ -201,10 +172,10 @@ class AlunosController extends AppController
                 $conditions['Curso.unidade_organica_id'] = $this->Session->read('Auth.User.unidade_organica_id');
             }
             $results = $this->Aluno->find('all', [
-                'fields'     => ['Aluno.auto_complete'],
+                'fields' => ['Aluno.auto_complete'],
                 'conditions' => $conditions,
-                'group'      => ['Aluno.codigo'],
-                'limit'      => 20
+                'group' => ['Aluno.codigo'],
+                'limit' => 20
             ]);
             $codigos = Set::extract('../Aluno/auto_complete', $results);
 
@@ -212,17 +183,17 @@ class AlunosController extends AppController
         }
     }
 
-    function beforeRender()
-    {
-        parent::beforeRender();
-        $this->set('current_section', 'estudantes');
-    }
-
     public function beforeFilter()
     {
         parent::beforeFilter();
         $this->Security->unlockedActions = ['matricular_candidato', 'adicionar_estudante'];
         $this->Auth->allow('get_estudante_azgo');
+    }
+
+    function beforeRender()
+    {
+        parent::beforeRender();
+        $this->set('current_section', 'estudantes');
     }
 
     public function busca_candidato()
@@ -286,7 +257,7 @@ class AlunosController extends AppController
                 'Entidade' => [
                     'Genero'
                 ],
-                'Curso'    => [
+                'Curso' => [
                     'UnidadeOrganica'
                 ]
             ]);
@@ -307,9 +278,9 @@ class AlunosController extends AppController
                 $this->Aluno->Entidade->set('telemovel', $this->request->data['CandidatoGraduacao']['telemovel']);
                 $novo_contacto = [
                     'EntidadeContacto' => [
-                        'entidade_id'      => $aluno['Aluno']['entidade_id'],
+                        'entidade_id' => $aluno['Aluno']['entidade_id'],
                         'tipo_contacto_id' => 2,
-                        'valor'            => $this->request->data['CandidatoGraduacao']['telemovel']
+                        'valor' => $this->request->data['CandidatoGraduacao']['telemovel']
                     ]
                 ];
 
@@ -320,7 +291,7 @@ class AlunosController extends AppController
                 $this->Session->setFlash(__('Aluno Inscrito com Sucesso'), 'default', ['class' => 'alert success']);
                 $this->redirect([
                     'controller' => 'cerimonia_graduacaos',
-                    'action'     => 'ver_detalhes',
+                    'action' => 'ver_detalhes',
                     $this->request->data['CandidatoGraduacao']['cerimonia_graduacao_id']
                 ]);
             }
@@ -329,7 +300,7 @@ class AlunosController extends AppController
             'Entidade' => [
                 'Genero'
             ],
-            'Curso'    => [
+            'Curso' => [
                 'UnidadeOrganica'
             ]
         ]);
@@ -391,6 +362,57 @@ class AlunosController extends AppController
 
     }
 
+    /**
+     * Função para docentes enviarem SMS para estudantes.
+     *
+     * @fixme Colocar validação docente-Estudante(Um docente so pode enviar sms para seus proprios estudantes)
+     * @param $alunoId
+     */
+    public function docente_enviar_sms($alunoId)
+    {
+        $this->Aluno->contain([
+            'Entidade' => [
+                'Genero'
+            ],
+            'Curso' => [
+                'UnidadeOrganica'
+            ]
+        ]);
+        $aluno = $this->Aluno->findById($alunoId);
+        if ($this->request->is('post')) {
+            $this->loadModel('SmsEnviada');
+            $celular = $this->Aluno->Entidade->getCellNumber($aluno['Aluno']['entidade_id']);
+            $sms_enviada = $this->SmsEnviada->sendSMS($celular, $this->request->data['Aluno']['mensagem'],
+                $aluno['Aluno']['entidade_id'], 1, $this->Session->read('Auth.User.id'));
+            if ($sms_enviada == 1) {
+                $this->Session->setFlash(__('SMS Enviada com Sucesso'), 'default', ['class' => 'alert success']);
+                $this->redirect(['action' => 'perfil_estudante', $this->request->data['Aluno']['aluno_id']]);
+            } else {
+                $this->Session->setFlash(__('Problemas no envio da SMS'), 'default', ['class' => 'alert error']);
+            }
+        }
+        $is_regular = $this->Aluno->isRegular($alunoId);
+
+
+        if (count($is_regular) == 1 && $is_regular[0]['regular'] == true) {
+            if ($is_regular[0]['estado'] == 1) {
+                $classe_estado = "alert note no-margin";
+            } else {
+                $classe_estado = "alert success";
+            }
+        } else {
+            $classe_estado = "alert error";
+        }
+
+        $celular = $this->Aluno->Entidade->getCellNumber($aluno['Aluno']['entidade_id']);
+        $funcionario = $this->Aluno->User->getFuncionarioActivoId($this->Session->read('Auth.User.id'));
+        if (!$celular) {
+            $this->Session->setFlash(__("Este Estudante não Possui nenhum Numero de Celular Associado"), 'default',
+                ['class' => 'alert error']);
+        }
+        $this->set(compact('aluno', 'is_regular', 'classe_estado', 'celular', 'funcionario'));
+    }
+
     public function docente_index($alunoId)
     {
         $userId = $this->Session->read('Auth.User.id');
@@ -402,7 +424,7 @@ class AlunosController extends AppController
 
         $turmasDocente = $this->Aluno->Inscricao->Turma->DocenteTurma->find('all', [
             'conditions' => [
-                'DocenteTurma.docente_id'              => $docente['Docente']['id'],
+                'DocenteTurma.docente_id' => $docente['Docente']['id'],
                 'DocenteTurma.estado_docente_turma_id' => 1
             ]
         ]);
@@ -421,7 +443,7 @@ class AlunosController extends AppController
         }
         $this->paginate = [
             'conditions' => $conditions,
-            'contain'    => ['Entidade', 'Curso', 'EstadoAluno'],
+            'contain' => ['Entidade', 'Curso', 'EstadoAluno'],
         ];
         $alunos = $this->paginate('Aluno');
         if (count($alunos) == 1) {
@@ -438,12 +460,12 @@ class AlunosController extends AppController
             throw new NotFoundException('Este aluno não existe no Sistema');
         }
         $this->Aluno->contain([
-            'Matricula'       => [
+            'Matricula' => [
                 'PlanoEstudo',
                 'Turno'
             ],
             'Curso',
-            'Entidade'        => [
+            'Entidade' => [
                 'ProvinciaNascimento',
                 'CidadeNascimento',
                 'PaisNascimento',
@@ -458,8 +480,8 @@ class AlunosController extends AppController
         $aluno = $this->Aluno->find('first', ['conditions' => ['Aluno.id' => $alunoId]]);
 
         $this->Aluno->Inscricao->contain([
-                'Turma'     => [
-                    'fields'     => [
+                'Turma' => [
+                    'fields' => [
                         'id',
                         'disciplina_id',
                         'ano_curricular',
@@ -470,7 +492,7 @@ class AlunosController extends AppController
                     ]
                 ],
                 'Matricula' => [
-                    'fields'     => ['id', 'ano_lectivo_id'],
+                    'fields' => ['id', 'ano_lectivo_id'],
                     'AnoLectivo' => [
                         'fields' => ['id', 'ano']
                     ]
@@ -480,14 +502,14 @@ class AlunosController extends AppController
         $inscricoes_activas = $this->Aluno->Inscricao->find('all', [
             'conditions' => [
                 'Inscricao.aluno_id'
-                                                => $alunoId,
+                => $alunoId,
                 'Inscricao.estado_inscricao_id' => 1
             ]
         ]);
 
         $this->Aluno->Inscricao->contain([
-                'Turma'     => [
-                    'fields'     => [
+                'Turma' => [
+                    'fields' => [
                         'id',
                         'disciplina_id',
                         'ano_curricular',
@@ -498,7 +520,7 @@ class AlunosController extends AppController
                     ]
                 ],
                 'Matricula' => [
-                    'fields'     => ['id', 'ano_lectivo_id'],
+                    'fields' => ['id', 'ano_lectivo_id'],
                     'AnoLectivo' => [
                         'fields' => ['id', 'ano']
                     ]
@@ -510,15 +532,15 @@ class AlunosController extends AppController
                 'Inscricao.aluno_id' =>
                     $alunoId
             ],
-            'order'      => [
+            'order' => [
                 'Turma.ano_curricular',
                 'Turma.semestre_curricular'
             ]
         ]);
 
         $this->Aluno->Inscricao->contain([
-                'Turma'     => [
-                    'fields'     => [
+                'Turma' => [
+                    'fields' => [
                         'id',
                         'disciplina_id',
                         'ano_curricular',
@@ -529,7 +551,7 @@ class AlunosController extends AppController
                     ]
                 ],
                 'Matricula' => [
-                    'fields'     => ['id', 'ano_lectivo_id'],
+                    'fields' => ['id', 'ano_lectivo_id'],
                     'AnoLectivo' => [
                         'fields' => ['id', 'ano']
                     ]
@@ -602,14 +624,14 @@ class AlunosController extends AppController
         if ($this->request->is('post') || $this->request->is('put')) {
             //Grava os dados do usuario
 
-            if($this->Aluno->updateAluno($this->request->data)){
+            if ($this->Aluno->updateAluno($this->request->data)) {
                 $this->Flash->success('Dados do Estudante Actualizados com Sucesso');
                 $this->redirect([
                     'controller' => 'alunos',
-                    'action'     => 'perfil_estudante',
+                    'action' => 'perfil_estudante',
                     $this->request->data['Aluno']['aluno_id']
                 ]);
-            } else{
+            } else {
                 $this->Flash->error('Problemas ao Actualizar os dados do Estudante. Verifique o Formulário e Tente novamente');
             }
 
@@ -635,21 +657,20 @@ class AlunosController extends AppController
 
         $entidadeContacto = $this->Aluno->Entidade->EntidadeContacto->find('first', [
             'conditions' => [
-                'entidade_id'       => $aluno['Aluno']['entidade_id'],
+                'entidade_id' => $aluno['Aluno']['entidade_id'],
                 'estado_objecto_id' => 1,
-                'tipo_contacto_id'  => 7
+                'tipo_contacto_id' => 7
             ]
         ]);
-        if($entidadeContacto){
+        if ($entidadeContacto) {
             $quarteirao = $entidadeContacto['EntidadeContacto']['valor'];
-        } else{
+        } else {
             $quarteirao = '';
         }
 
 
-
         $this->set(compact('grauParentescos', 'naturalidade', 'paises', 'provincias', 'documento_identificacaos',
-             'generos', 'cidades', 'estadoCivil', 'provinciaMoradaId', 'paisMoradaId','quarteirao'));
+            'generos', 'cidades', 'estadoCivil', 'provinciaMoradaId', 'paisMoradaId', 'quarteirao'));
 
         $this->layout = 'default';
     }
@@ -660,7 +681,7 @@ class AlunosController extends AppController
             'Entidade' => [
                 'Genero'
             ],
-            'Curso'    => [
+            'Curso' => [
                 'UnidadeOrganica'
             ]
         ]);
@@ -678,64 +699,6 @@ class AlunosController extends AppController
             }
         }
         $is_regular = $this->Aluno->isRegular($aluno_id);
-
-
-        if (count($is_regular) == 1 && $is_regular[0]['regular'] == true) {
-            if ($is_regular[0]['estado'] == 1) {
-                $classe_estado = "alert note no-margin";
-            } else {
-                $classe_estado = "alert success";
-            }
-        } else {
-            $classe_estado = "alert error";
-        }
-
-        $celular = $this->Aluno->Entidade->getCellNumber($aluno['Aluno']['entidade_id']);
-        $funcionario = $this->Aluno->User->getFuncionarioActivoId($this->Session->read('Auth.User.id'));
-        if (!$celular) {
-            $this->Session->setFlash(__("Este Estudante não Possui nenhum Numero de Celular Associado"), 'default',
-                ['class' => 'alert error']);
-        }
-        $this->set(compact('aluno', 'is_regular', 'classe_estado', 'celular', 'funcionario'));
-    }
-
-    public function exportar_alunos_autenticidades($anoIngresso = null)
-    {
-        $alunos = $this->Aluno->getAllAlunosForAutenticidades($anoIngresso);
-
-        $this->set(compact('alunos'));
-    }
-
-    /**
-     * Função para docentes enviarem SMS para estudantes.
-     *
-     * @fixme Colocar validação docente-Estudante(Um docente so pode enviar sms para seus proprios estudantes)
-     * @param $alunoId
-     */
-    public function docente_enviar_sms($alunoId)
-    {
-        $this->Aluno->contain([
-            'Entidade' => [
-                'Genero'
-            ],
-            'Curso'    => [
-                'UnidadeOrganica'
-            ]
-        ]);
-        $aluno = $this->Aluno->findById($alunoId);
-        if ($this->request->is('post')) {
-            $this->loadModel('SmsEnviada');
-            $celular = $this->Aluno->Entidade->getCellNumber($aluno['Aluno']['entidade_id']);
-            $sms_enviada = $this->SmsEnviada->sendSMS($celular, $this->request->data['Aluno']['mensagem'],
-                $aluno['Aluno']['entidade_id'], 1, $this->Session->read('Auth.User.id'));
-            if ($sms_enviada == 1) {
-                $this->Session->setFlash(__('SMS Enviada com Sucesso'), 'default', ['class' => 'alert success']);
-                $this->redirect(['action' => 'perfil_estudante', $this->request->data['Aluno']['aluno_id']]);
-            } else {
-                $this->Session->setFlash(__('Problemas no envio da SMS'), 'default', ['class' => 'alert error']);
-            }
-        }
-        $is_regular = $this->Aluno->isRegular($alunoId);
 
 
         if (count($is_regular) == 1 && $is_regular[0]['regular'] == true) {
@@ -860,7 +823,7 @@ class AlunosController extends AppController
             }
 
             $this->Aluno->contain([
-                'Curso'    => [
+                'Curso' => [
                     'UnidadeOrganica'
                 ],
                 'EstadoAluno',
@@ -881,8 +844,126 @@ class AlunosController extends AppController
         $this->set(compact('anolectivos', 'cursos', 'unidadeOrganicas', 'estadoAlunos'));
     }
 
+    public function exportar_alunos_autenticidades($anoIngresso = null)
+    {
+        $alunos = $this->Aluno->getAllAlunosForAutenticidades($anoIngresso);
+
+        $this->set(compact('alunos'));
+    }
+
     public function exportar_alunos_excel()
     {
+
+    }
+
+    /**
+     * Cadastro do aluno
+     *
+     * Registra os dados do aluno, faz a matricula inicial
+     * @Todo Resolver o problema da foto do aluno
+     * @todo garantir que a escola numca seja null
+     * @todo testar bem a funcao que gera codigo
+     * @todo criar manual de utilizador
+     * @todo Nas listagens apenas devem aparecer codificadores e opcoes activas
+     */
+    public function exportar_estudantes_bolseiros()
+    {
+        $this->loadModel('BolsaTemporaria');
+
+
+        $this->BolsaTemporaria->contain(['BolsaTipoBolsa', 'Curso']);
+        $bolsas = $this->BolsaTemporaria->find('all', ['order' => ['apelido', 'nomes']]);
+
+
+        foreach ($bolsas as $k => $bolsa) {
+//            $ano_ = date_parse($bolsa['BolsaTemporaria']['created']);
+//            if ( 2014 == $ano_['year']) {
+            $this->Aluno->contain('Entidade');
+            $aluno = $this->Aluno->findByCodigo($bolsa['BolsaTemporaria']['numero_estudante']);
+
+
+            if (!empty($aluno)) {
+
+
+                $bolsa['BolsaTemporaria']['apelido'] = $aluno['Entidade']['apelido'];
+                $bolsa['BolsaTemporaria']['nomes'] = $aluno['Entidade']['nomes'];
+            }
+//            }
+        }
+
+
+        $this->set(compact('bolsas'));
+    }
+
+    public function faculdade_alunos_sem_plano_estudo()
+    {
+        $unidadeOrganicaId = $this->Session->read('Auth.User.unidade_organica_id');
+        $unidadeOrganicas = $this->Aluno->Curso->UnidadeOrganica->getWithChilds($unidadeOrganicaId);
+
+
+        $conditions = [
+            'Curso.unidade_organica_id' => $unidadeOrganicas,
+            'Aluno.plano_estudo_id is null'
+        ];
+
+
+        $this->paginate = [
+            'conditions' => $conditions,
+            'contain' => ['Entidade', 'Curso', 'EstadoAluno'],
+        ];
+
+        $alunos = $this->paginate('Aluno');
+
+        if (count($alunos) == 1) {
+            $this->redirect(['action' => 'perfil_estudante', $alunos[0]['Aluno']['id']]);
+        }
+        $this->set('alunos', $alunos);
+    }
+
+    public function faculdade_atribuir_plano_estudo($alunoId)
+    {
+        $unidadeOrganicaId = $this->Session->read('Auth.User.unidade_organica_id');
+        $this->Aluno->contain([
+            'Entidade' => [
+                'User'
+            ]
+        ]);
+        $aluno = $this->Aluno->getAlunoForAction($alunoId);
+        if (!$this->Aluno->isFromUnidadeOrganica($alunoId, $unidadeOrganicaId)) {
+            throw new NotFoundException('Este Aluno Nao pertence a Esta Unidade Organica');
+        }
+        if ($aluno['Aluno']['plano_estudo_id'] != null) {
+            $this->Aluno->PlanoEstudo->id = $aluno['Aluno']['plano_estudo_id'];
+            if ($this->Aluno->PlanoEstudo->exists()) {
+                $this->Session->setFlash('Este Aluno Ja possui um Plano de Estudos', 'default',
+                    ['class' => 'alert alert-danger']);
+                $this->redirect(['action' => 'perfil_estudante', 'faculdade' => true, $alunoId]);
+            }
+        }
+        if ($this->request->is('post')) {
+            $this->Aluno->id = $this->request->data['Aluno']['aluno_id'];
+            $this->Aluno->set('plano_estudo_id', $this->request->data['Aluno']['plano_estudo_id']);
+            $this->Aluno->save();
+            $anoLectivo = Configure::read('OpenSGA.ano_lectivo');
+            $anoLectivo = $this->Aluno->Matricula->AnoLectivo->findByAno($anoLectivo);
+
+            $matricula = $this->Aluno->Matricula->findByAlunoIdAndAnoLectivoId($this->request->data['Aluno']['aluno_id'],
+                $anoLectivo['AnoLectivo']['id']);
+            if (!empty($matricula)) {
+                $this->Aluno->Matricula->id = $matricula['Matricula']['id'];
+                $this->Aluno->Matricula->set('plano_estudo_id', $this->request->data['Aluno']['plano_estudo_id']);
+                $this->Aluno->Matricula->save();
+            }
+            $this->Session->setFlash('Plano de Estudos Atribuido com Sucesso', 'default',
+                ['class' => 'alert alert-success']);
+            $this->redirect(['action' => 'perfil_estudante', 'faculdade' => true, $alunoId]);
+        }
+        $planoEstudos = $this->Aluno->PlanoEstudo->find('list',
+            ['conditions' => ['PlanoEstudo.curso_id' => $aluno['Aluno']['curso_id']]]);
+        $this->set('siga_page_title', 'Atribuir Plano de Estudo a Estudante');
+        $this->set('siga_page_overview',
+            'Atribuir Plano de Estudos a um estudante que ainda nao possui plano de Estudos');
+        $this->set(compact('aluno', 'planoEstudos'));
 
     }
 
@@ -915,7 +996,7 @@ class AlunosController extends AppController
 
         $this->paginate = [
             'conditions' => $conditions,
-            'contain'    => ['Entidade', 'Curso', 'EstadoAluno'],
+            'contain' => ['Entidade', 'Curso', 'EstadoAluno'],
         ];
 
         $alunos = $this->paginate('Aluno');
@@ -1027,13 +1108,13 @@ class AlunosController extends AppController
 
 
             $params = [
-                'id'        => $codigo . '.jpg',
-                'name'      => 'fotografia',
+                'id' => $codigo . '.jpg',
+                'name' => 'fotografia',
                 'extension' => 'jpg',
-                'mimeType'  => [
+                'mimeType' => [
                     'docx' => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
                 ],
-                'path'      => $path
+                'path' => $path
             ];
             $this->set($params);
         } else {
@@ -1057,8 +1138,8 @@ class AlunosController extends AppController
         $aluno = $this->Aluno->getAlunoForPerfil($id);
 
         $this->Aluno->Inscricao->contain([
-                'Turma'     => [
-                    'fields'     => [
+                'Turma' => [
+                    'fields' => [
                         'id',
                         'disciplina_id',
                         'ano_curricular',
@@ -1069,7 +1150,7 @@ class AlunosController extends AppController
                     ]
                 ],
                 'Matricula' => [
-                    'fields'     => ['id', 'ano_lectivo_id'],
+                    'fields' => ['id', 'ano_lectivo_id'],
                     'AnoLectivo' => [
                         'fields' => ['id', 'ano']
                     ]
@@ -1080,8 +1161,8 @@ class AlunosController extends AppController
             ['conditions' => ['Inscricao.aluno_id' => $id, 'Inscricao.estado_inscricao_id' => 1]]);
 
         $this->Aluno->Inscricao->contain([
-                'Turma'     => [
-                    'fields'     => [
+                'Turma' => [
+                    'fields' => [
                         'id',
                         'disciplina_id',
                         'ano_curricular',
@@ -1092,7 +1173,7 @@ class AlunosController extends AppController
                     ]
                 ],
                 'Matricula' => [
-                    'fields'     => ['id', 'ano_lectivo_id'],
+                    'fields' => ['id', 'ano_lectivo_id'],
                     'AnoLectivo' => [
                         'fields' => ['id', 'ano']
                     ]
@@ -1101,15 +1182,15 @@ class AlunosController extends AppController
         );
         $todas_inscricoes = $this->Aluno->Inscricao->find('all', [
             'conditions' => ['Inscricao.aluno_id' => $id],
-            'order'      => [
+            'order' => [
                 'Turma.ano_curricular',
                 'Turma.semestre_curricular'
             ]
         ]);
 
         $this->Aluno->Inscricao->contain([
-                'Turma'     => [
-                    'fields'     => [
+                'Turma' => [
+                    'fields' => [
                         'id',
                         'disciplina_id',
                         'ano_curricular',
@@ -1120,7 +1201,7 @@ class AlunosController extends AppController
                     ]
                 ],
                 'Matricula' => [
-                    'fields'     => ['id', 'ano_lectivo_id'],
+                    'fields' => ['id', 'ano_lectivo_id'],
                     'AnoLectivo' => [
                         'fields' => ['id', 'ano']
                     ]
@@ -1190,9 +1271,9 @@ class AlunosController extends AppController
                 }
                 if ($plugin != null) {
                     $this->redirect([
-                        'plugin'     => $plugin,
+                        'plugin' => $plugin,
                         'controller' => $controller,
-                        'action'     => $actionSeguinte,
+                        'action' => $actionSeguinte,
                         $aluno['Aluno']['id']
                     ]);
                 } elseif ($controller != null) {
@@ -1240,12 +1321,12 @@ class AlunosController extends AppController
         }
 
         $this->Aluno->contain([
-            'Matricula'       => [
+            'Matricula' => [
                 'PlanoEstudo',
                 'Turno'
             ],
             'Curso',
-            'Entidade'        => [
+            'Entidade' => [
                 'ProvinciaNascimento',
                 'CidadeNascimento',
                 'PaisNascimento',
@@ -1270,8 +1351,8 @@ class AlunosController extends AppController
         }
 
         $this->Aluno->Inscricao->contain([
-                'Turma'     => [
-                    'fields'     => [
+                'Turma' => [
+                    'fields' => [
                         'id',
                         'disciplina_id',
                         'ano_curricular',
@@ -1284,7 +1365,7 @@ class AlunosController extends AppController
                     'AnoLectivo'
                 ],
                 'Matricula' => [
-                    'fields'     => ['id', 'ano_lectivo_id'],
+                    'fields' => ['id', 'ano_lectivo_id'],
                     'AnoLectivo' => [
                         'fields' => ['id', 'ano']
                     ]
@@ -1294,7 +1375,7 @@ class AlunosController extends AppController
         );
         $inscricaos = $this->Aluno->Inscricao->find('all', [
             'conditions' => ['Inscricao.aluno_id' => $aluno_id],
-            'order'      => ['Turma.ano_curricular,Turma.semestre_curricular']
+            'order' => ['Turma.ano_curricular,Turma.semestre_curricular']
         ]);
 
         $this->set('has_foto_entidade', $this->Aluno->hasFoto($aluno['Aluno']['codigo']));
@@ -1316,7 +1397,7 @@ class AlunosController extends AppController
         }
         $this->paginate = [
             'conditions' => $conditions,
-            'contain'    => ['Entidade', 'Curso', 'EstadoAluno'],
+            'contain' => ['Entidade', 'Curso', 'EstadoAluno'],
         ];
         $alunos = $this->paginate('Aluno');
 
@@ -1374,6 +1455,52 @@ class AlunosController extends AppController
         $generos = $this->Aluno->Entidade->Genero->find('list');
 
         $this->set(compact('aluno', 'cursos', 'turnos', 'documento_identificacaos', 'generos'));
+    }
+
+    public function matriculados_pela_faculdade()
+    {
+
+        if ($this->request->is('post')) {
+            $alunoId = $this->request->params['named']['aluno_id'];
+            $mode = $this->request->params['named']['mode'];
+            if ($mode == 'confirmar') {
+                $aluno = $this->Aluno->findById($alunoId);
+                if (!$aluno['Aluno']['estado_aluno_id'] == 14) {
+                    throw new MethodNotAllowedException('Erro no Sistema');
+                }
+                $dataEstado = [
+                    'aluno_id' => $alunoId,
+                    'estado_actual' => 1,
+                    'motivo_estado_aluno_id' => 15,
+                    'observacao' => 'Matricula Confirmada a Nivel Central',
+                    'data_mudanca' => date('Y-m-d H:i:s')
+                ];
+                if ($this->Aluno->alteraStatus($dataEstado)) {
+                    $this->Session->setFlash('Matricula Confirmada com Sucesso', 'default',
+                        ['class' => 'alert alert-success']);
+                    $this->redirect(['action' => 'matriculados_pela_faculdade']);
+                }
+
+            }
+
+        }
+        $conditions = [
+            'Aluno.estado_aluno_id' => 14
+        ];
+
+        $this->paginate = [
+            'conditions' => $conditions,
+            'contain' => ['Entidade', 'Curso', 'EstadoAluno'],
+        ];
+
+        $alunos = $this->paginate('Aluno');
+
+        if (count($alunos) == 1) {
+            $this->redirect(['action' => 'perfil_estudante', $alunos[0]['Aluno']['id']]);
+        }
+
+        $this->set('alunos', $alunos);
+
     }
 
     public function matricular($aluno_id)
@@ -1496,13 +1623,13 @@ class AlunosController extends AppController
 
 
             $params = [
-                'id'        => $codigo . '.jpg',
-                'name'      => 'fotografia',
+                'id' => $codigo . '.jpg',
+                'name' => 'fotografia',
                 'extension' => 'jpg',
-                'mimeType'  => [
+                'mimeType' => [
                     'docx' => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
                 ],
-                'path'      => $path
+                'path' => $path
             ];
             $this->set($params);
         } else {
@@ -1577,8 +1704,8 @@ class AlunosController extends AppController
         $matriculas = $this->Aluno->Matricula->getAllMatriculasByAluno($alunoId);
 
         $this->Aluno->Inscricao->contain([
-                'Turma'     => [
-                    'fields'     => [
+                'Turma' => [
+                    'fields' => [
                         'id',
                         'disciplina_id',
                         'ano_curricular',
@@ -1589,7 +1716,7 @@ class AlunosController extends AppController
                     ]
                 ],
                 'Matricula' => [
-                    'fields'     => ['id', 'ano_lectivo_id'],
+                    'fields' => ['id', 'ano_lectivo_id'],
                     'AnoLectivo' => [
                         'fields' => ['id', 'ano']
                     ]
@@ -1600,8 +1727,8 @@ class AlunosController extends AppController
             ['conditions' => ['Inscricao.aluno_id' => $alunoId, 'Inscricao.estado_inscricao_id' => 1]]);
 
         $this->Aluno->Inscricao->contain([
-                'Turma'     => [
-                    'fields'     => [
+                'Turma' => [
+                    'fields' => [
                         'id',
                         'disciplina_id',
                         'ano_curricular',
@@ -1612,7 +1739,7 @@ class AlunosController extends AppController
                     ]
                 ],
                 'Matricula' => [
-                    'fields'     => ['id', 'ano_lectivo_id'],
+                    'fields' => ['id', 'ano_lectivo_id'],
                     'AnoLectivo' => [
                         'fields' => ['id', 'ano']
                     ]
@@ -1621,15 +1748,15 @@ class AlunosController extends AppController
         );
         $todas_inscricoes = $this->Aluno->Inscricao->find('all', [
             'conditions' => ['Inscricao.aluno_id' => $alunoId],
-            'order'      => [
+            'order' => [
                 'Turma.ano_curricular',
                 'Turma.semestre_curricular'
             ]
         ]);
 
         $this->Aluno->Inscricao->contain([
-                'Turma'     => [
-                    'fields'     => [
+                'Turma' => [
+                    'fields' => [
                         'id',
                         'disciplina_id',
                         'ano_curricular',
@@ -1640,7 +1767,7 @@ class AlunosController extends AppController
                     ]
                 ],
                 'Matricula' => [
-                    'fields'     => ['id', 'ano_lectivo_id'],
+                    'fields' => ['id', 'ano_lectivo_id'],
                     'AnoLectivo' => [
                         'fields' => ['id', 'ano']
                     ]
@@ -1691,9 +1818,9 @@ class AlunosController extends AppController
             if (!empty($aluno)) {
                 if ($plugin != null) {
                     $this->redirect([
-                        'plugin'     => $plugin,
+                        'plugin' => $plugin,
                         'controller' => $controller,
-                        'action'     => $actionSeguinte,
+                        'action' => $actionSeguinte,
                         $aluno['Aluno']['id']
                     ]);
                 } elseif ($controller != null) {
@@ -1725,8 +1852,8 @@ class AlunosController extends AppController
         $conditions['Candidatura.ano_lectivo_admissao'] = 2015;
         $this->paginate = [
             'conditions' => $conditions,
-            'limit'      => 50,
-            'contain'    => ['Curso', 'BolsaTemporaria']
+            'limit' => 50,
+            'contain' => ['Curso', 'BolsaTemporaria']
         ];
         $candidatos = $this->paginate('Candidatura');
 
@@ -1766,7 +1893,7 @@ class AlunosController extends AppController
     {
 
         $this->Aluno->MudancaCurso->contain([
-            'Aluno'     => [
+            'Aluno' => [
                 'Entidade'
             ],
             'CursoNovo' => [
@@ -1792,6 +1919,11 @@ class AlunosController extends AppController
         $this->set(compact('mudanca', 'funcionario'));
     }
 
+    public function relatorios()
+    {
+
+    }
+
     public function report_estudantes_fora_tempo_estudos()
     {
 
@@ -1803,139 +1935,6 @@ class AlunosController extends AppController
     }
 
     public function report_estudantes_sem_smo()
-    {
-
-    }
-
-    public function faculdade_alunos_sem_plano_estudo()
-    {
-        $unidadeOrganicaId = $this->Session->read('Auth.User.unidade_organica_id');
-        $unidadeOrganicas = $this->Aluno->Curso->UnidadeOrganica->getWithChilds($unidadeOrganicaId);
-
-
-        $conditions = [
-            'Curso.unidade_organica_id' => $unidadeOrganicas,
-            'Aluno.plano_estudo_id is null'
-        ];
-
-
-        $this->paginate = [
-            'conditions' => $conditions,
-            'contain'    => ['Entidade', 'Curso', 'EstadoAluno'],
-        ];
-
-        $alunos = $this->paginate('Aluno');
-
-        if (count($alunos) == 1) {
-            $this->redirect(['action' => 'perfil_estudante', $alunos[0]['Aluno']['id']]);
-        }
-        $this->set('alunos', $alunos);
-    }
-
-    public function alunos_sem_plano_estudo()
-    {
-
-    }
-
-    public function faculdade_atribuir_plano_estudo($alunoId)
-    {
-        $unidadeOrganicaId = $this->Session->read('Auth.User.unidade_organica_id');
-        $this->Aluno->contain([
-            'Entidade' => [
-                'User'
-            ]
-        ]);
-        $aluno = $this->Aluno->getAlunoForAction($alunoId);
-        if (!$this->Aluno->isFromUnidadeOrganica($alunoId, $unidadeOrganicaId)) {
-            throw new NotFoundException('Este Aluno Nao pertence a Esta Unidade Organica');
-        }
-        if ($aluno['Aluno']['plano_estudo_id'] != null) {
-            $this->Aluno->PlanoEstudo->id = $aluno['Aluno']['plano_estudo_id'];
-            if ($this->Aluno->PlanoEstudo->exists()) {
-                $this->Session->setFlash('Este Aluno Ja possui um Plano de Estudos', 'default',
-                    ['class' => 'alert alert-danger']);
-                $this->redirect(['action' => 'perfil_estudante', 'faculdade' => true, $alunoId]);
-            }
-        }
-        if ($this->request->is('post')) {
-            $this->Aluno->id = $this->request->data['Aluno']['aluno_id'];
-            $this->Aluno->set('plano_estudo_id', $this->request->data['Aluno']['plano_estudo_id']);
-            $this->Aluno->save();
-            $anoLectivo = Configure::read('OpenSGA.ano_lectivo');
-            $anoLectivo = $this->Aluno->Matricula->AnoLectivo->findByAno($anoLectivo);
-
-            $matricula = $this->Aluno->Matricula->findByAlunoIdAndAnoLectivoId($this->request->data['Aluno']['aluno_id'],
-                $anoLectivo['AnoLectivo']['id']);
-            if (!empty($matricula)) {
-                $this->Aluno->Matricula->id = $matricula['Matricula']['id'];
-                $this->Aluno->Matricula->set('plano_estudo_id', $this->request->data['Aluno']['plano_estudo_id']);
-                $this->Aluno->Matricula->save();
-            }
-            $this->Session->setFlash('Plano de Estudos Atribuido com Sucesso', 'default',
-                ['class' => 'alert alert-success']);
-            $this->redirect(['action' => 'perfil_estudante', 'faculdade' => true, $alunoId]);
-        }
-        $planoEstudos = $this->Aluno->PlanoEstudo->find('list',
-            ['conditions' => ['PlanoEstudo.curso_id' => $aluno['Aluno']['curso_id']]]);
-        $this->set('siga_page_title', 'Atribuir Plano de Estudo a Estudante');
-        $this->set('siga_page_overview',
-            'Atribuir Plano de Estudos a um estudante que ainda nao possui plano de Estudos');
-        $this->set(compact('aluno', 'planoEstudos'));
-
-    }
-
-    public function atribuir_plano_estudo($aluno_id)
-    {
-
-    }
-
-    public function matriculados_pela_faculdade()
-    {
-
-        if ($this->request->is('post')) {
-            $alunoId = $this->request->params['named']['aluno_id'];
-            $mode = $this->request->params['named']['mode'];
-            if ($mode == 'confirmar') {
-                $aluno = $this->Aluno->findById($alunoId);
-                if (!$aluno['Aluno']['estado_aluno_id'] == 14) {
-                    throw new MethodNotAllowedException('Erro no Sistema');
-                }
-                $dataEstado = [
-                    'aluno_id'               => $alunoId,
-                    'estado_actual'          => 1,
-                    'motivo_estado_aluno_id' => 15,
-                    'observacao'             => 'Matricula Confirmada a Nivel Central',
-                    'data_mudanca'           => date('Y-m-d H:i:s')
-                ];
-                if ($this->Aluno->alteraStatus($dataEstado)) {
-                    $this->Session->setFlash('Matricula Confirmada com Sucesso', 'default',
-                        ['class' => 'alert alert-success']);
-                    $this->redirect(['action' => 'matriculados_pela_faculdade']);
-                }
-
-            }
-
-        }
-        $conditions = [
-            'Aluno.estado_aluno_id' => 14
-        ];
-
-        $this->paginate = [
-            'conditions' => $conditions,
-            'contain'    => ['Entidade', 'Curso', 'EstadoAluno'],
-        ];
-
-        $alunos = $this->paginate('Aluno');
-
-        if (count($alunos) == 1) {
-            $this->redirect(['action' => 'perfil_estudante', $alunos[0]['Aluno']['id']]);
-        }
-
-        $this->set('alunos', $alunos);
-
-    }
-
-    public function relatorios()
     {
 
     }

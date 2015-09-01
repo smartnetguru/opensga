@@ -23,7 +23,7 @@ class Inscricao extends AppModel
     var $name = 'Inscricao';
     //The Associations below have been created with all possible keys, those that are not needed can be removed
 
-    public $estadoInscricoesAbertas = [1, 2, 3];
+    public $estadoInscricoesAbertas = [null,1, 2, 3];
 
     public $validate = [
         'tipo_inscricao_id'   => [

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "8dd1d9fbb37cf31e63ff2db841a9e77e",
+    "hash": "a549ff1e09e41d4cc74e00cbe11e405f",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -109,16 +109,16 @@
         },
         {
             "name": "cakephp/cakephp",
-            "version": "2.7.2",
+            "version": "2.7.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cakephp/cakephp.git",
-                "reference": "f959b7601323065e74c6ec5dd0b63049ae939dac"
+                "reference": "0dbabce792cf3ff04f68a5ecadefb7659113f5e3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cakephp/cakephp/zipball/f959b7601323065e74c6ec5dd0b63049ae939dac",
-                "reference": "f959b7601323065e74c6ec5dd0b63049ae939dac",
+                "url": "https://api.github.com/repos/cakephp/cakephp/zipball/0dbabce792cf3ff04f68a5ecadefb7659113f5e3",
+                "reference": "0dbabce792cf3ff04f68a5ecadefb7659113f5e3",
                 "shasum": ""
             },
             "require": {
@@ -148,7 +148,7 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2015-08-07 01:43:53"
+            "time": "2015-08-24 02:22:27"
         },
         {
             "name": "cakephp/collection",
@@ -989,16 +989,16 @@
         },
         {
             "name": "phpoffice/phpword",
-            "version": "0.12.0",
+            "version": "v0.12.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPOffice/PHPWord.git",
-                "reference": "3f136501b3dfea94766a704e17782c8a942a7b9b"
+                "reference": "38cb04d322007dd522cbdd8ba3cd50ab67ced0db"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPOffice/PHPWord/zipball/3f136501b3dfea94766a704e17782c8a942a7b9b",
-                "reference": "3f136501b3dfea94766a704e17782c8a942a7b9b",
+                "url": "https://api.github.com/repos/PHPOffice/PHPWord/zipball/38cb04d322007dd522cbdd8ba3cd50ab67ced0db",
+                "reference": "38cb04d322007dd522cbdd8ba3cd50ab67ced0db",
                 "shasum": ""
             },
             "require": {
@@ -1081,7 +1081,7 @@
                 "word",
                 "writer"
             ],
-            "time": "2015-01-03 09:42:48"
+            "time": "2015-08-30 14:30:44"
         },
         {
             "name": "radig/auditable",
@@ -1227,6 +1227,60 @@
             "description": "Symfony EventDispatcher Component",
             "homepage": "https://symfony.com",
             "time": "2015-06-18 19:21:56"
+        },
+        {
+            "name": "videlalvaro/php-amqplib",
+            "version": "v2.5.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/videlalvaro/php-amqplib.git",
+                "reference": "eb8f94d97c8e79900accf77343dbd7eca7f58506"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/videlalvaro/php-amqplib/zipball/eb8f94d97c8e79900accf77343dbd7eca7f58506",
+                "reference": "eb8f94d97c8e79900accf77343dbd7eca7f58506",
+                "shasum": ""
+            },
+            "require": {
+                "ext-bcmath": "*",
+                "ext-mbstring": "*",
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "3.7.*"
+            },
+            "suggest": {
+                "ext-sockets": "Use AMQPSocketConnection"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.4-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "PhpAmqpLib\\": "PhpAmqpLib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL-2.1"
+            ],
+            "authors": [
+                {
+                    "name": "Alvaro Videla"
+                }
+            ],
+            "description": "This library is a pure PHP implementation of the AMQP protocol. It's been tested against RabbitMQ.",
+            "homepage": "https://github.com/videlalvaro/php-amqplib/",
+            "keywords": [
+                "message",
+                "queue",
+                "rabbitmq"
+            ],
+            "time": "2015-08-11 12:30:09"
         }
     ],
     "packages-dev": [

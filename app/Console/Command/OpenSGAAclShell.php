@@ -204,6 +204,67 @@ class OpenSGAAclShell extends AppShell
                 $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/matriculados_pela_faculdade";
 
 
+                /*Todas as funcoes das faculdades deviam estar acessiveis para a DRA */
+                $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Avaliacaos/ver_avaliacao";
+                $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Avaliacaos/editar_notas_avaliacao";
+                $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Avaliacaos/publicar_avaliacao";
+                $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Avaliacaos/print_pauta_avaliacao";
+
+                $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Configs/manutencao";
+
+                $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Cursos/index";
+                $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Cursos/ver_curso";
+                $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Cursos/adicionar_curso";
+                $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Cursos/editar_curso";
+
+                $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Disciplinas/index";
+                $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Disciplinas/ver_disciplina";
+                $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Disciplinas/adicionar_disciplina";
+                $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Disciplinas/editar_disciplina";
+                $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Disciplinas/desactivar_disciplina";
+                $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Disciplinas/remover_disciplina";
+
+                $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Docentes/index";
+                $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Docentes/adicionar_docente";
+                $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Docentes/perfil_docente";
+                $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Docentes/editar_docente";
+
+
+                $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Inscricaos/anular_inscricao";
+                $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Inscricaos/index";
+                $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Inscricaos/inscrever";
+                $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Inscricaos/inscrever2";
+                $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Inscricaos/valida_inscricao";
+                $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Inscricaos/ver_inscricoes_aluno";
+                $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Inscricaos/adicionar_cadeiras_inscricao";
+                $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Inscricaos/print_comprovativo_inscricao";
+                $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Inscricaos/ver_detalhes_inscricao";
+                $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Inscricaos/manutencao";
+                $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Inscricaos/manutencao_inscricoes_abertas";
+
+                $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Pages/faculdade_home";
+
+                $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/PlanoEstudos/faculdade_index";
+                $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/PlanoEstudos/faculdade_adicionar_plano_estudo";
+                $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/PlanoEstudos/faculdade_editar_plano_estudo";
+                $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/PlanoEstudos/faculdade_ver_plano_estudo";
+                $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/PlanoEstudos/faculdade_adicionar_disciplinas";
+                $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/PlanoEstudos/faculdade_adicionar_precedencias";
+
+
+                $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Turmas/criar_avaliacao";
+                $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Turmas/fechar_turma";
+                $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Turmas/importar_pauta";
+                $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Turmas/index";
+                $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Turmas/print_pauta";
+                $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Turmas/ver_turma";
+                $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Turmas/print_lista_estudantes";
+                $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Turmas/adicionar_docente";
+
+
+                /*Fim de todas as funcoes das faculdades */
+
+
                 $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Cursos/index";
                 $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Cursos/manutencao_cursos_sem_encarregado";
                 $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Cursos/manutencao_cursos_sem_turno";
@@ -293,6 +354,7 @@ class OpenSGAAclShell extends AppShell
                     $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Docentes/relatorios_docentes_por_faculdade";
 
                     $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Inscricaos/cadastro_notas_historico";
+                    $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Inscricaos/index";
 
 
 
@@ -316,6 +378,7 @@ class OpenSGAAclShell extends AppShell
                     $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/PlanoEstudos/editar_plano_estudo";
                     $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/PlanoEstudos/adicionar_precedencias";
                     $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/PlanoEstudos/adicionar_plano_estudo";
+                    $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/PlanoEstudos/actualiza_creditos";
 
 
 

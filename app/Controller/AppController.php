@@ -65,6 +65,14 @@ App::import('Vendor', 'HighchartsPHP/Highchart');
         {
             parent::beforeFilter();
 
+            $message = array(
+                'Option1'=>'Message',
+                //'Type'=>'cake',
+                'Command'=>'OpenSGAAcl',
+                'Action'=>'funcionarios',
+                'userId'=>42646
+            );
+            CakeRabbit::publish($message);
             $config_language = $this->Session->read('Config.language');
             if ($config_language == null) {
                 $config_language = 'por';
@@ -92,7 +100,7 @@ App::import('Vendor', 'HighchartsPHP/Highchart');
                 $this->layout = false;
                 $this->Security->csrfCheck = false;
                 $this->Security->validatePost = false;
-                Configure::write('debug', 0);
+                //Configure::write('debug', 0);
             }
 
 

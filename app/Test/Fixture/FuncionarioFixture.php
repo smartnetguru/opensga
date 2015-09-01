@@ -1,7 +1,6 @@
 <?php
 /**
- * FuncionarioFixture
- *
+ * Funcionario Fixture
  */
 class FuncionarioFixture extends CakeTestFixture {
 
@@ -32,7 +31,7 @@ class FuncionarioFixture extends CakeTestFixture {
 			'entidade_id' => '42309',
 			'unidade_organica_id' => '29',
 			'funcao_profissional_id' => null,
-			'categoria_funcionario_id' => null
+			'funcionario_categoria_id' => null
 		),
 		array(
 			'id' => '2',
@@ -48,7 +47,7 @@ class FuncionarioFixture extends CakeTestFixture {
 			'entidade_id' => '42343',
 			'unidade_organica_id' => '29',
 			'funcao_profissional_id' => null,
-			'categoria_funcionario_id' => null
+			'funcionario_categoria_id' => null
 		),
 		array(
 			'id' => '3',
@@ -64,7 +63,7 @@ class FuncionarioFixture extends CakeTestFixture {
 			'entidade_id' => '42396',
 			'unidade_organica_id' => '59',
 			'funcao_profissional_id' => null,
-			'categoria_funcionario_id' => null
+			'funcionario_categoria_id' => null
 		),
 		array(
 			'id' => '4',
@@ -80,7 +79,7 @@ class FuncionarioFixture extends CakeTestFixture {
 			'entidade_id' => '42397',
 			'unidade_organica_id' => '57',
 			'funcao_profissional_id' => null,
-			'categoria_funcionario_id' => null
+			'funcionario_categoria_id' => null
 		),
 		array(
 			'id' => '5',
@@ -96,7 +95,7 @@ class FuncionarioFixture extends CakeTestFixture {
 			'entidade_id' => '42398',
 			'unidade_organica_id' => '57',
 			'funcao_profissional_id' => null,
-			'categoria_funcionario_id' => null
+			'funcionario_categoria_id' => null
 		),
 		array(
 			'id' => '6',
@@ -112,7 +111,7 @@ class FuncionarioFixture extends CakeTestFixture {
 			'entidade_id' => '42399',
 			'unidade_organica_id' => '58',
 			'funcao_profissional_id' => null,
-			'categoria_funcionario_id' => null
+			'funcionario_categoria_id' => null
 		),
 		array(
 			'id' => '7',
@@ -128,7 +127,7 @@ class FuncionarioFixture extends CakeTestFixture {
 			'entidade_id' => '42400',
 			'unidade_organica_id' => '57',
 			'funcao_profissional_id' => null,
-			'categoria_funcionario_id' => null
+			'funcionario_categoria_id' => null
 		),
 		array(
 			'id' => '8',
@@ -144,7 +143,7 @@ class FuncionarioFixture extends CakeTestFixture {
 			'entidade_id' => '42401',
 			'unidade_organica_id' => '58',
 			'funcao_profissional_id' => null,
-			'categoria_funcionario_id' => null
+			'funcionario_categoria_id' => null
 		),
 		array(
 			'id' => '9',
@@ -160,7 +159,7 @@ class FuncionarioFixture extends CakeTestFixture {
 			'entidade_id' => '42402',
 			'unidade_organica_id' => '57',
 			'funcao_profissional_id' => null,
-			'categoria_funcionario_id' => null
+			'funcionario_categoria_id' => null
 		),
 		array(
 			'id' => '10',
@@ -176,24 +175,8 @@ class FuncionarioFixture extends CakeTestFixture {
 			'entidade_id' => '42403',
 			'unidade_organica_id' => '57',
 			'funcao_profissional_id' => null,
-			'categoria_funcionario_id' => null
+			'funcionario_categoria_id' => null
 		),
-        array(
-            'id' => '11',
-            'user_id' => '11',
-            'grau_academico_id' => null,
-            'cargo_id' => null,
-            'superior_hierarquico' => null,
-            'data_inicio' => null,
-            'tipo_funcionario_id' => null,
-            'codigo' => '',
-            'created' => '2013-08-07 11:27:21',
-            'modified' => '2013-08-07 11:27:21',
-            'entidade_id' => '42403',
-            'unidade_organica_id' => '1',
-            'funcao_profissional_id' => null,
-            'categoria_funcionario_id' => null
-        ),
 	);
 
 }

@@ -16,7 +16,9 @@
         public $fixtures = [
             'app.turma',
             'app.ano_lectivo',
-            'app.docente_disciplina'
+            'app.docente_disciplina',
+            'app.docente_turma'
+
         ];
         //public $autoFixtures = false;
 
