@@ -119,6 +119,9 @@ class Turma extends AppModel
             'order'      => ''
         ]
     ];
+    public $virtualFields = array(
+        'total_alunos' => 'SELECT count(*) from inscricaos where turma_id=Turma.id'
+    );
     public $hasMany = [
         'Inscricao'          => [
             'className'    => 'Inscricao',

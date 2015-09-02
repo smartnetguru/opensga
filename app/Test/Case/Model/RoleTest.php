@@ -96,7 +96,6 @@ class RoleTest extends CakeTestCase {
 		'app.estado_docente_turma',
 		'app.tipo_docente_turma',
 		'app.disciplina_unidade_organica',
-		'app.disciplina_docente',
 		'app.alumni',
 		'app.tipo_funcionario',
 		'app.funcionario_categoria',

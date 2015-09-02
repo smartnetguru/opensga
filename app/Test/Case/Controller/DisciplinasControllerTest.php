@@ -18,7 +18,9 @@ class DisciplinasControllerTest extends ControllerTestCase
         'app.disciplina_unidade_organica',
         'app.opensga_session',
         'app.user',
-        'app.funcionario'
+        'app.funcionario',
+        'app.log',
+        'app.log_detail'
     ];
 
     /**

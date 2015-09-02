@@ -2,18 +2,84 @@
 
 App::uses('AuditableConfig', 'Auditable.Lib');
 App::uses('AppShell', 'Console/Command');
+App::uses('CakeEmail', 'Network/Email');
 
-class UserShell extends AppShell {
+class UserShell extends AppShell
+{
 
-	public $uses = array('User', 'Upload');
+    public $uses = array('User', 'Upload');
 
-	/**
-	 * Envia os dados da nova senha por email e sms
-	 * Parametros: UserId e SenhaNova
-	 */
-	public function afterChangePassword() {
+    /**
+     * Envia os dados da nova senha por email e sms
+     * Parametros: UserId e SenhaNova
+     */
+    public function afterChangePassword()
+    {
 
-	}
+    }
+
+    public function ajustaUserAro()
+    {
+        $users = $this->User->find('all');
+        $count = count($users);
+        foreach ($users as $user) {
+            //Temos de Certificar que o Aro existe, principalmente para estudantes importados
+            $aro = $this->User->Aro->find('first',
+                [
+                    'conditions' => [
+                        'model' => $this->User->alias,
+                        'foreign_key' => $user['User']['id']
+                    ]
+                ]);
+            if (empty($aro)) {
+                $new_aro = [
+                    'parent_id' => $user['User']['group_id'],
+                    'foreign_key' => $user['User']['id'],
+                    'model' => $this->User->alias
+                ];
+                $this->User->Aro->create();
+                $this->User->Aro->save($new_aro);
+                $this->out('Aro Salvo');
+            }
+            $this->out($count--);
+        }
+    }
+
+    public function ajusta_password()
+    {
+        $users = $this->User->find('all', array('conditions' => array('group_id' => 3, 'ultimo_login is null')));
+        $total = count($users);
+        foreach ($users as $user) {
+            $hash = $user['User']['password'];
+            if (strlen($hash) < 12 && strpos($hash, 'e') === 0) {
+                $this->out('Encontrou------------' . $hash);
+                $this->User->id = $user['User']['id'];
+                //Temos de Certificar que o Aro existe, principalmente para estudantes importados
+                $aro = $this->User->Aro->find('first',
+                    [
+                        'conditions' => [
+                            'model' => $this->User->alias,
+                            'foreign_key' => $user['User']['id']
+                        ]
+                    ]);
+                if (empty($aro)) {
+                    $new_aro = [
+                        'parent_id' => $user['User']['group_id'],
+                        'model' => $this->User->alias
+                    ];
+                    $this->User->Aro->create();
+                    $this->User->Aro->save($new_aro);
+                }
+                $this->User->set('password', Security::hash($user['User']['codigocartao'], 'blowfish'));
+                $this->User->save();
+
+            } else {
+                $this->out('passou');
+            }
+            $this->out($total--);
+
+        }
+    }
 
     /**
      * Altera Password a partir da linha de comandos
@@ -50,41 +116,6 @@ class UserShell extends AppShell {
         }
     }
 
-
-    public function ajusta_password(){
-        $users = $this->User->find('all',array('conditions'=>array('group_id'=>3,'ultimo_login is null')));
-        $total = count($users);
-        foreach($users as $user){
-            $hash = $user['User']['password'];
-            if(strlen($hash)<12 && strpos($hash,'e')===0){
-                $this->out('Encontrou------------'.$hash);
-                $this->User->id = $user['User']['id'];
-                //Temos de Certificar que o Aro existe, principalmente para estudantes importados
-                $aro = $this->User->Aro->find('first',
-                    ['conditions' => ['model'       => $this->User->alias,
-                                      'foreign_key' => $user['User']['id']
-                    ]
-                    ]);
-                if (empty($aro)) {
-                    $new_aro = [
-                        'parent_id'   => $user['User']['group_id'],
-                        'model'       => $this->User->alias
-                    ];
-                    $this->User->Aro->create();
-                    $this->User->Aro->save($new_aro);
-                }
-                $this->User->set('password',Security::hash($user['User']['codigocartao'],'blowfish'));
-                $this->User->save();
-
-            } else{
-                $this->out('passou');
-            }
-            $this->out($total--);
-
-        }
-    }
-
-
     public function getOptionParser()
     {
         $parser = parent::getOptionParser();
@@ -97,29 +128,16 @@ class UserShell extends AppShell {
 
     }
 
-
-    public function ajustaUserAro(){
-        $users = $this->User->find('all');
-        $count = count($users);
-        foreach($users as $user){
-            //Temos de Certificar que o Aro existe, principalmente para estudantes importados
-            $aro = $this->User->Aro->find('first',
-                ['conditions' => ['model'       => $this->User->alias,
-                                  'foreign_key' => $user['User']['id']
-                ]
-                ]);
-            if (empty($aro)) {
-                $new_aro = [
-                    'parent_id'   => $user['User']['group_id'],
-                    'foreign_key' => $user['User']['id'],
-                    'model'       => $this->User->alias
-                ];
-                $this->User->Aro->create();
-                $this->User->Aro->save($new_aro);
-                $this->out('Aro Salvo');
-            }
-            $this->out($count--);
-        }
+    public function testaEmail()
+    {
+        $email = new CakeEmail();
+        $email->config('smtp')
+            //->template('test_template', 'test_layout')//I'm assuming these were created
+            ->emailFormat('html')
+            ->to('elisio.leonardo@gmail.com')
+            //->from(array('no-reply@example.com' => 'Example'))
+            ->subject('I\'m just testing something')
+            ->send();
     }
 
 }

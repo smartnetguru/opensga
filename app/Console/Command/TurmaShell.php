@@ -47,4 +47,20 @@ class TurmaShell extends AppShell {
         $this->Turma->save();
 
     }
+
+    public function removeTurmasSemInscricao(){
+        $unidadeOrganicaId = $this->args[0];
+        $this->Turma->contain('Curso');
+        $turmas = $this->Turma->find('all',array('conditions'=>array('Curso.unidade_organica_id'=>$unidadeOrganicaId)));
+        foreach($turmas as $turma){
+            $inscricaos = $this->Turma->Inscricao->find('count',array('conditions'=>['Inscricao.turma_id'=>$turma['Turma']['id']]));
+            if($inscricaos==0){
+                $this->out($inscricaos.'<error>------Removendo----'.$turma['Turma']['name'].'</error>');
+                $this->Turma->id = $turma['Turma']['id'];
+                $this->Turma->delete($turma['Turma']['id']);
+            } else{
+                $this->out($inscricaos.'------Mantendo----'.$turma['Turma']['name']);
+            }
+        }
+    }
 }

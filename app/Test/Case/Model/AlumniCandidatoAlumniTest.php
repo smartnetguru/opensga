@@ -127,7 +127,7 @@ class AlumniCandidatoAlumniTest extends CakeTestCase
         'app.motivo_estado_aluno',
         'app.alumni_alumni'
     ];
-    public $autoFixtures = false;
+
 
     /**
      * setUp method
@@ -159,7 +159,7 @@ class AlumniCandidatoAlumniTest extends CakeTestCase
      */
     public function testSaveCandidatoAlumni()
     {
-        $this->loadFixtures('AlumniCandidatoAlumni');
+
         $data = [
             'AlumniCandidatoAlumni' => [
                 'apelido'                               => 'Leonardo',

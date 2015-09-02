@@ -754,7 +754,7 @@ class TurmasController extends AppController
                 'Curso' => array('UnidadeOrganica'),
                 'Inscricao' => array(
                     'conditions' => array(
-                        'estado_inscricao_id' => 1
+                        //'estado_inscricao_id' => 1
                     )
                 )
             ),

@@ -11,9 +11,13 @@ class AppModel extends Model
     public function __construct($id = false, $table = null, $ds = null)
     {
         parent::__construct($id, $table, $ds);
-        if ($this->name=='Log' || $this->name=='opensgaSession' || $this->alias=='Session') {
-            $this->Behaviors->unload('Auditable.Auditable');
+
+            if ($this->name=='Log' || $this->name=='opensgaSession' || $this->alias=='Session') {
+                $this->Behaviors->unload('Auditable.Auditable');
+
         }
+
+
 
 
     }
