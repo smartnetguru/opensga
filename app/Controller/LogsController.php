@@ -73,17 +73,17 @@ class LogsController extends AppController {
         if (!empty($this->data)) {
             $filter = $this->data['Log']['filter'];
         }
-        $conditions = $this->Log->textSearch($filter);
+        /*$conditions = $this->Log->textSearch($filter);
         if ($type = $this->request->query('type')) {
             $conditions['type'] = $type;
-        }
+        }*/
 
 
         $logs  = $this->Log->find('all',array('limit'=>25,'order'=>'created DESC'));
         $totalLogs = $this->Log->find('count');
         $this->set(compact('totalLogs'));
         $this->set('logs', $logs);
-        $this->set('types', $this->Log->getTypes());
+       // $this->set('types', $this->Log->getTypes());
         $this->set('filter', $filter);
     }
 

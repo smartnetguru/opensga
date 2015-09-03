@@ -106,6 +106,7 @@
             if ($userId) {
                 $funcionarios = $this->Funcionario->find('all', ['conditions' => ['User.id' => $userId]]);
             } else {
+                die(debug('Nenhum Argumento Recebido'));
                 $funcionarios = $this->Funcionario->find('all',
                     ['conditions' => ['group_id' => 2], 'order' => 'User.id DESC']);
             }

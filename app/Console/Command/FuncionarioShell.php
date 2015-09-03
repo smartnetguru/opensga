@@ -389,9 +389,9 @@
             $Email->config('smtp')
                 ->emailFormat('html')
                 ->to($emailTo)
-                ->cc(['elisio.leonardo@gmail.com','jose.nhampossa@gmail.com','sergiobata@gmail.com'])
+                ->cc(['elisio.leonardo@gmail.com','sergiobata@gmail.com'])
                 ->domain('siga.uem.mz')
-                ->subject('TESTE: Novo Usuario Cadastrado no SIGA')
+                ->subject('Novo Usuario Cadastrado no SIGA')
                 ->send($emailBody);
 
 
