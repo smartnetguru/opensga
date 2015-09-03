@@ -124,6 +124,7 @@
 
                     $this->create();
                     if ($this->save($data)) {
+                        $dataSource->commit();
                         $message = [
                             'Option1' => 'Message',
                             //'Type'=>'cake',
@@ -132,7 +133,7 @@
                             'turmaId'  => $this->id
                         ];
                         CakeRabbit::publish($message);
-                        $dataSource->commit();
+
 
                         return true;
                     } else {

@@ -344,6 +344,10 @@
             $funcionarioId = $this->args[0];
             $this->Funcionario->contain(['Entidade' => ['User']]);
             $funcionario = $this->Funcionario->findById($funcionarioId);
+            if(empty($funcionario)){
+                debug($funcionarioId);
+                die();
+            }
 
             //Atribui Permissoes
             $comando = 'OpenSGAAcl funcionarios ' . $funcionario['Entidade']['User']['id'];
