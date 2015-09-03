@@ -1,7 +1,6 @@
 <?php
 /**
- * TurmaFixture
- *
+ * Turma Fixture
  */
 class TurmaFixture extends CakeTestFixture {
 
@@ -45,7 +44,6 @@ class TurmaFixture extends CakeTestFixture {
 			'nota_minima_dispensa' => null,
 			'created_by' => null,
 			'modified_by' => null,
-			'unidade_organica_id' => '28',
 			'pauta_path' => null
 		),
 		array(
@@ -75,7 +73,6 @@ class TurmaFixture extends CakeTestFixture {
 			'nota_minima_dispensa' => null,
 			'created_by' => null,
 			'modified_by' => null,
-			'unidade_organica_id' => '28',
 			'pauta_path' => null
 		),
 		array(
@@ -105,7 +102,6 @@ class TurmaFixture extends CakeTestFixture {
 			'nota_minima_dispensa' => null,
 			'created_by' => null,
 			'modified_by' => null,
-			'unidade_organica_id' => '28',
 			'pauta_path' => null
 		),
 		array(
@@ -135,7 +131,6 @@ class TurmaFixture extends CakeTestFixture {
 			'nota_minima_dispensa' => null,
 			'created_by' => null,
 			'modified_by' => null,
-			'unidade_organica_id' => '28',
 			'pauta_path' => null
 		),
 		array(
@@ -165,7 +160,6 @@ class TurmaFixture extends CakeTestFixture {
 			'nota_minima_dispensa' => null,
 			'created_by' => null,
 			'modified_by' => null,
-			'unidade_organica_id' => '28',
 			'pauta_path' => null
 		),
 		array(
@@ -195,7 +189,6 @@ class TurmaFixture extends CakeTestFixture {
 			'nota_minima_dispensa' => null,
 			'created_by' => null,
 			'modified_by' => null,
-			'unidade_organica_id' => '28',
 			'pauta_path' => null
 		),
 		array(
@@ -225,7 +218,6 @@ class TurmaFixture extends CakeTestFixture {
 			'nota_minima_dispensa' => null,
 			'created_by' => null,
 			'modified_by' => null,
-			'unidade_organica_id' => '28',
 			'pauta_path' => null
 		),
 		array(
@@ -255,7 +247,6 @@ class TurmaFixture extends CakeTestFixture {
 			'nota_minima_dispensa' => null,
 			'created_by' => null,
 			'modified_by' => null,
-			'unidade_organica_id' => '28',
 			'pauta_path' => null
 		),
 		array(
@@ -285,7 +276,6 @@ class TurmaFixture extends CakeTestFixture {
 			'nota_minima_dispensa' => null,
 			'created_by' => null,
 			'modified_by' => null,
-			'unidade_organica_id' => '28',
 			'pauta_path' => null
 		),
 		array(
@@ -315,7 +305,6 @@ class TurmaFixture extends CakeTestFixture {
 			'nota_minima_dispensa' => null,
 			'created_by' => null,
 			'modified_by' => null,
-			'unidade_organica_id' => '28',
 			'pauta_path' => null
 		),
 	);

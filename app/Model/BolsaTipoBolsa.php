@@ -1,75 +1,77 @@
 <?php
-App::uses('AppModel', 'Model');
-/**
- * BolsaTipoBolsa Model
- *
- * @property BolsaPedido $BolsaPedido
- * @property BolsaResultado $BolsaResultado
- * @property BolsaValorBolsa $BolsaValorBolsa
- */
-class BolsaTipoBolsa extends AppModel {
+    App::uses('AppModel', 'Model');
+
+    /**
+     * BolsaTipoBolsa Model
+     *
+     * @property BolsaPedido $BolsaPedido
+     * @property BolsaResultado $BolsaResultado
+     * @property BolsaValorBolsa $BolsaValorBolsa
+     */
+    class BolsaTipoBolsa extends AppModel
+    {
 
 
-	//The Associations below have been created with all possible keys, those that are not needed can be removed
+        //The Associations below have been created with all possible keys, those that are not needed can be removed
 
-/**
- * hasMany associations
- *
- * @var array
- */
-	public $hasMany = array(
-		'BolsaPedido' => array(
-			'className' => 'BolsaPedido',
-			'foreignKey' => 'bolsa_tipo_bolsa_id',
-			'dependent' => false,
-			'conditions' => '',
-			'fields' => '',
-			'order' => '',
-			'limit' => '',
-			'offset' => '',
-			'exclusive' => '',
-			'finderQuery' => '',
-			'counterQuery' => ''
-		),
-		'BolsaResultado' => array(
-			'className' => 'BolsaResultado',
-			'foreignKey' => 'bolsa_tipo_bolsa_id',
-			'dependent' => false,
-			'conditions' => '',
-			'fields' => '',
-			'order' => '',
-			'limit' => '',
-			'offset' => '',
-			'exclusive' => '',
-			'finderQuery' => '',
-			'counterQuery' => ''
-		),
-		'BolsaValorBolsa' => array(
-			'className' => 'BolsaValorBolsa',
-			'foreignKey' => 'bolsa_tipo_bolsa_id',
-			'dependent' => false,
-			'conditions' => '',
-			'fields' => '',
-			'order' => '',
-			'limit' => '',
-			'offset' => '',
-			'exclusive' => '',
-			'finderQuery' => '',
-			'counterQuery' => ''
-		),
-		'BolsaBolsa' => array(
-			'className' => 'BolsaBolsa',
-			'foreignKey' => 'bolsa_tipo_bolsa_id',
-			'dependent' => false,
-			'conditions' => '',
-			'fields' => '',
-			'order' => '',
-			'limit' => '',
-			'offset' => '',
-			'exclusive' => '',
-			'finderQuery' => '',
-			'counterQuery' => ''
-		)
-	);
+        /**
+         * hasMany associations
+         *
+         * @var array
+         */
+        public $hasMany = [
+            'BolsaPedido'     => [
+                'className'    => 'BolsaPedido',
+                'foreignKey'   => 'bolsa_tipo_bolsa_id',
+                'dependent'    => false,
+                'conditions'   => '',
+                'fields'       => '',
+                'order'        => '',
+                'limit'        => '',
+                'offset'       => '',
+                'exclusive'    => '',
+                'finderQuery'  => '',
+                'counterQuery' => ''
+            ],
+            'BolsaResultado'  => [
+                'className'    => 'BolsaResultado',
+                'foreignKey'   => 'bolsa_tipo_bolsa_id',
+                'dependent'    => false,
+                'conditions'   => '',
+                'fields'       => '',
+                'order'        => '',
+                'limit'        => '',
+                'offset'       => '',
+                'exclusive'    => '',
+                'finderQuery'  => '',
+                'counterQuery' => ''
+            ],
+            'BolsaValorBolsa' => [
+                'className'    => 'BolsaValorBolsa',
+                'foreignKey'   => 'bolsa_tipo_bolsa_id',
+                'dependent'    => false,
+                'conditions'   => '',
+                'fields'       => '',
+                'order'        => '',
+                'limit'        => '',
+                'offset'       => '',
+                'exclusive'    => '',
+                'finderQuery'  => '',
+                'counterQuery' => ''
+            ],
+            'BolsaBolsa'      => [
+                'className'    => 'BolsaBolsa',
+                'foreignKey'   => 'bolsa_tipo_bolsa_id',
+                'dependent'    => false,
+                'conditions'   => '',
+                'fields'       => '',
+                'order'        => '',
+                'limit'        => '',
+                'offset'       => '',
+                'exclusive'    => '',
+                'finderQuery'  => '',
+                'counterQuery' => ''
+            ]
+        ];
 
-}
+    }

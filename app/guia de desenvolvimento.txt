@@ -94,3 +94,24 @@ Continued Registration Flow control
 Results Registration (Exams)
 Transfer of Curriculum (to the next Academic year)
 Transfer of Students (from one semester/trimester to the next)
+
+
+-----------------------------------------------------------
+libreoffice --headless -convert-to pdf fileToConvert.docx -outdir output/path/for/pdf
+-------------------------------------------------------------
+import sys
+import os
+import comtypes.client
+
+wdFormatPDF = 17
+
+in_file = os.path.abspath(sys.argv[1])
+out_file = os.path.abspath(sys.argv[2])
+
+word = comtypes.client.CreateObject('Word.Application')
+doc = word.Documents.Open(in_file)
+doc.SaveAs(out_file, FileFormat=wdFormatPDF)
+doc.Close()
+word.Quit()
+
+-----------------------------------------------------

@@ -1,5 +1,5 @@
 <?php
-App::import('Vendor', 'HighchartsPHP/Highchart');
+    //App::import('Vendor', 'HighchartsPHP/Highchart');
     /**
      * App Controller
      *
@@ -11,8 +11,8 @@ App::import('Vendor', 'HighchartsPHP/Highchart');
      * @since           OpenSGA v 0.1.0
      *
      */
-    App::uses('AuditableConfig', 'Auditable.Lib');
-    App::uses('Controller', 'Controller');
+    // App::uses('AuditableConfig', 'Auditable.Lib');
+    //App::uses('Controller', 'Controller');
 
     /**
      * Classe Mae para todos os Controllers
@@ -24,7 +24,7 @@ App::import('Vendor', 'HighchartsPHP/Highchart');
     class AppController extends Controller
     {
 
-        public $components  = [
+        public $components = [
             'Security',
             'Acl',
             'Auth'             => [
@@ -40,14 +40,14 @@ App::import('Vendor', 'HighchartsPHP/Highchart');
             'Flash',
 
         ];
-        public $helpers     = [
-            'Html'=> array('className' =>'SigaHtml'),
+        public $helpers = [
+            'Html' => ['className' => 'SigaHtml'],
             'AclLink',
             'Print',
             'BreadCumbs',
             'Form',
             'Session',
-            'Js'         => [
+            'Js'   => [
                 'MyJquery'
             ],
             'EventsCalendar',
@@ -58,21 +58,14 @@ App::import('Vendor', 'HighchartsPHP/Highchart');
             'Time',
             'AmazonS3'
         ];
-        public $pdfConfig   = ['engine' => 'CakePdf.Tcpdf'];
+        public $pdfConfig = ['engine' => 'CakePdf.Tcpdf'];
         public $cacheAction = '1 hour';
 
         public function beforeFilter()
         {
             parent::beforeFilter();
 
-            $message = array(
-                'Option1'=>'Message',
-                //'Type'=>'cake',
-                'Command'=>'OpenSGAAcl',
-                'Action'=>'funcionarios',
-                'userId'=>42646
-            );
-            CakeRabbit::publish($message);
+
             $config_language = $this->Session->read('Config.language');
             if ($config_language == null) {
                 $config_language = 'por';
@@ -102,9 +95,6 @@ App::import('Vendor', 'HighchartsPHP/Highchart');
                 $this->Security->validatePost = false;
                 //Configure::write('debug', 0);
             }
-
-
-
 
 
             //Devemos forcar o prefixo para funcionarios da faculdade, docente e estudantes
@@ -217,7 +207,7 @@ App::import('Vendor', 'HighchartsPHP/Highchart');
 
             if (isset($this->request->prefix) && !$this->request->is('ajax')) {
                 $action = $this->action;
-                if(strcmp($action,'trocar_senha')){
+                if (strcmp($action, 'trocar_senha')) {
                     $this->layout = $this->request->prefix;
                 }
 
@@ -226,12 +216,13 @@ App::import('Vendor', 'HighchartsPHP/Highchart');
                 'notificacoes'));
         }
 
-        public function blackhole($type) {
-            if($type=='csrf'){
+        public function blackhole($type)
+        {
+            if ($type == 'csrf') {
                 $this->Flash->warning('Algo Estranho Aconteceu com o Sistema. Os administradores ja foram notificados!');
                 $this->log('Erro de CSRF');
                 $this->redirect($this->referer());
-            } else{
+            } else {
                 $this->Flash->warning('Algo Estranho Aconteceu com o Sistema. Os administradores ja foram notificados!');
                 $this->log('blackhole');
                 $this->redirect($this->referer());

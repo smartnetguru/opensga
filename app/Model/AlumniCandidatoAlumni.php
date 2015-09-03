@@ -113,9 +113,9 @@ class AlumniCandidatoAlumni extends AppModel {
  * @var array
  */
 	public $hasMany = [
-		'Alumni' => [
-			'className' => 'Alumni',
-			'foreignKey' => 'candidato_alumni_id',
+		'AlumniAlumni' => [
+			'className' => 'AlumniAlumni',
+			'foreignKey' => 'alumni_candidato_alumni_id',
 			'dependent' => false,
 			'conditions' => '',
 			'fields' => '',

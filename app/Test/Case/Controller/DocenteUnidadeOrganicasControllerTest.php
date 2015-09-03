@@ -39,7 +39,7 @@ class DocenteUnidadeOrganicasControllerTest extends ControllerTestCase {
 		'app.bairro',
 		'app.rua',
 		'app.documento_identificacao',
-		'app.alumni',
+
 		'app.tipo_curso',
 		'app.curso_responsavel',
 		'app.plano_estudo',

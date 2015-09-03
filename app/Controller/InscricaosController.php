@@ -892,6 +892,55 @@ class InscricaosController extends AppController
         $this->set(compact('inscricao', 'aluno', 'tipoInscricaos', 'estadoInscricaos'));
     }
 
+
+    function ver_detalhes_inscricao($inscricaoId = null)
+    {
+
+
+        if (!$inscricaoId) {
+            $this->Session->setFlash('Invalido %s', 'flasherror');
+            $this->redirect(['action' => 'index']);
+        }
+        $this->Inscricao->contain([
+            'Aluno' => ['Entidade'],
+            'Turma' => ['Curso'],
+            'EstadoInscricao'
+        ]);
+        $inscricao = $this->Inscricao->findById($inscricaoId);
+        $aluno = $this->Inscricao->Aluno->getAlunoForAction($inscricao['Inscricao']['aluno_id']);
+
+        if ($this->request->is('post') || $this->request->is('put')) {
+
+
+            if ($this->Inscricao->actualizaDadosInscricao($this->request->data) === true) {
+                $this->Flash->success('Dados da Inscricao Actualizados com Sucesso');
+                $redirect_url = $this->request->query('redirect_url');
+                if(!empty($redirect_url)){
+                    $this->redirect($redirect_url);
+                } else{
+                    $this->redirect([
+                        'controller' => 'inscricaos',
+                        'action' => 'ver_inscricoes_aluno',
+                        $aluno['Aluno']['id']
+                    ]);
+                }
+
+            } else {
+                $this->Flash->error('Problemas ao Actualizar a Inscricao. Verifique os dados e tente novamente');
+            }
+        }
+
+
+        $this->request->data = $inscricao;
+
+        $tipoInscricaos = $this->Inscricao->TipoInscricao->find('list');
+        $estadoInscricaos = $this->Inscricao->EstadoInscricao->find('list');
+
+
+        $this->set(compact('inscricao', 'aluno', 'tipoInscricaos', 'estadoInscricaos'));
+    }
+
+
     /**
      *
      * @param type $aluno_id

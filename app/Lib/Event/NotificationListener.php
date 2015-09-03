@@ -10,7 +10,8 @@
         }
 
         public function afterRenovacaoMatricula($event){
-            die(debug('teste'));
+            debug('teste');
+            die();
         }
     }
 

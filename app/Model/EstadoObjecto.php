@@ -89,19 +89,6 @@ class EstadoObjecto extends AppModel {
 			'finderQuery' => '',
 			'counterQuery' => ''
 		),
-		'DisciplinaDocente' => array(
-			'className' => 'DisciplinaDocente',
-			'foreignKey' => 'estado_objecto_id',
-			'dependent' => false,
-			'conditions' => '',
-			'fields' => '',
-			'order' => '',
-			'limit' => '',
-			'offset' => '',
-			'exclusive' => '',
-			'finderQuery' => '',
-			'counterQuery' => ''
-		),
 		'DisciplinaPlanoEstudo' => array(
 			'className' => 'DisciplinaPlanoEstudo',
 			'foreignKey' => 'estado_objecto_id',

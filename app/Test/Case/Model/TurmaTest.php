@@ -61,9 +61,7 @@
             $resultado = $this->Turma->adicionaDocente($data);
 
             debug($resultado);
-            $resultado2 = $this->Turma->adicionaDocente($data);
-            debug($resultado2);
-            $this->assertSame($resultado2,false);
+
             $this->assertSame($resultado,true);
         }
 

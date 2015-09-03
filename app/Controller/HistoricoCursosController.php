@@ -109,4 +109,19 @@ class HistoricoCursosController extends AppController {
 		}
 		return $this->redirect(array('action' => 'index'));
 	}
+
+
+    public function print_certificado_conclusao($alunoId,$cursoId){
+
+        $this->HistoricoCurso->contain([
+            'Aluno'=>[
+                'Entidade','Curso'
+            ]
+        ]);
+        $historicoCurso = $this->HistoricoCurso->findByAlunoIdAndCursoId($alunoId,$cursoId);
+
+        $this->set(compact('historicoCurso'));
+        $this->layout=false;
+
+    }
 }

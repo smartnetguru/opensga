@@ -92,7 +92,7 @@ class FuncionarioCategoriasControllerTest extends ControllerTestCase {
 		'app.estado_docente_turma',
 		'app.tipo_docente_turma',
 		'app.disciplina_unidade_organica',
-		'app.alumni',
+
 		'app.tipo_curso',
 		'app.curso_responsavel',
 		'app.cursos_turno',

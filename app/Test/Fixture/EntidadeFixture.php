@@ -1,7 +1,6 @@
 <?php
 /**
- * EntidadeFixture
- *
+ * Entidade Fixture
  */
 class EntidadeFixture extends CakeTestFixture {
 
@@ -55,52 +54,54 @@ class EntidadeFixture extends CakeTestFixture {
 			'avenida_rua_ferias' => null,
 			'agregado_familiar_numero' => null,
 			'estado_civil' => null,
-			'documento_identificacao_validade' => null,
+			'documento_identificacao_data_validade' => null,
 			'nacionalidade' => null,
 			'codigo' => '',
-			'naturalidade' => null
+			'naturalidade' => null,
+			'nuit' => null
 		),
 		array(
 			'id' => '2',
 			'name' => 'Jessica Tavares De Matos',
-			'nome_pai' => 'António Dos Santos Matoa',
-			'nome_mae' => 'Carla Marisa Tavares Da Silva Matos',
+			'nome_pai' => 'António Dos Santos Matoa2',
+			'nome_mae' => 'Carla Marisa Tavares Da Silva Matos2',
 			'foto' => '0',
 			'genero_id' => '2',
 			'pais_nascimento' => '152',
-			'cidade_morada' => null,
-			'bairro_morada' => null,
-			'caixa_postal_morada' => null,
+			'cidade_morada' => '18',
+			'bairro_morada' => '944',
+			'caixa_postal_morada' => '233',
 			'cidade_ferias' => null,
-			'cidade_nascimento' => '1101',
-			'provincia_nascimento' => null,
+			'cidade_nascimento' => '109',
+			'provincia_nascimento' => '9',
 			'email' => '                                             ',
 			'telefone' => '            ',
-			'telemovel' => '826659090',
-			'documento_identificacao_id' => null,
-			'documento_identificacao_numero' => null,
-			'data_nascimento' => '1991-09-20',
-			'documento_identificacao_data_emissao' => null,
-			'estado_entidade_id' => null,
+			'telemovel' => '8266590900000',
+			'documento_identificacao_id' => '1',
+			'documento_identificacao_numero' => '464576547h',
+			'data_nascimento' => '2000-02-01',
+			'documento_identificacao_data_emissao' => '2015-08-19',
+			'estado_entidade_id' => '1',
 			'created' => '2013-06-01 22:35:37',
-			'modified' => '2013-09-13 07:43:02',
+			'modified' => '2015-08-31 20:13:07',
 			'user_id' => '2',
-			'documento_identificacao_local_emissao' => null,
+			'documento_identificacao_local_emissao' => 'ggdgd',
 			'apelido' => 'Matos',
 			'nomes' => 'Jessica Tavares De',
 			'created_by' => null,
-			'modified_by' => null,
+			'modified_by' => '42646',
 			'provincia_ferias' => null,
 			'telefone_ferias' => null,
 			'telemovel_ferias' => null,
-			'avenida_rua' => null,
+			'avenida_rua' => '1247',
 			'avenida_rua_ferias' => null,
 			'agregado_familiar_numero' => null,
-			'estado_civil' => '1',
-			'documento_identificacao_validade' => null,
+			'estado_civil' => '2',
+			'documento_identificacao_data_validade' => null,
 			'nacionalidade' => '1',
 			'codigo' => '12283',
-			'naturalidade' => null
+			'naturalidade' => '',
+			'nuit' => null
 		),
 		array(
 			'id' => '3',
@@ -139,10 +140,11 @@ class EntidadeFixture extends CakeTestFixture {
 			'avenida_rua_ferias' => null,
 			'agregado_familiar_numero' => null,
 			'estado_civil' => '1',
-			'documento_identificacao_validade' => null,
+			'documento_identificacao_data_validade' => null,
 			'nacionalidade' => '1',
 			'codigo' => '12284',
-			'naturalidade' => null
+			'naturalidade' => null,
+			'nuit' => null
 		),
 		array(
 			'id' => '4',
@@ -181,10 +183,11 @@ class EntidadeFixture extends CakeTestFixture {
 			'avenida_rua_ferias' => null,
 			'agregado_familiar_numero' => null,
 			'estado_civil' => '2',
-			'documento_identificacao_validade' => null,
+			'documento_identificacao_data_validade' => null,
 			'nacionalidade' => '1',
 			'codigo' => '12285',
-			'naturalidade' => null
+			'naturalidade' => null,
+			'nuit' => null
 		),
 		array(
 			'id' => '5',
@@ -223,10 +226,11 @@ class EntidadeFixture extends CakeTestFixture {
 			'avenida_rua_ferias' => null,
 			'agregado_familiar_numero' => null,
 			'estado_civil' => '1',
-			'documento_identificacao_validade' => null,
+			'documento_identificacao_data_validade' => null,
 			'nacionalidade' => '1',
 			'codigo' => '12286',
-			'naturalidade' => null
+			'naturalidade' => null,
+			'nuit' => null
 		),
 		array(
 			'id' => '6',
@@ -265,10 +269,11 @@ class EntidadeFixture extends CakeTestFixture {
 			'avenida_rua_ferias' => null,
 			'agregado_familiar_numero' => null,
 			'estado_civil' => '1',
-			'documento_identificacao_validade' => null,
+			'documento_identificacao_data_validade' => null,
 			'nacionalidade' => '1',
 			'codigo' => '12287',
-			'naturalidade' => null
+			'naturalidade' => null,
+			'nuit' => null
 		),
 		array(
 			'id' => '7',
@@ -307,10 +312,11 @@ class EntidadeFixture extends CakeTestFixture {
 			'avenida_rua_ferias' => null,
 			'agregado_familiar_numero' => null,
 			'estado_civil' => '1',
-			'documento_identificacao_validade' => null,
+			'documento_identificacao_data_validade' => null,
 			'nacionalidade' => '1',
 			'codigo' => '12288',
-			'naturalidade' => null
+			'naturalidade' => null,
+			'nuit' => null
 		),
 		array(
 			'id' => '8',
@@ -349,10 +355,11 @@ class EntidadeFixture extends CakeTestFixture {
 			'avenida_rua_ferias' => null,
 			'agregado_familiar_numero' => null,
 			'estado_civil' => '1',
-			'documento_identificacao_validade' => null,
+			'documento_identificacao_data_validade' => null,
 			'nacionalidade' => '1',
 			'codigo' => '12289',
-			'naturalidade' => null
+			'naturalidade' => null,
+			'nuit' => null
 		),
 		array(
 			'id' => '9',
@@ -391,10 +398,11 @@ class EntidadeFixture extends CakeTestFixture {
 			'avenida_rua_ferias' => null,
 			'agregado_familiar_numero' => null,
 			'estado_civil' => '1',
-			'documento_identificacao_validade' => null,
+			'documento_identificacao_data_validade' => null,
 			'nacionalidade' => '1',
 			'codigo' => '12290',
-			'naturalidade' => null
+			'naturalidade' => null,
+			'nuit' => null
 		),
 		array(
 			'id' => '10',
@@ -433,10 +441,11 @@ class EntidadeFixture extends CakeTestFixture {
 			'avenida_rua_ferias' => null,
 			'agregado_familiar_numero' => null,
 			'estado_civil' => '2',
-			'documento_identificacao_validade' => null,
+			'documento_identificacao_data_validade' => null,
 			'nacionalidade' => '1',
 			'codigo' => '12291',
-			'naturalidade' => null
+			'naturalidade' => null,
+			'nuit' => null
 		),
 	);
 

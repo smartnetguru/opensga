@@ -97,7 +97,7 @@ class RolesControllerTest extends ControllerTestCase {
 		'app.tipo_docente_turma',
 		'app.disciplina_unidade_organica',
 
-		'app.alumni',
+
 		'app.tipo_funcionario',
 		'app.funcionario_categoria',
 		'app.estado_entidade',

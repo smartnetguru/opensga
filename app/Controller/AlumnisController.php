@@ -5,7 +5,7 @@ App::uses('AppController', 'Controller');
  *
  * @property Alumni $Alumni
  */
-class AlumnisController extends AppController {
+class AlumniAlumnisController extends AppController {
 
 /**
  * index method
