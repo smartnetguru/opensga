@@ -75,11 +75,27 @@
                     'allowEmpty' => true
                 ]
             ],
+            'turma_inscricao_id'  => [
+                'TurmaInscricaoNotEmpty' => [
+                    'rule'     => 'notBlank',
+                    'required' => 'Create',
+                    'on'       => 'create',
+                    'message'  => 'A turma onde o estudante escreveu deve ser Definida'
+                ]
+            ],
+            'matricula_id'=>[
+                'MatriculaIdtEmpty' => [
+                    'rule'     => 'notBlank',
+                    'required' => 'Create',
+                    'on'       => 'create',
+                    'message'  => 'A turma onde o estudante escreveu deve ser Definida'
+                ]
+            ],
             'epoca_avaliacao_id',
             'data',
             'nota_exame_normal',
             'nota_exame_recorrencia',
-            'turma_inscricao_id'
+
 
         ];
         var $belongsTo = [
@@ -398,6 +414,41 @@
             return $alunos2;
         }
 
+        /**
+         * Retorna todas as inscricoes de uma determinada Turma
+         *
+         * @param $turmaId
+         *
+         * @return mixed
+         */
+        public function getAllByTurmaId($turmaId)
+        {
+            $this->Turma->Inscricao->contain([
+                'EstadoInscricao',
+                'Matricula' => [
+                    'Aluno' => [
+                        'Entidade' => [
+                            'User'
+                        ]
+                    ]
+                ],
+                'Turma'     => [
+                    'Curso' => [
+                        'fields' => ['name']
+                    ],
+                    'Disciplina',
+                    'Turno',
+                    'AnoLectivo'
+                ]
+            ]);
+            $resultado = $this->Turma->Inscricao->find('all', ['conditions' => ['turma_id' => $turmaId]]);
+            $sorted = Hash::sort($resultado, '{n}.Matricula.Aluno.Entidade.apelido');
+
+            return $sorted;
+
+
+        }
+
         public function getAllCadeirasPendentesByAluno($alunoId)
         {
             $aluno = $this->Aluno->findById($alunoId);
@@ -430,34 +481,6 @@
             return $disciplinaPlanoEstudos;
         }
 
-        /**
-         * Retorna todas as inscricoes de uma determinada Turma
-         * @param $turmaId
-         *
-         * @return mixed
-         */
-        public function getAllByTurmaId($turmaId){
-            $this->Turma->Inscricao->contain([
-                'EstadoInscricao',
-                'Matricula' => [
-                    'Aluno' => [
-                        'Entidade' => [
-                            'User'
-                        ]
-                    ]
-                ],
-                'Turma' => [
-                    'Curso' => [
-                        'fields' => ['name']
-                    ],
-                    'Disciplina',
-                    'Turno',
-                    'AnoLectivo'
-                ]
-            ]);
-            return $this->Turma->Inscricao->find('all', ['conditions' => ['turma_id' => $turmaId]]);
-
-        }
         public function getAllDisciplinasForInscricao($alunoId, $anoLectivoId = null)
         {
             if (!$anoLectivoId) {
@@ -759,6 +782,48 @@
             }
 
             return false;
+        }
+
+        /**
+         * Inscreve o Aluno numa Turma Existente
+         * Como parametro recebe um array contendo O Aluno e a Turma
+         *
+         * @param $data
+         */
+        public function inscreveAlunoNaTurma($data)
+        {
+            if (!isset($data['Inscricao']['turma_inscricao_id'])) {
+                $data['Inscricao']['turma_inscricao_id']=$data['Inscricao']['turma_id'];
+            }
+            if (!isset($data['Inscricao']['turma_frequencia_id'])) {
+                $data['Inscricao']['turma_frequencia_id']=$data['Inscricao']['turma_id'];
+            }
+            if (!isset($data['Inscricao']['matricula_id'])) {
+                $this->Turma->id  = $data['Inscricao']['turma_id'];
+                $anoLectivoId = $this->Turma->field('ano_lectivo_id');
+                $matricula = $this->Matricula->findByAlunoIdAndAnoLectivoId($data['Inscricao']['aluno_id'],$anoLectivoId);
+                if(empty($matricula)){
+                    $matriculaId = $this->Matricula->matriculaEstudante($data['Inscricao']['aluno_id'],$anoLectivoId);
+                } else{
+                    $matriculaId = $matricula['Matricula']['id'];
+                }
+                $data['Inscricao']['matricula_id'] = $matriculaId;
+
+                $data['Inscricao']['turma_frequencia_id']=$data['Inscricao']['turma_id'];
+            }
+
+            $this->create();
+
+            if ($this->save($data)) {
+                $data['Inscricao']['inscricao_id'] = $this->id;
+                if ($resultado = $this->actualizaDadosInscricao($data)) {
+                    return true;
+                } else {
+                    return resultado;
+                }
+            } else {
+                return [false, $this->validationErrors];
+            }
         }
 
     }

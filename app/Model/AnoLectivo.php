@@ -34,7 +34,7 @@
         var $belongsTo = array(
             'RegimeLectivo' => array(
                 'className'  => 'RegimeLectivo',
-                'foreignKey' => 'RegimeLectivo_id',
+                'foreignKey' => 'regime_lectivo_id',
                 'conditions' => '',
                 'fields'     => '',
                 'order'      => ''

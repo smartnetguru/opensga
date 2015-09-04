@@ -934,11 +934,11 @@ class AlunosController extends AppController
         }
         if ($aluno['Aluno']['plano_estudo_id'] != null) {
             $this->Aluno->PlanoEstudo->id = $aluno['Aluno']['plano_estudo_id'];
-            if ($this->Aluno->PlanoEstudo->exists()) {
+           /* if ($this->Aluno->PlanoEstudo->exists()) {
                 $this->Session->setFlash('Este Aluno Ja possui um Plano de Estudos', 'default',
                     ['class' => 'alert alert-danger']);
                 $this->redirect(['action' => 'perfil_estudante', 'faculdade' => true, $alunoId]);
-            }
+            }*/
         }
         if ($this->request->is('post')) {
             $this->Aluno->id = $this->request->data['Aluno']['aluno_id'];

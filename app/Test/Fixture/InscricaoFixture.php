@@ -37,7 +37,7 @@ class InscricaoFixture extends CakeTestFixture {
 			'nota_exame_normal' => '-1.00',
 			'nota_exame_recorrencia' => '-1.00',
 			'estado_inscricao' => '4',
-			'turma_inscricao_id' => null,
+			'turma_inscricao_id' => '2',
 			'turma_frequencia_id' => '2'
 		),
 		array(
@@ -60,7 +60,7 @@ class InscricaoFixture extends CakeTestFixture {
 			'nota_exame_normal' => '-1.00',
 			'nota_exame_recorrencia' => '-1.00',
 			'estado_inscricao' => '4',
-			'turma_inscricao_id' => null,
+			'turma_inscricao_id' => '98',
 			'turma_frequencia_id' => '98'
 		),
 		array(
@@ -83,7 +83,7 @@ class InscricaoFixture extends CakeTestFixture {
 			'nota_exame_normal' => '10.00',
 			'nota_exame_recorrencia' => '-1.00',
 			'estado_inscricao' => '2',
-			'turma_inscricao_id' => null,
+			'turma_inscricao_id' => '192',
 			'turma_frequencia_id' => '192'
 		),
 		array(
@@ -106,7 +106,7 @@ class InscricaoFixture extends CakeTestFixture {
 			'nota_exame_normal' => '11.00',
 			'nota_exame_recorrencia' => '-1.00',
 			'estado_inscricao' => '2',
-			'turma_inscricao_id' => null,
+			'turma_inscricao_id' => '314',
 			'turma_frequencia_id' => '314'
 		),
 		array(
@@ -129,7 +129,7 @@ class InscricaoFixture extends CakeTestFixture {
 			'nota_exame_normal' => '-1.00',
 			'nota_exame_recorrencia' => '-1.00',
 			'estado_inscricao' => '5',
-			'turma_inscricao_id' => null,
+			'turma_inscricao_id' => '480',
 			'turma_frequencia_id' => '480'
 		),
 		array(
@@ -152,7 +152,7 @@ class InscricaoFixture extends CakeTestFixture {
 			'nota_exame_normal' => '14.00',
 			'nota_exame_recorrencia' => '-1.00',
 			'estado_inscricao' => '2',
-			'turma_inscricao_id' => null,
+			'turma_inscricao_id' => '481',
 			'turma_frequencia_id' => '481'
 		),
 		array(
@@ -175,7 +175,7 @@ class InscricaoFixture extends CakeTestFixture {
 			'nota_exame_normal' => '-1.00',
 			'nota_exame_recorrencia' => '-1.00',
 			'estado_inscricao' => '5',
-			'turma_inscricao_id' => null,
+			'turma_inscricao_id' => '593',
 			'turma_frequencia_id' => '593'
 		),
 		array(
@@ -198,7 +198,7 @@ class InscricaoFixture extends CakeTestFixture {
 			'nota_exame_normal' => '-1.00',
 			'nota_exame_recorrencia' => '-1.00',
 			'estado_inscricao' => '4',
-			'turma_inscricao_id' => null,
+			'turma_inscricao_id' => '594',
 			'turma_frequencia_id' => '594'
 		),
 		array(
@@ -221,7 +221,7 @@ class InscricaoFixture extends CakeTestFixture {
 			'nota_exame_normal' => '17.00',
 			'nota_exame_recorrencia' => '-1.00',
 			'estado_inscricao' => '2',
-			'turma_inscricao_id' => null,
+			'turma_inscricao_id' => '694',
 			'turma_frequencia_id' => '694'
 		),
 		array(
@@ -244,7 +244,7 @@ class InscricaoFixture extends CakeTestFixture {
 			'nota_exame_normal' => '10.00',
 			'nota_exame_recorrencia' => '-1.00',
 			'estado_inscricao' => '2',
-			'turma_inscricao_id' => null,
+			'turma_inscricao_id' => '820',
 			'turma_frequencia_id' => '820'
 		),
 	);

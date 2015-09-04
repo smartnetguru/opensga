@@ -773,6 +773,10 @@
             }
         }
 
+        public function actualizar_notas($turmaId){
+
+        }
+
         /**
          * Lista de turmas activas no Sistema.
          *
@@ -832,6 +836,19 @@
 
         public function inscrever_aluno($alunoId, $turmaId)
         {
+            if($this->request->is('post')){
+                if($this->Turma->Inscricao->inscreveAlunoNaTurma($this->request->data)===true){
+                    $this->Flash->success('Aluno Inscrito com Sucesso na Turma');
+                    $redirect_url = $this->request->query('redirect_url');
+                    if($redirect_url){
+                        $this->redirect($redirect_url);
+                    } else{
+                        $this->redirect(['action'=>'ver_turma',$turmaId]);
+                    }
+                } else{
+                    $this->Flash->error('Algo Estranho aconteceu com esta turma');
+                }
+            }
 
             $this->Turma->Inscricao->Aluno->contain(['Entidade','Curso']);
             $aluno = $this->Turma->Inscricao->Aluno->findById($alunoId);
@@ -839,7 +856,9 @@
             $this->Turma->contain('AnoLectivo');
             $turma = $this->Turma->findById($turmaId);
 
-            $this->set(compact('aluno','turma'));
+            $tipoInscricaos = $this->Turma->Inscricao->TipoInscricao->find('list');
+
+            $this->set(compact('aluno','turma','tipoInscricaos'));
 
         }
 

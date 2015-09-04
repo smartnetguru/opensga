@@ -282,6 +282,7 @@
                     $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Turmas/adicionar_docente";
                     $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Turmas/inscrever_aluno";
                     $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Turmas/get_aluno_for_inscricao";
+                    $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Turmas/actualizar_notas";
 
 
                     /*Fim de todas as funcoes das faculdades */

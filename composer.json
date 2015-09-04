@@ -52,7 +52,8 @@
     "videlalvaro/php-amqplib": "2.5.*",
     "laurentbrieu/tcpdf": "dev-master",
     "dompdf/dompdf" : "0.6.*",
-    "google/apiclient": "1.*"
+    "google/apiclient": "1.*",
+    "trentrichardson/cakephp-scheduler": "1.*"
 
   },
   "require-dev": {
