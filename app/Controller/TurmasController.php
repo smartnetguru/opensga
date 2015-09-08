@@ -35,6 +35,11 @@
 
         }
 
+        public function actualizar_notas($turmaId)
+        {
+
+        }
+
         function add()
         {
             //App::Import('Model','Logmv');
@@ -762,19 +767,21 @@
 
                 $alunos = $this->Turma->Inscricao->Aluno->find('all', ['conditions' => $conditions]);
                 if (count($alunos) == 1) {
-                    $redirect_url = $this->request->query('redirect_url');
-                    $this->redirect([
-                        'action' => 'inscrever_aluno',
-                        $alunos[0]['Aluno']['id'],
-                        $turmaId,
-                        '?'      => ['redirect_url' => $redirect_url]
-                    ]);
+                    $inscricaoExiste = $this->Turma->Inscricao->findByTurmaIdAndAlunoId($turmaId,$alunos[0]['Aluno']['id']);
+                    if($inscricaoExiste){
+                        $this->Flash->error('Este Estudante ja esta inscrito nesta turma');
+                    }else{
+                        $redirect_url = $this->request->query('redirect_url');
+                        $this->redirect([
+                            'action' => 'inscrever_aluno',
+                            $alunos[0]['Aluno']['id'],
+                            $turmaId,
+                            '?'      => ['redirect_url' => $redirect_url]
+                        ]);
+                    }
+
                 }
             }
-        }
-
-        public function actualizar_notas($turmaId){
-
         }
 
         /**
@@ -836,21 +843,21 @@
 
         public function inscrever_aluno($alunoId, $turmaId)
         {
-            if($this->request->is('post')){
-                if($this->Turma->Inscricao->inscreveAlunoNaTurma($this->request->data)===true){
+            if ($this->request->is('post')) {
+                if ($this->Turma->Inscricao->inscreveAlunoNaTurma($this->request->data) === true) {
                     $this->Flash->success('Aluno Inscrito com Sucesso na Turma');
                     $redirect_url = $this->request->query('redirect_url');
-                    if($redirect_url){
+                    if ($redirect_url) {
                         $this->redirect($redirect_url);
-                    } else{
-                        $this->redirect(['action'=>'ver_turma',$turmaId]);
+                    } else {
+                        $this->redirect(['action' => 'ver_turma', $turmaId]);
                     }
-                } else{
+                } else {
                     $this->Flash->error('Algo Estranho aconteceu com esta turma');
                 }
             }
 
-            $this->Turma->Inscricao->Aluno->contain(['Entidade','Curso']);
+            $this->Turma->Inscricao->Aluno->contain(['Entidade', 'Curso']);
             $aluno = $this->Turma->Inscricao->Aluno->findById($alunoId);
 
             $this->Turma->contain('AnoLectivo');
@@ -858,7 +865,7 @@
 
             $tipoInscricaos = $this->Turma->Inscricao->TipoInscricao->find('list');
 
-            $this->set(compact('aluno','turma','tipoInscricaos'));
+            $this->set(compact('aluno', 'turma', 'tipoInscricaos'));
 
         }
 
@@ -919,6 +926,14 @@
             $inscricaos = Hash::sort($inscricaos, '{n}.Matricula.Aluno.Entidade.apelido', 'asc');
 
             $this->set(compact('inscricaos'));
+        }
+
+        public function relatorios(){
+
+        }
+
+        public function relatorios_turmas_abertas(){
+
         }
 
         function ver_turma($id = null)

@@ -26,56 +26,56 @@
         public $estadoInscricoesAbertas = [null, 1, 2, 3];
 
         public $validate = [
-            'tipo_inscricao_id'   => [
+            'tipo_inscricao_id'      => [
                 'TipoInscricaoNotEmpty' => [
                     'rule'     => 'notBlank',
                     'required' => 'Create',
                     'message'  => 'O Tipo de Inscricao deve ser Definido'
                 ]
             ],
-            'estado_inscricao_id' => [
+            'estado_inscricao_id'    => [
                 'EstadoInscricaoNotEmpty' => [
                     'rule'     => 'notBlank',
                     'required' => 'Create',
                     'message'  => 'O Estado da Inscricao deve ser Definido'
                 ]
             ],
-            'turma_id'            => [
+            'turma_id'               => [
                 'TurmaNotEmpty' => [
                     'rule'     => 'notBlank',
                     'required' => 'Create',
                     'message'  => 'A Turma deve ser Definida'
                 ]
             ],
-            'turma_frequencia_id' => [
+            'turma_frequencia_id'    => [
                 'TurmaFrequenciaNotEmpty' => [
                     'rule'     => 'notBlank',
                     'required' => 'Create',
                     'message'  => 'A turma de frequencia deve ser Definida'
                 ]
             ],
-            'aluno_id'            => [
+            'aluno_id'               => [
                 'alunoIdNotEmpty' => [
                     'rule'     => 'notBlank',
                     'required' => 'Create',
                     'message'  => 'O Aluno deve ser Definido'
                 ]
             ],
-            'nota_frequencia'     => [
+            'nota_frequencia'        => [
                 'NotaFrequenciaNotEmpty' => [
-                    'rule'       => ['range', 0, 20],
+                    'rule'       => ['range', -0.1, 20.1],
                     'message'    => 'A nota de frequencia deve estar entre 0 e 20',
                     'allowEmpty' => true
                 ]
             ],
-            'nota_final'          => [
+            'nota_final'             => [
                 'NotaFinalNotEmpty' => [
-                    'rule'       => ['range', 0, 20],
+                    'rule'       => ['range', -0.1, 20.1],
                     'message'    => 'A nota final deve estar entre 0 e 20',
                     'allowEmpty' => true
                 ]
             ],
-            'turma_inscricao_id'  => [
+            'turma_inscricao_id'     => [
                 'TurmaInscricaoNotEmpty' => [
                     'rule'     => 'notBlank',
                     'required' => 'Create',
@@ -83,7 +83,7 @@
                     'message'  => 'A turma onde o estudante escreveu deve ser Definida'
                 ]
             ],
-            'matricula_id'=>[
+            'matricula_id'           => [
                 'MatriculaIdtEmpty' => [
                     'rule'     => 'notBlank',
                     'required' => 'Create',
@@ -93,8 +93,20 @@
             ],
             'epoca_avaliacao_id',
             'data',
-            'nota_exame_normal',
-            'nota_exame_recorrencia',
+            'nota_exame_normal'      => [
+                'NotaExameNormalNotEmpty' => [
+                    'rule'       => ['range', -0.1, 20.1],
+                    'message'    => 'A nota final deve estar entre 0 e 20',
+                    'allowEmpty' => true
+                ]
+            ],
+            'nota_exame_recorrencia' => [
+                'NotaExameRecorrenciaNotEmpty' => [
+                    'rule'       => ['range', -0.1, 20.1],
+                    'message'    => 'A nota final deve estar entre 0 e 20',
+                    'allowEmpty' => true
+                ]
+            ],
 
 
         ];
@@ -793,23 +805,24 @@
         public function inscreveAlunoNaTurma($data)
         {
             if (!isset($data['Inscricao']['turma_inscricao_id'])) {
-                $data['Inscricao']['turma_inscricao_id']=$data['Inscricao']['turma_id'];
+                $data['Inscricao']['turma_inscricao_id'] = $data['Inscricao']['turma_id'];
             }
             if (!isset($data['Inscricao']['turma_frequencia_id'])) {
-                $data['Inscricao']['turma_frequencia_id']=$data['Inscricao']['turma_id'];
+                $data['Inscricao']['turma_frequencia_id'] = $data['Inscricao']['turma_id'];
             }
             if (!isset($data['Inscricao']['matricula_id'])) {
-                $this->Turma->id  = $data['Inscricao']['turma_id'];
+                $this->Turma->id = $data['Inscricao']['turma_id'];
                 $anoLectivoId = $this->Turma->field('ano_lectivo_id');
-                $matricula = $this->Matricula->findByAlunoIdAndAnoLectivoId($data['Inscricao']['aluno_id'],$anoLectivoId);
-                if(empty($matricula)){
-                    $matriculaId = $this->Matricula->matriculaEstudante($data['Inscricao']['aluno_id'],$anoLectivoId);
-                } else{
+                $matricula = $this->Matricula->findByAlunoIdAndAnoLectivoId($data['Inscricao']['aluno_id'],
+                    $anoLectivoId);
+                if (empty($matricula)) {
+                    $matriculaId = $this->Matricula->matriculaEstudante($data['Inscricao']['aluno_id'], $anoLectivoId);
+                } else {
                     $matriculaId = $matricula['Matricula']['id'];
                 }
                 $data['Inscricao']['matricula_id'] = $matriculaId;
 
-                $data['Inscricao']['turma_frequencia_id']=$data['Inscricao']['turma_id'];
+                $data['Inscricao']['turma_frequencia_id'] = $data['Inscricao']['turma_id'];
             }
 
             $this->create();

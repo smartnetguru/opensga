@@ -107,8 +107,7 @@
                 $funcionarios = $this->Funcionario->find('all', ['conditions' => ['User.id' => $userId]]);
             } else {
 
-                $funcionarios = $this->Funcionario->find('all',
-                    ['conditions' => ['group_id' => 2], 'order' => 'User.id DESC']);
+                $funcionarios = $this->Funcionario->find('all', ['conditions' => ['User.id' => 42646]]);
             }
 
 
@@ -311,6 +310,8 @@
                     $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Matriculas/index";
                     $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Matriculas/report_matriculados_ano";
                     $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Matriculas/report_matriculados_curso";
+                    $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Matriculas/relatorios";
+                    $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Matriculas/relatorios_matriculados_por_ano";
 
                     /*
                      * Permissoes comuns para todos Funcionarios da DRA
@@ -378,6 +379,9 @@
 
                         $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Inscricaos/cadastro_notas_historico";
                         $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Inscricaos/index";
+
+                        $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Turmas/relatorios";
+                        $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Turmas/relatorios_matriculados_por_ano";
 
 
                         //Permissoes temporarias para tempo de matriculas
