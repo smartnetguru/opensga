@@ -25,13 +25,6 @@ class MudancaCurso extends AppModel {
 			'fields' => '',
 			'order' => ''
 		),
-		'Funcionario' => array(
-			'className' => 'Funcionario',
-			'foreignKey' => 'funcionario_id',
-			'conditions' => '',
-			'fields' => '',
-			'order' => ''
-		),
 		'FormaMudancaCurso' => array(
 			'className' => 'FormaMudancaCurso',
 			'foreignKey' => 'forma_mudanca_curso_id',

@@ -78,6 +78,13 @@ class CandidatoGraduacao extends AppModel {
             'conditions' => '',
             'fields' => '',
             'order' => ''
+        ),
+        'Curso' => array(
+            'className' => 'Curso',
+            'foreignKey' => 'curso_id',
+            'conditions' => '',
+            'fields' => '',
+            'order' => ''
         )
     );
     public $validate = array(

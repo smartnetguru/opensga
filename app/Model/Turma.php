@@ -101,13 +101,6 @@
                 'fields'     => '',
                 'order'      => ''
             ],
-            'UnidadeOrganica' => [
-                'className'  => 'UnidadeOrganica',
-                'foreignKey' => 'unidade_organica_id',
-                'conditions' => '',
-                'fields'     => '',
-                'order'      => ''
-            ],
             'AnoLectivo'      => [
                 'className'  => 'AnoLectivo',
                 'foreignKey' => 'ano_lectivo_id',
@@ -131,7 +124,16 @@
             ]
         ];
         public $virtualFields = [
-            'total_alunos' => 'SELECT count(*) from inscricaos where turma_id=Turma.id'
+            'total_alunos' => 'SELECT count(*) from inscricaos where turma_id=Turma.id',
+            'total_excluidos'=>'SELECT count(*) from inscricaos where turma_id=Turma.id and nota_frequencia<10',
+            'total_admitidos'=>'SELECT count(*) from inscricaos where turma_id=Turma.id and nota_frequencia>=10 and nota_frequencia<14',
+            'total_dispensados'=>'SELECT count(*) from inscricaos where turma_id=Turma.id and nota_frequencia>=14',
+            'total_recorrentes'=>'SELECT count(*) from inscricaos where turma_id=Turma.id and nota_exame_recorrencia is not null',
+            'total_admitidos'=>'SELECT count(*) from inscricaos where turma_id=Turma.id and nota_frequencia>=10 and nota_frequencia<14',
+            'total_reprovados_recorrencia'=>'SELECT count(*) from inscricaos where turma_id=Turma.id and nota_exame_recorrencia <10',
+            'total_aprovados'=>'SELECT count(*) from inscricaos where turma_id=Turma.id and nota_final>=10',
+            'total_reprovados'=>'SELECT count(*) from inscricaos where turma_id=Turma.id and nota_final<10',
+
         ];
         public $hasMany = [
             'Inscricao'          => [

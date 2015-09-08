@@ -96,8 +96,8 @@ class Curso extends AppModel
             'finderQuery'  => '',
             'counterQuery' => ''
         ],
-        'CursosTurno' => [
-            'className'    => 'CursosTurno',
+        'CursoRegime' => [
+            'className'    => 'CursoRegime',
             'foreignKey'   => 'curso_id',
             'dependent'    => false,
             'conditions'   => '',
@@ -134,7 +134,86 @@ class Curso extends AppModel
             'exclusive'    => '',
             'finderQuery'  => '',
             'counterQuery' => ''
+        ],
+        'AlumniCandidatoAlumni'       => [
+            'className'    => 'AlumniCandidatoAlumni',
+            'foreignKey'   => 'curso_id',
+            'dependent'    => false,
+            'conditions'   => '',
+            'fields'       => '',
+            'order'        => '',
+            'limit'        => '',
+            'offset'       => '',
+            'exclusive'    => '',
+            'finderQuery'  => '',
+            'counterQuery' => ''
+        ],
+        'BolsaTemporaria'       => [
+            'className'    => 'BolsaTemporaria',
+            'foreignKey'   => 'curso_id',
+            'dependent'    => false,
+            'conditions'   => '',
+            'fields'       => '',
+            'order'        => '',
+            'limit'        => '',
+            'offset'       => '',
+            'exclusive'    => '',
+            'finderQuery'  => '',
+            'counterQuery' => ''
+        ],
+        'CursoEscola'       => [
+            'className'    => 'CursoEscola',
+            'foreignKey'   => 'curso_id',
+            'dependent'    => false,
+            'conditions'   => '',
+            'fields'       => '',
+            'order'        => '',
+            'limit'        => '',
+            'offset'       => '',
+            'exclusive'    => '',
+            'finderQuery'  => '',
+            'counterQuery' => ''
+        ],
+        'HistoricoCurso'       => [
+            'className'    => 'HistoricoCurso',
+            'foreignKey'   => 'curso_id',
+            'dependent'    => false,
+            'conditions'   => '',
+            'fields'       => '',
+            'order'        => '',
+            'limit'        => '',
+            'offset'       => '',
+            'exclusive'    => '',
+            'finderQuery'  => '',
+            'counterQuery' => ''
+        ],
+        'MudancaCurso'       => [
+            'className'    => 'MudancaCurso',
+            'foreignKey'   => 'curso_antigo',
+            'dependent'    => false,
+            'conditions'   => '',
+            'fields'       => '',
+            'order'        => '',
+            'limit'        => '',
+            'offset'       => '',
+            'exclusive'    => '',
+            'finderQuery'  => '',
+            'counterQuery' => ''
+        ],
+        'Candidatura'       => [
+            'className'    => 'Candidatura',
+            'foreignKey'   => 'curso_id',
+            'dependent'    => false,
+            'conditions'   => '',
+            'fields'       => '',
+            'order'        => '',
+            'limit'        => '',
+            'offset'       => '',
+            'exclusive'    => '',
+            'finderQuery'  => '',
+            'counterQuery' => ''
         ]
+
     ];
     var $validate = [
         'codigo' => [

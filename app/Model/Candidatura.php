@@ -31,13 +31,6 @@ class Candidatura extends AppModel {
 	 * @var array
 	 */
 	public $belongsTo = array(
-		'Entidade' => array(
-			'className' => 'Entidade',
-			'foreignKey' => 'entidade_id',
-			'conditions' => '',
-			'fields' => '',
-			'order' => ''
-		),
 		'EscolaNivelMedio' => array(
 			'className' => 'EscolaNivelMedio',
 			'foreignKey' => 'escola_nivel_medio_id',

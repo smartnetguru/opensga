@@ -7,6 +7,7 @@ class AppModel extends Model
 
     public $recursive = -1;
     public $actsAs = array('Containable','Auditable.Auditable');
+    //public $useTable = false;
 
     public function __construct($id = false, $table = null, $ds = null)
     {

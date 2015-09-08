@@ -12,8 +12,8 @@
  */
  
  
-class CursosEscola extends AppModel {
-	var $name = 'CursosEscola';
+class CursoEscola extends AppModel {
+	var $name = 'CursoEscola';
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 
 	var $belongsTo = array(

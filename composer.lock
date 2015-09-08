@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "656aa75170ea0fd6d5de74f81143a2f1",
+    "hash": "692430f0d723e5554d343372caa905df",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
-            "version": "2.8.19",
+            "version": "2.8.20",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "282aa6e96275c49fcc363429297ddc1ba006c42a"
+                "reference": "e01825efad025dbe6d88997e02bd32ec80814381"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/282aa6e96275c49fcc363429297ddc1ba006c42a",
-                "reference": "282aa6e96275c49fcc363429297ddc1ba006c42a",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/e01825efad025dbe6d88997e02bd32ec80814381",
+                "reference": "e01825efad025dbe6d88997e02bd32ec80814381",
                 "shasum": ""
             },
             "require": {
@@ -67,7 +67,7 @@
                 "s3",
                 "sdk"
             ],
-            "time": "2015-08-20 23:04:59"
+            "time": "2015-09-03 22:25:15"
         },
         {
             "name": "cakedc/migrations",
@@ -1385,6 +1385,42 @@
             "description": "Symfony EventDispatcher Component",
             "homepage": "https://symfony.com",
             "time": "2015-06-18 19:21:56"
+        },
+        {
+            "name": "trentrichardson/cakephp-scheduler",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/trentrichardson/cakephp-scheduler.git",
+                "reference": "25f67e028e046c011e5ee3babb1c1fb41c5a0433"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/trentrichardson/cakephp-scheduler/zipball/25f67e028e046c011e5ee3babb1c1fb41c5a0433",
+                "reference": "25f67e028e046c011e5ee3babb1c1fb41c5a0433",
+                "shasum": ""
+            },
+            "require": {
+                "composer/installers": "*",
+                "php": ">=5.3.6"
+            },
+            "type": "cakephp-plugin",
+            "extra": {
+                "installer-name": "Scheduler"
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Makes scheduling tasks in CakePHP much simpler.",
+            "homepage": "http://github.com/trentrichardson/cakephp-scheduler",
+            "keywords": [
+                "cakephp",
+                "cron job",
+                "scheduler",
+                "task"
+            ],
+            "time": "2015-03-19 00:01:14"
         },
         {
             "name": "videlalvaro/php-amqplib",

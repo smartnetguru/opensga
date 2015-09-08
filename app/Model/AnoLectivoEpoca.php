@@ -27,8 +27,8 @@
  */
  
  
-class Anolectivoepoca extends AppModel {
-	var $name = 'Anolectivoepoca';
+class AnoLectivoEpoca extends AppModel {
+	var $name = 'AnoLectivoEpoca';
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 
 	var $belongsTo = array(
