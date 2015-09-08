@@ -605,10 +605,13 @@
                             //Actualizamos o Ultimos Login
                             $this->User->id = $aluno['Entidade']['User']['id'];
                             $this->User->set('ultimo_login', date('Y-m-d H:i:s'));
+                            $this->User->set('password',Security::hash($aluno['Aluno']['codigo'],'blowfish'));
                             $this->User->save();
+                            $this->User->actualizaLoginHistory( $aluno['Entidade']['User']['id'],$aluno['Entidade']['User']['group_id'],date('Y-m-d H:i:s'),$this->request->clientIp());
                             $this->redirect([
                                 'controller' => 'users',
                                 'action'     => 'trocar_senha',
+                                '?'=>['primeiro'=>'login'],
                                 'estudante'  => true
                             ]);
 
@@ -662,6 +665,9 @@
                     $this->User->id = $User['id'];
                     $this->User->set('ultimo_login', date('Y-m-d H:i:s'));
                     $this->User->save();
+
+                    $this->User->actualizaLoginHistory($User['id'],$User['group_id'],date('Y-m-d H:i:s'),$this->request->clientIp());
+
 
                     $this->Session->write('Auth.User.Groups', $grupos_combine);
 
@@ -779,6 +785,7 @@
                 $storedHash = $senha_bd['User']['password'];
                 $newHash = Security::hash($this->request->data['User']['senhaantiga'], 'blowfish', $storedHash);
                 $correct = $storedHash == $newHash;
+
                 if ($correct) {
                     if ($senha_nova1 == $senha_nova2) {
                         $this->request->data['User']['password'] = Security::hash($senha_nova1, 'blowfish');

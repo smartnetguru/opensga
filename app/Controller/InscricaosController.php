@@ -1139,6 +1139,34 @@ class InscricaosController extends AppController
         $this->set(compact('inscricoes'));
     }
 
+    /**
+     * @todo Implementar a funcao
+     */
+    public function estudante_index(){
+
+    }
+
+    /**
+     * @todo Implementar a funcao
+     */
+    public function estudante_ver_detalhes_inscricao(){
+
+    }
+
+    /**
+     * @todo Implementar a funcao
+     */
+    public function estudante_inscrever(){
+
+    }
+
+    /**
+     * @todo Implementar a funcao
+     */
+    public function estudante_anular_inscricao(){
+
+    }
+
 }
 
 ?>

@@ -65,6 +65,19 @@
                 'exclusive'    => '',
                 'finderQuery'  => '',
                 'counterQuery' => ''
+            ],
+            'UserLoginHistory'  => [
+                'className'    => 'UserLoginHistory',
+                'foreignKey'   => 'user_id',
+                'dependent'    => false,
+                'conditions'   => '',
+                'fields'       => '',
+                'order'        => '',
+                'limit'        => '',
+                'offset'       => '',
+                'exclusive'    => '',
+                'finderQuery'  => '',
+                'counterQuery' => ''
             ]
         ];
         var $actsAs = ['Acl' => ['type' => 'requester']];
@@ -524,6 +537,13 @@
             ];
         }
 
+
+        public function actualizaLoginHistory($userId,$groupId,$data,$ip){
+            $arrayLoginHistory = array('UserLoginHistory'=>array('user_id'=>$userId,'group_id'=>$groupId,'login_date'=>$data,'ip'=>$ip));
+            $this->UserLoginHistory->create();
+            $this->UserLoginHistory->save($arrayLoginHistory);
+            return true;
+        }
 
     }
 

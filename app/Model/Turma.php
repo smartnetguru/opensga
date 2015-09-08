@@ -398,6 +398,8 @@
         public function fecharTurma($turmaId){
             $this->id = $turmaId;
             $this->set('estado_turma_id',2);
+            $this->set('data_fecho',date('Y-m-d H:i:s'));
+            $this->set('user_fecho',CakeSession::read('Auth.User.id'));
             if($this->save()){
                 $message = [
                     'Option1' => 'Message',

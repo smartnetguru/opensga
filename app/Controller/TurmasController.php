@@ -18,6 +18,8 @@
      * @todo            No futuro criar uma tabela docentes_turmas vai ajudar a manter o historico completo das turmas
      *
      */
+    use Ghunti\HighchartsPHP\Highchart;
+    use Ghunti\HighchartsPHP\HighchartJsExpr;
     class TurmasController extends AppController
     {
 
@@ -934,6 +936,57 @@
 
         public function relatorios_turmas_abertas(){
 
+            $conditions=[];
+            $unidadeOrganicaId = $this->request->query('unidadeOrganicaId');
+            $anoLectivo = $this->request->query('anoLectivo');
+            if($unidadeOrganicaId){
+                $conditions['Curso.unidade_organica_id']=$unidadeOrganicaId;
+            }
+            if($anoLectivo){
+                $conditions['AnoLectivo.ano']=$anoLectivo;
+            }
+            $conditions['Turma.estado_turma_id']=1;
+
+            //$turmas_abertas = $this->Turma->find('count',)
+            $chart = new Highchart();
+
+            $chart->chart->renderTo = "abertas-vs-fechadas";
+            $chart->chart->plotBackgroundColor = null;
+            $chart->chart->plotBorderWidth = null;
+            $chart->chart->plotShadow = false;
+            $chart->title->text = "Turmas Abertas vs Fechadas";
+
+            $chart->tooltip->formatter = new HighchartJsExpr(
+                "function() {
+    return '<b>'+ this.point.name +'</b>: '+ this.percentage +' %';}");
+
+            $chart->plotOptions->pie->allowPointSelect = 1;
+            $chart->plotOptions->pie->cursor = "pointer";
+            $chart->plotOptions->pie->dataLabels->enabled = 1;
+            $chart->plotOptions->pie->dataLabels->color = "#000000";
+            $chart->plotOptions->pie->dataLabels->connectorColor = "#000000";
+
+            $chart->plotOptions->pie->dataLabels->formatter = new HighchartJsExpr(
+                "function() {
+    return '<b>'+ this.point.name +'</b>: '+ this.percentage +' %'; }");
+
+            $chart->series[] = array(
+                'type' => "pie",
+                'name' => "Browser share",
+                'data' => array(
+                    array(
+                        "Firefox",
+                        45
+                    ),
+                    array(
+                        "IE",
+                        26.8
+                    )
+                )
+            );
+
+
+            $this->set(compact('chart'));
         }
 
         function ver_turma($id = null)

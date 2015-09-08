@@ -40,6 +40,23 @@ class EntidadesController extends AppController {
     );
     $this->set($params);
     }
+
+
+    function email_test()
+    {
+        $this->layout = 'Emails/html/default';
+        $this->loadModel('Relatorio');
+
+        $user = $this->Relatorio->getResumoDiario(date('Y-m-d'));
+        $this->set('data', $user);
+
+        return $this->render('/Emails/html/resumo_diario');
+    }
+
+    public function beforeFilter(){
+        parent::beforeFilter();
+        $this->Auth->allow('email_test');
+    }
     
     
     
