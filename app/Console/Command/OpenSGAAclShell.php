@@ -86,6 +86,11 @@
             $comandos[] = "acl grant Group.3 controllers/Alunos/estudante_editar_perfil";
             $comandos[] = "acl grant Group.3 controllers/Alunos/estudante_mostrar_foto";
 
+            $comandos[] = "acl grant Group.3 controllers/CerimoniaGraduacaos/estudante_index";
+            $comandos[] = "acl grant Group.3 controllers/CerimoniaGraduacaos/estudante_inscricao";
+            $comandos[] = "acl grant Group.3 controllers/CerimoniaGraduacaos/estudante_pagamento_inscricao";
+            $comandos[] = "acl grant Group.3 controllers/CerimoniaGraduacaos/estudante_ver_detalhes";
+
             $comandos[] = "acl grant Group.3 controllers/Matriculas/estudante_como_renovar";
             $comandos[] = "acl grant Group.3 controllers/Matriculas/estudante_index";
             $comandos[] = "acl grant Group.3 controllers/Matriculas/estudante_anular_matricula";
@@ -387,6 +392,8 @@
                         $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Turmas/relatorios";
                         $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Turmas/relatorios_turmas_abertas";
 
+                        $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/ReportManager";
+
 
                         //Permissoes temporarias para tempo de matriculas
                         $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/busca_candidato";
@@ -441,6 +448,7 @@
 
                         $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Funcionarios/adicionar_funcionario";
                         $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Funcionarios/index";
+                        $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Funcionarios/alterar_unidade_organica";
 
                         $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Matriculas/renovar_matricula";
 

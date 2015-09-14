@@ -124,15 +124,15 @@
             ]
         ];
         public $virtualFields = [
-            'total_alunos' => 'SELECT count(*) from inscricaos where turma_id=Turma.id',
-            'total_excluidos'=>'SELECT count(*) from inscricaos where turma_id=Turma.id and nota_frequencia<10',
-            'total_admitidos'=>'SELECT count(*) from inscricaos where turma_id=Turma.id and nota_frequencia>=10 and nota_frequencia<14',
-            'total_dispensados'=>'SELECT count(*) from inscricaos where turma_id=Turma.id and nota_frequencia>=14',
-            'total_recorrentes'=>'SELECT count(*) from inscricaos where turma_id=Turma.id and nota_exame_recorrencia is not null',
-            'total_admitidos'=>'SELECT count(*) from inscricaos where turma_id=Turma.id and nota_frequencia>=10 and nota_frequencia<14',
-            'total_reprovados_recorrencia'=>'SELECT count(*) from inscricaos where turma_id=Turma.id and nota_exame_recorrencia <10',
-            'total_aprovados'=>'SELECT count(*) from inscricaos where turma_id=Turma.id and nota_final>=10',
-            'total_reprovados'=>'SELECT count(*) from inscricaos where turma_id=Turma.id and nota_final<10',
+            'total_alunos'                 => 'SELECT count(*) from inscricaos where turma_id=Turma.id',
+            'total_excluidos'              => 'SELECT count(*) from inscricaos where turma_id=Turma.id and nota_frequencia<10',
+            'total_admitidos'              => 'SELECT count(*) from inscricaos where turma_id=Turma.id and nota_frequencia>=10 and nota_frequencia<14',
+            'total_dispensados'            => 'SELECT count(*) from inscricaos where turma_id=Turma.id and nota_frequencia>=14',
+            'total_recorrentes'            => 'SELECT count(*) from inscricaos where turma_id=Turma.id and nota_exame_recorrencia is not null',
+            'total_admitidos'              => 'SELECT count(*) from inscricaos where turma_id=Turma.id and nota_frequencia>=10 and nota_frequencia<14',
+            'total_reprovados_recorrencia' => 'SELECT count(*) from inscricaos where turma_id=Turma.id and nota_exame_recorrencia <10',
+            'total_aprovados'              => 'SELECT count(*) from inscricaos where turma_id=Turma.id and nota_final>=10',
+            'total_reprovados'             => 'SELECT count(*) from inscricaos where turma_id=Turma.id and nota_final<10',
 
         ];
         public $hasMany = [
@@ -242,6 +242,41 @@
             ]
 
         ];
+
+        /**
+         * @param $data
+         *
+         * @return array
+         *
+         * @todo provavelmente calcular totais aqui ou no Shell
+         */
+        public function actualizaNotas($data)
+        {
+            $dataSource = $this->getDataSource();
+            $dataSource->begin();
+
+
+            foreach ($data['Inscricao'] as $k => $inscricao) {
+                if ($inscricao['gravar'] == 1) {
+                    $arrayInscricao['Inscricao'] = $inscricao;
+                    if(!$this->Inscricao->actualizaDadosInscricao($arrayInscricao)){
+                        $dataSource->rollback();
+                        return [false,$arrayInscricao];
+                    }
+                }
+            }
+            $dataSource->commit();
+            $message = [
+                'Option1' => 'Message',
+                //'Type'=>'cake',
+                'Command' => 'Turma',
+                'Action'  => 'processaTurmaActualizada',
+                'turmaId'  => $data['Turma']['turma_id']
+            ];
+            CakeRabbit::publish($message);
+            return true;
+
+        }
 
         /**
          * Adiciona um Docente a Uma turma.
@@ -392,31 +427,34 @@
 
         /**
          * Fecha uma Turma. Depois envia uma notificacao para Calcular os aprovados e notificar os usuarios
+         *
          * @param $turmaId
+         *
          * @todo No processamento calcular totais e medias
          */
-        public function fecharTurma($turmaId){
+        public function fecharTurma($turmaId)
+        {
             $this->id = $turmaId;
-            $this->set('estado_turma_id',2);
-            $this->set('data_fecho',date('Y-m-d H:i:s'));
-            $this->set('user_fecho',CakeSession::read('Auth.User.id'));
-            if($this->save()){
+            $this->set('estado_turma_id', 2);
+            $this->set('data_fecho', date('Y-m-d H:i:s'));
+            $this->set('user_fecho', CakeSession::read('Auth.User.id'));
+            if ($this->save()) {
                 $message = [
                     'Option1' => 'Message',
                     //'Type'=>'cake',
                     'Command' => 'Turma',
                     'Action'  => 'processarTurmaFechada',
-                    'turmaId'  => $turmaId
+                    'turmaId' => $turmaId
                 ];
                 CakeRabbit::publish($message);
+
                 return true;
-            } else{
+            } else {
                 return false;
             }
 
 
         }
-
 
         public function geraPautaExcel($turmaId)
         {
@@ -879,13 +917,13 @@
                     'estado_inscricao_id' => $this->Inscricao->estadoInscricoesAbertas
                 ]
             ]);
-            if($inscricaos>0){
-                $motivoNaoFecho['Inscricoes']=$inscricaos;
-                $valorRetorno=false;
+            if ($inscricaos > 0) {
+                $motivoNaoFecho['Inscricoes'] = $inscricaos;
+                $valorRetorno = false;
             }
-            if($valorRetorno==false){
+            if ($valorRetorno == false) {
                 return $motivoNaoFecho;
-            } else{
+            } else {
                 return true;
             }
         }

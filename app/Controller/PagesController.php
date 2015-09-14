@@ -46,7 +46,7 @@
         {
             parent::beforeFilter();
             $user = $this->Auth->user();
-            $this->Auth->allow('email_oficial_uem', 'email');
+            $this->Auth->allow('email_oficial_uem', 'email','webmail');
             if ($user != null) {
                 $this->Auth->allowedActions = ['display', 'email_oficial_uem', 'webmail', 'email'];
             }
@@ -114,7 +114,9 @@
             $this->loadModel('Aluno');
 
             $userId = $this->Session->read('Auth.User.id');
+
             $aluno = $this->Aluno->getByUserId($userId);
+
             $matriculasPendentes = $this->Aluno->getAllMatriculasPendentes($aluno['Aluno']['id']);
             if (!empty($matriculasPendentes)) {
                 $this->set(compact('matriculasPendentes'));

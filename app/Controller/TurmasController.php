@@ -1,6 +1,5 @@
 <?php
 
-    ini_set('memory_limit', "2048M");
 
     /**
      * Controller de turmas do OpenSGA
@@ -20,6 +19,7 @@
      */
     use Ghunti\HighchartsPHP\Highchart;
     use Ghunti\HighchartsPHP\HighchartJsExpr;
+
     class TurmasController extends AppController
     {
 
@@ -39,6 +39,34 @@
 
         public function actualizar_notas($turmaId)
         {
+            $this->Turma->id = $turmaId;
+            if (!$this->Turma->exists()) {
+                throw new NotFoundException('Turma Não Existente');
+            }
+
+            if ($this->request->is('post')) {
+                if ($this->Turma->actualizaNotas($this->request->data)===true) {
+                    $this->Flash->success('Notas Actualizadas com Sucesso');
+                    $redirect_url = $this->request->query('redirect_url');
+                    if ($redirect_url) {
+                        $this->redirect($redirect_url);
+                    } else {
+                        $this->redirect(['action' => 'ver_turma', $turmaId]);
+                    }
+                } else {
+                    $this->Flash->error('Não foi possivel gravar as notas. Verifique os dados e tente novamente');
+                }
+            }
+
+            $this->Turma->contain('Disciplina');
+            $turma = $this->Turma->findById($turmaId);
+
+            $inscricaos = $this->Turma->Inscricao->getAllByTurmaId($turmaId);
+
+            $this->set('siga_page_title','Actualizar Notas da Turma');
+            $this->set('siga_page_overview','');
+
+            $this->set(compact('inscricaos', 'turma'));
 
         }
 
@@ -769,10 +797,11 @@
 
                 $alunos = $this->Turma->Inscricao->Aluno->find('all', ['conditions' => $conditions]);
                 if (count($alunos) == 1) {
-                    $inscricaoExiste = $this->Turma->Inscricao->findByTurmaIdAndAlunoId($turmaId,$alunos[0]['Aluno']['id']);
-                    if($inscricaoExiste){
+                    $inscricaoExiste = $this->Turma->Inscricao->findByTurmaIdAndAlunoId($turmaId,
+                        $alunos[0]['Aluno']['id']);
+                    if ($inscricaoExiste) {
                         $this->Flash->error('Este Estudante ja esta inscrito nesta turma');
-                    }else{
+                    } else {
                         $redirect_url = $this->request->query('redirect_url');
                         $this->redirect([
                             'action' => 'inscrever_aluno',
@@ -930,22 +959,24 @@
             $this->set(compact('inscricaos'));
         }
 
-        public function relatorios(){
+        public function relatorios()
+        {
 
         }
 
-        public function relatorios_turmas_abertas(){
+        public function relatorios_turmas_abertas()
+        {
 
-            $conditions=[];
+            $conditions = [];
             $unidadeOrganicaId = $this->request->query('unidadeOrganicaId');
             $anoLectivo = $this->request->query('anoLectivo');
-            if($unidadeOrganicaId){
-                $conditions['Curso.unidade_organica_id']=$unidadeOrganicaId;
+            if ($unidadeOrganicaId) {
+                $conditions['Curso.unidade_organica_id'] = $unidadeOrganicaId;
             }
-            if($anoLectivo){
-                $conditions['AnoLectivo.ano']=$anoLectivo;
+            if ($anoLectivo) {
+                $conditions['AnoLectivo.ano'] = $anoLectivo;
             }
-            $conditions['Turma.estado_turma_id']=1;
+            $conditions['Turma.estado_turma_id'] = 1;
 
             //$turmas_abertas = $this->Turma->find('count',)
             $chart = new Highchart();
@@ -970,20 +1001,20 @@
                 "function() {
     return '<b>'+ this.point.name +'</b>: '+ this.percentage +' %'; }");
 
-            $chart->series[] = array(
+            $chart->series[] = [
                 'type' => "pie",
                 'name' => "Browser share",
-                'data' => array(
-                    array(
+                'data' => [
+                    [
                         "Firefox",
                         45
-                    ),
-                    array(
+                    ],
+                    [
                         "IE",
                         26.8
-                    )
-                )
-            );
+                    ]
+                ]
+            ];
 
 
             $this->set(compact('chart'));

@@ -208,6 +208,8 @@
                 if ($this->request->data['Funcionario']['unidade_organica_id'] != '') {
                     $conditions['Funcionario.unidade_organica_id'] =
                         $this->request->data['Funcionario']['unidade_organica_id'];
+                    $conditions['Entidade.nomes LIKE'] = '%' . $this->request->data['Funcionario']['nomes'] . '%';
+                    $conditions['Entidade.apelido LIKE'] = '%' . $this->request->data['Funcionario']['apelido'] . '%';
                 } else {
                     $conditions['Entidade.nomes LIKE'] = '%' . $this->request->data['Funcionario']['nomes'] . '%';
                     $conditions['Entidade.apelido LIKE'] = '%' . $this->request->data['Funcionario']['apelido'] . '%';
@@ -233,18 +235,36 @@
             $this->set('funcionarios', $this->paginate());
         }
 
-        function perfil_funcionario($id = null)
+        function perfil_funcionario($funcionarioId = null)
         {
-            if (!$id) {
-                $this->Session->setFlash('Invalido %s', 'flasherror');
+            if (!$funcionarioId) {
+                $this->Flash->error('Funcionario Invalido');
                 $this->redirect(['action' => 'index']);
             }
 
 
-            $funcionario = $this->Funcionario->read(null, $id);
+
+            $funcionario = $this->Funcionario->getFuncionarioForPerfil($funcionarioId);
 
 
             $this->set(compact('funcionario'));
+        }
+
+        public function alterar_unidade_organica($funcionarioId){
+
+
+            if($this->request->is('post')){
+                if($this->Funcionario->alteraUnidadeOrganica($this->request->data)===true){
+                    $this->Flash->success('Unidade Organica Alterada com Sucesso. As permissoes do Funcionario serao actualizadas');
+                    $this->redirect(['action'=>'perfil_funcionario',$funcionarioId]);
+                } else{
+                    $this->Flash->error('Problemas ao Alterar Unidade Organica. Tente Novamente');
+                }
+            }
+            $funcionario = $this->Funcionario->getFuncionarioForAction($funcionarioId);
+            $unidadeOrganicas = $this->Funcionario->UnidadeOrganica->find('list');
+
+            $this->set(compact('funcionario','unidadeOrganicas'));
         }
 
     }

@@ -1518,8 +1518,7 @@ class Aluno extends AppModel
     public function getByUserId($userId)
     {
         $this->contain('Entidade');
-        $aluno = $this->find('first', ['Entidade.usern_id' => $userId]);
-
+        $aluno = $this->find('first', ['conditions'=>['Entidade.user_id' => $userId]]);
         return $aluno;
     }
 
@@ -1527,9 +1526,9 @@ class Aluno extends AppModel
      *Retorna todas as renovacoes pendentes para um aluno
      *
      */
-    public function getAllMatriculasPendentes($alunoId)
+    public function getAllMatriculasPendentes($alunoId,$matriculasFuturas=false)
     {
-        $renovacoesFalta = $this->Matricula->getStatusRenovacao($alunoId, true);
+        $renovacoesFalta = $this->Matricula->getStatusRenovacao($alunoId, $matriculasFuturas);
 
         return $renovacoesFalta;
     }

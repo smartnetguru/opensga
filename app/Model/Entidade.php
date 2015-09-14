@@ -390,16 +390,27 @@ class Entidade extends AppModel
         if ($mesNascimento == null) {
             $mesNascimento = date('m');
         }
+        $this->contain('User');
         $entidades = $this->find('all', [
                 'conditions' => [
                     'DAY(Entidade.data_nascimento)'   => $diaNascimento,
                     'MONTH(Entidade.data_nascimento)' => $mesNascimento
                 ],
-                'fields'     => ['Entidade.id', 'Entidade.name', 'Entidade.data_nascimento', 'Entidade.telemovel']
+                'fields'     => ['Entidade.id', 'Entidade.name', 'Entidade.data_nascimento', 'Entidade.telemovel','Entidade.email','Entidade.nomes','User.username']
             ]
         );
 
         return $entidades;
+    }
+
+    public function enviaMensagemAniversario($entidade){
+        debug($entidade);
+        die();
+        $mensagem = 'Caro ' . trim($entidade['Entidade']['nomes']) . ', O SIGA deseja-lhe um feliz aniversario! www.siga.uem.mz';
+        $telemovel = $entidade['Entidade']['telemovel'];
+        $emailPessoal = $entidade['Entidade']['email'];
+        $emailInstitucional = $entidade['User']['username'];
+        //debug(strlen($mensagem) . '-----' . $mensagem);
     }
 
     public function updateDadosEntidade($entidadeId, $data)

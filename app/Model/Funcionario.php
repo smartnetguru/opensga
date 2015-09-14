@@ -72,6 +72,21 @@
         public $hasOne = [
             'Docente'
         ];
+        var $hasMany = [
+            'FuncionarioUnidadeOrganica' => [
+                'className'    => 'FuncionarioUnidadeOrganica',
+                'foreignKey'   => 'funcionario_id',
+                'dependent'    => false,
+                'conditions'   => '',
+                'fields'       => '',
+                'order'        => '',
+                'limit'        => '',
+                'offset'       => '',
+                'exclusive'    => '',
+                'finderQuery'  => '',
+                'counterQuery' => ''
+            ],
+        ];
 
         public $validate = [
             'entidade_id'         => [
@@ -88,7 +103,50 @@
             ],
         ];
 
-        public function cadastraFuncionario(array $data)
+        public function alteraUnidadeOrganica($data)
+        {
+            $dataSource = $this->getDataSource();
+            $dataSource->begin();
+            $this->id = $data['Funcionario']['funcionario_id'];
+            $this->set('unidade_organica_id', $data['Funcionario']['unidade_organica_id']);
+            if ($this->save()) {
+                $arrayFuncionarioUnidade = [
+                    'FuncionarioUnidadeOrganica' => [
+                        'funcionario_id'      => $data['Funcionario']['funcionario_id'],
+                        'unidade_organica_id' => $data['Funcionario']['unidade_organica_id'],
+                        'data_inicio'         => date('Y-m-d'),
+                        'estado_objecto_id'   => 1,
+
+                    ]
+                ];
+                $this->FuncionarioUnidadeOrganica->create();
+                if ($this->FuncionarioUnidadeOrganica->save($arrayFuncionarioUnidade)) {
+                    $dataSource->commit();
+                    $message = [
+                        'Option1' => 'Message',
+                        //'Type'=>'cake',
+                        'Command' => 'Funcionario',
+                        'Action'  => 'processaAlteraUnidadeOrganica',
+                        'turmaId' => $this->id
+                    ];
+                    CakeRabbit::publish($message);
+
+                    return true;
+
+                } else {
+                    $dataSource->rollback();
+
+                    return [false, $this->FuncionarioUnidadeOrganica->validationErrors];
+                }
+            } else {
+                $dataSource->rollback();
+
+                return [false, $this->validationErrors];
+            }
+
+        }
+
+        public function cadastraFuncionario($data)
         {
             $dataSource = $this->getDataSource();
 
@@ -100,7 +158,7 @@
 
             $data['User']['username'] = $this->User->geraEmailUem(strtolower($data['Entidade']['apelido']),
                 strtolower($data['Entidade']['nomes']));
-            $data['User']['codigo'] = $this->geraCodigo();
+            //$data['User']['codigo'] = $this->geraCodigo();
             $data['User']['password'] = Security::hash('siga12345UEM', 'blowfish');
             $data['User']['group_id'] = 2;
 
@@ -109,9 +167,9 @@
                 //die(debug($this->User->id));
                 $data['Entidade']['user_id'] = $this->User->id;
                 $data['Entidade']['name'] = $data['Entidade']['nomes'] . " " . $data['Entidade']['apelido'];
-                if(!empty($data['EntidadeContacto'][1])){
+                if (!empty($data['EntidadeContacto'][1])) {
                     $data['Entidade']['email'] = $data['EntidadeContacto'][1];
-                } else{
+                } else {
                     $data['Entidade']['email'] = $data['User']['username'];
                     $data['EntidadeContacto'][1] = $data['User']['username'];
 
@@ -130,7 +188,7 @@
                             //'Type'=>'cake',
                             'Command' => 'Funcionario',
                             'Action'  => 'processaCadastroFuncionario',
-                            'turmaId'  => $this->id
+                            'turmaId' => $this->id
                         ];
                         CakeRabbit::publish($message);
 
@@ -154,39 +212,6 @@
             return false;
         }
 
-        function geraCodigo()
-        {
-            $id = $this->find('first', ['order' => ['Funcionario.created DESC'], 'fields' => 'id']);
-            $ano = date('Y');
-            $id_for = str_pad($id['Funcionario']['id'] + 1, 5, "0", STR_PAD_LEFT);
-            $codigo = $ano . $id_for;
-
-            return $codigo;
-        }
-
-        /**
-         *
-         * @param type $name
-         *
-         * @return string
-         *
-         * @deprecated Usa o geraUsername dos users que eh global
-         */
-        function criaUsername($name)
-        {
-            $nome_lw = strtolower($name);
-            $nome_ex = explode(' ', $nome_lw);
-            $nome_1 = $nome_ex[0];
-            $nome_2 = end($nome_ex);
-            $nome = $nome_1 . "." . $nome_2;
-            $numero = $this->User->find('count', ['conditions' => ['username' => $nome]]);
-            if ($numero > 0) {
-                //$numero=$numero+1;
-                $nome = $nome . $numero;
-            }
-
-            return $nome;
-        }
 
         public function getAllFuncionariosForResponsavelCurso()
         {
@@ -203,6 +228,7 @@
             ]);
 
             return $funcionarios;
+
         }
 
         public function getByUserId($user_id)
@@ -211,6 +237,40 @@
 
             return $funcionario;
         }
+
+        public function getFuncionarioForAction($funcionarioId)
+        {
+            $this->contain([
+                'Entidade' => [
+                    'Genero',
+                    'User'
+                ],
+                'UnidadeOrganica',
+                'FuncionarioCategoria'
+            ]);
+
+            return $this->findById($funcionarioId);
+        }
+
+
+        public function getFuncionarioForPerfil($funcionarioId)
+        {
+            $this->contain([
+                'Entidade' => [
+                    'Genero',
+                    'User',
+                    'CidadeNascimento' => [
+                        'Provincia' => [
+                            'Pais'
+                        ]
+                    ]
+                ],
+                'UnidadeOrganica'
+            ]);
+
+            return $this->findById($funcionarioId);
+        }
+
 
         function getTurmasByFuncionario($funcionario_id)
         {

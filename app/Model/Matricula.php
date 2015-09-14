@@ -175,6 +175,7 @@
             $ano_lectivos = $this->AnoLectivo->find('all',
                 ['conditions' => $ano_lectivo_conditions, 'order' => 'ano desc']);
             $array_renovacao_falta = [];
+
             foreach ($ano_lectivos as $ano_lectivo) {
                 $matricula = $this->find('first',
                     ['conditions' => ['aluno_id' => $aluno_id, 'ano_lectivo_id' => $ano_lectivo['AnoLectivo']['id']]]);
@@ -225,8 +226,9 @@
         /**
          * Matricula um Estudante num Determinado Ano Lectivo, ou renova a sua matricula
          *
-         * @todo Criar uma funcao que verifica o curso e plano de estudos de um estudante num ano lectivo determinado
+         * @todo  Criar uma funcao que verifica o curso e plano de estudos de um estudante num ano lectivo determinado
          * @fixme Verificar se o aluno pode se inscrever neste ano de acordo com o historico no CUrso
+         *
          * @param $alunoId
          * @param $anoLectivoId
          *
