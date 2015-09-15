@@ -156,6 +156,7 @@
                 $data['CandidatoGraduacao']['referencia_pagamento'] = $this->Aluno->FinanceiroPagamento->geraReferenciaPagamentoGraduacao($data['CandidatoGraduacao']['aluno_id']);
             }
             $data['CandidatoGraduacao']['data_candidatura'] = date('Y-m-d H:i:s');
+            $data['CandidatoGraduacao']['estado_candidatura_id'] = 4;
             $this->create();
             if ($this->save($data)) {
                 return true;
