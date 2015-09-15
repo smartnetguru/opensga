@@ -162,8 +162,8 @@ class DisciplinasController extends AppController {
                 }
             }
 		}
-		$unidadeOrganicas = $this->Disciplina->UnidadeOrganica->find('list');
-		$this->set(compact('unidadeOrganicas'));
+		//$unidadeOrganicas = $this->Disciplina->UnidadeOrganica->find('list');
+		//$this->set(compact('unidadeOrganicas'));
 	}
 
 	function ver_disciplina($id = null) {

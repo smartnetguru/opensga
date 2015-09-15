@@ -74,16 +74,50 @@
         public function estudante_index()
         {
             $this->CerimoniaGraduacao->recursive = 0;
+            $this->paginate = [
+                'order' => 'data DESC'
+            ];
             $this->set('cerimoniaGraduacaos', $this->Paginator->paginate());
         }
 
         public function estudante_inscricao()
         {
 
+            if($this->request->is('post')){
+                if($this->CerimoniaGraduacao->CandidatoGraduacao->cadastraCandidatoGraduacao($this->request->data)===true){
+                    $this->Flash->success('Inscricao Realizada com Sucesso. Veja a seguir como fazer o Pagamento');
+                    $this->redirect(['action'=>'pagamento_inscricao']);
+                } else{
+                    $this->Flash->error('Problemas ao registar a Inscricao. Verifique os dados e tente novamente');
+                }
+            }
+            $userId = $this->Session->read('Auth.User.id');
+            $aluno = $this->CerimoniaGraduacao->CandidatoGraduacao->Aluno->getByUserId($userId);
+            $aluno = $this->CerimoniaGraduacao->CandidatoGraduacao->Aluno->getAlunoForAction($aluno['Aluno']['id']);
+
+            $paises = $this->CerimoniaGraduacao->CandidatoGraduacao->Aluno->Entidade->PaisNascimento->find('list');
+            $provincias = $this->CerimoniaGraduacao->CandidatoGraduacao->Aluno->Entidade->ProvinciaNascimento->find('list');
+            $cidadeNascimentos = $this->CerimoniaGraduacao->CandidatoGraduacao->Aluno->Entidade->CidadeMorada->find('list');
+            $generos = $this->CerimoniaGraduacao->CandidatoGraduacao->Aluno->Entidade->Genero->find('list');
+            $naturalidade = '';
+            $estadoCivil = $this->CerimoniaGraduacao->CandidatoGraduacao->Aluno->Entidade->EstadoCivil->find('list');
+
+            $regimeEstudos = $this->CerimoniaGraduacao->CandidatoGraduacao->RegimeEstudo->find('list');
+            $regaliaSocials = $this->CerimoniaGraduacao->CandidatoGraduacao->RegaliaSocial->find('list');
+
+
+            $this->set(compact('aluno','paises','provincias','cidadeNascimentos','generos','naturalidade','estadoCivil','regimeEstudos','regaliaSocials'));
         }
 
         public function estudante_pagamento_inscricao()
         {
+            $userId = $this->Session->read('Auth.User.id');
+            $aluno = $this->CerimoniaGraduacao->CandidatoGraduacao->Aluno->getByUserId($userId);
+            $cerimoniaGraduacaoId = $this->CerimoniaGraduacao->getProximaCerimoniaId();
+            $candidatoGraduacao = $this->CerimoniaGraduacao->CandidatoGraduacao->findByAlunoIdAndCerimoniaGraduacaoId($aluno['Aluno']['id'],$cerimoniaGraduacaoId);
+
+            $referenciaPagamento = $this->CerimoniaGraduacao->CandidatoGraduacao->Aluno->FinanceiroPagamento->geraReferenciaPagamentoGraduacao($aluno['Aluno']['id']);
+            $this->set(compact('candidatoGraduacao','referenciaPagamento'));
 
         }
 

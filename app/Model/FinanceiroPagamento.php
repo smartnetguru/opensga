@@ -315,4 +315,33 @@ class FinanceiroPagamento extends AppModel {
         }
 
     }
+
+    public function geraReferenciaPagamentoGraduacao($alunoId){
+
+
+        $this->Aluno->contain('Curso');
+        $aluno = $this->Aluno->findById($alunoId);
+
+        $nomeCurso = $aluno['Curso']['name'];
+        if (strpos($nomeCurso,'Licenciatura') !== false) {
+            $codigoPagamento = '04';
+        } elseif(strpos($nomeCurso,'Mestrado') !== false){
+            $codigoPagamento = '05';
+        } elseif(strpos($nomeCurso,'Doutoramento') !== false){
+            $codigoPagamento = '06';
+        }
+
+
+        $ano_ingresso = $aluno['Aluno']['ano_ingresso'];
+        if ($ano_ingresso >= 2000 && $ano_ingresso <= 2007) {
+            $referencia = "1".substr($aluno['Aluno']['codigo'], 3);
+        } elseif ($ano_ingresso > 2007) {
+            $referencia = "1" . $aluno['Aluno']['codigo'];
+        } else {
+            $referencia = $aluno['Aluno']['codigo'];
+        }
+
+        $referencia = $referencia.$codigoPagamento;
+        return $referencia;
+    }
 }

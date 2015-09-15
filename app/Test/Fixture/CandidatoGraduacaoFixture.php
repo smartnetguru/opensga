@@ -1,7 +1,6 @@
 <?php
 /**
- * CandidatoGraduacaoFixture
- *
+ * CandidatoGraduacao Fixture
  */
 class CandidatoGraduacaoFixture extends CakeTestFixture {
 
@@ -46,9 +45,10 @@ class CandidatoGraduacaoFixture extends CakeTestFixture {
 			'estado_civil_id' => '1',
 			'regime_estudo_id' => '1',
 			'regalia_social_id' => '1',
-			'data_candidatura' => null,
+			'data_candidatura' => '2013-09-18 08:28:02',
 			'telemovel' => '823898989',
-			'funcionario_id' => '10'
+			'funcionario_id' => '10',
+			'referencia_pagamento' => '0'
 		),
 		array(
 			'id' => '2',
@@ -80,7 +80,8 @@ class CandidatoGraduacaoFixture extends CakeTestFixture {
 			'regalia_social_id' => '1',
 			'data_candidatura' => '2013-09-18 00:00:00',
 			'telemovel' => '825201830',
-			'funcionario_id' => '7'
+			'funcionario_id' => '7',
+			'referencia_pagamento' => '0'
 		),
 		array(
 			'id' => '3',
@@ -112,7 +113,8 @@ class CandidatoGraduacaoFixture extends CakeTestFixture {
 			'regalia_social_id' => '1',
 			'data_candidatura' => '2013-09-18 00:00:00',
 			'telemovel' => '824830630',
-			'funcionario_id' => '7'
+			'funcionario_id' => '7',
+			'referencia_pagamento' => '0'
 		),
 		array(
 			'id' => '4',
@@ -144,7 +146,8 @@ class CandidatoGraduacaoFixture extends CakeTestFixture {
 			'regalia_social_id' => '1',
 			'data_candidatura' => '2013-09-18 00:00:00',
 			'telemovel' => '840791675',
-			'funcionario_id' => '7'
+			'funcionario_id' => '7',
+			'referencia_pagamento' => '0'
 		),
 		array(
 			'id' => '5',
@@ -176,7 +179,8 @@ class CandidatoGraduacaoFixture extends CakeTestFixture {
 			'regalia_social_id' => '1',
 			'data_candidatura' => '2013-09-18 00:00:00',
 			'telemovel' => '827570899',
-			'funcionario_id' => '7'
+			'funcionario_id' => '7',
+			'referencia_pagamento' => '0'
 		),
 		array(
 			'id' => '6',
@@ -208,7 +212,8 @@ class CandidatoGraduacaoFixture extends CakeTestFixture {
 			'regalia_social_id' => '1',
 			'data_candidatura' => '2013-09-18 00:00:00',
 			'telemovel' => '823009813',
-			'funcionario_id' => '7'
+			'funcionario_id' => '7',
+			'referencia_pagamento' => '0'
 		),
 		array(
 			'id' => '7',
@@ -240,7 +245,8 @@ class CandidatoGraduacaoFixture extends CakeTestFixture {
 			'regalia_social_id' => '1',
 			'data_candidatura' => '2013-09-18 00:00:00',
 			'telemovel' => '847077120',
-			'funcionario_id' => '7'
+			'funcionario_id' => '7',
+			'referencia_pagamento' => '0'
 		),
 		array(
 			'id' => '8',
@@ -272,7 +278,8 @@ class CandidatoGraduacaoFixture extends CakeTestFixture {
 			'regalia_social_id' => '1',
 			'data_candidatura' => '2013-09-18 00:00:00',
 			'telemovel' => '846589782',
-			'funcionario_id' => '7'
+			'funcionario_id' => '7',
+			'referencia_pagamento' => '0'
 		),
 		array(
 			'id' => '9',
@@ -304,7 +311,8 @@ class CandidatoGraduacaoFixture extends CakeTestFixture {
 			'regalia_social_id' => '1',
 			'data_candidatura' => '2013-09-18 09:18:00',
 			'telemovel' => '826613355',
-			'funcionario_id' => '7'
+			'funcionario_id' => '7',
+			'referencia_pagamento' => '0'
 		),
 		array(
 			'id' => '10',
@@ -336,7 +344,8 @@ class CandidatoGraduacaoFixture extends CakeTestFixture {
 			'regalia_social_id' => '1',
 			'data_candidatura' => '2013-09-18 00:00:00',
 			'telemovel' => '825769533',
-			'funcionario_id' => '7'
+			'funcionario_id' => '7',
+			'referencia_pagamento' => '0'
 		),
 	);
 
