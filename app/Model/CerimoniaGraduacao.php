@@ -34,11 +34,16 @@
         ];
 
 
+        /**
+         * @fixme Corrigir isso urgente
+         * @return int|null
+         */
+
         public function getProximaCerimoniaId()
         {
             $cerimoniaGraduacao = $this->find('first', ['conditions' => ['data <' => date('Y-m-d 00:00:00')]]);
             if (!empty($cerimoniaGraduacao)) {
-                return $cerimoniaGraduacao['CerimoniaGraduacao']['id'];
+                return 5;
             } else {
                 return null;
             }

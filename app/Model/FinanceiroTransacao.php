@@ -83,7 +83,7 @@ class FinanceiroTransacao extends AppModel
 
     ];
 
-    public function geraCheckDigito()
+    public function geraCheckDigito($entidade,$referencia,$montante)
     {
         $arrayPesos = [
             1  => 1,
@@ -124,9 +124,6 @@ class FinanceiroTransacao extends AppModel
         $somaPeso3=0;
         $somaPeso4=0;
 
-        $entidade= "150";
-        $referencia="1231234";
-        $montante = "00543200";
         $validaTotal = "sim";
 
         if($validaTotal==="sim"){
@@ -140,13 +137,18 @@ class FinanceiroTransacao extends AppModel
 
         debug($tamanhoNum);
         for($x=$tamanhoNum;$x>=1;$x--){
-            $valPosicao = substr($numero,$x,1);
-            $somaPeso1 = $somaPeso1 + $arrayPesos[$tamanhoNum-$x+3]*intval($valPosicao);
+            $valPosicao = substr($numero,$x-1,1);
+            $posArrayPesos = $tamanhoNum-$x+3;
+            $multiplicador = $arrayPesos[$posArrayPesos]*intval($valPosicao);
+            $somaPeso1 = $somaPeso1 + $multiplicador;
             debug('--------------------------');
+            debug($posArrayPesos);
             debug($x);
             debug($valPosicao);
             debug($somaPeso1);
-            die();
+            debug($multiplicador);
+
+
         }
         $somaPeso2 = $somaPeso1/97;
         $somaPeso3 = intval($somaPeso2)*97;

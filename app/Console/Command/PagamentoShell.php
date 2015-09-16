@@ -5,7 +5,7 @@ App::uses('AppShell', 'Console/Command');
 
 class PagamentoShell extends AppShell {
 
-	public $uses = array('FinanceiroPagamento');
+	public $uses = array('FinanceiroPagamento','FinanceiroTransacao');
 
 	/**
 	 * Job para importar Pautas no Background
@@ -30,4 +30,15 @@ class PagamentoShell extends AppShell {
         $this->Turma->save();
 
     }
+
+    public function testaCheckDigit(){
+        $digit = $this->FinanceiroTransacao->geraCheckDigito();
+
+        debug($digit);
+    }
+
+
 }
+
+
+

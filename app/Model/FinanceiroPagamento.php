@@ -10,6 +10,7 @@ App::uses('AppModel', 'Model');
  * @property FinanceiroTipoPagamento $FinanceiroTipoPagamento
  * @property AnoLectivo $AnoLectivo
  * @property FinanceiroEstadoPagamento $FinanceiroEstadoPagamento
+ * @property FinanceiroTransacao $FinanceiroTransacao
  */
 class FinanceiroPagamento extends AppModel {
     //The Associations below have been created with all possible keys, those that are not needed can be removed
@@ -58,6 +59,13 @@ class FinanceiroPagamento extends AppModel {
         'SemestreLectivo' => array(
             'className' => 'SemestreLectivo',
             'foreignKey' => 'semestre_lectivo_id',
+            'conditions' => '',
+            'fields' => '',
+            'order' => ''
+        ),
+        'FinanceiroTransacao' => array(
+            'className' => 'FinanceiroTransacao',
+            'foreignKey' => 'financeiro_transacao_id',
             'conditions' => '',
             'fields' => '',
             'order' => ''
@@ -324,13 +332,14 @@ class FinanceiroPagamento extends AppModel {
 
         $nomeCurso = $aluno['Curso']['name'];
         if (strpos($nomeCurso,'Licenciatura') !== false) {
-            $codigoPagamento = '04';
+            $valor = 350000;
         } elseif(strpos($nomeCurso,'Mestrado') !== false){
-            $codigoPagamento = '05';
+            $valor=400000;
         } elseif(strpos($nomeCurso,'Doutoramento') !== false){
-            $codigoPagamento = '06';
+            $valor=450000;
         }
 
+        $entidade = 77001;
 
         $ano_ingresso = $aluno['Aluno']['ano_ingresso'];
         if ($ano_ingresso >= 2000 && $ano_ingresso <= 2007) {
@@ -341,7 +350,9 @@ class FinanceiroPagamento extends AppModel {
             $referencia = $aluno['Aluno']['codigo'];
         }
 
-        $referencia = $referencia.$codigoPagamento;
-        return $referencia;
+        $checkDigito = $this->FinanceiroTransacao->geraCheckDigito($entidade,$referencia,$valor);
+
+        $referenciaFinal = $referencia.$checkDigito;
+        return $referenciaFinal;
     }
 }
