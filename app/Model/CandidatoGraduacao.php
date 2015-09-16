@@ -145,6 +145,14 @@
             ],
         ];
 
+        /**
+         *
+         * @fixme GetProximaCerimoniaId foi martelada :(
+         * @param $data
+         *
+         * @return array|bool
+         * @throws \Exception
+         */
         public function cadastraCandidatoGraduacao($data)
         {
 

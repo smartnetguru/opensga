@@ -131,23 +131,13 @@ class FinanceiroTransacao extends AppModel
         } else{
             $numero = $entidade.$referencia;
         }
-
-        debug($numero);
         $tamanhoNum = strlen($numero);
 
-        debug($tamanhoNum);
         for($x=$tamanhoNum;$x>=1;$x--){
             $valPosicao = substr($numero,$x-1,1);
             $posArrayPesos = $tamanhoNum-$x+3;
             $multiplicador = $arrayPesos[$posArrayPesos]*intval($valPosicao);
             $somaPeso1 = $somaPeso1 + $multiplicador;
-            debug('--------------------------');
-            debug($posArrayPesos);
-            debug($x);
-            debug($valPosicao);
-            debug($somaPeso1);
-            debug($multiplicador);
-
 
         }
         $somaPeso2 = $somaPeso1/97;

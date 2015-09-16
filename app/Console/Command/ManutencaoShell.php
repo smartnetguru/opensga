@@ -29,18 +29,4 @@
         ];
 
 
-        public function actualizaReferenciaPagamento(){
-            $candidatos = $this->Aluno->CandidatoGraduacao->find('all',['conditions'=>['cerimonia_graduacao_id'=>5]]);
-            foreach($candidatos as $candidato){
-                debug($candidato);
-                
-                $this->Aluno->CandidatoGraduacao->id = $candidato['CandidatoGraduacao']['id'];
-                $referenciaPagamento = $this->Aluno->FinanceiroPagamento->geraReferenciaPagamentoGraduacao($candidato['CandidatoGraduacao']['aluno_id']);
-                debug($referenciaPagamento);
-                die();
-                $this->Aluno->CandidatoGraduacao->set('referencia_pagamento',$referenciaPagamento);
-                $this->Aluno->CandidatoGraduacao->save();
-            }
-        }
-
     }
