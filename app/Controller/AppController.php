@@ -61,6 +61,7 @@
         public $pdfConfig = ['engine' => 'CakePdf.Tcpdf'];
         public $cacheAction = '1 hour';
 
+
         public function beforeFilter()
         {
             parent::beforeFilter();
@@ -89,12 +90,7 @@
             $this->Auth->unauthorizedRedirect = false;
             $paginationOptions = [];
 
-            if ($this->request->is('ajax')) {
-                $this->layout = false;
-                $this->Security->csrfCheck = false;
-                $this->Security->validatePost = false;
-                //Configure::write('debug', 0);
-            }
+
 
 
             //Devemos forcar o prefixo para funcionarios da faculdade, docente e estudantes

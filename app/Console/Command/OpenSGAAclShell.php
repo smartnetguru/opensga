@@ -21,6 +21,7 @@
             $comandos[] = "acl deny Group.4 controllers";
             $comandos[] = "acl grant Group.4 controllers/Docentes/docente_meu_perfil";
             $comandos[] = "acl grant Group.4 controllers/Pages/docente_home";
+            $comandos[] = "acl grant Group.4 controllers/Users/docente_trocar_senha";
 
 
             foreach ($comandos as $comando) {
@@ -365,12 +366,24 @@
                         $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Messages/sms_index";
                         $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Messages/send_mass_sms";
 
+                        $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/CandidatoGraduacaos/ver_detalhes";
+                        $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/CandidatoGraduacaos/confirmar_dados";
+                        $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/CandidatoGraduacaos/confirmar_pagamento";
+                        $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/CandidatoGraduacaos/rejeitar_candidatura";
+
 
                         $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Candidaturas/index";
                         $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Candidaturas/print_lista_admitidos";
                         $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Candidaturas/print_boletim_matriculas";
                         $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Candidaturas/candidatos_admitidos";
                         $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Candidaturas/print_lista_admitidos";
+
+                        $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/cerimonia_graduacao";
+
+                        $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/CerimoniaGraduacaos/index";
+                        $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/CerimoniaGraduacaos/ver_detalhes";
+                        $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/CerimoniaGraduacaos/print_lista_graduandos";
+                        $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/CerimoniaGraduacaos/nova_cerimonia";
 
                         $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Cursos/ver_curso";
                         $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Cursos/manutencao";

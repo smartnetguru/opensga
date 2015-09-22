@@ -17,6 +17,7 @@ class FinancasShell extends AppShell
 
     public function base_fund()
     {
+        $this->out( 'Init....');
         //Lemos a biblioteca PHPExcel
         App::import('Helper', 'PhpExcel');
         $this->PHPExcel = new PhpExcelHelper(new View());
@@ -60,9 +61,15 @@ class FinancasShell extends AppShell
                     ]
                 ]);
                 if (empty($curso)) {
-                    $naoEnconttados[] = $nomeCompletoCurso;
-                    $linhaActual++;
-                    continue;
+                    $cursoOlds = $this->Aluno->Curso->find('list',array('order'=>'name'));
+
+                    foreach ($cursoOlds as $k => $v) {
+                        $this->out($k . '. ' . $v);
+                    }
+                    $this->out('----------------------------');
+                    $cursoId = $this->in($nomeCurso);
+                    $curso = $this->Aluno->Curso->findById($cursoId);
+
                 }
 
             }

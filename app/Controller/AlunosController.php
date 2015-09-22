@@ -1693,6 +1693,7 @@ class AlunosController extends AppController
     /**
      * @Todo Optimizar esta pagina
      * @Todo Colocar os links para as opcoes do estudante
+     * @Todo remover o find de Matreiculas, Ja faz parte do Get Aluno For Perfil
      * @param type $id
      */
     function perfil_estudante($alunoId = null)

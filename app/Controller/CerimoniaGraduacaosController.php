@@ -228,8 +228,9 @@
             $this->set('cerimoniaGraduacao', $this->CerimoniaGraduacao->find('first', $options));
 
             $this->CerimoniaGraduacao->CandidatoGraduacao->contain([
-                'Aluno' => ['Entidade', 'Curso']
+                'Aluno' => ['Entidade', 'Curso'],'EstadoCandidatura'
             ]);
+
             $candidatos = $this->CerimoniaGraduacao->CandidatoGraduacao->find('all',
                 ['conditions' => ['cerimonia_graduacao_id' => $id]]);
             $this->set(compact('candidatos'));

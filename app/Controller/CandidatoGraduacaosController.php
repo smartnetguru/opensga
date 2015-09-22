@@ -59,7 +59,7 @@
 
             if ($this->request->is('post')) {
                 $this->CandidatoGraduacao->Aluno->contain([
-                    'Entidade'=>['User'],
+                    'Entidade' => ['User'],
                     'Curso'
                 ]);
                 $aluno = $this->CandidatoGraduacao->Aluno->find('all', [
@@ -75,7 +75,7 @@
                 ]);
                 if (count($aluno) == 1) {
                     $last_login = $aluno['Entidade']['User']['ultimo_login'];
-                    if($last_login!=null){
+                    if ($last_login != null) {
                         $this->Flash->error('A conta do SIGA pertencente a este estudante ja foi activada previamente. Contacte a Direccao de Registo Academico para mais detalhes');
                     }
                 } else {
@@ -90,6 +90,16 @@ Veriifique os dados e tente novamente<br />
             $generos = $this->CandidatoGraduacao->Aluno->Entidade->Genero->find('list');
             $this->set(compact('unidadeOrganicas', 'cursos', 'generos'));
             $this->layout = 'guest_users';
+        }
+
+        public function confirmar_dados($candidatoGraduacaoId = null)
+        {
+
+        }
+
+        public function confirmar_pagamento($candidatoGraduacaoId = null)
+        {
+
         }
 
         /**
@@ -178,6 +188,11 @@ Veriifique os dados e tente novamente<br />
             $this->layout = 'guest_users';
         }
 
+        public function rejeitar_candidatura($candidatoGraduacaoId = null)
+        {
+
+        }
+
         /**
          * view method
          *
@@ -187,12 +202,23 @@ Veriifique os dados e tente novamente<br />
          *
          * @return void
          */
-        public function view($id = null)
+        public function ver_detalhes($candidatoGraduacaoId = null)
         {
-            if (!$this->CandidatoGraduacao->exists($id)) {
+            if (!$this->CandidatoGraduacao->exists($candidatoGraduacaoId)) {
                 throw new NotFoundException(__('Invalid candidato graduacao'));
             }
-            $options = ['conditions' => ['CandidatoGraduacao.' . $this->CandidatoGraduacao->primaryKey => $id]];
-            $this->set('candidatoGraduacao', $this->CandidatoGraduacao->find('first', $options));
+
+            $this->CandidatoGraduacao->contain([
+                'CerimoniaGraduacao',
+                'EstadoCandidatura',
+                'EstadoCivil',
+                'RegimeEstudo',
+                'RegaliaSocial',
+                'Funcionario'
+            ]);
+            $options = ['conditions' => ['CandidatoGraduacao.id' => $candidatoGraduacaoId]];
+            $candidatoGraduacao = $this->CandidatoGraduacao->find('first', $options);
+            $aluno = $this->CandidatoGraduacao->Aluno->getAlunoForAction($candidatoGraduacao['CandidatoGraduacao']['aluno_id']);
+            $this->set(compact('candidatoGraduacao', 'aluno'));
         }
     }

@@ -157,6 +157,8 @@ class Candidatura extends AppModel {
     public function processaFicheiroExcelCandidatos($data){
         AuditableConfig::$Logger = ClassRegistry::init('Auditable.Logger');
 
+        $this->Entidade = ClassRegistry::init('Entidade');
+
         $filePath = $data['path'][0];
         $fileUrl = $data['urls'][0];
         $objPHPExcel = new OpenSGAExcel();
