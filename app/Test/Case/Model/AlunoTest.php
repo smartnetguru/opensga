@@ -580,6 +580,7 @@ class AlunoTest extends CakeTestCase
         $resultado = $this->Aluno->concluirNivel($data);
         $this->assertTrue($resultado);
 
+
     }
 
     /**

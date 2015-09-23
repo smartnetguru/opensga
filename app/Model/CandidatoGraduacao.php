@@ -86,6 +86,13 @@
                 'conditions' => '',
                 'fields'     => '',
                 'order'      => ''
+            ],
+            'Funcionario'        => [
+                'className'  => 'Funcionario',
+                'foreignKey' => 'funcionario_id',
+                'conditions' => '',
+                'fields'     => '',
+                'order'      => ''
             ]
         ];
         public $validate = [
@@ -148,6 +155,7 @@
         /**
          *
          * @fixme GetProximaCerimoniaId foi martelada :(
+         *
          * @param $data
          *
          * @return array|bool
@@ -172,6 +180,101 @@
                 return [false, $this->validationErrors];
             }
 
+        }
+
+        public function confirmaDados(array $data)
+        {
+            $dataSource = $this->getDataSource();
+            $dataSource->begin();
+            $this->id = $data['CandidatoGraduacao']['candidato_graduacao_id'];
+            $candidatoGraduacao = $this->findById($data['CandidatoGraduacao']['candidato_graduacao_id']);
+            $alunoId = $candidatoGraduacao['CandidatoGraduacao']['aluno_id'];
+            $this->Aluno->id = $alunoId;
+            $this->Aluno->Entidade->id = $this->Aluno->field('entidade_id');
+
+            $this->Aluno->Entidade->set('apelido', $data['CandidatoGraduacao']['apelido']);
+            $this->Aluno->Entidade->set('nomes', $data['CandidatoGraduacao']['nomes']);
+            $this->Aluno->Entidade->set('data_nascimento',
+                $candidatoGraduacao['CandidatoGraduacao']['data_nascimento']);
+            $this->Aluno->Entidade->set('telemovel', $data['CandidatoGraduacao']['telemovel']);
+
+            if (!$this->Aluno->Entidade->save()) {
+                $dataSource->rollback();
+
+                return [false, $this->Aluno->Entidade->validationErrors];
+            }
+
+
+            $funcionario = $this->Aluno->Entidade->Funcionario->getByUserId(CakeSession::read('Auth.User.id'));
+            $cursoId = $this->Aluno->field('curso_id');
+            $dataConclusaoNivel = [
+                'HistoricoCurso' => [
+                    'data_conclusao' => $data['CandidatoGraduacao']['data_defesa'],
+                    'nota_final'     => $data['CandidatoGraduacao']['media_defesa'],
+                    'funcionario_id' => $funcionario['Funcionario']['id']
+                ],
+                'Aluno'          => [
+                    'observacao' => '',
+                    'aluno_id'   => $alunoId,
+                    'curso_id'   => $cursoId,
+                    'anexo_url'  => [
+                        'name'     => '',
+                        'type'     => '',
+                        'tmp_name' => '',
+                        'error'    => 4,
+                        'size'     => 0,
+                    ]
+                ]
+            ];
+            if (!$this->Aluno->concluirNivel($dataConclusaoNivel)) {
+                $dataSource->rollback();
+
+                return [false, $this->Aluno->validationErrors];
+            }
+            $estadoCandidatoGraduacao = $candidatoGraduacao['CandidatoGraduacao']['estado_candidatura_id'];
+            if ($estadoCandidatoGraduacao == 4) {
+                $this->set('estado_candidatura_id', 2);
+
+
+            } elseif ($estadoCandidatoGraduacao == 3) {
+                $this->set('estado_candidatura_id', 1);
+
+            }
+            $this->set('funcionario_id', $funcionario['Funcionario']['id']);
+
+            if (!$this->save()) {
+                $dataSource->rollback();
+
+                return [false, $this->validationErrors];
+            }
+
+            $dataSource->commit();
+
+            return true;
+
+
+        }
+
+        public function confirmaPagamento(array $data)
+        {
+            $dataSource = $this->getDataSource();
+            $dataSource->begin();
+            $candidatoGraduacao = $this->findById($data['CandidatoGraduacao']['candidato_graduacao_id']);
+
+            $this->Aluno->id = $candidatoGraduacao['CandidatoGraduacao']['aluno_id'];
+            $entidadeId = $this->Aluno->field('entidade_id');
+
+            if ($this->Aluno->Entidade->FinanceiroTrancasao->FinanceiroPagamento->pagar($entidadeId,
+                $data['CandidatoGraduacao']['valor_pago'],
+                $data['CandidatoGraduacao']['data_pagamento'], 39,
+                $candidatoGraduacao['CandidatoGraduacao']['referencia_pagamento'],
+                $candidatoGraduacao['CandidatoGraduacao']['numero_talao'])
+            ) {
+
+            }
+
+            debug($candidatoGraduacao);
+            debug($data);
         }
 
     }

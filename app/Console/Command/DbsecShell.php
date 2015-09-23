@@ -820,7 +820,7 @@ class DbsecShell extends AppShell
                         } else{
                             debug($array_inscricao);
                             debug($this->Inscricao->validationErrors);
-                            die();
+
                         }
 
                     } else {

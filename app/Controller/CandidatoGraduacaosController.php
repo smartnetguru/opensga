@@ -100,6 +100,31 @@ Veriifique os dados e tente novamente<br />
         public function confirmar_pagamento($candidatoGraduacaoId = null)
         {
 
+
+            if ($this->request->is('post')) {
+                if ($this->CandidatoGraduacao->confirmaPagamento($this->request->data) === true) {
+                    $this->Flash->success('Pagamento Confirmado com Sucesso');
+                    $this->redirect([
+                        'controller' => 'cerimonia_graduacaos',
+                        'action'     => 'ver_detalhes',
+                        $this->request->data['CandidatoGraduacao']['cerimonia_graduacao_id']
+                    ]);
+                } else {
+                    $this->Flash->error('Problemas ao actualizar dados. Tente novamente');
+                }
+            }
+            $this->CandidatoGraduacao->contain([
+                'CerimoniaGraduacao',
+                'EstadoCandidatura',
+                'EstadoCivil',
+                'RegimeEstudo',
+                'RegaliaSocial',
+                'Funcionario'
+            ]);
+            $options = ['conditions' => ['CandidatoGraduacao.id' => $candidatoGraduacaoId]];
+            $candidatoGraduacao = $this->CandidatoGraduacao->find('first', $options);
+            $aluno = $this->CandidatoGraduacao->Aluno->getAlunoForAction($candidatoGraduacao['CandidatoGraduacao']['aluno_id']);
+            $this->set(compact('candidatoGraduacao', 'aluno'));
         }
 
         /**
@@ -206,6 +231,20 @@ Veriifique os dados e tente novamente<br />
         {
             if (!$this->CandidatoGraduacao->exists($candidatoGraduacaoId)) {
                 throw new NotFoundException(__('Invalid candidato graduacao'));
+            }
+
+            if ($this->request->is('post')) {
+                if ($this->CandidatoGraduacao->confirmaDados($this->request->data) === true) {
+                    $this->Flash->success('Dados Confirmados com Sucesso');
+                    $this->redirect([
+                        'controller' => 'cerimonia_graduacaos',
+                        'action'     => 'ver_detalhes',
+                        $this->request->data['CandidatoGraduacao']['cerimonia_graduacao_id']
+                    ]);
+                } else {
+                    $this->Flash->error('Problemas ao actualizar dados. Tente novamente');
+                }
+
             }
 
             $this->CandidatoGraduacao->contain([

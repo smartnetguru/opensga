@@ -36,8 +36,39 @@
         {
 
         }
-
         public function actualizar_notas($turmaId)
+        {
+            $this->Turma->id = $turmaId;
+            if (!$this->Turma->exists()) {
+                throw new NotFoundException('Turma Não Existente');
+            }
+
+            if ($this->request->is('post')) {
+                if ($this->Turma->actualizaNotas($this->request->data)===true) {
+                    $this->Flash->success('Notas Actualizadas com Sucesso');
+                    $redirect_url = $this->request->query('redirect_url');
+                    if ($redirect_url) {
+                        $this->redirect($redirect_url);
+                    } else {
+                        $this->redirect(['action' => 'ver_turma', $turmaId]);
+                    }
+                } else {
+                    $this->Flash->error('Não foi possivel gravar as notas. Verifique os dados e tente novamente');
+                }
+            }
+
+            $this->Turma->contain('Disciplina');
+            $turma = $this->Turma->findById($turmaId);
+
+            $inscricaos = $this->Turma->Inscricao->getAllByTurmaId($turmaId);
+
+            $this->set('siga_page_title','Actualizar Notas da Turma');
+            $this->set('siga_page_overview','');
+
+            $this->set(compact('inscricaos', 'turma'));
+
+        }
+        public function faculdade_actualizar_notas($turmaId)
         {
             $this->Turma->id = $turmaId;
             if (!$this->Turma->exists()) {
@@ -447,6 +478,32 @@
         public function faculdade_fechar_turma($turmaId)
         {
 
+            $this->Turma->id = $turmaId;
+            if (!$this->Turma->exists()) {
+                throw new NotFoundException('Turma Não Existente');
+            }
+
+            $turma = $this->Turma->findById($turmaId);
+            if ($turma['Turma']['estado_turma_id'] != 1) {
+                $this->Flash->warning('Esta Turma ja esta fechada ou foi Cancelada. Nao e possivel fecha-la novamente');
+                $this->redirect(['action' => 'ver_turma', $turmaId]);
+            }
+            if ($this->request->is('post')) {
+                if ($this->Turma->podeSerFechada($turmaId)) {
+                    if ($this->Turma->fecharTurma($turmaId)) {
+                        $this->Flash->success('Turma Fechada com Sucesso. Os Estudantes Serao Notificados');
+                        $this->redirect(['action' => 'ver_turma', $turmaId]);
+                    } else {
+                        $this->Flash->error('Problemas ao fechar Turma. Verifique as Pre-Condicoes');
+                    }
+                }
+            }
+
+
+            $inscricaos = $this->Turma->Inscricao->getAllByTurmaId($turmaId);
+
+            $podeSerFechada = $this->Turma->podeSerFechada($turmaId);
+            $this->set(compact('inscricaos', 'turma', 'podeSerFechada'));
         }
 
         public function faculdade_importar_pauta($turmaId)
@@ -780,6 +837,49 @@
          *
          * @param $turmaId
          */
+        public function faculdade_get_aluno_for_inscricao($turmaId)
+        {
+            if ($this->request->is('post')) {
+                $conditions = [];
+                if (!empty($this->request->data['Turma']['codigo_aluno'])) {
+                    $conditions['Aluno.codigo'] = $this->request->data['Turma']['codigo_aluno'];
+                } else {
+                    if (!empty($this->request->data['Turma']['apelido_aluno'])) {
+                        $conditions['Entidade.apelido LIKE'] = '%' . $this->request->data['Turma']['apelido_aluno'] . '%';
+                    }
+                    if (!empty($this->request->data['Turma']['nomes_aluno'])) {
+                        $conditions['Entidade.nomes LIKE'] = '%' . $this->request->data['Turma']['nomes_aluno'] . '%';
+                    }
+                }
+
+                $alunos = $this->Turma->Inscricao->Aluno->find('all', ['conditions' => $conditions]);
+                if (count($alunos) == 1) {
+                    $inscricaoExiste = $this->Turma->Inscricao->findByTurmaIdAndAlunoId($turmaId,
+                        $alunos[0]['Aluno']['id']);
+                    if ($inscricaoExiste) {
+                        $this->Flash->error('Este Estudante ja esta inscrito nesta turma');
+                    } else {
+                        $redirect_url = $this->request->query('redirect_url');
+                        $this->redirect([
+                            'action' => 'inscrever_aluno',
+                            $alunos[0]['Aluno']['id'],
+                            $turmaId,
+                            '?'      => ['redirect_url' => $redirect_url]
+                        ]);
+                    }
+
+                }
+            }
+        }
+
+        /**
+         * Pesquisa um aluno para inscrever numa turma aberta existente
+         *
+         * @todo Verificar o curso e plano de estudos do aluno
+         * @todo verificar o estado da turma
+         *
+         * @param $turmaId
+         */
         public function get_aluno_for_inscricao($turmaId)
         {
             if ($this->request->is('post')) {
@@ -900,6 +1000,33 @@
 
         }
 
+        public function faculdade_inscrever_aluno($alunoId, $turmaId)
+        {
+            if ($this->request->is('post')) {
+                if ($this->Turma->Inscricao->inscreveAlunoNaTurma($this->request->data) === true) {
+                    $this->Flash->success('Aluno Inscrito com Sucesso na Turma');
+                    $redirect_url = $this->request->query('redirect_url');
+                    if ($redirect_url) {
+                        $this->redirect($redirect_url);
+                    } else {
+                        $this->redirect(['action' => 'ver_turma', $turmaId]);
+                    }
+                } else {
+                    $this->Flash->error('Algo Estranho aconteceu com esta turma');
+                }
+            }
+
+            $this->Turma->Inscricao->Aluno->contain(['Entidade', 'Curso']);
+            $aluno = $this->Turma->Inscricao->Aluno->findById($alunoId);
+
+            $this->Turma->contain('AnoLectivo');
+            $turma = $this->Turma->findById($turmaId);
+
+            $tipoInscricaos = $this->Turma->Inscricao->TipoInscricao->find('list');
+
+            $this->set(compact('aluno', 'turma', 'tipoInscricaos'));
+
+        }
         public function print_lista_estudantes($turma_id)
         {
             $this->Turma->Inscricao->contain([
