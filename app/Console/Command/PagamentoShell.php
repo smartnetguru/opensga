@@ -32,7 +32,7 @@ class PagamentoShell extends AppShell {
     }
 
     public function testaCheckDigit(){
-        $digit = $this->FinanceiroTransacao->geraCheckDigito();
+        $digit = $this->FinanceiroTransacao->geraCheckDigito('77001','223456789','100');
 
         debug($digit);
     }

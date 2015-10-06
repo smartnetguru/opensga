@@ -264,13 +264,28 @@
             $this->Aluno->id = $candidatoGraduacao['CandidatoGraduacao']['aluno_id'];
             $entidadeId = $this->Aluno->field('entidade_id');
 
-            if ($this->Aluno->Entidade->FinanceiroTrancasao->FinanceiroPagamento->pagar($entidadeId,
+            if ($this->Aluno->Entidade->FinanceiroTransacao->FinanceiroPagamento->pagar($entidadeId,
                 $data['CandidatoGraduacao']['valor_pago'],
                 $data['CandidatoGraduacao']['data_pagamento'], 39,
                 $candidatoGraduacao['CandidatoGraduacao']['referencia_pagamento'],
-                $candidatoGraduacao['CandidatoGraduacao']['numero_talao'])
+                $data['CandidatoGraduacao']['numero_talao'])
             ) {
+                $estadoCandidatura  =  $candidatoGraduacao['CandidatoGraduacao']['estado_candidatura_id'];
+                $this->id = $candidatoGraduacao['CandidatoGraduacao']['id'];
+                if($estadoCandidatura==2){
+                    $this->set('estado_candidatura_id',1);
+                } elseif($estadoCandidatura==4){
+                    $this->set('estado_candidatura_id',3);
+                }
+                $funcionario = $this->Funcionario->getByUserId(CakeSession::read('Auth.User.id'));
+                $this->set('funcionario_id',$funcionario['Funcionario']['id']);
+                if(!$this->save()){
+                    $dataSource->rollback();
+                    return [false,$this->validationErrors];
+                }
 
+                $dataSource->commit();
+                return true;
             }
 
             debug($candidatoGraduacao);

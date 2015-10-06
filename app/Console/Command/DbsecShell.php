@@ -620,7 +620,7 @@ class DbsecShell extends AppShell
                         debug($turma_existe);
                         debug($array_turma);
                         $this->out("Turma existia");
-                        die();
+
                     }
 
 

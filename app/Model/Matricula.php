@@ -144,6 +144,51 @@
             return $matricula;
         }
 
+        public function getReferenciaRenovacaoMatricula($alunoId){
+            $valor = $this->getValorRenovacaoMatricula($alunoId);
+            $aluno = $this->Aluno->findById($alunoId);
+            $ano_ingresso = $aluno['Aluno']['ano_ingresso'];
+            if ($ano_ingresso >= 2000 && $ano_ingresso <= 2007) {
+                $referencia = "1" . substr($aluno['Aluno']['codigo'], 3);
+            } elseif ($ano_ingresso > 2007) {
+                $referencia = "1" . $aluno['Aluno']['codigo'];
+            } else {
+                $referencia = $aluno['Aluno']['codigo'];
+            }
+            $valor = $valor.'00';
+            $checkDigito = $this->Aluno->Entidade->FinanceiroTransacao->geraCheckDigito(77001,$referencia,$valor);
+
+            $referencia = $referencia.$checkDigito;
+            return $referencia;
+        }
+
+
+        /**
+         * Retorna o valor da renovacao de Matricula
+         * @todo Verificar essa funcao
+         * @param $alunoId
+         */
+        public function getValorRenovacaoMatricula($alunoId){
+            $statusRenovacao = $this->getStatusRenovacao($alunoId,true);
+
+            $aluno = $this->Aluno->findById($alunoId);
+            $curso_turno = $this->Aluno->Curso->CursosTurno->find('first',
+                ['conditions' => ['curso_id' => $aluno['Aluno']['curso_id']]]);
+            if ($curso_turno['CursosTurno']['turno_id'] == 1) {
+                $valorBase = 80;
+            } else {
+                $valorBase= 160;
+            }
+            if(empty($statusRenovacao)){
+                return 0;
+            }
+            if(count($statusRenovacao)==1){
+                return $valorBase;
+            } else{
+                return $valorBase+((2000+$valorBase)*(count($statusRenovacao)-1));
+            }
+        }
+
         /**
          * Retorna o estado da renovacao de matricula do Aluno.
          *
@@ -165,10 +210,12 @@
                     ['conditions' => ['aluno_id' => $aluno['Aluno']['id'], 'curso_id' => $aluno['Aluno']['curso_id']]]);
                 $ano_lectivo_conditions['ano <='] = $historicoAluno['HistoricoCurso']['ano_fim'];
             } else {
-                if ($renovacoes_futuras) {
+                if ($renovacoes_futuras===true) {
+
                     $ano_lectivo_maximo = $this->AnoLectivo->find('first', ['order' => 'AnoLectivo.ano DESC']);
                     $ano_lectivo_conditions['ano <='] = $ano_lectivo_maximo['AnoLectivo']['ano'];
                 } else {
+
                     $ano_lectivo_conditions['ano <='] = Configure::read('OpenSGA.ano_lectivo');
                 }
             }

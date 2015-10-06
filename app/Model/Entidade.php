@@ -22,7 +22,7 @@
  * @property Funcionario $Funcionario
  * @property FinanceiroConta $FinanceiroConta
  * @property FinanceiroDeposito $FinanceiroDeposito
- * @property FinanceiroTransacao $FinanceiroTrancasao
+ * @property FinanceiroTransacao $FinanceiroTransacao
  * @property EntidadeIdentificacao $EntidadeIdentificacao
  * @property EntidadeContacto $EntidadeContacto
  *

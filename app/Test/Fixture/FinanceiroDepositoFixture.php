@@ -1,7 +1,6 @@
 <?php
 /**
- * FinanceiroDepositoFixture
- *
+ * FinanceiroDeposito Fixture
  */
 class FinanceiroDepositoFixture extends CakeTestFixture {
 
@@ -34,7 +33,7 @@ class FinanceiroDepositoFixture extends CakeTestFixture {
 			'financeiro_banco_id' => '1',
 			'financeiro_transacao_id' => '38630',
 			'valor' => '80.00',
-			'semestre_lectivo_id' => null,
+			'semestre_lectivo_id' => '0',
 			'referencia_deposito' => '06121101702',
 			'id_transacao_banco' => '7017296'
 		),
@@ -54,7 +53,7 @@ class FinanceiroDepositoFixture extends CakeTestFixture {
 			'financeiro_banco_id' => '1',
 			'financeiro_transacao_id' => '38631',
 			'valor' => '0.80',
-			'semestre_lectivo_id' => null,
+			'semestre_lectivo_id' => '0',
 			'referencia_deposito' => '02011612402',
 			'id_transacao_banco' => '7835273'
 		),
@@ -74,7 +73,7 @@ class FinanceiroDepositoFixture extends CakeTestFixture {
 			'financeiro_banco_id' => '1',
 			'financeiro_transacao_id' => '38633',
 			'valor' => '160.00',
-			'semestre_lectivo_id' => null,
+			'semestre_lectivo_id' => '0',
 			'referencia_deposito' => '02011518903',
 			'id_transacao_banco' => '9620571'
 		),
@@ -94,7 +93,7 @@ class FinanceiroDepositoFixture extends CakeTestFixture {
 			'financeiro_banco_id' => '1',
 			'financeiro_transacao_id' => '38634',
 			'valor' => '80.00',
-			'semestre_lectivo_id' => null,
+			'semestre_lectivo_id' => '0',
 			'referencia_deposito' => '02012057002',
 			'id_transacao_banco' => '9666123'
 		),
@@ -114,7 +113,7 @@ class FinanceiroDepositoFixture extends CakeTestFixture {
 			'financeiro_banco_id' => '1',
 			'financeiro_transacao_id' => '38635',
 			'valor' => '80.00',
-			'semestre_lectivo_id' => null,
+			'semestre_lectivo_id' => '0',
 			'referencia_deposito' => '02012055402',
 			'id_transacao_banco' => '9709840'
 		),
@@ -134,7 +133,7 @@ class FinanceiroDepositoFixture extends CakeTestFixture {
 			'financeiro_banco_id' => '1',
 			'financeiro_transacao_id' => '38636',
 			'valor' => '80.00',
-			'semestre_lectivo_id' => null,
+			'semestre_lectivo_id' => '0',
 			'referencia_deposito' => '02012055802',
 			'id_transacao_banco' => '9721907'
 		),
@@ -154,7 +153,7 @@ class FinanceiroDepositoFixture extends CakeTestFixture {
 			'financeiro_banco_id' => '1',
 			'financeiro_transacao_id' => '38637',
 			'valor' => '80.80',
-			'semestre_lectivo_id' => null,
+			'semestre_lectivo_id' => '0',
 			'referencia_deposito' => '02012059402',
 			'id_transacao_banco' => '9745337'
 		),
@@ -174,7 +173,7 @@ class FinanceiroDepositoFixture extends CakeTestFixture {
 			'financeiro_banco_id' => '1',
 			'financeiro_transacao_id' => '38638',
 			'valor' => '80.00',
-			'semestre_lectivo_id' => null,
+			'semestre_lectivo_id' => '0',
 			'referencia_deposito' => '02011601502',
 			'id_transacao_banco' => '0291344'
 		),
@@ -194,7 +193,7 @@ class FinanceiroDepositoFixture extends CakeTestFixture {
 			'financeiro_banco_id' => '1',
 			'financeiro_transacao_id' => '38639',
 			'valor' => '80.00',
-			'semestre_lectivo_id' => null,
+			'semestre_lectivo_id' => '0',
 			'referencia_deposito' => '02013351702',
 			'id_transacao_banco' => '1582378'
 		),
@@ -214,7 +213,7 @@ class FinanceiroDepositoFixture extends CakeTestFixture {
 			'financeiro_banco_id' => '1',
 			'financeiro_transacao_id' => '38640',
 			'valor' => '160.00',
-			'semestre_lectivo_id' => null,
+			'semestre_lectivo_id' => '0',
 			'referencia_deposito' => '06342200203',
 			'id_transacao_banco' => '1699460'
 		),

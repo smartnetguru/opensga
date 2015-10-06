@@ -896,8 +896,6 @@
             App::import('Model', 'Matricula');
 
             $turma = new Turma;
-            $inscricao = new Inscricao;
-            $Matricula = new Matricula;
 
             $plano_estudo = $this->query("Select plano_estudo_id from matriculas where aluno_id = {$aluno_id}");
             $turma->recursive = -1;

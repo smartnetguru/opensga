@@ -120,9 +120,6 @@ class FinanceiroTransacao extends AppModel
 
         $numero = "";
         $somaPeso1=0;
-        $somaPeso2=0;
-        $somaPeso3=0;
-        $somaPeso4=0;
 
         $validaTotal = "sim";
 

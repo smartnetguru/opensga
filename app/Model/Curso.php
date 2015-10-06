@@ -69,6 +69,15 @@ class Curso extends AppModel
             'order'      => ''
         ]
     ];
+
+    public $hasOne = [
+        'CursosTurno'         => [
+            'className'  => 'CursosTurno',
+            'foreignKey' => 'curso_id',
+            'dependent'  => true
+        ]
+    ];
+
     var $hasMany = [
         'PlanoEstudo' => [
             'className'    => 'PlanoEstudo',

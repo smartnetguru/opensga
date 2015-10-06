@@ -25,6 +25,8 @@
      * @since           OpenSGA v 0.10.0.0
      *
      *
+     *@property Matricula $Matricula
+     *
      *
      */
     class MatriculasController extends AppController
@@ -542,6 +544,16 @@
          * @todo Implementar a funcao
          */
         public function estudante_renovar_matricula(){
+
+            $userId = $this->Session->read('Auth.User.id');
+            $aluno = $this->Matricula->Aluno->getByUserId($userId);
+
+            $referenciaRenovacao = $this->Matricula->getReferenciaRenovacaoMatricula($aluno['Aluno']['id']);
+
+            $valorRenovacao = $this->Matricula->getValorRenovacaoMatricula($aluno['Aluno']['id']);
+
+            $this->set(compact('valorRenovacao','referenciaRenovacao'));
+
 
         }
 

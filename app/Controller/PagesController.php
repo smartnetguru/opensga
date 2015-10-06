@@ -117,7 +117,8 @@
 
             $aluno = $this->Aluno->getByUserId($userId);
 
-            $matriculasPendentes = $this->Aluno->getAllMatriculasPendentes($aluno['Aluno']['id']);
+            $matriculasPendentes = $this->Aluno->getAllMatriculasPendentes($aluno['Aluno']['id'],true);
+
             if (!empty($matriculasPendentes)) {
                 $this->set(compact('matriculasPendentes'));
             }

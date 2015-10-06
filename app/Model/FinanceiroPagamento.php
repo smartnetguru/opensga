@@ -332,6 +332,19 @@
             return $valor_divida[0][0]['valor'];
         }
 
+        /**
+         * Paga uma factura previamente criada ou cria uma nova factura e marca como paga
+         * @param $entidadeId
+         * @param $valor
+         * @param $dataPagamento
+         * @param $tipoPagamentoId
+         * @param $referenciaPagamento
+         * @param $numeroComprovativo
+         *
+         * @todo desenvolver essa funcao
+         *
+         * @fixme Esta funcoa sempre retorna true;
+         */
         public function pagar(
             $entidadeId,
             $valor,
@@ -340,9 +353,33 @@
             $referenciaPagamento,
             $numeroComprovativo
         ) {
-            //Financeiro-Pagamento===aluno_id,financeiro_conta_id,valor,data_pagamento,financeiro_tipo_pagamento_id,ano_lectivo_id,financeiro_estado_pagamento_id,data_emissao,financeiro_transacao_id,semestre_lectivo_id,referencia_pagamento,ano_lectivo_id
+
+            return true;
+            $deposito = $this->FinanceiroTransacao->FinanceiroDeposito->findByReferenciaDeposito($referenciaPagamento);
+            if (empty($deposito)) {
+                $depositoResult = $this->FinanceiroTransacao->FinanceiroDeposito->depositaValor($entidadeId,
+                    $numeroComprovativo, $valor, $referenciaPagamento, $dataPagamento);
+
+                $deposito = $this->FinanceiroTransacao->FinanceiroDeposito->findById($depositoResult[1]);
+
+            }
+            $pagamento = $this->findByReferenciaPagamento($referenciaPagamento);
+            if(empty($pagamento)){
+                $pagamentoResult = $this->criaPagamento($entidadeId,$valor,$dataPagamento,$tipoPagamentoId,$referenciaPagamento);
+                $this->id = $pagamentoResult[1];
+            } else{
+                $this->id = $pagamento['FinanceiroPagamento']['id'];
+            }
+            $this->set('numero_comprovativo',$numeroComprovativo);
+            $this->set('');
+
             //
 
+        }
+
+        public function criaPagamento($entidadeId,$valor,$dataPagamento,$tipoPagamentoId,$referenciaPagamento){
+            //Financeiro-Pagamento===aluno_id,financeiro_conta_id,valor,data_pagamento,financeiro_tipo_pagamento_id,ano_lectivo_id,financeiro_estado_pagamento_id,data_emissao,financeiro_transacao_id,semestre_lectivo_id,referencia_pagamento,ano_lectivo_id
+            //Financeiro-Pagamento===aluno_id,financeiro_conta_id,valor,data_pagamento,financeiro_tipo_pagamento_id,ano_lectivo_id,financeiro_estado_pagamento_id,data_emissao,financeiro_transacao_id,semestre_lectivo_id,referencia_pagamento,ano_lectivo_id
         }
 
         public function setPagamentoRenovacaoMatricula($alunoId, $cursoId, $montante, $data, $referencia, $entidadeId)
