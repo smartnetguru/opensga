@@ -878,6 +878,20 @@
             return $disciplinas;
         }
 
+
+
+        public function getEstudantesForaTempoEstudos($unidadeOrganicaId=null){
+            $conditions = array();
+            if($unidadeOrganicaId){
+                $conditions['Curso.unidade_organica_id']=$unidadeOrganicaId;
+            }
+
+            $cursos = $this->Curso->find('list',['conditions'=>$conditions]);
+            foreach($cursos as $curso){
+                debug($curso);
+            }
+        }
+
         /**
          *Retorna todas as renovacoes pendentes para um aluno
          *

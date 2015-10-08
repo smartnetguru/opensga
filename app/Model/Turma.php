@@ -195,49 +195,49 @@
                 'cursoRule-3' => [
                     'rule'     => 'notBlank',
                     'required' => 'create',
-                    'message'  => 'O Usermane não pode estar vazio'
+                    'message'  => 'O curso não pode estar vazio'
                 ]
             ],
             'ano_lectivo_id'      => [
                 'anoLectivoRule-3' => [
                     'rule'     => 'notBlank',
                     'required' => 'create',
-                    'message'  => 'O Usermane não pode estar vazio'
+                    'message'  => 'O ano lectivo não pode estar vazio'
                 ]
             ],
             'plano_estudo_id'     => [
                 'planoEstudoRule-3' => [
                     'rule'     => 'notBlank',
                     'required' => 'create',
-                    'message'  => 'O Usermane não pode estar vazio'
+                    'message'  => 'O plano de estudos não pode estar vazio'
                 ]
             ],
             'disciplina_id'       => [
                 'disciplinaRule-3' => [
                     'rule'     => 'notBlank',
                     'required' => 'create',
-                    'message'  => 'O Usermane não pode estar vazio'
+                    'message'  => 'A disciplina não pode estar vazia'
                 ]
             ],
             'ano_curricular'      => [
                 'anoCurricularRule-3' => [
                     'rule'     => 'notBlank',
                     'required' => 'create',
-                    'message'  => 'O Usermane não pode estar vazio'
+                    'message'  => 'O ano curricular não pode estar vazio'
                 ]
             ],
             'semestre_curricular' => [
                 'semestreCurricularRule-3' => [
                     'rule'     => 'notBlank',
                     'required' => 'create',
-                    'message'  => 'O Usermane não pode estar vazio'
+                    'message'  => 'O semestre curricular não pode estar vazio'
                 ]
             ],
             'semestre_lectivo_id' => [
                 'semestreLectivoRule-3' => [
                     'rule'     => 'notBlank',
                     'required' => 'create',
-                    'message'  => 'O Usermane não pode estar vazio'
+                    'message'  => 'O Semestre Lectivo não pode estar vazio'
                 ]
             ]
 

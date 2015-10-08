@@ -14,6 +14,15 @@
         //@formatter:off
         public $uses = ['Funcionario', 'User', 'Docente', 'Aluno', 'UnidadeOrganica'];
 
+        public function usuarios(){
+            $users = $this->User->find('list',array('conditions'=>array('ultimo_login is not null')));
+            foreach($users as $userId){
+                if($this->User->isFuncionario($userId)){
+                    $this->Permissao->funcionario($userId);
+                }
+            }
+        }
+
         public function docentes()
         {
             $grupo = $this->User->Group;
@@ -117,7 +126,7 @@
                 $funcionarios = $this->Funcionario->find('all', ['conditions' => ['User.id' => $userId]]);
             } else {
 
-                $funcionarios = $this->Funcionario->find('all', ['conditions' => ['User.id' => 42646]]);
+                $funcionarios = $this->Funcionario->find('all', ['conditions' => ['User.ultimo_login is not null']]);
             }
 
 
@@ -387,6 +396,7 @@
                         $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/CerimoniaGraduacaos/ver_detalhes";
                         $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/CerimoniaGraduacaos/print_lista_graduandos";
                         $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/CerimoniaGraduacaos/nova_cerimonia";
+                        $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/CerimoniaGraduacaos/inscrever_aluno";
 
                         $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Cursos/ver_curso";
                         $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Cursos/manutencao";

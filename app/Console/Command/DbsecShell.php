@@ -5,7 +5,7 @@ App::uses('AuditableConfig', 'Auditable.Lib');
 
 class DbsecShell extends AppShell
 {
-
+//@formatter:off
     public $uses = [
         'HistoricoCurso',
         'TipoAvaliacao',
@@ -486,7 +486,7 @@ class DbsecShell extends AppShell
         $xls = PHPExcel_IOFactory::load(APP . 'Imports' . DS . $this->folder . DS . 'leccionamento.xlsx');
 
 
-        $linha_actual = 2;
+        $linha_actual = 2960;
         $worksheet = $xls->getActiveSheet();
         $xls2 = PHPExcel_IOFactory::load(APP . 'Imports' . DS . $this->folder . DS . 'disciplina.xlsx');
         $worksheet2 = $xls2->getActiveSheet();
@@ -502,7 +502,7 @@ class DbsecShell extends AppShell
             $nivel = trim($worksheet->getCell('N' . $linha_actual)->getCalculatedValue());
             $ramo = trim($worksheet->getCell('I' . $linha_actual)->getCalculatedValue());
             $idTurma = trim($worksheet->getCell('F' . $linha_actual)->getCalculatedValue());
-            debug($idTurma);
+
             if ($idCcurso == '') {
                 $this->out('@@@@@@@'.$linha_actual);
                 break;
@@ -518,6 +518,25 @@ class DbsecShell extends AppShell
                     ]
                 ]);
                 $anolectivo = $this->AnoLectivo->findByAno($ano);
+
+                if($idDisciplina=='AIP'){
+                    $idDisciplina='AIPT';
+                }
+
+                if($idDisciplina=='MI'){
+                    $idDisciplina='MT';
+                }
+                if($idDisciplina=='MIMESD'){
+                    $idDisciplina='MT';
+                }
+
+                if($idDisciplina=='SNIP'){
+                    $idDisciplina='SNIPE';
+                }
+                if($idDisciplina=='TEEA'){
+                    $idDisciplina='TEEA 1';
+                }
+
 
 
                 $disciplina = $this->Disciplina->findByCodigoAntigo($idDisciplina);
@@ -616,9 +635,7 @@ class DbsecShell extends AppShell
 
 
                     } else {
-                        debug($disciplina);
-                        debug($turma_existe);
-                        debug($array_turma);
+
                         $this->out("Turma existia");
 
                     }
@@ -685,8 +702,22 @@ class DbsecShell extends AppShell
                     }
                 }
 
+                if($idDisciplina=='AIP'){
+                    $idDisciplina='AIPT';
+                }
+
                 if($idDisciplina=='MI'){
                     $idDisciplina='MT';
+                }
+                if($idDisciplina=='MIMESD'){
+                    $idDisciplina='MT';
+                }
+
+                if($idDisciplina=='SNIP'){
+                    $idDisciplina='SNIPE';
+                }
+                if($idDisciplina=='TEEA'){
+                    $idDisciplina='TEEA 1';
                 }
 
                 $disciplina = $this->Disciplina->findByCodigoAntigo($idDisciplina);

@@ -161,6 +161,8 @@
             $this->Aluno->contain('Curso');
             $aluno = $this->Aluno->findById($alunoId);
 
+            $valor = 0;
+
             $nomeCurso = $aluno['Curso']['name'];
             if (strpos($nomeCurso, 'Licenciatura') !== false) {
                 $valor = 350000;

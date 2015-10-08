@@ -22,7 +22,7 @@ class EstudanteShell extends AppShell
 
         $worksheet = $xls->getActiveSheet();
 
-        $anoLectivo = 2013;
+        $anoLectivo = 2015;
         $linhaActual = 3;
 
 
@@ -73,7 +73,7 @@ class EstudanteShell extends AppShell
         }
         $objWriter = PHPExcel_IOFactory::createWriter($xls, 'Excel2007');
 
-        $objWriter->save('ficheiro_' . $anoLectivo . '.xlsx');
+        $objWriter->save('estudantes_fora_tempo_' . $anoLectivo . '.xlsx');
 
 
     }

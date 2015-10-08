@@ -165,6 +165,7 @@
         {
 
 
+
             if (!isset($data['CandidatoGraduacao']['cerimonia_graduacao_id'])) {
                 $data['CandidatoGraduacao']['cerimonia_graduacao_id'] = $this->CerimoniaGraduacao->getProximaCerimoniaId();
             }
@@ -172,9 +173,21 @@
                 $data['CandidatoGraduacao']['referencia_pagamento'] = $this->Aluno->FinanceiroPagamento->geraReferenciaPagamentoGraduacao($data['CandidatoGraduacao']['aluno_id']);
             }
             $data['CandidatoGraduacao']['data_candidatura'] = date('Y-m-d H:i:s');
-            $data['CandidatoGraduacao']['estado_candidatura_id'] = 4;
+            if (!isset($data['CandidatoGraduacao']['estado_candidatura_id'])) {
+                $data['CandidatoGraduacao']['estado_candidatura_id'] = 4;
+            }
+
             $this->create();
             if ($this->save($data)) {
+                if (isset($data['CandidatoGraduacao']['valor_pago'])) {
+                    $this->Aluno->id = $data['CandidatoGraduacao']['aluno_id'];
+                    $entidadeId = $this->Aluno->field('entidade_id');
+                    $this->Aluno->Entidade->FinanceiroDeposito->depositaValor($entidadeId,
+                        $data['CandidatoGraduacao']['numero_talao'], $data['CandidatoGraduacao']['valor_pago'],
+                        $data['CandidatoGraduacao']['referencia_pagamento'],
+                        $data['CandidatoGraduacao']['data_pagamento']);
+                }
+
                 return true;
             } else {
                 return [false, $this->validationErrors];
@@ -270,21 +283,23 @@
                 $candidatoGraduacao['CandidatoGraduacao']['referencia_pagamento'],
                 $data['CandidatoGraduacao']['numero_talao'])
             ) {
-                $estadoCandidatura  =  $candidatoGraduacao['CandidatoGraduacao']['estado_candidatura_id'];
+                $estadoCandidatura = $candidatoGraduacao['CandidatoGraduacao']['estado_candidatura_id'];
                 $this->id = $candidatoGraduacao['CandidatoGraduacao']['id'];
-                if($estadoCandidatura==2){
-                    $this->set('estado_candidatura_id',1);
-                } elseif($estadoCandidatura==4){
-                    $this->set('estado_candidatura_id',3);
+                if ($estadoCandidatura == 2) {
+                    $this->set('estado_candidatura_id', 1);
+                } elseif ($estadoCandidatura == 4) {
+                    $this->set('estado_candidatura_id', 3);
                 }
                 $funcionario = $this->Funcionario->getByUserId(CakeSession::read('Auth.User.id'));
-                $this->set('funcionario_id',$funcionario['Funcionario']['id']);
-                if(!$this->save()){
+                $this->set('funcionario_id', $funcionario['Funcionario']['id']);
+                if (!$this->save()) {
                     $dataSource->rollback();
-                    return [false,$this->validationErrors];
+
+                    return [false, $this->validationErrors];
                 }
 
                 $dataSource->commit();
+
                 return true;
             }
 
