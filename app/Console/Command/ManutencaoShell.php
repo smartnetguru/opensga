@@ -60,11 +60,14 @@
                 $array_nome = explode(' ',trim($nome));
 
 
-                $this->Aluno->contain('Entidade');
+                $this->Aluno->contain(['Entidade','EstadoAluno']);
                 $aluno = $this->Aluno->find('first',array('conditions'=>array('Entidade.apelido like'=>'%'.end($array_nome).'%','Entidade.nomes like'=>'%'.$array_nome[0].'%','Aluno.ano_ingresso'=>$anoLectivo)));
 
                 if($aluno){
+                   // debug($aluno);die();
                     $worksheet->setCellValue('A' . $linha_actual, $aluno['Aluno']['codigo']); //Nome da Instituicao
+                    $worksheet->setCellValue('D' . $linha_actual, $aluno['Aluno']['ano_ingresso']-$aluno['Entidade']['data_nascimento']); //Nome da Instituicao
+                    $worksheet->setCellValue('P' . $linha_actual, $aluno['EstadoAluno']['name']); //Nome da Instituicao
                 }
 
                 $this->out($nome);

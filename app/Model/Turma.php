@@ -919,7 +919,7 @@
             ]);
             if ($inscricaos > 0) {
                 $motivoNaoFecho['Inscricoes'] = $inscricaos;
-                $valorRetorno = false;
+                $valorRetorno = true;
             }
             if ($valorRetorno == false) {
                 return $motivoNaoFecho;
