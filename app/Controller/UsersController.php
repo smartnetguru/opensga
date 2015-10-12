@@ -44,6 +44,13 @@
             }
         }
 
+        public function acessos(){
+            $this->User->contain(['Group','Entidade']);
+            $users = $this->User->find('all',array('conditions'=>['DATE(ultimo_login)'=>date('Y-m-d')]));
+
+            $this->set(compact('users'));
+        }
+
         public function alterar_senha()
         {
             if ($this->request->is('post') || $this->request->is('put')) {

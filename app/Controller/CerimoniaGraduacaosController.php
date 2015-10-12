@@ -256,6 +256,8 @@
                 throw new NotFoundException(__('Cerimónia de Graduação Inválida'));
             }
 
+
+
             $options = ['conditions' => ['CerimoniaGraduacao.' . $this->CerimoniaGraduacao->primaryKey => $id]];
             $this->CerimoniaGraduacao->recursive = 0;
             $this->set('cerimoniaGraduacao', $this->CerimoniaGraduacao->find('first', $options));
@@ -265,9 +267,26 @@
                 'EstadoCandidatura'
             ]);
 
+            $conditions = [];
+            $conditions['cerimonia_graduacao_id'] = $id;
+            $cursoId = $this->request->query('curso_id');
+            $numeroEstudante = $this->request->query('numero_estudante');
+            $anoIngresso = $this->request->query('ano_ingresso');
+            if($cursoId){
+                $conditions['Aluno.curso_id'] = $cursoId;
+            }
+            if($anoIngresso){
+                $conditions['Aluno.ano_ingresso'] = $anoIngresso;
+            }
+            if($numeroEstudante){
+                $conditions['Aluno.codigo']= $numeroEstudante;
+            }
+
             $candidatos = $this->CerimoniaGraduacao->CandidatoGraduacao->find('all',
-                ['conditions' => ['cerimonia_graduacao_id' => $id]]);
-            $this->set(compact('candidatos'));
+                ['conditions' => $conditions]);
+
+            $cursos = $this->CerimoniaGraduacao->CandidatoGraduacao->Aluno->Curso->find('list');
+            $this->set(compact('candidatos','cursos','unidadeOrganicas'));
 
         }
     }

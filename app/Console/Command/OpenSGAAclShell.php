@@ -444,6 +444,9 @@
                         $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/PlanoEstudos/actualiza_creditos";
 
 
+                        $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Users/acessos";
+
+
                     }
 
                     if (in_array('DRA_DI', $unidadesOrganicas)) {
@@ -537,6 +540,7 @@
                         $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/concluir_nivel";
 
                         $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/perfil_estudante";
+
                     } elseif (in_array('DRA_DR', $unidadesOrganicas)) {
                         $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/index";
 

@@ -66,7 +66,6 @@
         {
             parent::beforeFilter();
 
-
             $config_language = $this->Session->read('Config.language');
             if ($config_language == null) {
                 $config_language = 'por';
@@ -89,9 +88,6 @@
             $this->Auth->loginRedirect = [['plugin' => false, 'controller' => 'pages', 'action' => 'display', 'home']];
             $this->Auth->unauthorizedRedirect = false;
             $paginationOptions = [];
-
-
-
 
             //Devemos forcar o prefixo para funcionarios da faculdade, docente e estudantes
             $general_actions = [
@@ -168,13 +164,13 @@
                     }
                     if ($this->User->isFromFaculdade($this->Session->read('Auth.User.id'))) {
 
-
                         if ($this->request->prefix != 'faculdade') {
                             $this->Session->setFlash(__('Não tem Permissão para acessar a area anterior'), 'default',
                                 ['class' => 'alert info']);
                             $this->redirect(['controller' => 'pages', 'action' => 'home', 'faculdade' => true]);
                         }
                     }
+                    
                 }
             }
 
