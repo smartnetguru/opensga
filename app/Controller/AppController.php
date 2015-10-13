@@ -170,7 +170,7 @@
                             $this->redirect(['controller' => 'pages', 'action' => 'home', 'faculdade' => true]);
                         }
                     }
-                    
+
                 }
             }
 

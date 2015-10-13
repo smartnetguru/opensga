@@ -269,6 +269,7 @@
 
             $conditions = [];
             $conditions['cerimonia_graduacao_id'] = $id;
+            $conditions['estado_candidatura_id NOT'] = 1;
             $cursoId = $this->request->query('curso_id');
             $numeroEstudante = $this->request->query('numero_estudante');
             $anoIngresso = $this->request->query('ano_ingresso');
@@ -287,6 +288,7 @@
 
             $cursos = $this->CerimoniaGraduacao->CandidatoGraduacao->Aluno->Curso->find('list');
             $this->set(compact('candidatos','cursos','unidadeOrganicas'));
+            $this->set('cerimoniaGraduacaoId',$id);
 
         }
     }

@@ -748,7 +748,7 @@
                             $user_data['Funcionario'][0]['UnidadeOrganica']['name']);
 
                         if ($this->User->isFromFaculdade($User['id'])) {
-                            if ($password_login == '12345') {
+                            if (in_array($password_login, ['12345', 'siga12345UEM','uem1234567dra'])) {
                                 $this->redirect([
                                     'controller' => 'users',
                                     'action'     => 'trocar_senha',
@@ -759,7 +759,7 @@
                             $this->redirect(['controller' => 'pages', 'action' => 'home', 'faculdade' => true]);
                         }
                     }
-                    if (in_array($password_login, ['12345', 'siga12345UEM'])) {
+                    if (in_array($password_login, ['12345', 'siga12345UEM','uem1234567dra'])) {
                         $this->redirect(['controller' => 'users', 'action' => 'trocar_senha', $User['id']]);
                     }
                     $this->redirect(['controller' => 'pages', 'action' => 'home']);
