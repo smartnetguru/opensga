@@ -60,11 +60,13 @@
         ];
         public $pdfConfig = ['engine' => 'CakePdf.Tcpdf'];
         public $cacheAction = '1 hour';
+        public $persistModel = true;
 
 
         public function beforeFilter()
         {
             parent::beforeFilter();
+            fclog('Test','error');
 
             $config_language = $this->Session->read('Config.language');
             if ($config_language == null) {

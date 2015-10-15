@@ -124,15 +124,6 @@
             ]
         ];
         public $virtualFields = [
-            'total_alunos'                 => 'SELECT count(*) from inscricaos where turma_id=Turma.id',
-            'total_excluidos'              => 'SELECT count(*) from inscricaos where turma_id=Turma.id and nota_frequencia<10',
-            'total_admitidos'              => 'SELECT count(*) from inscricaos where turma_id=Turma.id and nota_frequencia>=10 and nota_frequencia<14',
-            'total_dispensados'            => 'SELECT count(*) from inscricaos where turma_id=Turma.id and nota_frequencia>=14',
-            'total_recorrentes'            => 'SELECT count(*) from inscricaos where turma_id=Turma.id and nota_exame_recorrencia is not null',
-            'total_admitidos'              => 'SELECT count(*) from inscricaos where turma_id=Turma.id and nota_frequencia>=10 and nota_frequencia<14',
-            'total_reprovados_recorrencia' => 'SELECT count(*) from inscricaos where turma_id=Turma.id and nota_exame_recorrencia <10',
-            'total_aprovados'              => 'SELECT count(*) from inscricaos where turma_id=Turma.id and nota_final>=10',
-            'total_reprovados'             => 'SELECT count(*) from inscricaos where turma_id=Turma.id and nota_final<10',
 
         ];
         public $hasMany = [
@@ -252,20 +243,17 @@
          */
         public function actualizaNotas($data)
         {
-            $dataSource = $this->getDataSource();
-            $dataSource->begin();
+
 
 
             foreach ($data['Inscricao'] as $k => $inscricao) {
                 if ($inscricao['gravar'] == 1) {
                     $arrayInscricao['Inscricao'] = $inscricao;
                     if(!$this->Inscricao->actualizaDadosInscricao($arrayInscricao)){
-                        $dataSource->rollback();
                         return [false,$arrayInscricao];
                     }
                 }
             }
-            $dataSource->commit();
             $message = [
                 'Option1' => 'Message',
                 //'Type'=>'cake',
@@ -908,8 +896,10 @@
             $avaliacoes = $this->TurmaTipoAvaliacao->find('count',
                 ['conditions' => ['turma_id' => $turmaId, 'estado_turma_avaliacao_id' => 1]]);
             if ($avaliacoes > 0) {
-                $motivoNaoFecho['Avalicaoces'] = $avaliacoes;
+                $motivoNaoFecho['Avaliaces'] = $avaliacoes;
                 $valorRetorno = false;
+            } else{
+                $motivoNaoFecho['Avaliacoes'] = 0;
             }
             $inscricaos = $this->Inscricao->find('count', [
                 'conditions' => [
@@ -919,7 +909,9 @@
             ]);
             if ($inscricaos > 0) {
                 $motivoNaoFecho['Inscricoes'] = $inscricaos;
-                $valorRetorno = true;
+                $valorRetorno = false;
+            } else{
+                $motivoNaoFecho['Inscricoes'] = 0;
             }
             if ($valorRetorno == false) {
                 return $motivoNaoFecho;

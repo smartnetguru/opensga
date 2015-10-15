@@ -12,9 +12,11 @@
      * @version         OpenSGA v 0.5.0
      * @since           OpenSGA v 0.1.0
      *
-     * @property Turma $Turma
+     * 
      *
      * @todo            No futuro criar uma tabela docentes_turmas vai ajudar a manter o historico completo das turmas
+     *
+     * @property Turma $Turma
      *
      */
     use Ghunti\HighchartsPHP\Highchart;
@@ -868,6 +870,7 @@
             $inscricaos = $this->Turma->Inscricao->getAllByTurmaId($turmaId);
 
             $podeSerFechada = $this->Turma->podeSerFechada($turmaId);
+
             $this->set(compact('inscricaos', 'turma', 'podeSerFechada'));
 
         }

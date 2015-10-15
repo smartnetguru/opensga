@@ -1386,6 +1386,9 @@ class AlunosController extends AppController
 
     public function index()
     {
+        $this->helpers[] = 'Cache';
+        $this->cacheAction = '10 minutes';
+
         $conditions = [];
         if ($this->request->is('post')) {
             if ($this->request->data['Aluno']['codigo'] != '') {
