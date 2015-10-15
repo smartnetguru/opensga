@@ -212,28 +212,38 @@
         {
             $this->CerimoniaGraduacao->CandidatoGraduacao->contain([
                 'Aluno' => [
+
                     'Entidade' => [
-                        'Genero',
-                        'PaisNascimento',
-                        'ProvinciaNascimento',
+
                         'User'
                     ],
                     'Curso'    => [
                         'UnidadeOrganica'
                     ]
-                ]
+                ],
+                'Genero',
+
+                'ProvinciaNascimento',
+                'EstadoCandidatura'
             ]);
             $candidatos = $this->CerimoniaGraduacao->CandidatoGraduacao->find('all',
                 ['conditions' => ['cerimonia_graduacao_id' => $cerimonia_graduacao_id]]);
 
             $candidatos2 = [];
-            foreach ($candidatos as $candidato) {
+            foreach ($candidatos as $key=>$candidato) {
+
                 $is_regular = $this->CerimoniaGraduacao->CandidatoGraduacao->Aluno->isRegular($candidato['CandidatoGraduacao']['aluno_id']);
                 if ($is_regular[0]['regular'] == true) {
                     $candidato['Aluno']['Status'] = 'Regular';
                 } else {
                     $candidato['Aluno']['Status'] = 'Não Regular';
                 }
+                $referenciaPagamento = $candidato['CandidatoGraduacao']['referencia_pagamento'];
+                $deposito = $this->CerimoniaGraduacao->CandidatoGraduacao->Aluno->FinanceiroPagamento->FinanceiroTransacao->FinanceiroDeposito->findByReferenciaDeposito($referenciaPagamento);
+                if($deposito){
+                    $candidato['FinanceiroDeposito'] = $deposito;
+                }
+                
                 $candidatos2[] = $candidato;
             }
             $candidatos = $candidatos2;

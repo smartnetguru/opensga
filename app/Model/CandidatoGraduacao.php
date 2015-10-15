@@ -93,6 +93,20 @@
                 'conditions' => '',
                 'fields'     => '',
                 'order'      => ''
+            ],
+            'ProvinciaNascimento'        => [
+                'className'  => 'Provincia',
+                'foreignKey' => 'provincia_nascimento',
+                'conditions' => '',
+                'fields'     => '',
+                'order'      => ''
+            ],
+            'DistritoNascimento'        => [
+                'className'  => 'Cidade',
+                'foreignKey' => 'distrito_nascimento',
+                'conditions' => '',
+                'fields'     => '',
+                'order'      => ''
             ]
         ];
         public $validate = [
