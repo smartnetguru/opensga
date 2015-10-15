@@ -26,7 +26,7 @@ class DbsecShell extends AppShell
         'Entidade',
     ];
 
-    public $folder = 'dcb';
+    public $folder = 'dmi';
     public $unidadeOrganicaId = 3;
 
 
@@ -193,6 +193,7 @@ class DbsecShell extends AppShell
                     'ano_criacao' => $worksheet->getCell('J' . $linha_actual)->getCalculatedValue()
                 ]
             ]);
+
             if (empty($plano_estudo_existe)) {
                 $this->PlanoEstudo->create();
                 $array_plano_estudo = [
@@ -221,11 +222,17 @@ class DbsecShell extends AppShell
 
             $codigo_disciplina = $worksheet->getCell('A' . $linha_actual)->getCalculatedValue();
 
-            if($codigo_disciplina=='I I 2009'){
-                $codigo_disciplina='ING';
+            if($codigo_disciplina=='BD II'){
+                $codigo_disciplina='BDII';
             }
-            if($codigo_disciplina=='E II 2009'){
-                $codigo_disciplina='E II NC';
+            if($codigo_disciplina=='G'){
+                $codigo_disciplina='G I';
+            }
+            if($codigo_disciplina=='MD II'){
+                $codigo_disciplina='MDII';
+            }
+            if($codigo_disciplina=='OP'){
+                $codigo_disciplina='OPÇAO';
             }
 
             $disciplina = $this->Disciplina->findByCodigoAntigo($codigo_disciplina);
@@ -260,19 +267,42 @@ class DbsecShell extends AppShell
                 ]
             ];
 
+
             $plano_ano_existe = $this->DisciplinaPlanoEstudo->find('first', [
                 'conditions' => [
                     'plano_estudo_id'     => $plano_estudo_id,
                     'disciplina_id'       => $disciplina['Disciplina']['id'],
-                    'ramo_id'             => $ramo_id,
                     'ano_curricular'      => $worksheet->getCell('D' . $linha_actual)->getCalculatedValue(),
                     'semestre_curricular' => $worksheet->getCell('G' . $linha_actual)->getCalculatedValue(),
                 ]
             ]);
             if (empty($plano_ano_existe)) {
                 $this->DisciplinaPlanoEstudo->create();
-                $this->DisciplinaPlanoEstudo->save($array_plano_ano);
-                $this->out('Plano Ano Criado---------------' . $this->DisciplinaPlanoEstudo->id);
+                if($this->DisciplinaPlanoEstudo->save($array_plano_ano)){
+                    $this->out('Plano Ano Criado---------------' . $this->DisciplinaPlanoEstudo->id);
+                } else{
+                    $plano_ano_existe2 = $this->DisciplinaPlanoEstudo->find('first', [
+                        'conditions' => [
+                            'plano_estudo_id'     => $plano_estudo_id,
+                            'disciplina_id'       => $disciplina['Disciplina']['id'],
+                        ]
+                    ]);
+                    if($plano_ano_existe2){
+                        $this->DisciplinaPlanoEstudo->id = $plano_ano_existe2['DisciplinaPlanoEstudo']['id'];
+                        if($this->DisciplinaPlanoEstudo->save($array_plano_ano)){
+                            $this->out('Plano Ano Actualizado--------------------------'.$plano_ano_existe2['DisciplinaPlanoEstudo']['id']);
+                        } else{
+                            debug($array_plano_ano);
+                            debug($plano_ano_existe2);
+                            //debug($this->DisciplinaPlanoEstudo->getLog());
+                            debug($this->DisciplinaPlanoEstudo->validationErrors);
+                           // die();
+                        }
+
+                    }
+
+                }
+
             } else {
                 $this->out("Plano existia--------------".$linha_actual."-----------------------".$disciplina['Disciplina']['name']);
 
@@ -456,7 +486,7 @@ class DbsecShell extends AppShell
         $xls = PHPExcel_IOFactory::load(APP . 'Imports' . DS . $this->folder . DS . 'leccionamento.xlsx');
 
 
-        $linha_actual = 5000;
+        $linha_actual = 2;
         $worksheet = $xls->getActiveSheet();
         $xls2 = PHPExcel_IOFactory::load(APP . 'Imports' . DS . $this->folder . DS . 'disciplina.xlsx');
         $worksheet2 = $xls2->getActiveSheet();
@@ -496,15 +526,17 @@ class DbsecShell extends AppShell
                 ]);
                 $anolectivo = $this->AnoLectivo->findByAno($ano);
 
-                if($idDisciplina=='I I 2009'){
-                    $idDisciplina='ING';
+                if($idDisciplina=='BD II'){
+                    $idDisciplina='BDII';
                 }
-                if($idDisciplina=='E II 2009'){
-                    $idDisciplina='E II NC';
+                if($idDisciplina=='G'){
+                    $idDisciplina='G I';
                 }
-
-                if($idDisciplina=='EXP I'){
-                    $idDisciplina='EXPI';
+                if($idDisciplina=='MD II'){
+                    $idDisciplina='MDII';
+                }
+                if($idDisciplina=='OP'){
+                    $idDisciplina='OPÇAO';
                 }
 
 
@@ -683,11 +715,17 @@ class DbsecShell extends AppShell
                     }
                 }
 
-                if($idDisciplina=='I I 2009'){
-                    $idDisciplina='ING';
+                if($idDisciplina=='BD II'){
+                    $idDisciplina='BDII';
                 }
-                if($idDisciplina=='E II 2009'){
-                    $idDisciplina='E II NC';
+                if($idDisciplina=='G'){
+                    $idDisciplina='G I';
+                }
+                if($idDisciplina=='MD II'){
+                    $idDisciplina='MDII';
+                }
+                if($idDisciplina=='OP'){
+                    $idDisciplina='OPÇAO';
                 }
 
                 $disciplina = $this->Disciplina->findByCodigoAntigo($idDisciplina);

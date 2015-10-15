@@ -243,7 +243,7 @@
                 if($deposito){
                     $candidato['FinanceiroDeposito'] = $deposito;
                 }
-                
+
                 $candidatos2[] = $candidato;
             }
             $candidatos = $candidatos2;
