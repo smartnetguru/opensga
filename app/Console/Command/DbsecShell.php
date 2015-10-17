@@ -26,8 +26,8 @@ class DbsecShell extends AppShell
         'Entidade',
     ];
 
-    public $folder = 'esuder';
-    public $unidadeOrganicaId = 3;
+    public $folder = 'medicina';
+    public $unidadeOrganicaId = 17;
 
 
 
@@ -488,17 +488,17 @@ class DbsecShell extends AppShell
             $this->PlanoEstudo->recursive = -1;
             $this->Curso->recursive = -1;
             $idDisciplina = trim($worksheet->getCell('A' . $linha_actual)->getCalculatedValue());
-            $idCcurso = trim($worksheet->getCell('G' . $linha_actual)->getCalculatedValue());
+            $idCcurso = trim($worksheet->getCell('D' . $linha_actual)->getCalculatedValue());
             $ano = trim($worksheet->getCell('B' . $linha_actual)->getCalculatedValue());
             $semestre = trim($worksheet->getCell('C' . $linha_actual)->getCalculatedValue());
-            $curriculum = trim($worksheet->getCell('H' . $linha_actual)->getCalculatedValue());
+            $curriculum = trim($worksheet->getCell('E' . $linha_actual)->getCalculatedValue());
             $nivel = trim($worksheet->getCell('N' . $linha_actual)->getCalculatedValue());
-            $ramo = trim($worksheet->getCell('I' . $linha_actual)->getCalculatedValue());
-            $idTurma = trim($worksheet->getCell('F' . $linha_actual)->getCalculatedValue());
+            $ramo = trim($worksheet->getCell('F' . $linha_actual)->getCalculatedValue());
+            $idTurma = trim($worksheet->getCell('M' . $linha_actual)->getCalculatedValue());
 
-            if($ano=='3003'){
+            if($ano=='2207'){
 
-                $ano=2003;
+                $ano=2007;
             }
             if ($idCcurso == '') {
                 $this->out('@@@@@@@'.$linha_actual);
@@ -679,7 +679,7 @@ class DbsecShell extends AppShell
             $cellDataInscricao = $worksheet->getCell('C' . $linha_actual);
             $idAnoLectivo = trim($worksheet->getCell('E' . $linha_actual)->getCalculatedValue());
             $idCursoFrequencia = trim($worksheet->getCell('U' . $linha_actual)->getCalculatedValue());
-            $idCurso = trim($worksheet->getCell('N' . $linha_actual)->getCalculatedValue());
+            $idCurso = trim($worksheet->getCell('O' . $linha_actual)->getCalculatedValue());
             $notaFrequencia = trim($worksheet->getCell('F' . $linha_actual)->getCalculatedValue());
             $notaFinal = trim($worksheet->getCell('I' . $linha_actual)->getCalculatedValue());
 
