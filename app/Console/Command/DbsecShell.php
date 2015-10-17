@@ -612,9 +612,9 @@ class DbsecShell extends AppShell
                     }
                     $turma_existe = $this->Turma->find('first', [
                         'conditions' => array(
-                            'ano_lectivo_id'      => $anolectivo['AnoLectivo']['id'],
-                            'plano_estudo_id'     => $plano_estudo['PlanoEstudo']['id'],
                             'disciplina_id'       => $disciplina['Disciplina']['id'],
+                            'plano_estudo_id'     => $plano_estudo['PlanoEstudo']['id'],
+                            'ano_lectivo_id'      => $anolectivo['AnoLectivo']['id'],
                             'curso_id'            => $plano_estudo['PlanoEstudo']['curso_id'],
                             'ano_curricular'      => $nivel,
                             'semestre_curricular' => $semestre,
