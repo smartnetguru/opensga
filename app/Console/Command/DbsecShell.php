@@ -26,7 +26,7 @@ class DbsecShell extends AppShell
         'Entidade',
     ];
 
-    public $folder = 'geologia';
+    public $folder = 'fisica';
     public $unidadeOrganicaId = 3;
 
 
@@ -222,27 +222,10 @@ class DbsecShell extends AppShell
 
             $codigo_disciplina = $worksheet->getCell('A' . $linha_actual)->getCalculatedValue();
 
-            if($codigo_disciplina=='AEP'){
-                $codigo_disciplina='AEPR';
+            if($codigo_disciplina=='2023'){
+                $codigo_disciplina='AM III';
             }
-            if($codigo_disciplina=='C'){
-                $codigo_disciplina='CART';
-            }
-            if($codigo_disciplina=='CG'){
-                $codigo_disciplina='CGC';
-            }
-            if($codigo_disciplina=='GGE'){
-                $codigo_disciplina='GGEST';
-            }
-            if($codigo_disciplina=='GGU'){
-                $codigo_disciplina='GGUNC';
-            }
-            if($codigo_disciplina=='GRM024'){
-                $codigo_disciplina='TPII';
-            }
-            if($codigo_disciplina=='PPJM'){
-                $codigo_disciplina='PPJMI';
-            }
+
 
             $disciplina = $this->Disciplina->findByCodigoAntigo($codigo_disciplina);
 
@@ -257,7 +240,7 @@ class DbsecShell extends AppShell
             if ($worksheet->getCell('G' . $linha_actual)->getCalculatedValue() == 2) {
                 $semestre_sequencial = $worksheet->getCell('D' . $linha_actual)->getCalculatedValue() * $worksheet->getCell('G' . $linha_actual)->getCalculatedValue();
             }
-            $ramo_id = $worksheet->getCell('L' . $linha_actual)->getCalculatedValue();
+            $ramo_id = $worksheet->getCell('K' . $linha_actual)->getCalculatedValue();
             if ($ramo_id == -1) {
                 $ramo_id = null;
             }
@@ -267,7 +250,7 @@ class DbsecShell extends AppShell
                     'ano_curricular'      => $worksheet->getCell('D' . $linha_actual)->getCalculatedValue(),
                     'semestre_curricular' => $worksheet->getCell('G' . $linha_actual)->getCalculatedValue(),
                     'carga_total'         => $worksheet->getCell('E' . $linha_actual)->getCalculatedValue(),
-                    'creditos'            => $worksheet->getCell('M' . $linha_actual)->getCalculatedValue(),
+                    'creditos'            => $worksheet->getCell('N' . $linha_actual)->getCalculatedValue(),
                     'disciplina_id'       => $disciplina['Disciplina']['id'],
                     'codigo'              => $disciplina['Disciplina']['codigo'] . "-" . $curso['Curso']['codigo'] . "-" . $worksheet->getCell('J' . $linha_actual)->getCalculatedValue(),
                     'ramo_id'             => $ramo_id,
@@ -504,19 +487,17 @@ class DbsecShell extends AppShell
             $this->PlanoEstudo->recursive = -1;
             $this->Curso->recursive = -1;
             $idDisciplina = trim($worksheet->getCell('A' . $linha_actual)->getCalculatedValue());
-            $idCcurso = trim($worksheet->getCell('B' . $linha_actual)->getCalculatedValue());
-            $ano = trim($worksheet->getCell('C' . $linha_actual)->getCalculatedValue());
-            $semestre = trim($worksheet->getCell('D' . $linha_actual)->getCalculatedValue());
-            $curriculum = trim($worksheet->getCell('F' . $linha_actual)->getCalculatedValue());
+            $idCcurso = trim($worksheet->getCell('H' . $linha_actual)->getCalculatedValue());
+            $ano = trim($worksheet->getCell('B' . $linha_actual)->getCalculatedValue());
+            $semestre = trim($worksheet->getCell('C' . $linha_actual)->getCalculatedValue());
+            $curriculum = trim($worksheet->getCell('M' . $linha_actual)->getCalculatedValue());
             $nivel = trim($worksheet->getCell('N' . $linha_actual)->getCalculatedValue());
-            $ramo = trim($worksheet->getCell('G' . $linha_actual)->getCalculatedValue());
-            $idTurma = trim($worksheet->getCell('E' . $linha_actual)->getCalculatedValue());
+            $ramo = trim($worksheet->getCell('I' . $linha_actual)->getCalculatedValue());
+            $idTurma = trim($worksheet->getCell('F' . $linha_actual)->getCalculatedValue());
 
-            if($idCcurso=='0'){
-                $linha_actual++;
-                continue;
+            if($ano=='3003'){
 
-                $ano=2009;
+                $ano=2003;
             }
             if ($idCcurso == '') {
                 $this->out('@@@@@@@'.$linha_actual);
@@ -524,6 +505,9 @@ class DbsecShell extends AppShell
             }
 
             if($idCcurso==20111){
+                $idCcurso = 2011111;
+            }
+            if($idCcurso==0){
                 $idCcurso = 2011111;
             }
             $curso = $this->Curso->findByCodigo($idCcurso);
@@ -538,26 +522,8 @@ class DbsecShell extends AppShell
                 ]);
                 $anolectivo = $this->AnoLectivo->findByAno($ano);
 
-                if($idDisciplina=='AEP'){
-                    $idDisciplina='AEPR';
-                }
-                if($idDisciplina=='C'){
-                    $idDisciplina='CART';
-                }
-                if($idDisciplina=='CG'){
-                    $idDisciplina='CGC';
-                }
-                if($idDisciplina=='GGE'){
-                    $idDisciplina='GGEST';
-                }
-                if($idDisciplina=='GGU'){
-                    $idDisciplina='GGUNC';
-                }
-                if($idDisciplina=='GRM024'){
-                    $idDisciplina='TPII';
-                }
-                if($idDisciplina=='PPJM'){
-                    $idDisciplina='PPJMI';
+                if($idDisciplina=='2023'){
+                    $idDisciplina='AM III';
                 }
 
 
@@ -736,26 +702,8 @@ class DbsecShell extends AppShell
                     }
                 }
 
-                if($idDisciplina=='AEP'){
-                    $idDisciplina='AEPR';
-                }
-                if($idDisciplina=='C'){
-                    $idDisciplina='CART';
-                }
-                if($idDisciplina=='CG'){
-                    $idDisciplina='CGC';
-                }
-                if($idDisciplina=='GGE'){
-                    $idDisciplina='GGEST';
-                }
-                if($idDisciplina=='GGU'){
-                    $idDisciplina='GGUNC';
-                }
-                if($idDisciplina=='GRM024'){
-                    $idDisciplina='TPII';
-                }
-                if($idDisciplina=='PPJM'){
-                    $idDisciplina='PPJMI';
+                if($idDisciplina=='2023'){
+                    $idDisciplina='AM III';
                 }
 
                 $disciplina = $this->Disciplina->findByCodigoAntigo($idDisciplina);
