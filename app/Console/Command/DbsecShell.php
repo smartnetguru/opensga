@@ -26,7 +26,7 @@ class DbsecShell extends AppShell
         'Entidade',
     ];
 
-    public $folder = 'fisica';
+    public $folder = 'esnec';
     public $unidadeOrganicaId = 3;
 
 
@@ -182,6 +182,7 @@ class DbsecShell extends AppShell
         $worksheet = $xls->getActiveSheet();
         foreach ($worksheet->getRowIterator() as $ow) {
             $curso_codigo = $worksheet->getCell('B' . $linha_actual)->getCalculatedValue();
+
             $curso = $this->Curso->findByCodigo($curso_codigo);
             if ($curso_codigo == '') {
                 break;
@@ -250,7 +251,7 @@ class DbsecShell extends AppShell
                     'ano_curricular'      => $worksheet->getCell('D' . $linha_actual)->getCalculatedValue(),
                     'semestre_curricular' => $worksheet->getCell('G' . $linha_actual)->getCalculatedValue(),
                     'carga_total'         => $worksheet->getCell('E' . $linha_actual)->getCalculatedValue(),
-                    'creditos'            => $worksheet->getCell('N' . $linha_actual)->getCalculatedValue(),
+                    'creditos'            => $worksheet->getCell('M' . $linha_actual)->getCalculatedValue(),
                     'disciplina_id'       => $disciplina['Disciplina']['id'],
                     'codigo'              => $disciplina['Disciplina']['codigo'] . "-" . $curso['Curso']['codigo'] . "-" . $worksheet->getCell('J' . $linha_actual)->getCalculatedValue(),
                     'ramo_id'             => $ramo_id,
@@ -487,13 +488,13 @@ class DbsecShell extends AppShell
             $this->PlanoEstudo->recursive = -1;
             $this->Curso->recursive = -1;
             $idDisciplina = trim($worksheet->getCell('A' . $linha_actual)->getCalculatedValue());
-            $idCcurso = trim($worksheet->getCell('H' . $linha_actual)->getCalculatedValue());
-            $ano = trim($worksheet->getCell('B' . $linha_actual)->getCalculatedValue());
-            $semestre = trim($worksheet->getCell('C' . $linha_actual)->getCalculatedValue());
-            $curriculum = trim($worksheet->getCell('M' . $linha_actual)->getCalculatedValue());
+            $idCcurso = trim($worksheet->getCell('B' . $linha_actual)->getCalculatedValue());
+            $ano = trim($worksheet->getCell('C' . $linha_actual)->getCalculatedValue());
+            $semestre = trim($worksheet->getCell('D' . $linha_actual)->getCalculatedValue());
+            $curriculum = trim($worksheet->getCell('F' . $linha_actual)->getCalculatedValue());
             $nivel = trim($worksheet->getCell('N' . $linha_actual)->getCalculatedValue());
-            $ramo = trim($worksheet->getCell('I' . $linha_actual)->getCalculatedValue());
-            $idTurma = trim($worksheet->getCell('F' . $linha_actual)->getCalculatedValue());
+            $ramo = trim($worksheet->getCell('G' . $linha_actual)->getCalculatedValue());
+            $idTurma = trim($worksheet->getCell('E' . $linha_actual)->getCalculatedValue());
 
             if($ano=='3003'){
 
