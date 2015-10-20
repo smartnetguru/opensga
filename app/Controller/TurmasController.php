@@ -605,6 +605,12 @@
             $unidade_organica_id = $this->Session->read('Auth.User.unidade_organica_id');
 
             $conditions = [];
+            $estadoTurma  = $this->request->query('estado_turma');
+            if($estadoTurma){
+                $conditions['Turma.estado_turma_id'] = $estadoTurma;
+            } else{
+                $conditions['Turma.estado_turma_id'] = 1;
+            }
             $paginationOptions = [];
             if ($this->request->is('post')) {
 
@@ -624,7 +630,7 @@
                     $conditions['AnoLectivo.ano'] = $this->request->params['named']['ano_lectivo'];
                 }
             }
-            $conditions['Turma.estado_turma_id'] = 1;
+
             $conditions['Curso.unidade_organica_id'] = $unidade_organica_id;
 
             $this->paginate = [
@@ -644,8 +650,10 @@
                 'order'      => 'Turma.created DESC'
             ];
 
+            $estadoTurma = $this->Turma->EstadoTurma->findById($conditions['Turma.estado_turma_id']);
+
             $turmas = $this->paginate('Turma');
-            $this->set(compact('turmas', 'paginationOptions'));
+            $this->set(compact('turmas', 'paginationOptions','estadoTurma'));
         }
 
         public function faculdade_inscrever_aluno($alunoId, $turmaId)
