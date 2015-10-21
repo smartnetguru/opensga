@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "8ee4e95591576c8e257bbdf8990e305d",
-    "content-hash": "df6b96c93ac74150a35f6fc1d48aa20e",
+    "hash": "037f3a875c611433f85563b8b22e465d",
+    "content-hash": "4275c83e7bdfc4c7cadc11ca53ce42da",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -1019,6 +1019,42 @@
                 "pdf"
             ],
             "time": "2014-06-25 08:31:59"
+        },
+        {
+            "name": "logentries/logentries",
+            "version": "1.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/logentries/le_php.git",
+                "reference": "43beb04c45957c2820399f7a4d116b0324ad1c87"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/logentries/le_php/zipball/43beb04c45957c2820399f7a4d116b0324ad1c87",
+                "reference": "43beb04c45957c2820399f7a4d116b0324ad1c87",
+                "shasum": ""
+            },
+            "require-dev": {
+                "phpunit/phpunit": "3.7.*"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "./"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mark Lacomber",
+                    "email": "marklacomber@gmail.com"
+                }
+            ],
+            "description": "Logging library for use with Logentries",
+            "time": "2014-06-17 08:42:10"
         },
         {
             "name": "markstory/acl_extras",

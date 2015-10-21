@@ -25,7 +25,8 @@
             'Requisicoes.RequisicoesPedido',
             'Entidade',
             'User',
-            'SmsNotification'
+            'SmsNotification',
+            'Docente'
         ];
 
 
@@ -88,6 +89,30 @@
             $xls->disconnectWorksheets();
             unset($xls);
 
+        }
+
+        public function senhaDocentes(){
+            $this->Docente->contain(['Entidade'=>['User']]);
+            $docentes   = $this->Docente->find('all');
+
+            foreach($docentes as $docente){
+                $ultimoLogin = $docente['Entidade']['User']['ultimo_login'];
+
+                if($ultimoLogin==null){
+                    $this->User->id = $docente['Entidade']['User']['id'];
+                    $this->User->set('password',Security::hash('siga12345UEM','blowfish'));
+                    $this->User->set('estado_objecto_id',1);
+                    if($this->User->save()){
+                        $this->out('Actualizando...'.$docente['Entidade']['User']['username']);
+                    } else{
+                        debug($this->User->validationErrors);
+                        debug($docente['Entidade']['User']['username']);
+                        die();
+                    }
+
+
+                }
+            }
         }
 
 

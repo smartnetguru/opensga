@@ -54,7 +54,8 @@
     "google/apiclient": "1.*",
     "trentrichardson/cakephp-scheduler": "1.*",
     "oldskool/whoops-cakephp": "dev-cake2",
-    "raveren/kint": "^1.0"
+    "raveren/kint": "^1.0",
+    "logentries/logentries": "^1.6"
 
   },
   "require-dev": {
