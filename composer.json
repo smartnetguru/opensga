@@ -55,7 +55,8 @@
     "trentrichardson/cakephp-scheduler": "1.*",
     "oldskool/whoops-cakephp": "dev-cake2",
     "raveren/kint": "^1.0",
-    "logentries/logentries": "^1.6"
+    "logentries/logentries": "^1.6",
+    "jeremyharris/cakephp-newrelic": "dev-master"
 
   },
   "require-dev": {

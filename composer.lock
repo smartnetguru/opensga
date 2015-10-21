@@ -4,21 +4,21 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "037f3a875c611433f85563b8b22e465d",
-    "content-hash": "4275c83e7bdfc4c7cadc11ca53ce42da",
+    "hash": "f0ccabd7e17cd2ed0fc2b024aaad86be",
+    "content-hash": "9d7d22b90fa366259d52d629f7b66b97",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
-            "version": "2.8.21",
+            "version": "2.8.22",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "92642ca4906e6681a1301971cf41500d7c68581c"
+                "reference": "d24eb9c69e5b6bdab53a7e223e58507bbea842dd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/92642ca4906e6681a1301971cf41500d7c68581c",
-                "reference": "92642ca4906e6681a1301971cf41500d7c68581c",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/d24eb9c69e5b6bdab53a7e223e58507bbea842dd",
+                "reference": "d24eb9c69e5b6bdab53a7e223e58507bbea842dd",
                 "shasum": ""
             },
             "require": {
@@ -68,7 +68,7 @@
                 "s3",
                 "sdk"
             ],
-            "time": "2015-09-17 00:17:24"
+            "time": "2015-10-15 21:08:01"
         },
         {
             "name": "cakedc/migrations",
@@ -154,16 +154,16 @@
         },
         {
             "name": "cakephp/collection",
-            "version": "3.1.1",
+            "version": "3.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cakephp/collection.git",
-                "reference": "532733318c5f2349fce4fd5c305e331e3d9fb4a5"
+                "reference": "b9000f73c5087160360c1d4c5f7239af24fe6b58"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cakephp/collection/zipball/532733318c5f2349fce4fd5c305e331e3d9fb4a5",
-                "reference": "532733318c5f2349fce4fd5c305e331e3d9fb4a5",
+                "url": "https://api.github.com/repos/cakephp/collection/zipball/b9000f73c5087160360c1d4c5f7239af24fe6b58",
+                "reference": "b9000f73c5087160360c1d4c5f7239af24fe6b58",
                 "shasum": ""
             },
             "type": "library",
@@ -186,11 +186,11 @@
                 }
             ],
             "description": "Work easily with arrays and iterators by having a battery of utility traversal methods",
-            "time": "2015-10-02 03:15:47"
+            "time": "2015-10-12 18:52:34"
         },
         {
             "name": "cakephp/core",
-            "version": "3.1.1",
+            "version": "3.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cakephp/core.git",
@@ -229,16 +229,16 @@
         },
         {
             "name": "cakephp/database",
-            "version": "3.1.1",
+            "version": "3.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cakephp/database.git",
-                "reference": "8145ed95c52aeb7afe7a5aa946abed2ee54b6611"
+                "reference": "531eba73d288c64ee6d2999a657c7bc97f5dbea7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cakephp/database/zipball/8145ed95c52aeb7afe7a5aa946abed2ee54b6611",
-                "reference": "8145ed95c52aeb7afe7a5aa946abed2ee54b6611",
+                "url": "https://api.github.com/repos/cakephp/database/zipball/531eba73d288c64ee6d2999a657c7bc97f5dbea7",
+                "reference": "531eba73d288c64ee6d2999a657c7bc97f5dbea7",
                 "shasum": ""
             },
             "require": {
@@ -266,20 +266,20 @@
                 }
             ],
             "description": "Flexible and powerful Database abstraction library with a familiar PDO-like API",
-            "time": "2015-10-02 03:15:47"
+            "time": "2015-10-18 09:05:30"
         },
         {
             "name": "cakephp/datasource",
-            "version": "3.1.1",
+            "version": "3.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cakephp/datasource.git",
-                "reference": "89bab4a22d2f508165d84f2e60ba869484341e7d"
+                "reference": "7016014d870d13ff884817ef6fd176325c702b67"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cakephp/datasource/zipball/89bab4a22d2f508165d84f2e60ba869484341e7d",
-                "reference": "89bab4a22d2f508165d84f2e60ba869484341e7d",
+                "url": "https://api.github.com/repos/cakephp/datasource/zipball/7016014d870d13ff884817ef6fd176325c702b67",
+                "reference": "7016014d870d13ff884817ef6fd176325c702b67",
                 "shasum": ""
             },
             "require": {
@@ -306,11 +306,11 @@
                 }
             ],
             "description": "Provides connection managing and traits for Entities and Queries that can be reused for different datastores",
-            "time": "2015-10-01 19:32:12"
+            "time": "2015-10-15 11:11:39"
         },
         {
             "name": "cakephp/event",
-            "version": "3.1.1",
+            "version": "3.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cakephp/event.git",
@@ -343,16 +343,16 @@
         },
         {
             "name": "cakephp/orm",
-            "version": "3.1.1",
+            "version": "3.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cakephp/orm.git",
-                "reference": "98696e4b76de97c0481f0dd48df4f55cdf194766"
+                "reference": "d2c01809c2e3822e551d3566d1d83ad36c1df7a6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cakephp/orm/zipball/98696e4b76de97c0481f0dd48df4f55cdf194766",
-                "reference": "98696e4b76de97c0481f0dd48df4f55cdf194766",
+                "url": "https://api.github.com/repos/cakephp/orm/zipball/d2c01809c2e3822e551d3566d1d83ad36c1df7a6",
+                "reference": "d2c01809c2e3822e551d3566d1d83ad36c1df7a6",
                 "shasum": ""
             },
             "require": {
@@ -384,20 +384,20 @@
                 }
             ],
             "description": "CakePHP ORM - Provides a flexible and powerful ORM implementing a data-mapper pattern.",
-            "time": "2015-10-01 19:32:12"
+            "time": "2015-10-18 01:13:10"
         },
         {
             "name": "cakephp/utility",
-            "version": "3.1.1",
+            "version": "3.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cakephp/utility.git",
-                "reference": "ab757b6f99fe19d943b62e0b229ac8013d513c74"
+                "reference": "5a8f6c024b20a215f734bce2535e3c67d2eb0152"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cakephp/utility/zipball/ab757b6f99fe19d943b62e0b229ac8013d513c74",
-                "reference": "ab757b6f99fe19d943b62e0b229ac8013d513c74",
+                "url": "https://api.github.com/repos/cakephp/utility/zipball/5a8f6c024b20a215f734bce2535e3c67d2eb0152",
+                "reference": "5a8f6c024b20a215f734bce2535e3c67d2eb0152",
                 "shasum": ""
             },
             "type": "library",
@@ -420,20 +420,20 @@
                 }
             ],
             "description": "CakePHP Utility classes such as Inflector, String, Hash, and Security",
-            "time": "2015-09-30 03:15:40"
+            "time": "2015-10-15 20:17:57"
         },
         {
             "name": "cakephp/validation",
-            "version": "3.1.1",
+            "version": "3.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cakephp/validation.git",
-                "reference": "1fe20a50fc723dfdc6c2bf8cdc7d0056f2bc8128"
+                "reference": "3cee2c52ee72f068f669ef32aa11305c388e05a8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cakephp/validation/zipball/1fe20a50fc723dfdc6c2bf8cdc7d0056f2bc8128",
-                "reference": "1fe20a50fc723dfdc6c2bf8cdc7d0056f2bc8128",
+                "url": "https://api.github.com/repos/cakephp/validation/zipball/3cee2c52ee72f068f669ef32aa11305c388e05a8",
+                "reference": "3cee2c52ee72f068f669ef32aa11305c388e05a8",
                 "shasum": ""
             },
             "require": {
@@ -456,7 +456,7 @@
                 }
             ],
             "description": "CakePHP Validation library",
-            "time": "2015-09-30 02:11:40"
+            "time": "2015-10-16 02:00:46"
         },
         {
             "name": "composer/installers",
@@ -648,16 +648,16 @@
         },
         {
             "name": "facebook/php-sdk-v4",
-            "version": "5.0.0",
+            "version": "5.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/facebook/facebook-php-sdk-v4.git",
-                "reference": "b5d7e5c8b85419f9031b08a161e9030dca35f5a1"
+                "reference": "cc551f793492fa92ca107d596a6f1e3a62fb894c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/facebook/facebook-php-sdk-v4/zipball/b5d7e5c8b85419f9031b08a161e9030dca35f5a1",
-                "reference": "b5d7e5c8b85419f9031b08a161e9030dca35f5a1",
+                "url": "https://api.github.com/repos/facebook/facebook-php-sdk-v4/zipball/cc551f793492fa92ca107d596a6f1e3a62fb894c",
+                "reference": "cc551f793492fa92ca107d596a6f1e3a62fb894c",
                 "shasum": ""
             },
             "require": {
@@ -699,7 +699,7 @@
                 "facebook",
                 "sdk"
             ],
-            "time": "2015-07-08 19:08:57"
+            "time": "2015-10-13 22:11:58"
         },
         {
             "name": "filp/whoops",
@@ -978,6 +978,44 @@
                 "web service"
             ],
             "time": "2015-03-18 18:23:50"
+        },
+        {
+            "name": "jeremyharris/cakephp-newrelic",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jeremyharris/cakephp-newrelic.git",
+                "reference": "78317455e7dee426bedeba28a4ea9bbbae410802"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jeremyharris/cakephp-newrelic/zipball/78317455e7dee426bedeba28a4ea9bbbae410802",
+                "reference": "78317455e7dee426bedeba28a4ea9bbbae410802",
+                "shasum": ""
+            },
+            "require": {
+                "composer/installers": "*"
+            },
+            "type": "cakephp-plugin",
+            "extra": {
+                "installer-name": "NewRelic"
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "Jeremy Harris",
+                    "email": "jeremy@someguyjeremy.com"
+                }
+            ],
+            "description": "New Relic is a plugin for CakePHP that makes transactions more useful",
+            "homepage": "https://github.com/jeremyharris/cakephp-newrelic",
+            "keywords": [
+                "cakephp",
+                "new relic",
+                "plugin",
+                "route"
+            ],
+            "time": "2014-10-20 20:21:10"
         },
         {
             "name": "laurentbrieu/tcpdf",
@@ -2182,6 +2220,7 @@
         "dereuromark/cakephp-databaselog": 20,
         "laurentbrieu/tcpdf": 20,
         "oldskool/whoops-cakephp": 20,
+        "jeremyharris/cakephp-newrelic": 20,
         "cakephp/debug_kit": 20
     },
     "prefer-stable": false,
