@@ -336,8 +336,14 @@
             $this->id = $data['Inscricao']['inscricao_id'];
 
 
+            if($data['Inscricao']['desistiu']){
+                $data['Inscricao']['estado_inscricao_id'] = 8;
+
+            } elseif($data['Inscricao']['anulou']){
+                $data['Inscricao']['estado_inscricao_id'] = 9;
+            }
             //Se tiver nota final, entao a cadeira terminou
-            if (!empty($data['Inscricao']['nota_final'])) {
+            elseif (!empty($data['Inscricao']['nota_final'])) {
                 if ($data['Inscricao']['nota_final'] < 10) {
                     $data['Inscricao']['estado_inscricao_id'] = 10;
                 } else {
@@ -376,6 +382,7 @@
                 }
 
             }
+
 
             if ($this->save($data)) {
                 return true;

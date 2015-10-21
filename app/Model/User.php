@@ -40,7 +40,7 @@
             ]
         ];
         var $hasMany = [
-            'Funcionario' => [
+            'Funcionario'      => [
                 'className'    => 'Funcionario',
                 'foreignKey'   => 'user_id',
                 'dependent'    => false,
@@ -53,7 +53,7 @@
                 'finderQuery'  => '',
                 'counterQuery' => ''
             ],
-            'GroupsUser'  => [
+            'GroupsUser'       => [
                 'className'    => 'GroupsUser',
                 'foreignKey'   => 'user_id',
                 'dependent'    => false,
@@ -66,7 +66,7 @@
                 'finderQuery'  => '',
                 'counterQuery' => ''
             ],
-            'UserLoginHistory'  => [
+            'UserLoginHistory' => [
                 'className'    => 'UserLoginHistory',
                 'foreignKey'   => 'user_id',
                 'dependent'    => false,
@@ -100,6 +100,19 @@
             ]
         ];
 
+        public function actualizaLoginHistory($userId, $groupId, $data, $ip)
+        {
+            $arrayLoginHistory = ['UserLoginHistory' => ['user_id'    => $userId,
+                                                         'group_id'   => $groupId,
+                                                         'login_date' => $data,
+                                                         'ip'         => $ip
+            ]
+            ];
+            $this->UserLoginHistory->create();
+            $this->UserLoginHistory->save($arrayLoginHistory);
+
+            return true;
+        }
 
         public function afterSave($created, $options = [])
         {
@@ -229,72 +242,6 @@
             return strtolower($email);
         }
 
-        function deleteUser($user_id)
-        {
-            $query = "delete from users where id = {$user_id} ";
-            $resultado = $this->query($query);
-
-            //var_dump($query);
-            return $resultado;
-        }
-
-        /**
-         * Gera o nome de Usuario de Cada Utilizador de acordo com criterios pre-estabelecidos
-         * Por Enquanto Ele usa a estrutura "primeironome.ultimonome<sequencia>"
-         */
-        function geraUsername($nome)
-        {
-            $nome = $this->normalize_str($nome);
-            $nomes = explode(' ', $nome);
-
-            $username = strtolower($nomes[0]) . "." . strtolower(end($nomes));
-
-            $username1 = $username;
-            $numero = 1;
-            $linha = 1;
-            while ($linha != 0) {
-                $this->contain();
-                $users = $this->find('count', ['conditions' => ['username' => $username]]);
-                $linha = $users;
-                if ($linha == 0) {
-
-                    //Actualiza o estado do candidato
-
-                    $this->Candidatura->id = $data['Dados']['numero_candidato'];
-
-                    $this->Candidatura->set('estado_matricula_id', 1);
-                    $this->Candidatura->set('estado_candidatura_id', 3);
-
-                    $this->Candidatura->set('data_matricula', date('Y-m-d H:m:s'));
-                    if ($this->Candidatura->save()) {
-
-                    }
-
-                    return $username;
-                } else {
-
-                    $username = $username1 . $numero;
-                    $numero++;
-                }
-            }
-
-            return $username;
-        }
-
-        /*function beforeSave($options = array()) {
-            //So gera Password e Username se for novo cadastro
-
-            if (isset($this->request->data['User']['password'])) {
-                $this->request->data['User']['password'] = Security::hash($this->request->data['User']['password'], 'Blowfish');
-            }
-
-            if (!isset($this->request->data['User']['username'])) {
-                $this->request->data['User']['username'] = $this->geraUsername($this->request->data['User']['name']);
-            }
-            return true;
-        }
-    */
-
         public function normalize_str($str)
         {
             $invalid = [
@@ -391,6 +338,88 @@
             return $str;
         }
 
+        /*function beforeSave($options = array()) {
+            //So gera Password e Username se for novo cadastro
+
+            if (isset($this->request->data['User']['password'])) {
+                $this->request->data['User']['password'] = Security::hash($this->request->data['User']['password'], 'Blowfish');
+            }
+
+            if (!isset($this->request->data['User']['username'])) {
+                $this->request->data['User']['username'] = $this->geraUsername($this->request->data['User']['name']);
+            }
+            return true;
+        }
+    */
+
+        function deleteUser($user_id)
+        {
+            $query = "delete from users where id = {$user_id} ";
+            $resultado = $this->query($query);
+
+            //var_dump($query);
+            return $resultado;
+        }
+
+        public function geraPassword($length = 8, $capital = true, $symbol = true)
+        {
+            $chars = "abcdefghijklmnopqrstuvwxyz0123456789";
+            if ($capital == true) {
+                $chars .= "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            }
+            if ($symbol == true) {
+                $chars .= "!@#$%^&*()_-=+;:,.?";
+            }
+            $password = substr(str_shuffle($chars), 0, $length);
+
+            return $password;
+        }
+
+        /**
+         * Gera o nome de Usuario de Cada Utilizador de acordo com criterios pre-estabelecidos
+         * Por Enquanto Ele usa a estrutura "primeironome.ultimonome<sequencia>"
+         */
+        function geraUsername($nome)
+        {
+            $nome = $this->normalize_str($nome);
+            $nomes = explode(' ', $nome);
+
+            $username = strtolower($nomes[0]) . "." . strtolower(end($nomes));
+
+            $username1 = $username;
+            $numero = 1;
+            $linha = 1;
+            while ($linha != 0) {
+                $this->contain();
+                $users = $this->find('count', ['conditions' => ['username' => $username]]);
+                $linha = $users;
+                if ($linha == 0) {
+
+                    //Actualiza o estado do candidato
+
+                    $this->Candidatura->id = $data['Dados']['numero_candidato'];
+
+                    $this->Candidatura->set('estado_matricula_id', 1);
+                    $this->Candidatura->set('estado_candidatura_id', 3);
+
+                    $this->Candidatura->set('data_matricula', date('Y-m-d H:m:s'));
+                    if ($this->Candidatura->save()) {
+
+                    }
+
+                    return $username;
+                } else {
+
+                    $username = $username1 . $numero;
+                    $numero++;
+                }
+            }
+
+            return $username;
+        }
+
+        //Verifica se um dado Estudante é aluno
+
         function getAlunoIDByUser($user_id)
         {
             $query = "SELECT ta.id FROM users us, Alunos ta WHERE ta.user_id = us.id AND us.id = {$user_id} ";
@@ -410,8 +439,6 @@
 
             return $funcionario;
         }
-
-        //Verifica se um dado Estudante é aluno
 
         function getFuncionarioIDByUser($user_id)
         {
@@ -503,20 +530,6 @@
             return $novaPassword;
         }
 
-        public function geraPassword($length = 8, $capital = true, $symbol = true)
-        {
-            $chars = "abcdefghijklmnopqrstuvwxyz0123456789";
-            if ($capital == true) {
-                $chars .= "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-            }
-            if ($symbol == true) {
-                $chars .= "!@#$%^&*()_-=+;:,.?";
-            }
-            $password = substr(str_shuffle($chars), 0, $length);
-
-            return $password;
-        }
-
         function splitName($name, $prefix = '')
         {
             $pos = strrpos($name, ' ');
@@ -535,14 +548,6 @@
                 $prefix . 'firstname' => $firstname,
                 $prefix . 'surname'   => $surname
             ];
-        }
-
-
-        public function actualizaLoginHistory($userId,$groupId,$data,$ip){
-            $arrayLoginHistory = array('UserLoginHistory'=>array('user_id'=>$userId,'group_id'=>$groupId,'login_date'=>$data,'ip'=>$ip));
-            $this->UserLoginHistory->create();
-            $this->UserLoginHistory->save($arrayLoginHistory);
-            return true;
         }
 
     }

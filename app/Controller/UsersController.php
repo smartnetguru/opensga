@@ -103,10 +103,7 @@
                     if ($this->User->alteraPassword($this->request->data)) {
                         $this->Session->setFlash('Senha Alterada Com Sucesso. Uma SMS e um Email serao enviados para o usuario com a notificacao',
                             'default', ['class' => 'alert alert-success']);
-                        CakeResque::enqueue(
-                            'default', 'UserShell',
-                            ['afterChangePassword', $userId, $this->request->data['User']['senhanova1']]
-                        );
+
                         $this->Redirect('/');
                     } else {
                         $this->Session->setFlash('Problemas com a Password. Tente novamente', 'default',
@@ -118,10 +115,7 @@
                     $this->User->alteraPassword($this->request->data);
                     $this->Session->setFlash('Senha Alterada Com Sucesso. Uma SMS e um Email serao enviados para o usuario com a notificacao',
                         'default', ['class' => 'alert alert-success']);
-                    CakeResque::enqueue(
-                        'default', 'UserShell',
-                        ['afterChangePassword', $userId, $this->request->data['User']['senhanova1']]
-                    );
+
                     $this->Redirect('/');
                 } elseif ($this->request->data['User']['usar_senha_padrao']) {
                     $this->request->data['User']['novasenha1'] = $this->request->data['User']['senha_padrao'];
@@ -129,17 +123,14 @@
                     $this->User->alteraPassword($this->request->data);
                     $this->Session->setFlash('Senha Alterada Com Sucesso. Uma SMS e um Email serao enviados para o usuario com a notificacao',
                         'default', ['class' => 'alert alert-success']);
-                    CakeResque::enqueue(
-                        'default', 'UserShell',
-                        ['afterChangePassword', $userId, $this->request->data['User']['senhanova1']]
-                    );
+
                     $this->Redirect('/');
                 } else {
                     $this->Session->setFlash('Nao foi solicitada nenhuma opcao de senha. Tente Novamente', 'default',
                         ['class' => 'alert alert-success']);
                 }
             }
-            $randomPassword = $this->User->generatePassword();
+            $randomPassword = $this->User->geraPassword();
             $this->set(compact('randomPassword', 'defaultPassword', 'userId'));
         }
 
@@ -626,7 +617,7 @@
                     $aluno = $this->User->Entidade->Aluno->findByCodigo($username);
                     if ($aluno) {
                         $ultimo_login = $aluno['Entidade']['User']['ultimo_login'];
-                        if ($ultimo_login == null) {
+                       // if ($ultimo_login == null) {
                             $this->Auth->login($aluno['Entidade']['User']);
 
                             $entidade = ['Entidade' => $aluno['Entidade']];
@@ -662,10 +653,10 @@
                                 'estudante'  => true
                             ]);
 
-                        } else {
+                      /*  } else {
                             $this->Flash->error('Esta conta ja esta activa. Se esqueceu a senha, contacte o Registo Academico da sua Faculdade');
                             $this->redirect(['controller' => 'users', 'action' => 'login']);
-                        }
+                        }*/
 
                     }
                 }

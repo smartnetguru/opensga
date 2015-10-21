@@ -730,7 +730,7 @@
                         'Turma.curso_id'       => $turma['Turma']['curso_id'],
                         'Turma.disciplina_id'  => $turma['Turma']['disciplina_id'],
                         'Turma.ano_lectivo_id' => $turma['Turma']['ano_lectivo_id'],
-                        'Turma.semestre_curricular'=>$turma['Turma']['semestre_curricular']
+                        //'Turma.semestre_curricular'=>$turma['Turma']['semestre_curricular']
                     ]
                 ]);
                 $todasTurmasIds = array_keys($todasTurmas);
