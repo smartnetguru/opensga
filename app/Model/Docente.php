@@ -126,7 +126,7 @@ class Docente extends AppModel
         //Grava os dados do Usuario
         $this->Entidade->User->create();
         $data['User']['username'] = $data['Docente']['codigo'];
-        $data['User']['password'] = Security::hash('uem2013', 'blowfish');
+        $data['User']['password'] = Security::hash('siga12345UEM', 'blowfish');
         $data['User']['codigocartao'] = $data['Docente']['codigo'];
         $data['User']['name'] = $data['Entidade']['name'];
         $data['User']['group_id'] = 4;

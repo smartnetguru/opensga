@@ -106,6 +106,7 @@
                         $this->out('Actualizando...'.$docente['Entidade']['User']['username']);
                     } else{
                         debug($this->User->validationErrors);
+                        debug($docente);
                         debug($docente['Entidade']['User']['username']);
                         die();
                     }
