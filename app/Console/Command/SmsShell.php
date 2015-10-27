@@ -100,4 +100,41 @@ class SMSShell extends AppShell {
 
                 }
 
+
+    public function envia_sms_graduados()
+    {
+        AuditableConfig::$Logger = ClassRegistry::init('Auditable.Logger');
+        $this->Aluno->contain(array(
+            'Entidade' => array(
+                'EntidadeContacto' => array(
+                    'conditions' => array('tipo_contacto_id' => 2)
+                )
+            )
+        ));
+        $candidatos = $this->Aluno->CandidatoGraduacao->find('all', array('conditions' => array('CandidatoGraduacao.estado_candidatura_id'=>[1,2,3,4,5],'cerimonia_graduacao_id'=>5)));
+        $this->out('Enviando SMS para um total de ' . count($candidatos) . ' Estudantes');
+
+        $mensagem = "Caro estudante, queira contactar a DRA da UEM com Urgencia para tratar sobre a cerimonia de graduacao. Sergio";
+        //$this->SmsEnviada->sendSMS('826614965', $mensagem);
+        //$this->SmsEnviada->sendSMS('842587341', $mensagem);
+        //$this->SmsEnviada->sendSMS('824601330', $mensagem);
+        //$this->SmsEnviada->sendSMS('842015744', $mensagem);
+
+        foreach ($candidatos as $candidato) {
+            
+            if ($candidato['CandidatoGraduacao']['telemovel'] != '') {
+                $numero = $candidato['CandidatoGraduacao']['telemovel'];
+                if (is_numeric($numero)) {
+                    debug($numero);
+
+
+                    //$this->SmsEnviada->sendSMS($numero, $mensagem);
+                    $this->out('SMS Enviada para---' . $numero);
+                }
+
+
+            }
+        }
+    }
+
 }

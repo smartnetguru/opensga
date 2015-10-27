@@ -39,11 +39,7 @@
             }
             $this->Docente->contain([
                 'Entidade' => [
-                    'User' => [
-                        'conditions' => [
-                            'group_id' => 4
-                        ]
-                    ]
+                    'User'
                 ]
             ]);
             $docentes = $this->Docente->find('all', []);
@@ -419,6 +415,9 @@
                         $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Turmas/relatorios_turmas_abertas";
 
                         $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/ReportManager";
+
+                        $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Users/alterar_senha_sistema";
+                        $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Users/alterar_senha_email";
 
 
                         //Permissoes temporarias para tempo de matriculas

@@ -320,7 +320,9 @@
         public function processaFicheiroRenovacao($file_url, $anoLectivoAno)
         {
             App::uses('File', 'Utility');
-            $linhas = file(Configure::read('OpenSGA.save_path') . DS . $file_url, FILE_IGNORE_NEW_LINES);
+            $linhas = file( $file_url, FILE_IGNORE_NEW_LINES);
+            debug($file_url);
+            debug($linhas);
             foreach ($linhas as $linha) {
 
                 switch ($linha[0]) {
@@ -344,7 +346,8 @@
                         $montante_decimal = substr($montante, -2);
                         $montante_real = ltrim(substr($montante, 0, -2), '0');
                         $montante = $montante_real . '.' . $montante_decimal;
-
+                        debug($referencia);
+die();
 
                         $transacao = [];
                         $deposito = [];
