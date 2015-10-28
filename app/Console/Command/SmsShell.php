@@ -121,7 +121,7 @@ class SMSShell extends AppShell {
         //$this->SmsEnviada->sendSMS('842015744', $mensagem);
 
         foreach ($candidatos as $candidato) {
-            
+
             if ($candidato['CandidatoGraduacao']['telemovel'] != '') {
                 $numero = $candidato['CandidatoGraduacao']['telemovel'];
                 if (is_numeric($numero)) {

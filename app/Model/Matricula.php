@@ -2,6 +2,7 @@
 
     App::uses('CakeSession', 'Model/Datasource');
     App::uses('CakeEvent', 'Event');
+    App::uses('OpenSGAAmazonS3', 'Lib');
 
     /**
      * Model de Matricula
@@ -12,6 +13,8 @@
      * @package         opensga
      * @subpackage      opensga.core.controller
      * @since           OpenSGA v 0.10.0.0
+     *
+     * @property FinanceiroPagamento $FinanceiroPagamento
      *
      */
     class Matricula extends AppModel
@@ -124,52 +127,83 @@
             return $matriculas;
         }
 
-        /**
-         * Retorna a renovacao dado o id do aluno e o ano lectivo
-         *
-         * @todo rever essa funcao/melhorar
-         *
-         * @param type $aluno_id
-         * @param type $ano
-         *
-         * @return type
-         */
-        public function getRenovacaoByAlunoAndAnoLectivo($aluno_id, $ano)
+        public function getReferenciaRenovacaoMatricula($alunoId, $anoLectivoAno = null)
         {
-            $ano_lectivo_id = $this->AnoLectivo->getAnoLectivoIdByAno($ano);
 
-            $matricula = $this->find('first',
-                ['conditions' => ['aluno_id' => $aluno_id, 'ano_lectivo_id' => $ano_lectivo_id]]);
-
-            return $matricula;
-        }
-
-        public function getReferenciaRenovacaoMatricula($alunoId){
-            $valor = $this->getValorRenovacaoMatricula($alunoId);
-            $aluno = $this->Aluno->findById($alunoId);
-            $ano_ingresso = $aluno['Aluno']['ano_ingresso'];
-            if ($ano_ingresso >= 2000 && $ano_ingresso <= 2007) {
-                $referencia = "1" . substr($aluno['Aluno']['codigo'], 3);
-            } elseif ($ano_ingresso > 2007) {
-                $referencia = "1" . $aluno['Aluno']['codigo'];
-            } else {
-                $referencia = $aluno['Aluno']['codigo'];
+            if (!$anoLectivoAno) {
+                $anoLectivoAno = Configure::read('OpenSGA.ano_lectivo');
             }
-            $valor = $valor.'00';
-            $checkDigito = $this->Aluno->Entidade->FinanceiroTransacao->geraCheckDigito(77001,$referencia,$valor);
+            $anoLectivo = $this->AnoLectivo->findByAno($anoLectivoAno);
+            $this->contain('FinanceiroPagamento');
+            $matricula = $this->findByAlunoIdAndAnoLectivoId($alunoId, $anoLectivo['AnoLectivo']['id']);
 
-            $referencia = $referencia.$checkDigito;
-            return $referencia;
+            if (!empty($matricula)) {
+                if ($matricula['Matricula']['estado_matricula_id'] == 5) {
+                    return $matricula['FinanceiroPagamento']['referencia_pagamento'];
+                }
+            } else {
+                $valor = $this->getValorRenovacaoMatricula($alunoId);
+                $aluno = $this->Aluno->findById($alunoId);
+                $ano_ingresso = $aluno['Aluno']['ano_ingresso'];
+                if ($ano_ingresso >= 2000 && $ano_ingresso <= 2007) {
+                    $referencia = "1" . substr($aluno['Aluno']['codigo'], 3);
+                } elseif ($ano_ingresso > 2007) {
+                    $referencia = "1" . $aluno['Aluno']['codigo'];
+                } else {
+                    $referencia = $aluno['Aluno']['codigo'];
+                }
+                if ($valor == 80) {
+                    $tipoPagamentoId = 37;
+                } else {
+                    $tipoPagamentoId = 38;
+                }
+                $valor = $valor . '00';
+                $checkDigito = $this->Aluno->Entidade->FinanceiroTransacao->geraCheckDigito(77001, $referencia, $valor);
+
+
+                $referencia = $referencia . $checkDigito;
+
+                $userId = CakeSession::read('Auth.User.id');
+                if(!$userId){
+                    $userId = $aluno['Aluno']['user_id'];
+                }
+
+                $pagamentoId = $this->FinanceiroPagamento->criaPagamento($aluno['Aluno']['entidade_id'], $valor,
+                    date('Y-m-d'), $tipoPagamentoId, $referencia);
+                $arrayMatricula=[
+                    'Matricula'=>[
+                        'aluno_id'                => $aluno['Aluno']['id'],
+                        'curso_id'                => $aluno['Aluno']['curso_id'],
+                        'plano_estudo_id'         => $aluno['Aluno']['plano_estudo_id'],
+                        'data'                    => date('Y-m-d'),
+                        'estado_matricula_id'     => 5,
+                        'ano_lectivo_id'          => $anoLectivo['AnoLectivo']['id'],
+                        'tipo_matricula_id'       => 2,
+                        'user_id'                 => $userId,
+                        'financeiro_pagamento_id' => $pagamentoId
+                    ]
+                ];
+                $this->create();
+                if($this->save($arrayMatricula)){
+                    return $referencia;
+                } else{
+                    return false;
+                }
+
+            }
+
         }
-
 
         /**
          * Retorna o valor da renovacao de Matricula
+         *
          * @todo Verificar essa funcao
+         *
          * @param $alunoId
          */
-        public function getValorRenovacaoMatricula($alunoId){
-            $statusRenovacao = $this->getStatusRenovacao($alunoId,true);
+        public function getValorRenovacaoMatricula($alunoId)
+        {
+            $statusRenovacao = $this->getStatusRenovacao($alunoId, true);
 
             $aluno = $this->Aluno->findById($alunoId);
             $curso_turno = $this->Aluno->Curso->CursosTurno->find('first',
@@ -177,15 +211,15 @@
             if ($curso_turno['CursosTurno']['turno_id'] == 1) {
                 $valorBase = 80;
             } else {
-                $valorBase= 160;
+                $valorBase = 160;
             }
-            if(empty($statusRenovacao)){
+            if (empty($statusRenovacao)) {
                 return 0;
             }
-            if(count($statusRenovacao)==1){
+            if (count($statusRenovacao) == 1) {
                 return $valorBase;
-            } else{
-                return $valorBase+((2000+$valorBase)*(count($statusRenovacao)-1));
+            } else {
+                return $valorBase + ((2000 + $valorBase) * (count($statusRenovacao) - 1));
             }
         }
 
@@ -210,7 +244,7 @@
                     ['conditions' => ['aluno_id' => $aluno['Aluno']['id'], 'curso_id' => $aluno['Aluno']['curso_id']]]);
                 $ano_lectivo_conditions['ano <='] = $historicoAluno['HistoricoCurso']['ano_fim'];
             } else {
-                if ($renovacoes_futuras===true) {
+                if ($renovacoes_futuras === true) {
 
                     $ano_lectivo_maximo = $this->AnoLectivo->find('first', ['order' => 'AnoLectivo.ano DESC']);
                     $ano_lectivo_conditions['ano <='] = $ano_lectivo_maximo['AnoLectivo']['ano'];
@@ -234,6 +268,26 @@
             }
 
             return $array_renovacao_falta;
+        }
+
+        /**
+         * Retorna a renovacao dado o id do aluno e o ano lectivo
+         *
+         * @todo rever essa funcao/melhorar
+         *
+         * @param type $aluno_id
+         * @param type $ano
+         *
+         * @return type
+         */
+        public function getRenovacaoByAlunoAndAnoLectivo($aluno_id, $ano)
+        {
+            $ano_lectivo_id = $this->AnoLectivo->getAnoLectivoIdByAno($ano);
+
+            $matricula = $this->find('first',
+                ['conditions' => ['aluno_id' => $aluno_id, 'ano_lectivo_id' => $ano_lectivo_id]]);
+
+            return $matricula;
         }
 
         /**
@@ -320,9 +374,12 @@
         public function processaFicheiroRenovacao($file_url, $anoLectivoAno)
         {
             App::uses('File', 'Utility');
-            $linhas = file( $file_url, FILE_IGNORE_NEW_LINES);
-            debug($file_url);
-            debug($linhas);
+            $tmpPath = '/tmp/bimtxt' . date('His') . '.txt';
+            $AmazonS3 = new OpenSGAAmazonS3();
+
+            $file = $AmazonS3->getObject($file_url, null, $tmpPath);
+            $linhas = file($file, FILE_IGNORE_NEW_LINES);
+
             foreach ($linhas as $linha) {
 
                 switch ($linha[0]) {
@@ -346,8 +403,9 @@
                         $montante_decimal = substr($montante, -2);
                         $montante_real = ltrim(substr($montante, 0, -2), '0');
                         $montante = $montante_real . '.' . $montante_decimal;
-                        debug($referencia);
-die();
+                        debug($referencia . '-----' . $montante . '---------' . $data);
+                        continue;
+                        die();
 
                         $transacao = [];
                         $deposito = [];

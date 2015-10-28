@@ -73,6 +73,76 @@
             ]
         ];
 
+        public function criaPagamento(
+            $entidadeId,
+            $valor,
+            $dataEmissao,
+            $tipoPagamentoId,
+            $referenciaPagamento,
+            $dataPagamento = null,
+            $dataLimite = null
+        ) {
+            $datasource = $this->Aluno->getDatasource();
+            $datasource->begin();
+            $transacao = [];
+            $pagamento = [];
+
+            $pagamento['financeiro_tipo_pagamento_id'] = $tipoPagamentoId;
+            $transacao['valor'] = $valor;
+            $transacao['entidade_id'] = $entidadeId;
+            $transacao['financeiro_tipo_transacao_id'] = 2;
+
+            $financeiroConta = $this->Aluno->Entidade->FinanceiroTransacao->FinanceiroConta->getByEntidadeId($entidadeId);
+            $transacao['financeiro_conta_id'] = $financeiroConta['FinanceiroConta']['id'];
+            $transacao['financeiro_estado_transacao_id'] = 1;
+            $this->Aluno->Entidade->FinanceiroTransacao->create();
+            $this->Aluno->Entidade->FinanceiroTransacao->save(['FinanceiroTransacao' => $transacao]);
+
+            $aluno = $this->Aluno->findByEntidadeId($entidadeId);
+
+            $pagamento['aluno_id'] = $aluno['Aluno']['id'];
+            $pagamento['financeiro_conta_id'] = $financeiroConta['FinanceiroConta']['id'];
+            $pagamento['valor'] = $transacao['valor'];
+            $pagamento['data_limite'] = $dataLimite;
+            $pagamento['data_emissao'] = $dataEmissao;
+            $pagamento['data_pagamento'] = $dataPagamento;
+            $anolectivo = $this->Aluno->Matricula->AnoLectivo->findByAno(
+                Configure::read('OpenSGA.ano_lectivo')
+            );
+            $pagamento['ano_lectivo_id'] = $anolectivo['AnoLectivo']['id'];
+            $pagamento['financeiro_estado_pagamento_id'] = 2;
+            $pagamento['codigo'] = $referenciaPagamento;
+            $pagamento['financeiro_transacao_id'] = $this->Aluno->Entidade->FinanceiroTransacao->id;
+            $pagamento['referencia_pagamento'] = $referenciaPagamento;
+            $pagamento['numero_comprovativo'] = $referenciaPagamento;
+            $pagamento['entidade_id'] = $entidadeId;
+            $semestre = Configure::read('OpenSGA.semestre_lectivo');
+            $semestreLectivo = $this->SemestreLectivo->findByAnoLectivoIdAndSemestre($anolectivo['AnoLectivo']['id'],
+                $semestre);
+            $pagamento['semestre_lectivo_id'] = $semestreLectivo['SemestreLectivo']['id'];
+
+            //verificar antes se o pagamento ainda nao foi registado
+            $pagamentoExiste = $this->find('first', [
+                'conditions' => [
+                    'aluno_id'             => $aluno['Aluno']['id'],
+                    'referencia_pagamento' => $referenciaPagamento,
+                    'ano_lectivo_id'       => $anolectivo['AnoLectivo']['id']
+                ]
+            ]);
+            if (!$pagamentoExiste) {
+                $this->Aluno->Entidade->FinanceiroTransacao->FinanceiroPagamento->create();
+                $this->Aluno->Entidade->FinanceiroTransacao->FinanceiroPagamento->save(['FinanceiroPagamento' => $pagamento]);
+                $datasource->commit();
+
+                return $this->id;
+            } else {
+                $datasource->rollback();
+
+                return $pagamentoExiste['FinanceiroPagamento']['id'];
+            }
+
+        }
+
         public function geraPagamentoRenovacaoMatriculas($anoLectivo = null)
         {
             $this->Aluno->contain();
@@ -336,6 +406,7 @@
 
         /**
          * Paga uma factura previamente criada ou cria uma nova factura e marca como paga
+         *
          * @param $entidadeId
          * @param $valor
          * @param $dataPagamento
@@ -343,7 +414,7 @@
          * @param $referenciaPagamento
          * @param $numeroComprovativo
          *
-         * @todo desenvolver essa funcao
+         * @todo  desenvolver essa funcao
          *
          * @fixme Esta funcoa sempre retorna true;
          */
@@ -366,22 +437,18 @@
 
             }
             $pagamento = $this->findByReferenciaPagamento($referenciaPagamento);
-            if(empty($pagamento)){
-                $pagamentoResult = $this->criaPagamento($entidadeId,$valor,$dataPagamento,$tipoPagamentoId,$referenciaPagamento);
+            if (empty($pagamento)) {
+                $pagamentoResult = $this->criaPagamento($entidadeId, $valor, $dataPagamento, $tipoPagamentoId,
+                    $referenciaPagamento);
                 $this->id = $pagamentoResult[1];
-            } else{
+            } else {
                 $this->id = $pagamento['FinanceiroPagamento']['id'];
             }
-            $this->set('numero_comprovativo',$numeroComprovativo);
+            $this->set('numero_comprovativo', $numeroComprovativo);
             $this->set('');
 
             //
 
-        }
-
-        public function criaPagamento($entidadeId,$valor,$dataPagamento,$tipoPagamentoId,$referenciaPagamento){
-            //Financeiro-Pagamento===aluno_id,financeiro_conta_id,valor,data_pagamento,financeiro_tipo_pagamento_id,ano_lectivo_id,financeiro_estado_pagamento_id,data_emissao,financeiro_transacao_id,semestre_lectivo_id,referencia_pagamento,ano_lectivo_id
-            //Financeiro-Pagamento===aluno_id,financeiro_conta_id,valor,data_pagamento,financeiro_tipo_pagamento_id,ano_lectivo_id,financeiro_estado_pagamento_id,data_emissao,financeiro_transacao_id,semestre_lectivo_id,referencia_pagamento,ano_lectivo_id
         }
 
         public function setPagamentoRenovacaoMatricula($alunoId, $cursoId, $montante, $data, $referencia, $entidadeId)
