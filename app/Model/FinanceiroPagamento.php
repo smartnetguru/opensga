@@ -260,6 +260,26 @@
             return $referenciaFinal;
         }
 
+        public function geraReferenciaPagamentoGraduacaoValor($alunoId)
+        {
+
+
+            $this->Aluno->contain('Curso');
+            $aluno = $this->Aluno->findById($alunoId);
+
+            $valor = 0;
+
+            $nomeCurso = $aluno['Curso']['name'];
+            if (strpos($nomeCurso, 'Licenciatura') !== false) {
+                $valor = 3500;
+            } elseif (strpos($nomeCurso, 'Mestrado') !== false) {
+                $valor = 4000;
+            } elseif (strpos($nomeCurso, 'Doutoramento') !== false) {
+                $valor = 4500;
+            }
+
+            return $valor;
+        }
         /**
          * Gera todos os pagamentos de todos os alunos matriculados
          * Nao duplica pagamentos para o mesmo plano de estudos
@@ -418,6 +438,55 @@
          *
          * @fixme Esta funcoa sempre retorna true;
          */
+        public function pagarFactura(
+            $entidadeId,
+            $valor,
+            $dataPagamento,
+            $tipoPagamentoId,
+            $referenciaPagamento,
+            $numeroComprovativo
+        ) {
+
+
+
+            $deposito = $this->FinanceiroTransacao->FinanceiroDeposito->findByReferenciaDeposito($referenciaPagamento);
+            if (empty($deposito)) {
+                $depositoResult = $this->FinanceiroTransacao->FinanceiroDeposito->depositaValor($entidadeId,
+                    $numeroComprovativo, $valor, $referenciaPagamento, $dataPagamento);
+
+                $deposito = $this->FinanceiroTransacao->FinanceiroDeposito->findById($depositoResult[1]);
+
+            }
+            $pagamento = $this->findByReferenciaPagamento($referenciaPagamento);
+            if (empty($pagamento)) {
+                $pagamentoResult = $this->criaPagamento($entidadeId, $valor, $dataPagamento, $tipoPagamentoId,
+                    $referenciaPagamento);
+                $this->id = $pagamentoResult[1];
+            } else {
+                $this->id = $pagamento['FinanceiroPagamento']['id'];
+            }
+            $this->set('numero_comprovativo', $numeroComprovativo);
+            $this->set('financeiro_estado_pagamento_id',2);
+            $this->save();
+
+            return true;
+
+
+        }
+        /**
+         * Paga uma factura previamente criada ou cria uma nova factura e marca como paga
+         *
+         * @param $entidadeId
+         * @param $valor
+         * @param $dataPagamento
+         * @param $tipoPagamentoId
+         * @param $referenciaPagamento
+         * @param $numeroComprovativo
+         *
+         * @todo  desenvolver essa funcao
+         *
+         * @fixme Esta funcoa sempre retorna true;
+         */
         public function pagar(
             $entidadeId,
             $valor,
@@ -427,7 +496,8 @@
             $numeroComprovativo
         ) {
 
-            return true;
+
+
             $deposito = $this->FinanceiroTransacao->FinanceiroDeposito->findByReferenciaDeposito($referenciaPagamento);
             if (empty($deposito)) {
                 $depositoResult = $this->FinanceiroTransacao->FinanceiroDeposito->depositaValor($entidadeId,

@@ -15,6 +15,7 @@
      * @since           OpenSGA v 0.10.0.0
      *
      * @property FinanceiroPagamento $FinanceiroPagamento
+     * @property Aluno $Aluno
      *
      */
     class Matricula extends AppModel
@@ -157,6 +158,7 @@
                 } else {
                     $tipoPagamentoId = 38;
                 }
+                $valor1 = $valor;
                 $valor = $valor . '00';
                 $checkDigito = $this->Aluno->Entidade->FinanceiroTransacao->geraCheckDigito(77001, $referencia, $valor);
 
@@ -168,7 +170,7 @@
                     $userId = $aluno['Aluno']['user_id'];
                 }
 
-                $pagamentoId = $this->FinanceiroPagamento->criaPagamento($aluno['Aluno']['entidade_id'], $valor,
+                $pagamentoId = $this->FinanceiroPagamento->criaPagamento($aluno['Aluno']['entidade_id'], $valor1,
                     date('Y-m-d'), $tipoPagamentoId, $referencia);
                 $arrayMatricula = [
                     'Matricula' => [
@@ -410,46 +412,70 @@
                         $montante_real = ltrim(substr($montante, 0, -2), '0');
                         $montante = $montante_real . '.' . $montante_decimal;
                         debug($referencia . '-----' . $montante . '---------' . $data);
-                        continue;
-                        die();
 
-                        $transacao = [];
-                        $deposito = [];
-                        $transacao['tipo_transacao_id'] = 1;
-                        $transacao['valor'] = $montante;
-
-                        //Temos de gravar deposito antes
-                        $aluno = $this->Aluno->getByReferenciaRenovacaoMatricula($referencia);
-                        $anoLectivo = $this->AnoLectivo->findByAno(Configure::read('OpenSGA.ano_lectivo'));
-                        if ($this->Aluno->Entidade->FinanceiroTransacao->FinanceiroDeposito->setNovoDeposito(
-                            $aluno['Aluno']['entidade_id'], $transacaoId, $montante, $referencia, $data
-                        )
-                        ) {
-                            $pagamento = $this->FinanceiroPagamento->setPagamentoRenovacaoMatricula(
-                                $aluno['Aluno']['id'], $aluno['Aluno']['curso_id'], $montante, $data, $referencia,
-                                $aluno['Aluno']['entidade_id']
-                            );
-                            if ($pagamento) {
-                                //verifica se o aluno é regular
-                                if ($aluno && $this->Aluno->isRegular($aluno['Aluno']['id'])) {
-                                    $this->create();
-                                    $matricula = [
-                                        'aluno_id'                => $aluno['Aluno']['id'],
-                                        'curso_id'                => $aluno['Aluno']['curso_id'],
-                                        'plano_estudo_id'         => $aluno['Aluno']['plano_estudo_id'],
-                                        'data'                    => $data,
-                                        'estado_matricula_id'     => 1,
-                                        'ano_lectivo_id'          => $anoLectivo['AnoLectivo']['id'],
-                                        'tipo_matricula_id'       => 2,
-                                        'user_id'                 => CakeSession::read('Auth.User.id'),
-                                        'financeiro_pagamento_id' => $pagamento
-                                    ];
-                                    $this->save(['Matricula' => $matricula]);
-                                }
+                        $pagamento = $this->FinanceiroPagamento->findByReferenciaPagamento($referencia);
+                        if(!$pagamento){
+                            if($montante==80 || $montante==160){
+                            }
+                            $candidatoGraduacao = $this->Aluno->CandidatoGraduacao->findByReferenciaPagamento2($referencia);
+                            if($candidatoGraduacao){
+                                $pagamento = $this->FinanceiroPagamento->findByReferenciaPagamento($candidatoGraduacao['CandidatoGraduacao']['referencia_pagamento']);
+                                debug($pagamento);
                             }
                         }
+
+
+                        if (!$pagamento) {
+
+                            //Não foi criada a matricula. Provavelmente seja graduacao
+                            //@todo verificar graduacoes se criam pagamentos antecipadamente
+
+                        } else {
+                            if (in_array($pagamento['FinanceiroPagamento']['financeiro_tipo_pagamento_id'], [37, 38])) {
+                                if (!$this->FinanceiroPagamento->pagarFactura($pagamento['FinanceiroPagamento']['entidade_id'],
+                                    $montante, $data, $pagamento['FinanceiroPagamento']['financeiro_tipo_pagamento_id'],
+                                    $referencia, $referencia)
+                                ) {
+                                    //return false;
+                                }
+                                $matricula = $this->findByFinanceiroPagamentoId($pagamento['FinanceiroPagamento']['id']);
+
+                                if ($matricula['Matricula']['estado_matricula_id'] == 5) {
+                                    $this->id = $matricula['Matricula']['id'];
+                                    $this->set('data', date('Y-m-d H:i:s'));
+                                    $this->set('estado_matricula_id', 1);
+                                    $this->save();
+                                }
+                            } elseif ($pagamento['FinanceiroPagamento']['financeiro_tipo_pagamento_id'] == 39) {
+                                if (!$this->FinanceiroPagamento->pagarFactura($pagamento['FinanceiroPagamento']['entidade_id'],
+                                    $montante, $data, $pagamento['FinanceiroPagamento']['financeiro_tipo_pagamento_id'],
+                                    $referencia, $referencia)
+                                ) {
+                                    //return false;
+                                }
+                                $candidatoGraduacao = $this->Aluno->CandidatoGraduacao->findByReferenciaPagamento($pagamento['FinanceiroPagamento']['referencia_pagamento']);
+                                if(empty($candidatoGraduacao)){
+                                    $candidatoGraduacao =$this->Aluno->CandidatoGraduacao->findByReferenciaPagamento2($pagamento['FinanceiroPagamento']['referencia_pagamento']);
+                                }
+
+                                $arrayData = [
+                                    'CandidatoGraduacao'=>[
+                                        'candidato_graduacao_id'=>$candidatoGraduacao['CandidatoGraduacao']['id'],
+                                        'valor_pago'=>$montante,
+                                        'data_pagamento'=>$data,
+                                        'numero_talao'=>$referencia
+
+                                    ]
+                                ];
+                                $pagamentoGraduacao = $this->Aluno->CandidatoGraduacao->confirmaPagamento($arrayData);
+
+
+                            }
+                        }
+
                 }
             }
+            return true;
         }
 
         /**

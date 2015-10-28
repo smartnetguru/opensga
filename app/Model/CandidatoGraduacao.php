@@ -291,7 +291,7 @@
             $this->Aluno->id = $candidatoGraduacao['CandidatoGraduacao']['aluno_id'];
             $entidadeId = $this->Aluno->field('entidade_id');
 
-            if ($this->Aluno->Entidade->FinanceiroTransacao->FinanceiroPagamento->pagar($entidadeId,
+            if ($this->Aluno->Entidade->FinanceiroTransacao->FinanceiroPagamento->pagarFactura($entidadeId,
                 $data['CandidatoGraduacao']['valor_pago'],
                 $data['CandidatoGraduacao']['data_pagamento'], 39,
                 $candidatoGraduacao['CandidatoGraduacao']['referencia_pagamento'],
@@ -315,10 +315,9 @@
                 $dataSource->commit();
 
                 return true;
+            } else{
+                return false;
             }
-
-            debug($candidatoGraduacao);
-            debug($data);
         }
 
     }

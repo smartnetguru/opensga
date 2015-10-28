@@ -62,7 +62,7 @@
                         if ($processado) {
                             $this->Session->setFlash(__('Ficheiro de Renovação Processado com Sucesso'), 'default',
                                 ['class' => 'alert success']);
-                            $this->redirect(['action' => 'renovacao_matriculas', 2014]);
+                            $this->redirect(['action' => 'renovacao_matriculas', $this->request->data['Upload']['ano_lectivo']]);
                         }
                     }
                 } else {
@@ -493,7 +493,7 @@
                 ],
                 'order'      => 'Matricula.data DESC',
                 'limit'      => '10',
-                'conditions' => ['ano_lectivo_id' => $anolectivo['AnoLectivo']['id'], 'tipo_matricula_id' => 2]
+                'conditions' => ['ano_lectivo_id' => $anolectivo['AnoLectivo']['id'], 'tipo_matricula_id' => 2,'estado_matricula_id NOT'=>5]
             ];
 
 

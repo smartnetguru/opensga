@@ -83,6 +83,8 @@
         public function estudante_inscricao()
         {
 
+            $this->Flash->error('O periodo de inscricao terminou');
+            $this->redirect(['action'=>'index']);
             if ($this->request->is('post')) {
                 if ($this->CerimoniaGraduacao->CandidatoGraduacao->cadastraCandidatoGraduacao($this->request->data) === true) {
                     $this->Flash->success('Inscricao Realizada com Sucesso. Veja a seguir como fazer o Pagamento');
