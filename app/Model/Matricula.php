@@ -164,14 +164,14 @@
                 $referencia = $referencia . $checkDigito;
 
                 $userId = CakeSession::read('Auth.User.id');
-                if(!$userId){
+                if (!$userId) {
                     $userId = $aluno['Aluno']['user_id'];
                 }
 
                 $pagamentoId = $this->FinanceiroPagamento->criaPagamento($aluno['Aluno']['entidade_id'], $valor,
                     date('Y-m-d'), $tipoPagamentoId, $referencia);
-                $arrayMatricula=[
-                    'Matricula'=>[
+                $arrayMatricula = [
+                    'Matricula' => [
                         'aluno_id'                => $aluno['Aluno']['id'],
                         'curso_id'                => $aluno['Aluno']['curso_id'],
                         'plano_estudo_id'         => $aluno['Aluno']['plano_estudo_id'],
@@ -184,9 +184,9 @@
                     ]
                 ];
                 $this->create();
-                if($this->save($arrayMatricula)){
+                if ($this->save($arrayMatricula)) {
                     return $referencia;
-                } else{
+                } else {
                     return false;
                 }
 
@@ -259,7 +259,13 @@
 
             foreach ($ano_lectivos as $ano_lectivo) {
                 $matricula = $this->find('first',
-                    ['conditions' => ['aluno_id' => $aluno_id, 'ano_lectivo_id' => $ano_lectivo['AnoLectivo']['id']]]);
+                    [
+                        'conditions' => [
+                            'aluno_id'                => $aluno_id,
+                            'ano_lectivo_id'          => $ano_lectivo['AnoLectivo']['id'],
+                            'estado_matricula_id NOT' => 5
+                        ]
+                    ]);
                 if (empty($matricula)) {
                     $array_renovacao_falta[] = $ano_lectivo;
                 } else {
