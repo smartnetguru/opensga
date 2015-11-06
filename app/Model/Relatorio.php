@@ -32,11 +32,11 @@
 
             /*Matriculas*/
             $estudantesMatriculados = $this->Aluno->Matricula->find('count',
-                ['conditions' => ['DATE(data)' => $dataResumo, 'tipo_matricula_id' => 1]]);
+                ['conditions' => ['DATE(data)' => $dataResumo, 'tipo_matricula_id' => 1,'estado_matricula_id'=>1]]);
             $matriculasRenovadas = $this->Aluno->Matricula->find('count',
-                ['conditions' => ['DATE(data)' => $dataResumo, 'tipo_matricula_id' => 2]]);
+                ['conditions' => ['DATE(data)' => $dataResumo, 'tipo_matricula_id' => 2,'estado_matricula_id'=>1]]);
             $reingressos = $this->Aluno->Matricula->find('count',
-                ['conditions' => ['DATE(data)' => $dataResumo, 'tipo_matricula_id' => 3]]);
+                ['conditions' => ['DATE(data)' => $dataResumo, 'tipo_matricula_id' => 3,'estado_matricula_id'=>1]]);
             $data['Matriculas']['novo_ingresso'] = $estudantesMatriculados;
             $data['Matriculas']['renovacao'] = $matriculasRenovadas;
             $data['Matriculas']['reingresso'] = $reingressos;

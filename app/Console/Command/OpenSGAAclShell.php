@@ -58,7 +58,7 @@
                 $comandos[] = "acl grant User.{$docente['Entidade']['User']['id']} controllers/Docentes/docente_meu_perfil";
 
                 $comandos[] = "acl grant User.{$docente['Entidade']['User']['id']} controllers/Messages/docente_index";
-                $comandos[] = "acl grant User.{$docente['Entidade']['User']['id']} controllers/Messages/docente_criar_mensagem";
+                $comandos[] = "acl grant User.{$docente['Entidade']['User']['id']} controllers/Messages/docente_enviar_mensagem";
                 $comandos[] = "acl grant User.{$docente['Entidade']['User']['id']} controllers/Messages/docente_ver_mensagem";
                 $comandos[] = "acl grant User.{$docente['Entidade']['User']['id']} controllers/Messages/docente_editar_mensagem";
 
@@ -103,6 +103,10 @@
             $comandos[] = "acl grant Group.3 controllers/Matriculas/estudante_ver_matricula";
             $comandos[] = "acl grant Group.3 controllers/Matriculas/estudante_renovar_matricula";
 
+            $comandos[] = "acl grant Group.3 controllers/Messages/estudante_index";
+            $comandos[] = "acl grant Group.3 controllers/Messages/estudante_enviar_mensagem";
+            $comandos[] = "acl grant Group.3 controllers/Messages/estudante_ver_mensagem";
+
             $comandos[] = "acl grant Group.3 controllers/users/estudante_mostrar_foto";
             $comandos[] = "acl grant Group.3 controllers/users/estudante_perfil";
             $comandos[] = "acl grant Group.3 controllers/users/estudante_trocar_senha";
@@ -144,8 +148,11 @@
                 $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/print_bolsas_novo_ingresso";
 
                 $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/BolsaBolsas/exportar_bolseiros_ano_ingresso";
-
                 $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/BolsaBolsas/exportar_bolseiros_ano_ingresso_escolas";
+
+                $comandos[] = "acl grant User.{$funcionario['User']['id']}  controllers/Messages/index";
+                $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Messages/enviar_mensagem";
+                $comandos[] = "acl grant User.{$funcionario['User']['id']}  controllers/Messages/ver_mensagem";
 
 
                 $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Users/login";

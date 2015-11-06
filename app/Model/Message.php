@@ -1,52 +1,192 @@
 <?php
-/**
- * OpenSGA - Sistema de Gestão Académica
- *   Copyright (C) 2010-2011  INFOmoz (Informática-Moçambique)
- * 
- * Este programa é um software livre: Você pode redistribuir e/ou modificar
- * todo ou parte deste programa, desde que siga os termos da licença por nele
- * estabelecidos. Grande parte do código deste programa está sob a licença 
- * GNU Affero General Public License publicada pela Free Software Foundation.
- * A versão original desta licença está disponível na pasta raiz deste software.
- * 
- * Este software é distribuido sob a perspectiva de que possa ser útil para 
- * satisfazer as necessidades dos seus utilizadores, mas SEM NENHUMA GARANTIA. Veja
- * os termos da licença GNU Affero General Public License para mais detalhes
- * 
- * As redistribuições deste software, mesmo quando o código-fonte for modificado significativamente,
- * devem manter está informação legal, assim como a licença original do software.
- * 
- * @copyright     Copyright 2010-2011, INFOmoz (Informática-Moçambique) (http://infomoz.net)
- * @link          http://infomoz.net/opensga CakePHP(tm) Project
- * @author		  Elisio Leonardo (http://infomoz.net/elisio-leonardo)
- * @package       opensga
- * @subpackage    opensga.core.controller
- * @since         OpenSGA v 0.10.0.0
- * @license       GNU Affero General Public License
- * 
- */
- 
- 
- 
-class Message extends AppModel {
-	var $name = 'Message';
-	//The Associations below have been created with all possible keys, those that are not needed can be removed
+    App::uses('AppModel', 'Model');
 
-	var $belongsTo = array(
-		'User' => array(
-			'className' => 'User',
-			'foreignKey' => 'user_id',
-			'conditions' => '',
-			'fields' => '',
-			'order' => ''
-		),
-		'Recipient' => array(
-			'className' => 'User',
-			'foreignKey' => 'recipient_id',
-			'conditions' => '',
-			'fields' => '',
-			'order' => ''
-		)
-	);
-}
-?>
+    /**
+     * Message Model
+     *
+     * @property User $User
+     * @property EstadoObjecto $EstadoObjecto
+     * @property MessageText $MessageText
+     * @property MessageUser $MessageUser
+     */
+    class Message extends AppModel
+    {
+
+        /**
+         * Validation rules
+         *
+         * @var array
+         */
+        public $validate = [
+            'user_id'           => [
+                'numeric' => [
+                    'rule' => ['numeric'],
+                    //'message' => 'Your custom message here',
+                    //'allowEmpty' => false,
+                    //'required' => false,
+                    //'last' => false, // Stop validation after this rule
+                    //'on' => 'create', // Limit validation to 'create' or 'update' operations
+                ],
+            ],
+            'assunto'           => [
+                'notBlank' => [
+                    'rule' => ['notBlank'],
+                    //'message' => 'Your custom message here',
+                    //'allowEmpty' => false,
+                    //'required' => false,
+                    //'last' => false, // Stop validation after this rule
+                    //'on' => 'create', // Limit validation to 'create' or 'update' operations
+                ],
+            ],
+            'data_envio'        => [
+                'datetime' => [
+                    'rule' => ['datetime'],
+                    //'message' => 'Your custom message here',
+                    //'allowEmpty' => false,
+                    //'required' => false,
+                    //'last' => false, // Stop validation after this rule
+                    //'on' => 'create', // Limit validation to 'create' or 'update' operations
+                ],
+            ],
+            'estado_objecto_id' => [
+                'numeric' => [
+                    'rule' => ['numeric'],
+                    //'message' => 'Your custom message here',
+                    //'allowEmpty' => false,
+                    //'required' => false,
+                    //'last' => false, // Stop validation after this rule
+                    //'on' => 'create', // Limit validation to 'create' or 'update' operations
+                ],
+            ],
+        ];
+
+        // The Associations below have been created with all possible keys, those that are not needed can be removed
+
+        /**
+         * belongsTo associations
+         *
+         * @var array
+         */
+        public $belongsTo = [
+            'User'          => [
+                'className'  => 'User',
+                'foreignKey' => 'user_id',
+                'conditions' => '',
+                'fields'     => '',
+                'order'      => ''
+            ],
+            'EstadoObjecto' => [
+                'className'  => 'EstadoObjecto',
+                'foreignKey' => 'estado_objecto_id',
+                'conditions' => '',
+                'fields'     => '',
+                'order'      => ''
+            ]
+        ];
+
+        /**
+         * hasMany associations
+         *
+         * @var array
+         */
+        public $hasMany = [
+            'MessageText' => [
+                'className'    => 'MessageText',
+                'foreignKey'   => 'message_id',
+                'dependent'    => false,
+                'conditions'   => '',
+                'fields'       => '',
+                'order'        => '',
+                'limit'        => '',
+                'offset'       => '',
+                'exclusive'    => '',
+                'finderQuery'  => '',
+                'counterQuery' => ''
+            ],
+            'MessageUser' => [
+                'className'    => 'MessageUser',
+                'foreignKey'   => 'message_id',
+                'dependent'    => false,
+                'conditions'   => '',
+                'fields'       => '',
+                'order'        => '',
+                'limit'        => '',
+                'offset'       => '',
+                'exclusive'    => '',
+                'finderQuery'  => '',
+                'counterQuery' => ''
+            ]
+        ];
+
+
+        public function sendMessage($from, $to, $subject, $message, $dataEnvio = null)
+        {
+            $datasource = $this->getDataSource();
+            $datasource->begin();
+
+            if (!$dataEnvio) {
+                $dataEnvio = date('Y-m-d H:i:s');
+            }
+            $arrayMessage = [
+                'Message' => [
+                    'user_id'           => $from,
+                    'assunto'           => $subject,
+                    'data_envio'        => $dataEnvio,
+                    'estado_objecto_id' => 1
+                ]
+            ];
+            $this->create();
+            if (!$this->save($arrayMessage)) {
+                $datasource->rollback();
+
+                return false;
+            }
+            $arrayMessageText = [
+                'MessageText' => [
+                    'message_id' => $this->id,
+                    'texto'      => $message
+                ]
+            ];
+            $this->MessageText->create();
+            if (!$this->MessageText->save($arrayMessageText)) {
+                $datasource->rollback();
+
+                return false;
+            }
+            $arrayMessageUser = [
+                'MessageUser' => [
+                    'message_id'        => $this->id,
+                    'user_id'           => $to,
+                    'message_folder_id' => 1,
+                    'estado_message_id' => 1,
+                    'is_starred'        => 0
+                ]
+            ];
+            $this->MessageUser->create();
+            if (!$this->MessageUser->save($arrayMessageUser)) {
+                $datasource->rollback();
+
+                return false;
+            }
+            $arrayMessageUserFrom = [
+                'MessageUser' => [
+                    'message_id'        => $this->id,
+                    'user_id'           => $from,
+                    'message_folder_id' => 2,
+                    'estado_message_id' => 2,
+                    'is_starred'        => 0
+                ]
+            ];
+            $this->MessageUser->create();
+            if (!$this->MessageUser->save($arrayMessageUserFrom)) {
+                $datasource->rollback();
+
+                return false;
+            }
+
+            $datasource->commit();
+
+            return true;
+        }
+
+    }

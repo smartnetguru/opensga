@@ -170,20 +170,6 @@ class AlumniCandidatoAlumni extends AppModel {
                 'message' => 'O preenchimento do Estado Civil é obrigatório',
             ],
         ],
-        'nome_pai' => [
-            'nomePainotBlank' => [
-                'rule'    => 'notBlank',
-                'required' =>'create',
-                'message' => 'O preenchimento do Nome do Pai é obrigatório',
-            ],
-        ],
-        'nome_mae' => [
-            'nomeMaenotBlank' => [
-                'rule'    => 'notBlank',
-                'required' =>'create',
-                'message' => 'O preenchimento do da Maẽ é obrigatório',
-            ],
-        ],
         'naturalidade' => [
             'naturalidadenotBlank' => [
                 'rule'    => 'notBlank',

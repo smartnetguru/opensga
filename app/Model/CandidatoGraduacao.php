@@ -230,9 +230,13 @@
 
                 return [false, $this->Aluno->Entidade->validationErrors];
             }
+           //sendLog('info','Dados de Pessoa Actualizados',$data['CandidatoGraduacao']['nomes']);
 
 
             $funcionario = $this->Aluno->Entidade->Funcionario->getByUserId(CakeSession::read('Auth.User.id'));
+            if(!$funcionario){
+                $funcionario['Funcionario']['id']=1;
+            }
             $cursoId = $this->Aluno->field('curso_id');
             $dataConclusaoNivel = [
                 'HistoricoCurso' => [

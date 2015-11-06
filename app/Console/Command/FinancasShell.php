@@ -61,21 +61,42 @@ class FinancasShell extends AppShell
                     ]
                 ]);
                 if (empty($curso)) {
-                    $cursoOlds = $this->Aluno->Curso->find('list',array('order'=>'name'));
 
-                    foreach ($cursoOlds as $k => $v) {
-                        $this->out($k . '. ' . $v);
+                    $nomeCurso = str_replace('-',' ',$nomeCurso);
+
+                    $cursoExplode = explode(' ',$nomeCurso);
+
+                    $nomeCompletoCurso = $nomeGrau.'%'.$cursoExplode[0].'%'.end($cursoExplode).'%';
+                    $curso = $this->Aluno->Curso->find('first', [
+                        'conditions' => [
+                            'Curso.name
+                LIKE' => $nomeCompletoCurso
+                        ]
+                    ]);
+
+                    if(empty($curso)){
+                        $cursoOlds = $this->Aluno->Curso->find('list',array('order'=>'name'));
+
+                        foreach ($cursoOlds as $k => $v) {
+                            $this->out($k . '. ' . $v);
+                        }
+                        $this->out($nomeCompletoCurso);
+                        $this->out('----------------------------');
+                        $cursoId = $this->in($nomeCurso);
+                        $curso = $this->Aluno->Curso->findById($cursoId);
                     }
-                    $this->out('----------------------------');
-                    $cursoId = $this->in($nomeCurso);
-                    $curso = $this->Aluno->Curso->findById($cursoId);
+
+
 
                 }
 
             }
 
 
+            $worksheet->setCellValue('E' . $linhaActual, 2014);
             $ano = $worksheet->getCell('E' . $linhaActual)->getValue();
+
+
             $sexo = $worksheet->getCell('M' . $linhaActual)->getValue();
             if ($sexo == 1) {
                 $genero = 'Masculino';

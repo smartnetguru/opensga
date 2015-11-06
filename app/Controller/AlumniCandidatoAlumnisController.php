@@ -72,6 +72,7 @@ class AlumniCandidatoAlumnisController extends AppController
 				contacto'));
                 $this->redirect(['action' => 'agradecimento']);
             } else {
+                debug($this->AlumniCandidatoAlumni->validationErrors);
                 $this->Session->setFlash(__('Problemas ao gravar dados. Por favor corrija os erros e tente novamente
 				.'));
             }

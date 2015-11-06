@@ -1,96 +1,116 @@
 <?php
-App::uses('AppModel', 'Model');
-/**
- * Notification Model
- *
- * @property User $User
- * @property EstadoMessage $EstadoMessage
- */
-class Notification extends AppModel {
+    App::uses('AppModel', 'Model');
 
-/**
- * Validation rules
- *
- * @var array
- */
-	public $validate = array(
-		'user_id' => array(
-			'numeric' => array(
-				'rule' => array('numeric'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
-		),
-		'title' => array(
-			'notEmpty' => array(
-				'rule' => array('notEmpty'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
-		),
-		'details' => array(
-			'notEmpty' => array(
-				'rule' => array('notEmpty'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
-		),
-		'estado_message_id' => array(
-			'numeric' => array(
-				'rule' => array('numeric'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
-		),
-	);
+    /**
+     * Notification Model
+     *
+     * @property User $User
+     * @property EstadoMessage $EstadoMessage
+     */
+    class Notification extends AppModel
+    {
 
-	//The Associations below have been created with all possible keys, those that are not needed can be removed
+        /**
+         * Validation rules
+         *
+         * @var array
+         */
+        public $validate = [
+            'user_id'           => [
+                'numeric' => [
+                    'rule' => ['numeric'],
+                    //'message' => 'Your custom message here',
+                    //'allowEmpty' => false,
+                    //'required' => false,
+                    //'last' => false, // Stop validation after this rule
+                    //'on' => 'create', // Limit validation to 'create' or 'update' operations
+                ],
+            ],
+            'title'             => [
+                'notEmpty' => [
+                    'rule' => ['notEmpty'],
+                    //'message' => 'Your custom message here',
+                    //'allowEmpty' => false,
+                    //'required' => false,
+                    //'last' => false, // Stop validation after this rule
+                    //'on' => 'create', // Limit validation to 'create' or 'update' operations
+                ],
+            ],
+            'details'           => [
+                'notEmpty' => [
+                    'rule' => ['notEmpty'],
+                    //'message' => 'Your custom message here',
+                    //'allowEmpty' => false,
+                    //'required' => false,
+                    //'last' => false, // Stop validation after this rule
+                    //'on' => 'create', // Limit validation to 'create' or 'update' operations
+                ],
+            ],
+            'estado_message_id' => [
+                'numeric' => [
+                    'rule' => ['numeric'],
+                    //'message' => 'Your custom message here',
+                    //'allowEmpty' => false,
+                    //'required' => false,
+                    //'last' => false, // Stop validation after this rule
+                    //'on' => 'create', // Limit validation to 'create' or 'update' operations
+                ],
+            ],
+        ];
 
-/**
- * belongsTo associations
- *
- * @var array
- */
-	public $belongsTo = array(
-		'User' => array(
-			'className' => 'User',
-			'foreignKey' => 'user_id',
-			'conditions' => '',
-			'fields' => '',
-			'order' => ''
-		),
-		'EstadoMessage' => array(
-			'className' => 'EstadoMessage',
-			'foreignKey' => 'estado_message_id',
-			'conditions' => '',
-			'fields' => '',
-			'order' => ''
-		)
-	);
+        //The Associations below have been created with all possible keys, those that are not needed can be removed
 
-    public function setNotification($userId,$title,$details,$areaNotification){
-        $arrayNotification = [
-            'Notification'=>[
-                'user_id'=>$userId,
-                'title' => $title,
-                'details'=>$details,
-                'areaNotification'=>$areaNotification,
-                'estado_message_id'=>1
+        /**
+         * belongsTo associations
+         *
+         * @var array
+         */
+        public $belongsTo = [
+            'User'          => [
+                'className'  => 'User',
+                'foreignKey' => 'user_id',
+                'conditions' => '',
+                'fields'     => '',
+                'order'      => ''
+            ],
+            'EstadoMessage' => [
+                'className'  => 'EstadoMessage',
+                'foreignKey' => 'estado_message_id',
+                'conditions' => '',
+                'fields'     => '',
+                'order'      => ''
             ]
         ];
-        $this->create();
-        $this->save($arrayNotification);
+
+        public function setNotification($receptorId, $title, $areaNotification, $details = null)
+        {
+
+
+            $this->User->contain('Entidade');
+            $receptor = $this->NotificationUser->User->findById($receptorId);
+
+            $arrayNotification = [
+                'Notification' => [
+                    'title'             => $title,
+                    'details'           => $details,
+                    'areaNotification'  => $areaNotification,
+                    'notification_type_id'=>1
+                ]
+            ];
+            $this->create();
+            if($this->save($arrayNotification)){
+                $arrayNotificationUser = [
+                    'NotificationUser'=>[
+                        'user_id'=>$receptorId,
+                        'notification_id'=>$this->id,
+                        'estado_message_id'=>1
+
+                    ]
+                ];
+                $this->NotificationUser->create();
+                if($this->NotificationUser->save($arrayNotificationUser)){
+                    return true;
+                }
+            }
+        }
     }
-}

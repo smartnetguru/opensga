@@ -5,6 +5,11 @@
     App::uses('AuditableConfig', 'Auditable.Lib');
     App::uses('CakeEmail', 'Network/Email');
 
+    /**
+     * Class RelatorioShell
+     * @property Relatorio $Relatorio
+     */
+
     class RelatorioShell extends AppShell
     {
 

@@ -67,7 +67,7 @@
         public function beforeFilter()
         {
             parent::beforeFilter();
-            fclog('Test','error');
+
 
             $config_language = $this->Session->read('Config.language');
             if ($config_language == null) {
@@ -190,14 +190,25 @@
         public function beforeRender()
         {
             parent::beforeRender();
+            $this->loadModel('Message');
 
-            //Lemos as mensagens, notificacoes e tarefas em todas as requisicoes :(
-            $totalMessages = 0;
-            $totalNotificacoes = 0;
-            $totalTarefas = 0;
-            $messages = [];
-            $notificacoes = [];
-            $tarefas = [];
+            $userId = $this->Session->read('Auth.User.id');
+            if ($userId) {
+                //Lemos as mensagens, notificacoes e tarefas em todas as requisicoes :(
+                $totalMensagensPendentes = $this->Message->MessageUser->find('count', [
+                    'conditions' => ['MessageUser.user_id' => $userId, 'message_folder_id' => 1, 'estado_message_id' => 1]
+                ]);
+                $this->Message->MessageUser->contain(['Message'=>'User']);
+                $messages = $this->Message->MessageUser->find('all', [
+                    'conditions' => ['MessageUser.user_id' => $userId, 'message_folder_id' => 1, 'estado_message_id' => 1],
+                    'limit'      => 5
+                ]);
+                $totalNotificacoesPendentes = 0;
+                $totalTarefasPendentes = 0;
+
+                $notificacoes = [];
+                $tarefas = [];
+            }
 
 
             if (isset($this->request->prefix) && !$this->request->is('ajax')) {
@@ -207,7 +218,7 @@
                 }
 
             }
-            $this->set(compact('totalMessages', 'totalTarefas', 'totalNotificacoes', 'messages', 'tarefas',
+            $this->set(compact('totalMensagensPendentes', 'totalTarefasPendentes', 'totalNotificacoesPendentes', 'messages', 'tarefas',
                 'notificacoes'));
         }
 
