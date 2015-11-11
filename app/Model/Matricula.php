@@ -210,7 +210,11 @@
             $aluno = $this->Aluno->findById($alunoId);
             $curso_turno = $this->Aluno->Curso->CursosTurno->find('first',
                 ['conditions' => ['curso_id' => $aluno['Aluno']['curso_id']]]);
+
+
             if ($curso_turno['CursosTurno']['turno_id'] == 1) {
+                $valorBase = 80;
+            } elseif(empty($curso_turno)){
                 $valorBase = 80;
             } else {
                 $valorBase = 160;
@@ -221,7 +225,7 @@
             if (count($statusRenovacao) == 1) {
                 return $valorBase;
             } else {
-                return $valorBase + ((2000 + $valorBase) * (count($statusRenovacao) - 1));
+                return $valorBase + ((1000 + $valorBase) * (count($statusRenovacao) - 1));
             }
         }
 
