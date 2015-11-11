@@ -219,6 +219,8 @@
                     $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/PlanoEstudos/faculdade_ver_plano_estudo";
                     $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/PlanoEstudos/faculdade_adicionar_disciplinas";
                     $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/PlanoEstudos/faculdade_adicionar_precedencias";
+                    $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/PlanoEstudos/faculdade_editar_disciplina";
+                    $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/PlanoEstudos/faculdade_remover_disciplina";
 
                     $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Users/faculdade_logout";
                     $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Users/faculdade_trocar_senha";
@@ -447,7 +449,8 @@
                         $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/PlanoEstudos/editar_plano_estudo";
                         $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/PlanoEstudos/adicionar_precedencias";
                         $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/PlanoEstudos/adicionar_plano_estudo";
-                        $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/PlanoEstudos/actualiza_creditos";
+                        $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/PlanoEstudos/editar_disciplina";
+                        $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/PlanoEstudos/remover_disciplina";
 
 
                         $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Users/acessos";

@@ -333,18 +333,21 @@ class Entidade extends AppModel
     public function getMorada($entidadeId)
     {
         $morada = [];
+        $morada['string']='';
         $paisMorada = $this->EntidadeContacto->findByEntidadeIdAndTipoContactoIdAndEstadoObjectoId($entidadeId, 11, 1,
             null, 'id DESC');
         if (!empty($paisMorada)) {
             $morada['pais_morada'] = $paisMorada['EntidadeContacto']['valor'];
+            $morada['string'] .= $morada['provincia_morada'];
         } else {
             $morada['pais_morada'] = null;
         }
-        debug($paisMorada);
+
         $provinciaMorada = $this->EntidadeContacto->findByEntidadeIdAndTipoContactoIdAndEstadoObjectoId($entidadeId, 10,
             1);
         if (!empty($provinciaMorada)) {
             $morada['provincia_morada'] = $provinciaMorada['EntidadeContacto']['valor'];
+            $morada['string'] .= '-'.$morada['provincia_morada'];
         } else {
             $morada['provincia_morada'] = null;
         }
@@ -352,6 +355,8 @@ class Entidade extends AppModel
         $cidadeMorada = $this->EntidadeContacto->findByEntidadeIdAndTipoContactoIdAndEstadoObjectoId($entidadeId, 9, 1);
         if (!empty($cidadeMorada)) {
             $morada['cidade_morada'] = $cidadeMorada['EntidadeContacto']['valor'];
+            $morada['string'] .= '-'.$morada['cidade_morada'];
+
         } else {
             $morada['cidade_morada'] = null;
         }
@@ -360,6 +365,7 @@ class Entidade extends AppModel
             1);
         if (!empty($quarteiraoMorada)) {
             $morada['quarteirao'] = $quarteiraoMorada['EntidadeContacto']['valor'];
+            $morada['string'] .= '-'.$morada['quarteirao'];
         } else {
             $morada['quarteirao'] = null;
         }

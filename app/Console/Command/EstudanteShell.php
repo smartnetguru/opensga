@@ -562,14 +562,17 @@ class EstudanteShell extends AppShell
             $xls->getActiveSheet()->setCellValue('C' . $linhaActual, date('d-m-Y', $phpdate));
             $xls->getActiveSheet()->setCellValue('D' . $linhaActual, strtoupper($aluno['Entidade']['PaisNascimento']['iso3']));
             $xls->getActiveSheet()->setCellValue('E' . $linhaActual, strtoupper($aluno['Entidade']['naturalidade']));
-            $xls->getActiveSheet()->setCellValue('F' . $linhaActual, strtoupper($aluno['Entidade']['nome_pai']));
-            $xls->getActiveSheet()->setCellValue('G' . $linhaActual, strtoupper($aluno['Entidade']['nome_mae']));
+            $xls->getActiveSheet()->setCellValue('F' . $linhaActual, strtoupper($this->removeAccents($aluno['Entidade']['nome_pai'])));
+            $xls->getActiveSheet()->setCellValue('G' . $linhaActual, strtoupper($this->removeAccents($aluno['Entidade']['nome_mae'])));
             $xls->getActiveSheet()->setCellValue('H' . $linhaActual,
                 $aluno['Entidade']['documento_identificacao_numero']);
             $phpdate2 = strtotime($aluno['Entidade']['documento_identificacao_data_emissao']);
             $xls->getActiveSheet()->setCellValue('I' . $linhaActual, date('d-m-Y', $phpdate2));
 
-
+            $xls->getActiveSheet()->setCellValue('J' . $linhaActual, $aluno['Entidade']['EstadoCivil']['name']);
+            $endereco = $this->Aluno->Entidade->getMorada($aluno['Entidade']['id']);
+            debug($endereco);
+            $xls->getActiveSheet()->setCellValue('L' . $linhaActual, $endereco['string']);
             $xls->getActiveSheet()->setCellValue('M' . $linhaActual, $aluno['Entidade']['telemovel']);
 
             $genero = $aluno['Entidade']['genero_id'];

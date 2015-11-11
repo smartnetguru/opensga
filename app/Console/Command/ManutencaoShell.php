@@ -35,6 +35,12 @@
             'Docente'
         ];
 
+        public function actualiza_turnos_cursos(){
+            $cursos  = $this->Curso->find('all');
+            foreach($cursos as $curso){
+                debug($curso);
+            }
+        }
 
         public function actualiza(){
             $this->Aluno->CandidatoGraduacao->contain(['Aluno'=>'Entidade']);

@@ -646,6 +646,14 @@
                             $this->User->set('password',Security::hash($aluno['Aluno']['codigo'],'blowfish'));
                             $this->User->save();
                             $this->User->actualizaLoginHistory( $aluno['Entidade']['User']['id'],$aluno['Entidade']['User']['group_id'],date('Y-m-d H:i:s'),$this->request->clientIp());
+                        $message = [
+                            'Option1'     => 'Message',
+                            //'Type'=>'cake',
+                            'Command'     => 'User',
+                            'Action'      => 'processaLoginEfectuado',
+                            'matriculaId' => $aluno['Entidade']['User']['id']
+                        ];
+                        CakeRabbit::publish($message);
                             $this->redirect([
                                 'controller' => 'users',
                                 'action'     => 'trocar_senha',

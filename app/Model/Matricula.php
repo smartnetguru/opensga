@@ -445,6 +445,14 @@
                                     $this->set('data', date('Y-m-d H:i:s'));
                                     $this->set('estado_matricula_id', 1);
                                     $this->save();
+                                    $message = [
+                                        'Option1' => 'Message',
+                                        //'Type'=>'cake',
+                                        'Command' => 'Matricula',
+                                        'Action'  => 'processaMatriculaRenovada',
+                                        'matriculaId' => $this->id
+                                    ];
+                                    CakeRabbit::publish($message);
                                 }
                             } elseif ($pagamento['FinanceiroPagamento']['financeiro_tipo_pagamento_id'] == 39) {
                                 if (!$this->FinanceiroPagamento->pagarFactura($pagamento['FinanceiroPagamento']['entidade_id'],

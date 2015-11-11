@@ -66,8 +66,8 @@
          * @var array
          */
         public $belongsTo = [
-            'User'          => [
-                'className'  => 'User',
+            'NotificationUser'          => [
+                'className'  => 'NotificationUser',
                 'foreignKey' => 'user_id',
                 'conditions' => '',
                 'fields'     => '',
@@ -82,11 +82,11 @@
             ]
         ];
 
-        public function setNotification($receptorId, $title, $areaNotification, $details = null)
+        public function sendNotification($receptorId, $title, $areaNotification, $details = null)
         {
 
 
-            $this->User->contain('Entidade');
+            $this->NotificationUser->User->contain('Entidade');
             $receptor = $this->NotificationUser->User->findById($receptorId);
 
             $arrayNotification = [

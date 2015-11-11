@@ -11,11 +11,7 @@
      * @version         OpenSGA v 0.5.0
      * @since           OpenSGA v 0.1.0
      *
-     */
-
-    /**
-     *
-     * @todo Ver bem a tabela de precedencias. O nome nao parece consistente
+     * @property PlanoEstudo $PlanoEstudo
      */
     class PlanoEstudosController extends AppController
     {
@@ -190,6 +186,11 @@
             if ($this->action == 'faculdade_adicionar_precedencias') {
                 //$this->Security->validatePost=false;
             }
+        }
+
+        public function editar_disciplina($disciplinaPlanoId)
+        {
+
         }
 
         function editar_plano_estudo($id = null)
@@ -369,6 +370,57 @@
             $this->set(compact('precedencias', 'planoEstudoId', 'disciplinaId'));
         }
 
+        /**
+         * Edita uma disciplina dentro de um plano de Estudos
+         * @param $disciplinaPlanoId
+         *
+         * @throws \Exception
+         *
+         * @todo verificar a questao do total dos creditos
+         */
+        public function faculdade_editar_disciplina($disciplinaPlanoId)
+        {
+
+            if($this->request->is('post')){
+                if($this->PlanoEstudo->DisciplinaPlanoEstudo->save($this->request->data)){
+                    $this->Flash->success('Disciplina Editada com sucesso');
+
+                } else{
+                    $this->Flash->error('Problemas ao editar disciplina');
+                }
+
+            }
+
+            $disciplinaPlanoEstudo = $this->PlanoEstudo->DisciplinaPlanoEstudo->findById($disciplinaPlanoId);
+            $this->PlanoEstudo->contain([
+                'Curso'
+            ]);
+            $planoEstudo = $this->PlanoEstudo->findById($disciplinaPlanoEstudo['DisciplinaPlanoEstudo']['plano_estudo_id']);
+            $planoEstudo['PlanoEstudo']['total_creditos'] = $this->PlanoEstudo->getTotalCreditos($disciplinaPlanoEstudo['DisciplinaPlanoEstudo']['plano_estudo_id']);
+
+            $this->request->data = $planoEstudo;
+
+
+            //$disciplinasAdicionadas = $this->PlanoEstudo->getAllDisciplinas($disciplinaPlanoEstudo['DisciplinaPlanoEstudo']['plano_estudo_id']);
+            //$disciplinasExcluir = Hash::extract($disciplinasAdicionadas, '{n}.Disciplina.id');
+
+            $disciplinas = $this->PlanoEstudo->DisciplinaPlanoEstudo->Disciplina->find('list',
+                ['conditions' => [], 'order' => ['name ASC']]);
+            $anos = [];
+            for ($i = 1; $i <= $planoEstudo['PlanoEstudo']['duracao']; $i++) {
+                $anos[$i] = $i;
+            }
+            $semestres = [];
+            for ($i = 1; $i <= $planoEstudo['PlanoEstudo']['semestres_ano']; $i++) {
+                $semestres[$i] = $i;
+            }
+
+
+            $this->set('disciplinaPlanoId', $disciplinaPlanoId);
+            $this->set('planoId', $disciplinaPlanoEstudo['DisciplinaPlanoEstudo']['plano_estudo_id']);
+            $this->set(compact('disciplinasAdicionadas', 'anos', 'semestres', 'disciplinas','disciplinaPlanoEstudo'));
+        }
+
         function faculdade_editar_plano_estudo($id = null)
         {
             $this->PlanoEstudo->id = $id;
@@ -404,6 +456,25 @@
                 'order'      => 'PlanoEstudo.ano_criacao DESC'
             ];
             $this->set('planoEstudos', $this->paginate('PlanoEstudo'));
+        }
+
+        public function faculdade_remover_disciplina($disciplinaPlanoId)
+        {
+
+            if (!$this->request->is('post')) {
+                throw new \Aws\S3\Exception\MethodNotAllowedException('Tentou aceder esta funcao de forma incorrecta');
+            }
+            $this->PlanoEstudo->DisciplinaPlanoEstudo->id = $disciplinaPlanoId;
+            if (!$this->PlanoEstudo->DisciplinaPlanoEstudo->exists()) {
+                throw new \Cake\Network\Exception\NotFoundException('Disciplina não Encontrada');
+            }
+            if ($this->PlanoEstudo->removeDisciplina($disciplinaPlanoId)) {
+                $this->Flash->success('Disciplina Removida com Sucesso');
+                $this->redirect($this->referer());
+            } else {
+                $this->Flash->error('Erro ao tentar remover a disciplina. Favor tentar novamente');
+            }
+
         }
 
         function faculdade_ver_plano_estudo($id = null)
@@ -457,34 +528,34 @@
 
             $unidadeOrganicaId = $this->request->query('unidade_organica_id');
             $cursoId = $this->request->query('curso_id');
-            $anoCriacao  = $this->request->query('ano_criacao');
-            if(!empty($unidadeOrganicaId)){
+            $anoCriacao = $this->request->query('ano_criacao');
+            if (!empty($unidadeOrganicaId)) {
                 $conditions['Curso.unidade_organica_id'] = $unidadeOrganicaId;
                 $conditionsCurso['unidade_organica_id'] = $unidadeOrganicaId;
             }
-            if(!empty($cursoId)){
+            if (!empty($cursoId)) {
                 $conditions['PlanoEstudo.curso_id'] = $cursoId;
 
             }
-            if(!empty($anoCriacao)){
+            if (!empty($anoCriacao)) {
                 $conditions['PlanoEstudo.ano_criacao'] = $anoCriacao;
 
             }
 
 
             $this->paginate = [
-                'contain' => [
+                'contain'    => [
                     'Curso',
                     'EstadoObjecto'
                 ],
-                'order'   => 'PlanoEstudo.ano_criacao DESC',
-                'conditions'=>$conditions
+                'order'      => 'PlanoEstudo.ano_criacao DESC',
+                'conditions' => $conditions
             ];
             $this->set('planoEstudos', $this->paginate('PlanoEstudo'));
 
             $unidadeOrganicas = $this->PlanoEstudo->Curso->UnidadeOrganica->find('list');
-            $cursos = $this->PlanoEstudo->Curso->find('list',['conditions'=>$conditionsCurso]);
-            $this->set(compact('cursos','unidadeOrganicas'));
+            $cursos = $this->PlanoEstudo->Curso->find('list', ['conditions' => $conditionsCurso]);
+            $this->set(compact('cursos', 'unidadeOrganicas'));
         }
 
         public function manutencao()
@@ -493,6 +564,11 @@
         }
 
         public function manutencao_plano_estudos_incompletos()
+        {
+
+        }
+
+        public function remover_disciplina($disciplinaPlanoId)
         {
 
         }

@@ -10,7 +10,10 @@
  * @subpackage    opensga.core.controller
  * @since         OpenSGA v 0.10.0.0
  *
- * @property PlanoEstudo @PlanoEstudo
+ * @property Curso $Curso
+ * @property DisciplinaPlanoEstudo $DisciplinaPlanoEstudo
+ * @property EstadoObjecto $EstadoObjecto
+ * @property Aluno $Aluno
  * @todo Dar a possibilidade de activar e desactivar um plano de estudos
  */
 class PlanoEstudo extends AppModel
@@ -38,6 +41,19 @@ class PlanoEstudo extends AppModel
     public $hasMany = [
         'DisciplinaPlanoEstudo' => [
             'className'    => 'DisciplinaPlanoEstudo',
+            'foreignKey'   => 'plano_estudo_id',
+            'dependent'    => false,
+            'conditions'   => '',
+            'fields'       => '',
+            'order'        => '',
+            'limit'        => '',
+            'offset'       => '',
+            'exclusive'    => '',
+            'finderQuery'  => '',
+            'counterQuery' => ''
+        ],
+        'Aluno' => [
+            'className'    => 'Aluno',
             'foreignKey'   => 'plano_estudo_id',
             'dependent'    => false,
             'conditions'   => '',
@@ -317,6 +333,34 @@ class PlanoEstudo extends AppModel
         ]);
 
         return $totalCreditos[0][0]['total_creditos'];
+    }
+
+    /**
+     * Remove uma disciplina de um plano de Estudos
+     *
+     * So remove se o plano de estudos nao tiver nenhum estudante a frequentar
+     * @param $disciplinaPlanoId
+     *
+     */
+    public function removeDisciplina($disciplinaPlanoId){
+
+        $disciplinaPlanoEstudo = $this->DisciplinaPlanoEstudo->findById($disciplinaPlanoId);
+        if(empty($disciplinaPlanoEstudo)){
+            return [false,'Esta Disciplina não pertence a este plano de Estudos'];
+        }
+        $totalEstudantes = $this->getTotalEstudantesByPlanoEstudo($disciplinaPlanoEstudo['DisciplinaPlanoEstudo']['plano_estudo_id']);
+        if($totalEstudantes > 0){
+            return [false,'Esta disciplina não pode ser removida pois existem '.$totalEstudantes.' estudantes a frequentar este plano de estudos'];
+        }
+        $this->DisciplinaPlanoEstudo->id = $disciplinaPlanoId;
+        $this->DisciplinaPlanoEstudo->delete($disciplinaPlanoId);
+        return true;
+    }
+
+    public function getTotalEstudantesByPlanoEstudo($planoEstudoId){
+
+        $totalEstudantes = $this->Aluno->find('count',array('conditions'=>array('Aluno.plano_estudo_id'=>$planoEstudoId)));
+        return $totalEstudantes;
     }
 
 }
