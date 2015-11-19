@@ -211,6 +211,8 @@
                     $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Inscricaos/faculdade_print_comprovativo_inscricao";
                     $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Inscricaos/faculdade_ver_detalhes_inscricao";
 
+                    $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Matriculas/faculdade_renovar_matricula";
+
                     $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Pages/faculdade_home";
 
                     $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/PlanoEstudos/faculdade_index";

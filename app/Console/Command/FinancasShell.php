@@ -22,7 +22,8 @@ class FinancasShell extends AppShell
         App::import('Helper', 'PhpExcel');
         $this->PHPExcel = new PhpExcelHelper(new View());
         //Lemos o ficheiro excel a preencher. Aquele que foi fornecido pelos financiadores
-        $xls = $this->PHPExcel->loadWorksheetFromS3('/Reports/Financas/base_fund.xlsx');
+        //$xls = $this->PHPExcel->loadWorksheetFromS3('/Reports/Financas/base_fund.xlsx');
+        $xls = PHPExcel_IOFactory::load(APP . 'Imports' . DS . 'ficheiro_novo.xlsx');
 
         $worksheet = $xls->getActiveSheet();
         $linhaActual = 3;

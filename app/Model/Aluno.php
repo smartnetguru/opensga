@@ -1191,6 +1191,15 @@
         }
 
         /**
+         * Retorna todos estudantes finalistas
+         *
+         */
+        public function getEstudantesFinalistas($anoLectivo = null,$cursoId = null){
+            $alunos = array();
+
+        }
+
+        /**
          * Retorna o nivel academico mais elevado que o aluno ja frequentou.
          * Esta funcao é importante para se verificar o que sao cadeiras normais e o que sao cadeiras em atraso
          *

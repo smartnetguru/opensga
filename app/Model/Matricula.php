@@ -140,6 +140,7 @@
 
             if (!empty($matricula)) {
                 if ($matricula['Matricula']['estado_matricula_id'] == 5) {
+                    
                     return $matricula['FinanceiroPagamento']['referencia_pagamento'];
                 }
             } else {
@@ -501,9 +502,25 @@
             $dataSource->begin();
             foreach ($data['AnoLectivo'] as $k => $v) {
                 if ($v != 0) {
-                    $data['Matricula']['ano_lectivo_id'] = $v;
-                    $this->Aluno->Matricula->create();
-                    $this->Aluno->Matricula->save($data);
+                    $matriculaExiste = $this->findByAlunoIdAndAnoLectivoId($data['Matricula']['aluno_id'],$v);
+                    if($matriculaExiste){
+                        $this->id = $matriculaExiste['Matricula']['id'];
+                        $this->set('estado_matricula_id',1);
+                        $this->set('data',$data['Matricula']['data']);
+                        $this->set('user_id',$data['Matricula']['user_id']);
+                        if(!$this->save()){
+                            $dataSource->rollback();
+                            return false;
+                        }
+                    } else{
+                        $data['Matricula']['ano_lectivo_id'] = $v;
+                        $this->create();
+                        if(!$this->save($data)){
+                            $dataSource->rollback();
+                            return false;
+                        }
+                    }
+
                 }
             }
             $dataSource->commit();
