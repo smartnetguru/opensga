@@ -69,4 +69,20 @@
 
         }
 
+        public function renovaMatriculaFromFolder(){
+
+            $folder = $this->args[0];
+            $dir = new Folder($folder);
+            $files = $dir->find('.*\.txt');
+            foreach ($files as $file) {
+                $file = new File($dir->pwd() . DS . $file);
+
+                $this->Matricula->processaFicheiroRenovacaoLocal($file->path,2015);
+                $this->out('Ficheiro Processado com Sucesso-------------'.$file->name);
+
+                $file->close(); // Be sure to close the file when you're done
+            }
+            
+        }
+
     }

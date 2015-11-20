@@ -2932,7 +2932,7 @@
 
                     $this->Candidatura->set('data_matricula', $aluno['Aluno']['created']);
                     if(!$this->Candidatura->save()){
-                        
+
                     }
                 } else{
                     $this->out($linhaActual.'-----Matriculando');

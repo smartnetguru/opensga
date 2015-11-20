@@ -378,12 +378,6 @@
             }
         }
 
-        /**
-         * @param $file_url
-         *
-         * @return bool
-         * @todo dinamizar o ano lectivo
-         */
         public function processaFicheiroRenovacao($file_url, $anoLectivoAno)
         {
             App::uses('File', 'Utility');
@@ -444,6 +438,157 @@
                                     //return false;
                                 }
                                 $matricula = $this->findByFinanceiroPagamentoId($pagamento['FinanceiroPagamento']['id']);
+
+                                if ($matricula['Matricula']['estado_matricula_id'] == 5) {
+                                    $this->id = $matricula['Matricula']['id'];
+                                    $this->set('data', date('Y-m-d H:i:s'));
+                                    $this->set('estado_matricula_id', 1);
+                                    $this->save();
+                                    $message = [
+                                        'Option1' => 'Message',
+                                        //'Type'=>'cake',
+                                        'Command' => 'Matricula',
+                                        'Action'  => 'processaMatriculaRenovada',
+                                        'matriculaId' => $this->id
+                                    ];
+                                    CakeRabbit::publish($message);
+                                }
+                            } elseif ($pagamento['FinanceiroPagamento']['financeiro_tipo_pagamento_id'] == 39) {
+                                if (!$this->FinanceiroPagamento->pagarFactura($pagamento['FinanceiroPagamento']['entidade_id'],
+                                    $montante, $data, $pagamento['FinanceiroPagamento']['financeiro_tipo_pagamento_id'],
+                                    $referencia, $referencia)
+                                ) {
+                                    //return false;
+                                }
+                                $candidatoGraduacao = $this->Aluno->CandidatoGraduacao->findByReferenciaPagamento($pagamento['FinanceiroPagamento']['referencia_pagamento']);
+                                if(empty($candidatoGraduacao)){
+                                    $candidatoGraduacao =$this->Aluno->CandidatoGraduacao->findByReferenciaPagamento2($pagamento['FinanceiroPagamento']['referencia_pagamento']);
+                                }
+
+                                $arrayData = [
+                                    'CandidatoGraduacao'=>[
+                                        'candidato_graduacao_id'=>$candidatoGraduacao['CandidatoGraduacao']['id'],
+                                        'valor_pago'=>$montante,
+                                        'data_pagamento'=>$data,
+                                        'numero_talao'=>$referencia
+
+                                    ]
+                                ];
+                                $pagamentoGraduacao = $this->Aluno->CandidatoGraduacao->confirmaPagamento($arrayData);
+
+
+                            }
+                        }
+
+                }
+            }
+            return true;
+        }
+
+
+
+        /**
+         * @param $file_url
+         *
+         * @return bool
+         * @todo dinamizar o ano lectivo
+         */
+        public function processaFicheiroRenovacaoLocal($file_url, $anoLectivoAno)
+        {
+
+
+            $file = $file_url;
+            $linhas = file($file, FILE_IGNORE_NEW_LINES);
+            foreach ($linhas as $linha) {
+
+                switch ($linha[0]) {
+                    case '0': //Primeira Linha
+                        break;
+                    case '1':
+                        $referencia = substr($linha, 1, 11);
+                        $montante = substr($linha, 12, 16);
+                        $comissao = substr($linha, 28, 16);
+                        $dia = substr($linha, 44, 2);
+                        $mes = substr($linha, 46, 2);
+                        $ano = substr($linha, 48, 4);
+                        $hora = substr($linha, 52, 2);
+                        $minuto = substr($linha, 54, 2);
+                        $segundo = substr($linha, 56, 2);
+                        $data = $ano . '-' . $mes . '-' . $dia . " " . $hora . ":" . $minuto . ":" . $segundo;
+
+                        $transacaoId = substr($linha, 58, 7);
+                        $atm_id = substr($linha, 65, 10);
+                        $localizacao_atm = substr($linha, 75, 16);
+                        $montante_decimal = substr($montante, -2);
+                        $montante_real = ltrim(substr($montante, 0, -2), '0');
+                        $montante = $montante_real . '.' . $montante_decimal;
+                        debug($referencia . '-----' . $montante . '---------' . $data);
+
+                        $pagamento = $this->FinanceiroPagamento->findByReferenciaPagamento($referencia);
+                        if(!$pagamento){
+                            if($montante==80 || $montante==160){
+                            }
+                            $candidatoGraduacao = $this->Aluno->CandidatoGraduacao->findByReferenciaPagamento2($referencia);
+                            if($candidatoGraduacao){
+                                $pagamento = $this->FinanceiroPagamento->findByReferenciaPagamento($candidatoGraduacao['CandidatoGraduacao']['referencia_pagamento']);
+                                debug($pagamento);
+                            }
+                        }
+
+
+                        if (!$pagamento) {
+
+                            //Não foi criada a matricula. Provavelmente seja graduacao
+                            //@todo verificar graduacoes se criam pagamentos antecipadamente
+
+                        } else {
+                            if (in_array($pagamento['FinanceiroPagamento']['financeiro_tipo_pagamento_id'], [37, 38])) {
+                                if (!$this->FinanceiroPagamento->pagarFactura($pagamento['FinanceiroPagamento']['entidade_id'],
+                                    $montante, $data, $pagamento['FinanceiroPagamento']['financeiro_tipo_pagamento_id'],
+                                    $referencia, $referencia)
+                                ) {
+                                    //return false;
+                                }
+                                $matricula = $this->findByFinanceiroPagamentoId($pagamento['FinanceiroPagamento']['id']);
+                                if(empty($matricula)){
+                                    $aluno = $this->Aluno->findById($pagamento['FinanceiroPagamento']['id']);
+                                    if(empty($aluno)){
+                                        continue;
+                                    }
+                                    $anoLectivo = $this->AnoLectivo->findByAno($anoLectivoAno);
+                                    $matricula = $this->findByAlunoIdAndAnoLectivoId($aluno['Aluno']['id'],$anoLectivo['AnoLectivo']['id']);
+
+                                    if(empty($matricula)){
+                                        $arrayMatricula = [
+                                            'Matricula' => [
+                                                'aluno_id'                => $aluno['Aluno']['id'],
+                                                'curso_id'                => $aluno['Aluno']['curso_id'],
+                                                'plano_estudo_id'         => $aluno['Aluno']['plano_estudo_id'],
+                                                'data'                    => date('Y-m-d'),
+                                                'estado_matricula_id'     => 5,
+                                                'ano_lectivo_id'          => $anoLectivo['AnoLectivo']['id'],
+                                                'tipo_matricula_id'       => 2,
+                                                'user_id'                 => 1,
+                                                'financeiro_pagamento_id' => $pagamento['FinanceiroPagamento']['id']
+                                            ]
+                                        ];
+                                        $this->create();
+                                        if(!$this->save($arrayMatricula)){
+                                            debug($this->validationErrors);
+                                            die();
+                                        }
+                                        $matricula = $this->findById($this->id);
+                                    }
+
+
+
+                                }
+
+                                if(empty($matricula)){
+                                    debug($pagamento);
+                                    debug($aluno);
+                                    die();
+                                }
 
                                 if ($matricula['Matricula']['estado_matricula_id'] == 5) {
                                     $this->id = $matricula['Matricula']['id'];
