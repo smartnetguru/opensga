@@ -715,6 +715,7 @@
         public function concluirNivel($data)
         {
 
+
             $datasource = $this->getDataSource();
             $datasource->begin();
             if ($data['HistoricoCurso']['nota_final'] == '' || $data['HistoricoCurso']['data_conclusao'] == '') {
@@ -777,8 +778,8 @@
                 'funcionario_id'         => $data['HistoricoCurso']['funcionario_id']
             ];
             $this->alteraStatus($data_estado);
-
-            return $datasource->commit();
+            $datasource->commit();
+            return true;
         }
 
         public function geraReferenciaRenovacao($alunoId = null)
