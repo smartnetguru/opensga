@@ -82,7 +82,7 @@
 
                 $file->close(); // Be sure to close the file when you're done
             }
-            
+
         }
 
     }

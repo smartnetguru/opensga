@@ -152,7 +152,10 @@
                     'Entidade.name' => 'Asc'
                 ]
             ];
-            $this->set('docentes', $this->paginate());
+
+            $docentes = $this->paginate();
+            $this->set('docentes', $docentes);
+
 
             $options['joins'] = [
                 [
@@ -172,6 +175,7 @@
             $options['order'] = 'UnidadeOrganica.name ASC';
 
             $unidadeOrganicas = $this->Docente->UnidadeOrganica->find('list', $options);
+
             $this->set(compact('unidadeOrganicas'));
         }
 

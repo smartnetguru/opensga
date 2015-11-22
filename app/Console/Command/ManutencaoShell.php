@@ -159,6 +159,29 @@
         }
 
 
+        public function apaga_docentes_duplicados(){
+
+            $docentes = $this->Docente->find('all');
+            $i=1;
+            foreach($docentes as $docente){
+                $i++;
+                $entidadeId = $docente['Docente']['entidade_id'];
+                $outrosDocentes = $this->Docente->find('all',['conditions'=>['Docente.id NOT'=>$docente['Docente']['id'],'entidade_id'=>$entidadeId]]);
+                if(empty($outrosDocentes)){
+                    $this->out($i.'------------------Clean');
+
+                    continue;
+
+                }
+                foreach($outrosDocentes as $outro){
+                    $this->Docente->delete($outro['Docente']['id']);
+                    $this->out($i.'------------------------');
+                }
+
+            }
+        }
+
+
 
 
     }
