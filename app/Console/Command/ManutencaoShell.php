@@ -181,6 +181,20 @@
             }
         }
 
+        public function actualiza_turmas_estudantes(){
+
+            $this->Turma->contain('Curso');
+            $turmas = $this->Turma->find('all',['conditions'=>[]]);
+            foreach($turmas as $turma){
+                $inscricaos = $this->Inscricao->find('count',['conditions'=>['Inscricao.turma_id'=>$turma['Turma']['id']]]);
+                $this->Turma->id = $turma['Turma']['id'];
+                $this->Turma->set('total_alunos',$inscricaos);
+                $this->Turma->save();
+                $this->out($turma['Turma']['name'].'--------------------'.$inscricaos);
+
+            }
+        }
+
 
 
 

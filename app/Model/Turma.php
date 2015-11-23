@@ -234,6 +234,72 @@
 
         ];
 
+
+        /**
+         * Grava os dados da Avaliacao a Criar
+         * Controla o total de Pesos das Avaliacoes da Turma
+         * @param $data
+         */
+        public function criaAvaliacao($data){
+
+            $turmaId = $data['TurmaTipoAvaliacao']['turma_id'];
+            $totalPesos = $this->TurmaTipoAvaliacao->getTotalPesos($turmaId);
+            if($totalPesos+$data['TurmaTipoAvaliacao']['peso']>100){
+                return [false,'ERRO: O Peso total das Avaliacoes sera Superior a 100%!'];
+            }
+            $this->TurmaTipoAvaliacao->create();
+            if($this->TurmaTipoAvaliacao->save($data)){
+                return [true];
+            } else{
+                $erro = implode(',',$this->TurmaTipoAvaliacao->validationErrors);
+                debug($this->TurmaTipoAvaliacao->validationErrors);
+                debug($erro);
+                return [false,'ERRO ao gravar: '.$erro];
+
+            }
+
+            debug($data);
+        }
+        public function getTurmasSemDocente($anoLectivoId,$semestreLectivoId,$unidadeOrganicaId = null,$type='all')
+        {
+
+
+
+            $options['joins'] = [
+                ['table' => 'docente_turmas',
+                      'alias' => 'DocenteTurma',
+                      'type' => 'left',
+                      'conditions' => [
+                          'Turma.id = DocenteTurma.turma_id'
+                      ]
+                ],
+                ['table' => 'cursos',
+                      'alias' => 'Curso',
+                      'type' => 'left',
+                      'conditions' => [
+                          'Curso.id = Turma.curso_id'
+                      ]
+                ],
+
+            ];
+
+            $options['fields']='*';
+            $options['conditions'] = [
+                'DocenteTurma.docente_id' => null,
+                'Turma.ano_lectivo_id'=>$anoLectivoId,
+            'Turma.semestre_lectivo_id'=>$semestreLectivoId
+            ];
+            if(isset($unidadeOrganicaId)){
+                $options['conditions']['Curso.unidade_organica_id'] = $unidadeOrganicaId;
+            }
+
+            $options['order']=['Curso.name','Disciplina.name'];
+
+
+
+            $turmas = $this->find($type, $options);
+            return $turmas;
+        }
         /**
          * @param $data
          *

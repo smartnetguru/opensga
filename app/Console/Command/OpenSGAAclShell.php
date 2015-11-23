@@ -238,6 +238,10 @@
                     $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Turmas/faculdade_get_aluno_for_inscricao";
                     $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Turmas/faculdade_inscrever_aluno";
                     $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Turmas/faculdade_actualizar_notas";
+                    $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Turmas/faculdade_manutencao";
+                    $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Turmas/faculdade_manutencao_turmas_sem_docente";
+                    $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Turmas/faculdade_manutencao_turmas_abertas";
+                    $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Turmas/faculdade_manutencao_turmas_sem_estudante";
 
                     $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/faculdade_index";
                     $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/faculdade_perfil_estudante";

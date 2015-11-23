@@ -52,6 +52,9 @@ class AvaliacaosController extends AppController {
 		}
 
 
+        if($this->request->is('post')){
+            debug($this->request->data);
+        }
 		$this->Avaliacao->TurmaTipoAvaliacao->contain(array(
 			'Turma' => array(
 				'AnoLectivo',

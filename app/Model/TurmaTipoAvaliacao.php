@@ -63,6 +63,63 @@ class TurmaTipoAvaliacao extends AppModel {
 		)
 	);
 
+    public $validate = [
+        'turma_id'            => [
+            'cursoRule-3' => [
+                'rule'     => 'notBlank',
+                'required' => 'create',
+                'message'  => 'É necessário indicar a turma a qual a avaliacao pertence'
+            ]
+        ],
+        'tipo_avaliacao_id'      => [
+            'anoLectivoRule-3' => [
+                'rule'     => 'notBlank',
+                'required' => 'create',
+                'message'  => 'É necessário indicar o tipo de avaliacao'
+            ]
+        ],
+        'estado_turma_avaliacao_id'     => [
+            'planoEstudoRule-3' => [
+                'rule'     => 'notBlank',
+                'required' => 'create',
+                'message'  => 'O estado da avaliacao deve ser indicado'
+            ]
+        ],
+        'peso'       => [
+            'pesoNotBlank' => [
+                'rule'     => 'notBlank',
+                'required' => 'create',
+                'message'  => 'O Peso da Avaliacao deve ser indicado'
+            ],
+            'pesoBetween' => [
+                'rule'     => ['range',-0.01,100.01],
+                'required' => 'create',
+                'message'  => 'O Peso da Avaliacao deve ser indicado'
+            ]
+        ],
+        'ordem'      => [
+            'anoCurricularRule-3' => [
+                'rule'     => 'notBlank',
+                'required' => 'create',
+                'message'  => 'O ano curricular não pode estar vazio'
+            ]
+        ],
+        'data_marcada' => [
+            'semestreCurricularRule-3' => [
+                'rule'     => 'notBlank',
+                'required' => 'create',
+                'message'  => 'O semestre curricular não pode estar vazio'
+            ]
+        ],
+
+
+    ];
+
+    public function getTotalPesos($turmaId){
+        $totalPesos = $this->find('all',['conditions'=>['turma_id'=>$turmaId],'fields'=>['SUM(peso) as total']]);
+        return $totalPesos[0][0]['total'];
+    }
+
 }
 
 ?>

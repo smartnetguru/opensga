@@ -150,6 +150,12 @@
             $this->set(compact('turma', 'docentes', 'tipoDocenteTurmas', 'turma_id'));
         }
 
+        /**
+         * Cria uma avaliacao para a turma
+         *
+         * @todo quando selecciona exames, esconder o campo de percentagem
+         * @param $turmaId
+         */
         public function docente_criar_avaliacao($turmaId)
         {
             $this->Turma->id = $turmaId;
@@ -166,7 +172,8 @@
                     'UnidadeOrganica'
                 ],
                 'Disciplina',
-                'AnoLectivo'
+                'AnoLectivo',
+                'SemestreLectivo'
             ]);
             $turma = $this->Turma->read(null, $turmaId);
 
@@ -178,10 +185,15 @@
             }
 
             if ($this->request->is('post')) {
-                $this->Turma->TurmaTipoAvaliacao->create();
-                if ($this->Turma->TurmaTipoAvaliacao->save($this->request->data)) {
+                $resultado = $this->Turma->criaAvaliacao($this->request->data);
+
+                if($resultado[0]===true){
                     $this->Session->setFlash('Avaliacao Criada com Sucesso');
                     $this->redirect(['action' => 'ver_turma', $turmaId]);
+                } else{
+
+                        $this->Flash->error($resultado[1]);
+
                 }
             }
             $tipoAvaliacaos = $this->Turma->TurmaTipoAvaliacao->TipoAvaliacao->find('list');
@@ -442,6 +454,12 @@
 
         }
 
+        /**
+         * Associa um Docente a Turma em questao
+         *
+         * @todo criar a funcionalidade docentes recomendados, de acordo com as disciplinas do docente
+         * @param $turmaId
+         */
         public function faculdade_adicionar_docente($turmaId)
         {
             $this->Turma->id = $turmaId;
@@ -461,6 +479,7 @@
                 }
             }
 
+            $this->Turma->contain(['Disciplina','Curso','AnoLectivo','SemestreLectivo']);
             $turma = $this->Turma->findById($turmaId);
             $this->Turma->DocenteTurma->Docente->contain([
                 'Entidade',
@@ -1064,6 +1083,54 @@
 
             $this->set(compact('inscricaos'));
         }
+
+        public function faculdade_manutencao(){
+
+            $anoLectivoAno = Configure::read('OpenSGA.ano_lectivo');
+            $anoLectivo = $this->Turma->AnoLectivo->findByAno($anoLectivoAno);
+            $anoLectivoId = $anoLectivo['AnoLectivo']['id'];
+
+            $semestreLectivoSemestre = Configure::read('OpenSGA.semestre_lectivo');
+            $semestreLectivo = $this->Turma->AnoLectivo->SemestreLectivo->findByAnoLectivoIdAndSemestre($anoLectivoId,$semestreLectivoSemestre);
+            $semestreLectivoId = $semestreLectivo['SemestreLectivo']['id'];
+
+            $unidadeOrganicaId = CakeSession::read('Auth.User.unidade_organica_id');
+
+            $totalTurmasSemDocente = $this->Turma->getTurmasSemDocente($anoLectivoId,$semestreLectivoId,$unidadeOrganicaId,'count');
+
+
+
+            $this->set(compact('totalTurmasSemDocente'));
+        }
+
+        public function faculdade_manutencao_turmas_sem_docente(){
+
+            $anoLectivoAno = Configure::read('OpenSGA.ano_lectivo');
+            $anoLectivo = $this->Turma->AnoLectivo->findByAno($anoLectivoAno);
+            $anoLectivoId = $anoLectivo['AnoLectivo']['id'];
+
+            $semestreLectivoSemestre = Configure::read('OpenSGA.semestre_lectivo');
+            $semestreLectivo = $this->Turma->AnoLectivo->SemestreLectivo->findByAnoLectivoIdAndSemestre($anoLectivoId,$semestreLectivoSemestre);
+            $semestreLectivoId = $semestreLectivo['SemestreLectivo']['id'];
+
+
+            $unidadeOrganicaId = CakeSession::read('Auth.User.unidade_organica_id');
+
+            $this->Turma->contain(['AnoLectivo','SemestreLectivo','Disciplina']);
+            $turmasSemDocente = $this->Turma->getTurmasSemDocente($anoLectivoId,$semestreLectivoId,$unidadeOrganicaId,'all');
+
+            $this->set(compact('turmasSemDocente'));
+
+        }
+
+        public function faculdade_manutencao_turmas_sem_estudante(){
+
+        }
+
+        public function faculdade_manutencao_turmas_abertas(){
+
+        }
+
 
         public function print_pauta($turmaId)
         {
