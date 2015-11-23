@@ -131,13 +131,18 @@
          *
          * @return void
          */
-        public function estudante_ver_mensagem($id = null)
+        public function estudante_ver_mensagem($messageId = null)
         {
-            if (!$this->Message->exists($id)) {
+            if (!$this->Message->exists($messageId)) {
                 throw new NotFoundException(__('Invalid message'));
             }
-            $options = ['conditions' => ['Message.' . $this->Message->primaryKey => $id]];
-            $this->set('message', $this->Message->find('first', $options));
+
+            $userId = $this->Session->read('Auth.User.id');
+            $this->Message->MessageUser->contain(['Message'=>['User'=>'Entidade']]);
+            $options = ['conditions' => ['Message.id >=' => $messageId,'MessageUser.user_id'=>$userId],'limit'=>10];
+            $messages = $this->Message->MessageUser->find('all', $options);
+            $this->set('messages', $messages);
+            $this->set(compact('messageId'));
         }
 
         public function docente_enviar_mensagem()

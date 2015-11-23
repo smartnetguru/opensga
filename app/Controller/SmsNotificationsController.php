@@ -39,6 +39,7 @@ class SmsNotificationsController extends AppController {
 			)
 		);
 
+        $this->loadModel('SmsNotification');
 		$this->SmsNotification->create();
 		$this->SmsNotification->save($array_sms);
 

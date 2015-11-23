@@ -195,7 +195,7 @@
                     'conditions' => ['MessageUser.user_id' => $userId, 'message_folder_id' => 1, 'estado_message_id' => 1]
                 ]);
                 $this->Message->MessageUser->contain(['Message'=>'User']);
-                $messages = $this->Message->MessageUser->find('all', [
+                $headerMessages = $this->Message->MessageUser->find('all', [
                     'conditions' => ['MessageUser.user_id' => $userId, 'message_folder_id' => 1, 'estado_message_id' => 1],
                     'limit'      => 5
                 ]);
@@ -214,7 +214,7 @@
                 }
 
             }
-            $this->set(compact('totalMensagensPendentes', 'totalTarefasPendentes', 'totalNotificacoesPendentes', 'messages', 'tarefas',
+            $this->set(compact('totalMensagensPendentes', 'totalTarefasPendentes', 'totalNotificacoesPendentes', 'headerMessages', 'tarefas',
                 'notificacoes'));
         }
 

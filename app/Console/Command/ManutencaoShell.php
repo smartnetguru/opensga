@@ -195,6 +195,22 @@
             }
         }
 
+        public function ajusta_cursos_turnos(){
+
+            $cursos = $this->Curso->find('all');
+            $turnos = $this->Curso->CursosTurno->Turno->find('list');
+            foreach($cursos as $curso){
+                $cursosTurnos = $this->Curso->CursosTurno->findByCursoId($curso['Curso']['id']);
+                if(empty($cursosTurnos)){
+                    debug($turnos);
+                    $turno = $this->in($curso['Curso']['name']);
+                    $arrayCursoTurno = ['CursosTurno'=>['curso_id'=>$curso['Curso']['id'],'turno_id'=>$turno]];
+                    $this->Curso->CursosTurno->create();
+                    $this->Curso->CursosTurno->save($arrayCursoTurno);
+                }
+            }
+        }
+
 
 
 
