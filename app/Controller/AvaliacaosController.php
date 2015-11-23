@@ -53,7 +53,10 @@ class AvaliacaosController extends AppController {
 
 
         if($this->request->is('post')){
-            debug($this->request->data);
+            $resultado = $this->Avaliacao->gravaNotas($this->request->data);
+            if($resultado[0]===true){
+                $this->Flash->success('Notas Gravadas com Sucesso');
+            }
         }
 		$this->Avaliacao->TurmaTipoAvaliacao->contain(array(
 			'Turma' => array(

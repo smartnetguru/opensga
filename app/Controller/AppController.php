@@ -116,8 +116,6 @@
                     switch ($codigo_unidade) {
                         case 'cooperacao':
                             if ($this->request->plugin != 'cooperacao') {
-                                $this->Session->setFlash(__('Não tem Permissão para acessar a area anterior'),
-                                    'default', ['class' => 'alert info']);
                                 $this->redirect([
                                     'controller' => 'cooperacao_acordos',
                                     'action'     => 'home',
@@ -127,19 +125,17 @@
                             break;
                         case 'faculdade':
                             if ($this->request->prefix != 'faculdade') {
-                                $this->Session->setFlash(__('Não tem Permissão para acessar a area anterior'),
-                                    'default', ['class' => 'alert info']);
-                                $this->redirect(['controller' => 'pages', 'action' => 'home', 'faculdade' => true]);
+                                $this->redirect(['faculdade' => true]);
                             }
                     }
                 } elseif ($grupo_id == 4) {
                     if ($this->request->prefix != 'docente') {
-                        $this->request->prefix = 'docente';
+                        $this->redirect(['docente'=>true]);
                     }
                 } elseif ($grupo_id == 3) {
 
                     if ($this->request->prefix != 'estudante') {
-                        $this->request->prefix = 'estudante';
+                        $this->redirect(['estudante'=>true]);
                     }
                 } elseif ($grupo_id == 2) {
                     $this->loadModel('User');

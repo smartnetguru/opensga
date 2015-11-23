@@ -45,6 +45,9 @@
         function beforeFilter()
         {
             parent::beforeFilter();
+            $action = $this->action;
+            debug($action);
+
             $user = $this->Auth->user();
             $this->Auth->allow('email_oficial_uem', 'email','webmail');
             if ($user != null) {
@@ -164,6 +167,7 @@
 
         function home()
         {
+
             $this->loadModel('SmsEnviada');
             $this->loadModel('SmsNotification');
             $this->loadModel('DatabaseLog.Log');

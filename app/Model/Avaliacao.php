@@ -150,6 +150,27 @@ class Avaliacao extends AppModel {
 		return $resultado;
 	}
 
+    public function gravaNotas($data){
+        foreach($data['Avaliacao'] as $avaliacao){
+            $avaliacaoExiste = $this->finrueu dByInscricaoIdAndTurmaTipoAvaliacaoId($avaliacao['inscricao_id'],$avaliacao['turma_tipo_avaliacao_id']);
+            $turmaTipoAvaliacaoId = $avaliacao['turma_tipo_avaliacao_id'];
+            if($avaliacaoExiste){
+                $this->id = $avaliacaoExiste['Avaliacao']['id'];
+                $this->save($data);
+            } else{
+                $this->create();
+                $this->save($data);
+            }
+        }
+        if($data['metodo']=='PUBLICAR'){
+            $this->TurmaTipoAvaliacao->id = $turmaTipoAvaliacaoId;
+            $this->TurmaTipoAvaliacao->set('estado_turma_avaliacao_id',5);
+            $this->TurmaTipoAvaliacao->save();
+        }
+
+        return [true];
+    }
+
 }
 
 ?>
