@@ -91,6 +91,7 @@
             $comandos[] = "acl grant Group.3 controllers/Alunos/estudante_perfil";
             $comandos[] = "acl grant Group.3 controllers/Alunos/estudante_editar_perfil";
             $comandos[] = "acl grant Group.3 controllers/Alunos/estudante_mostrar_foto";
+            $comandos[] = "acl grant Group.3 controllers/Alunos/estudante_index";
 
             $comandos[] = "acl grant Group.3 controllers/CerimoniaGraduacaos/estudante_index";
             $comandos[] = "acl grant Group.3 controllers/CerimoniaGraduacaos/estudante_inscricao";

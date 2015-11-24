@@ -26,6 +26,9 @@ class AlunosController extends AppController
 
 
 
+    public function estudante_index(){
+        $this->redirect(['action'=>'perfil']);
+    }
     function adicionar_estudante()
     {
         if ($this->request->is('post') || $this->request->is('put')) {

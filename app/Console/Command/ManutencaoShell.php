@@ -35,40 +35,6 @@
             'Docente'
         ];
 
-        public function actualiza_turnos_cursos(){
-            $cursos  = $this->Curso->find('all');
-            foreach($cursos as $curso){
-                debug($curso);
-            }
-        }
-
-        public function actualiza(){
-            $this->Aluno->CandidatoGraduacao->contain(['Aluno'=>'Entidade']);
-            $candidatos = $this->Aluno->CandidatoGraduacao->find('all');
-            foreach($candidatos as $candidato){
-                if(!$candidato['CandidatoGraduacao']['referencia_pagamento']){
-                    continue;
-                }
-
-                $pagamento = $this->Aluno->FinanceiroPagamento->findByReferenciaPagamento($candidato['CandidatoGraduacao']['referencia_pagamento']);
-                if(empty($pagamento)){
-
-                    if($candidato['CandidatoGraduacao']['aluno_id']==0){
-                        continue;
-                    }
-                    debug($candidato);
-                    $valor = $this->Aluno->FinanceiroPagamento->geraReferenciaPagamentoGraduacaoValor($candidato['Aluno']['id']);
-
-
-                    $pagamento = $this->Aluno->FinanceiroPagamento->criaPagamento($candidato['Aluno']['entidade_id'],$valor,$candidato['CandidatoGraduacao']['created'],39,$candidato['CandidatoGraduacao']['referencia_pagamento']);
-
-                    debug($pagamento);
-                }
-
-
-            }
-
-        }
 
 
         //Exportar dados actualizados para tabela alunos e ou entidades
@@ -195,21 +161,43 @@
             }
         }
 
-        public function ajusta_cursos_turnos(){
+       public function ajusta_alunos_matriculas(){
+           $alunos = $this->Aluno->find('all');
+           $total = count($alunos);
+           foreach($alunos as $aluno){
+               $this->Aluno->Matricula->contain('AnoLectivo');
+               $ultimaMatricula = $this->Aluno->Matricula->find('first',['conditions'=>['Matricula.aluno_id'=>$aluno['Aluno']['id']],'order'=>'AnoLectivo.ano DESC']);
+              $anoFim = $ultimaMatricula['AnoLectivo']['ano'];
+               $anoInicio = $aluno['Aluno']['ano_ingresso'];
 
-            $cursos = $this->Curso->find('all');
-            $turnos = $this->Curso->CursosTurno->Turno->find('list');
-            foreach($cursos as $curso){
-                $cursosTurnos = $this->Curso->CursosTurno->findByCursoId($curso['Curso']['id']);
-                if(empty($cursosTurnos)){
-                    debug($turnos);
-                    $turno = $this->in($curso['Curso']['name']);
-                    $arrayCursoTurno = ['CursosTurno'=>['curso_id'=>$curso['Curso']['id'],'turno_id'=>$turno]];
-                    $this->Curso->CursosTurno->create();
-                    $this->Curso->CursosTurno->save($arrayCursoTurno);
-                }
-            }
-        }
+               $anoLectivos = $this->Aluno->Matricula->AnoLectivo->find('list',['conditions'=>['AnoLectivo.ano >'=>$anoInicio,'AnoLectivo.ano <'=>$anoFim]]);
+               foreach($anoLectivos as $k=>$v){
+                   $matriculaExiste = $this->Aluno->Matricula->findByAlunoIdAndAnoLectivoId($aluno['Aluno']['id'],$k);
+                   if(empty($matriculaExiste)){
+                       $arrayMatricula = [
+                           'Matricula'=>[
+                               'aluno_id' => $aluno['Aluno']['id'],
+                               'curso_id' => $aluno['Aluno']['curso_id'],
+                               'plano_estudo_id' => $aluno['Aluno']['plano_estudo_id'],
+                               'data' => $v.'-01-01',
+                               'estado_matricula_id' => 1,
+                               'user_id' => 1,
+                               'ano_lectivo_id' => $k,
+                               'tipo_matricula_id' => 2,
+
+                           ]
+                       ];
+
+                       $this->Aluno->Matricula->create();
+                       if(!$this->Aluno->Matricula->save($arrayMatricula)){
+                           die(debug($this->Aluno->Matricula->validationErrors));
+                       }
+                   }
+               }
+               $total--;
+               $this->out($total.'------------------------');
+           }
+       }
 
 
 
