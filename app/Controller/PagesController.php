@@ -45,9 +45,6 @@
         function beforeFilter()
         {
             parent::beforeFilter();
-            $action = $this->action;
-            debug($action);
-
             $user = $this->Auth->user();
             $this->Auth->allow('email_oficial_uem', 'email','webmail');
             if ($user != null) {
@@ -59,8 +56,8 @@
                 $referer = $this->referer();
                 preg_match('/login/', $referer, $matches);
                 if ($matches) {
-                    $whatsNew = '<p>Inscricoes da Escola Superior de Ciencias do Desporto Importadas</p>';
-                    $this->set(compact('whatsNew'));
+                   // $whatsNew = '<p>Inscricoes da Escola Superior de Ciencias do Desporto Importadas</p>';
+                    //$this->set(compact('whatsNew'));
                 }
 
             }

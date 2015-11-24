@@ -144,6 +144,9 @@
 
             if ($this->action == 'login' or $this->action == 'logout') {
 
+                    $this->Security->validatePost = false;
+
+
             }
 
         }
@@ -611,6 +614,11 @@
 
 
             if ($this->request->is('post')) {
+                if(!isset($this->request->data['User'])){
+                    $this->request->data['User'] = $this->request->data;
+                    unset($this->request->data['username']);
+                    unset($this->request->data['password']);
+                }
                 $username = $this->request->data['User']['username'];
                 if (is_numeric($username)) {
                     $this->User->Entidade->Aluno->contain(['Entidade' => ['User']]);
