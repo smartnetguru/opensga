@@ -3,3 +3,8 @@
     RewriteRule    ^$    webroot/    [L]
     RewriteRule    (.*) webroot/$1    [L]
 </IfModule>
+# Do not route missing asset requests through cake
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !img/titles
+RewriteRule ^/?((assets|img|js|css|swf)/.*)$ - [R=404,L]
