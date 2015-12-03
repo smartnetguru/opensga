@@ -1762,4 +1762,99 @@
         }
 
 
+
+
+        public function projeccaoGraduados(){
+            App::import('Vendor', 'PHPExcel', ['file' => 'PHPExcel.php']);
+            if (!class_exists('PHPExcel')) {
+                throw new CakeException('Vendor class PHPExcel not found!');
+            }
+
+            $xls = PHPExcel_IOFactory::load(APP . 'Reports' . DS .'Estudantes'.DS. 'projeccao.xlsx');
+
+            $worksheet = $xls->getActiveSheet();
+            $linhaActual = 4;
+
+            $anoInicio = 2016;
+            $anoFim = 2020;
+            $anoBase = 2015;
+
+            $cursos = [40=>40,54=>54,130=>130,131=>131];
+
+            foreach($cursos as $k=>$v){
+                $this->Aluno->Curso->contain(['GrauAcademico']);
+                $curso = $this->Aluno->Curso->findById($k);
+                $xls->getActiveSheet()->setCellValue('A' . $linhaActual, 'Universidade Eduardo Mondlane');
+                $xls->getActiveSheet()->setCellValue('B' . $linhaActual, 'Cidade de Maputo');
+                $xls->getActiveSheet()->setCellValue('C' . $linhaActual, $curso['Curso']['name']);
+
+                $anoCriacao = $curso['Curso']['ano_criacao'];
+                if(!$anoCriacao){
+                    $xls->getActiveSheet()->setCellValue('D' . $linhaActual, '');
+                } else{
+                    $xls->getActiveSheet()->setCellValue('D' . $linhaActual, $curso['Curso']['ano_criacao']);
+                }
+
+                $xls->getActiveSheet()->setCellValue('E' . $linhaActual, $curso['GrauAcademico']['name']);
+
+                if(!empty($curso['Curso']['duracao'])){
+                    $xls->getActiveSheet()->setCellValue('F' . $linhaActual, $curso['Curso']['duracao']*2);
+                } else{
+                    die($this->out($curso['Curso']['name'].'------Sem Duracao----------'.$curso['Curso']['id']));
+                }
+
+                $totalTurmas = $this->Aluno->find('count',['fields'=>'ano_ingresso','group'=>'ano_ingresso','conditions'=>['curso_id'=>$k,'estado_aluno_id'=>[1,11,14]]]);
+                $xls->getActiveSheet()->setCellValue('G' . $linhaActual, $totalTurmas);
+                $totalMatriculados = $this->Aluno->find('count',['conditions'=>['curso_id'=>$k,'estado_aluno_id'=>[1,11,14]]]);
+                $xls->getActiveSheet()->setCellValue('H' . $linhaActual, $totalMatriculados);
+
+                $duracao = $curso['Curso']['duracao'];
+
+                $ingressoBase = $anoBase-$duracao;
+                $totalIngressoBase = $totalMatriculados = $this->Aluno->find('count',['conditions'=>['curso_id'=>$k,'ano_ingresso'=>$ingressoBase]]);
+
+                debug($totalIngressoBase);
+
+                $this->Aluno->contain(['HistoricoCurso'=>['conditions'=>['ano_fim'=>$anoBase,'curso_id'=>$k]]]);
+                $graduadosBase = $totalMatriculados = $this->Aluno->find('all',['conditions'=>['curso_id'=>$k,'estado_aluno_id'=>3]]);
+                $totalGraduadosBase = 0;
+                foreach($graduadosBase as $graduado){
+                    if(!empty($graduado['HistoricoCurso'])){
+                        $totalGraduadosBase++;
+                    }
+                }
+                $percentagem = $totalGraduadosBase/$totalIngressoBase*100;
+                $this->out($curso['Curso']['name'].'---Graduados: '.$totalGraduadosBase.'---Ingressos: '.$totalIngressoBase.'---Ano: '.$anoBase.'--%: '.$percentagem);
+
+
+
+
+                $letrasSeguintes = ['I','J','K','L','M'];
+                $contadorLetras = 0;
+                for($ano=$anoInicio;$ano<=$anoFim;$ano++){
+
+                    $anoIngresso = $ano-$duracao;
+
+                    $totalIngresso = $totalMatriculados = $this->Aluno->find('count',['conditions'=>['curso_id'=>$k,'ano_ingresso'=>$anoIngresso]]);
+
+                    //Controlar Coeficiente
+                    $xls->getActiveSheet()->setCellValue($letrasSeguintes[$contadorLetras] . $linhaActual, round($totalIngresso*$percentagem/100));
+                    $contadorLetras++;
+
+                }
+
+
+
+
+                $linhaActual++;
+            }
+
+
+
+            $objWriter = PHPExcel_IOFactory::createWriter($xls, 'Excel2007');
+
+            $objWriter->save('projeccao_' . Configure::read('OpenSGA.ano_lectivo') . '.xlsx');
+        }
+
+
     }

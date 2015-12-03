@@ -118,11 +118,14 @@ class EntidadeContacto extends AppModel
                     ) {
                         $this->id = $contactoActual['EntidadeContacto']['id'];
                         $this->set('estado_objecto_id', 2);
+                    } else{
+                        $dataSource->rollback();
+                        return false;
                     }
                 }
             } else {
                 $this->Entidade->EntidadeContacto->create();
-                $this->Entidade->EntidadeContacto->save(
+                if(!$this->Entidade->EntidadeContacto->save(
                     [
                         'EntidadeContacto' => [
                             'entidade_id'       => $data['Aluno']['entidade_id'],
@@ -131,11 +134,15 @@ class EntidadeContacto extends AppModel
                             'estado_objecto_id' => 1
                         ]
                     ]
-                );
+                )){
+                    $dataSource->rollback();
+                    return false;
+                }
             }
         }
+        $dataSource->commit();
 
-        return $dataSource->commit();
+        return true;
     }
 
 }

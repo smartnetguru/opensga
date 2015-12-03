@@ -629,11 +629,11 @@ class AlunosController extends AppController
 
             if ($this->Aluno->updateAluno($this->request->data)) {
                 $this->Flash->success('Dados do Estudante Actualizados com Sucesso');
-                $this->redirect([
+               /** $this->redirect([
                     'controller' => 'alunos',
                     'action' => 'perfil_estudante',
                     $this->request->data['Aluno']['aluno_id']
-                ]);
+                ]);*/
             } else {
                 $this->Flash->error('Problemas ao Actualizar os dados do Estudante. Verifique o Formulário e Tente novamente');
             }

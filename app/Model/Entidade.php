@@ -430,6 +430,7 @@ class Entidade extends AppModel
             if (!$this->EntidadeContacto->actualizaContactos($data)) {
                 $dataSource->rollback();
 
+
                 return false;
             }
             $data['EntidadeIdentificacao']['entidade_id'] = $entidadeId;
