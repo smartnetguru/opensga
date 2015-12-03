@@ -166,7 +166,7 @@
            $total = count($alunos);
            foreach($alunos as $aluno){
                $this->Aluno->Matricula->contain('AnoLectivo');
-               $ultimaMatricula = $this->Aluno->Matricula->find('first',['conditions'=>['Matricula.aluno_id'=>$aluno['Aluno']['id']],'order'=>'AnoLectivo.ano DESC']);
+               $ultimaMatricula = $this->Aluno->Matricula->find('first',['conditions'=>['Matricula.aluno_id'=>$aluno['Aluno']['id'],'Matricula.estado_matricula_id'=>1],'order'=>'AnoLectivo.ano DESC']);
               $anoFim = $ultimaMatricula['AnoLectivo']['ano'];
                $anoInicio = $aluno['Aluno']['ano_ingresso'];
 

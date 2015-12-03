@@ -1823,7 +1823,7 @@
                         $totalGraduadosBase++;
                     }
                 }
-                $percentagem = $totalGraduadosBase/$totalIngressoBase*100;
+                //$percentagem = $totalGraduadosBase/$totalIngressoBase*100;
                 $this->out($curso['Curso']['name'].'---Graduados: '.$totalGraduadosBase.'---Ingressos: '.$totalIngressoBase.'---Ano: '.$anoBase.'--%: '.$percentagem);
 
 
@@ -1838,7 +1838,7 @@
                     $totalIngresso = $totalMatriculados = $this->Aluno->find('count',['conditions'=>['curso_id'=>$k,'ano_ingresso'=>$anoIngresso]]);
 
                     //Controlar Coeficiente
-                    $xls->getActiveSheet()->setCellValue($letrasSeguintes[$contadorLetras] . $linhaActual, round($totalIngresso*$percentagem/100));
+                    $xls->getActiveSheet()->setCellValue($letrasSeguintes[$contadorLetras] . $linhaActual, round($totalIngresso));
                     $contadorLetras++;
 
                 }
