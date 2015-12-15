@@ -141,6 +141,7 @@
                 $comandos[] = "acl deny User.{$funcionario['User']['id']} controllers";
 
                 $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/autocomplete";
+                $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/index";
                 $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/mostrar_foto";
                 $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/enviar_sms";
                 $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/exportar_alunos_autenticidades";
@@ -169,6 +170,7 @@
                 //Permissoes para funcionarios da faculdade
                 if ($this->User->isFromFaculdade($funcionario['User']['id'])) {
 
+                    $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/faculdade_adicionar_estudante";
                     $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/faculdade_mostrar_foto";
                     $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/faculdade_pesquisa_candidatos_action";
                     $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/faculdade_matricular_candidato";
@@ -176,6 +178,7 @@
                     $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/faculdade_matricula_novo_ingresso_sucesso";
                     $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/faculdade_alunos_sem_plano_estudo";
                     $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/faculdade_atribuir_plano_estudo";
+                    $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/faculdade_alterar_status";
 
                     $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Avaliacaos/faculdade_ver_avaliacao";
                     $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Avaliacaos/faculdade_editar_notas_avaliacao";

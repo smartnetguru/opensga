@@ -71,6 +71,48 @@ class AlunosController extends AppController
             'escolaNivelMedios', 'estadoCivil'));
     }
 
+    function faculdade_adicionar_estudante()
+    {
+        if ($this->request->is('post') || $this->request->is('put')) {
+            $this->request->data['Aluno']['codigo'] = $this->request->data['Aluno']['numero_estudante'];
+            $this->request->data['Matricula']['user_id'] = $this->Session->read('Auth.User.id');
+            $this->request->data['Entidade']['name'] = $this->request->data['Entidade']['nomes'] . ' ' . $this->request->data['Entidade']['apelido'];
+            if ($this->Aluno->cadastraAluno($this->request->data)) {
+                $this->Session->setFlash("Aluno Registrado com Sucesso", 'default', ['class' => 'alert success']);
+                $this->redirect(['controller' => 'alunos', 'action' => 'perfil_estudante', $this->Aluno->id]);
+            } else {
+                $this->Session->setFlash('Problemas ao registrar os dados do Aluno', 'default',
+                    ['class' => 'alert error']);
+            }
+        }
+
+
+        $cursos = $this->Aluno->Curso->find('list');
+        $unidadeOrganicaId = $this->Session->read('Auth.User.unidade_organica_id');
+        $unidadeOrganicas = $this->Aluno->Curso->UnidadeOrganica->find('list');
+        $planoestudos = $this->Aluno->Matricula->PlanoEstudo->find('list');
+
+        $paises = $this->Aluno->Entidade->PaisNascimento->find('list');
+        $escolaNivelMedios = $this->Aluno->AlunoNivelMedio->EscolaNivelMedio->find('list');
+        $cidadeNascimentos = $this->Aluno->Entidade->CidadeNascimento->find('list');
+        $provincias = $this->Aluno->Entidade->ProvinciaNascimento->find('list');
+        $provenienciacidades = $this->Aluno->AlunoNivelMedio->EscolaNivelMedio->Distrito->find('list');
+        $proveniencianomes = $this->Aluno->AlunoNivelMedio->EscolaNivelMedio->Provincia->find('list');
+        $documento_identificacaos = $this->Aluno->Entidade->DocumentoIdentificacao->find('list');
+        $areatrabalhos = $this->Aluno->AreaTrabalho->find('list');
+        $generos = $this->Aluno->Entidade->Genero->find('list');
+        $turnos = $this->Aluno->Matricula->Turno->find('list');
+        $estadoCivil = $this->Aluno->Entidade->EstadoCivil->find('list');
+        $cidadenascimentos = $this->Aluno->Entidade->CidadeNascimento->find('list');
+        $grauParentescos = $this->Aluno->GrauParentesco->find('list');
+        $naturalidade = '';
+        $this->loadModel('SimNaoResposta');
+        $simNaoRespostas = $this->SimNaoResposta->find('list');
+        $this->set(compact('grauParentescos', 'simNaoRespostas', 'naturalidade', 'nacionalidades', 'cursos',
+            'planoestudos', 'unidadeOrganicas', 'paises', 'cidadeNascimentos', 'provincias', 'documento_identificacaos',
+            'areatrabalhos', 'generos', 'cidadenascimentos', 'proveniencianomes', 'provenienciacidades', 'turnos',
+            'escolaNivelMedios', 'estadoCivil'));
+    }
     public function alterar_nome($alunoId)
     {
         if ($this->request->is('post')) {
@@ -101,6 +143,36 @@ class AlunosController extends AppController
 
         $aluno = $this->Aluno->getAlunoForAction($alunoId);
         $funcionario = $this->Aluno->User->getFuncionarioActivoId($this->Session->read('Auth.User.Id'));
+        $estadoAlunos = $this->Aluno->EstadoAluno->find('list');
+        $motivoEstadoAlunos = $this->Aluno->AlunoEstado->MotivoEstadoAluno->find('list');
+        $this->set(compact('aluno', 'cursos', 'funcionario', 'estadoAlunos', 'motivoEstadoAlunos'));
+    }
+
+    public function faculdade_alterar_status($alunoId)
+    {
+        $aluno = $this->Aluno->getAlunoForAction($alunoId);
+        $funcionario = $this->Aluno->User->getFuncionarioActivoId($this->Session->read('Auth.User.Id'));
+
+        $unidadeOrganicaId = $this->Session->read('Auth.User.unidade_organica_id');
+        if($unidadeOrganicaId!=$aluno['Curso']['unidade_organica_id']){
+            $this->Flash->error('Não tem Permissão para aceder a página solicitada');
+            $this->redirect($this->referer());
+        }
+
+
+        if ($this->request->is('post')) {
+
+            if ($this->Aluno->alteraStatus($this->request->data['Aluno'])) {
+                $this->Session->setFlash(__('Status do Aluno Alterado Com Sucesso'), 'default',
+                    ['class' => 'alert alert-success']);
+                $this->redirect(['action' => 'perfil_estudante', $this->request->data['Aluno']['aluno_id']]);
+            } else {
+                $this->Session->setFlash(__('Problemas ao alterar Status do Estudante'), 'default',
+                    ['class' => 'alert alert-danger']);
+            }
+        }
+
+
         $estadoAlunos = $this->Aluno->EstadoAluno->find('list');
         $motivoEstadoAlunos = $this->Aluno->AlunoEstado->MotivoEstadoAluno->find('list');
         $this->set(compact('aluno', 'cursos', 'funcionario', 'estadoAlunos', 'motivoEstadoAlunos'));

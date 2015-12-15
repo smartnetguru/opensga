@@ -170,4 +170,74 @@ turmas
         }
 
 
+        public function cursos_sem_plano_estudos(){
+            App::import('Vendor', 'PHPExcel', ['file' => 'PHPExcel.php']);
+            if (!class_exists('PHPExcel')) {
+                throw new CakeException('Vendor class PHPExcel not found!');
+            }
+
+            $xls = PHPExcel_IOFactory::load(APP . 'Reports' . DS . 'Faculdades' . DS . 'renovacao.xlsx');
+
+            $worksheet = $xls->getActiveSheet();
+            $linha_actual = 2;
+            $this->Curso->contain('UnidadeOrganica');
+            $cursos = $this->Curso->find('all');
+            foreach($cursos as $curso){
+                $planoEstudoExiste = $this->Curso->PlanoEstudo->findByCursoId($curso['Curso']['id']);
+                if(empty($planoEstudoExiste)){
+
+                    $xls->getActiveSheet()->setCellValue('A' . $linha_actual, $curso['UnidadeOrganica']['name']);
+                    $xls->getActiveSheet()->setCellValue('B' . $linha_actual, $curso['Curso']['codigo']);
+                    $xls->getActiveSheet()->setCellValue('C' . $linha_actual, $curso['Curso']['name']);
+
+                    $linha_actual++;
+                }
+
+            }
+
+            $objWriter = PHPExcel_IOFactory::createWriter($xls, 'Excel2007');
+
+            $objWriter->save('cursos_sem_plano_estudo.xlsx');
+        }
+
+        public function cursos_com_plano_estudos(){
+            App::import('Vendor', 'PHPExcel', ['file' => 'PHPExcel.php']);
+            if (!class_exists('PHPExcel')) {
+                throw new CakeException('Vendor class PHPExcel not found!');
+            }
+
+            $xls = PHPExcel_IOFactory::load(APP . 'Reports' . DS . 'Faculdades' . DS . 'renovacao.xlsx');
+            $linha_actual = 2;
+            $this->Curso->contain('UnidadeOrganica');
+            $cursos = $this->Curso->find('all');
+            foreach($cursos as $curso){
+                $todosPlanosDeEstudo = $this->Curso->PlanoEstudo->findAllByCursoId($curso['Curso']['id']);
+                if(!empty($todosPlanosDeEstudo)){
+
+                    foreach($todosPlanosDeEstudo as $planoEstudo){
+                        $totalCreditos = $this->Curso->PlanoEstudo->getTotalCreditos($planoEstudo['PlanoEstudo']['id']);
+                        $xls->getActiveSheet()->setCellValue('A' . $linha_actual, $curso['UnidadeOrganica']['name']);
+                        $xls->getActiveSheet()->setCellValue('B' . $linha_actual, $curso['Curso']['codigo']);
+                        $xls->getActiveSheet()->setCellValue('C' . $linha_actual, $curso['Curso']['name']);
+                        $xls->getActiveSheet()->setCellValue('D' . $linha_actual, $planoEstudo['PlanoEstudo']['ano_criacao']);
+                        $xls->getActiveSheet()->setCellValue('E' . $linha_actual, $totalCreditos);
+
+                        $linha_actual++;
+
+                    }
+
+
+
+
+
+                }
+
+            }
+
+            $objWriter = PHPExcel_IOFactory::createWriter($xls, 'Excel2007');
+
+            $objWriter->save('cursos_com_plano_estudo.xlsx');
+        }
+
+
     }
