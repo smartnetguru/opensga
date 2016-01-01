@@ -261,7 +261,7 @@ class AlunosController extends AppController
     public function beforeFilter()
     {
         parent::beforeFilter();
-        $this->Security->unlockedActions = ['matricular_candidato', 'adicionar_estudante'];
+        $this->Security->unlockedActions = ['matricular_candidato', 'adicionar_estudante','faculdade_adicionar_estudante'];
         $this->Auth->allow('get_estudante_azgo');
     }
 

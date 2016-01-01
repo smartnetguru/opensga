@@ -41,11 +41,11 @@
 
         ];
         public $helpers = [
-            'Html' => ['className' => 'SigaHtml'],
+            'Html' => array('className' => 'BoostCake.BoostCakeHtml'),
+            'Form' => array('className' => 'BoostCake.BoostCakeForm'),
+            'Paginator' => array('className' => 'BoostCake.BoostCakePaginator'),
             'AclLink',
-            'Print',
             'BreadCumbs',
-            'Form',
             'Session',
             'Js'   => [
                 'MyJquery'
@@ -226,7 +226,7 @@
                 $this->redirect($this->referer());
             } else {
                 $this->Flash->warning('Algo Estranho Aconteceu com o Sistema. Os administradores ja foram notificados!');
-                $this->log('blackhole');
+                $this->log('blackhole'.$type);
                 $this->redirect($this->referer());
             }
 

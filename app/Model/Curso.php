@@ -37,7 +37,7 @@ class Curso extends AppModel
 {
 
     var $name = 'Curso';
-    //The Associations below have been created with all possible keys, those that are not needed can be removed
+    public $findMethods = array('activo' =>  true);
 
     var $belongsTo = [
         'GrauAcademico'    => [
@@ -234,6 +234,16 @@ class Curso extends AppModel
             'message' => 'Ja existe um curso com este nome.'
         ]
     ];
+
+    protected function _findActivo($state, $query, $results = array()) {
+        if ($state === 'before') {
+            $query['conditions']['Curso.tipo_curso_id'] = 1;
+            return $query;
+        }
+        debug($results);
+        return $results;
+    }
+
 
     public function cadastraCurso($data)
     {

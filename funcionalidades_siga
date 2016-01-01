@@ -1,0 +1,29 @@
+FACULDADE:
+	Disciplinas
+		listar, adicionar, ver detalhes, editar, remover
+	Cursos
+		Listar, ver detalhes
+	Planos de Estudos
+		Listar, adicionar, ver_detalhes, editar, remover
+		Imprimir Plano de Estudos
+		Adicionar Disciplinas, Alterar Creditos, remover Disciplinas, Editar Disciplinas
+	Inscricoes
+		Listar, Inscrever, Anular, Cancelar
+		Adicionar Inscricao Passada
+	Turmas
+		Listar, Criar, Gerar Turmas, Remover, Cancelar
+		Associar Docentes
+		Fechar Turma
+		Imprimir Lista de Estudantes
+		Exportar Pauta
+		Importar Pauta
+	Docentes
+		Listar, Cadastrar, Associar Turma, Ver Perfil, Editar Perfil,Alterar Senha
+	Avaliacoes
+		Listar, Cadastrar, Inserir Notas, Publicar, Cancelar, Apagar, 
+	Pautas
+		Exportar, Importar, Imprimir
+	Matriculas
+		Matricular, Renovar Matricula,
+	Alunos
+		Listar, Matricular Candidato,Adicionar Estudante, Alterar Senha, Ver Perfil, Renovar Matricula, Alterar Status, Receber Documentos,

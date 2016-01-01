@@ -149,6 +149,28 @@ turmas
 
         }
 
+        public function desactivaCursoSemEstudantes(){
+            $cursos = $this->Curso->find('all',['conditions'=>['OR'=>['Curso.estado_objecto_id'=>1,['Curso.estado_objecto_id is null']]]]);
+            foreach($cursos as $curso){
+                $totalAlunos = $this->Curso->Aluno->find('count',['conditions'=>['Aluno.curso_id'=>$curso['Curso']['id']]]);
+                if($totalAlunos ==0){
+                    $this->Curso->id = $curso['Curso']['id'];
+                    $this->Curso->set('estado_objecto_id');
+                }
+            }
+        }
+
+
+        public function testaRSS(){
+            App::import('Utility', 'Xml');
+
+            $feed = Xml::toArray(Xml::build('http://www.mmo.co.mz/feed'));
+            foreach($feed['rss']['channel']['item'] as $k =>$v){
+                debug($v);
+            }
+
+        }
+
         public function organiza_cursos_faculdade()
         {
             $cursos = $this->Curso->find('all');

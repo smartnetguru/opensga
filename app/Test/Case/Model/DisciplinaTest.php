@@ -44,10 +44,17 @@ class DisciplinaTest extends CakeTestCase {
  */
 	public function testCadastraDisciplina() {
 
-        $data = array('Disciplina'=>array('name'=>'Logica e Teoria de Conjuntos','unidade_organica_id'=>1));
+        $data = array('Disciplina'=>array('codigo'=>'LTC','name'=>'Logica e Teoria de Conjuntos','unidade_organica_id'=>1));
 
         $resultado =$this->Disciplina->cadastraDisciplina($data);
         $this->assertTrue($resultado);
+        $resultado2 =$this->Disciplina->cadastraDisciplina($data);
+        $this->assertFalse($resultado2);
+        $disciplinaUnidadeExiste = $this->Disciplina->DisciplinaUnidadeOrganica->findByDisciplinaIdAndUnidadeOrganicaId(11,1);
+        $this->assertNotEmpty($disciplinaUnidadeExiste);
+        $this->assertArrayHasKey('DisciplinaUnidadeOrganica',$disciplinaUnidadeExiste);
+
+
 
 	}
 

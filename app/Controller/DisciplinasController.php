@@ -1,191 +1,172 @@
 <?php
-App::uses('AppController', 'Controller');
-/**
- * Controller de Disciplinas
- *
- * @copyright     Copyright 2010-2011, INFOmoz (Inform�tica-Mo�ambique) (http://infomoz.net)
- * * @link          http://opensga.com OpenSGA  - Sistema de Gestão Académica
- * @author		  Elisio Leonardo (elisio.leonardo@gmail.com)
- * @package       opensga
- * @subpackage    opensga.core.controller
- * @since         OpenSGA v 0.1.0
- *
- * @todo Txunar ver disciplia
- * @todo funcao de activar/desactivar disciplina
- *
- * @property Disciplina $Disciplina
- *
- *
-
- *
- */
-class DisciplinasController extends AppController {
-
-	function index() {
-		$this->Disciplina->DisciplinaUnidadeOrganica->contain(array('Disciplina','UnidadeOrganica'));
-		$disciplinas = $this->paginate('DisciplinaUnidadeOrganica');
-		$this->set('disciplinas', $disciplinas);
-	}
-
-
-	function faculdade_index() {
-
-        $unidadeOrganicaId = $this->Session->read("Auth.User.unidade_organica_id");
-
-        $this->paginate = array(
-            'conditions' => array('DisciplinaUnidadeOrganica.unidade_organica_id' => $unidadeOrganicaId),
-            'order' => 'Disciplina.name ASC',
-            'contain' => array(
-                'Disciplina'
-            )
-		);
-		$disciplinas = $this->paginate('DisciplinaUnidadeOrganica');
-		$this->set('disciplinas', $disciplinas);
-        $this->set('siga_page_title','Lista de Disciplinas Cadastradas');
-        $this->set('siga_page_overview','Lista de Disciplinas cadastradas para esta unidade orgânica');
-        $this->render('index');
-	}
-
-	function faculdade_ver_disciplina($id = null) {
-
-		if (!$id) {
-			$this->Session->setFlash('Invalido %s', 'flasherror');
-			$this->redirect(array('action' => 'index'));
-		}
-		$this->set('disciplina', $this->Disciplina->read(null, $id));
-		// var_dump($this->data);
-		if (empty($this->data)) {
-			$this->data = $this->Disciplina->read(null, $id);
-		}
-		$grupodisciplinars = $this->Disciplina->Grupodisciplinar->find('list');
-		$this->set(compact('grupodisciplinars'));
-	}
-
+    App::uses('AppController', 'Controller');
 
     /**
-     *Adiciona disciplinas de uma determinada Faculdade á Base de Dados.
-     * Alem de adicionar a tabela Disciplinas, adiciona tambem na disciplina_unidade_organicas
+     * Controller de Disciplinas
+     *
+     * @copyright       Copyright 2010-2011, INFOmoz (Inform�tica-Mo�ambique) (http://infomoz.net)
+     * * @link          http://opensga.com OpenSGA  - Sistema de Gestão Académica
+     * @author          Elisio Leonardo (elisio.leonardo@gmail.com)
+     * @package         opensga
+     * @subpackage      opensga.core.controller
+     * @since           OpenSGA v 0.1.0
+     *
+     * @todo            Txunar ver disciplia
+     * @todo            funcao de activar/desactivar disciplina
+     *
+     * @property Disciplina $Disciplina
+     *
+     *
      *
      */
-    public function adicionar_disciplina()
+    class DisciplinasController extends AppController
     {
 
-        if ($this->request->is('post')) {
+        /**
+         *Adiciona disciplinas de uma determinada Faculdade á Base de Dados.
+         * Alem de adicionar a tabela Disciplinas, adiciona tambem na disciplina_unidade_organicas
+         *
+         */
+        public function adicionar_disciplina()
+        {
 
-            $unidade_organica_id = $this->Session->read('Auth.User.unidade_organica_id');
-            //Primeiro ver se a disciplina existe
-            $disciplina = $this->Disciplina->findByName($this->request->data['Disciplina']['name']);
+            if ($this->request->is('post')) {
 
-            if (!empty($disciplina)) {
-                $this->Disciplina->id = $disciplina['Disciplina']['id'];
-                $array_disciplina_unidade = array(
-                    'DisciplinaUnidadeOrganica' => array(
-                        'disciplina_id' => $disciplina['Disciplina']['id'],
-                        'unidade_organica_id' => $unidade_organica_id,
-                        'estado_objecto_id' => 1
-                    )
-                );
-                $disciplina_unidade_existe = $this->Disciplina->DisciplinaUnidadeOrganica->find('first', array(
-                    'conditions' => array(
-                        'disciplina_id' => $disciplina['Disciplina']['id'],
-                        'unidade_organica_id' => $unidade_organica_id
-                    )
-                ));
-                if (empty($disciplina_unidade_existe)) {
-                    $this->Disciplina->DisciplinaUnidadeOrganica->create();
-                    $this->Disciplina->DisciplinaUnidadeOrganica->save($array_disciplina_unidade);
-                    $this->Session->setFlash(__('Dados Gravados com Sucesso'), 'default', array('class' => 'alert alert-success'));
-                    return $this->redirect(array('action' => 'index'));
+                $unidade_organica_id = $this->Session->read('Auth.User.unidade_organica_id');
+                //Primeiro ver se a disciplina existe
+                $disciplina = $this->Disciplina->findByName($this->request->data['Disciplina']['name']);
+
+                if (!empty($disciplina)) {
+                    $this->Disciplina->id = $disciplina['Disciplina']['id'];
+                    $array_disciplina_unidade = [
+                        'DisciplinaUnidadeOrganica' => [
+                            'disciplina_id'       => $disciplina['Disciplina']['id'],
+                            'unidade_organica_id' => $unidade_organica_id,
+                            'estado_objecto_id'   => 1
+                        ]
+                    ];
+                    $disciplina_unidade_existe = $this->Disciplina->DisciplinaUnidadeOrganica->find('first', [
+                        'conditions' => [
+                            'disciplina_id'       => $disciplina['Disciplina']['id'],
+                            'unidade_organica_id' => $unidade_organica_id
+                        ]
+                    ]);
+                    if (empty($disciplina_unidade_existe)) {
+                        $this->Disciplina->DisciplinaUnidadeOrganica->create();
+                        $this->Disciplina->DisciplinaUnidadeOrganica->save($array_disciplina_unidade);
+                        $this->Session->setFlash(__('Dados Gravados com Sucesso'), 'default',
+                            ['class' => 'alert alert-success']);
+
+                        return $this->redirect(['action' => 'index']);
+                    } else {
+                        $this->Session->setFlash(__('Esta Disciplina ja estava cadastrada'), 'default',
+                            ['class' => 'alert alert-info']);
+
+                        return $this->redirect(['action' => 'index']);
+                    }
                 } else {
-                    $this->Session->setFlash(__('Esta Disciplina ja estava cadastrada'), 'default', array('class' => 'alert alert-info'));
-                    return $this->redirect(array('action' => 'index'));
-                }
-            } else{
-                $this->request->data['Disciplina']['unidade_organica_id'] = $unidade_organica_id;
-                $resultado = $this->Disciplina->cadastraDisciplina($this->request->data);
+                    $this->request->data['Disciplina']['unidade_organica_id'] = $unidade_organica_id;
+                    $resultado = $this->Disciplina->cadastraDisciplina($this->request->data);
 
-                if ($resultado) {
+                    if ($resultado) {
 
-                    $this->Session->setFlash(__('Dados Gravados com Sucesso'), 'default', array('class' => 'alert alert-success'));
-                    return  $this->redirect(array('action' => 'index'));
-                } else {
-                    $this->Session->setFlash(__('Problemas ao Registrar dados.'), 'default', array('class' => 'alert alert-danger'));
+                        $this->Session->setFlash(__('Dados Gravados com Sucesso'), 'default',
+                            ['class' => 'alert alert-success']);
+
+                        return $this->redirect(['action' => 'index']);
+                    } else {
+                        $this->Session->setFlash(__('Problemas ao Registrar dados.'), 'default',
+                            ['class' => 'alert alert-danger']);
+                    }
                 }
             }
+            $unidadeOrganicas = $this->Disciplina->DisciplinaUnidadeOrganica->UnidadeOrganica->find('list');
+            $this->set(compact('unidadeOrganicas'));
         }
-        $unidadeOrganicas = $this->Disciplina->DisciplinaUnidadeOrganica->UnidadeOrganica->find('list');
-        $this->set(compact('unidadeOrganicas'));
-    }
-    public function faculdade_adicionar_disciplina()
-    {
 
-        if ($this->request->is('post')) {
+        public function beforeFilter()
+        {
+            parent::beforeFilter();
+            $this->Auth->allow('faculdade_adicionar_disciplina');
+        }
 
-			$unidade_organica_id = $this->Session->read('Auth.User.unidade_organica_id');
-			//Primeiro ver se a disciplina existe
-			$disciplina = $this->Disciplina->findByName($this->request->data['Disciplina']['name']);
+        public function faculdade_adicionar_disciplina()
+        {
 
-			if (!empty($disciplina)) {
-				$this->Disciplina->id = $disciplina['Disciplina']['id'];
-				$array_disciplina_unidade = array(
-					'DisciplinaUnidadeOrganica' => array(
-						'disciplina_id' => $disciplina['Disciplina']['id'],
-						'unidade_organica_id' => $unidade_organica_id,
-						'estado_objecto_id' => 1
-					)
-				);
-				$disciplina_unidade_existe = $this->Disciplina->DisciplinaUnidadeOrganica->find('first', array(
-					'conditions' => array(
-						'disciplina_id' => $disciplina['Disciplina']['id'],
-						'unidade_organica_id' => $unidade_organica_id
-					)
-				));
-				if (empty($disciplina_unidade_existe)) {
-					$this->Disciplina->DisciplinaUnidadeOrganica->create();
-					$this->Disciplina->DisciplinaUnidadeOrganica->save($array_disciplina_unidade);
-					$this->Session->setFlash(__('Dados Gravados com Sucesso'), 'default', array('class' => 'alert alert-success'));
-					 return $this->redirect(array('action' => 'index'));
-				} else {
-					$this->Session->setFlash(__('Esta Disciplina ja estava cadastrada'), 'default', array('class' => 'alert alert-info'));
-					 return $this->redirect(array('action' => 'index'));
-				}
-			} else{
-                $this->request->data['Disciplina']['unidade_organica_id'] = $unidade_organica_id;
+            if ($this->request->is('post')) {
+
+                $unidadeOrganicaId = $this->Session->read('Auth.User.unidade_organica_id');
+                $this->request->data['Disciplina']['unidade_organica_id'] = $unidadeOrganicaId;
                 $resultado = $this->Disciplina->cadastraDisciplina($this->request->data);
-
-                if ($resultado) {
-
-                    $this->Session->setFlash(__('Dados Gravados com Sucesso'), 'default', array('class' => 'alert alert-success'));
-                   return  $this->redirect(array('action' => 'index'));
-                } else {
-                    $this->Session->setFlash(__('Problemas ao Registrar dados.'), 'default', array('class' => 'alert alert-danger'));
+                if($resultado===true){
+                    $this->Session->setFlash(__('Dados Gravados com Sucesso'), 'default',
+                        ['class' => 'alert alert-success']);
+                    return $this->redirect(['action' => 'index']);
+                } else{
+                    $this->Session->setFlash(__('Problemas ao Registrar dados:'.$resultado['errors']), 'default',
+                        ['class' => 'alert alert-danger']);
                 }
+
             }
-		}
-		//$unidadeOrganicas = $this->Disciplina->UnidadeOrganica->find('list');
-		//$this->set(compact('unidadeOrganicas'));
-	}
+            $this->set('siga_page_title', 'Cadastro de Nova Disciplina');
+            $this->set('siga_page_overview', '');
+        }
 
-	function ver_disciplina($id = null) {
+        function faculdade_index()
+        {
 
-		if (!$id) {
-			$this->Session->setFlash('Invalido %s', 'flasherror');
-			$this->redirect(array('action' => 'index'));
-		}
-		$this->set('disciplina', $this->Disciplina->read(null, $id));
-		// var_dump($this->data);
-		if (empty($this->data)) {
-			$this->data = $this->Disciplina->read(null, $id);
-		}
-		$grupodisciplinars = $this->Disciplina->Grupodisciplinar->find('list');
-		$this->set(compact('grupodisciplinars'));
-	}
+            $unidadeOrganicaId = $this->Session->read("Auth.User.unidade_organica_id");
+            $this->paginate = [
+                'conditions' => ['DisciplinaUnidadeOrganica.unidade_organica_id' => $unidadeOrganicaId],
+                'order'      => 'Disciplina.name ASC',
+                'contain'    => [
+                    'Disciplina'
+                ]
+            ];
+            $disciplinas = $this->paginate('DisciplinaUnidadeOrganica');
+            $this->set('disciplinas', $disciplinas);
+            $this->set('siga_page_title', 'Lista de Disciplinas Cadastradas');
+            $this->set('siga_page_overview', 'Lista de Disciplinas cadastradas para esta unidade orgânica');
+        }
 
-    public function beforeFilter(){
-        parent::beforeFilter();
-        $this->Auth->allow('faculdade_adicionar_disciplina');
+        function faculdade_ver_disciplina($id = null)
+        {
+
+            if (!$id) {
+                $this->Session->setFlash('Invalido %s', 'flasherror');
+                $this->redirect(['action' => 'index']);
+            }
+            $this->set('disciplina', $this->Disciplina->read(null, $id));
+            // var_dump($this->data);
+            if (empty($this->data)) {
+                $this->data = $this->Disciplina->read(null, $id);
+            }
+            $this->set(compact('grupodisciplinars'));
+        }
+
+        function index()
+        {
+            $this->Disciplina->DisciplinaUnidadeOrganica->contain(['Disciplina', 'UnidadeOrganica']);
+            $disciplinas = $this->paginate('DisciplinaUnidadeOrganica');
+            $this->set('disciplinas', $disciplinas);
+        }
+
+        function ver_disciplina($id = null)
+        {
+
+            if (!$id) {
+                $this->Session->setFlash('Invalido %s', 'flasherror');
+                $this->redirect(['action' => 'index']);
+            }
+            $this->set('disciplina', $this->Disciplina->read(null, $id));
+            // var_dump($this->data);
+            if (empty($this->data)) {
+                $this->data = $this->Disciplina->read(null, $id);
+            }
+            $grupodisciplinars = $this->Disciplina->Grupodisciplinar->find('list');
+            $this->set(compact('grupodisciplinars'));
+        }
+
     }
-
-}
 
 ?>

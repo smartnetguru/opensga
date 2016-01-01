@@ -56,6 +56,12 @@ class Disciplina extends AppModel {
             'message' => 'Ja existe uma disciplina com este nome.',
             'required' => 'create',
             'allowEmpty' => false,
+        ),
+        'codigo' => array(
+            'rule' => 'isUnique',
+            'message' => 'Ja existe uma disciplina com este Codigo.',
+            'required' => 'create',
+            'allowEmpty' => true,
         )
     );
 
@@ -70,25 +76,47 @@ class Disciplina extends AppModel {
      *
      */
     public function cadastraDisciplina($data){
+
+
         $datasource = $this->getDataSource();
         $datasource->begin();
-        
+
         $this->create();
         if($this->save($data)){
-            $arrayDisciplinaUnidade = array(
-                'disciplina_id'=>$this->id,
-                'unidade_organica_id'=>$data['Disciplina']['unidade_organica_id'],
-                'estado_objecto_id'=>1
-            );
-            $this->DisciplinaUnidadeOrganica->create();
-            if ($this->DisciplinaUnidadeOrganica->save($arrayDisciplinaUnidade)) {
-                return $datasource->commit();
+            $disciplinaId = $this->id;
+        } else{
+            $disciplina = $this->findByName($data['Disciplina']['name']);
+            if(!empty($disciplina)){
+                $disciplinaId = $disciplina['Disciplina']['id'];
+            } else{
+                $datasource->rollback();
+                return false;
             }
-            $datasource->rollback();
+        }
+
+        $arrayDisciplinaUnidade = array(
+            'disciplina_id'=>$disciplinaId,
+            'unidade_organica_id'=>$data['Disciplina']['unidade_organica_id'],
+            'estado_objecto_id'=>1
+        );
+        $disciplinaUnidadeExiste = $this->DisciplinaUnidadeOrganica->find('first', [
+            'conditions' => [
+                'disciplina_id'=>$disciplinaId,
+                'unidade_organica_id'=>$data['Disciplina']['unidade_organica_id'],
+            ]
+        ]);
+        if(!empty($disciplinaUnidadeExiste)){
+            $datasource->commit();
             return false;
         }
-        $datasource->rollback();;
+
+        $this->DisciplinaUnidadeOrganica->create();
+        if ($this->DisciplinaUnidadeOrganica->save($arrayDisciplinaUnidade)) {
+            return $datasource->commit();
+        }
+        $datasource->rollback();
         return false;
+
     }
 
 }

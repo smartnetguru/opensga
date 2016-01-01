@@ -1026,6 +1026,7 @@
             $matricula = $this->Inscricao->Matricula->findByAlunoIdAndCursoIdAndAnoLectivoId($aluno_id,
                 $aluno['Aluno']['curso_id'], $anoLectivo['AnoLectivo']['id']);
 
+
             $cadeirasPendentes = $this->Inscricao->getAllCadeirasPendentesByAluno($aluno_id);
             $isRegular = $this->Inscricao->Aluno->isRegular($aluno_id);
 

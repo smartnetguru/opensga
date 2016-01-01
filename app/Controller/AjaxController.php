@@ -196,6 +196,97 @@
             echo json_encode($codigos);
         }
 
+
+        public function faculdade_get_bairros_autocomplete()
+        {
+            $this->autoRender = false;
+            $this->loadModel('Bairro');
+
+            $conditions = [
+                'name LIKE ' => '%' . $this->request->query['term'] . '%'
+            ];
+
+            $results = $this->Bairro->find('all', [
+                'fields'     => ['name'],
+                'conditions' => $conditions,
+                'group'      => ['name'],
+                'limit'      => 20
+            ]);
+            $codigos = Set::extract('../Bairro/name', $results);
+
+            echo json_encode($codigos);
+        }
+
+        public function faculdade_get_cidades_by_provincia()
+        {
+            foreach ($this->request->data as $k => $v) {
+
+                $provincia_id = reset($v);
+            }
+            $this->loadModel('Cidade');
+            $cidades = $this->Cidade->find('list', ['conditions' => ['provincia_id' => $provincia_id]]);
+            $this->set(compact('cidades'));
+        }
+
+        public function faculdade_get_cursos_by_faculdade()
+        {
+            foreach ($this->request->data as $k => $v) {
+
+                $faculdadeId = reset($v);
+            }
+            $this->loadModel('Curso');
+            $departamentos = $this->Curso->UnidadeOrganica->children($faculdadeId);
+            $unidadeOrganicas = Hash::extract($departamentos, '{n}.UnidadeOrganica.id');
+            $unidadeOrganicas[] = $faculdadeId;
+            $cursos = $this->Curso->find('list', ['conditions' => ['unidade_organica_id' => $unidadeOrganicas]]);
+            $this->set(compact('cursos'));
+        }
+
+        public function faculdade_get_cursos_by_unidade_organica()
+        {
+            $this->loadModel('Curso');
+            $unidadeOrganicaId = $this->request->data['Curso']['unidade_organica_id'];
+
+            $unidadeOrganicas = $this->Curso->UnidadeOrganica->children($unidadeOrganicaId);
+            $todasUnidades = Hash::extract($unidadeOrganicas, '{n}.UnidadeOrganica.id');
+            $todasUnidades[] = $unidadeOrganicaId;
+            $cursos = $this->Curso->find('list', ['conditions' => ['unidade_organica_id' => $todasUnidades]]);
+            $this->set(compact('cursos'));
+        }
+
+        public function faculdade_get_escolas_by_distrito()
+        {
+            foreach ($this->request->data as $k => $v) {
+
+                $cidade_id = reset($v);
+            }
+            $this->loadModel('EscolaNivelMedio');
+            $distritos = $this->EscolaNivelMedio->find('list', ['conditions' => ['distrito_id' => $cidade_id]]);
+            $this->set(compact('distritos'));
+        }
+
+        public function faculdade_get_naturalidades_autocomplete()
+        {
+            $this->autoRender = false;
+            $this->loadModel('Aluno');
+
+            $conditions = [
+                'Entidade.naturalidade LIKE ' => '%' . $this->request->query['term'] . '%'
+            ];
+
+            $results = $this->Aluno->Entidade->find('all', [
+                'fields'     => ['naturalidade'],
+                'conditions' => $conditions,
+                'group'      => ['naturalidade'],
+                'limit'      => 20
+            ]);
+            $codigos = Set::extract('../Entidade/naturalidade', $results);
+
+            echo json_encode($codigos);
+        }
+
+
     }
+
 
 ?>

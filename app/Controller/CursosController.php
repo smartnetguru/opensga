@@ -148,6 +148,7 @@
 
         function faculdade_index() {
             $this->paginate = array(
+                'paramType' => 'querystring',
                 'conditions' => array(
                     'Curso.unidade_organica_id' => $this->Curso->UnidadeOrganica->getWithChilds($this->Session->read('Auth.User.unidade_organica_id'))
                 ),
@@ -157,6 +158,8 @@
             );
 
             $this->set('cursos', $this->paginate());
+            $this->set('siga_page_title', 'Cursos Activos');
+            $this->set('siga_page_overview', 'Cursos Activos para Esta Unidade Organica');
         }
 
         function faculdade_ver_curso($id = null) {

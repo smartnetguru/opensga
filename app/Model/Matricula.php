@@ -640,6 +640,8 @@
          * Renova a Matricula de um estudante. Tambem processa o pagamento da renovação de matricula
          *
          * @param type $data
+         *
+         * @fixme Nao renovar matriculas mais recentes antes das antigas
          */
         public function renovaMatricula($data)
         {
