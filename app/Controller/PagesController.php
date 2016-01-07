@@ -122,6 +122,14 @@
             if (!empty($matriculasPendentes)) {
                 $this->set(compact('matriculasPendentes'));
             }
+
+            $this->Aluno->Inscricao->contain(['Turma'=>['Disciplina']]);
+            $inscricoesActivas = $this->Aluno->Inscricao->find('all',['conditions'=>['Inscricao.aluno_id'=>$aluno['Aluno']['id'],'Turma.ano_lectivo_id'=>Configure::read('OpenSGA.ano_lectivo_id'),'Turma.semestre_lectivo_id'=>Configure::read('OpenSGA.semestre_lectivo_id')],'order'=>['Turma.ano_curricular','Turma.semestre_curricular']]);
+
+
+            $this->set(compact('inscricoesActivas'));
+
+
         }
 
         public function faculdade_home()
@@ -229,11 +237,8 @@
             ]);
             $ultimos_users = $this->User->find('all', ['limit' => 10, 'order' => 'User.ultimo_login DESC']);
 
-            $logs = $this->Log->find('all', ['limit' => 10, 'order' => 'created DESC']);
-            $totalLogs = $this->Log->find('count');
-
             $this->set('alertas', $alertas);
-            $this->set(compact('totalLogs', 'logs', 'total_alunos_activos', 'total_matriculas_activas',
+            $this->set(compact('total_alunos_activos', 'total_matriculas_activas',
                 'facturas_geradas',
                 'facturas_pagas', 'valor_arrecadado', 'valor_divida', 'sms_enviadas_24', 'sms_enviadas_30',
                 'sms_recebidas_24', 'sms_recebidas_30', 'ultimos_users'));

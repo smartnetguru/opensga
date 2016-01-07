@@ -75,7 +75,7 @@ class PlanoEstudo extends AppModel
             ],
             'nameRule-2' => [
                 'rule'     => 'isUnique',
-                'required' => true,
+                'required' => 'create',
                 'message'  => 'Nao podem existir dois planos de estudo com mesmo nome'
             ]
         ],
@@ -361,6 +361,25 @@ class PlanoEstudo extends AppModel
 
         $totalEstudantes = $this->Aluno->find('count',array('conditions'=>array('Aluno.plano_estudo_id'=>$planoEstudoId)));
         return $totalEstudantes;
+    }
+
+
+    public function desactivaPlanoEstudo(int $planoEstudoId){
+        $totalAlunos = $this->Curso->Aluno->find('count',['conditions'=>['Aluno.plano_estudo_id'=>$planoEstudoId]]);
+        if($totalAlunos==0){
+            debug($planoEstudoId);
+            $this->id = $planoEstudoId;
+            $this->set('estado_objecto_id',2);
+            if($this->save()){
+                return true;
+            } else{
+                debug($this->getLog());
+                debug($this->validationErrors);
+                die();
+            }
+        } else{
+            return false;
+        }
     }
 
 }

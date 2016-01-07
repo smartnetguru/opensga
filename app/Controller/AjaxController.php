@@ -285,6 +285,17 @@
             echo json_encode($codigos);
         }
 
+        public function faculdade_get_plano_estudos_by_curso()
+        {
+            foreach ($this->request->data as $k => $v) {
+
+                $cursoId = reset($v);
+            }
+            $this->loadModel('PlanoEstudo');
+            $planoEstudos = $this->PlanoEstudo->find('list', ['conditions' => ['curso_id' => $cursoId,'OR'=>['estado_objecto_id is null','estado_objecto_id'=>1]]]);
+            $this->set(compact('planoEstudos'));
+        }
+
 
     }
 

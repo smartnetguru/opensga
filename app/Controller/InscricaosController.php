@@ -182,9 +182,14 @@
             ]);
             $aluno = $this->Inscricao->Aluno->findById($alunoId);
 
-            if ($aluno['Curso']['unidade_organica_id'] != $unidadeOrganicaId) {
-                $this->Session->setFlash(__('Nao Possui permissao para aceder a pagina anterior'));
-                $this->redirect($this->referer());
+            $isExterno = 1;
+            $planoEstudoId = $this->request->query('planoEstudoId');
+            if(empty($planoEstudoId)){
+                if ($aluno['Curso']['unidade_organica_id'] != $unidadeOrganicaId) {
+                    $this->Session->setFlash(__('Nao Possui permissao para aceder a pagina anterior2'));
+                    $this->redirect($this->referer());
+                }
+                $isExterno = null;
             }
 
 
@@ -205,14 +210,19 @@
                 $this->Session->write('OpenSGA.inscricao.cadeiras', $inscricao_nova);
                 $this->Session->write('OpenSGA.inscricao.matricula_id', $matriculaId);
                 $this->Session->write('OpenSGA.inscricao.aluno_id', $alunoId);
-                $this->redirect(['controller' => 'inscricaos', 'action' => 'valida_inscricao']);
+                $this->redirect(['controller' => 'inscricaos', 'action' => 'valida_inscricao','?'=>['planoEstudoId'=>$planoEstudoId,'isExterno'=>$isExterno]]);
             }
 
 
-            $disciplinas = $this->Inscricao->getAllDisciplinasForInscricao($alunoId);
+            if(empty($planoEstudoId)){
+                $disciplinas = $this->Inscricao->getAllDisciplinasForInscricao($alunoId);
+            } else{
+                $disciplinas = $this->Inscricao->getAllDisciplinasForInscricaoByPlanoEstudo($alunoId,$planoEstudoId);
+            }
+
             $this->set('aluno_id', $alunoId);
             $this->set('matricula_id', $matriculaId);
-            $this->set(compact('disciplinas'));
+            $this->set(compact('disciplinas','planoEstudoId'));
         }
 
         /**
@@ -417,7 +427,7 @@
          * @todo A lista de disciplinas deve ter em consideracao  a tabela de precedencias
          * @todo Deve existir possibilidade de inscricao condicional
          */
-        public function faculdade_inscrever($alunoId, $matriculaId)
+        public function faculdade_inscrever($alunoId, $matriculaId,$planoEstudoId=null,$inscricaoCondicional=null)
         {
             $this->loadModel('Turma');
             $this->loadModel('Aluno');
@@ -437,12 +447,23 @@
                 'PlanoEstudo',
                 'Curso' => ['UnidadeOrganica']
             ]);
-            $aluno = $this->Inscricao->Aluno->findById($alunoId);
 
-            if ($aluno['Curso']['unidade_organica_id'] != $unidadeOrganicaId) {
-                $this->Session->setFlash(__('Nao Possui permissao para aceder a pagina anterior'));
-                $this->redirect($this->referer());
+            if(empty($planoEstudoId)){
+                $planoEstudoId = $this->request->query('planoEstudoId');
             }
+
+            $isExterno = 1;
+
+            $aluno = $this->Inscricao->Aluno->findById($alunoId);
+            if(empty($planoEstudoId)){
+                if ($aluno['Curso']['unidade_organica_id'] != $unidadeOrganicaId) {
+                    $this->Session->setFlash(__('Nao Possui permissao para aceder a pagina anterior2'));
+                    $this->redirect($this->referer());
+                }
+                $isExterno=null;
+            }
+
+
 
 
             //Primeiro vemos se ainda nao se matriculou no ano lectivo em questao
@@ -464,12 +485,10 @@
                     'controller' => 'inscricaos',
                     'action'     => 'adicionar_cadeiras_inscricao',
                     $alunoId,
-                    $matriculaId
+                    $matriculaId,'?'=>['planoEstudoId'=>$planoEstudoId]
                 ]);
             }
             if ($this->request->is('post') || $this->request->is('put')) {
-
-
                 $alunoId = $this->request->data['Inscricao']['aluno_id'];
                 $matriculaId = $this->request->data['Inscricao']['matricula_id'];
                 $inscricaoNova = [];
@@ -484,15 +503,20 @@
                 $this->Session->write('OpenSGA.inscricao.cadeiras', $inscricaoNova);
                 $this->Session->write('OpenSGA.inscricao.matricula_id', $matriculaId);
                 $this->Session->write('OpenSGA.inscricao.aluno_id', $alunoId);
-                $this->redirect(['controller' => 'inscricaos', 'action' => 'valida_inscricao']);
+                $this->redirect(['controller' => 'inscricaos', 'action' => 'valida_inscricao','?'=>['isExterno'=>$isExterno,'planoEstudoId'=>$planoEstudoId]]);
             }
 
 
-            $disciplinas = $this->Inscricao->getAllDisciplinasForInscricao($alunoId);
+            if(empty($planoEstudoId)){
+                $disciplinas = $this->Inscricao->getAllDisciplinasForInscricao($alunoId);
+            } else{
+                $disciplinas = $this->Inscricao->getAllDisciplinasForInscricaoByPlanoEstudo($alunoId,$planoEstudoId);
+            }
+
 
             $this->set('aluno_id', $alunoId);
             $this->set('matricula_id', $matriculaId);
-            $this->set(compact('disciplinas'));
+            $this->set(compact('disciplinas','planoEstudoId'));
         }
 
         public function faculdade_inscrever2($aluno_id, $matricula_id)
@@ -785,7 +809,7 @@
 
             $unidadeOrganicaId = $this->Session->read('Auth.User.unidade_organica_id');
             $alunoId = $this->Session->read('OpenSGA.inscricao.aluno_id');
-
+            $planoEstudoId = $this->request->query('planoEstudoId');
             $this->Inscricao->Aluno->contain([
                 'Entidade',
                 'PlanoEstudo',
@@ -793,10 +817,15 @@
             ]);
             $aluno = $this->Inscricao->Aluno->findById($alunoId);
 
-            if ($aluno['Curso']['unidade_organica_id'] != $unidadeOrganicaId) {
-                $this->Session->setFlash(__('Nao Possui permissao para aceder a pagina anterior'));
-                $this->redirect($this->referer());
+            $isExterno = $this->request->query('isExterno');
+
+            if(!$isExterno){
+                if ($aluno['Curso']['unidade_organica_id'] != $unidadeOrganicaId) {
+                    $this->Session->setFlash(__('Nao Possui permissao para aceder a pagina anterior'));
+                    $this->redirect($this->referer());
+                }
             }
+
 
             $this->Inscricao->Turma->PlanoEstudo->DisciplinaPlanoEstudo->contain([
                 'Disciplina'
@@ -848,7 +877,6 @@
 
             if ($this->request->is('post') || $this->request->is('put')) {
 
-                debug($this->request->data);
                 $this->request->data['disciplinas'] = $this->Session->read('OpenSGA.inscricao.cadeiras');
                 $total_normal = 0;
                 $total_atraso = 0;
@@ -893,8 +921,10 @@
                     //$this->redirect(array('controller' => 'alunos', 'action' => 'perfil_estudante', $aluno_id));
                 }
             }
+
+            $tipoInscricaos = $this->Inscricao->TipoInscricao->find('list');
             $this->set(compact('disciplinas', 'turmas_normais', 'turmas_atraso', 'total_normal', 'total_atraso',
-                'matriculaId', 'alunoId', 'imprimir', 'aluno'));
+                'matriculaId', 'alunoId', 'imprimir', 'aluno','tipoInscricaos','planoEstudoId'));
         }
 
         function faculdade_ver_detalhes_inscricao($inscricaoId = null)
@@ -1040,12 +1070,114 @@
             } else {
                 $classeEstado = "alert alert-danger";
             }
-
-
             $this->set(compact('inscricoesActivas', 'cadeirasPendentes', 'aluno', 'matricula', 'isRegular',
                 'classeEstado', 'inscricoesAbertas', 'cadeirasFeitas'));
         }
 
+
+        /**
+         *
+         *
+         *
+         * @fixme esta matricula nao eh consistente para casos em que aluno muda de curso,etc
+         */
+        public function estudante_ver_inscricoes_aluno()
+        {
+            $userId = $this->Session->read('Auth.User.id');
+            $this->Inscricao->Aluno->contain([
+                'Entidade' => ['User'],
+                'PlanoEstudo',
+                'Curso'    => ['UnidadeOrganica']
+            ]);
+            $aluno = $this->Inscricao->Aluno->find('first', ['conditions' => ['Entidade.user_id' => $userId]]);
+            if (empty($aluno)) {
+                throw new NotFoundException('Este aluno não existe no Sistema');
+            }
+            //Pegamos todas inscricoes activas
+            $this->Inscricao->contain([
+                'Turma' => [
+                    'Disciplina',
+                    'AnoLectivo'
+                ],
+                'TipoInscricao'
+            ]);
+            $inscricoesActivas = $this->Inscricao->find('all',
+                [
+                    'conditions' => [
+                        'Inscricao.estado_inscricao_id' => $this->Inscricao->estadoInscricoesAbertas,
+                        'Inscricao.aluno_id'            => $aluno['Aluno']['id'],
+                        'Turma.ano_lectivo_id'          => Configure::read('OpenSGA.ano_lectivo_id'),
+                        'Turma.semestre_lectivo_id'     => Configure::read('OpenSGA.semestre_lectivo_id')
+                    ],
+                    'order'      => 'Inscricao.id DESC'
+                ]);
+
+            $this->Inscricao->contain([
+                'Turma' => [
+                    'Disciplina',
+                    'AnoLectivo'
+                ],
+                'TipoInscricao'
+            ]);
+            $inscricoesAbertas = $this->Inscricao->find('all',
+                [
+                    'conditions' => [
+                        'Inscricao.estado_inscricao_id' => [1, 2, 3],
+                        'Inscricao.aluno_id'            => $aluno['Aluno']['id'],
+                        'OR'                            => [
+                            [
+                                'Turma.ano_lectivo_id NOT'      => Configure::read('OpenSGA.ano_lectivo_id'),
+                                'Turma.semestre_lectivo_id NOT' => Configure::read('OpenSGA.semestre_lectivo_id')
+                            ],
+                            [
+                                'Turma.ano_lectivo_id'          => Configure::read('OpenSGA.ano_lectivo_id'),
+                                'Turma.semestre_lectivo_id NOT' => Configure::read('OpenSGA.semestre_lectivo_id')
+                            ]
+
+
+                        ]
+
+                    ],
+                    'order'      => 'Inscricao.id DESC'
+                ]);
+
+            $this->Inscricao->contain([
+                'Turma' => [
+                    'Disciplina',
+                    'AnoLectivo'
+                ],
+                'TipoInscricao'
+            ]);
+            $cadeirasFeitas = $this->Inscricao->find('all',
+                [
+                    'conditions' => [
+                        'Inscricao.estado_inscricao_id' => [4, 5, 6, 13],
+                        'Inscricao.aluno_id'            => $aluno['Aluno']['id'],
+                    ],
+                    'order'      => 'Inscricao.id DESC'
+                ]);
+            $anoLectivo = $this->Inscricao->Matricula->AnoLectivo->findByAno(Configure::read('OpenSGA.ano_lectivo'));
+
+            $matricula = $this->Inscricao->Matricula->findByAlunoIdAndCursoIdAndAnoLectivoId($aluno['Aluno']['id'],
+                $aluno['Aluno']['curso_id'], $anoLectivo['AnoLectivo']['id']);
+
+
+            $cadeirasPendentes = $this->Inscricao->getAllCadeirasPendentesByAluno($aluno['Aluno']['id']);
+            $isRegular = $this->Inscricao->Aluno->isRegular($aluno['Aluno']['id']);
+
+
+            if (count($isRegular) == 1 && $isRegular[0]['regular'] == true) {
+                if ($isRegular[0]['estado'] == 1) {
+                    $classeEstado = "alert alert-info";
+                } else {
+                    $classeEstado = "alert alert-success";
+                }
+            } else {
+                $classeEstado = "alert alert-danger";
+            }
+            $this->set(compact('inscricoesActivas', 'cadeirasPendentes', 'aluno', 'matricula', 'isRegular',
+                'classeEstado', 'inscricoesAbertas', 'cadeirasFeitas'));
+        }
         public function index()
         {
 
@@ -1289,6 +1421,32 @@
 
             $this->set(compact('inscricoesActivas', 'cadeirasPendentes', 'aluno', 'matricula', 'isRegular',
                 'classeEstado', 'inscricoesAbertas', 'cadeirasFeitas'));
+        }
+
+        public function faculdade_inscrever_aluno_externo(int $alunoId){
+
+            $aluno = $this->Inscricao->Aluno->getAlunoForAction($alunoId);
+
+            if($this->request->is('post')){
+                $matricula = $this->Inscricao->Matricula->findByAlunoIdAndAnoLectivoId($alunoId,Configure::read('OpenSGA.ano_lectivo_id'));
+                $this->redirect(['action'=>'inscrever',$alunoId,$matricula['Matricula']['id'],$this->request->data['Inscricao']['plano_estudo_id']]);
+            }
+
+            $isRegular = $this->Inscricao->Aluno->isRegular($alunoId);
+            if($isRegular[0]['regular']!==true){
+                $this->Flash->error('Este Aluno Possui as seguintes irregularidades: '.$isRegular[0]['mensagem'].'. Por isso não pode se inscrever');
+                $this->redirect(['action'=>'index']);
+            }
+
+
+            $unidadeOrganicaId = $this->Session->read('Auth.User.unidade_organica_id');
+            $funcionario = $this->Inscricao->Aluno->Entidade->Funcionario->getByUserId($this->Session->read('Auth.User.id'));
+
+            $cursos = $this->Inscricao->Aluno->Curso->find('list',['conditions'=>['OR'=>['estado_objecto_id is null','estado_objecto_id'=>1],'unidade_organica_id'=>$unidadeOrganicaId]]);
+$cursoIds = array_keys($cursos);
+            $planoEstudos = $this->Inscricao->Aluno->Curso->PlanoEstudo->find('list',['conditions'=>['OR'=>['estado_objecto_id is null','estado_objecto_id'=>1],'curso_id'=>$cursoIds]]);
+            $this->set(compact('aluno','funcionario','cursos','planoEstudos'));
+
         }
 
     }

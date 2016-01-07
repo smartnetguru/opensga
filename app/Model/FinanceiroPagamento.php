@@ -341,6 +341,7 @@
          */
         public function gerarPagamentosByAluno($aluno_id, $data)
         {
+            return true;
             $dataSource = $this->getDataSource();
             $dataSource->begin();
 

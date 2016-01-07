@@ -98,6 +98,13 @@
             $comandos[] = "acl grant Group.3 controllers/CerimoniaGraduacaos/estudante_pagamento_inscricao";
             $comandos[] = "acl grant Group.3 controllers/CerimoniaGraduacaos/estudante_ver_detalhes";
 
+            $comandos[] = "acl grant Group.3 controllers/Inscricaos/estudante_ver_inscricoes_aluno";
+            $comandos[] = "acl grant Group.3 controllers/Inscricaos/estudante_index";
+            $comandos[] = "acl grant Group.3 controllers/Inscricaos/estudante_ver_detalhes_inscricao";
+            $comandos[] = "acl grant Group.3 controllers/Inscricaos/estudante_inscrever";
+            $comandos[] = "acl grant Group.3 controllers/Inscricaos/estudante_anular_inscricao";
+            $comandos[] = "acl grant Group.3 controllers/Inscricaos/estudante_adicionar_cadeiras_inscricao";
+
             $comandos[] = "acl grant Group.3 controllers/Matriculas/estudante_como_renovar";
             $comandos[] = "acl grant Group.3 controllers/Matriculas/estudante_index";
             $comandos[] = "acl grant Group.3 controllers/Matriculas/estudante_anular_matricula";
@@ -179,6 +186,7 @@
                     $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/faculdade_alunos_sem_plano_estudo";
                     $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/faculdade_atribuir_plano_estudo";
                     $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/faculdade_alterar_status";
+                    $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/faculdade_pesquisa_aluno_externo_action";
 
                     $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Avaliacaos/faculdade_ver_avaliacao";
                     $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Avaliacaos/faculdade_editar_notas_avaliacao";
@@ -186,7 +194,6 @@
                     $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Avaliacaos/faculdade_print_pauta_avaliacao";
 
                     $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Configs/faculdade_manutencao";
-
                     $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Cursos/faculdade_index";
                     $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Cursos/faculdade_ver_curso";
                     $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Cursos/faculdade_adicionar_curso";
@@ -209,6 +216,7 @@
                     $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Inscricaos/faculdade_index";
                     $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Inscricaos/faculdade_inscrever";
                     $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Inscricaos/faculdade_inscrever2";
+                    $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Inscricaos/faculdade_inscrever_aluno_externo";
                     $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Inscricaos/faculdade_valida_inscricao";
                     $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Inscricaos/faculdade_ver_inscricoes_aluno";
                     $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Inscricaos/faculdade_adicionar_cadeiras_inscricao";
@@ -222,6 +230,8 @@
                     $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/PlanoEstudos/faculdade_index";
                     $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/PlanoEstudos/faculdade_adicionar_plano_estudo";
                     $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/PlanoEstudos/faculdade_editar_plano_estudo";
+                    $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/PlanoEstudos/faculdade_remover_plano_estudo";
+                    $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/PlanoEstudos/faculdade_desactivar_plano_estudo";
                     $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/PlanoEstudos/faculdade_ver_plano_estudo";
                     $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/PlanoEstudos/faculdade_adicionar_disciplinas";
                     $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/PlanoEstudos/faculdade_adicionar_precedencias";

@@ -152,7 +152,7 @@ class Avaliacao extends AppModel {
 
     public function gravaNotas($data){
         foreach($data['Avaliacao'] as $avaliacao){
-            $avaliacaoExiste = $this->finrueu dByInscricaoIdAndTurmaTipoAvaliacaoId($avaliacao['inscricao_id'],$avaliacao['turma_tipo_avaliacao_id']);
+            $avaliacaoExiste = $this->findByInscricaoIdAndTurmaTipoAvaliacaoId($avaliacao['inscricao_id'],$avaliacao['turma_tipo_avaliacao_id']);
             $turmaTipoAvaliacaoId = $avaliacao['turma_tipo_avaliacao_id'];
             if($avaliacaoExiste){
                 $this->id = $avaliacaoExiste['Avaliacao']['id'];

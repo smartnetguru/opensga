@@ -84,6 +84,14 @@
             ]
         ];
 
+        public $hasOne = array(
+            'MessageText' => array(
+                'className' => 'MessageText',
+                'conditions' => array(),
+                'dependent' => true
+            )
+        );
+
         /**
          * hasMany associations
          *

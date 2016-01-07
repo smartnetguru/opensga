@@ -268,8 +268,10 @@ class FinanceiroTransacao extends AppModel
 
         //Grava os dados da transacao
         $data['FinanceiroTransacao']['financeiro_tipo_transacao_id'] = 1;
+        $data['FinanceiroTransacao']['financeiro_estado_transacao_id'] = 2;
         $data['FinanceiroTransacao']['entidade_id'] = $aluno['Aluno']['entidade_id'];
         $data['FinanceiroTransacao']['financeiro_conta_id'] = $conta['FinanceiroConta']['id'];
+
 
         $this->create();
         if ($this->save($data)) {
@@ -280,6 +282,10 @@ class FinanceiroTransacao extends AppModel
             $novo_deposito['FinanceiroDeposito']['data_reconciliacao'] = null;
             $novo_deposito['FinanceiroDeposito']['financeiro_estado_deposito_id'] = 1;
             $novo_deposito['FinanceiroDeposito']['semestre_lectivo_id'] = Configure::read('OpenSGA.semestre_lectivo_id');
+
+            if($novo_deposito['FinanceiroDeposito']['data_deposito']==''){
+                $novo_deposito['FinanceiroDeposito']['data_deposito'] = date('Y-m-d H:i:s');
+            }
             //die(debug($novo_deposito));            
             $this->FinanceiroDeposito->create();
             if ($this->FinanceiroDeposito->save($novo_deposito)) {
@@ -314,6 +320,7 @@ class FinanceiroTransacao extends AppModel
         $dataSource->begin();
 
         $data['financeiro_tipo_transacao_id'] = 2;
+        $data['financeiro_estado_transacao_id'] = 2;
 
 
         $this->create();
@@ -332,7 +339,7 @@ class FinanceiroTransacao extends AppModel
 
                     return $this->FinanceiroPagamento->id;
                 } else {
-                    $datasource->rollback();
+                    $dataSource->rollback();
                 }
             } else {
                 $dataSource->rollback();

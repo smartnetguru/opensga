@@ -200,6 +200,21 @@
        }
 
 
+        public function removeInscricaoSemTurma(){
+            $inscricaos = $this->Inscricao->find('all');
+            $total = count($inscricaos);
+            foreach($inscricaos as $inscricao){
+                $turma = $this->Turma->findById($inscricao['Inscricao']['turma_id']);
+                if(empty($turma)){
+                    $this->out('Removendo');
+                    $this->Inscricao->id = $inscricao['Inscricao']['id'];
+                    $this->Inscricao->delete($inscricao['Inscricao']['id']);
+                }
+                $this->out($total--);
+            }
+        }
+
+
 
 
     }

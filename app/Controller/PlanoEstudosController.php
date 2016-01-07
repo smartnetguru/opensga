@@ -183,9 +183,7 @@
         public function beforeFilter()
         {
             parent::beforeFilter();
-            if ($this->action == 'faculdade_adicionar_precedencias') {
-                //$this->Security->validatePost=false;
-            }
+            $this->Security->requirePost('faculdade_desactivar_plano_estudos','faculdade_remover_plano_estudos');
         }
 
         public function editar_disciplina($disciplinaPlanoId)
@@ -371,7 +369,25 @@
         }
 
         /**
+         * Desactiva um plano de Estudos
+         *
+         * Para desactivar um plano de Estudos, ele não deve ter aluno activo.
+         * @param Int $planoEstudoId
+         */
+        public function faculdade_desactivar_plano_estudo(int $planoEstudoId)
+        {
+            if($this->PlanoEstudo->desactivaPlanoEstudo($planoEstudoId)===true){
+                $this->Flash->success('Plano de Estudos Desactivado com sucesso');
+                $this->redirect($this->referer('/'));
+            } else{
+                $this->Flash->error('Este Plano de Estudos não pode ser desactivado porque tem alunos activos');
+                $this->redirect($this->referer('/'));
+            }
+        }
+
+        /**
          * Edita uma disciplina dentro de um plano de Estudos
+         *
          * @param $disciplinaPlanoId
          *
          * @throws \Exception
@@ -381,11 +397,11 @@
         public function faculdade_editar_disciplina($disciplinaPlanoId)
         {
 
-            if($this->request->is('post')){
-                if($this->PlanoEstudo->DisciplinaPlanoEstudo->save($this->request->data)){
+            if ($this->request->is('post')) {
+                if ($this->PlanoEstudo->DisciplinaPlanoEstudo->save($this->request->data)) {
                     $this->Flash->success('Disciplina Editada com sucesso');
 
-                } else{
+                } else {
                     $this->Flash->error('Problemas ao editar disciplina');
                 }
 
@@ -418,29 +434,30 @@
 
             $this->set('disciplinaPlanoId', $disciplinaPlanoId);
             $this->set('planoId', $disciplinaPlanoEstudo['DisciplinaPlanoEstudo']['plano_estudo_id']);
-            $this->set(compact('disciplinasAdicionadas', 'anos', 'semestres', 'disciplinas','disciplinaPlanoEstudo'));
+            $this->set(compact('disciplinasAdicionadas', 'anos', 'semestres', 'disciplinas', 'disciplinaPlanoEstudo'));
         }
 
-        function faculdade_editar_plano_estudo($id = null)
+        function faculdade_editar_plano_estudo(int $planoEstudoId = null)
         {
-            $this->PlanoEstudo->id = $id;
+            $this->PlanoEstudo->id = $planoEstudoId;
             if (!$this->PlanoEstudo->exists()) {
                 throw new NotFoundException(__('Plano de Estudos Invalido'));
             }
             if ($this->request->is('post') || $this->request->is('put')) {
                 if ($this->PlanoEstudo->save($this->request->data)) {
                     $this->Session->setFlash('Dados Registados com Sucesso', 'flasherror');
-                    $this->redirect(['action' => 'adicionar_disciplinas', $id]);
+                    $this->redirect(['action' => 'adicionar_disciplinas', $planoEstudoId]);
                 } else {
                     $this->Session->setFlash('Erro ao editar dados. Por favor tente de novo.', 'flasherror');
                 }
             }
             if (empty($this->request->data)) {
-                $this->data = $this->PlanoEstudo->read(null, $id);
+                $this->data = $this->PlanoEstudo->read(null, $planoEstudoId);
             }
             $cursos = $this->PlanoEstudo->Curso->find('list');
             $this->set(compact('cursos'));
         }
+
 
         function faculdade_index()
         {
@@ -451,7 +468,8 @@
                     'EstadoObjecto'
                 ],
                 'conditions' => [
-                    'Curso.unidade_organica_id' => $this->Session->read('Auth.User.unidade_organica_id')
+                    'Curso.unidade_organica_id' => $this->Session->read('Auth.User.unidade_organica_id'),
+                    'OR' => ['PlanoEstudo.estado_objecto_id is null','PlanoEstudo.estado_objecto_id'=>1]
                 ],
                 'order'      => 'PlanoEstudo.ano_criacao DESC'
             ];
@@ -474,6 +492,11 @@
             } else {
                 $this->Flash->error('Erro ao tentar remover a disciplina. Favor tentar novamente');
             }
+
+        }
+
+        public function faculdade_remover_plano_estudo()
+        {
 
         }
 
@@ -508,16 +531,7 @@
                 'popcionais'));
         }
 
-        public function getByCurso()
-        {
-            foreach ($this->request->data as $k => $v) {
-                $curso_id = $v['curso_id'];
-            }
-            //$curso_id = $this->request->data['Aluno']['curso_id'];
-            $planoestudos = $this->PlanoEstudo->find('list', ['conditions' => ['curso_id' => $curso_id]]);
-            $this->set(compact('planoestudos'));
-            $this->layout = 'ajax';
-        }
+
 
         function index()
         {
@@ -541,6 +555,8 @@
                 $conditions['PlanoEstudo.ano_criacao'] = $anoCriacao;
 
             }
+            $conditions['OR'] = ['PlanoEstudo.estado_objecto_id is null','PlanoEstudo.estado_objecto_id'=>1];
+
 
 
             $this->paginate = [

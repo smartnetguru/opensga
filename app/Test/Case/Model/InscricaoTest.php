@@ -151,7 +151,113 @@
          */
         public function testInscreveAluno()
         {
-            $this->markTestIncomplete('testInscreveAluno not implemented.');
+            $dataExterna = [
+                'Disciplina'          => [
+                    (int)0 => [
+                        'tipo' => '1',
+                        'id'   => '1270'
+                    ],
+                    (int)1 => [
+                        'tipo' => '1',
+                        'id'   => '1272'
+                    ],
+                    (int)2 => [
+                        'tipo' => '1',
+                        'id'   => '1266'
+                    ],
+                    (int)3 => [
+                        'tipo' => '1',
+                        'id'   => '1269'
+                    ]
+                ],
+                'FinanceiroDeposito'  => [
+                    'numero_comprovativo' => '5346534',
+                    'data_deposito'       => ''
+                ],
+                'FinanceiroTransacao' => [
+                    'valor'    => '435345345',
+                    'detalhes' => '',
+                    'aluno_id' => '39118'
+                ],
+                'Inscricao'           => [
+                    'plano_estudo_id' => '35'
+                ],
+                'disciplinas'         => [
+                    (int)0 => '1272',
+                    (int)1 => '1270',
+                    (int)2 => '1266',
+                    (int)3 => '1269'
+                ],
+                'total_normal'        => (float)800,
+                'total_atraso'        => (int)0,
+                'aluno_id'            => '39118',
+                'matricula_id'        => '205383',
+                'turmas_tipo'         => [
+                    (int)1270 => '1',
+                    (int)1272 => '1',
+                    (int)1266 => '1',
+                    (int)1269 => '1'
+                ],
+                'cadeiras_normais'    => (int)4,
+                'cadeiras_atraso'     => (int)0
+            ];
+
+            $dataNormal = [
+                'Disciplina'          => [
+                    (int)0 => [
+                        'tipo' => '1',
+                        'id'   => '1259'
+                    ],
+                    (int)1 => [
+                        'tipo' => '1',
+                        'id'   => '1059'
+                    ],
+                    (int)2 => [
+                        'tipo' => '1',
+                        'id'   => '1234'
+                    ],
+                    (int)3 => [
+                        'tipo' => '1',
+                        'id'   => '1114'
+                    ]
+                ],
+                'FinanceiroDeposito'  => [
+                    'numero_comprovativo' => '3242423',
+                    'data_deposito'       => ''
+                ],
+                'FinanceiroTransacao' => [
+                    'valor'    => '32423423',
+                    'detalhes' => '',
+                    'aluno_id' => '42872'
+                ],
+                'Inscricao'           => [
+                    'plano_estudo_id' => ''
+                ],
+                'disciplinas'         => [
+                    (int)0 => '1259',
+                    (int)1 => '1059',
+                    (int)2 => '1234',
+                    (int)3 => '1114'
+                ],
+                'total_normal'        => (float)800,
+                'total_atraso'        => (int)0,
+                'aluno_id'            => '42872',
+                'matricula_id'        => '205384',
+                'turmas_tipo'         => [
+                    (int)1259 => '1',
+                    (int)1059 => '1',
+                    (int)1234 => '1',
+                    (int)1114 => '1'
+                ],
+                'cadeiras_normais'    => (int)4,
+                'cadeiras_atraso'     => (int)0
+            ];
+
+            $inscricaoExterno = $this->Inscricao->inscreveAluno($dataExterna);
+            $inscricaoNormal = $this->Inscricao->inscreveAluno($dataNormal);
+
+            $this->assertTrue($inscricaoExterno);
+            $this->assertTrue($inscricaoNormal);
         }
 
         /**
@@ -161,6 +267,7 @@
          */
         public function testInscreveAlunoNaTurma()
         {
+            $this->markTestIncomplete('testValidaInscricao not implemented.');
             $data = [
                 'Inscricao' => [
                     'tipo_inscricao_id'      => '1',
@@ -169,7 +276,8 @@
                     'nota_exame_recorrencia' => '',
                     'nota_final'             => '13',
                     'turma_id'               => '8',
-                    'aluno_id'               => '8'
+                    'aluno_id'               => '8',
+                    'user_id'                => 1
                 ]
             ];
             $mock = $this->getMock('CakeSession');
