@@ -375,6 +375,9 @@
 
         public function estudante_login()
         {
+            if($this->Auth->user()){
+                $this->redirect(['controller'=>'pages','action'=>'home']);
+            }
             $this->redirect(['action' => 'login', 'estudante' => false]);
         }
 
@@ -618,7 +621,7 @@
                     $aluno = $this->User->Entidade->Aluno->findByCodigo($username);
                     if ($aluno) {
                         $ultimo_login = $aluno['Entidade']['User']['ultimo_login'];
-                        // if ($ultimo_login == null) {
+                         if ($ultimo_login == null) {
                         $this->Auth->login($aluno['Entidade']['User']);
                         $entidade = ['Entidade' => $aluno['Entidade']];
                         $this->Session->write('Auth.User.name', $entidade['Entidade']['name']);
@@ -652,17 +655,17 @@
                             'Action'      => 'processaLoginEfectuado',
                             'matriculaId' => $aluno['Entidade']['User']['id']
                         ];
-                        CakeRabbit::publish($message);
+                       // CakeRabbit::publish($message);
                         $this->redirect([
                             'controller' => 'users',
                             'action'     => 'trocar_senha',
                             '?'=>['primeiro'=>'login'],
                             'estudante'  => true
                         ]);
-                        /*  } else {
+                         } else {
                               $this->Flash->error('Esta conta ja esta activa. Se esqueceu a senha, contacte o Registo Academico da sua Faculdade');
                               $this->redirect(['controller' => 'users', 'action' => 'login']);
-                          }*/
+                          }
                     }
                 }
                 if ($this->Auth->login()) {
@@ -811,7 +814,7 @@
                 $this->redirect(['controller' => 'docentes', 'action' => 'meu_perfil']);
             }
             if ($groupId == 3) {
-                $this->redirect(['controller' => 'estudantes', 'action' => 'meu_perfil']);
+                $this->redirect(['controller' => 'alunos', 'action' => 'meu_perfil']);
             }
             $this->redirect(['controller' => 'funcionarios', 'action' => 'meu_perfil']);
         }

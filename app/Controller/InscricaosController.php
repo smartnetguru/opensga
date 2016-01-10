@@ -151,11 +151,54 @@
         }
 
         /**
-         * @todo Implementar a funcao
+         * @fixme Nao eh seguro, todos funcionarios podem aceder, mesmo nao sendo da faculdade
+         * @param null $inscricaoId
          */
-        public function estudante_ver_detalhes_inscricao()
+        function estudante_ver_detalhes_inscricao($inscricaoId = null)
         {
 
+            if (!$inscricaoId) {
+                $this->Session->setFlash('Invalido %s', 'flasherror');
+                $this->redirect(['action' => 'index']);
+            }
+
+            $aluno = $this->Inscricao->Aluno->getByUserId(CakeSession::read('Auth.User.id'));
+            $aluno = $this->Inscricao->Aluno->getAlunoForAction($aluno['Aluno']['id']);
+            $this->Inscricao->contain([
+                'Aluno' => ['Entidade'],
+                'Turma' => ['Curso'],
+                'EstadoInscricao'
+            ]);
+            $inscricao = $this->Inscricao->findById($inscricaoId);
+            if($inscricao['Inscricao']['aluno_id']!=$aluno['Aluno']['id']){
+                $this->Flash->error('Não tem permissão para aceder a pagina anterior');
+                $this->redirect($this->referer(['controller'=>'pages','action'=>'home']));
+            }
+
+
+            if ($this->request->is('post') || $this->request->is('put')) {
+
+
+                if ($this->Inscricao->actualizaDadosInscricao($this->request->data) === true) {
+                    $this->Flash->success('Dados da Inscricao Actualizados com Sucesso');
+                    $this->redirect([
+                        'controller' => 'inscricaos',
+                        'action'     => 'ver_inscricoes_aluno',
+                        $aluno['Aluno']['id']
+                    ]);
+                } else {
+                    $this->Flash->error('Problemas ao Actualizar a Inscricao. Verifique os dados e tente novamente');
+                }
+            }
+
+
+            $this->request->data = $inscricao;
+
+            $tipoInscricaos = $this->Inscricao->TipoInscricao->find('list');
+            $estadoInscricaos = $this->Inscricao->EstadoInscricao->find('list');
+
+
+            $this->set(compact('inscricao', 'aluno', 'tipoInscricaos', 'estadoInscricaos'));
         }
 
         /**
@@ -927,6 +970,11 @@
                 'matriculaId', 'alunoId', 'imprimir', 'aluno','tipoInscricaos','planoEstudoId'));
         }
 
+
+        /**
+         * @fixme Nao eh seguro, todos funcionarios podem aceder, mesmo nao sendo da faculdade
+         * @param null $inscricaoId
+         */
         function faculdade_ver_detalhes_inscricao($inscricaoId = null)
         {
 

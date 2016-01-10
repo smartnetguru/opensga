@@ -115,6 +115,9 @@
             $comandos[] = "acl grant Group.3 controllers/Messages/estudante_enviar_mensagem";
             $comandos[] = "acl grant Group.3 controllers/Messages/estudante_ver_mensagem";
 
+            $comandos[] = "acl grant Group.3 controllers/Turmas/estudante_index";
+            $comandos[] = "acl grant Group.3 controllers/Turmas/estudante_ver_turma";
+
             $comandos[] = "acl grant Group.3 controllers/users/estudante_mostrar_foto";
             $comandos[] = "acl grant Group.3 controllers/users/estudante_perfil";
             $comandos[] = "acl grant Group.3 controllers/users/estudante_trocar_senha";

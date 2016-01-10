@@ -1,6 +1,7 @@
 <?php
 
-
+    use Ghunti\HighchartsPHP\Highchart;
+    use Ghunti\HighchartsPHP\HighchartJsExpr;
     /**
      * Controller de turmas do OpenSGA
      *
@@ -12,15 +13,13 @@
      * @version         OpenSGA v 0.5.0
      * @since           OpenSGA v 0.1.0
      *
-     * 
+     *
      *
      * @todo            No futuro criar uma tabela docentes_turmas vai ajudar a manter o historico completo das turmas
      *
      * @property Turma $Turma
      *
      */
-    use Ghunti\HighchartsPHP\Highchart;
-    use Ghunti\HighchartsPHP\HighchartJsExpr;
 
     class TurmasController extends AppController
     {
@@ -154,6 +153,7 @@
          * Cria uma avaliacao para a turma
          *
          * @todo quando selecciona exames, esconder o campo de percentagem
+         *
          * @param $turmaId
          */
         public function docente_criar_avaliacao($turmaId)
@@ -187,12 +187,12 @@
             if ($this->request->is('post')) {
                 $resultado = $this->Turma->criaAvaliacao($this->request->data);
 
-                if($resultado[0]===true){
+                if ($resultado[0] === true) {
                     $this->Session->setFlash('Avaliacao Criada com Sucesso');
                     $this->redirect(['action' => 'ver_turma', $turmaId]);
-                } else{
+                } else {
 
-                        $this->Flash->error($resultado[1]);
+                    $this->Flash->error($resultado[1]);
 
                 }
             }
@@ -458,6 +458,7 @@
          * Associa um Docente a Turma em questao
          *
          * @todo criar a funcionalidade docentes recomendados, de acordo com as disciplinas do docente
+         *
          * @param $turmaId
          */
         public function faculdade_adicionar_docente($turmaId)
@@ -479,7 +480,7 @@
                 }
             }
 
-            $this->Turma->contain(['Disciplina','Curso','AnoLectivo','SemestreLectivo']);
+            $this->Turma->contain(['Disciplina', 'Curso', 'AnoLectivo', 'SemestreLectivo']);
             $turma = $this->Turma->findById($turmaId);
             $this->Turma->DocenteTurma->Docente->contain([
                 'Entidade',
@@ -624,10 +625,10 @@
             $unidade_organica_id = $this->Session->read('Auth.User.unidade_organica_id');
 
             $conditions = [];
-            $estadoTurma  = $this->request->query('estado_turma');
-            if($estadoTurma){
+            $estadoTurma = $this->request->query('estado_turma');
+            if ($estadoTurma) {
                 $conditions['Turma.estado_turma_id'] = $estadoTurma;
-            } else{
+            } else {
                 $conditions['Turma.estado_turma_id'] = 1;
             }
             $paginationOptions = [];
@@ -672,7 +673,7 @@
             $estadoTurma = $this->Turma->EstadoTurma->findById($conditions['Turma.estado_turma_id']);
 
             $turmas = $this->paginate('Turma');
-            $this->set(compact('turmas', 'paginationOptions','estadoTurma'));
+            $this->set(compact('turmas', 'paginationOptions', 'estadoTurma'));
         }
 
         public function faculdade_inscrever_aluno($alunoId, $turmaId)
@@ -700,6 +701,60 @@
             $tipoInscricaos = $this->Turma->Inscricao->TipoInscricao->find('list');
 
             $this->set(compact('aluno', 'turma', 'tipoInscricaos'));
+
+        }
+
+        public function faculdade_manutencao()
+        {
+
+            $anoLectivoAno = Configure::read('OpenSGA.ano_lectivo');
+            $anoLectivo = $this->Turma->AnoLectivo->findByAno($anoLectivoAno);
+            $anoLectivoId = $anoLectivo['AnoLectivo']['id'];
+
+            $semestreLectivoSemestre = Configure::read('OpenSGA.semestre_lectivo');
+            $semestreLectivo = $this->Turma->AnoLectivo->SemestreLectivo->findByAnoLectivoIdAndSemestre($anoLectivoId,
+                $semestreLectivoSemestre);
+            $semestreLectivoId = $semestreLectivo['SemestreLectivo']['id'];
+
+            $unidadeOrganicaId = CakeSession::read('Auth.User.unidade_organica_id');
+
+            $totalTurmasSemDocente = $this->Turma->getTurmasSemDocente($anoLectivoId, $semestreLectivoId,
+                $unidadeOrganicaId, 'count');
+
+
+            $this->set(compact('totalTurmasSemDocente'));
+        }
+
+        public function faculdade_manutencao_turmas_abertas()
+        {
+
+        }
+
+        public function faculdade_manutencao_turmas_sem_docente()
+        {
+
+            $anoLectivoAno = Configure::read('OpenSGA.ano_lectivo');
+            $anoLectivo = $this->Turma->AnoLectivo->findByAno($anoLectivoAno);
+            $anoLectivoId = $anoLectivo['AnoLectivo']['id'];
+
+            $semestreLectivoSemestre = Configure::read('OpenSGA.semestre_lectivo');
+            $semestreLectivo = $this->Turma->AnoLectivo->SemestreLectivo->findByAnoLectivoIdAndSemestre($anoLectivoId,
+                $semestreLectivoSemestre);
+            $semestreLectivoId = $semestreLectivo['SemestreLectivo']['id'];
+
+
+            $unidadeOrganicaId = CakeSession::read('Auth.User.unidade_organica_id');
+
+            $this->Turma->contain(['AnoLectivo', 'SemestreLectivo', 'Disciplina']);
+            $turmasSemDocente = $this->Turma->getTurmasSemDocente($anoLectivoId, $semestreLectivoId, $unidadeOrganicaId,
+                'all');
+
+            $this->set(compact('turmasSemDocente'));
+
+        }
+
+        public function faculdade_manutencao_turmas_sem_estudante()
+        {
 
         }
 
@@ -772,8 +827,8 @@
                 ]);
                 $inscricaos2 = $this->Turma->Inscricao->find('all', [
                     'conditions' => [
-                        'turma_id' =>$todasTurmasIds,
-                        'Inscricao.estado_inscricao_id NOT' =>9,
+                        'turma_id'                          => $todasTurmasIds,
+                        'Inscricao.estado_inscricao_id NOT' => 9,
                     ]
                 ]);
                 $inscricaos = Hash::sort($inscricaos2, '{n}.Matricula.Aluno.Entidade.apelido', 'asc');
@@ -1084,54 +1139,6 @@
             $this->set(compact('inscricaos'));
         }
 
-        public function faculdade_manutencao(){
-
-            $anoLectivoAno = Configure::read('OpenSGA.ano_lectivo');
-            $anoLectivo = $this->Turma->AnoLectivo->findByAno($anoLectivoAno);
-            $anoLectivoId = $anoLectivo['AnoLectivo']['id'];
-
-            $semestreLectivoSemestre = Configure::read('OpenSGA.semestre_lectivo');
-            $semestreLectivo = $this->Turma->AnoLectivo->SemestreLectivo->findByAnoLectivoIdAndSemestre($anoLectivoId,$semestreLectivoSemestre);
-            $semestreLectivoId = $semestreLectivo['SemestreLectivo']['id'];
-
-            $unidadeOrganicaId = CakeSession::read('Auth.User.unidade_organica_id');
-
-            $totalTurmasSemDocente = $this->Turma->getTurmasSemDocente($anoLectivoId,$semestreLectivoId,$unidadeOrganicaId,'count');
-
-
-
-            $this->set(compact('totalTurmasSemDocente'));
-        }
-
-        public function faculdade_manutencao_turmas_sem_docente(){
-
-            $anoLectivoAno = Configure::read('OpenSGA.ano_lectivo');
-            $anoLectivo = $this->Turma->AnoLectivo->findByAno($anoLectivoAno);
-            $anoLectivoId = $anoLectivo['AnoLectivo']['id'];
-
-            $semestreLectivoSemestre = Configure::read('OpenSGA.semestre_lectivo');
-            $semestreLectivo = $this->Turma->AnoLectivo->SemestreLectivo->findByAnoLectivoIdAndSemestre($anoLectivoId,$semestreLectivoSemestre);
-            $semestreLectivoId = $semestreLectivo['SemestreLectivo']['id'];
-
-
-            $unidadeOrganicaId = CakeSession::read('Auth.User.unidade_organica_id');
-
-            $this->Turma->contain(['AnoLectivo','SemestreLectivo','Disciplina']);
-            $turmasSemDocente = $this->Turma->getTurmasSemDocente($anoLectivoId,$semestreLectivoId,$unidadeOrganicaId,'all');
-
-            $this->set(compact('turmasSemDocente'));
-
-        }
-
-        public function faculdade_manutencao_turmas_sem_estudante(){
-
-        }
-
-        public function faculdade_manutencao_turmas_abertas(){
-
-        }
-
-
         public function print_pauta($turmaId)
         {
 
@@ -1287,6 +1294,143 @@
             $this->set(compact('inscricaos', 'turmaTipoAvaliacaos', 'anolectivos', 'estados', 'mediaTurma',
                 'anosemestrecurr', 'cursos', 'planoestudos', 'turnos', 'disciplinas', 'docentes', 'ano_curricular',
                 'regente', 'assistentes'));
+        }
+
+
+        public function estudante_ver_turma($turmaId = null)
+        {
+            $this->Turma->id = $turmaId;
+            if (!$this->Turma->exists()) {
+                throw new NotFoundException(__('Turma Inválida'));
+            }
+
+            if (empty($this->data)) {
+                $this->Turma->contain([
+                    'Turno',
+                    'PlanoEstudo',
+                    'AnoLectivo',
+                    'EstadoTurma',
+                    'Curso' => [
+                        'UnidadeOrganica'
+                    ],
+                    'Disciplina',
+                    'AnoLectivo'
+                ]);
+                $this->data = $this->Turma->read(null, $turmaId);
+            }
+
+            $aluno = $this->Turma->Inscricao->Aluno->findByUserId(CakeSession::read('Auth.User.id'));
+            $this->Turma->Inscricao->contain([
+                'EstadoInscricao',
+                'Matricula' => [
+                    'Aluno' => [
+                        'Entidade' => [
+                            'User'
+                        ]
+                    ]
+                ],
+                'Turma'     => [
+                    'Curso' => [
+                        'fields' => ['name']
+                    ],
+                    'Disciplina',
+                    'Turno',
+                    'AnoLectivo'
+                ]
+            ]);
+            $inscricao = $this->Turma->Inscricao->findByAlunoIdAndTurmaId($aluno['Aluno']['id'],$turmaId);
+            if(empty($inscricao)){
+                $this->Flash->error('Não possui permissão para ver esta turma');
+                $this->redirect($this->referer(['controller'=>'pages','action'=>'home']));
+            }
+
+
+            $this->Turma->TurmaTipoAvaliacao->contain([
+                'TipoAvaliacao'
+            ]);
+            $turmaTipoAvaliacaos = $this->Turma->TurmaTipoAvaliacao->find('all',
+                ['conditions' => ['turma_id' => $this->data['Turma']['id']]]);
+            $estados = ['1' => 'Activa', '2' => 'Cancelada', '3' => 'Fechada'];
+            $anosemestrecurr = ['1' => '1', '2' => '2', '3' => '3', '4' => '4'];
+            $anolectivos = $this->Turma->AnoLectivo->find('list');
+            $cursos = $this->Turma->Curso->find('list');
+            $planoestudos = $this->Turma->PlanoEstudo->find('list');
+            $turnos = $this->Turma->Turno->find('list');
+            $disciplinas = $this->Turma->Disciplina->find('list');
+            $regente = $this->Turma->getRegente($turmaId);
+            $assistentes = $this->Turma->getAllAssistentes($turmaId);
+
+            $this->set('turma', $this->data);
+            $this->set(compact( 'turmaTipoAvaliacaos', 'anolectivos', 'estados', 'mediaTurma',
+                'anosemestrecurr', 'cursos', 'planoestudos', 'turnos', 'disciplinas', 'docentes', 'ano_curricular',
+                'regente', 'assistentes'));
+        }
+
+        function estudante_index()
+        {
+
+            $this->Turma->contain([
+                'AnoLectivo',
+                'Disciplina',
+                'PlanoEstudo',
+                'Curso' => ['UnidadeOrganica']
+            ]);
+
+            $aluno = $this->Turma->Inscricao->Aluno->findByUserId(CakeSession::read('Auth.User.id'));
+            $inscricoesActivas = $this->Turma->Inscricao->find('list',['conditions'=>['aluno_id'=>$aluno['Aluno']['id'],'estado_inscricao_id'=>$this->Turma->Inscricao->estadoInscricoesAbertas],'fields'=>'turma_id']);
+
+
+
+            $conditions = [];
+            $estadoTurma = $this->request->query('estado_turma');
+            if ($estadoTurma) {
+                $conditions['Turma.estado_turma_id'] = $estadoTurma;
+            } else {
+                $conditions['Turma.estado_turma_id'] = 1;
+            }
+            $paginationOptions = [];
+            if ($this->request->is('post')) {
+
+                if ($this->request->data['Turma']['codigo'] != '') {
+                    $conditions['Turma.codigo'] = $this->request->data['Turma']['codigo'];
+                }
+                if ($this->request->data['Turma']['name'] != '') {
+                    $conditions['Turma.name LIKE'] = '%' . $this->request->data['Turma']['name'] . '%';
+                }
+                if ($this->request->data['AnoLectivo']['ano'] != '') {
+                    $conditions['AnoLectivo.ano'] = $this->request->data['AnoLectivo']['ano'];
+                    $paginationOptions['url']['ano_lectivo'] = $this->request->data['AnoLectivo']['ano'];
+                }
+            }
+            if ($this->request->is('ajax')) {
+                if (isset($this->request->params['named']['ano_lectivo'])) {
+                    $conditions['AnoLectivo.ano'] = $this->request->params['named']['ano_lectivo'];
+                }
+            }
+
+            $conditions['Turma.id'] = array_values($inscricoesActivas);
+
+            $this->paginate = [
+                'conditions' => $conditions,
+                'contain'    => [
+                    'AnoLectivo',
+                    'Disciplina',
+                    'PlanoEstudo',
+                    'Curso'     => ['UnidadeOrganica'],
+                    'Inscricao' => [
+                        'conditions' => [
+                            'estado_inscricao_id' => 1
+                        ]
+                    ]
+                ],
+                'limit'      => 20,
+                'order'      => 'Turma.created DESC'
+            ];
+
+            $estadoTurma = $this->Turma->EstadoTurma->findById($conditions['Turma.estado_turma_id']);
+
+            $turmas = $this->paginate('Turma');
+            $this->set(compact('turmas', 'paginationOptions', 'estadoTurma'));
         }
 
     }

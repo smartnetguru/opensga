@@ -1116,6 +1116,15 @@
             return true;
         }
 
+        public function getAllTurmasByAlunoAndEstado(int $alunoId,int $estado){
+
+            $inscricoesActivas = $this->Inscricao->find('list',['conditions'=>['aluno_id'=>$alunoId,'estado_inscricao_id'=>$this->Inscricao->estadoInscricoesAbertas],'fields'=>'turma_id']);
+            $this->contain(['Disciplina']);
+            $turmas = $this->find('all',['conditions'=>['Turma.id'=>array_values($inscricoesActivas)]]);
+            return $turmas;
+
+        }
+
     }
 
 ?>
