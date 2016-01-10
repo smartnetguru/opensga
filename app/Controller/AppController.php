@@ -41,13 +41,13 @@
 
         ];
         public $helpers = [
-            'Html' => array('className' => 'BoostCake.BoostCakeHtml'),
-            'Form' => array('className' => 'BoostCake.BoostCakeForm'),
-            'Paginator' => array('className' => 'BoostCake.BoostCakePaginator'),
+            'Html'      => ['className' => 'BoostCake.BoostCakeHtml'],
+            'Form'      => ['className' => 'BoostCake.BoostCakeForm'],
+            'Paginator' => ['className' => 'BoostCake.BoostCakePaginator'],
             'AclLink',
             'BreadCumbs',
             'Session',
-            'Js'   => [
+            'Js'        => [
                 'MyJquery'
             ],
             'EventsCalendar',
@@ -130,19 +130,22 @@
                     }
                 } elseif ($grupo_id == 4) {
                     if ($this->request->prefix != 'docente') {
-                        $this->redirect(['docente'=>true]);
+                        $this->redirect(['docente' => true]);
                     }
                 } elseif ($grupo_id == 3) {
 
                     if ($this->request->prefix != 'estudante') {
-                        $this->redirect(['estudante'=>true]);
+                        $this->redirect(['estudante' => true]);
                     }
                 } elseif ($grupo_id == 2) {
                     $this->loadModel('User');
                     $unidade_organica = $this->User->Funcionario->UnidadeOrganica->findById($this->Session->read('Auth.User.unidade_organica_id'));
+
                     $codigo_unidade = $unidade_organica['UnidadeOrganica']['codigo_interno'];
 
                     switch ($codigo_unidade) {
+                        case 'dra':
+                            break;
                         case 'cooperacao':
                             if ($this->request->plugin != 'cooperacao') {
                                 $this->Session->setFlash(__('Não tem Permissão para acessar a area anterior'),
@@ -160,6 +163,23 @@
                                     'default', ['class' => 'alert info']);
                                 $this->redirect(['controller' => 'pages', 'action' => 'home', 'faculdade' => true]);
                             }
+
+                            break;
+                        case 'cea':
+                            if ($this->request->plugin != 'cea') {
+                                $this->Session->setFlash(__('Não tem Permissão para acessar a area anterior'),
+                                    'default', ['class' => 'alert info']);
+                                $this->redirect([
+                                    'controller' => 'pages',
+                                    'action'     => 'home',
+                                    'plugin'     => 'cea'
+                                ]);
+                            }
+                        break;
+                        default:
+                            die(debug(CakeSession::read()));
+                            $this->Flash->error('Não está autorizado a aceder ao Sistema');
+                            $this->redirect(['controller' => 'users', 'action' => 'logout']);
                     }
                     if ($this->User->isFromFaculdade($this->Session->read('Auth.User.id'))) {
 
@@ -192,11 +212,19 @@
             if ($userId) {
                 //Lemos as mensagens, notificacoes e tarefas em todas as requisicoes :(
                 $totalMensagensPendentes = $this->Message->MessageUser->find('count', [
-                    'conditions' => ['MessageUser.user_id' => $userId, 'message_folder_id' => 1, 'estado_message_id' => 1]
+                    'conditions' => [
+                        'MessageUser.user_id' => $userId,
+                        'message_folder_id'   => 1,
+                        'estado_message_id'   => 1
+                    ]
                 ]);
-                $this->Message->MessageUser->contain(['Message'=>'User']);
+                $this->Message->MessageUser->contain(['Message' => 'User']);
                 $headerMessages = $this->Message->MessageUser->find('all', [
-                    'conditions' => ['MessageUser.user_id' => $userId, 'message_folder_id' => 1, 'estado_message_id' => 1],
+                    'conditions' => [
+                        'MessageUser.user_id' => $userId,
+                        'message_folder_id'   => 1,
+                        'estado_message_id'   => 1
+                    ],
                     'limit'      => 5
                 ]);
                 $totalNotificacoesPendentes = 0;
@@ -214,7 +242,8 @@
                 }
 
             }
-            $this->set(compact('totalMensagensPendentes', 'totalTarefasPendentes', 'totalNotificacoesPendentes', 'headerMessages', 'tarefas',
+            $this->set(compact('totalMensagensPendentes', 'totalTarefasPendentes', 'totalNotificacoesPendentes',
+                'headerMessages', 'tarefas',
                 'notificacoes'));
         }
 
@@ -226,7 +255,7 @@
                 $this->redirect($this->referer());
             } else {
                 $this->Flash->warning('Algo Estranho Aconteceu com o Sistema. Os administradores ja foram notificados!');
-                $this->log('blackhole'.$type);
+                $this->log('blackhole' . $type);
                 $this->redirect($this->referer());
             }
 

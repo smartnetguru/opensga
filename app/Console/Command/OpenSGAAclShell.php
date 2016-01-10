@@ -31,6 +31,7 @@
             $comandos[] = "acl grant Group.4 controllers/Docentes/docente_meu_perfil";
             $comandos[] = "acl grant Group.4 controllers/Pages/docente_home";
             $comandos[] = "acl grant Group.4 controllers/Users/docente_trocar_senha";
+            $comandos[] = "acl grant Group.4 controllers/Users/docente_changeLoginProfile";
 
 
             foreach ($comandos as $comando) {
@@ -122,6 +123,7 @@
             $comandos[] = "acl grant Group.3 controllers/users/estudante_perfil";
             $comandos[] = "acl grant Group.3 controllers/users/estudante_trocar_senha";
             $comandos[] = "acl grant Group.3 controllers/users/estudante_after_fb_login";
+            $comandos[] = "acl grant Group.3 controllers/users/estudante_changeLoginProfile";
 
             foreach ($comandos as $comando) {
                 $this->dispatchShell($comando);
@@ -349,6 +351,7 @@
 
                     $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Pages/home";
                     $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Users/trocar_senha";
+                    $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Users/changeLoginProfile";
 
                     $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Requisicoes/RequisicoesPedidos/entregar_cartao_novo_ingresso";
                     $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Requisicoes/RequisicoesPedidos/index";
@@ -591,7 +594,20 @@
 
                         $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/enviar_sms";
                     }
+                    elseif (in_array('CEA', $unidadesOrganicas)) {
+                        //Funcionarios do Gabinete de Cooperacao
+
+                        $comandos[] = "acl deny User.{$funcionario['User']['id']} controllers";
+                        $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Cea";
+                        $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/autocomplete";
+                        $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/mostrar_foto";
+                        $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Users/login";
+
+                        $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Users/logout";
+
+                    }
                 }
+
 
                 foreach ($comandos as $comando) {
                     $this->out($comando);

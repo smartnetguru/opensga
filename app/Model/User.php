@@ -550,6 +550,22 @@
             ];
         }
 
+
+        public function changeLoginProfile($data){
+            $groupId = $data['User']['group_id'];
+            $userId = CakeSession::read('Auth.User.id');
+
+            if($groupId==2){
+                CakeSession::write('Auth.User.group_id',$groupId);
+                $this->Funcionario->contain('Entidade');
+                $funcionario = $this->Funcionario->findByUserId($userId);
+                CakeSession::write('Auth.User.unidade_organica_id',$funcionario['Funcionario']['unidade_organica_id']);
+                return [true];
+
+
+            }
+        }
+
     }
 
 ?>

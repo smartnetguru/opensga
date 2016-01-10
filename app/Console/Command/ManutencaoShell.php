@@ -215,6 +215,61 @@
         }
 
 
+        public function ajustaUserGroup(){
+            $users = $this->User->find('all');
+            $total = count($users);
+            foreach($users as $user){
+                $this->out($total--);
+                //funcionario
+                $funcionario = $this->User->Entidade->Funcionario->findByUserId($user['User']['id']);
+                if(!empty($funcionario)){
+                    $grupos['GroupsUser'] = [
+                        'user_id'=>$user['User']['id'],
+                        'group_id'=>2
+                    ];
+                    $grupoExiste = $this->User->GroupsUser->findByUserIdAndGroupId($user['User']['id'],2);
+                    if(empty($grupoExiste)){
+                        $this->out('Criando Funcionario');
+                        $this->User->GroupsUser->create();
+                        $this->User->GroupsUser->save($grupos);
+                    }
+
+                }
+                //docente
+                $entidade = $this->User->Entidade->findByUserId($user['User']['id']);
+                $docente = $this->User->Entidade->Docente->findByEntidadeId($entidade['Entidade']['id']);
+                if(!empty($docente)){
+                    $grupos['GroupsUser'] = [
+                        'user_id'=>$user['User']['id'],
+                        'group_id'=>4
+                    ];
+                    $grupoExiste = $this->User->GroupsUser->findByUserIdAndGroupId($user['User']['id'],4);
+                    if(empty($grupoExiste)){
+                        $this->out('Criando Docente');
+                        $this->User->GroupsUser->create();
+                        $this->User->GroupsUser->save($grupos);
+                    }
+
+                }
+                //estudante
+                $aluno = $this->User->Entidade->Aluno->findByUserId($user['User']['id']);
+                if(!empty($aluno)){
+                    $grupos['GroupsUser'] = [
+                        'user_id'=>$user['User']['id'],
+                        'group_id'=>2
+                    ];
+                    $grupoExiste = $this->User->GroupsUser->findByUserIdAndGroupId($user['User']['id'],2);
+                    if(empty($grupoExiste)){
+                        $this->out('Criando Aluno');
+                        $this->User->GroupsUser->create();
+                        $this->User->GroupsUser->save($grupos);
+                    }
+
+                }
+            }
+        }
+
+
 
 
     }

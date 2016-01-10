@@ -181,11 +181,16 @@
 
         public function docente_login()
         {
+            if($this->Auth->user()){
+                $this->redirect(['controller'=>'pages','action'=>'home']);
+            }
+
             $this->redirect(['action' => 'login', 'docente' => false]);
         }
 
         public function docente_logout()
         {
+
             $this->redirect(['action' => 'logout', 'docente' => false]);
         }
 
@@ -856,6 +861,16 @@
                     }
                 } else {
                     $this->Session->setFlash(sprintf(__('A senha antiga nao confere', true), 'user'));
+                }
+            }
+        }
+
+
+        public function docente_changeLoginProfile(){
+            if($this->request->is('post')){
+                $resultado = $this->User->changeLoginProfile($this->request->data);
+                if($resultado[0]==true){
+                    $this->redirect(['controller'=>'pages','action'=>'home','docente'=>false]);
                 }
             }
         }
