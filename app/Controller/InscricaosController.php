@@ -1,5 +1,5 @@
 <?php
-
+    App::uses('CakeTime', 'Utility');
     /**
      * Controller inscrições
      *
@@ -19,6 +19,8 @@
      *
      * @property Inscricao $Inscricao
      */
+
+
     class InscricaosController extends AppController
     {
 
@@ -283,8 +285,7 @@
                 $this->Inscricao->save();
                 $this->Session->setFlash(__('Inscricao Anulada com Sucesso'), 'default',
                     ['class' => 'alert alert-success']);
-                //$alunoId = $this->Inscricao->field('aluno_id');
-                $this->redirect($this->referer());
+                $this->redirect($this->referer(['action'=>'index']));
             } else {
                 throw new MethodNotAllowedException('Erro no Sistema');
             }
@@ -300,6 +301,10 @@
 
             if (!$this->Inscricao->exists()) {
                 throw new NotFoundException(__('Inscricao Invalida'));
+            }
+            if(!CakeTime::isToday($inscricao['Inscricao']['data'])){
+                $this->Flash->error('Esta Inscricao não pode ser apagada. Apenas anulada');
+                $this->redirect($this->referer(['action'=>'index']));
             }
             if ($this->Inscricao->delete()) {
                 $this->Session->setFlash(__('Inscricao Apagada com Sucesso'), 'default', ['class' => 'alert success']);

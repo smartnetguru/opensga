@@ -218,6 +218,7 @@
 
 
                     $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Inscricaos/faculdade_anular_inscricao";
+                    $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Inscricaos/faculdade_apagar_inscricao";
                     $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Inscricaos/faculdade_index";
                     $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Inscricaos/faculdade_inscrever";
                     $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Inscricaos/faculdade_inscrever2";
