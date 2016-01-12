@@ -172,10 +172,13 @@
                 'EstadoInscricao'
             ]);
             $inscricao = $this->Inscricao->findById($inscricaoId);
-            if($inscricao['Inscricao']['aluno_id']!=$aluno['Aluno']['id']){
-                $this->Flash->error('Não tem permissão para aceder a pagina anterior');
-                $this->redirect($this->referer(['controller'=>'pages','action'=>'home']));
+            if(!empty($inscricao)){
+                if($inscricao['Inscricao']['aluno_id']!=$aluno['Aluno']['id']){
+                    $this->Flash->error('Não tem permissão para aceder a pagina anterior');
+                    $this->redirect($this->referer(['controller'=>'pages','action'=>'home']));
+                }
             }
+
 
 
             if ($this->request->is('post') || $this->request->is('put')) {
@@ -269,6 +272,75 @@
             $this->set('matricula_id', $matriculaId);
             $this->set(compact('disciplinas','planoEstudoId'));
         }
+
+
+        /**
+         * Adiciona novas cadeiras a um aluno que ja fez inscricao num dado semestre, e recalcula as mensalidades
+         *
+         * @param type $aluno_id
+         * @param type $matricula_id
+         *
+         * @todo Implementar essa cena :(
+         */
+        public function faculdade_adicionar_cadeiras_inscricao_todos_planos($alunoId, $matriculaId)
+        {
+            $this->loadModel('Turma');
+            $this->loadModel('Aluno');
+            $this->loadModel('FinanceiroPagamento');
+            $this->loadModel('Matricula');
+
+            $unidadeOrganicaId = $this->Session->read('Auth.User.unidade_organica_id');
+
+            $this->Inscricao->Aluno->contain([
+                'Entidade',
+                'PlanoEstudo',
+                'Curso' => ['UnidadeOrganica']
+            ]);
+            $aluno = $this->Inscricao->Aluno->findById($alunoId);
+
+            $isExterno = 1;
+            $planoEstudoId = $this->request->query('planoEstudoId');
+            if(empty($planoEstudoId)){
+                if ($aluno['Curso']['unidade_organica_id'] != $unidadeOrganicaId) {
+                    $this->Session->setFlash(__('Nao Possui permissao para aceder a pagina anterior2'));
+                    $this->redirect($this->referer());
+                }
+                $isExterno = null;
+            }
+
+
+            if ($this->request->is('post') || $this->request->is('put')) {
+
+                $alunoId = $this->request->data['Inscricao']['aluno_id'];
+                $matriculaId = $this->request->data['Inscricao']['matricula_id'];
+                $inscricao_nova = [];
+
+                if (isset($this->request->data['disciplinas'])) {
+                    foreach ($this->request->data['disciplinas'] as $k => $v) {
+                        if ($v > 0) {
+                            $inscricao_nova[] = $v;
+                        }
+                    }
+                }
+
+                $this->Session->write('OpenSGA.inscricao.cadeiras', $inscricao_nova);
+                $this->Session->write('OpenSGA.inscricao.matricula_id', $matriculaId);
+                $this->Session->write('OpenSGA.inscricao.aluno_id', $alunoId);
+                $this->redirect(['controller' => 'inscricaos', 'action' => 'valida_inscricao','?'=>['planoEstudoId'=>$planoEstudoId,'isExterno'=>$isExterno]]);
+            }
+
+
+
+                $disciplinas = $this->Inscricao->getAllDisciplinasForInscricaoByCurso($alunoId);
+
+            $this->set('aluno_id', $alunoId);
+            $this->set('matricula_id', $matriculaId);
+            $this->set(compact('disciplinas','planoEstudoId'));
+            $this->render('faculdade_adicionar_cadeiras_inscricao');
+        }
+
+
+
 
         /**
          *
@@ -567,6 +639,103 @@
             $this->set(compact('disciplinas','planoEstudoId'));
         }
 
+
+        /**
+         * Inscreve alunos depois da primeira matricula
+         *
+         * @param type $aluno_id
+         * @param type $matricula_id
+         *
+         *
+         * @todo garantir que so se inscreve quem nao tem dividas no semestre anterior
+         * @todo A lista de disciplinas deve ter em consideracao  a tabela de precedencias
+         * @todo Deve existir possibilidade de inscricao condicional
+         */
+        public function faculdade_inscrever_todos_planos_estudos($alunoId, $matriculaId,$planoEstudoId=null,$inscricaoCondicional=null)
+        {
+            $this->loadModel('Turma');
+            $this->loadModel('Aluno');
+            $this->loadModel('FinanceiroPagamento');
+            $this->loadModel('Matricula');
+
+            $unidadeOrganicaId = $this->Session->read('Auth.User.unidade_organica_id');
+
+            $isRegular = $this->Inscricao->Aluno->isRegular($alunoId);
+            if (!$isRegular[0]['regular'] == true) {
+                $this->Session->setFlash(__('So pode fazer Inscricoes depois de renovar a matricula para o ano lectivo actual'),
+                    'default', ['class' => 'alert error']);
+                $this->redirect($this->referer());
+            }
+            $this->Inscricao->Aluno->contain([
+                'Entidade',
+                'PlanoEstudo',
+                'Curso' => ['UnidadeOrganica']
+            ]);
+
+            if(empty($planoEstudoId)){
+                $planoEstudoId = $this->request->query('planoEstudoId');
+            }
+
+            $isExterno = 1;
+
+            $aluno = $this->Inscricao->Aluno->findById($alunoId);
+            if(empty($planoEstudoId)){
+                if ($aluno['Curso']['unidade_organica_id'] != $unidadeOrganicaId) {
+                    $this->Session->setFlash(__('Nao Possui permissao para aceder a pagina anterior2'));
+                    $this->redirect($this->referer());
+                }
+                $isExterno=null;
+            }
+
+
+
+
+            //Primeiro vemos se ainda nao se matriculou no ano lectivo em questao
+
+            $this->Inscricao->contain([
+                'Turma'
+            ]);
+            $inscricoesActivas = $this->Inscricao->find('all', [
+                'conditions' => [
+                    'Inscricao.aluno_id'        => $alunoId,
+                    'Turma.ano_lectivo_id'      => Configure::read('OpenSGA.ano_lectivo_id'),
+                    'Turma.semestre_lectivo_id' => Configure::read('OpenSGA.semestre_lectivo_id')
+                ]
+            ]);
+            if (!empty($inscricoesActivas)) {
+                $this->Session->setFlash(__('Este Aluno já fez inscrições neste ano. As cadeiras seguintes serão adicionadas ás inscrições anteriores, e o valor da inscrição será recalculado'),
+                    'default', ['class' => 'alert info']);
+                $this->redirect([
+                    'controller' => 'inscricaos',
+                    'action'     => 'adicionar_cadeiras_inscricao_todos_planos',
+                    $alunoId,
+                    $matriculaId
+                ]);
+            }
+            if ($this->request->is('post') || $this->request->is('put')) {
+                $alunoId = $this->request->data['Inscricao']['aluno_id'];
+                $matriculaId = $this->request->data['Inscricao']['matricula_id'];
+                $inscricaoNova = [];
+
+                foreach ($this->request->data['disciplinas'] as $k => $v) {
+                    if ($v > 0) {
+                        $inscricaoNova[] = $v;
+                    }
+                }
+
+
+                $this->Session->write('OpenSGA.inscricao.cadeiras', $inscricaoNova);
+                $this->Session->write('OpenSGA.inscricao.matricula_id', $matriculaId);
+                $this->Session->write('OpenSGA.inscricao.aluno_id', $alunoId);
+                $this->redirect(['controller' => 'inscricaos', 'action' => 'valida_inscricao','?'=>['isExterno'=>$isExterno,'planoEstudoId'=>$planoEstudoId]]);
+            }
+
+                $disciplinas = $this->Inscricao->getAllDisciplinasForInscricaoByCurso($alunoId);
+
+            $this->set('aluno_id', $alunoId);
+            $this->set('matricula_id', $matriculaId);
+            $this->set(compact('disciplinas','planoEstudoId'));
+            }
         public function faculdade_inscrever2($aluno_id, $matricula_id)
         {
             $unidade_organica_id = $this->Session->read('Auth.User.unidade_organica_id');

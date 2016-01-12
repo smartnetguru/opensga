@@ -177,7 +177,6 @@
                             }
                         break;
                         default:
-                            die(debug(CakeSession::read()));
                             $this->Flash->error('Não está autorizado a aceder ao Sistema');
                             $this->redirect(['controller' => 'users', 'action' => 'logout']);
                     }
@@ -242,6 +241,10 @@
                 }
 
             }
+
+            $pageTitle = Inflector::humanize($this->action);
+            $pageTitle .= ' - '.Inflector::humanize($this->request->param('controller'));
+            $this->set('title_for_layout',$pageTitle);
             $this->set(compact('totalMensagensPendentes', 'totalTarefasPendentes', 'totalNotificacoesPendentes',
                 'headerMessages', 'tarefas',
                 'notificacoes'));
