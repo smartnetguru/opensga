@@ -338,7 +338,7 @@ class Entidade extends AppModel
             null, 'id DESC');
         if (!empty($paisMorada)) {
             $morada['pais_morada'] = $paisMorada['EntidadeContacto']['valor'];
-            $morada['string'] .= $morada['provincia_morada'];
+            $morada['string'] .= $morada['pais_morada'];
         } else {
             $morada['pais_morada'] = null;
         }
