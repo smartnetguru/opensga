@@ -27,10 +27,11 @@
  */
  
  
-class Tipoprecedencia extends AppModel {
-	var $name = 'Tipoprecedencia';
+class TipoPrecedencia extends AppModel {
+	var $name = 'TipoPrecedencia';
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 
+	public $useTable = 'tipo_precedencias';
 	var $hasMany = array(
 		'Grupodisciplina' => array(
 			'className' => 'Grupodisciplina',
