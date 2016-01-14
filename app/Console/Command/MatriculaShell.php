@@ -85,4 +85,48 @@
 
         }
 
+        public function exporta_renovacao_matriculas()
+        {
+            App::import('Vendor', 'PHPExcel', ['file' => 'PHPExcel.php']);
+            if (!class_exists('PHPExcel')) {
+                throw new CakeException('Vendor class PHPExcel not found!');
+            }
+
+            $xls = PHPExcel_IOFactory::load(APP . 'Reports' . DS . 'Faculdades' . DS . 'renovacao.xlsx');
+
+            $worksheet = $xls->getActiveSheet();
+            $linha_actual = 2;
+            $this->Aluno->Matricula->contain([
+                'Aluno' => [
+                    'Entidade'
+                ],
+                'AnoLectivo',
+                'Curso' => [
+                    'UnidadeOrganica'
+                ]
+            ]);
+            $matriculas = $this->Aluno->Matricula->find('all',
+                ['conditions' => ['Matricula.ano_lectivo_id' => Configure::read('OpenSGA.ano_lectivo_id')]]);
+            foreach ($matriculas as $matricula) {
+                $xls->getActiveSheet()->setCellValue('A' . $linha_actual, $matricula['Aluno']['codigo']);
+                $xls->getActiveSheet()->setCellValue('B' . $linha_actual, $matricula['Aluno']['Entidade']['apelido']);
+                $xls->getActiveSheet()->setCellValue('C' . $linha_actual, $matricula['Aluno']['Entidade']['nomes']);
+                $xls->getActiveSheet()->setCellValue('D' . $linha_actual, $matricula['AnoLectivo']['ano']);
+                $xls->getActiveSheet()->setCellValue('E' . $linha_actual, $matricula['Matricula']['data']);
+                $xls->getActiveSheet()->setCellValue('F' . $linha_actual, $matricula['Curso']['name']);
+                $unidade_organica = $matricula['Curso']['UnidadeOrganica'];
+                $faculdade = $unidade_organica;
+                if ($unidade_organica['tipo_unidade_organica_id'] == 2) {
+                    $unidade_organica_nova = $this->Aluno->Curso->UnidadeOrganica->findById($unidade_organica['parent_id']);
+                    $faculdade = $unidade_organica_nova['UnidadeOrganica'];
+                }
+                $xls->getActiveSheet()->setCellValue('G' . $linha_actual, $faculdade['name']);
+                $this->out($linha_actual . "---" . $matricula['Aluno']['codigo']);
+                $linha_actual++;
+            }
+            $objWriter = PHPExcel_IOFactory::createWriter($xls, 'Excel2007');
+
+            $objWriter->save(Configure::read('OpenSGA.save_path') . DS . 'renovacao' . Configure::read('OpenSGA.ano_lectivo') . '.xlsx');
+        }
+
     }

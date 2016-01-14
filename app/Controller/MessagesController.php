@@ -131,11 +131,17 @@
          * index method
          *
          * @return void
+         *
+         * @todo implementar a funcao
          */
         public function estudante_index()
         {
-            $this->Message->recursive = 0;
-            $this->set('messages', $this->Paginator->paginate());
+            $userId = CakeSession::read('Auth.User.id');
+            $this->paginate = [
+                //'conditions' => ['MessageUser.user_id'=>$userId],
+                'contain'    => ['MessageUser','User' ],
+            ];
+            //$this->set('messages', $this->Paginator->paginate());
         }
 
         /**
@@ -231,6 +237,7 @@
             $this->Message->recursive = 0;
             $this->set('messages', $this->Paginator->paginate());
         }
+
 
         /**
          * view method
