@@ -28,6 +28,7 @@
             $worksheet = $xls->getActiveSheet();
             $linhaActual = 3900;
             $this->out('Iterando');
+
             foreach ($worksheet->getRowIterator() as $row) {
                 if ($worksheet->getCell('A' . $linhaActual)->getValue() == '') {
                     break;
@@ -144,8 +145,8 @@
                             die(debug($this->Funcionario->validationErrors));
                         }
                         if ($isDocente) {
-                            $docenteExiste = $this->Funcionario->Entidade->Docente->findByEntidadeId($funcionarioExiste['Funcionario']['entidade_id']);
-                            if (!empty($ocenteExiste)) {
+                            $docenteExiste = $this->Funcionario->Entidade->Docente->findByEntidadeId($entidadeExiste['Entidade']['id']);
+                            if (!empty($docenteExiste)) {
                                 $this->Funcionario->Entidade->Docente->id = $docenteExiste['Docente']['id'];
                                 $this->Funcionario->Entidade->Docente->set('docente_categoria_id', $categoriaDocenteId);
                                 if (!$this->Funcionario->Entidade->Docente->save()) {

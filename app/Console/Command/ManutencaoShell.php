@@ -138,11 +138,13 @@
 
                     continue;
 
+                } else{
+                    foreach($outrosDocentes as $outro){
+                        $this->Docente->delete($outro['Docente']['id']);
+                        $this->out($i.'------------------------'.$outro['Docente']['id']);
+                    }
                 }
-                foreach($outrosDocentes as $outro){
-                    $this->Docente->delete($outro['Docente']['id']);
-                    $this->out($i.'------------------------');
-                }
+
 
             }
         }
