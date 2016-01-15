@@ -437,6 +437,12 @@
             $this->set(compact('disciplinasAdicionadas', 'anos', 'semestres', 'disciplinas', 'disciplinaPlanoEstudo'));
         }
 
+        /**
+         * @param int|null $planoEstudoId
+         *
+         * @throws \Exception
+         * @todo Verificar se o Plano de Estudos pode ser editado, de acordo com as condicoes
+         */
         function faculdade_editar_plano_estudo(int $planoEstudoId = null)
         {
             $this->PlanoEstudo->id = $planoEstudoId;
@@ -444,11 +450,12 @@
                 throw new NotFoundException(__('Plano de Estudos Invalido'));
             }
             if ($this->request->is('post') || $this->request->is('put')) {
+
                 if ($this->PlanoEstudo->save($this->request->data)) {
-                    $this->Session->setFlash('Dados Registados com Sucesso', 'flasherror');
+                    $this->Flash->success('Dados Registados com Sucesso');
                     $this->redirect(['action' => 'adicionar_disciplinas', $planoEstudoId]);
                 } else {
-                    $this->Session->setFlash('Erro ao editar dados. Por favor tente de novo.', 'flasherror');
+                    $this->Flash->error('Erro ao editar dados. Por favor tente de novo.');
                 }
             }
             if (empty($this->request->data)) {

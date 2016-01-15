@@ -32,12 +32,18 @@ class AppModel extends Model
         }
 // go trough all columns and get their values from the parameters
         foreach ($fields as $key) {
-            $unique[$key] = $this->data[$this->name][$key];
+            if(isset($this->data[$this->name][$key])){
+                $unique[$key] = $this->data[$this->name][$key];
+            } else{
+                return true;
+            }
+
         }
 // primary key value must be different from the posted value
         if (isset($this->data[$this->name][$this->primaryKey])) {
             $unique[$this->primaryKey] = "<>" . $this->data[$this->name][$this->primaryKey];
         }
+        debug($unique);
 
 // use the model's isUnique function to check the unique rule
         return $this->isUnique($unique, false);

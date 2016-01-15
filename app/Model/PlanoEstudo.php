@@ -108,7 +108,8 @@ class PlanoEstudo extends AppModel
             ],
             'EvitaDuplicadosCursoAno' => [
                 'rule'    => ['checkUnique', ['curso_id', 'ano_criacao']],
-                'message' => 'Nao podem existir dois planos de estudo para o mesmo curso, no mesmo ano'
+                'message' => 'Nao podem existir dois planos de estudo para o mesmo curso, no mesmo ano',
+                'required'=>'create'
             ]
         ],
     ];

@@ -58,7 +58,8 @@
     "logentries/logentries": "^1.6",
     "jeremyharris/cakephp-newrelic": "dev-master",
     "happyr/linkedin-api-client": "dev-master",
-    "webtechnick/cakephp-whos-online-plugin": "dev-master"
+    "webtechnick/cakephp-whos-online-plugin": "dev-master",
+    "zackkitzmiller/tiny": "1.2.0"
 
   },
   "require-dev": {
