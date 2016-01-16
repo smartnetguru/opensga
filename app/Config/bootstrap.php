@@ -113,8 +113,7 @@
         'CacheDispatcher',
         'NewRelic.NewRelicFilter'
     ]);
-    App::uses('CakeLog', 'Log');
-    CakeLog::config('default', ['engine' => 'Database']);
+
 
 
     CakeNumber::addFormat(
