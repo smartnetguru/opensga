@@ -2,14 +2,13 @@
 #################################################
 /app/Config/database.php
 /app/tmp
-/lib/Cake/Console/Templates/skel/tmp/
-/plugins
-/vendors
+/Plugin
+/Vendor
 /build
 /dist
 /tags
 *.mo
-/suporte/config_inc.php
+
 
 # IDE and editor specific files #
 #################################
