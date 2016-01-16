@@ -49,7 +49,6 @@
     "google/apiclient": "1.*",
     "trentrichardson/cakephp-scheduler": "1.*",
     "oldskool/whoops-cakephp": "dev-cake2",
-    "logentries/logentries": "^1.6",
     "jeremyharris/cakephp-newrelic": "dev-master",
     "zackkitzmiller/tiny": "1.2.0"
 
