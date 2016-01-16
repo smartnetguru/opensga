@@ -2,6 +2,7 @@
 #################################################
 /app/Config/database.php
 /app/Config/core.php
+/app/tmp
 /Plugin
 /Vendor
 /build
