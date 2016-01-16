@@ -1,0 +1,12 @@
+AddType text/cache-manifest .manifest
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^(.*)$ index.php?/$1 [QSA,L]
+</IfModule>
+
+<IfModule mod_gzip.c> 
+        mod_gzip_on Yes 
+        mod_gzip_dechunk Yes 
+</IfModule>

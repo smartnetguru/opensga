@@ -1,0 +1,64 @@
+<?php
+$this->extend('/Common/index_common');
+$this->BreadCumbs->addCrumb('Alunos', '/alunos');
+$this->BreadCumbs->addCrumb('Lista de Alunos', '/alunos/index');
+?>
+
+<?php $this->start('top-actions') ?>
+<div class="action-list">
+
+</div>
+<?php $this->end() ?>
+<?php $this->assign('table-title', __('Estudantes Cadastrados')) ?>
+<?php $this->start('filter-form') ?>
+<?php echo $this->Form->create('Aluno', array('role' => 'form', 'enctype' => 'multipart/form-data', 'class' => 'form-horizontal', 'inputDefaults' => array('before' => '', 'after' => ''))); ?>
+<div class="row">
+	<div class="form-group">
+		<div class="col-md-3">
+			<?php echo $this->Form->input('Aluno.codigo', array('label' => false, 'div' => false, 'required' => FALSE, 'class' => 'form-control', 'placeholder' => 'Numero de Estudante')); ?>
+		</div>
+		<div class="col-md-3">
+			<?php echo $this->Form->input('Aluno.apelido', array('label' => false, 'div' => false, 'class' => 'form-control', 'placeholder' => 'Ou Apelido')); ?>
+		</div>
+		<div class="col-md-3">
+			<?php echo $this->Form->input('Aluno.nomes', array('label' => false, 'div' => false, 'class' => 'form-control', 'placeholder' => 'Ou nomes')); ?>
+		</div>
+		<div class="col-md-3">
+			<?php echo $this->Form->end(array('label' => __('Pesquisar', true), 'class' => 'btn btn-blue next-step btn-block')); ?>
+		</div>
+	</div>
+</div>
+
+
+<?php $this->end() ?>
+<?php $this->start('table-header') ?>
+
+<tr>
+	<th ><?php echo __('Codigo'); ?></th>
+	<th><?php echo __('Apelido'); ?></th>
+	<th><?php echo __('Nome'); ?></th>
+	<th><?php echo __('Curso'); ?></th>
+	<th><?php echo __('Ano de Ingresso'); ?></th>
+	<th><?php echo __('Estado'); ?></th>
+</tr>
+<?php $this->end() ?>
+<?php $this->start('table-body') ?>
+<?php
+foreach ($alunos as $aluno):
+	?>
+	<tr>
+
+
+
+		<td><?php echo $this->Html->link($aluno['Aluno']['codigo'], array('controller' => 'alunos', 'action' => 'perfil_estudante', $aluno['Aluno']['id'])); ?>&nbsp;</td>
+		<td><?php echo $aluno['Entidade']['apelido']; ?>&nbsp;</td>
+		<td><?php echo $aluno['Entidade']['nomes']; ?>&nbsp;</td>
+		<td><?php echo $aluno['Curso']['name']; ?>&nbsp;</td>
+		<td><?php echo $aluno['Aluno']['ano_ingresso']; ?>&nbsp;</td>
+		<td><?php echo $aluno['EstadoAluno']['name']; ?>&nbsp;</td>
+
+	</tr>
+	<?php
+endforeach;
+?>
+<?php $this->end() ?>

@@ -1,0 +1,1 @@
+Detalhes ate amanha
