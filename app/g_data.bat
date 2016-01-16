@@ -1,1 +1,0 @@
-cake g_data cria_contas
