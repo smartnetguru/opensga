@@ -175,7 +175,6 @@
 
             $this->loadModel('SmsEnviada');
             $this->loadModel('SmsNotification');
-            $this->loadModel('DatabaseLog.Log');
 
             $User = $this->Session->read('Auth.User');
             if ($User['group_id'] == 3) {

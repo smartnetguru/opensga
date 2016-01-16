@@ -36,11 +36,9 @@
 
     CakePlugin::load('Auditable');
     CakePlugin::load('BoostCake');
-    CakePlugin::load('DatabaseLog');
     CakePlugin::load('DebugKit');
     CakePlugin::load('AclExtras');
     CakePlugin::load('Migrations');
-    CakePlugin::load('ReportManager', ['bootstrap' => true]);
     CakePlugin::load('Scheduler');
     CakePlugin::load('NewRelic');
 
@@ -58,8 +56,6 @@
     App::uses('CakeEventListener', 'Event');
 
     Configure::config('database', new DatabaseReader());
-    Configure::load('bootstrap_siga');
-    Configure::load('siga_constants');
     Configure::load('database', 'database');
 
 

@@ -11,7 +11,7 @@
      * @since           OpenSGA v 0.1.0
      *
      */
-    // App::uses('AuditableConfig', 'Auditable.Lib');
+     App::uses('AuditableConfig', 'Auditable.Lib');
     //App::uses('Controller', 'Controller');
 
     /**
