@@ -4,6 +4,8 @@
 /app/Config/core.php
 /app/Config/Config-*
 /app/tmp
+/app/Reports
+/app/Imports
 /Plugin
 /Vendor
 /build
