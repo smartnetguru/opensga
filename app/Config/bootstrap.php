@@ -3,6 +3,22 @@
     App::build(['Plugin' => [ROOT . DS . 'Plugin' . DS]]);
     require ROOT . DS . 'Vendor' . DS . 'autoload.php';
 
+    CakePlugin::load('Auditable');
+    CakePlugin::load('BoostCake');
+    CakePlugin::load('DebugKit');
+    CakePlugin::load('AclExtras');
+    CakePlugin::load('Migrations');
+    CakePlugin::load('Scheduler');
+    CakePlugin::load('NewRelic');
+
+    App::import('Log','CakeLog');
+    CakePlugin::load('DatabaseLogger');
+    CakeLog::config('default', array(
+        'engine' => 'DatabaseLogger.DatabaseLog'
+
+    ));
+    
+
 // Do plural pro singular
     Inflector::rules('singular', [
         'rules'       => [
@@ -34,13 +50,7 @@
         'uninflected' => []
     ]);
 
-    CakePlugin::load('Auditable');
-    CakePlugin::load('BoostCake');
-    CakePlugin::load('DebugKit');
-    CakePlugin::load('AclExtras');
-    CakePlugin::load('Migrations');
-    CakePlugin::load('Scheduler');
-    CakePlugin::load('NewRelic');
+
 
 
     CakePlugin::load('Requisicoes', ['bootstrap' => false, 'routes' => false]);
