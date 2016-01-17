@@ -1,6 +1,7 @@
 <?php
 
 App::uses('Model', 'Model');
+    App::uses('AuditableConfig', 'Auditable.Lib');
 
 class AppModel extends Model
 {
