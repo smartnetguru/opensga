@@ -30,7 +30,6 @@ echo $this->Html->script(array('/assets/plugins/perfect-scrollbar/src/jquery.mou
 echo $this->Html->script(array('/assets/plugins/less/less-1.5.0.min'));
 echo $this->Html->script(array('/assets/plugins/perfect-scrollbar/src/perfect-scrollbar'));
 echo $this->Html->script(array('/assets/plugins/jquery-cookie/jquery.cookie'));
-echo $this->Html->script(array('/assets/plugins/bootstrap-colorpalette/js/bootstrap-colorpalette'));
 echo $this->Html->script('/assets/plugins/jquery-validation/dist/jquery.validate.min',
     array('block' => 'scriptBottom'));
 echo $this->Html->script('/assets/plugins/select2/select2.min', array('block' => 'scriptBottom'));
@@ -38,13 +37,11 @@ echo $this->Html->script('/assets/plugins/bootstrap-datepicker/js/bootstrap-date
 echo $this->Html->script('/assets/plugins/bootstrap-timepicker/js/bootstrap-timepicker.min', array('block' => 'scriptBottom'));
 echo $this->Html->script('/assets/plugins/bootstrap-daterangepicker/moment.min', array('block' => 'scriptBottom'));
 echo $this->Html->script('/assets/plugins/bootstrap-daterangepicker/daterangepicker', array('block' => 'scriptBottom'));
-echo $this->Html->script('/assets/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker', array('block' => 'scriptBottom'));
 echo $this->Html->script('/assets/plugins/jquery.maskedinput/src/jquery.maskedinput', array('block' => 'scriptBottom'));
 echo $this->Html->script('/assets/plugins/jquery-maskmoney/jquery.maskMoney', array('block' => 'scriptBottom'));
     echo $this->Html->script('/assets/plugins/jquery-inputlimiter/jquery.inputlimiter.1.3.1.min', array('block' => 'scriptBottom'));
 
     echo $this->Html->script('/assets/plugins/autosize/jquery.autosize.min', array('block' => 'scriptBottom'));
-    echo $this->Html->script('/assets/plugins/bootstrap-colorpicker/js/commits', array('block' => 'scriptBottom'));
     echo $this->Html->script('/assets/plugins/jQuery-Tags-Input/jquery.tagsinput', array('block' => 'scriptBottom'));
     echo $this->Html->script('/assets/plugins/bootstrap-fileupload/bootstrap-fileupload.min', array('block' => 'scriptBottom'));
     echo $this->Html->script('/assets/plugins/summernote/build/summernote.min', array('block' => 'scriptBottom'));

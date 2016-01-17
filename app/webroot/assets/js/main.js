@@ -493,23 +493,7 @@ var Main = function() {
             return false;
         });
     };
-    //Set of functions for Style Selector
-    var runStyleSelector = function() {
-        $('.style-toggle').on('click', function() {
-            if($(this).hasClass('open')) {
-                $(this).removeClass('open').addClass('close');
-                $('#style_selector_container').hide();
-            } else {
-                $(this).removeClass('close').addClass('open');
-                $('#style_selector_container').show();
-            }
-        });
-        setColorScheme();
-        setLayoutStyle();
-        setHeaderStyle();
-        setFooterStyle();
-        setBoxedBackgrounds();
-    };
+
     $('.drop-down-wrapper').perfectScrollbar({
         wheelSpeed: 50,
         minScrollbarLength: 20,
@@ -550,38 +534,7 @@ var Main = function() {
             }
         });
     };
-    var setLayoutStyle = function() {
-        $('select[name="layout"]').change(function() {
-            if($('select[name="layout"] option:selected').val() == 'boxed')
-                $('body').addClass('layout-boxed');
-            else
-                $('body').removeClass('layout-boxed');
-        });
-    };
-    var setHeaderStyle = function() {
-        $('select[name="header"]').change(function() {
-            if($('select[name="header"] option:selected').val() == 'default')
-                $('body').addClass('header-default');
-            else
-                $('body').removeClass('header-default');
-        });
-    };
-    var setFooterStyle = function() {
-        $('select[name="footer"]').change(function() {
-            if($('select[name="footer"] option:selected').val() == 'fixed')
-                $('body').addClass('footer-fixed');
-            else
-                $('body').removeClass('footer-fixed');
-        });
-    };
-    var runColorPalette = function() {
-        if($('.colorpalette').length) {
-            $('.colorpalette').colorPalette().on('selectColor', function(e) {
-                $(this).closest('ul').prev('a').children('i').css('background-color', e.color).end().closest('div').prev('input').val(e.color);
-                runActivateLess();
-            });
-        };
-    };
+
 
     //function to activate Less style
     var runActivateLess = function() {
@@ -605,131 +558,8 @@ var Main = function() {
             runElementsPosition();
         });
     };
-    //function to save user settings
-    var runSaveSetting = function() {
-        $('.save_style').on('click', function() {
-            var clipSetting = new Object;
-            if($('body').hasClass('rtl')) {
-                clipSetting.rtl = true;
-            } else {
-                clipSetting.rtl = false;
-            };
-            if($('body').hasClass('layout-boxed')) {
-                clipSetting.layoutBoxed = true;
-                $("body[class]").filter(function() {
-                    var classNames = this.className.split(/\s+/);
-                    for(var i = 0; i < classNames.length; ++i) {
-                        if(classNames[i].substr(0, 9) === "bg_style_") {
-                            clipSetting.bgStyle = classNames[i];
-                        }
-                    }
 
-                });
-            } else {
-                clipSetting.layoutBoxed = false;
-            };
-            if($('body').hasClass('header-default')) {
-                clipSetting.headerDefault = true;
-            } else {
-                clipSetting.headerDefault = false;
-            };
-            if($('body').hasClass('footer-fixed')) {
-                clipSetting.footerDefault = false;
-            } else {
-                clipSetting.footerDefault = true;
-            };
-            if($('#skin_color').attr('rel') == 'stylesheet') {
-                clipSetting.useLess = false;
-            } else if($('#skin_color').attr('rel') == 'stylesheet/less') {
-                clipSetting.useLess = true;
-                clipSetting.baseColor = $('.color-base').val();
-                clipSetting.textColor = $('.color-text').val();
-                clipSetting.badgeColor = $('.color-badge').val();
-            }
-            ;
-            clipSetting.skinClass = $('#skin_color').attr('href');
 
-            $.cookie("clip-setting", JSON.stringify(clipSetting));
-
-            var el = $('#style_selector_container');
-            el.block({
-                overlayCSS: {
-                    backgroundColor: '#fff'
-                },
-                message: '<img src="assets/images/loading.gif" /> Just a moment...',
-                css: {
-                    border: 'none',
-                    color: '#333',
-                    background: 'none'
-                }
-            });
-            window.setTimeout(function() {
-                el.unblock();
-            }, 1000);
-        });
-    };
-    //function to load user settings
-    var runCustomSetting = function() {
-        if($.cookie("clip-setting")) {
-            var loadSetting = jQuery.parseJSON($.cookie("clip-setting"));
-            if(loadSetting.layoutBoxed) {
-
-                $('body').addClass('layout-boxed');
-                $('#style_selector select[name="layout"]').find('option[value="boxed"]').attr('selected', 'true');
-            };
-            if(loadSetting.headerDefault) {
-                $('body').addClass('header-default');
-                $('#style_selector select[name="header"]').find('option[value="default"]').attr('selected', 'true');
-            };
-            if(!loadSetting.footerDefault) {
-                $('body').addClass('footer-fixed');
-                $('#style_selector select[name="footer"]').find('option[value="fixed"]').attr('selected', 'true');
-            };
-            if($('#style_selector').length) {
-                if(loadSetting.useLess) {
-
-                    $('.color-base').val(loadSetting.baseColor).next('.dropdown').find('i').css('background-color', loadSetting.baseColor);
-                    $('.color-text').val(loadSetting.textColor).next('.dropdown').find('i').css('background-color', loadSetting.textColor);
-                    $('.color-badge').val(loadSetting.badgeColor).next('.dropdown').find('i').css('background-color', loadSetting.badgeColor);
-                    runActivateLess();
-                } else {
-                    $('.color-base').val('#FFFFFF').next('.dropdown').find('i').css('background-color', '#FFFFFF');
-                    $('.color-text').val('#555555').next('.dropdown').find('i').css('background-color', '#555555');
-                    $('.color-badge').val('#007AFF').next('.dropdown').find('i').css('background-color', '#007AFF');
-                    $('#skin_color').attr('href', loadSetting.skinClass);
-                };
-            };
-            $('body').addClass(loadSetting.bgStyle);
-        } else {
-            runDefaultSetting();
-        };
-    };
-    //function to clear user settings
-    var runClearSetting = function() {
-        $('.clear_style').on('click', function() {
-            $.removeCookie("clip-setting");
-            $('body').removeClass("layout-boxed header-default footer-fixed");
-            $('body')[0].className = $('body')[0].className.replace(/\bbg_style_.*?\b/g, '');
-            if($('#skin_color').attr("rel") == "stylesheet/less") {
-                $('#skin_color').next('style').remove();
-                $('#skin_color').attr("rel", "stylesheet");
-
-            }
-
-            $('.icons-color img').first().trigger('click');
-            runDefaultSetting();
-        });
-    };
-    //function to restore user settings
-    var runDefaultSetting = function() {
-        $('#style_selector select[name="layout"]').val('default');
-        $('#style_selector select[name="header"]').val('fixed');
-        $('#style_selector select[name="footer"]').val('default');
-        $('		.boxed-patterns img').removeClass('active');
-        $('.color-base').val('#FFFFFF').next('.dropdown').find('i').css('background-color', '#FFFFFF');
-        $('.color-text').val('#555555').next('.dropdown').find('i').css('background-color', '#555555');
-        $('.color-badge').val('#007AFF').next('.dropdown').find('i').css('background-color', '#007AFF');
-    };
     //function to initiate jquery.inputlimiter
     var runInputLimiter = function () {
         $('.limited').inputlimiter({
@@ -794,13 +624,7 @@ var Main = function() {
         });
         $('.colorpicker-component').colorpicker();
     };
-    //function to initiate bootstrap-colorpalette
-    var runColorPalette = function () {
-        $('.color-palette').colorPalette()
-            .on('selectColor', function (e) {
-                $('#selected-color1').val(e.color);
-            });
-    };
+
     //function to initiate jquery.tagsinput
     var runTagsInput = function () {
         $('#tags_1').tagsInput({
@@ -824,7 +648,6 @@ var Main = function() {
         init: function() {
             runWIndowResize();
             runInit();
-            runStyleSelector();
             runSearchInput();
             runElementsPosition();
             runToDoAction();
@@ -839,10 +662,6 @@ var Main = function() {
             runShowTab();
             runAccordionFeatures();
             runCustomCheck();
-            runColorPalette();
-            runSaveSetting();
-            runCustomSetting();
-            runClearSetting();
             runQuickSideBar();
 
 
@@ -855,8 +674,6 @@ var Main = function() {
             runDatePicker();
             runTimePicker();
             runDateRangePicker();
-            runColorPicker();
-            runColorPalette();
             runTagsInput();
             runSummerNote();
             runCKEditor();
