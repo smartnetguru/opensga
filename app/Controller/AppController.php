@@ -68,14 +68,14 @@
         {
             parent::beforeFilter();
 
-
+$this->log('Sessiin');
             $config_language = $this->Session->read('Config.language');
             if ($config_language == null) {
                 $config_language = 'por';
             }
             Configure::write('Config.language', $config_language);
             setlocale(LC_ALL, 'ptb');
-            if ($this->Auth->loggedIn()) {
+            if ($this->Auth->user()) {
                 AuditableConfig::$responsibleId = $this->Auth->user('id');
             }
             AuditableConfig::$Logger = ClassRegistry::init('Auditable.Logger');

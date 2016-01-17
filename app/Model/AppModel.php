@@ -11,18 +11,17 @@ class AppModel extends Model
 
     public function __construct($id = false, $table = null, $ds = null)
     {
+        if(get_class($this) !== 'Logger' && empty(AuditableConfig::$Logger)) {
+            // Caso deseje usar o modelo padrão, utilize como abaixo, caso contrário você pode usar qualquer modelo
+            AuditableConfig::$Logger = ClassRegistry::init('Auditable.Logger', true);
+        }
         parent::__construct($id, $table, $ds);
 
             if ($this->name=='Log' || $this->name=='opensgaSession' || $this->alias=='Session') {
                 $this->Behaviors->unload('Auditable.Auditable');
 
         }
-
-
-
-
     }
-
 
     function checkUnique($data, $fields)
     {
@@ -65,6 +64,15 @@ class AppModel extends Model
         $logs = $dbo->getLog(false, false);
 
         return end($logs['log']);
+    }
+
+    function onError()
+    {
+        // The SQL error
+        $error = $this->getDataSource()->error;
+
+        $this->log($error,'critical');
+        $this->log($this->data,'critical');
     }
 
 }

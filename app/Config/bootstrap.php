@@ -3,6 +3,7 @@
     App::build(['Plugin' => [ROOT . DS . 'Plugin' . DS]]);
     require ROOT . DS . 'Vendor' . DS . 'autoload.php';
 
+
     CakePlugin::load('Auditable');
     CakePlugin::load('BoostCake');
     CakePlugin::load('DebugKit');
@@ -17,7 +18,7 @@
         'engine' => 'DatabaseLogger.DatabaseLog'
 
     ));
-    
+
 
 // Do plural pro singular
     Inflector::rules('singular', [

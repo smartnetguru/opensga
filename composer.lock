@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "570cfbf43b6c09a0bba2f43825e4e08b",
-    "content-hash": "4d3a7fb3c46c59f930eff75f39a3b833",
+    "hash": "ccd8036045fdd610c3d0a680ca2095c6",
+    "content-hash": "2809a7ce15d018978f024d2d7b5e3b23",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -584,6 +584,59 @@
                 "route"
             ],
             "time": "2015-11-25 17:18:37"
+        },
+        {
+            "name": "leeoniya/dump-r",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/leeoniya/dump_r.php.git",
+                "reference": "f6d3694f4ddd7dc08d7b3900875116eaf600034d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/leeoniya/dump_r.php/zipball/f6d3694f4ddd7dc08d7b3900875116eaf600034d",
+                "reference": "f6d3694f4ddd7dc08d7b3900875116eaf600034d",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "suggest": {
+                "jdorn/sql-formatter": "Pretty-print dumped SQL strings"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "dump_r.php"
+                ],
+                "psr-4": {
+                    "dump_r\\": "src/dump_r"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Leon Sorokin",
+                    "email": "leeoniya@gmail.com",
+                    "homepage": "https://github.com/leeoniya",
+                    "role": "Developer"
+                }
+            ],
+            "description": "a cleaner, leaner mix of print_r() and var_dump()",
+            "homepage": "https://github.com/leeoniya/dump_r.php",
+            "keywords": [
+                "debug",
+                "dump",
+                "pretty",
+                "print",
+                "print_r",
+                "var_dump"
+            ],
+            "time": "2015-09-04 22:05:16"
         },
         {
             "name": "markstory/acl_extras",
@@ -1676,6 +1729,7 @@
         "cakedc/migrations": 0,
         "oldskool/whoops-cakephp": 20,
         "jeremyharris/cakephp-newrelic": 20,
+        "leeoniya/dump-r": 20,
         "cakephp/debug_kit": 20
     },
     "prefer-stable": false,

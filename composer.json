@@ -50,7 +50,8 @@
     "trentrichardson/cakephp-scheduler": "1.*",
     "oldskool/whoops-cakephp": "dev-cake2",
     "jeremyharris/cakephp-newrelic": "dev-master",
-    "zackkitzmiller/tiny": "1.2.0"
+    "zackkitzmiller/tiny": "1.2.0",
+    "leeoniya/dump-r": "dev-master"
 
   },
   "require-dev": {

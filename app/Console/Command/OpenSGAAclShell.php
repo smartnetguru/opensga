@@ -516,6 +516,8 @@
 
                         $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Cursos/adicionar_curso";
 
+                        $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/DatabaseLogger/Logs";
+
                         $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/FinanceiroTipoPagamentos/index";
 
                         $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Funcionarios/adicionar_funcionario";

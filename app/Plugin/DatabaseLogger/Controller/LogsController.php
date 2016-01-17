@@ -5,7 +5,7 @@ class LogsController extends DatabaseLoggerAppController {
 	
 	var $name = 'Logs';
 	var $helpers = array('Time');
-	var $paginate = array(
+	public $paginate = array(
 		'order' => 'Log.id DESC',
 		'fields' => array(
 			'Log.created',
@@ -24,7 +24,12 @@ class LogsController extends DatabaseLoggerAppController {
 			$this->Log->search($this->request->params['named']),
 			$this->Log->textSearch($filter)
 		);
-		$this->set('logs',$this->paginate($conditions));
+        $this->Paginator->settings = array(
+            'conditions' => $conditions,
+            'limit' => 30,
+            'order'=>'Log.created DESC'
+        );
+		$this->set('logs',$this->paginate('Log'));
 		$this->set('types', $this->Log->getTypes());
 		$this->set('filter', $filter);
 		$this->set('search_params', $this->request->params['named']);
