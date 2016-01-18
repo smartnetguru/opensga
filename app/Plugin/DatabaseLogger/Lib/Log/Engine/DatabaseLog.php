@@ -42,7 +42,7 @@ class DatabaseLog implements CakeLogInterface{
 	* Write the log to database
 	*/
 	function write($type, $message){
-		$this->Log->create();		
+		$this->Log->create();
 		$this->Log->save(array(
 			'type' => $type,
 			'message' => $message
