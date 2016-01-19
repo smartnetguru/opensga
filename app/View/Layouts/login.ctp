@@ -43,7 +43,7 @@
 
                             <div class="menu_login_container rfloat _ohf">
 
-                                <?php echo $this->Form->create('User', ['action' => 'login']); ?>
+                                <?php echo $this->Form->create('User', ['url' => ['action'=>'login']]); ?>
                                 <table cellspacing="0">
                                     <tbody>
                                     <tr>
@@ -250,7 +250,7 @@
         <p>
             Por favor introduza seus dados para se autenticar
         </p>
-        <?php echo $this->Form->create('User', ['action' => 'login']); ?>
+        <?php echo $this->Form->create('User', ['url' => ['action'=>'login']]); ?>
             <fieldset>
                 <div class="form-group">
 							<span class="input-icon">

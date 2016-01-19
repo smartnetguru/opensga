@@ -127,6 +127,17 @@ class AnoLectivoFixture extends CakeTestFixture {
 			'modified' => '2013-06-10 14:57:34',
 			
 		),
+		array(
+			'id' => '11',
+			'codigo' => null,
+			'ano' => '2016',
+			'num_semestre' => '1',
+			'data_inicio' => null,
+			'data_fim' => null,
+			'created' => '2013-06-10 14:57:34',
+			'modified' => '2013-06-10 14:57:34',
+
+		),
 	);
 
 }

@@ -61,10 +61,12 @@ class Provincia extends AppModel {
         ),
     );
 
-    public function getPaisIdByProvinciaId($provinciaId){
+    public function getPaisIdByProvinciaId($provinciaId):int {
         $provincia = $this->findByid($provinciaId);
+
         if($provincia){
-            return $provincia['Provincia']['pais_id'];
+			$paisId = Hash::extract($provincia,'{s}.pais_id');
+            return $paisId[0];
         } else return null;
 
     }

@@ -11,7 +11,7 @@
 		<p>
 			Por favor introduza o seu email institucional e a sua senha do SIGA
 		</p>
-		<?php echo $this->Form->create('User', array('action' => 'login', 'class' => 'form-login')); ?>
+		<?php echo $this->Form->create('User', array('url' => ['action'=>'login'], 'class' => 'form-login')); ?>
 
 		<div class="errorHandler alert alert-danger no-display">
 			<i class="fa fa-remove-sign"></i> Erro no Login, por favor corrija os dados abaixo

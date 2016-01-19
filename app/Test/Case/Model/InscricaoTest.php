@@ -19,7 +19,10 @@
             'app.aluno',
             'app.ano_lectivo',
             'app.opensga_session',
-            'app.financeiro_tipo_pagamento'
+            'app.financeiro_tipo_pagamento',
+            'app.disciplina_plano_estudo',
+            'app.plano_estudo',
+            'app.disciplina'
         ];
 
         /**
@@ -152,23 +155,28 @@
          */
         public function testInscreveAluno()
         {
+            $mock = $this->getMock('Configure');
+            $mock->expects($this->any())->method('read')
+                ->with('OpenSGA.ano_lectivo')
+                ->will($this->returnValue(2016));
+
             $dataExterna = [
                 'Disciplina'          => [
                     (int)0 => [
                         'tipo' => '1',
-                        'id'   => '1270'
+                        'id'   => '1'
                     ],
                     (int)1 => [
                         'tipo' => '1',
-                        'id'   => '1272'
+                        'id'   => '2'
                     ],
                     (int)2 => [
                         'tipo' => '1',
-                        'id'   => '1266'
+                        'id'   => '3'
                     ],
                     (int)3 => [
                         'tipo' => '1',
-                        'id'   => '1269'
+                        'id'   => '4'
                     ]
                 ],
                 'FinanceiroDeposito'  => [
@@ -194,10 +202,10 @@
                 'aluno_id'            => '2',
                 'matricula_id'        => '205383',
                 'turmas_tipo'         => [
-                    (int)1270 => '1',
-                    (int)1272 => '1',
-                    (int)1266 => '1',
-                    (int)1269 => '1'
+                    (int)1 => '1',
+                    (int)2 => '1',
+                    (int)3 => '1',
+                    (int)4 => '1'
                 ],
                 'cadeiras_normais'    => (int)4,
                 'cadeiras_atraso'     => (int)0
@@ -207,19 +215,19 @@
                 'Disciplina'          => [
                     (int)0 => [
                         'tipo' => '1',
-                        'id'   => '1259'
+                        'id'   => '1'
                     ],
                     (int)1 => [
                         'tipo' => '1',
-                        'id'   => '1059'
+                        'id'   => '2'
                     ],
                     (int)2 => [
                         'tipo' => '1',
-                        'id'   => '1234'
+                        'id'   => '3'
                     ],
                     (int)3 => [
                         'tipo' => '1',
-                        'id'   => '1114'
+                        'id'   => '4'
                     ]
                 ],
                 'FinanceiroDeposito'  => [
@@ -245,10 +253,10 @@
                 'aluno_id'            => '2',
                 'matricula_id'        => '205384',
                 'turmas_tipo'         => [
-                    (int)1259 => '1',
-                    (int)1059 => '1',
-                    (int)1234 => '1',
-                    (int)1114 => '1'
+                    (int)1 => '1',
+                    (int)2 => '1',
+                    (int)3 => '1',
+                    (int)4 => '1'
                 ],
                 'cadeiras_normais'    => (int)4,
                 'cadeiras_atraso'     => (int)0
@@ -256,7 +264,7 @@
 
 
             $inscricaoExterno = $this->Inscricao->inscreveAluno($dataExterna);
-            die(debug($inscricaoExterno));
+
             $inscricaoNormal = $this->Inscricao->inscreveAluno($dataNormal);
 
             $this->assertTrue($inscricaoExterno);

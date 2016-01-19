@@ -767,7 +767,6 @@
                             'conditions' => $turmaExisteConditions
                         ]);
 
-
                         if (empty($turmaExiste)) {
 
                             $turma = [];

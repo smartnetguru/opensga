@@ -5,20 +5,11 @@
 class MessageTextFixture extends CakeTestFixture {
 
 /**
- * Fields
+ * Import
  *
  * @var array
  */
-	public $fields = array(
-		'id' => array('type' => 'biginteger', 'null' => false, 'default' => null, 'length' => 19, 'unsigned' => true, 'key' => 'primary'),
-		'message_id' => array('type' => 'biginteger', 'null' => false, 'default' => null, 'length' => 19, 'unsigned' => true, 'key' => 'index'),
-		'texto' => array('type' => 'text', 'null' => true, 'default' => null, 'collate' => 'utf8_general_ci', 'charset' => 'utf8'),
-		'indexes' => array(
-			'PRIMARY' => array('column' => 'id', 'unique' => 1),
-			'messages_texts_messages_idx' => array('column' => 'message_id', 'unique' => 0)
-		),
-		'tableParameters' => array('charset' => 'utf8', 'collate' => 'utf8_general_ci', 'engine' => 'InnoDB')
-	);
+	public $import = array('model' => 'MessageText');
 
 /**
  * Records
@@ -27,9 +18,49 @@ class MessageTextFixture extends CakeTestFixture {
  */
 	public $records = array(
 		array(
-			'id' => '',
-			'message_id' => '',
-			'texto' => 'Lorem ipsum dolor sit amet, aliquet feugiat. Convallis morbi fringilla gravida, phasellus feugiat dapibus velit nunc, pulvinar eget sollicitudin venenatis cum nullam, vivamus ut a sed, mollitia lectus. Nulla vestibulum massa neque ut et, id hendrerit sit, feugiat in taciti enim proin nibh, tempor dignissim, rhoncus duis vestibulum nunc mattis convallis.'
+			'id' => '5',
+			'message_id' => '5',
+			'texto' => 'detalhes'
+		),
+		array(
+			'id' => '6',
+			'message_id' => '6',
+			'texto' => 'Caro Estudante, a sua renovacao de Matricula foi Confirmada. Nao precisa fazer mais nada a respeito'
+		),
+		array(
+			'id' => '7',
+			'message_id' => '7',
+			'texto' => 'Caro Estudante, a sua renovacao de Matricula foi Confirmada. Nao precisa fazer mais nada a respeito'
+		),
+		array(
+			'id' => '8',
+			'message_id' => '8',
+			'texto' => 'Caro Estudante, a sua renovacao de Matricula foi Confirmada. Nao precisa fazer mais nada a respeito'
+		),
+		array(
+			'id' => '9',
+			'message_id' => '9',
+			'texto' => 'Caro Estudante, a sua renovacao de Matricula foi Confirmada. Nao precisa fazer mais nada a respeito'
+		),
+		array(
+			'id' => '10',
+			'message_id' => '10',
+			'texto' => 'Caro Estudante, a sua renovacao de Matricula foi Confirmada. Nao precisa fazer mais nada a respeito'
+		),
+		array(
+			'id' => '11',
+			'message_id' => '11',
+			'texto' => 'Caro Estudante, a sua renovacao de Matricula foi Confirmada. Nao precisa fazer mais nada a respeito'
+		),
+		array(
+			'id' => '12',
+			'message_id' => '12',
+			'texto' => 'Caro Estudante, a sua renovacao de Matricula foi Confirmada. Nao precisa fazer mais nada a respeito'
+		),
+		array(
+			'id' => '13',
+			'message_id' => '13',
+			'texto' => 'Caro Estudante, a sua renovacao de Matricula foi Confirmada. Nao precisa fazer mais nada a respeito'
 		),
 	);
 

@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "ccd8036045fdd610c3d0a680ca2095c6",
-    "content-hash": "2809a7ce15d018978f024d2d7b5e3b23",
+    "hash": "a30e55385822d65049eb6570e574657c",
+    "content-hash": "0959c38d75ca811f032c57ce000a9087",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -110,16 +110,16 @@
         },
         {
             "name": "cakephp/cakephp",
-            "version": "2.7.8",
+            "version": "2.8.0-RC1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cakephp/cakephp.git",
-                "reference": "2ee72e2ad2340d707901dc7a5e8520f1cb235916"
+                "reference": "a530414a88a86ac3fe98f71a14814c87afafec3f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cakephp/cakephp/zipball/2ee72e2ad2340d707901dc7a5e8520f1cb235916",
-                "reference": "2ee72e2ad2340d707901dc7a5e8520f1cb235916",
+                "url": "https://api.github.com/repos/cakephp/cakephp/zipball/a530414a88a86ac3fe98f71a14814c87afafec3f",
+                "reference": "a530414a88a86ac3fe98f71a14814c87afafec3f",
                 "shasum": ""
             },
             "require": {
@@ -150,7 +150,7 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2015-12-21 19:55:52"
+            "time": "2016-01-13 04:49:25"
         },
         {
             "name": "composer/installers",
@@ -1724,6 +1724,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
+        "cakephp/cakephp": 5,
         "radig/auditable": 0,
         "markstory/acl_extras": 20,
         "cakedc/migrations": 0,
