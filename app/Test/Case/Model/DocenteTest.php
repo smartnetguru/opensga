@@ -79,7 +79,7 @@ class DocenteTest extends CakeTestCase
                 'provincia_nascimento' => '6',
                 'cidade_nascimento'    => '1',
                 'name'                 => 'Elisio Leonardo Leonardo',
-                'nuit'=>'10298087658'
+                'nuit'=>'1029808658'
             ],
             'Docente'               => [
                 'unidade_organica_id' => '1',

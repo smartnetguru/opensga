@@ -12,23 +12,8 @@ var FormElements = function () {
         $("textarea.autosize").autosize();
     };
     
-    //function to initiate bootstrap-colorpicker
-    var runColorPicker = function () {
-        $('.color-picker').colorpicker({
-            format: 'hex'
-        });
-        $('.color-picker-rgba').colorpicker({
-            format: 'rgba'
-        });
-        $('.colorpicker-component').colorpicker();
-    };
-    //function to initiate bootstrap-colorpalette
-    var runColorPalette = function () {
-        $('.color-palette').colorPalette()
-            .on('selectColor', function (e) {
-                $('#selected-color1').val(e.color);
-            });
-    };
+
+
     //function to initiate jquery.tagsinput
     var runTagsInput = function () {
         $('#tags_1').tagsInput({
@@ -52,8 +37,6 @@ var FormElements = function () {
         init: function () {
             runInputLimiter();
             runAutosize();
-            runColorPicker();
-            runColorPalette();
             runTagsInput();
             runSummerNote();
             runCKEditor();

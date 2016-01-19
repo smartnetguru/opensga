@@ -104,14 +104,6 @@ class Docente extends AppModel
 
     ];
 
-    public function getByUserID($userId)
-    {
-        $this->contain(['Entidade']);
-        $docente = $this->find('first', ['conditions' => ['Entidade.user_id' => $userId]]);
-
-        return $docente;
-    }
-
     public function cadastraDocente(array $data)
     {
         $dataSource = $this->getDataSource();
@@ -161,7 +153,7 @@ class Docente extends AppModel
                         'DocenteUnidadeOrganica' => [
                             'docente_id'          => $this->id,
                             'unidade_organica_id' => $data['Docente']['unidade_organica_id'],
-                            'data_inicio'         => date('Y-d-m'),
+                            'data_inicio'         => date('Y-m-d'),
                             'estado_objecto_id'   => 1,
 
                         ]
@@ -218,6 +210,14 @@ class Docente extends AppModel
         }
 
 
+    }
+
+    public function getByUserID($userId)
+    {
+        $this->contain(['Entidade']);
+        $docente = $this->find('first', ['conditions' => ['Entidade.user_id' => $userId]]);
+
+        return $docente;
     }
 
     /**

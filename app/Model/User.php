@@ -472,6 +472,7 @@
             $user = $this->findById($user_id);
             if ($user['User']['group_id'] == 2) {
                 $this->Funcionario->contain('UnidadeOrganica');
+
                 $funcionario = $this->Funcionario->findByUserId($user_id);
                 if ($this->Funcionario->UnidadeOrganica->isFromFaculdade($funcionario['Funcionario']['unidade_organica_id'])) {
                     return true;

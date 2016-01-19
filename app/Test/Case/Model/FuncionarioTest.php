@@ -49,58 +49,57 @@
          */
         public function testCadastraFuncionario()
         {
-            $data = array(
-                'Aluno' => array(
-                    'numero_estudante' => '',
-                    'nome_emergencia' => '',
-                    'telemovel_emergencia' => '',
+            $data = [
+                'Aluno'                 => [
+                    'numero_estudante'       => '',
+                    'nome_emergencia'        => '',
+                    'telemovel_emergencia'   => '',
                     'parentesco_encarregado' => ''
-                ),
-                'Entidade' => array(
-                    'apelido' => 'Leonardo',
-                    'nomes' => 'Elisio',
-                    'genero_id' => '1',
-                    'data_nascimento' => '2015-09-01',
-                    'estado_civil' => '1',
-                    'nome_pai' => 'Chigalo Sande',
-                    'nome_mae' => 'Chuma Mafanhe',
-                    'naturalidade' => 'Chimoio',
-                    'pais_nascimento' => '152',
+                ],
+                'Entidade'              => [
+                    'apelido'              => 'Leonardo',
+                    'nomes'                => 'Elisio',
+                    'genero_id'            => '1',
+                    'data_nascimento'      => '2015-09-01',
+                    'estado_civil'         => '1',
+                    'nome_pai'             => 'Chigalo Sande',
+                    'nome_mae'             => 'Chuma Mafanhe',
+                    'naturalidade'         => 'Chimoio',
+                    'pais_nascimento'      => '152',
                     'provincia_nascimento' => '8',
-                    'cidade_nascimento' => '97'
-                ),
-                'Funcionario' => array(
-                    'unidade_organica_id' => '6',
-                    'tipo_funcionario_id' => '',
-                    'data_admissao' => '2015-09-02',
-                    'grau_academico_id' => '',
-                    'cargo_id' => '',
-                    'superior_hierarquico' => '',
-                    'categoria_funcionario_id' => '',
+                    'cidade_nascimento'    => '97'
+                ],
+                'Funcionario'           => [
+                    'unidade_organica_id'       => '6',
+                    'tipo_funcionario_id'       => '',
+                    'data_admissao'             => '2015-09-02',
+                    'grau_academico_id'         => '',
+                    'cargo_id'                  => '',
+                    'superior_hierarquico'      => '',
+                    'categoria_funcionario_id'  => '',
                     'categoria_profissional_id' => ''
-                ),
-                'EntidadeContacto' => array(
-                    (int) 11 => '152',
-                    (int) 10 => '',
-                    (int) 9 => '',
-                    (int) 6 => '',
-                    (int) 5 => '',
-                    (int) 7 => '',
-                    (int) 8 => '',
-                    (int) 2 => '3464567574',
-                    (int) 1 => 'elisio.leonardo444@gmail.com'
-                ),
-                'EntidadeIdentificacao' => array(
+                ],
+                'EntidadeContacto'      => [
+                    (int)11 => '152',
+                    (int)10 => '',
+                    (int)9  => '',
+                    (int)6  => '',
+                    (int)5  => '',
+                    (int)7  => '',
+                    (int)8  => '',
+                    (int)2  => '3464567574',
+                    (int)1  => 'elisio.leonardo444@gmail.com'
+                ],
+                'EntidadeIdentificacao' => [
                     'documento_identificacao_id' => '',
-                    'numero' => '',
-                    'local_emissao' => '',
-                    'data_emissao' => '',
-                    'data_validade' => ''
-                )
-            );
+                    'numero'                     => '',
+                    'local_emissao'              => '',
+                    'data_emissao'               => '',
+                    'data_validade'              => ''
+                ]
+            ];
             $resultado = $this->Funcionario->cadastraFuncionario($data);
-            debug($resultado);
-            $this->assertSame(true,$resultado);
+            $this->assertSame(true, $resultado);
 
         }
 

@@ -66,7 +66,7 @@ class AnoLectivoTest extends CakeTestCase
 
         $resultado = $this->AnoLectivo->criaAnoLectivo($data);
 
-        $this->assertEquals(11, $resultado);
+        $this->assertEquals(12, $resultado);
 
 
 

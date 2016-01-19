@@ -69,10 +69,6 @@ class DisciplinasControllerTest extends ControllerTestCase
             'return' => 'vars'
         ]);
         $this->assertRegExp('/\/faculdade\/disciplinas/',$this->headers['Location']);
-
-        debug($this->vars);
-        debug($this->view);
-        debug($this->headers);
     }
 
     /**
@@ -122,7 +118,7 @@ class DisciplinasControllerTest extends ControllerTestCase
                     } elseif($param == 'Auth.User.group_id'){
                         return 2;
                     } elseif($param=='Auth.User.id'){
-                        return 11;
+                        return 1;
                     } else {
                         return null;
                     }

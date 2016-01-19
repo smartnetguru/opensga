@@ -65,23 +65,13 @@
         }
 
         /**
-         * testGetPlanoEstudoCorrente method
+         * testActualizaContactos method
          *
          * @return void
          */
-        public function testGetPlanoEstudoCorrente()
+        public function testActualizaContactos()
         {
-            $this->markTestIncomplete('testGetPlanoEstudoCorrente not implemented.');
-        }
-
-        /**
-         * testGetAllInscricoesActivas method
-         *
-         * @return void
-         */
-        public function testGetAllInscricoesActivas()
-        {
-            $this->markTestIncomplete('testGetAllInscricoesActivas not implemented.');
+            $this->markTestIncomplete('testActualizaContactos not implemented.');
         }
 
         /**
@@ -95,143 +85,13 @@
         }
 
         /**
-         * testGetAllInscricoesActivasAndAprovadasForInscricao method
+         * testAlteraStatus method
          *
          * @return void
          */
-        public function testGetAllInscricoesActivasAndAprovadasForInscricao()
+        public function testAlteraStatus()
         {
-            $this->markTestIncomplete('testGetAllInscricoesActivasAndAprovadasForInscricao not implemented.');
-        }
-
-        /**
-         * testGetAllTurmasByEstado method
-         *
-         * @return void
-         */
-        public function testGetAllTurmasByEstado()
-        {
-            $this->markTestIncomplete('testGetAllTurmasByEstado not implemented.');
-        }
-
-        /**
-         * testGetAllTurmasByAluno method
-         *
-         * @return void
-         */
-        public function testGetAllTurmasByAluno()
-        {
-            $this->markTestIncomplete('testGetAllTurmasByAluno not implemented.');
-        }
-
-        /**
-         * testGeraCodigo method
-         *
-         * @return void
-         */
-        public function testGeraCodigo()
-        {
-            $this->markTestIncomplete('testGeraCodigo not implemented.');
-        }
-
-        /**
-         * testGetContaByAlunoId method
-         *
-         * @return void
-         */
-        public function testGetContaByAlunoId()
-        {
-            $this->markTestIncomplete('testGetContaByAlunoId not implemented.');
-        }
-
-        /**
-         * testGetContaIdByAlunoId method
-         *
-         * @return void
-         */
-        public function testGetContaIdByAlunoId()
-        {
-            $this->markTestIncomplete('testGetContaIdByAlunoId not implemented.');
-        }
-
-        /**
-         * testGetAllTurmasForInscricao method
-         *
-         * @return void
-         */
-        public function testGetAllTurmasForInscricao()
-        {
-            $this->markTestIncomplete('testGetAllTurmasForInscricao not implemented.');
-        }
-
-        /**
-         * testGetAllTurmasNormaisForInscricao method
-         *
-         * @return void
-         */
-        public function testGetAllTurmasNormaisForInscricao()
-        {
-            $this->markTestIncomplete('testGetAllTurmasNormaisForInscricao not implemented.');
-        }
-
-        /**
-         * testGetMatriculaCorrente method
-         *
-         * @return void
-         */
-        public function testGetMatriculaCorrente()
-        {
-            $this->markTestIncomplete('testGetMatriculaCorrente not implemented.');
-        }
-
-        /**
-         * testGetAlunoForAction method
-         *
-         * @return void
-         */
-        public function testGetAlunoForAction()
-        {
-            $this->markTestIncomplete('testGetAlunoForAction not implemented.');
-        }
-
-        /**
-         * testGetAllAlunosForAutenticidades method
-         *
-         * @return void
-         */
-        public function testGetAllAlunosForAutenticidades()
-        {
-            $this->markTestIncomplete('testGetAllAlunosForAutenticidades not implemented.');
-        }
-
-        /**
-         * testGetAlunoForPerfil method
-         *
-         * @return void
-         */
-        public function testGetAlunoForPerfil()
-        {
-            $this->markTestIncomplete('testGetAlunoForPerfil not implemented.');
-        }
-
-        /**
-         * testGetNivelAcademicoElevado method
-         *
-         * @return void
-         */
-        public function testGetNivelAcademicoElevado()
-        {
-            $this->markTestIncomplete('testGetNivelAcademicoElevado not implemented.');
-        }
-
-        /**
-         * testGetNivelAcademicoReal method
-         *
-         * @return void
-         */
-        public function testGetNivelAcademicoReal()
-        {
-            $this->markTestIncomplete('testGetNivelAcademicoReal not implemented.');
+            $this->markTestIncomplete('testAlteraStatus not implemented.');
         }
 
         /**
@@ -336,6 +196,269 @@
         }
 
         /**
+         * testConcluirNivel method
+         *
+         * @return void
+         */
+        public function testConcluirNivel()
+        {
+            $this->loadFixtures('Aluno', 'HistoricoCurso', 'AlunoEstado');
+            $data = [
+                'HistoricoCurso' => [
+                    'data_conclusao' => '2015-07-14',
+                    'nota_final'     => '12',
+                    'funcionario_id' => '26'
+                ],
+                'Aluno'          => [
+                    'observacao' => '',
+                    'aluno_id'   => '1',
+                    'curso_id'   => '40',
+                    'anexo_url'  => [
+                        'name'     => '',
+                        'type'     => '',
+                        'tmp_name' => '',
+                        'error'    => 4,
+                        'size'     => 0,
+                    ]
+                ]
+            ];
+            $resultado = $this->Aluno->concluirNivel($data);
+            $this->assertTrue($resultado);
+
+
+        }
+
+        /**
+         * testGeraCodigo method
+         *
+         * @return void
+         */
+        public function testGeraCodigo()
+        {
+            $this->markTestIncomplete('testGeraCodigo not implemented.');
+        }
+
+        /**
+         * testGetAllAlunosForAutenticidades method
+         *
+         * @return void
+         */
+        public function testGetAllAlunosForAutenticidades()
+        {
+            $this->markTestIncomplete('testGetAllAlunosForAutenticidades not implemented.');
+        }
+
+        /**
+         * testGetAllInscricoesActivas method
+         *
+         * @return void
+         */
+        public function testGetAllInscricoesActivas()
+        {
+            $this->markTestIncomplete('testGetAllInscricoesActivas not implemented.');
+        }
+
+        /**
+         * testGetAllInscricoesActivasAndAprovadasForInscricao method
+         *
+         * @return void
+         */
+        public function testGetAllInscricoesActivasAndAprovadasForInscricao()
+        {
+            $this->markTestIncomplete('testGetAllInscricoesActivasAndAprovadasForInscricao not implemented.');
+        }
+
+        /**
+         * testGetAllTurmasByAluno method
+         *
+         * @return void
+         */
+        public function testGetAllTurmasByAluno()
+        {
+            $this->markTestIncomplete('testGetAllTurmasByAluno not implemented.');
+        }
+
+        /**
+         * testGetAllTurmasByEstado method
+         *
+         * @return void
+         */
+        public function testGetAllTurmasByEstado()
+        {
+            $this->markTestIncomplete('testGetAllTurmasByEstado not implemented.');
+        }
+
+        /**
+         * testGetAllTurmasForInscricao method
+         *
+         * @return void
+         */
+        public function testGetAllTurmasForInscricao()
+        {
+            $this->markTestIncomplete('testGetAllTurmasForInscricao not implemented.');
+        }
+
+        /**
+         * testGetAllTurmasNormaisForInscricao method
+         *
+         * @return void
+         */
+        public function testGetAllTurmasNormaisForInscricao()
+        {
+            $this->markTestIncomplete('testGetAllTurmasNormaisForInscricao not implemented.');
+        }
+
+        /**
+         * testGetAlunoForAction method
+         *
+         * @return void
+         */
+        public function testGetAlunoForAction()
+        {
+            $this->markTestIncomplete('testGetAlunoForAction not implemented.');
+        }
+
+        /**
+         * testGetAlunoForPerfil method
+         *
+         * @return void
+         */
+        public function testGetAlunoForPerfil()
+        {
+            $this->markTestIncomplete('testGetAlunoForPerfil not implemented.');
+        }
+
+        /**
+         * testGetAlunosSemCertificado method
+         *
+         * @return void
+         */
+        public function testGetAlunosSemCertificado()
+        {
+            $this->markTestIncomplete('testGetAlunosSemCertificado not implemented.');
+        }
+
+        /**
+         * testGetContaByAlunoId method
+         *
+         * @return void
+         */
+        public function testGetContaByAlunoId()
+        {
+            $this->markTestIncomplete('testGetContaByAlunoId not implemented.');
+        }
+
+        /**
+         * testGetContaIdByAlunoId method
+         *
+         * @return void
+         */
+        public function testGetContaIdByAlunoId()
+        {
+            $this->markTestIncomplete('testGetContaIdByAlunoId not implemented.');
+        }
+
+        /**
+         * testGetEstudantesByFaculdade method
+         *
+         * @return void
+         */
+        public function testGetEstudantesByFaculdade()
+        {
+            $this->markTestIncomplete('testGetEstudantesByFaculdade not implemented.');
+        }
+
+        /**
+         * testGetMatriculaCorrente method
+         *
+         * @return void
+         */
+        public function testGetMatriculaCorrente()
+        {
+            $this->markTestIncomplete('testGetMatriculaCorrente not implemented.');
+        }
+
+        /**
+         * testGetNivelAcademicoElevado method
+         *
+         * @return void
+         */
+        public function testGetNivelAcademicoElevado()
+        {
+            $this->markTestIncomplete('testGetNivelAcademicoElevado not implemented.');
+        }
+
+        /**
+         * testGetNivelAcademicoReal method
+         *
+         * @return void
+         */
+        public function testGetNivelAcademicoReal()
+        {
+            $this->markTestIncomplete('testGetNivelAcademicoReal not implemented.');
+        }
+
+        /**
+         * testGetPerfilAluno method
+         *
+         * @return void
+         */
+        public function testGetPerfilAluno()
+        {
+            $this->markTestIncomplete('testGetPerfilAluno not implemented.');
+        }
+
+        /**
+         * testGetPlanoEstudoCorrente method
+         *
+         * @return void
+         */
+        public function testGetPlanoEstudoCorrente()
+        {
+            $this->markTestIncomplete('testGetPlanoEstudoCorrente not implemented.');
+        }
+
+        /**
+         * testGetTotalAlunosActivos method
+         *
+         * @return void
+         */
+        public function testGetTotalAlunosActivos()
+        {
+            $this->markTestIncomplete('testGetTotalAlunosActivos not implemented.');
+        }
+
+        /**
+         * testGetTotalAlunosActivosPorCurso method
+         *
+         * @return void
+         */
+        public function testGetTotalAlunosActivosPorCurso()
+        {
+            $this->markTestIncomplete('testGetTotalAlunosActivosPorCurso not implemented.');
+        }
+
+        /**
+         * testGetTotalEstudantesPorCurso method
+         *
+         * @return void
+         */
+        public function testGetTotalEstudantesPorCurso()
+        {
+            $this->markTestIncomplete('testGetTotalEstudantesPorCurso not implemented.');
+        }
+
+        /**
+         * testHasFoto method
+         *
+         * @return void
+         */
+        public function testHasFoto()
+        {
+            $this->markTestIncomplete('testHasFoto not implemented.');
+        }
+
+        /**
          * testIsBolseiro method
          *
          * @return void
@@ -356,86 +479,6 @@
         }
 
         /**
-         * testSetNovaMatricula method
-         *
-         * @return void
-         */
-        public function testSetNovaMatricula()
-        {
-            $this->markTestIncomplete('testSetNovaMatricula not implemented.');
-        }
-
-        /**
-         * testGetPerfilAluno method
-         *
-         * @return void
-         */
-        public function testGetPerfilAluno()
-        {
-            $this->markTestIncomplete('testGetPerfilAluno not implemented.');
-        }
-
-        /**
-         * testGetEstudantesByFaculdade method
-         *
-         * @return void
-         */
-        public function testGetEstudantesByFaculdade()
-        {
-            $this->markTestIncomplete('testGetEstudantesByFaculdade not implemented.');
-        }
-
-        /**
-         * testGetTotalEstudantesPorCurso method
-         *
-         * @return void
-         */
-        public function testGetTotalEstudantesPorCurso()
-        {
-            $this->markTestIncomplete('testGetTotalEstudantesPorCurso not implemented.');
-        }
-
-        /**
-         * testActualizaContactos method
-         *
-         * @return void
-         */
-        public function testActualizaContactos()
-        {
-            $this->markTestIncomplete('testActualizaContactos not implemented.');
-        }
-
-        /**
-         * testGetTotalAlunosActivosPorCurso method
-         *
-         * @return void
-         */
-        public function testGetTotalAlunosActivosPorCurso()
-        {
-            $this->markTestIncomplete('testGetTotalAlunosActivosPorCurso not implemented.');
-        }
-
-        /**
-         * testGetTotalAlunosActivos method
-         *
-         * @return void
-         */
-        public function testGetTotalAlunosActivos()
-        {
-            $this->markTestIncomplete('testGetTotalAlunosActivos not implemented.');
-        }
-
-        /**
-         * testHasFoto method
-         *
-         * @return void
-         */
-        public function testHasFoto()
-        {
-            $this->markTestIncomplete('testHasFoto not implemented.');
-        }
-
-        /**
          * testIsRegular method
          *
          * @return void
@@ -443,26 +486,6 @@
         public function testIsRegular()
         {
             $this->markTestIncomplete('testIsRegular not implemented.');
-        }
-
-        /**
-         * testProcessaContacto method
-         *
-         * @return void
-         */
-        public function testProcessaContacto()
-        {
-            $this->markTestIncomplete('testProcessaContacto not implemented.');
-        }
-
-        /**
-         * testAlteraStatus method
-         *
-         * @return void
-         */
-        public function testAlteraStatus()
-        {
-            $this->markTestIncomplete('testAlteraStatus not implemented.');
         }
 
         /**
@@ -556,46 +579,23 @@
         }
 
         /**
-         * testConcluirNivel method
+         * testProcessaContacto method
          *
          * @return void
          */
-        public function testConcluirNivel()
+        public function testProcessaContacto()
         {
-            $this->loadFixtures('Aluno', 'HistoricoCurso', 'AlunoEstado');
-            $data = [
-                'HistoricoCurso' => [
-                    'data_conclusao' => '2015-07-14',
-                    'nota_final'     => '12',
-                    'funcionario_id' => '26'
-                ],
-                'Aluno'          => [
-                    'observacao' => '',
-                    'aluno_id'   => '1',
-                    'curso_id'   => '40',
-                    'anexo_url'  => [
-                        'name'     => '',
-                        'type'     => '',
-                        'tmp_name' => '',
-                        'error'    => 4,
-                        'size'     => 0,
-                    ]
-                ]
-            ];
-            $resultado = $this->Aluno->concluirNivel($data);
-            $this->assertTrue($resultado);
-
-
+            $this->markTestIncomplete('testProcessaContacto not implemented.');
         }
 
         /**
-         * testGetAlunosSemCertificado method
+         * testSetNovaMatricula method
          *
          * @return void
          */
-        public function testGetAlunosSemCertificado()
+        public function testSetNovaMatricula()
         {
-            $this->markTestIncomplete('testGetAlunosSemCertificado not implemented.');
+            $this->markTestIncomplete('testSetNovaMatricula not implemented.');
         }
 
         public function testUpdateAluno()

@@ -13,8 +13,9 @@ class AvaliacaoTest extends CakeTestCase {
  * @var array
  */
 	public $fixtures = array(
+		'app.avaliacao',
 	);
-    public $autoFixtures = false;
+
 /**
  * setUp method
  *
