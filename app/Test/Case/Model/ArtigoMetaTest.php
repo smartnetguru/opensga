@@ -1,10 +1,10 @@
 <?php
-App::uses('ArtigoMetum', 'Model');
+App::uses('ArtigoMeta', 'Model');
 
 /**
  * ArtigoMetum Test Case
  */
-class ArtigoMetumTest extends CakeTestCase {
+class ArtigoMetaTest extends CakeTestCase {
 
 /**
  * setUp method
@@ -13,7 +13,7 @@ class ArtigoMetumTest extends CakeTestCase {
  */
 	public function setUp() {
 		parent::setUp();
-		$this->ArtigoMetum = ClassRegistry::init('ArtigoMetum');
+		$this->ArtigoMetum = ClassRegistry::init('ArtigoMeta');
 	}
 
 /**

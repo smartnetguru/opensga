@@ -12,7 +12,7 @@ class UserLoginHistoriesControllerTest extends ControllerTestCase {
  * @var array
  */
 	public $fixtures = array(
-		'app.user_login_historie',
+		'app.user_login_history',
 		'app.user',
 		'app.group',
 		'app.estado_objecto',

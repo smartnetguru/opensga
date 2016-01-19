@@ -37,7 +37,7 @@ class FinanceiroPagamentoFixture extends CakeTestFixture {
 			'semestre_lectivo_id' => null,
 			'referencia_pagamento' => '02009382102',
 			'entidade_id' => '2',
-			'numero_comprovativo' => null
+			'numero_comprovativo' => 687687676785
 		),
 		array(
 			'id' => '2',
@@ -59,7 +59,7 @@ class FinanceiroPagamentoFixture extends CakeTestFixture {
 			'semestre_lectivo_id' => null,
 			'referencia_pagamento' => '02009382302',
 			'entidade_id' => '3',
-			'numero_comprovativo' => null
+			'numero_comprovativo' => 322432423
 		),
 		array(
 			'id' => '3',
@@ -81,7 +81,7 @@ class FinanceiroPagamentoFixture extends CakeTestFixture {
 			'semestre_lectivo_id' => null,
 			'referencia_pagamento' => '02009203403',
 			'entidade_id' => '4',
-			'numero_comprovativo' => null
+			'numero_comprovativo' => 34723497245
 		),
 		array(
 			'id' => '4',
@@ -103,7 +103,7 @@ class FinanceiroPagamentoFixture extends CakeTestFixture {
 			'semestre_lectivo_id' => null,
 			'referencia_pagamento' => '02009000402',
 			'entidade_id' => '5',
-			'numero_comprovativo' => null
+			'numero_comprovativo' => 824362734342
 		),
 		array(
 			'id' => '5',
@@ -125,7 +125,7 @@ class FinanceiroPagamentoFixture extends CakeTestFixture {
 			'semestre_lectivo_id' => null,
 			'referencia_pagamento' => '02009373202',
 			'entidade_id' => '6',
-			'numero_comprovativo' => null
+			'numero_comprovativo' => 7632478623224
 		),
 		array(
 			'id' => '6',
@@ -147,7 +147,7 @@ class FinanceiroPagamentoFixture extends CakeTestFixture {
 			'semestre_lectivo_id' => null,
 			'referencia_pagamento' => '02009002302',
 			'entidade_id' => '7',
-			'numero_comprovativo' => null
+			'numero_comprovativo' => 6378642873642
 		),
 		array(
 			'id' => '7',
@@ -169,7 +169,7 @@ class FinanceiroPagamentoFixture extends CakeTestFixture {
 			'semestre_lectivo_id' => null,
 			'referencia_pagamento' => '02009395302',
 			'entidade_id' => '8',
-			'numero_comprovativo' => null
+			'numero_comprovativo' => 5645484354354
 		),
 		array(
 			'id' => '8',
@@ -191,7 +191,7 @@ class FinanceiroPagamentoFixture extends CakeTestFixture {
 			'semestre_lectivo_id' => null,
 			'referencia_pagamento' => '02009005402',
 			'entidade_id' => '9',
-			'numero_comprovativo' => null
+			'numero_comprovativo' => 98783926748236
 		),
 		array(
 			'id' => '9',
@@ -213,7 +213,7 @@ class FinanceiroPagamentoFixture extends CakeTestFixture {
 			'semestre_lectivo_id' => null,
 			'referencia_pagamento' => '02009406403',
 			'entidade_id' => '10',
-			'numero_comprovativo' => null
+			'numero_comprovativo' => 76236754623542
 		),
 		array(
 			'id' => '10',
@@ -235,7 +235,7 @@ class FinanceiroPagamentoFixture extends CakeTestFixture {
 			'semestre_lectivo_id' => null,
 			'referencia_pagamento' => '02009400802',
 			'entidade_id' => '11',
-			'numero_comprovativo' => null
+			'numero_comprovativo' => 674836247236482736
 		),
 	);
 

@@ -703,7 +703,7 @@
         {
 
             $dataSource = $this->getDataSource();
-            $dataSource->useNestedTransactions = true;
+            //$dataSource->useNestedTransactions = true;
             $dataSource->begin();
             $this->FinanceiroTransacao = ClassRegistry::init('FinanceiroTransacao');
             $this->Aluno->contain([

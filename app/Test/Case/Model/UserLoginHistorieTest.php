@@ -12,7 +12,7 @@ class UserLoginHistorieTest extends CakeTestCase {
  * @var array
  */
 	public $fixtures = array(
-		'app.user_login_historie',
+		'ee',
 		'app.user',
 		'app.group',
 		'app.estado_objecto',

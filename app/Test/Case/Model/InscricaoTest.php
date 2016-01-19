@@ -18,7 +18,8 @@
             'app.matricula',
             'app.aluno',
             'app.ano_lectivo',
-            'app.opensga_session'
+            'app.opensga_session',
+            'app.financeiro_tipo_pagamento'
         ];
 
         /**
@@ -175,9 +176,9 @@
                     'data_deposito'       => ''
                 ],
                 'FinanceiroTransacao' => [
-                    'valor'    => '435345345',
+                    'valor'    => '5345',
                     'detalhes' => '',
-                    'aluno_id' => '39118'
+                    'aluno_id' => '2'
                 ],
                 'Inscricao'           => [
                     'plano_estudo_id' => '35'
@@ -190,7 +191,7 @@
                 ],
                 'total_normal'        => (float)800,
                 'total_atraso'        => (int)0,
-                'aluno_id'            => '39118',
+                'aluno_id'            => '2',
                 'matricula_id'        => '205383',
                 'turmas_tipo'         => [
                     (int)1270 => '1',
@@ -226,9 +227,9 @@
                     'data_deposito'       => ''
                 ],
                 'FinanceiroTransacao' => [
-                    'valor'    => '32423423',
+                    'valor'    => '23423',
                     'detalhes' => '',
-                    'aluno_id' => '42872'
+                    'aluno_id' => '2'
                 ],
                 'Inscricao'           => [
                     'plano_estudo_id' => ''
@@ -241,7 +242,7 @@
                 ],
                 'total_normal'        => (float)800,
                 'total_atraso'        => (int)0,
-                'aluno_id'            => '42872',
+                'aluno_id'            => '2',
                 'matricula_id'        => '205384',
                 'turmas_tipo'         => [
                     (int)1259 => '1',
@@ -253,7 +254,9 @@
                 'cadeiras_atraso'     => (int)0
             ];
 
+
             $inscricaoExterno = $this->Inscricao->inscreveAluno($dataExterna);
+            die(debug($inscricaoExterno));
             $inscricaoNormal = $this->Inscricao->inscreveAluno($dataNormal);
 
             $this->assertTrue($inscricaoExterno);
