@@ -278,10 +278,14 @@ class Curso extends AppModel
         return $codigo;
     }
 
-    public function getPlanoEstudoRecente($curso_id)
+    public function getPlanoEstudoRecente($cursoId,$anoLectivo=null)
     {
+        $conditions = ['curso_id' => $cursoId, 'estado_objecto_id' => 1];
+        if(!empty($anoLectivo)){
+            $conditions['ano_criacao <=']=$anoLectivo;
+        }
         return $this->PlanoEstudo->find('first', [
-            'conditions' => ['curso_id' => $curso_id, 'estado_objecto_id' => 1],
+            'conditions' => $conditions,
             'order'      => 'ano_criacao DESC'
         ]);
     }

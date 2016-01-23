@@ -1474,62 +1474,31 @@
         public function index()
         {
 
-            $conditions = [];
-            $conditions['Inscricao.estado_inscricao_id'] = [1, 2, 3];
-            $this->Inscricao->Turma->contain('Curso');
-            $cursosFaculdade = $this->Inscricao->Turma->Curso->find('list', [
-                'conditions' => [
+            $this->Prg->commonProcess();
 
-
-                ]
-            ]);
-            $turmasFaculdade = $this->Inscricao->Turma->find('list', [
-                'conditions' => [
-
-                    'Turma.estado_turma_id' => 1,
-
-                ]
-            ]);
-            $turmasFilter = array_keys($turmasFaculdade);
-            $conditions['Inscricao.turma_id'] = $turmasFilter;
-
-            if ($this->request->is('post') || $this->request->is('put')) {
-                if ($this->request->data['Inscricao']['curso_id'] != '') {
-                    $conditions['Turma.curso_id'] = $this->request->data['Inscricao']['curso_id'];
-                    $turmasFaculdade = $this->Inscricao->Turma->find('list', [
-                        'conditions' => [
-                            'Turma.curso_id'        => $this->request->data['Inscricao']['curso_id'],
-                            'Turma.estado_turma_id' => 1
-                        ]
-                    ]);
-                }
-                if ($this->request->data['Inscricao']['turma_id'] != '') {
-                    $conditions['Inscricao.turma_id'] = $this->request->data['Inscricao']['turma_id'];
-                }
-                if ($this->request->data['Inscricao']['numero_estudante'] != '') {
-                    $conditions['Aluno.codigo'] = $this->request->data['Inscricao']['numero_estudante'];
-                }
-            }
-
-
-            $this->paginate = [
-                'conditions' => $conditions,
-                'contain'    => [
-                    'Aluno' => [
-                        'Entidade'
-                    ],
-                    'Turma' => [
-                        'Curso',
-                        'Disciplina',
-                        'AnoLectivo',
-                        'SemestreLectivo'
-                    ],
-                    'EstadoInscricao'
+            $this->Paginator->settings['conditions'] = $this->Inscricao->parseCriteria($this->Prg->parsedParams());
+            $this->Paginator->settings['contain'] = [
+                'Aluno' => [
+                    'Entidade'
                 ],
-                'order'      => 'Inscricao.modified Desc'
+                'Turma' => [
+                    'Curso',
+                    'Disciplina',
+                    'AnoLectivo',
+                    'SemestreLectivo'
+                ],
+                'EstadoInscricao'
             ];
+            $this->Paginator->settings['order'] = 'Inscricao.modified Desc';
+
+
             $inscricaos = $this->paginate();
-            $this->set(compact('inscricaos', 'turmasFaculdade', 'cursosFaculdade'));
+
+            $faculdades = $this->Inscricao->Turma->Curso->UnidadeOrganica->find('list',['conditions'=>['tipo_unidade_organica_id'=>1]]);
+            $cursos = $this->Inscricao->Turma->Curso->find('list',['conditions'=>['estado_objecto_id'=>1]]);
+            $turmas = $this->Inscricao->Turma->find('list',['limit'=>10]);
+            $estadoInscricaos = $this->Inscricao->EstadoInscricao->find('list');
+            $this->set(compact('inscricaos', 'turmas', 'cursos','faculdades','estadoInscricaos'));
         }
 
         public function manutencao()
@@ -1555,7 +1524,7 @@
                     ],
                     'EstadoInscricao'
                 ],
-                'order'      => 'Inscricao.modified Desc'
+                'order'      =>'Inscricao.modified Desc'
             ];
             $inscricaos = $this->Paginate('Inscricao');
             $this->set(compact('inscricoes'));
@@ -1583,16 +1552,31 @@
                         'Turma.ano_lectivo_id'      => Configure::read('OpenSGA.ano_lectivo_id'),
                         'Turma.semestre_lectivo_id' => Configure::read('OpenSGA.semestre_lectivo_id')
                     ],
-                    'fields'=>'DISTINCT Inscricao.aluno_id'
+                    'fields'     => 'DISTINCT Inscricao.aluno_id'
+                ]);
+                $alunos = $this->Inscricao->Aluno->find('count', [
+                    'conditions' => [
+                        'Aluno.curso_id'        => array_keys($cursos),
+                        'Aluno.estado_aluno_id' => [1, 11, 14]
+                    ]
+                ]);
+                $matriculas = $this->Inscricao->Aluno->Matricula->find('count', [
+                    'conditions' => [
+                        'Matricula.curso_id'       => array_keys($cursos),
+                        'Matricula.ano_lectivo_id' => Configure::read('OpenSGA.ano_lectivo_id')
+                    ]
                 ]);
 
                 $arrayX[] = $v;
-                $arrayY[] = $inscricaos;
+                $arrayInscritos[] = $inscricaos;
+                $arrayAlunos[] = $alunos;
+                $arrayMatriculas[] = $matriculas;
 
 
             }
 
             $chart = new Highchart();
+            $chart->addExtraScript('export', 'http://code.highcharts.com/modules/', 'exporting.js');
             $chart->chart->renderTo = "inscritos-semestre";
             $chart->chart->type = "column";
             $chart->title->text = "Inscricoes por Semestre";
@@ -1617,10 +1601,20 @@
 
             $chart->plotOptions->column->pointPadding = 0.2;
             $chart->plotOptions->column->borderWidth = 0;
+            $chart->plotOptions->column->dataLabels->enabled = true;
+
 
             $chart->series[] = [
                 'name' => "Total de Inscricoes",
-                'data' => $arrayY,
+                'data' => $arrayInscritos,
+            ];
+            $chart->series[] = [
+                'name' => "Estudantes Activos",
+                'data' => $arrayAlunos,
+            ];
+            $chart->series[] = [
+                'name' => "Estudantes Matriculados em " . Configure::read('OpenSGA.ano_lectivo'),
+                'data' => $arrayMatriculas,
             ];
 
 

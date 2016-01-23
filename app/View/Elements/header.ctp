@@ -44,7 +44,8 @@
         echo $this->Html->css('/assets/css/theme_green.css');
         echo $this->Html->script(['/assets/plugins/jquery-2.0.3.min']);
         echo $this->Html->css('/assets/css/opensga.css');
-        echo $this->Html->css('/assets/plugins/select2/select2.css');
+        echo $this->Html->css('/assets/plugins/select2/dist/css/select2.css');
+    echo $this->Html->css('/assets/plugins/select2/dist/css/select2-bootstrap.min');
 
     ?>
     <!--[if IE 7]>
@@ -94,6 +95,7 @@
 <!-- end: HEAD -->
 <!-- start: BODY -->
 <body class="footer-fixed">
+<?php if(Configure::read('environment')=='prod'):?>
 <script>
     (function (i, s, o, g, r, a, m) {
         i['GoogleAnalyticsObject'] = r;
@@ -112,6 +114,7 @@
     ga('send', 'pageview');
 
 </script>
+<?php endif;?>
 <!-- start: HEADER -->
 <div class="navbar navbar-inverse navbar-fixed-top">
     <!-- start: TOP NAVIGATION CONTAINER -->

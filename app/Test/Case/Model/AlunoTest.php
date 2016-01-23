@@ -35,7 +35,8 @@
             'app.curso',
             'app.disciplina_plano_estudo',
             'app.escola_nivel_medio',
-            'app.rua'
+            'app.rua',
+            'app.mudanca_curso'
         ];
 
 
@@ -575,7 +576,30 @@
          */
         public function testMudaCurso()
         {
-            $this->markTestIncomplete('testMudaCurso not implemented.');
+            $data = array(
+                'Aluno' => array(
+                    'numero_estudante_atribuido' => '',
+                    'data_mudanca' => '2016-01-21',
+                    'curso_id' => '5',
+                    'observacao' => 'gdrgfdgdf',
+                    'aluno_id' => '24',
+                    'curso_antigo' => '233',
+                    'anexo_url' => array(
+                        'name' => '',
+                        'type' => '',
+                        'tmp_name' => '',
+                        'error' => (int) 4,
+                        'size' => (int) 0
+                    )
+                )
+            );
+
+
+            $resultado = $this->Aluno->mudaCurso($data);
+            debug($resultado);
+            $this->AssertTrue($resultado[0]);
+
+
         }
 
         /**

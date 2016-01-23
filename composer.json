@@ -51,7 +51,11 @@
     "oldskool/whoops-cakephp": "dev-cake2",
     "jeremyharris/cakephp-newrelic": "dev-master",
     "zackkitzmiller/tiny": "1.2.0",
-    "leeoniya/dump-r": "dev-master"
+    "leeoniya/dump-r": "dev-master",
+    "phpunit/phpunit-selenium": "1.2.*",
+    "backstageel/cakephp-reports": "dev-master",
+    "webtechnick/cakephp-database-logger-plugin":"dev-master",
+    "cakedc/search": "^2.5"
 
 
   },

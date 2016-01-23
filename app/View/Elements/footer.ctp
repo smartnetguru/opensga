@@ -32,41 +32,32 @@ echo $this->Html->script(array('/assets/plugins/perfect-scrollbar/src/perfect-sc
 echo $this->Html->script(array('/assets/plugins/jquery-cookie/jquery.cookie'));
 echo $this->Html->script('/assets/plugins/jquery-validation/dist/jquery.validate.min',
     array('block' => 'scriptBottom'));
-echo $this->Html->script('/assets/plugins/select2/select2.min', array('block' => 'scriptBottom'));
-echo $this->Html->script('/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker', array('block' => 'scriptBottom'));
-echo $this->Html->script('/assets/plugins/bootstrap-timepicker/js/bootstrap-timepicker.min', array('block' => 'scriptBottom'));
-echo $this->Html->script('/assets/plugins/bootstrap-daterangepicker/moment.min', array('block' => 'scriptBottom'));
-echo $this->Html->script('/assets/plugins/bootstrap-daterangepicker/daterangepicker', array('block' => 'scriptBottom'));
-echo $this->Html->script('/assets/plugins/jquery.maskedinput/src/jquery.maskedinput', array('block' => 'scriptBottom'));
-echo $this->Html->script('/assets/plugins/jquery-maskmoney/jquery.maskMoney', array('block' => 'scriptBottom'));
-    echo $this->Html->script('/assets/plugins/jquery-inputlimiter/jquery.inputlimiter.1.3.1.min', array('block' => 'scriptBottom'));
+echo $this->Html->script('/assets/plugins/select2/dist/js/select2.min');
+echo $this->Html->script('/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker');
+echo $this->Html->script('/assets/plugins/bootstrap-timepicker/js/bootstrap-timepicker.min');
+echo $this->Html->script('/assets/plugins/bootstrap-daterangepicker/moment.min');
+echo $this->Html->script('/assets/plugins/bootstrap-daterangepicker/daterangepicker');
+echo $this->Html->script('/assets/plugins/jquery.maskedinput/src/jquery.maskedinput');
+echo $this->Html->script('/assets/plugins/jquery-maskmoney/jquery.maskMoney');
+    echo $this->Html->script('/assets/plugins/jquery-inputlimiter/jquery.inputlimiter.1.3.1.min');
 
-    echo $this->Html->script('/assets/plugins/autosize/jquery.autosize.min', array('block' => 'scriptBottom'));
-    echo $this->Html->script('/assets/plugins/jQuery-Tags-Input/jquery.tagsinput', array('block' => 'scriptBottom'));
-    echo $this->Html->script('/assets/plugins/bootstrap-fileupload/bootstrap-fileupload.min', array('block' => 'scriptBottom'));
-    echo $this->Html->script('/assets/plugins/summernote/build/summernote.min', array('block' => 'scriptBottom'));
-    echo $this->Html->script('/assets/plugins/ckeditor/ckeditor', array('block' => 'scriptBottom'));
-    echo $this->Html->script('/assets/plugins/ckeditor/adapters/jquery', array('block' => 'scriptBottom'));
+    echo $this->Html->script('/assets/plugins/autosize/jquery.autosize.min');
+    echo $this->Html->script('/assets/plugins/jQuery-Tags-Input/jquery.tagsinput');
+    echo $this->Html->script('/assets/plugins/bootstrap-fileupload/bootstrap-fileupload.min');
+    echo $this->Html->script('/assets/plugins/summernote/build/summernote.min');
+    echo $this->Html->script('/assets/plugins/ckeditor/ckeditor');
+    echo $this->Html->script('/assets/plugins/ckeditor/adapters/jquery');
 
 
 echo $this->Html->script(array('/assets/js/main'));
     echo $this->Html->script(array('/assets/js/opensga'));
 ?>
-
-<?php $this->Html->scriptStart(array('inline' => false, 'block' => 'scriptBottom')); ?>
-
-
+<script>
 $(document).ready(function() {
 
 Main.init();
 });
-jQuery(document).ready(function($) {
-$(".clickable-row").click(function() {
-window.document.location = $(this).data("href");
-});
-});
-<?php $this->Html->scriptEnd(); ?>
-
+</script>
 <?php echo $this->fetch('scriptBottom'); ?>
 
 <!-- end scripts-->
@@ -77,9 +68,12 @@ window.document.location = $(this).data("href");
   <script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>
   <script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script>
 <![endif]-->
+
+
 <?php
 echo $this->Js->writeBuffer();
 ?>
+<?php if(Configure::read('environment')=='prod'):?>
 <!--Start of Zopim Live Chat Script-->
 <script type="text/javascript">
     window.$zopim||(function(d,s){var z=$zopim=function(c){z._.push(c)},$=z.s=
@@ -115,6 +109,7 @@ echo $this->Js->writeBuffer();
     }
 </script>
 <!--End of Zopim Live Chat Script-->
+<?php endif;?>
 <!-- end: MAIN JAVASCRIPTS -->
 <?php echo $this->NewRelic->end(); ?>
 

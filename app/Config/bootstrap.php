@@ -11,6 +11,7 @@
     CakePlugin::load('Migrations');
     CakePlugin::load('Scheduler');
     CakePlugin::load('NewRelic');
+CakePlugin::load('Search');
 
     App::import('Log','CakeLog');
     CakePlugin::load('DatabaseLogger');
@@ -193,3 +194,4 @@
     }
 
 CakePlugin::load('Cea', array('bootstrap' => false, 'routes' => false));
+

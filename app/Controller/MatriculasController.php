@@ -546,7 +546,8 @@
 
             if ($this->request->is('post') || $this->request->is('put')) {
 
-                if ($this->Matricula->renovaMatricula($this->request->data)) {
+                $resultado =$this->Matricula->renovaMatricula($this->request->data);
+                if ($resultado[0]===true) {
                     $this->Session->setFlash(__('A Matricula do Aluno foi renovada com Sucesso'), 'default',
                         ['class' => 'alert alert-success']);
                 } else {
@@ -618,6 +619,15 @@
         {
             $anoLectivoAno = Configure::read('OpenSGA.ano_lectivo');
             debug($anoLectivoAno);
+        }
+
+        /**
+         * @param $matriculaId
+         *
+         * @fixme implementar com urgencia
+         */
+        public function cancelar_renovacao_matricula($matriculaId){
+
         }
 
 

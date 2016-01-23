@@ -401,6 +401,7 @@
                 if ($this->PlanoEstudo->DisciplinaPlanoEstudo->save($this->request->data)) {
                     $this->Flash->success('Disciplina Editada com sucesso');
 
+
                 } else {
                     $this->Flash->error('Problemas ao editar disciplina');
                 }

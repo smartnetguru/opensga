@@ -44,30 +44,6 @@ $group_id = $this->Session->read('Auth.User.group_id');
 
 <div class="container_12">
 
-    <div class="grid_12">
-        <div class="block-border">
-            <div class="block-content">
-                <ul class="shortcut-list">
-
-
-                    <li>
-                        <?php echo $this->Html->link($this->Html->image('icons/packs/crystal/48x48/apps/wifi.png') . __("Requisicoes"),
-                            [
-                                'plugin'     => 'requisicoes',
-                                'controller' => 'requisicoes_pedidos',
-                                'action'     => 'nova_requisicao'
-                            ], ['escape' => false]) ?>
-                    </li>
-
-                    <li>
-                        <?php echo $this->Html->link($this->Html->image('icons/student/teachers_icon.png') . __("Avaliações"),
-                            ['controller' => 'docentes', 'action' => 'index'], ['escape' => false]) ?>
-                    </li>
-                </ul>
-                <div class="clear"></div>
-            </div>
-        </div>
-    </div>
 
     <div class="row">
         <div class="col-sm-4">

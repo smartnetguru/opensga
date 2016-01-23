@@ -31,55 +31,7 @@ $this->BreadCumbs->addCrumb('Lista de Alunos', '/alunos/index');
     </div>
 <?php $this->end() ?>
 <?php $this->assign('table-title', __('Inscrições Activas')) ?>
-<?php $this->start('filter-form') ?>
-<?php echo $this->Form->create('Inscricao', [
-    'role'          => 'form',
-    'enctype'       => 'multipart/form-data',
-    'class'         => 'form-horizontal',
-    'inputDefaults' => ['before' => '', 'after' => '']
-]); ?>
-    <div class="row">
-        <div class="form-group">
-            <div class="col-md-3">
-                <?php echo $this->Form->input('Inscricao.curso_id', [
-                    'options'  => $cursosFaculdade,
-                    'label'    => false,
-                    'div'      => false,
-                    'required' => false,
-                    'class'    => 'form-control',
-                    'empty'    => 'Curso',
-                ]); ?>
-            </div>
-            <div class="col-md-3">
-                <?php echo $this->Form->input('Inscricao.turma_id', [
-                    'options'  => $turmasFaculdade,
-                    'label'    => false,
-                    'div'      => false,
-                    'required' => false,
-                    'class'    => 'form-control',
-                    'empty'    => 'Ou Turma'
-                ]); ?>
-            </div>
-            <div class="col-md-3">
-                <?php echo $this->Form->input('Inscricao.numero_estudante', [
-                    'label'       => false,
-                    'div'         => false,
-                    'required'    => false,
-                    'class'       => 'form-control',
-                    'placeholder' => 'Ou Numero de Estudante'
-                ]); ?>
-            </div>
-            <div class="col-md-3">
-                <?php echo $this->Form->end([
-                    'label' => __('Pesquisar', true),
-                    'class' => 'btn btn-blue next-step btn-block'
-                ]); ?>
-            </div>
-        </div>
-    </div>
 
-
-<?php $this->end() ?>
 <?php $this->start('table-header') ?>
 
     <tr>

@@ -24,7 +24,11 @@
 
         public $name = 'Alunos';
 
-        function adicionar_estudante()
+        public function relatorios_estudantes_estrangeiros(){
+
+        }
+
+        public function adicionar_estudante()
         {
             if ($this->request->is('post') || $this->request->is('put')) {
                 $this->request->data['Aluno']['codigo'] = $this->request->data['Aluno']['numero_estudante'];
@@ -1792,13 +1796,17 @@
             }
 
             if ($this->request->is('post')) {
-                if ($this->Aluno->mudaCurso($this->request->data)) {
+
+                $resultado = $this->Aluno->mudaCurso($this->request->data);
+                if ($resultado[0]===true) {
+
                     $this->Session->setFlash(__('Mudança de Curso efectuada com sucesso'), 'default',
                         ['class' => 'alert alert-success']);
                     $this->set('mudancaSucesso', 1);
                     $this->set('mudancaCursoId', $this->Aluno->MudancaCurso->id);
                 }
             } else {
+                $this->Flash->error('Problemas ao Gravar a Mudanca de Curso. Tente novamente mais tarde');
                 $this->set('mudancaSucesso', 0);
             }
 

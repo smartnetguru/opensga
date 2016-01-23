@@ -23,6 +23,12 @@ $this->Html->addCrumb('Página Inicial', '/');
 
         </div>
         <div class="col-sm-2">
+            <?php echo $this->Html->link('<i class="fa fa-pencil fa-2x"></i>	Bolsas de Estudos',
+                ['controller' => 'bolsa_bolsas', 'action' => 'index'],
+                ['escape' => false, 'class' => 'btn btn-icon btn-block']) ?>
+
+        </div>
+        <div class="col-sm-2">
             <?php echo $this->Html->link('<i class="fa fa-gift  fa-2x"></i>Cerimonias de Graduacao',
                 ['controller' => 'cerimonia_graduacaos', 'action' => 'index'],
                 ['escape' => false, 'class' => 'btn btn-icon btn-block']) ?>
@@ -51,72 +57,6 @@ $this->Html->addCrumb('Página Inicial', '/');
                     'class'  => 'btn btn-icon btn-block'
                 ]) ?>
         </div>
-    </div>
-
-    <div class="col-sm-12">
-        <ul class="shortcut-list">
-            <li>
-                <?php echo $this->Html->link($this->Html->image('icons/packs/crystal/48x48/apps/penguin.png') . __("Entrega de Certificado"),
-                    [
-                        'controller' => 'alunos',
-                        'action'     => 'pesquisa_aluno_action',
-                        'recebe_certificado_nivel_anterior'
-                    ], ['escape' => false]) ?>
-            </li>
-            <li>
-                <?php echo $this->Html->link($this->Html->image('icons/packs/crystal/48x48/apps/penguin.png') . __("Conclusão de Curso"),
-                    ['controller' => 'alunos', 'action' => 'pesquisa_aluno_action', 'concluir_nivel'],
-                    ['escape' => false]) ?>
-            </li>
-            <li>
-                <?php echo $this->Html->link($this->Html->image('icons/packs/crystal/48x48/apps/wifi.png') . __("Requisicoes"),
-                    ['plugin' => 'requisicoes', 'controller' => 'requisicoes_pedidos', 'action' => 'nova_requisicao'],
-                    ['escape' => false]) ?>
-            </li>
-            <li>
-                <?php echo $this->Html->link($this->Html->image('icons/packs/crystal/48x48/apps/wifi.png') . __("Inscrição para Graduação"),
-                    [
-                        'plugin' => false,
-                        'controller' => 'alunos',
-                        'action' => 'pesquisa_aluno_action',
-                        'cerimonia_graduacao'
-                    ], ['escape' => false]) ?>
-            </li>
-            <li>
-                <?php echo $this->Html->link($this->Html->image('icons/packs/crystal/48x48/apps/wifi.png') . __("Enviar Cartao para Faculdade"),
-                    [
-                        'controller' => 'alunos',
-                        'action'     => 'pesquisa_aluno_action',
-                        'entregar_cartao_novo_ingresso',
-                        'requisicoes_pedidos',
-                        'requisicoes'
-                    ], ['escape' => false]) ?>
-            </li>
-
-            <li>
-                <?php echo $this->Html->link($this->Html->image('icons/packs/crystal/48x48/apps/wifi.png') . __("Mensagens SMS"),
-                    ['controller' => 'messages', 'action' => 'sms_index'], ['escape' => false]) ?>
-            </li>
-
-
-            <li>
-                <?php echo $this->Html->link($this->Html->image('icons/packs/crystal/48x48/apps/penguin.png') . __("Anos Lectivos"),
-                    ['controller' => 'anolectivos', 'action' => 'index'], ['escape' => false]) ?>
-            </li>
-            <li>
-                <?php echo $this->Html->link($this->Html->image('icons/packs/crystal/48x48/apps/wifi.png') . __("Renovacao de Matricula"),
-                    ['controller' => 'matriculas', 'action' => 'renovacao_matriculas'], ['escape' => false]) ?>
-            </li>
-            <li>
-                <?php echo $this->Html->link($this->Html->image('icons/packs/crystal/48x48/apps/wifi.png') . __("Candidatos"),
-                    ['controller' => 'candidaturas', 'action' => 'index'], ['escape' => false]) ?>
-            </li>
-            <li>
-                <?php echo $this->Html->link($this->Html->image('icons/packs/crystal/48x48/apps/wifi.png') . __("Atribuir Bolsas"),
-                    ['controller' => 'alunos', 'action' => 'pesquisar_candidato'], ['escape' => false]) ?>
-            </li>
-        </ul>
-
     </div>
 </div>
 

@@ -647,8 +647,21 @@
         {
             $dataSource = $this->getDataSource();
             $dataSource->begin();
-            foreach ($data['AnoLectivo'] as $k => $v) {
-                if ($v != 0) {
+
+            $anosLectivos = array_values($data['AnoLectivo']);
+            $anosLectivosDB = $this->AnoLectivo->find('all',['conditions'=>['id'=>$anosLectivos],'order'=>'AnoLectivo.ano ASC']);
+
+
+            foreach ($anosLectivosDB as $anoLectivo) {
+                $v = $anoLectivo['AnoLectivo']['id'];
+
+                //Eh necessario verificar se renovou a matricula anterior
+                $this->contain('AnoLectivo');
+                $matriculaAnterior = $this->find('first',['conditions'=>['Matricula.aluno_id'=>$data['Matricula']['aluno_id'],'AnoLectivo.ano'=>$anoLectivo['AnoLectivo']['ano']-1,'Matricula.estado_matricula_id'=>1]]);
+                if(empty($matriculaAnterior)){
+                    $dataSource->rollback();
+                    return [false,'MatriculaAnterior'];
+                }
                     $matriculaExiste = $this->findByAlunoIdAndAnoLectivoId($data['Matricula']['aluno_id'],$v);
                     if($matriculaExiste){
                         $this->id = $matriculaExiste['Matricula']['id'];
@@ -657,27 +670,29 @@
                         $this->set('user_id',$data['Matricula']['user_id']);
                         if(!$this->save()){
                             $dataSource->rollback();
-                            return false;
+
+                            return [false,'Matricula Renovar'];
                         }
                     } else{
                         $data['Matricula']['ano_lectivo_id'] = $v;
                         $this->create();
                         if(!$this->save($data)){
                             $dataSource->rollback();
-                            return false;
+
+                            return [false,'Matricula Renovar 2'];;
                         }
                     }
 
-                }
+
             }
             $dataSource->commit();
 
-            /**$event = new CakeEvent('Model.Matricula.afterRenovacao', $this, array(
-             * 'data' => $data
-             * ));
-             * $this->getEventManager()->dispatch($event); */
+            $event = new CakeEvent('Model.Matricula.afterRenovacao', $this, array(
+              'data' => $data
+              ));
+              $this->getEventManager()->dispatch($event);
 
-            return true;
+            return [true];
         }
 
         function validaMatricula($check)

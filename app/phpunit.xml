@@ -1,0 +1,15 @@
+<phpunit>
+    <filter>
+        <blacklist>
+            <directory suffix=".php">../lib</directory>
+            <directory suffix=".ctp">../lib</directory>
+            <directory suffix=".php">*/Vendor</directory>
+            <directory suffix=".php">*/tmp</directory>
+            <directory suffix=".php">*/Config/Migration</directory>
+            <directory suffix=".php">*/Config/Schema</directory>
+            <directory suffix=".php">*/Console/Templates</directory>
+            <directory suffix=".php">*/Test</directory>            
+            <directory suffix=".php">*/Plugin</directory>
+        </blacklist>
+    </filter>
+</phpunit>

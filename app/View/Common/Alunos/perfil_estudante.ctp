@@ -348,14 +348,36 @@
                                 <td><?php echo h($matricula['TipoMatricula']['name']) ?></td>
                                 <td><?php echo h($matricula['EstadoMatricula']['name']) ?></td>
                                 <td><?php echo h('') ?></td>
-                                <td>
-                                    <?php
-                                        echo $this->Html->link('Imprimir', [
-                                            'controller' => 'matriculas',
-                                            'action'     => 'print_comprovativo_renovacao_matricula',
-                                            $matricula['id']
-                                        ])
-                                    ?>
+                                <td class="center">
+                                    <div class="visible-md visible-lg hidden-sm hidden-xs">
+
+                                        <?= $this->Html->link('<i class="fa fa-print"></i>',
+                                            [
+                                                'controller' => 'matriculas',
+                                                'action'     => 'print_comprovativo_renovacao_matricula',
+                                                $matricula['id'],
+                                            ], [
+                                                'class'               => 'btn btn-xs btn-green tooltips',
+                                                'data-placement'      => 'top',
+                                                'data-original-title' => 'Imprimir',
+                                                'escape'              => false
+                                            ]); ?>
+                                        <?php
+                                        echo $this->Form->postLink('<i class="clip clip-file-remove fa fa-white"></i>',
+                                            [
+                                                'controller' => 'matriculas',
+                                                'action'    => 'cancelar_renovacao_matricula',
+                                                $matricula['id'],
+                                            ], [
+                                                'escape' => false,
+                                                'class'  => 'btn btn-xs btn-yellow tooltips',
+                                                'data-placement'      => 'top',
+                                                'data-original-title' => 'Cancelar Renovacao de Matricula',
+                                            ],
+                                            __('Tem Certeza que pretende Cancelar a renovacao desta Matricula?'));
+
+                                        ?>
+                                    </div>
                                 </td>
                             </tr>
                         <?php

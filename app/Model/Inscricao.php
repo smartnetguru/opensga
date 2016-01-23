@@ -15,6 +15,8 @@
      *
      * @property Aluno $Aluno
      * @property FinanceiroTransacao $FinanceiroTransacao
+     * @property Turma $Turma
+     * @property EstadoInscricao $EstadoInscricao
      *
      */
     class Inscricao extends AppModel
@@ -24,6 +26,21 @@
         //The Associations below have been created with all possible keys, those that are not needed can be removed
 
         public $estadoInscricoesAbertas = [null, 1, 2, 3];
+
+        public $filterArgs = array(
+
+            'turma_id' => array(
+                'type' => 'value',
+                'field' => 'turma_id'
+            ),
+            'estado_inscricao_id'=>[
+
+            ],
+            'numero_estudante'=>[
+                'type'=>'value',
+                'field'=>'Aluno.codigo'
+            ]
+        );
 
         public $validate = [
             'tipo_inscricao_id'      => [

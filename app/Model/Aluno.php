@@ -1573,8 +1573,17 @@
             return false;
         }
 
+        /**
+         * Muda o Curso de um determinado estudante
+         * @param $data
+         * @return bool
+         * @throws Exception
+         *
+         */
         public function mudaCurso($data)
         {
+
+
             $datasource = $this->getDataSource();
             $datasource->begin();
 
@@ -1599,7 +1608,11 @@
                     'observacao'             => $data['Aluno']['observacao'],
                     'data_mudanca'           => $data['Aluno']['data_mudanca']
                 ];
-                $this->alteraStatus($dataEstado);
+                if(!$this->alteraStatus($dataEstado)){
+                    $datasource->rollback();
+
+                    return [false,'Status'];
+                }
             } else {
                 $mudancaArray['MudancaCurso']['forma_mudanca_id'] = 2;
             }
@@ -1623,15 +1636,19 @@
                 $this->HistoricoCurso->id = $historicoActual['HistoricoCurso']['id'];
 
                 $this->HistoricoCurso->set('ano_fim', $dataAno->format("Y"));
-                $this->HistoricoCurso->save();
+                if(!$this->HistoricoCurso->save()){
+                    $datasource->rollback();
+
+                    return [false,'Historico'];
+                }
             }
 
             $this->Matricula->AnoLectivo->contain();
             $anolectivo = $this->Matricula->AnoLectivo->findByAno($dataAno->format("Y"));
             //Cria Novo Historico
-            $planoEstudo = $this->Curso->getPlanoEstudoRecente($data['Aluno']['curso_id']);
+            $planoEstudo = $this->Curso->getPlanoEstudoRecente($data['Aluno']['curso_id'],$dataAno->format("Y"));
             if (empty($planoEstudo)) {
-                $planoEstudoId = 0;
+                $planoEstudoId = null;
             } else {
                 $planoEstudoId = $planoEstudo['PlanoEstudo']['id'];
             }
@@ -1645,13 +1662,29 @@
                 ]
             ];
             $this->HistoricoCurso->create();
-            $this->HistoricoCurso->save($arrayNovoHistorico);
+            if(!$this->HistoricoCurso->save($arrayNovoHistorico)){
+                $datasource->rollback();
+
+                return [false,'Historico'];
+            }
+
             $this->id = $data['Aluno']['aluno_id'];
             $this->set('curso_id', $data['Aluno']['curso_id']);
             $this->set('plano_estudo_id', $planoEstudoId);
-            $this->save();
+            if(!$this->save()){
+                $datasource->rollback();
+
+                return [false,'Aluno'];
+            }
+
             $this->MudancaCurso->create();
-            $this->MudancaCurso->save($mudancaArray);
+            if(!$this->MudancaCurso->save($mudancaArray)){
+                $datasource->rollback();
+
+                return [false,'Mudanca'];
+            }
+
+            $anoLectivoActual = Configure::read('OpenSGA.ano_lectivo');
 
             //Eh necessario actualizar o Plano de Estudos da Ultima Matricula
             $matricula = $this->Matricula->findByAlunoIdAndAnoLectivoId($data['Aluno']['aluno_id'],
@@ -1660,11 +1693,41 @@
                 $this->Matricula->id = $matricula['Matricula']['id'];
                 $this->Matricula->set('plano_estudo_id', $planoEstudoId);
                 $this->Matricula->save();
+            } else{
+                $dataMatricula = [
+                    'Matricula'=>[
+                        'aluno_id'=>$data['Aluno']['aluno_id'],
+                        'ano_lectivo_id'=>$anolectivo['AnoLectivo']['id'],
+                        'data'=>$data['Aluno']['data_mudanca'],
+                        'user_id'=>CakeSession::read('Auth.User.id'),
+                        'curso_id'=>$data['Aluno']['curso_id'],
+                        'tipo_matricula_id'=>2
+
+
+                    ],
+                    'AnoLectivo'=>[
+                        $anolectivo['AnoLectivo']['id']=>$anolectivo['AnoLectivo']['id']
+                    ]
+                ];
+                $resultadoMatricula =$this->Matricula->renovaMatricula($dataMatricula);
+
+                if(!$resultadoMatricula[0]===true){
+                    $datasource->rollback();
+
+                    return [false,'Matricula'];
+                }
             }
 
-            return $datasource->commit();
+            $datasource->commit();
+            return [true];
         }
 
+        /**
+         * Altera Status de um estudante
+         * @param $data
+         * @return bool
+         * @throws Exception
+         */
         public function alteraStatus($data)
         {
             $datasource = $this->getDataSource();

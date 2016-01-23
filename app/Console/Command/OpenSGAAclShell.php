@@ -345,6 +345,8 @@
                     /*Fim de todas as funcoes das faculdades */
 
 
+
+
                     $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Cursos/index";
                     $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Cursos/manutencao_cursos_sem_encarregado";
                     $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Cursos/manutencao_cursos_sem_turno";
@@ -378,7 +380,6 @@
 
 
                     if (in_array('DRA', $unidadesOrganicas)) {
-
                         $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Logs/admin_index";
                         $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Logs/admin_view";
                         $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Logs/admin_delete";
@@ -404,6 +405,10 @@
                         $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/mudanca_curso";
                         $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/concluir_nivel";
                         $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/perfil_estudante";
+                        $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/relatorios";
+                        $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Matriculas/print_comprovativo_matricula";
+                        $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/print_comprovativo_mudanca_curso";
+                        $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/relatorios_estudantes_estrangeiros";
 
 
                         $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/AlumniCandidatoAlumnis/index";

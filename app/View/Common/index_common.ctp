@@ -2,8 +2,6 @@
 $this->BreadCumbs->addCrumb('Alunos', '/alunos');
 $this->BreadCumbs->addCrumb('Lista de Alunos', '/alunos/index');
 
-
-echo $this->Html->css('/assets/plugins/select2/select2.css');
 echo $this->Html->css('/assets/plugins/DataTables/media/css/DT_bootstrap.css');
 ?>
 
@@ -65,13 +63,5 @@ echo $this->Html->css('/assets/plugins/DataTables/media/css/DT_bootstrap.css');
     </div>
 </div>
 
-<?php
-echo $this->Html->script('/assets/plugins/select2/select2.min', array('block' => 'scriptBottom'));
-//echo $this->Html->script('/assets/plugins/DataTables/media/js/jquery.dataTables.min', array('block' => 'scriptBottom'));
-//echo $this->Html->script('/assets/plugins/DataTables/media/js/DT_bootstrap', array('block' => 'scriptBottom'));
-?>
 
 <?php echo $this->fetch('content'); ?>
-<?php
-echo $this->Js->writeBuffer();
-?>

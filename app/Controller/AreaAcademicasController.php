@@ -41,7 +41,7 @@ class AreaAcademicasController extends AppController {
 		if ($this->request->is('post')) {
 			$this->AreaAcademica->create();
 			if ($this->AreaAcademica->save($this->request->data)) {
-				$this->Session->setFlash(__('A Área Académica foi registrada com sucesso'),'default'.array('class'=>'alert_success'));
+				$this->Session->setFlash(__('A Área Académica foi registrada com sucesso'),'default',array('class'=>'alert_success'));
 				$this->redirect(array('action' => 'index'));
 			} else {
 				$this->Session->setFlash(__('Problemas ao registrar a Área Académica'),'default',array('alert_error'));

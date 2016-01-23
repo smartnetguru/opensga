@@ -204,16 +204,18 @@
                             ]) ?></li>
                         <li><?php echo $this->Html->link(__('Candidatos'),
                                 ['controller' => 'candidaturas', 'action' => 'relatorios', 'plugin' => false]) ?></li>
-                        <li><?php echo $this->Html->link(__('Requisicoes'),
-                                ['controller' => 'relatorios', 'action' => 'requisicoes', 'plugin' => false]) ?></li>
                         <li><?php echo $this->Html->link(__('Estudantes'),
-                                ['controller' => 'relatorios', 'action' => 'estudantes_por_curso']) ?></li>
-                        <li><?php echo $this->Html->link(sprintf(__('Docentes', true)),
-                                ['controller' => 'docentes', 'action' => 'relatorios'], ['class' => 'link']); ?></li>
+                                ['controller' => 'alunos', 'action' => 'relatorios']) ?></li>
                         <li><?php echo $this->Html->link(sprintf(__('Matriculas', true)),
                                 ['controller' => 'matriculas', 'action' => 'relatorios'], ['class' => 'link']); ?></li>
+                        <li><?php echo $this->Html->link(sprintf(__('Inscricoes', true)),
+                                ['controller' => 'inscricaos', 'action' => 'relatorios'], ['class' => 'link']); ?></li>
                         <li><?php echo $this->Html->link(sprintf(__('Turmas', true)),
                                 ['controller' => 'turmas', 'action' => 'relatorios'], ['class' => 'link']); ?></li>
+                        <li><?php echo $this->Html->link(sprintf(__('Docentes', true)),
+                                ['controller' => 'docentes', 'action' => 'relatorios'], ['class' => 'link']); ?></li>
+                        <li><?php echo $this->Html->link(__('Requisicoes'),
+                                ['controller' => 'relatorios', 'action' => 'requisicoes', 'plugin' => false]) ?></li>
                     </ul>
                 </li>
                 <li>
@@ -344,7 +346,6 @@
                 <?php echo $this->element('page_header'); ?>
                 <!-- end: PAGE HEADER -->
                 <!-- start: PAGE CONTENT -->
-
 
 
                 <?php

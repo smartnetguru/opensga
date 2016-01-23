@@ -5,13 +5,12 @@
 
         public function implementedEvents() {
             return array(
-                'Model.Matricula.afterRenovacao' => 'afterRenovacaoMatricula'
+               // 'Model.Matricula.afterRenovacao' => 'afterRenovacaoMatricula'
             );
         }
 
         public function afterRenovacaoMatricula($event){
-            debug('teste');
-            die();
+
         }
     }
 

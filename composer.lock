@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "a30e55385822d65049eb6570e574657c",
-    "content-hash": "0959c38d75ca811f032c57ce000a9087",
+    "hash": "f95a5236fe1a5f01e6660c472d48daec",
+    "content-hash": "1d13589c031f3aa50afa7de1681233bc",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -71,6 +71,53 @@
             "time": "2015-11-16 22:34:08"
         },
         {
+            "name": "backstageel/cakephp-reports",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/backstageel/cakephp-reports.git",
+                "reference": "1ecb20dadeae27c46d0bcade92ed239bc04c921a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/backstageel/cakephp-reports/zipball/1ecb20dadeae27c46d0bcade92ed239bc04c921a",
+                "reference": "1ecb20dadeae27c46d0bcade92ed239bc04c921a",
+                "shasum": ""
+            },
+            "require": {
+                "composer/installers": "~1.0",
+                "cossou/jasperphp": "^2.1",
+                "php": ">=5.3.0"
+            },
+            "type": "cakephp-plugin",
+            "extra": {
+                "installer-name": "Reports"
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "pache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Elisio Leonardo",
+                    "email": "elisio.leonardo@gmail.com",
+                    "homepage": "http://infomoz.net",
+                    "role": "Author"
+                }
+            ],
+            "description": "CakePHP Reports Generator Using JaspePHP And Jaspersoft Studio",
+            "homepage": "https://infomoz.net",
+            "keywords": [
+                "Jaspersoft studio",
+                "cakephp",
+                "infomoz",
+                "jasperphp",
+                "mozambique",
+                "reports"
+            ],
+            "time": "2016-01-21 17:33:33"
+        },
+        {
             "name": "cakedc/migrations",
             "version": "2.4.1",
             "source": {
@@ -107,6 +154,50 @@
                 "migrations"
             ],
             "time": "2015-12-18 10:32:40"
+        },
+        {
+            "name": "cakedc/search",
+            "version": "2.5.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/CakeDC/search.git",
+                "reference": "67632a54d69e840970fa64c31eb79936c59e5226"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/CakeDC/search/zipball/67632a54d69e840970fa64c31eb79936c59e5226",
+                "reference": "67632a54d69e840970fa64c31eb79936c59e5226",
+                "shasum": ""
+            },
+            "require": {
+                "composer/installers": "*",
+                "php": ">=5.3.0"
+            },
+            "type": "cakephp-plugin",
+            "extra": {
+                "installer-name": "Search"
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Cake Development Corporation",
+                    "email": "team@cakedc.com",
+                    "homepage": "http://cakedc.com"
+                }
+            ],
+            "description": "Search Plugin for CakePHP",
+            "homepage": "http://github.com/CakeDC/search",
+            "keywords": [
+                "cakephp",
+                "filter",
+                "post-redirect-get",
+                "prg",
+                "search"
+            ],
+            "time": "2014-08-07 18:13:40"
         },
         {
             "name": "cakephp/cakephp",
@@ -249,6 +340,47 @@
                 "zikula"
             ],
             "time": "2015-10-29 23:28:48"
+        },
+        {
+            "name": "cossou/jasperphp",
+            "version": "v2.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/cossou/JasperPHP.git",
+                "reference": "6e222fb5cf7b3b0f7118060784919c229c63b4bf"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/cossou/JasperPHP/zipball/6e222fb5cf7b3b0f7118060784919c229c63b4bf",
+                "reference": "6e222fb5cf7b3b0f7118060784919c229c63b4bf",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "JasperPHP": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Hélder Duarte",
+                    "email": "cossou@gmail.com"
+                }
+            ],
+            "description": "Create Reports in PHP with JasperReports",
+            "homepage": "https://github.com/cossou/JasperPHP",
+            "keywords": [
+                "jasper",
+                "jasperreports",
+                "java",
+                "pdf",
+                "reports"
+            ],
+            "time": "2015-10-16 09:07:06"
         },
         {
             "name": "facebook/php-sdk-v4",
@@ -857,382 +989,6 @@
             "time": "2015-08-30 14:30:44"
         },
         {
-            "name": "radig/auditable",
-            "version": "2.0.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/radig/auditable.git",
-                "reference": "af8b5031522ebd6d69daa0e694a65c1cb2935b48"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/radig/auditable/zipball/af8b5031522ebd6d69daa0e694a65c1cb2935b48",
-                "reference": "af8b5031522ebd6d69daa0e694a65c1cb2935b48",
-                "shasum": ""
-            },
-            "require": {
-                "composer/installers": "~1.0",
-                "php": ">=5.3.0"
-            },
-            "type": "cakephp-plugin",
-            "extra": {
-                "installer-name": "Auditable"
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Radig Soluções em TI",
-                    "email": "suporte@radig.com.br",
-                    "homepage": "http://www.radig.com.br",
-                    "role": "Author"
-                }
-            ],
-            "description": "Log all database changes",
-            "homepage": "https://github.com/radig/Auditable",
-            "keywords": [
-                "Audit",
-                "Auditable",
-                "cakephp",
-                "historic",
-                "log",
-                "radig"
-            ],
-            "time": "2013-09-10 22:04:14"
-        },
-        {
-            "name": "slywalker/boost_cake",
-            "version": "1.0.6",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/slywalker/cakephp-plugin-boost_cake.git",
-                "reference": "bb1fa0d96b2c2c8fad7b0ccfab2ca2f231f66c3e"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/slywalker/cakephp-plugin-boost_cake/zipball/bb1fa0d96b2c2c8fad7b0ccfab2ca2f231f66c3e",
-                "reference": "bb1fa0d96b2c2c8fad7b0ccfab2ca2f231f66c3e",
-                "shasum": ""
-            },
-            "require": {
-                "composer/installers": "*",
-                "php": ">=5.3.0"
-            },
-            "suggest": {
-                "twbs/bootstrap": "Bootstrap framework"
-            },
-            "type": "cakephp-plugin",
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Yasuo Harada",
-                    "email": "slywalker.net@gmail.com"
-                }
-            ],
-            "description": "BoostCake is a plugin for CakePHP using Bootstrap",
-            "homepage": "http://slywalker.github.io/cakephp-plugin-boost_cake/",
-            "keywords": [
-                "bootstrap",
-                "cakephp",
-                "twitter"
-            ],
-            "time": "2014-11-07 10:36:43"
-        },
-        {
-            "name": "symfony/event-dispatcher",
-            "version": "v2.8.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/event-dispatcher.git",
-                "reference": "ee278f7c851533e58ca307f66305ccb9188aceda"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/ee278f7c851533e58ca307f66305ccb9188aceda",
-                "reference": "ee278f7c851533e58ca307f66305ccb9188aceda",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.9"
-            },
-            "require-dev": {
-                "psr/log": "~1.0",
-                "symfony/config": "~2.0,>=2.0.5|~3.0.0",
-                "symfony/dependency-injection": "~2.6|~3.0.0",
-                "symfony/expression-language": "~2.6|~3.0.0",
-                "symfony/stopwatch": "~2.3|~3.0.0"
-            },
-            "suggest": {
-                "symfony/dependency-injection": "",
-                "symfony/http-kernel": ""
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.8-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Symfony\\Component\\EventDispatcher\\": ""
-                },
-                "exclude-from-classmap": [
-                    "/Tests/"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com"
-                },
-                {
-                    "name": "Symfony Community",
-                    "homepage": "https://symfony.com/contributors"
-                }
-            ],
-            "description": "Symfony EventDispatcher Component",
-            "homepage": "https://symfony.com",
-            "time": "2016-01-13 10:28:07"
-        },
-        {
-            "name": "trentrichardson/cakephp-scheduler",
-            "version": "1.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/trentrichardson/cakephp-scheduler.git",
-                "reference": "25f67e028e046c011e5ee3babb1c1fb41c5a0433"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/trentrichardson/cakephp-scheduler/zipball/25f67e028e046c011e5ee3babb1c1fb41c5a0433",
-                "reference": "25f67e028e046c011e5ee3babb1c1fb41c5a0433",
-                "shasum": ""
-            },
-            "require": {
-                "composer/installers": "*",
-                "php": ">=5.3.6"
-            },
-            "type": "cakephp-plugin",
-            "extra": {
-                "installer-name": "Scheduler"
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "Makes scheduling tasks in CakePHP much simpler.",
-            "homepage": "http://github.com/trentrichardson/cakephp-scheduler",
-            "keywords": [
-                "cakephp",
-                "cron job",
-                "scheduler",
-                "task"
-            ],
-            "time": "2015-03-19 00:01:14"
-        },
-        {
-            "name": "videlalvaro/php-amqplib",
-            "version": "v2.5.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/videlalvaro/php-amqplib.git",
-                "reference": "eb8f94d97c8e79900accf77343dbd7eca7f58506"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/videlalvaro/php-amqplib/zipball/eb8f94d97c8e79900accf77343dbd7eca7f58506",
-                "reference": "eb8f94d97c8e79900accf77343dbd7eca7f58506",
-                "shasum": ""
-            },
-            "require": {
-                "ext-bcmath": "*",
-                "ext-mbstring": "*",
-                "php": ">=5.3.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "3.7.*"
-            },
-            "suggest": {
-                "ext-sockets": "Use AMQPSocketConnection"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.4-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "PhpAmqpLib\\": "PhpAmqpLib/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "LGPL-2.1"
-            ],
-            "authors": [
-                {
-                    "name": "Alvaro Videla"
-                }
-            ],
-            "description": "This library is a pure PHP implementation of the AMQP protocol. It's been tested against RabbitMQ.",
-            "homepage": "https://github.com/videlalvaro/php-amqplib/",
-            "keywords": [
-                "message",
-                "queue",
-                "rabbitmq"
-            ],
-            "time": "2015-08-11 12:30:09"
-        },
-        {
-            "name": "zackkitzmiller/tiny",
-            "version": "1.2.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/zackkitzmiller/tiny-php.git",
-                "reference": "55611994d9ca67d0a902c8d1d7d9fc7b5bfb0d7c"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/zackkitzmiller/tiny-php/zipball/55611994d9ca67d0a902c8d1d7d9fc7b5bfb0d7c",
-                "reference": "55611994d9ca67d0a902c8d1d7d9fc7b5bfb0d7c",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.0"
-            },
-            "require-dev": {
-                "league/phpunit-coverage-listener": "~1.1",
-                "phpunit/phpunit": "~3.7.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "ZackKitzmiller": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Jacob DeHart"
-                },
-                {
-                    "name": "Kyle Bragger"
-                },
-                {
-                    "name": "Zack Kitzmiller",
-                    "email": "zack@inrpce.com"
-                }
-            ],
-            "homepage": "http://github.com/zackkitzmiller/tiny-php",
-            "time": "2014-06-21 12:46:27"
-        }
-    ],
-    "packages-dev": [
-        {
-            "name": "cakephp/cakephp-codesniffer",
-            "version": "2.0.6",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/cakephp/cakephp-codesniffer.git",
-                "reference": "1e48e5f778a402f91c7f7adaafe08fbba0761fb7"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/cakephp/cakephp-codesniffer/zipball/1e48e5f778a402f91c7f7adaafe08fbba0761fb7",
-                "reference": "1e48e5f778a402f91c7f7adaafe08fbba0761fb7",
-                "shasum": ""
-            },
-            "require": {
-                "squizlabs/php_codesniffer": "~2.4"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "4.1.*"
-            },
-            "type": "library",
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "CakePHP Community",
-                    "homepage": "https://github.com/cakephp/cakephp-codesniffer/graphs/contributors"
-                }
-            ],
-            "description": "CakePHP CodeSniffer Standards",
-            "homepage": "http://cakephp.org",
-            "keywords": [
-                "codesniffer",
-                "framework"
-            ],
-            "time": "2015-11-29 16:32:42"
-        },
-        {
-            "name": "cakephp/debug_kit",
-            "version": "2.2.x-dev",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/cakephp/debug_kit.git",
-                "reference": "1a73aeb21df9df8b26baa5b384f4899ca1736975"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/cakephp/debug_kit/zipball/1a73aeb21df9df8b26baa5b384f4899ca1736975",
-                "reference": "1a73aeb21df9df8b26baa5b384f4899ca1736975",
-                "shasum": ""
-            },
-            "require": {
-                "composer/installers": "*",
-                "php": ">=5.3.0"
-            },
-            "require-dev": {
-                "cakephp/cakephp-codesniffer": "^1.0.0"
-            },
-            "type": "cakephp-plugin",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.2.x-dev"
-                },
-                "installer-name": "DebugKit"
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Mark Story",
-                    "homepage": "http://mark-story.com",
-                    "role": "Author"
-                },
-                {
-                    "name": "CakePHP Community",
-                    "homepage": "https://github.com/cakephp/debug_kit/graphs/contributors"
-                }
-            ],
-            "description": "CakePHP Debug Kit",
-            "homepage": "https://github.com/cakephp/debug_kit",
-            "keywords": [
-                "cakephp",
-                "debug",
-                "kit"
-            ],
-            "time": "2015-09-28 13:31:22"
-        },
-        {
             "name": "phpunit/php-code-coverage",
             "version": "1.2.18",
             "source": {
@@ -1595,81 +1351,200 @@
             "time": "2013-01-13 10:24:48"
         },
         {
-            "name": "squizlabs/php_codesniffer",
-            "version": "2.5.0",
+            "name": "phpunit/phpunit-selenium",
+            "version": "1.2.12",
             "source": {
                 "type": "git",
-                "url": "https://github.com/squizlabs/PHP_CodeSniffer.git",
-                "reference": "e4fb41d5d0387d556e2c25534d630b3cce90ea67"
+                "url": "https://github.com/giorgiosironi/phpunit-selenium.git",
+                "reference": "433ed50153623b28d196ab16c87aa3b01dc44022"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/e4fb41d5d0387d556e2c25534d630b3cce90ea67",
-                "reference": "e4fb41d5d0387d556e2c25534d630b3cce90ea67",
+                "url": "https://api.github.com/repos/giorgiosironi/phpunit-selenium/zipball/433ed50153623b28d196ab16c87aa3b01dc44022",
+                "reference": "433ed50153623b28d196ab16c87aa3b01dc44022",
                 "shasum": ""
             },
             "require": {
-                "ext-tokenizer": "*",
-                "ext-xmlwriter": "*",
-                "php": ">=5.1.2"
+                "ext-curl": "*",
+                "ext-dom": "*",
+                "php": ">=5.3.3",
+                "phpunit/phpunit": ">=3.7.0@stable"
             },
-            "require-dev": {
-                "phpunit/phpunit": "~4.0"
-            },
-            "bin": [
-                "scripts/phpcs",
-                "scripts/phpcbf"
-            ],
             "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.0.x-dev"
-                }
-            },
             "autoload": {
                 "classmap": [
-                    "CodeSniffer.php",
-                    "CodeSniffer/CLI.php",
-                    "CodeSniffer/Exception.php",
-                    "CodeSniffer/File.php",
-                    "CodeSniffer/Fixer.php",
-                    "CodeSniffer/Report.php",
-                    "CodeSniffer/Reporting.php",
-                    "CodeSniffer/Sniff.php",
-                    "CodeSniffer/Tokens.php",
-                    "CodeSniffer/Reports/",
-                    "CodeSniffer/Tokenizers/",
-                    "CodeSniffer/DocGenerators/",
-                    "CodeSniffer/Standards/AbstractPatternSniff.php",
-                    "CodeSniffer/Standards/AbstractScopeSniff.php",
-                    "CodeSniffer/Standards/AbstractVariableSniff.php",
-                    "CodeSniffer/Standards/IncorrectPatternException.php",
-                    "CodeSniffer/Standards/Generic/Sniffs/",
-                    "CodeSniffer/Standards/MySource/Sniffs/",
-                    "CodeSniffer/Standards/PEAR/Sniffs/",
-                    "CodeSniffer/Standards/PSR1/Sniffs/",
-                    "CodeSniffer/Standards/PSR2/Sniffs/",
-                    "CodeSniffer/Standards/Squiz/Sniffs/",
-                    "CodeSniffer/Standards/Zend/Sniffs/"
+                    "PHPUnit/"
                 ]
             },
             "notification-url": "https://packagist.org/downloads/",
+            "include-path": [
+                ""
+            ],
             "license": [
                 "BSD-3-Clause"
             ],
             "authors": [
                 {
-                    "name": "Greg Sherwood",
+                    "name": "Sebastian Bergmann",
+                    "email": "sb@sebastian-bergmann.de",
                     "role": "lead"
                 }
             ],
-            "description": "PHP_CodeSniffer tokenizes PHP, JavaScript and CSS files and detects violations of a defined set of coding standards.",
-            "homepage": "http://www.squizlabs.com/php-codesniffer",
+            "description": "Selenium Server integration for PHPUnit",
+            "homepage": "http://www.phpunit.de/",
             "keywords": [
-                "phpcs",
-                "standards"
+                "selenium",
+                "testing",
+                "xunit"
             ],
-            "time": "2015-12-11 00:12:46"
+            "time": "2013-02-02 16:03:01"
+        },
+        {
+            "name": "radig/auditable",
+            "version": "2.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/radig/auditable.git",
+                "reference": "af8b5031522ebd6d69daa0e694a65c1cb2935b48"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/radig/auditable/zipball/af8b5031522ebd6d69daa0e694a65c1cb2935b48",
+                "reference": "af8b5031522ebd6d69daa0e694a65c1cb2935b48",
+                "shasum": ""
+            },
+            "require": {
+                "composer/installers": "~1.0",
+                "php": ">=5.3.0"
+            },
+            "type": "cakephp-plugin",
+            "extra": {
+                "installer-name": "Auditable"
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Radig Soluções em TI",
+                    "email": "suporte@radig.com.br",
+                    "homepage": "http://www.radig.com.br",
+                    "role": "Author"
+                }
+            ],
+            "description": "Log all database changes",
+            "homepage": "https://github.com/radig/Auditable",
+            "keywords": [
+                "Audit",
+                "Auditable",
+                "cakephp",
+                "historic",
+                "log",
+                "radig"
+            ],
+            "time": "2013-09-10 22:04:14"
+        },
+        {
+            "name": "slywalker/boost_cake",
+            "version": "1.0.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/slywalker/cakephp-plugin-boost_cake.git",
+                "reference": "bb1fa0d96b2c2c8fad7b0ccfab2ca2f231f66c3e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/slywalker/cakephp-plugin-boost_cake/zipball/bb1fa0d96b2c2c8fad7b0ccfab2ca2f231f66c3e",
+                "reference": "bb1fa0d96b2c2c8fad7b0ccfab2ca2f231f66c3e",
+                "shasum": ""
+            },
+            "require": {
+                "composer/installers": "*",
+                "php": ">=5.3.0"
+            },
+            "suggest": {
+                "twbs/bootstrap": "Bootstrap framework"
+            },
+            "type": "cakephp-plugin",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Yasuo Harada",
+                    "email": "slywalker.net@gmail.com"
+                }
+            ],
+            "description": "BoostCake is a plugin for CakePHP using Bootstrap",
+            "homepage": "http://slywalker.github.io/cakephp-plugin-boost_cake/",
+            "keywords": [
+                "bootstrap",
+                "cakephp",
+                "twitter"
+            ],
+            "time": "2014-11-07 10:36:43"
+        },
+        {
+            "name": "symfony/event-dispatcher",
+            "version": "v2.8.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/event-dispatcher.git",
+                "reference": "ee278f7c851533e58ca307f66305ccb9188aceda"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/ee278f7c851533e58ca307f66305ccb9188aceda",
+                "reference": "ee278f7c851533e58ca307f66305ccb9188aceda",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.9"
+            },
+            "require-dev": {
+                "psr/log": "~1.0",
+                "symfony/config": "~2.0,>=2.0.5|~3.0.0",
+                "symfony/dependency-injection": "~2.6|~3.0.0",
+                "symfony/expression-language": "~2.6|~3.0.0",
+                "symfony/stopwatch": "~2.3|~3.0.0"
+            },
+            "suggest": {
+                "symfony/dependency-injection": "",
+                "symfony/http-kernel": ""
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.8-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\EventDispatcher\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony EventDispatcher Component",
+            "homepage": "https://symfony.com",
+            "time": "2016-01-13 10:28:07"
         },
         {
             "name": "symfony/yaml",
@@ -1719,6 +1594,359 @@
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
             "time": "2016-01-13 10:28:07"
+        },
+        {
+            "name": "trentrichardson/cakephp-scheduler",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/trentrichardson/cakephp-scheduler.git",
+                "reference": "25f67e028e046c011e5ee3babb1c1fb41c5a0433"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/trentrichardson/cakephp-scheduler/zipball/25f67e028e046c011e5ee3babb1c1fb41c5a0433",
+                "reference": "25f67e028e046c011e5ee3babb1c1fb41c5a0433",
+                "shasum": ""
+            },
+            "require": {
+                "composer/installers": "*",
+                "php": ">=5.3.6"
+            },
+            "type": "cakephp-plugin",
+            "extra": {
+                "installer-name": "Scheduler"
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Makes scheduling tasks in CakePHP much simpler.",
+            "homepage": "http://github.com/trentrichardson/cakephp-scheduler",
+            "keywords": [
+                "cakephp",
+                "cron job",
+                "scheduler",
+                "task"
+            ],
+            "time": "2015-03-19 00:01:14"
+        },
+        {
+            "name": "videlalvaro/php-amqplib",
+            "version": "v2.5.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/videlalvaro/php-amqplib.git",
+                "reference": "eb8f94d97c8e79900accf77343dbd7eca7f58506"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/videlalvaro/php-amqplib/zipball/eb8f94d97c8e79900accf77343dbd7eca7f58506",
+                "reference": "eb8f94d97c8e79900accf77343dbd7eca7f58506",
+                "shasum": ""
+            },
+            "require": {
+                "ext-bcmath": "*",
+                "ext-mbstring": "*",
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "3.7.*"
+            },
+            "suggest": {
+                "ext-sockets": "Use AMQPSocketConnection"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.4-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "PhpAmqpLib\\": "PhpAmqpLib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL-2.1"
+            ],
+            "authors": [
+                {
+                    "name": "Alvaro Videla"
+                }
+            ],
+            "description": "This library is a pure PHP implementation of the AMQP protocol. It's been tested against RabbitMQ.",
+            "homepage": "https://github.com/videlalvaro/php-amqplib/",
+            "keywords": [
+                "message",
+                "queue",
+                "rabbitmq"
+            ],
+            "time": "2015-08-11 12:30:09"
+        },
+        {
+            "name": "webtechnick/cakephp-database-logger-plugin",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/webtechnick/CakePHP-DatabaseLogger-Plugin.git",
+                "reference": "fbe91ca356a14ccea27cd667990c1a7fe17eefa6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/webtechnick/CakePHP-DatabaseLogger-Plugin/zipball/fbe91ca356a14ccea27cd667990c1a7fe17eefa6",
+                "reference": "fbe91ca356a14ccea27cd667990c1a7fe17eefa6",
+                "shasum": ""
+            },
+            "require": {
+                "composer/installers": "*",
+                "php": ">=5.2.0"
+            },
+            "type": "cakephp-plugin",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.x-dev"
+                },
+                "installer-name": "DatabaseLogger"
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nick Baker",
+                    "homepage": "http://www.webtechnick.com",
+                    "role": "Author"
+                }
+            ],
+            "description": "CakePHP Database Logger Plugin",
+            "homepage": "https://github.com/webtechnick/CakePHP-DatabaseLogger-Plugin",
+            "keywords": [
+                "cakephp",
+                "database",
+                "logging",
+                "logs",
+                "plugin"
+            ],
+            "time": "2015-03-02 18:30:57"
+        },
+        {
+            "name": "zackkitzmiller/tiny",
+            "version": "1.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/zackkitzmiller/tiny-php.git",
+                "reference": "55611994d9ca67d0a902c8d1d7d9fc7b5bfb0d7c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/zackkitzmiller/tiny-php/zipball/55611994d9ca67d0a902c8d1d7d9fc7b5bfb0d7c",
+                "reference": "55611994d9ca67d0a902c8d1d7d9fc7b5bfb0d7c",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "league/phpunit-coverage-listener": "~1.1",
+                "phpunit/phpunit": "~3.7.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "ZackKitzmiller": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jacob DeHart"
+                },
+                {
+                    "name": "Kyle Bragger"
+                },
+                {
+                    "name": "Zack Kitzmiller",
+                    "email": "zack@inrpce.com"
+                }
+            ],
+            "homepage": "http://github.com/zackkitzmiller/tiny-php",
+            "time": "2014-06-21 12:46:27"
+        }
+    ],
+    "packages-dev": [
+        {
+            "name": "cakephp/cakephp-codesniffer",
+            "version": "2.0.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/cakephp/cakephp-codesniffer.git",
+                "reference": "1e48e5f778a402f91c7f7adaafe08fbba0761fb7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/cakephp/cakephp-codesniffer/zipball/1e48e5f778a402f91c7f7adaafe08fbba0761fb7",
+                "reference": "1e48e5f778a402f91c7f7adaafe08fbba0761fb7",
+                "shasum": ""
+            },
+            "require": {
+                "squizlabs/php_codesniffer": "~2.4"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.1.*"
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "CakePHP Community",
+                    "homepage": "https://github.com/cakephp/cakephp-codesniffer/graphs/contributors"
+                }
+            ],
+            "description": "CakePHP CodeSniffer Standards",
+            "homepage": "http://cakephp.org",
+            "keywords": [
+                "codesniffer",
+                "framework"
+            ],
+            "time": "2015-11-29 16:32:42"
+        },
+        {
+            "name": "cakephp/debug_kit",
+            "version": "2.2.x-dev",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/cakephp/debug_kit.git",
+                "reference": "1a73aeb21df9df8b26baa5b384f4899ca1736975"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/cakephp/debug_kit/zipball/1a73aeb21df9df8b26baa5b384f4899ca1736975",
+                "reference": "1a73aeb21df9df8b26baa5b384f4899ca1736975",
+                "shasum": ""
+            },
+            "require": {
+                "composer/installers": "*",
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "cakephp/cakephp-codesniffer": "^1.0.0"
+            },
+            "type": "cakephp-plugin",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.2.x-dev"
+                },
+                "installer-name": "DebugKit"
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mark Story",
+                    "homepage": "http://mark-story.com",
+                    "role": "Author"
+                },
+                {
+                    "name": "CakePHP Community",
+                    "homepage": "https://github.com/cakephp/debug_kit/graphs/contributors"
+                }
+            ],
+            "description": "CakePHP Debug Kit",
+            "homepage": "https://github.com/cakephp/debug_kit",
+            "keywords": [
+                "cakephp",
+                "debug",
+                "kit"
+            ],
+            "time": "2015-09-28 13:31:22"
+        },
+        {
+            "name": "squizlabs/php_codesniffer",
+            "version": "2.5.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/squizlabs/PHP_CodeSniffer.git",
+                "reference": "6731851d6aaf1d0d6c58feff1065227b7fda3ba8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/6731851d6aaf1d0d6c58feff1065227b7fda3ba8",
+                "reference": "6731851d6aaf1d0d6c58feff1065227b7fda3ba8",
+                "shasum": ""
+            },
+            "require": {
+                "ext-tokenizer": "*",
+                "ext-xmlwriter": "*",
+                "php": ">=5.1.2"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.0"
+            },
+            "bin": [
+                "scripts/phpcs",
+                "scripts/phpcbf"
+            ],
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.x-dev"
+                }
+            },
+            "autoload": {
+                "classmap": [
+                    "CodeSniffer.php",
+                    "CodeSniffer/CLI.php",
+                    "CodeSniffer/Exception.php",
+                    "CodeSniffer/File.php",
+                    "CodeSniffer/Fixer.php",
+                    "CodeSniffer/Report.php",
+                    "CodeSniffer/Reporting.php",
+                    "CodeSniffer/Sniff.php",
+                    "CodeSniffer/Tokens.php",
+                    "CodeSniffer/Reports/",
+                    "CodeSniffer/Tokenizers/",
+                    "CodeSniffer/DocGenerators/",
+                    "CodeSniffer/Standards/AbstractPatternSniff.php",
+                    "CodeSniffer/Standards/AbstractScopeSniff.php",
+                    "CodeSniffer/Standards/AbstractVariableSniff.php",
+                    "CodeSniffer/Standards/IncorrectPatternException.php",
+                    "CodeSniffer/Standards/Generic/Sniffs/",
+                    "CodeSniffer/Standards/MySource/Sniffs/",
+                    "CodeSniffer/Standards/PEAR/Sniffs/",
+                    "CodeSniffer/Standards/PSR1/Sniffs/",
+                    "CodeSniffer/Standards/PSR2/Sniffs/",
+                    "CodeSniffer/Standards/Squiz/Sniffs/",
+                    "CodeSniffer/Standards/Zend/Sniffs/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Greg Sherwood",
+                    "role": "lead"
+                }
+            ],
+            "description": "PHP_CodeSniffer tokenizes PHP, JavaScript and CSS files and detects violations of a defined set of coding standards.",
+            "homepage": "http://www.squizlabs.com/php-codesniffer",
+            "keywords": [
+                "phpcs",
+                "standards"
+            ],
+            "time": "2016-01-19 23:39:10"
         }
     ],
     "aliases": [],
@@ -1731,6 +1959,8 @@
         "oldskool/whoops-cakephp": 20,
         "jeremyharris/cakephp-newrelic": 20,
         "leeoniya/dump-r": 20,
+        "backstageel/cakephp-reports": 20,
+        "webtechnick/cakephp-database-logger-plugin": 20,
         "cakephp/debug_kit": 20
     },
     "prefer-stable": false,

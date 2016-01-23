@@ -100,7 +100,7 @@ $this->BreadCumbs->addCrumb(__('Adicionar Docente'), '#');
                 <div class="form-group">
                     <div class="col-sm-12">
                         <?php echo $this->Form->label('docente_id', 'Nome do Docente'); ?>
-                        <?php echo $this->Form->input('docente_id', array('label' => false, 'div' => false, 'class' => 'form-control search-select')); ?>
+                        <?php echo $this->Form->input('docente_id', array('label' => false, 'div' => false, 'class' => 'form-control ajax-select')); ?>
                     </div>
                     <div class="col-sm-12">
                         <?php echo $this->Form->label('tipo_docente_turma_id', 'Tipo de Docente'); ?>
@@ -122,4 +122,46 @@ $this->BreadCumbs->addCrumb(__('Adicionar Docente'), '#');
     </div>
 
 </div>
-</form>
+<script>
+    <?php $this->Html->scriptStart(array('inline' => false, 'block' => 'scriptBottom')); ?>
+
+    $(".ajax-select").select2({
+        minimumInputLength: 2,
+        tags: [],
+        'theme':'bootstrap',
+        ajax: {
+            url: '<?php echo $this->Html->url(['controller'=>'docentes', 'action' => 'autocomplete'])?>',
+            dataType: 'json',
+            type: "GET",
+            delay: 250,
+            quietMillis: 50,
+            data: function (params) {
+                return {
+                    q: params.term, // search term
+                    page: params.page
+                };
+            },
+            processResults: function (data, params) {
+                // parse the results into the format expected by Select2
+                // since we are using custom formatting functions we do not need to
+                // alter the remote JSON data, except to indicate that infinite
+                // scrolling can be used
+
+                params.page = params.page || 1;
+
+                return {
+                    results:$.map(data, function(obj) {
+                        console.dir(obj);
+                        return { id: obj.id, text: obj.name+' - '+obj.nuit };
+                    }),
+                    pagination: {
+                        more: (params.page * 30) < data.total_count
+                    }
+                };
+            },
+            cache: true
+
+        }
+    });
+    <?php $this->Html->scriptEnd(); ?>
+    </script>
