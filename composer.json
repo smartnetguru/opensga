@@ -55,7 +55,8 @@
     "phpunit/phpunit-selenium": "1.2.*",
     "backstageel/cakephp-reports": "dev-master",
     "webtechnick/cakephp-database-logger-plugin":"dev-master",
-    "cakedc/search": "^2.5"
+    "cakedc/search": "^2.5",
+    "alliedhealthmedia/icing":"dev-master"
 
 
   },

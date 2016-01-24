@@ -1,5 +1,8 @@
 <?php
     App::uses('AppController', 'Controller');
+use Aws\Sns\MessageValidator\Message;
+use Aws\Sns\MessageValidator\MessageValidator;
+use Guzzle\Http\Client;
 
     /**
      * Messages Controller
@@ -19,19 +22,59 @@
 
 
         public function aws_bounces(){
-            $message = Aws\Sns\MessageValidator\Message::fromRawPostData();
 
-// Create a Guzzle client and send a request to the SubscribeURL
-            $client = new Guzzle\Http\Client();
-            $client->get($message->get('SubscribeURL'))->send();
+
+// Make sure the request is POST
+            if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+                http_response_code(405);
+                die;
+            }
+
+            try {
+                // Create a message from the post data and validate its signature
+                $message = Message::fromRawPostData();
+                $validator = new MessageValidator();
+                $validator->validate($message);
+            } catch (Exception $e) {
+                // Pretend we're not here if the message is invalid
+                http_response_code(404);
+                die;
+            }
+
+            if ($message->get('Type') === 'SubscriptionConfirmation') {
+                // Send a request to the SubscribeURL to complete subscription
+                (new Client)->get($message->get('SubscribeURL'))->send();
+            } elseif ($message->get('Type') === 'Notification') {
+                // Do something with the notification
+                $this->log(json_encode($message));
+            }
         }
 
         public function aws_complaints(){
-            $message = Aws\Sns\MessageValidator\Message::fromRawPostData();
+            // Make sure the request is POST
+            if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+                http_response_code(405);
+                die;
+            }
 
-// Create a Guzzle client and send a request to the SubscribeURL
-            $client = new Guzzle\Http\Client();
-            $client->get($message->get('SubscribeURL'))->send();
+            try {
+                // Create a message from the post data and validate its signature
+                $message = Message::fromRawPostData();
+                $validator = new MessageValidator();
+                $validator->validate($message);
+            } catch (Exception $e) {
+                // Pretend we're not here if the message is invalid
+                http_response_code(404);
+                die;
+            }
+
+            if ($message->get('Type') === 'SubscriptionConfirmation') {
+                // Send a request to the SubscribeURL to complete subscription
+                (new Client)->get($message->get('SubscribeURL'))->send();
+            } elseif ($message->get('Type') === 'Notification') {
+                // Do something with the notification
+                $this->log(json_encode($message));
+            }
         }
 
         public function beforeFilter() {

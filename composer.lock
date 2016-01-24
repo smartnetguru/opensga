@@ -4,9 +4,107 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "f95a5236fe1a5f01e6660c472d48daec",
-    "content-hash": "1d13589c031f3aa50afa7de1681233bc",
+    "hash": "80139eb591b39053c3b452c66229ca18",
+    "content-hash": "c00bca686dc68241c259fb59334ae96e",
     "packages": [
+        {
+            "name": "alliedhealthmedia/icing",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/AudiologyHoldings/Icing.git",
+                "reference": "04cba3a1697f7c731ee6757dd824cd8c781f496e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/AudiologyHoldings/Icing/zipball/04cba3a1697f7c731ee6757dd824cd8c781f496e",
+                "reference": "04cba3a1697f7c731ee6757dd824cd8c781f496e",
+                "shasum": ""
+            },
+            "require": {
+                "composer/installers": "*",
+                "php": ">=5.3.0"
+            },
+            "type": "cakephp-plugin",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.x-dev",
+                    "cakephp1.3": "1.3-dev"
+                },
+                "installer-name": "Icing"
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nick Baker",
+                    "homepage": "http://www.webtechnick.com",
+                    "role": "Author"
+                },
+                {
+                    "name": "Alan Blount",
+                    "homepage": "http://www.alliedhealthmedia.com",
+                    "role": "Author"
+                },
+                {
+                    "name": "Matt Reishus",
+                    "homepage": "http://www.alliedhealthmedia.com",
+                    "role": "Author"
+                },
+                {
+                    "name": "Mark Vince",
+                    "homepage": "http://www.alliedhealthmedia.com",
+                    "role": "Author"
+                },
+                {
+                    "name": "Chris Johnson",
+                    "homepage": "http://www.alliedhealthmedia.com",
+                    "role": "Author"
+                },
+                {
+                    "name": "Travis Reddell",
+                    "homepage": "http://www.alliedhealthmedia.com",
+                    "role": "Author"
+                },
+                {
+                    "name": "Becky Lemons",
+                    "homepage": "http://www.alliedhealthmedia.com",
+                    "role": "Author"
+                },
+                {
+                    "name": "Jeff Kolesnikowicz",
+                    "homepage": "http://www.alliedhealthmedia.com",
+                    "role": "Author"
+                },
+                {
+                    "name": "Roger Flynn",
+                    "homepage": "http://www.alliedhealthmedia.com",
+                    "role": "Author"
+                }
+            ],
+            "description": "CakePHP Icing Plugin - Portable Package of Handy Utilities for CakePHP",
+            "homepage": "https://github.com/AudiologyHoldings/Icing",
+            "keywords": [
+                "CKEditor",
+                "appfixture",
+                "apptest",
+                "cache",
+                "cakephp",
+                "csv",
+                "database cache",
+                "do",
+                "file upload",
+                "google calendar",
+                "icing",
+                "shell",
+                "summable",
+                "twitter",
+                "versionable"
+            ],
+            "time": "2015-11-30 17:48:35"
+        },
         {
             "name": "aws/aws-sdk-php",
             "version": "2.8.24",
@@ -1961,6 +2059,7 @@
         "leeoniya/dump-r": 20,
         "backstageel/cakephp-reports": 20,
         "webtechnick/cakephp-database-logger-plugin": 20,
+        "alliedhealthmedia/icing": 20,
         "cakephp/debug_kit": 20
     },
     "prefer-stable": false,

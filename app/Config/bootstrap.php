@@ -12,6 +12,7 @@
     CakePlugin::load('Scheduler');
     CakePlugin::load('NewRelic');
 CakePlugin::load('Search');
+CakePlugin::load('Icing');
 
     App::import('Log','CakeLog');
     CakePlugin::load('DatabaseLogger');
