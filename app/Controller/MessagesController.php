@@ -37,6 +37,11 @@
         public function beforeFilter() {
             parent::beforeFilter();
             $this->Auth->allow(['aws_complaints','aws_bounces']);
+            if($this->action == 'aws_complaints' || $this->action=='aws_bounces'){
+                $this->Security->csrfCheck = false;
+                $this->Security->validatePost = false;
+                $this->Security->unlockedActions= array('aws_complaints','aws_bounces');
+            }
 
         }
 
