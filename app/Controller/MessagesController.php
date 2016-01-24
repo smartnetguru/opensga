@@ -77,13 +77,40 @@ use Guzzle\Http\Client;
             }
         }
 
+        public function aws_deliveries(){
+            // Make sure the request is POST
+            if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+                http_response_code(405);
+                die;
+            }
+
+            try {
+                // Create a message from the post data and validate its signature
+                $message = Message::fromRawPostData();
+                $validator = new MessageValidator();
+                $validator->validate($message);
+            } catch (Exception $e) {
+                // Pretend we're not here if the message is invalid
+                http_response_code(404);
+                die;
+            }
+
+            if ($message->get('Type') === 'SubscriptionConfirmation') {
+                // Send a request to the SubscribeURL to complete subscription
+                (new Client)->get($message->get('SubscribeURL'))->send();
+            } elseif ($message->get('Type') === 'Notification') {
+                // Do something with the notification
+                $this->log(json_encode($message));
+            }
+        }
+
         public function beforeFilter() {
             parent::beforeFilter();
-            $this->Auth->allow(['aws_complaints','aws_bounces']);
-            if($this->action == 'aws_complaints' || $this->action=='aws_bounces'){
+            $this->Auth->allow(['aws_complaints','aws_bounces','aws_deliveries']);
+            if($this->action == 'aws_complaints' || $this->action=='aws_bounces' || $this->action=='aws_deliveries'){
                 $this->Security->csrfCheck = false;
                 $this->Security->validatePost = false;
-                $this->Security->unlockedActions= array('aws_complaints','aws_bounces');
+                $this->Security->unlockedActions= array('aws_complaints','aws_bounces','aws_deliveries');
             }
 
         }
