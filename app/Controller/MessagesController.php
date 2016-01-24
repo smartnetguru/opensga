@@ -46,7 +46,7 @@ use Guzzle\Http\Client;
                 (new Client)->get($message->get('SubscribeURL'))->send();
             } elseif ($message->get('Type') === 'Notification') {
                 // Do something with the notification
-                $this->log(json_encode($message));
+                $this->log(serialize($message));
             }
         }
 
@@ -73,7 +73,7 @@ use Guzzle\Http\Client;
                 (new Client)->get($message->get('SubscribeURL'))->send();
             } elseif ($message->get('Type') === 'Notification') {
                 // Do something with the notification
-                $this->log(json_encode($message));
+                $this->log(serialize($message));
             }
         }
 
@@ -100,7 +100,7 @@ use Guzzle\Http\Client;
                 (new Client)->get($message->get('SubscribeURL'))->send();
             } elseif ($message->get('Type') === 'Notification') {
                 // Do something with the notification
-                $this->log(json_encode($message));
+                $this->log(serialize($message));
             }
         }
 
