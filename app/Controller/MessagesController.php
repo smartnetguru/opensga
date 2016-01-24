@@ -17,6 +17,29 @@
          */
         public $components = ['Paginator'];
 
+
+        public function aws_bounces(){
+            $message = Aws\Sns\MessageValidator\Message::fromRawPostData();
+
+// Create a Guzzle client and send a request to the SubscribeURL
+            $client = new Guzzle\Http\Client();
+            $client->get($message->get('SubscribeURL'))->send();
+        }
+
+        public function aws_complaints(){
+            $message = Aws\Sns\MessageValidator\Message::fromRawPostData();
+
+// Create a Guzzle client and send a request to the SubscribeURL
+            $client = new Guzzle\Http\Client();
+            $client->get($message->get('SubscribeURL'))->send();
+        }
+
+        public function beforeFilter() {
+            parent::beforeFilter();
+            $this->Auth->allow(['aws_complaints','aws_bounces']);
+
+        }
+
         /**
          * delete method
          *

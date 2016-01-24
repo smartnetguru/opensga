@@ -780,8 +780,9 @@ class TurmasController extends AppController
         ]);
         $inscricaos = $this->Turma->Inscricao->find('all',
             ['conditions' => ['turma_id' => $turma_id, 'Inscricao.estado_inscricao_id' => 1]]);
-        //debug($inscricaos);
-        //debug();
+        debug($inscricaos);
+        debug($this->Turma->Inscricao->getLog());
+        die();
 
         $this->set(compact('inscricaos'));
     }
