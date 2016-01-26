@@ -24,7 +24,35 @@
 
         public $name = 'Alunos';
 
-        public function relatorios_estudantes_estrangeiros(){
+        public function relatorios_estudantes_estrangeiros()
+        {
+            $options = [
+                'conditions' => ['Entidade.pais_nascimento NOT' => 152],
+                'limit'=>3,
+                'group'      => ['UnidadeOrganica.name', 'Curso.name'],
+                //'fields'=>['UnidadeOrganica.name','Curso.name','Genero.name','count(*) as total']
+            ];
+            $options['joins'] = array(
+                array('table' => 'cursos',
+                      'alias' => 'Curso',
+                      'type' => 'left',
+                      'conditions' => array(
+                          'Curso.id = Aluno.curso_id'
+                      )
+                ),
+                array('table' => 'unidade_organicas',
+                      'alias' => 'UnidadeOrganica',
+                      'type' => 'left',
+                      'conditions' => array(
+                          'Curso.unidade_organica_id = UnidadeOrganica.id'
+                      )
+                ),
+
+
+            );
+            $this->Aluno->contain([ 'Entidade' => ['Genero', 'PaisNascimento']]);
+            $alunos = $this->Aluno->find('all', $options);
+            $this->set(compact('alunos'));
 
         }
 
@@ -165,11 +193,11 @@
 
                 $this->Aluno->contain([
                     'Entidade',
-                    'Curso'
+                    'Curso',
                 ]);
                 $this->Aluno->virtualFields['auto_complete'] = 'CONCAT(Aluno.codigo," - ",Entidade.name)';
                 $conditions = [
-                    'Aluno.codigo LIKE ' => '%' . $this->request->query['term'] . '%'
+                    'Aluno.codigo LIKE ' => '%' . $this->request->query['term'] . '%',
                 ];
                 if ($this->Aluno->Entidade->User->isFromFaculdade($this->Session->read('Auth.User.id'))) {
                     $conditions['Curso.unidade_organica_id'] = $this->Session->read('Auth.User.unidade_organica_id');
@@ -178,7 +206,7 @@
                     'fields'     => ['Aluno.auto_complete'],
                     'conditions' => $conditions,
                     'group'      => ['Aluno.codigo'],
-                    'limit'      => 20
+                    'limit'      => 20,
                 ]);
                 $codigos = Set::extract('../Aluno/auto_complete', $results);
 
@@ -192,7 +220,7 @@
             $this->Security->unlockedActions = [
                 'matricular_candidato',
                 'adicionar_estudante',
-                'faculdade_adicionar_estudante'
+                'faculdade_adicionar_estudante',
             ];
             $this->Auth->allow('get_estudante_azgo');
         }
@@ -227,7 +255,7 @@
                     $this->redirect([
                         'action' => $action_seguinte,
                         $candidato[''
-                        . '']['id']
+                        . '']['id'],
                     ]);
                 } else {
                     $this->Session->setFlash(__('Candidato Invalido'));
@@ -263,11 +291,11 @@
 
                 $this->Aluno->contain([
                     'Entidade' => [
-                        'Genero'
+                        'Genero',
                     ],
                     'Curso'    => [
-                        'UnidadeOrganica'
-                    ]
+                        'UnidadeOrganica',
+                    ],
                 ]);
                 $aluno = $this->Aluno->findById($this->request->data['CandidatoGraduacao']['aluno_id']);
 
@@ -289,8 +317,8 @@
                         'EntidadeContacto' => [
                             'entidade_id'      => $aluno['Aluno']['entidade_id'],
                             'tipo_contacto_id' => 2,
-                            'valor'            => $this->request->data['CandidatoGraduacao']['telemovel']
-                        ]
+                            'valor'            => $this->request->data['CandidatoGraduacao']['telemovel'],
+                        ],
                     ];
 
                     $this->Aluno->Entidade->EntidadeContacto->create();
@@ -301,17 +329,17 @@
                     $this->redirect([
                         'controller' => 'cerimonia_graduacaos',
                         'action'     => 'ver_detalhes',
-                        $this->request->data['CandidatoGraduacao']['cerimonia_graduacao_id']
+                        $this->request->data['CandidatoGraduacao']['cerimonia_graduacao_id'],
                     ]);
                 }
             }
             $this->Aluno->contain([
                 'Entidade' => [
-                    'Genero'
+                    'Genero',
                 ],
                 'Curso'    => [
-                    'UnidadeOrganica'
-                ]
+                    'UnidadeOrganica',
+                ],
             ]);
             $aluno = $this->Aluno->findById($aluno_id);
 
@@ -382,11 +410,11 @@
         {
             $this->Aluno->contain([
                 'Entidade' => [
-                    'Genero'
+                    'Genero',
                 ],
                 'Curso'    => [
-                    'UnidadeOrganica'
-                ]
+                    'UnidadeOrganica',
+                ],
             ]);
             $aluno = $this->Aluno->findById($alunoId);
             if ($this->request->is('post')) {
@@ -435,8 +463,8 @@
             $turmasDocente = $this->Aluno->Inscricao->Turma->DocenteTurma->find('all', [
                 'conditions' => [
                     'DocenteTurma.docente_id'              => $docente['Docente']['id'],
-                    'DocenteTurma.estado_docente_turma_id' => 1
-                ]
+                    'DocenteTurma.estado_docente_turma_id' => 1,
+                ],
             ]);
             $turmaIds = Hash::extract($turmasDocente, '{n}.DocenteTurma.turma_id');
 
@@ -472,7 +500,7 @@
             $this->Aluno->contain([
                 'Matricula'       => [
                     'PlanoEstudo',
-                    'Turno'
+                    'Turno',
                 ],
                 'Curso',
                 'Entidade'        => [
@@ -481,11 +509,11 @@
                     'PaisNascimento',
                     'Genero',
                     'DocumentoIdentificacao',
-                    'User'
+                    'User',
                 ],
                 'AlunoNivelMedio' => [
-                    'EscolaNivelMedio' => ['Provincia', 'Distrito']
-                ]
+                    'EscolaNivelMedio' => ['Provincia', 'Distrito'],
+                ],
             ]);
             $aluno = $this->Aluno->find('first', ['conditions' => ['Aluno.id' => $alunoId]]);
 
@@ -495,26 +523,26 @@
                             'id',
                             'disciplina_id',
                             'ano_curricular',
-                            'semestre_curricular'
+                            'semestre_curricular',
                         ],
                         'Disciplina' => [
-                            'fields' => ['id', 'name']
-                        ]
+                            'fields' => ['id', 'name'],
+                        ],
                     ],
                     'Matricula' => [
                         'fields'     => ['id', 'ano_lectivo_id'],
                         'AnoLectivo' => [
-                            'fields' => ['id', 'ano']
-                        ]
-                    ]
+                            'fields' => ['id', 'ano'],
+                        ],
+                    ],
                 ]
             );
             $inscricoes_activas = $this->Aluno->Inscricao->find('all', [
                 'conditions' => [
                     'Inscricao.aluno_id'
                                                     => $alunoId,
-                    'Inscricao.estado_inscricao_id' => 1
-                ]
+                    'Inscricao.estado_inscricao_id' => 1,
+                ],
             ]);
 
             $this->Aluno->Inscricao->contain([
@@ -523,29 +551,29 @@
                             'id',
                             'disciplina_id',
                             'ano_curricular',
-                            'semestre_curricular'
+                            'semestre_curricular',
                         ],
                         'Disciplina' => [
-                            'fields' => ['id', 'name']
-                        ]
+                            'fields' => ['id', 'name'],
+                        ],
                     ],
                     'Matricula' => [
                         'fields'     => ['id', 'ano_lectivo_id'],
                         'AnoLectivo' => [
-                            'fields' => ['id', 'ano']
-                        ]
-                    ]
+                            'fields' => ['id', 'ano'],
+                        ],
+                    ],
                 ]
             );
             $todas_inscricoes = $this->Aluno->Inscricao->find('all', [
                 'conditions' => [
                     'Inscricao.aluno_id' =>
-                        $alunoId
+                        $alunoId,
                 ],
                 'order'      => [
                     'Turma.ano_curricular',
-                    'Turma.semestre_curricular'
-                ]
+                    'Turma.semestre_curricular',
+                ],
             ]);
 
             $this->Aluno->Inscricao->contain([
@@ -554,25 +582,25 @@
                             'id',
                             'disciplina_id',
                             'ano_curricular',
-                            'semestre_curricular'
+                            'semestre_curricular',
                         ],
                         'Disciplina' => [
-                            'fields' => ['id', 'name']
-                        ]
+                            'fields' => ['id', 'name'],
+                        ],
                     ],
                     'Matricula' => [
                         'fields'     => ['id', 'ano_lectivo_id'],
                         'AnoLectivo' => [
-                            'fields' => ['id', 'ano']
-                        ]
-                    ]
+                            'fields' => ['id', 'ano'],
+                        ],
+                    ],
                 ]
             );
             $cadeiras_aprovadas = $this->Aluno->Inscricao->find('all', [
                 'conditions' => [
                     'Inscricao.aluno_id'
-                    => $alunoId
-                ]
+                    => $alunoId,
+                ],
             ]);
 
 
@@ -600,13 +628,13 @@
 
 
             $this->Aluno->FinanceiroPagamento->contain([
-                'FinanceiroTipoPagamento'
+                'FinanceiroTipoPagamento',
             ]);
             $pagamentos = $this->Aluno->FinanceiroPagamento->find('all', [
                 'conditions' => [
                     'FinanceiroPagamento
-        .aluno_id' => $alunoId
-                ]
+        .aluno_id' => $alunoId,
+                ],
             ]);
             //debug($pagamentos);
             $this->set('aluno', $aluno);
@@ -663,7 +691,7 @@
             $this->Aluno->contain([
                 'Entidade',
                 'AlunoNivelMedio' => ['EscolaNivelMedio'],
-                'Curso'           => ['UnidadeOrganica']
+                'Curso'           => ['UnidadeOrganica'],
             ]);
             $aluno = $this->Aluno->find('first', ['conditions' => ['Aluno.id' => $id]]);
             $this->request->data = $aluno;
@@ -675,8 +703,8 @@
                 'conditions' => [
                     'entidade_id'       => $aluno['Aluno']['entidade_id'],
                     'estado_objecto_id' => 1,
-                    'tipo_contacto_id'  => 7
-                ]
+                    'tipo_contacto_id'  => 7,
+                ],
             ]);
             if ($entidadeContacto) {
                 $quarteirao = $entidadeContacto['EntidadeContacto']['valor'];
@@ -695,11 +723,11 @@
         {
             $this->Aluno->contain([
                 'Entidade' => [
-                    'Genero'
+                    'Genero',
                 ],
                 'Curso'    => [
-                    'UnidadeOrganica'
-                ]
+                    'UnidadeOrganica',
+                ],
             ]);
             $aluno = $this->Aluno->findById($aluno_id);
             if ($this->request->is('post')) {
@@ -743,8 +771,8 @@
                 'Entidade' => [
                     'EntidadeContacto',
                     'Bairro',
-                    'Rua'
-                ]
+                    'Rua',
+                ],
             ]);
             $aluno = $this->Aluno->find('first', ['conditions' => ['Entidade.user_id' => $userId]]);
             if (empty($aluno)) {
@@ -778,7 +806,7 @@
         {
             $userId = $this->Session->read('Auth.User.id');
             $this->Aluno->contain([
-                'Entidade'
+                'Entidade',
             ]);
             $aluno = $this->Aluno->find('first', ['conditions' => ['Entidade.user_id' => $userId]]);
             if (empty($aluno)) {
@@ -813,7 +841,7 @@
             $requisicoes = $this->Aluno->RequisicoesPedido->getAllRequisicoesPedidoByEstudante($aluno['Aluno']['id']);
 
             $this->Aluno->FinanceiroPagamento->contain([
-                'FinanceiroTipoPagamento'
+                'FinanceiroTipoPagamento',
             ]);
             $pagamentos = $this->Aluno->FinanceiroPagamento->find('all',
                 ['conditions' => ['FinanceiroPagamento.aluno_id' => $aluno['Aluno']['id']]]);
@@ -845,11 +873,11 @@
 
                 $this->Aluno->contain([
                     'Curso'    => [
-                        'UnidadeOrganica'
+                        'UnidadeOrganica',
                     ],
                     'EstadoAluno',
                     'Entidade' => [
-                        'Genero'
+                        'Genero',
                     ],
                 ]);
                 $alunos = $this->Aluno->find('all', ['conditions' => $conditions]);
@@ -1000,7 +1028,7 @@
 
             $conditions = [
                 'Curso.unidade_organica_id' => $unidadeOrganicas,
-                'Aluno.plano_estudo_id is null'
+                'Aluno.plano_estudo_id is null',
             ];
 
 
@@ -1022,8 +1050,8 @@
             $unidadeOrganicaId = $this->Session->read('Auth.User.unidade_organica_id');
             $this->Aluno->contain([
                 'Entidade' => [
-                    'User'
-                ]
+                    'User',
+                ],
             ]);
             $aluno = $this->Aluno->getAlunoForAction($alunoId);
             if (!$this->Aluno->isFromUnidadeOrganica($alunoId, $unidadeOrganicaId)) {
@@ -1116,7 +1144,7 @@
             $aluno = $this->Aluno->read();
             $this->set(compact('aluno'));
 
-            //$this->layout = 'clipone_default';
+
         }
 
         public function faculdade_matricular_candidato($candidatoId)
@@ -1164,8 +1192,8 @@
             $estado_civil = $this->Aluno->Entidade->EstadoCivil->find('list');
             $cidadeNascimentos = $this->Aluno->Entidade->CidadeNascimento->find('list', [
                     'conditions' => [
-                        'provincia_id' => $candidato['Candidatura']['provincia_nascimento']
-                    ]
+                        'provincia_id' => $candidato['Candidatura']['provincia_nascimento'],
+                    ],
                 ]
             );
             $grauParentescos = $this->Aluno->GrauParentesco->find('list');
@@ -1180,7 +1208,7 @@
 
             $this->set('siga_page_title', 'Matriculas');
             $this->set('siga_page_overview', 'Formulario de Matricula de Novos Ingressos');
-            //$this->layout = 'clipone_default';
+
         }
 
         public function faculdade_mostrar_foto($codigo)
@@ -1210,9 +1238,9 @@
                     'name'      => 'fotografia',
                     'extension' => 'jpg',
                     'mimeType'  => [
-                        'docx' => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+                        'docx' => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
                     ],
-                    'path'      => $path
+                    'path'      => $path,
                 ];
                 $this->set($params);
             } else {
@@ -1242,18 +1270,18 @@
                             'id',
                             'disciplina_id',
                             'ano_curricular',
-                            'semestre_curricular'
+                            'semestre_curricular',
                         ],
                         'Disciplina' => [
-                            'fields' => ['id', 'name']
-                        ]
+                            'fields' => ['id', 'name'],
+                        ],
                     ],
                     'Matricula' => [
                         'fields'     => ['id', 'ano_lectivo_id'],
                         'AnoLectivo' => [
-                            'fields' => ['id', 'ano']
-                        ]
-                    ]
+                            'fields' => ['id', 'ano'],
+                        ],
+                    ],
                 ]
             );
             $inscricoes_activas = $this->Aluno->Inscricao->find('all',
@@ -1265,26 +1293,26 @@
                             'id',
                             'disciplina_id',
                             'ano_curricular',
-                            'semestre_curricular'
+                            'semestre_curricular',
                         ],
                         'Disciplina' => [
-                            'fields' => ['id', 'name']
-                        ]
+                            'fields' => ['id', 'name'],
+                        ],
                     ],
                     'Matricula' => [
                         'fields'     => ['id', 'ano_lectivo_id'],
                         'AnoLectivo' => [
-                            'fields' => ['id', 'ano']
-                        ]
-                    ]
+                            'fields' => ['id', 'ano'],
+                        ],
+                    ],
                 ]
             );
             $todas_inscricoes = $this->Aluno->Inscricao->find('all', [
                 'conditions' => ['Inscricao.aluno_id' => $id],
                 'order'      => [
                     'Turma.ano_curricular',
-                    'Turma.semestre_curricular'
-                ]
+                    'Turma.semestre_curricular',
+                ],
             ]);
 
             $this->Aluno->Inscricao->contain([
@@ -1293,18 +1321,18 @@
                             'id',
                             'disciplina_id',
                             'ano_curricular',
-                            'semestre_curricular'
+                            'semestre_curricular',
                         ],
                         'Disciplina' => [
-                            'fields' => ['id', 'name']
-                        ]
+                            'fields' => ['id', 'name'],
+                        ],
                     ],
                     'Matricula' => [
                         'fields'     => ['id', 'ano_lectivo_id'],
                         'AnoLectivo' => [
-                            'fields' => ['id', 'ano']
-                        ]
-                    ]
+                            'fields' => ['id', 'ano'],
+                        ],
+                    ],
                 ]
             );
             $cadeiras_aprovadas = $this->Aluno->Inscricao->find('all', ['conditions' => ['Inscricao.aluno_id' => $id]]);
@@ -1334,7 +1362,7 @@
 
 
             $this->Aluno->FinanceiroPagamento->contain([
-                'FinanceiroTipoPagamento'
+                'FinanceiroTipoPagamento',
             ]);
             $pagamentos = $this->Aluno->FinanceiroPagamento->find('all',
                 ['conditions' => ['FinanceiroPagamento.aluno_id' => $id]]);
@@ -1370,13 +1398,13 @@
                             'plugin'     => $plugin,
                             'controller' => $controller,
                             'action'     => $actionSeguinte,
-                            $aluno['Aluno']['id']
+                            $aluno['Aluno']['id'],
                         ]);
                     } elseif ($controller != null) {
                         $this->redirect([
                             'controller' => $controller,
                             'action'     => $actionSeguinte,
-                            $aluno['Aluno']['id']
+                            $aluno['Aluno']['id'],
                         ]);
                     } else {
                         $this->redirect(['action' => $actionSeguinte, $aluno['Aluno']['id']]);
@@ -1416,13 +1444,13 @@
                             'plugin'     => $plugin,
                             'controller' => $controller,
                             'action'     => $actionSeguinte,
-                            $aluno['Aluno']['id']
+                            $aluno['Aluno']['id'],
                         ]);
                     } elseif ($controller != null) {
                         $this->redirect([
                             'controller' => $controller,
                             'action'     => $actionSeguinte,
-                            $aluno['Aluno']['id']
+                            $aluno['Aluno']['id'],
                         ]);
                     } else {
                         $this->redirect(['action' => $actionSeguinte, $aluno['Aluno']['id']]);
@@ -1469,7 +1497,7 @@
             $this->Aluno->contain([
                 'Matricula'       => [
                     'PlanoEstudo',
-                    'Turno'
+                    'Turno',
                 ],
                 'Curso',
                 'Entidade'        => [
@@ -1478,11 +1506,11 @@
                     'PaisNascimento',
                     'Genero',
                     'DocumentoIdentificacao',
-                    'EstadoCivil'
+                    'EstadoCivil',
                 ],
                 'AlunoNivelMedio' => [
-                    'EscolaNivelMedio'
-                ]
+                    'EscolaNivelMedio',
+                ],
             ]);
             $aluno = $this->Aluno->find('first', ['conditions' => ['Aluno.id' => $aluno_id]]);
 
@@ -1503,25 +1531,25 @@
                             'disciplina_id',
                             'ano_curricular',
                             'semestre_curricular',
-                            'ano_lectivo_id'
+                            'ano_lectivo_id',
                         ],
                         'Disciplina' => [
-                            'fields' => ['id', 'name']
+                            'fields' => ['id', 'name'],
                         ],
-                        'AnoLectivo'
+                        'AnoLectivo',
                     ],
                     'Matricula' => [
                         'fields'     => ['id', 'ano_lectivo_id'],
                         'AnoLectivo' => [
-                            'fields' => ['id', 'ano']
-                        ]
+                            'fields' => ['id', 'ano'],
+                        ],
                     ],
-                    'Avaliacao' => []
+                    'Avaliacao' => [],
                 ]
             );
             $inscricaos = $this->Aluno->Inscricao->find('all', [
                 'conditions' => ['Inscricao.aluno_id' => $aluno_id],
-                'order'      => ['Turma.ano_curricular,Turma.semestre_curricular']
+                'order'      => ['Turma.ano_curricular,Turma.semestre_curricular'],
             ]);
 
             $this->set('has_foto_entidade', $this->Aluno->hasFoto($aluno['Aluno']['codigo']));
@@ -1573,7 +1601,7 @@
             $aluno = $this->Aluno->read();
             $this->set(compact('aluno'));
 
-            //$this->layout = 'clipone_default';
+
         }
 
         public function matricula_simples($aluno_id)
@@ -1622,7 +1650,7 @@
                         'estado_actual'          => 1,
                         'motivo_estado_aluno_id' => 15,
                         'observacao'             => 'Matricula Confirmada a Nivel Central',
-                        'data_mudanca'           => date('Y-m-d H:i:s')
+                        'data_mudanca'           => date('Y-m-d H:i:s'),
                     ];
                     if ($this->Aluno->alteraStatus($dataEstado)) {
                         $this->Session->setFlash('Matricula Confirmada com Sucesso', 'default',
@@ -1634,7 +1662,7 @@
 
             }
             $conditions = [
-                'Aluno.estado_aluno_id' => 14
+                'Aluno.estado_aluno_id' => 14,
             ];
 
             $this->paginate = [
@@ -1689,7 +1717,7 @@
             }
 
             $this->Aluno->Candidatura->contain([
-                'CidadeNascimento'
+                'CidadeNascimento',
             ]);
             $candidato = $this->Aluno->Candidatura->findByIdAndEstadoCandidaturaId($candidato_id, 2);
 
@@ -1732,8 +1760,8 @@
             $estado_civil = $this->Aluno->Entidade->EstadoCivil->find('list');
             $cidadeNascimentos = $this->Aluno->Entidade->CidadeNascimento->find('list', [
                     'conditions' => [
-                        'provincia_id' => $candidato['Candidatura']['provincia_nascimento']
-                    ]
+                        'provincia_id' => $candidato['Candidatura']['provincia_nascimento'],
+                    ],
                 ]
             );
             $grauParentescos = $this->Aluno->GrauParentesco->find('list');
@@ -1748,7 +1776,7 @@
 
             $this->set('siga_page_title', 'Matriculas');
             $this->set('siga_page_overview', 'Formulario de Matricula de Novos Ingressos');
-            //$this->layout = 'clipone_default';
+
         }
 
         public function mostrar_foto($codigo)
@@ -1778,9 +1806,9 @@
                     'name'      => 'fotografia',
                     'extension' => 'jpg',
                     'mimeType'  => [
-                        'docx' => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+                        'docx' => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
                     ],
-                    'path'      => $path
+                    'path'      => $path,
                 ];
                 $this->set($params);
             } else {
@@ -1798,7 +1826,7 @@
             if ($this->request->is('post')) {
 
                 $resultado = $this->Aluno->mudaCurso($this->request->data);
-                if ($resultado[0]===true) {
+                if ($resultado[0] === true) {
 
                     $this->Session->setFlash(__('Mudança de Curso efectuada com sucesso'), 'default',
                         ['class' => 'alert alert-success']);
@@ -1866,18 +1894,18 @@
                             'id',
                             'disciplina_id',
                             'ano_curricular',
-                            'semestre_curricular'
+                            'semestre_curricular',
                         ],
                         'Disciplina' => [
-                            'fields' => ['id', 'name']
-                        ]
+                            'fields' => ['id', 'name'],
+                        ],
                     ],
                     'Matricula' => [
                         'fields'     => ['id', 'ano_lectivo_id'],
                         'AnoLectivo' => [
-                            'fields' => ['id', 'ano']
-                        ]
-                    ]
+                            'fields' => ['id', 'ano'],
+                        ],
+                    ],
                 ]
             );
             $inscricoes_activas = $this->Aluno->Inscricao->find('all',
@@ -1889,26 +1917,26 @@
                             'id',
                             'disciplina_id',
                             'ano_curricular',
-                            'semestre_curricular'
+                            'semestre_curricular',
                         ],
                         'Disciplina' => [
-                            'fields' => ['id', 'name']
-                        ]
+                            'fields' => ['id', 'name'],
+                        ],
                     ],
                     'Matricula' => [
                         'fields'     => ['id', 'ano_lectivo_id'],
                         'AnoLectivo' => [
-                            'fields' => ['id', 'ano']
-                        ]
-                    ]
+                            'fields' => ['id', 'ano'],
+                        ],
+                    ],
                 ]
             );
             $todas_inscricoes = $this->Aluno->Inscricao->find('all', [
                 'conditions' => ['Inscricao.aluno_id' => $alunoId],
                 'order'      => [
                     'Turma.ano_curricular',
-                    'Turma.semestre_curricular'
-                ]
+                    'Turma.semestre_curricular',
+                ],
             ]);
 
             $this->Aluno->Inscricao->contain([
@@ -1917,18 +1945,18 @@
                             'id',
                             'disciplina_id',
                             'ano_curricular',
-                            'semestre_curricular'
+                            'semestre_curricular',
                         ],
                         'Disciplina' => [
-                            'fields' => ['id', 'name']
-                        ]
+                            'fields' => ['id', 'name'],
+                        ],
                     ],
                     'Matricula' => [
                         'fields'     => ['id', 'ano_lectivo_id'],
                         'AnoLectivo' => [
-                            'fields' => ['id', 'ano']
-                        ]
-                    ]
+                            'fields' => ['id', 'ano'],
+                        ],
+                    ],
                 ]
             );
             $cadeiras_aprovadas = $this->Aluno->Inscricao->find('all',
@@ -1958,7 +1986,7 @@
 
 
             $this->Aluno->FinanceiroPagamento->contain([
-                'FinanceiroTipoPagamento'
+                'FinanceiroTipoPagamento',
             ]);
             $pagamentos = $this->Aluno->FinanceiroPagamento->find('all',
                 ['conditions' => ['FinanceiroPagamento.aluno_id' => $alunoId]]);
@@ -1978,13 +2006,13 @@
                             'plugin'     => $plugin,
                             'controller' => $controller,
                             'action'     => $actionSeguinte,
-                            $aluno['Aluno']['id']
+                            $aluno['Aluno']['id'],
                         ]);
                     } elseif ($controller != null) {
                         $this->redirect([
                             'controller' => $controller,
                             'action'     => $actionSeguinte,
-                            $aluno['Aluno']['id']
+                            $aluno['Aluno']['id'],
                         ]);
                     } else {
                         $this->redirect(['action' => $actionSeguinte, $aluno['Aluno']['id']]);
@@ -2014,7 +2042,7 @@
             $this->paginate = [
                 'conditions' => $conditions,
                 'limit'      => 50,
-                'contain'    => ['Curso', 'BolsaTemporaria']
+                'contain'    => ['Curso', 'BolsaTemporaria'],
             ];
             $candidatos = $this->paginate('Candidatura');
 
@@ -2055,12 +2083,12 @@
 
             $this->Aluno->MudancaCurso->contain([
                 'Aluno'     => [
-                    'Entidade'
+                    'Entidade',
                 ],
                 'CursoNovo' => [
-                    'UnidadeOrganica'
+                    'UnidadeOrganica',
                 ],
-                'CursoAntigo'
+                'CursoAntigo',
             ]);
 
             $mudanca = $this->Aluno->MudancaCurso->findById($mudanca_curso_id);

@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "80139eb591b39053c3b452c66229ca18",
-    "content-hash": "c00bca686dc68241c259fb59334ae96e",
+    "hash": "28ce54aa5939169c16c9335399cd418c",
+    "content-hash": "d05d530c3d52666e77986d1bbf44c69e",
     "packages": [
         {
             "name": "alliedhealthmedia/icing",
@@ -1788,14 +1788,8 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/webtechnick/CakePHP-DatabaseLogger-Plugin.git",
+                "url": "https://github.com/backstageel/CakePHP-DatabaseLogger-Plugin.git",
                 "reference": "fbe91ca356a14ccea27cd667990c1a7fe17eefa6"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/webtechnick/CakePHP-DatabaseLogger-Plugin/zipball/fbe91ca356a14ccea27cd667990c1a7fe17eefa6",
-                "reference": "fbe91ca356a14ccea27cd667990c1a7fe17eefa6",
-                "shasum": ""
             },
             "require": {
                 "composer/installers": "*",
@@ -1808,7 +1802,6 @@
                 },
                 "installer-name": "DatabaseLogger"
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -1828,6 +1821,10 @@
                 "logs",
                 "plugin"
             ],
+            "support": {
+                "issues": "https://github.com/webtechnick/CakePHP-DatabaseLogger-Plugin/issues",
+                "source": "https://github.com/webtechnick/CakePHP-DatabaseLogger-Plugin"
+            },
             "time": "2015-03-02 18:30:57"
         },
         {

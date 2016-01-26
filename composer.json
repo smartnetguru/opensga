@@ -34,6 +34,13 @@
     "source": "http://infomoz.net",
     "docs": "http://infomoz.net"
   },
+  "repositories":[
+    {
+      "type":"git",
+      "url":"https://github.com/backstageel/CakePHP-DatabaseLogger-Plugin.git"
+
+    }
+  ],
   "require": {
     "cakephp/cakephp": "2.8.0-RC1",
     "radig/auditable": "@stable",

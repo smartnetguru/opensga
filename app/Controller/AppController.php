@@ -66,9 +66,8 @@ class AppController extends Controller
 
     public function beforeFilter()
     {
-        ini_set('memory_limit', '-1');
+        
         parent::beforeFilter();
-
 
         $config_language = $this->Session->read('Config.language');
         if ($config_language == null) {
