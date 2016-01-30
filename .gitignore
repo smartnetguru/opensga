@@ -6,6 +6,8 @@
 /app/tmp
 /app/Reports
 /app/Imports
+/Reports
+/Imports
 /Plugin
 /Vendor
 /build
