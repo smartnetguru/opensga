@@ -79,7 +79,6 @@ class AppController extends Controller
             AuditableConfig::$responsibleId = $this->Auth->user('id');
         }
         AuditableConfig::$Logger = ClassRegistry::init('Auditable.Logger');
-        $this->Security->blackHoleCallback = 'blackhole';
         $this->Security->csrfExpires = "+10 minutes";
         $this->Auth->authorize = ['Actions' => ['actionPath' => 'controllers']];
         $this->Auth->autoRedirect = false;
@@ -252,19 +251,6 @@ class AppController extends Controller
             'notificacoes'));
     }
 
-    public function blackhole($type)
-    {
-        if ($type == 'csrf') {
-            $this->Flash->warning('Algo Estranho Aconteceu com o Sistema. Os administradores ja foram notificados!');
-            $this->log('Erro de CSRF');
-            $this->redirect($this->referer());
-        } else {
-            $this->Flash->warning('Algo Estranho Aconteceu com o Sistema. Os administradores ja foram notificados!');
-            $this->log('blackhole' . $type);
-            $this->redirect($this->referer());
-        }
-
-    }
 
 
 }

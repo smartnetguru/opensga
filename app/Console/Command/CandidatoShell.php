@@ -296,6 +296,13 @@ class CandidatoShell extends AppShell {
 
 
 
+            $dataNascimento = null;
+            $dataNascimentoCell = trim($worksheet->getCell('O' . $linha_actual)->getFormattedValue());
+            if (!empty($dataNascimentoCell)) {
+                $dateInTimestampValue = PHPExcel_Shared_Date::ExcelToPHP($worksheet->getCell('O' . $linha_actual)->getValue());
+                $dataNascimento = date('Y-m-d',$dateInTimestampValue);
+            }
+
             if ($candidato) {
                 $this->Candidatura->id = $candidato['Candidatura']['id'];
                 $this->Candidatura->set('numero_estudante', $worksheet->getCell('A' . $linha_actual)
@@ -314,6 +321,9 @@ class CandidatoShell extends AppShell {
                 $this->Candidatura->set('estado_matricula_id', 5);
                 $this->Candidatura->set('nomes', $nomes);
                 $this->Candidatura->set('apelido', $apelido);
+                $this->Candidatura->set('data_nascimento', $dataNascimento);
+
+
 
 
                 if(!$this->Candidatura->save()){
@@ -340,7 +350,8 @@ class CandidatoShell extends AppShell {
                         'nome_curso'                     => $curso['Curso']['name'],
                         'estado_matricula_id'            => 5,
                         'nomes'                          => $nomes,
-                        'apelido'                        => $apelido
+                        'apelido'                        => $apelido,
+                        'data_nascimento'                        => $dataNascimento
 
                     ]
                 ];

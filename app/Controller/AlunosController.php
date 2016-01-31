@@ -147,6 +147,11 @@
         public function atribuir_bolsa_candidato($candidato_id)
         {
             $this->loadModel('Candidatura');
+            $this->Candidatura->contain([
+                'Curso'=>[
+                    'UnidadeOrganica'
+                ]
+            ]);
             $candidato = $this->Candidatura->findById($candidato_id);
             if ($this->request->is('post')) {
                 $this->loadModel('BolsaTemporaria');
@@ -2023,6 +2028,10 @@
             $this->set(compact('actionSeguinte', 'codigos'));
         }
 
+        /**
+         * @todo Enviar requests via Get
+         * @todo activar paginacao
+         */
         public function pesquisar_candidato()
         {
             $conditions = [];
@@ -2036,11 +2045,12 @@
             }
 
             $conditions['Candidatura.estado_candidatura_id'] = [2, 3];
-            $conditions['Candidatura.ano_lectivo_admissao'] = 2015;
+            $conditions['Candidatura.ano_lectivo_admissao'] = Configure::read('OpenSGA.ano_lectivo');
             $this->paginate = [
                 'conditions' => $conditions,
                 'limit'      => 50,
-                'contain'    => ['Curso', 'BolsaTemporaria'],
+                'contain'    => ['Curso', 'BolsaTemporaria'=>['BolsaTipoBolsa']],
+                'order'=>['Candidatura.apelido','Candidatura.name']
             ];
             $candidatos = $this->paginate('Candidatura');
 

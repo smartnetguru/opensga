@@ -24,7 +24,7 @@ $this->Html->addCrumb('Página Inicial', '/');
         </div>
         <div class="col-sm-2">
             <?php echo $this->Html->link('<i class="fa fa-pencil fa-2x"></i>	Bolsas de Estudos',
-                ['controller' => 'bolsa_bolsas', 'action' => 'index'],
+                ['controller' => 'alunos', 'action' => 'pesquisar_candidato'],
                 ['escape' => false, 'class' => 'btn btn-icon btn-block']) ?>
 
         </div>
