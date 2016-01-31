@@ -26,14 +26,4 @@
         </ul>
 
     </div>
-    <div class="col-sm-12">
-        <?php if (isset($siga_page_title)) { ?>
-            <div class="page-header">
-                <h1><?php echo $siga_page_title ?>
-                    <small><?php echo $siga_page_overview ?></small>
-                </h1>
-            </div>
-        <?php } ?>
-        <!-- end: PAGE TITLE & BREADCRUMB -->
-    </div>
 </div>

@@ -3,6 +3,7 @@
     class AjaxController extends AppController
     {
 
+        public $uses = [];
         public function beforeFilter()
         {
             parent::beforeFilter();

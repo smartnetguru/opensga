@@ -157,7 +157,19 @@
             }
             $data['User']['password'] = Security::hash($data['User']['password'], 'blowfish');
             if ($this->save($data)) {
-                return $this->id;
+                $arrayGrupo = [
+                    'GroupsUser'=>[
+                        'user_id'=>$this->id,
+                        'group_id'=>$data['User']['group_id']
+                    ]
+                ];
+                $this->GroupsUser->create();
+                if($this->GroupsUser->save($arrayGrupo)){
+                    return $this->id;
+                } else{
+                    return false;
+                }
+
             }
 
             return false;

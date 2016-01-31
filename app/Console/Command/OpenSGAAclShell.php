@@ -589,6 +589,12 @@
 
                         $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/perfil_estudante";
 
+                        $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Matriculas/print_comprovativo_matricula";
+
+                        $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/print_comprovativo_mudanca_curso";
+
+                        $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Matriculas/print_comprovativo_renovacao_matricula";
+
                     } elseif (in_array('DRA_DR', $unidadesOrganicas)) {
                         $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/index";
 

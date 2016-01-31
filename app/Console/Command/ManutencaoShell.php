@@ -280,5 +280,13 @@
             }
         }
 
+        public function ajustaAlunosCurso(){
+            $alunos = $this->Aluno->find('all',['conditions'=>['curso_id is null']]);
+            foreach($alunos as $aluno){
+                debug($aluno);
+            }
+        }
+
+
 
     }

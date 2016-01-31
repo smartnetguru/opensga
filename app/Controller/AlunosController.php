@@ -1769,13 +1769,11 @@
             $simNaoRespostas = $this->SimNaoResposta->find('list');
 
             $naturalidade = '';
+            $necessidadeEspeciais = $this->Aluno->Entidade->EntidadeNecessidade->NecessidadeEspecial->find('list');
             $this->set(compact('candidato', 'cursos', 'paises', 'provincias', 'documento_identificacaos',
                 'areatrabalhos',
                 'generos', 'cidadeNascimentos', 'proveniencianomes', 'cidades', 'turnos', 'escolaNivelMedios',
-                'estado_civil', 'naturalidade', 'grauParentescos', 'simNaoRespostas'));
-
-            $this->set('siga_page_title', 'Matriculas');
-            $this->set('siga_page_overview', 'Formulario de Matricula de Novos Ingressos');
+                'estado_civil', 'naturalidade', 'grauParentescos', 'simNaoRespostas','necessidadeEspeciais'));
 
         }
 

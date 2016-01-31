@@ -1372,8 +1372,8 @@
                 $data['Entidade']['telemovel'] = $data['EntidadeContacto'][2];
                 $data['Entidade']['documento_identificacao_id'] = $data['EntidadeIdentificacao']['documento_identificacao_id'];
                 $data['Entidade']['documento_identificacao_numero'] = $data['EntidadeIdentificacao']['numero'];
-                //$data['Entidade']['documento_identificacao_data_emissao'] =
-                //$data['EntidadeIdentificacao']['data_emissao'];
+                $data['Entidade']['documento_identificacao_data_emissao'] =
+                    $data['EntidadeIdentificacao']['data_emissao'];
                 $data['Entidade']['estado_entidade_id'] = 1;
                 //$data['Entidade']['documento_identificacao_local_emissao'] =
                 //$data['EntidadeIdentificacao']['local_emissao'];

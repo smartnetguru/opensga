@@ -82,12 +82,3 @@
 
     </div>
 
-<?php $this->Html->scriptStart(['inline' => false, 'block' => 'scriptBottom']); ?>
-    $(document).ready(function() {
-    $('input').iCheck({
-    checkboxClass: 'icheckbox_minimal-green',
-    radioClass: 'iradio_minimal',
-    increaseArea: '20%' // optional
-    });
-    });
-<?php $this->Html->scriptEnd(); ?>

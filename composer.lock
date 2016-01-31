@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "28ce54aa5939169c16c9335399cd418c",
-    "content-hash": "d05d530c3d52666e77986d1bbf44c69e",
+    "hash": "deb65386df6b527cea4450186a10e91f",
+    "content-hash": "deba90626f991c2bf531e0632a789167",
     "packages": [
         {
             "name": "alliedhealthmedia/icing",
@@ -107,16 +107,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "2.8.24",
+            "version": "2.8.25",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "54b67f902bb2c5bbab481bc3c46537752a018830"
+                "reference": "852cf2f712443cb6a42f92f365a06eff8997eaa6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/54b67f902bb2c5bbab481bc3c46537752a018830",
-                "reference": "54b67f902bb2c5bbab481bc3c46537752a018830",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/852cf2f712443cb6a42f92f365a06eff8997eaa6",
+                "reference": "852cf2f712443cb6a42f92f365a06eff8997eaa6",
                 "shasum": ""
             },
             "require": {
@@ -166,7 +166,54 @@
                 "s3",
                 "sdk"
             ],
-            "time": "2015-11-16 22:34:08"
+            "time": "2016-01-26 01:52:42"
+        },
+        {
+            "name": "backstageel/cakephp-rabbitmq",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/backstageel/cakephp-rabbitmq.git",
+                "reference": "65ec8804769d51144ba8b40450ce6d662b111850"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/backstageel/cakephp-rabbitmq/zipball/65ec8804769d51144ba8b40450ce6d662b111850",
+                "reference": "65ec8804769d51144ba8b40450ce6d662b111850",
+                "shasum": ""
+            },
+            "require": {
+                "composer/installers": "~1.0",
+                "php": ">=5.3.0",
+                "videlalvaro/php-amqplib": "2.5.*"
+            },
+            "type": "cakephp-plugin",
+            "extra": {
+                "installer-name": "RabbitMQ"
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Elisio Leonardo",
+                    "email": "elisio.leonardo@gmail.com",
+                    "homepage": "http://infomoz.net",
+                    "role": "Author"
+                }
+            ],
+            "description": "A CakePHP Plugin to Interact with RabbitMQ",
+            "homepage": "https://infomoz.net",
+            "keywords": [
+                "AMQP",
+                "cakephp",
+                "infomoz",
+                "mozambique",
+                "queues",
+                "rabbimq"
+            ],
+            "time": "2016-01-26 12:16:08"
         },
         {
             "name": "backstageel/cakephp-reports",
@@ -174,12 +221,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/backstageel/cakephp-reports.git",
-                "reference": "1ecb20dadeae27c46d0bcade92ed239bc04c921a"
+                "reference": "36937960635b0c6557ec2f6eb5c99de69d146677"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/backstageel/cakephp-reports/zipball/1ecb20dadeae27c46d0bcade92ed239bc04c921a",
-                "reference": "1ecb20dadeae27c46d0bcade92ed239bc04c921a",
+                "url": "https://api.github.com/repos/backstageel/cakephp-reports/zipball/36937960635b0c6557ec2f6eb5c99de69d146677",
+                "reference": "36937960635b0c6557ec2f6eb5c99de69d146677",
                 "shasum": ""
             },
             "require": {
@@ -213,7 +260,7 @@
                 "mozambique",
                 "reports"
             ],
-            "time": "2016-01-21 17:33:33"
+            "time": "2016-01-26 09:48:14"
         },
         {
             "name": "cakedc/migrations",
@@ -1789,7 +1836,7 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/backstageel/CakePHP-DatabaseLogger-Plugin.git",
-                "reference": "fbe91ca356a14ccea27cd667990c1a7fe17eefa6"
+                "reference": "cd15a73e98371bc88bd9a15e4342172539730c60"
             },
             "require": {
                 "composer/installers": "*",
@@ -1825,7 +1872,7 @@
                 "issues": "https://github.com/webtechnick/CakePHP-DatabaseLogger-Plugin/issues",
                 "source": "https://github.com/webtechnick/CakePHP-DatabaseLogger-Plugin"
             },
-            "time": "2015-03-02 18:30:57"
+            "time": "2016-01-25 11:52:11"
         },
         {
             "name": "zackkitzmiller/tiny",
@@ -2051,6 +2098,7 @@
         "radig/auditable": 0,
         "markstory/acl_extras": 20,
         "cakedc/migrations": 0,
+        "backstageel/cakephp-rabbitmq": 20,
         "oldskool/whoops-cakephp": 20,
         "jeremyharris/cakephp-newrelic": 20,
         "leeoniya/dump-r": 20,

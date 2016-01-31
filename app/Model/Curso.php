@@ -250,6 +250,10 @@ class Curso extends AppModel
         $datasource = $this->getDataSource();
         $datasource->begin();
 
+        if(empty($data['Curso']['codigo_admissao'])){
+            $data['Curso']['codigo_admissao'] = $data['Curso']['codigo'];
+        }
+
         $this->create();
         if ($this->save($data)) {
             $array_curso_turno = [

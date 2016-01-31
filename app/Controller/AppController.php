@@ -66,7 +66,7 @@ class AppController extends Controller
 
     public function beforeFilter()
     {
-        
+
         parent::beforeFilter();
 
         $config_language = $this->Session->read('Config.language');

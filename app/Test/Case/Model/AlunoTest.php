@@ -16,6 +16,7 @@
         public $fixtures = [
             'app.aluno',
             'app.entidade',
+            'app.groups_user',
             'app.historico_curso',
             'app.entidade_contacto',
             'app.entidade_identificacao',
@@ -36,7 +37,8 @@
             'app.disciplina_plano_estudo',
             'app.escola_nivel_medio',
             'app.rua',
-            'app.mudanca_curso'
+            'app.mudanca_curso',
+
         ];
 
 
@@ -116,7 +118,7 @@
                     'nome_emergencia'            => 'Elisio Leonardo',
                     'telemovel_emergencia'       => '+258826489374',
                     'parentesco_encarregado'     => '1',
-                    'codigo'                     => '20072041017'
+                    'codigo'                     => '20072041017',
                 ],
                 'Entidade'              => [
                     'apelido'              => 'Leonardo',
@@ -130,33 +132,33 @@
                     'pais_nascimento'      => '152',
                     'provincia_nascimento' => '1',
                     'cidade_nascimento'    => '44',
-                    'name'                 => 'Elisio Leonardo'
+                    'name'                 => 'Elisio Leonardo',
                 ],
                 'Curso'                 => [
-                    'unidade_organica_id' => '3'
+                    'unidade_organica_id' => '3',
                 ],
                 'AlunoNivelMedio'       => [
                     'EscolaNivelMedio'      => [
                         'provincia_id' => '1',
-                        'distrito_id'  => '44'
+                        'distrito_id'  => '44',
                     ],
                     'escola_nivel_medio_id' => '',
                     'nova_escola_anterior'  => 'Escola Secundaria Samora Machel',
                     'ano_conclusao'         => '2006',
-                    'nota_final'            => '15'
+                    'nota_final'            => '15',
                 ],
                 'EntidadeContacto'      => [
-                    (int)2 => '826489374'
+                    (int)2 => '826489374',
                 ],
                 'EntidadeIdentificacao' => [
                     'documento_identificacao_id' => '1',
                     'numero'                     => '1101023525320',
                     'local_emissao'              => 'Maputo',
-                    'data_emissao'               => '2015-08-11'
+                    'data_emissao'               => '2015-08-11',
                 ],
                 'Matricula'             => [
-                    'user_id' => '42646'
-                ]
+                    'user_id' => '42646',
+                ],
             ];
             $resultado = $this->Aluno->cadastraAluno($data);
             $this->assertSame(true, $resultado);
@@ -170,7 +172,7 @@
                     'data_matricula'             => '2015-08-12',
                     'certificado_nivel_anterior' => '1',
                     'recenseamento_militar'      => '1',
-                    'codigo'                     => '200720410173'
+                    'codigo'                     => '200720410173',
                 ],
                 'Entidade'              => [
                     'apelido'         => 'Leonardo',
@@ -179,18 +181,18 @@
                     'data_nascimento' => '1989-02-09',
                 ],
                 'Curso'                 => [
-                    'unidade_organica_id' => '3'
+                    'unidade_organica_id' => '3',
                 ],
                 'EntidadeContacto'      => [
-                    '2' => '826489374'
+                    '2' => '826489374',
                 ],
                 'EntidadeIdentificacao' => [
                     'documento_identificacao_id' => '1',
                     'numero'                     => '110102352532034',
                 ],
                 'Matricula'             => [
-                    'user_id' => '1'
-                ]
+                    'user_id' => '1',
+                ],
             ];
             $resultado2 = $this->Aluno->cadastraAluno($data2);
             $this->assertSame(true, $resultado2);
@@ -208,7 +210,7 @@
                 'HistoricoCurso' => [
                     'data_conclusao' => '2015-07-14',
                     'nota_final'     => '12',
-                    'funcionario_id' => '26'
+                    'funcionario_id' => '26',
                 ],
                 'Aluno'          => [
                     'observacao' => '',
@@ -220,8 +222,8 @@
                         'tmp_name' => '',
                         'error'    => 4,
                         'size'     => 0,
-                    ]
-                ]
+                    ],
+                ],
             ];
             $resultado = $this->Aluno->concluirNivel($data);
             $this->assertTrue($resultado);
@@ -489,10 +491,13 @@
             $this->markTestIncomplete('testIsRegular not implemented.');
         }
 
+
+
         /**
          * testMatriculaNovoIngresso method
          *
          * @return void
+         * @TODO testar cadastro de uma entidade existente
          */
         public function testMatriculaNovoIngresso()
         {
@@ -500,69 +505,68 @@
                 'EntidadeIdentificacao', 'EntidadeContacto', 'AlunoNivelMedio', 'HistoricoCurso', 'Matricula');
             $data = [
                 'Aluno'                 => [
-                    'codigo'                     => '201462262',
+                    'codigo'                     => '20155638',
                     'certificado_nivel_anterior' => '1',
                     'recenseamento_militar'      => '1',
-                    'nome_emergencia'            => 'Elisio Leonardo',
-                    'telemovel_emergencia'       => '826489374',
-                    'parentesco_encarregado'     => 1,
-                    'curso_id'                   => '257',
-                    'unidade_organica_id'        => '257',
-                    'numero_estudante'           => '201462262',
-                    'aluno_via_admissao_id'      => '13',
-                    'ano_ingresso'               => '2014'
+                    'curso_id'                   => '5',
+                    'unidade_organica_id'        => '249',
+                    'numero_estudante'           => '20155638',
+                    'aluno_via_admissao_id'      => '',
+                    'ano_ingresso'               => '2015',
                 ],
                 'Entidade'              => [
-                    'apelido'              => 'Massamba',
-                    'nomes'                => 'Sandra Fazenete Picardo',
+                    'apelido'              => 'Torikka',
+                    'nomes'                => 'Niina Hannele',
                     'genero_id'            => '1',
-                    'data_nascimento'      => '2014-09-15',
-                    'estado_civil'         => '3',
-                    'nome_pai'             => 'Teste',
-                    'nome_mae'             => 'Yeste',
-                    'naturalidade'         => 'Teste',
+                    'data_nascimento'      => '2015-12-29',
+                    'estado_civil'         => '1',
+                    'nome_pai'             => 'Chigalo Sande',
+                    'nome_mae'             => 'Chuma Mafanhe',
+                    'naturalidade'         => 'Chimoio',
                     'pais_nascimento'      => '152',
-                    'provincia_nascimento' => '9',
-                    'cidade_nascimento'    => '111',
-                    'name'                 => 'Sandra Fazenete Picardo Massamba'
+                    'provincia_nascimento' => '7',
+                    'cidade_nascimento'    => '76',
+                    'name'                 => 'Niina Hannele Torikka',
+                    'nuit'                 => '786587687',
                 ],
                 'Candidatura'           => [
-                    'nome_faculdade' => 'Faculdade de Ciencias',
-                    'nome_curso'     => 'Mestrado em Recursos HÃ­dricos e Geohidrologia'
+                    'nome_faculdade' => '',
+                    'nome_curso'     => 'Mestrado em Tecnologia e Utilização de Madeira',
                 ],
                 'AlunoNivelMedio'       => [
                     'EscolaNivelMedio'      => [
                         'pais_id'      => '152',
-                        'provincia_id' => '',
-                        'distrito_id'  => ''
+                        'provincia_id' => '1',
+                        'distrito_id'  => '1',
                     ],
-                    'escola_nivel_medio_id' => '4',
-                    'nova_escola_anterior'  => '',
-                    'ano_conclusao'         => '328798',
-                    'nota_final'            => '12'
+                    'escola_nivel_medio_id' => '3',
+                    'ano_conclusao'         => '2010',
+                    'nota_final'            => '10',
                 ],
                 'EntidadeContacto'      => [
-                    (int)11 => '152',
-                    (int)10 => '',
-                    (int)9  => '',
-                    (int)6  => '',
-                    (int)5  => '',
-                    (int)7  => '',
-                    (int)8  => '',
-                    (int)2  => '',
-                    (int)1  => ''
+                    (int)2 => '826489374',
                 ],
                 'EntidadeIdentificacao' => [
-                    'documento_identificacao_id' => '4',
-                    'numero'                     => '',
-                    'local_emissao'              => '',
-                    'data_emissao'               => '',
-                    'data_validade'              => ''
+                    'documento_identificacao_id' => '1',
+                    'numero'                     => '5435454',
+                    'data_emissao' => '2016-01-12',
+
+
+                ],
+                'nessecidade_especial'  => [
+                    (int)1 => '1',
+                    (int)2 => '1',
+                    (int)3 => '0',
+                    (int)4 => '1',
+                    (int)5 => '0',
+                    (int)6 => '0',
+                    (int)7 => '1',
+                    (int)8 => '1',
                 ],
                 'Dados'                 => [
                     'user_id'          => '42646',
-                    'numero_candidato' => '36726'
-                ]
+                    'numero_candidato' => '64653',
+                ],
             ];
 
             $matriculado = $this->Aluno->MatriculaNovoIngresso($data);
@@ -576,23 +580,23 @@
          */
         public function testMudaCurso()
         {
-            $data = array(
-                'Aluno' => array(
+            $data = [
+                'Aluno' => [
                     'numero_estudante_atribuido' => '',
-                    'data_mudanca' => '2016-01-21',
-                    'curso_id' => '5',
-                    'observacao' => 'gdrgfdgdf',
-                    'aluno_id' => '24',
-                    'curso_antigo' => '233',
-                    'anexo_url' => array(
-                        'name' => '',
-                        'type' => '',
+                    'data_mudanca'               => '2016-01-21',
+                    'curso_id'                   => '5',
+                    'observacao'                 => 'gdrgfdgdf',
+                    'aluno_id'                   => '24',
+                    'curso_antigo'               => '233',
+                    'anexo_url'                  => [
+                        'name'     => '',
+                        'type'     => '',
                         'tmp_name' => '',
-                        'error' => (int) 4,
-                        'size' => (int) 0
-                    )
-                )
-            );
+                        'error'    => (int)4,
+                        'size'     => (int)0,
+                    ],
+                ],
+            ];
 
 
             $resultado = $this->Aluno->mudaCurso($data);
@@ -634,7 +638,7 @@
                     'naturalidade'         => '',
                     'pais_nascimento'      => '152',
                     'provincia_nascimento' => '',
-                    'cidade_nascimento'    => ''
+                    'cidade_nascimento'    => '',
                 ],
                 'EntidadeContacto'      => [
                     (int)11 => '',
@@ -645,21 +649,21 @@
                     (int)7  => '',
                     (int)8  => '',
                     (int)2  => '826659090',
-                    (int)1  => 'elisio.leonardo.teste@elisio.com'
+                    (int)1  => 'elisio.leonardo.teste@elisio.com',
                 ],
                 'Aluno'                 => [
                     'nome_emergencia'        => '',
                     'telemovel_emergencias'  => '',
                     'parentesco_encarregado' => '',
-                    'aluno_id'               => 1
+                    'aluno_id'               => 1,
                 ],
                 'EntidadeIdentificacao' => [
                     'documento_identificacao_id' => '',
                     'numero'                     => '',
                     'local_emissao'              => '',
                     'data_emissao'               => '',
-                    'data_validade'              => ''
-                ]
+                    'data_validade'              => '',
+                ],
             ];
 
             $resultado = $this->Aluno->updateAluno($data);

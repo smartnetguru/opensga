@@ -64,10 +64,6 @@ CakePlugin::load('Icing');
     App::uses('DatabaseReader', 'Lib');
     App::uses('CakeNumber', 'Utility');
     App::uses('ClassRegistry', 'Utility');
-    App::uses('NotificationListener', 'Event');
-    App::uses('CakeEventManager', 'Event');
-    App::uses('CakeEventListener', 'Event');
-
     Configure::config('database', new DatabaseReader());
     Configure::load('database', 'database');
 
@@ -93,27 +89,14 @@ CakePlugin::load('Icing');
     ]);
 
 
-    /**
-     * Configure the Exception handler used for uncaught exceptions.  By default,
-     * ErrorHandler::handleException() is used. It will display a HTML page for the exception, and
-     * while debug > 0, framework errors like Missing Controller will be displayed.  When debug = 0,
-     * framework errors will be coerced into generic HTTP errors.
-     *
-     * Options:
-     *
-     * - `handler` - callback - The callback to handle exceptions. You can set this to any callback type,
-     *   including anonymous functions.
-     * - `renderer` - string - The class responsible for rendering uncaught exceptions.  If you choose a custom class you
-     *   should place the file for that class in app/Error. This class needs to implement a render method.
-     * - `log` - boolean - Should Exceptions be logged?
-     *
-     * @see ErrorHandler for more information on exception handling and configuration.
-     */
+    App::uses('AppErrorHandler', 'Lib/Exception');
+    App::uses('AppException', 'Lib/Exception');
     Configure::write('Exception', array(
-        'handler' => 'ErrorHandler::handleException',
+        'handler' => 'AppErrorHandler::handleException',
         'renderer' => 'ExceptionRenderer',
         'log' => true
     ));
+
 
     if(Configure::read('debug')!=0){
         CakePlugin::load('WhoopsCakephp', array('bootstrap' => true));
@@ -147,9 +130,7 @@ CakePlugin::load('Icing');
 
 
 
-//$matricula = ClassRegistry::init('Matricula')
-    $notifications = new NotificationListener();
-    CakeEventManager::instance()->attach($notifications);
+
 
 
 // PHP5.3 namespace loader for Cake2.x
@@ -196,3 +177,7 @@ CakePlugin::load('Icing');
 
 CakePlugin::load('Cea', array('bootstrap' => false, 'routes' => false));
 
+
+CakePlugin::load('RabbitMQ', array('bootstrap' => false, 'routes' => false));
+
+    require_once APP.'Config'.DS.'events.php';

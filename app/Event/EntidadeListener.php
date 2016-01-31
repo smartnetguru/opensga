@@ -1,19 +1,32 @@
 <?php
     App::uses('CakeEventListener', 'Event');
 
-    class AlunoListener implements CakeEventListener {
+
+    /**
+     * Class EntidadeListener
+     *
+     * @property Entidade $Entidade
+     */
+    class EntidadeListener implements CakeEventListener {
 
         public function implementedEvents() {
             return array(
-                'Model.Aluno.beforeMatricula' => 'cadastraEntidadeForMatricula'
+                'Model.Entidade.beforeCreate' => 'cadastraUserForEntidade',
+
             );
         }
 
-        public function cadastraEntidadeForMatricula($event){
-            debug($event->subject->request);
-            print_r($event->subject);
-            die();
-
+        public function cadastraUserForEntidade($event){
+            $this->Entidade = ClassRegistry::init('Entidade');
+            $resultado = $this->Entidade->User->cadastraUser($event->data['data']);
+            if($resultado!==false){
+                $data = $event->data['data'];
+                $data['Entidade']['user_id'] = $resultado;
+                $data['Aluno']['user_id'] = $resultado;
+                return $data;
+            } else{
+                return false;
+            }
         }
     }
 
