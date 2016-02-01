@@ -28,29 +28,31 @@
         {
             $options = [
                 'conditions' => ['Entidade.pais_nascimento NOT' => 152],
-                'limit'=>3,
+                'limit'      => 3,
                 'group'      => ['UnidadeOrganica.name', 'Curso.name'],
                 //'fields'=>['UnidadeOrganica.name','Curso.name','Genero.name','count(*) as total']
             ];
-            $options['joins'] = array(
-                array('table' => 'cursos',
-                      'alias' => 'Curso',
-                      'type' => 'left',
-                      'conditions' => array(
-                          'Curso.id = Aluno.curso_id'
-                      )
-                ),
-                array('table' => 'unidade_organicas',
-                      'alias' => 'UnidadeOrganica',
-                      'type' => 'left',
-                      'conditions' => array(
-                          'Curso.unidade_organica_id = UnidadeOrganica.id'
-                      )
-                ),
+            $options['joins'] = [
+                [
+                    'table'      => 'cursos',
+                    'alias'      => 'Curso',
+                    'type'       => 'left',
+                    'conditions' => [
+                        'Curso.id = Aluno.curso_id',
+                    ],
+                ],
+                [
+                    'table'      => 'unidade_organicas',
+                    'alias'      => 'UnidadeOrganica',
+                    'type'       => 'left',
+                    'conditions' => [
+                        'Curso.unidade_organica_id = UnidadeOrganica.id',
+                    ],
+                ],
 
 
-            );
-            $this->Aluno->contain([ 'Entidade' => ['Genero', 'PaisNascimento']]);
+            ];
+            $this->Aluno->contain(['Entidade' => ['Genero', 'PaisNascimento']]);
             $alunos = $this->Aluno->find('all', $options);
             $this->set(compact('alunos'));
 
@@ -148,9 +150,9 @@
         {
             $this->loadModel('Candidatura');
             $this->Candidatura->contain([
-                'Curso'=>[
-                    'UnidadeOrganica'
-                ]
+                'Curso' => [
+                    'UnidadeOrganica',
+                ],
             ]);
             $candidato = $this->Candidatura->findById($candidato_id);
             if ($this->request->is('post')) {
@@ -1778,7 +1780,7 @@
             $this->set(compact('candidato', 'cursos', 'paises', 'provincias', 'documento_identificacaos',
                 'areatrabalhos',
                 'generos', 'cidadeNascimentos', 'proveniencianomes', 'cidades', 'turnos', 'escolaNivelMedios',
-                'estado_civil', 'naturalidade', 'grauParentescos', 'simNaoRespostas','necessidadeEspeciais'));
+                'estado_civil', 'naturalidade', 'grauParentescos', 'simNaoRespostas', 'necessidadeEspeciais'));
 
         }
 
@@ -2049,8 +2051,8 @@
             $this->paginate = [
                 'conditions' => $conditions,
                 'limit'      => 50,
-                'contain'    => ['Curso', 'BolsaTemporaria'=>['BolsaTipoBolsa']],
-                'order'=>['Candidatura.apelido','Candidatura.name']
+                'contain'    => ['Curso', 'BolsaTemporaria' => ['BolsaTipoBolsa']],
+                'order'      => ['Candidatura.apelido', 'Candidatura.name'],
             ];
             $candidatos = $this->paginate('Candidatura');
 
@@ -2079,8 +2081,14 @@
             foreach ($cursos as $k => $v) {
                 $this->BolsaTemporaria->contain('BolsaTipoBolsa');
                 $bolsas = $this->BolsaTemporaria->find('all',
-                    ['conditions' => ['curso_id' => $k], 'order' => ['apelido', 'nomes']]);
-                $bolseiros[$v] = $bolsas;
+                    [
+                        'conditions' => ['curso_id' => $k, 'numero_estudante LIKE' => '2016%'],
+                        'order'      => ['apelido', 'nomes'],
+                    ]);
+                if(!empty($bolsas)){
+                    $bolseiros[$v] = $bolsas;
+                }
+
             }
 
             $this->set(compact('bolseiros'));
