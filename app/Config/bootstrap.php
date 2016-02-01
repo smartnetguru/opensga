@@ -87,15 +87,13 @@ CakePlugin::load('Icing');
         'level'   => E_ALL,
         'trace'   => true
     ]);
-
-
-    App::uses('AppErrorHandler', 'Lib/Exception');
-    App::uses('AppException', 'Lib/Exception');
+    
     Configure::write('Exception', array(
-        'handler' => 'AppErrorHandler::handleException',
+        'handler' => 'ErrorHandler::handleException',
         'renderer' => 'ExceptionRenderer',
         'log' => true
     ));
+
 
 
     if(Configure::read('debug')!=0){

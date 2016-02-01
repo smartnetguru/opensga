@@ -6,7 +6,7 @@ App::uses('AppShell', 'Console/Command');
 
 class CandidatoShell extends AppShell {
 
-	public $uses = array('User', 'Candidatura','Curso');
+	public $uses = array('User', 'Candidatura','Curso','Entidade');
 
     public function afterImportCandidatos(){
 
@@ -368,6 +368,238 @@ class CandidatoShell extends AppShell {
         $this->out($nao_encontrados);
     }
 
+    public function importaCandidatosSQL(){
+
+        $candidatos = $this->Candidatura->query('select * from admissao_candidato');
+        $total = count($candidatos);
+        foreach($candidatos as $candidato){
+
+            $c = $candidato['admissao_candidato'];
+
+
+            $numero_candidato = $c['candidato_codigo'];
+            $tipoDocumento = $c['tipoDocumento'];
+            $tipoDocumentoId = null;
+            if(in_array($tipoDocumento,['Bilhete de Identidade','bi','B.I','Bilheite de Identidade','bilhete de
+            identificação','Bilhete de indentidade','B.I.','bilhete identidade','Bilhete','BI'])){
+                $tipoDocumentoId = 1;
+            } elseif(in_array($tipoDocumento,['Carta de ConduÃ§Ã£o','Carta de Condução',''])){
+                $tipoDocumentoId = 6;
+            } elseif(in_array($tipoDocumento,['Passaporte','Passaport'])){
+                $tipoDocumentoId= 2;
+            }elseif(in_array($tipoDocumento,['Talão de Bilhete de Identidade','TalÃ£o de Bilhete de Identidade',
+                'Recibo de Bi','espera BI','Talão de BI','talão','Cedula Pessoal'])){
+                $tipoDocumentoId = 4;
+            } elseif(in_array($tipoDocumento,['DIRE'])){
+                $tipoDocumentoId =3;
+            }
+
+            $numeroDocumento =$c['numeroDocumento'];
+            $sexo = $c['genero'];
+            if ($sexo == 'Masculino') {
+                $genero = 1;
+            } elseif ($sexo == 'Feminino') {
+                $genero = 2;
+            }
+            $estadoCivil = $c['estadoCivil'];
+            if ($estadoCivil == 'Casado(a)') {
+                $estadoCivilId = 2;
+            } elseif ($estadoCivil == 'Divorciado(a)') {
+                $estadoCivilId = 4;
+            } elseif (in_array($estadoCivil,['Solterio(a)','solteiro','solteira'])) {
+                $estadoCivilId = 1;
+            } elseif ($estadoCivil == 'Viúvo(a)') {
+                $estadoCivilId = 6;
+            }
+
+
+
+            $distritoNascimento = $c['distrito_nascimento'];
+            if($distritoNascimento=='DISTRITO URBANO 4'){
+                $distritoNascimento = 'Urbano nº 4';
+            }
+            if($distritoNascimento=='DISTRITO URBANO 1'){
+                $distritoNascimento = 'Urbano nº 1';
+            }
+            if($distritoNascimento=='DISTRITO URBANO 2'){
+                $distritoNascimento = 'Urbano nº 2';
+            }
+            if($distritoNascimento=='DISTRITO URBANO 3'){
+                $distritoNascimento = 'Urbano nº 3';
+            }
+            if($distritoNascimento=='DISTRITO URBANO 5'){
+                $distritoNascimento = 'Urbano nº 5';
+            }
+            if($distritoNascimento=='PEMBA CIDADE'){
+                $distritoNascimento = 'Cidade de Pemba';
+            }
+            if($distritoNascimento=='Maputo Provincia'){
+                $distritoNascimento = 'Provincia de Maputo';
+            }
+            $distritoNascimentoDB = $this->Entidade->CidadeNascimento->find('first',['conditions'=>['name
+            LIKE'=>'%'.$distritoNascimento.'%']]);
+            if(empty($distritoNascimentoDB)){
+
+            }
+
+            $distritoNascimento = $c['distrito_residencia'];
+            if($distritoNascimento=='DISTRITO URBANO 4'){
+                $distritoNascimento = 'Urbano nº 4';
+            }
+            if($distritoNascimento=='DISTRITO URBANO 1'){
+                $distritoNascimento = 'Urbano nº 1';
+            }
+            if($distritoNascimento=='DISTRITO URBANO 2'){
+                $distritoNascimento = 'Urbano nº 2';
+            }
+            if($distritoNascimento=='DISTRITO URBANO 3'){
+                $distritoNascimento = 'Urbano nº 3';
+            }
+            if($distritoNascimento=='DISTRITO URBANO 5'){
+                $distritoNascimento = 'Urbano nº 5';
+            }
+            if($distritoNascimento=='PEMBA CIDADE'){
+                $distritoNascimento = 'Cidade de Pemba';
+            }
+            if($distritoNascimento=='Maputo Provincia'){
+                $distritoNascimento = 'Provincia de Maputo';
+            }
+            $distritoResidenciaDB = $this->Entidade->CidadeNascimento->find('first',['conditions'=>['name
+            LIKE'=>'%'.$distritoNascimento.'%']]);
+            if(empty($distritoResidenciaDB)){
+
+            }
+
+
+            $paisNascimento = $c['pai_nascimento'];
+            $paisNascimentoDB = $this->Entidade->PaisNascimento->findByName($paisNascimento);
+            if(empty($paisNascimentoDB)){
+
+            }
+
+            $provinciaNascimento = $c['provincia_nascimento'];
+            if($provinciaNascimento){
+                if($provinciaNascimento=='Maputo Provincia'){
+                    $provinciaNascimento = 'Maputo';
+                }
+                if($provinciaNascimento=='ZambÃ©zia'){
+                    $provinciaNascimento = 'Zambezia';
+                }
+                if($provinciaNascimento=='Matola Cidade'){
+                    $provinciaNascimento = 'Maputo';
+                }
+                $provinciaNascimentoDB = $this->Entidade->ProvinciaNascimento->findByName($provinciaNascimento);
+                if(empty($provinciaNascimentoDB)){
+                    debug($provinciaNascimento);
+                    die();
+                }
+            }
+
+
+            $provinciaNascimento = $c['provincia_frequencia'];
+            if($provinciaNascimento){
+                if($provinciaNascimento=='Maputo Provincia'){
+                    $provinciaNascimento = 'Maputo';
+                }
+                if($provinciaNascimento=='ZambÃ©zia'){
+                    $provinciaNascimento = 'Zambezia';
+                }
+                if($provinciaNascimento=='Matola Cidade'){
+                    $provinciaNascimento = 'Maputo';
+                }
+                $provinciaFrequenciaDB = $this->Entidade->ProvinciaNascimento->findByName($provinciaNascimento);
+                if(empty($provinciaFrequenciaDB)){
+                    debug($provinciaNascimento);
+                    die();
+                }
+            }
+
+
+            $provinciaNascimento = $c['provincia_residencia'];
+            if($provinciaNascimento){
+                if($provinciaNascimento=='Maputo Provincia'){
+                    $provinciaNascimento = 'Maputo';
+                }
+                if($provinciaNascimento=='ZambÃ©zia'){
+                    $provinciaNascimento = 'Zambezia';
+                }
+                $provinciaResidenciaDB = $this->Entidade->ProvinciaNascimento->findByName($provinciaNascimento);
+                if(empty($provinciaResidenciaDB)){
+                    debug($provinciaNascimento);
+                    die();
+                }
+            }
+
+
+            $escola = $c['cand_escola_preuniversitaria'];
+            if($escola){
+                $escolaExiste = $this->Entidade->Aluno->AlunoNivelMedio->EscolaNivelMedio->findByNameAndProvinciaId
+                ($escola,$provinciaFrequenciaDB['ProvinciaNascimento']['id']);
+                if(!empty($escolaExiste)){
+                    $escolaNivelMedioId = $escolaExiste['EscolaNivelMedio']['id'];
+                } else{
+                    $escolaNullExiste = $this->Entidade->Aluno->AlunoNivelMedio->EscolaNivelMedio
+                        ->find('first',['conditions'=>['name'=>$escola,'provincia_id is null']]);
+                    if(!empty($escolaNullExiste)){
+                        $escolaNivelMedioId = $escolaNullExiste['EscolaNivelMedio']['id'];
+                        $this->Entidade->Aluno->AlunoNivelMedio->EscolaNivelMedio->id =
+                            $escolaNullExiste['EscolaNivelMedio']['id'];
+                        $this->Entidade->Aluno->AlunoNivelMedio->EscolaNivelMedio->set('provincia_id',
+                            $provinciaFrequenciaDB['ProvinciaNascimento']['id']);
+                    } else{
+                        $arrayEscola = array(
+                            'EscolaNivelMedio'=>[
+                                'name'=>$escola,
+                                'provincia_id'=>$provinciaFrequenciaDB['ProvinciaNascimento']['id']
+                            ]
+                        );
+                        $this->Entidade->Aluno->AlunoNivelMedio->EscolaNivelMedio->create();
+                        $this->Entidade->Aluno->AlunoNivelMedio->EscolaNivelMedio->save($arrayEscola);
+                        $escolaNivelMedioId = $this->Entidade->Aluno->AlunoNivelMedio->EscolaNivelMedio->id;
+                    }
+                }
+            }
+
+
+            $nuit = $c['nuit'];
+            if(!is_int($nuit)){
+                $nuit  = null;
+            }
+            $candidatoExiste = $this->Candidatura->findByNumeroCandidato($numero_candidato);
+            if ($candidatoExiste) {
+                $this->out('Existente');
+                $this->Candidatura->id = $candidatoExiste['Candidatura']['id'];
+            } else {
+                $this->Candidatura->create();
+                $this->Candidatura->set('numero_candidato', $numero_candidato);
+            }
+            $this->Candidatura->set('documento_identificacao_id', $tipoDocumentoId);
+            $this->Candidatura->set('documento_identificacao_numero', $numeroDocumento);
+            $this->Candidatura->set('documento_identificacao_data_validade', $c['validade']);
+            $this->Candidatura->set('estado_civil_id', $estadoCivilId);
+            $this->Candidatura->set('genero_id', $genero);
+            $this->Candidatura->set('email', $c['email']);
+            $this->Candidatura->set('telemovel', $c['celular']);
+            $this->Candidatura->set('nuit', $nuit);
+            $this->Candidatura->set('nacionalidade', $paisNascimentoDB['PaisNascimento']['id']);
+            $this->Candidatura->set('pais_nascimento', $paisNascimentoDB['PaisNascimento']['id']);
+            $this->Candidatura->set('provincia_nascimento', $provinciaNascimentoDB['ProvinciaNascimento']['id']);
+            $this->Candidatura->set('provincia_candidatura', $provinciaFrequenciaDB['ProvinciaNascimento']['id']);
+            $this->Candidatura->set('provincia_residencia', $provinciaResidenciaDB['ProvinciaNascimento']['id']);
+            $this->Candidatura->set('ano_conclusao', $c['anoConclusao']);
+            $this->Candidatura->set('escola_nivel_medio_id', $escolaNivelMedioId);
+            $this->Candidatura->set('nome_pai', $c['nomePai']);
+            $this->Candidatura->set('nome_mae', $c['nomeMae']);
+            $this->Candidatura->set('distrito_nascimento', $distritoNascimentoDB['CidadeNascimento']['id']);
+            $this->Candidatura->set('distrito_residencia', $distritoResidenciaDB['CidadeNascimento']['id']);
+
+
+            $this->Candidatura->save();
+            $this->out($total . '----------------Candidato Criado---------------' . $this->Candidatura->id);
+            $total--;
+        }
+
+    }
 
 
 
