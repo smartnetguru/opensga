@@ -177,6 +177,17 @@ class AppController extends Controller
                             ]);
                         }
                         break;
+                    case 'cend':
+                        if ($this->request->plugin != 'cend') {
+                            $this->Session->setFlash(__('Não tem Permissão para acessar a area anterior'),
+                                'default', ['class' => 'alert info']);
+                            $this->redirect([
+                                'controller' => 'pages',
+                                'action' => 'home',
+                                'plugin' => 'cend'
+                            ]);
+                        }
+                        break;
                     default:
                         $this->Flash->error('Não está autorizado a aceder ao Sistema');
                         $this->redirect(['controller' => 'users', 'action' => 'logout']);

@@ -1228,6 +1228,7 @@ color: #AAAAAA !important;
 	margin-top: 0;
 	background-color: #FFFFFF;
 	padding: 0;
+    min-height:600px;
 }
 .container {
 	max-width: none !important;
