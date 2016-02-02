@@ -591,7 +591,11 @@ class CandidatoShell extends AppShell {
             $this->Candidatura->set('distrito_residencia', $distritoResidenciaDB['CidadeNascimento']['id']);
 
 
-            $this->Candidatura->save();
+            try{
+                $this->Candidatura->save();
+            } catch(Exception $e){
+                print_r($e);
+            }
             $this->out($total . '----------------Candidato Criado---------------' . $this->Candidatura->id);
             $total--;
         }
