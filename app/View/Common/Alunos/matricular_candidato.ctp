@@ -405,7 +405,7 @@
                             <fieldset>
                                 <legend>Necessidades Especiais</legend>
                                 <?php foreach($necessidadeEspeciais as $necessidadeId =>$necessidadeValue):?>
-                                    <?php echo $this->Form->input('nessecidade_especial.'.$necessidadeId,
+                                    <?php echo $this->Form->input('necessidade_especial.'.$necessidadeId,
                                             array(
                                             'wrapInput' => 'col col-md-3',
                                             'label' => $necessidadeValue,

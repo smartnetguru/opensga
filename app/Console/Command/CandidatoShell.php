@@ -490,8 +490,7 @@ class CandidatoShell extends AppShell {
                 }
                 $provinciaNascimentoDB = $this->Entidade->ProvinciaNascimento->findByName($provinciaNascimento);
                 if(empty($provinciaNascimentoDB)){
-                    debug($provinciaNascimento);
-                    die();
+
                 }
             }
 
@@ -509,8 +508,7 @@ class CandidatoShell extends AppShell {
                 }
                 $provinciaFrequenciaDB = $this->Entidade->ProvinciaNascimento->findByName($provinciaNascimento);
                 if(empty($provinciaFrequenciaDB)){
-                    debug($provinciaNascimento);
-                    die();
+
                 }
             }
 
@@ -525,8 +523,7 @@ class CandidatoShell extends AppShell {
                 }
                 $provinciaResidenciaDB = $this->Entidade->ProvinciaNascimento->findByName($provinciaNascimento);
                 if(empty($provinciaResidenciaDB)){
-                    debug($provinciaNascimento);
-                    die();
+
                 }
             }
 

@@ -87,7 +87,7 @@ CakePlugin::load('Icing');
         'level'   => E_ALL,
         'trace'   => true
     ]);
-    
+
     Configure::write('Exception', array(
         'handler' => 'ErrorHandler::handleException',
         'renderer' => 'ExceptionRenderer',
@@ -179,3 +179,5 @@ CakePlugin::load('Cea', array('bootstrap' => false, 'routes' => false));
 CakePlugin::load('RabbitMQ', array('bootstrap' => false, 'routes' => false));
 
     require_once APP.'Config'.DS.'events.php';
+
+CakePlugin::load('Cend', array('bootstrap' => false, 'routes' => false));

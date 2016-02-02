@@ -1551,6 +1551,21 @@
 
                                 $this->Candidatura->set('data_matricula', date('Y-m-d H:m:s'));
                                 if ($this->Candidatura->save()) {
+
+                                    //Grava Necessidades espeicias
+                                    foreach($data['necessidade_especial'] as $k=>$v){
+                                        if($v==1){
+                                            $arrayNecessidade = [
+                                                'EntidadeNecessidade'=>[
+                                                    'entidade_id'=>$this->Entidade->id,
+                                                    'necessidade_especial_id'=>$k,
+                                                    'estado_objecto_id'=>1
+                                                ]
+                                            ];
+                                            $this->Entidade->EntidadeNecessidade->create();
+                                            $this->Entidade->EntidadeNecessidade->save($arrayNecessidade);
+                                        }
+                                    }
                                     $dataSource->commit();
 
                                     return true;
@@ -1565,6 +1580,8 @@
                 } else {
                     return false;
                 }
+            } else{
+                debug($this->User->validationErrors);
             }
 
 
