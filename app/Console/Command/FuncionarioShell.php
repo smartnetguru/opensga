@@ -26,7 +26,7 @@
 
             $this->out('Ficheiro do S3 Lido');
             $worksheet = $xls->getActiveSheet();
-            $linhaActual = 3900;
+            $linhaActual = 945;
             $this->out('Iterando');
 
             foreach ($worksheet->getRowIterator() as $row) {
@@ -136,6 +136,7 @@
                     }
                     $funcionarioExiste = $this->Funcionario->findByEntidadeId($entidadeExiste['Entidade']['id']);
                     if (!empty($funcionarioExiste)) {
+debug($isDocente);
                         $this->out('Encontrado Funcionario, Vamos Apenas Actualizar o Orgao e o Codigo');
                         $this->Funcionario->id = $funcionarioExiste['Funcionario']['id'];
                         $this->Funcionario->set('codigo', $codigo);
@@ -146,6 +147,7 @@
                         }
                         if ($isDocente) {
                             $docenteExiste = $this->Funcionario->Entidade->Docente->findByEntidadeId($entidadeExiste['Entidade']['id']);
+debug($docenteExiste);
                             if (!empty($docenteExiste)) {
                                 $this->Funcionario->Entidade->Docente->id = $docenteExiste['Docente']['id'];
                                 $this->Funcionario->Entidade->Docente->set('docente_categoria_id', $categoriaDocenteId);

@@ -69,6 +69,7 @@ class AppController extends Controller
 
         parent::beforeFilter();
 
+
         $config_language = $this->Session->read('Config.language');
         if ($config_language == null) {
             $config_language = 'por';
