@@ -594,7 +594,7 @@ class CandidatoShell extends AppShell {
             try{
                 $this->Candidatura->save();
             } catch(Exception $e){
-                print_r($e);
+                print_r($this->Candidatura->data);
             }
             $this->out($total . '----------------Candidato Criado---------------' . $this->Candidatura->id);
             $total--;
