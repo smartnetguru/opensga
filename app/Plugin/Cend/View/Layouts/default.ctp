@@ -146,7 +146,7 @@
                                 ['controller' => 'alunos', 'action' => 'manutencao', 'plugin' => false]) ?></li>
                     </ul>
                 </li>
-       
+
             </ul>
             <!-- end: MAIN NAVIGATION MENU -->
         </div>

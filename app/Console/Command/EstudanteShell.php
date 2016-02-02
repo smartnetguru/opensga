@@ -1454,7 +1454,7 @@
                             'curso_id'           => $cursoID
                         ]
                     ]);
-                    debug($this->Aluno->lastQuery());
+
                     $i = 1;
                     $homens = 0;
                     $mulheres = 0;

@@ -43,7 +43,7 @@
                     'User'
                 ]
             ]);
-            $docentes = $this->Docente->find('all', []);
+            $docentes = $this->Docente->find('all', ['conditions'=>['Entidade.user_id'=>55763]]);
             $comandos = [];
             foreach ($docentes as $docente) {
 

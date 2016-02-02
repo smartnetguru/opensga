@@ -864,7 +864,7 @@
                 'Genero'
             ]);
             $candidatos = $this->Candidatura->find('all',
-                ['conditions' => ['estado_candidatura_id' => 2, 'ano_lectivo_admissao' => 2014]]);
+                ['conditions' => ['estado_candidatura_id' => 2, 'ano_lectivo_admissao' => 2016]]);
 
             foreach ($candidatos as $candidato) {
                 $xls->getActiveSheet()->setCellValue('A' . $linha_actual,
