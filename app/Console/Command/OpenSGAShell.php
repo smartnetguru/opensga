@@ -888,7 +888,7 @@
             }
             $objWriter = PHPExcel_IOFactory::createWriter($xls, 'Excel2007');
 
-            $objWriter->save(Configure::read('OpenSGA.save_path') . DS . 'estudantes_admitidos_' . Configure::read('OpenSGA.ano_lectivo') . '.xlsx');
+            $objWriter->save( Configure::read('OpenSGA.ano_lectivo') . '.xlsx');
         }
 
 
