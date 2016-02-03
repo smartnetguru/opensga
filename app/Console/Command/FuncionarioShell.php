@@ -26,7 +26,7 @@
 
             $this->out('Ficheiro do S3 Lido');
             $worksheet = $xls->getActiveSheet();
-            $linhaActual = 945;
+            $linhaActual = 2;
             $this->out('Iterando');
 
             foreach ($worksheet->getRowIterator() as $row) {

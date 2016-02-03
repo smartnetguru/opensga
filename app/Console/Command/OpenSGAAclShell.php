@@ -43,11 +43,17 @@
                     'User'
                 ]
             ]);
-            $docentes = $this->Docente->find('all', ['conditions'=>['Entidade.user_id'=>55763]]);
+            $docentes = $this->Docente->find('all', ['conditions'=>['Entidade.user_id'=>55473]]);
             $comandos = [];
             foreach ($docentes as $docente) {
 
                 $comandos[] = "acl deny User.{$docente['Entidade']['User']['id']} controllers";
+
+                $comandos[] = "acl grant User.{$docente['Entidade']['User']['id']}
+                controllers/Docentes/docente_meu_perfil";
+            $comandos[] = "acl grant User.{$docente['Entidade']['User']['id']} controllers/Pages/docente_home";
+            $comandos[] = "acl grant User.{$docente['Entidade']['User']['id']} controllers/Users/docente_trocar_senha";
+            $comandos[] = "acl grant User.{$docente['Entidade']['User']['id']} controllers/Users/docente_changeLoginProfile";
 
                 $comandos[] = "acl grant User.{$docente['Entidade']['User']['id']} controllers/Avaliacaos/docente_ver_avaliacao";
 

@@ -15,3 +15,25 @@ echo $this->Html->css('/assets/plugins/bootstrap-fileupload/bootstrap-fileupload
 echo $this->Html->css('/assets/plugins/summernote/build/summernote.css');
 echo $this->Html->css('/assets/plugins/ckeditor/contents.css');
 ?>
+
+<?php $this->start('nomes')?>
+<div class="col-sm-4">
+    <?php echo $this->Form->input('Entidade.apelido', [
+        'value' => $candidato['Candidatura']['apelido'],
+        'label' => 'Apelido',
+        'class' => 'form-control',
+        'id'    => 'codigo',
+        'readonly'=>true,
+    ]); ?>
+</div>
+<div class="col-sm-4">
+    <?php echo $this->Form->input('Entidade.nomes', [
+        'value' => $candidato['Candidatura']['nomes'],
+        'label' => 'Outros Nomes',
+        'class' => 'form-control',
+        'id'    => 'codigo',
+        'readonly'=>true,
+    ]); ?>
+</div>
+
+<?php $this->end();?>

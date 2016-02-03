@@ -20,7 +20,6 @@
     $this->BreadCumbs->addCrumb(__('Alunos'), '/alunos');
     $this->BreadCumbs->addCrumb($aluno['Entidade']['name'], '#');
     $this->BreadCumbs->addCrumb(__('Perfil'), '#');
-    echo $this->BreadCumbs->css('/assets/plugins/bootstrap-fileupload/bootstrap-fileupload.min.css');
     echo $this->BreadCumbs->css('/assets/plugins/bootstrap-social-buttons/social-buttons-3.css');
     $this->end();
 ?>
@@ -29,7 +28,7 @@
 <div class="action-list">
     <div class="row">
         <div class="col-sm-2">
-            <?php echo $this->Html->link($this->Html->image('icons/student/edit-student.png') . '<br />Editar Perfil',
+            <?php echo $this->Html->link('<i class="fa fa-print  fa-2x"></i>	Editar Perfil',
                 ['controller' => 'alunos', 'action' => 'editar_estudante', $aluno['Aluno']['id']],
                 ['escape' => false, 'class' => 'btn btn-icon btn-block']) ?>
 
@@ -56,28 +55,7 @@
                 ['escape' => false, 'class' => 'btn btn-icon btn-block']) ?>
 
         </div>
-        <div class="col-sm-2">
-            <?php echo $this->Html->link('<i class="fa fa-refresh  fa-2x"></i>	Fazer Reingresso',
-                ['controller' => 'matriculas', 'action' => 'fazer_reingresso', $aluno['Aluno']['id']],
-                ['escape' => false, 'class' => 'btn btn-icon btn-block']) ?>
-        </div>
-        <div class="col-sm-2">
-            <?php echo $this->Html->link($this->Html->image('icons/packs/crystal/48x48/apps/printer.png') . "<br />Alterar Status",
-                ['controller' => 'alunos', 'action' => 'alterar_status', $aluno['Aluno']['id']],
-                ['escape' => false, 'class' => 'btn btn-icon btn-block']) ?>
 
-        </div>
-        <div class="col-sm-2">
-            <?php echo $this->Html->link($this->Html->image('icons/packs/crystal/48x48/apps/printer.png') . "<br />Alterar Nome",
-                ['controller' => 'alunos', 'action' => 'alterar_nome', $aluno['Aluno']['id']],
-                ['escape' => false, 'class' => 'btn btn-icon btn-block']) ?>
-
-        </div>
-        <div class="col-sm-2">
-            <?php echo $this->Html->link('<i class="fa fa-check  fa-2x"></i>	Concluir Nivel',
-                ['controller' => 'alunos', 'action' => 'concluir_nivel', $aluno['Aluno']['id']],
-                ['escape' => false, 'class' => 'btn btn-icon btn-block']) ?>
-        </div>
         <div class="col-sm-2">
             <?php echo $this->Html->link($this->Html->image('icons/packs/crystal/48x48/apps/printer.png') . "<br />Enviar SMS",
                 ['controller' => 'alunos', 'action' => 'enviar_sms', $aluno['Aluno']['id']],
@@ -95,23 +73,6 @@
                 ['escape' => false, 'class' => 'btn btn-icon btn-block']) ?>
 
         </div>
-        <div class="col-sm-2">
-            <?php echo $this->Html->link('<i class="fa fa-refresh  fa-2x"></i> Cadastrar Notas do Histórico',
-                ['controller' => 'inscricaos', 'action' => 'cadastro_notas_historico', $aluno['Aluno']['id']],
-                ['escape' => false, 'class' => 'btn btn-icon btn-block']) ?>
-
-        </div>
-        <?php if ($aluno['Aluno']['estado_aluno_id'] == 3): ?>
-            <div class="col-sm-2">
-                <?php echo $this->Html->link('<i class="fa fa-print  fa-2x"></i>Certificado de Conlusao', [
-                    'controller' => 'historico_cursos',
-                    'action'     => 'print_certificado_conclusao',
-                    $aluno['Aluno']['id'],
-                    $aluno['Aluno']['curso_id']
-                ], ['escape' => false, 'class' => 'btn btn-icon btn-block']) ?>
-
-            </div>
-        <?php endif; ?>
     </div>
     <div class="row">
 

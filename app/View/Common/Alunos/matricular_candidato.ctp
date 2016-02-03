@@ -90,6 +90,7 @@
                                         'id'       => 'codigo',
                                 ]); ?>
                             </div>
+                            <?php if(!$this->fetch('nomes')):?>
                             <div class="col-sm-4">
                                 <?php echo $this->Form->input('Entidade.apelido', [
                                         'value' => $candidato['Candidatura']['apelido'],
@@ -106,6 +107,9 @@
                                         'id'    => 'codigo',
                                 ]); ?>
                             </div>
+                            <?php else:?>
+                            <?php echo $this->fetch('nomes')?>
+                            <?php endif;?>
                         </div>
                         <div class="row">
                             <div class="col-sm-6">
