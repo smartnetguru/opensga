@@ -282,6 +282,7 @@
                                         'id'      => 'escolaOrigem',
                                         'options' => $escolaNivelMedios,
                                         'empty'   => 'Seleccione',
+                                    'required'=>'required',
                                 ]); ?>
                             </div>
                             <div class="col-sm-4">

@@ -4,7 +4,6 @@
 ?>
 
 <?php
-    echo $this->Html->css('/assets/plugins/select2/select2.css', ['block' => 'scriptTop']);
     echo $this->Html->css('/assets/plugins/datepicker/css/datepicker.css', ['block' => 'scriptTop']);
     echo $this->Html->css('/assets/plugins/bootstrap-timepicker/css/bootstrap-timepicker.min.css',
         ['block' => 'scriptTop']);
@@ -482,8 +481,7 @@
              ]));
 ?>
 <?php
-    //echo $this->Html->script('/assets/plugins/jquery-validation/dist/jquery.validate.min',
-    //  array('block' => 'scriptBottom'));
+
     echo $this->Html->script('/assets/plugins/jQuery-Smart-Wizard/js/jquery.smartWizard', ['block' => 'scriptBottom']);
 
 
@@ -491,7 +489,6 @@
         ['block' => 'scriptBottom']);
     echo $this->Html->script('/assets/plugins/autosize/jquery.autosize.min', ['block' => 'scriptBottom']);
     echo $this->Html->script('/assets/plugins/autosize/jquery.autosize.min', ['block' => 'scriptBottom']);
-    echo $this->Html->script('/assets/plugins/select2/select2.min', ['block' => 'scriptBottom']);
     echo $this->Html->script('/assets/plugins/jquery.maskedinput/src/jquery.maskedinput', ['block' => 'scriptBottom']);
     echo $this->Html->script('/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker',
         ['block' => 'scriptBottom']);
