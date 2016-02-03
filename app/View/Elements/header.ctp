@@ -42,7 +42,7 @@
         echo $this->Html->css('/assets/plugins/perfect-scrollbar/src/perfect-scrollbar.css');
         echo $this->Html->css('/assets/plugins/jquery-ui/jquery-ui-1.10.1.custom.min'); //<link rel="stylesheet" href="css/jquery-ui-1.8.15.custom.css"> <!-- jQuery UI, optional -->
         echo $this->Html->css('/assets/css/theme_green.css');
-        echo $this->Html->script(['/assets/plugins/jquery-2.0.3.min']);
+
         echo $this->Html->css('/assets/css/opensga.css');
         echo $this->Html->css('/assets/plugins/select2/dist/css/select2.css');
     echo $this->Html->css('/assets/plugins/select2/dist/css/select2-bootstrap.min');

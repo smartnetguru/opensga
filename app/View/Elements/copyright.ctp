@@ -16,7 +16,7 @@
 ?>
 
 <p>&copy; 2010-<?php echo date('Y') ?>  <strong><?php echo $this->Html->link(__(Configure::read('OpenSGA.desenvolvedor')),
-            'http://infomoz.net',
+            'http://infomoz.net/en/infomoz/sobre-elisio-leonardo/',
             array('title' => 'Sistemas de Gestão para Educação','target'=>'_blank')) ?></strong> | Desenvolvido para <b><?php echo Configure::read('OpenSGA.instituicao.nome') ?></b>
     
 </p>

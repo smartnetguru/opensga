@@ -39,7 +39,13 @@
       "type":"git",
       "url":"https://github.com/backstageel/CakePHP-DatabaseLogger-Plugin.git"
 
+    },
+    {
+      "type":"git",
+      "url":"https://github.com/markstory/asset_compress.git"
+
     }
+
   ],
   "require": {
     "cakephp/cakephp": "2.8.0-RC1",
@@ -63,7 +69,9 @@
     "backstageel/cakephp-reports": "dev-master",
     "webtechnick/cakephp-database-logger-plugin":"dev-master",
     "cakedc/search": "^2.5",
-    "alliedhealthmedia/icing":"dev-master"
+    "alliedhealthmedia/icing":"dev-master",
+    "markstory/asset_compress": "2.x-dev",
+    "linkorb/jsmin-php": "^1.0"
 
 
   },

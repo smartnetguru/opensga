@@ -2,7 +2,7 @@
 #################################################
 /app/Config/database.php
 /app/Config/core.php
-/app/Config/Config-*
+/app/Config/Config-UEM.php
 /app/tmp
 /app/Reports
 /app/Imports

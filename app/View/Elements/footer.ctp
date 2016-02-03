@@ -19,8 +19,10 @@ echo $this->Html->script(['/assets/plugins/respond.min']);
 echo $this->Html->script(['/assets/plugins/excanvas.min']);
 ?>
 <![endif]-->
+<?= $this->AssetCompress->addScript('jquery-combined'); ?>
+
 <?php
-    //echo $this->Html->script(array('/assets/plugins/jquery-2.0.3.min'));
+    echo $this->Html->script(['/assets/plugins/jquery-2.0.3.min']);
     echo $this->Html->script(['/assets/plugins/jquery-ui/jquery-ui-1.10.2.custom.min']);
     echo $this->Html->script(['/assets/plugins/bootstrap/js/bootstrap.min']);
     echo $this->Html->script(['/assets/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min']);
