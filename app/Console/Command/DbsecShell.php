@@ -1,10 +1,10 @@
 <?php
 
-ini_set('memory_limit', "3096M");
-App::uses('AuditableConfig', 'Auditable.Lib');
+    ini_set('memory_limit', "3096M");
+    App::uses('AuditableConfig', 'Auditable.Lib');
 
-class DbsecShell extends AppShell
-{
+    class DbsecShell extends AppShell
+    {
 //@formatter:off
     public $uses = [
         'HistoricoCurso',
@@ -116,28 +116,54 @@ class DbsecShell extends AppShell
             if ($codigo_disciplina == '' && !is_numeric($codigo_disciplina)) {
                 break;
             }
+
             $nome_existe = $this->Disciplina->findByName($nome_disciplina);
             {
+
                 if (!empty($nome_existe)) {
 
                     $this->out("Ja existe Disciplina com Este nome");
                     $disciplinaId = $nome_existe['Disciplina']['id'];
                     $this->Disciplina->id = $nome_existe['Disciplina']['id'];
                     $this->Disciplina->set('codigo_antigo',$codigo_disciplina);
-                    $this->Disciplina->save();
+                    $this->Disciplina->set('id',$nome_existe['Disciplina']['id']);
+                    $this->Disciplina->set('name',$nome_disciplina);
+                    $this->Disciplina->set('codigo',null);
+                    if($nome_disciplina=='Português III'){
+                        debug($nome_existe);
+                            debug($this->Disciplina->data);
+                        //die(debug('1'));
+                    }
+                    if(!$this->Disciplina->save()){
+                        if($nome_disciplina=='Arqueologia Marítima'){
+                            debug($nome_existe);
+                            debug($this->Disciplina->data);
+                            debug($this->Disciplina->validationErrors);
+                        die(debug('Leo'));
+                    }
+                    }
 
                 } else {
                     $codigo_existe = $this->Disciplina->findByCodigoAntigo($codigo_disciplina);
                     if (empty($codigo_existe)) {
                         $array_disciplina = [
                             'Disciplina' => [
-                                'codigo'        => $codigo_disciplina,
                                 'name'          => $nome_disciplina,
-                                'codigo_antigo' => $codigo_disciplina
+                                'codigo_antigo' => $codigo_disciplina,
+                                'codigo'=>null
                             ]
                         ];
+
                         $this->Disciplina->create();
-                        $this->Disciplina->save($array_disciplina);
+                        if(!$this->Disciplina->save($array_disciplina)){
+
+                      debug($this->Disciplina->validationErrors);
+                    debug($array_disciplina);
+
+
+                        }
+                        $this->Disciplina->set('codigo', $this->Disciplina->id);
+                        $this->Disciplina->save();
                         $disciplinaId = $this->Disciplina->id;
                     } else {
                         $array_disciplina = [
@@ -265,10 +291,24 @@ class DbsecShell extends AppShell
                 $codigo_disciplina='PORT V';
             }
 
-            if($codigo_disciplina=='FS'){
-                $codigo_disciplina='MO5';
+            if($codigo_disciplina=='IES'){
+                $codigo_disciplina='ISO';
             }
-
+            if($codigo_disciplina=='IG'){
+                $codigo_disciplina='ING';
+            }
+            if($codigo_disciplina=='LLF II'){
+                $codigo_disciplina='LLF-II';
+            }
+            if($codigo_disciplina=='MO8'){
+                $codigo_disciplina='PGP';
+            }
+            if($codigo_disciplina=='LOA'){
+                $codigo_disciplina='LOAS';
+            }
+if($codigo_disciplina=='MGAP 122'){
+                $codigo_disciplina='OG';
+            }
             if($codigo_disciplina=='GEA'){
                 $codigo_disciplina='GEG';
             }
@@ -279,7 +319,7 @@ class DbsecShell extends AppShell
                 $codigo_disciplina='HIPI';
             }
 
-            $creditos = $worksheet->getCell('N' . $linha_actual)->getCalculatedValue();
+            $creditos = $worksheet->getCell('M' . $linha_actual)->getCalculatedValue();
 
             if($creditos==''){
                 $creditos=0;
@@ -289,6 +329,8 @@ class DbsecShell extends AppShell
             $disciplina = $this->Disciplina->findByCodigoAntigo($codigo_disciplina);
 
             if (empty($disciplina)) {
+                debug(APP . 'Imports' . DS . $this->folder . DS . 'disciplina_curso.xlsx');
+                debug($linha_actual);
                 die(debug($codigo_disciplina));
             }
 
@@ -394,9 +436,9 @@ class DbsecShell extends AppShell
             $idCurso = trim($worksheet->getCell('K' . $linha_actual)->getCalculatedValue());
             $nacionalidade = trim($worksheet->getCell('M' . $linha_actual)->getCalculatedValue());
             $email = trim($worksheet->getCell('N' . $linha_actual)->getCalculatedValue());
-            $cellDataRegistro = $worksheet->getCell('P' . $linha_actual);
-            $curriculum = trim($worksheet->getCell('S' . $linha_actual)->getCalculatedValue());
-            $ramo = trim($worksheet->getCell('L' . $linha_actual)->getCalculatedValue());
+            $cellDataRegistro = $worksheet->getCell('O' . $linha_actual);
+            $curriculum = trim($worksheet->getCell('R' . $linha_actual)->getCalculatedValue());
+            $ramo = trim($worksheet->getCell('S' . $linha_actual)->getCalculatedValue());
             $statusId = trim($worksheet->getCell('T' . $linha_actual)->getCalculatedValue());
 
             if ($sexo == 'Masculino') {
@@ -485,7 +527,8 @@ class DbsecShell extends AppShell
                             debug($InvDateNascimento);
                             debug($aluno);
                             debug($data);
-                            die();
+
+                            //die();
                         }
                     }
 
@@ -548,14 +591,14 @@ class DbsecShell extends AppShell
         foreach ($worksheet->getRowIterator() as $row) {
             $this->PlanoEstudo->recursive = -1;
             $this->Curso->recursive = -1;
-            $idDisciplina = trim($worksheet->getCell('B' . $linha_actual)->getCalculatedValue());
-            $idCcurso = trim($worksheet->getCell('C' . $linha_actual)->getCalculatedValue());
-            $ano = trim($worksheet->getCell('D' . $linha_actual)->getCalculatedValue());
-            $semestre = trim($worksheet->getCell('E' . $linha_actual)->getCalculatedValue());
-            $curriculum = trim($worksheet->getCell('F' . $linha_actual)->getCalculatedValue());
-            $nivel = trim($worksheet->getCell('N' . $linha_actual)->getCalculatedValue());
-            $ramo = trim($worksheet->getCell('H' . $linha_actual)->getCalculatedValue());
-            $idTurma = trim($worksheet->getCell('M' . $linha_actual)->getCalculatedValue());
+            $idDisciplina = trim($worksheet->getCell('A' . $linha_actual)->getCalculatedValue());
+            $idCcurso = trim($worksheet->getCell('G' . $linha_actual)->getCalculatedValue());
+            $ano = trim($worksheet->getCell('B' . $linha_actual)->getCalculatedValue());
+            $semestre = trim($worksheet->getCell('C' . $linha_actual)->getCalculatedValue());
+            $curriculum = trim($worksheet->getCell('H' . $linha_actual)->getCalculatedValue());
+            $nivel = trim($worksheet->getCell('J' . $linha_actual)->getCalculatedValue());
+            $ramo = trim($worksheet->getCell('I' . $linha_actual)->getCalculatedValue());
+            $idTurma = trim($worksheet->getCell('F' . $linha_actual)->getCalculatedValue());
 
             if($ano=='2030'){
 
@@ -612,10 +655,63 @@ class DbsecShell extends AppShell
                     }
                 }
 
+$codigo_disciplina = $idDisciplina;
 
+                if($codigo_disciplina=='D C II'){
+                $codigo_disciplina='DO II';
+            }
 
+            if($codigo_disciplina=='D C III'){
+                $codigo_disciplina='DO III';
+            }
 
+            if($codigo_disciplina=='D C IV'){
+                $codigo_disciplina='DO IV';
+            }
 
+            if($codigo_disciplina=='EBE-24'){
+                $codigo_disciplina='EFE-24';
+            }
+
+            if($codigo_disciplina=='EBE-29'){
+                $codigo_disciplina='EFE-29';
+            }
+
+            if($codigo_disciplina=='EPO-11'){
+                $codigo_disciplina='PORT III';
+            }
+
+            if($codigo_disciplina=='EPO-19'){
+                $codigo_disciplina='PORT V';
+            }
+
+            if($codigo_disciplina=='IES'){
+                $codigo_disciplina='ISO';
+            }
+            if($codigo_disciplina=='IG'){
+                $codigo_disciplina='ING';
+            }
+            if($codigo_disciplina=='LLF II'){
+                $codigo_disciplina='LLF-II';
+            }
+            if($codigo_disciplina=='MO8'){
+                $codigo_disciplina='PGP';
+            }
+            if($codigo_disciplina=='LOA'){
+                $codigo_disciplina='LOAS';
+            }
+if($codigo_disciplina=='MGAP 122'){
+                $codigo_disciplina='OG';
+            }
+            if($codigo_disciplina=='GEA'){
+                $codigo_disciplina='GEG';
+            }
+
+            if($codigo_disciplina=='HIP'){
+                $codigo_disciplina='HIPI';
+            }
+
+$idDisciplina = $codigo_disciplina;
                 $disciplina = $this->Disciplina->findByCodigoAntigo($idDisciplina);
 
                 if (empty($disciplina)) {

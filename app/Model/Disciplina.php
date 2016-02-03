@@ -62,6 +62,12 @@ class Disciplina extends AppModel {
             'message' => 'Ja existe uma disciplina com este Codigo.',
             'required' => 'create',
             'allowEmpty' => true,
+        ),
+        'codigo_antigo' => array(
+            'rule' => 'isUnique',
+            'message' => 'Ja existe uma disciplina com este Codigo antigo.',
+            'required' => 'create',
+            'allowEmpty' => true,
         )
     );
 

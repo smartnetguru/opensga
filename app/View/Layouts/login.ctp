@@ -233,9 +233,7 @@
             </div>
             <div class="mvl copyright">
                 <div class="fsm fwn fcg">
-                    <span> © 2010 - <?php echo date('Y') ?> UEM - DRA | Desenvolvido para
-                        <b><?php echo Configure::read('OpenSGA.instituicao.nome') ?></b>
-                    </span>
+                    <?php echo $this->Element('copyright') ?>
                 </div>
             </div>
         </div>
