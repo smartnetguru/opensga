@@ -286,10 +286,18 @@
                                         'id'      => 'escolaOrigem',
                                         'options' => $escolaNivelMedios,
                                         'empty'   => 'Seleccione',
-                                    'required'=>'required',
+                                    'required'=>false,
                                 ]); ?>
                             </div>
                             <div class="col-sm-4">
+                                <?php echo $this->Form->input('AlunoNivelMedio.escola_nivel_medio', [
+                                        'label' => 'Ou Digite o nome da Escola',
+                                        'class' => 'form-control',
+                                        'id'    => 'codigo',
+                                        'type'  => 'text',
+                                ]); ?>
+                            </div>
+                            <div class="col-sm-2">
                                 <?php echo $this->Form->input('AlunoNivelMedio.ano_conclusao', [
                                         'value' => $candidato['Candidatura']['ano_conclusao'],
                                         'label' => 'Ano de Conclusão do Nivel Anterior',
@@ -298,7 +306,7 @@
                                         'type'  => 'text',
                                 ]); ?>
                             </div>
-                            <div class="col-sm-4">
+                            <div class="col-sm-2">
                                 <?php
                                     if ($candidato['Candidatura']['nota_conclusao'] == '') {
                                         $candidato['Candidatura']['nota_conclusao'] = 10;
@@ -769,7 +777,7 @@
             ]),
     ])
     );
-    $this->Js->get('#cidadeOrigem')->event('change', $this->Js->request([
+  /*  $this->Js->get('#cidadeOrigem')->event('change', $this->Js->request([
             'controller' => 'ajax',
             'action'     => 'get_escolas_by_distrito',
     ], [
@@ -783,7 +791,7 @@
                     'inline' => true,
             ]),
     ])
-    );
+    );*/
 ?>
 <?php
     echo $this->Html->script('/assets/plugins/jQuery-Smart-Wizard/js/jquery.smartWizard', ['block' => 'scriptBottom']);

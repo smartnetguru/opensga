@@ -1509,6 +1509,25 @@
                         $aluno_nivel_medio = [
                             'AlunoNivelMedio' => $data['AlunoNivelMedio']
                         ];
+                        if(!empty($aluno_nivel_medio['AlunoNivelMedio']['escola_nivel_medio'])){
+                            $escolaExiste = $this->AlunoNivelMedio->EscolaNivelMedio->find('first',[
+                                'conditions'=>[
+                                    'name'=>$aluno_nivel_medio['AlunoNivelMedio']['escola_nivel_medio'],
+                                    'distrito_id'=>$data['AlunoNivelMedio']['EscolaNivelMedio']['distrito_id']
+                                ]
+                            ]);
+                            if(!empty($escolaExiste)){
+                                $aluno_nivel_medio['AlunoNivelMedio']['escola_nivel_medio_id']=$escolaExiste
+                                ['EscolaNivelMedio']['id'];
+                            } else{
+                                $escolaData['EscolaNivelMedio'] = $data['AlunoNivelMedio']['EscolaNivelMedio'];
+                                $escolaData['EscolaNivelMedio']['name']=$data['AlunoNivelMedio']['escola_nivel_medio'];
+                                $this->AlunoNivelMedio->EscolaNivelMedio->create();
+                                $this->AlunoNivelMedio->EscolaNivelMedio->save($escolaData);
+                                $aluno_nivel_medio['AlunoNivelMedio']['escola_nivel_medio_id']=
+                                    $this->AlunoNivelMedio->EscolaNivelMedio->id;
+                            }
+                        }
 
                         $aluno_nivel_medio['AlunoNivelMedio']['provincia_id'] = $data['AlunoNivelMedio']['EscolaNivelMedio']['provincia_id'];
                         $aluno_nivel_medio['AlunoNivelMedio']['aluno_id'] = $this->id;
