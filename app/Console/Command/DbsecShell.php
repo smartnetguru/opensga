@@ -848,7 +848,7 @@ $idDisciplina = $codigo_disciplina;
         $this->out('Lendo---------------');
         $xls = PHPExcel_IOFactory::load(APP . 'Imports' . DS . $this->folder . DS . 'inscricao.xlsx');
 
-        $linha_actual = 2;
+        $linha_actual = 18780;
         $worksheet = $xls->getActiveSheet();
         $xls2 = PHPExcel_IOFactory::load(APP . 'Imports' . DS . $this->folder . DS . 'disciplina.xlsx');
         $worksheet2 = $xls2->getActiveSheet();
@@ -886,7 +886,63 @@ $idDisciplina = $codigo_disciplina;
                     }
                 }
 
+$codigo_disciplina = $idDisciplina;
 
+                if($codigo_disciplina=='D C II'){
+                $codigo_disciplina='DO II';
+            }
+
+            if($codigo_disciplina=='D C III'){
+                $codigo_disciplina='DO III';
+            }
+
+            if($codigo_disciplina=='D C IV'){
+                $codigo_disciplina='DO IV';
+            }
+
+            if($codigo_disciplina=='EBE-24'){
+                $codigo_disciplina='EFE-24';
+            }
+
+            if($codigo_disciplina=='EBE-29'){
+                $codigo_disciplina='EFE-29';
+            }
+
+            if($codigo_disciplina=='EPO-11'){
+                $codigo_disciplina='PORT III';
+            }
+
+            if($codigo_disciplina=='EPO-19'){
+                $codigo_disciplina='PORT V';
+            }
+
+            if($codigo_disciplina=='IES'){
+                $codigo_disciplina='ISO';
+            }
+            if($codigo_disciplina=='IG'){
+                $codigo_disciplina='ING';
+            }
+            if($codigo_disciplina=='LLF II'){
+                $codigo_disciplina='LLF-II';
+            }
+            if($codigo_disciplina=='MO8'){
+                $codigo_disciplina='PGP';
+            }
+            if($codigo_disciplina=='LOA'){
+                $codigo_disciplina='LOAS';
+            }
+if($codigo_disciplina=='MGAP 122'){
+                $codigo_disciplina='OG';
+            }
+            if($codigo_disciplina=='GEA'){
+                $codigo_disciplina='GEG';
+            }
+
+            if($codigo_disciplina=='HIP'){
+                $codigo_disciplina='HIPI';
+            }
+
+$idDisciplina = $codigo_disciplina;
 
                 $disciplina = $this->Disciplina->findByCodigoAntigo($idDisciplina);
 
