@@ -1,6 +1,7 @@
 <?php
 
-class RequisicoesAppModel extends AppModel {
+    class RequisicoesAppModel extends AppModel
+    {
 
-}
+    }
 

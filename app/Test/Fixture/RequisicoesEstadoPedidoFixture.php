@@ -1,47 +1,49 @@
 <?php
-/**
- * RequisicoesEstadoPedidoFixture
- *
- */
-class RequisicoesEstadoPedidoFixture extends CakeTestFixture {
 
-/**
- * Import
- *
- * @var array
- */
-	public $import = array('table' => 'requisicoes_estado_pedidos');
+	/**
+	 * RequisicoesEstadoPedidoFixture
+	 *
+	 */
+	class RequisicoesEstadoPedidoFixture extends CakeTestFixture
+	{
 
-/**
- * Records
- *
- * @var array
- */
-	public $records = array(
-		array(
-			'id' => '1',
-			'name' => 'Pendente'
-		),
-		array(
-			'id' => '2',
-			'name' => 'Processamento'
-		),
-		array(
-			'id' => '3',
-			'name' => 'Despacho'
-		),
-		array(
-			'id' => '4',
-			'name' => 'Pronto'
-		),
-		array(
-			'id' => '5',
-			'name' => 'Entregue'
-		),
-		array(
-			'id' => '6',
-			'name' => 'Enviado á Faculdade'
-		),
-	);
+		/**
+		 * Import
+		 *
+		 * @var array
+		 */
+		public $import = ['table' => 'requisicoes_estado_pedidos'];
 
-}
+		/**
+		 * Records
+		 *
+		 * @var array
+		 */
+		public $records = [
+			[
+				'id'   => '1',
+				'name' => 'Pendente',
+			],
+			[
+				'id'   => '2',
+				'name' => 'Processamento',
+			],
+			[
+				'id'   => '3',
+				'name' => 'Despacho',
+			],
+			[
+				'id'   => '4',
+				'name' => 'Pronto',
+			],
+			[
+				'id'   => '5',
+				'name' => 'Entregue',
+			],
+			[
+				'id'   => '6',
+				'name' => 'Enviado á Faculdade',
+			],
+		];
+
+	}

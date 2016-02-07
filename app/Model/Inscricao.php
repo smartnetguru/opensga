@@ -27,86 +27,86 @@
 
         public $estadoInscricoesAbertas = [null, 1, 2, 3];
 
-        public $filterArgs = array(
+        public $filterArgs = [
 
-            'turma_id' => array(
-                'type' => 'value',
-                'field' => 'turma_id'
-            ),
-            'estado_inscricao_id'=>[
+            'turma_id'            => [
+                'type'  => 'value',
+                'field' => 'turma_id',
+            ],
+            'estado_inscricao_id' => [
 
             ],
-            'numero_estudante'=>[
-                'type'=>'value',
-                'field'=>'Aluno.codigo'
-            ]
-        );
+            'numero_estudante'    => [
+                'type'  => 'value',
+                'field' => 'Aluno.codigo',
+            ],
+        ];
 
         public $validate = [
             'tipo_inscricao_id'      => [
                 'TipoInscricaoNotEmpty' => [
                     'rule'     => 'notBlank',
                     'required' => 'Create',
-                    'message'  => 'O Tipo de Inscricao deve ser Definido'
-                ]
+                    'message'  => 'O Tipo de Inscricao deve ser Definido',
+                ],
             ],
             'estado_inscricao_id'    => [
                 'EstadoInscricaoNotEmpty' => [
                     'rule'     => 'notBlank',
                     'required' => 'Create',
-                    'message'  => 'O Estado da Inscricao deve ser Definido'
-                ]
+                    'message'  => 'O Estado da Inscricao deve ser Definido',
+                ],
             ],
             'turma_id'               => [
                 'TurmaNotEmpty' => [
                     'rule'     => 'notBlank',
                     'required' => 'Create',
-                    'message'  => 'A Turma deve ser Definida'
-                ]
+                    'message'  => 'A Turma deve ser Definida',
+                ],
             ],
             'turma_frequencia_id'    => [
                 'TurmaFrequenciaNotEmpty' => [
                     'rule'     => 'notBlank',
                     'required' => 'Create',
-                    'message'  => 'A turma de frequencia deve ser Definida'
-                ]
+                    'message'  => 'A turma de frequencia deve ser Definida',
+                ],
             ],
             'aluno_id'               => [
                 'alunoIdNotEmpty' => [
                     'rule'     => 'notBlank',
                     'required' => 'Create',
-                    'message'  => 'O Aluno deve ser Definido'
-                ]
+                    'message'  => 'O Aluno deve ser Definido',
+                ],
             ],
             'nota_frequencia'        => [
                 'NotaFrequenciaNotEmpty' => [
                     'rule'       => ['range', -0.1, 20.1],
                     'message'    => 'A nota de frequencia deve estar entre 0 e 20',
-                    'allowEmpty' => true
-                ]
+                    'allowEmpty' => true,
+                ],
             ],
             'nota_final'             => [
                 'NotaFinalNotEmpty' => [
                     'rule'       => ['range', -0.1, 20.1],
                     'message'    => 'A nota final deve estar entre 0 e 20',
-                    'allowEmpty' => true
-                ]
+                    'allowEmpty' => true,
+                ],
             ],
             'turma_inscricao_id'     => [
                 'TurmaInscricaoNotEmpty' => [
                     'rule'     => 'notBlank',
                     'required' => 'Create',
                     'on'       => 'create',
-                    'message'  => 'A turma onde o estudante escreveu deve ser Definida'
-                ]
+                    'message'  => 'A turma onde o estudante escreveu deve ser Definida',
+                ],
             ],
             'matricula_id'           => [
                 'MatriculaIdtEmpty' => [
                     'rule'     => 'notBlank',
                     'required' => 'Create',
                     'on'       => 'create',
-                    'message'  => 'A turma onde o estudante escreveu deve ser Definida'
-                ]
+                    'message'  => 'A turma onde o estudante escreveu deve ser Definida',
+                ],
             ],
             'epoca_avaliacao_id',
             'data',
@@ -114,15 +114,15 @@
                 'NotaExameNormalNotEmpty' => [
                     'rule'       => ['range', -0.1, 20.1],
                     'message'    => 'A nota final deve estar entre 0 e 20',
-                    'allowEmpty' => true
-                ]
+                    'allowEmpty' => true,
+                ],
             ],
             'nota_exame_recorrencia' => [
                 'NotaExameRecorrenciaNotEmpty' => [
                     'rule'       => ['range', -0.1, 20.1],
                     'message'    => 'A nota final deve estar entre 0 e 20',
-                    'allowEmpty' => true
-                ]
+                    'allowEmpty' => true,
+                ],
             ],
 
 
@@ -133,43 +133,43 @@
                 'foreignKey' => 'Aluno_id',
                 'conditions' => '',
                 'fields'     => '',
-                'order'      => ''
+                'order'      => '',
             ],
             'Turma'           => [
                 'className'  => 'Turma',
                 'foreignKey' => 'turma_id',
                 'conditions' => '',
                 'fields'     => '',
-                'order'      => ''
+                'order'      => '',
             ],
             'EstadoInscricao' => [
                 'className'  => 'EstadoInscricao',
                 'foreignKey' => 'estado_inscricao_id',
                 'conditions' => '',
                 'fields'     => '',
-                'order'      => ''
+                'order'      => '',
             ],
             'EpocaAvaliacao'  => [
                 'className'  => 'EpocaAvaliacao',
                 'foreignKey' => 'EpocaAvaliacao_id',
                 'conditions' => '',
                 'fields'     => '',
-                'order'      => ''
+                'order'      => '',
             ],
             'Matricula'       => [
                 'className'  => 'Matricula',
                 'foreignKey' => 'matricula_id',
                 'conditions' => '',
                 'fields'     => '',
-                'order'      => ''
+                'order'      => '',
             ],
             'TipoInscricao'   => [
                 'className'  => 'TipoInscricao',
                 'foreignKey' => 'tipo_inscricao_id',
                 'conditions' => '',
                 'fields'     => '',
-                'order'      => ''
-            ]
+                'order'      => '',
+            ],
         ];
         var $hasMany = [
             'Avaliacao' => [
@@ -183,8 +183,8 @@
                 'offset'       => '',
                 'exclusive'    => '',
                 'finderQuery'  => '',
-                'counterQuery' => ''
-            ]
+                'counterQuery' => '',
+            ],
         ];
 
         public function cadastraNotasHistorico($data)
@@ -207,8 +207,8 @@
                         'Inscricao' => [
                             'nota_final'   => $inscricao['nota_final'],
                             'aluno_id'     => $alunoId,
-                            'inscricao_id' => $inscricao['inscricao_id']
-                        ]
+                            'inscricao_id' => $inscricao['inscricao_id'],
+                        ],
                     ];
                     $resultado = $this->actualizaDadosInscricao($dadosInscricao);
                     if ($resultado !== true) {
@@ -229,8 +229,8 @@
                             'SemestreLectivo' => [
                                 'ano_lectivo_id' => $anoLectivo['AnoLectivo']['id'],
                                 'semestre'       => $disciplinaPlanoEstudo['DisciplinaPlanoEstudo']['semestre_curricular'],
-                                'codigo'         => $anoLectivo['AnoLectivo']['id'] . '/' . $disciplinaPlanoEstudo['DisciplinaPlanoEstudo']['semestre_curricular']
-                            ]
+                                'codigo'         => $anoLectivo['AnoLectivo']['id'] . '/' . $disciplinaPlanoEstudo['DisciplinaPlanoEstudo']['semestre_curricular'],
+                            ],
                         ];
                         $this->Turma->SemestreLectivo->create();
                         if (!$this->Turma->SemestreLectivo->save($arraySemestreLectivo)) {
@@ -249,8 +249,8 @@
                             'plano_estudo_id'     => $disciplinaPlanoEstudo['DisciplinaPlanoEstudo']['plano_estudo_id'],
                             'ano_curricular'      => $disciplinaPlanoEstudo['DisciplinaPlanoEstudo']['ano_curricular'],
                             'semestre_curricular' => $disciplinaPlanoEstudo['DisciplinaPlanoEstudo']['semestre_curricular'],
-                            'ano_lectivo_id'      => $anoLectivo['AnoLectivo']['id']
-                        ]
+                            'ano_lectivo_id'      => $anoLectivo['AnoLectivo']['id'],
+                        ],
                     ]);
                     if (empty($turmaExiste)) {
                         //Criamos a Turma
@@ -266,7 +266,7 @@
                                 'name'                => $disciplinaPlanoEstudo['Disciplina']['name'] . ' - ' . $inscricao['ano_lectivo'] . $disciplinaPlanoEstudo['PlanoEstudo']['name'],
                                 'semestre_lectivo_id' => $semestreLectivoId,
 
-                            ]
+                            ],
                         ];
                         $this->Turma->create();
                         if (!$this->Turma->save($arrayNovaTurma)) {
@@ -296,8 +296,8 @@
                                 'data'                => $inscricao['ano_lectivo'] . '-01-01',
                                 'estado_matricula_id' => 1,
                                 'ano_lectivo_id'      => $anoLectivo['AnoLectivo']['id'],
-                                'tipo_matricula_id'   => $tipoMatriculaId
-                            ]
+                                'tipo_matricula_id'   => $tipoMatriculaId,
+                            ],
                         ];
                         $this->Matricula->create();
                         if (!$this->Matricula->save($arrayMatricula)) {
@@ -320,7 +320,7 @@
                             'turma_inscricao_id'  => $turmaId,
                             'turma_frequencia_id' => $turmaId,
 
-                        ]
+                        ],
                     ];
                     $this->create();
                     if (!$this->save($arrayNovaInscricao)) {
@@ -332,8 +332,8 @@
                         'Inscricao' => [
                             'nota_final'   => $inscricao['nota_final'],
                             'aluno_id'     => $alunoId,
-                            'inscricao_id' => $this->id
-                        ]
+                            'inscricao_id' => $this->id,
+                        ],
                     ];
                     $resultado = $this->actualizaDadosInscricao($dadosInscricao);
                     if ($resultado !== true) {
@@ -463,18 +463,18 @@
                 'Matricula' => [
                     'Aluno' => [
                         'Entidade' => [
-                            'User'
-                        ]
-                    ]
+                            'User',
+                        ],
+                    ],
                 ],
                 'Turma'     => [
                     'Curso' => [
-                        'fields' => ['name']
+                        'fields' => ['name'],
                     ],
                     'Disciplina',
                     'Turno',
-                    'AnoLectivo'
-                ]
+                    'AnoLectivo',
+                ],
             ]);
             $resultado = $this->Turma->Inscricao->find('all', ['conditions' => ['turma_id' => $turmaId]]);
             $sorted = Hash::sort($resultado, '{n}.Matricula.Aluno.Entidade.apelido');
@@ -489,7 +489,7 @@
             $aluno = $this->Aluno->findById($alunoId);
 
             $this->contain([
-                'Turma'
+                'Turma',
 
             ]);
             $cadeirasFeitas = $this->find('all',
@@ -498,7 +498,7 @@
                         'Inscricao.estado_inscricao_id' => [4, 5, 6, 13],
                         'Inscricao.aluno_id'            => $alunoId,
                     ],
-                    'fields'     => 'Turma.disciplina_id'
+                    'fields'     => 'Turma.disciplina_id',
                 ]);
             $disciplinasExcluir = Hash::extract($cadeirasFeitas, '{n}.Turma.disciplina_id');
             //Pega todas as cadeiras do plano
@@ -507,9 +507,9 @@
                 [
                     'conditions' => [
                         'plano_estudo_id'   => $aluno['Aluno']['plano_estudo_id'],
-                        'disciplina_id NOT' => $disciplinasExcluir
+                        'disciplina_id NOT' => $disciplinasExcluir,
                     ],
-                    'order'      => ['ano_curricular', 'semestre_curricular']
+                    'order'      => ['ano_curricular', 'semestre_curricular'],
                 ]);
 
 
@@ -527,9 +527,9 @@
             $this->Aluno->contain([
                 'Matricula' => [
                     'conditions' => [
-                        'ano_lectivo_id' => $anoLectivoId
-                    ]
-                ]
+                        'ano_lectivo_id' => $anoLectivoId,
+                    ],
+                ],
             ]);
             $aluno = $this->Aluno->findById($alunoId);
             $cadeirasInscritas = $this->getAllCadeirasInscritasByAlunoSemestre($alunoId);
@@ -539,63 +539,20 @@
 
             $disciplinasExcluir = Hash::extract($inscricaosExcluir, '{n}.Turma.disciplina_id');
             $this->Aluno->PlanoEstudo->DisciplinaPlanoEstudo->contain([
-                'Disciplina'
+                'Disciplina',
             ]);
 
             $disciplinaPlanoEstudo = $this->Aluno->PlanoEstudo->DisciplinaPlanoEstudo->find('all', [
                 'conditions' => [
                     'plano_estudo_id'   => $aluno['Matricula'][0]['plano_estudo_id'],
-                    'Disciplina.id NOT' => $disciplinasExcluir
+                    'Disciplina.id NOT' => $disciplinasExcluir,
                 ],
                 'order'      => [
                     'ano_curricular',
-                    'semestre_curricular'
-                ]
-
-            ]);
-
-            return $disciplinaPlanoEstudo;
-        }
-
-        public function getAllDisciplinasForInscricaoByCurso($alunoId, $anoLectivoId = null)
-        {
-            if (!$anoLectivoId) {
-                $anoLectivo = Configure::read('OpenSGA.ano_lectivo');
-                $anoLectivo = $this->Turma->AnoLectivo->findByAno($anoLectivo);
-                $anoLectivoId = $anoLectivo['AnoLectivo']['id'];
-            }
-
-            $this->Aluno->contain([
-                'Matricula' => [
-                    'conditions' => [
-                        'ano_lectivo_id' => $anoLectivoId
-                    ]
-                ]
-            ]);
-            $aluno = $this->Aluno->findById($alunoId);
-            $cadeirasInscritas = $this->getAllCadeirasInscritasByAlunoSemestre($alunoId);
-
-            $disciplinasFeitas = $this->getAllInscricoesByAlunoAndEstado($alunoId, [4, 5, 6, 13]);
-            $inscricaosExcluir = Hash::merge($cadeirasInscritas, $disciplinasFeitas);
-
-            $disciplinasExcluir = Hash::extract($inscricaosExcluir, '{n}.Turma.disciplina_id');
-            $this->Aluno->PlanoEstudo->DisciplinaPlanoEstudo->contain([
-                'Disciplina','PlanoEstudo'
-            ]);
-
-
-            $disciplinaPlanoEstudo = $this->Aluno->PlanoEstudo->DisciplinaPlanoEstudo->find('all', [
-                'conditions' => [
-                    'PlanoEstudo.curso_id'   => $aluno['Aluno']['curso_id'],
-                    'Disciplina.id NOT' => $disciplinasExcluir
+                    'semestre_curricular',
                 ],
-                'order'      => [
-                    'ano_curricular',
-                    'semestre_curricular'
-                ]
 
             ]);
-
 
             return $disciplinaPlanoEstudo;
         }
@@ -615,7 +572,7 @@
             }
 
             $this->contain([
-                'Turma'
+                'Turma',
             ]);
             $inscricaos = $this->find('all',
                 ['conditions' => ['Inscricao.aluno_id' => $aluno_id, 'Turma.semestre_lectivo_id' => $semestre_id]]);
@@ -631,18 +588,18 @@
                             'id',
                             'disciplina_id',
                             'ano_curricular',
-                            'semestre_curricular'
+                            'semestre_curricular',
                         ],
                         'Disciplina' => [
-                            'fields' => ['id', 'name']
-                        ]
+                            'fields' => ['id', 'name'],
+                        ],
                     ],
                     'Matricula' => [
                         'fields'     => ['id', 'ano_lectivo_id'],
                         'AnoLectivo' => [
-                            'fields' => ['id', 'ano']
-                        ]
-                    ]
+                            'fields' => ['id', 'ano'],
+                        ],
+                    ],
                 ]
             );
             $conditions = ['Inscricao.aluno_id' => $alunoId];
@@ -652,6 +609,50 @@
             $inscricoes = $this->find('all', ['conditions' => $conditions]);
 
             return $inscricoes;
+        }
+
+        public function getAllDisciplinasForInscricaoByCurso($alunoId, $anoLectivoId = null)
+        {
+            if (!$anoLectivoId) {
+                $anoLectivo = Configure::read('OpenSGA.ano_lectivo');
+                $anoLectivo = $this->Turma->AnoLectivo->findByAno($anoLectivo);
+                $anoLectivoId = $anoLectivo['AnoLectivo']['id'];
+            }
+
+            $this->Aluno->contain([
+                'Matricula' => [
+                    'conditions' => [
+                        'ano_lectivo_id' => $anoLectivoId,
+                    ],
+                ],
+            ]);
+            $aluno = $this->Aluno->findById($alunoId);
+            $cadeirasInscritas = $this->getAllCadeirasInscritasByAlunoSemestre($alunoId);
+
+            $disciplinasFeitas = $this->getAllInscricoesByAlunoAndEstado($alunoId, [4, 5, 6, 13]);
+            $inscricaosExcluir = Hash::merge($cadeirasInscritas, $disciplinasFeitas);
+
+            $disciplinasExcluir = Hash::extract($inscricaosExcluir, '{n}.Turma.disciplina_id');
+            $this->Aluno->PlanoEstudo->DisciplinaPlanoEstudo->contain([
+                'Disciplina',
+                'PlanoEstudo',
+            ]);
+
+
+            $disciplinaPlanoEstudo = $this->Aluno->PlanoEstudo->DisciplinaPlanoEstudo->find('all', [
+                'conditions' => [
+                    'PlanoEstudo.curso_id' => $aluno['Aluno']['curso_id'],
+                    'Disciplina.id NOT'    => $disciplinasExcluir,
+                ],
+                'order'      => [
+                    'ano_curricular',
+                    'semestre_curricular',
+                ],
+
+            ]);
+
+
+            return $disciplinaPlanoEstudo;
         }
 
         public function getAllDisciplinasForInscricaoByPlanoEstudo($alunoId, $planoEstudoId, $anoLectivoId = null)
@@ -665,9 +666,9 @@
             $this->Aluno->contain([
                 'Matricula' => [
                     'conditions' => [
-                        'ano_lectivo_id' => $anoLectivoId
-                    ]
-                ]
+                        'ano_lectivo_id' => $anoLectivoId,
+                    ],
+                ],
             ]);
             $cadeirasInscritas = $this->getAllCadeirasInscritasByAlunoSemestre($alunoId);
 
@@ -676,18 +677,18 @@
 
             $disciplinasExcluir = Hash::extract($inscricaosExcluir, '{n}.Turma.disciplina_id');
             $this->Aluno->PlanoEstudo->DisciplinaPlanoEstudo->contain([
-                'Disciplina'
+                'Disciplina',
             ]);
 
             $disciplinaPlanoEstudo = $this->Aluno->PlanoEstudo->DisciplinaPlanoEstudo->find('all', [
                 'conditions' => [
                     'plano_estudo_id'   => $planoEstudoId,
-                    'Disciplina.id NOT' => $disciplinasExcluir
+                    'Disciplina.id NOT' => $disciplinasExcluir,
                 ],
                 'order'      => [
                     'ano_curricular',
-                    'semestre_curricular'
-                ]
+                    'semestre_curricular',
+                ],
 
             ]);
 
@@ -708,7 +709,7 @@
             }
 
             $this->contain([
-                'Turma'
+                'Turma',
             ]);
 
             return $this->find('count', ['conditions' => $conditions]);
@@ -724,7 +725,7 @@
             $dataSource->begin();
             $this->FinanceiroTransacao = ClassRegistry::init('FinanceiroTransacao');
             $this->Aluno->contain([
-                'PlanoEstudo'
+                'PlanoEstudo',
             ]);
             $aluno = $this->Aluno->findById($data['aluno_id']);
             //Primeiro Realizamos o deposito
@@ -778,10 +779,10 @@
                             'Turma.estado_turma_id'     => 1,
                             'Turma.ano_curricular'      => $disciplinaPlanoEstudo['DisciplinaPlanoEstudo']['ano_curricular'],
                             'Turma.semestre_curricular' => $disciplinaPlanoEstudo['DisciplinaPlanoEstudo']['semestre_curricular'],
-                            'Turma.semestre_lectivo_id' => Configure::read('OpenSGA.semestre_lectivo_id')
+                            'Turma.semestre_lectivo_id' => Configure::read('OpenSGA.semestre_lectivo_id'),
                         ];
                         $turmaExiste = $this->Turma->find('first', [
-                            'conditions' => $turmaExisteConditions
+                            'conditions' => $turmaExisteConditions,
                         ]);
 
                         if (empty($turmaExiste)) {
@@ -811,8 +812,8 @@
                             'conditions' => [
                                 'aluno_id'            => $aluno['Aluno']['id'],
                                 'turma_id'            => $turmaId,
-                                'estado_inscricao_id' => 1
-                            ]
+                                'estado_inscricao_id' => 1,
+                            ],
                         ]);
                         $inscricaoSave = [
                             'Inscricao' => [
@@ -825,7 +826,7 @@
                                 'pagamento_id'        => $pagamento_id,
                                 'tipo_inscricao_id'   => 1,
                                 'turma_inscricao_id'  => $turmaId,
-                            ]
+                            ],
                         ];
                         if (empty($inscricaoExiste)) {
                             if ($this->validaInscricao($inscricaoSave)) {
@@ -878,8 +879,8 @@
                 'conditions' => [
                     'turma_id'     => $inscricao_data['Inscricao']['turma_id'],
                     'aluno_id'     => $inscricao_data['Inscricao']['aluno_id'],
-                    'matricula_id' => $inscricao_data['Inscricao']['matricula_id']
-                ]
+                    'matricula_id' => $inscricao_data['Inscricao']['matricula_id'],
+                ],
             ]);
             if (!$turma) {
                 return true;

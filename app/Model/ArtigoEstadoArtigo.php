@@ -1,51 +1,53 @@
 <?php
-App::uses('AppModel', 'Model');
-/**
- * ArtigoEstadoArtigo Model
- *
- * @property Artigo $Artigo
- */
-class ArtigoEstadoArtigo extends AppModel {
+	App::uses('AppModel', 'Model');
 
-/**
- * Validation rules
- *
- * @var array
- */
-	public $validate = array(
-		'name' => array(
-			'notBlank' => array(
-				'rule' => array('notBlank'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
-		),
-	);
+	/**
+	 * ArtigoEstadoArtigo Model
+	 *
+	 * @property Artigo $Artigo
+	 */
+	class ArtigoEstadoArtigo extends AppModel
+	{
 
-	// The Associations below have been created with all possible keys, those that are not needed can be removed
+		/**
+		 * Validation rules
+		 *
+		 * @var array
+		 */
+		public $validate = [
+			'name' => [
+				'notBlank' => [
+					'rule' => ['notBlank'],
+					//'message' => 'Your custom message here',
+					//'allowEmpty' => false,
+					//'required' => false,
+					//'last' => false, // Stop validation after this rule
+					//'on' => 'create', // Limit validation to 'create' or 'update' operations
+				],
+			],
+		];
 
-/**
- * hasMany associations
- *
- * @var array
- */
-	public $hasMany = array(
-		'Artigo' => array(
-			'className' => 'Artigo',
-			'foreignKey' => 'artigo_estado_artigo_id',
-			'dependent' => false,
-			'conditions' => '',
-			'fields' => '',
-			'order' => '',
-			'limit' => '',
-			'offset' => '',
-			'exclusive' => '',
-			'finderQuery' => '',
-			'counterQuery' => ''
-		)
-	);
+		// The Associations below have been created with all possible keys, those that are not needed can be removed
 
-}
+		/**
+		 * hasMany associations
+		 *
+		 * @var array
+		 */
+		public $hasMany = [
+			'Artigo' => [
+				'className'    => 'Artigo',
+				'foreignKey'   => 'artigo_estado_artigo_id',
+				'dependent'    => false,
+				'conditions'   => '',
+				'fields'       => '',
+				'order'        => '',
+				'limit'        => '',
+				'offset'       => '',
+				'exclusive'    => '',
+				'finderQuery'  => '',
+				'counterQuery' => '',
+			],
+		];
+
+	}

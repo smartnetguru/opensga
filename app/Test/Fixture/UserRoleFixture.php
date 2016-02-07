@@ -1,23 +1,25 @@
 <?php
-/**
- * UserRoleFixture
- *
- */
-class UserRoleFixture extends CakeTestFixture {
 
-/**
- * Import
- *
- * @var array
- */
-	public $import = array('model' => 'UserRole');
+	/**
+	 * UserRoleFixture
+	 *
+	 */
+	class UserRoleFixture extends CakeTestFixture
+	{
 
-/**
- * Records
- *
- * @var array
- */
-	public $records = array(
-	);
+		/**
+		 * Import
+		 *
+		 * @var array
+		 */
+		public $import = ['model' => 'UserRole'];
 
-}
+		/**
+		 * Records
+		 *
+		 * @var array
+		 */
+		public $records = [
+		];
+
+	}

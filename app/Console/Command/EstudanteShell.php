@@ -156,16 +156,16 @@
                     $this->Aluno->contain([
                             'Curso',
                             'Entidade' => [
-                                'Genero'
-                            ]
+                                'Genero',
+                            ],
                         ]
                     );
                     $alunos = $this->Aluno->find('all', [
                         'conditions' => [
                             'Aluno.ano_ingresso <' => Configure::read('OpenSGA.ano_lectivo') - $limiteEstudos,
                             'curso_id'             => $cursoID,
-                            'estado_aluno_id'      => [1, 11]
-                        ]
+                            'estado_aluno_id'      => [1, 11],
+                        ],
                     ]);
                     $i = 1;
                     $homens = 0;
@@ -296,20 +296,20 @@
                 'AlunoNivelMedio' => [
                     'EscolaNivelMedio' => [
                         'Distrito' => [
-                            'Provincia'
-                        ]
-                    ]
+                            'Provincia',
+                        ],
+                    ],
                 ],
                 'Entidade',
-                'Curso'
+                'Curso',
             ]);
             $alunos = $this->Aluno->find('all', [
                 'conditions' => [
                     'or' => [
                         'ano_ingresso'       => '2013',
-                        'Aluno.codigo LIKE ' => '2013%'
-                    ]
-                ]
+                        'Aluno.codigo LIKE ' => '2013%',
+                    ],
+                ],
             ]);
 
             foreach ($alunos as $aluno) {
@@ -363,8 +363,8 @@
                     'Genero',
                 ],
                 'Curso'    => [
-                    'UnidadeOrganica'
-                ]
+                    'UnidadeOrganica',
+                ],
             ]);
 
             $unidadeOrganicas = $this->Aluno->Curso->UnidadeOrganica->getWithChilds(15);
@@ -375,7 +375,7 @@
                     'Curso.unidade_organica_id' => $unidadeOrganicas,
                     // 'Aluno.ano_ingresso NOT' => array(2015,2014)
                 ],
-                'order'      => 'Aluno.ano_ingresso DESC'
+                'order'      => 'Aluno.ano_ingresso DESC',
             ]);
             debug(count($alunos));
             foreach ($alunos as $aluno) {
@@ -489,7 +489,6 @@
                  * $xls->getActiveSheet()->setCellValue('T' . $linhaActual, $base64);
                  * }
                  * }
-
                  */
                 $this->out($linhaActual);
                 $linhaActual++;
@@ -734,7 +733,7 @@
                 'ϋ',
                 'ΰ',
                 'Ή',
-                'ή'
+                'ή',
             ];
             $b = [
                 'A',
@@ -965,7 +964,7 @@
                 'υ',
                 'υ',
                 'Η',
-                'η'
+                'η',
             ];
 
             return str_replace($a, $b, $str);
@@ -985,17 +984,17 @@
                 'Entidade' => [
                     'Genero',
                     'PaisNascimento',
-                    'User'
+                    'User',
                 ],
                 'Curso'    => [
-                    'UnidadeOrganica'
-                ]
+                    'UnidadeOrganica',
+                ],
             ]);
             $alunos = $this->Aluno->find('all', [
                 'conditions' => [
                     'Aluno.ano_ingresso' => 2015,
-                    "NOT"                => ['Aluno.codigo' => null]
-                ]
+                    "NOT"                => ['Aluno.codigo' => null],
+                ],
             ]);
             $totalAlunos = count($alunos);
             $linhaActual = 2;
@@ -1156,16 +1155,16 @@
                     $this->Aluno->contain([
                             'Curso',
                             'Entidade' => [
-                                'Genero'
-                            ]
+                                'Genero',
+                            ],
                         ]
                     );
                     $alunos = $this->Aluno->find('all', [
                         'conditions' => [
                             'Aluno.ano_ingresso' => Configure::read('OpenSGA.ano_lectivo') - $limiteEstudos,
-                            'curso_id'             => $cursoID,
-                            'estado_aluno_id'      => [1, 11]
-                        ]
+                            'curso_id'           => $cursoID,
+                            'estado_aluno_id'    => [1, 11],
+                        ],
                     ]);
                     $i = 1;
                     $homens = 0;
@@ -1274,7 +1273,6 @@
         }
 
 
-
         public function exporta_fora_tempo_estudos_ano()
         {
 
@@ -1304,23 +1302,23 @@
                 $novosIngressos = $this->Aluno->find('count', [
                     'conditions' => [
                         'ano_ingresso' => $anoLectivo,
-                        'curso_id'     => $curso['Curso']['id']
-                    ]
+                        'curso_id'     => $curso['Curso']['id'],
+                    ],
                 ]);
                 $foraTempo = $this->Aluno->find('count', [
                     'conditions' => [
                         'ano_ingresso <
              '                     => $anoLectivo - $limiteEstudos,
-                        'curso_id' => $curso['Curso']['id']
-                    ]
+                        'curso_id' => $curso['Curso']['id'],
+                    ],
                 ]);
 
                 $dentroTempo = $this->Aluno->find('count', [
                     'conditions' => [
                         'ano_ingresso >='
                                    => $anoLectivo - $limiteEstudos,
-                        'curso_id' => $curso['Curso']['id']
-                    ]
+                        'curso_id' => $curso['Curso']['id'],
+                    ],
                 ]);
 
                 $xls->getActiveSheet()->setCellValue('A' . $linhaActual, $curso['Curso']['name']);
@@ -1444,15 +1442,15 @@
                     $this->Aluno->contain([
                             'Curso',
                             'Entidade' => [
-                                'Genero'
-                            ]
+                                'Genero',
+                            ],
                         ]
                     );
                     $alunos = $this->Aluno->find('all', [
                         'conditions' => [
                             'Aluno.ano_ingresso' => Configure::read('OpenSGA.ano_lectivo'),
-                            'curso_id'           => $cursoID
-                        ]
+                            'curso_id'           => $cursoID,
+                        ],
                     ]);
 
                     $i = 1;
@@ -1584,9 +1582,9 @@
                     'OR' => [
                         'Aluno.referencia_renovacao is
             null',
-                        'Aluno.referencia_renovacao' => ''
-                    ]
-                ]
+                        'Aluno.referencia_renovacao' => '',
+                    ],
+                ],
             ]);
             $total = count($alunos);
 
@@ -1616,14 +1614,14 @@
                 'Entidade'        => [
                     'User',
                     'EntidadeIdentificacao',
-                    'EntidadeContacto'
+                    'EntidadeContacto',
                 ],
                 'AlunoNivelMedio' => [
-                    'EscolaNivelMedio'
+                    'EscolaNivelMedio',
                 ],
                 'Matricula',
                 'HistoricoCurso',
-                'Curso'
+                'Curso',
             ]);
             $alunos = $this->Aluno->find('all',
                 ['conditions' => ['Aluno.ano_ingresso' => Configure::read('OpenSGA.ano_lectivo')]]);
@@ -1685,23 +1683,23 @@
                         'EscolaNivelMedio'      => [
                             'pais_id'      => $aluno['AlunoNivelMedio']['EscolaNivelMedio']['pais_id'],
                             'provincia_id' => $aluno['AlunoNivelMedio']['EscolaNivelMedio']['provincia_id'],
-                            'distrito_id'  => $aluno['AlunoNivelMedio']['EscolaNivelMedio']['distrito_id']
+                            'distrito_id'  => $aluno['AlunoNivelMedio']['EscolaNivelMedio']['distrito_id'],
                         ],
                         'escola_nivel_medio_id' => $aluno['AlunoNivelMedio']['escola_nivel_medio_id'],
                         'ano_conclusao'         => $aluno['AlunoNivelMedio']['ano_conclusao'],
                         'nota_final'            => $aluno['AlunoNivelMedio']['nota_final'],
-                        'nova_escola_anterior'  => ''
+                        'nova_escola_anterior'  => '',
                     ],
                     'EntidadeIdentificacao' => [
                         'documento_identificacao_id' => $aluno['Entidade']['EntidadeIdentificacao'][0]['documento_identificacao_id'],
                         'numero'                     => $aluno['Entidade']['EntidadeIdentificacao'][0]['numero'],
                         'local_emissao'              => $aluno['Entidade']['EntidadeIdentificacao'][0]['local_emissao'],
                         'data_emissao'               => $aluno['Entidade']['EntidadeIdentificacao'][0]['data_emissao'],
-                        'data_validade'              => $aluno['Entidade']['EntidadeIdentificacao'][0]['data_validade']
+                        'data_validade'              => $aluno['Entidade']['EntidadeIdentificacao'][0]['data_validade'],
                     ],
                     'Dados'                 => [
                         'user_id' => $aluno['Aluno']['created_by'],
-                    ]
+                    ],
                 ];
 
                 foreach ($aluno['Entidade']['EntidadeContacto'] as $contacto) {
@@ -1762,15 +1760,14 @@
         }
 
 
-
-
-        public function projeccaoGraduados(){
+        public function projeccaoGraduados()
+        {
             App::import('Vendor', 'PHPExcel', ['file' => 'PHPExcel.php']);
             if (!class_exists('PHPExcel')) {
                 throw new CakeException('Vendor class PHPExcel not found!');
             }
 
-            $xls = PHPExcel_IOFactory::load(APP . 'Reports' . DS .'Estudantes'.DS. 'projeccao.xlsx');
+            $xls = PHPExcel_IOFactory::load(APP . 'Reports' . DS . 'Estudantes' . DS . 'projeccao.xlsx');
 
             $worksheet = $xls->getActiveSheet();
             $linhaActual = 4;
@@ -1779,9 +1776,9 @@
             $anoFim = 2020;
             $anoBase = 2015;
 
-            $cursos = [40=>40,54=>54,130=>130,131=>131];
+            $cursos = [40 => 40, 54 => 54, 130 => 130, 131 => 131];
 
-            foreach($cursos as $k=>$v){
+            foreach ($cursos as $k => $v) {
                 $this->Aluno->Curso->contain(['GrauAcademico']);
                 $curso = $this->Aluno->Curso->findById($k);
                 $xls->getActiveSheet()->setCellValue('A' . $linhaActual, 'Universidade Eduardo Mondlane');
@@ -1789,66 +1786,77 @@
                 $xls->getActiveSheet()->setCellValue('C' . $linhaActual, $curso['Curso']['name']);
 
                 $anoCriacao = $curso['Curso']['ano_criacao'];
-                if(!$anoCriacao){
+                if (!$anoCriacao) {
                     $xls->getActiveSheet()->setCellValue('D' . $linhaActual, '');
-                } else{
+                } else {
                     $xls->getActiveSheet()->setCellValue('D' . $linhaActual, $curso['Curso']['ano_criacao']);
                 }
 
                 $xls->getActiveSheet()->setCellValue('E' . $linhaActual, $curso['GrauAcademico']['name']);
 
-                if(!empty($curso['Curso']['duracao'])){
-                    $xls->getActiveSheet()->setCellValue('F' . $linhaActual, $curso['Curso']['duracao']*2);
-                } else{
-                    die($this->out($curso['Curso']['name'].'------Sem Duracao----------'.$curso['Curso']['id']));
+                if (!empty($curso['Curso']['duracao'])) {
+                    $xls->getActiveSheet()->setCellValue('F' . $linhaActual, $curso['Curso']['duracao'] * 2);
+                } else {
+                    die($this->out($curso['Curso']['name'] . '------Sem Duracao----------' . $curso['Curso']['id']));
                 }
 
-                $totalTurmas = $this->Aluno->find('count',['fields'=>'ano_ingresso','group'=>'ano_ingresso','conditions'=>['curso_id'=>$k,'estado_aluno_id'=>[1,11,14]]]);
+                $totalTurmas = $this->Aluno->find('count', [
+                    'fields'     => 'ano_ingresso',
+                    'group'      => 'ano_ingresso',
+                    'conditions' => ['curso_id' => $k, 'estado_aluno_id' => [1, 11, 14]],
+                ]);
                 $xls->getActiveSheet()->setCellValue('G' . $linhaActual, $totalTurmas);
-                $totalMatriculados = $this->Aluno->find('count',['conditions'=>['curso_id'=>$k,'estado_aluno_id'=>[1,11,14]]]);
+                $totalMatriculados = $this->Aluno->find('count',
+                    ['conditions' => ['curso_id' => $k, 'estado_aluno_id' => [1, 11, 14]]]);
                 $xls->getActiveSheet()->setCellValue('H' . $linhaActual, $totalMatriculados);
 
                 $duracao = $curso['Curso']['duracao'];
 
-                $ingressoBase = $anoBase-$duracao;
-                $totalIngressoBase = $totalMatriculados = $this->Aluno->find('count',['conditions'=>['curso_id'=>$k,'ano_ingresso'=>$ingressoBase]]);
+                $ingressoBase = $anoBase - $duracao;
+                $totalIngressoBase = $totalMatriculados = $this->Aluno->find('count',
+                    ['conditions' => ['curso_id' => $k, 'ano_ingresso' => $ingressoBase]]);
 
                 debug($totalIngressoBase);
 
-                $this->Aluno->contain(['HistoricoCurso'=>['conditions'=>['ano_fim'=>$anoBase,'curso_id'=>$k]]]);
-                $graduadosBase = $totalMatriculados = $this->Aluno->find('all',['conditions'=>['curso_id'=>$k,'estado_aluno_id'=>3]]);
+                $this->Aluno->contain([
+                    'HistoricoCurso' => [
+                        'conditions' => [
+                            'ano_fim'  => $anoBase,
+                            'curso_id' => $k,
+                        ],
+                    ],
+                ]);
+                $graduadosBase = $totalMatriculados = $this->Aluno->find('all',
+                    ['conditions' => ['curso_id' => $k, 'estado_aluno_id' => 3]]);
                 $totalGraduadosBase = 0;
-                foreach($graduadosBase as $graduado){
-                    if(!empty($graduado['HistoricoCurso'])){
+                foreach ($graduadosBase as $graduado) {
+                    if (!empty($graduado['HistoricoCurso'])) {
                         $totalGraduadosBase++;
                     }
                 }
                 //$percentagem = $totalGraduadosBase/$totalIngressoBase*100;
-                $this->out($curso['Curso']['name'].'---Graduados: '.$totalGraduadosBase.'---Ingressos: '.$totalIngressoBase.'---Ano: '.$anoBase.'--%: '.$percentagem);
+                $this->out($curso['Curso']['name'] . '---Graduados: ' . $totalGraduadosBase . '---Ingressos: ' . $totalIngressoBase . '---Ano: ' . $anoBase . '--%: ' . $percentagem);
 
 
-
-
-                $letrasSeguintes = ['I','J','K','L','M'];
+                $letrasSeguintes = ['I', 'J', 'K', 'L', 'M'];
                 $contadorLetras = 0;
-                for($ano=$anoInicio;$ano<=$anoFim;$ano++){
+                for ($ano = $anoInicio; $ano <= $anoFim; $ano++) {
 
-                    $anoIngresso = $ano-$duracao;
+                    $anoIngresso = $ano - $duracao;
 
-                    $totalIngresso = $totalMatriculados = $this->Aluno->find('count',['conditions'=>['curso_id'=>$k,'ano_ingresso'=>$anoIngresso]]);
+                    $totalIngresso = $totalMatriculados = $this->Aluno->find('count',
+                        ['conditions' => ['curso_id' => $k, 'ano_ingresso' => $anoIngresso]]);
 
                     //Controlar Coeficiente
-                    $xls->getActiveSheet()->setCellValue($letrasSeguintes[$contadorLetras] . $linhaActual, round($totalIngresso));
+                    $xls->getActiveSheet()->setCellValue($letrasSeguintes[$contadorLetras] . $linhaActual,
+                        round($totalIngresso));
                     $contadorLetras++;
 
                 }
 
 
-
-
                 $linhaActual++;
             }
-
 
 
             $objWriter = PHPExcel_IOFactory::createWriter($xls, 'Excel2007');

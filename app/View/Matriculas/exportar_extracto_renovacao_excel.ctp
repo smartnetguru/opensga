@@ -1,8 +1,9 @@
 <?php
 
-    App::import('Vendor', 'PHPExcel', array('file' => 'PHPExcel.php'));
-    if (!class_exists('PHPExcel'))
+    App::import('Vendor', 'PHPExcel', ['file' => 'PHPExcel.php']);
+    if (!class_exists('PHPExcel')) {
         throw new CakeException('Vendor class PHPExcel not found!');
+    }
 
 //die(debug($aluno));
     $this->PhpExcel->createWorksheet();
@@ -16,7 +17,6 @@
     $worksheet->setCellValue('A1', 'Data de Confirmação');
     $worksheet->setCellValue('A1', 'Valor Pago');
     $worksheet->setCellValue('A1', 'Ordem');
-
 
 
     $this->PhpExcel->addWorksheetMeta($this->Session->read('Auth.User.name'));

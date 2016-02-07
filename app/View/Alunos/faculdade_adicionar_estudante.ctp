@@ -40,17 +40,17 @@
             </div>
             <div class="panel-body">
                 <?php echo $this->Form->create('Aluno', [
-                    'role'          => "form",
-                    'novalidade'    => 'novalidate',
-                    'enctype'       => 'multipart/form-data',
-                    'class'         => 'smart-wizard form-horizontal',
-                    'id'            => 'form',
-                    'inputDefaults' => [
-                        'label'       => false,
-                        'div'         => false,
-                        'empty'       => 'Seleccione',
-                        'placeholder' => 'Seleccione'
-                    ]
+                        'role'          => "form",
+                        'novalidade'    => 'novalidate',
+                        'enctype'       => 'multipart/form-data',
+                        'class'         => 'smart-wizard form-horizontal',
+                        'id'            => 'form',
+                        'inputDefaults' => [
+                                'label'       => false,
+                                'div'         => false,
+                                'empty'       => 'Seleccione',
+                                'placeholder' => 'Seleccione',
+                        ],
                 ]); ?>
 
                 <div class="swMain" id="wizard">
@@ -120,36 +120,36 @@
                                 <div class="row">
                                     <div class="col-sm-4">
                                         <?php echo $this->Form->label('Aluno.numero_estudante',
-                                            'Numero de Estudante'); ?>
+                                                'Numero de Estudante'); ?>
                                         <?php echo $this->Form->input('Aluno.numero_estudante',
-                                            ['class' => 'form-control', 'id' => 'codigo']); ?>
+                                                ['class' => 'form-control', 'id' => 'codigo']); ?>
                                     </div>
                                     <div class="col-sm-4">
                                         <?php echo $this->Form->label('Entidade.apelido', 'Apelido'); ?>
                                         <?php echo $this->Form->input('Entidade.apelido',
-                                            ['class' => 'form-control', 'id' => 'codigo']); ?>
+                                                ['class' => 'form-control', 'id' => 'codigo']); ?>
                                     </div>
                                     <div class="col-sm-4">
                                         <?php echo $this->Form->label('Entidade.nomes', 'Nomes'); ?>
                                         <?php echo $this->Form->input('Entidade.nomes',
-                                            ['class' => 'form-control', 'id' => 'codigo']); ?>
+                                                ['class' => 'form-control', 'id' => 'codigo']); ?>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-sm-4">
                                         <?php echo $this->Form->label('Curso.unidade_organica_id', 'Faculdade'); ?>
                                         <?php echo $this->Form->input('Curso.unidade_organica_id',
-                                            ['class' => 'form-control', 'id' => 'unidadeOrganica']); ?>
+                                                ['class' => 'form-control', 'id' => 'unidadeOrganica']); ?>
                                     </div>
                                     <div class="col-sm-4">
                                         <?php echo $this->Form->label('Aluno.curso_id', 'Nome do Curso'); ?>
                                         <?php echo $this->Form->input('Aluno.curso_id',
-                                            ['class' => 'form-control', 'id' => 'curso']); ?>
+                                                ['class' => 'form-control', 'id' => 'curso']); ?>
                                     </div>
                                     <div class="col-sm-4">
                                         <?php echo $this->Form->label('Aluno.ano_ingresso', 'Ano de Ingresso'); ?>
                                         <?php echo $this->Form->input('Aluno.ano_ingresso',
-                                            ['class' => 'form-control', 'id' => 'codigo', 'type' => 'text']); ?>
+                                                ['class' => 'form-control', 'id' => 'codigo', 'type' => 'text']); ?>
                                     </div>
 
 
@@ -159,19 +159,19 @@
                                     <div class="col-sm-3">
                                         <?php echo $this->Form->label('Entidade.genero_id', 'Sexo'); ?>
                                         <?php echo $this->Form->input('Entidade.genero_id',
-                                            ['class' => 'form-control', 'id' => 'codigo']); ?>
+                                                ['class' => 'form-control', 'id' => 'codigo']); ?>
                                     </div>
                                     <div class="col-sm-3">
                                         <div class="form-group">
                                             <?php echo $this->Form->label('Entidade.data_nascimento',
-                                                'Data de Nascimento'); ?>
+                                                    'Data de Nascimento'); ?>
                                             <div class="input-group">
                                                 <?php echo $this->Form->input('Entidade.data_nascimento', [
-                                                    'class'              => 'form-control date-picker',
-                                                    'id'                 => 'firstname',
-                                                    'type'               => 'text',
-                                                    'data-date-viewmode' => 'years',
-                                                    'data-date-format'   => 'yyyy-mm-dd'
+                                                        'class'              => 'form-control date-picker',
+                                                        'id'                 => 'firstname',
+                                                        'type'               => 'text',
+                                                        'data-date-viewmode' => 'years',
+                                                        'data-date-format'   => 'yyyy-mm-dd',
                                                 ]); ?>
                                                 <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
                                             </div>
@@ -181,14 +181,14 @@
                                     <div class="col-sm-3">
                                         <div class="form-group">
                                             <?php echo $this->Form->label('Aluno.data_matricula',
-                                                'Data da Matricula'); ?>
+                                                    'Data da Matricula'); ?>
                                             <div class="input-group">
                                                 <?php echo $this->Form->input('Aluno.data_matricula', [
-                                                    'class'              => 'form-control date-picker',
-                                                    'id'                 => 'firstname',
-                                                    'type'               => 'text',
-                                                    'data-date-viewmode' => 'years',
-                                                    'data-date-format'   => 'yyyy-mm-dd'
+                                                        'class'              => 'form-control date-picker',
+                                                        'id'                 => 'firstname',
+                                                        'type'               => 'text',
+                                                        'data-date-viewmode' => 'years',
+                                                        'data-date-format'   => 'yyyy-mm-dd',
                                                 ]); ?>
                                                 <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
                                             </div>
@@ -198,9 +198,9 @@
                                     <div class="col-sm-3">
                                         <?php echo $this->Form->label('Entidade.estado_civil', 'Estado Civil'); ?>
                                         <?php echo $this->Form->input('Entidade.estado_civil', [
-                                            'class'   => 'form-control',
-                                            'id'      => 'codigo',
-                                            'options' => $estadoCivil
+                                                'class'   => 'form-control',
+                                                'id'      => 'codigo',
+                                                'options' => $estadoCivil,
                                         ]); ?>
                                     </div>
                                 </div>
@@ -209,20 +209,20 @@
                                     <div class="col-sm-6">
                                         <?php echo $this->Form->label('Entidade.nome_pai', 'Nome do pai'); ?>
                                         <?php echo $this->Form->input('Entidade.nome_pai', [
-                                            'label' => false,
-                                            'div'   => false,
-                                            'class' => 'form-control',
-                                            'id'    => 'codigo'
+                                                'label' => false,
+                                                'div'   => false,
+                                                'class' => 'form-control',
+                                                'id'    => 'codigo',
                                         ]); ?>
                                     </div>
                                     <div class="col-sm-6">
                                         <?php echo $this->Form->label('Entidade.nome_mae', 'Nome da Mae'); ?>
                                         <?php echo $this->Form->input('Entidade.nome_mae', [
-                                            'label' => false,
-                                            'div'   => false,
-                                            'class' => 'form-control',
-                                            'id'    => 'codigo',
-                                            'type'  => 'text'
+                                                'label' => false,
+                                                'div'   => false,
+                                                'class' => 'form-control',
+                                                'id'    => 'codigo',
+                                                'type'  => 'text',
                                         ]); ?>
                                     </div>
 
@@ -233,40 +233,40 @@
                                     <div class="col-sm-3">
                                         <?php echo $this->Form->label('Entidade.naturalidade', 'Naturalidade'); ?>
                                         <?php echo $this->Form->input('Entidade.naturalidade', [
-                                            'label'        => false,
-                                            'div'          => false,
-                                            'class'        => 'form-control',
-                                            'id'           => 'naturalidade',
-                                            'options'      => $naturalidade,
-                                            'autocomplete' => 'on',
-                                            'type'         => 'text'
+                                                'label'        => false,
+                                                'div'          => false,
+                                                'class'        => 'form-control',
+                                                'id'           => 'naturalidade',
+                                                'options'      => $naturalidade,
+                                                'autocomplete' => 'on',
+                                                'type'         => 'text',
                                         ]); ?>
                                     </div>
                                     <div class="col-sm-3">
                                         <?php echo $this->Form->label('Entidade.pais_nascimento', 'Nacionalidade'); ?>
                                         <?php echo $this->Form->input('Entidade.pais_nascimento', [
-                                            'class'   => 'form-control',
-                                            'id'      => 'paisNascimento',
-                                            'options' => $paises,
-                                            'default' => 152
+                                                'class'   => 'form-control',
+                                                'id'      => 'paisNascimento',
+                                                'options' => $paises,
+                                                'default' => 152,
                                         ]); ?>
                                     </div>
                                     <div class="col-sm-3">
                                         <?php echo $this->Form->label('Entidade.provincia_nascimento',
-                                            'Provincia de Nascimento'); ?>
+                                                'Provincia de Nascimento'); ?>
                                         <?php echo $this->Form->input('Entidade.provincia_nascimento', [
-                                            'class'   => 'form-control',
-                                            'id'      => 'provinciaNascimento',
-                                            'options' => $provincias
+                                                'class'   => 'form-control',
+                                                'id'      => 'provinciaNascimento',
+                                                'options' => $provincias,
                                         ]); ?>
                                     </div>
                                     <div class="col-sm-3">
                                         <?php echo $this->Form->label('Entidade.cidade_nascimento',
-                                            'Cidade/Distrito de Nascimento'); ?>
+                                                'Cidade/Distrito de Nascimento'); ?>
                                         <?php echo $this->Form->input('Entidade.cidade_nascimento', [
-                                            'class'   => 'form-control',
-                                            'id'      => 'cidadeNascimento',
-                                            'options' => $cidadeNascimentos
+                                                'class'   => 'form-control',
+                                                'id'      => 'cidadeNascimento',
+                                                'options' => $cidadeNascimentos,
                                         ]); ?>
                                     </div>
                                 </div>
@@ -290,27 +290,27 @@
                                 <div class="row">
                                     <!--<div class="col-sm-4">
 										<?php echo $this->Form->label('AlunoNivelMedio.EscolaNivelMedio.pais_id',
-                                        'Pais de Origem'); ?>
+                                            'Pais de Origem'); ?>
 										<?php echo $this->Form->input('AlunoNivelMedio.EscolaNivelMedio.pais_id', [
-                                        'class'   => 'form-control',
-                                        'id'      => 'codigo',
-                                        'options' => $paises,
-                                        'default' => 152
+                                            'class'   => 'form-control',
+                                            'id'      => 'codigo',
+                                            'options' => $paises,
+                                            'default' => 152,
                                     ]); ?>
                                     </div>-->
                                     <div class="col-sm-4">
                                         <?php echo $this->Form->label('AlunoNivelMedio.EscolaNivelMedio.provincia_id',
-                                            'Provincia de Origem'); ?>
+                                                'Provincia de Origem'); ?>
                                         <?php echo $this->Form->input('AlunoNivelMedio.EscolaNivelMedio.provincia_id',
-                                            ['class' => 'form-control', 'id' => 'provinciaOrigem']); ?>
+                                                ['class' => 'form-control', 'id' => 'provinciaOrigem']); ?>
                                     </div>
                                     <div class="col-sm-4">
                                         <?php echo $this->Form->label('AlunoNivelMedio.EscolaNivelMedio.distrito_id',
-                                            'Cidade de Origem'); ?>
+                                                'Cidade de Origem'); ?>
                                         <?php echo $this->Form->input('AlunoNivelMedio.EscolaNivelMedio.distrito_id', [
-                                            'class'   => 'form-control',
-                                            'id'      => 'cidadeOrigem',
-                                            'options' => $cidadeNascimentos
+                                                'class'   => 'form-control',
+                                                'id'      => 'cidadeOrigem',
+                                                'options' => $cidadeNascimentos,
                                         ]); ?>
                                     </div>
 
@@ -319,58 +319,58 @@
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <?php echo $this->Form->label('AlunoNivelMedio.escola_nivel_medio_id',
-                                            'Escola de Conclusao'); ?>
+                                                'Escola de Conclusao'); ?>
                                         <?php echo $this->Form->input('AlunoNivelMedio.escola_nivel_medio_id', [
-                                            'class'            => 'form-control search-select',
-                                            'id'               => 'escolaOrigem',
-                                            'options'          => $escolaNivelMedios,
-                                            'empty'            => true,
-                                            'data-placeholder' => 'Seleccione...'
+                                                'class'            => 'form-control search-select',
+                                                'id'               => 'escolaOrigem',
+                                                'options'          => $escolaNivelMedios,
+                                                'empty'            => true,
+                                                'data-placeholder' => 'Seleccione...',
                                         ]); ?>
                                     </div>
                                     <div class="col-sm-6">
                                         <?php echo $this->Form->label('AlunoNivelMedio.nova_escola_anterior',
-                                            'Ou Digite o Nome da Escola'); ?>
+                                                'Ou Digite o Nome da Escola'); ?>
                                         <?php echo $this->Form->input('AlunoNivelMedio.nova_escola_anterior', [
-                                            'label' => false,
-                                            'div'   => false,
-                                            'class' => 'form-control',
-                                            'id'    => 'codigo'
+                                                'label' => false,
+                                                'div'   => false,
+                                                'class' => 'form-control',
+                                                'id'    => 'codigo',
                                         ]); ?>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <?php echo $this->Form->label('AlunoNivelMedio.ano_conclusao',
-                                            'Ano de Conclusao'); ?>
+                                                'Ano de Conclusao'); ?>
                                         <?php echo $this->Form->input('AlunoNivelMedio.ano_conclusao',
-                                            ['class' => 'form-control', 'id' => 'codigo', 'type' => 'text']); ?>
+                                                ['class' => 'form-control', 'id' => 'codigo', 'type' => 'text']); ?>
                                     </div>
                                     <div class="col-sm-6">
                                         <?php echo $this->Form->label('AlunoNivelMedio.nota_final',
-                                            'Nota de Conclusao'); ?>
+                                                'Nota de Conclusao'); ?>
                                         <?php echo $this->Form->input('AlunoNivelMedio.nota_final',
-                                            ['class' => 'form-control', 'id' => 'codigo']); ?>
+                                                ['class' => 'form-control', 'id' => 'codigo']); ?>
                                     </div>
                                     <div class="col-sm-6">
                                         <?php echo $this->Form->label('Aluno.certificado_nivel_anterior',
-                                            'Entregou Certificado?'); ?>
+                                                'Entregou Certificado?'); ?>
                                         <?php echo $this->Form->input('Aluno.certificado_nivel_anterior', [
-                                            'options' => $simNaoRespostas,
-                                            'label'   => false,
-                                            'div'     => false,
-                                            'class'   => 'form-control',
-                                            'id'      => 'codigo'
+                                                'options' => $simNaoRespostas,
+                                                'label'   => false,
+                                                'div'     => false,
+                                                'class'   => 'form-control',
+                                                'id'      => 'codigo',
                                         ]); ?>
                                     </div>
                                     <div class="col-sm-6">
                                         <?php echo $this->Form->label('Aluno.recenseamento_militar',
-                                            'Entregou Documento de Recenseamento Militar?'); ?>
+                                                'Entregou Documento de Recenseamento Militar?'); ?>
                                         <?php echo $this->Form->input('Aluno.recenseamento_militar', [
-                                            'options' => $simNaoRespostas,
-                                            'label'   => false,
-                                            'div'     => false,
-                                            'class'   => 'form-control'
+                                                'options' => $simNaoRespostas,
+                                                'label'   => false,
+                                                'div'     => false,
+                                                'class'   => 'form-control',
                                         ]); ?>
                                     </div>
 
@@ -398,32 +398,32 @@
                                     <div class="col-sm-4">
 										<?php echo $this->Form->label('EntidadeContacto.11', 'Pais Onde Mora'); ?>
 										<?php echo $this->Form->input('EntidadeContacto.11', [
-                                'class'            => 'form-control',
-                                'id'               => 'paisMorada',
-                                'options'          => $paises,
-                                'default'          => 152,
-                                'data-placeholder' => "Seleccione...",
-                                'empty'            => true
+                                    'class'            => 'form-control',
+                                    'id'               => 'paisMorada',
+                                    'options'          => $paises,
+                                    'default'          => 152,
+                                    'data-placeholder' => "Seleccione...",
+                                    'empty'            => true,
                             ]); ?>
                                     </div>
                                     <div class="col-sm-4">
 										<?php echo $this->Form->label('EntidadeContacto.10', 'Provincia onde Mora'); ?>
 										<?php echo $this->Form->input('EntidadeContacto.10', [
-                                'class'            => 'form-control',
-                                'id'               => 'provinciaMorada',
-                                'options'          => $provincias,
-                                'data-placeholder' => "Seleccione...",
-                                'empty'            => true
+                                    'class'            => 'form-control',
+                                    'id'               => 'provinciaMorada',
+                                    'options'          => $provincias,
+                                    'data-placeholder' => "Seleccione...",
+                                    'empty'            => true,
                             ]); ?>
                                     </div>
                                     <div class="col-sm-4">
 										<?php echo $this->Form->label('EntidadeContacto.9', 'Cidade onde Mora'); ?>
 										<?php echo $this->Form->input('EntidadeContacto.9', [
-                                'class'            => 'form-control',
-                                'id'               => 'cidadeMorada',
-                                'options'          => $cidadeNascimentos,
-                                'data-placeholder' => "Seleccione...",
-                                'empty'            => true
+                                    'class'            => 'form-control',
+                                    'id'               => 'cidadeMorada',
+                                    'options'          => $cidadeNascimentos,
+                                    'data-placeholder' => "Seleccione...",
+                                    'empty'            => true,
                             ]); ?>
                                     </div>
                                 </div>
@@ -431,38 +431,38 @@
                                     <div class="col-sm-3">
 										<?php echo $this->Form->label('EntidadeContacto.6', 'Bairro'); ?>
 										<?php echo $this->Form->input('EntidadeContacto.6', [
-                                'label' => false,
-                                'div'   => false,
-                                'class' => 'form-control',
-                                'id'    => 'bairroMorada',
-                                'type'  => 'text'
+                                    'label' => false,
+                                    'div'   => false,
+                                    'class' => 'form-control',
+                                    'id'    => 'bairroMorada',
+                                    'type'  => 'text',
                             ]); ?>
                                     </div>
                                     <div class="col-sm-3">
 										<?php echo $this->Form->label('EntidadeContacto.5', 'Avenida/Rua'); ?>
 										<?php echo $this->Form->input('EntidadeContacto.5', [
-                                'label' => false,
-                                'div'   => false,
-                                'class' => 'form-control',
-                                'id'    => 'avenidaMorada'
+                                    'label' => false,
+                                    'div'   => false,
+                                    'class' => 'form-control',
+                                    'id'    => 'avenidaMorada',
                             ]); ?>
                                     </div>
                                     <div class="col-sm-3">
 										<?php echo $this->Form->label('EntidadeContacto.7', 'Quarteirao'); ?>
 										<?php echo $this->Form->input('EntidadeContacto.7', [
-                                'label' => false,
-                                'div'   => false,
-                                'class' => 'form-control',
-                                'id'    => 'quarteiraoMorada'
+                                    'label' => false,
+                                    'div'   => false,
+                                    'class' => 'form-control',
+                                    'id'    => 'quarteiraoMorada',
                             ]); ?>
                                     </div>
                                     <div class="col-sm-3">
 										<?php echo $this->Form->label('EntidadeContacto.8', 'Caixa Postal'); ?>
 										<?php echo $this->Form->input('EntidadeContacto.8', [
-                                'label' => false,
-                                'div'   => false,
-                                'class' => 'form-control',
-                                'id'    => 'caixaPostalMorada'
+                                    'label' => false,
+                                    'div'   => false,
+                                    'class' => 'form-control',
+                                    'id'    => 'caixaPostalMorada',
                             ]); ?>
                                     </div>
                                 </div>
@@ -474,34 +474,34 @@
                             <div class="col-sm-6">
                                 <?php echo $this->Form->label('EntidadeContacto.2', 'Telemovel'); ?>
                                 <?php echo $this->Form->input('EntidadeContacto.2',
-                                    ['class' => 'form-control', 'id' => 'codigo']); ?>
+                                        ['class' => 'form-control', 'id' => 'codigo']); ?>
                             </div>
                             <!--    <div class="col-sm-6">
 										<?php echo $this->Form->label('EntidadeContacto.1', 'Email Pessoal'); ?>
 										<?php echo $this->Form->input('EntidadeContacto.1',
-                                ['class' => 'form-control', 'id' => 'codigo']); ?>
+                                    ['class' => 'form-control', 'id' => 'codigo']); ?>
                                     </div>
                                 </div>-->
                             <div class="row">
                                 <div class="col-sm-4">
                                     <?php echo $this->Form->label('Aluno.nome_emergencia',
-                                        'Nome para Casos de Emergencia'); ?>
+                                            'Nome para Casos de Emergencia'); ?>
                                     <?php echo $this->Form->input('Aluno.nome_emergencia',
-                                        ['class' => 'form-control', 'id' => 'codigo']); ?>
+                                            ['class' => 'form-control', 'id' => 'codigo']); ?>
                                 </div>
                                 <div class="col-sm-4">
                                     <?php echo $this->Form->label('Aluno.telemovel_emergencia',
-                                        'Telemovel para Emergencias'); ?>
+                                            'Telemovel para Emergencias'); ?>
                                     <?php echo $this->Form->input('Aluno.telemovel_emergencia',
-                                        ['class' => 'form-control', 'id' => 'codigo', 'type' => 'text']); ?>
+                                            ['class' => 'form-control', 'id' => 'codigo', 'type' => 'text']); ?>
                                 </div>
                                 <div class="col-sm-4">
                                     <?php echo $this->Form->label('Aluno.parentesco_encarregado',
-                                        'Grau de Parentesco'); ?>
+                                            'Grau de Parentesco'); ?>
                                     <?php echo $this->Form->input('Aluno.parentesco_encarregado', [
-                                        'class'   => 'form-control',
-                                        'id'      => 'codigo',
-                                        'options' => $grauParentescos
+                                            'class'   => 'form-control',
+                                            'id'      => 'codigo',
+                                            'options' => $grauParentescos,
                                     ]); ?>
                                 </div>
 
@@ -531,41 +531,41 @@
                                 <div class="row">
                                     <div class="col-sm-4">
                                         <?php echo $this->Form->label('EntidadeIdentificacao.documento_identificacao_id',
-                                            'Tipo de Documento'); ?>
+                                                'Tipo de Documento'); ?>
                                         <?php echo $this->Form->input('EntidadeIdentificacao.documento_identificacao_id',
-                                            [
-                                                'class'   => 'form-control',
-                                                'id'      => 'codigo',
-                                                'options' => $documento_identificacaos
-                                            ]); ?>
+                                                [
+                                                        'class'   => 'form-control',
+                                                        'id'      => 'codigo',
+                                                        'options' => $documento_identificacaos,
+                                                ]); ?>
                                     </div>
                                     <div class="col-sm-4">
                                         <?php echo $this->Form->label('EntidadeIdentificacao.numero',
-                                            'Numero de Documento'); ?>
+                                                'Numero de Documento'); ?>
                                         <?php echo $this->Form->input('EntidadeIdentificacao.numero',
-                                            ['class' => 'form-control', 'id' => 'codigo']); ?>
+                                                ['class' => 'form-control', 'id' => 'codigo']); ?>
                                     </div>
                                     <div class="col-sm-4">
                                         <?php echo $this->Form->label('EntidadeIdentificacao.local_emissao',
-                                            'Local de Emissao'); ?>
+                                                'Local de Emissao'); ?>
                                         <?php echo $this->Form->input('EntidadeIdentificacao.local_emissao', [
-                                            'class' => 'form-control',
-                                            'id'    => 'localEmissaoDocumento',
-                                            'type'  => 'text'
+                                                'class' => 'form-control',
+                                                'id'    => 'localEmissaoDocumento',
+                                                'type'  => 'text',
                                         ]); ?>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <?php echo $this->Form->label('EntidadeIdentificacao.data_emissao',
-                                            'Data de Emissao'); ?>
+                                                'Data de Emissao'); ?>
                                         <div class="input-group">
                                             <?php echo $this->Form->input('EntidadeIdentificacao.data_emissao', [
-                                                'class'              => 'form-control date-picker',
-                                                'id'                 => 'firstname',
-                                                'type'               => 'text',
-                                                'data-date-viewmode' => 'years',
-                                                'data-date-format'   => 'yyyy-mm-dd'
+                                                    'class'              => 'form-control date-picker',
+                                                    'id'                 => 'firstname',
+                                                    'type'               => 'text',
+                                                    'data-date-viewmode' => 'years',
+                                                    'data-date-format'   => 'yyyy-mm-dd',
                                             ]); ?>
                                             <span class="input-group-addon"> <i class="clip-calendar"></i> </span>
                                         </div>
@@ -573,12 +573,12 @@
                                     </div>
                                     <!--<div class="col-sm-6">
 										<?php echo $this->Form->label('EntidadeIdentificacao.data_validade',
-                                        'Data de Validade'); ?>
+                                            'Data de Validade'); ?>
 										<?php echo $this->Form->input('EntidadeIdentificacao.data_validade', [
-                                        'label' => false,
-                                        'div'   => false,
-                                        'class' => 'form-control',
-                                        'id'    => 'codigo'
+                                            'label' => false,
+                                            'div'   => false,
+                                            'class' => 'form-control',
+                                            'id'    => 'codigo',
                                     ]); ?>
 									</div>-->
                                 </div>
@@ -850,9 +850,9 @@
                             <div class="form-group">
 
                                 <?php echo $this->Form->end([
-                                    'label' => __('GRAVAR', true),
-                                    'class' => 'btn btn-success finish-step btn-block',
-                                    'div'   => 'col-sm-2 col-sm-offset-8'
+                                        'label' => __('GRAVAR', true),
+                                        'class' => 'btn btn-success finish-step btn-block',
+                                        'div'   => 'col-sm-2 col-sm-offset-8',
                                 ]); ?>
 
                             </div>
@@ -869,79 +869,79 @@
 
 <?php
     $this->Js->get('#provinciaNascimento')->event('change', $this->Js->request([
-        'controller' => 'ajax',
-        'action'     => 'get_cidades_by_provincia'
+            'controller' => 'ajax',
+            'action'     => 'get_cidades_by_provincia',
     ], [
-        'update'         => '#cidadeNascimento',
-        'complete'       => '$("#cidadeNascimento").trigger("liszt:updated")',
-        'async'          => true,
-        'method'         => 'post',
-        'dataExpression' => true,
-        'data'           => $this->Js->serializeForm([
-            'isForm' => true,
-            'inline' => true
-        ])
+            'update'         => '#cidadeNascimento',
+            'complete'       => '$("#cidadeNascimento").trigger("liszt:updated")',
+            'async'          => true,
+            'method'         => 'post',
+            'dataExpression' => true,
+            'data'           => $this->Js->serializeForm([
+                    'isForm' => true,
+                    'inline' => true,
+            ]),
     ])
     );
 
     $this->Js->get('#provinciaOrigem')->event('change', $this->Js->request([
-        'controller' => 'ajax',
-        'action'     => 'get_cidades_by_provincia'
+            'controller' => 'ajax',
+            'action'     => 'get_cidades_by_provincia',
     ], [
-        'update'         => '#cidadeOrigem',
-        'complete'       => '$("#cidadeOrigem").trigger("liszt:updated")',
-        'async'          => true,
-        'method'         => 'post',
-        'dataExpression' => true,
-        'data'           => $this->Js->serializeForm([
-            'isForm' => true,
-            'inline' => true
-        ])
+            'update'         => '#cidadeOrigem',
+            'complete'       => '$("#cidadeOrigem").trigger("liszt:updated")',
+            'async'          => true,
+            'method'         => 'post',
+            'dataExpression' => true,
+            'data'           => $this->Js->serializeForm([
+                    'isForm' => true,
+                    'inline' => true,
+            ]),
     ])
     );
     $this->Js->get('#provinciaMorada')->event('change', $this->Js->request([
-        'controller' => 'ajax',
-        'action'     => 'get_cidades_by_provincia'
+            'controller' => 'ajax',
+            'action'     => 'get_cidades_by_provincia',
     ], [
-        'update'         => '#cidadeMorada',
-        'complete'       => '$("#cidadeMorada").trigger("liszt:updated")',
-        'async'          => true,
-        'method'         => 'post',
-        'dataExpression' => true,
-        'data'           => $this->Js->serializeForm([
-            'isForm' => true,
-            'inline' => true
-        ])
+            'update'         => '#cidadeMorada',
+            'complete'       => '$("#cidadeMorada").trigger("liszt:updated")',
+            'async'          => true,
+            'method'         => 'post',
+            'dataExpression' => true,
+            'data'           => $this->Js->serializeForm([
+                    'isForm' => true,
+                    'inline' => true,
+            ]),
     ])
     );
     $this->Js->get('#cidadeOrigem')->event('change', $this->Js->request([
-        'controller' => 'ajax',
-        'action'     => 'get_escolas_by_distrito'
+            'controller' => 'ajax',
+            'action'     => 'get_escolas_by_distrito',
     ], [
-        'update'         => '#escolaOrigem',
-        'complete'       => '$("#escolaOrigem").trigger("liszt:updated")',
-        'async'          => true,
-        'method'         => 'post',
-        'dataExpression' => true,
-        'data'           => $this->Js->serializeForm([
-            'isForm' => true,
-            'inline' => true
-        ])
+            'update'         => '#escolaOrigem',
+            'complete'       => '$("#escolaOrigem").trigger("liszt:updated")',
+            'async'          => true,
+            'method'         => 'post',
+            'dataExpression' => true,
+            'data'           => $this->Js->serializeForm([
+                    'isForm' => true,
+                    'inline' => true,
+            ]),
     ])
     );
     $this->Js->get('#unidadeOrganica')->event('change', $this->Js->request([
-        'controller' => 'ajax',
-        'action'     => 'get_cursos_by_unidade_organica'
+            'controller' => 'ajax',
+            'action'     => 'get_cursos_by_unidade_organica',
     ], [
-        'update'         => '#curso',
-        'complete'       => '$("#curso").trigger("liszt:updated")',
-        'async'          => true,
-        'method'         => 'post',
-        'dataExpression' => true,
-        'data'           => $this->Js->serializeForm([
-            'isForm' => true,
-            'inline' => true
-        ])
+            'update'         => '#curso',
+            'complete'       => '$("#curso").trigger("liszt:updated")',
+            'async'          => true,
+            'method'         => 'post',
+            'dataExpression' => true,
+            'data'           => $this->Js->serializeForm([
+                    'isForm' => true,
+                    'inline' => true,
+            ]),
     ])
     );
 ?>
@@ -951,23 +951,23 @@
 
 
     echo $this->Html->script('/assets/plugins/jquery-inputlimiter/jquery.inputlimiter.1.3.1.min',
-        ['block' => 'scriptBottom']);
+            ['block' => 'scriptBottom']);
     echo $this->Html->script('/assets/plugins/autosize/jquery.autosize.min', ['block' => 'scriptBottom']);
     echo $this->Html->script('/assets/plugins/autosize/jquery.autosize.min', ['block' => 'scriptBottom']);
     echo $this->Html->script('/assets/plugins/select2/select2.min', ['block' => 'scriptBottom']);
     echo $this->Html->script('/assets/plugins/jquery.maskedinput/src/jquery.maskedinput', ['block' => 'scriptBottom']);
     echo $this->Html->script('/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker',
-        ['block' => 'scriptBottom']);
+            ['block' => 'scriptBottom']);
     echo $this->Html->script('/assets/plugins/bootstrap-timepicker/js/bootstrap-timepicker.min',
-        ['block' => 'scriptBottom']);
+            ['block' => 'scriptBottom']);
     echo $this->Html->script('/assets/plugins/bootstrap-daterangepicker/moment.min', ['block' => 'scriptBottom']);
     echo $this->Html->script('/assets/plugins/bootstrap-daterangepicker/daterangepicker', ['block' => 'scriptBottom']);
     echo $this->Html->script('/assets/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker',
-        ['block' => 'scriptBottom']);
+            ['block' => 'scriptBottom']);
     //echo $this->Html->script('/assets/plugins/bootstrap-colorpicker/js/commits', array('block' => 'scriptBottom'));
     echo $this->Html->script('/assets/plugins/jQuery-Tags-Input/jquery.tagsinput', ['block' => 'scriptBottom']);
     echo $this->Html->script('/assets/plugins/bootstrap-fileupload/bootstrap-fileupload.min',
-        ['block' => 'scriptBottom']);
+            ['block' => 'scriptBottom']);
     echo $this->Html->script('/assets/plugins/summernote/build/summernote.min', ['block' => 'scriptBottom']);
     echo $this->Html->script('/assets/plugins/ckeditor/ckeditor', ['block' => 'scriptBottom']);
     echo $this->Html->script('/assets/plugins/ckeditor/adapters/jquery', ['block' => 'scriptBottom']);
@@ -976,9 +976,9 @@
     echo $this->Html->script(['/assets/plugins/jquery-ui/jquery.ui.menu'], ['block' => 'scriptBottom']);
     echo $this->Html->script(['/assets/plugins/jquery-ui/jquery.ui.autocomplete'], ['block' => 'scriptBottom']);
     echo $this->Html->script('/assets/js/form-matricular-candidato-elements', ['block' => 'scriptBottom'],
-        ['block' => 'scriptBottom']);
+            ['block' => 'scriptBottom']);
     echo $this->Html->script('/assets/js/form-matricular-candidato-wizard', ['block' => 'scriptBottom'],
-        ['block' => 'scriptBottom']);
+            ['block' => 'scriptBottom']);
 ?>
 
 

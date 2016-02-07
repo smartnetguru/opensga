@@ -14,7 +14,7 @@ var PagesUserProfile = function () {
     return {
         //main function to initiate template pages
         init: function () {
-           // runPulsate();
+            // runPulsate();
         }
     };
 }();

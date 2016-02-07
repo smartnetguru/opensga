@@ -1,14 +1,17 @@
 <?php
-App::uses('CeaAppController', 'Cea.Controller');
-/**
- * Pages Controller
- */
-class PagesController extends CeaAppController {
+    App::uses('CeaAppController', 'Cea.Controller');
 
-    var $uses = [];
+    /**
+     * Pages Controller
+     */
+    class PagesController extends CeaAppController
+    {
 
-    public function home(){
+        var $uses = [];
+
+        public function home()
+        {
+
+        }
 
     }
-
-}

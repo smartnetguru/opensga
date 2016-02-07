@@ -1,39 +1,41 @@
 <?php
-/**
- * EstadoMatriculaFixture
- *
- */
-class EstadoMatriculaFixture extends CakeTestFixture {
 
-/**
- * Import
- *
- * @var array
- */
-	public $import = array('model' => 'EstadoMatricula');
+	/**
+	 * EstadoMatriculaFixture
+	 *
+	 */
+	class EstadoMatriculaFixture extends CakeTestFixture
+	{
 
-/**
- * Records
- *
- * @var array
- */
-	public $records = array(
-		array(
-			'id' => '1',
-			'name' => 'Normal'
-		),
-		array(
-			'id' => '2',
-			'name' => 'Suspensa'
-		),
-		array(
-			'id' => '3',
-			'name' => 'Anulada'
-		),
-		array(
-			'id' => '4',
-			'name' => 'Concluida'
-		),
-	);
+		/**
+		 * Import
+		 *
+		 * @var array
+		 */
+		public $import = ['model' => 'EstadoMatricula'];
 
-}
+		/**
+		 * Records
+		 *
+		 * @var array
+		 */
+		public $records = [
+			[
+				'id'   => '1',
+				'name' => 'Normal',
+			],
+			[
+				'id'   => '2',
+				'name' => 'Suspensa',
+			],
+			[
+				'id'   => '3',
+				'name' => 'Anulada',
+			],
+			[
+				'id'   => '4',
+				'name' => 'Concluida',
+			],
+		];
+
+	}

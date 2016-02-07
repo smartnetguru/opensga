@@ -1,23 +1,25 @@
 <?php
-/**
- * EstadoFaltaAulaFixture
- *
- */
-class EstadoFaltaAulaFixture extends CakeTestFixture {
 
-/**
- * Import
- *
- * @var array
- */
-	public $import = array('table' => 'estado_falta_aulas');
+	/**
+	 * EstadoFaltaAulaFixture
+	 *
+	 */
+	class EstadoFaltaAulaFixture extends CakeTestFixture
+	{
 
-/**
- * Records
- *
- * @var array
- */
-	public $records = array(
-	);
+		/**
+		 * Import
+		 *
+		 * @var array
+		 */
+		public $import = ['table' => 'estado_falta_aulas'];
 
-}
+		/**
+		 * Records
+		 *
+		 * @var array
+		 */
+		public $records = [
+		];
+
+	}

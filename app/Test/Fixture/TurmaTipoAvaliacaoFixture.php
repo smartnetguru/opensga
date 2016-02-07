@@ -1,23 +1,25 @@
 <?php
-/**
- * TurmaTipoAvaliacaoFixture
- *
- */
-class TurmaTipoAvaliacaoFixture extends CakeTestFixture {
 
-/**
- * Import
- *
- * @var array
- */
-	public $import = array('model' => 'TurmaTipoAvaliacao');
+	/**
+	 * TurmaTipoAvaliacaoFixture
+	 *
+	 */
+	class TurmaTipoAvaliacaoFixture extends CakeTestFixture
+	{
 
-/**
- * Records
- *
- * @var array
- */
-	public $records = array(
-	);
+		/**
+		 * Import
+		 *
+		 * @var array
+		 */
+		public $import = ['model' => 'TurmaTipoAvaliacao'];
 
-}
+		/**
+		 * Records
+		 *
+		 * @var array
+		 */
+		public $records = [
+		];
+
+	}

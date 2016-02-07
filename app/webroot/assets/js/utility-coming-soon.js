@@ -87,6 +87,7 @@ var ComingSoon = function () {
                 clearInterval(interval);
             }
         }
+
         //run the function
         countdown_proc();
         //loop the function

@@ -20,7 +20,7 @@ var ImageCropping = function () {
     };
     // Simple event handler, called from onChange and onSelect
     // event handlers, as per the Jcrop invocation above
-   var showCoords = function(c) {
+    var showCoords = function (c) {
         $('#x1').val(c.x);
         $('#y1').val(c.y);
         $('#x2').val(c.x2);
@@ -29,7 +29,7 @@ var ImageCropping = function () {
         $('#h').val(c.h);
     };
 
-    var clearCoords = function() {
+    var clearCoords = function () {
         $('#coords input').val('');
     };
     var runPreviewPane = function () {
@@ -130,6 +130,7 @@ var ImageCropping = function () {
                 $o.append(c);
             return $o;
         }
+
         var a_count = 1;
         // Create animation buttons
         for (i in ac) {

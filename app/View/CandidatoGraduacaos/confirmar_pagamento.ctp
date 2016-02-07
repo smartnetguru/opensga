@@ -8,7 +8,7 @@
 <?php $this->assign('form-title', 'Dados do Estudante na Base de Dados') ?>
 <?php $this->start('form-elements') ?>
 <?php echo $this->Form->create('AnoLectivo',
-    ['role' => 'form', 'class' => 'form-horizontal', 'inputDefaults' => []]); ?>
+        ['role' => 'form', 'class' => 'form-horizontal', 'inputDefaults' => []]); ?>
 
 <div class="form-group">
     <label class="control-label col-sm-4">Numero de Estudante</label>
@@ -81,88 +81,87 @@
         $disabled = 'disabled';
     }
     echo $this->Form->create('CandidatoGraduacao',
-        ['role' => 'form', 'class' => '', 'inputDefaults' => ['disabled' => $disabled]]); ?>
+            ['role' => 'form', 'class' => '', 'inputDefaults' => ['disabled' => $disabled]]); ?>
 <?php
     echo $this->Form->input('apelido',
-        [
-            'label' => [
-                'class' => 'control-label',
-                'text'  => 'Apelido'
-            ],
-            'div'   => 'form-group col-sm-6',
-            'class' => 'form-control',
-            'id'    => 'codigoID',
-            'value' => $candidatoGraduacao['CandidatoGraduacao']['apelido']
-        ]
+            [
+                    'label' => [
+                            'class' => 'control-label',
+                            'text'  => 'Apelido',
+                    ],
+                    'div'   => 'form-group col-sm-6',
+                    'class' => 'form-control',
+                    'id'    => 'codigoID',
+                    'value' => $candidatoGraduacao['CandidatoGraduacao']['apelido'],
+            ]
     );
     echo $this->Form->input('nomes',
-        [
-            'label' => [
-                'class' => 'control-label',
-                'text'  => 'Outros Nomes'
-            ],
-            'div'   => 'form-group col-sm-6',
-            'class' => 'form-control',
-            'id'    => 'codigoID',
-            'value' => $candidatoGraduacao['CandidatoGraduacao']['nomes']
-        ]
+            [
+                    'label' => [
+                            'class' => 'control-label',
+                            'text'  => 'Outros Nomes',
+                    ],
+                    'div'   => 'form-group col-sm-6',
+                    'class' => 'form-control',
+                    'id'    => 'codigoID',
+                    'value' => $candidatoGraduacao['CandidatoGraduacao']['nomes'],
+            ]
     );
     echo $this->Form->input('numero_talao',
-        [
-            'label' => [
-                'class' => 'control-label',
-                'text'  => 'Numero do Talao'
-            ],
-            'div'   => 'form-group col-sm-4',
-            'class' => 'form-control',
-            'id'    => 'codigoID',
-            'required'=>true,
-            'type'  => 'text',
+            [
+                    'label'    => [
+                            'class' => 'control-label',
+                            'text'  => 'Numero do Talao',
+                    ],
+                    'div'      => 'form-group col-sm-4',
+                    'class'    => 'form-control',
+                    'id'       => 'codigoID',
+                    'required' => true,
+                    'type'     => 'text',
 
-        ]
+            ]
     );
     echo $this->Form->input('data_pagamento',
-        [
-            'label'              => [
-                'class' => 'control-label',
-                'text'  => 'Data de Deposito'
-            ],
-            'div'                => 'form-group col-sm-4',
-            'class'              => 'form-control date-picker',
-            'id'                 => 'codigoID',
-            'type'               => 'text',
-            'data-date-viewmode' => 'years',
-            'data-date-format'   => 'yyyy-mm-dd',
+            [
+                    'label'              => [
+                            'class' => 'control-label',
+                            'text'  => 'Data de Deposito',
+                    ],
+                    'div'                => 'form-group col-sm-4',
+                    'class'              => 'form-control date-picker',
+                    'id'                 => 'codigoID',
+                    'type'               => 'text',
+                    'data-date-viewmode' => 'years',
+                    'data-date-format'   => 'yyyy-mm-dd',
 
 
-        ]
+            ]
     );
     echo $this->Form->input('valor_pago',
-        [
-            'label' => [
-                'class' => 'control-label',
-                'text'  => 'Valor Pago'
-            ],
-            'div'   => 'form-group col-sm-4',
-            'class' => 'form-control',
-            'id'    => 'codigoID',
+            [
+                    'label' => [
+                            'class' => 'control-label',
+                            'text'  => 'Valor Pago',
+                    ],
+                    'div'   => 'form-group col-sm-4',
+                    'class' => 'form-control',
+                    'id'    => 'codigoID',
 
-        ]
+            ]
     );
-
 
 
     echo $this->Form->input('candidato_graduacao_id',
-        [
-            'type'  => 'hidden',
-            'value' => $candidatoGraduacao['CandidatoGraduacao']['id']
-        ]
+            [
+                    'type'  => 'hidden',
+                    'value' => $candidatoGraduacao['CandidatoGraduacao']['id'],
+            ]
     );
     echo $this->Form->input('cerimonia_graduacao_id',
-        [
-            'type'  => 'hidden',
-            'value' => $candidatoGraduacao['CandidatoGraduacao']['cerimonia_graduacao_id']
-        ]
+            [
+                    'type'  => 'hidden',
+                    'value' => $candidatoGraduacao['CandidatoGraduacao']['cerimonia_graduacao_id'],
+            ]
     );
 
 
@@ -171,9 +170,9 @@
 <div class="form-group col-sm-12">
     <div class="col-sm-4">
         <?php echo $this->Html->link('Voltar', [
-            'controller' => 'cerimonia_graduacaos',
-            'action'     => 'ver_detalhes',
-            $candidatoGraduacao['CandidatoGraduacao']['cerimonia_graduacao_id']
+                'controller' => 'cerimonia_graduacaos',
+                'action'     => 'ver_detalhes',
+                $candidatoGraduacao['CandidatoGraduacao']['cerimonia_graduacao_id'],
         ], ['class' => 'btn btn-light-grey btn-block']) ?>
 
 
@@ -186,9 +185,9 @@
         <?php
             if (in_array($candidatoGraduacao['CandidatoGraduacao']['estado_candidatura_id'], [2, 4])) {
                 echo $this->Form->end([
-                    'label' => __('Confirmar Pagamento', true),
-                    'class' => 'btn btn-blue btn-block',
-                    'div'   => 'col-sm-6'
+                        'label' => __('Confirmar Pagamento', true),
+                        'class' => 'btn btn-blue btn-block',
+                        'div'   => 'col-sm-6',
                 ]);
             }
         ?>

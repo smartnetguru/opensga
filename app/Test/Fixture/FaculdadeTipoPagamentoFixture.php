@@ -1,23 +1,25 @@
 <?php
-/**
- * FaculdadeTipoPagamentoFixture
- *
- */
-class FaculdadeTipoPagamentoFixture extends CakeTestFixture {
 
-/**
- * Import
- *
- * @var array
- */
-	public $import = array('model' => 'FaculdadeTipoPagamento');
+	/**
+	 * FaculdadeTipoPagamentoFixture
+	 *
+	 */
+	class FaculdadeTipoPagamentoFixture extends CakeTestFixture
+	{
 
-/**
- * Records
- *
- * @var array
- */
-	public $records = array(
-	);
+		/**
+		 * Import
+		 *
+		 * @var array
+		 */
+		public $import = ['model' => 'FaculdadeTipoPagamento'];
 
-}
+		/**
+		 * Records
+		 *
+		 * @var array
+		 */
+		public $records = [
+		];
+
+	}

@@ -270,11 +270,13 @@ var Charts = function () {
                 });
             }
         }
+
         plotAccordingToChoices();
         // Interactivity 
         function randValue() {
             return (Math.floor(Math.random() * (1 + 40 - 20))) + 20;
         }
+
         var pageviews = [
             [1, randValue()],
             [2, randValue()],
@@ -395,6 +397,7 @@ var Charts = function () {
                 opacity: 0.80
             }).appendTo("body").fadeIn(200);
         }
+
         var previousPoint = null;
         $("#placeholder3").bind("plothover", function (event, pos, item) {
             $("#x").text(pos.x.toFixed(2));
@@ -439,6 +442,7 @@ var Charts = function () {
             }
             return res;
         }
+
         // Set up the control widget
         var updateInterval = 30;
         $("#updateInterval").val(updateInterval).change(function () {
@@ -472,6 +476,7 @@ var Charts = function () {
             plot.draw();
             setTimeout(update, updateInterval);
         }
+
         update();
         //Categories 
         var data_category = [

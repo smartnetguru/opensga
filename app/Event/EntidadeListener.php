@@ -7,24 +7,28 @@
      *
      * @property Entidade $Entidade
      */
-    class EntidadeListener implements CakeEventListener {
+    class EntidadeListener implements CakeEventListener
+    {
 
-        public function implementedEvents() {
-            return array(
+        public function implementedEvents()
+        {
+            return [
                 'Model.Entidade.beforeCreate' => 'cadastraUserForEntidade',
 
-            );
+            ];
         }
 
-        public function cadastraUserForEntidade($event){
+        public function cadastraUserForEntidade($event)
+        {
             $this->Entidade = ClassRegistry::init('Entidade');
             $resultado = $this->Entidade->User->cadastraUser($event->data['data']);
-            if($resultado!==false){
+            if ($resultado !== false) {
                 $data = $event->data['data'];
                 $data['Entidade']['user_id'] = $resultado;
                 $data['Aluno']['user_id'] = $resultado;
+
                 return $data;
-            } else{
+            } else {
                 return false;
             }
         }

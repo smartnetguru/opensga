@@ -8,20 +8,20 @@
         </label>
         <?php
             echo $this->Form->input('tipo_avaliacao_id',
-                ['label' => false, 'div' => false, 'class' => 'form-control', 'empty' => '--Seleccione--']);
+                    ['label' => false, 'div' => false, 'class' => 'form-control', 'empty' => '--Seleccione--']);
         ?>
     </div>
     <div class="form-group">
         <?php echo $this->Form->label('data_marcada', 'Data'); ?>
         <div class="input-group">
             <?php echo $this->Form->input('data_marcada', [
-                'label'              => false,
-                'div'                => false,
-                'class'              => 'form-control date-picker',
-                'id'                 => 'firstname',
-                'type'               => 'text',
-                'data-date-viewmode' => 'years',
-                'data-date-format'   => 'yyyy-mm-dd'
+                    'label'              => false,
+                    'div'                => false,
+                    'class'              => 'form-control date-picker',
+                    'id'                 => 'firstname',
+                    'type'               => 'text',
+                    'data-date-viewmode' => 'years',
+                    'data-date-format'   => 'yyyy-mm-dd',
             ]); ?>
             <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
         </div>
@@ -33,7 +33,7 @@
 
         <div>
             <?php echo $this->Form->input('ordem',
-                ['type' => 'text', 'label' => false, 'div' => false, 'class' => 'form-control']); ?>
+                    ['type' => 'text', 'label' => false, 'div' => false, 'class' => 'form-control']); ?>
         </div>
     </div>
     <div class="form-group">
@@ -43,7 +43,7 @@
 
         <div>
             <?php echo $this->Form->input('peso',
-                ['type' => 'text', 'label' => false, 'div' => false, 'class' => 'form-control']); ?>
+                    ['type' => 'text', 'label' => false, 'div' => false, 'class' => 'form-control']); ?>
         </div>
     </div>
     <div class="form-group">

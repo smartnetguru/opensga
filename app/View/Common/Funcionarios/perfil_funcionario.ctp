@@ -2,7 +2,7 @@
     echo $this->Html->css('/assets/plugins/bootstrap-social-buttons/social-buttons-3.css');
     $this->BreadCumbs->addCrumb('Funcionario', '/faculdade/docentes');
     $this->BreadCumbs->addCrumb($funcionario['Entidade']['name'],
-        '/faculdade/docentes/perfil_docente/' . $funcionario['Funcionario']['id']);
+            '/faculdade/docentes/perfil_docente/' . $funcionario['Funcionario']['id']);
     $this->BreadCumbs->addCrumb('Perfil', '/faculdade/docentes/perfil_docente/' . $funcionario['Funcionario']['id']);
 ?>
 
@@ -47,8 +47,8 @@
                                     <div data-provides="fileupload" class="fileupload fileupload-new">
                                         <div class="user-image">
                                             <div
-                                                class="fileupload-new thumbnail"><?php echo $this->Html->image($signedUrl,
-                                                    ['style' => 'max-width:330px;max-height:380px']); ?>
+                                                    class="fileupload-new thumbnail"><?php echo $this->Html->image($signedUrl,
+                                                        ['style' => 'max-width:330px;max-height:380px']); ?>
                                             </div>
                                         </div>
                                     </div>
@@ -88,40 +88,40 @@
                                         <td>Data de Nascimento</td>
                                         <td><?php h($funcionario['Entidade']['data_nascimento']); ?></td>
                                         <td><a class="show-tab" href="#panel_edit_account"><i
-                                                    class="fa fa-pencil edit-user-info"></i></a></td>
+                                                        class="fa fa-pencil edit-user-info"></i></a></td>
                                     </tr>
                                     <tr>
                                         <td>Sexo</td>
                                         <td><?php echo h($funcionario['Entidade']['Genero']['name']) ?></td>
                                         <td><a class="show-tab" href="#panel_edit_account"><i
-                                                    class="fa fa-pencil edit-user-info"></i></a></td>
+                                                        class="fa fa-pencil edit-user-info"></i></a></td>
                                     </tr>
                                     <tr>
                                         <td>Nome do Pai</td>
                                         <td><?php echo h($funcionario['Entidade']['nome_pai']) ?></td>
                                         <td><a class="show-tab" href="#panel_edit_account"><i
-                                                    class="fa fa-pencil edit-user-info"></i></a></td>
+                                                        class="fa fa-pencil edit-user-info"></i></a></td>
                                     </tr>
                                     <tr>
                                         <td>Nome da Mae</td>
                                         <td><?php echo h($funcionario['Entidade']['nome_mae']) ?></td>
                                         <td><a class="show-tab" href="#panel_edit_account"><i
-                                                    class="fa fa-pencil edit-user-info"></i></a></td>
+                                                        class="fa fa-pencil edit-user-info"></i></a></td>
                                     </tr>
                                     <tr>
                                         <td>Nacionalidade</td>
                                         <td><span
-                                                class="label label-sm label-info"><?php echo h($funcionario['Entidade']['CidadeNascimento']['Provincia']['Pais']['name']); ?></span>
+                                                    class="label label-sm label-info"><?php echo h($funcionario['Entidade']['CidadeNascimento']['Provincia']['Pais']['name']); ?></span>
                                         </td>
                                         <td><a class="show-tab" href="#panel_edit_account"><i
-                                                    class="fa fa-pencil edit-user-info"></i></a></td>
+                                                        class="fa fa-pencil edit-user-info"></i></a></td>
                                     </tr>
                                     <tr>
                                         <td>Naturalidade</td>
                                         <td><?php echo h($funcionario['Entidade']['naturalidade']); ?>
                                             - <?php echo h($funcionario['Entidade']['CidadeNascimento']['Provincia']['name']); ?></td>
                                         <td><a class="show-tab" href="#panel_edit_account"><i
-                                                    class="fa fa-pencil edit-user-info"></i></a></td>
+                                                        class="fa fa-pencil edit-user-info"></i></a></td>
                                     </tr>
 
                                     </tbody>
@@ -137,7 +137,7 @@
                                         <td>Ultimo acesso</td>
                                         <td><?php echo h($funcionario['Entidade']['User']['ultimo_login']); ?></td>
                                         <td><a class="show-tab" href="#panel_edit_account"><i
-                                                    class="fa fa-pencil edit-user-info"></i></a></td>
+                                                        class="fa fa-pencil edit-user-info"></i></a></td>
                                     </tr>
 
                                     </tbody>
@@ -271,11 +271,6 @@
         </div>
     </div>
 </div>
-
-
-
-
-
 
 
 <?php

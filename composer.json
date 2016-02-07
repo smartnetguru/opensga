@@ -2,7 +2,9 @@
   "name": "infomoz/opensga",
   "description": "Sistema de Gestao Academica de Codigo Aberto",
   "type": "project",
-  "keywords": ["opensga"],
+  "keywords": [
+    "opensga"
+  ],
   "homepage": "http://infomoz.net",
   "time": "2015-07-17",
   "license": "MIT",
@@ -34,18 +36,15 @@
     "source": "http://infomoz.net",
     "docs": "http://infomoz.net"
   },
-  "repositories":[
+  "repositories": [
     {
-      "type":"git",
-      "url":"https://github.com/backstageel/CakePHP-DatabaseLogger-Plugin.git"
-
+      "type": "git",
+      "url": "https://github.com/backstageel/CakePHP-DatabaseLogger-Plugin.git"
     },
     {
-      "type":"git",
-      "url":"https://github.com/markstory/asset_compress.git"
-
+      "type": "git",
+      "url": "https://github.com/markstory/asset_compress.git"
     }
-
   ],
   "require": {
     "cakephp/cakephp": "2.8.0-RC1",
@@ -67,13 +66,11 @@
     "leeoniya/dump-r": "dev-master",
     "phpunit/phpunit-selenium": "1.2.*",
     "backstageel/cakephp-reports": "dev-master",
-    "webtechnick/cakephp-database-logger-plugin":"dev-master",
+    "webtechnick/cakephp-database-logger-plugin": "dev-master",
     "cakedc/search": "^2.5",
-    "alliedhealthmedia/icing":"dev-master",
+    "alliedhealthmedia/icing": "dev-master",
     "markstory/asset_compress": "2.x-dev",
     "linkorb/jsmin-php": "^1.0"
-
-
   },
   "require-dev": {
     "phpunit/phpunit": "3.7.*",

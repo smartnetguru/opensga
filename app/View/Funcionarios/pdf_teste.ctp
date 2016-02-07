@@ -1,5 +1,4 @@
+<?php //var_dump($this->data);
 
-<?php //var_dump($this->data); 
-
-echo $this->data["Aluno"]["name"];
+    echo $this->data["Aluno"]["name"];
 ?>

@@ -60,7 +60,7 @@
             if ($this->request->is('post')) {
                 $this->CandidatoGraduacao->Aluno->contain([
                     'Entidade' => ['User'],
-                    'Curso'
+                    'Curso',
                 ]);
                 $aluno = $this->CandidatoGraduacao->Aluno->find('all', [
                     'conditions' => [
@@ -69,9 +69,9 @@
                         'Entidade.nomes LIKE'      => trim($this->request->data['Entidade']['nomes']),
                         'Entidade.apelido LIKE'    => trim($this->request->data['Entidade']['apelido']),
                         'Entidade.data_nascimento' => $this->request->data['Entidade']['data_nascimento'],
-                        'Entidade.genero_id'       => $this->request->data['Entidade']['genero_id']
+                        'Entidade.genero_id'       => $this->request->data['Entidade']['genero_id'],
 
-                    ]
+                    ],
                 ]);
                 if (count($aluno) == 1) {
                     $last_login = $aluno['Entidade']['User']['ultimo_login'];
@@ -107,7 +107,7 @@ Veriifique os dados e tente novamente<br />
                     $this->redirect([
                         'controller' => 'cerimonia_graduacaos',
                         'action'     => 'ver_detalhes',
-                        $this->request->data['CandidatoGraduacao']['cerimonia_graduacao_id']
+                        $this->request->data['CandidatoGraduacao']['cerimonia_graduacao_id'],
                     ]);
                 } else {
                     $this->Flash->error('Problemas ao actualizar dados. Tente novamente');
@@ -119,7 +119,7 @@ Veriifique os dados e tente novamente<br />
                 'EstadoCivil',
                 'RegimeEstudo',
                 'RegaliaSocial',
-                'Funcionario'
+                'Funcionario',
             ]);
             $options = ['conditions' => ['CandidatoGraduacao.id' => $candidatoGraduacaoId]];
             $candidatoGraduacao = $this->CandidatoGraduacao->find('first', $options);
@@ -239,7 +239,7 @@ Veriifique os dados e tente novamente<br />
                     $this->redirect([
                         'controller' => 'cerimonia_graduacaos',
                         'action'     => 'ver_detalhes',
-                        $this->request->data['CandidatoGraduacao']['cerimonia_graduacao_id']
+                        $this->request->data['CandidatoGraduacao']['cerimonia_graduacao_id'],
                     ]);
                 } else {
                     $this->Flash->error('Problemas ao actualizar dados. Tente novamente');
@@ -253,7 +253,7 @@ Veriifique os dados e tente novamente<br />
                 'EstadoCivil',
                 'RegimeEstudo',
                 'RegaliaSocial',
-                'Funcionario'
+                'Funcionario',
             ]);
             $options = ['conditions' => ['CandidatoGraduacao.id' => $candidatoGraduacaoId]];
             $candidatoGraduacao = $this->CandidatoGraduacao->find('first', $options);

@@ -1,30 +1,32 @@
 <?php
-/**
- * RegimeLectivo Fixture
- */
-class RegimeLectivoFixture extends CakeTestFixture {
 
-/**
- * Import
- *
- * @var array
- */
-	public $import = array('model' => 'RegimeLectivo');
+	/**
+	 * RegimeLectivo Fixture
+	 */
+	class RegimeLectivoFixture extends CakeTestFixture
+	{
 
-/**
- * Records
- *
- * @var array
- */
-	public $records = array(
-		array(
-			'id' => '1',
-			'name' => 'Fevereiro'
-		),
-		array(
-			'id' => '2',
-			'name' => 'Agosto'
-		),
-	);
+		/**
+		 * Import
+		 *
+		 * @var array
+		 */
+		public $import = ['model' => 'RegimeLectivo'];
 
-}
+		/**
+		 * Records
+		 *
+		 * @var array
+		 */
+		public $records = [
+			[
+				'id'   => '1',
+				'name' => 'Fevereiro',
+			],
+			[
+				'id'   => '2',
+				'name' => 'Agosto',
+			],
+		];
+
+	}

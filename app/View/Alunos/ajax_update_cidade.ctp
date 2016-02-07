@@ -1,1 +1,1 @@
-<?php var_dump('teste');?>
+<?php var_dump('teste'); ?>

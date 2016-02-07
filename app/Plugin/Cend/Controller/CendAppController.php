@@ -1,7 +1,8 @@
 <?php
 
-App::uses('AppController', 'Controller');
+    App::uses('AppController', 'Controller');
 
-class CendAppController extends AppController {
+    class CendAppController extends AppController
+    {
 
-}
+    }

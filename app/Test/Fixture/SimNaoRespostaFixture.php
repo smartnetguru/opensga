@@ -1,31 +1,33 @@
 <?php
-/**
- * SimNaoRespostaFixture
- *
- */
-class SimNaoRespostaFixture extends CakeTestFixture {
 
-/**
- * Import
- *
- * @var array
- */
-	public $import = array('table' => 'sim_nao_respostas');
+	/**
+	 * SimNaoRespostaFixture
+	 *
+	 */
+	class SimNaoRespostaFixture extends CakeTestFixture
+	{
 
-/**
- * Records
- *
- * @var array
- */
-	public $records = array(
-		array(
-			'id' => '1',
-			'name' => 'SIM'
-		),
-		array(
-			'id' => '2',
-			'name' => 'NÃO'
-		),
-	);
+		/**
+		 * Import
+		 *
+		 * @var array
+		 */
+		public $import = ['table' => 'sim_nao_respostas'];
 
-}
+		/**
+		 * Records
+		 *
+		 * @var array
+		 */
+		public $records = [
+			[
+				'id'   => '1',
+				'name' => 'SIM',
+			],
+			[
+				'id'   => '2',
+				'name' => 'NÃO',
+			],
+		];
+
+	}

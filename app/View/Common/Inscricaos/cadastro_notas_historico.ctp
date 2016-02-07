@@ -68,8 +68,8 @@
                 </table>
                 <p>
                     <?php echo $this->Html->link('<i class="fa fa-plus"></i>Voltar para o Perfil',
-                        ['controller' => 'alunos', 'action' => 'perfil_estudante', $aluno['Aluno']['id']],
-                        ['class' => 'btn btn-green', 'escape' => false]) ?>
+                            ['controller' => 'alunos', 'action' => 'perfil_estudante', $aluno['Aluno']['id']],
+                            ['class' => 'btn btn-green', 'escape' => false]) ?>
                 </p>
             </div>
         </div>
@@ -100,7 +100,11 @@
             </div>
             <div class="panel-body">
                 <?php echo $this->Form->create('Inscricao',
-                    ['role' => 'form', 'enctype' => 'multipart/form-data', 'class' => '', 'inputDefaults' => []]); ?>
+                        ['role'          => 'form',
+                         'enctype'       => 'multipart/form-data',
+                         'class'         => '',
+                         'inputDefaults' => [],
+                        ]); ?>
                 <table class="table table-bordered table-hover">
                     <thead>
                     <tr>
@@ -121,28 +125,28 @@
                             foreach ($inscricao['Nota'] as $cadeiraFeita): ?>
                                 <tr>
                                     <td><?= $this->Form->checkbox('Inscricao.' . $inscricao['DisciplinaPlanoEstudo']['id'] . '.gravar',
-                                            ['checked' => true]); ?></td>
+                                                ['checked' => true]); ?></td>
                                     <td><?= $inscricao['DisciplinaPlanoEstudo']['ano_curricular'] ?></td>
                                     <td><?= $inscricao['DisciplinaPlanoEstudo']['semestre_curricular'] ?></td>
                                     <td><?= $inscricao['Disciplina']['name'] ?></td>
                                     <td><?= $this->Form->input('Inscricao.' . $inscricao['DisciplinaPlanoEstudo']['id'] . '.nota_final',
-                                            [
-                                                'div'   => false,
-                                                'label' => false,
-                                                'class' => 'form-control col-xs-1',
-                                                'id'    => 'apelido',
-                                                'value' => $cadeiraFeita['Inscricao']['nota_final']
+                                                [
+                                                        'div'   => false,
+                                                        'label' => false,
+                                                        'class' => 'form-control col-xs-1',
+                                                        'id'    => 'apelido',
+                                                        'value' => $cadeiraFeita['Inscricao']['nota_final'],
 
-                                            ]); ?></td>
+                                                ]); ?></td>
                                     <td><?= $cadeiraFeita['AnoLectivo']['ano'] ?>
                                         <?php echo $this->Form->hidden('Inscricao.' . $inscricao['DisciplinaPlanoEstudo']['id'] . '.inscricao_id',
-                                                ['value' => $cadeiraFeita['Inscricao']['id']]); ?>
+                                                    ['value' => $cadeiraFeita['Inscricao']['id']]); ?>
                                     </td>
                                     <td>
                                         <?= $cadeiraFeita['Inscricao']['data']; ?>
                                     </td>
                                 </tr>
-                            <?php endforeach;?>
+                            <?php endforeach; ?>
                         <?php else: ?>
 
                             <?php
@@ -156,34 +160,34 @@
                                 <td><?= $inscricao['DisciplinaPlanoEstudo']['semestre_curricular'] ?></td>
                                 <td><?= $inscricao['Disciplina']['name'] ?></td>
                                 <td><?= $this->Form->input('Inscricao.' . $inscricao['DisciplinaPlanoEstudo']['id'] . '.nota_final',
-                                        [
-                                            'div'      => false,
-                                            'label'    => false,
-                                            'class'    => 'form-control col-xs-1',
-                                            'id'       => 'apelido',
-                                            'required' => false
+                                            [
+                                                    'div'      => false,
+                                                    'label'    => false,
+                                                    'class'    => 'form-control col-xs-1',
+                                                    'id'       => 'apelido',
+                                                    'required' => false,
 
-                                        ]); ?></td>
+                                            ]); ?></td>
                                 <td><?= $this->Form->input('Inscricao.' . $inscricao['DisciplinaPlanoEstudo']['id'] . '.ano_lectivo',
-                                        [
-                                            'div'      => false,
-                                            'label'    => false,
-                                            'class'    => 'form-control col-xs-1',
-                                            'id'       => 'apelido',
-                                            'options'  => $anoLectivos,
-                                            'selected' => $defaultAnoLectivo
-                                        ]); ?></td>
+                                            [
+                                                    'div'      => false,
+                                                    'label'    => false,
+                                                    'class'    => 'form-control col-xs-1',
+                                                    'id'       => 'apelido',
+                                                    'options'  => $anoLectivos,
+                                                    'selected' => $defaultAnoLectivo,
+                                            ]); ?></td>
                                 <td>
                                     <?= $this->Form->input('Inscricao.' . $inscricao['DisciplinaPlanoEstudo']['id'] . '.data',
-                                        [
-                                            'div'                => false,
-                                            'label'              => false,
-                                            'class'              => 'form-control date-picker',
-                                            'id'                 => 'dataNascimento',
-                                            'type'               => 'text',
-                                            'data-date-viewmode' => 'years',
-                                            'data-date-format'   => 'yyyy-mm-dd'
-                                        ]); ?>
+                                            [
+                                                    'div'                => false,
+                                                    'label'              => false,
+                                                    'class'              => 'form-control date-picker',
+                                                    'id'                 => 'dataNascimento',
+                                                    'type'               => 'text',
+                                                    'data-date-viewmode' => 'years',
+                                                    'data-date-format'   => 'yyyy-mm-dd',
+                                            ]); ?>
                                 </td>
                             </tr>
                         <?php endif; ?>
@@ -220,23 +224,23 @@
 
 
     echo $this->Html->script('/assets/plugins/jquery-inputlimiter/jquery.inputlimiter.1.3.1.min',
-        ['block' => 'scriptBottom']);
+            ['block' => 'scriptBottom']);
     echo $this->Html->script('/assets/plugins/autosize/jquery.autosize.min', ['block' => 'scriptBottom']);
     echo $this->Html->script('/assets/plugins/autosize/jquery.autosize.min', ['block' => 'scriptBottom']);
     echo $this->Html->script('/assets/plugins/select2/select2.min', ['block' => 'scriptBottom']);
     echo $this->Html->script('/assets/plugins/jquery.maskedinput/src/jquery.maskedinput', ['block' => 'scriptBottom']);
     echo $this->Html->script('/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker',
-        ['block' => 'scriptBottom']);
+            ['block' => 'scriptBottom']);
     echo $this->Html->script('/assets/plugins/bootstrap-timepicker/js/bootstrap-timepicker.min',
-        ['block' => 'scriptBottom']);
+            ['block' => 'scriptBottom']);
     echo $this->Html->script('/assets/plugins/bootstrap-daterangepicker/moment.min', ['block' => 'scriptBottom']);
     echo $this->Html->script('/assets/plugins/bootstrap-daterangepicker/daterangepicker', ['block' => 'scriptBottom']);
     echo $this->Html->script('/assets/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker',
-        ['block' => 'scriptBottom']);
+            ['block' => 'scriptBottom']);
     //echo $this->Html->script('/assets/plugins/bootstrap-colorpicker/js/commits', array('block' => 'scriptBottom'));
     echo $this->Html->script('/assets/plugins/jQuery-Tags-Input/jquery.tagsinput', ['block' => 'scriptBottom']);
     echo $this->Html->script('/assets/plugins/bootstrap-fileupload/bootstrap-fileupload.min',
-        ['block' => 'scriptBottom']);
+            ['block' => 'scriptBottom']);
     echo $this->Html->script('/assets/plugins/summernote/build/summernote.min', ['block' => 'scriptBottom']);
     echo $this->Html->script('/assets/plugins/ckeditor/ckeditor', ['block' => 'scriptBottom']);
     echo $this->Html->script('/assets/plugins/ckeditor/adapters/jquery', ['block' => 'scriptBottom']);
@@ -245,8 +249,8 @@
     echo $this->Html->script(['/assets/plugins/jquery-ui/jquery.ui.menu'], ['block' => 'scriptBottom']);
     echo $this->Html->script(['/assets/plugins/jquery-ui/jquery.ui.autocomplete'], ['block' => 'scriptBottom']);
     echo $this->Html->script('/assets/js/form-matricular-candidato-elements', ['block' => 'scriptBottom'],
-        ['block' => 'scriptBottom']);
+            ['block' => 'scriptBottom']);
     echo $this->Html->script('/assets/js/form-matricular-candidato-wizard', ['block' => 'scriptBottom'],
-        ['block' => 'scriptBottom']);
+            ['block' => 'scriptBottom']);
 ?>
 

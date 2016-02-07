@@ -5,7 +5,7 @@
     estudante nos dois campos de autenticacao na pagina de login.</p>
 
 <?= $this->Html->image('https://s3-eu-west-1.amazonaws.com/public.siga.uem.mz/siga-login.png',
-    ['url' => ['controller' => 'users', 'action' => 'login']]) ?>
+        ['url' => ['controller' => 'users', 'action' => 'login']]) ?>
 
 <p>A imagem acima ilustra o local onde deve introduzir seu numero de estudante. Seu numero de estudante devera ser
     introduzido em ambos os campos.</p>
@@ -15,7 +15,7 @@
     para poder fazer a inscricao</p>
 
 <?= $this->Html->link('Clique Aqui para Ir a pagina de Login do SIGA', ['controller' => 'users', 'action' => 'login'],
-    ['class' => 'btn btn-success']) ?>
+        ['class' => 'btn btn-success']) ?>
 
 <br/>
 <br/>

@@ -59,12 +59,12 @@
                 </table>
                 <p>
                     <?php echo $this->Html->link('<i class="fa fa-plus"></i>Voltar para o Perfil',
-                        [
-                            'controller' => 'funcionarios',
-                            'action'     => 'perfil_funcionario',
-                            $funcionario['Funcionario']['id']
-                        ],
-                        ['class' => 'btn btn-green', 'escape' => false]) ?>
+                            [
+                                    'controller' => 'funcionarios',
+                                    'action'     => 'perfil_funcionario',
+                                    $funcionario['Funcionario']['id'],
+                            ],
+                            ['class' => 'btn btn-green', 'escape' => false]) ?>
                 </p>
 
             </div>

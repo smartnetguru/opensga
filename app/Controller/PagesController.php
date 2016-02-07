@@ -46,7 +46,7 @@
         {
             parent::beforeFilter();
             $user = $this->Auth->user();
-            $this->Auth->allow('email_oficial_uem', 'email','webmail');
+            $this->Auth->allow('email_oficial_uem', 'email', 'webmail');
             if ($user != null) {
                 $this->Auth->allowedActions = ['display', 'email_oficial_uem', 'webmail', 'email'];
             }
@@ -56,7 +56,7 @@
                 $referer = $this->referer();
                 preg_match('/login/', $referer, $matches);
                 if ($matches) {
-                   // $whatsNew = '<p>Inscricoes da Escola Superior de Ciencias do Desporto Importadas</p>';
+                    // $whatsNew = '<p>Inscricoes da Escola Superior de Ciencias do Desporto Importadas</p>';
                     //$this->set(compact('whatsNew'));
                 }
 
@@ -117,14 +117,21 @@
 
             $aluno = $this->Aluno->getByUserId($userId);
 
-            $matriculasPendentes = $this->Aluno->getAllMatriculasPendentes($aluno['Aluno']['id'],true);
+            $matriculasPendentes = $this->Aluno->getAllMatriculasPendentes($aluno['Aluno']['id'], true);
 
             if (!empty($matriculasPendentes)) {
                 $this->set(compact('matriculasPendentes'));
             }
 
-            $this->Aluno->Inscricao->contain(['Turma'=>['Disciplina']]);
-            $inscricoesActivas = $this->Aluno->Inscricao->find('all',['conditions'=>['Inscricao.aluno_id'=>$aluno['Aluno']['id'],'Turma.ano_lectivo_id'=>Configure::read('OpenSGA.ano_lectivo_id'),'Turma.semestre_lectivo_id'=>Configure::read('OpenSGA.semestre_lectivo_id')],'order'=>['Turma.ano_curricular','Turma.semestre_curricular']]);
+            $this->Aluno->Inscricao->contain(['Turma' => ['Disciplina']]);
+            $inscricoesActivas = $this->Aluno->Inscricao->find('all', [
+                'conditions' => [
+                    'Inscricao.aluno_id'        => $aluno['Aluno']['id'],
+                    'Turma.ano_lectivo_id'      => Configure::read('OpenSGA.ano_lectivo_id'),
+                    'Turma.semestre_lectivo_id' => Configure::read('OpenSGA.semestre_lectivo_id'),
+                ],
+                'order'      => ['Turma.ano_curricular', 'Turma.semestre_curricular'],
+            ]);
 
 
             $this->set(compact('inscricoesActivas'));
@@ -156,8 +163,8 @@
             $total_turmas_activas_ano = $this->Aluno->Inscricao->Turma->find('count', [
                 'conditions' => [
                     'Turma.curso_id'       => $cursos,
-                    'Turma.ano_lectivo_id' => Configure::read('OpenSGA.ano_lectivo_id')
-                ]
+                    'Turma.ano_lectivo_id' => Configure::read('OpenSGA.ano_lectivo_id'),
+                ],
             ]);
             $total_turmas_passadas = $total_turmas_activas - $total_turmas_activas_ano;
 
@@ -197,23 +204,23 @@
             $facturas_geradas = $this->Aluno->FinanceiroPagamento->find('count', [
                 'conditions' => [
                     'MONTH(FinanceiroPagamento.created)' => date('m'),
-                    'YEAR(FinanceiroPagamento.created)'  => date('Y')
-                ]
+                    'YEAR(FinanceiroPagamento.created)'  => date('Y'),
+                ],
             ]);
             $facturas_pagas = $this->Aluno->FinanceiroPagamento->find('count', [
                 'conditions' => [
                     'MONTH(FinanceiroPagamento.data_pagamento)'          => date('m'),
                     'YEAR(FinanceiroPagamento.data_pagamento)'           => date('Y'),
-                    'FinanceiroPagamento.financeiro_estado_pagamento_id' => 2
-                ]
+                    'FinanceiroPagamento.financeiro_estado_pagamento_id' => 2,
+                ],
             ]);
             $valor_arrecadado = $this->Aluno->FinanceiroPagamento->find('all', [
                 'conditions' => [
                     'MONTH(FinanceiroPagamento.data_pagamento)'          => date('m'),
                     'YEAR(FinanceiroPagamento.data_pagamento)'           => date('Y'),
-                    'FinanceiroPagamento.financeiro_estado_pagamento_id' => 2
+                    'FinanceiroPagamento.financeiro_estado_pagamento_id' => 2,
                 ],
-                'fields'     => 'sum(FinanceiroPagamento.valor) as valor'
+                'fields'     => 'sum(FinanceiroPagamento.valor) as valor',
             ]);
             $valor_divida = $this->Aluno->FinanceiroPagamento->getValorDividaTotal();
             $alertas = null;
@@ -231,8 +238,8 @@
             $this->loadModel('User');
             $this->User->contain([
                 'Group' => [
-                    'fields' => 'name'
-                ]
+                    'fields' => 'name',
+                ],
             ]);
             $ultimos_users = $this->User->find('all', ['limit' => 10, 'order' => 'User.ultimo_login DESC']);
 

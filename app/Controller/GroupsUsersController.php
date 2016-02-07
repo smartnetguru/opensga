@@ -1,111 +1,122 @@
 <?php
-App::uses('AppController', 'Controller');
-/**
- * GroupsUsers Controller
- *
- * @property GroupsUser $GroupsUser
- * @property PaginatorComponent $Paginator
- */
-class GroupsUsersController extends AppController {
+	App::uses('AppController', 'Controller');
 
-/**
- * Components
- *
- * @var array
- */
-	public $components = array('Paginator');
+	/**
+	 * GroupsUsers Controller
+	 *
+	 * @property GroupsUser $GroupsUser
+	 * @property PaginatorComponent $Paginator
+	 */
+	class GroupsUsersController extends AppController
+	{
 
-/**
- * index method
- *
- * @return void
- */
-	public function index() {
-		$this->GroupsUser->recursive = 0;
-		$this->set('groupsUsers', $this->Paginator->paginate());
-	}
+		/**
+		 * Components
+		 *
+		 * @var array
+		 */
+		public $components = ['Paginator'];
 
-/**
- * view method
- *
- * @throws NotFoundException
- * @param string $id
- * @return void
- */
-	public function view($id = null) {
-		if (!$this->GroupsUser->exists($id)) {
-			throw new NotFoundException(__('Invalid groups user'));
+		/**
+		 * index method
+		 *
+		 * @return void
+		 */
+		public function index()
+		{
+			$this->GroupsUser->recursive = 0;
+			$this->set('groupsUsers', $this->Paginator->paginate());
 		}
-		$options = array('conditions' => array('GroupsUser.' . $this->GroupsUser->primaryKey => $id));
-		$this->set('groupsUser', $this->GroupsUser->find('first', $options));
-	}
 
-/**
- * add method
- *
- * @return void
- */
-	public function add() {
-		if ($this->request->is('post')) {
-			$this->GroupsUser->create();
-			if ($this->GroupsUser->save($this->request->data)) {
-				$this->Session->setFlash(__('The groups user has been saved.'));
-				return $this->redirect(array('action' => 'index'));
-			} else {
-				$this->Session->setFlash(__('The groups user could not be saved. Please, try again.'));
+		/**
+		 * view method
+		 *
+		 * @throws NotFoundException
+		 * @param string $id
+		 * @return void
+		 */
+		public function view($id = null)
+		{
+			if (!$this->GroupsUser->exists($id)) {
+				throw new NotFoundException(__('Invalid groups user'));
 			}
+			$options = ['conditions' => ['GroupsUser.' . $this->GroupsUser->primaryKey => $id]];
+			$this->set('groupsUser', $this->GroupsUser->find('first', $options));
 		}
-		$users = $this->GroupsUser->User->find('list');
-		$groups = $this->GroupsUser->Group->find('list');
-		$estadoObjectos = $this->GroupsUser->EstadoObjecto->find('list');
-		$this->set(compact('users', 'groups', 'estadoObjectos'));
-	}
 
-/**
- * edit method
- *
- * @throws NotFoundException
- * @param string $id
- * @return void
- */
-	public function edit($id = null) {
-		if (!$this->GroupsUser->exists($id)) {
-			throw new NotFoundException(__('Invalid groups user'));
-		}
-		if ($this->request->is('post') || $this->request->is('put')) {
-			if ($this->GroupsUser->save($this->request->data)) {
-				$this->Session->setFlash(__('The groups user has been saved.'));
-				return $this->redirect(array('action' => 'index'));
-			} else {
-				$this->Session->setFlash(__('The groups user could not be saved. Please, try again.'));
+		/**
+		 * add method
+		 *
+		 * @return void
+		 */
+		public function add()
+		{
+			if ($this->request->is('post')) {
+				$this->GroupsUser->create();
+				if ($this->GroupsUser->save($this->request->data)) {
+					$this->Session->setFlash(__('The groups user has been saved.'));
+
+					return $this->redirect(['action' => 'index']);
+				} else {
+					$this->Session->setFlash(__('The groups user could not be saved. Please, try again.'));
+				}
 			}
-		} else {
-			$options = array('conditions' => array('GroupsUser.' . $this->GroupsUser->primaryKey => $id));
-			$this->request->data = $this->GroupsUser->find('first', $options);
+			$users = $this->GroupsUser->User->find('list');
+			$groups = $this->GroupsUser->Group->find('list');
+			$estadoObjectos = $this->GroupsUser->EstadoObjecto->find('list');
+			$this->set(compact('users', 'groups', 'estadoObjectos'));
 		}
-		$users = $this->GroupsUser->User->find('list');
-		$groups = $this->GroupsUser->Group->find('list');
-		$estadoObjectos = $this->GroupsUser->EstadoObjecto->find('list');
-		$this->set(compact('users', 'groups', 'estadoObjectos'));
-	}
 
-/**
- * delete method
- *
- * @throws NotFoundException
- * @param string $id
- * @return void
- */
-	public function delete($id = null) {
-		$this->GroupsUser->id = $id;
-		if (!$this->GroupsUser->exists()) {
-			throw new NotFoundException(__('Invalid groups user'));
+		/**
+		 * edit method
+		 *
+		 * @throws NotFoundException
+		 * @param string $id
+		 * @return void
+		 */
+		public function edit($id = null)
+		{
+			if (!$this->GroupsUser->exists($id)) {
+				throw new NotFoundException(__('Invalid groups user'));
+			}
+			if ($this->request->is('post') || $this->request->is('put')) {
+				if ($this->GroupsUser->save($this->request->data)) {
+					$this->Session->setFlash(__('The groups user has been saved.'));
+
+					return $this->redirect(['action' => 'index']);
+				} else {
+					$this->Session->setFlash(__('The groups user could not be saved. Please, try again.'));
+				}
+			} else {
+				$options = ['conditions' => ['GroupsUser.' . $this->GroupsUser->primaryKey => $id]];
+				$this->request->data = $this->GroupsUser->find('first', $options);
+			}
+			$users = $this->GroupsUser->User->find('list');
+			$groups = $this->GroupsUser->Group->find('list');
+			$estadoObjectos = $this->GroupsUser->EstadoObjecto->find('list');
+			$this->set(compact('users', 'groups', 'estadoObjectos'));
 		}
-		$this->request->onlyAllow('post', 'delete');
-		if ($this->GroupsUser->delete()) {
-			$this->Session->setFlash(__('The groups user has been deleted.'));
-		} else {
-			$this->Session->setFlash(__('The groups user could not be deleted. Please, try again.'));
+
+		/**
+		 * delete method
+		 *
+		 * @throws NotFoundException
+		 * @param string $id
+		 * @return void
+		 */
+		public function delete($id = null)
+		{
+			$this->GroupsUser->id = $id;
+			if (!$this->GroupsUser->exists()) {
+				throw new NotFoundException(__('Invalid groups user'));
+			}
+			$this->request->onlyAllow('post', 'delete');
+			if ($this->GroupsUser->delete()) {
+				$this->Session->setFlash(__('The groups user has been deleted.'));
+			} else {
+				$this->Session->setFlash(__('The groups user could not be deleted. Please, try again.'));
+			}
+
+			return $this->redirect(['action' => 'index']);
 		}
-		return $this->redirect(array('action' => 'index'));
-	}}
+	}

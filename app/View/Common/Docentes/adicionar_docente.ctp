@@ -1,16 +1,16 @@
 <?php
-$this->BreadCumbs->addCrumb('Alunos', '/alunos');
-$this->BreadCumbs->addCrumb('Lista de Alunos', '/alunos/index');
+    $this->BreadCumbs->addCrumb('Alunos', '/alunos');
+    $this->BreadCumbs->addCrumb('Lista de Alunos', '/alunos/index');
 
-echo $this->Html->css('/assets/plugins/select2/select2.css');
-echo $this->Html->css('/assets/plugins/datepicker/css/datepicker.css');
-echo $this->Html->css('/assets/plugins/bootstrap-timepicker/css/bootstrap-timepicker.min.css');
-echo $this->Html->css('/assets/plugins/bootstrap-daterangepicker/daterangepicker-bs3.css');
-echo $this->Html->css('/assets/plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.css');
-echo $this->Html->css('/assets/plugins/jQuery-Tags-Input/jquery.tagsinput.css');
-echo $this->Html->css('/assets/plugins/bootstrap-fileupload/bootstrap-fileupload.min.css');
-echo $this->Html->css('/assets/plugins/summernote/build/summernote.css');
-echo $this->Html->css('/assets/plugins/ckeditor/contents.css');
+    echo $this->Html->css('/assets/plugins/select2/select2.css');
+    echo $this->Html->css('/assets/plugins/datepicker/css/datepicker.css');
+    echo $this->Html->css('/assets/plugins/bootstrap-timepicker/css/bootstrap-timepicker.min.css');
+    echo $this->Html->css('/assets/plugins/bootstrap-daterangepicker/daterangepicker-bs3.css');
+    echo $this->Html->css('/assets/plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.css');
+    echo $this->Html->css('/assets/plugins/jQuery-Tags-Input/jquery.tagsinput.css');
+    echo $this->Html->css('/assets/plugins/bootstrap-fileupload/bootstrap-fileupload.min.css');
+    echo $this->Html->css('/assets/plugins/summernote/build/summernote.css');
+    echo $this->Html->css('/assets/plugins/ckeditor/contents.css');
 ?>
 
 
@@ -40,12 +40,12 @@ echo $this->Html->css('/assets/plugins/ckeditor/contents.css');
             </div>
             <div class="panel-body">
                 <?php echo $this->Form->create('Docente', [
-                    'role'          => "form",
-                    'novalidate'    => true,
-                    'enctype'       => 'multipart/form-data',
-                    'class'         => 'smart-wizard form-vertical',
-                    'id'            => 'formAlumniCandidatoAlumni',
-                    'inputDefaults' => ['before' => '', 'after' => '']
+                        'role'          => "form",
+                        'novalidate'    => true,
+                        'enctype'       => 'multipart/form-data',
+                        'class'         => 'smart-wizard form-vertical',
+                        'id'            => 'formAlumniCandidatoAlumni',
+                        'inputDefaults' => ['before' => '', 'after' => ''],
                 ]); ?>
 
                 <div class="swMain" id="wizard">
@@ -111,102 +111,102 @@ echo $this->Html->css('/assets/plugins/ckeditor/contents.css');
                         <fieldset>
                             <legend><?php echo __('Dados Básicos') ?></legend>
                             <?php
-                            echo $this->Form->input('Entidade.apelido',
-                                [
-                                    'div'   => 'form-group col-sm-4',
-                                    'label' => ['class' => 'control-label'],
-                                    'class' => 'form-control',
-                                    'id'    => 'apelidoID'
-                                ]);
-                            echo $this->Form->input('Entidade.nomes',
-                                [
-                                    'div'   => 'col-sm-4 form-group',
-                                    'label' => ['class' => 'control-label'],
-                                    'class' => 'form-control',
-                                    'id'    => 'nomesID'
-                                ]);
-                            echo $this->Form->input('Entidade.genero_id',
-                                [
-                                    'div'   => 'col-sm-4 form-group',
-                                    'label' => ['class' => 'control-label'],
-                                    'class' => 'form-control',
-                                    'id'    => 'apelidoID'
-                                ]);
+                                echo $this->Form->input('Entidade.apelido',
+                                        [
+                                                'div'   => 'form-group col-sm-4',
+                                                'label' => ['class' => 'control-label'],
+                                                'class' => 'form-control',
+                                                'id'    => 'apelidoID',
+                                        ]);
+                                echo $this->Form->input('Entidade.nomes',
+                                        [
+                                                'div'   => 'col-sm-4 form-group',
+                                                'label' => ['class' => 'control-label'],
+                                                'class' => 'form-control',
+                                                'id'    => 'nomesID',
+                                        ]);
+                                echo $this->Form->input('Entidade.genero_id',
+                                        [
+                                                'div'   => 'col-sm-4 form-group',
+                                                'label' => ['class' => 'control-label'],
+                                                'class' => 'form-control',
+                                                'id'    => 'apelidoID',
+                                        ]);
 
-                            echo $this->Html->div('clearfix', '');
-                            $before = '<div c' . 'lass="input-group">';
-                            $after = '<s' . 'pan class="input-group-addon"> <i class="fa fa-calendar"></i> </span></div>';
-                            echo $this->Form->input('Entidade.data_nascimento',
-                                [
-                                    'label'              => [
-                                        'class' => 'control-label',
-                                        'text'  => 'Data de Nascimento'
-                                    ],
-                                    'div'                => 'col-sm-2 form-group',
-                                    'class'              => 'form-control date-picker',
-                                    'id'                 => 'dataNascimento',
-                                    'type'               => 'text',
-                                    'data-date-viewmode' => 'years',
-                                    'data-date-format'   => 'yyyy-mm-dd',
-                                    'between'            => $before,
-                                    'after'              => $after
-                                ]);
-                            echo $this->Form->input('Entidade.nuit',
-                                [
-                                    'div'   => 'col-sm-2 form-group required',
-                                    'label' => ['class' => 'control-label required'],
-                                    'class' => 'form-control required',
-                                    'id'    => 'nomePaiID'
-                                ]);
+                                echo $this->Html->div('clearfix', '');
+                                $before = '<div c' . 'lass="input-group">';
+                                $after = '<s' . 'pan class="input-group-addon"> <i class="fa fa-calendar"></i> </span></div>';
+                                echo $this->Form->input('Entidade.data_nascimento',
+                                        [
+                                                'label'              => [
+                                                        'class' => 'control-label',
+                                                        'text'  => 'Data de Nascimento',
+                                                ],
+                                                'div'                => 'col-sm-2 form-group',
+                                                'class'              => 'form-control date-picker',
+                                                'id'                 => 'dataNascimento',
+                                                'type'               => 'text',
+                                                'data-date-viewmode' => 'years',
+                                                'data-date-format'   => 'yyyy-mm-dd',
+                                                'between'            => $before,
+                                                'after'              => $after,
+                                        ]);
+                                echo $this->Form->input('Entidade.nuit',
+                                        [
+                                                'div'   => 'col-sm-2 form-group required',
+                                                'label' => ['class' => 'control-label required'],
+                                                'class' => 'form-control required',
+                                                'id'    => 'nomePaiID',
+                                        ]);
 
-                            echo $this->Form->input('Entidade.nome_pai',
-                                [
-                                    'div'   => 'col-sm-4 form-group',
-                                    'label' => ['class' => 'control-label'],
-                                    'class' => 'form-control',
-                                    'id'    => 'nomePaiID'
-                                ]);
+                                echo $this->Form->input('Entidade.nome_pai',
+                                        [
+                                                'div'   => 'col-sm-4 form-group',
+                                                'label' => ['class' => 'control-label'],
+                                                'class' => 'form-control',
+                                                'id'    => 'nomePaiID',
+                                        ]);
 
-                            echo $this->Form->input('Entidade.nome_mae',
-                                [
-                                    'div'   => 'col-sm-4 form-group',
-                                    'label' => ['class' => 'control-label'],
-                                    'class' => 'form-control',
-                                    'id'    => 'nomeMaeID'
-                                ]);
-                            echo $this->Html->div('clearfix', '');
-                            echo $this->Form->input('Entidade.naturalidade',
-                                [
-                                    'div'   => 'col-sm-3 form-group',
-                                    'label' => ['class' => 'control-label'],
-                                    'class' => 'form-control',
-                                    'id'    => 'naturalidadeID'
-                                ]);
-                            echo $this->Form->input('Entidade.pais_nascimento',
-                                [
-                                    'div'     => 'col-sm-3 form-group',
-                                    'label'   => ['class' => 'control-label'],
-                                    'class'   => 'form-control',
-                                    'id'      => 'paisNascimentoID',
-                                    'options' => $paises,
-                                    'default' => 152
-                                ]);
-                            echo $this->Form->input('Entidade.provincia_nascimento',
-                                [
-                                    'div'     => 'col-sm-3 form-group',
-                                    'label'   => ['class' => 'control-label'],
-                                    'class'   => 'form-control',
-                                    'id'      => 'apelidoID',
-                                    'options' => $provincias
-                                ]);
-                            echo $this->Form->input('Entidade.cidade_nascimento',
-                                [
-                                    'div'     => 'col-sm-3 form-group',
-                                    'label'   => ['class' => 'control-label'],
-                                    'class'   => 'form-control',
-                                    'id'      => 'apelidoID',
-                                    'options' => $cidadeNascimentos
-                                ]);
+                                echo $this->Form->input('Entidade.nome_mae',
+                                        [
+                                                'div'   => 'col-sm-4 form-group',
+                                                'label' => ['class' => 'control-label'],
+                                                'class' => 'form-control',
+                                                'id'    => 'nomeMaeID',
+                                        ]);
+                                echo $this->Html->div('clearfix', '');
+                                echo $this->Form->input('Entidade.naturalidade',
+                                        [
+                                                'div'   => 'col-sm-3 form-group',
+                                                'label' => ['class' => 'control-label'],
+                                                'class' => 'form-control',
+                                                'id'    => 'naturalidadeID',
+                                        ]);
+                                echo $this->Form->input('Entidade.pais_nascimento',
+                                        [
+                                                'div'     => 'col-sm-3 form-group',
+                                                'label'   => ['class' => 'control-label'],
+                                                'class'   => 'form-control',
+                                                'id'      => 'paisNascimentoID',
+                                                'options' => $paises,
+                                                'default' => 152,
+                                        ]);
+                                echo $this->Form->input('Entidade.provincia_nascimento',
+                                        [
+                                                'div'     => 'col-sm-3 form-group',
+                                                'label'   => ['class' => 'control-label'],
+                                                'class'   => 'form-control',
+                                                'id'      => 'apelidoID',
+                                                'options' => $provincias,
+                                        ]);
+                                echo $this->Form->input('Entidade.cidade_nascimento',
+                                        [
+                                                'div'     => 'col-sm-3 form-group',
+                                                'label'   => ['class' => 'control-label'],
+                                                'class'   => 'form-control',
+                                                'id'      => 'apelidoID',
+                                                'options' => $cidadeNascimentos,
+                                        ]);
 
                             ?>
 
@@ -226,55 +226,67 @@ echo $this->Html->css('/assets/plugins/ckeditor/contents.css');
                                 <legend><?php echo __('Dados de Docencia') ?></legend>
                                 <div class="row">
                                     <?php
-                                    echo $this->Form->input('Docente.unidade_organica_id',
-                                        [
-                                            'div'     => 'col-sm-6 form-group',
-                                            'label'   => ['class' => 'control-label', 'text' => 'Unidade Organica'],
-                                            'class'   => 'form-control',
-                                            'id'      => 'unidadeOrganicaId',
-                                            'default' => $unidadeOrganicaId
-                                        ]);
+                                        echo $this->Form->input('Docente.unidade_organica_id',
+                                                [
+                                                        'div'     => 'col-sm-6 form-group',
+                                                        'label'   => [
+                                                                'class' => 'control-label',
+                                                                'text'  => 'Unidade Organica',
+                                                        ],
+                                                        'class'   => 'form-control',
+                                                        'id'      => 'unidadeOrganicaId',
+                                                        'default' => $unidadeOrganicaId,
+                                                ]);
 
-                                    echo $this->Form->input('Docente.data_ingresso',
-                                        [
-                                            'label'              => [
-                                                'class' => 'control-label',
-                                                'text'  => 'Data de Ingresso na Docencia'
-                                            ],
-                                            'div'                => 'col-sm-6 form-group',
-                                            'class'              => 'form-control date-picker',
-                                            'id'                 => 'dataIngresso',
-                                            'type'               => 'text',
-                                            'data-date-viewmode' => 'years',
-                                            'data-date-format'   => 'yyyy-mm-dd',
-                                            'between'            => $before,
-                                            'after'              => $after
-                                        ]);
+                                        echo $this->Form->input('Docente.data_ingresso',
+                                                [
+                                                        'label'              => [
+                                                                'class' => 'control-label',
+                                                                'text'  => 'Data de Ingresso na Docencia',
+                                                        ],
+                                                        'div'                => 'col-sm-6 form-group',
+                                                        'class'              => 'form-control date-picker',
+                                                        'id'                 => 'dataIngresso',
+                                                        'type'               => 'text',
+                                                        'data-date-viewmode' => 'years',
+                                                        'data-date-format'   => 'yyyy-mm-dd',
+                                                        'between'            => $before,
+                                                        'after'              => $after,
+                                                ]);
                                     ?>
                                 </div>
                                 <div class="row">
                                     <?php
-                                    echo $this->Form->input('Docente.docente_categoria_id',
-                                        [
-                                            'div'   => 'col-sm-4 form-group',
-                                            'label' => ['class' => 'control-label', 'text' => 'Categoria do Docente'],
-                                            'class' => 'form-control',
-                                            'id'    => 'docenteCategoriaId'
-                                        ]);
-                                    echo $this->Form->input('Docente.docente_funcao_id',
-                                        [
-                                            'div'   => 'col-sm-4 form-group',
-                                            'label' => ['class' => 'control-label', 'text' => 'Funcao do Docente'],
-                                            'class' => 'form-control',
-                                            'id'    => 'docenteFuncaoId'
-                                        ]);
-                                    echo $this->Form->input('Docente.regime_trabalho_id',
-                                        [
-                                            'div'   => 'col-sm-4 form-group',
-                                            'label' => ['class' => 'control-label', 'text' => 'Regime de Trabalho'],
-                                            'class' => 'form-control',
-                                            'id'    => 'regimeTrabalhoId'
-                                        ]);
+                                        echo $this->Form->input('Docente.docente_categoria_id',
+                                                [
+                                                        'div'   => 'col-sm-4 form-group',
+                                                        'label' => [
+                                                                'class' => 'control-label',
+                                                                'text'  => 'Categoria do Docente',
+                                                        ],
+                                                        'class' => 'form-control',
+                                                        'id'    => 'docenteCategoriaId',
+                                                ]);
+                                        echo $this->Form->input('Docente.docente_funcao_id',
+                                                [
+                                                        'div'   => 'col-sm-4 form-group',
+                                                        'label' => [
+                                                                'class' => 'control-label',
+                                                                'text'  => 'Funcao do Docente',
+                                                        ],
+                                                        'class' => 'form-control',
+                                                        'id'    => 'docenteFuncaoId',
+                                                ]);
+                                        echo $this->Form->input('Docente.regime_trabalho_id',
+                                                [
+                                                        'div'   => 'col-sm-4 form-group',
+                                                        'label' => [
+                                                                'class' => 'control-label',
+                                                                'text'  => 'Regime de Trabalho',
+                                                        ],
+                                                        'class' => 'form-control',
+                                                        'id'    => 'regimeTrabalhoId',
+                                                ]);
                                     ?>
                                 </div>
                             </fieldset>
@@ -298,104 +310,116 @@ echo $this->Html->css('/assets/plugins/ckeditor/contents.css');
                                 <legend><?php echo __('Contactos') ?></legend>
                                 <div class="row">
                                     <?php
-                                    echo $this->Form->input('EntidadeContacto.11',
-                                        [
-                                            'div'              => 'col-sm-4 form-group',
-                                            'label'            => [
-                                                'class' => 'control-label',
-                                                'text'  => 'Pais Onde Mora'
-                                            ],
-                                            'class'            => 'form-control',
-                                            'id'               => 'paisMorada',
-                                            'options'          => $paises,
-                                            'default'          => 152,
-                                            'data-placeholder' => "Seleccione...",
-                                            'empty'            => true
-                                        ]);
-                                    echo $this->Form->input('EntidadeContacto.10',
-                                        [
-                                            'div'              => 'col-sm-4 form-group',
-                                            'label'            => [
-                                                'class' => 'control-label',
-                                                'text'  => 'Provincia onde Mora'
-                                            ],
-                                            'class'            => 'form-control',
-                                            'id'               => 'provinciaMorada',
-                                            'options'          => $provincias,
-                                            'data-placeholder' => "Seleccione...",
-                                            'empty'            => true
-                                        ]);
-                                    echo $this->Form->input('EntidadeContacto.9',
-                                        [
-                                            'div'              => 'col-sm-4 form-group',
-                                            'label'            => [
-                                                'class' => 'control-label',
-                                                'text'  => 'Cidade Onde Mora'
-                                            ],
-                                            'class'            => 'form-control',
-                                            'id'               => 'cidadeMorada',
-                                            'options'          => $cidadeNascimentos,
-                                            'data-placeholder' => "Seleccione...",
-                                            'empty'            => true
-                                        ]);
+                                        echo $this->Form->input('EntidadeContacto.11',
+                                                [
+                                                        'div'              => 'col-sm-4 form-group',
+                                                        'label'            => [
+                                                                'class' => 'control-label',
+                                                                'text'  => 'Pais Onde Mora',
+                                                        ],
+                                                        'class'            => 'form-control',
+                                                        'id'               => 'paisMorada',
+                                                        'options'          => $paises,
+                                                        'default'          => 152,
+                                                        'data-placeholder' => "Seleccione...",
+                                                        'empty'            => true,
+                                                ]);
+                                        echo $this->Form->input('EntidadeContacto.10',
+                                                [
+                                                        'div'              => 'col-sm-4 form-group',
+                                                        'label'            => [
+                                                                'class' => 'control-label',
+                                                                'text'  => 'Provincia onde Mora',
+                                                        ],
+                                                        'class'            => 'form-control',
+                                                        'id'               => 'provinciaMorada',
+                                                        'options'          => $provincias,
+                                                        'data-placeholder' => "Seleccione...",
+                                                        'empty'            => true,
+                                                ]);
+                                        echo $this->Form->input('EntidadeContacto.9',
+                                                [
+                                                        'div'              => 'col-sm-4 form-group',
+                                                        'label'            => [
+                                                                'class' => 'control-label',
+                                                                'text'  => 'Cidade Onde Mora',
+                                                        ],
+                                                        'class'            => 'form-control',
+                                                        'id'               => 'cidadeMorada',
+                                                        'options'          => $cidadeNascimentos,
+                                                        'data-placeholder' => "Seleccione...",
+                                                        'empty'            => true,
+                                                ]);
 
                                     ?>
                                 </div>
                                 <div class="row">
                                     <?php
-                                    echo $this->Form->input('EntidadeContacto.6',
-                                        [
-                                            'div'   => 'col-sm-3 form-group',
-                                            'label' => ['class' => 'control-label', 'text' => 'Bairro'],
-                                            'class' => 'form-control',
-                                            'id'    => 'bairroMorada2',
-                                            'type'  => 'text'
-                                        ]);
-                                    echo $this->Form->input('EntidadeContacto.5',
-                                        [
-                                            'div'   => 'col-sm-3 form-group',
-                                            'label' => ['class' => 'control-label', 'text' => 'Avenida/Rua'],
-                                            'class' => 'form-control',
-                                            'id'    => 'avenidaMorada'
-                                        ]);
+                                        echo $this->Form->input('EntidadeContacto.6',
+                                                [
+                                                        'div'   => 'col-sm-3 form-group',
+                                                        'label' => ['class' => 'control-label', 'text' => 'Bairro'],
+                                                        'class' => 'form-control',
+                                                        'id'    => 'bairroMorada2',
+                                                        'type'  => 'text',
+                                                ]);
+                                        echo $this->Form->input('EntidadeContacto.5',
+                                                [
+                                                        'div'   => 'col-sm-3 form-group',
+                                                        'label' => [
+                                                                'class' => 'control-label',
+                                                                'text'  => 'Avenida/Rua',
+                                                        ],
+                                                        'class' => 'form-control',
+                                                        'id'    => 'avenidaMorada',
+                                                ]);
 
-                                    echo $this->Form->input('EntidadeContacto.7',
-                                        [
-                                            'div'   => 'col-sm-3 form-group',
-                                            'label' => ['class' => 'control-label', 'text' => 'Quarteirao'],
-                                            'class' => 'form-control',
-                                            'id'    => 'quarteiraoMorada'
-                                        ]);
-                                    echo $this->Form->input('EntidadeContacto.8',
-                                        [
-                                            'div'   => 'col-sm-3 form-group',
-                                            'label' => ['class' => 'control-label', 'text' => 'Caixa Postal'],
-                                            'class' => 'form-control',
-                                            'id'    => 'caixaPostalMorada'
-                                        ]);
+                                        echo $this->Form->input('EntidadeContacto.7',
+                                                [
+                                                        'div'   => 'col-sm-3 form-group',
+                                                        'label' => ['class' => 'control-label', 'text' => 'Quarteirao'],
+                                                        'class' => 'form-control',
+                                                        'id'    => 'quarteiraoMorada',
+                                                ]);
+                                        echo $this->Form->input('EntidadeContacto.8',
+                                                [
+                                                        'div'   => 'col-sm-3 form-group',
+                                                        'label' => [
+                                                                'class' => 'control-label',
+                                                                'text'  => 'Caixa Postal',
+                                                        ],
+                                                        'class' => 'form-control',
+                                                        'id'    => 'caixaPostalMorada',
+                                                ]);
 
                                     ?>
                                 </div>
                                 <div class="row">
                                     <?php
 
-                                    echo $this->Form->input('EntidadeContacto.2',
-                                        [
-                                            'div'      => 'col-sm-6 form-group required',
-                                            'label'    => ['class' => 'control-label', 'text' => 'Telemovel'],
-                                            'class'    => 'form-control',
-                                            'id'       => 'telemovel',
-                                            'required' => 'required'
-                                        ]);
+                                        echo $this->Form->input('EntidadeContacto.2',
+                                                [
+                                                        'div'      => 'col-sm-6 form-group required',
+                                                        'label'    => [
+                                                                'class' => 'control-label',
+                                                                'text'  => 'Telemovel',
+                                                        ],
+                                                        'class'    => 'form-control',
+                                                        'id'       => 'telemovel',
+                                                        'required' => 'required',
+                                                ]);
 
-                                    echo $this->Form->input('EntidadeContacto.1',
-                                        [
-                                            'div'      => 'col-sm-6 form-group required',
-                                            'label'    => ['class' => 'control-label', 'text' => 'Email Pessoal'],
-                                            'class'    => 'form-control',
-                                            'id'       => 'emailPessoal',
-                                            'required' => 'required'
-                                        ]);
+                                        echo $this->Form->input('EntidadeContacto.1',
+                                                [
+                                                        'div'      => 'col-sm-6 form-group required',
+                                                        'label'    => [
+                                                                'class' => 'control-label',
+                                                                'text'  => 'Email Pessoal',
+                                                        ],
+                                                        'class'    => 'form-control',
+                                                        'id'       => 'emailPessoal',
+                                                        'required' => 'required',
+                                                ]);
                                     ?>
                                 </div>
                             </fieldset>
@@ -422,63 +446,72 @@ echo $this->Html->css('/assets/plugins/ckeditor/contents.css');
 
                                 <div class="row">
                                     <?php
-                                    echo $this->Form->input('EntidadeIdentificacao.documento_identificacao_id',
-                                        [
-                                            'div'     => 'col-sm-4 form-group',
-                                            'label'   => ['class' => 'control-label', 'text' => 'Tipo de Documento'],
-                                            'class'   => 'form-control',
-                                            'id'      => 'documentoIdentificacaoId',
-                                            'options' => $documentoIdentificacaos
-                                        ]);
-                                    echo $this->Form->input('EntidadeIdentificacao.numero',
-                                        [
-                                            'div'   => 'col-sm-4 form-group',
-                                            'label' => ['class' => 'control-label', 'text' => 'Numero de Documento'],
-                                            'class' => 'form-control',
-                                            'id'    => 'numeroDocumentoIdentificacao'
-                                        ]);
-                                    echo $this->Form->input('EntidadeIdentificacao.local_emissao',
-                                        [
-                                            'div'   => 'col-sm-4 form-group',
-                                            'label' => ['class' => 'control-label', 'text' => 'Local de Emissão'],
-                                            'class' => 'form-control',
-                                            'id'    => 'localEmissaoDocumentoIdentificacao',
-                                            'type'  => 'text'
-                                        ]);
+                                        echo $this->Form->input('EntidadeIdentificacao.documento_identificacao_id',
+                                                [
+                                                        'div'     => 'col-sm-4 form-group',
+                                                        'label'   => [
+                                                                'class' => 'control-label',
+                                                                'text'  => 'Tipo de Documento',
+                                                        ],
+                                                        'class'   => 'form-control',
+                                                        'id'      => 'documentoIdentificacaoId',
+                                                        'options' => $documentoIdentificacaos,
+                                                ]);
+                                        echo $this->Form->input('EntidadeIdentificacao.numero',
+                                                [
+                                                        'div'   => 'col-sm-4 form-group',
+                                                        'label' => [
+                                                                'class' => 'control-label',
+                                                                'text'  => 'Numero de Documento',
+                                                        ],
+                                                        'class' => 'form-control',
+                                                        'id'    => 'numeroDocumentoIdentificacao',
+                                                ]);
+                                        echo $this->Form->input('EntidadeIdentificacao.local_emissao',
+                                                [
+                                                        'div'   => 'col-sm-4 form-group',
+                                                        'label' => [
+                                                                'class' => 'control-label',
+                                                                'text'  => 'Local de Emissão',
+                                                        ],
+                                                        'class' => 'form-control',
+                                                        'id'    => 'localEmissaoDocumentoIdentificacao',
+                                                        'type'  => 'text',
+                                                ]);
                                     ?>
                                 </div>
                                 <div class="row">
                                     <?php
-                                    echo $this->Form->input('EntidadeIdentificacao.data_emissao',
-                                        [
-                                            'label'              => [
-                                                'class' => 'control-label',
-                                                'text'  => 'Data de Emissao'
-                                            ],
-                                            'div'                => 'col-sm-4 form-group',
-                                            'class'              => 'form-control date-picker',
-                                            'id'                 => 'dataEmissaoDocumentoIdentificacao',
-                                            'type'               => 'text',
-                                            'data-date-viewmode' => 'years',
-                                            'data-date-format'   => 'yyyy-mm-dd',
-                                            'between'            => $before,
-                                            'after'              => $after
-                                        ]);
-                                    echo $this->Form->input('EntidadeIdentificacao.data_validade',
-                                        [
-                                            'label'              => [
-                                                'class' => 'control-label',
-                                                'text'  => 'Data de Validade'
-                                            ],
-                                            'div'                => 'col-sm-6 form-group',
-                                            'class'              => 'form-control date-picker',
-                                            'id'                 => 'dataValidadeDocumentoIdentificacao',
-                                            'type'               => 'text',
-                                            'data-date-viewmode' => 'years',
-                                            'data-date-format'   => 'yyyy-mm-dd',
-                                            'between'            => $before,
-                                            'after'              => $after
-                                        ]);
+                                        echo $this->Form->input('EntidadeIdentificacao.data_emissao',
+                                                [
+                                                        'label'              => [
+                                                                'class' => 'control-label',
+                                                                'text'  => 'Data de Emissao',
+                                                        ],
+                                                        'div'                => 'col-sm-4 form-group',
+                                                        'class'              => 'form-control date-picker',
+                                                        'id'                 => 'dataEmissaoDocumentoIdentificacao',
+                                                        'type'               => 'text',
+                                                        'data-date-viewmode' => 'years',
+                                                        'data-date-format'   => 'yyyy-mm-dd',
+                                                        'between'            => $before,
+                                                        'after'              => $after,
+                                                ]);
+                                        echo $this->Form->input('EntidadeIdentificacao.data_validade',
+                                                [
+                                                        'label'              => [
+                                                                'class' => 'control-label',
+                                                                'text'  => 'Data de Validade',
+                                                        ],
+                                                        'div'                => 'col-sm-6 form-group',
+                                                        'class'              => 'form-control date-picker',
+                                                        'id'                 => 'dataValidadeDocumentoIdentificacao',
+                                                        'type'               => 'text',
+                                                        'data-date-viewmode' => 'years',
+                                                        'data-date-format'   => 'yyyy-mm-dd',
+                                                        'between'            => $before,
+                                                        'after'              => $after,
+                                                ]);
                                     ?>
                                 </div>
                             </fieldset>
@@ -729,9 +762,9 @@ echo $this->Html->css('/assets/plugins/ckeditor/contents.css');
                             <div class="form-group">
 
                                 <?php echo $this->Form->end([
-                                    'label' => __('GRAVAR', true),
-                                    'class' => 'btn btn-success finish-step btn-block',
-                                    'div'   => 'col-sm-2 col-sm-offset-8'
+                                        'label' => __('GRAVAR', true),
+                                        'class' => 'btn btn-success finish-step btn-block',
+                                        'div'   => 'col-sm-2 col-sm-offset-8',
                                 ]); ?>
 
                             </div>
@@ -747,119 +780,122 @@ echo $this->Html->css('/assets/plugins/ckeditor/contents.css');
 </div>
 
 <?php
-$this->Js->get('#provinciaNascimento')->event('change', $this->Js->request([
-    'controller' => 'ajax',
-    'action'     => 'get_cidades_by_provincia',
-    'faculdade'  => false
-], [
-    'update'         => '#cidadeNascimento',
-    'complete'       => '$("#cidadeNascimento").trigger("liszt:updated")',
-    'async'          => true,
-    'method'         => 'post',
-    'dataExpression' => true,
-    'data'           => $this->Js->serializeForm([
-        'isForm' => true,
-        'inline' => true
+    $this->Js->get('#provinciaNascimento')->event('change', $this->Js->request([
+            'controller' => 'ajax',
+            'action'     => 'get_cidades_by_provincia',
+            'faculdade'  => false,
+    ], [
+            'update'         => '#cidadeNascimento',
+            'complete'       => '$("#cidadeNascimento").trigger("liszt:updated")',
+            'async'          => true,
+            'method'         => 'post',
+            'dataExpression' => true,
+            'data'           => $this->Js->serializeForm([
+                    'isForm' => true,
+                    'inline' => true,
+            ]),
     ])
-])
-);
+    );
 
-$this->Js->get('#provinciaOrigem')->event('change', $this->Js->request([
-    'controller' => 'ajax',
-    'action'     => 'get_cidades_by_provincia',
-    'faculdade'  => false
-], [
-    'update'         => '#cidadeOrigem',
-    'complete'       => '$("#cidadeOrigem").trigger("liszt:updated")',
-    'async'          => true,
-    'method'         => 'post',
-    'dataExpression' => true,
-    'data'           => $this->Js->serializeForm([
-        'isForm' => true,
-        'inline' => true
+    $this->Js->get('#provinciaOrigem')->event('change', $this->Js->request([
+            'controller' => 'ajax',
+            'action'     => 'get_cidades_by_provincia',
+            'faculdade'  => false,
+    ], [
+            'update'         => '#cidadeOrigem',
+            'complete'       => '$("#cidadeOrigem").trigger("liszt:updated")',
+            'async'          => true,
+            'method'         => 'post',
+            'dataExpression' => true,
+            'data'           => $this->Js->serializeForm([
+                    'isForm' => true,
+                    'inline' => true,
+            ]),
     ])
-])
-);
-$this->Js->get('#provinciaMorada')->event('change', $this->Js->request([
-    'controller' => 'ajax',
-    'action'     => 'get_cidades_by_provincia',
-    'faculdade'  => false
-], [
-    'update'         => '#cidadeMorada',
-    'complete'       => '$("#cidadeMorada").trigger("liszt:updated")',
-    'async'          => true,
-    'method'         => 'post',
-    'dataExpression' => true,
-    'data'           => $this->Js->serializeForm([
-        'isForm' => true,
-        'inline' => true
+    );
+    $this->Js->get('#provinciaMorada')->event('change', $this->Js->request([
+            'controller' => 'ajax',
+            'action'     => 'get_cidades_by_provincia',
+            'faculdade'  => false,
+    ], [
+            'update'         => '#cidadeMorada',
+            'complete'       => '$("#cidadeMorada").trigger("liszt:updated")',
+            'async'          => true,
+            'method'         => 'post',
+            'dataExpression' => true,
+            'data'           => $this->Js->serializeForm([
+                    'isForm' => true,
+                    'inline' => true,
+            ]),
     ])
-])
-);
-$this->Js->get('#cidadeOrigem')->event('change', $this->Js->request([
-    'controller' => 'ajax',
-    'action'     => 'get_escolas_by_distrito',
-    'faculdade'  => false
-], [
-    'update'         => '#escolaOrigem',
-    'complete'       => '$("#escolaOrigem").trigger("liszt:updated")',
-    'async'          => true,
-    'method'         => 'post',
-    'dataExpression' => true,
-    'data'           => $this->Js->serializeForm([
-        'isForm' => true,
-        'inline' => true
+    );
+    $this->Js->get('#cidadeOrigem')->event('change', $this->Js->request([
+            'controller' => 'ajax',
+            'action'     => 'get_escolas_by_distrito',
+            'faculdade'  => false,
+    ], [
+            'update'         => '#escolaOrigem',
+            'complete'       => '$("#escolaOrigem").trigger("liszt:updated")',
+            'async'          => true,
+            'method'         => 'post',
+            'dataExpression' => true,
+            'data'           => $this->Js->serializeForm([
+                    'isForm' => true,
+                    'inline' => true,
+            ]),
     ])
-])
-);
-$this->Js->get('#unidadeOrganica')->event('change', $this->Js->request([
-    'controller' => 'ajax',
-    'action'     => 'get_cursos_by_unidade_organica',
-    'faculdade'  => false
-], [
-    'update'         => '#curso',
-    'complete'       => '$("#curso").trigger("liszt:updated")',
-    'async'          => true,
-    'method'         => 'post',
-    'dataExpression' => true,
-    'data'           => $this->Js->serializeForm([
-        'isForm' => true,
-        'inline' => true
+    );
+    $this->Js->get('#unidadeOrganica')->event('change', $this->Js->request([
+            'controller' => 'ajax',
+            'action'     => 'get_cursos_by_unidade_organica',
+            'faculdade'  => false,
+    ], [
+            'update'         => '#curso',
+            'complete'       => '$("#curso").trigger("liszt:updated")',
+            'async'          => true,
+            'method'         => 'post',
+            'dataExpression' => true,
+            'data'           => $this->Js->serializeForm([
+                    'isForm' => true,
+                    'inline' => true,
+            ]),
     ])
-])
-);
+    );
 ?>
 <?php
-echo $this->Html->script('/assets/plugins/jquery-validation/dist/jquery.validate.min', ['block' => 'scriptBottom']);
-echo $this->Html->script('/assets/plugins/jQuery-Smart-Wizard/js/jquery.smartWizard', ['block' => 'scriptBottom']);
+    echo $this->Html->script('/assets/plugins/jquery-validation/dist/jquery.validate.min', ['block' => 'scriptBottom']);
+    echo $this->Html->script('/assets/plugins/jQuery-Smart-Wizard/js/jquery.smartWizard', ['block' => 'scriptBottom']);
 
 
-echo $this->Html->script('/assets/plugins/jquery-inputlimiter/jquery.inputlimiter.1.3.1.min',
-    ['block' => 'scriptBottom']);
-echo $this->Html->script('/assets/plugins/autosize/jquery.autosize.min', ['block' => 'scriptBottom']);
-echo $this->Html->script('/assets/plugins/autosize/jquery.autosize.min', ['block' => 'scriptBottom']);
-echo $this->Html->script('/assets/plugins/select2/select2.min', ['block' => 'scriptBottom']);
-echo $this->Html->script('/assets/plugins/jquery.maskedinput/src/jquery.maskedinput', ['block' => 'scriptBottom']);
-echo $this->Html->script('/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker', ['block' => 'scriptBottom']);
-echo $this->Html->script('/assets/plugins/bootstrap-timepicker/js/bootstrap-timepicker.min',
-    ['block' => 'scriptBottom']);
-echo $this->Html->script('/assets/plugins/bootstrap-daterangepicker/moment.min', ['block' => 'scriptBottom']);
-echo $this->Html->script('/assets/plugins/bootstrap-daterangepicker/daterangepicker', ['block' => 'scriptBottom']);
-echo $this->Html->script('/assets/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker', ['block' => 'scriptBottom']);
-//echo $this->Html->script('/assets/plugins/bootstrap-colorpicker/js/commits', array('block' => 'scriptBottom'));
-echo $this->Html->script('/assets/plugins/jQuery-Tags-Input/jquery.tagsinput', ['block' => 'scriptBottom']);
-echo $this->Html->script('/assets/plugins/bootstrap-fileupload/bootstrap-fileupload.min', ['block' => 'scriptBottom']);
-echo $this->Html->script('/assets/plugins/summernote/build/summernote.min', ['block' => 'scriptBottom']);
-echo $this->Html->script('/assets/plugins/ckeditor/ckeditor', ['block' => 'scriptBottom']);
-echo $this->Html->script('/assets/plugins/ckeditor/adapters/jquery', ['block' => 'scriptBottom']);
-echo $this->Html->script(['/assets/plugins/jquery-ui/jquery.ui.widget'], ['block' => 'scriptBottom']);
-echo $this->Html->script(['/assets/plugins/jquery-ui/jquery.ui.position'], ['block' => 'scriptBottom']);
-echo $this->Html->script(['/assets/plugins/jquery-ui/jquery.ui.menu'], ['block' => 'scriptBottom']);
-echo $this->Html->script(['/assets/plugins/jquery-ui/jquery.ui.autocomplete'], ['block' => 'scriptBottom']);
-echo $this->Html->script('/assets/js/form-adicionar-docente-elements', ['block' => 'scriptBottom'],
-    ['block' => 'scriptBottom']);
-echo $this->Html->script('/assets/js/form-adicionar-docente-wizard', ['block' => 'scriptBottom'],
-    ['block' => 'scriptBottom']);
+    echo $this->Html->script('/assets/plugins/jquery-inputlimiter/jquery.inputlimiter.1.3.1.min',
+            ['block' => 'scriptBottom']);
+    echo $this->Html->script('/assets/plugins/autosize/jquery.autosize.min', ['block' => 'scriptBottom']);
+    echo $this->Html->script('/assets/plugins/autosize/jquery.autosize.min', ['block' => 'scriptBottom']);
+    echo $this->Html->script('/assets/plugins/select2/select2.min', ['block' => 'scriptBottom']);
+    echo $this->Html->script('/assets/plugins/jquery.maskedinput/src/jquery.maskedinput', ['block' => 'scriptBottom']);
+    echo $this->Html->script('/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker',
+            ['block' => 'scriptBottom']);
+    echo $this->Html->script('/assets/plugins/bootstrap-timepicker/js/bootstrap-timepicker.min',
+            ['block' => 'scriptBottom']);
+    echo $this->Html->script('/assets/plugins/bootstrap-daterangepicker/moment.min', ['block' => 'scriptBottom']);
+    echo $this->Html->script('/assets/plugins/bootstrap-daterangepicker/daterangepicker', ['block' => 'scriptBottom']);
+    echo $this->Html->script('/assets/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker',
+            ['block' => 'scriptBottom']);
+    //echo $this->Html->script('/assets/plugins/bootstrap-colorpicker/js/commits', array('block' => 'scriptBottom'));
+    echo $this->Html->script('/assets/plugins/jQuery-Tags-Input/jquery.tagsinput', ['block' => 'scriptBottom']);
+    echo $this->Html->script('/assets/plugins/bootstrap-fileupload/bootstrap-fileupload.min',
+            ['block' => 'scriptBottom']);
+    echo $this->Html->script('/assets/plugins/summernote/build/summernote.min', ['block' => 'scriptBottom']);
+    echo $this->Html->script('/assets/plugins/ckeditor/ckeditor', ['block' => 'scriptBottom']);
+    echo $this->Html->script('/assets/plugins/ckeditor/adapters/jquery', ['block' => 'scriptBottom']);
+    echo $this->Html->script(['/assets/plugins/jquery-ui/jquery.ui.widget'], ['block' => 'scriptBottom']);
+    echo $this->Html->script(['/assets/plugins/jquery-ui/jquery.ui.position'], ['block' => 'scriptBottom']);
+    echo $this->Html->script(['/assets/plugins/jquery-ui/jquery.ui.menu'], ['block' => 'scriptBottom']);
+    echo $this->Html->script(['/assets/plugins/jquery-ui/jquery.ui.autocomplete'], ['block' => 'scriptBottom']);
+    echo $this->Html->script('/assets/js/form-adicionar-docente-elements', ['block' => 'scriptBottom'],
+            ['block' => 'scriptBottom']);
+    echo $this->Html->script('/assets/js/form-adicionar-docente-wizard', ['block' => 'scriptBottom'],
+            ['block' => 'scriptBottom']);
 ?>
 
 
@@ -880,18 +916,18 @@ FormWizard.init();
 
 $( "#naturalidade2" ).autocomplete({
 source: "<?php echo $this->Html->url([
-    'controller' => 'ajax',
-    'action'     => 'get_naturalidades_autocomplete',
-    'faculdade'  => false
+        'controller' => 'ajax',
+        'action'     => 'get_naturalidades_autocomplete',
+        'faculdade'  => false,
 ]) ?>",
 minLength: 2,
 delay: 2
 });
 $( "#bairroMorada" ).autocomplete({
 source: "<?php echo $this->Html->url([
-    'controller' => 'ajax',
-    'action'     => 'get_bairros_autocomplete',
-    'faculdade'  => false
+        'controller' => 'ajax',
+        'action'     => 'get_bairros_autocomplete',
+        'faculdade'  => false,
 ]) ?>",
 minLength: 2,
 delay: 2

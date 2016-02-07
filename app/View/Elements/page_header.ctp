@@ -3,14 +3,14 @@
         <!-- start: PAGE TITLE & BREADCRUMB -->
         <?php
             echo $this->BreadCumbs->getCrumbList(['class' => 'breadcrumb'], [
-                'text'   => '<li>
+                    'text'   => '<li>
                             <i class="clip-home-3"></i>
                             <a href="#">
                                 Home
                             </a>
                         </li>',
-                'url'    => '/',
-                'escape' => false
+                    'url'    => '/',
+                    'escape' => false,
             ]);
         ?>
 

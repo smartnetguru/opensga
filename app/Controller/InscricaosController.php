@@ -59,8 +59,8 @@
                     'conditions' => ['DisciplinaPlanoEstudo.plano_estudo_id' => $aluno['Aluno']['plano_estudo_id']],
                     'order'      => [
                         'DisciplinaPlanoEstudo.ano_curricular',
-                        'DisciplinaPlanoEstudo.semestre_curricular'
-                    ]
+                        'DisciplinaPlanoEstudo.semestre_curricular',
+                    ],
                 ]);
 
             foreach ($disciplinaPlanoEstudos as $k => $disciplinaPlanoEstudo) {
@@ -70,23 +70,23 @@
                         'alias'      => 'Turma',
                         'type'       => 'inner',
                         'conditions' => [
-                            'Inscricao.turma_id = Turma.id'
-                        ]
+                            'Inscricao.turma_id = Turma.id',
+                        ],
                     ],
                     [
                         'table'      => 'ano_lectivos',
                         'alias'      => 'AnoLectivo',
                         'type'       => 'inner',
                         'conditions' => [
-                            'Turma.ano_lectivo_id = AnoLectivo.id'
-                        ]
-                    ]
+                            'Turma.ano_lectivo_id = AnoLectivo.id',
+                        ],
+                    ],
                 ];
 
                 $options['conditions'] = [
                     'Inscricao.aluno_id'    => $aluno['Aluno']['id'],
                     'Turma.disciplina_id'   => $disciplinaPlanoEstudo['DisciplinaPlanoEstudo']['disciplina_id'],
-                    'Turma.plano_estudo_id' => $aluno['Aluno']['plano_estudo_id']
+                    'Turma.plano_estudo_id' => $aluno['Aluno']['plano_estudo_id'],
                 ];
                 $options['order'] = 'AnoLectivo.ano ASC';
                 $options['fields'] = '*';
@@ -104,8 +104,8 @@
                 'conditions' => [
                     'aluno_id'     => $aluno['Aluno']['id'],
                     'curso_id'     => $aluno['Aluno']['curso_id'],
-                    'ano_ingresso' => $aluno['Aluno']['ano_ingresso']
-                ]
+                    'ano_ingresso' => $aluno['Aluno']['ano_ingresso'],
+                ],
             ]);
             if (empty($historicoCurso)) {
                 throw new \Cake\Network\Exception\BadRequestException('Criar Historico Urgente' . $alunoId);
@@ -176,7 +176,7 @@
             $this->Inscricao->contain([
                 'Aluno' => ['Entidade'],
                 'Turma' => ['Curso'],
-                'EstadoInscricao'
+                'EstadoInscricao',
             ]);
             $inscricao = $this->Inscricao->findById($inscricaoId);
             if (!empty($inscricao)) {
@@ -195,7 +195,7 @@
                     $this->redirect([
                         'controller' => 'inscricaos',
                         'action'     => 'ver_inscricoes_aluno',
-                        $aluno['Aluno']['id']
+                        $aluno['Aluno']['id'],
                     ]);
                 } else {
                     $this->Flash->error('Problemas ao Actualizar a Inscricao. Verifique os dados e tente novamente');
@@ -224,7 +224,7 @@
             $this->Inscricao->Aluno->contain([
                 'Entidade' => ['User'],
                 'PlanoEstudo',
-                'Curso'    => ['UnidadeOrganica']
+                'Curso'    => ['UnidadeOrganica'],
             ]);
             $aluno = $this->Inscricao->Aluno->find('first', ['conditions' => ['Entidade.user_id' => $userId]]);
             if (empty($aluno)) {
@@ -234,9 +234,9 @@
             $this->Inscricao->contain([
                 'Turma' => [
                     'Disciplina',
-                    'AnoLectivo'
+                    'AnoLectivo',
                 ],
-                'TipoInscricao'
+                'TipoInscricao',
             ]);
             $inscricoesActivas = $this->Inscricao->find('all',
                 [
@@ -244,17 +244,17 @@
                         'Inscricao.estado_inscricao_id' => $this->Inscricao->estadoInscricoesAbertas,
                         'Inscricao.aluno_id'            => $aluno['Aluno']['id'],
                         'Turma.ano_lectivo_id'          => Configure::read('OpenSGA.ano_lectivo_id'),
-                        'Turma.semestre_lectivo_id'     => Configure::read('OpenSGA.semestre_lectivo_id')
+                        'Turma.semestre_lectivo_id'     => Configure::read('OpenSGA.semestre_lectivo_id'),
                     ],
-                    'order'      => 'Inscricao.id DESC'
+                    'order'      => 'Inscricao.id DESC',
                 ]);
 
             $this->Inscricao->contain([
                 'Turma' => [
                     'Disciplina',
-                    'AnoLectivo'
+                    'AnoLectivo',
                 ],
-                'TipoInscricao'
+                'TipoInscricao',
             ]);
             $inscricoesAbertas = $this->Inscricao->find('all',
                 [
@@ -264,26 +264,26 @@
                         'OR'                            => [
                             [
                                 'Turma.ano_lectivo_id NOT'      => Configure::read('OpenSGA.ano_lectivo_id'),
-                                'Turma.semestre_lectivo_id NOT' => Configure::read('OpenSGA.semestre_lectivo_id')
+                                'Turma.semestre_lectivo_id NOT' => Configure::read('OpenSGA.semestre_lectivo_id'),
                             ],
                             [
                                 'Turma.ano_lectivo_id'          => Configure::read('OpenSGA.ano_lectivo_id'),
-                                'Turma.semestre_lectivo_id NOT' => Configure::read('OpenSGA.semestre_lectivo_id')
-                            ]
+                                'Turma.semestre_lectivo_id NOT' => Configure::read('OpenSGA.semestre_lectivo_id'),
+                            ],
 
 
-                        ]
+                        ],
 
                     ],
-                    'order'      => 'Inscricao.id DESC'
+                    'order'      => 'Inscricao.id DESC',
                 ]);
 
             $this->Inscricao->contain([
                 'Turma' => [
                     'Disciplina',
-                    'AnoLectivo'
+                    'AnoLectivo',
                 ],
-                'TipoInscricao'
+                'TipoInscricao',
             ]);
             $cadeirasFeitas = $this->Inscricao->find('all',
                 [
@@ -291,7 +291,7 @@
                         'Inscricao.estado_inscricao_id' => [4, 5, 6, 13],
                         'Inscricao.aluno_id'            => $aluno['Aluno']['id'],
                     ],
-                    'order'      => 'Inscricao.id DESC'
+                    'order'      => 'Inscricao.id DESC',
                 ]);
             $anoLectivo = $this->Inscricao->Matricula->AnoLectivo->findByAno(Configure::read('OpenSGA.ano_lectivo'));
 
@@ -336,7 +336,7 @@
             $this->Inscricao->Aluno->contain([
                 'Entidade',
                 'PlanoEstudo',
-                'Curso' => ['UnidadeOrganica']
+                'Curso' => ['UnidadeOrganica'],
             ]);
             $aluno = $this->Inscricao->Aluno->findById($alunoId);
 
@@ -371,7 +371,7 @@
                 $this->redirect([
                     'controller' => 'inscricaos',
                     'action'     => 'valida_inscricao',
-                    '?'          => ['planoEstudoId' => $planoEstudoId, 'isExterno' => $isExterno]
+                    '?'          => ['planoEstudoId' => $planoEstudoId, 'isExterno' => $isExterno],
                 ]);
             }
 
@@ -407,7 +407,7 @@
             $this->Inscricao->Aluno->contain([
                 'Entidade',
                 'PlanoEstudo',
-                'Curso' => ['UnidadeOrganica']
+                'Curso' => ['UnidadeOrganica'],
             ]);
             $aluno = $this->Inscricao->Aluno->findById($alunoId);
 
@@ -442,7 +442,7 @@
                 $this->redirect([
                     'controller' => 'inscricaos',
                     'action'     => 'valida_inscricao',
-                    '?'          => ['planoEstudoId' => $planoEstudoId, 'isExterno' => $isExterno]
+                    '?'          => ['planoEstudoId' => $planoEstudoId, 'isExterno' => $isExterno],
                 ]);
             }
 
@@ -496,7 +496,7 @@
                 $this->redirect([
                     'action'    => 'ver_inscricoes_aluno',
                     $inscricao['Inscricao']['aluno_id'],
-                    'faculdade' => true
+                    'faculdade' => true,
                 ]);
             }
             $this->Session->setFlash(__('Problemas ao apagar a inscricao. Tente novamente'), 'default',
@@ -504,7 +504,7 @@
             $this->redirect([
                 'action'    => 'ver_inscricoes_aluno',
                 $inscricao['Inscricao']['aluno_id'],
-                'faculdade' => true
+                'faculdade' => true,
             ]);
 
             debug($this->request->data);
@@ -598,14 +598,14 @@
                 'conditions' => [
                     'Curso.unidade_organica_id' => $unidadeOrganicaId,
                     //'Curso.estado_objecto_id NOT'=>2
-                ]
+                ],
             ]);
             $turmasFaculdade = $this->Inscricao->Turma->find('list', [
                 'conditions' => [
                     'Curso.unidade_organica_id' => $unidadeOrganicaId,
                     'Turma.estado_turma_id'     => 1,
 
-                ]
+                ],
             ]);
             $turmasFilter = array_keys($turmasFaculdade);
             $conditions['Inscricao.turma_id'] = $turmasFilter;
@@ -616,8 +616,8 @@
                     $turmasFaculdade = $this->Inscricao->Turma->find('list', [
                         'conditions' => [
                             'Turma.curso_id'        => $this->request->data['Inscricao']['curso_id'],
-                            'Turma.estado_turma_id' => 1
-                        ]
+                            'Turma.estado_turma_id' => 1,
+                        ],
                     ]);
                 }
                 if ($this->request->data['Inscricao']['turma_id'] != '') {
@@ -633,17 +633,17 @@
                 'conditions' => $conditions,
                 'contain'    => [
                     'Aluno' => [
-                        'Entidade'
+                        'Entidade',
                     ],
                     'Turma' => [
                         'Curso',
                         'Disciplina',
                         'AnoLectivo',
-                        'SemestreLectivo'
+                        'SemestreLectivo',
                     ],
-                    'EstadoInscricao'
+                    'EstadoInscricao',
                 ],
-                'order'      => 'Inscricao.modified Desc'
+                'order'      => 'Inscricao.modified Desc',
             ];
             $inscricaos = $this->paginate();
             $this->set(compact('inscricaos', 'turmasFaculdade', 'cursosFaculdade'));
@@ -678,7 +678,7 @@
             $this->Inscricao->Aluno->contain([
                 'Entidade',
                 'PlanoEstudo',
-                'Curso' => ['UnidadeOrganica']
+                'Curso' => ['UnidadeOrganica'],
             ]);
 
             if (empty($planoEstudoId)) {
@@ -700,14 +700,14 @@
             //Primeiro vemos se ainda nao se matriculou no ano lectivo em questao
 
             $this->Inscricao->contain([
-                'Turma'
+                'Turma',
             ]);
             $inscricoesActivas = $this->Inscricao->find('all', [
                 'conditions' => [
                     'Inscricao.aluno_id'        => $alunoId,
                     'Turma.ano_lectivo_id'      => Configure::read('OpenSGA.ano_lectivo_id'),
-                    'Turma.semestre_lectivo_id' => Configure::read('OpenSGA.semestre_lectivo_id')
-                ]
+                    'Turma.semestre_lectivo_id' => Configure::read('OpenSGA.semestre_lectivo_id'),
+                ],
             ]);
             if (!empty($inscricoesActivas)) {
                 $this->Session->setFlash(__('Este Aluno já fez inscrições neste ano. As cadeiras seguintes serão adicionadas ás inscrições anteriores, e o valor da inscrição será recalculado'),
@@ -717,7 +717,7 @@
                     'action'     => 'adicionar_cadeiras_inscricao',
                     $alunoId,
                     $matriculaId,
-                    '?'          => ['planoEstudoId' => $planoEstudoId]
+                    '?'          => ['planoEstudoId' => $planoEstudoId],
                 ]);
             }
             if ($this->request->is('post') || $this->request->is('put')) {
@@ -738,7 +738,7 @@
                 $this->redirect([
                     'controller' => 'inscricaos',
                     'action'     => 'valida_inscricao',
-                    '?'          => ['isExterno' => $isExterno, 'planoEstudoId' => $planoEstudoId]
+                    '?'          => ['isExterno' => $isExterno, 'planoEstudoId' => $planoEstudoId],
                 ]);
             }
 
@@ -773,7 +773,7 @@
             $this->Inscricao->Aluno->contain([
                 'Entidade',
                 'PlanoEstudo',
-                'Curso' => ['UnidadeOrganica']
+                'Curso' => ['UnidadeOrganica'],
             ]);
             $aluno = $this->Inscricao->Aluno->findById($aluno_id);
 
@@ -787,14 +787,14 @@
             //Primeiro vemos se ainda nao se inscreveu no ano lectivo em questao
 
             $this->Inscricao->contain([
-                'Turma'
+                'Turma',
             ]);
             $inscricoes_activas = $this->Inscricao->find('all', [
                     'conditions' => [
                         'Inscricao.aluno_id'        => $aluno_id,
                         'Turma.ano_lectivo_id'      => $anoLectivo['AnoLectivo']['id'],
-                        'Turma.semestre_lectivo_id' => $semestreLectivo['SemestreLectivo']['id']
-                    ]
+                        'Turma.semestre_lectivo_id' => $semestreLectivo['SemestreLectivo']['id'],
+                    ],
                 ]
             );
             if (!empty($inscricoes_activas)) {
@@ -804,7 +804,7 @@
                     'controller' => 'inscricaos',
                     'action'     => 'adicionar_cadeiras_inscricao',
                     $aluno_id,
-                    $matricula_id
+                    $matricula_id,
                 ]);
             }
             if ($this->request->is('post') || $this->request->is('put')) {
@@ -822,8 +822,8 @@
                                     'ano_lectivo_id'      => $anoLectivo['AnoLectivo']['id'],
                                     'semestre_lectivo_id' => $semestreLectivo['SemestreLectivo']['id'],
                                     'curso_id'            => $planoEstudo['PlanoEstudo']['id'],
-                                    'plano_estudo_id'     => $planoEstudo['PlanoEstudo']['id']
-                                ]
+                                    'plano_estudo_id'     => $planoEstudo['PlanoEstudo']['id'],
+                                ],
 
                             ]);
                             if (empty($turmaExiste)) {
@@ -831,7 +831,7 @@
                                 $disciplinaPlanoEstudo = $this->Inscricao->Turma->PlanoEstudo->DisciplinaPlanoEstudo->find('first',
                                     [
                                         'disciplina_id'   => $v,
-                                        'plano_estudo_id' => $planoEstudoId
+                                        'plano_estudo_id' => $planoEstudoId,
                                     ]);
 
                                 $turma = [];
@@ -900,7 +900,7 @@
             $this->Inscricao->Aluno->contain([
                 'Entidade',
                 'PlanoEstudo',
-                'Curso' => ['UnidadeOrganica']
+                'Curso' => ['UnidadeOrganica'],
             ]);
             $aluno = $this->Inscricao->Aluno->findById($aluno_id);
 
@@ -915,14 +915,14 @@
             //Primeiro vemos se ainda nao se matriculou no ano lectivo em questao
 
             $this->Inscricao->contain([
-                'Turma'
+                'Turma',
             ]);
             $inscricoes_activas = $this->Inscricao->find('all', [
                 'conditions' => [
                     'Inscricao.aluno_id'        => $aluno_id,
                     'Turma.ano_lectivo_id'      => Configure::read('OpenSGA.ano_lectivo_id'),
-                    'Turma.semestre_lectivo_id' => Configure::read('OpenSGA.semestre_lectivo_id')
-                ]
+                    'Turma.semestre_lectivo_id' => Configure::read('OpenSGA.semestre_lectivo_id'),
+                ],
             ]);
             if (!empty($inscricoes_activas)) {
                 $this->Session->setFlash(__('Este Aluno já fez inscrições neste ano. As cadeiras seguintes serão adicionadas ás inscrições anteriores, e o valor da inscrição será recalculado'),
@@ -931,7 +931,7 @@
                     'controller' => 'inscricaos',
                     'action'     => 'adicionar_cadeiras_inscricao',
                     $aluno_id,
-                    $matricula_id
+                    $matricula_id,
                 ]);
             }
             if ($this->request->is('post') || $this->request->is('put')) {
@@ -981,7 +981,7 @@
                     'action' => 'inscrever',
                     $alunoId,
                     $matricula['Matricula']['id'],
-                    $this->request->data['Inscricao']['plano_estudo_id']
+                    $this->request->data['Inscricao']['plano_estudo_id'],
                 ]);
             }
 
@@ -998,15 +998,15 @@
             $cursos = $this->Inscricao->Aluno->Curso->find('list', [
                 'conditions' => [
                     'OR'                  => ['estado_objecto_id is null', 'estado_objecto_id' => 1],
-                    'unidade_organica_id' => $unidadeOrganicaId
-                ]
+                    'unidade_organica_id' => $unidadeOrganicaId,
+                ],
             ]);
             $cursoIds = array_keys($cursos);
             $planoEstudos = $this->Inscricao->Aluno->Curso->PlanoEstudo->find('list', [
                 'conditions' => [
                     'OR'       => ['estado_objecto_id is null', 'estado_objecto_id' => 1],
-                    'curso_id' => $cursoIds
-                ]
+                    'curso_id' => $cursoIds,
+                ],
             ]);
             $this->set(compact('aluno', 'funcionario', 'cursos', 'planoEstudos'));
 
@@ -1045,7 +1045,7 @@
             $this->Inscricao->Aluno->contain([
                 'Entidade',
                 'PlanoEstudo',
-                'Curso' => ['UnidadeOrganica']
+                'Curso' => ['UnidadeOrganica'],
             ]);
 
             if (empty($planoEstudoId)) {
@@ -1067,14 +1067,14 @@
             //Primeiro vemos se ainda nao se matriculou no ano lectivo em questao
 
             $this->Inscricao->contain([
-                'Turma'
+                'Turma',
             ]);
             $inscricoesActivas = $this->Inscricao->find('all', [
                 'conditions' => [
                     'Inscricao.aluno_id'        => $alunoId,
                     'Turma.ano_lectivo_id'      => Configure::read('OpenSGA.ano_lectivo_id'),
-                    'Turma.semestre_lectivo_id' => Configure::read('OpenSGA.semestre_lectivo_id')
-                ]
+                    'Turma.semestre_lectivo_id' => Configure::read('OpenSGA.semestre_lectivo_id'),
+                ],
             ]);
             if (!empty($inscricoesActivas)) {
                 $this->Session->setFlash(__('Este Aluno já fez inscrições neste ano. As cadeiras seguintes serão adicionadas ás inscrições anteriores, e o valor da inscrição será recalculado'),
@@ -1083,7 +1083,7 @@
                     'controller' => 'inscricaos',
                     'action'     => 'adicionar_cadeiras_inscricao_todos_planos',
                     $alunoId,
-                    $matriculaId
+                    $matriculaId,
                 ]);
             }
             if ($this->request->is('post') || $this->request->is('put')) {
@@ -1104,7 +1104,7 @@
                 $this->redirect([
                     'controller' => 'inscricaos',
                     'action'     => 'valida_inscricao',
-                    '?'          => ['isExterno' => $isExterno, 'planoEstudoId' => $planoEstudoId]
+                    '?'          => ['isExterno' => $isExterno, 'planoEstudoId' => $planoEstudoId],
                 ]);
             }
 
@@ -1134,8 +1134,8 @@
 
             $this->Inscricao->Aluno->contain([
                 'Entidade' => [
-                    'User'
-                ]
+                    'User',
+                ],
             ]);
             $aluno = $this->Inscricao->Aluno->findById($alunoId);
             $matricula = $this->Inscricao->Aluno->Matricula->findByAlunoIdAndAnoLectivoId($alunoId,
@@ -1147,25 +1147,25 @@
                     'Disciplina' => [
                         'DisciplinaPlanoEstudo' => [
                             'conditions' => [
-                                'plano_estudo_id' => $matricula['Matricula']['plano_estudo_id']
-                            ]
-                        ]
+                                'plano_estudo_id' => $matricula['Matricula']['plano_estudo_id'],
+                            ],
+                        ],
                     ],
                     'Curso'      => [
-                        'UnidadeOrganica'
+                        'UnidadeOrganica',
                     ],
                     'PlanoEstudo',
-                    'Turno'
+                    'Turno',
                 ],
-                'TipoInscricao'
+                'TipoInscricao',
             ]);
             $inscricoesActivas = $this->Inscricao->find('all', [
                 'conditions' => [
                     'estado_inscricao_id'       => 1,
                     'aluno_id'                  => $alunoId,
                     'Turma.ano_lectivo_id'      => $anoLectivo['AnoLectivo']['id'],
-                    'Turma.semestre_lectivo_id' => Configure::read('OpenSGA.semestre_lectivo_id')
-                ]
+                    'Turma.semestre_lectivo_id' => Configure::read('OpenSGA.semestre_lectivo_id'),
+                ],
             ]);
 
 
@@ -1205,7 +1205,7 @@
             $this->Inscricao->Aluno->contain([
                 'Entidade',
                 'PlanoEstudo',
-                'Curso' => ['UnidadeOrganica']
+                'Curso' => ['UnidadeOrganica'],
             ]);
             $aluno = $this->Inscricao->Aluno->findById($alunoId);
 
@@ -1220,19 +1220,19 @@
 
 
             $this->Inscricao->Turma->PlanoEstudo->DisciplinaPlanoEstudo->contain([
-                'Disciplina'
+                'Disciplina',
             ]);
             $disciplinaPlanoEstudos = $this->Inscricao->Turma->PlanoEstudo->DisciplinaPlanoEstudo->find('all', [
                 'conditions' => [
-                    'DisciplinaPlanoEstudo.id' => $this->Session->read('OpenSGA.inscricao.cadeiras')
+                    'DisciplinaPlanoEstudo.id' => $this->Session->read('OpenSGA.inscricao.cadeiras'),
                 ],
                 'order'      => [
                     'DisciplinaPlanoEstudo.ano_curricular',
-                    'DisciplinaPlanoEstudo.semestre_curricular'
-                ]
+                    'DisciplinaPlanoEstudo.semestre_curricular',
+                ],
             ]);
             $this->Inscricao->Turma->contain([
-                'Disciplina'
+                'Disciplina',
             ]);
             // $turmas = $this->Inscricao->Turma->find('all', array('conditions' => array('Turma.id' => $this->Session->read('OpenSGA.inscricao.cadeiras')), ));
 
@@ -1334,7 +1334,7 @@
             $this->Inscricao->contain([
                 'Aluno' => ['Entidade'],
                 'Turma' => ['Curso'],
-                'EstadoInscricao'
+                'EstadoInscricao',
             ]);
             $inscricao = $this->Inscricao->findById($inscricaoId);
             $aluno = $this->Inscricao->Aluno->getAlunoForAction($inscricao['Inscricao']['aluno_id']);
@@ -1347,7 +1347,7 @@
                     $this->redirect([
                         'controller' => 'inscricaos',
                         'action'     => 'ver_inscricoes_aluno',
-                        $aluno['Aluno']['id']
+                        $aluno['Aluno']['id'],
                     ]);
                 } else {
                     $this->Flash->error('Problemas ao Actualizar a Inscricao. Verifique os dados e tente novamente');
@@ -1377,7 +1377,7 @@
             $this->Inscricao->Aluno->contain([
                 'Entidade' => ['User'],
                 'PlanoEstudo',
-                'Curso'    => ['UnidadeOrganica']
+                'Curso'    => ['UnidadeOrganica'],
             ]);
             $aluno = $this->Inscricao->Aluno->findById($aluno_id);
 
@@ -1389,9 +1389,9 @@
             $this->Inscricao->contain([
                 'Turma' => [
                     'Disciplina',
-                    'AnoLectivo'
+                    'AnoLectivo',
                 ],
-                'TipoInscricao'
+                'TipoInscricao',
             ]);
             $inscricoesActivas = $this->Inscricao->find('all',
                 [
@@ -1399,17 +1399,17 @@
                         'Inscricao.estado_inscricao_id' => $this->Inscricao->estadoInscricoesAbertas,
                         'Inscricao.aluno_id'            => $aluno_id,
                         'Turma.ano_lectivo_id'          => Configure::read('OpenSGA.ano_lectivo_id'),
-                        'Turma.semestre_lectivo_id'     => Configure::read('OpenSGA.semestre_lectivo_id')
+                        'Turma.semestre_lectivo_id'     => Configure::read('OpenSGA.semestre_lectivo_id'),
                     ],
-                    'order'      => 'Inscricao.id DESC'
+                    'order'      => 'Inscricao.id DESC',
                 ]);
 
             $this->Inscricao->contain([
                 'Turma' => [
                     'Disciplina',
-                    'AnoLectivo'
+                    'AnoLectivo',
                 ],
-                'TipoInscricao'
+                'TipoInscricao',
             ]);
             $inscricoesAbertas = $this->Inscricao->find('all',
                 [
@@ -1419,26 +1419,26 @@
                         'OR'                            => [
                             [
                                 'Turma.ano_lectivo_id NOT'      => Configure::read('OpenSGA.ano_lectivo_id'),
-                                'Turma.semestre_lectivo_id NOT' => Configure::read('OpenSGA.semestre_lectivo_id')
+                                'Turma.semestre_lectivo_id NOT' => Configure::read('OpenSGA.semestre_lectivo_id'),
                             ],
                             [
                                 'Turma.ano_lectivo_id'          => Configure::read('OpenSGA.ano_lectivo_id'),
-                                'Turma.semestre_lectivo_id NOT' => Configure::read('OpenSGA.semestre_lectivo_id')
-                            ]
+                                'Turma.semestre_lectivo_id NOT' => Configure::read('OpenSGA.semestre_lectivo_id'),
+                            ],
 
 
-                        ]
+                        ],
 
                     ],
-                    'order'      => 'Inscricao.id DESC'
+                    'order'      => 'Inscricao.id DESC',
                 ]);
 
             $this->Inscricao->contain([
                 'Turma' => [
                     'Disciplina',
-                    'AnoLectivo'
+                    'AnoLectivo',
                 ],
-                'TipoInscricao'
+                'TipoInscricao',
             ]);
             $cadeirasFeitas = $this->Inscricao->find('all',
                 [
@@ -1446,7 +1446,7 @@
                         'Inscricao.estado_inscricao_id' => [4, 5, 6, 13],
                         'Inscricao.aluno_id'            => $aluno_id,
                     ],
-                    'order'      => 'Inscricao.id DESC'
+                    'order'      => 'Inscricao.id DESC',
                 ]);
             $anoLectivo = $this->Inscricao->Matricula->AnoLectivo->findByAno(Configure::read('OpenSGA.ano_lectivo'));
 
@@ -1479,26 +1479,27 @@
             $this->Paginator->settings['conditions'] = $this->Inscricao->parseCriteria($this->Prg->parsedParams());
             $this->Paginator->settings['contain'] = [
                 'Aluno' => [
-                    'Entidade'
+                    'Entidade',
                 ],
                 'Turma' => [
                     'Curso',
                     'Disciplina',
                     'AnoLectivo',
-                    'SemestreLectivo'
+                    'SemestreLectivo',
                 ],
-                'EstadoInscricao'
+                'EstadoInscricao',
             ];
             $this->Paginator->settings['order'] = 'Inscricao.modified Desc';
 
 
             $inscricaos = $this->paginate();
 
-            $faculdades = $this->Inscricao->Turma->Curso->UnidadeOrganica->find('list',['conditions'=>['tipo_unidade_organica_id'=>1]]);
-            $cursos = $this->Inscricao->Turma->Curso->find('list',['conditions'=>['estado_objecto_id'=>1]]);
-            $turmas = $this->Inscricao->Turma->find('list',['limit'=>10]);
+            $faculdades = $this->Inscricao->Turma->Curso->UnidadeOrganica->find('list',
+                ['conditions' => ['tipo_unidade_organica_id' => 1]]);
+            $cursos = $this->Inscricao->Turma->Curso->find('list', ['conditions' => ['estado_objecto_id' => 1]]);
+            $turmas = $this->Inscricao->Turma->find('list', ['limit' => 10]);
             $estadoInscricaos = $this->Inscricao->EstadoInscricao->find('list');
-            $this->set(compact('inscricaos', 'turmas', 'cursos','faculdades','estadoInscricaos'));
+            $this->set(compact('inscricaos', 'turmas', 'cursos', 'faculdades', 'estadoInscricaos'));
         }
 
         public function manutencao()
@@ -1514,17 +1515,17 @@
                 'conditions' => $conditions,
                 'contain'    => [
                     'Aluno' => [
-                        'Entidade'
+                        'Entidade',
                     ],
                     'Turma' => [
                         'Curso',
                         'Disciplina',
                         'AnoLectivo',
-                        'SemestreLectivo'
+                        'SemestreLectivo',
                     ],
-                    'EstadoInscricao'
+                    'EstadoInscricao',
                 ],
-                'order'      =>'Inscricao.modified Desc'
+                'order'      => 'Inscricao.modified Desc',
             ];
             $inscricaos = $this->Paginate('Inscricao');
             $this->set(compact('inscricoes'));
@@ -1550,21 +1551,21 @@
                     'conditions' => [
                         'Aluno.curso_id'            => array_keys($cursos),
                         'Turma.ano_lectivo_id'      => Configure::read('OpenSGA.ano_lectivo_id'),
-                        'Turma.semestre_lectivo_id' => Configure::read('OpenSGA.semestre_lectivo_id')
+                        'Turma.semestre_lectivo_id' => Configure::read('OpenSGA.semestre_lectivo_id'),
                     ],
-                    'fields'     => 'DISTINCT Inscricao.aluno_id'
+                    'fields'     => 'DISTINCT Inscricao.aluno_id',
                 ]);
                 $alunos = $this->Inscricao->Aluno->find('count', [
                     'conditions' => [
                         'Aluno.curso_id'        => array_keys($cursos),
-                        'Aluno.estado_aluno_id' => [1, 11, 14]
-                    ]
+                        'Aluno.estado_aluno_id' => [1, 11, 14],
+                    ],
                 ]);
                 $matriculas = $this->Inscricao->Aluno->Matricula->find('count', [
                     'conditions' => [
                         'Matricula.curso_id'       => array_keys($cursos),
-                        'Matricula.ano_lectivo_id' => Configure::read('OpenSGA.ano_lectivo_id')
-                    ]
+                        'Matricula.ano_lectivo_id' => Configure::read('OpenSGA.ano_lectivo_id'),
+                    ],
                 ]);
 
                 $arrayX[] = $v;
@@ -1633,7 +1634,7 @@
             $this->Inscricao->contain([
                 'Aluno' => ['Entidade'],
                 'Turma' => ['Curso'],
-                'EstadoInscricao'
+                'EstadoInscricao',
             ]);
             $inscricao = $this->Inscricao->findById($inscricaoId);
             $aluno = $this->Inscricao->Aluno->getAlunoForAction($inscricao['Inscricao']['aluno_id']);
@@ -1650,7 +1651,7 @@
                         $this->redirect([
                             'controller' => 'inscricaos',
                             'action'     => 'ver_inscricoes_aluno',
-                            $aluno['Aluno']['id']
+                            $aluno['Aluno']['id'],
                         ]);
                     }
 
@@ -1682,7 +1683,7 @@
             $this->Inscricao->Aluno->contain([
                 'Entidade' => ['User'],
                 'PlanoEstudo',
-                'Curso'    => ['UnidadeOrganica']
+                'Curso'    => ['UnidadeOrganica'],
             ]);
             $aluno = $this->Inscricao->Aluno->findById($aluno_id);
 
@@ -1694,9 +1695,9 @@
             $this->Inscricao->contain([
                 'Turma' => [
                     'Disciplina',
-                    'AnoLectivo'
+                    'AnoLectivo',
                 ],
-                'TipoInscricao'
+                'TipoInscricao',
             ]);
             $inscricoesActivas = $this->Inscricao->find('all',
                 [
@@ -1704,17 +1705,17 @@
                         'Inscricao.estado_inscricao_id' => $this->Inscricao->estadoInscricoesAbertas,
                         'Inscricao.aluno_id'            => $aluno_id,
                         'Turma.ano_lectivo_id'          => Configure::read('OpenSGA.ano_lectivo_id'),
-                        'Turma.semestre_lectivo_id'     => Configure::read('OpenSGA.semestre_lectivo_id')
+                        'Turma.semestre_lectivo_id'     => Configure::read('OpenSGA.semestre_lectivo_id'),
                     ],
-                    'order'      => 'Inscricao.id DESC'
+                    'order'      => 'Inscricao.id DESC',
                 ]);
 
             $this->Inscricao->contain([
                 'Turma' => [
                     'Disciplina',
-                    'AnoLectivo'
+                    'AnoLectivo',
                 ],
-                'TipoInscricao'
+                'TipoInscricao',
             ]);
             $inscricoesAbertas = $this->Inscricao->find('all',
                 [
@@ -1724,26 +1725,26 @@
                         'OR'                            => [
                             [
                                 'Turma.ano_lectivo_id NOT'      => Configure::read('OpenSGA.ano_lectivo_id'),
-                                'Turma.semestre_lectivo_id NOT' => Configure::read('OpenSGA.semestre_lectivo_id')
+                                'Turma.semestre_lectivo_id NOT' => Configure::read('OpenSGA.semestre_lectivo_id'),
                             ],
                             [
                                 'Turma.ano_lectivo_id'          => Configure::read('OpenSGA.ano_lectivo_id'),
-                                'Turma.semestre_lectivo_id NOT' => Configure::read('OpenSGA.semestre_lectivo_id')
-                            ]
+                                'Turma.semestre_lectivo_id NOT' => Configure::read('OpenSGA.semestre_lectivo_id'),
+                            ],
 
 
-                        ]
+                        ],
 
                     ],
-                    'order'      => 'Inscricao.id DESC'
+                    'order'      => 'Inscricao.id DESC',
                 ]);
 
             $this->Inscricao->contain([
                 'Turma' => [
                     'Disciplina',
-                    'AnoLectivo'
+                    'AnoLectivo',
                 ],
-                'TipoInscricao'
+                'TipoInscricao',
             ]);
             $cadeirasFeitas = $this->Inscricao->find('all',
                 [
@@ -1751,7 +1752,7 @@
                         'Inscricao.estado_inscricao_id' => [4, 5, 6, 13],
                         'Inscricao.aluno_id'            => $aluno_id,
                     ],
-                    'order'      => 'Inscricao.id DESC'
+                    'order'      => 'Inscricao.id DESC',
                 ]);
             $anoLectivo = $this->Inscricao->Matricula->AnoLectivo->findByAno(Configure::read('OpenSGA.ano_lectivo'));
 

@@ -3,4 +3,4 @@
 
 ?>
 
-<?php echo $this->Html->image("/relatorios/index", array("alt" => "Brownies",'url' => array('action' => 'view'))); ?>
+<?php echo $this->Html->image("/relatorios/index", ["alt" => "Brownies", 'url' => ['action' => 'view']]); ?>

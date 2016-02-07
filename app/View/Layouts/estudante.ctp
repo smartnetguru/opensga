@@ -14,8 +14,8 @@
                 <ul class="main-navigation-menu">
                     <li><?php echo $this->Html->link('<i class="clip-home-3"></i>
                         <span class="title"> Pagina Inicial </span><span class="selected"></span>',
-                            ['controller' => 'pages', 'action' => 'home', 'estudante' => true],
-                            ['escape' => false]) ?></li>
+                                ['controller' => 'pages', 'action' => 'home', 'estudante' => true],
+                                ['escape' => false]) ?></li>
                     <li>
                         <a href="javascript:void(0)"><i class="clip-grid-6"></i>
                             <span class="title"> Perfil</span><i class="icon-arrow"></i>
@@ -23,11 +23,13 @@
                         </a>
                         <ul class="sub-menu">
                             <li><?php echo $this->Html->link(__('Perfil Privado'),
-                                    ['controller'=>'alunos','action'=>'perfil'], ['class' => '', 'escape' => false]) ?></li>
+                                        ['controller' => 'alunos', 'action' => 'perfil'],
+                                        ['class' => '', 'escape' => false]) ?></li>
                             <li><?php echo $this->Html->link(sprintf(__('Perfil Publico<span class="badge badge-warning">Em breve</span>',
-                                    true)), '#', ['class' => 'link', 'escape' => false]); ?></li>
+                                        true)), '#', ['class' => 'link', 'escape' => false]); ?></li>
                             <li><?php echo $this->Html->link(sprintf(__('Editar Perfil',
-                                    true)), ['controller'=>'alunos','action'=>'editar_perfil'], ['class' => 'link', 'escape' => false]); ?></li>
+                                        true)), ['controller' => 'alunos', 'action' => 'editar_perfil'],
+                                        ['class' => 'link', 'escape' => false]); ?></li>
                         </ul>
                     </li>
                     <li>
@@ -37,11 +39,11 @@
                         </a>
                         <ul class="sub-menu">
                             <li><?php echo $this->Html->link(__('Renovacoes de Matricula'),
-                                    ['controller' => 'matriculas', 'action' => 'index'],
-                                    ['class' => '', 'escape' => false]) ?></li>
+                                        ['controller' => 'matriculas', 'action' => 'index'],
+                                        ['class' => '', 'escape' => false]) ?></li>
                             <li><?php echo $this->Html->link(sprintf(__('Renovar Matricula',
-                                    true)), ['controller' => 'matriculas', 'action' => 'renovar_matricula'],
-                                    ['class' => 'link', 'escape' => false]); ?></li>
+                                        true)), ['controller' => 'matriculas', 'action' => 'renovar_matricula'],
+                                        ['class' => 'link', 'escape' => false]); ?></li>
                         </ul>
                     </li>
                     <li>
@@ -51,13 +53,13 @@
                         </a>
                         <ul class="sub-menu">
                             <li><?php echo $this->Html->link(__('Inscricoes Activaso<span class="badge badge-warning">Em breve</span>'),
-                                    '#', ['class' => '', 'escape' => false]) ?></li>
+                                        '#', ['class' => '', 'escape' => false]) ?></li>
                             <li><?php echo $this->Html->link(sprintf(__('Cadeiras Aprovadas<span class="badge badge-warning">Em breve</span>',
-                                    true)), '#', ['class' => 'link', 'escape' => false]); ?></li>
+                                        true)), '#', ['class' => 'link', 'escape' => false]); ?></li>
                             <li><?php echo $this->Html->link(sprintf(__('Todas as Inscricoes<span class="badge badge-warning">Em breve</span>',
-                                    true)), '#', ['class' => 'link', 'escape' => false]); ?></li>
+                                        true)), '#', ['class' => 'link', 'escape' => false]); ?></li>
                             <li><?php echo $this->Html->link(__('Fazer Inscricao<span class="badge badge-warning">Em breve</span>'),
-                                    '#', ['class' => '', 'escape' => false]) ?></li>
+                                        '#', ['class' => '', 'escape' => false]) ?></li>
                         </ul>
                     </li>
                     <li>
@@ -68,11 +70,11 @@
                         <ul class="sub-menu">
 
                             <li><?php echo $this->Html->link(__('Turmas Activas<span class="badge badge-warning">Em breve</span>'),
-                                    '#', ['class' => '', 'escape' => false]) ?></li>
+                                        '#', ['class' => '', 'escape' => false]) ?></li>
                             <li><?php echo $this->Html->link(sprintf(__('Turmas Anteriores<span class="badge badge-warning">Em breve</span>',
-                                    true)), '#', ['class' => 'link', 'escape' => false]); ?></li>
+                                        true)), '#', ['class' => 'link', 'escape' => false]); ?></li>
                             <li><?php echo $this->Html->link(sprintf(__('Proximas Turmas<span class="badge badge-warning">Em breve</span>',
-                                    true)), '#', ['class' => 'link', 'escape' => false]); ?></li>
+                                        true)), '#', ['class' => 'link', 'escape' => false]); ?></li>
                         </ul>
                     </li>
                     <li>
@@ -83,9 +85,9 @@
                         <ul class="sub-menu">
 
                             <li><?php echo $this->Html->link(__('Ver Avaliacoes<span class="badge badge-warning">Em breve</span>'),
-                                    '#', ['class' => '', 'escape' => false]) ?></li>
+                                        '#', ['class' => '', 'escape' => false]) ?></li>
                             <li><?php echo $this->Html->link(sprintf(__('Calendario de Avaliacoes<span class="badge badge-warning">Em breve</span>',
-                                    true)), '#', ['class' => 'link', 'escape' => false]); ?></li>
+                                        true)), '#', ['class' => 'link', 'escape' => false]); ?></li>
                         </ul>
                     </li>
                     <li>
@@ -95,11 +97,11 @@
                         </a>
                         <ul class="sub-menu">
                             <li><?php echo $this->Html->link(__('Docentes Activos<span class="badge badge-warning">Em breve</span>'),
-                                    '#', ['class' => '', 'escape' => false]) ?></li>
+                                        '#', ['class' => '', 'escape' => false]) ?></li>
                             <li><?php echo $this->Html->link(sprintf(__('Docentes Anteriores<span class="badge badge-warning">Em breve</span>',
-                                    true)), '#', ['class' => 'link', 'escape' => false]); ?></li>
+                                        true)), '#', ['class' => 'link', 'escape' => false]); ?></li>
                             <li><?php echo $this->Html->link(sprintf(__('Outros Docentes<span class="badge badge-warning">Em breve</span>',
-                                    true)), '#', ['class' => 'link', 'escape' => false]); ?></li>
+                                        true)), '#', ['class' => 'link', 'escape' => false]); ?></li>
                         </ul>
                     </li>
                     <li>
@@ -109,13 +111,13 @@
                         </a>
                         <ul class="sub-menu">
                             <li><?php echo $this->Html->link(__('Cartao de Estudantes<span class="badge badge-warning">Em breve</span>'),
-                                    '#', ['class' => '', 'escape' => false]) ?></li>
+                                        '#', ['class' => '', 'escape' => false]) ?></li>
                             <li><?php echo $this->Html->link(sprintf(__('Certificados<span class="badge badge-warning">Em breve</span>',
-                                    true)), '#', ['class' => 'link', 'escape' => false]); ?></li>
+                                        true)), '#', ['class' => 'link', 'escape' => false]); ?></li>
                             <li><?php echo $this->Html->link(sprintf(__('Declaracoes<span class="badge badge-warning">Em breve</span>',
-                                    true)), '#', ['class' => 'link', 'escape' => false]); ?></li>
+                                        true)), '#', ['class' => 'link', 'escape' => false]); ?></li>
                             <li><?php echo $this->Html->link(__('Outros Pedidos<span class="badge badge-warning">Em breve</span>'),
-                                    '#', ['class' => '', 'escape' => false]) ?></li>
+                                        '#', ['class' => '', 'escape' => false]) ?></li>
                         </ul>
                     </li>
                     <li>
@@ -125,9 +127,9 @@
                         </a>
                         <ul class="sub-menu">
                             <li><?php echo $this->Html->link(__('Minha Conta<span class="badge badge-warning">Em breve</span>'),
-                                    '#', ['class' => '', 'escape' => false]) ?></li>
+                                        '#', ['class' => '', 'escape' => false]) ?></li>
                             <li><?php echo $this->Html->link(sprintf(__('Meus Pagamentos<span class="badge badge-warning">Em breve</span>',
-                                    true)), '#', ['class' => 'link', 'escape' => false]); ?></li>
+                                        true)), '#', ['class' => 'link', 'escape' => false]); ?></li>
                         </ul>
                     </li>
                     <li>
@@ -138,7 +140,7 @@
                         </a>
                         <ul class="sub-menu">
                             <li><?php echo $this->Html->link(__('Visao Geral<span class="badge badge-warning">Em breve</span>'),
-                                    '#', ['class' => '', 'escape' => false]) ?></li>
+                                        '#', ['class' => '', 'escape' => false]) ?></li>
                         </ul>
                     </li>
                 </ul>
@@ -149,25 +151,24 @@
         <!-- start: PAGE -->
         <div class="main-content">
 
-                <!-- start: PAGE HEADER -->
-                <?php echo $this->element('page_header'); ?>
-                <!-- end: PAGE HEADER -->
-                <!-- start: PAGE CONTENT -->
+            <!-- start: PAGE HEADER -->
+            <?php echo $this->element('page_header'); ?>
+            <!-- end: PAGE HEADER -->
+            <!-- start: PAGE CONTENT -->
 
 
-
-                <?php
-                    $session_message = $this->Session->read('Message');
-                    if (isset($session_message) and $session_message != null) {
-                        foreach ($session_message as $k => $v) {
-                            echo $this->Session->flash($k);
-                        }
+            <?php
+                $session_message = $this->Session->read('Message');
+                if (isset($session_message) and $session_message != null) {
+                    foreach ($session_message as $k => $v) {
+                        echo $this->Session->flash($k);
                     }
-                ?>
-                <div id="siga-content">
-                    <?php echo $this->fetch('content'); ?>
-                </div>
-                <!-- end: PAGE CONTENT-->
+                }
+            ?>
+            <div id="siga-content">
+                <?php echo $this->fetch('content'); ?>
+            </div>
+            <!-- end: PAGE CONTENT-->
 
         </div>
         <!-- end: PAGE -->

@@ -2,9 +2,10 @@
 
     App::uses('CendAppController', 'Cend.Controller');
 
-    class AlunosController extends CendAppController {
+    class AlunosController extends CendAppController
+    {
 
-public $uses = ['Aluno'];
+        public $uses = ['Aluno'];
 
         public function busca_candidato()
         {
@@ -22,16 +23,17 @@ public $uses = ['Aluno'];
         }
 
 
-        public function index(){
+        public function index()
+        {
             $this->helpers[] = 'Cache';
             $this->cacheAction = '10 minutes';
 
             $this->Aluno->Curso->contain([
-                'CursosTurno'
+                'CursosTurno',
             ]);
-            $cursos = $this->Aluno->Curso->find('list',['conditions'=>['CursosTurno.turno_id'=>3]]);
+            $cursos = $this->Aluno->Curso->find('list', ['conditions' => ['CursosTurno.turno_id' => 3]]);
             $conditions = [];
-            $conditions['Curso.id']=array_keys($cursos);
+            $conditions['Curso.id'] = array_keys($cursos);
             if ($this->request->is('post')) {
                 if ($this->request->data['Aluno']['codigo'] != '') {
                     $conditions['Aluno.codigo'] = $this->request->data['Aluno']['codigo'];
@@ -66,8 +68,9 @@ public $uses = ['Aluno'];
                 $this->Session->setFlash(__('Este candidato nao tem permissao para matricular ou ja esta matriculado'));
                 $this->redirect(['action' => 'index']);
             }
-            $curso = $this->Aluno->Curso->CursosTurno->findByCursoIdAndTurnoId($candidato['Candidatura']['curso_id'],3);
-            if(empty($curso)){
+            $curso = $this->Aluno->Curso->CursosTurno->findByCursoIdAndTurnoId($candidato['Candidatura']['curso_id'],
+                3);
+            if (empty($curso)) {
                 throw new NotFoundException('Candidato Invalido');
             }
             $alunoExiste = $this->Aluno->findByCodigo($candidato['Candidatura']['numero_estudante']);
@@ -117,7 +120,7 @@ public $uses = ['Aluno'];
             $this->set(compact('candidato', 'cursos', 'paises', 'provincias', 'documento_identificacaos',
                 'areatrabalhos',
                 'generos', 'cidadeNascimentos', 'proveniencianomes', 'cidades', 'turnos', 'escolaNivelMedios',
-                'estado_civil', 'naturalidade', 'grauParentescos', 'simNaoRespostas','necessidadeEspeciais'));
+                'estado_civil', 'naturalidade', 'grauParentescos', 'simNaoRespostas', 'necessidadeEspeciais'));
 
             $this->set('siga_page_title', 'Matriculas');
             $this->set('siga_page_overview', 'Formulario de Matricula de Novos Ingressos');
@@ -145,8 +148,8 @@ public $uses = ['Aluno'];
             if (!$aluno) {
                 throw new NotFoundException('Este aluno não existe no Sistema');
             }
-            $curso = $this->Aluno->Curso->CursosTurno->findByCursoIdAndTurnoId($aluno['Aluno']['curso_id'],3);
-            if(empty($curso)){
+            $curso = $this->Aluno->Curso->CursosTurno->findByCursoIdAndTurnoId($aluno['Aluno']['curso_id'], 3);
+            if (empty($curso)) {
                 throw new NotFoundException('Candidato Invalido');
             }
             $matriculas = $this->Aluno->Matricula->getAllMatriculasByAluno($alunoId);

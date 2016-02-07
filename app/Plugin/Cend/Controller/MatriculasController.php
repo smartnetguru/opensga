@@ -2,7 +2,8 @@
 
     App::uses('CendAppController', 'Cend.Controller');
 
-    class MatriculasController extends CendAppController {
+    class MatriculasController extends CendAppController
+    {
 
         public $uses = ['Matricula'];
 
@@ -17,24 +18,24 @@
         {
 
             $this->Matricula->Aluno->Curso->contain([
-                'CursosTurno'
+                'CursosTurno',
             ]);
-            $cursos = $this->Matricula->Aluno->Curso->find('list',['conditions'=>['CursosTurno.turno_id'=>3]]);
+            $cursos = $this->Matricula->Aluno->Curso->find('list', ['conditions' => ['CursosTurno.turno_id' => 3]]);
             $conditions = [];
-            $conditions['Curso.id']=array_keys($cursos);
+            $conditions['Curso.id'] = array_keys($cursos);
             $this->paginate = [
-                'conditions'=>$conditions,
-                'contain' => [
+                'conditions' => $conditions,
+                'contain'    => [
                     'Aluno' => [
-                        'Entidade'
+                        'Entidade',
                     ],
                     'Curso',
                     'EstadoMatricula',
                     'AnoLectivo',
-                    'TipoMatricula'
+                    'TipoMatricula',
                 ],
-                'order'   => 'Matricula.data DESC',
-                'limit'   => '10'
+                'order'      => 'Matricula.data DESC',
+                'limit'      => '10',
             ];
 
             $matriculas = $this->paginate('Matricula');
@@ -50,17 +51,17 @@
                     'PaisNascimento',
                     'EstadoCivil',
                     'EntidadeIdentificacao' => [
-                        'DocumentoIdentificacao'
-                    ]
+                        'DocumentoIdentificacao',
+                    ],
                 ],
                 'Curso'           => [
-                    'UnidadeOrganica'
+                    'UnidadeOrganica',
                 ],
                 'AlunoNivelMedio' => [
                     'EscolaNivelMedio' => [
-                        'Provincia'
-                    ]
-                ]
+                        'Provincia',
+                    ],
+                ],
             ]);
             $aluno = $this->Matricula->Aluno->findById($alunoId);
 
@@ -77,7 +78,7 @@
         {
             $this->Matricula->Aluno->contain([
                 'Entidade' => ['User'],
-                'Curso'
+                'Curso',
             ]);
 
             $aluno = $this->Matricula->Aluno->findById($alunoId);
@@ -89,13 +90,13 @@
             $this->Matricula->contain([
                 'Aluno' => [
                     'Entidade',
-                    'User'
+                    'User',
                 ],
                 'AnoLectivo',
                 'Curso',
                 'User'  => [
-                    'Entidade'
-                ]
+                    'Entidade',
+                ],
             ]);
             $aluno = $this->Matricula->findById($matriculaId);
 

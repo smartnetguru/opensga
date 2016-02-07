@@ -1,23 +1,25 @@
 <?php
-/**
- * BolsaPedidoFixture
- *
- */
-class BolsaPedidoFixture extends CakeTestFixture {
 
-/**
- * Import
- *
- * @var array
- */
-	public $import = array('model' => 'BolsaPedido');
+	/**
+	 * BolsaPedidoFixture
+	 *
+	 */
+	class BolsaPedidoFixture extends CakeTestFixture
+	{
 
-/**
- * Records
- *
- * @var array
- */
-	public $records = array(
-	);
+		/**
+		 * Import
+		 *
+		 * @var array
+		 */
+		public $import = ['model' => 'BolsaPedido'];
 
-}
+		/**
+		 * Records
+		 *
+		 * @var array
+		 */
+		public $records = [
+		];
+
+	}

@@ -66,20 +66,20 @@
          * @var array
          */
         public $belongsTo = [
-            'NotificationUser'          => [
+            'NotificationUser' => [
                 'className'  => 'NotificationUser',
                 'foreignKey' => 'user_id',
                 'conditions' => '',
                 'fields'     => '',
-                'order'      => ''
+                'order'      => '',
             ],
-            'EstadoMessage' => [
+            'EstadoMessage'    => [
                 'className'  => 'EstadoMessage',
                 'foreignKey' => 'estado_message_id',
                 'conditions' => '',
                 'fields'     => '',
-                'order'      => ''
-            ]
+                'order'      => '',
+            ],
         ];
 
         public function sendNotification($receptorId, $title, $areaNotification, $details = null)
@@ -91,24 +91,24 @@
 
             $arrayNotification = [
                 'Notification' => [
-                    'title'             => $title,
-                    'details'           => $details,
-                    'areaNotification'  => $areaNotification,
-                    'notification_type_id'=>1
-                ]
+                    'title'                => $title,
+                    'details'              => $details,
+                    'areaNotification'     => $areaNotification,
+                    'notification_type_id' => 1,
+                ],
             ];
             $this->create();
-            if($this->save($arrayNotification)){
+            if ($this->save($arrayNotification)) {
                 $arrayNotificationUser = [
-                    'NotificationUser'=>[
-                        'user_id'=>$receptorId,
-                        'notification_id'=>$this->id,
-                        'estado_message_id'=>1
+                    'NotificationUser' => [
+                        'user_id'           => $receptorId,
+                        'notification_id'   => $this->id,
+                        'estado_message_id' => 1,
 
-                    ]
+                    ],
                 ];
                 $this->NotificationUser->create();
-                if($this->NotificationUser->save($arrayNotificationUser)){
+                if ($this->NotificationUser->save($arrayNotificationUser)) {
                     return true;
                 }
             }

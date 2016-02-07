@@ -7,11 +7,11 @@
 
 <?php $this->start('form-elements') ?>
 <?php echo $this->Form->create('User', [
-    'role'          => "form",
-    'novalidade'    => 'novalidate',
-    'class'         => '',
-    'id'            => 'form',
-    'inputDefaults' => ['empty' => 'Seleccione', 'placeholder' => 'Seleccione']
+        'role'          => "form",
+        'novalidade'    => 'novalidate',
+        'class'         => '',
+        'id'            => 'form',
+        'inputDefaults' => ['empty' => 'Seleccione', 'placeholder' => 'Seleccione'],
 ]); ?>
     <div class="form-group">
         <label for="username" class="control-label">Nome de Usuário</label>
@@ -23,25 +23,25 @@
 <?php
 
     echo $this->Form->input('senha_antiga', [
-        'div'   => 'form-group',
-        'label' => ['class' => 'control-label', 'text' => 'Senha Antiga'],
-        'class' => 'form-control',
-        'id'    => 'senhaAntiga',
-        'type'  => 'password',
+            'div'   => 'form-group',
+            'label' => ['class' => 'control-label', 'text' => 'Senha Antiga'],
+            'class' => 'form-control',
+            'id'    => 'senhaAntiga',
+            'type'  => 'password',
     ]);
     echo $this->Form->input('nova_senha', [
-        'div'   => 'form-group',
-        'label' => ['class' => 'control-label', 'text' => 'Nova Senha'],
-        'class' => 'form-control',
-        'id'    => 'novaSenha',
-        'type'  => 'password',
+            'div'   => 'form-group',
+            'label' => ['class' => 'control-label', 'text' => 'Nova Senha'],
+            'class' => 'form-control',
+            'id'    => 'novaSenha',
+            'type'  => 'password',
     ]);
     echo $this->Form->input('confirmar_nova_senha', [
-        'div'   => 'form-group',
-        'label' => ['class' => 'control-label', 'text' => 'Confirmar Nova Senha'],
-        'class' => 'form-control',
-        'id'    => 'confirmarNovaSenha',
-        'type'  => 'password',
+            'div'   => 'form-group',
+            'label' => ['class' => 'control-label', 'text' => 'Confirmar Nova Senha'],
+            'class' => 'form-control',
+            'id'    => 'confirmarNovaSenha',
+            'type'  => 'password',
     ]);
 ?>
     <div class="col-sm-4 col-sm-offset-6">

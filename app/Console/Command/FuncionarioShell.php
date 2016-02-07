@@ -64,7 +64,7 @@
                             'nivel_unidade'         => 2,
                             'parent_id'             => 18,
                             'estado_objecto_id'     => 1,
-                        ]
+                        ],
                     ];
                     $this->Funcionario->UnidadeOrganica->create();
                     if (!$this->Funcionario->UnidadeOrganica->save($arrayUnidadeOrganica)) {
@@ -83,7 +83,7 @@
                         'PROFESSOR A',
                         'PROFESSOR C',
                         'MONITOR FINALISTA',
-                        'MONITOR NAO FINALISTA'
+                        'MONITOR NAO FINALISTA',
                     ])) {
                     $isDocente = true;
                     $categooriaDocenteExiste = $this->Funcionario->Entidade->Docente->DocenteCategoria->findByName($categoria);
@@ -136,7 +136,7 @@
                     }
                     $funcionarioExiste = $this->Funcionario->findByEntidadeId($entidadeExiste['Entidade']['id']);
                     if (!empty($funcionarioExiste)) {
-debug($isDocente);
+                        debug($isDocente);
                         $this->out('Encontrado Funcionario, Vamos Apenas Actualizar o Orgao e o Codigo');
                         $this->Funcionario->id = $funcionarioExiste['Funcionario']['id'];
                         $this->Funcionario->set('codigo', $codigo);
@@ -147,7 +147,7 @@ debug($isDocente);
                         }
                         if ($isDocente) {
                             $docenteExiste = $this->Funcionario->Entidade->Docente->findByEntidadeId($entidadeExiste['Entidade']['id']);
-debug($docenteExiste);
+                            debug($docenteExiste);
                             if (!empty($docenteExiste)) {
                                 $this->Funcionario->Entidade->Docente->id = $docenteExiste['Docente']['id'];
                                 $this->Funcionario->Entidade->Docente->set('docente_categoria_id', $categoriaDocenteId);
@@ -160,7 +160,7 @@ debug($docenteExiste);
                                     $arrayDocenteUnidadeOrganica = [
                                         'docente_id'          => $docenteExiste['Docente']['id'],
                                         'unidade_organica_id' => $unidadeOrganicaId,
-                                        'estado_objecto_id'   => 1
+                                        'estado_objecto_id'   => 1,
                                     ];
                                     $this->Funcionario->Entidade->Docente->DocenteUnidadeOrganica->create();
                                     if (!$this->Funcionario->Entidade->Docente->DocenteUnidadeOrganica->save($arrayDocenteUnidadeOrganica)) {
@@ -173,8 +173,8 @@ debug($docenteExiste);
                                     'Docente' => [
                                         'unidade_organica_id'  => $unidadeOrganicaId,
                                         'docente_categoria_id' => $categoriaDocenteId,
-                                        'entidade_id'          => $funcionarioExiste['Funcionario']['entidade_id']
-                                    ]
+                                        'entidade_id'          => $funcionarioExiste['Funcionario']['entidade_id'],
+                                    ],
                                 ];
                                 $this->Funcionario->Entidade->Docente->create();
                                 if (!$this->Funcionario->Entidade->Docente->save($arrayDocente)) {
@@ -183,7 +183,7 @@ debug($docenteExiste);
                                 $arrayDocenteUnidadeOrganica = [
                                     'docente_id'          => $this->Funcionario->Entidade->Docente->id,
                                     'unidade_organica_id' => $unidadeOrganicaId,
-                                    'estado_objecto_id'   => 1
+                                    'estado_objecto_id'   => 1,
                                 ];
                                 $this->Funcionario->Entidade->Docente->DocenteUnidadeOrganica->create();
                                 if (!$this->Funcionario->Entidade->Docente->DocenteUnidadeOrganica->save($arrayDocenteUnidadeOrganica)) {
@@ -202,7 +202,7 @@ debug($docenteExiste);
                                 'unidade_organica_id'      => $unidadeOrganicaId,
                                 'funcionario_categoria_id' => $categoriaFuncionarioId,
                                 'user_id'                  => $entidadeExiste['Entidade']['user_id'],
-                            ]
+                            ],
                         ];
                         $this->Funcionario->create();
                         if (!$this->Funcionario->save($arrayFuncionario)) {
@@ -214,8 +214,8 @@ debug($docenteExiste);
                                 'Docente' => [
                                     'unidade_organica_id'  => $unidadeOrganicaId,
                                     'docente_categoria_id' => $categoriaDocenteId,
-                                    'entidade_id'          => $entidadeExiste['Entidade']['id']
-                                ]
+                                    'entidade_id'          => $entidadeExiste['Entidade']['id'],
+                                ],
                             ];
                             $this->Funcionario->Entidade->Docente->create();
                             if (!$this->Funcionario->Entidade->Docente->save($arrayDocente)) {
@@ -224,7 +224,7 @@ debug($docenteExiste);
                             $arrayDocenteUnidadeOrganica = [
                                 'docente_id'          => $this->Funcionario->Entidade->Docente->id,
                                 'unidade_organica_id' => $unidadeOrganicaId,
-                                'estado_objecto_id'   => 1
+                                'estado_objecto_id'   => 1,
                             ];
                             $this->Funcionario->Entidade->Docente->DocenteUnidadeOrganica->create();
                             if (!$this->Funcionario->Entidade->Docente->DocenteUnidadeOrganica->save($arrayDocenteUnidadeOrganica)) {
@@ -255,8 +255,8 @@ debug($docenteExiste);
                         'User' => [
                             'username' => $username,
                             'password' => $password,
-                            'group_id' => $groupId
-                        ]
+                            'group_id' => $groupId,
+                        ],
                     ])
                     ) {
                         $dataSource->rollback();
@@ -274,7 +274,7 @@ debug($docenteExiste);
                             'name'    => ucwords(strtolower($nomes)) . ' ' . ucwords(strtolower($apelido)),
                             'nuit'    => $nuit,
                             'codigo'  => $codigo,
-                        ]
+                        ],
                     ];
                     $this->Funcionario->Entidade->validator()->remove('nuit');
                     $this->Funcionario->Entidade->validator()->remove('genero_id');
@@ -293,7 +293,7 @@ debug($docenteExiste);
                             'unidade_organica_id'      => $unidadeOrganicaId,
                             'funcionario_categoria_id' => $categoriaFuncionarioId,
                             'user_id'                  => $this->Funcionario->User->id,
-                        ]
+                        ],
                     ];
                     $this->Funcionario->create();
                     if (!$this->Funcionario->save($arrayFuncionario)) {
@@ -306,8 +306,8 @@ debug($docenteExiste);
                             'Docente' => [
                                 'unidade_organica_id'  => $unidadeOrganicaId,
                                 'docente_categoria_id' => $categoriaDocenteId,
-                                'entidade_id'          => $this->Funcionario->Entidade->id
-                            ]
+                                'entidade_id'          => $this->Funcionario->Entidade->id,
+                            ],
                         ];
                         $this->Funcionario->Entidade->Docente->create();
                         if (!$this->Funcionario->Entidade->Docente->save($arrayDocenteNovo)) {
@@ -318,7 +318,7 @@ debug($docenteExiste);
                         $arrayDocenteUnidadeOrganica = [
                             'docente_id'          => $this->Funcionario->Entidade->Docente->id,
                             'unidade_organica_id' => $unidadeOrganicaId,
-                            'estado_objecto_id'   => 1
+                            'estado_objecto_id'   => 1,
                         ];
                         $this->Funcionario->Entidade->Docente->DocenteUnidadeOrganica->create();
                         if (!$this->Funcionario->Entidade->Docente->DocenteUnidadeOrganica->save($arrayDocenteUnidadeOrganica)) {
@@ -347,7 +347,7 @@ debug($docenteExiste);
             $funcionarioId = $this->args[0];
             $this->Funcionario->contain(['Entidade' => ['User']]);
             $funcionario = $this->Funcionario->findById($funcionarioId);
-            if(empty($funcionario)){
+            if (empty($funcionario)) {
                 debug($funcionarioId);
                 die();
             }
@@ -387,16 +387,16 @@ debug($docenteExiste);
 
             $emailPessoal = $funcionario['Entidade']['email'];
 
-            if(empty($emailPessoal)){
+            if (empty($emailPessoal)) {
                 $emailTo = $funcionario['Entidade']['User']['username'];
-            } else{
-                $emailTo = [$emailPessoal,$funcionario['Entidade']['User']['username']];
+            } else {
+                $emailTo = [$emailPessoal, $funcionario['Entidade']['User']['username']];
             }
             $Email = new CakeEmail();
             $Email->config('smtp')
                 ->emailFormat('html')
                 ->to($emailTo)
-                ->cc(['elisio.leonardo@gmail.com','sergiobata@gmail.com'])
+                ->cc(['elisio.leonardo@gmail.com', 'sergiobata@gmail.com'])
                 ->domain('siga.uem.mz')
                 ->subject('Novo Usuario Cadastrado no SIGA')
                 ->send($emailBody);
@@ -407,11 +407,12 @@ debug($docenteExiste);
 
         }
 
-        public function processaAlteraUnidadeOrganica(){
+        public function processaAlteraUnidadeOrganica()
+        {
             $funcionarioId = $this->args[0];
             $this->Funcionario->contain(['Entidade' => ['User']]);
             $funcionario = $this->Funcionario->findById($funcionarioId);
-            if(empty($funcionario)){
+            if (empty($funcionario)) {
                 debug($funcionarioId);
                 die();
             }

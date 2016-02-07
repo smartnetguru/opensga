@@ -40,28 +40,29 @@
                     </li>
                     <?php foreach ($messages as $message): ?>
                         <?php
-                        $active= '';
+                        $active = '';
                         $starred = '';
-                            if($message['Message']['id']==$messageId){
-                                $active = 'active';
-                            }
+                        if ($message['Message']['id'] == $messageId) {
+                            $active = 'active';
+                        }
 
                         ?>
-                        <li class="messages-item <?= $active?>">
+                        <li class="messages-item <?= $active ?>">
                             <span title="Mark as starred" class="messages-item-star"><i class="fa fa-star"></i></span>
                             <img alt="" src="assets/images/avatar-1.jpg" class="messages-item-avatar">
-                            <span class="messages-item-from"><?= substr($message['Message']['User']['Entidade']['name'],0,15)?></span>
+                            <span class="messages-item-from"><?= substr($message['Message']['User']['Entidade']['name'],
+                                        0, 15) ?></span>
 
                             <div class="messages-item-time">
-                                <span class="text"><?= $message['Message']['data_envio']?></span>
+                                <span class="text"><?= $message['Message']['data_envio'] ?></span>
 
                                 <div class="messages-item-actions">
                                     <a data-toggle="dropdown" title="Reply" href="#"><i
-                                            class="fa fa-mail-reply"></i></a>
+                                                class="fa fa-mail-reply"></i></a>
 
                                     <div class="dropdown">
                                         <a data-toggle="dropdown" title="Move to folder" href="#"><i
-                                                class="fa fa-folder-open"></i></a>
+                                                    class="fa fa-folder-open"></i></a>
                                         <ul class="dropdown-menu pull-right">
                                             <li>
                                                 <a href="#">
@@ -85,7 +86,7 @@
                                     </div>
                                     <div class="dropdown">
                                         <a data-toggle="dropdown" title="Attach to tag" href="#"><i
-                                                class="fa fa-tag"></i></a>
+                                                    class="fa fa-tag"></i></a>
                                         <ul class="dropdown-menu pull-right">
                                             <li>
                                                 <a href="#"><i class="tag-icon red"></i>Important</a>
@@ -100,7 +101,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <span class="messages-item-subject"><?= substr($message['Message']['assunto'],0,40)?></span>
+                            <span class="messages-item-subject"><?= substr($message['Message']['assunto'], 0,
+                                        40) ?></span>
                             <!--<span class="messages-item-preview">Lorem ipsum dolor sit amet, consec tetur adipisicing elit, sed do antera ...</span>-->
                         </li>
                     <?php endforeach; ?>
@@ -108,18 +110,18 @@
                 <div class="messages-content">
                     <div class="message-header">
                         <div class="message-time">
-                            <?= $message0['Message']['data_envio']?>
+                            <?= $message0['Message']['data_envio'] ?>
                         </div>
                         <div class="message-from">
-                            <?= $message0['User']['Entidade']['name']?>
-                            (<?= $message0['User']['username']?>)
+                            <?= $message0['User']['Entidade']['name'] ?>
+                            (<?= $message0['User']['username'] ?>)
                         </div>
                         <div class="message-to">
-                            Para: <?= $message0['MessageUser'][0]['User']['Entidade']['name']?>
-                            (<?= $message0['MessageUser'][0]['User']['username']?>)
+                            Para: <?= $message0['MessageUser'][0]['User']['Entidade']['name'] ?>
+                            (<?= $message0['MessageUser'][0]['User']['username'] ?>)
                         </div>
                         <div class="message-subject">
-                            <?= $message0['Message']['assunto']?>
+                            <?= $message0['Message']['assunto'] ?>
                         </div>
                         <div class="message-actions">
                             <a title="Move to trash" href="#"><i class="fa fa-trash-o"></i></a>
@@ -129,7 +131,7 @@
                         </div>
                     </div>
                     <div class="message-content">
-                        <?= $message0['MessageText']['texto']?>
+                        <?= $message0['MessageText']['texto'] ?>
                     </div>
                 </div>
             </div>

@@ -4,6 +4,7 @@
     {
 
         public $uses = [];
+
         public function beforeFilter()
         {
             parent::beforeFilter();
@@ -27,14 +28,14 @@
             $this->loadModel('Bairro');
 
             $conditions = [
-                'name LIKE ' => '%' . $this->request->query['term'] . '%'
+                'name LIKE ' => '%' . $this->request->query['term'] . '%',
             ];
 
             $results = $this->Bairro->find('all', [
                 'fields'     => ['name'],
                 'conditions' => $conditions,
                 'group'      => ['name'],
-                'limit'      => 20
+                'limit'      => 20,
             ]);
             $codigos = Set::extract('../Bairro/name', $results);
 
@@ -95,14 +96,14 @@
             $this->loadModel('Aluno');
 
             $conditions = [
-                'Entidade.naturalidade LIKE ' => '%' . $this->request->query['term'] . '%'
+                'Entidade.naturalidade LIKE ' => '%' . $this->request->query['term'] . '%',
             ];
 
             $results = $this->Aluno->Entidade->find('all', [
                 'fields'     => ['naturalidade'],
                 'conditions' => $conditions,
                 'group'      => ['naturalidade'],
-                'limit'      => 20
+                'limit'      => 20,
             ]);
             $codigos = Set::extract('../Entidade/naturalidade', $results);
 
@@ -115,14 +116,14 @@
             $this->loadModel('Bairro');
 
             $conditions = [
-                'name LIKE ' => '%' . $this->request->query['term'] . '%'
+                'name LIKE ' => '%' . $this->request->query['term'] . '%',
             ];
 
             $results = $this->Bairro->find('all', [
                 'fields'     => ['name'],
                 'conditions' => $conditions,
                 'group'      => ['name'],
-                'limit'      => 20
+                'limit'      => 20,
             ]);
             $codigos = Set::extract('../Bairro/name', $results);
 
@@ -183,14 +184,14 @@
             $this->loadModel('Aluno');
 
             $conditions = [
-                'Entidade.naturalidade LIKE ' => '%' . $this->request->query['term'] . '%'
+                'Entidade.naturalidade LIKE ' => '%' . $this->request->query['term'] . '%',
             ];
 
             $results = $this->Aluno->Entidade->find('all', [
                 'fields'     => ['naturalidade'],
                 'conditions' => $conditions,
                 'group'      => ['naturalidade'],
-                'limit'      => 20
+                'limit'      => 20,
             ]);
             $codigos = Set::extract('../Entidade/naturalidade', $results);
 
@@ -204,14 +205,14 @@
             $this->loadModel('Bairro');
 
             $conditions = [
-                'name LIKE ' => '%' . $this->request->query['term'] . '%'
+                'name LIKE ' => '%' . $this->request->query['term'] . '%',
             ];
 
             $results = $this->Bairro->find('all', [
                 'fields'     => ['name'],
                 'conditions' => $conditions,
                 'group'      => ['name'],
-                'limit'      => 20
+                'limit'      => 20,
             ]);
             $codigos = Set::extract('../Bairro/name', $results);
 
@@ -272,14 +273,14 @@
             $this->loadModel('Aluno');
 
             $conditions = [
-                'Entidade.naturalidade LIKE ' => '%' . $this->request->query['term'] . '%'
+                'Entidade.naturalidade LIKE ' => '%' . $this->request->query['term'] . '%',
             ];
 
             $results = $this->Aluno->Entidade->find('all', [
                 'fields'     => ['naturalidade'],
                 'conditions' => $conditions,
                 'group'      => ['naturalidade'],
-                'limit'      => 20
+                'limit'      => 20,
             ]);
             $codigos = Set::extract('../Entidade/naturalidade', $results);
 
@@ -293,7 +294,12 @@
                 $cursoId = reset($v);
             }
             $this->loadModel('PlanoEstudo');
-            $planoEstudos = $this->PlanoEstudo->find('list', ['conditions' => ['curso_id' => $cursoId,'OR'=>['estado_objecto_id is null','estado_objecto_id'=>1]]]);
+            $planoEstudos = $this->PlanoEstudo->find('list', [
+                'conditions' => [
+                    'curso_id' => $cursoId,
+                    'OR'       => ['estado_objecto_id is null', 'estado_objecto_id' => 1],
+                ],
+            ]);
             $this->set(compact('planoEstudos'));
         }
 

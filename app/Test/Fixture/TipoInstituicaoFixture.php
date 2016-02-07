@@ -1,31 +1,33 @@
 <?php
-/**
- * TipoInstituicaoFixture
- *
- */
-class TipoInstituicaoFixture extends CakeTestFixture {
 
-/**
- * Import
- *
- * @var array
- */
-	public $import = array('model' => 'TipoInstituicao');
+	/**
+	 * TipoInstituicaoFixture
+	 *
+	 */
+	class TipoInstituicaoFixture extends CakeTestFixture
+	{
 
-/**
- * Records
- *
- * @var array
- */
-	public $records = array(
-		array(
-			'id' => '1',
-			'name' => 'Publica'
-		),
-		array(
-			'id' => '2',
-			'name' => 'Privada'
-		),
-	);
+		/**
+		 * Import
+		 *
+		 * @var array
+		 */
+		public $import = ['model' => 'TipoInstituicao'];
 
-}
+		/**
+		 * Records
+		 *
+		 * @var array
+		 */
+		public $records = [
+			[
+				'id'   => '1',
+				'name' => 'Publica',
+			],
+			[
+				'id'   => '2',
+				'name' => 'Privada',
+			],
+		];
+
+	}

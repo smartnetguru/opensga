@@ -22,7 +22,7 @@
             'app.financeiro_tipo_pagamento',
             'app.disciplina_plano_estudo',
             'app.plano_estudo',
-            'app.disciplina'
+            'app.disciplina',
         ];
 
         /**
@@ -164,38 +164,38 @@
                 'Disciplina'          => [
                     (int)0 => [
                         'tipo' => '1',
-                        'id'   => '1'
+                        'id'   => '1',
                     ],
                     (int)1 => [
                         'tipo' => '1',
-                        'id'   => '2'
+                        'id'   => '2',
                     ],
                     (int)2 => [
                         'tipo' => '1',
-                        'id'   => '3'
+                        'id'   => '3',
                     ],
                     (int)3 => [
                         'tipo' => '1',
-                        'id'   => '4'
-                    ]
+                        'id'   => '4',
+                    ],
                 ],
                 'FinanceiroDeposito'  => [
                     'numero_comprovativo' => '5346534',
-                    'data_deposito'       => ''
+                    'data_deposito'       => '',
                 ],
                 'FinanceiroTransacao' => [
                     'valor'    => '5345',
                     'detalhes' => '',
-                    'aluno_id' => '2'
+                    'aluno_id' => '2',
                 ],
                 'Inscricao'           => [
-                    'plano_estudo_id' => '35'
+                    'plano_estudo_id' => '35',
                 ],
                 'disciplinas'         => [
                     (int)0 => '1272',
                     (int)1 => '1270',
                     (int)2 => '1266',
-                    (int)3 => '1269'
+                    (int)3 => '1269',
                 ],
                 'total_normal'        => (float)800,
                 'total_atraso'        => (int)0,
@@ -205,48 +205,48 @@
                     (int)1 => '1',
                     (int)2 => '1',
                     (int)3 => '1',
-                    (int)4 => '1'
+                    (int)4 => '1',
                 ],
                 'cadeiras_normais'    => (int)4,
-                'cadeiras_atraso'     => (int)0
+                'cadeiras_atraso'     => (int)0,
             ];
 
             $dataNormal = [
                 'Disciplina'          => [
                     (int)0 => [
                         'tipo' => '1',
-                        'id'   => '1'
+                        'id'   => '1',
                     ],
                     (int)1 => [
                         'tipo' => '1',
-                        'id'   => '2'
+                        'id'   => '2',
                     ],
                     (int)2 => [
                         'tipo' => '1',
-                        'id'   => '3'
+                        'id'   => '3',
                     ],
                     (int)3 => [
                         'tipo' => '1',
-                        'id'   => '4'
-                    ]
+                        'id'   => '4',
+                    ],
                 ],
                 'FinanceiroDeposito'  => [
                     'numero_comprovativo' => '3242423',
-                    'data_deposito'       => ''
+                    'data_deposito'       => '',
                 ],
                 'FinanceiroTransacao' => [
                     'valor'    => '23423',
                     'detalhes' => '',
-                    'aluno_id' => '2'
+                    'aluno_id' => '2',
                 ],
                 'Inscricao'           => [
-                    'plano_estudo_id' => ''
+                    'plano_estudo_id' => '',
                 ],
                 'disciplinas'         => [
                     (int)0 => '1259',
                     (int)1 => '1059',
                     (int)2 => '1234',
-                    (int)3 => '1114'
+                    (int)3 => '1114',
                 ],
                 'total_normal'        => (float)800,
                 'total_atraso'        => (int)0,
@@ -256,10 +256,10 @@
                     (int)1 => '1',
                     (int)2 => '1',
                     (int)3 => '1',
-                    (int)4 => '1'
+                    (int)4 => '1',
                 ],
                 'cadeiras_normais'    => (int)4,
-                'cadeiras_atraso'     => (int)0
+                'cadeiras_atraso'     => (int)0,
             ];
 
 
@@ -288,8 +288,8 @@
                     'nota_final'             => '13',
                     'turma_id'               => '8',
                     'aluno_id'               => '8',
-                    'user_id'                => 1
-                ]
+                    'user_id'                => 1,
+                ],
             ];
             $mock = $this->getMock('CakeSession');
             $mock->expects($this->any())->method('read')

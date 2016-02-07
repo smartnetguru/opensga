@@ -1,9 +1,10 @@
 <?php
-$this->BreadCumbs->addCrumb('Turmas',['controller'=>'turmas','action'=>'index']);
-    $this->BreadCumbs->addCrumb($turma['Disciplina']['name'],['controller'=>'turmas','action'=>'ver_turma',$turma['Turma']['id']]);
-    $this->BreadCumbs->addCrumb('Fechar Turma',['controller'=>'turmas','action'=>'fechar_turma',$turma['Turma']['id']]);
-    $this->BreadCumbs->addCrumb('Actualizar Notas','#');
-
+    $this->BreadCumbs->addCrumb('Turmas', ['controller' => 'turmas', 'action' => 'index']);
+    $this->BreadCumbs->addCrumb($turma['Disciplina']['name'],
+            ['controller' => 'turmas', 'action' => 'ver_turma', $turma['Turma']['id']]);
+    $this->BreadCumbs->addCrumb('Fechar Turma',
+            ['controller' => 'turmas', 'action' => 'fechar_turma', $turma['Turma']['id']]);
+    $this->BreadCumbs->addCrumb('Actualizar Notas', '#');
 
 
 ?>
@@ -26,7 +27,8 @@ $this->BreadCumbs->addCrumb('Turmas',['controller'=>'turmas','action'=>'index'])
 
                 <div class="alert alert-warning">
                     <p>
-                    <h4>Só serão actualizados os estudantes em que a primeira coluna <em>"Actualizar"</em> estiver seleccionada</h4>
+                    <h4>Só serão actualizados os estudantes em que a primeira coluna <em>"Actualizar"</em> estiver
+                        seleccionada</h4>
                     <ul>
                         <li>Zero valores devem ser marcados como Zero</li>
                         <li>Deixar em branco indica que o estudante não fez o teste ou não tem nota</li>
@@ -35,7 +37,11 @@ $this->BreadCumbs->addCrumb('Turmas',['controller'=>'turmas','action'=>'index'])
                     </p>
                 </div>
                 <?php echo $this->Form->create('Inscricao',
-                    ['role' => 'form', 'enctype' => 'multipart/form-data', 'class' => '', 'inputDefaults' => []]); ?>
+                        ['role'          => 'form',
+                         'enctype'       => 'multipart/form-data',
+                         'class'         => '',
+                         'inputDefaults' => [],
+                        ]); ?>
                 <table class="table table-striped table-bordered table-hover table-full-width" id="sample_1">
                     <thead>
                     <tr>
@@ -54,24 +60,24 @@ $this->BreadCumbs->addCrumb('Turmas',['controller'=>'turmas','action'=>'index'])
                         $i = 0;
                         foreach ($inscricaos as $inscricao) {
 
-                            if($inscricao['Inscricao']['nota_frequencia']==-1){
-                                $notaFrequencia= '';
-                            } else{
+                            if ($inscricao['Inscricao']['nota_frequencia'] == -1) {
+                                $notaFrequencia = '';
+                            } else {
                                 $notaFrequencia = $inscricao['Inscricao']['nota_frequencia'];
                             }
-                            if($inscricao['Inscricao']['nota_exame_normal']==-1){
-                                $notaExameNormal= '';
-                            } else{
+                            if ($inscricao['Inscricao']['nota_exame_normal'] == -1) {
+                                $notaExameNormal = '';
+                            } else {
                                 $notaExameNormal = $inscricao['Inscricao']['nota_exame_normal'];
                             }
-                            if($inscricao['Inscricao']['nota_exame_recorrencia']==-1){
-                                $notaExameRecorrencia= '';
-                            } else{
+                            if ($inscricao['Inscricao']['nota_exame_recorrencia'] == -1) {
+                                $notaExameRecorrencia = '';
+                            } else {
                                 $notaExameRecorrencia = $inscricao['Inscricao']['nota_exame_recorrencia'];
                             }
-                            if($inscricao['Inscricao']['nota_final']==-1){
-                                $notaFinal= '';
-                            } else{
+                            if ($inscricao['Inscricao']['nota_final'] == -1) {
+                                $notaFinal = '';
+                            } else {
                                 $notaFinal = $inscricao['Inscricao']['nota_final'];
                             }
                             ?>
@@ -82,49 +88,49 @@ $this->BreadCumbs->addCrumb('Turmas',['controller'=>'turmas','action'=>'index'])
                                 <td><?php echo h($inscricao['Matricula']['Aluno']['Entidade']['nomes']) ?></td>
                                 <td>
                                     <?= $this->Form->input('Inscricao.' . $inscricao['Inscricao']['id'] . '.nota_frequencia',
-                                        [
-                                            'div'   => false,
-                                            'label' => false,
-                                            'class' => 'form-control',
-                                            'id'    => 'dataNascimento',
-                                            'type'  => 'text',
-                                            'value' => $notaFrequencia
-                                        ]); ?>
+                                            [
+                                                    'div'   => false,
+                                                    'label' => false,
+                                                    'class' => 'form-control',
+                                                    'id'    => 'dataNascimento',
+                                                    'type'  => 'text',
+                                                    'value' => $notaFrequencia,
+                                            ]); ?>
                                 </td>
                                 <td>
                                     <?= $this->Form->input('Inscricao.' . $inscricao['Inscricao']['id'] . '.nota_exame_normal',
-                                        [
-                                            'div'   => false,
-                                            'label' => false,
-                                            'class' => 'form-control',
-                                            'id'    => 'dataNascimento',
-                                            'type'  => 'text',
-                                            'value' => $notaExameNormal
-                                        ]); ?>
+                                            [
+                                                    'div'   => false,
+                                                    'label' => false,
+                                                    'class' => 'form-control',
+                                                    'id'    => 'dataNascimento',
+                                                    'type'  => 'text',
+                                                    'value' => $notaExameNormal,
+                                            ]); ?>
                                 </td>
                                 <td>
                                     <?= $this->Form->input('Inscricao.' . $inscricao['Inscricao']['id'] . '.nota_exame_recorrencia',
-                                        [
-                                            'div'   => false,
-                                            'label' => false,
-                                            'class' => 'form-control',
-                                            'id'    => 'dataNascimento',
-                                            'type'  => 'text',
-                                            'value' => $notaExameRecorrencia
-                                        ]); ?>
+                                            [
+                                                    'div'   => false,
+                                                    'label' => false,
+                                                    'class' => 'form-control',
+                                                    'id'    => 'dataNascimento',
+                                                    'type'  => 'text',
+                                                    'value' => $notaExameRecorrencia,
+                                            ]); ?>
                                 </td>
                                 <td>
                                     <?= $this->Form->input('Inscricao.' . $inscricao['Inscricao']['id'] . '.nota_final',
-                                        [
-                                            'div'   => false,
-                                            'label' => false,
-                                            'class' => 'form-control',
-                                            'id'    => 'dataNascimento',
-                                            'type'  => 'text',
-                                            'value' => $notaFinal
-                                        ]); ?>
+                                            [
+                                                    'div'   => false,
+                                                    'label' => false,
+                                                    'class' => 'form-control',
+                                                    'id'    => 'dataNascimento',
+                                                    'type'  => 'text',
+                                                    'value' => $notaFinal,
+                                            ]); ?>
                                     <?php echo $this->Form->hidden('Inscricao.' . $inscricao['Inscricao']['id'] . '.inscricao_id',
-                                        ['value' => $inscricao['Inscricao']['id']]); ?>
+                                            ['value' => $inscricao['Inscricao']['id']]); ?>
                                 </td>
                             </tr>
                         <?php } ?>
@@ -139,8 +145,8 @@ $this->BreadCumbs->addCrumb('Turmas',['controller'=>'turmas','action'=>'index'])
                             <?php
 
                                 echo $this->Form->end([
-                                    'label' => __('GRAVAR', true),
-                                    'class' => 'btn btn-blue btn-block'
+                                        'label' => __('GRAVAR', true),
+                                        'class' => 'btn btn-blue btn-block',
                                 ]);
 
                             ?>

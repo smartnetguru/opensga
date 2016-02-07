@@ -34,15 +34,21 @@
             <td><?php echo h($financeiroTipoPagamento['FinanceiroTipoPagamento']['valor']); ?>&nbsp;</td>
             <td><?php echo h($financeiroTipoPagamento['FinanceiroTipoPagamento']['codigo']); ?>&nbsp;</td>
             <td>
-                <?php echo $this->Html->link($financeiroTipoPagamento['Month']['name'], array('controller' => 'months', 'action' => 'view', $financeiroTipoPagamento['Month']['id'])); ?>
+                <?php echo $this->Html->link($financeiroTipoPagamento['Month']['name'],
+                        ['controller' => 'months', 'action' => 'view', $financeiroTipoPagamento['Month']['id']]); ?>
             </td>
             <td><?php echo h($financeiroTipoPagamento['FinanceiroTipoPagamento']['data_limite']); ?>&nbsp;</td>
             <td><?php echo h($financeiroTipoPagamento['FinanceiroTipoPagamento']['mes_limite']); ?>&nbsp;</td>
             <td><?php echo h($financeiroTipoPagamento['FinanceiroTipoPagamento']['dia_limite']); ?>&nbsp;</td>
             <td class="actions">
-                <?php echo $this->Html->link(__('View'), array('action' => 'view', $financeiroTipoPagamento['FinanceiroTipoPagamento']['id'])); ?>
-                <?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $financeiroTipoPagamento['FinanceiroTipoPagamento']['id'])); ?>
-                <?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $financeiroTipoPagamento['FinanceiroTipoPagamento']['id']), null, __('Are you sure you want to delete # %s?', $financeiroTipoPagamento['FinanceiroTipoPagamento']['id'])); ?>
+                <?php echo $this->Html->link(__('View'),
+                        ['action' => 'view', $financeiroTipoPagamento['FinanceiroTipoPagamento']['id']]); ?>
+                <?php echo $this->Html->link(__('Edit'),
+                        ['action' => 'edit', $financeiroTipoPagamento['FinanceiroTipoPagamento']['id']]); ?>
+                <?php echo $this->Form->postLink(__('Delete'),
+                        ['action' => 'delete', $financeiroTipoPagamento['FinanceiroTipoPagamento']['id']], null,
+                        __('Are you sure you want to delete # %s?',
+                                $financeiroTipoPagamento['FinanceiroTipoPagamento']['id'])); ?>
             </td>
         </tr>
     <?php endforeach; ?>

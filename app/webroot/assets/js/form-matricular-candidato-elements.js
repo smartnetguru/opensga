@@ -11,7 +11,6 @@ var FormElements = function () {
     var runAutosize = function () {
         $("textarea.autosize").autosize();
     };
-    
 
 
     //function to initiate jquery.tagsinput

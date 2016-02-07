@@ -1,23 +1,25 @@
 <?php
-/**
- * SadeAvaliacaoQualitativaFixture
- *
- */
-class SadeAvaliacaoQualitativaFixture extends CakeTestFixture {
 
-/**
- * Import
- *
- * @var array
- */
-	public $import = array('model' => 'SadeAvaliacaoQualitativa');
+	/**
+	 * SadeAvaliacaoQualitativaFixture
+	 *
+	 */
+	class SadeAvaliacaoQualitativaFixture extends CakeTestFixture
+	{
 
-/**
- * Records
- *
- * @var array
- */
-	public $records = array(
-	);
+		/**
+		 * Import
+		 *
+		 * @var array
+		 */
+		public $import = ['model' => 'SadeAvaliacaoQualitativa'];
 
-}
+		/**
+		 * Records
+		 *
+		 * @var array
+		 */
+		public $records = [
+		];
+
+	}

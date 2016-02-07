@@ -46,37 +46,46 @@
                                     <tr>
                                         <td>Disciplina</td>
                                         <td><?php echo h($turma['Disciplina']['name']); ?></td>
-                                        <td><a class="show-tab" href="#panel_edit_account"><i class="fa fa-pencil edit-user-info"></i></a></td>
+                                        <td><a class="show-tab" href="#panel_edit_account"><i
+                                                        class="fa fa-pencil edit-user-info"></i></a></td>
                                     </tr>
                                     <tr>
                                         <td>Curso</td>
                                         <td><?php echo h($turma['Curso']['name']); ?></td>
-                                        <td><a class="show-tab" href="#panel_edit_account"><i class="fa fa-pencil edit-user-info"></i></a></td>
+                                        <td><a class="show-tab" href="#panel_edit_account"><i
+                                                        class="fa fa-pencil edit-user-info"></i></a></td>
                                     </tr>
                                     <tr>
                                         <td>Ano Lectivo</td>
                                         <td><?php echo h($turma['AnoLectivo']['ano']); ?></td>
-                                        <td><a class="show-tab" href="#panel_edit_account"><i class="fa fa-pencil edit-user-info"></i></a></td>
+                                        <td><a class="show-tab" href="#panel_edit_account"><i
+                                                        class="fa fa-pencil edit-user-info"></i></a></td>
                                     </tr>
                                     <tr>
                                         <td>Plano de Estudos</td>
                                         <td><?php echo h($turma['PlanoEstudo']['name']); ?></td>
-                                        <td><a class="show-tab" href="#panel_edit_account"><i class="fa fa-pencil edit-user-info"></i></a></td>
+                                        <td><a class="show-tab" href="#panel_edit_account"><i
+                                                        class="fa fa-pencil edit-user-info"></i></a></td>
                                     </tr>
                                     <tr>
                                         <td>Ano Curricular</td>
-                                        <td><span class="label label-sm label-info"><?php echo h($turma['Turma']['ano_curricular']); ?></span></td>
-                                        <td><a class="show-tab" href="#panel_edit_account"><i class="fa fa-pencil edit-user-info"></i></a></td>
+                                        <td>
+                                            <span class="label label-sm label-info"><?php echo h($turma['Turma']['ano_curricular']); ?></span>
+                                        </td>
+                                        <td><a class="show-tab" href="#panel_edit_account"><i
+                                                        class="fa fa-pencil edit-user-info"></i></a></td>
                                     </tr>
                                     <tr>
                                         <td>Semestre Curricular</td>
                                         <td><?php echo h($turma['Turma']['semestre_curricular']); ?></td>
-                                        <td><a class="show-tab" href="#panel_edit_account"><i class="fa fa-pencil edit-user-info"></i></a></td>
+                                        <td><a class="show-tab" href="#panel_edit_account"><i
+                                                        class="fa fa-pencil edit-user-info"></i></a></td>
                                     </tr>
                                     <tr>
                                         <td>Turno</td>
                                         <td><?php echo h($turma['Turno']['name']); ?></td>
-                                        <td><a class="show-tab" href="#panel_edit_account"><i class="fa fa-pencil edit-user-info"></i></a></td>
+                                        <td><a class="show-tab" href="#panel_edit_account"><i
+                                                        class="fa fa-pencil edit-user-info"></i></a></td>
                                     </tr>
 
                                     </tbody>
@@ -87,7 +96,6 @@
                         <div class="col-sm-7 col-md-8">
                             <div class="row">
                                 <?php echo $this->fetch('menu-itens') ?>
-
 
 
                             </div>
@@ -107,10 +115,12 @@
                                         <tr>
                                             <td>Regente</td>
                                             <td><?php
-                                                    if(isset($regente['Docente']['Entidade']['name']))
+                                                    if (isset($regente['Docente']['Entidade']['name'])) {
                                                         echo h($regente['Docente']['Entidade']['name']);
+                                                    }
                                                 ?></td>
-                                            <td><a class="show-tab" href="#panel_edit_account"><i class="fa fa-pencil edit-user-info"></i></a></td>
+                                            <td><a class="show-tab" href="#panel_edit_account"><i
+                                                            class="fa fa-pencil edit-user-info"></i></a></td>
                                         </tr>
                                         <tr>
                                             <td>Assistente</td>
@@ -119,7 +129,8 @@
                                                         echo h($assistente['Docente']['Entidade']['name']);
                                                     }
                                                 ?></td>
-                                            <td><a class="show-tab" href="#panel_edit_account"><i class="fa fa-pencil edit-user-info"></i></a></td>
+                                            <td><a class="show-tab" href="#panel_edit_account"><i
+                                                            class="fa fa-pencil edit-user-info"></i></a></td>
                                         </tr>
                                         </tbody>
                                     </table>
@@ -135,22 +146,26 @@
                                         <tr>
                                             <td>Total de Estudantes</td>
                                             <td><?php echo h(''); ?></td>
-                                            <td><a class="show-tab" href="#panel_edit_account"><i class="fa fa-pencil edit-user-info"></i></a></td>
+                                            <td><a class="show-tab" href="#panel_edit_account"><i
+                                                            class="fa fa-pencil edit-user-info"></i></a></td>
                                         </tr>
                                         <tr>
                                             <td>Homens</td>
                                             <td><?php echo h(''); ?></td>
-                                            <td><a class="show-tab" href="#panel_edit_account"><i class="fa fa-pencil edit-user-info"></i></a></td>
+                                            <td><a class="show-tab" href="#panel_edit_account"><i
+                                                            class="fa fa-pencil edit-user-info"></i></a></td>
                                         </tr>
                                         <tr>
                                             <td>Mulheres</td>
                                             <td><?php echo h(''); ?></td>
-                                            <td><a class="show-tab" href="#panel_edit_account"><i class="fa fa-pencil edit-user-info"></i></a></td>
+                                            <td><a class="show-tab" href="#panel_edit_account"><i
+                                                            class="fa fa-pencil edit-user-info"></i></a></td>
                                         </tr>
                                         <tr>
                                             <td>Idade Media</td>
                                             <td><?php echo h(''); ?></td>
-                                            <td><a class="show-tab" href="#panel_edit_account"><i class="fa fa-pencil edit-user-info"></i></a></td>
+                                            <td><a class="show-tab" href="#panel_edit_account"><i
+                                                            class="fa fa-pencil edit-user-info"></i></a></td>
                                         </tr>
                                         </tbody>
                                     </table>
@@ -165,7 +180,8 @@
                                     <div class="panel-tools">
                                         <a href="#" class="btn btn-xs btn-link panel-collapse collapses">
                                         </a>
-                                        <a data-toggle="modal" href="#panel-config" class="btn btn-xs btn-link panel-config">
+                                        <a data-toggle="modal" href="#panel-config"
+                                           class="btn btn-xs btn-link panel-config">
                                             <i class="fa fa-wrench"></i>
                                         </a>
                                         <a href="#" class="btn btn-xs btn-link panel-refresh">
@@ -200,7 +216,15 @@
                                         </li>
 
                                     </ul>
-                                    <div class="ps-scrollbar-x-rail" style="left: 0px; bottom: 3px; width: 1051px; display: none;"><div class="ps-scrollbar-x" style="left: 0px; width: 0px;"></div></div><div class="ps-scrollbar-y-rail" style="top: 0px; right: 3px; height: 300px; display: inherit;"><div class="ps-scrollbar-y" style="top: 0px; height: 206px;"></div></div></div>
+                                    <div class="ps-scrollbar-x-rail"
+                                         style="left: 0px; bottom: 3px; width: 1051px; display: none;">
+                                        <div class="ps-scrollbar-x" style="left: 0px; width: 0px;"></div>
+                                    </div>
+                                    <div class="ps-scrollbar-y-rail"
+                                         style="top: 0px; right: 3px; height: 300px; display: inherit;">
+                                        <div class="ps-scrollbar-y" style="top: 0px; height: 206px;"></div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -231,7 +255,7 @@
                                     <td><?php echo h($inscricao['Inscricao']['nota_exame_recorrencia']) ?></td>
                                     <td><?php echo h($inscricao['Inscricao']['nota_final']) ?></td>
                                 </tr>
-                            <?php } */?>
+                            <?php } */ ?>
                         </tbody>
                     </table>
                 </div>
@@ -254,7 +278,11 @@
                                 ?>
                                 <tr>
                                     <td><?php echo $i++ ?></td>
-                                    <td><?php echo $this->Html->link($avaliacao['TipoAvaliacao']['name'], array('controller' => 'avaliacaos', 'action' => 'ver_avaliacao', $avaliacao['TurmaTipoAvaliacao']['id'])) ?></td>
+                                    <td><?php echo $this->Html->link($avaliacao['TipoAvaliacao']['name'], [
+                                                'controller' => 'avaliacaos',
+                                                'action'     => 'ver_avaliacao',
+                                                $avaliacao['TurmaTipoAvaliacao']['id'],
+                                        ]) ?></td>
                                     <td><?php echo h($avaliacao['TurmaTipoAvaliacao']['ordem']) ?></td>
                                     <td><?php echo h($avaliacao['TurmaTipoAvaliacao']['peso']) ?></td>
                                     <td><?php echo h($avaliacao['TurmaTipoAvaliacao']['data_marcada']) ?></td>
@@ -275,10 +303,10 @@
 <?php
     // echo $this->Html->script(array('/assets/plugins/bootstrap-fileupload/bootstrap-fileupload.min.js'));
     // echo $this->Html->script(array('/assets/plugins/jquery.pulsate/jquery.pulsate.min.js'));
-    echo $this->Html->script(array('/assets/js/perfil-estudante.js'));
+    echo $this->Html->script(['/assets/js/perfil-estudante.js']);
 ?>
 
-<?php $this->Html->scriptStart(array('inline' => false, 'block' => 'scriptBottom')); ?>
+<?php $this->Html->scriptStart(['inline' => false, 'block' => 'scriptBottom']); ?>
 
 $(document).ready(function() {
 

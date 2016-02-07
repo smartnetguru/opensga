@@ -1,39 +1,41 @@
 <?php
-/**
- * RegaliaSocialFixture
- *
- */
-class RegaliaSocialFixture extends CakeTestFixture {
 
-/**
- * Import
- *
- * @var array
- */
-	public $import = array('model' => 'RegaliaSocial');
+	/**
+	 * RegaliaSocialFixture
+	 *
+	 */
+	class RegaliaSocialFixture extends CakeTestFixture
+	{
 
-/**
- * Records
- *
- * @var array
- */
-	public $records = array(
-		array(
-			'id' => '1',
-			'name' => 'Nenhuma'
-		),
-		array(
-			'id' => '2',
-			'name' => 'Bolsa Completa'
-		),
-		array(
-			'id' => '3',
-			'name' => 'Isenção'
-		),
-		array(
-			'id' => '4',
-			'name' => 'Redução'
-		),
-	);
+		/**
+		 * Import
+		 *
+		 * @var array
+		 */
+		public $import = ['model' => 'RegaliaSocial'];
 
-}
+		/**
+		 * Records
+		 *
+		 * @var array
+		 */
+		public $records = [
+			[
+				'id'   => '1',
+				'name' => 'Nenhuma',
+			],
+			[
+				'id'   => '2',
+				'name' => 'Bolsa Completa',
+			],
+			[
+				'id'   => '3',
+				'name' => 'Isenção',
+			],
+			[
+				'id'   => '4',
+				'name' => 'Redução',
+			],
+		];
+
+	}

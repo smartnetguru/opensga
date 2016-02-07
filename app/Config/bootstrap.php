@@ -103,9 +103,6 @@
         CakePlugin::load('WhoopsCakephp', ['bootstrap' => true]);
     }
 
-    
-
-
 
     CakeNumber::addFormat(
         'MZN', [

@@ -1,80 +1,82 @@
 <?php
-App::uses('AppModel', 'Model');
-/**
- * ArtigoCategoriaArtigo Model
- *
- * @property Artigo $Artigo
- * @property ArtigoCategoria $ArtigoCategoria
- * @property EstadoObjecto $EstadoObjecto
- */
-class ArtigoCategoriaArtigo extends AppModel {
+	App::uses('AppModel', 'Model');
 
-/**
- * Validation rules
- *
- * @var array
- */
-	public $validate = array(
-		'artigo_id' => array(
-			'numeric' => array(
-				'rule' => array('numeric'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
-		),
-		'artigo_categoria_id' => array(
-			'numeric' => array(
-				'rule' => array('numeric'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
-		),
-		'estado_objecto_id' => array(
-			'numeric' => array(
-				'rule' => array('numeric'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
-		),
-	);
+	/**
+	 * ArtigoCategoriaArtigo Model
+	 *
+	 * @property Artigo $Artigo
+	 * @property ArtigoCategoria $ArtigoCategoria
+	 * @property EstadoObjecto $EstadoObjecto
+	 */
+	class ArtigoCategoriaArtigo extends AppModel
+	{
 
-	// The Associations below have been created with all possible keys, those that are not needed can be removed
+		/**
+		 * Validation rules
+		 *
+		 * @var array
+		 */
+		public $validate = [
+			'artigo_id'           => [
+				'numeric' => [
+					'rule' => ['numeric'],
+					//'message' => 'Your custom message here',
+					//'allowEmpty' => false,
+					//'required' => false,
+					//'last' => false, // Stop validation after this rule
+					//'on' => 'create', // Limit validation to 'create' or 'update' operations
+				],
+			],
+			'artigo_categoria_id' => [
+				'numeric' => [
+					'rule' => ['numeric'],
+					//'message' => 'Your custom message here',
+					//'allowEmpty' => false,
+					//'required' => false,
+					//'last' => false, // Stop validation after this rule
+					//'on' => 'create', // Limit validation to 'create' or 'update' operations
+				],
+			],
+			'estado_objecto_id'   => [
+				'numeric' => [
+					'rule' => ['numeric'],
+					//'message' => 'Your custom message here',
+					//'allowEmpty' => false,
+					//'required' => false,
+					//'last' => false, // Stop validation after this rule
+					//'on' => 'create', // Limit validation to 'create' or 'update' operations
+				],
+			],
+		];
 
-/**
- * belongsTo associations
- *
- * @var array
- */
-	public $belongsTo = array(
-		'Artigo' => array(
-			'className' => 'Artigo',
-			'foreignKey' => 'artigo_id',
-			'conditions' => '',
-			'fields' => '',
-			'order' => ''
-		),
-		'ArtigoCategoria' => array(
-			'className' => 'ArtigoCategoria',
-			'foreignKey' => 'artigo_categoria_id',
-			'conditions' => '',
-			'fields' => '',
-			'order' => ''
-		),
-		'EstadoObjecto' => array(
-			'className' => 'EstadoObjecto',
-			'foreignKey' => 'estado_objecto_id',
-			'conditions' => '',
-			'fields' => '',
-			'order' => ''
-		)
-	);
-}
+		// The Associations below have been created with all possible keys, those that are not needed can be removed
+
+		/**
+		 * belongsTo associations
+		 *
+		 * @var array
+		 */
+		public $belongsTo = [
+			'Artigo'          => [
+				'className'  => 'Artigo',
+				'foreignKey' => 'artigo_id',
+				'conditions' => '',
+				'fields'     => '',
+				'order'      => '',
+			],
+			'ArtigoCategoria' => [
+				'className'  => 'ArtigoCategoria',
+				'foreignKey' => 'artigo_categoria_id',
+				'conditions' => '',
+				'fields'     => '',
+				'order'      => '',
+			],
+			'EstadoObjecto'   => [
+				'className'  => 'EstadoObjecto',
+				'foreignKey' => 'estado_objecto_id',
+				'conditions' => '',
+				'fields'     => '',
+				'order'      => '',
+			],
+		];
+	}

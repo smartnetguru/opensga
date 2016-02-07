@@ -1,23 +1,25 @@
 <?php
-/**
- * AreaAcademicaFixture
- *
- */
-class AreaAcademicaFixture extends CakeTestFixture {
 
-/**
- * Import
- *
- * @var array
- */
-	public $import = array('model' => 'AreaAcademica');
+	/**
+	 * AreaAcademicaFixture
+	 *
+	 */
+	class AreaAcademicaFixture extends CakeTestFixture
+	{
 
-/**
- * Records
- *
- * @var array
- */
-	public $records = array(
-	);
+		/**
+		 * Import
+		 *
+		 * @var array
+		 */
+		public $import = ['model' => 'AreaAcademica'];
 
-}
+		/**
+		 * Records
+		 *
+		 * @var array
+		 */
+		public $records = [
+		];
+
+	}

@@ -90,26 +90,26 @@
                                         'id'       => 'codigo',
                                 ]); ?>
                             </div>
-                            <?php if(!$this->fetch('nomes')):?>
-                            <div class="col-sm-4">
-                                <?php echo $this->Form->input('Entidade.apelido', [
-                                        'value' => $candidato['Candidatura']['apelido'],
-                                        'label' => 'Apelido',
-                                        'class' => 'form-control',
-                                        'id'    => 'codigo',
-                                ]); ?>
-                            </div>
-                            <div class="col-sm-4">
-                                <?php echo $this->Form->input('Entidade.nomes', [
-                                        'value' => $candidato['Candidatura']['nomes'],
-                                        'label' => 'Outros Nomes',
-                                        'class' => 'form-control',
-                                        'id'    => 'codigo',
-                                ]); ?>
-                            </div>
-                            <?php else:?>
-                            <?php echo $this->fetch('nomes')?>
-                            <?php endif;?>
+                            <?php if (!$this->fetch('nomes')): ?>
+                                <div class="col-sm-4">
+                                    <?php echo $this->Form->input('Entidade.apelido', [
+                                            'value' => $candidato['Candidatura']['apelido'],
+                                            'label' => 'Apelido',
+                                            'class' => 'form-control',
+                                            'id'    => 'codigo',
+                                    ]); ?>
+                                </div>
+                                <div class="col-sm-4">
+                                    <?php echo $this->Form->input('Entidade.nomes', [
+                                            'value' => $candidato['Candidatura']['nomes'],
+                                            'label' => 'Outros Nomes',
+                                            'class' => 'form-control',
+                                            'id'    => 'codigo',
+                                    ]); ?>
+                                </div>
+                            <?php else: ?>
+                                <?php echo $this->fetch('nomes') ?>
+                            <?php endif; ?>
                         </div>
                         <div class="row">
                             <div class="col-sm-6">
@@ -280,13 +280,13 @@
                         <div class="row">
                             <div class="col-sm-4">
                                 <?php echo $this->Form->input('AlunoNivelMedio.escola_nivel_medio_id', [
-                                        'default' => $candidato['Candidatura']['escola_nivel_medio_id'],
-                                        'label'   => 'Escola de Origem(Nivel Anterior)',
-                                        'class'   => 'form-control search-select',
-                                        'id'      => 'escolaOrigem',
-                                        'options' => $escolaNivelMedios,
-                                        'empty'   => 'Seleccione',
-                                    'required'=>false,
+                                        'default'  => $candidato['Candidatura']['escola_nivel_medio_id'],
+                                        'label'    => 'Escola de Origem(Nivel Anterior)',
+                                        'class'    => 'form-control search-select',
+                                        'id'       => 'escolaOrigem',
+                                        'options'  => $escolaNivelMedios,
+                                        'empty'    => 'Seleccione',
+                                        'required' => false,
                                 ]); ?>
                             </div>
                             <div class="col-sm-4">
@@ -365,84 +365,84 @@
                         </div>
                     </div>
                     <div id="step-3">
-                                <div class="row">
-                                    <div class="col-sm-3">
-                                        <?php echo $this->Form->label('EntidadeIdentificacao.documento_identificacao_id',
-                                                'Tipo de Documento'); ?>
-                                        <?php echo $this->Form->input('EntidadeIdentificacao.documento_identificacao_id',
-                                                [
-                                                        'default' => $candidato['Candidatura']['documento_identificacao_id'],
-                                                        'label'   => false,
-                                                        'div'     => false,
-                                                        'class'   => 'form-control',
-                                                        'id'      => 'codigo',
-                                                        'options' => $documento_identificacaos,
-                                                ]); ?>
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <?php echo $this->Form->label('EntidadeIdentificacao.numero',
-                                                'Numero de Documento'); ?>
-                                        <?php echo $this->Form->input('EntidadeIdentificacao.numero', [
-                                                'value' => $candidato['Candidatura']['documento_identificacao_numero'],
-                                                'label' => false,
-                                                'div'   => false,
-                                                'class' => 'form-control',
-                                                'id'    => 'codigo',
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <?php echo $this->Form->label('EntidadeIdentificacao.documento_identificacao_id',
+                                        'Tipo de Documento'); ?>
+                                <?php echo $this->Form->input('EntidadeIdentificacao.documento_identificacao_id',
+                                        [
+                                                'default' => $candidato['Candidatura']['documento_identificacao_id'],
+                                                'label'   => false,
+                                                'div'     => false,
+                                                'class'   => 'form-control',
+                                                'id'      => 'codigo',
+                                                'options' => $documento_identificacaos,
                                         ]); ?>
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <?php echo $this->Form->input('EntidadeIdentificacao.data_emissao', [
-                                                'value'              =>
-                                                        $candidato['Candidatura']['documento_identificacao_data_emissao'],
-                                                'label'              => 'Data de Emissao',
-                                                'class'              => 'form-control date-picker',
-                                                'id'                 => 'firstname',
-                                                'type'               => 'text',
-                                                'data-date-viewmode' => 'years',
-                                                'data-date-format'   => 'yyyy-mm-dd',
-                                                'after'              => '<span class="input-group-addon"> <i class="fa fa-calendar"></i>
+                            </div>
+                            <div class="col-sm-3">
+                                <?php echo $this->Form->label('EntidadeIdentificacao.numero',
+                                        'Numero de Documento'); ?>
+                                <?php echo $this->Form->input('EntidadeIdentificacao.numero', [
+                                        'value' => $candidato['Candidatura']['documento_identificacao_numero'],
+                                        'label' => false,
+                                        'div'   => false,
+                                        'class' => 'form-control',
+                                        'id'    => 'codigo',
+                                ]); ?>
+                            </div>
+                            <div class="col-sm-3">
+                                <?php echo $this->Form->input('EntidadeIdentificacao.data_emissao', [
+                                        'value'              =>
+                                                $candidato['Candidatura']['documento_identificacao_data_emissao'],
+                                        'label'              => 'Data de Emissao',
+                                        'class'              => 'form-control date-picker',
+                                        'id'                 => 'firstname',
+                                        'type'               => 'text',
+                                        'data-date-viewmode' => 'years',
+                                        'data-date-format'   => 'yyyy-mm-dd',
+                                        'after'              => '<span class="input-group-addon"> <i class="fa fa-calendar"></i>
                                              </span></div>',
-                                                'between'            => '<div class="input-group">',
-                                        ]); ?>
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <?php echo $this->Form->input('Entidade.nuit', [
-                                                'value' => $candidato['Candidatura']['nuit'],
-                                                'label' => 'NUIT',
-                                                'class' => 'form-control',
-                                                'id'    => 'codigo',
-                                        ]); ?>
-                                    </div>
-                                </div>
+                                        'between'            => '<div class="input-group">',
+                                ]); ?>
+                            </div>
+                            <div class="col-sm-3">
+                                <?php echo $this->Form->input('Entidade.nuit', [
+                                        'value' => $candidato['Candidatura']['nuit'],
+                                        'label' => 'NUIT',
+                                        'class' => 'form-control',
+                                        'id'    => 'codigo',
+                                ]); ?>
+                            </div>
+                        </div>
                         <div class="row">
                             <fieldset>
                                 <legend>Necessidades Especiais</legend>
-                                <?php foreach($necessidadeEspeciais as $necessidadeId =>$necessidadeValue):?>
-                                    <?php echo $this->Form->input('necessidade_especial.'.$necessidadeId,
-                                            array(
-                                            'wrapInput' => 'col col-md-3',
-                                            'label' => $necessidadeValue,
-                                            'type'=>'checkbox',
-                                            'class' => false
-                                    )); ?>
-                                <?php endforeach;?>
+                                <?php foreach ($necessidadeEspeciais as $necessidadeId => $necessidadeValue): ?>
+                                    <?php echo $this->Form->input('necessidade_especial.' . $necessidadeId,
+                                            [
+                                                    'wrapInput' => 'col col-md-3',
+                                                    'label'     => $necessidadeValue,
+                                                    'type'      => 'checkbox',
+                                                    'class'     => false,
+                                            ]); ?>
+                                <?php endforeach; ?>
                             </fieldset>
                         </div>
 
                         <div class="row">
-                        <div class="form-group">
-                            <div class="col-sm-2 col-sm-offset-3">
-                                <button class="btn btn-light-grey back-step btn-block">
-                                    <i class="icon-circle-arrow-left"></i> Back
-                                </button>
-                            </div>
-                            <div class="col-sm-2 col-sm-offset-3">
-                                <button class="btn btn-blue next-step btn-block">
-                                    Next <i class="icon-circle-arrow-right"></i>
-                                </button>
+                            <div class="form-group">
+                                <div class="col-sm-2 col-sm-offset-3">
+                                    <button class="btn btn-light-grey back-step btn-block">
+                                        <i class="icon-circle-arrow-left"></i> Back
+                                    </button>
+                                </div>
+                                <div class="col-sm-2 col-sm-offset-3">
+                                    <button class="btn btn-blue next-step btn-block">
+                                        Next <i class="icon-circle-arrow-right"></i>
+                                    </button>
+                                </div>
                             </div>
                         </div>
-                    </div>
                     </div>
                     <div id="step-4">
                         <h2 class="StepTitle">Confirmacao dos Dados</h2>
@@ -777,21 +777,21 @@
             ]),
     ])
     );
-  /*  $this->Js->get('#cidadeOrigem')->event('change', $this->Js->request([
-            'controller' => 'ajax',
-            'action'     => 'get_escolas_by_distrito',
-    ], [
-            'update'         => '#escolaOrigem',
-            'complete'       => '$("#escolaOrigem").trigger("liszt:updated")',
-            'async'          => true,
-            'method'         => 'post',
-            'dataExpression' => true,
-            'data'           => $this->Js->serializeForm([
-                    'isForm' => true,
-                    'inline' => true,
-            ]),
-    ])
-    );*/
+    /*  $this->Js->get('#cidadeOrigem')->event('change', $this->Js->request([
+              'controller' => 'ajax',
+              'action'     => 'get_escolas_by_distrito',
+      ], [
+              'update'         => '#escolaOrigem',
+              'complete'       => '$("#escolaOrigem").trigger("liszt:updated")',
+              'async'          => true,
+              'method'         => 'post',
+              'dataExpression' => true,
+              'data'           => $this->Js->serializeForm([
+                      'isForm' => true,
+                      'inline' => true,
+              ]),
+      ])
+      );*/
 ?>
 <?php
     echo $this->Html->script('/assets/plugins/jQuery-Smart-Wizard/js/jquery.smartWizard', ['block' => 'scriptBottom']);

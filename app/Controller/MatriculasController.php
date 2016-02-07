@@ -62,7 +62,10 @@
                         if ($processado) {
                             $this->Session->setFlash(__('Ficheiro de Renovação Processado com Sucesso'), 'default',
                                 ['class' => 'alert success']);
-                            $this->redirect(['action' => 'renovacao_matriculas', $this->request->data['Upload']['ano_lectivo']]);
+                            $this->redirect([
+                                'action' => 'renovacao_matriculas',
+                                $this->request->data['Upload']['ano_lectivo'],
+                            ]);
                         }
                     }
                 } else {
@@ -75,8 +78,8 @@
                 'order'  => 'ano DESC',
                 'fields' => [
                     'ano',
-                    'ano'
-                ]
+                    'ano',
+                ],
             ]);
             $this->set(compact('anoLectivos'));
         }
@@ -103,7 +106,7 @@
             $userId = $this->Session->read('Auth.User.id');
 
             $this->Matricula->Aluno->contain([
-                'Entidade'
+                'Entidade',
             ]);
             $aluno = $this->Matricula->Aluno->find('first', ['conditions' => ['Entidade.user_id' => $userId]]);
             if (empty($aluno)) {
@@ -113,18 +116,18 @@
             $this->paginate = [
                 'contain'    => [
                     'Aluno' => [
-                        'Entidade'
+                        'Entidade',
                     ],
                     'Curso',
                     'EstadoMatricula',
                     'AnoLectivo',
-                    'TipoMatricula'
+                    'TipoMatricula',
                 ],
                 'order'      => 'Matricula.data DESC',
                 'limit'      => '10',
                 'conditions' => [
-                    'Matricula.aluno_id' => $aluno['Aluno']['id']
-                ]
+                    'Matricula.aluno_id' => $aluno['Aluno']['id'],
+                ],
             ];
 
             $matriculas = $this->paginate('Matricula');
@@ -144,13 +147,14 @@
 
             $mes = date('m');
 
-            if($mes<9){
-                $anoLectivoAno  = Configure::read('OpenSGA.ano_lectivo');
-            } else{
-                $anoLectivoAno  = Configure::read('OpenSGA.ano_lectivo')+1;
+            if ($mes < 9) {
+                $anoLectivoAno = Configure::read('OpenSGA.ano_lectivo');
+            } else {
+                $anoLectivoAno = Configure::read('OpenSGA.ano_lectivo') + 1;
             }
 
-            $referenciaRenovacao = $this->Matricula->getReferenciaRenovacaoMatricula($aluno['Aluno']['id'],$anoLectivoAno);
+            $referenciaRenovacao = $this->Matricula->getReferenciaRenovacaoMatricula($aluno['Aluno']['id'],
+                $anoLectivoAno);
 
             $valorRenovacao = $this->Matricula->getValorRenovacaoMatricula($aluno['Aluno']['id']);
 
@@ -176,9 +180,9 @@
                         'tipo_matricula_id'    => 2,
                         'data between ? and ?' => [
                             $this->request->data['Matricula']['data_inicio'],
-                            $this->request->data['Matricula']['data_fim']
-                        ]
-                    ]
+                            $this->request->data['Matricula']['data_fim'],
+                        ],
+                    ],
                 ]);
 
 
@@ -191,7 +195,7 @@
         public function exportar_matriculas()
         {
             $this->Matricula->contain([
-                'AnoLectivo'
+                'AnoLectivo',
             ]);
             $matriculas = $this->Matricula->find('all', ['conditions' => ['AnoLectivo.ano' => 2013]]);
             die(debug($matriculas));
@@ -201,7 +205,7 @@
         {
             $this->Matricula->Aluno->contain([
                 'Entidade' => ['User'],
-                'Curso'
+                'Curso',
             ]);
 
             $aluno = $this->Matricula->Aluno->findById($alunoId);
@@ -224,7 +228,7 @@
                 $this->redirect([
                     'controller' => 'alunos',
                     'action'     => 'perfil_estudante',
-                    $this->request->data['Matricula']['aluno_id']
+                    $this->request->data['Matricula']['aluno_id'],
                 ]);
             }
 
@@ -257,15 +261,15 @@
             $this->paginate = [
                 'contain' => [
                     'Aluno' => [
-                        'Entidade'
+                        'Entidade',
                     ],
                     'Curso',
                     'EstadoMatricula',
                     'AnoLectivo',
-                    'TipoMatricula'
+                    'TipoMatricula',
                 ],
                 'order'   => 'Matricula.data DESC',
-                'limit'   => '10'
+                'limit'   => '10',
             ];
 
             $matriculas = $this->paginate('Matricula');
@@ -281,17 +285,17 @@
                     'PaisNascimento',
                     'EstadoCivil',
                     'EntidadeIdentificacao' => [
-                        'DocumentoIdentificacao'
-                    ]
+                        'DocumentoIdentificacao',
+                    ],
                 ],
                 'Curso'           => [
-                    'UnidadeOrganica'
+                    'UnidadeOrganica',
                 ],
                 'AlunoNivelMedio' => [
                     'EscolaNivelMedio' => [
-                        'Provincia'
-                    ]
-                ]
+                        'Provincia',
+                    ],
+                ],
             ]);
             $aluno = $this->Matricula->Aluno->findById($alunoId);
 
@@ -308,7 +312,7 @@
         {
             $this->Matricula->Aluno->contain([
                 'Entidade' => ['User'],
-                'Curso'
+                'Curso',
             ]);
 
             $aluno = $this->Matricula->Aluno->findById($alunoId);
@@ -320,13 +324,13 @@
             $this->Matricula->contain([
                 'Aluno' => [
                     'Entidade',
-                    'User'
+                    'User',
                 ],
                 'AnoLectivo',
                 'Curso',
                 'User'  => [
-                    'Entidade'
-                ]
+                    'Entidade',
+                ],
             ]);
             $aluno = $this->Matricula->findById($matriculaId);
 
@@ -346,16 +350,16 @@
                 'renderTo'     => 'container',
                 'type'         => 'line',
                 'marginRight'  => 130,
-                'marginBottom' => 25
+                'marginBottom' => 25,
             ];
 
             $chart->title = [
                 'text' => 'Monthly Average Temperature',
-                'x'    => -20
+                'x'    => -20,
             ];
             $chart->subtitle = [
                 'text' => 'Source: WorldClimate.com',
-                'x'    => -20
+                'x'    => -20,
             ];
 
             $chart->xAxis->categories = [
@@ -370,20 +374,20 @@
                 'Sep',
                 'Oct',
                 'Nov',
-                'Dec'
+                'Dec',
             ];
 
             $chart->yAxis = [
                 'title'     => [
-                    'text' => 'Temperature (°C)'
+                    'text' => 'Temperature (°C)',
                 ],
                 'plotLines' => [
                     [
                         'value' => 0,
                         'width' => 1,
-                        'color' => '#808080'
-                    ]
-                ]
+                        'color' => '#808080',
+                    ],
+                ],
             ];
             $chart->legend = [
                 'layout'        => 'vertical',
@@ -391,7 +395,7 @@
                 'verticalAlign' => 'top',
                 'x'             => -10,
                 'y'             => 100,
-                'borderWidth'   => 0
+                'borderWidth'   => 0,
             ];
 
             $chart->series[] = [
@@ -408,8 +412,8 @@
                     23.3,
                     18.3,
                     13.9,
-                    9.6
-                ]
+                    9.6,
+                ],
             ];
             $chart->series[] = [
                 'name' => 'New York',
@@ -425,8 +429,8 @@
                     20.1,
                     14.1,
                     8.6,
-                    2.5
-                ]
+                    2.5,
+                ],
             ];
             $chart->series[] = [
                 'name' => 'Berlin',
@@ -442,8 +446,8 @@
                     14.3,
                     9.0,
                     3.9,
-                    1.0
-                ]
+                    1.0,
+                ],
             ];
             $chart->series[] = [
                 'name' => 'London',
@@ -459,8 +463,8 @@
                     14.2,
                     10.3,
                     6.6,
-                    4.8
-                ]
+                    4.8,
+                ],
             ];
 
             $chart->tooltip->formatter = new HighchartJsExpr(
@@ -477,23 +481,27 @@
             $anolectivo = $this->Matricula->AnoLectivo->findByAno($ano);
             $this->Matricula->contain([
                 'Aluno' => [
-                    'Entidade'
+                    'Entidade',
                 ],
                 'Curso',
-                'AnoLectivo'
+                'AnoLectivo',
             ]);
 
             $this->paginate = [
                 'contain'    => [
                     'Aluno' => [
-                        'Entidade'
+                        'Entidade',
                     ],
                     'Curso',
-                    'AnoLectivo'
+                    'AnoLectivo',
                 ],
                 'order'      => 'Matricula.data DESC',
                 'limit'      => '10',
-                'conditions' => ['ano_lectivo_id' => $anolectivo['AnoLectivo']['id'], 'tipo_matricula_id' => 2,'estado_matricula_id NOT'=>5]
+                'conditions' => [
+                    'ano_lectivo_id'          => $anolectivo['AnoLectivo']['id'],
+                    'tipo_matricula_id'       => 2,
+                    'estado_matricula_id NOT' => 5,
+                ],
             ];
 
 
@@ -501,6 +509,7 @@
 
             $this->set(compact('anolectivo', 'matriculas', 'total'));
         }
+
         public function faculdade_renovar_matricula($alunoId)
         {
 
@@ -522,7 +531,7 @@
                 $this->redirect([
                     'controller' => 'alunos',
                     'action'     => 'perfil_estudante',
-                    $this->request->data['Matricula']['aluno_id']
+                    $this->request->data['Matricula']['aluno_id'],
                 ]);
             }
 
@@ -546,8 +555,8 @@
 
             if ($this->request->is('post') || $this->request->is('put')) {
 
-                $resultado =$this->Matricula->renovaMatricula($this->request->data);
-                if ($resultado[0]===true) {
+                $resultado = $this->Matricula->renovaMatricula($this->request->data);
+                if ($resultado[0] === true) {
                     $this->Session->setFlash(__('A Matricula do Aluno foi renovada com Sucesso'), 'default',
                         ['class' => 'alert alert-success']);
                 } else {
@@ -558,7 +567,7 @@
                 $this->redirect([
                     'controller' => 'alunos',
                     'action'     => 'perfil_estudante',
-                    $this->request->data['Matricula']['aluno_id']
+                    $this->request->data['Matricula']['aluno_id'],
                 ]);
             }
 
@@ -577,7 +586,7 @@
             $anoLectivos = $this->Matricula->AnoLectivo->find('list', [
                 'conditions' => ['AnoLectivo.ano >=' => $anoLectivoAno - 10],
                 'fields'     => ['AnoLectivo.ano'],
-                'order'      => ['AnoLectivo.ano Desc']
+                'order'      => ['AnoLectivo.ano Desc'],
             ]);
 
             $anoLectivoIds = array_keys($anoLectivos);
@@ -587,7 +596,7 @@
             foreach ($anoLectivos as $k => $v) {
                 $this->Matricula->contain([
                     'TipoMatricula',
-                    'AnoLectivo'
+                    'AnoLectivo',
                 ]);
                 $matricula = $this->Matricula->find('all', [
                     'conditions' => ['Matricula.ano_lectivo_id' => $k],
@@ -609,7 +618,7 @@
             }
             $this->Matricula->contain([
                 'AnoLectivo',
-                'TipoMatricula'
+                'TipoMatricula',
             ]);
 
             $this->set(compact('anoLectivos', 'matriculas', 'novosIngressos', 'renovacao', 'reingresso'));
@@ -626,7 +635,8 @@
          *
          * @fixme implementar com urgencia
          */
-        public function cancelar_renovacao_matricula($matriculaId){
+        public function cancelar_renovacao_matricula($matriculaId)
+        {
 
         }
 

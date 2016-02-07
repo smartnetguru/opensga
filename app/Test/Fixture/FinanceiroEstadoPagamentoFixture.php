@@ -1,23 +1,25 @@
 <?php
-/**
- * FinanceiroEstadoPagamentoFixture
- *
- */
-class FinanceiroEstadoPagamentoFixture extends CakeTestFixture {
 
-/**
- * Import
- *
- * @var array
- */
-	public $import = array('model' => 'FinanceiroEstadoPagamento');
+	/**
+	 * FinanceiroEstadoPagamentoFixture
+	 *
+	 */
+	class FinanceiroEstadoPagamentoFixture extends CakeTestFixture
+	{
 
-/**
- * Records
- *
- * @var array
- */
-	public $records = array(
-	);
+		/**
+		 * Import
+		 *
+		 * @var array
+		 */
+		public $import = ['model' => 'FinanceiroEstadoPagamento'];
 
-}
+		/**
+		 * Records
+		 *
+		 * @var array
+		 */
+		public $records = [
+		];
+
+	}

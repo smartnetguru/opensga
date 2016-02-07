@@ -2,9 +2,11 @@
 
     App::uses('CendAppController', 'Cend.Controller');
 
-    class CandidaturasController extends CendAppController {
+    class CandidaturasController extends CendAppController
+    {
 
         public $uses = ['Candidatura'];
+
         /**
          * Lista de Candidatos não Matriculados.
          *
@@ -12,24 +14,29 @@
          *
          * @return void
          */
-        public function index() {
+        public function index()
+        {
 
             $this->Candidatura->Curso->contain([
-                'CursosTurno'
+                'CursosTurno',
             ]);
-            $cursos = $this->Candidatura->Curso->find('list',['conditions'=>['CursosTurno.turno_id'=>3]]);
-            $conditions = ['Candidatura.estado_candidatura_id'=>2,'Curso.id'=>array_keys($cursos)];
+            $cursos = $this->Candidatura->Curso->find('list', ['conditions' => ['CursosTurno.turno_id' => 3]]);
+            $conditions = ['Candidatura.estado_candidatura_id' => 2, 'Curso.id' => array_keys($cursos)];
 
-            $this->paginate = array(
+            $this->paginate = [
                 'conditions' => $conditions,
-                'order'=>array('Candidatura.id'=>'DESC'),
-                'contain' => array(
-                    'AlunoViaAdmissao', 'EscolaNivelMedio', 'Curso', 'UnidadeOrganica', 'Genero', 'ProvinciaNascimento'
-                )
-            );
+                'order'      => ['Candidatura.id' => 'DESC'],
+                'contain'    => [
+                    'AlunoViaAdmissao',
+                    'EscolaNivelMedio',
+                    'Curso',
+                    'UnidadeOrganica',
+                    'Genero',
+                    'ProvinciaNascimento',
+                ],
+            ];
             $this->set('candidaturas', $this->paginate());
         }
-
 
 
     }

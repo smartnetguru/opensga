@@ -28,43 +28,43 @@
                 'foreignKey' => 'entidade_id',
                 'conditions' => '',
                 'fields'     => '',
-                'order'      => ''
+                'order'      => '',
             ],
             'FinanceiroConta'          => [
                 'className'  => 'FinanceiroConta',
                 'foreignKey' => 'financeiro_conta_id',
                 'conditions' => '',
                 'fields'     => '',
-                'order'      => ''
+                'order'      => '',
             ],
             'FinanceiroEstadoDeposito' => [
                 'className'  => 'FinanceiroEstadoDeposito',
                 'foreignKey' => 'financeiro_estado_deposito_id',
                 'conditions' => '',
                 'fields'     => '',
-                'order'      => ''
+                'order'      => '',
             ],
             'FinanceiroFormaDeposito'  => [
                 'className'  => 'FinanceiroFormaDeposito',
                 'foreignKey' => 'financeiro_forma_deposito_id',
                 'conditions' => '',
                 'fields'     => '',
-                'order'      => ''
+                'order'      => '',
             ],
             'FinanceiroBanco'          => [
                 'className'  => 'FinanceiroBanco',
                 'foreignKey' => 'financeiro_banco_id',
                 'conditions' => '',
                 'fields'     => '',
-                'order'      => ''
+                'order'      => '',
             ],
             'FinanceiroTransacao'      => [
                 'className'  => 'FinanceiroTransacao',
                 'foreignKey' => 'financeiro_transacao_id',
                 'conditions' => '',
                 'fields'     => '',
-                'order'      => ''
-            ]
+                'order'      => '',
+            ],
         ];
 
         public function depositaValor($entidadeId, $numeroComprovativo, $valor, $referenciaAluno, $dataDeposito)
@@ -82,7 +82,7 @@
                     'valor'                         => $valor,
                     'referencia_deposito'           => $referenciaAluno,
                     'id_transacao_banco'            => $numeroComprovativo,
-                    'financeiro_ccdonta_id'           => $financeiroConta['FinanceiroConta']['id'],
+                    'financeiro_ccdonta_id'         => $financeiroConta['FinanceiroConta']['id'],
                     'data_deposito'                 => $dataDeposito,
                     'data_reconciliacao'            => $dataDeposito,
                     'financeiro_estado_deposito_id' => 1,
@@ -92,36 +92,39 @@
                     'valor'                         => $valor,
                     'semestre_lectivo_id'           => Configure::read('OpenSGA.semestre_lectivo_id'),
                     'referencia_deposito'           => $referenciaAluno,
-                    'id_transacao_banco'            => $numeroComprovativo
+                    'id_transacao_banco'            => $numeroComprovativo,
 
-                ]
+                ],
             ];
 
 
             $arrayTransacao = [
                 'FinanceiroTransacao' => [
-                    'financeiro_tipo_transacao_id'              => 1,
+                    'financeiro_tipo_transacao_id'   => 1,
                     'valor'                          => $valor,
                     'entidade_id'                    => $entidadeId,
                     'financeiro_conta_id'            => $financeiroConta['FinanceiroConta']['id'],
                     'detalhes'                       => '',
                     'financeiro_estado_transacao_id' => 1,
-                ]
+                ],
             ];
             $this->FinanceiroTransacao->create();
             $this->FinanceiroTransacao->save($arrayTransacao);
             $arrayNovoDeposito['FinanceiroDeposito']['financeiro_transacao_id'] = $this->FinanceiroTransacao->id;
 
             //Primeiro verificar se o deposito nao foi efectuado
-            $depositoExiste = $this->findByReferenciaDepositoAndNumeroComprovativo($referenciaAluno, $numeroComprovativo);
+            $depositoExiste = $this->findByReferenciaDepositoAndNumeroComprovativo($referenciaAluno,
+                $numeroComprovativo);
             if (empty($depositoExiste)) {
                 $this->create();
                 $this->save($arrayNovoDeposito);
                 $datasource->commit();
-                return [true,$this->id];
+
+                return [true, $this->id];
             } else {
                 $datasource->rollback();
-                return [false,$depositoExiste['FinanceiroDeposito']['id']];
+
+                return [false, $depositoExiste['FinanceiroDeposito']['id']];
             }
         }
 
@@ -166,9 +169,9 @@
                     'valor'                         => $valor,
                     'semestre_lectivo_id'           => Configure::read('OpenSGA.semestre_lectivo_id'),
                     'referencia_deposito'           => $referenciaAluno,
-                    'id_transacao_banco'            => $numeroComprovativo
+                    'id_transacao_banco'            => $numeroComprovativo,
 
-                ]
+                ],
             ];
 
 
@@ -180,7 +183,7 @@
                     'financeiro_conta_id'            => $financeiroConta['FinanceiroConta']['id'],
                     'detalhes'                       => '',
                     'financeiro_estado_transacao_id' => 1,
-                ]
+                ],
             ];
             $this->FinanceiroTransacao->create();
             $this->FinanceiroTransacao->save($arrayTransacao);

@@ -26,42 +26,42 @@
 <?php $this->start('menu-itens') ?>
     <div class="col-sm-2">
         <?php echo $this->Html->link('<i class="fa fa-print  fa-2x"></i>Lista de Estudantes',
-            ['controller' => 'turmas', 'action' => 'print_lista_estudantes', $turma['Turma']['id']],
-            ['escape' => false, 'class' => 'btn btn-icon btn-block']) ?>
+                ['controller' => 'turmas', 'action' => 'print_lista_estudantes', $turma['Turma']['id']],
+                ['escape' => false, 'class' => 'btn btn-icon btn-block']) ?>
 
     </div>
     <div class="col-sm-2">
         <?php echo $this->Html->link('<i class="fa fa-refresh  fa-2x"></i>Associar Docente',
-            ['controller' => 'turmas', 'action' => 'adicionar_docente', $turma['Turma']['id']],
-            ['escape' => false, 'class' => 'btn btn-icon btn-block']) ?>
+                ['controller' => 'turmas', 'action' => 'adicionar_docente', $turma['Turma']['id']],
+                ['escape' => false, 'class' => 'btn btn-icon btn-block']) ?>
 
     </div>
-<?php if($turma['Turma']['estado_turma_id']==1):?>
+<?php if ($turma['Turma']['estado_turma_id'] == 1): ?>
     <div class="col-sm-2">
         <?php echo $this->Html->link('<i class="fa fa-plus  fa-2x"></i>Criar Avaliacao',
-            ['controller' => 'turmas', 'action' => 'criar_avaliacao', $turma['Turma']['id']],
-            ['escape' => false, 'class' => 'btn btn-icon btn-block']) ?>
+                ['controller' => 'turmas', 'action' => 'criar_avaliacao', $turma['Turma']['id']],
+                ['escape' => false, 'class' => 'btn btn-icon btn-block']) ?>
 
     </div>
-<?php endif;?>
+<?php endif; ?>
     <div class="col-sm-2">
         <?php echo $this->Html->link('<i class="fa fa-print  fa-2x"></i>Exportar Docente',
-            ['controller' => 'turmas', 'action' => 'print_pauta', $turma['Turma']['id']],
-            ['escape' => false, 'class' => 'btn btn-icon btn-block']) ?>
+                ['controller' => 'turmas', 'action' => 'print_pauta', $turma['Turma']['id']],
+                ['escape' => false, 'class' => 'btn btn-icon btn-block']) ?>
 
     </div>
     <div class="col-sm-2">
         <?php echo $this->Html->link('<i class="fa fa-refresh  fa-2x"></i>Importar Pauta',
-            ['controller' => 'turmas', 'action' => 'importar_pauta', $turma['Turma']['id']],
-            ['escape' => false, 'class' => 'btn btn-icon btn-block']) ?>
+                ['controller' => 'turmas', 'action' => 'importar_pauta', $turma['Turma']['id']],
+                ['escape' => false, 'class' => 'btn btn-icon btn-block']) ?>
 
     </div>
-    <?php if($turma['Turma']['estado_turma_id']==1):?>
+<?php if ($turma['Turma']['estado_turma_id'] == 1): ?>
     <div class="col-sm-2">
         <?php echo $this->Html->link('<i class="glyphicon glyphicon-ok  fa-2x"></i>Fechar Turma',
-            ['controller' => 'turmas', 'action' => 'fechar_turma', $turma['Turma']['id']],
-            ['escape' => false, 'class' => 'btn btn-icon btn-block']) ?>
+                ['controller' => 'turmas', 'action' => 'fechar_turma', $turma['Turma']['id']],
+                ['escape' => false, 'class' => 'btn btn-icon btn-block']) ?>
 
     </div>
-    <?php endif;?>
+<?php endif; ?>
 <?php $this->end(); ?>

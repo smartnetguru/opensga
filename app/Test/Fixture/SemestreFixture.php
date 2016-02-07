@@ -1,23 +1,25 @@
 <?php
-/**
- * SemestreFixture
- *
- */
-class SemestreFixture extends CakeTestFixture {
 
-/**
- * Import
- *
- * @var array
- */
-	public $import = array('table' => 'semestres');
+	/**
+	 * SemestreFixture
+	 *
+	 */
+	class SemestreFixture extends CakeTestFixture
+	{
 
-/**
- * Records
- *
- * @var array
- */
-	public $records = array(
-	);
+		/**
+		 * Import
+		 *
+		 * @var array
+		 */
+		public $import = ['table' => 'semestres'];
 
-}
+		/**
+		 * Records
+		 *
+		 * @var array
+		 */
+		public $records = [
+		];
+
+	}

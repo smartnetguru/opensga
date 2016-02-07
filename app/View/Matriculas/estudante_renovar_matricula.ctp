@@ -23,8 +23,11 @@
 <p>Valor da Renovacao: <strong><?= $valorRenovacao ?>MT</strong></p>
 
 <h3>Como confirmar a Renovacao de Matricula</h3>
-<p>Apos a realizacao do pagamento de servico no Millennium BIM, o banco irá notificar a Direccao de Registo Academico sobre o pagamento em 24h úteis.</p>
-<p>Sendo assim, o estudante deve aceder ao SIGA 48h  depois de fazer o pagamento, para verificar se a renovacao foi confirmada.</p>
-<p>Se a renovacao não estiver confirmada no sistema, o estudante deverá entrar em contacto com a Direccao de Registo Academico</p>
+<p>Apos a realizacao do pagamento de servico no Millennium BIM, o banco irá notificar a Direccao de Registo Academico
+    sobre o pagamento em 24h úteis.</p>
+<p>Sendo assim, o estudante deve aceder ao SIGA 48h depois de fazer o pagamento, para verificar se a renovacao foi
+    confirmada.</p>
+<p>Se a renovacao não estiver confirmada no sistema, o estudante deverá entrar em contacto com a Direccao de Registo
+    Academico</p>
 
-<?php echo $this->Html->link('Voltar',array('action'=>'index'),array('class'=>'btn btn-green'))?>
+<?php echo $this->Html->link('Voltar', ['action' => 'index'], ['class' => 'btn btn-green']) ?>

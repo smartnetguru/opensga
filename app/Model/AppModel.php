@@ -25,7 +25,7 @@
             if (Configure::read('debug') > 0) {
                 $this->Behaviors->unload('Auditable.Auditable');
             }
-            if(isset($this->filterArgs)){
+            if (isset($this->filterArgs)) {
                 $this->Behaviors->load('Search.Searchable');
             }
         }

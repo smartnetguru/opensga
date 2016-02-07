@@ -1,1 +1,1 @@
-<?php $this->extend('/Common/Inscricaos/ver_inscricoes_aluno')?>
+<?php $this->extend('/Common/Inscricaos/ver_inscricoes_aluno') ?>

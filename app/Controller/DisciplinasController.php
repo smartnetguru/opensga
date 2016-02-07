@@ -42,14 +42,14 @@
                         'DisciplinaUnidadeOrganica' => [
                             'disciplina_id'       => $disciplina['Disciplina']['id'],
                             'unidade_organica_id' => $unidade_organica_id,
-                            'estado_objecto_id'   => 1
-                        ]
+                            'estado_objecto_id'   => 1,
+                        ],
                     ];
                     $disciplina_unidade_existe = $this->Disciplina->DisciplinaUnidadeOrganica->find('first', [
                         'conditions' => [
                             'disciplina_id'       => $disciplina['Disciplina']['id'],
-                            'unidade_organica_id' => $unidade_organica_id
-                        ]
+                            'unidade_organica_id' => $unidade_organica_id,
+                        ],
                     ]);
                     if (empty($disciplina_unidade_existe)) {
                         $this->Disciplina->DisciplinaUnidadeOrganica->create();
@@ -98,12 +98,13 @@
                 $unidadeOrganicaId = $this->Session->read('Auth.User.unidade_organica_id');
                 $this->request->data['Disciplina']['unidade_organica_id'] = $unidadeOrganicaId;
                 $resultado = $this->Disciplina->cadastraDisciplina($this->request->data);
-                if($resultado===true){
+                if ($resultado === true) {
                     $this->Session->setFlash(__('Dados Gravados com Sucesso'), 'default',
                         ['class' => 'alert alert-success']);
+
                     return $this->redirect(['action' => 'index']);
-                } else{
-                    $this->Session->setFlash(__('Problemas ao Registrar dados:'.$resultado['errors']), 'default',
+                } else {
+                    $this->Session->setFlash(__('Problemas ao Registrar dados:' . $resultado['errors']), 'default',
                         ['class' => 'alert alert-danger']);
                 }
 
@@ -120,8 +121,8 @@
                 'conditions' => ['DisciplinaUnidadeOrganica.unidade_organica_id' => $unidadeOrganicaId],
                 'order'      => 'Disciplina.name ASC',
                 'contain'    => [
-                    'Disciplina'
-                ]
+                    'Disciplina',
+                ],
             ];
             $disciplinas = $this->paginate('DisciplinaUnidadeOrganica');
             $this->set('disciplinas', $disciplinas);

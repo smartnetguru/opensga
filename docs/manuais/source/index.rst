@@ -29,17 +29,17 @@ Os módulos do SIGA permitem que instituições de ensino automatizem todos os s
 
 
 .. toctree::
-   :maxdepth: 5
-   :numbered:
-   
-   acesso
-   administrador/index
-   dra/index
-   faculdade/index
-   docente/index
-   reitoria/index
-   cooperacao/index
-   planificacao/index
-   estudante/index
-   desenvolvedor
-   todo
+:maxdepth: 5
+       :numbered:
+
+       acesso
+       administrador/index
+       dra/index
+       faculdade/index
+       docente/index
+       reitoria/index
+       cooperacao/index
+       planificacao/index
+       estudante/index
+       desenvolvedor
+       todo

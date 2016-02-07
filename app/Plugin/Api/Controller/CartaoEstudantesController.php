@@ -28,13 +28,13 @@
                         'name',
                         'apelido',
                         'data_nascimento',
-                        'nomes'
+                        'nomes',
                     ],
-                    'Genero'
+                    'Genero',
                 ],
                 'Curso'    => [
-                    'UnidadeOrganica'
-                ]
+                    'UnidadeOrganica',
+                ],
             ]);
             $aluno = $this->Aluno->findByCodigo($codigo_aluno);
             if (empty($aluno)) {
@@ -55,7 +55,7 @@
                 'curso'            => $aluno['Curso']['name'],
                 'faculdade'        => $faculdade['name'],
                 'codigo_curso'     => $aluno['Curso']['codigo'],
-                'codigo_faculdade' => $faculdade['codigo']
+                'codigo_faculdade' => $faculdade['codigo'],
 
             ];
             $this->set('dados_cartao', $dados_cartao);
@@ -80,13 +80,13 @@
                         'name',
                         'apelido',
                         'data_nascimento',
-                        'nomes'
+                        'nomes',
                     ],
-                    'Genero'
+                    'Genero',
                 ],
                 'Curso'    => [
-                    'UnidadeOrganica'
-                ]
+                    'UnidadeOrganica',
+                ],
             ]);
             $aluno = $this->Aluno->findByCodigo($codigo_aluno);
 

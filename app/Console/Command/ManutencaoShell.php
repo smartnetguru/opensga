@@ -31,7 +31,7 @@
             'Entidade',
             'User',
             'SmsNotification',
-            'Docente'
+            'Docente',
         ];
 
 
@@ -64,7 +64,7 @@
                 if (!empty($funcionario)) {
                     $grupos['GroupsUser'] = [
                         'user_id'  => $user['User']['id'],
-                        'group_id' => 2
+                        'group_id' => 2,
                     ];
                     $grupoExiste = $this->User->GroupsUser->findByUserIdAndGroupId($user['User']['id'], 2);
                     if (empty($grupoExiste)) {
@@ -80,7 +80,7 @@
                 if (!empty($docente)) {
                     $grupos['GroupsUser'] = [
                         'user_id'  => $user['User']['id'],
-                        'group_id' => 4
+                        'group_id' => 4,
                     ];
                     $grupoExiste = $this->User->GroupsUser->findByUserIdAndGroupId($user['User']['id'], 4);
                     if (empty($grupoExiste)) {
@@ -95,7 +95,7 @@
                 if (!empty($aluno)) {
                     $grupos['GroupsUser'] = [
                         'user_id'  => $user['User']['id'],
-                        'group_id' => 2
+                        'group_id' => 2,
                     ];
                     $grupoExiste = $this->User->GroupsUser->findByUserIdAndGroupId($user['User']['id'], 2);
                     if (empty($grupoExiste)) {
@@ -117,9 +117,9 @@
                 $ultimaMatricula = $this->Aluno->Matricula->find('first', [
                     'conditions' => [
                         'Matricula.aluno_id'            => $aluno['Aluno']['id'],
-                        'Matricula.estado_matricula_id' => 1
+                        'Matricula.estado_matricula_id' => 1,
                     ],
-                    'order'      => 'AnoLectivo.ano DESC'
+                    'order'      => 'AnoLectivo.ano DESC',
                 ]);
                 $anoFim = $ultimaMatricula['AnoLectivo']['ano'];
                 $anoInicio = $aluno['Aluno']['ano_ingresso'];
@@ -140,7 +140,7 @@
                                 'ano_lectivo_id'      => $k,
                                 'tipo_matricula_id'   => 2,
 
-                            ]
+                            ],
                         ];
 
                         $this->Aluno->Matricula->create();
@@ -196,8 +196,8 @@
                             'nomes'                  => 'firstname',
                             'telemovel'              => $candidatoGraduacao['CandidatoGraduacao']['telemovel'],
                             'data_defesa'            => $candidatoGraduacao['CandidatoGraduacao']['data_defesa'],
-                            'media_defesa'           => $candidatoGraduacao['CandidatoGraduacao']['media_defesa']
-                        ]
+                            'media_defesa'           => $candidatoGraduacao['CandidatoGraduacao']['media_defesa'],
+                        ],
                     ];
 
                     if (!$this->Aluno->CandidatoGraduacao->confirmaDados($arrayDados)) {
@@ -212,7 +212,7 @@
                         'HistoricoCurso' => [
                             'data_conclusao' => date('Y-m-d'),
                             'nota_final'     => 10,
-                            'funcionario_id' => 1
+                            'funcionario_id' => 1,
                         ],
                         'Aluno'          => [
                             'observacao' => '',
@@ -224,8 +224,8 @@
                                 'tmp_name' => '',
                                 'error'    => 4,
                                 'size'     => 0,
-                            ]
-                        ]
+                            ],
+                        ],
                     ];
                     if (!$this->Aluno->concluirNivel($dataConclusaoNivel)) {
                         debug($dataConclusaoNivel);
@@ -254,13 +254,13 @@
             }
         }
 
-        public function ajustaAlunosCurso(){
-            $alunos = $this->Aluno->find('all',['conditions'=>['curso_id is null']]);
-            foreach($alunos as $aluno){
+        public function ajustaAlunosCurso()
+        {
+            $alunos = $this->Aluno->find('all', ['conditions' => ['curso_id is null']]);
+            foreach ($alunos as $aluno) {
                 debug($aluno);
             }
         }
-
 
 
     }

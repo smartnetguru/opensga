@@ -4,7 +4,7 @@
         <div class="<?php echo $classeEstado ?>">
             <strong><?php echo $ir['mensagem']; ?></strong></div>
 
-    <?php
+        <?php
     }
 ?>
 <div class="row">
@@ -26,8 +26,8 @@
                     <div data-provides="fileupload" class="fileupload fileupload-new">
                         <div class="user-image">
                             <div
-                                class="fileupload-new thumbnail"><?php echo $this->Html->image($signedUrl,
-                                    ['style' => 'max-width:330px;max-height:380px']); ?>
+                                    class="fileupload-new thumbnail"><?php echo $this->Html->image($signedUrl,
+                                        ['style' => 'max-width:330px;max-height:380px']); ?>
                             </div>
                         </div>
                     </div>
@@ -122,49 +122,49 @@
                                                 <div class="visible-md visible-lg hidden-sm hidden-xs">
 
                                                     <?= $this->Html->link('<i class="fa fa-group"></i>',
-                                                        [
-                                                            'controller' => 'turmas',
-                                                            'action'     => 'ver_turma',
-                                                            $inscricao['Turma']['id'],
-                                                        ], [
-                                                            'class'               => 'btn btn-xs btn-green tooltips',
-                                                            'data-placement'      => 'top',
-                                                            'data-original-title' => 'Ver Turma',
-                                                            'escape'              => false
-                                                        ]); ?>
+                                                            [
+                                                                    'controller' => 'turmas',
+                                                                    'action'     => 'ver_turma',
+                                                                    $inscricao['Turma']['id'],
+                                                            ], [
+                                                                    'class'               => 'btn btn-xs btn-green tooltips',
+                                                                    'data-placement'      => 'top',
+                                                                    'data-original-title' => 'Ver Turma',
+                                                                    'escape'              => false,
+                                                            ]); ?>
                                                     <?php
                                                         if ($this->Time->isToday($inscricao['Inscricao']['data'],
-                                                                $this->Session->read('Auth.User.timezone')) && $inscricao['Inscricao']['created_by'] == $this->Session->read('Auth.User.id')
+                                                                        $this->Session->read('Auth.User.timezone')) && $inscricao['Inscricao']['created_by'] == $this->Session->read('Auth.User.id')
                                                         ) {
                                                             echo $this->Form->postLink('<i class="fa fa-times fa fa-white"></i>',
-                                                                [
-                                                                    'action'    => 'apagar_inscricao',
-                                                                    $inscricao['Inscricao']['id'],
-                                                                    'faculdade' => true
-                                                                ], [
-                                                                    'escape' => false,
-                                                                    'class'  => 'btn btn-xs btn-red tooltips',
-                                                                    'data-placement'      => 'top',
-                                                                    'data-original-title' => 'Apagar Inscricao',
-                                                                ],
-                                                                __('Tem Certeza que pretende apagar a inscricao de   %s?',
-                                                                    $inscricao['Turma']['Disciplina']['name']));
+                                                                    [
+                                                                            'action'    => 'apagar_inscricao',
+                                                                            $inscricao['Inscricao']['id'],
+                                                                            'faculdade' => true,
+                                                                    ], [
+                                                                            'escape'              => false,
+                                                                            'class'               => 'btn btn-xs btn-red tooltips',
+                                                                            'data-placement'      => 'top',
+                                                                            'data-original-title' => 'Apagar Inscricao',
+                                                                    ],
+                                                                    __('Tem Certeza que pretende apagar a inscricao de   %s?',
+                                                                            $inscricao['Turma']['Disciplina']['name']));
                                                         }
                                                     ?>
                                                     <?php
-                                                            echo $this->Form->postLink('<i class="clip clip-file-remove fa fa-white"></i>',
+                                                        echo $this->Form->postLink('<i class="clip clip-file-remove fa fa-white"></i>',
                                                                 [
-                                                                    'action'    => 'anular_inscricao',
-                                                                    $inscricao['Inscricao']['id'],
-                                                                    'faculdade' => true
+                                                                        'action'    => 'anular_inscricao',
+                                                                        $inscricao['Inscricao']['id'],
+                                                                        'faculdade' => true,
                                                                 ], [
-                                                                    'escape' => false,
-                                                                    'class'  => 'btn btn-xs btn-yellow tooltips',
-                                                                    'data-placement'      => 'top',
-                                                                    'data-original-title' => 'Anular Inscricao',
+                                                                        'escape'              => false,
+                                                                        'class'               => 'btn btn-xs btn-yellow tooltips',
+                                                                        'data-placement'      => 'top',
+                                                                        'data-original-title' => 'Anular Inscricao',
                                                                 ],
                                                                 __('Tem Certeza que pretende Anular a inscricao de   %s?',
-                                                                    $inscricao['Turma']['Disciplina']['name']));
+                                                                        $inscricao['Turma']['Disciplina']['name']));
 
                                                     ?>
 
@@ -178,15 +178,15 @@
                                                         <ul role="menu" class="dropdown-menu pull-right">
                                                             <li role="presentation">
                                                                 <?= $this->Html->link('<i class="fa fa-eye">Ver Turma</i>',
-                                                                    [
-                                                                        'controller' => 'turmas',
-                                                                        'action'     => 'ver_turma',
-                                                                        $inscricao['Turma']['id'],
-                                                                    ], [
-                                                                        'role'     => 'menuitem',
-                                                                        'tabindex' => '-1',
-                                                                        'escape'   => false
-                                                                    ]); ?>
+                                                                        [
+                                                                                'controller' => 'turmas',
+                                                                                'action'     => 'ver_turma',
+                                                                                $inscricao['Turma']['id'],
+                                                                        ], [
+                                                                                'role'     => 'menuitem',
+                                                                                'tabindex' => '-1',
+                                                                                'escape'   => false,
+                                                                        ]); ?>
                                                             </li>
 
 
@@ -196,7 +196,7 @@
                                             </td>
 
                                         </tr>
-                                    <?php
+                                        <?php
                                     endforeach;
                                 ?>
                                 </tbody>
@@ -248,28 +248,28 @@
                                         <div class="visible-md visible-lg hidden-sm hidden-xs">
 
                                             <?= $this->Html->link('<i class="fa fa-eye"></i>',
-                                                [
-                                                    'controller' => 'inscricaos',
-                                                    'action'     => 'ver_detalhes_inscricao',
-                                                    $inscricao['Inscricao']['id']
-                                                ], [
-                                                    'class'               => 'btn btn-xs btn-green tooltips',
-                                                    'data-placement'      => 'top',
-                                                    'data-original-title' => 'Ver Detalhes',
-                                                    'escape'              => false
-                                                ]); ?>
+                                                    [
+                                                            'controller' => 'inscricaos',
+                                                            'action'     => 'ver_detalhes_inscricao',
+                                                            $inscricao['Inscricao']['id'],
+                                                    ], [
+                                                            'class'               => 'btn btn-xs btn-green tooltips',
+                                                            'data-placement'      => 'top',
+                                                            'data-original-title' => 'Ver Detalhes',
+                                                            'escape'              => false,
+                                                    ]); ?>
 
                                             <?= $this->Html->link('<i class="fa fa-group"></i>',
-                                                [
-                                                    'controller' => 'turmas',
-                                                    'action'     => 'ver_turma',
-                                                    $inscricao['Turma']['id'],
-                                                ], [
-                                                    'class'               => 'btn btn-xs btn-green tooltips',
-                                                    'data-placement'      => 'top',
-                                                    'data-original-title' => 'Ver Turma',
-                                                    'escape'              => false
-                                                ]); ?>
+                                                    [
+                                                            'controller' => 'turmas',
+                                                            'action'     => 'ver_turma',
+                                                            $inscricao['Turma']['id'],
+                                                    ], [
+                                                            'class'               => 'btn btn-xs btn-green tooltips',
+                                                            'data-placement'      => 'top',
+                                                            'data-original-title' => 'Ver Turma',
+                                                            'escape'              => false,
+                                                    ]); ?>
 
                                         </div>
                                         <div class="visible-xs visible-sm hidden-md hidden-lg">
@@ -281,25 +281,25 @@
                                                 <ul role="menu" class="dropdown-menu pull-right">
                                                     <li role="presentation">
                                                         <?= $this->Html->link('<i class="fa fa-eye">Ver Detalhes</i>',
-                                                            [
-                                                                'controller' => 'inscricaos',
-                                                                'action'     => 'ver_detalhes_inscricao',
-                                                                $inscricao['Inscricao']['id']
-                                                            ], [
-                                                                'role'     => 'menuitem',
-                                                                'tabindex' => '-1',
-                                                                'escape'   => false
-                                                            ]); ?>
+                                                                [
+                                                                        'controller' => 'inscricaos',
+                                                                        'action'     => 'ver_detalhes_inscricao',
+                                                                        $inscricao['Inscricao']['id'],
+                                                                ], [
+                                                                        'role'     => 'menuitem',
+                                                                        'tabindex' => '-1',
+                                                                        'escape'   => false,
+                                                                ]); ?>
                                                         <?= $this->Html->link('<i class="fa fa-group">Ver Turma</i>',
-                                                            [
-                                                                'controller' => 'turmas',
-                                                                'action'     => 'ver_turma',
-                                                                $inscricao['Turma']['id'],
-                                                            ], [
-                                                                'role'     => 'menuitem',
-                                                                'tabindex' => '-1',
-                                                                'escape'   => false
-                                                            ]); ?>
+                                                                [
+                                                                        'controller' => 'turmas',
+                                                                        'action'     => 'ver_turma',
+                                                                        $inscricao['Turma']['id'],
+                                                                ], [
+                                                                        'role'     => 'menuitem',
+                                                                        'tabindex' => '-1',
+                                                                        'escape'   => false,
+                                                                ]); ?>
                                                     </li>
 
 
@@ -309,7 +309,7 @@
                                     </td>
 
                                 </tr>
-                            <?php
+                                <?php
                             endforeach;
                         ?>
                         </tbody>
@@ -346,28 +346,28 @@
                                         <div class="visible-md visible-lg hidden-sm hidden-xs">
 
                                             <?= $this->Html->link('<i class="fa fa-eye"></i>',
-                                                [
-                                                    'controller' => 'inscricaos',
-                                                    'action'     => 'ver_detalhes_inscricao',
-                                                    $inscricao['Inscricao']['id']
-                                                ], [
-                                                    'class'               => 'btn btn-xs btn-green tooltips',
-                                                    'data-placement'      => 'top',
-                                                    'data-original-title' => 'Ver Detalhes',
-                                                    'escape'              => false
-                                                ]); ?>
+                                                    [
+                                                            'controller' => 'inscricaos',
+                                                            'action'     => 'ver_detalhes_inscricao',
+                                                            $inscricao['Inscricao']['id'],
+                                                    ], [
+                                                            'class'               => 'btn btn-xs btn-green tooltips',
+                                                            'data-placement'      => 'top',
+                                                            'data-original-title' => 'Ver Detalhes',
+                                                            'escape'              => false,
+                                                    ]); ?>
 
                                             <?= $this->Html->link('<i class="fa fa-group"></i>',
-                                                [
-                                                    'controller' => 'turmas',
-                                                    'action'     => 'ver_turma',
-                                                    $inscricao['Turma']['id'],
-                                                ], [
-                                                    'class'               => 'btn btn-xs btn-green tooltips',
-                                                    'data-placement'      => 'top',
-                                                    'data-original-title' => 'Ver Turma',
-                                                    'escape'              => false
-                                                ]); ?>
+                                                    [
+                                                            'controller' => 'turmas',
+                                                            'action'     => 'ver_turma',
+                                                            $inscricao['Turma']['id'],
+                                                    ], [
+                                                            'class'               => 'btn btn-xs btn-green tooltips',
+                                                            'data-placement'      => 'top',
+                                                            'data-original-title' => 'Ver Turma',
+                                                            'escape'              => false,
+                                                    ]); ?>
 
                                         </div>
                                         <div class="visible-xs visible-sm hidden-md hidden-lg">
@@ -379,25 +379,25 @@
                                                 <ul role="menu" class="dropdown-menu pull-right">
                                                     <li role="presentation">
                                                         <?= $this->Html->link('<i class="fa fa-eye">Ver Detalhes</i>',
-                                                            [
-                                                                'controller' => 'inscricaos',
-                                                                'action'     => 'ver_detalhes_inscricao',
-                                                                $inscricao['Inscricao']['id']
-                                                            ], [
-                                                                'role'     => 'menuitem',
-                                                                'tabindex' => '-1',
-                                                                'escape'   => false
-                                                            ]); ?>
+                                                                [
+                                                                        'controller' => 'inscricaos',
+                                                                        'action'     => 'ver_detalhes_inscricao',
+                                                                        $inscricao['Inscricao']['id'],
+                                                                ], [
+                                                                        'role'     => 'menuitem',
+                                                                        'tabindex' => '-1',
+                                                                        'escape'   => false,
+                                                                ]); ?>
                                                         <?= $this->Html->link('<i class="fa fa-group">Ver Turma</i>',
-                                                            [
-                                                                'controller' => 'turmas',
-                                                                'action'     => 'ver_turma',
-                                                                $inscricao['Turma']['id'],
-                                                            ], [
-                                                                'role'     => 'menuitem',
-                                                                'tabindex' => '-1',
-                                                                'escape'   => false
-                                                            ]); ?>
+                                                                [
+                                                                        'controller' => 'turmas',
+                                                                        'action'     => 'ver_turma',
+                                                                        $inscricao['Turma']['id'],
+                                                                ], [
+                                                                        'role'     => 'menuitem',
+                                                                        'tabindex' => '-1',
+                                                                        'escape'   => false,
+                                                                ]); ?>
                                                     </li>
 
 
@@ -407,7 +407,7 @@
                                     </td>
 
                                 </tr>
-                            <?php
+                                <?php
                             endforeach;
                         ?>
                         </tbody>
@@ -452,7 +452,7 @@
 
                                 </tr>
 
-                            <?php
+                                <?php
                             endforeach;
                         ?>
 

@@ -2,8 +2,8 @@ var Animation = function () {
     //function to initiate CSS3 Animation 
     var runAnimation = function () {
         /*
-				 ENTRANCES
-				 */
+         ENTRANCES
+         */
         $('.animation-buttons .btn').click(function (e) {
             e.preventDefault();
         });
@@ -68,8 +68,8 @@ var Animation = function () {
             });
         });
         /*
-				 MISC
-				 */
+         MISC
+         */
         $('#bounceBtn').click(function () {
             $(this).each(function () {
                 $('#object').removeClass();

@@ -29,15 +29,15 @@
                 'foreignKey' => 'group_id',
                 'conditions' => '',
                 'fields'     => '',
-                'order'      => ''
-            ]
+                'order'      => '',
+            ],
         ];
         public $hasOne = [
             'Entidade' => [
                 'className'  => 'Entidade',
                 'foreignKey' => 'user_id',
-                'conditions' => ''
-            ]
+                'conditions' => '',
+            ],
         ];
         var $hasMany = [
             'Funcionario'      => [
@@ -51,7 +51,7 @@
                 'offset'       => '',
                 'exclusive'    => '',
                 'finderQuery'  => '',
-                'counterQuery' => ''
+                'counterQuery' => '',
             ],
             'GroupsUser'       => [
                 'className'    => 'GroupsUser',
@@ -64,7 +64,7 @@
                 'offset'       => '',
                 'exclusive'    => '',
                 'finderQuery'  => '',
-                'counterQuery' => ''
+                'counterQuery' => '',
             ],
             'UserLoginHistory' => [
                 'className'    => 'UserLoginHistory',
@@ -77,8 +77,8 @@
                 'offset'       => '',
                 'exclusive'    => '',
                 'finderQuery'  => '',
-                'counterQuery' => ''
-            ]
+                'counterQuery' => '',
+            ],
         ];
         var $actsAs = ['Acl' => ['type' => 'requester']];
         //Regras de Validacao
@@ -91,22 +91,24 @@
                 ],
                 'usernameIsUnique' => [
                     'rule'    => 'isUnique',
-                    'message' => 'Não podem existir 2 usuários com emails iguais'
+                    'message' => 'Não podem existir 2 usuários com emails iguais',
                 ],
                 'usernameNotBlank' => [
                     'rule'    => 'notBlank',
-                    'message' => 'O Usermane não pode estar vazio'
-                ]
-            ]
+                    'message' => 'O Usermane não pode estar vazio',
+                ],
+            ],
         ];
 
         public function actualizaLoginHistory($userId, $groupId, $data, $ip)
         {
-            $arrayLoginHistory = ['UserLoginHistory' => ['user_id'    => $userId,
-                                                         'group_id'   => $groupId,
-                                                         'login_date' => $data,
-                                                         'ip'         => $ip
-            ]
+            $arrayLoginHistory = [
+                'UserLoginHistory' => [
+                    'user_id'    => $userId,
+                    'group_id'   => $groupId,
+                    'login_date' => $data,
+                    'ip'         => $ip,
+                ],
             ];
             $this->UserLoginHistory->create();
             $this->UserLoginHistory->save($arrayLoginHistory);
@@ -135,7 +137,7 @@
             $this->set('password', Security::hash($data['User']['novasenha1'], 'blowfish'));
             $this->save();
             $event = new CakeEvent('Model.User.afterChangePassword', $this, [
-                'data' => $data
+                'data' => $data,
             ]);
             $this->getEventManager()->dispatch($event);
 
@@ -158,15 +160,15 @@
             $data['User']['password'] = Security::hash($data['User']['password'], 'blowfish');
             if ($this->save($data)) {
                 $arrayGrupo = [
-                    'GroupsUser'=>[
-                        'user_id'=>$this->id,
-                        'group_id'=>$data['User']['group_id']
-                    ]
+                    'GroupsUser' => [
+                        'user_id'  => $this->id,
+                        'group_id' => $data['User']['group_id'],
+                    ],
                 ];
                 $this->GroupsUser->create();
-                if($this->GroupsUser->save($arrayGrupo)){
+                if ($this->GroupsUser->save($arrayGrupo)) {
                     return $this->id;
-                } else{
+                } else {
                     return false;
                 }
 
@@ -342,7 +344,7 @@
                 "{"         => "",
                 "~"         => "",
                 "–"         => "-",
-                "’"         => "'"
+                "’"         => "'",
             ];
 
             $str = str_replace(array_keys($invalid), array_values($invalid), $str);
@@ -550,7 +552,7 @@
             if ($pos === false) {
                 return [
                     $prefix . 'firstname' => $name,
-                    $prefix . 'surname'   => null
+                    $prefix . 'surname'   => null,
                 ];
             }
 
@@ -559,20 +561,22 @@
 
             return [
                 $prefix . 'firstname' => $firstname,
-                $prefix . 'surname'   => $surname
+                $prefix . 'surname'   => $surname,
             ];
         }
 
 
-        public function changeLoginProfile($data){
+        public function changeLoginProfile($data)
+        {
             $groupId = $data['User']['group_id'];
             $userId = CakeSession::read('Auth.User.id');
 
-            if($groupId==2){
-                CakeSession::write('Auth.User.group_id',$groupId);
+            if ($groupId == 2) {
+                CakeSession::write('Auth.User.group_id', $groupId);
                 $this->Funcionario->contain('Entidade');
                 $funcionario = $this->Funcionario->findByUserId($userId);
-                CakeSession::write('Auth.User.unidade_organica_id',$funcionario['Funcionario']['unidade_organica_id']);
+                CakeSession::write('Auth.User.unidade_organica_id', $funcionario['Funcionario']['unidade_organica_id']);
+
                 return [true];
 
 

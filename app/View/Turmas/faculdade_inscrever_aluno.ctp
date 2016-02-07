@@ -1,2 +1,2 @@
 <?php
-$this->extend('/Common/Turmas/inscrever_aluno');
+    $this->extend('/Common/Turmas/inscrever_aluno');

@@ -38,8 +38,8 @@
                 'foreignKey' => 'regime_lectivo_id',
                 'conditions' => '',
                 'fields'     => '',
-                'order'      => ''
-            ]
+                'order'      => '',
+            ],
         ];
         var $displayField = 'ano';
         var $hasMany = [
@@ -54,7 +54,7 @@
                 'offset'       => '',
                 'exclusive'    => '',
                 'finderQuery'  => '',
-                'counterQuery' => ''
+                'counterQuery' => '',
             ],
             'SemestreLectivo' => [
                 'className'    => 'SemestreLectivo',
@@ -67,8 +67,8 @@
                 'offset'       => '',
                 'exclusive'    => '',
                 'finderQuery'  => '',
-                'counterQuery' => ''
-            ]
+                'counterQuery' => '',
+            ],
         ];
 
         public $validate = [
@@ -77,22 +77,22 @@
                     'rule'       => ['date', 'y'],
                     'required'   => 'create',
                     'message'    => 'Introduza um ano Lectivo valido',
-                    'allowEmpty' => false
+                    'allowEmpty' => false,
                 ],
                 'anoUnique' => [
                     'rule'       => 'isUnique',
                     'required'   => 'create',
                     'message'    => 'Este Ano Lectivo já existe no Sistema',
-                    'allowEmpty' => false
-                ]
+                    'allowEmpty' => false,
+                ],
             ],
             'codigo' => [
                 'codigoRule-1' => [
                     'rule'     => 'isUnique',
                     'required' => 'create',
-                    'message'  => 'Já existe um Ano lectivo com este código'
-                ]
-            ]
+                    'message'  => 'Já existe um Ano lectivo com este código',
+                ],
+            ],
         ];
 
         public function criaAnoLectivo($data)
@@ -118,16 +118,16 @@
                         'ano_lectivo_id' => $this->id,
                         'codigo'         => $data['AnoLectivo']['ano'] . '-1',
                         'semestre'       => 1,
-                        'semestre_id'    => 1
-                    ]
+                        'semestre_id'    => 1,
+                    ],
                 ];
                 $semestres[] = [
                     'SemestreLectivo' => [
                         'ano_lectivo_id' => $this->id,
                         'codigo'         => $data['AnoLectivo']['ano'] . '-2',
                         'semestre'       => 2,
-                        'semestre_id'    => 2
-                    ]
+                        'semestre_id'    => 2,
+                    ],
                 ];
                 $this->SemestreLectivo->create();
                 if ($this->SemestreLectivo->saveAll($semestres)) {

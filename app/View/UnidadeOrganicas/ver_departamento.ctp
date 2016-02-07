@@ -1,20 +1,21 @@
 <?php
-/**
- * Pagina para adicionar unidades organicas
- *
- * @copyright     Copyright 2010-2012, INFOmoz (Informática-Moçambique) (http://infomoz.net)
- * * @link          http://opensga.com OpenSGA  - Sistema de Gestão Académica
- * @author		  Elisio Leonardo (elisio.leonardo@gmail.com)
- * @package       opensga
- * @subpackage    opensga.core.instituicoes
- * @since         OpenSGA v 0.1.0
- * @version        OpenSGA v 0.5.0
- *
- *
- */
-$this->Html->addCrumb(__('Unidades Orgânicas'), '/unidade_organicas');
-$this->Html->addCrumb($unidadeOrganica['UnidadeOrganica']['name'], '/unidade_organicas/edit/' . $unidadeOrganica['UnidadeOrganica']['id']);
-$this->Html->addCrumb(__('Editar'), '/unidade_organicas/edit/' . $unidadeOrganica['UnidadeOrganica']['id']);
+    /**
+     * Pagina para adicionar unidades organicas
+     *
+     * @copyright     Copyright 2010-2012, INFOmoz (Informática-Moçambique) (http://infomoz.net)
+     * * @link          http://opensga.com OpenSGA  - Sistema de Gestão Académica
+     * @author          Elisio Leonardo (elisio.leonardo@gmail.com)
+     * @package       opensga
+     * @subpackage    opensga.core.instituicoes
+     * @since         OpenSGA v 0.1.0
+     * @version        OpenSGA v 0.5.0
+     *
+     *
+     */
+    $this->Html->addCrumb(__('Unidades Orgânicas'), '/unidade_organicas');
+    $this->Html->addCrumb($unidadeOrganica['UnidadeOrganica']['name'],
+            '/unidade_organicas/edit/' . $unidadeOrganica['UnidadeOrganica']['id']);
+    $this->Html->addCrumb(__('Editar'), '/unidade_organicas/edit/' . $unidadeOrganica['UnidadeOrganica']['id']);
 ?>
 <div class="container_12">
     <div class="grid_12">
@@ -22,14 +23,19 @@ $this->Html->addCrumb(__('Editar'), '/unidade_organicas/edit/' . $unidadeOrganic
             <div class="block-content">
                 <ul class="shortcut-list">
                     <li>
-                        <?php echo $this->Html->link($this->Html->image('icons/packs/crystal/48x48/apps/kedit.png') . __("Nova Sub-Unidade Orgânica"), array('controller' => 'unidade_organicas', 'action' => 'nova_unidade',$unidadeOrganica['UnidadeOrganica']['id']), array('escape' => false)) ?>
+                        <?php echo $this->Html->link($this->Html->image('icons/packs/crystal/48x48/apps/kedit.png') . __("Nova Sub-Unidade Orgânica"),
+                                [
+                                        'controller' => 'unidade_organicas',
+                                        'action'     => 'nova_unidade',
+                                        $unidadeOrganica['UnidadeOrganica']['id'],
+                                ], ['escape' => false]) ?>
                     </li>
                 </ul>
                 <div class="clear"></div>
             </div>
         </div>
     </div>
-    <?php debug($unidadeOrganica)?>
+    <?php debug($unidadeOrganica) ?>
     <div class="grid_6">
         <div class="block-border">
             <div class="block-header">
@@ -87,7 +93,9 @@ $this->Html->addCrumb(__('Editar'), '/unidade_organicas/edit/' . $unidadeOrganic
                 <div class="clear"></div>
                 <div class="block-actions">
                     <ul class="actions-left">
-                        <li><?php echo $this->Html->link(__('Lista de Tipos de Unidades Orgânicas'), array('controller' => 'unidade_organicas', 'action' => 'index'), array('class' => 'button red')) ?></li>
+                        <li><?php echo $this->Html->link(__('Lista de Tipos de Unidades Orgânicas'),
+                                    ['controller' => 'unidade_organicas', 'action' => 'index'],
+                                    ['class' => 'button red']) ?></li>
                     </ul>
                     <ul class="actions-right">
 

@@ -24,118 +24,118 @@
          * @var array
          */
         public $belongsTo = [
-            'Aluno'              => [
+            'Aluno'               => [
                 'className'  => 'Aluno',
                 'foreignKey' => 'aluno_id',
                 'conditions' => '',
                 'fields'     => '',
-                'order'      => ''
+                'order'      => '',
             ],
-            'CerimoniaGraduacao' => [
+            'CerimoniaGraduacao'  => [
                 'className'  => 'CerimoniaGraduacao',
                 'foreignKey' => 'cerimonia_graduacao_id',
                 'conditions' => '',
                 'fields'     => '',
-                'order'      => ''
+                'order'      => '',
             ],
-            'EstadoObjecto'      => [
+            'EstadoObjecto'       => [
                 'className'  => 'EstadoObjecto',
                 'foreignKey' => 'estado_objecto_id',
                 'conditions' => '',
                 'fields'     => '',
-                'order'      => ''
+                'order'      => '',
             ],
-            'EstadoCandidatura'  => [
+            'EstadoCandidatura'   => [
                 'className'  => 'EstadoCandidatura',
                 'foreignKey' => 'estado_candidatura_id',
                 'conditions' => '',
                 'fields'     => '',
-                'order'      => ''
+                'order'      => '',
             ],
-            'Genero'             => [
+            'Genero'              => [
                 'className'  => 'Genero',
                 'foreignKey' => 'genero_id',
                 'conditions' => '',
                 'fields'     => '',
-                'order'      => ''
+                'order'      => '',
             ],
-            'EstadoCivil'        => [
+            'EstadoCivil'         => [
                 'className'  => 'EstadoCivil',
                 'foreignKey' => 'estado_civil_id',
                 'conditions' => '',
                 'fields'     => '',
-                'order'      => ''
+                'order'      => '',
             ],
-            'RegimeEstudo'       => [
+            'RegimeEstudo'        => [
                 'className'  => 'RegimeEstudo',
                 'foreignKey' => 'regime_estudo_id',
                 'conditions' => '',
                 'fields'     => '',
-                'order'      => ''
+                'order'      => '',
             ],
-            'RegaliaSocial'      => [
+            'RegaliaSocial'       => [
                 'className'  => 'RegaliaSocial',
                 'foreignKey' => 'regalia_social_id',
                 'conditions' => '',
                 'fields'     => '',
-                'order'      => ''
+                'order'      => '',
             ],
-            'Curso'              => [
+            'Curso'               => [
                 'className'  => 'Curso',
                 'foreignKey' => 'curso_id',
                 'conditions' => '',
                 'fields'     => '',
-                'order'      => ''
+                'order'      => '',
             ],
-            'Funcionario'        => [
+            'Funcionario'         => [
                 'className'  => 'Funcionario',
                 'foreignKey' => 'funcionario_id',
                 'conditions' => '',
                 'fields'     => '',
-                'order'      => ''
+                'order'      => '',
             ],
-            'ProvinciaNascimento'        => [
+            'ProvinciaNascimento' => [
                 'className'  => 'Provincia',
                 'foreignKey' => 'provincia_nascimento',
                 'conditions' => '',
                 'fields'     => '',
-                'order'      => ''
+                'order'      => '',
             ],
-            'DistritoNascimento'        => [
+            'DistritoNascimento'  => [
                 'className'  => 'Cidade',
                 'foreignKey' => 'distrito_nascimento',
                 'conditions' => '',
                 'fields'     => '',
-                'order'      => ''
-            ]
+                'order'      => '',
+            ],
         ];
         public $validate = [
             'aluno_id'               => [
                 'EvitaDuplicados' => [
                     'rule'    => ['checkUnique', ['aluno_id', 'cerimonia_graduacao_id']],
-                    'message' => 'Este estudante já está inscrito para esta cerimónia'
-                ]
+                    'message' => 'Este estudante já está inscrito para esta cerimónia',
+                ],
             ],
             'apelido'                => [
                 'apelidoNotEmpty' => [
                     'rule'    => 'notBlank',
                     'message' => 'O Campo Apelido é de Preenchimento Obrigatório',
                     // extra keys like on, required, etc. go here...
-                ]
+                ],
             ],
             'nomes'                  => [
                 'nomesNotEmpty' => [
                     'rule'    => 'notBlank',
                     'message' => 'O Campo Outros Nomes é de Preenchimento Obrigatório',
                     // extra keys like on, required, etc. go here...
-                ]
+                ],
             ],
             'genero_id'              => [
                 'generoIdNotEmpty' => [
                     'rule'    => 'notBlank',
                     'message' => 'O Campo Sexo é de Preenchimento Obrigatório',
                     // extra keys like on, required, etc. go here...
-                ]
+                ],
             ],
             'data_nascimento'        => [
                 'dataNascimentoNotEmpty' => [
@@ -147,7 +147,7 @@
                     'rule'    => ['date', 'ymd'],
                     'message' => 'Introduza uma data no formato certo',
                     // extra keys like on, required, etc. go here...
-                ]
+                ],
 
             ],
             'cerimonia_graduacao_id' => [
@@ -155,14 +155,14 @@
                     'rule'    => 'notBlank',
                     'message' => 'É necessário indicar a que cerimonia esta a se inscrever',
                     // extra keys like on, required, etc. go here...
-                ]
+                ],
             ],
             'telemovel'              => [
                 'telemovelValid' => [
                     'rule'    => 'notBlank',
                     'message' => 'O Campo Email2 de Preenchimento Obrigatório',
                     // extra keys like on, required, etc. go here...
-                ]
+                ],
             ],
         ];
 
@@ -177,7 +177,6 @@
          */
         public function cadastraCandidatoGraduacao($data)
         {
-
 
 
             if (!isset($data['CandidatoGraduacao']['cerimonia_graduacao_id'])) {
@@ -230,19 +229,19 @@
 
                 return [false, $this->Aluno->Entidade->validationErrors];
             }
-           //sendLog('info','Dados de Pessoa Actualizados',$data['CandidatoGraduacao']['nomes']);
+            //sendLog('info','Dados de Pessoa Actualizados',$data['CandidatoGraduacao']['nomes']);
 
 
             $funcionario = $this->Aluno->Entidade->Funcionario->getByUserId(CakeSession::read('Auth.User.id'));
-            if(!$funcionario){
-                $funcionario['Funcionario']['id']=1;
+            if (!$funcionario) {
+                $funcionario['Funcionario']['id'] = 1;
             }
             $cursoId = $this->Aluno->field('curso_id');
             $dataConclusaoNivel = [
                 'HistoricoCurso' => [
                     'data_conclusao' => $data['CandidatoGraduacao']['data_defesa'],
                     'nota_final'     => $data['CandidatoGraduacao']['media_defesa'],
-                    'funcionario_id' => $funcionario['Funcionario']['id']
+                    'funcionario_id' => $funcionario['Funcionario']['id'],
                 ],
                 'Aluno'          => [
                     'observacao' => '',
@@ -254,8 +253,8 @@
                         'tmp_name' => '',
                         'error'    => 4,
                         'size'     => 0,
-                    ]
-                ]
+                    ],
+                ],
             ];
             if (!$this->Aluno->concluirNivel($dataConclusaoNivel)) {
                 $dataSource->rollback();
@@ -319,7 +318,7 @@
                 $dataSource->commit();
 
                 return true;
-            } else{
+            } else {
                 return false;
             }
         }

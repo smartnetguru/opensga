@@ -10,7 +10,7 @@
 
 <?php $this->start('form-elements') ?>
 <?php echo $this->Form->create('PlanoEstudo',
-    ['role' => 'form', 'class' => '', 'inputDefaults' => ['disabled' => true]]); ?>
+        ['role' => 'form', 'class' => '', 'inputDefaults' => ['disabled' => true]]); ?>
 <div class="form-group">
     <label>
         <?php echo __('Nome do Plano de Estudos') ?>
@@ -24,11 +24,11 @@
 
     <div>
         <?php echo $this->Form->input('curso_id', [
-            'type'  => 'text',
-            'value' => $this->request->data['Curso']['name'],
-            'label' => false,
-            'div'   => false,
-            'class' => 'form-control'
+                'type'  => 'text',
+                'value' => $this->request->data['Curso']['name'],
+                'label' => false,
+                'div'   => false,
+                'class' => 'form-control',
         ]); ?>
     </div>
 </div>
@@ -48,7 +48,7 @@
 
     <div>
         <?php echo $this->Form->input('semestres_ano',
-            ['label' => false, 'div' => false, 'class' => 'form-control']); ?>
+                ['label' => false, 'div' => false, 'class' => 'form-control']); ?>
     </div>
 </div>
 <div class="form-group">
@@ -58,11 +58,11 @@
 
     <div>
         <?php echo $this->Form->input('ano_criacao', [
-            'type'  => 'text',
-            'value' => $this->request->data['PlanoEstudo']['ano_criacao'],
-            'label' => false,
-            'div'   => false,
-            'class' => 'form-control'
+                'type'  => 'text',
+                'value' => $this->request->data['PlanoEstudo']['ano_criacao'],
+                'label' => false,
+                'div'   => false,
+                'class' => 'form-control',
         ]); ?>
     </div>
 </div>
@@ -73,11 +73,11 @@
 
     <div>
         <?php echo $this->Form->input('total_creditos', [
-            'type'  => 'text',
-            'value' => $this->request->data['PlanoEstudo']['total_creditos'],
-            'label' => false,
-            'div'   => false,
-            'class' => 'form-control'
+                'type'  => 'text',
+                'value' => $this->request->data['PlanoEstudo']['total_creditos'],
+                'label' => false,
+                'div'   => false,
+                'class' => 'form-control',
         ]); ?>
     </div>
 </div>
@@ -119,10 +119,14 @@
         </div>
         <div class="panel-body">
             <?php echo $this->Form->create('DisciplinaPlanoEstudo', [
-                'url'           => ['controller' => 'plano_estudos', 'action' => 'editar_disciplina', $disciplinaPlanoId],
-                'role'          => 'form',
-                'class'         => '',
-                'inputDefaults' => []
+                    'url'           => [
+                            'controller' => 'plano_estudos',
+                            'action'     => 'editar_disciplina',
+                            $disciplinaPlanoId,
+                    ],
+                    'role'          => 'form',
+                    'class'         => '',
+                    'inputDefaults' => [],
             ]); ?>
             <div class="form-group">
                 <label>
@@ -131,13 +135,13 @@
 
                 <div>
                     <?php echo $this->Form->input('disciplina_id',
-                        [
-                            'label'    => false,
-                            'div'      => false,
-                            'class'    => 'form-control search-select',
-                            'selected' => $disciplinaPlanoEstudo['DisciplinaPlanoEstudo']['disciplina_id'],
-                            'disabled' => 'disabled'
-                        ]); ?>
+                            [
+                                    'label'    => false,
+                                    'div'      => false,
+                                    'class'    => 'form-control search-select',
+                                    'selected' => $disciplinaPlanoEstudo['DisciplinaPlanoEstudo']['disciplina_id'],
+                                    'disabled' => 'disabled',
+                            ]); ?>
                 </div>
             </div>
             <div class="col-sm-6">
@@ -147,13 +151,13 @@
                         <?php echo __('Ano Curricular') ?>
                     </label>
                     <?php echo $this->Form->input('ano_curricular',
-                        [
-                            'options' => $anos,
-                            'label'   => false,
-                            'div'     => false,
-                            'class'   => 'form-control',
-                            'value'   => $disciplinaPlanoEstudo['DisciplinaPlanoEstudo']['ano_curricular']
-                        ]); ?>
+                            [
+                                    'options' => $anos,
+                                    'label'   => false,
+                                    'div'     => false,
+                                    'class'   => 'form-control',
+                                    'value'   => $disciplinaPlanoEstudo['DisciplinaPlanoEstudo']['ano_curricular'],
+                            ]); ?>
                 </div>
             </div>
             <div class="col-sm-6">
@@ -163,13 +167,13 @@
                         <?php echo __('Semestre Curricular') ?>
                     </label>
                     <?php echo $this->Form->input('semestre_curricular',
-                        [
-                            'options' => $semestres,
-                            'label'   => false,
-                            'div'     => false,
-                            'class'   => 'form-control',
-                            'value'   => $disciplinaPlanoEstudo['DisciplinaPlanoEstudo']['semestre_curricular']
-                        ]); ?>
+                            [
+                                    'options' => $semestres,
+                                    'label'   => false,
+                                    'div'     => false,
+                                    'class'   => 'form-control',
+                                    'value'   => $disciplinaPlanoEstudo['DisciplinaPlanoEstudo']['semestre_curricular'],
+                            ]); ?>
                 </div>
             </div>
 
@@ -180,12 +184,12 @@
                         <?php echo __('Carga Horaria Teorica') ?>
                     </label>
                     <?php echo $this->Form->input('carga_horaria_teoricas',
-                        [
-                            'label' => false,
-                            'div'   => false,
-                            'class' => 'form-control',
-                            'value' => $disciplinaPlanoEstudo['DisciplinaPlanoEstudo']['carga_horaria_teoricas']
-                        ]); ?>
+                            [
+                                    'label' => false,
+                                    'div'   => false,
+                                    'class' => 'form-control',
+                                    'value' => $disciplinaPlanoEstudo['DisciplinaPlanoEstudo']['carga_horaria_teoricas'],
+                            ]); ?>
                 </div>
             </div>
             <div class="col-sm-6">
@@ -195,12 +199,12 @@
                         <?php echo __('Carga Horaria Pratica') ?>
                     </label>
                     <?php echo $this->Form->input('carga_horaria_praticas',
-                        [
-                            'label' => false,
-                            'div'   => false,
-                            'class' => 'form-control',
-                            'value' => $disciplinaPlanoEstudo['DisciplinaPlanoEstudo']['carga_horaria_praticas']
-                        ]); ?>
+                            [
+                                    'label' => false,
+                                    'div'   => false,
+                                    'class' => 'form-control',
+                                    'value' => $disciplinaPlanoEstudo['DisciplinaPlanoEstudo']['carga_horaria_praticas'],
+                            ]); ?>
                 </div>
             </div>
             <div class="col-sm-6">
@@ -210,12 +214,12 @@
                         <?php echo __('Horas de Estudo Individual') ?>
                     </label>
                     <?php echo $this->Form->input('horas_individual',
-                        [
-                            'label' => false,
-                            'div'   => false,
-                            'class' => 'form-control',
-                            'value' => $disciplinaPlanoEstudo['DisciplinaPlanoEstudo']['horas_individual']
-                        ]); ?>
+                            [
+                                    'label' => false,
+                                    'div'   => false,
+                                    'class' => 'form-control',
+                                    'value' => $disciplinaPlanoEstudo['DisciplinaPlanoEstudo']['horas_individual'],
+                            ]); ?>
                 </div>
             </div>
             <div class="col-sm-6">
@@ -225,12 +229,12 @@
                         <?php echo __('Horas de Estudo com o Docente') ?>
                     </label>
                     <?php echo $this->Form->input('horas_docente',
-                        [
-                            'label' => false,
-                            'div'   => false,
-                            'class' => 'form-control',
-                            'value' => $disciplinaPlanoEstudo['DisciplinaPlanoEstudo']['horas_docente']
-                        ]); ?>
+                            [
+                                    'label' => false,
+                                    'div'   => false,
+                                    'class' => 'form-control',
+                                    'value' => $disciplinaPlanoEstudo['DisciplinaPlanoEstudo']['horas_docente'],
+                            ]); ?>
                 </div>
             </div>
             <div class="form-group">
@@ -239,30 +243,30 @@
                     <?php echo __('Creditos') ?>
                 </label>
                 <?php echo $this->Form->input('creditos',
-                    [
-                        'label' => false,
-                        'div'   => false,
-                        'class' => 'form-control',
-                        'value' => $disciplinaPlanoEstudo['DisciplinaPlanoEstudo']['creditos']
-                    ]); ?>
+                        [
+                                'label' => false,
+                                'div'   => false,
+                                'class' => 'form-control',
+                                'value' => $disciplinaPlanoEstudo['DisciplinaPlanoEstudo']['creditos'],
+                        ]); ?>
             </div>
             <div class="form-group">
                 <div class="col-sm-2">
                     <?php echo $this->Html->link('Voltar', ['action' => 'index'],
-                        ['class' => 'btn btn-light-grey btn-block']) ?>
+                            ['class' => 'btn btn-light-grey btn-block']) ?>
 
 
                 </div>
                 <div class="col-sm-2 col-sm-offset-8">
                     <?php
                         echo $this->Form->input('id', [
-                            'value' => $disciplinaPlanoEstudo['DisciplinaPlanoEstudo']['id'],
-                            'type'  => 'hidden',
-                            'div'   => false
+                                'value' => $disciplinaPlanoEstudo['DisciplinaPlanoEstudo']['id'],
+                                'type'  => 'hidden',
+                                'div'   => false,
                         ]);
                         echo $this->Form->end([
-                            'label' => __('GRAVAR', true),
-                            'class' => 'btn btn-blue btn-block'
+                                'label' => __('GRAVAR', true),
+                                'class' => 'btn btn-blue btn-block',
                         ]); ?>
 
                 </div>

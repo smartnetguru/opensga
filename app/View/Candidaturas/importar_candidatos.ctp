@@ -1,6 +1,6 @@
 <?php $this->extend('/Common/form_basic_common'); ?>
 <?php $this->start('form-elements') ?>
-<?php echo $this->Form->create('Upload', array('enctype' => 'multipart/form-data', 'class' => 'block-content form',)); ?>
+<?php echo $this->Form->create('Upload', ['enctype' => 'multipart/form-data', 'class' => 'block-content form',]); ?>
 <div class="row">
     <div class="alert alert-warning">
         <button data-dismiss="alert" class="close">
@@ -23,7 +23,7 @@
         <i class="fa fa-exclamation-triangle"></i>
         <strong>Atenção!</strong> A ordem dos campos no ficheiro é fundamental. Veja abaixo.
     </div>
-    </div>
+</div>
 
 <div class="form-group">
     <div class="col-sm-12">
@@ -40,9 +40,12 @@
                     <div class="btn btn-light-grey btn-file">
                         <span class="fileupload-new"><i class="fa fa-folder-open-o"></i> Escolher Ficheiro</span>
                         <span class="fileupload-exists"><i class="fa fa-folder-open-o"></i> Trocar</span>
-                        <?php echo $this->Form->input('file', array('type' => 'file', 'label' => false,
-                                                                    'div' =>false,
-                                                                    'class' => 'file-input required')); ?>
+                        <?php echo $this->Form->input('file', [
+                                'type'  => 'file',
+                                'label' => false,
+                                'div'   => false,
+                                'class' => 'file-input required',
+                        ]); ?>
                     </div>
                     <a href="#" class="btn btn-light-grey fileupload-exists" data-dismiss="fileupload">
                         <i class="fa fa-times"></i> Remover
@@ -54,7 +57,7 @@
 </div>
 <div class="form-group col-sm-12">
     <div class="col-sm-2 col-sm-offset-8">
-        <?php echo $this->Form->end(array('label' => __('GRAVAR', true), 'class' => 'btn btn-blue btn-block')); ?>
+        <?php echo $this->Form->end(['label' => __('GRAVAR', true), 'class' => 'btn btn-blue btn-block']); ?>
 
     </div>
 </div>
@@ -66,10 +69,11 @@
         <li><b>B</b> - Nome Completo<b> (Obrigatório)</b></li>
         <li><b>C</b> - Nome da Faculdade</li>
         <li><b>D</b> - Nome do Curso<b> (Obrigatório)</b>. O nome do Curso deve estar escrito como na Base de
-            Dados</li>
+            Dados
+        </li>
     </ul>
 </div>
-<?php $this->end();?>
+<?php $this->end(); ?>
 
 
 

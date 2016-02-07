@@ -1,18 +1,17 @@
 <?php
-/**
- * OpenSGA - Sistema de Gestão Académica
- *   Copyright (C) 2010-2011  INFOmoz (Informática-Moçambique)
- *
- *
- * @copyright     Copyright 2010-2011, INFOmoz (Informática-Moçambique) (http://infomoz.net)
- * * @link          http://opensga.com OpenSGA  - Sistema de Gestão Académica
- * @author		  Elisio Leonardo (elisio.leonardo@gmail.com)
- * @package       opensga
- * @subpackage    opensga.core.controller
- * @since         OpenSGA v 0.5.0.0
-
- *
- */
+    /**
+     * OpenSGA - Sistema de Gestão Académica
+     *   Copyright (C) 2010-2011  INFOmoz (Informática-Moçambique)
+     *
+     *
+     * @copyright     Copyright 2010-2011, INFOmoz (Informática-Moçambique) (http://infomoz.net)
+     * * @link          http://opensga.com OpenSGA  - Sistema de Gestão Académica
+     * @author          Elisio Leonardo (elisio.leonardo@gmail.com)
+     * @package       opensga
+     * @subpackage    opensga.core.controller
+     * @since         OpenSGA v 0.5.0.0
+     *
+     */
 ?>
 
 
@@ -21,7 +20,8 @@
         <div class="block-border">
             <div class="block-content">
                 <ul class="shortcut-list">
-                    <li><?php echo $this->Html->link($this->Html->image('icons/packs/crystal/48x48/apps/kedit.png') . __("Lista de Cursos"), array('controller' => 'cursos', 'action' => 'index'), array('escape' => false)) ?>
+                    <li><?php echo $this->Html->link($this->Html->image('icons/packs/crystal/48x48/apps/kedit.png') . __("Lista de Cursos"),
+                                ['controller' => 'cursos', 'action' => 'index'], ['escape' => false]) ?>
                     </li>
                 </ul>
                 <div class="clear"></div>
@@ -37,7 +37,8 @@
                 </h1>
                 <span></span>
             </div>
-            <?php echo $this->Form->create('RequisicaoPedido', array('class' => 'block-content form', 'inputDefaults' => array('before' => '<p>', 'after' => '</p>'))); ?>
+            <?php echo $this->Form->create('RequisicaoPedido',
+                    ['class' => 'block-content form', 'inputDefaults' => ['before' => '<p>', 'after' => '</p>']]); ?>
             <div class="_50">
                 <p>
                     <label for="textfield"><?php echo __('Número de Estudante') ?></label>
@@ -98,11 +99,11 @@
                 <p>
                     <label for="textfield"><?php echo __('Estado Actual') ?></label>
                     <?php
-                    foreach ($is_regular as $ir) {
-                        ?>
-                        <span class="<?php echo $classe_estado ?>"><?php echo $this->Print->printField($ir['mensagem']); ?></span>
-                        <?php
-                    }
+                        foreach ($is_regular as $ir) {
+                            ?>
+                            <span class="<?php echo $classe_estado ?>"><?php echo $this->Print->printField($ir['mensagem']); ?></span>
+                            <?php
+                        }
                     ?>
 
 
@@ -112,12 +113,26 @@
             <div class="clear"></div>
             <div class="block-actions">
                 <ul class="actions-left">
-                    <li><?php echo $this->Html->link(__('Adicionar/Editar Contactos'), array('plugin' => 'requisicoes', 'controller' => 'requisicoes_pedidos', 'action' => 'nova_requisicao'), array('class' => 'button red')) ?>
+                    <li><?php echo $this->Html->link(__('Adicionar/Editar Contactos'), [
+                                'plugin'     => 'requisicoes',
+                                'controller' => 'requisicoes_pedidos',
+                                'action'     => 'nova_requisicao',
+                        ], ['class' => 'button red']) ?>
                     </li>
                 </ul>
                 <ul class="actions-right">
-                    <li><?php echo $this->Html->link(__('Renovar Matricula'), array('plugin' => false, 'controller' => 'alunos', 'action' => 'renovar_matricula', $aluno['Aluno']['id']), array('class' => 'button blue')) ?></li>
-                    <li><?php echo $this->Html->link(__('Concluir Nivel'), array('plugin' => false, 'controller' => 'alunos', 'action' => 'concluir_nivel', $aluno['Aluno']['id']), array('class' => 'button blue')) ?></li>
+                    <li><?php echo $this->Html->link(__('Renovar Matricula'), [
+                                'plugin'     => false,
+                                'controller' => 'alunos',
+                                'action'     => 'renovar_matricula',
+                                $aluno['Aluno']['id'],
+                        ], ['class' => 'button blue']) ?></li>
+                    <li><?php echo $this->Html->link(__('Concluir Nivel'), [
+                                'plugin'     => false,
+                                'controller' => 'alunos',
+                                'action'     => 'concluir_nivel',
+                                $aluno['Aluno']['id'],
+                        ], ['class' => 'button blue']) ?></li>
                 </ul>
             </div>
             </form>
@@ -133,25 +148,36 @@
                     <span></span>
                 </div>
 
-                <?php echo $this->Form->create('Aluno', array('enctype' => 'multipart/form-data', 'class' => 'block-content form', 'inputDefaults' => array('before' => '<p>', 'after' => '</p>'))); ?>
+                <?php echo $this->Form->create('Aluno', [
+                        'enctype'       => 'multipart/form-data',
+                        'class'         => 'block-content form',
+                        'inputDefaults' => ['before' => '<p>', 'after' => '</p>'],
+                ]); ?>
 
-                <?php echo $this->Form->input('mensagem', array('type' => 'textarea', 'label' => __('Mensagem'), 'div' => '_100', 'class' => 'required','maxlength'=>160)); ?>
+                <?php echo $this->Form->input('mensagem', [
+                        'type'      => 'textarea',
+                        'label'     => __('Mensagem'),
+                        'div'       => '_100',
+                        'class'     => 'required',
+                        'maxlength' => 160,
+                ]); ?>
 
                 <?php echo $this->Form->unlockField('mudanca_via_exame'); ?>
-                <?php echo $this->Form->hidden('aluno_id', array('value' => $aluno['Aluno']['id'])); ?>
-                <?php echo $this->Form->hidden('funcionario_id', array('value' => $funcionario['Funcionario']['id'])); ?>
-
+                <?php echo $this->Form->hidden('aluno_id', ['value' => $aluno['Aluno']['id']]); ?>
+                <?php echo $this->Form->hidden('funcionario_id', ['value' => $funcionario['Funcionario']['id']]); ?>
 
 
                 <div class="clear"></div>
                 <div class="block-actions">
                     <ul class="actions-left">
-                        <li><?php echo $this->Html->link(__('Voltar ao Perfil do Aluno'), array('controller' => 'alunos', 'action' => 'perfil_estudante', $aluno['Aluno']['id']), array('class' => 'button red')) ?></li>
+                        <li><?php echo $this->Html->link(__('Voltar ao Perfil do Aluno'),
+                                    ['controller' => 'alunos', 'action' => 'perfil_estudante', $aluno['Aluno']['id']],
+                                    ['class' => 'button red']) ?></li>
                     </ul>
                     <ul class="actions-right">
 
 
-                        <li><?php echo $this->Form->end(array('label' => __('ENVIAR', true), 'class' => 'button')); ?></li>
+                        <li><?php echo $this->Form->end(['label' => __('ENVIAR', true), 'class' => 'button']); ?></li>
 
                     </ul>
                 </div>
@@ -167,7 +193,7 @@
 <!--! end of #main-content -->
 
 
-<?php $this->Html->scriptStart(array('inline' => false, 'block' => 'scriptBottom')); ?>
+<?php $this->Html->scriptStart(['inline' => false, 'block' => 'scriptBottom']); ?>
 $(function() {
 
 $( "#dataMudanca" ).datepicker({ dateFormat: 'yy-mm-dd',changeMonth: true,changeYear: true,yearRange: "c-100:c+1" });

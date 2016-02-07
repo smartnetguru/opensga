@@ -10,78 +10,78 @@
 <?php echo $this->Form->create('Inscricao', ['role' => 'form', 'class' => '', 'inputDefaults' => []]); ?>
 <?php
     echo $this->Form->input('turma',
-        [
-            'label'    => [
-                'class' => 'control-label',
-                'text'  => 'Turma'
-            ],
-            'div'      => 'form-group',
-            'class'    => 'form-control',
-            'id'       => 'codigoID',
-            'value'    => $inscricao['Turma']['name'],
-            'disabled' => 'disabled'
-        ]
+            [
+                    'label'    => [
+                            'class' => 'control-label',
+                            'text'  => 'Turma',
+                    ],
+                    'div'      => 'form-group',
+                    'class'    => 'form-control',
+                    'id'       => 'codigoID',
+                    'value'    => $inscricao['Turma']['name'],
+                    'disabled' => 'disabled',
+            ]
     );
     echo $this->Form->input('tipo_inscricao_id',
-        [
-            'label' => [
-                'class' => 'control-label',
-                'text'  => 'Tipo de Frequencia'
-            ],
-            'div'   => 'form-group  col-sm-6',
-            'class' => 'form-control',
-            'id'    => 'tipoInscricaoId',
-            'empty' => '----Seleccione----'
-        ]
+            [
+                    'label' => [
+                            'class' => 'control-label',
+                            'text'  => 'Tipo de Frequencia',
+                    ],
+                    'div'   => 'form-group  col-sm-6',
+                    'class' => 'form-control',
+                    'id'    => 'tipoInscricaoId',
+                    'empty' => '----Seleccione----',
+            ]
     );
 
     echo $this->Form->input('nota_frequencia',
-        [
-            'label'    => [
-                'class' => 'control-label',
-                'text'  => 'Nota de Frequencia'
-            ],
-            'div'      => 'form-group col-sm-12',
-            'class'    => 'form-control',
-            'id'       => 'notaFrequencia',
-            'required' => false,
-        ]
+            [
+                    'label'    => [
+                            'class' => 'control-label',
+                            'text'  => 'Nota de Frequencia',
+                    ],
+                    'div'      => 'form-group col-sm-12',
+                    'class'    => 'form-control',
+                    'id'       => 'notaFrequencia',
+                    'required' => false,
+            ]
     );
     echo $this->Form->input('nota_exame_normal',
-        [
-            'label'    => [
-                'class' => 'control-label',
-                'text'  => 'Nota de Exame Normal'
-            ],
-            'div'      => 'form-group  col-sm-6',
-            'class'    => 'form-control',
-            'id'       => 'notaExameNormal',
-            'required' => false,
-        ]
+            [
+                    'label'    => [
+                            'class' => 'control-label',
+                            'text'  => 'Nota de Exame Normal',
+                    ],
+                    'div'      => 'form-group  col-sm-6',
+                    'class'    => 'form-control',
+                    'id'       => 'notaExameNormal',
+                    'required' => false,
+            ]
     );
     echo $this->Form->input('nota_exame_recorrencia',
-        [
-            'label'    => [
-                'class' => 'control-label',
-                'text'  => 'Nota de Exame de Recorrencia'
-            ],
-            'div'      => 'form-group col-sm-6 ',
-            'class'    => 'form-control',
-            'id'       => 'notaExameRecorrencia',
-            'required' => false,
-        ]
+            [
+                    'label'    => [
+                            'class' => 'control-label',
+                            'text'  => 'Nota de Exame de Recorrencia',
+                    ],
+                    'div'      => 'form-group col-sm-6 ',
+                    'class'    => 'form-control',
+                    'id'       => 'notaExameRecorrencia',
+                    'required' => false,
+            ]
     );
     echo $this->Form->input('nota_final',
-        [
-            'label'    => [
-                'class' => 'control-label',
-                'text'  => 'Nota Final'
-            ],
-            'div'      => 'form-group col-sm-12',
-            'class'    => 'form-control',
-            'id'       => 'notaFinal',
-            'required' => false,
-        ]
+            [
+                    'label'    => [
+                            'class' => 'control-label',
+                            'text'  => 'Nota Final',
+                    ],
+                    'div'      => 'form-group col-sm-12',
+                    'class'    => 'form-control',
+                    'id'       => 'notaFinal',
+                    'required' => false,
+            ]
     );
 ?>
     <div class="clearfix"></div>
@@ -92,7 +92,7 @@
             <div class="checkbox">
                 <label for="checkboxes-0">
                     <?php echo $this->Form->checkbox('desistiu',
-                        ['value' => '1', 'div' => false, 'label' => false]); ?>
+                            ['value' => '1', 'div' => false, 'label' => false]); ?>
                     Desistiu
                 </label>
             </div>
@@ -100,7 +100,7 @@
             <div class="checkbox">
                 <label for="checkboxes-1">
                     <?php echo $this->Form->checkbox('anulou',
-                        ['value' => '1', 'div' => false, 'label' => false]); ?>
+                            ['value' => '1', 'div' => false, 'label' => false]); ?>
                     Anulou
                 </label>
             </div>
@@ -111,7 +111,7 @@
     <div class="form-group">
         <div class="col-sm-3">
             <?php echo $this->Html->link('Voltar', ['action' => 'index'],
-                ['class' => 'btn btn-light-grey btn-block']) ?>
+                    ['class' => 'btn btn-light-grey btn-block']) ?>
 
 
         </div>

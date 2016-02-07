@@ -1,44 +1,44 @@
 <?php
-$this->Html->addCrumb('OpenSGA', '/');
-$this->Html->addCrumb('Página Inicial', '/');
-$group_id = $this->Session->read('Auth.User.group_id');
+    $this->Html->addCrumb('OpenSGA', '/');
+    $this->Html->addCrumb('Página Inicial', '/');
+    $group_id = $this->Session->read('Auth.User.group_id');
 ?>
 
 <div class="row">
     <div class="col-sm-2">
         <?php echo $this->Html->link('<i class="fa fa-plus fa-2x"></i>	Estudantes',
-            ['controller' => 'alunos', 'action' => 'index', 'faculdade' => true], [
-                'escape' => false,
-                'class'  => 'btn btn-icon btn-block'
-            ]) ?>
+                ['controller' => 'alunos', 'action' => 'index', 'faculdade' => true], [
+                        'escape' => false,
+                        'class'  => 'btn btn-icon btn-block',
+                ]) ?>
     </div>
     <div class="col-sm-2">
         <?php echo $this->Html->link('<i class="fa fa-plus fa-2x"></i>	Inscricoes',
-            ['controller' => 'inscricaos', 'action' => 'index', 'faculdade' => true], [
-                'escape' => false,
-                'class'  => 'btn btn-icon btn-block'
-            ]) ?>
+                ['controller' => 'inscricaos', 'action' => 'index', 'faculdade' => true], [
+                        'escape' => false,
+                        'class'  => 'btn btn-icon btn-block',
+                ]) ?>
     </div>
     <div class="col-sm-2">
         <?php echo $this->Html->link('<i class="fa fa-plus fa-2x"></i>	Turmas',
-            ['controller' => 'turmas', 'action' => 'index', 'faculdade' => true], [
-                'escape' => false,
-                'class'  => 'btn btn-icon btn-block'
-            ]) ?>
+                ['controller' => 'turmas', 'action' => 'index', 'faculdade' => true], [
+                        'escape' => false,
+                        'class'  => 'btn btn-icon btn-block',
+                ]) ?>
     </div>
     <div class="col-sm-2">
         <?php echo $this->Html->link('<i class="fa fa-plus fa-2x"></i>	Docentes',
-            ['controller' => 'docentes', 'action' => 'index', 'faculdade' => true], [
-                'escape' => false,
-                'class'  => 'btn btn-icon btn-block'
-            ]) ?>
+                ['controller' => 'docentes', 'action' => 'index', 'faculdade' => true], [
+                        'escape' => false,
+                        'class'  => 'btn btn-icon btn-block',
+                ]) ?>
     </div>
     <div class="col-sm-2">
         <?php echo $this->Html->link('<i class="fa fa-wrench fa-2x"></i>	Manutencao',
-            ['controller' => 'configs', 'action' => 'manutencao', 'faculdade' => true], [
-                'escape' => false,
-                'class'  => 'btn btn-icon btn-block'
-            ]) ?>
+                ['controller' => 'configs', 'action' => 'manutencao', 'faculdade' => true], [
+                        'escape' => false,
+                        'class'  => 'btn btn-icon btn-block',
+                ]) ?>
     </div>
 </div>
 

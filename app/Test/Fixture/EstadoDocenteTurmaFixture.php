@@ -1,39 +1,41 @@
 <?php
-/**
- * EstadoDocenteTurmaFixture
- *
- */
-class EstadoDocenteTurmaFixture extends CakeTestFixture {
 
-/**
- * Import
- *
- * @var array
- */
-	public $import = array('model' => 'EstadoDocenteTurma');
+	/**
+	 * EstadoDocenteTurmaFixture
+	 *
+	 */
+	class EstadoDocenteTurmaFixture extends CakeTestFixture
+	{
 
-/**
- * Records
- *
- * @var array
- */
-	public $records = array(
-		array(
-			'id' => '1',
-			'name' => 'Activo'
-		),
-		array(
-			'id' => '2',
-			'name' => 'Transferido'
-		),
-		array(
-			'id' => '3',
-			'name' => 'Demitido'
-		),
-		array(
-			'id' => '4',
-			'name' => 'Substituido'
-		),
-	);
+		/**
+		 * Import
+		 *
+		 * @var array
+		 */
+		public $import = ['model' => 'EstadoDocenteTurma'];
 
-}
+		/**
+		 * Records
+		 *
+		 * @var array
+		 */
+		public $records = [
+			[
+				'id'   => '1',
+				'name' => 'Activo',
+			],
+			[
+				'id'   => '2',
+				'name' => 'Transferido',
+			],
+			[
+				'id'   => '3',
+				'name' => 'Demitido',
+			],
+			[
+				'id'   => '4',
+				'name' => 'Substituido',
+			],
+		];
+
+	}

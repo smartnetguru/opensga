@@ -1,47 +1,49 @@
 <?php
-/**
- * MotivoTerminoCursoFixture
- *
- */
-class MotivoTerminoCursoFixture extends CakeTestFixture {
 
-/**
- * Import
- *
- * @var array
- */
-	public $import = array('table' => 'motivo_termino_cursos');
+	/**
+	 * MotivoTerminoCursoFixture
+	 *
+	 */
+	class MotivoTerminoCursoFixture extends CakeTestFixture
+	{
 
-/**
- * Records
- *
- * @var array
- */
-	public $records = array(
-		array(
-			'id' => '1',
-			'name' => 'Concluiu'
-		),
-		array(
-			'id' => '2',
-			'name' => 'Mudou de Curso'
-		),
-		array(
-			'id' => '3',
-			'name' => 'Cancelou Matricula'
-		),
-		array(
-			'id' => '4',
-			'name' => 'Desistiu'
-		),
-		array(
-			'id' => '5',
-			'name' => 'Expulso'
-		),
-		array(
-			'id' => '6',
-			'name' => 'Fora do Tempo de Estudos'
-		),
-	);
+		/**
+		 * Import
+		 *
+		 * @var array
+		 */
+		public $import = ['table' => 'motivo_termino_cursos'];
 
-}
+		/**
+		 * Records
+		 *
+		 * @var array
+		 */
+		public $records = [
+			[
+				'id'   => '1',
+				'name' => 'Concluiu',
+			],
+			[
+				'id'   => '2',
+				'name' => 'Mudou de Curso',
+			],
+			[
+				'id'   => '3',
+				'name' => 'Cancelou Matricula',
+			],
+			[
+				'id'   => '4',
+				'name' => 'Desistiu',
+			],
+			[
+				'id'   => '5',
+				'name' => 'Expulso',
+			],
+			[
+				'id'   => '6',
+				'name' => 'Fora do Tempo de Estudos',
+			],
+		];
+
+	}

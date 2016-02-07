@@ -1,24 +1,25 @@
-.alert{
-    margin-top:10px;
+.alert {
+    margin-top: 10px;
 }
 
 tr.clickableRow:hover {
     cursor: pointer;
     /* whatever other hover styles you want */
 }
+
 .form-group.required .control-label:after {
-    content:"*";
-    color:red;
+    content: "*";
+    color: red;
 }
 
-.ajuda-suporte{
-    font-size:14px;
+.ajuda-suporte {
+    font-size: 14px;
     font-weight: bold;
 }
 
-.btn{
-    white-space:normal !important;
-    word-wrap:break-word;
+.btn {
+    white-space: normal !important;
+    word-wrap: break-word;
 }
 
 .panel-heading h3 {

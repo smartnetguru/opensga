@@ -1,23 +1,25 @@
 <?php
-/**
- * GrupodisciplinarFixture
- *
- */
-class GrupodisciplinarFixture extends CakeTestFixture {
 
-/**
- * Import
- *
- * @var array
- */
-	public $import = array('model' => 'Grupodisciplinar');
+	/**
+	 * GrupodisciplinarFixture
+	 *
+	 */
+	class GrupodisciplinarFixture extends CakeTestFixture
+	{
 
-/**
- * Records
- *
- * @var array
- */
-	public $records = array(
-	);
+		/**
+		 * Import
+		 *
+		 * @var array
+		 */
+		public $import = ['model' => 'Grupodisciplinar'];
 
-}
+		/**
+		 * Records
+		 *
+		 * @var array
+		 */
+		public $records = [
+		];
+
+	}

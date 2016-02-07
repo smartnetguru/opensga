@@ -1,3 +1,3 @@
 <?php
-$this->extend('/Common/Funcionarios/index');
+    $this->extend('/Common/Funcionarios/index');
 ?>

@@ -34,7 +34,7 @@
         function adicionar_disciplinas($planoEstudoId)
         {
             $this->PlanoEstudo->contain([
-                'Curso'
+                'Curso',
             ]);
             $planoEstudo = $this->PlanoEstudo->findById($planoEstudoId);
             $planoEstudo['PlanoEstudo']['total_creditos'] = $this->PlanoEstudo->getTotalCreditos($planoEstudoId);
@@ -60,14 +60,14 @@
                         $this->redirect([
                             'action' => 'adicionar_precedencias',
                             $this->request->data['DisciplinaPlanoEstudo']['plano_estudo_id'],
-                            $this->request->data['DisciplinaPlanoEstudo']['disciplina_id']
+                            $this->request->data['DisciplinaPlanoEstudo']['disciplina_id'],
                         ]);
                     } else {
                         $this->Session->setFlash('Dado Registado com Sucesso.Adicione Mais disciplinas.', 'default',
                             ['class' => 'alert success']);
                         $this->redirect([
                             'action' => 'adicionar_disciplinas',
-                            $this->request->data['DisciplinaPlanoEstudo']['plano_estudo_id']
+                            $this->request->data['DisciplinaPlanoEstudo']['plano_estudo_id'],
                         ]);
                     }
                 } else {
@@ -116,8 +116,8 @@
                     $planoEstudoExiste = $this->PlanoEstudo->find('first', [
                         'conditions' => [
                             'curso_id'    => $this->request->data['PlanoEstudo']['curso_id'],
-                            'ano_criacao' => $this->request->data['PlanoEstudo']['ano_criacao']
-                        ]
+                            'ano_criacao' => $this->request->data['PlanoEstudo']['ano_criacao'],
+                        ],
                     ]);
 
                     if (!empty($planoEstudoExiste)) {
@@ -129,7 +129,7 @@
             }
             $cursos = $this->PlanoEstudo->Curso->find('list', [
                 // 'conditions' => ['Curso.unidade_organica_id' => $this->Session->read('Auth.User.unidade_organica_id')],
-                'order' => 'Curso.name ASC'
+                'order' => 'Curso.name ASC',
             ]);
             $this->set(compact('cursos'));
         }
@@ -148,13 +148,13 @@
                 throw new NotFoundException(__('Esta disciplina nao pertence a este plano de Estudos'));
             }
             $this->PlanoEstudo->contain([
-                'Curso'
+                'Curso',
             ]);
             $planoEstudo = $this->PlanoEstudo->find('first', [
                 'conditions' => [
                     //'Curso.unidade_organica_id' => $this->Session->read('Auth.User.unidade_organica_id'),
-                    'PlanoEstudo.id' => $planoEstudoId
-                ]
+                    'PlanoEstudo.id' => $planoEstudoId,
+                ],
             ]);
             if (empty($planoEstudo)) {
                 throw new MethodNotAllowedException(__('Nao possui permissao para aceder a pagina anterior'));
@@ -168,7 +168,7 @@
                         ['class' => 'alert success']);
                     $this->redirect([
                         'action' => 'adicionar_disciplinas',
-                        $this->data['PlanoEstudo']['plano_estudo_id']
+                        $this->data['PlanoEstudo']['plano_estudo_id'],
                     ]);
                 } else {
                     $this->Session->setFlash(__('Problemas ao Gravar Dados. Tente Novamente'), 'default',
@@ -183,7 +183,7 @@
         public function beforeFilter()
         {
             parent::beforeFilter();
-            $this->Security->requirePost('faculdade_desactivar_plano_estudos','faculdade_remover_plano_estudos');
+            $this->Security->requirePost('faculdade_desactivar_plano_estudos', 'faculdade_remover_plano_estudos');
         }
 
         public function editar_disciplina($disciplinaPlanoId)
@@ -215,7 +215,7 @@
         function faculdade_adicionar_disciplinas($planoEstudoId)
         {
             $this->PlanoEstudo->contain([
-                'Curso'
+                'Curso',
             ]);
             $planoEstudo = $this->PlanoEstudo->findById($planoEstudoId);
             $planoEstudo['PlanoEstudo']['total_creditos'] = $this->PlanoEstudo->getTotalCreditos($planoEstudoId);
@@ -245,14 +245,14 @@
                         $this->redirect([
                             'action' => 'adicionar_precedencias',
                             $this->request->data['DisciplinaPlanoEstudo']['plano_estudo_id'],
-                            $this->request->data['DisciplinaPlanoEstudo']['disciplina_id']
+                            $this->request->data['DisciplinaPlanoEstudo']['disciplina_id'],
                         ]);
                     } else {
                         $this->Session->setFlash('Dado Registado com Sucesso.Adicione Mais disciplinas.', 'default',
                             ['class' => 'alert success']);
                         $this->redirect([
                             'action' => 'adicionar_disciplinas',
-                            $this->request->data['DisciplinaPlanoEstudo']['plano_estudo_id']
+                            $this->request->data['DisciplinaPlanoEstudo']['plano_estudo_id'],
                         ]);
                     }
                 } else {
@@ -302,13 +302,13 @@
                         'conditions' => [
                             'curso_id',
                             $this->request->data['PlanoEstudo']['curso_id'],
-                            'ano_criacao' => $this->request->data['PlanoEstudo']['ano_criacao']
-                        ]
+                            'ano_criacao' => $this->request->data['PlanoEstudo']['ano_criacao'],
+                        ],
                     ]);
                     if (!empty($planoEstudoExiste)) {
                         $this->redirect([
                             'actrion' => 'adicionar_disciplinas',
-                            $planoEstudoExiste['PlanoEstudo']['id']
+                            $planoEstudoExiste['PlanoEstudo']['id'],
                         ]);
                     }
                     $this->Session->setFlash('Erro ao gravar dados. Por favor tente de novo.', 'default',
@@ -317,7 +317,7 @@
             }
             $cursos = $this->PlanoEstudo->Curso->find('list', [
                 'conditions' => ['Curso.unidade_organica_id' => $this->Session->read('Auth.User.unidade_organica_id')],
-                'order'      => 'Curso.name ASC'
+                'order'      => 'Curso.name ASC',
             ]);
             $this->set(compact('cursos'));
         }
@@ -336,13 +336,13 @@
                 throw new NotFoundException(__('Esta disciplina nao pertence a este plano de Estudos'));
             }
             $this->PlanoEstudo->contain([
-                'Curso'
+                'Curso',
             ]);
             $planoEstudo = $this->PlanoEstudo->find('first', [
                 'conditions' => [
                     'Curso.unidade_organica_id' => $this->Session->read('Auth.User.unidade_organica_id'),
-                    'PlanoEstudo.id'            => $planoEstudoId
-                ]
+                    'PlanoEstudo.id'            => $planoEstudoId,
+                ],
             ]);
             if (empty($planoEstudo)) {
                 throw new MethodNotAllowedException(__('Nao possui permissao para aceder a pagina anterior'));
@@ -356,7 +356,7 @@
                         ['class' => 'alert success']);
                     $this->redirect([
                         'action' => 'adicionar_disciplinas',
-                        $this->data['PlanoEstudo']['plano_estudo_id']
+                        $this->data['PlanoEstudo']['plano_estudo_id'],
                     ]);
                 } else {
                     $this->Session->setFlash(__('Problemas ao Gravar Dados. Tente Novamente'), 'default',
@@ -376,10 +376,10 @@
          */
         public function faculdade_desactivar_plano_estudo(int $planoEstudoId)
         {
-            if($this->PlanoEstudo->desactivaPlanoEstudo($planoEstudoId)===true){
+            if ($this->PlanoEstudo->desactivaPlanoEstudo($planoEstudoId) === true) {
                 $this->Flash->success('Plano de Estudos Desactivado com sucesso');
                 $this->redirect($this->referer('/'));
-            } else{
+            } else {
                 $this->Flash->error('Este Plano de Estudos não pode ser desactivado porque tem alunos activos');
                 $this->redirect($this->referer('/'));
             }
@@ -410,7 +410,7 @@
 
             $disciplinaPlanoEstudo = $this->PlanoEstudo->DisciplinaPlanoEstudo->findById($disciplinaPlanoId);
             $this->PlanoEstudo->contain([
-                'Curso'
+                'Curso',
             ]);
             $planoEstudo = $this->PlanoEstudo->findById($disciplinaPlanoEstudo['DisciplinaPlanoEstudo']['plano_estudo_id']);
             $planoEstudo['PlanoEstudo']['total_creditos'] = $this->PlanoEstudo->getTotalCreditos($disciplinaPlanoEstudo['DisciplinaPlanoEstudo']['plano_estudo_id']);
@@ -473,13 +473,16 @@
             $this->paginate = [
                 'contain'    => [
                     'Curso',
-                    'EstadoObjecto'
+                    'EstadoObjecto',
                 ],
                 'conditions' => [
                     'Curso.unidade_organica_id' => $this->Session->read('Auth.User.unidade_organica_id'),
-                    'OR' => ['PlanoEstudo.estado_objecto_id is null','PlanoEstudo.estado_objecto_id'=>1]
+                    'OR'                        => [
+                        'PlanoEstudo.estado_objecto_id is null',
+                        'PlanoEstudo.estado_objecto_id' => 1,
+                    ],
                 ],
-                'order'      => 'PlanoEstudo.ano_criacao DESC'
+                'order'      => 'PlanoEstudo.ano_criacao DESC',
             ];
             $this->set('planoEstudos', $this->paginate('PlanoEstudo'));
         }
@@ -540,7 +543,6 @@
         }
 
 
-
         function index()
         {
 
@@ -563,17 +565,16 @@
                 $conditions['PlanoEstudo.ano_criacao'] = $anoCriacao;
 
             }
-            $conditions['OR'] = ['PlanoEstudo.estado_objecto_id is null','PlanoEstudo.estado_objecto_id'=>1];
-
+            $conditions['OR'] = ['PlanoEstudo.estado_objecto_id is null', 'PlanoEstudo.estado_objecto_id' => 1];
 
 
             $this->paginate = [
                 'contain'    => [
                     'Curso',
-                    'EstadoObjecto'
+                    'EstadoObjecto',
                 ],
                 'order'      => 'PlanoEstudo.ano_criacao DESC',
-                'conditions' => $conditions
+                'conditions' => $conditions,
             ];
             $this->set('planoEstudos', $this->paginate('PlanoEstudo'));
 

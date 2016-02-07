@@ -1,6 +1,7 @@
 <?php
 
-class RequisicoesAppController extends AppController {
+    class RequisicoesAppController extends AppController
+    {
 
-}
+    }
 

@@ -2,15 +2,20 @@
 
 <?php $this->start('funcionario-form') ?>
 <?php echo $this->Form->create('Funcionario',
-    ['role' => 'form', 'class' => 'form-horizontal', 'inputDefaults' => []]); ?>
+        ['role' => 'form', 'class' => 'form-horizontal', 'inputDefaults' => []]); ?>
 <div class="form-group">
     <label>
         <?php echo __('Nova Unidade Organica') ?>
     </label>
 
 
-        <?php echo $this->Form->input('unidade_organica_id',
-            ['label' => false, 'div' => false, 'class' => 'form-control','empty'=>'--Seleccione--','required'=>true]); ?>
+    <?php echo $this->Form->input('unidade_organica_id',
+            ['label'    => false,
+             'div'      => false,
+             'class'    => 'form-control',
+             'empty'    => '--Seleccione--',
+             'required' => true,
+            ]); ?>
 
 </div>
 <div class="form-group">

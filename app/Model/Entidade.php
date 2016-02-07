@@ -488,29 +488,6 @@
 
         }
 
-        public function verificaEntidadeExiste($nuit, $telemovel, $tipoDocumento, $numeroDocumento)
-        {
-            $nuitExiste = $this->findByNuit($nuit);
-            if (!empty($nuitExiste)) {
-                return $nuitExiste;
-            }
-            $telemovelExiste = $this->findByTelemovel($telemovel);
-            if (!empty($telemovelExiste)) {
-                return $telemovelExiste;
-            }
-            $documentoExiste = $this->find('first', [
-                'conditions' => [
-                    'documento_identificacao_id'     => $tipoDocumento,
-                    'documento_identificacao_numero' => $numeroDocumento,
-                ],
-            ]);
-            if (!empty($documentoExiste)) {
-                return $documentoExiste;
-            }
-
-            return false;
-        }
-
         public function cadastraEntidade($data)
         {
             $dataSource = $this->getDataSource();
@@ -544,6 +521,29 @@
             $dataSource->commit();
 
             return $this->id;
+        }
+
+        public function verificaEntidadeExiste($nuit, $telemovel, $tipoDocumento, $numeroDocumento)
+        {
+            $nuitExiste = $this->findByNuit($nuit);
+            if (!empty($nuitExiste)) {
+                return $nuitExiste;
+            }
+            $telemovelExiste = $this->findByTelemovel($telemovel);
+            if (!empty($telemovelExiste)) {
+                return $telemovelExiste;
+            }
+            $documentoExiste = $this->find('first', [
+                'conditions' => [
+                    'documento_identificacao_id'     => $tipoDocumento,
+                    'documento_identificacao_numero' => $numeroDocumento,
+                ],
+            ]);
+            if (!empty($documentoExiste)) {
+                return $documentoExiste;
+            }
+
+            return false;
         }
 
     }

@@ -1,23 +1,25 @@
 <?php
-/**
- * DocenteFixture
- *
- */
-class DocenteFixture extends CakeTestFixture {
 
-/**
- * Import
- *
- * @var array
- */
-	public $import = array('model' => 'Docente');
+	/**
+	 * DocenteFixture
+	 *
+	 */
+	class DocenteFixture extends CakeTestFixture
+	{
 
-/**
- * Records
- *
- * @var array
- */
-	public $records = array(
-	);
+		/**
+		 * Import
+		 *
+		 * @var array
+		 */
+		public $import = ['model' => 'Docente'];
 
-}
+		/**
+		 * Records
+		 *
+		 * @var array
+		 */
+		public $records = [
+		];
+
+	}

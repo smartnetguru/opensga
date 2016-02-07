@@ -17,7 +17,7 @@
             'app.turma',
             'app.ano_lectivo',
             'app.docente_disciplina',
-            'app.docente_turma'
+            'app.docente_turma',
 
         ];
         //public $autoFixtures = false;
@@ -52,17 +52,19 @@
          */
         public function testAdicionaDocente()
         {
-            $data= array('DocenteTurma'=>[
-                'docente_id'=>1,
-                'turma_id'=>2,
-                'tipo_docente_turma_id'=>1,
-                'estado_docente_turma_id'=>1,
-            ]);
+            $data = [
+                'DocenteTurma' => [
+                    'docente_id'              => 1,
+                    'turma_id'                => 2,
+                    'tipo_docente_turma_id'   => 1,
+                    'estado_docente_turma_id' => 1,
+                ],
+            ];
             $resultado = $this->Turma->adicionaDocente($data);
 
             debug($resultado);
 
-            $this->assertSame($resultado,true);
+            $this->assertSame($resultado, true);
         }
 
         /**

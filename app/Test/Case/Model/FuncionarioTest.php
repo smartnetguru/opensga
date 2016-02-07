@@ -16,7 +16,7 @@
             'app.funcionario',
             'app.entidade',
             'app.user',
-            'app.group'
+            'app.group',
         ];
 
         /**
@@ -54,7 +54,7 @@
                     'numero_estudante'       => '',
                     'nome_emergencia'        => '',
                     'telemovel_emergencia'   => '',
-                    'parentesco_encarregado' => ''
+                    'parentesco_encarregado' => '',
                 ],
                 'Entidade'              => [
                     'apelido'              => 'Leonardo',
@@ -67,7 +67,7 @@
                     'naturalidade'         => 'Chimoio',
                     'pais_nascimento'      => '152',
                     'provincia_nascimento' => '8',
-                    'cidade_nascimento'    => '97'
+                    'cidade_nascimento'    => '97',
                 ],
                 'Funcionario'           => [
                     'unidade_organica_id'       => '6',
@@ -77,7 +77,7 @@
                     'cargo_id'                  => '',
                     'superior_hierarquico'      => '',
                     'categoria_funcionario_id'  => '',
-                    'categoria_profissional_id' => ''
+                    'categoria_profissional_id' => '',
                 ],
                 'EntidadeContacto'      => [
                     (int)11 => '152',
@@ -88,15 +88,15 @@
                     (int)7  => '',
                     (int)8  => '',
                     (int)2  => '3464567574',
-                    (int)1  => 'elisio.leonardo444@gmail.com'
+                    (int)1  => 'elisio.leonardo444@gmail.com',
                 ],
                 'EntidadeIdentificacao' => [
                     'documento_identificacao_id' => '',
                     'numero'                     => '',
                     'local_emissao'              => '',
                     'data_emissao'               => '',
-                    'data_validade'              => ''
-                ]
+                    'data_validade'              => '',
+                ],
             ];
             $resultado = $this->Funcionario->cadastraFuncionario($data);
             $this->assertSame(true, $resultado);

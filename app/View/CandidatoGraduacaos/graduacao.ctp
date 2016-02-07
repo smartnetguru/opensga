@@ -5,16 +5,16 @@
 <p>Por favor, siga os passos que se seguem para poder aceder a sua conta pessoal do SIGA</p>
 <h4>Já alguma vez acedeu ao SIGA usando a sua conta pessoal?</h4>
 <div
-    class="col-sm-4">
+        class="col-sm-4">
     <?php echo $this->Html->link('Sim, já acedi ao SIGA e conheco meu Email Institucional e minha senha de acesso',
-        ['controller' => 'users', 'action' => 'login'],
-        ['class' => 'btn btn-success', 'id' => 'login']) ?>
+            ['controller' => 'users', 'action' => 'login'],
+            ['class' => 'btn btn-success', 'id' => 'login']) ?>
 </div>
 <div class="col-sm-4"><?php echo $this->Html->link('Nao, nunca acedi ao SIGA, mas conheco meu numero de Estudante',
-        ['action' => 'numeroEstudante'], ['class' => 'btn btn-info', 'id' => 'numeroEstudante']) ?>
+            ['action' => 'numeroEstudante'], ['class' => 'btn btn-info', 'id' => 'numeroEstudante']) ?>
 </div>
 <div class="col-sm-4"><?php echo $this->Html->link('Nao, nunca acedi ao SIGA, nem me lembro do meu numero de Estudante',
-        ['action' => 'cadastro'], ['class' => 'btn btn-success']) ?>
+            ['action' => 'cadastro'], ['class' => 'btn btn-success']) ?>
 </div>
 
 <?php $this->Html->scriptStart(['inline' => false, 'block' => 'scriptBottom']); ?>

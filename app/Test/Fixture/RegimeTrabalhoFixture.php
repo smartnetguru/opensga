@@ -1,31 +1,33 @@
 <?php
-/**
- * RegimeTrabalhoFixture
- *
- */
-class RegimeTrabalhoFixture extends CakeTestFixture {
 
-/**
- * Import
- *
- * @var array
- */
-	public $import = array('model' => 'RegimeTrabalho');
+	/**
+	 * RegimeTrabalhoFixture
+	 *
+	 */
+	class RegimeTrabalhoFixture extends CakeTestFixture
+	{
 
-/**
- * Records
- *
- * @var array
- */
-	public $records = array(
-		array(
-			'id' => '1',
-			'name' => 'Tempo Inteiro'
-		),
-		array(
-			'id' => '2',
-			'name' => 'Tempo Parcial'
-		),
-	);
+		/**
+		 * Import
+		 *
+		 * @var array
+		 */
+		public $import = ['model' => 'RegimeTrabalho'];
 
-}
+		/**
+		 * Records
+		 *
+		 * @var array
+		 */
+		public $records = [
+			[
+				'id'   => '1',
+				'name' => 'Tempo Inteiro',
+			],
+			[
+				'id'   => '2',
+				'name' => 'Tempo Parcial',
+			],
+		];
+
+	}

@@ -40,17 +40,17 @@
             </div>
             <div class="panel-body">
                 <?php echo $this->Form->create('Aluno', [
-                    'role'          => "form",
-                    'novalidade'    => 'novalidate',
-                    'enctype'       => 'multipart/form-data',
-                    'class'         => 'smart-wizard form-horizontal',
-                    'id'            => 'form',
-                    'inputDefaults' => [
-                        'label'       => false,
-                        'div'         => false,
-                        'empty'       => 'Seleccione',
-                        'placeholder' => 'Seleccione'
-                    ]
+                        'role'          => "form",
+                        'novalidade'    => 'novalidate',
+                        'enctype'       => 'multipart/form-data',
+                        'class'         => 'smart-wizard form-horizontal',
+                        'id'            => 'form',
+                        'inputDefaults' => [
+                                'label'       => false,
+                                'div'         => false,
+                                'empty'       => 'Seleccione',
+                                'placeholder' => 'Seleccione',
+                        ],
                 ]); ?>
 
                 <div class="swMain">
@@ -64,48 +64,48 @@
                                 <div class="col-sm-4">
                                     <?php echo $this->Form->label('Entidade.apelido', 'Apelido'); ?>
                                     <?php echo $this->Form->input('Entidade.apelido',
-                                        ['class' => 'form-control', 'id' => 'codigo']); ?>
+                                            ['class' => 'form-control', 'id' => 'codigo']); ?>
                                 </div>
                                 <div class="col-sm-4">
                                     <?php echo $this->Form->label('Entidade.nomes', 'Nomes'); ?>
                                     <?php echo $this->Form->input('Entidade.nomes',
-                                        ['class' => 'form-control', 'id' => 'codigo']); ?>
+                                            ['class' => 'form-control', 'id' => 'codigo']); ?>
                                 </div>
                                 <div class="col-sm-4">
                                     <?php echo $this->Form->label('Entidade.genero_id', 'Sexo'); ?>
                                     <?php echo $this->Form->input('Entidade.genero_id',
-                                        ['class' => 'form-control', 'id' => 'codigo']); ?>
+                                            ['class' => 'form-control', 'id' => 'codigo']); ?>
                                 </div>
 
 
                                 <div class="col-sm-3">
                                     <?php echo $this->Form->label('Curso.unidade_organica_id', 'Faculdade'); ?>
                                     <?php echo $this->Form->input('Curso.unidade_organica_id',
-                                        ['class' => 'form-control', 'id' => 'unidadeOrganica']); ?>
+                                            ['class' => 'form-control', 'id' => 'unidadeOrganica']); ?>
                                 </div>
                                 <div class="col-sm-3">
                                     <?php echo $this->Form->label('Aluno.curso_id', 'Nome do Curso'); ?>
                                     <?php echo $this->Form->input('Aluno.curso_id',
-                                        ['class' => 'form-control', 'id' => 'curso']); ?>
+                                            ['class' => 'form-control', 'id' => 'curso']); ?>
                                 </div>
                                 <div class="col-sm-3">
                                     <?php echo $this->Form->label('Aluno.ano_ingresso', 'Ano de Ingresso'); ?>
                                     <?php echo $this->Form->input('Aluno.ano_ingresso',
-                                        ['class' => 'form-control', 'id' => 'codigo', 'type' => 'text']); ?>
+                                            ['class' => 'form-control', 'id' => 'codigo', 'type' => 'text']); ?>
                                 </div>
 
 
                                 <div class="col-sm-3">
                                     <div class="form-group">
                                         <?php echo $this->Form->label('Entidade.data_nascimento',
-                                            'Data de Nascimento'); ?>
+                                                'Data de Nascimento'); ?>
                                         <div class="input-group">
                                             <?php echo $this->Form->input('Entidade.data_nascimento', [
-                                                'class'              => 'form-control date-picker',
-                                                'id'                 => 'firstname',
-                                                'type'               => 'text',
-                                                'data-date-viewmode' => 'years',
-                                                'data-date-format'   => 'yyyy-mm-dd'
+                                                    'class'              => 'form-control date-picker',
+                                                    'id'                 => 'firstname',
+                                                    'type'               => 'text',
+                                                    'data-date-viewmode' => 'years',
+                                                    'data-date-format'   => 'yyyy-mm-dd',
                                             ]); ?>
                                             <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
                                         </div>
@@ -119,9 +119,9 @@
                         <div class="form-group">
 
                             <?php echo $this->Form->end([
-                                'label' => __('GRAVAR', true),
-                                'class' => 'btn btn-success finish-step btn-block',
-                                'div'   => 'col-sm-2 col-sm-offset-8'
+                                    'label' => __('GRAVAR', true),
+                                    'class' => 'btn btn-success finish-step btn-block',
+                                    'div'   => 'col-sm-2 col-sm-offset-8',
                             ]); ?>
 
                         </div>
@@ -137,35 +137,35 @@
 
 <?php
     $this->Js->get('#provinciaNascimento')->event('change', $this->Js->request([
-        'controller' => 'ajax',
-        'action'     => 'get_cidades_by_provincia'
+            'controller' => 'ajax',
+            'action'     => 'get_cidades_by_provincia',
     ], [
-        'update'         => '#cidadeNascimento',
-        'complete'       => '$("#cidadeNascimento").trigger("liszt:updated")',
-        'async'          => true,
-        'method'         => 'post',
-        'dataExpression' => true,
-        'data'           => $this->Js->serializeForm([
-            'isForm' => true,
-            'inline' => true
-        ])
+            'update'         => '#cidadeNascimento',
+            'complete'       => '$("#cidadeNascimento").trigger("liszt:updated")',
+            'async'          => true,
+            'method'         => 'post',
+            'dataExpression' => true,
+            'data'           => $this->Js->serializeForm([
+                    'isForm' => true,
+                    'inline' => true,
+            ]),
     ])
     );
 
 
     $this->Js->get('#unidadeOrganica')->event('change', $this->Js->request([
-        'controller' => 'ajax',
-        'action'     => 'get_cursos_by_unidade_organica'
+            'controller' => 'ajax',
+            'action'     => 'get_cursos_by_unidade_organica',
     ], [
-        'update'         => '#curso',
-        'complete'       => '$("#curso").trigger("liszt:updated")',
-        'async'          => true,
-        'method'         => 'post',
-        'dataExpression' => true,
-        'data'           => $this->Js->serializeForm([
-            'isForm' => true,
-            'inline' => true
-        ])
+            'update'         => '#curso',
+            'complete'       => '$("#curso").trigger("liszt:updated")',
+            'async'          => true,
+            'method'         => 'post',
+            'dataExpression' => true,
+            'data'           => $this->Js->serializeForm([
+                    'isForm' => true,
+                    'inline' => true,
+            ]),
     ])
     );
 ?>
@@ -175,23 +175,23 @@
 
 
     echo $this->Html->script('/assets/plugins/jquery-inputlimiter/jquery.inputlimiter.1.3.1.min',
-        ['block' => 'scriptBottom']);
+            ['block' => 'scriptBottom']);
     echo $this->Html->script('/assets/plugins/autosize/jquery.autosize.min', ['block' => 'scriptBottom']);
     echo $this->Html->script('/assets/plugins/autosize/jquery.autosize.min', ['block' => 'scriptBottom']);
     echo $this->Html->script('/assets/plugins/select2/select2.min', ['block' => 'scriptBottom']);
     echo $this->Html->script('/assets/plugins/jquery.maskedinput/src/jquery.maskedinput', ['block' => 'scriptBottom']);
     echo $this->Html->script('/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker',
-        ['block' => 'scriptBottom']);
+            ['block' => 'scriptBottom']);
     echo $this->Html->script('/assets/plugins/bootstrap-timepicker/js/bootstrap-timepicker.min',
-        ['block' => 'scriptBottom']);
+            ['block' => 'scriptBottom']);
     echo $this->Html->script('/assets/plugins/bootstrap-daterangepicker/moment.min', ['block' => 'scriptBottom']);
     echo $this->Html->script('/assets/plugins/bootstrap-daterangepicker/daterangepicker', ['block' => 'scriptBottom']);
     echo $this->Html->script('/assets/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker',
-        ['block' => 'scriptBottom']);
+            ['block' => 'scriptBottom']);
     //echo $this->Html->script('/assets/plugins/bootstrap-colorpicker/js/commits', array('block' => 'scriptBottom'));
     echo $this->Html->script('/assets/plugins/jQuery-Tags-Input/jquery.tagsinput', ['block' => 'scriptBottom']);
     echo $this->Html->script('/assets/plugins/bootstrap-fileupload/bootstrap-fileupload.min',
-        ['block' => 'scriptBottom']);
+            ['block' => 'scriptBottom']);
     echo $this->Html->script('/assets/plugins/summernote/build/summernote.min', ['block' => 'scriptBottom']);
     echo $this->Html->script('/assets/plugins/ckeditor/ckeditor', ['block' => 'scriptBottom']);
     echo $this->Html->script('/assets/plugins/ckeditor/adapters/jquery', ['block' => 'scriptBottom']);
@@ -200,9 +200,9 @@
     echo $this->Html->script(['/assets/plugins/jquery-ui/jquery.ui.menu'], ['block' => 'scriptBottom']);
     echo $this->Html->script(['/assets/plugins/jquery-ui/jquery.ui.autocomplete'], ['block' => 'scriptBottom']);
     echo $this->Html->script('/assets/js/form-matricular-candidato-elements', ['block' => 'scriptBottom'],
-        ['block' => 'scriptBottom']);
+            ['block' => 'scriptBottom']);
     echo $this->Html->script('/assets/js/form-matricular-candidato-wizard', ['block' => 'scriptBottom'],
-        ['block' => 'scriptBottom']);
+            ['block' => 'scriptBottom']);
 ?>
 
 

@@ -73,24 +73,24 @@
                 'foreignKey' => 'user_id',
                 'conditions' => '',
                 'fields'     => '',
-                'order'      => ''
+                'order'      => '',
             ],
             'EstadoObjecto' => [
                 'className'  => 'EstadoObjecto',
                 'foreignKey' => 'estado_objecto_id',
                 'conditions' => '',
                 'fields'     => '',
-                'order'      => ''
-            ]
+                'order'      => '',
+            ],
         ];
 
-        public $hasOne = array(
-            'MessageText' => array(
-                'className' => 'MessageText',
-                'conditions' => array(),
-                'dependent' => true
-            )
-        );
+        public $hasOne = [
+            'MessageText' => [
+                'className'  => 'MessageText',
+                'conditions' => [],
+                'dependent'  => true,
+            ],
+        ];
 
         /**
          * hasMany associations
@@ -109,7 +109,7 @@
                 'offset'       => '',
                 'exclusive'    => '',
                 'finderQuery'  => '',
-                'counterQuery' => ''
+                'counterQuery' => '',
             ],
             'MessageUser' => [
                 'className'    => 'MessageUser',
@@ -122,8 +122,8 @@
                 'offset'       => '',
                 'exclusive'    => '',
                 'finderQuery'  => '',
-                'counterQuery' => ''
-            ]
+                'counterQuery' => '',
+            ],
         ];
 
 
@@ -140,8 +140,8 @@
                     'user_id'           => $from,
                     'assunto'           => $subject,
                     'data_envio'        => $dataEnvio,
-                    'estado_objecto_id' => 1
-                ]
+                    'estado_objecto_id' => 1,
+                ],
             ];
             $this->create();
             if (!$this->save($arrayMessage)) {
@@ -152,8 +152,8 @@
             $arrayMessageText = [
                 'MessageText' => [
                     'message_id' => $this->id,
-                    'texto'      => $message
-                ]
+                    'texto'      => $message,
+                ],
             ];
             $this->MessageText->create();
             if (!$this->MessageText->save($arrayMessageText)) {
@@ -167,8 +167,8 @@
                     'user_id'           => $to,
                     'message_folder_id' => 1,
                     'estado_message_id' => 1,
-                    'is_starred'        => 0
-                ]
+                    'is_starred'        => 0,
+                ],
             ];
             $this->MessageUser->create();
             if (!$this->MessageUser->save($arrayMessageUser)) {
@@ -182,8 +182,8 @@
                     'user_id'           => $from,
                     'message_folder_id' => 2,
                     'estado_message_id' => 2,
-                    'is_starred'        => 0
-                ]
+                    'is_starred'        => 0,
+                ],
             ];
             $this->MessageUser->create();
             if (!$this->MessageUser->save($arrayMessageUserFrom)) {

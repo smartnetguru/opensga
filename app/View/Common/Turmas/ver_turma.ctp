@@ -1,21 +1,21 @@
 ﻿<?php
-/**
- * View do Perfil do Aluno
- *
- * @copyright     Copyright 2010-2011, INFOmoz (Informática-Moçambique) (http://infomoz.net)
- * @link          http://infomoz.net/opensga OpenSGA - Sistema de Gestão Académica
- * @author          Elisio Leonardo (elisio.leonardo@gmail.com)
- * @package       opensga
- * @subpackage    opensga.core.estudantes
- * @version       OpenSGA v 0.5.0
- * @since         OpenSGA v 0.1.0
- *
- */
+    /**
+     * View do Perfil do Aluno
+     *
+     * @copyright     Copyright 2010-2011, INFOmoz (Informática-Moçambique) (http://infomoz.net)
+     * @link          http://infomoz.net/opensga OpenSGA - Sistema de Gestão Académica
+     * @author          Elisio Leonardo (elisio.leonardo@gmail.com)
+     * @package       opensga
+     * @subpackage    opensga.core.estudantes
+     * @version       OpenSGA v 0.5.0
+     * @since         OpenSGA v 0.1.0
+     *
+     */
 ?>
 
 <?php
-echo $this->Html->css('/assets/plugins/bootstrap-fileupload/bootstrap-fileupload.min.css');
-echo $this->Html->css('/assets/plugins/bootstrap-social-buttons/social-buttons-3.css');
+    echo $this->Html->css('/assets/plugins/bootstrap-fileupload/bootstrap-fileupload.min.css');
+    echo $this->Html->css('/assets/plugins/bootstrap-social-buttons/social-buttons-3.css');
 ?>
 
 <div class="row">
@@ -67,45 +67,45 @@ echo $this->Html->css('/assets/plugins/bootstrap-social-buttons/social-buttons-3
                                         <td>Disciplina</td>
                                         <td><?php echo h($turma['Disciplina']['name']); ?></td>
                                         <td><a class="show-tab" href="#panel_edit_account"><i
-                                                    class="fa fa-pencil edit-user-info"></i></a></td>
+                                                        class="fa fa-pencil edit-user-info"></i></a></td>
                                     </tr>
                                     <tr>
                                         <td>Curso</td>
                                         <td><?php echo h($turma['Curso']['name']); ?></td>
                                         <td><a class="show-tab" href="#panel_edit_account"><i
-                                                    class="fa fa-pencil edit-user-info"></i></a></td>
+                                                        class="fa fa-pencil edit-user-info"></i></a></td>
                                     </tr>
                                     <tr>
                                         <td>Ano Lectivo</td>
                                         <td><?php echo h($turma['AnoLectivo']['ano']); ?></td>
                                         <td><a class="show-tab" href="#panel_edit_account"><i
-                                                    class="fa fa-pencil edit-user-info"></i></a></td>
+                                                        class="fa fa-pencil edit-user-info"></i></a></td>
                                     </tr>
                                     <tr>
                                         <td>Plano de Estudos</td>
                                         <td><?php echo h($turma['PlanoEstudo']['name']); ?></td>
                                         <td><a class="show-tab" href="#panel_edit_account"><i
-                                                    class="fa fa-pencil edit-user-info"></i></a></td>
+                                                        class="fa fa-pencil edit-user-info"></i></a></td>
                                     </tr>
                                     <tr>
                                         <td>Ano Curricular</td>
                                         <td><span
-                                                class="label label-sm label-info"><?php echo h($turma['Turma']['ano_curricular']); ?></span>
+                                                    class="label label-sm label-info"><?php echo h($turma['Turma']['ano_curricular']); ?></span>
                                         </td>
                                         <td><a class="show-tab" href="#panel_edit_account"><i
-                                                    class="fa fa-pencil edit-user-info"></i></a></td>
+                                                        class="fa fa-pencil edit-user-info"></i></a></td>
                                     </tr>
                                     <tr>
                                         <td>Semestre Curricular</td>
                                         <td><?php echo h($turma['Turma']['semestre_curricular']); ?></td>
                                         <td><a class="show-tab" href="#panel_edit_account"><i
-                                                    class="fa fa-pencil edit-user-info"></i></a></td>
+                                                        class="fa fa-pencil edit-user-info"></i></a></td>
                                     </tr>
                                     <tr>
                                         <td>Turno</td>
                                         <td><?php echo h($turma['Turno']['name']); ?></td>
                                         <td><a class="show-tab" href="#panel_edit_account"><i
-                                                    class="fa fa-pencil edit-user-info"></i></a></td>
+                                                        class="fa fa-pencil edit-user-info"></i></a></td>
                                     </tr>
 
                                     </tbody>
@@ -135,21 +135,22 @@ echo $this->Html->css('/assets/plugins/bootstrap-social-buttons/social-buttons-3
                                         <tr>
                                             <td>Regente</td>
                                             <td><?php
-                                                if (isset($regente['Docente']['Entidade']['name']))
-                                                    echo h($regente['Docente']['Entidade']['name']);
+                                                    if (isset($regente['Docente']['Entidade']['name'])) {
+                                                        echo h($regente['Docente']['Entidade']['name']);
+                                                    }
                                                 ?></td>
                                             <td><a class="show-tab" href="#panel_edit_account"><i
-                                                        class="fa fa-pencil edit-user-info"></i></a></td>
+                                                            class="fa fa-pencil edit-user-info"></i></a></td>
                                         </tr>
                                         <tr>
                                             <td>Assistente</td>
                                             <td><?php
-                                                foreach ($assistentes as $assistente) {
-                                                    echo h($assistente['Docente']['Entidade']['name']);
-                                                }
+                                                    foreach ($assistentes as $assistente) {
+                                                        echo h($assistente['Docente']['Entidade']['name']);
+                                                    }
                                                 ?></td>
                                             <td><a class="show-tab" href="#panel_edit_account"><i
-                                                        class="fa fa-pencil edit-user-info"></i></a></td>
+                                                            class="fa fa-pencil edit-user-info"></i></a></td>
                                         </tr>
                                         </tbody>
                                     </table>
@@ -166,25 +167,25 @@ echo $this->Html->css('/assets/plugins/bootstrap-social-buttons/social-buttons-3
                                             <td>Total de Estudantes</td>
                                             <td><?php echo h(''); ?></td>
                                             <td><a class="show-tab" href="#panel_edit_account"><i
-                                                        class="fa fa-pencil edit-user-info"></i></a></td>
+                                                            class="fa fa-pencil edit-user-info"></i></a></td>
                                         </tr>
                                         <tr>
                                             <td>Homens</td>
                                             <td><?php echo h(''); ?></td>
                                             <td><a class="show-tab" href="#panel_edit_account"><i
-                                                        class="fa fa-pencil edit-user-info"></i></a></td>
+                                                            class="fa fa-pencil edit-user-info"></i></a></td>
                                         </tr>
                                         <tr>
                                             <td>Mulheres</td>
                                             <td><?php echo h(''); ?></td>
                                             <td><a class="show-tab" href="#panel_edit_account"><i
-                                                        class="fa fa-pencil edit-user-info"></i></a></td>
+                                                            class="fa fa-pencil edit-user-info"></i></a></td>
                                         </tr>
                                         <tr>
                                             <td>Idade Media</td>
                                             <td><?php echo h(''); ?></td>
                                             <td><a class="show-tab" href="#panel_edit_account"><i
-                                                        class="fa fa-pencil edit-user-info"></i></a></td>
+                                                            class="fa fa-pencil edit-user-info"></i></a></td>
                                         </tr>
                                         </tbody>
                                     </table>
@@ -264,20 +265,20 @@ echo $this->Html->css('/assets/plugins/bootstrap-social-buttons/social-buttons-3
                         </thead>
                         <tbody>
                         <?php
-                        $i = 1;
-                        foreach ($inscricaos as $inscricao) {
-                            ?>
-                            <tr>
-                                <td><?php echo $i++ ?></td>
-                                <td><?php echo h($inscricao['Matricula']['Aluno']['codigo']) ?></td>
-                                <td><?php echo h($inscricao['Matricula']['Aluno']['Entidade']['apelido']) ?></td>
-                                <td><?php echo h($inscricao['Matricula']['Aluno']['Entidade']['nomes']) ?></td>
-                                <td><?php echo h($inscricao['Inscricao']['nota_frequencia']) ?></td>
-                                <td><?php echo h($inscricao['Inscricao']['nota_exame_normal']) ?></td>
-                                <td><?php echo h($inscricao['Inscricao']['nota_exame_recorrencia']) ?></td>
-                                <td><?php echo h($inscricao['Inscricao']['nota_final']) ?></td>
-                            </tr>
-                        <?php } ?>
+                            $i = 1;
+                            foreach ($inscricaos as $inscricao) {
+                                ?>
+                                <tr>
+                                    <td><?php echo $i++ ?></td>
+                                    <td><?php echo h($inscricao['Matricula']['Aluno']['codigo']) ?></td>
+                                    <td><?php echo h($inscricao['Matricula']['Aluno']['Entidade']['apelido']) ?></td>
+                                    <td><?php echo h($inscricao['Matricula']['Aluno']['Entidade']['nomes']) ?></td>
+                                    <td><?php echo h($inscricao['Inscricao']['nota_frequencia']) ?></td>
+                                    <td><?php echo h($inscricao['Inscricao']['nota_exame_normal']) ?></td>
+                                    <td><?php echo h($inscricao['Inscricao']['nota_exame_recorrencia']) ?></td>
+                                    <td><?php echo h($inscricao['Inscricao']['nota_final']) ?></td>
+                                </tr>
+                            <?php } ?>
                         </tbody>
                     </table>
                 </div>
@@ -295,18 +296,22 @@ echo $this->Html->css('/assets/plugins/bootstrap-social-buttons/social-buttons-3
                         </thead>
                         <tbody>
                         <?php
-                        $i = 1;
-                        foreach ($turmaTipoAvaliacaos as $avaliacao) {
-                            ?>
-                            <tr>
-                                <td><?php echo $i++ ?></td>
-                                <td><?php echo $this->Html->link($avaliacao['TipoAvaliacao']['name'], array('controller' => 'avaliacaos', 'action' => 'ver_avaliacao', $avaliacao['TurmaTipoAvaliacao']['id'])) ?></td>
-                                <td><?php echo h($avaliacao['TurmaTipoAvaliacao']['ordem']) ?></td>
-                                <td><?php echo h($avaliacao['TurmaTipoAvaliacao']['peso']) ?></td>
-                                <td><?php echo h($avaliacao['TurmaTipoAvaliacao']['data_marcada']) ?></td>
-                                <td><?php echo h($avaliacao['TurmaTipoAvaliacao']['data_realizada']) ?></td>
-                            </tr>
-                        <?php } ?>
+                            $i = 1;
+                            foreach ($turmaTipoAvaliacaos as $avaliacao) {
+                                ?>
+                                <tr>
+                                    <td><?php echo $i++ ?></td>
+                                    <td><?php echo $this->Html->link($avaliacao['TipoAvaliacao']['name'], [
+                                                'controller' => 'avaliacaos',
+                                                'action'     => 'ver_avaliacao',
+                                                $avaliacao['TurmaTipoAvaliacao']['id'],
+                                        ]) ?></td>
+                                    <td><?php echo h($avaliacao['TurmaTipoAvaliacao']['ordem']) ?></td>
+                                    <td><?php echo h($avaliacao['TurmaTipoAvaliacao']['peso']) ?></td>
+                                    <td><?php echo h($avaliacao['TurmaTipoAvaliacao']['data_marcada']) ?></td>
+                                    <td><?php echo h($avaliacao['TurmaTipoAvaliacao']['data_realizada']) ?></td>
+                                </tr>
+                            <?php } ?>
                         </tbody>
                     </table>
                 </div>
@@ -319,12 +324,12 @@ echo $this->Html->css('/assets/plugins/bootstrap-social-buttons/social-buttons-3
 <?php echo $this->fetch('content'); ?>
 
 <?php
-// echo $this->Html->script(array('/assets/plugins/bootstrap-fileupload/bootstrap-fileupload.min.js'));
-// echo $this->Html->script(array('/assets/plugins/jquery.pulsate/jquery.pulsate.min.js'));
-echo $this->Html->script(array('/assets/js/perfil-estudante.js'));
+    // echo $this->Html->script(array('/assets/plugins/bootstrap-fileupload/bootstrap-fileupload.min.js'));
+    // echo $this->Html->script(array('/assets/plugins/jquery.pulsate/jquery.pulsate.min.js'));
+    echo $this->Html->script(['/assets/js/perfil-estudante.js']);
 ?>
 
-<?php $this->Html->scriptStart(array('inline' => false, 'block' => 'scriptBottom')); ?>
+<?php $this->Html->scriptStart(['inline' => false, 'block' => 'scriptBottom']); ?>
 
 $(document).ready(function() {
 

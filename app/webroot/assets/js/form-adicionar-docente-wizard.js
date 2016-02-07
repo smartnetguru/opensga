@@ -16,7 +16,8 @@ var FormWizard = function () {
     var animateBar = function (val) {
         if ((typeof val == 'undefined') || val == "") {
             val = 1;
-        };
+        }
+        ;
         numberOfSteps = $('.swMain > ul > li').length;
         var valueNow = Math.floor(100 / numberOfSteps * val);
         $('.step-bar').css('width', valueNow + '%');
@@ -128,12 +129,14 @@ var FormWizard = function () {
                 animateBar(nextstep);
                 isStepValid = true;
                 return true;
-            };
+            }
+            ;
         } else {
             displayConfirm();
             animateBar(nextstep);
             return true;
-        };
+        }
+        ;
     };
     var validateAllSteps = function () {
         var isStepValid = true;

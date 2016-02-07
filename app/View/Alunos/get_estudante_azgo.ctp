@@ -1,7 +1,7 @@
 <?php
-$this->Html->addCrumb('OpenSGA', '/');
-$this->Html->addCrumb('Página Inicial', '/');
-$group_id = $this->Session->read('Auth.User.group_id');
+    $this->Html->addCrumb('OpenSGA', '/');
+    $this->Html->addCrumb('Página Inicial', '/');
+    $group_id = $this->Session->read('Auth.User.group_id');
 ?>
 <div class="row">
     <div class="col-sm-6">
@@ -61,7 +61,9 @@ $group_id = $this->Session->read('Auth.User.group_id');
                     </tbody>
                 </table>
                 <p>
-                    <?php echo $this->Html->link('<i class="fa fa-plus"></i>Confirmar Compra', array('action' => 'perfil_estudante', $aluno['Aluno']['id']), array('class' => 'btn btn-green', 'escape' => false)) ?>
+                    <?php echo $this->Html->link('<i class="fa fa-plus"></i>Confirmar Compra',
+                            ['action' => 'perfil_estudante', $aluno['Aluno']['id']],
+                            ['class' => 'btn btn-green', 'escape' => false]) ?>
                 </p>
 
             </div>
@@ -92,18 +94,27 @@ $group_id = $this->Session->read('Auth.User.group_id');
                 </div>
             </div>
             <div class="panel-body">
-                <?php echo $this->Form->create('Aluno', array('role' => 'form', 'enctype' => 'multipart/form-data', 'class' => '', 'inputDefaults' => array())); ?>
+                <?php echo $this->Form->create('Aluno', [
+                        'role'          => 'form',
+                        'enctype'       => 'multipart/form-data',
+                        'class'         => '',
+                        'inputDefaults' => [],
+                ]); ?>
                 <div class="form-group">
                     <label>
                         <?php echo __('Numero de Estudante)') ?>
                     </label>
-                    <?php echo $this->Form->input('numero_estudante', array('label' => false, 'div' => false, 'class' => 'form-control')); ?>
+                    <?php echo $this->Form->input('numero_estudante',
+                            ['label' => false, 'div' => false, 'class' => 'form-control']); ?>
                 </div>
                 <div class="form-group">
                     <div class="col-sm-4 col-sm-offset-8">
                         <?php
 
-                            echo $this->Form->end(array('label' => __('PESQUISAR', true), 'class' => 'btn btn-blue btn-block'));
+                            echo $this->Form->end([
+                                    'label' => __('PESQUISAR', true),
+                                    'class' => 'btn btn-blue btn-block',
+                            ]);
 
                         ?>
 

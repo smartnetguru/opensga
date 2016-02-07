@@ -31,7 +31,7 @@
                 'offset'       => '',
                 'exclusive'    => '',
                 'finderQuery'  => '',
-                'counterQuery' => ''
+                'counterQuery' => '',
             ],
             'BolsaResultado'  => [
                 'className'    => 'BolsaResultado',
@@ -44,7 +44,7 @@
                 'offset'       => '',
                 'exclusive'    => '',
                 'finderQuery'  => '',
-                'counterQuery' => ''
+                'counterQuery' => '',
             ],
             'BolsaValorBolsa' => [
                 'className'    => 'BolsaValorBolsa',
@@ -57,7 +57,7 @@
                 'offset'       => '',
                 'exclusive'    => '',
                 'finderQuery'  => '',
-                'counterQuery' => ''
+                'counterQuery' => '',
             ],
             'BolsaBolsa'      => [
                 'className'    => 'BolsaBolsa',
@@ -70,8 +70,8 @@
                 'offset'       => '',
                 'exclusive'    => '',
                 'finderQuery'  => '',
-                'counterQuery' => ''
-            ]
+                'counterQuery' => '',
+            ],
         ];
 
     }

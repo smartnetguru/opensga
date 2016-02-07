@@ -1,23 +1,25 @@
 <?php
-/**
- * FaltaAulaFixture
- *
- */
-class FaltaAulaFixture extends CakeTestFixture {
 
-/**
- * Import
- *
- * @var array
- */
-	public $import = array('table' => 'falta_aulas');
+	/**
+	 * FaltaAulaFixture
+	 *
+	 */
+	class FaltaAulaFixture extends CakeTestFixture
+	{
 
-/**
- * Records
- *
- * @var array
- */
-	public $records = array(
-	);
+		/**
+		 * Import
+		 *
+		 * @var array
+		 */
+		public $import = ['table' => 'falta_aulas'];
 
-}
+		/**
+		 * Records
+		 *
+		 * @var array
+		 */
+		public $records = [
+		];
+
+	}

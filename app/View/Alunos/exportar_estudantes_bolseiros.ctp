@@ -1,29 +1,28 @@
 <?php
 
-App::import('Vendor', 'PHPExcel', array('file' => 'PHPExcel.php'));
-if (!class_exists('PHPExcel'))
-    throw new CakeException('Vendor class PHPExcel not found!');
+    App::import('Vendor', 'PHPExcel', ['file' => 'PHPExcel.php']);
+    if (!class_exists('PHPExcel')) {
+        throw new CakeException('Vendor class PHPExcel not found!');
+    }
 
 
-$this->PhpExcel->loadWorksheet(APP . 'Reports' . DS . 'Bolsas' . DS . 'exportar_estudantes_bolseiros.xlsx');
+    $this->PhpExcel->loadWorksheet(APP . 'Reports' . DS . 'Bolsas' . DS . 'exportar_estudantes_bolseiros.xlsx');
 
-$excel = $this->PhpExcel->xls->getActiveSheet();
+    $excel = $this->PhpExcel->xls->getActiveSheet();
 
-$linha_actual = 2;
+    $linha_actual = 2;
 
-foreach ($bolsas as $bolsa) {
+    foreach ($bolsas as $bolsa) {
 
-    $this->PhpExcel->xls->getActiveSheet()->setCellValue('A' . $linha_actual, $bolsa['BolsaTemporaria']['apelido']);
-    $this->PhpExcel->xls->getActiveSheet()->setCellValue('B' . $linha_actual, $bolsa['BolsaTemporaria']['nomes']);
-    $this->PhpExcel->xls->getActiveSheet()->setCellValue('C' . $linha_actual, $bolsa['Curso']['name']);
-    $this->PhpExcel->xls->getActiveSheet()->setCellValue('D' . $linha_actual, $bolsa['BolsaTipoBolsa']['name']);
+        $this->PhpExcel->xls->getActiveSheet()->setCellValue('A' . $linha_actual, $bolsa['BolsaTemporaria']['apelido']);
+        $this->PhpExcel->xls->getActiveSheet()->setCellValue('B' . $linha_actual, $bolsa['BolsaTemporaria']['nomes']);
+        $this->PhpExcel->xls->getActiveSheet()->setCellValue('C' . $linha_actual, $bolsa['Curso']['name']);
+        $this->PhpExcel->xls->getActiveSheet()->setCellValue('D' . $linha_actual, $bolsa['BolsaTipoBolsa']['name']);
 
-    $linha_actual++;
-}
+        $linha_actual++;
+    }
 
-$excel->getHeaderFooter()->setOddFooter('&L&D  &RPagina &P de &N');
-
-
+    $excel->getHeaderFooter()->setOddFooter('&L&D  &RPagina &P de &N');
 
 
 //$this->PhpExcel->xls->getActiveSheet()->setCellValue('A7', Configure::read('OpenSGA.instituicao.nome')); //Nome da Instituicao
@@ -39,4 +38,4 @@ $excel->getHeaderFooter()->setOddFooter('&L&D  &RPagina &P de &N');
 //  $this->PhpExcel->xls->getActiveSheet()->getProtection()->setInsertRows(true);
 //  $this->PhpExcel->xls->getActiveSheet()->getProtection()->setFormatCells(true); 
 
-$this->PhpExcel->output('Estudantes_bolseiros.xlsx');
+    $this->PhpExcel->output('Estudantes_bolseiros.xlsx');

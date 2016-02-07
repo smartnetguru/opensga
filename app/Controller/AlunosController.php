@@ -1212,7 +1212,7 @@
             $this->set(compact('candidato', 'cursos', 'paises', 'provincias', 'documento_identificacaos',
                 'areatrabalhos',
                 'generos', 'cidadeNascimentos', 'proveniencianomes', 'cidades', 'turnos', 'escolaNivelMedios',
-                'estado_civil', 'naturalidade', 'grauParentescos', 'simNaoRespostas','necessidadeEspeciais'));
+                'estado_civil', 'naturalidade', 'grauParentescos', 'simNaoRespostas', 'necessidadeEspeciais'));
 
             $this->set('siga_page_title', 'Matriculas');
             $this->set('siga_page_overview', 'Formulario de Matricula de Novos Ingressos');
@@ -2086,7 +2086,7 @@
                         'conditions' => ['curso_id' => $k, 'numero_estudante LIKE' => '2016%'],
                         'order'      => ['apelido', 'nomes'],
                     ]);
-                if(!empty($bolsas)){
+                if (!empty($bolsas)) {
                     $bolseiros[$v] = $bolsas;
                 }
 

@@ -75,7 +75,7 @@
         {
             $this->CerimoniaGraduacao->recursive = 0;
             $this->paginate = [
-                'order' => 'data DESC'
+                'order' => 'data DESC',
             ];
             $this->set('cerimoniaGraduacaos', $this->Paginator->paginate());
         }
@@ -84,7 +84,7 @@
         {
 
             $this->Flash->error('O periodo de inscricao terminou');
-            $this->redirect(['action'=>'index']);
+            $this->redirect(['action' => 'index']);
             if ($this->request->is('post')) {
                 if ($this->CerimoniaGraduacao->CandidatoGraduacao->cadastraCandidatoGraduacao($this->request->data) === true) {
                     $this->Flash->success('Inscricao Realizada com Sucesso. Veja a seguir como fazer o Pagamento');
@@ -137,7 +137,7 @@
 
             $this->CerimoniaGraduacao->CandidatoGraduacao->contain([
                 'Aluno' => ['Entidade', 'Curso'],
-                'EstadoCandidatura'
+                'EstadoCandidatura',
             ]);
             $candidatos = $this->CerimoniaGraduacao->CandidatoGraduacao->find('all',
                 ['conditions' => ['cerimonia_graduacao_id' => $id]]);
@@ -154,7 +154,7 @@
         {
             $this->CerimoniaGraduacao->recursive = 0;
             $this->paginate = [
-                'order' => 'data DESC'
+                'order' => 'data DESC',
             ];
             $this->set('cerimoniaGraduacaos', $this->Paginator->paginate());
         }
@@ -163,7 +163,7 @@
         {
 
             if ($this->request->is('post')) {
-                $this->request->data['CandidatoGraduacao']['estado_candidatura_id']=1;
+                $this->request->data['CandidatoGraduacao']['estado_candidatura_id'] = 1;
                 if ($this->CerimoniaGraduacao->CandidatoGraduacao->cadastraCandidatoGraduacao($this->request->data) === true) {
                     $this->Flash->success('Inscricao Realizada com Sucesso. Veja a seguir como fazer o Pagamento');
                     $this->redirect(['action' => 'pagamento_inscricao']);
@@ -217,22 +217,22 @@
 
                     'Entidade' => [
 
-                        'User'
+                        'User',
                     ],
                     'Curso'    => [
-                        'UnidadeOrganica'
-                    ]
+                        'UnidadeOrganica',
+                    ],
                 ],
                 'Genero',
 
                 'ProvinciaNascimento',
-                'EstadoCandidatura'
+                'EstadoCandidatura',
             ]);
             $candidatos = $this->CerimoniaGraduacao->CandidatoGraduacao->find('all',
                 ['conditions' => ['cerimonia_graduacao_id' => $cerimonia_graduacao_id]]);
 
             $candidatos2 = [];
-            foreach ($candidatos as $key=>$candidato) {
+            foreach ($candidatos as $key => $candidato) {
 
                 $is_regular = $this->CerimoniaGraduacao->CandidatoGraduacao->Aluno->isRegular($candidato['CandidatoGraduacao']['aluno_id']);
                 if ($is_regular[0]['regular'] == true) {
@@ -242,7 +242,7 @@
                 }
                 $referenciaPagamento = $candidato['CandidatoGraduacao']['referencia_pagamento'];
                 $deposito = $this->CerimoniaGraduacao->CandidatoGraduacao->Aluno->FinanceiroPagamento->FinanceiroTransacao->FinanceiroDeposito->findByReferenciaDeposito($referenciaPagamento);
-                if($deposito){
+                if ($deposito) {
                     $candidato['FinanceiroDeposito'] = $deposito;
                 }
 
@@ -269,14 +269,13 @@
             }
 
 
-
             $options = ['conditions' => ['CerimoniaGraduacao.' . $this->CerimoniaGraduacao->primaryKey => $id]];
             $this->CerimoniaGraduacao->recursive = 0;
             $this->set('cerimoniaGraduacao', $this->CerimoniaGraduacao->find('first', $options));
 
             $this->CerimoniaGraduacao->CandidatoGraduacao->contain([
                 'Aluno' => ['Entidade', 'Curso'],
-                'EstadoCandidatura'
+                'EstadoCandidatura',
             ]);
 
             $conditions = [];
@@ -285,22 +284,22 @@
             $cursoId = $this->request->query('curso_id');
             $numeroEstudante = $this->request->query('numero_estudante');
             $anoIngresso = $this->request->query('ano_ingresso');
-            if($cursoId){
+            if ($cursoId) {
                 $conditions['Aluno.curso_id'] = $cursoId;
             }
-            if($anoIngresso){
+            if ($anoIngresso) {
                 $conditions['Aluno.ano_ingresso'] = $anoIngresso;
             }
-            if($numeroEstudante){
-                $conditions['Aluno.codigo']= $numeroEstudante;
+            if ($numeroEstudante) {
+                $conditions['Aluno.codigo'] = $numeroEstudante;
             }
 
             $candidatos = $this->CerimoniaGraduacao->CandidatoGraduacao->find('all',
                 ['conditions' => $conditions]);
 
             $cursos = $this->CerimoniaGraduacao->CandidatoGraduacao->Aluno->Curso->find('list');
-            $this->set(compact('candidatos','cursos','unidadeOrganicas'));
-            $this->set('cerimoniaGraduacaoId',$id);
+            $this->set(compact('candidatos', 'cursos', 'unidadeOrganicas'));
+            $this->set('cerimoniaGraduacaoId', $id);
 
         }
     }

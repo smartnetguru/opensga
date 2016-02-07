@@ -18,7 +18,7 @@ var Calendar = function () {
             });
         });
         /* initialize the calendar
-				 -----------------------------------------------------------------*/
+         -----------------------------------------------------------------*/
         var date = new Date();
         var d = date.getDate();
         var m = date.getMonth();

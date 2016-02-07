@@ -1,23 +1,25 @@
 <?php
-/**
- * EstadoMessageFixture
- *
- */
-class EstadoMessageFixture extends CakeTestFixture {
 
-/**
- * Import
- *
- * @var array
- */
-	public $import = array('table' => 'estado_messages');
+	/**
+	 * EstadoMessageFixture
+	 *
+	 */
+	class EstadoMessageFixture extends CakeTestFixture
+	{
 
-/**
- * Records
- *
- * @var array
- */
-	public $records = array(
-	);
+		/**
+		 * Import
+		 *
+		 * @var array
+		 */
+		public $import = ['table' => 'estado_messages'];
 
-}
+		/**
+		 * Records
+		 *
+		 * @var array
+		 */
+		public $records = [
+		];
+
+	}

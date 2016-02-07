@@ -1,23 +1,25 @@
 <?php
-/**
- * SadeNivelAvaliadorFixture
- *
- */
-class SadeNivelAvaliadorFixture extends CakeTestFixture {
 
-/**
- * Import
- *
- * @var array
- */
-	public $import = array('model' => 'SadeNivelAvaliador');
+	/**
+	 * SadeNivelAvaliadorFixture
+	 *
+	 */
+	class SadeNivelAvaliadorFixture extends CakeTestFixture
+	{
 
-/**
- * Records
- *
- * @var array
- */
-	public $records = array(
-	);
+		/**
+		 * Import
+		 *
+		 * @var array
+		 */
+		public $import = ['model' => 'SadeNivelAvaliador'];
 
-}
+		/**
+		 * Records
+		 *
+		 * @var array
+		 */
+		public $records = [
+		];
+
+	}

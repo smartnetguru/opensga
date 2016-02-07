@@ -22,7 +22,7 @@
             <div class="<?php echo $classe_estado ?>">
                 <strong><?= $ir['mensagem']; ?></strong></div>
 
-        <?php
+            <?php
         }
     ?>
 </div>
@@ -85,8 +85,8 @@
                             <div class="user-left">
                                 <div class="center">
                                     <h4><?php echo h($aluno['Entidade']['name']); ?></h4>
-                                    <?php if(Configure::read('environment')=='prod'):?>
-                                    <?php
+                                    <?php if (Configure::read('environment') == 'prod'): ?>
+                                        <?php
 
                                         $file = '/Fotos/Estudantes/' . $aluno['Aluno']['ano_ingresso'] . '/' . $aluno['Aluno']['codigo'] . '.jpg';
                                         if (!$signedUrl = $this->AmazonS3->getSignedUrl($file)) {
@@ -95,16 +95,16 @@
                                             $signedUrl = $this->AmazonS3->getSignedUrl($file);
                                         }
 
-                                    ?>
-                                    <div data-provides="fileupload" class="fileupload fileupload-new">
-                                        <div class="user-image">
-                                            <div
-                                                class="fileupload-new thumbnail"><?php echo $this->Html->image($signedUrl,
-                                                    ['style' => 'max-width:330px;max-height:380px']); ?>
+                                        ?>
+                                        <div data-provides="fileupload" class="fileupload fileupload-new">
+                                            <div class="user-image">
+                                                <div
+                                                        class="fileupload-new thumbnail"><?php echo $this->Html->image($signedUrl,
+                                                            ['style' => 'max-width:330px;max-height:380px']); ?>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <?php endif;?>
+                                    <?php endif; ?>
                                     <h4><?php echo h($aluno['Aluno']['codigo']); ?></h4>
                                     <hr>
                                     <p>
@@ -137,7 +137,7 @@
                                         <td>Data de Nascimento</td>
                                         <td><?php echo h($aluno['Entidade']['data_nascimento']); ?></td>
                                         <td><a class="show-tab" href="#panel_edit_account"><i
-                                                    class="fa fa-pencil edit-user-info"></i></a></td>
+                                                        class="fa fa-pencil edit-user-info"></i></a></td>
                                     </tr>
                                     <tr>
                                         <td>Sexo</td>
@@ -146,27 +146,27 @@
                                                     echo h($aluno['Entidade']['Genero']['name']);
                                                 } ?></td>
                                         <td><a class="show-tab" href="#panel_edit_account"><i
-                                                    class="fa fa-pencil edit-user-info"></i></a></td>
+                                                        class="fa fa-pencil edit-user-info"></i></a></td>
                                     </tr>
                                     <tr>
                                         <td>Nome do Pai</td>
                                         <td><?php echo h($aluno['Entidade']['nome_pai']) ?></td>
                                         <td><a class="show-tab" href="#panel_edit_account"><i
-                                                    class="fa fa-pencil edit-user-info"></i></a></td>
+                                                        class="fa fa-pencil edit-user-info"></i></a></td>
                                     </tr>
                                     <tr>
                                         <td>Nome da Mae</td>
                                         <td><?php echo h($aluno['Entidade']['nome_mae']) ?></td>
                                         <td><a class="show-tab" href="#panel_edit_account"><i
-                                                    class="fa fa-pencil edit-user-info"></i></a></td>
+                                                        class="fa fa-pencil edit-user-info"></i></a></td>
                                     </tr>
                                     <tr>
                                         <td>Nacionalidade</td>
                                         <td><span
-                                                class="label label-sm label-info"><?php echo h($aluno['Entidade']['PaisNascimento']['name']); ?></span>
+                                                    class="label label-sm label-info"><?php echo h($aluno['Entidade']['PaisNascimento']['name']); ?></span>
                                         </td>
                                         <td><a class="show-tab" href="#panel_edit_account"><i
-                                                    class="fa fa-pencil edit-user-info"></i></a></td>
+                                                        class="fa fa-pencil edit-user-info"></i></a></td>
                                     </tr>
                                     <tr>
                                         <td>Naturalidade</td>
@@ -179,7 +179,7 @@
                                             ?>
                                         </td>
                                         <td><a class="show-tab" href="#panel_edit_account"><i
-                                                    class="fa fa-pencil edit-user-info"></i></a></td>
+                                                        class="fa fa-pencil edit-user-info"></i></a></td>
                                     </tr>
 
                                     </tbody>
@@ -195,7 +195,7 @@
                                         <td>Ultimo acesso</td>
                                         <td><?php echo h($aluno['Entidade']['User']['ultimo_login']); ?></td>
                                         <td><a class="show-tab" href="#panel_edit_account"><i
-                                                    class="fa fa-pencil edit-user-info"></i></a></td>
+                                                        class="fa fa-pencil edit-user-info"></i></a></td>
                                     </tr>
 
                                     </tbody>
@@ -352,35 +352,35 @@
                                     <div class="visible-md visible-lg hidden-sm hidden-xs">
 
                                         <?= $this->Html->link('<i class="fa fa-print"></i>',
-                                            [
-                                                'controller' => 'matriculas',
-                                                'action'     => 'print_comprovativo_renovacao_matricula',
-                                                $matricula['id'],
-                                            ], [
-                                                'class'               => 'btn btn-xs btn-green tooltips',
-                                                'data-placement'      => 'top',
-                                                'data-original-title' => 'Imprimir',
-                                                'escape'              => false
-                                            ]); ?>
+                                                [
+                                                        'controller' => 'matriculas',
+                                                        'action'     => 'print_comprovativo_renovacao_matricula',
+                                                        $matricula['id'],
+                                                ], [
+                                                        'class'               => 'btn btn-xs btn-green tooltips',
+                                                        'data-placement'      => 'top',
+                                                        'data-original-title' => 'Imprimir',
+                                                        'escape'              => false,
+                                                ]); ?>
                                         <?php
-                                        echo $this->Form->postLink('<i class="clip clip-file-remove fa fa-white"></i>',
-                                            [
-                                                'controller' => 'matriculas',
-                                                'action'    => 'cancelar_renovacao_matricula',
-                                                $matricula['id'],
-                                            ], [
-                                                'escape' => false,
-                                                'class'  => 'btn btn-xs btn-yellow tooltips',
-                                                'data-placement'      => 'top',
-                                                'data-original-title' => 'Cancelar Renovacao de Matricula',
-                                            ],
-                                            __('Tem Certeza que pretende Cancelar a renovacao desta Matricula?'));
+                                            echo $this->Form->postLink('<i class="clip clip-file-remove fa fa-white"></i>',
+                                                    [
+                                                            'controller' => 'matriculas',
+                                                            'action'     => 'cancelar_renovacao_matricula',
+                                                            $matricula['id'],
+                                                    ], [
+                                                            'escape'              => false,
+                                                            'class'               => 'btn btn-xs btn-yellow tooltips',
+                                                            'data-placement'      => 'top',
+                                                            'data-original-title' => 'Cancelar Renovacao de Matricula',
+                                                    ],
+                                                    __('Tem Certeza que pretende Cancelar a renovacao desta Matricula?'));
 
                                         ?>
                                     </div>
                                 </td>
                             </tr>
-                        <?php
+                            <?php
                         }
                         ?>
                         </tbody>
@@ -417,25 +417,25 @@
                                     <?php
                                         if ($historico['motivo_termino_curso_id'] == 1) {
                                             echo $this->Html->link('Imprimir Certificado de Conclusao', [
-                                                'controller' => 'alunos',
-                                                'action'     => 'print_certificado_conclusao_curso',
-                                                $aluno['Aluno']['id'],
-                                                $historico['Curso']['id'],
-                                                $historico['ano_fim']
+                                                    'controller' => 'alunos',
+                                                    'action'     => 'print_certificado_conclusao_curso',
+                                                    $aluno['Aluno']['id'],
+                                                    $historico['Curso']['id'],
+                                                    $historico['ano_fim'],
                                             ]);
                                         } elseif ($historico['motivo_termino_curso_id'] == 2) {
                                             echo $this->Html->link('Imprimir Comprovativo de Mudanca', [
-                                                'controller' => 'alunos',
-                                                'action'     => 'print_comprovativo_mudanca_curso_aluno',
-                                                $aluno['Aluno']['id'],
-                                                $historico['Curso']['id'],
-                                                $historico['ano_fim']
+                                                    'controller' => 'alunos',
+                                                    'action'     => 'print_comprovativo_mudanca_curso_aluno',
+                                                    $aluno['Aluno']['id'],
+                                                    $historico['Curso']['id'],
+                                                    $historico['ano_fim'],
                                             ]);
                                         }
                                     ?>
                                 </td>
                             </tr>
-                        <?php
+                            <?php
                         }
                         ?>
                         </tbody>

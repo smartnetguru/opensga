@@ -27,7 +27,7 @@
             'Entidade',
             'User',
             'SmsNotification',
-            'SmsEnviada'
+            'SmsEnviada',
         ];
 
         public function actualiza_fotos_uem()
@@ -100,8 +100,8 @@
             $inscricaos = $this->Aluno->Inscricao->find("all", [
                 'conditions' => [
                     'Inscricao
-            .matricula_id is NULL'
-                ]
+            .matricula_id is NULL',
+                ],
             ]);
 
             $dbo = $this->Aluno->Inscricao->getDatasource();
@@ -115,8 +115,8 @@
                     'conditions' => [
                         'Matricula
                 .ano_lectivo_id'             => 30,
-                        'Matricula.aluno_id' => $alunoId
-                    ]
+                        'Matricula.aluno_id' => $alunoId,
+                    ],
                 ]);
                 if ($matricula) {
                     $this->Aluno->Inscricao->id = $inscricao['Inscricao']['id'];
@@ -138,7 +138,7 @@
                 $this->Matricula->contain([
                     'AnoLectivo',
                     'Aluno',
-                    'TipoMatricula'
+                    'TipoMatricula',
                 ]);
                 $matriculas = $this->Matricula->find('all',
                     ['conditions' => ['Matricula.tipo_matricula_id' => [0, null]], 'limit' => 10000]);
@@ -269,8 +269,8 @@
                             'Turma.ano_lectivo_id'  => 30,
                             'Turma.curso_id'        => $inscricao['Turma']['curso_id'],
                             'Turma.disciplina_id'   => $inscricao['Turma']['disciplina_id'],
-                            'Turma.plano_estudo_id' => 31
-                        ]
+                            'Turma.plano_estudo_id' => 31,
+                        ],
                     ]);
                     if (!empty($turmaNova)) {
                         $this->Inscricao->id = $inscricao['Inscricao']['id'];
@@ -305,8 +305,8 @@
                             'Turma.ano_lectivo_id'  => 30,
                             'Turma.curso_id'        => $inscricao['Turma']['curso_id'],
                             'Turma.disciplina_id'   => $inscricao['Turma']['disciplina_id'],
-                            'Turma.plano_estudo_id' => 29
-                        ]
+                            'Turma.plano_estudo_id' => 29,
+                        ],
                     ]);
                     if (!empty($turmaNova)) {
                         $this->Inscricao->id = $inscricao['Inscricao']['id'];
@@ -342,7 +342,7 @@
         public function ajusta_inscricao_curriculum()
         {
             $this->Aluno->Inscricao->contain([
-                'Turma'
+                'Turma',
             ]);
             $inscricaos = $this->Aluno->Inscricao->find('all',
                 ['conditions' => ['Turma.plano_estudo_id' => [30, 32], 'Turma.ano_lectivo_id' => 30]]);
@@ -363,7 +363,7 @@
                         'Turma.disciplina_id'       => $inscricao['Turma']['disciplina_id'],
                         'Turma.ano_curricular'      => $inscricao['Turma']['ano_curricular'],
                         'Turma.semestre_curricular' => $inscricao['Turma']['semestre_curricular'],
-                    ]
+                    ],
                 ]);
 
                 if ($turmaNovoCurriculum) {
@@ -384,7 +384,7 @@
                     [
                         'Matricula.aluno_id' => $pagamento['FinanceiroPagamento']['aluno_id'],
                         'Matricula.data'     => $pagamento['FinanceiroPagamento']['created'],
-                        'Matricula.financeiro_pagamento_id is null'
+                        'Matricula.financeiro_pagamento_id is null',
                     ]);
                 if (!empty($matricula)) {
                     $this->Aluno->Matricula->id = $matricula['Matricula']['id'];
@@ -400,7 +400,7 @@
             AuditableConfig::$Logger = ClassRegistry::init('Auditable.Logger');
             $this->Matricula->contain([
                 'Curso',
-                'Aluno'
+                'Aluno',
             ]);
             $matriculas = $this->Matricula->find('all',
                 ['conditions' => ['Curso.unidade_organica_id' => 1, 'Matricula.plano_estudo_id is null']]);
@@ -414,17 +414,17 @@
                     $planoEstudo = $this->PlanoEstudo->find('first', [
                         'conditions' => [
                             'PlanoEstudo.curso_id' => $matricula['Matricula']['curso_id'],
-                            'ano_criacao <='       => $matricula['Aluno']['ano_ingresso']
+                            'ano_criacao <='       => $matricula['Aluno']['ano_ingresso'],
                         ],
-                        'order'      => 'ano_criacao desc'
+                        'order'      => 'ano_criacao desc',
                     ]);
                     if (empty($planoEstudo)) {
                         $planoEstudo = $this->PlanoEstudo->find('first', [
                             'conditions' => [
                                 'PlanoEstudo.curso_id' => $matricula['Matricula']['curso_id'],
-                                'ano_criacao >='       => $matricula['Aluno']['ano_ingresso']
+                                'ano_criacao >='       => $matricula['Aluno']['ano_ingresso'],
                             ],
-                            'order'      => 'ano_criacao ASC'
+                            'order'      => 'ano_criacao ASC',
                         ]);
                     }
                 }
@@ -460,8 +460,8 @@
             $alunos = $this->Aluno->find('all', [
                 'conditions' => [
                     'curso_id'        => [7, 8],
-                    'estado_aluno_id' => 1
-                ]
+                    'estado_aluno_id' => 1,
+                ],
             ]);
             foreach ($alunos as $aluno) {
                 $data = [
@@ -469,7 +469,7 @@
                     'observacao'                 => "Mudanca de Curso para novo Curso. Inscricoes",
                     'curso_antigo'               => $aluno['Aluno']['curso_id'],
                     'aluno_id'                   => $aluno['Aluno']['id'],
-                    'numero_estudante_atribuido' => ''
+                    'numero_estudante_atribuido' => '',
 
                 ];
                 if ($aluno['Aluno']['curso_id'] == 7) {
@@ -499,7 +499,7 @@
                     'user_id'             => 1,
                     'turno_id'            => 1,
                     'tipo_matricula_id'   => 2,
-                    'ano_lectivo_id'      => 31
+                    'ano_lectivo_id'      => 31,
 
                 ];
                 $matricular = false;
@@ -542,12 +542,12 @@
                 $this->PlanoEstudo->contain();
                 $planoestudo = $this->PlanoEstudo->find('first', [
                     'conditions' => ['curso_id' => $curso['Curso']['id'], 'ano_criacao <' => 2009],
-                    'order'      => ['ano_criacao DESC']
+                    'order'      => ['ano_criacao DESC'],
                 ]);
 
                 $planoestudoano = $this->PlanoEstudo->DisciplinaPlanoEstudo->find('all', [
                     'conditions' => ['plano_estudo_id' => $planoestudo['PlanoEstudo']['id']],
-                    'order'      => ['ano', 'semestre']
+                    'order'      => ['ano', 'semestre'],
                 ]);
 
                 $linha = 1;
@@ -579,14 +579,14 @@
                         $codigo_disciplina = $worksheet->getCellByColumnAndRow($coluna, 4)->getValue();
                         $disciplina = $this->Disciplina->findByCodigo($codigo_disciplina);
                         $this->Aluno->Inscricao->contain([
-                            'Turma'
+                            'Turma',
                         ]);
                         $inscricao = $this->Aluno->Inscricao->find('first', [
                             'conditions' => [
                                 'Inscricao.aluno_id'  => $aluno['Aluno']['id'],
-                                'Turma.disciplina_id' => $disciplina['Disciplina']['id']
+                                'Turma.disciplina_id' => $disciplina['Disciplina']['id'],
                             ],
-                            'order'      => 'data DESC'
+                            'order'      => 'data DESC',
                         ]);
                         if ($inscricao) {
                             $worksheet->setCellValueByColumnAndRow($coluna, $linha,
@@ -812,16 +812,16 @@
             $linha_actual = 2;
             $this->Aluno->Matricula->contain([
                 'Aluno' => [
-                    'Entidade'
+                    'Entidade',
                 ],
                 'AnoLectivo',
                 'Curso' => [
-                    'UnidadeOrganica'
-                ]
+                    'UnidadeOrganica',
+                ],
             ]);
             $matriculas = $this->Aluno->Matricula->find('all', [
                 'conditions' => ['Matricula.ano_lectivo_id' => Configure::read('OpenSGA.ano_lectivo_id')],
-                'limit'      => 10
+                'limit'      => 10,
             ]);
             foreach ($matriculas as $matricula) {
                 $xls->getActiveSheet()->setCellValue('A' . $linha_actual, $matricula['Aluno']['codigo']);
@@ -859,9 +859,9 @@
             $linha_actual = 2;
             $this->Candidatura->contain([
                 'Curso' => [
-                    'UnidadeOrganica'
+                    'UnidadeOrganica',
                 ],
-                'Genero'
+                'Genero',
             ]);
             $candidatos = $this->Candidatura->find('all',
                 ['conditions' => ['estado_candidatura_id' => 2, 'ano_lectivo_admissao' => 2016]]);
@@ -888,9 +888,8 @@
             }
             $objWriter = PHPExcel_IOFactory::createWriter($xls, 'Excel2007');
 
-            $objWriter->save( Configure::read('OpenSGA.ano_lectivo') . '.xlsx');
+            $objWriter->save(Configure::read('OpenSGA.ano_lectivo') . '.xlsx');
         }
-
 
 
         public function gera_pagamentos_renovacao_2014()
@@ -930,22 +929,22 @@
                 $conta_existe = $this->Aluno->Entidade->FinanceiroTransacao->FinanceiroConta->find('first', [
                     'conditions' => [
                         'entidade_id'         => $aluno['Aluno']['entidade_id'],
-                        'unidade_organica_id' => 29
-                    ]
+                        'unidade_organica_id' => 29,
+                    ],
                 ]);
                 if (empty($conta_existe)) {
                     $this->Aluno->Entidade->FinanceiroTransacao->FinanceiroConta->create();
                     $this->Aluno->Entidade->FinanceiroTransacao->FinanceiroConta->save([
                         'FinanceiroConta' => [
                             'entidade_id'         => $aluno['Aluno']['entidade_id'],
-                            'unidade_organica_id' => 29
-                        ]
+                            'unidade_organica_id' => 29,
+                        ],
                     ]);
                     $conta_existe = $this->Aluno->Entidade->FinanceiroTransacao->FinanceiroConta->find('first', [
                         'conditions' => [
                             'entidade_id'         => $aluno['Aluno']['entidade_id'],
-                            'unidade_organica_id' => 29
-                        ]
+                            'unidade_organica_id' => 29,
+                        ],
                     ]);
                 }
                 $transacao['financeiro_conta_id'] = $conta_existe['FinanceiroConta']['id'];
@@ -1017,8 +1016,8 @@
                                     'ano_curricular'      => $turma['ano_curricular'],
                                     'semestre_curricular' => $turma['semestre_curricular'],
                                     'turno_id'            => $turma['turno_id'],
-                                    'semestre_lectivo_id' => $semestre_id
-                                ]
+                                    'semestre_lectivo_id' => $semestre_id,
+                                ],
                             ]
                         );
 
@@ -1058,8 +1057,8 @@
                                         'ano_curricular'      => $turma['ano_curricular'],
                                         'semestre_curricular' => $turma['semestre_curricular'],
                                         'turno_id'            => $turma['turno_id'],
-                                        'semestre_lectivo_id' => $semestre_id
-                                    ]
+                                        'semestre_lectivo_id' => $semestre_id,
+                                    ],
                                 ]
                             );
 
@@ -1100,7 +1099,7 @@
                 $array_candidato = [
                     'Candidatura' => [
                         'numero_estudante' => $numero_candidato,
-                    ]
+                    ],
                 ];
                 $nome_completo2 = $worksheet->getCell('B' . $linha_actual)->getCalculatedValue();
                 $nome_completo = trim($nome_completo2);
@@ -1159,8 +1158,8 @@
                     if (empty($viaAdmissaoExiste)) {
                         $arrayViaAdmissao = [
                             'AlunoViaAdmissao' => [
-                                'name' => $viaAdmissao
-                            ]
+                                'name' => $viaAdmissao,
+                            ],
                         ];
                         $this->Aluno->AlunoViaAdmissao->create();
                         $this->Aluno->AlunoViaAdmissao->save($arrayViaAdmissao);
@@ -1416,7 +1415,7 @@
                         'nomes'            => ucwords(strtolower($worksheet->getCell('B' . $linha_actual)->getValue())),
                         //   'apelido' => $worksheet->getCell('C' . $linha_actual)->getValue(),
 //   'nome_curso' => $worksheet->getCell('D' . $linha_actual)->getValue()
-                    ]
+                    ],
                 ];
 
                 $sexo = $worksheet->getCell('C' . $linha_actual)->getCalculatedValue();
@@ -1530,8 +1529,8 @@
                 $arrayNovaEscola = [
                     'EscolaNivelMedio' => [
                         'codigo_admissao' => $worksheet->getCell('A' . $linha_actual)->getCalculatedValue(),
-                        'name'            => $worksheet->getCell('B' . $linha_actual)->getCalculatedValue()
-                    ]
+                        'name'            => $worksheet->getCell('B' . $linha_actual)->getCalculatedValue(),
+                    ],
                 ];
                 $this->Aluno->AlunoNivelMedio->EscolaNivelMedio->create();
                 $this->Aluno->AlunoNivelMedio->EscolaNivelMedio->save($arrayNovaEscola);
@@ -1677,12 +1676,12 @@
                     continue;
                 }
 
-                $data  = $AnoConclusao.'-01-01';
+                $data = $AnoConclusao . '-01-01';
                 $dataConlusao = [
                     'HistoricoCurso' => [
                         'data_conclusao' => $data,
                         'nota_final'     => '10',
-                        'funcionario_id' => '1'
+                        'funcionario_id' => '1',
                     ],
                     'Aluno'          => [
                         'observacao' => 'Importado das Brochuras',
@@ -1693,21 +1692,18 @@
                             'type'     => '',
                             'tmp_name' => '',
                             'error'    => (int)4,
-                            'size'     => (int)0
-                        ]
-                    ]
+                            'size'     => (int)0,
+                        ],
+                    ],
                 ];
 
-                if($aluno['Aluno']['estado_aluno_id']!=3){
-                    $this->out('Concluindo--------------------'.$numeroEstudante);
+                if ($aluno['Aluno']['estado_aluno_id'] != 3) {
+                    $this->out('Concluindo--------------------' . $numeroEstudante);
                     $this->Aluno->concluirNivel($dataConlusao);
 
-                } else{
+                } else {
 
                 }
-
-
-
 
 
                 $linha_actual++;
@@ -1822,7 +1818,7 @@
                 $array_plano_estudos = [
                     'name'         => $curso_nome,
                     'duracao'      => 5,
-                    'semestresano' => 2
+                    'semestresano' => 2,
                 ];
                 $this->Curso->create();
                 $this->Curso->save($array_plano_estudos);
@@ -1839,7 +1835,7 @@
                     if (is_numeric($verificador)) {
                         $array_disciplina = [
                             'codigo' => $ws->getCellByColumnAndRow(0, $linha_actual)->getCalculatedValue(),
-                            'name'   => $ws->getCellByColumnAndRow(1, $linha_actual)->getCalculatedValue()
+                            'name'   => $ws->getCellByColumnAndRow(1, $linha_actual)->getCalculatedValue(),
                         ];
                         $disciplina_existe = $this->Disciplina->findByCodigo($array_disciplina['codigo']);
                         if (empty($disciplina_existe)) {
@@ -1864,7 +1860,7 @@
                                     $linha_actual)->getCalculatedValue(),
                                 'creditos'             => $ws->getCellByColumnAndRow(6,
                                     $linha_actual)->getCalculatedValue(),
-                            ]
+                            ],
                         ];
                         if ($array_plano_estudo_anos['DisciplinaPlanoEstudo']['semestre_sequencial'] % 2 == 0) {
                             $array_plano_estudo_anos['DisciplinaPlanoEstudo']['ano'] = $array_plano_estudo_anos['DisciplinaPlanoEstudo']['semestre_sequencial'] / 2;
@@ -1884,8 +1880,8 @@
                                 'Precedencia' => [
                                     'planoestudoano_id'  => $this->DisciplinaPlanoEstudo->id,
                                     'precedencia'        => $disciplina_precendencia['Disciplina']['id'],
-                                    'tipoprecedencia_id' => 1
-                                ]
+                                    'tipoprecedencia_id' => 1,
+                                ],
                             ];
                             $this->Precedencia->create();
                             $this->Precedencia->save($array_precedencia);
@@ -2111,8 +2107,8 @@
             $candidatos = $this->Candidatura->find('all', [
                 'conditions' => [
                     'estado_candidatura_id'          => 2,
-                    'codigo_curso_admitido_admissao' => [1040, 1096, 1027, 1028, 1029, 1030, 1052, 1041, 1056]
-                ]
+                    'codigo_curso_admitido_admissao' => [1040, 1096, 1027, 1028, 1029, 1030, 1052, 1041, 1056],
+                ],
             ]);
             debug(count($candidatos));
 
@@ -2161,7 +2157,7 @@
 
                 $this->Aluno->contain([
                     'EstadoAluno',
-                    'AlunoEstado' => ['MotivoEstadoAluno']
+                    'AlunoEstado' => ['MotivoEstadoAluno'],
                 ]);
 
 
@@ -2204,11 +2200,11 @@
             $cursos = $this->Candidatura->find('list', [
                 'conditions' => [
                     'estado_candidatura_id' => 2,
-                    'ano_lectivo_admissao'  => Configure::read('OpenSGA.ano_lectivo')
+                    'ano_lectivo_admissao'  => Configure::read('OpenSGA.ano_lectivo'),
                 ],
                 'fields'     => ['curso_id', 'Curso.name'],
                 'group'      => 'curso_id',
-                'order'      => 'Curso.name'
+                'order'      => 'Curso.name',
             ]);
 
             App::import('Vendor', 'PHPExcel', ['file' => 'PHPExcel.php']);
@@ -2233,14 +2229,14 @@
                     'EscolaNivelMedio',
                     'EstadoCivil',
                     'DocumentoIdentificacao',
-                    'Curso'
+                    'Curso',
                 ]);
                 $candidatos = $this->Candidatura->find('all',
                     [
                         'conditions' => [
                             'estado_candidatura_id' => 2,
                             'ano_lectivo_admissao'  => Configure::read('OpenSGA.ano_lectivo'),
-                            'curso_id'              => $k
+                            'curso_id'              => $k,
                         ],
                         'order'      => ['Candidatura.apelido', 'Candidatura.nomes']
                         ,
@@ -2383,7 +2379,7 @@
                 $this->Aluno->contain(['Entidade' => ['User']]);
                 $alunos = $this->Aluno->find('all', [
                     'conditions' => ['Aluno.curso_id' => $curso['Curso']['id']],
-                    'order'      => ['Entidade.apelido', 'Entidade.nomes']
+                    'order'      => ['Entidade.apelido', 'Entidade.nomes'],
                 ]);
                 $linha_actual = 10;
                 $ii = 1;
@@ -2524,7 +2520,7 @@
                     $array_candidato = [
                         'Candidatura' => [
                             'numero_candidato' => $numero_candidato,
-                        ]
+                        ],
                     ];
                     $array_candidato['Candidatura']['numero_estudante'] = $worksheet->getCell('B' . $linha_actual)->getCalculatedValue();
                     $nome_completo = $worksheet->getCell('C' . $linha_actual)->getCalculatedValue();
@@ -2695,7 +2691,7 @@
                         'aluno_id'             => $aluno['Aluno']['id'],
                         'curso_id'             => $aluno['Aluno']['curso_id'],
                         'ano_ingresso'         => $aluno['Aluno']['ano_ingresso'],
-                        'ano_lectivo_ingresso' => $ano_lectivo['AnoLectivo']['id']
+                        'ano_lectivo_ingresso' => $ano_lectivo['AnoLectivo']['id'],
                     ];
                     $this->HistoricoCurso->create();
                     $this->HistoricoCurso->save(['HistoricoCurso' => $historico_array]);
@@ -2718,28 +2714,30 @@
 
             $worksheet = $xls->getActiveSheet();
 
-            $candidatos = $this->Candidatura->find('all',['conditions'=>['estado_candidatura_id'=>2,'ano_lectivo_admissao'=>2015]]);
+            $candidatos = $this->Candidatura->find('all',
+                ['conditions' => ['estado_candidatura_id' => 2, 'ano_lectivo_admissao' => 2015]]);
             $linhaActual = 2;
 
 
-            foreach($candidatos as $candidato){
+            foreach ($candidatos as $candidato) {
                 $numeroEstudante = $candidato['Candidatura']['numero_estudante'];
                 $aluno = $this->Aluno->findByCodigo($numeroEstudante);
 
-                if(!empty($aluno)){
-                    $this->out($linhaActual.'------------------Actualizando');
+                if (!empty($aluno)) {
+                    $this->out($linhaActual . '------------------Actualizando');
                     $this->Candidatura->id = $candidato['Candidatura']['id'];
 
                     $this->Candidatura->set('estado_matricula_id', 1);
                     $this->Candidatura->set('estado_candidatura_id', 3);
 
                     $this->Candidatura->set('data_matricula', $aluno['Aluno']['created']);
-                    if(!$this->Candidatura->save()){
+                    if (!$this->Candidatura->save()) {
 
                     }
-                } else{
-                    $this->out($linhaActual.'-----Matriculando');
-                    $xls->getActiveSheet()->setCellValue('A' . $linhaActual, $candidato['Candidatura']['numero_estudante']);
+                } else {
+                    $this->out($linhaActual . '-----Matriculando');
+                    $xls->getActiveSheet()->setCellValue('A' . $linhaActual,
+                        $candidato['Candidatura']['numero_estudante']);
                     $xls->getActiveSheet()->setCellValue('B' . $linhaActual, $candidato['Candidatura']['name']);
                     $xls->getActiveSheet()->setCellValue('C' . $linhaActual, $candidato['Candidatura']['nome_curso']);
                 }

@@ -5,9 +5,11 @@
 
             <ul>
                 <?php foreach ($errors as $field => $error) {
-                    foreach($error as $error1=>$error2){?>
-                    <li><?php echo $error2; ?></li>
-                <?php }} ?>
+                    foreach ($error as $error1 => $error2) {
+                        ?>
+                        <li><?php echo $error2; ?></li>
+                    <?php }
+                } ?>
             </ul>
         </div>
     <?php } ?>

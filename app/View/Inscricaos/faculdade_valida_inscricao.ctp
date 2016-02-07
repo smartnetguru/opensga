@@ -1,12 +1,12 @@
 <div class="row">
     <?php echo $this->Form->create('Inscricao', [
-        'id'            => 'validate-form',
-        'inputDefaults' => [
-            'div'       => 'form-group',
-            'wrapInput' => false,
-            'class'     => 'form-control',
-            'label'     => ['class' => 'control-label']
-        ],
+            'id'            => 'validate-form',
+            'inputDefaults' => [
+                    'div'       => 'form-group',
+                    'wrapInput' => false,
+                    'class'     => 'form-control',
+                    'label'     => ['class' => 'control-label'],
+            ],
     ]); ?>
     <div class="col-sm-7">
         <div class="panel panel-default">
@@ -33,14 +33,16 @@
                                 <td><?php echo $disciplina['DisciplinaPlanoEstudo']['ano_curricular']; ?>&nbsp;</td>
                                 <td><?php echo $disciplina['DisciplinaPlanoEstudo']['semestre_curricular']; ?></td>
                                 <td><?php echo $this->Form->input('Disciplina.' . $i . '.tipo', [
-                                        'label'   => false,
-                                        'div'     => false,
-                                        'default' => 1,
-                                        'options' => $tipoInscricaos
+                                            'label'   => false,
+                                            'div'     => false,
+                                            'default' => 1,
+                                            'options' => $tipoInscricaos,
                                     ]) ?></td>
                                 <?php
                                     echo $this->Form->input('Disciplina.' . $i . '.id',
-                                        ['type' => 'hidden', 'value' => $disciplina['DisciplinaPlanoEstudo']['id']]);
+                                            ['type'  => 'hidden',
+                                             'value' => $disciplina['DisciplinaPlanoEstudo']['id'],
+                                            ]);
                                 ?>
                             </tr>
 
@@ -54,14 +56,16 @@
                                 <td><?php echo $disciplina['DisciplinaPlanoEstudo']['ano_curricular']; ?>&nbsp;</td>
                                 <td><?php echo $disciplina['DisciplinaPlanoEstudo']['semestre_curricular']; ?></td>
                                 <td><?php echo $this->Form->input('Disciplina.' . $i . '.tipo', [
-                                        'label'   => false,
-                                        'div'     => false,
-                                        'default' => 1,
-                                        'options' => $tipoInscricaos
+                                            'label'   => false,
+                                            'div'     => false,
+                                            'default' => 1,
+                                            'options' => $tipoInscricaos,
                                     ]) ?>&nbsp;</td>
                                 <?php
                                     echo $this->Form->input('Disciplina.' . $i . '.id',
-                                        ['type' => 'hidden', 'value' => $disciplina['DisciplinaPlanoEstudo']['id']]);
+                                            ['type'  => 'hidden',
+                                             'value' => $disciplina['DisciplinaPlanoEstudo']['id'],
+                                            ]);
                                 ?>
                             </tr>
 
@@ -91,7 +95,7 @@
                     <div class="col-sm-4">
                         <p data-display="data[Aluno][codigo]"
                            class="form-control-static display-value"><?php echo $this->Number->currency($total_normal + $total_atraso,
-                                'MZN') ?></p>
+                                    'MZN') ?></p>
                     </div>
                 </div>
                 <div class="form-group  col-sm-12">
@@ -102,7 +106,7 @@
                     <div class="col-sm-4">
                         <p data-display="data[Aluno][codigo]"
                            class="form-control-static display-value"><?php echo $this->Number->currency($total_normal,
-                                'MZN') ?></p>
+                                    'MZN') ?></p>
                     </div>
                 </div>
                 <div class="form-group   col-sm-12">
@@ -113,76 +117,76 @@
                     <div class="col-sm-4">
                         <p data-display="data[Aluno][codigo]"
                            class="form-control-static display-value"><?php echo $this->Number->currency($total_atraso,
-                                'MZN') ?></p>
+                                    'MZN') ?></p>
                     </div>
                 </div>
                 <?php echo $this->Form->input('FinanceiroDeposito.numero_comprovativo', [
-                    'label'       => 'Número de Comprovativo',
-                    'placeholder' => 'Número de Comprovativo...',
-                    'after'       => '<span class="help-block">Número do comprovativo de depósito do banco.</span>',
-                    'required'    => true
+                        'label'       => 'Número de Comprovativo',
+                        'placeholder' => 'Número de Comprovativo...',
+                        'after'       => '<span class="help-block">Número do comprovativo de depósito do banco.</span>',
+                        'required'    => true,
                 ]); ?>
                 <?php echo $this->Form->input('FinanceiroDeposito.financeiro_forma_deposito_id', [
-                    'label'       => 'Forma de Depósito',
-                    'placeholder' => 'Seleccione...',
-                    'after'       => '<span class="help-block">.</span>',
-                    'div'         => 'form-group col-sm-6'
+                        'label'       => 'Forma de Depósito',
+                        'placeholder' => 'Seleccione...',
+                        'after'       => '<span class="help-block">.</span>',
+                        'div'         => 'form-group col-sm-6',
                 ]); ?>
                 <?php echo $this->Form->input('FinanceiroDeposito.financeiro_banco_id', [
-                    'label'       => 'Banco Usado',
-                    'placeholder' => 'Seleccione...',
-                    'after'       => '<span class="help-block">.</span>',
-                    'div'         => 'form-group col-sm-6'
+                        'label'       => 'Banco Usado',
+                        'placeholder' => 'Seleccione...',
+                        'after'       => '<span class="help-block">.</span>',
+                        'div'         => 'form-group col-sm-6',
                 ]); ?>
                 <?php echo $this->Form->input('FinanceiroTransacao.valor', [
-                    'label'       => 'Valor Pago',
-                    'placeholder' => 'Seleccione...',
-                    'after'       => '<span class="help-block">.</span>',
-                    'div'         => 'form-group col-sm-6',
-                    'required'    => true
+                        'label'       => 'Valor Pago',
+                        'placeholder' => 'Seleccione...',
+                        'after'       => '<span class="help-block">.</span>',
+                        'div'         => 'form-group col-sm-6',
+                        'required'    => true,
                 ]); ?>
                 <?php echo $this->Form->input('FinanceiroDeposito.data_deposito', [
-                    'label'       => 'Data de Depósito',
-                    'placeholder' => 'Seleccione...',
-                    'after'       => '<span class="help-block">.</span>',
-                    'div'         => 'form-group col-sm-6',
-                    'class'              => 'form-control date-picker',
-                    'id'                 => 'dataDeposito',
-                    'type'               => 'text',
-                    'data-date-viewmode' => 'years',
-                    'data-date-format'   => 'yyyy-mm-dd',
-                    'required'    => true
+                        'label'              => 'Data de Depósito',
+                        'placeholder'        => 'Seleccione...',
+                        'after'              => '<span class="help-block">.</span>',
+                        'div'                => 'form-group col-sm-6',
+                        'class'              => 'form-control date-picker',
+                        'id'                 => 'dataDeposito',
+                        'type'               => 'text',
+                        'data-date-viewmode' => 'years',
+                        'data-date-format'   => 'yyyy-mm-dd',
+                        'required'           => true,
                 ]); ?>
                 <?php echo $this->Form->input('FinanceiroTransacao.detalhes', [
-                    'label'       => 'Detalhes',
-                    'placeholder' => 'Detalhes adicionais...',
-                    'after'       => '<span class="help-block"></span>',
-                    'type'=>'text'
+                        'label'       => 'Detalhes',
+                        'placeholder' => 'Detalhes adicionais...',
+                        'after'       => '<span class="help-block"></span>',
+                        'type'        => 'text',
                 ]); ?>
                 <?php echo $this->Form->input('FinanceiroTransacao.aluno_id',
-                    ['value' => $alunoId, 'type' => 'hidden']) ?>
+                        ['value' => $alunoId, 'type' => 'hidden']) ?>
                 <?php echo $this->Form->input('Inscricao.plano_estudo_id',
-                    ['value' => $planoEstudoId, 'type' => 'hidden']) ?>
+                        ['value' => $planoEstudoId, 'type' => 'hidden']) ?>
                 <div class="clear"></div>
                 <div class="block-actions">
                     <ul class="actions-left">
                         <li><?php echo $this->Html->link(__('Voltar ao Perfil'),
-                                ['controller' => 'alunos', 'action' => 'perfil_estudante', $alunoId],
-                                ['class' => 'btn btn-red btn-block']) ?></li>
+                                    ['controller' => 'alunos', 'action' => 'perfil_estudante', $alunoId],
+                                    ['class' => 'btn btn-red btn-block']) ?></li>
                     </ul>
                     <ul class="actions-right">
                         <li><?php
                                 if ($imprimir == true) {
                                     echo $this->Html->link('Imprimir Comprovativo', [
-                                        'controller' => 'inscricaos',
-                                        'action'     => 'print_comprovativo_inscricao',
-                                        'faculdade'  => true,
-                                        $alunoId
+                                            'controller' => 'inscricaos',
+                                            'action'     => 'print_comprovativo_inscricao',
+                                            'faculdade'  => true,
+                                            $alunoId,
                                     ], ['class' => 'btn btn-blue btn-block', 'target' => 'blank']);
                                 } else {
                                     echo $this->Form->end([
-                                        'class' => 'btn btn-green btn-block',
-                                        'label' => __('Inscrever Aluno')
+                                            'class' => 'btn btn-green btn-block',
+                                            'label' => __('Inscrever Aluno'),
                                     ]);
                                 }
                             ?></li>

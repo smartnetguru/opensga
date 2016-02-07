@@ -38,7 +38,7 @@
             $tipocursos = $this->Curso->TipoCurso->find('list');
             $unidadeOrganicas = $this->Curso->UnidadeOrganica->find('list');
             $turnos = $this->Curso->CursosTurno->Turno->find('list');
-            $this->set(compact('grauacademicos', 'tipocursos', 'escolas', 'unidadeOrganicas','turnos'));
+            $this->set(compact('grauacademicos', 'tipocursos', 'escolas', 'unidadeOrganicas', 'turnos'));
         }
 
         public function manutencao_cursos_sem_encarregado()
@@ -162,11 +162,11 @@
         function faculdade_index()
         {
             $this->paginate = [
-                'paramType' => 'querystring',
+                'paramType'  => 'querystring',
                 'conditions' => [
                     'Curso.unidade_organica_id' => $this->Curso->UnidadeOrganica->getWithChilds($this->Session->read('Auth.User.unidade_organica_id')),
                 ],
-                'contain' => [
+                'contain'    => [
                     'GrauAcademico',
                     'TipoCurso',
                 ],

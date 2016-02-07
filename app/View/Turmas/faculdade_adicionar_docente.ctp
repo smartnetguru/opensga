@@ -1,36 +1,43 @@
 <?php
-$this->BreadCumbs->addCrumb('Turmas', '/turmas');
-$this->BreadCumbs->addCrumb($turma['Turma']['name'], '/turmas/ver_turma/' . $turma['Turma']['id']);
-$this->BreadCumbs->addCrumb(__('Adicionar Docente'), '#');
+    $this->BreadCumbs->addCrumb('Turmas', '/turmas');
+    $this->BreadCumbs->addCrumb($turma['Turma']['name'], '/turmas/ver_turma/' . $turma['Turma']['id']);
+    $this->BreadCumbs->addCrumb(__('Adicionar Docente'), '#');
 
 
 ?>
 
-<?php echo $this->Form->create('DocenteTurma', array('role' => "form", 'novalidade' => 'novalidate', 'enctype' => 'multipart/form-data', 'class' => 'smart-wizard form-horizontal', 'id' => 'form', 'inputDefaults' => array('empty' => 'Seleccione', 'data-placeholder' => 'Seleccione'))); ?>
+<?php echo $this->Form->create('DocenteTurma', [
+        'role'          => "form",
+        'novalidade'    => 'novalidate',
+        'enctype'       => 'multipart/form-data',
+        'class'         => 'smart-wizard form-horizontal',
+        'id'            => 'form',
+        'inputDefaults' => ['empty' => 'Seleccione', 'data-placeholder' => 'Seleccione'],
+]); ?>
 <div class="row">
-	<div class="col-sm-6">
-		<!-- start: TEXT AREA PANEL -->
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				<i class="fa fa-external-link-square"></i>
-				Informacoes da Turma
-				<div class="panel-tools">
-					<a href="#" class="btn btn-xs btn-link panel-collapse collapses">
-					</a>
-					<a data-toggle="modal" href="#panel-config" class="btn btn-xs btn-link panel-config">
-						<i class="fa fa-wrench"></i>
-					</a>
-					<a href="#" class="btn btn-xs btn-link panel-refresh">
-						<i class="fa fa-refresh"></i>
-					</a>
-					<a href="#" class="btn btn-xs btn-link panel-expand">
-						<i class="fa fa-resize-full"></i>
-					</a>
-					<a href="#" class="btn btn-xs btn-link panel-close">
-						<i class="fa fa-times"></i>
-					</a>
-				</div>
-			</div>
+    <div class="col-sm-6">
+        <!-- start: TEXT AREA PANEL -->
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <i class="fa fa-external-link-square"></i>
+                Informacoes da Turma
+                <div class="panel-tools">
+                    <a href="#" class="btn btn-xs btn-link panel-collapse collapses">
+                    </a>
+                    <a data-toggle="modal" href="#panel-config" class="btn btn-xs btn-link panel-config">
+                        <i class="fa fa-wrench"></i>
+                    </a>
+                    <a href="#" class="btn btn-xs btn-link panel-refresh">
+                        <i class="fa fa-refresh"></i>
+                    </a>
+                    <a href="#" class="btn btn-xs btn-link panel-expand">
+                        <i class="fa fa-resize-full"></i>
+                    </a>
+                    <a href="#" class="btn btn-xs btn-link panel-close">
+                        <i class="fa fa-times"></i>
+                    </a>
+                </div>
+            </div>
             <div class="panel-body">
                 <table class="table table-condensed table-hover">
                     <tbody>
@@ -65,13 +72,15 @@ $this->BreadCumbs->addCrumb(__('Adicionar Docente'), '#');
                     </tbody>
                 </table>
                 <p>
-                    <?php echo $this->Html->link('<i class="fa fa-plus"></i>Ver Turma', array('controller'=>'turmas','action' => 'ver_turma', $turma['Turma']['id']), array('class' => 'btn btn-green', 'escape' => false)) ?>
+                    <?php echo $this->Html->link('<i class="fa fa-plus"></i>Ver Turma',
+                            ['controller' => 'turmas', 'action' => 'ver_turma', $turma['Turma']['id']],
+                            ['class' => 'btn btn-green', 'escape' => false]) ?>
                 </p>
 
             </div>
         </div>
-		<!-- end: TEXT AREA PANEL -->
-	</div>
+        <!-- end: TEXT AREA PANEL -->
+    </div>
 
     <div class="col-sm-6">
         <!-- start: TEXT AREA PANEL -->
@@ -100,19 +109,32 @@ $this->BreadCumbs->addCrumb(__('Adicionar Docente'), '#');
                 <div class="form-group">
                     <div class="col-sm-12">
                         <?php echo $this->Form->label('docente_id', 'Nome do Docente'); ?>
-                        <?php echo $this->Form->input('docente_id', array('label' => false, 'div' => false, 'class' => 'form-control ajax-select')); ?>
+                        <?php echo $this->Form->input('docente_id',
+                                ['label' => false, 'div' => false, 'class' => 'form-control ajax-select']); ?>
                     </div>
                     <div class="col-sm-12">
                         <?php echo $this->Form->label('tipo_docente_turma_id', 'Tipo de Docente'); ?>
-                        <?php echo $this->Form->input('tipo_docente_turma_id', array('label' => false, 'div' => false, 'class' => 'form-control', 'id' => 'codigo')); ?>
+                        <?php echo $this->Form->input('tipo_docente_turma_id',
+                                ['label' => false, 'div' => false, 'class' => 'form-control', 'id' => 'codigo']); ?>
                     </div>
 
                 </div>
-                <?php echo $this->Form->input('estado_docente_turma_id', array('type' => 'hidden', 'value' => 1, 'label' => false, 'div' => '_30', 'readonly' => true)); ?>
-                <?php echo $this->Form->input('turma_id', array('type' => 'hidden', 'value' => $turmaId, 'label' => false, 'div' => '_30', 'readonly' => true)); ?>
+                <?php echo $this->Form->input('estado_docente_turma_id',
+                        ['type' => 'hidden', 'value' => 1, 'label' => false, 'div' => '_30', 'readonly' => true]); ?>
+                <?php echo $this->Form->input('turma_id', [
+                        'type'     => 'hidden',
+                        'value'    => $turmaId,
+                        'label'    => false,
+                        'div'      => '_30',
+                        'readonly' => true,
+                ]); ?>
                 <div class="form-group">
 
-                    <?php echo $this->Form->end(array('label' => __('GRAVAR', true), 'class' => 'btn btn-success finish-step btn-block', 'div' => 'col-sm-2 col-sm-offset-8')); ?>
+                    <?php echo $this->Form->end([
+                            'label' => __('GRAVAR', true),
+                            'class' => 'btn btn-success finish-step btn-block',
+                            'div'   => 'col-sm-2 col-sm-offset-8',
+                    ]); ?>
 
                 </div>
 
@@ -123,14 +145,14 @@ $this->BreadCumbs->addCrumb(__('Adicionar Docente'), '#');
 
 </div>
 <script>
-    <?php $this->Html->scriptStart(array('inline' => false, 'block' => 'scriptBottom')); ?>
+    <?php $this->Html->scriptStart(['inline' => false, 'block' => 'scriptBottom']); ?>
 
     $(".ajax-select").select2({
         minimumInputLength: 2,
         tags: [],
-        'theme':'bootstrap',
+        'theme': 'bootstrap',
         ajax: {
-            url: '<?php echo $this->Html->url(['controller'=>'docentes', 'action' => 'autocomplete'])?>',
+            url: '<?php echo $this->Html->url(['controller' => 'docentes', 'action' => 'autocomplete'])?>',
             dataType: 'json',
             type: "GET",
             delay: 250,
@@ -150,9 +172,9 @@ $this->BreadCumbs->addCrumb(__('Adicionar Docente'), '#');
                 params.page = params.page || 1;
 
                 return {
-                    results:$.map(data, function(obj) {
+                    results: $.map(data, function (obj) {
                         console.dir(obj);
-                        return { id: obj.id, text: obj.name+' - '+obj.nuit };
+                        return {id: obj.id, text: obj.name + ' - ' + obj.nuit};
                     }),
                     pagination: {
                         more: (params.page * 30) < data.total_count
@@ -164,4 +186,4 @@ $this->BreadCumbs->addCrumb(__('Adicionar Docente'), '#');
         }
     });
     <?php $this->Html->scriptEnd(); ?>
-    </script>
+</script>

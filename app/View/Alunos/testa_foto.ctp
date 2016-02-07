@@ -1,1 +1,1 @@
-<?php echo $foto['DraFoto']['conteudo']?>
+<?php echo $foto['DraFoto']['conteudo'] ?>

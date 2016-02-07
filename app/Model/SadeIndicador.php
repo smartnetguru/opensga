@@ -1,33 +1,35 @@
 <?php
-App::uses('AppModel', 'Model');
-/**
- * SadeIndicador Model
- *
- * @property SadeParametro $SadeParametro
- */
-class SadeIndicador extends AppModel {
+	App::uses('AppModel', 'Model');
 
-	//The Associations below have been created with all possible keys, those that are not needed can be removed
+	/**
+	 * SadeIndicador Model
+	 *
+	 * @property SadeParametro $SadeParametro
+	 */
+	class SadeIndicador extends AppModel
+	{
 
-/**
- * hasMany associations
- *
- * @var array
- */
-	public $hasMany = array(
-		'SadeParametro' => array(
-			'className' => 'SadeParametro',
-			'foreignKey' => 'sade_indicador_id',
-			'dependent' => false,
-			'conditions' => '',
-			'fields' => '',
-			'order' => '',
-			'limit' => '',
-			'offset' => '',
-			'exclusive' => '',
-			'finderQuery' => '',
-			'counterQuery' => ''
-		)
-	);
+		//The Associations below have been created with all possible keys, those that are not needed can be removed
 
-}
+		/**
+		 * hasMany associations
+		 *
+		 * @var array
+		 */
+		public $hasMany = [
+			'SadeParametro' => [
+				'className'    => 'SadeParametro',
+				'foreignKey'   => 'sade_indicador_id',
+				'dependent'    => false,
+				'conditions'   => '',
+				'fields'       => '',
+				'order'        => '',
+				'limit'        => '',
+				'offset'       => '',
+				'exclusive'    => '',
+				'finderQuery'  => '',
+				'counterQuery' => '',
+			],
+		];
+
+	}

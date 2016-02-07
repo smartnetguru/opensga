@@ -40,17 +40,17 @@
             </div>
             <div class="panel-body">
                 <?php echo $this->Form->create('CandidatoGraduacao', [
-                    'role'          => "form",
-                    'novalidade'    => 'novalidate',
-                    'enctype'       => 'multipart/form-data',
-                    'class'         => 'smart-wizard form-horizontal',
-                    'id'            => 'form',
-                    'inputDefaults' => [
-                        'label'       => false,
-                        'div'         => false,
-                        'empty'       => 'Seleccione',
-                        'placeholder' => 'Seleccione'
-                    ]
+                        'role'          => "form",
+                        'novalidade'    => 'novalidate',
+                        'enctype'       => 'multipart/form-data',
+                        'class'         => 'smart-wizard form-horizontal',
+                        'id'            => 'form',
+                        'inputDefaults' => [
+                                'label'       => false,
+                                'div'         => false,
+                                'empty'       => 'Seleccione',
+                                'placeholder' => 'Seleccione',
+                        ],
                 ]); ?>
 
                 <div class="swMain">
@@ -70,20 +70,20 @@
                                     <div class="col-sm-4">
                                         <?php echo $this->Form->label('CandidatoGraduacao.apelido', 'Apelido'); ?>
                                         <?php echo $this->Form->input('CandidatoGraduacao.apelido',
-                                            [
-                                                'class' => 'form-control',
-                                                'id'    => 'codigo',
-                                                'value' => $aluno['Entidade']['apelido']
-                                            ]); ?>
+                                                [
+                                                        'class' => 'form-control',
+                                                        'id'    => 'codigo',
+                                                        'value' => $aluno['Entidade']['apelido'],
+                                                ]); ?>
                                     </div>
                                     <div class="col-sm-4">
                                         <?php echo $this->Form->label('CandidatoGraduacao.nomes', 'Nomes'); ?>
                                         <?php echo $this->Form->input('CandidatoGraduacao.nomes',
-                                            [
-                                                'class' => 'form-control',
-                                                'id'    => 'codigo',
-                                                'value' => $aluno['Entidade']['nomes']
-                                            ]); ?>
+                                                [
+                                                        'class' => 'form-control',
+                                                        'id'    => 'codigo',
+                                                        'value' => $aluno['Entidade']['nomes'],
+                                                ]); ?>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -101,21 +101,21 @@
                                     </div>
                                     <div class="col-sm-4">
                                         <?php echo $this->Form->label('CandidatoGraduacao.ano_conclusao',
-                                            'Ano de Conclusao'); ?>
+                                                'Ano de Conclusao'); ?>
                                         <?php echo $this->Form->input('CandidatoGraduacao.ano_conclusao',
-                                            ['class' => 'form-control', 'id' => 'codigo', 'type' => 'text']); ?>
+                                                ['class' => 'form-control', 'id' => 'codigo', 'type' => 'text']); ?>
                                     </div>
                                     <div class="col-sm-4">
                                         <div class="form-group">
                                             <?php echo $this->Form->label('CandidatoGraduacao.data_defesa',
-                                                'Data de defesa'); ?>
+                                                    'Data de defesa'); ?>
                                             <div class="input-group">
                                                 <?php echo $this->Form->input('CandidatoGraduacao.data_defesa', [
-                                                    'class'              => 'form-control date-picker',
-                                                    'id'                 => 'firstname',
-                                                    'type'               => 'text',
-                                                    'data-date-viewmode' => 'years',
-                                                    'data-date-format'   => 'yyyy-mm-dd'
+                                                        'class'              => 'form-control date-picker',
+                                                        'id'                 => 'firstname',
+                                                        'type'               => 'text',
+                                                        'data-date-viewmode' => 'years',
+                                                        'data-date-format'   => 'yyyy-mm-dd',
                                                 ]); ?>
                                                 <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
                                             </div>
@@ -124,9 +124,9 @@
                                     </div>
                                     <div class="col-sm-4">
                                         <?php echo $this->Form->label('CandidatoGraduacao.media_defesa',
-                                            'Media de Conclusao'); ?>
+                                                'Media de Conclusao'); ?>
                                         <?php echo $this->Form->input('CandidatoGraduacao.media_defesa',
-                                            ['class' => 'form-control', 'id' => 'codigo', 'type' => 'text']); ?>
+                                                ['class' => 'form-control', 'id' => 'codigo', 'type' => 'text']); ?>
                                     </div>
 
 
@@ -136,24 +136,24 @@
                                     <div class="col-sm-4">
                                         <?php echo $this->Form->label('CandidatoGraduacao.genero_id', 'Sexo'); ?>
                                         <?php echo $this->Form->input('CandidatoGraduacao.genero_id',
-                                            [
-                                                'class'   => 'form-control',
-                                                'id'      => 'codigo',
-                                                'default' => $aluno['Entidade']['genero_id']
-                                            ]); ?>
+                                                [
+                                                        'class'   => 'form-control',
+                                                        'id'      => 'codigo',
+                                                        'default' => $aluno['Entidade']['genero_id'],
+                                                ]); ?>
                                     </div>
                                     <div class="col-sm-4">
                                         <div class="form-group">
                                             <?php echo $this->Form->label('CandidatoGraduacao.data_nascimento',
-                                                'Data de Nascimento'); ?>
+                                                    'Data de Nascimento'); ?>
                                             <div class="input-group">
                                                 <?php echo $this->Form->input('CandidatoGraduacao.data_nascimento', [
-                                                    'class'              => 'form-control date-picker',
-                                                    'id'                 => 'firstname',
-                                                    'type'               => 'text',
-                                                    'data-date-viewmode' => 'years',
-                                                    'data-date-format'   => 'yyyy-mm-dd',
-                                                    'value'              => $aluno['Entidade']['data_nascimento']
+                                                        'class'              => 'form-control date-picker',
+                                                        'id'                 => 'firstname',
+                                                        'type'               => 'text',
+                                                        'data-date-viewmode' => 'years',
+                                                        'data-date-format'   => 'yyyy-mm-dd',
+                                                        'value'              => $aluno['Entidade']['data_nascimento'],
                                                 ]); ?>
                                                 <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
                                             </div>
@@ -163,12 +163,12 @@
 
                                     <div class="col-sm-4">
                                         <?php echo $this->Form->label('CandidatoGraduacao.estado_civil_id',
-                                            'Estado Civil'); ?>
+                                                'Estado Civil'); ?>
                                         <?php echo $this->Form->input('CandidatoGraduacao.estado_civil_id', [
-                                            'class'   => 'form-control',
-                                            'id'      => 'codigo',
-                                            'options' => $estadoCivil,
-                                            'default' => $aluno['Entidade']['estado_civil']
+                                                'class'   => 'form-control',
+                                                'id'      => 'codigo',
+                                                'options' => $estadoCivil,
+                                                'default' => $aluno['Entidade']['estado_civil'],
                                         ]); ?>
                                     </div>
                                 </div>
@@ -176,20 +176,20 @@
                                 <div class="row">
                                     <div class="col-sm-4">
                                         <?php echo $this->Form->label('CandidatoGraduacao.regime_estudo_id',
-                                            'Regime de Estudo'); ?>
+                                                'Regime de Estudo'); ?>
                                         <?php echo $this->Form->input('CandidatoGraduacao.regime_estudo_id',
-                                            ['class' => 'form-control', 'id' => 'codigo']); ?>
+                                                ['class' => 'form-control', 'id' => 'codigo']); ?>
                                     </div>
                                     <div class="col-sm-4">
                                         <?php echo $this->Form->label('CandidatoGraduacao.regalia_social_id',
-                                            'Regalia Social'); ?>
+                                                'Regalia Social'); ?>
                                         <?php echo $this->Form->input('CandidatoGraduacao.regalia_social_id',
-                                            ['class' => 'form-control', 'id' => 'codigo']); ?>
+                                                ['class' => 'form-control', 'id' => 'codigo']); ?>
                                     </div>
                                     <div class="col-sm-4">
                                         <?php echo $this->Form->label('CandidatoGraduacao.telemovel', 'Contacto'); ?>
                                         <?php echo $this->Form->input('CandidatoGraduacao.telemovel',
-                                            ['class' => 'form-control', 'id' => 'codigo', 'type' => 'text']); ?>
+                                                ['class' => 'form-control', 'id' => 'codigo', 'type' => 'text']); ?>
                                     </div>
 
                                 </div>
@@ -198,89 +198,89 @@
                                 <div class="row">
                                     <div class="col-sm-3">
                                         <?php echo $this->Form->label('CandidatoGraduacao.naturalidade',
-                                            'Naturalidade'); ?>
+                                                'Naturalidade'); ?>
                                         <?php echo $this->Form->input('CandidatoGraduacao.naturalidade', [
-                                            'label'        => false,
-                                            'div'          => false,
-                                            'class'        => 'form-control',
-                                            'id'           => 'naturalidade',
-                                            'options'      => $naturalidade,
-                                            'autocomplete' => 'on',
-                                            'type'         => 'text'
+                                                'label'        => false,
+                                                'div'          => false,
+                                                'class'        => 'form-control',
+                                                'id'           => 'naturalidade',
+                                                'options'      => $naturalidade,
+                                                'autocomplete' => 'on',
+                                                'type'         => 'text',
                                         ]); ?>
                                     </div>
                                     <div class="col-sm-3">
                                         <?php echo $this->Form->label('CandidatoGraduacao.pais_nascimento',
-                                            'Nacionalidade'); ?>
+                                                'Nacionalidade'); ?>
                                         <?php echo $this->Form->input('CandidatoGraduacao.pais_nascimento', [
-                                            'class'   => 'form-control',
-                                            'id'      => 'paisNascimento',
-                                            'options' => $paises,
-                                            'default' => 152
+                                                'class'   => 'form-control',
+                                                'id'      => 'paisNascimento',
+                                                'options' => $paises,
+                                                'default' => 152,
                                         ]); ?>
                                     </div>
                                     <div class="col-sm-3">
                                         <?php echo $this->Form->label('CandidatoGraduacao.provincia_nascimento',
-                                            'Provincia de Nascimento'); ?>
+                                                'Provincia de Nascimento'); ?>
                                         <?php echo $this->Form->input('CandidatoGraduacao.provincia_nascimento', [
-                                            'class'   => 'form-control',
-                                            'id'      => 'provinciaNascimento',
-                                            'options' => $provincias
+                                                'class'   => 'form-control',
+                                                'id'      => 'provinciaNascimento',
+                                                'options' => $provincias,
                                         ]); ?>
                                     </div>
                                     <div class="col-sm-3">
                                         <?php echo $this->Form->label('CandidatoGraduacao.distrito_nascimento',
-                                            'Cidade/Distrito de Nascimento'); ?>
+                                                'Cidade/Distrito de Nascimento'); ?>
                                         <?php echo $this->Form->input('CandidatoGraduacao.distrito_nascimento', [
-                                            'class'   => 'form-control',
-                                            'id'      => 'cidadeNascimento',
-                                            'options' => $cidadeNascimentos
+                                                'class'   => 'form-control',
+                                                'id'      => 'cidadeNascimento',
+                                                'options' => $cidadeNascimentos,
                                         ]); ?>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <?php
                                         echo $this->Form->input('numero_talao',
-                                            [
-                                                'label' => [
-                                                    'class' => 'control-label',
-                                                    'text'  => 'Numero do Talao'
-                                                ],
-                                                'div'   => 'form-group col-sm-4',
-                                                'class' => 'form-control',
-                                                'id'    => 'codigoID',
-                                                'required'=>true,
-                                                'type'  => 'text',
+                                                [
+                                                        'label'    => [
+                                                                'class' => 'control-label',
+                                                                'text'  => 'Numero do Talao',
+                                                        ],
+                                                        'div'      => 'form-group col-sm-4',
+                                                        'class'    => 'form-control',
+                                                        'id'       => 'codigoID',
+                                                        'required' => true,
+                                                        'type'     => 'text',
 
-                                            ]
+                                                ]
                                         );
                                         echo $this->Form->input('data_pagamento',
-                                            [
-                                                'label'              => [
-                                                    'class' => 'control-label',
-                                                    'text'  => 'Data de Deposito'
-                                                ],
-                                                'div'                => 'form-group col-sm-4',
-                                                'class'              => 'form-control date-picker',
-                                                'id'                 => 'codigoID',
-                                                'type'               => 'text',
-                                                'data-date-viewmode' => 'years',
-                                                'data-date-format'   => 'yyyy-mm-dd',
+                                                [
+                                                        'label'              => [
+                                                                'class' => 'control-label',
+                                                                'text'  => 'Data de Deposito',
+                                                        ],
+                                                        'div'                => 'form-group col-sm-4',
+                                                        'class'              => 'form-control date-picker',
+                                                        'id'                 => 'codigoID',
+                                                        'type'               => 'text',
+                                                        'data-date-viewmode' => 'years',
+                                                        'data-date-format'   => 'yyyy-mm-dd',
 
 
-                                            ]
+                                                ]
                                         );
                                         echo $this->Form->input('valor_pago',
-                                            [
-                                                'label' => [
-                                                    'class' => 'control-label',
-                                                    'text'  => 'Valor Pago'
-                                                ],
-                                                'div'   => 'form-group col-sm-4',
-                                                'class' => 'form-control',
-                                                'id'    => 'codigoID',
+                                                [
+                                                        'label' => [
+                                                                'class' => 'control-label',
+                                                                'text'  => 'Valor Pago',
+                                                        ],
+                                                        'div'   => 'form-group col-sm-4',
+                                                        'class' => 'form-control',
+                                                        'id'    => 'codigoID',
 
-                                            ]
+                                                ]
                                         );
 
                                     ?>
@@ -293,14 +293,14 @@
 
                             <?php
                                 echo $this->Form->input('CandidatoGraduacao.aluno_id', [
-                                    'type'  => 'hidden',
-                                    'value' => $aluno['Aluno']['id'],
+                                        'type'  => 'hidden',
+                                        'value' => $aluno['Aluno']['id'],
                                 ]);
 
                                 echo $this->Form->end([
-                                    'label' => __('GRAVAR', true),
-                                    'class' => 'btn btn-success finish-step btn-block',
-                                    'div'   => 'col-sm-2 col-sm-offset-8'
+                                        'label' => __('GRAVAR', true),
+                                        'class' => 'btn btn-success finish-step btn-block',
+                                        'div'   => 'col-sm-2 col-sm-offset-8',
                                 ]); ?>
 
                         </div>
@@ -315,79 +315,79 @@
 
 <?php
     $this->Js->get('#provinciaNascimento')->event('change', $this->Js->request([
-        'controller' => 'ajax',
-        'action'     => 'get_cidades_by_provincia'
+            'controller' => 'ajax',
+            'action'     => 'get_cidades_by_provincia',
     ], [
-        'update'         => '#cidadeNascimento',
-        'complete'       => '$("#cidadeNascimento").trigger("liszt:updated")',
-        'async'          => true,
-        'method'         => 'post',
-        'dataExpression' => true,
-        'data'           => $this->Js->serializeForm([
-            'isForm' => true,
-            'inline' => true
-        ])
+            'update'         => '#cidadeNascimento',
+            'complete'       => '$("#cidadeNascimento").trigger("liszt:updated")',
+            'async'          => true,
+            'method'         => 'post',
+            'dataExpression' => true,
+            'data'           => $this->Js->serializeForm([
+                    'isForm' => true,
+                    'inline' => true,
+            ]),
     ])
     );
 
     $this->Js->get('#provinciaOrigem')->event('change', $this->Js->request([
-        'controller' => 'ajax',
-        'action'     => 'get_cidades_by_provincia'
+            'controller' => 'ajax',
+            'action'     => 'get_cidades_by_provincia',
     ], [
-        'update'         => '#cidadeOrigem',
-        'complete'       => '$("#cidadeOrigem").trigger("liszt:updated")',
-        'async'          => true,
-        'method'         => 'post',
-        'dataExpression' => true,
-        'data'           => $this->Js->serializeForm([
-            'isForm' => true,
-            'inline' => true
-        ])
+            'update'         => '#cidadeOrigem',
+            'complete'       => '$("#cidadeOrigem").trigger("liszt:updated")',
+            'async'          => true,
+            'method'         => 'post',
+            'dataExpression' => true,
+            'data'           => $this->Js->serializeForm([
+                    'isForm' => true,
+                    'inline' => true,
+            ]),
     ])
     );
     $this->Js->get('#provinciaMorada')->event('change', $this->Js->request([
-        'controller' => 'ajax',
-        'action'     => 'get_cidades_by_provincia'
+            'controller' => 'ajax',
+            'action'     => 'get_cidades_by_provincia',
     ], [
-        'update'         => '#cidadeMorada',
-        'complete'       => '$("#cidadeMorada").trigger("liszt:updated")',
-        'async'          => true,
-        'method'         => 'post',
-        'dataExpression' => true,
-        'data'           => $this->Js->serializeForm([
-            'isForm' => true,
-            'inline' => true
-        ])
+            'update'         => '#cidadeMorada',
+            'complete'       => '$("#cidadeMorada").trigger("liszt:updated")',
+            'async'          => true,
+            'method'         => 'post',
+            'dataExpression' => true,
+            'data'           => $this->Js->serializeForm([
+                    'isForm' => true,
+                    'inline' => true,
+            ]),
     ])
     );
     $this->Js->get('#cidadeOrigem')->event('change', $this->Js->request([
-        'controller' => 'ajax',
-        'action'     => 'get_escolas_by_distrito'
+            'controller' => 'ajax',
+            'action'     => 'get_escolas_by_distrito',
     ], [
-        'update'         => '#escolaOrigem',
-        'complete'       => '$("#escolaOrigem").trigger("liszt:updated")',
-        'async'          => true,
-        'method'         => 'post',
-        'dataExpression' => true,
-        'data'           => $this->Js->serializeForm([
-            'isForm' => true,
-            'inline' => true
-        ])
+            'update'         => '#escolaOrigem',
+            'complete'       => '$("#escolaOrigem").trigger("liszt:updated")',
+            'async'          => true,
+            'method'         => 'post',
+            'dataExpression' => true,
+            'data'           => $this->Js->serializeForm([
+                    'isForm' => true,
+                    'inline' => true,
+            ]),
     ])
     );
     $this->Js->get('#unidadeOrganica')->event('change', $this->Js->request([
-        'controller' => 'ajax',
-        'action'     => 'get_cursos_by_unidade_organica'
+            'controller' => 'ajax',
+            'action'     => 'get_cursos_by_unidade_organica',
     ], [
-        'update'         => '#curso',
-        'complete'       => '$("#curso").trigger("liszt:updated")',
-        'async'          => true,
-        'method'         => 'post',
-        'dataExpression' => true,
-        'data'           => $this->Js->serializeForm([
-            'isForm' => true,
-            'inline' => true
-        ])
+            'update'         => '#curso',
+            'complete'       => '$("#curso").trigger("liszt:updated")',
+            'async'          => true,
+            'method'         => 'post',
+            'dataExpression' => true,
+            'data'           => $this->Js->serializeForm([
+                    'isForm' => true,
+                    'inline' => true,
+            ]),
     ])
     );
 ?>
@@ -397,23 +397,23 @@
 
 
     echo $this->Html->script('/assets/plugins/jquery-inputlimiter/jquery.inputlimiter.1.3.1.min',
-        ['block' => 'scriptBottom']);
+            ['block' => 'scriptBottom']);
     echo $this->Html->script('/assets/plugins/autosize/jquery.autosize.min', ['block' => 'scriptBottom']);
     echo $this->Html->script('/assets/plugins/autosize/jquery.autosize.min', ['block' => 'scriptBottom']);
     echo $this->Html->script('/assets/plugins/select2/select2.min', ['block' => 'scriptBottom']);
     echo $this->Html->script('/assets/plugins/jquery.maskedinput/src/jquery.maskedinput', ['block' => 'scriptBottom']);
     echo $this->Html->script('/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker',
-        ['block' => 'scriptBottom']);
+            ['block' => 'scriptBottom']);
     echo $this->Html->script('/assets/plugins/bootstrap-timepicker/js/bootstrap-timepicker.min',
-        ['block' => 'scriptBottom']);
+            ['block' => 'scriptBottom']);
     echo $this->Html->script('/assets/plugins/bootstrap-daterangepicker/moment.min', ['block' => 'scriptBottom']);
     echo $this->Html->script('/assets/plugins/bootstrap-daterangepicker/daterangepicker', ['block' => 'scriptBottom']);
     echo $this->Html->script('/assets/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker',
-        ['block' => 'scriptBottom']);
+            ['block' => 'scriptBottom']);
     //echo $this->Html->script('/assets/plugins/bootstrap-colorpicker/js/commits', array('block' => 'scriptBottom'));
     echo $this->Html->script('/assets/plugins/jQuery-Tags-Input/jquery.tagsinput', ['block' => 'scriptBottom']);
     echo $this->Html->script('/assets/plugins/bootstrap-fileupload/bootstrap-fileupload.min',
-        ['block' => 'scriptBottom']);
+            ['block' => 'scriptBottom']);
     echo $this->Html->script('/assets/plugins/summernote/build/summernote.min', ['block' => 'scriptBottom']);
     echo $this->Html->script('/assets/plugins/ckeditor/ckeditor', ['block' => 'scriptBottom']);
     echo $this->Html->script('/assets/plugins/ckeditor/adapters/jquery', ['block' => 'scriptBottom']);
@@ -422,9 +422,9 @@
     echo $this->Html->script(['/assets/plugins/jquery-ui/jquery.ui.menu'], ['block' => 'scriptBottom']);
     echo $this->Html->script(['/assets/plugins/jquery-ui/jquery.ui.autocomplete'], ['block' => 'scriptBottom']);
     echo $this->Html->script('/assets/js/form-matricular-candidato-elements', ['block' => 'scriptBottom'],
-        ['block' => 'scriptBottom']);
+            ['block' => 'scriptBottom']);
     echo $this->Html->script('/assets/js/form-matricular-candidato-wizard', ['block' => 'scriptBottom'],
-        ['block' => 'scriptBottom']);
+            ['block' => 'scriptBottom']);
 ?>
 
 

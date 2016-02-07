@@ -1,23 +1,25 @@
 <?php
-/**
- * TipoMovimentoFixture
- *
- */
-class TipoMovimentoFixture extends CakeTestFixture {
 
-/**
- * Import
- *
- * @var array
- */
-	public $import = array('table' => 'tipo_movimentos');
+	/**
+	 * TipoMovimentoFixture
+	 *
+	 */
+	class TipoMovimentoFixture extends CakeTestFixture
+	{
 
-/**
- * Records
- *
- * @var array
- */
-	public $records = array(
-	);
+		/**
+		 * Import
+		 *
+		 * @var array
+		 */
+		public $import = ['table' => 'tipo_movimentos'];
 
-}
+		/**
+		 * Records
+		 *
+		 * @var array
+		 */
+		public $records = [
+		];
+
+	}

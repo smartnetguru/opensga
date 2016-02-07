@@ -1,23 +1,25 @@
 <?php
-/**
- * AlumniCandidatoAlumnisAreaPesquisaFixture
- *
- */
-class AlumniCandidatoAlumnisAreaPesquisaFixture extends CakeTestFixture {
 
-/**
- * Import
- *
- * @var array
- */
-	public $import = array('table' => 'candidato_alumnis_area_pesquisas');
+	/**
+	 * AlumniCandidatoAlumnisAreaPesquisaFixture
+	 *
+	 */
+	class AlumniCandidatoAlumnisAreaPesquisaFixture extends CakeTestFixture
+	{
 
-/**
- * Records
- *
- * @var array
- */
-	public $records = array(
-	);
+		/**
+		 * Import
+		 *
+		 * @var array
+		 */
+		public $import = ['table' => 'candidato_alumnis_area_pesquisas'];
 
-}
+		/**
+		 * Records
+		 *
+		 * @var array
+		 */
+		public $records = [
+		];
+
+	}

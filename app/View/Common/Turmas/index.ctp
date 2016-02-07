@@ -11,46 +11,46 @@
 ?>
 
 <?php echo $this->fetch('top-actions'); ?>
-<?php $this->assign('table-title', __('Turmas '.$estadoTurma['EstadoTurma']['name'])) ?>
+<?php $this->assign('table-title', __('Turmas ' . $estadoTurma['EstadoTurma']['name'])) ?>
 <?php $this->start('filter-form') ?>
 <?php echo $this->Form->create('Turma', [
-    'role'          => 'form',
-    'enctype'       => 'multipart/form-data',
-    'class'         => 'form-horizontal',
-    'inputDefaults' => ['before' => '', 'after' => '']
+        'role'          => 'form',
+        'enctype'       => 'multipart/form-data',
+        'class'         => 'form-horizontal',
+        'inputDefaults' => ['before' => '', 'after' => ''],
 ]); ?>
     <div class="row">
         <div class="form-group">
             <div class="col-md-3">
                 <?php echo $this->Form->input('Turma.name', [
-                    'label'       => false,
-                    'div'         => false,
-                    'required'    => false,
-                    'class'       => 'form-control',
-                    'placeholder' => 'Nome da Turma'
+                        'label'       => false,
+                        'div'         => false,
+                        'required'    => false,
+                        'class'       => 'form-control',
+                        'placeholder' => 'Nome da Turma',
                 ]); ?>
             </div>
             <div class="col-md-3">
                 <?php echo $this->Form->input('AnoLectivo.ano', [
-                    'label'       => false,
-                    'div'         => false,
-                    'class'       => 'form-control',
-                    'placeholder' => 'Ou Ano Lectivo'
+                        'label'       => false,
+                        'div'         => false,
+                        'class'       => 'form-control',
+                        'placeholder' => 'Ou Ano Lectivo',
                 ]); ?>
             </div>
             <div class="col-md-3">
                 <?php echo $this->Form->input('Turma.curso_id', [
-                    'label'       => false,
-                    'div'         => false,
-                    'class'       => 'form-control',
-                    'placeholder' => 'Ou Curso',
-                    'required'=>false
+                        'label'       => false,
+                        'div'         => false,
+                        'class'       => 'form-control',
+                        'placeholder' => 'Ou Curso',
+                        'required'    => false,
                 ]); ?>
             </div>
             <div class="col-md-3">
                 <?php echo $this->Form->end([
-                    'label' => __('Pesquisar', true),
-                    'class' => 'btn btn-blue next-step btn-block'
+                        'label' => __('Pesquisar', true),
+                        'class' => 'btn btn-blue next-step btn-block',
                 ]); ?>
             </div>
         </div>
@@ -76,14 +76,14 @@
 
             <td>
                 <?php echo $this->Html->link($turma['Turma']['name'],
-                    ['controller' => 'turmas', 'action' => 'ver_turma', $turma['Turma']['id']]); ?>
+                        ['controller' => 'turmas', 'action' => 'ver_turma', $turma['Turma']['id']]); ?>
             </td>
             <td><?php echo $this->Html->link($turma['AnoLectivo']['ano'],
-                    ['controller' => 'anolectivos', 'action' => 'view', $turma['AnoLectivo']['codigo']]); ?></td>
+                        ['controller' => 'anolectivos', 'action' => 'view', $turma['AnoLectivo']['codigo']]); ?></td>
             <td><?php echo $this->Html->link($turma['Turma']['semestre_curricular'],
-                    ['controller' => 'anolectivos', 'action' => 'view', $turma['AnoLectivo']['codigo']]); ?></td>
+                        ['controller' => 'anolectivos', 'action' => 'view', $turma['AnoLectivo']['codigo']]); ?></td>
             <td><?php echo $this->Html->link($turma['Turma']['total_alunos'],
-                    ['controller' => 'anolectivos', 'action' => 'view', $turma['AnoLectivo']['codigo']]); ?></td>
+                        ['controller' => 'anolectivos', 'action' => 'view', $turma['AnoLectivo']['codigo']]); ?></td>
             <td>
 
                 <?php
@@ -92,13 +92,13 @@
                     }
 
                     echo $this->Html->link($turma['Docente']['Entidade']['name'],
-                        ['controller' => 'turmas', 'action' => 'view']);
+                            ['controller' => 'turmas', 'action' => 'view']);
                 ?>
             </td>
             <td class="accoes">
                 <?php echo $this->Html->link('<span class="glyphicon glyphicon-eye-open"></span>',
-                    ['action' => 'ver_turma', $turma['Turma']['id']],
-                    ['escape' => false,  'class'=>'tooltips','title' => 'Visualizar Turma']);
+                        ['action' => 'ver_turma', $turma['Turma']['id']],
+                        ['escape' => false, 'class' => 'tooltips', 'title' => 'Visualizar Turma']);
 
                 ?>
 

@@ -1,8 +1,8 @@
 <?php
     App::uses('AppController', 'Controller');
-use Aws\Sns\MessageValidator\Message;
-use Aws\Sns\MessageValidator\MessageValidator;
-use Guzzle\Http\Client;
+    use Aws\Sns\MessageValidator\Message;
+    use Aws\Sns\MessageValidator\MessageValidator;
+    use Guzzle\Http\Client;
 
     /**
      * Messages Controller
@@ -21,7 +21,8 @@ use Guzzle\Http\Client;
         public $components = ['Paginator'];
 
 
-        public function aws_bounces(){
+        public function aws_bounces()
+        {
 
 
 // Make sure the request is POST
@@ -51,13 +52,14 @@ use Guzzle\Http\Client;
         }
 
 
-        public function beforeFilter() {
+        public function beforeFilter()
+        {
             parent::beforeFilter();
-            $this->Auth->allow(['aws_complaints','aws_bounces','aws_deliveries']);
-            if($this->action == 'aws_complaints' || $this->action=='aws_bounces' || $this->action=='aws_deliveries'){
+            $this->Auth->allow(['aws_complaints', 'aws_bounces', 'aws_deliveries']);
+            if ($this->action == 'aws_complaints' || $this->action == 'aws_bounces' || $this->action == 'aws_deliveries') {
                 $this->Security->csrfCheck = false;
                 $this->Security->validatePost = false;
-                $this->Security->unlockedActions= array('aws_complaints','aws_bounces','aws_deliveries');
+                $this->Security->unlockedActions = ['aws_complaints', 'aws_bounces', 'aws_deliveries'];
             }
 
         }
@@ -184,7 +186,7 @@ use Guzzle\Http\Client;
             $userId = CakeSession::read('Auth.User.id');
             $this->paginate = [
                 //'conditions' => ['MessageUser.user_id'=>$userId],
-                'contain'    => ['MessageUser','User' ],
+                'contain' => ['MessageUser', 'User'],
             ];
             //$this->set('messages', $this->Paginator->paginate());
         }
@@ -208,22 +210,22 @@ use Guzzle\Http\Client;
             $this->Message->MessageUser->contain(['Message' => ['User' => 'Entidade']]);
             $options = [
                 'conditions' => ['Message.id >=' => $messageId, 'MessageUser.user_id' => $userId],
-                'limit'      => 10
+                'limit'      => 10,
             ];
             $messages = $this->Message->MessageUser->find('all', $options);
 
             $this->Message->contain([
                 'User'        => ['Entidade'],
                 'MessageText',
-                'MessageUser' => ['User' => ['Entidade'],'conditions'=>['user_id'=>$userId],'limit'=>1]
+                'MessageUser' => ['User' => ['Entidade'], 'conditions' => ['user_id' => $userId], 'limit' => 1],
             ]);
 
             $message0 = $this->Message->findById($messageId);
             $this->Message->MessageUser->id = $message0['MessageUser'][0]['id'];
-            $this->Message->MessageUser->set('estado_message_id',2);
+            $this->Message->MessageUser->set('estado_message_id', 2);
             $this->Message->MessageUser->save();
             $this->set('messages', $messages);
-            $this->set(compact('messageId','message0'));
+            $this->set(compact('messageId', 'message0'));
         }
 
         public function faculdade_enviar_mensagem()

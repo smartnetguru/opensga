@@ -16,7 +16,7 @@
         public $fixtures = [
             'app.user',
             'app.group',
-            'app.estado_objecto'
+            'app.estado_objecto',
         ];
 
         public $autoFixtures = false;
@@ -212,12 +212,12 @@
                     'estado_email'         => (int)0,
                     'estado_objecto_id'    => (int)1,
                     'timezone'             => 'Africa/Maputo',
-                    'password'             => '12345'
+                    'password'             => '12345',
                 ],
                 'Entidade' => [
                     'apelido' => 'Sitoe',
-                    'nomes'   => 'Elisio'
-                ]
+                    'nomes'   => 'Elisio',
+                ],
             ];
 
 

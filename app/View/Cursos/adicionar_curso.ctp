@@ -5,7 +5,7 @@
 ?>
 <?php
     $this->extend('/Common/form_basic_common');
-    $this->assign('form-title','Adicionar Novo Curso');
+    $this->assign('form-title', 'Adicionar Novo Curso');
 ?>
 
 <?php $this->start('form-elements') ?>
@@ -34,25 +34,25 @@
             'label'       => 'Grau Académico',
             'placeholder' => 'Grau Académico...',
             'after'       => '',
-        'div'=>'form-group col-sm-6'
+            'div'         => 'form-group col-sm-6',
     ]);
     echo $this->Form->input('tipo_curso_id', [
             'label'       => 'Tipo de Curso',
             'placeholder' => 'Tipo de Curso...',
             'after'       => '',
-            'div'=>'form-group col-sm-6'
+            'div'         => 'form-group col-sm-6',
     ]);
     echo $this->Form->input('unidade_organica_id', [
             'label'       => 'Unidade Organica',
             'placeholder' => 'Unidade Organica...',
             'after'       => '',
-            'div'=>'form-group col-sm-6'
+            'div'         => 'form-group col-sm-6',
     ]);
     echo $this->Form->input('turno_id', [
             'label'       => 'Turno',
             'placeholder' => 'Turno...',
             'after'       => '',
-            'div'=>'form-group col-sm-6'
+            'div'         => 'form-group col-sm-6',
     ]);
 
 ?>

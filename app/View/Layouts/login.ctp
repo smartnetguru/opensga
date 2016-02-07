@@ -3,27 +3,34 @@
 <head>
     <?php echo $this->NewRelic->start(); ?>
     <?php
-    echo $this->Html->meta(
-        'favicon.ico',
-        '/favicon.ico',
-        ['type' => 'icon']
-    );
+        echo $this->Html->meta(
+                'favicon.ico',
+                '/favicon.ico',
+                ['type' => 'icon']
+        );
     ?>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
-    <meta name="google-site-verification" content="ljmJ-ygf8VVfKZs11OOKbkUr3SMMQRST_2FruT3Lpss" />
+    <meta name="google-site-verification" content="ljmJ-ygf8VVfKZs11OOKbkUr3SMMQRST_2FruT3Lpss"/>
     <?php
-    echo $this->Html->css('/assets/plugins/bootstrap/css/bootstrap.min.css', array('media' => 'screen'));
-    echo $this->Html->css('/assets/css/login_fb.css');
+        echo $this->Html->css('/assets/plugins/bootstrap/css/bootstrap.min.css', ['media' => 'screen']);
+        echo $this->Html->css('/assets/css/login_fb.css');
     ?>
     <title id="pageTitle">SIGA-Sistema Integrado de Gestão Académica</title>
 </head>
 <body class="fbIndex UIPage_LoggedOut _2gsg gecko Locale_en_US" dir="ltr">
 <script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    (function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r;
+        i[r] = i[r] || function () {
+                    (i[r].q = i[r].q || []).push(arguments)
+                }, i[r].l = 1 * new Date();
+        a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
 
     ga('create', 'UA-42847981-1', 'auto');
     ga('send', 'pageview');
@@ -43,7 +50,7 @@
 
                             <div class="menu_login_container rfloat _ohf">
 
-                                <?php echo $this->Form->create('User', ['url' => ['action'=>'login']]); ?>
+                                <?php echo $this->Form->create('User', ['url' => ['action' => 'login']]); ?>
                                 <table cellspacing="0">
                                     <tbody>
                                     <tr>
@@ -57,27 +64,27 @@
                                     <tr>
                                         <td>
                                             <?php echo $this->Form->input('username', [
-                                                'div'         => false,
-                                                'label'       => false,
-                                                'class'       => 'inputtext',
-                                                'placeholder' => 'Nome de Usuario ou Email Institucional'
+                                                    'div'         => false,
+                                                    'label'       => false,
+                                                    'class'       => 'inputtext',
+                                                    'placeholder' => 'Nome de Usuario ou Email Institucional',
                                             ]) ?>
                                         </td>
                                         <td>
                                             <?php echo $this->Form->input('password', [
-                                                'div'         => false,
-                                                'label'       => false,
-                                                'class'       => 'inputtext',
-                                                'placeholder' => 'Senha'
+                                                    'div'         => false,
+                                                    'label'       => false,
+                                                    'class'       => 'inputtext',
+                                                    'placeholder' => 'Senha',
                                             ]) ?>
 
                                         </td>
                                         <td>
                                             <label class="uiButton uiButtonConfirm" id="loginbutton" for="u_0_n">
                                                 <?php echo $this->Form->end([
-                                                    'label'  => __('Entrar'),
-                                                    'class'  => false,
-                                                    'escape' => false
+                                                        'label'  => __('Entrar'),
+                                                        'class'  => false,
+                                                        'escape' => false,
                                                 ]) ?>
                                             </label>
                                         </td>
@@ -85,12 +92,12 @@
                                     <tr>
                                         <td class="login_form_label_field" colspan="2">
                                             <?php
-                                            $session_message = $this->Session->read('Message');
-                                            if (isset($session_message) and $session_message != null) {
-                                                foreach ($session_message as $k => $v) {
-                                                    echo $this->Session->flash($k);
+                                                $session_message = $this->Session->read('Message');
+                                                if (isset($session_message) and $session_message != null) {
+                                                    foreach ($session_message as $k => $v) {
+                                                        echo $this->Session->flash($k);
+                                                    }
                                                 }
-                                            }
                                             ?>
                                         </td>
                                     </tr>
@@ -124,7 +131,7 @@
                                 <div class="mtl pbm">
                                     <div class="_6a _6b mrl" style="text-align: center; width: 55px">
                                         <?php echo $this->Html->image('estudantes.png',
-                                            ['style' => "vertical-align: middle"]); ?>
+                                                ['style' => "vertical-align: middle"]); ?>
                                     </div>
                                     <div class="_6a _6b product_desc">
                                         <span class="mtl _3ma _6p _6s _6v"> Estudantes </span>
@@ -135,7 +142,7 @@
                                 <div class="mtl pbm">
                                     <div class="_6a _6b mrl" style="text-align: center; width: 55px">
                                         <?php echo $this->Html->image('docentes.png',
-                                            ['style' => "vertical-align: middle"]); ?>
+                                                ['style' => "vertical-align: middle"]); ?>
                                     </div>
                                     <div class="_6a _6b product_desc">
                                         <span class="mtl _3ma _6p _6s _6v"> Docentes </span>
@@ -145,7 +152,7 @@
                                 <div class="mtl pbm">
                                     <div class="_6a _6b mrl" style="text-align: center; width: 55px">
                                         <?php echo $this->Html->image('funcionarios.png',
-                                            ['style' => "vertical-align: middle"]); ?>
+                                                ['style' => "vertical-align: middle"]); ?>
                                     </div>
                                     <div class="_6a _6b product_desc">
                                         <span class="mtl _3ma _6p _6s _6v"> Funcionários </span>
@@ -181,7 +188,8 @@
                                         <h1 class="mbs _3ma _6n _6s _6v" style="font-size: 36px">Dúvidas?</h1>
 
                                         <h2 class="mbl _3m9 _6o _6s _mf">Contacte: siga-uem@googlegroups.com</h2>
-                                        <h2 class="mbl _3m9 _6o _6s _mf">Contacte: https://groups.google.com/forum/#!forum/siga-uem</h2>
+                                        <h2 class="mbl _3m9 _6o _6s _mf">Contacte:
+                                            https://groups.google.com/forum/#!forum/siga-uem</h2>
                                     </div>
                                 </div>
                             </div>
@@ -248,69 +256,81 @@
         <p>
             Por favor introduza seus dados para se autenticar
         </p>
-        <?php echo $this->Form->create('User', ['url' => ['action'=>'login']]); ?>
-            <fieldset>
-                <div class="form-group">
+        <?php echo $this->Form->create('User', ['url' => ['action' => 'login']]); ?>
+        <fieldset>
+            <div class="form-group">
 							<span class="input-icon">
                                 <?php echo $this->Form->input('username', [
-                                    'div'         => false,
-                                    'label'       => false,
-                                    'class'       => 'form-control',
-                                    'placeholder' => 'Nome de Usuario ou Email Institucional'
+                                        'div'         => false,
+                                        'label'       => false,
+                                        'class'       => 'form-control',
+                                        'placeholder' => 'Nome de Usuario ou Email Institucional',
                                 ]) ?>
 
-								<i class="fa fa-user"></i> </span>
-                </div>
-                <div class="form-group form-actions">
+                                <i class="fa fa-user"></i> </span>
+            </div>
+            <div class="form-group form-actions">
 							<span class="input-icon">
                                 <?php echo $this->Form->input('password', [
-                                    'div'         => false,
-                                    'label'       => false,
-                                    'class'       => 'form-control password',
-                                    'placeholder' => 'Senha'
+                                        'div'         => false,
+                                        'label'       => false,
+                                        'class'       => 'form-control password',
+                                        'placeholder' => 'Senha',
                                 ]) ?>
 
-								<i class="fa fa-lock"></i>
+                                <i class="fa fa-lock"></i>
 								<a class="forgot" href="#">
                                     Não Sabe como Aceder? Clique Aqui
                                 </a> </span>
-                </div>
-                <div class="form-actions">
+            </div>
+            <div class="form-actions">
 
-                    <?php echo $this->Form->end([
+                <?php echo $this->Form->end([
                         'label'  => __('Entrar'),
                         'class'  => 'btn btn-bricky pull-right',
-                        'escape' => false
-                    ]) ?>
+                        'escape' => false,
+                ]) ?>
 
-                </div>
+            </div>
 
-                <div class="new-account">
-                    <?php
+            <div class="new-account">
+                <?php
                     $session_message = $this->Session->read('Message');
                     if (isset($session_message) and $session_message != null) {
                         foreach ($session_message as $k => $v) {
                             echo $this->Session->flash($k);
                         }
                     }
-                    ?>
-                </div>
-            </fieldset>
+                ?>
+            </div>
+        </fieldset>
         </form>
     </div>
     <!-- end: LOGIN BOX -->
 
 </div>
 <script type="text/javascript">
-    window.$zopim||(function(d,s){var z=$zopim=function(c){z._.push(c)},$=z.s=
-        d.createElement(s),e=d.getElementsByTagName(s)[0];z.set=function(o){z.set.
-        _.push(o)};z._=[];z.set._=[];$.async=!0;$.setAttribute("charset","utf-8");
-        $.src="//v2.zopim.com/?3WnXWSTZHxq02GapZvrf8igf2fk66CfB";z.t=+new Date;$.
-            type="text/javascript";e.parentNode.insertBefore($,e)})(document,"script");
+    window.$zopim || (function (d, s) {
+        var z = $zopim = function (c) {
+            z._.push(c)
+        }, $ = z.s =
+                d.createElement(s), e = d.getElementsByTagName(s)[0];
+        z.set = function (o) {
+            z.set._.push(o)
+        };
+        z._ = [];
+        z.set._ = [];
+        $.async = !0;
+        $.setAttribute("charset", "utf-8");
+        $.src = "//v2.zopim.com/?3WnXWSTZHxq02GapZvrf8igf2fk66CfB";
+        z.t = +new Date;
+        $.type = "text/javascript";
+        e.parentNode.insertBefore($, e)
+    })(document, "script");
 </script>
 <script>
 
-    $zopim(function() {
+    $zopim(function () {
         $zopim.livechat.setLanguage('pt');
         $zopim.livechat.setGreetings({
             'online': 'Converse Conosco',

@@ -1,93 +1,103 @@
 <?php
-/**
- * OpenSGA - Sistema de Gestão Académica
- *   Copyright (C) 2010-2011  INFOmoz (Informática-Moçambique)
- * 
- * Este programa é um software livre: Você pode redistribuir e/ou modificar
- * todo ou parte deste programa, desde que siga os termos da licença por nele
- * estabelecidos. Grande parte do código deste programa está sob a licença 
- * GNU Affero General Public License publicada pela Free Software Foundation.
- * A versão original desta licença está disponível na pasta raiz deste software.
- * 
- * Este software é distribuido sob a perspectiva de que possa ser útil para 
- * satisfazer as necessidades dos seus utilizadores, mas SEM NENHUMA GARANTIA. Veja
- * os termos da licença GNU Affero General Public License para mais detalhes
- * 
- * As redistribuições deste software, mesmo quando o código-fonte for modificado significativamente,
- * devem manter está informação legal, assim como a licença original do software.
- * 
- * @copyright     Copyright 2010-2011, INFOmoz (Informática-Moçambique) (http://infomoz.net)
- * @link          http://infomoz.net/opensga CakePHP(tm) Project
- * @author		  Elisio Leonardo (http://infomoz.net/elisio-leonardo)
- * @package       opensga
- * @subpackage    opensga.core.controller
- * @since         OpenSGA v 0.10.0.0
- * @license       GNU Affero General Public License
- * 
- */
- 
- 
-class PlanoestudoanosController extends AppController {
 
-	var $name = 'Planoestudoanos';
+	/**
+	 * OpenSGA - Sistema de Gestï¿½o Acadï¿½mica
+	 *   Copyright (C) 2010-2011  INFOmoz (Informï¿½tica-Moï¿½ambique)
+	 *
+	 * Este programa ï¿½ um software livre: Vocï¿½ pode redistribuir e/ou modificar
+	 * todo ou parte deste programa, desde que siga os termos da licenï¿½a por nele
+	 * estabelecidos. Grande parte do cï¿½digo deste programa estï¿½ sob a licenï¿½a
+	 * GNU Affero General Public License publicada pela Free Software Foundation.
+	 * A versï¿½o original desta licenï¿½a estï¿½ disponï¿½vel na pasta raiz deste software.
+	 *
+	 * Este software ï¿½ distribuido sob a perspectiva de que possa ser ï¿½til para
+	 * satisfazer as necessidades dos seus utilizadores, mas SEM NENHUMA GARANTIA. Veja
+	 * os termos da licenï¿½a GNU Affero General Public License para mais detalhes
+	 *
+	 * As redistribuiï¿½ï¿½es deste software, mesmo quando o cï¿½digo-fonte for modificado significativamente,
+	 * devem manter estï¿½ informaï¿½ï¿½o legal, assim como a licenï¿½a original do software.
+	 *
+	 * @copyright     Copyright 2010-2011, INFOmoz (Informï¿½tica-Moï¿½ambique) (http://infomoz.net)
+	 * @link          http://infomoz.net/opensga CakePHP(tm) Project
+	 * @author          Elisio Leonardo (http://infomoz.net/elisio-leonardo)
+	 * @package       opensga
+	 * @subpackage    opensga.core.controller
+	 * @since         OpenSGA v 0.10.0.0
+	 * @license       GNU Affero General Public License
+	 *
+	 */
+	class PlanoestudoanosController extends AppController
+	{
 
-	function index() {
-		$this->DisciplinaPlanoEstudo->recursive = 0;
-		$this->set('planoestudoanos', $this->paginate());
-	}
+		var $name = 'Planoestudoanos';
 
-	function view($id = null) {
-		if (!$id) {
-			$this->Session->setFlash(sprintf(__('Invalid %s', true), 'planoestudoano'));
-			$this->redirect(array('action' => 'index'));
+		function index()
+		{
+			$this->DisciplinaPlanoEstudo->recursive = 0;
+			$this->set('planoestudoanos', $this->paginate());
 		}
-		$this->set('planoestudoano', $this->DisciplinaPlanoEstudo->read(null, $id));
-	}
 
-	function add() {
-		if (!empty($this->data)) {
-			$this->DisciplinaPlanoEstudo->create();
-			if ($this->DisciplinaPlanoEstudo->save($this->data)) {
-				$this->Session->setFlash(sprintf(__('Dado Registado com Sucesso', true), 'planoestudoano'));
-				$this->redirect(array('action' => 'index'));
-			} else {
-				$this->Session->setFlash(sprintf(__('Erro ao gravar dados. Por favor tente de novo.', true), 'planoestudoano'));
+		function view($id = null)
+		{
+			if (!$id) {
+				$this->Session->setFlash(sprintf(__('Invalid %s', true), 'planoestudoano'));
+				$this->redirect(['action' => 'index']);
+			}
+			$this->set('planoestudoano', $this->DisciplinaPlanoEstudo->read(null, $id));
+		}
+
+		function add()
+		{
+			if (!empty($this->data)) {
+				$this->DisciplinaPlanoEstudo->create();
+				if ($this->DisciplinaPlanoEstudo->save($this->data)) {
+					$this->Session->setFlash(sprintf(__('Dado Registado com Sucesso', true), 'planoestudoano'));
+					$this->redirect(['action' => 'index']);
+				} else {
+					$this->Session->setFlash(sprintf(__('Erro ao gravar dados. Por favor tente de novo.', true),
+						'planoestudoano'));
+				}
 			}
 		}
-	}
 
-	function edit($id = null) {
-		if (!$id && empty($this->data)) {
-			$this->Session->setFlash(sprintf(__('Invalid %s', true), 'planoestudoano'));
-			$this->redirect(array('action' => 'index'));
-		}
-		if (!empty($this->data)) {
-			if ($this->DisciplinaPlanoEstudo->save($this->data)) {
-				$this->Session->setFlash(sprintf(__('Dado Registado com Sucesso', true), 'planoestudoano'));
-				$this->redirect(array('action' => 'index'));
-			} else {
-				$this->Session->setFlash(sprintf(__('Erro ao gravar dados. Por favor tente de novo.', true), 'planoestudoano'));
+		function edit($id = null)
+		{
+			if (!$id && empty($this->data)) {
+				$this->Session->setFlash(sprintf(__('Invalid %s', true), 'planoestudoano'));
+				$this->redirect(['action' => 'index']);
+			}
+			if (!empty($this->data)) {
+				if ($this->DisciplinaPlanoEstudo->save($this->data)) {
+					$this->Session->setFlash(sprintf(__('Dado Registado com Sucesso', true), 'planoestudoano'));
+					$this->redirect(['action' => 'index']);
+				} else {
+					$this->Session->setFlash(sprintf(__('Erro ao gravar dados. Por favor tente de novo.', true),
+						'planoestudoano'));
+				}
+			}
+			if (empty($this->data)) {
+				$this->data = $this->DisciplinaPlanoEstudo->read(null, $id);
 			}
 		}
-		if (empty($this->data)) {
-			$this->data = $this->DisciplinaPlanoEstudo->read(null, $id);
+
+		function delete($id = null)
+		{
+			if (!$id) {
+				$this->Session->setFlash(sprintf(__('Invalid id for %s', true), 'planoestudoano'));
+				$this->redirect(['action' => 'index']);
+			}
+			if ($this->DisciplinaPlanoEstudo->delete($id)) {
+				$this->Session->setFlash(sprintf(__('%s deleted', true), 'DisciplinaPlanoEstudo'));
+				$this->redirect(['action' => 'index']);
+			}
+			$this->Session->setFlash(sprintf(__('%s was not deleted', true), 'DisciplinaPlanoEstudo'));
+			$this->redirect(['action' => 'index']);
+		}
+
+		function beforeRender()
+		{
+			$this->set('current_section', 'pedagogica');
 		}
 	}
 
-	function delete($id = null) {
-		if (!$id) {
-			$this->Session->setFlash(sprintf(__('Invalid id for %s', true), 'planoestudoano'));
-			$this->redirect(array('action'=>'index'));
-		}
-		if ($this->DisciplinaPlanoEstudo->delete($id)) {
-			$this->Session->setFlash(sprintf(__('%s deleted', true), 'DisciplinaPlanoEstudo'));
-			$this->redirect(array('action'=>'index'));
-		}
-		$this->Session->setFlash(sprintf(__('%s was not deleted', true), 'DisciplinaPlanoEstudo'));
-		$this->redirect(array('action' => 'index'));
-	}
-        function beforeRender(){
-            $this->set('current_section','pedagogica');
-        }
-}
 ?>

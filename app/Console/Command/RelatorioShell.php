@@ -9,7 +9,6 @@
      * Class RelatorioShell
      * @property Relatorio $Relatorio
      */
-
     class RelatorioShell extends AppShell
     {
 
@@ -34,7 +33,7 @@
                     'g.nhatsave@gmail.com',
                     'linas.mucabel@gmail.com',
                     'daslanga@gmail.com',
-                    'rafaelmachava@gmail.com'
+                    'rafaelmachava@gmail.com',
                 ])
                 ->subject('SIGA- Resumo Diario ->' . date('Y-m-d'))
                 ->send();

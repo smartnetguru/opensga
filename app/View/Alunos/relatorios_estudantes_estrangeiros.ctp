@@ -1,4 +1,4 @@
-<?php debug($alunos);?>
+<?php debug($alunos); ?>
 <div class="row">
     <div class="col-md-6">
         <!-- start: BORDERED TABLE PANEL -->
@@ -13,10 +13,11 @@
                     <tr>
                         <th class="center hidden-xs">
                             <div class="checkbox-table">
-                                NR</th>
+                                NR
+                        </th>
                         <th>Faculdade/Escola</th>
                         <th class="hidden-xs">Curso</th>
-                        <th><i class="fa fa-time"></i> Masculino </th>
+                        <th><i class="fa fa-time"></i> Masculino</th>
                         <th class="hidden-xs">Feminino</th>
                         <th class="hidden-xs">Total</th>
                     </tr>
@@ -28,7 +29,8 @@
                                 <label>
                                     <input type="checkbox" class="flat-grey">
                                 </label>
-                            </div></td>
+                            </div>
+                        </td>
                         <td>
                             <a href="#">
                                 alpha.com
@@ -43,7 +45,8 @@
                                 <label>
                                     <input type="checkbox" class="flat-grey">
                                 </label>
-                            </div></td>
+                            </div>
+                        </td>
                         <td>
                             <a href="#">
                                 beta.com
@@ -58,7 +61,8 @@
                                 <label>
                                     <input type="checkbox" class="flat-grey">
                                 </label>
-                            </div></td>
+                            </div>
+                        </td>
                         <td>
                             <a href="#">
                                 gamma.com
@@ -73,7 +77,8 @@
                                 <label>
                                     <input type="checkbox" class="flat-grey">
                                 </label>
-                            </div></td>
+                            </div>
+                        </td>
                         <td>
                             <a href="#">
                                 delta.com
@@ -88,7 +93,8 @@
                                 <label>
                                     <input type="checkbox" class="flat-grey">
                                 </label>
-                            </div></td>
+                            </div>
+                        </td>
                         <td>
                             <a href="#">
                                 epsilon.com
@@ -103,7 +109,8 @@
                                 <label>
                                     <input type="checkbox" class="flat-grey">
                                 </label>
-                            </div></td>
+                            </div>
+                        </td>
                         <td>
                             <a href="#">
                                 zeta.com
@@ -118,7 +125,8 @@
                                 <label>
                                     <input type="checkbox" class="flat-grey">
                                 </label>
-                            </div></td>
+                            </div>
+                        </td>
                         <td>
                             <a href="#">
                                 eta.com
@@ -133,7 +141,8 @@
                                 <label>
                                     <input type="checkbox" class="flat-grey">
                                 </label>
-                            </div></td>
+                            </div>
+                        </td>
                         <td>
                             <a href="#">
                                 theta.com
@@ -148,7 +157,8 @@
                                 <label>
                                     <input type="checkbox" class="flat-grey">
                                 </label>
-                            </div></td>
+                            </div>
+                        </td>
                         <td>
                             <a href="#">
                                 iota.com
@@ -163,7 +173,8 @@
                                 <label>
                                     <input type="checkbox" class="flat-grey">
                                 </label>
-                            </div></td>
+                            </div>
+                        </td>
                         <td>
                             <a href="#">
                                 kappa.com

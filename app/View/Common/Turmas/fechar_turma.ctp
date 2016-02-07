@@ -80,20 +80,20 @@
                                 <th>
                                     <?php
                                         echo $this->Html->link(
-                                            'Ver Detalhes',
-                                            [
-                                                'controller' => 'inscricaos',
-                                                'action'     => 'ver_detalhes_inscricao',
-                                                $inscricao['Inscricao']['id'],
-                                                '?'          => [
-                                                    'redirect_url' => $this->Html->url([
-                                                        'controller' => 'turmas',
-                                                        'action'     => 'fechar_turma',
-                                                        $turma['Turma']['id']
-                                                    ])
-                                                ]
-                                            ],
-                                            ['class' => 'btn btn-info']
+                                                'Ver Detalhes',
+                                                [
+                                                        'controller' => 'inscricaos',
+                                                        'action'     => 'ver_detalhes_inscricao',
+                                                        $inscricao['Inscricao']['id'],
+                                                        '?'          => [
+                                                                'redirect_url' => $this->Html->url([
+                                                                        'controller' => 'turmas',
+                                                                        'action'     => 'fechar_turma',
+                                                                        $turma['Turma']['id'],
+                                                                ]),
+                                                        ],
+                                                ],
+                                                ['class' => 'btn btn-info']
                                         );
                                     ?>
                                 </th>
@@ -141,24 +141,24 @@
                     <div class="pull-right">
                         <?php
                             echo $this->Html->link(
-                                'Voltar a Turma',
-                                ['controller' => 'turmas', 'action' => 'ver_turma', $turma['Turma']['id']],
-                                ['class' => 'btn btn-info']);
+                                    'Voltar a Turma',
+                                    ['controller' => 'turmas', 'action' => 'ver_turma', $turma['Turma']['id']],
+                                    ['class' => 'btn btn-info']);
                             echo $this->Html->link(
-                                'Inscrever Aluno',
-                                [
-                                    'controller' => 'turmas',
-                                    'action'     => 'get_aluno_for_inscricao',
-                                    $turma['Turma']['id'],
-                                    '?'          => [
-                                        'redirect_url' => $this->Html->url([
+                                    'Inscrever Aluno',
+                                    [
                                             'controller' => 'turmas',
-                                            'action'     => 'fechar_turma',
-                                            $turma['Turma']['id']
-                                        ])
-                                    ]
-                                ],
-                                ['class' => 'btn btn-info']);
+                                            'action'     => 'get_aluno_for_inscricao',
+                                            $turma['Turma']['id'],
+                                            '?'          => [
+                                                    'redirect_url' => $this->Html->url([
+                                                            'controller' => 'turmas',
+                                                            'action'     => 'fechar_turma',
+                                                            $turma['Turma']['id'],
+                                                    ]),
+                                            ],
+                                    ],
+                                    ['class' => 'btn btn-info']);
 
                             $anoLectivoId = Configure::read('OpenSGA.ano_lectivo_id');
                             $semestreLectivoId = Configure::read('OpenSGA.semestre_lectivo_id');
@@ -167,25 +167,25 @@
 
                             } else {
                                 echo $this->Html->link('Actualizar Notas',
-                                    [
-                                        'controller' => 'turmas',
-                                        'action'     => 'actualizar_notas',
-                                        $turma['Turma']['id'],
-                                        '?'          => [
-                                            'redirect_url' => $this->Html->url([
+                                        [
                                                 'controller' => 'turmas',
-                                                'action'     => 'fechar_turma',
-                                                $turma['Turma']['id']
-                                            ])
-                                        ]
-                                    ],
-                                    ['class' => 'btn btn-primary']);
+                                                'action'     => 'actualizar_notas',
+                                                $turma['Turma']['id'],
+                                                '?'          => [
+                                                        'redirect_url' => $this->Html->url([
+                                                                'controller' => 'turmas',
+                                                                'action'     => 'fechar_turma',
+                                                                $turma['Turma']['id'],
+                                                        ]),
+                                                ],
+                                        ],
+                                        ['class' => 'btn btn-primary']);
                             }
 
                             if ($podeSerFechada === true) {
                                 echo $this->Form->postLink('Fechar Turma',
-                                    ['controller' => 'turmas', 'action' => 'fechar_turma', $turma['Turma']['id']],
-                                    ['class' => 'btn btn-success']);
+                                        ['controller' => 'turmas', 'action' => 'fechar_turma', $turma['Turma']['id']],
+                                        ['class' => 'btn btn-success']);
                             } else {
 
                                 echo '<div class="col-sm-3">Essa Turma ainda não pode ser fechada pois possui ' . $podeSerFechada['Avaliacoes'] . ' Avaliacoes por realizar e ' . $podeSerFechada['Inscricoes'] . ' Inscricoes por fechar. Use a Funcao actualizar notas para fechar as inscricoes</div>';

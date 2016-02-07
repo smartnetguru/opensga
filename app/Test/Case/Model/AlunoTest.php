@@ -492,7 +492,6 @@
         }
 
 
-
         /**
          * testMatriculaNovoIngresso method
          *
@@ -549,7 +548,7 @@
                 'EntidadeIdentificacao' => [
                     'documento_identificacao_id' => '1',
                     'numero'                     => '5435454',
-                    'data_emissao' => '2016-01-12',
+                    'data_emissao'               => '2016-01-12',
 
 
                 ],

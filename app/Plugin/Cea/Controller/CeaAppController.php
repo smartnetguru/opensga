@@ -1,7 +1,8 @@
 <?php
 
-App::uses('AppController', 'Controller');
+    App::uses('AppController', 'Controller');
 
-class CeaAppController extends AppController {
+    class CeaAppController extends AppController
+    {
 
-}
+    }

@@ -8,27 +8,39 @@
 ?>
 <?php $this->extend('/Common/form_basic'); ?>
 
-<?php $this->assign('form-title','Definir Encarregado')?>
+<?php $this->assign('form-title', 'Definir Encarregado') ?>
 
 <?php $this->start('form-elements') ?>
-<?php echo $this->Form->create('CursoResponsavel', array('role' => 'form', 'enctype' => 'multipart/form-data',
-                                                    'class' => '',
-                                          'inputDefaults' => array())); ?>
+<?php echo $this->Form->create('CursoResponsavel', [
+        'role'          => 'form',
+        'enctype'       => 'multipart/form-data',
+        'class'         => '',
+        'inputDefaults' => [],
+]); ?>
 <div class="form-group">
     <label>
         <?php echo __('Encarregado do Curso') ?>
     </label>
-    <?php echo $this->Form->input('user_id', array('label' => false, 'div' => false,
-                                                       'class' => 'form-control search-select',
-                                                       'options'=>$encarregados)); ?>
+    <?php echo $this->Form->input('user_id', [
+            'label'   => false,
+            'div'     => false,
+            'class'   => 'form-control search-select',
+            'options' => $encarregados,
+    ]); ?>
 </div>
 <div class="form-group">
     <label>
         <?php echo __('Data de Início') ?>
     </label>
     <div>
-        <?php echo $this->Form->input('data_inicio', array('label' => false, 'div' => false,
-                                                 'class' => 'form-control date-picker', 'type' => 'text', 'data-date-viewmode' => 'years', 'data-date-format' => 'yyyy-mm-dd')); ?>
+        <?php echo $this->Form->input('data_inicio', [
+                'label'              => false,
+                'div'                => false,
+                'class'              => 'form-control date-picker',
+                'type'               => 'text',
+                'data-date-viewmode' => 'years',
+                'data-date-format'   => 'yyyy-mm-dd',
+        ]); ?>
     </div>
 </div>
 <div class="form-group">
@@ -36,17 +48,23 @@
         <?php echo __('Data de Fim(Opcional)') ?>
     </label>
     <div>
-        <?php echo $this->Form->input('data_fim',array('label' => false, 'div' => false,
-                                                'class' => 'form-control date-picker', 'type' => 'text', 'data-date-viewmode' => 'years', 'data-date-format' => 'yyyy-mm-dd')); ?>
+        <?php echo $this->Form->input('data_fim', [
+                'label'              => false,
+                'div'                => false,
+                'class'              => 'form-control date-picker',
+                'type'               => 'text',
+                'data-date-viewmode' => 'years',
+                'data-date-format'   => 'yyyy-mm-dd',
+        ]); ?>
     </div>
 </div>
 <div class="form-group">
     <div class="col-sm-4 col-sm-offset-8">
-        <?php echo $this->Form->hidden('curso_id', array('value' => $curso['Curso']['id'])); ?>
-        <?php echo $this->Form->hidden('estado_objecto_id', array('value' => 1)); ?>
+        <?php echo $this->Form->hidden('curso_id', ['value' => $curso['Curso']['id']]); ?>
+        <?php echo $this->Form->hidden('estado_objecto_id', ['value' => 1]); ?>
         <?php
 
-                echo $this->Form->end(array('label' => __('GRAVAR', true), 'class' => 'btn btn-blue btn-block'));
+            echo $this->Form->end(['label' => __('GRAVAR', true), 'class' => 'btn btn-blue btn-block']);
 
         ?>
 
@@ -58,7 +76,7 @@
     $this->end();
 
 ?>
-<?php $this->start('right-panel')?>
+<?php $this->start('right-panel') ?>
 <div class="col-sm-6">
     <!-- start: SELECT BOX PANEL -->
     <div class="panel panel-default">
@@ -86,7 +104,7 @@
             <tbody>
             <tr>
                 <td>Nome do Curso</td>
-                <td><?= $curso['Curso']['name']?></td>
+                <td><?= $curso['Curso']['name'] ?></td>
             </tr>
             </tbody>
         </table>
@@ -94,4 +112,4 @@
     </div>
     <!-- end: SELECT BOX PANEL -->
 </div>
-<?php $this->end();?>
+<?php $this->end(); ?>

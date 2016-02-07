@@ -1,14 +1,16 @@
 <?php
 
-App::uses('AppController', 'Controller');
+    App::uses('AppController', 'Controller');
 
-class ApiAppController extends AppController {
-    
-    public function beforeFilter() {
-        parent::beforeFilter();
-        $this->Auth->allow();
+    class ApiAppController extends AppController
+    {
 
+        public function beforeFilter()
+        {
+            parent::beforeFilter();
+            $this->Auth->allow();
+
+
+        }
 
     }
-
-}

@@ -1,39 +1,41 @@
 <?php
-/**
- * GrauAcademicoFixture
- *
- */
-class GrauAcademicoFixture extends CakeTestFixture {
 
-/**
- * Import
- *
- * @var array
- */
-	public $import = array('model' => 'GrauAcademico');
+	/**
+	 * GrauAcademicoFixture
+	 *
+	 */
+	class GrauAcademicoFixture extends CakeTestFixture
+	{
 
-/**
- * Records
- *
- * @var array
- */
-	public $records = array(
-		array(
-			'id' => '1',
-			'name' => 'Bacharelato'
-		),
-		array(
-			'id' => '2',
-			'name' => 'Licenciatura'
-		),
-		array(
-			'id' => '3',
-			'name' => 'Mestrado'
-		),
-		array(
-			'id' => '4',
-			'name' => 'Doutoramento'
-		),
-	);
+		/**
+		 * Import
+		 *
+		 * @var array
+		 */
+		public $import = ['model' => 'GrauAcademico'];
 
-}
+		/**
+		 * Records
+		 *
+		 * @var array
+		 */
+		public $records = [
+			[
+				'id'   => '1',
+				'name' => 'Bacharelato',
+			],
+			[
+				'id'   => '2',
+				'name' => 'Licenciatura',
+			],
+			[
+				'id'   => '3',
+				'name' => 'Mestrado',
+			],
+			[
+				'id'   => '4',
+				'name' => 'Doutoramento',
+			],
+		];
+
+	}

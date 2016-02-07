@@ -25,8 +25,8 @@
                 'foreignKey' => 'entidade_id',
                 'conditions' => '',
                 'fields'     => '',
-                'order'      => ''
-            ]
+                'order'      => '',
+            ],
         ];
 
 
@@ -47,7 +47,7 @@
                 'offset'       => '',
                 'exclusive'    => '',
                 'finderQuery'  => '',
-                'counterQuery' => ''
+                'counterQuery' => '',
             ],
             'FinanceiroPagamento' => [
                 'className'    => 'FinanceiroPagamento',
@@ -60,8 +60,8 @@
                 'offset'       => '',
                 'exclusive'    => '',
                 'finderQuery'  => '',
-                'counterQuery' => ''
-            ]
+                'counterQuery' => '',
+            ],
         ];
 
 
@@ -69,13 +69,13 @@
             'entidade_id' => [
                 'notEmpty' => [
                     'rule'    => 'notEmpty',
-                    'message' => 'Este campo nao pode ficar vazio'
+                    'message' => 'Este campo nao pode ficar vazio',
                 ],
                 'unique'   => [
                     'rule'    => 'isUnique',
-                    'message' => 'Uma entidade só pode ter uma conta'
-                ]
-            ]
+                    'message' => 'Uma entidade só pode ter uma conta',
+                ],
+            ],
         ];
 
 

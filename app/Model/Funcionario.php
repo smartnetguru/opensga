@@ -22,55 +22,55 @@
                 'foreignKey' => 'entidade_id',
                 'conditions' => '',
                 'fields'     => '',
-                'order'      => ''
+                'order'      => '',
             ],
             'User'                 => [
                 'className'  => 'User',
                 'foreignKey' => 'user_id',
                 'conditions' => '',
                 'fields'     => '',
-                'order'      => ''
+                'order'      => '',
             ],
             'GrauAcademico'        => [
                 'className'  => 'GrauAcademico',
                 'foreignKey' => 'grau_academico_id',
                 'conditions' => '',
                 'fields'     => '',
-                'order'      => ''
+                'order'      => '',
             ],
             'TipoFuncionario'      => [
                 'className'  => 'TipoFuncionario',
                 'foreignKey' => 'tipo_funcionario_id',
                 'conditions' => '',
                 'fields'     => '',
-                'order'      => ''
+                'order'      => '',
             ],
             'UnidadeOrganica'      => [
                 'className'  => 'UnidadeOrganica',
                 'foreignKey' => 'unidade_organica_id',
                 'conditions' => '',
                 'fields'     => '',
-                'order'      => ''
+                'order'      => '',
             ],
             'SuperiorHieraquico'   => [
                 'className'  => 'Funcionario',
                 'foreignKey' => 'superior_hierarquico',
                 'conditions' => '',
                 'fields'     => '',
-                'order'      => ''
+                'order'      => '',
             ],
             'FuncionarioCategoria' => [
                 'className'  => 'FuncionarioCategoria',
                 'foreignKey' => 'funcionario_categoria_id',
                 'conditions' => '',
                 'fields'     => '',
-                'order'      => ''
+                'order'      => '',
             ],
 
 
         ];
         public $hasOne = [
-            'Docente'
+            'Docente',
         ];
         var $hasMany = [
             'FuncionarioUnidadeOrganica' => [
@@ -84,7 +84,7 @@
                 'offset'       => '',
                 'exclusive'    => '',
                 'finderQuery'  => '',
-                'counterQuery' => ''
+                'counterQuery' => '',
             ],
         ];
 
@@ -92,13 +92,13 @@
             'entidade_id'         => [
                 'entidadeIdNotBlank' => [
                     'rule'    => 'notBlank',
-                    'message' => 'Entidade em branco?'
+                    'message' => 'Entidade em branco?',
                 ],
             ],
             'unidade_organica_id' => [
                 'unidadeOrganicaNotBlank' => [
                     'rule'    => 'notBlank',
-                    'message' => 'Deve-se Indicar a que unidadeOrganica este funcionario pertence'
+                    'message' => 'Deve-se Indicar a que unidadeOrganica este funcionario pertence',
                 ],
             ],
         ];
@@ -117,7 +117,7 @@
                         'data_inicio'         => date('Y-m-d'),
                         'estado_objecto_id'   => 1,
 
-                    ]
+                    ],
                 ];
                 $this->FuncionarioUnidadeOrganica->create();
                 if ($this->FuncionarioUnidadeOrganica->save($arrayFuncionarioUnidade)) {
@@ -127,7 +127,7 @@
                         //'Type'=>'cake',
                         'Command' => 'Funcionario',
                         'Action'  => 'processaAlteraUnidadeOrganica',
-                        'turmaId' => $this->id
+                        'turmaId' => $this->id,
                     ];
                     CakeRabbit::publish($message);
 
@@ -188,7 +188,7 @@
                             //'Type'=>'cake',
                             'Command' => 'Funcionario',
                             'Action'  => 'processaCadastroFuncionario',
-                            'turmaId' => $this->id
+                            'turmaId' => $this->id,
                         ];
                         CakeRabbit::publish($message);
 
@@ -218,13 +218,13 @@
             $this->contain(['UnidadeOrganica', 'Entidade' => ['User'], 'User']);
             $funcionarios = $this->find('list', [
                 'conditions' => [
-                    'UnidadeOrganica.codigo' => ['DRA', 'DRA_DR', 'DRA_DI']
+                    'UnidadeOrganica.codigo' => ['DRA', 'DRA_DR', 'DRA_DI'],
                 ],
                 'fields'     => [
                     'User.id',
-                    'Entidade.name'
+                    'Entidade.name',
                 ],
-                'order'      => ['Entidade.name']
+                'order'      => ['Entidade.name'],
             ]);
 
             return $funcionarios;
@@ -243,10 +243,10 @@
             $this->contain([
                 'Entidade' => [
                     'Genero',
-                    'User'
+                    'User',
                 ],
                 'UnidadeOrganica',
-                'FuncionarioCategoria'
+                'FuncionarioCategoria',
             ]);
 
             return $this->findById($funcionarioId);
@@ -261,11 +261,11 @@
                     'User',
                     'CidadeNascimento' => [
                         'Provincia' => [
-                            'Pais'
-                        ]
-                    ]
+                            'Pais',
+                        ],
+                    ],
                 ],
-                'UnidadeOrganica'
+                'UnidadeOrganica',
             ]);
 
             return $this->findById($funcionarioId);

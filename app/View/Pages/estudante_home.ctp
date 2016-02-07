@@ -14,11 +14,11 @@
                 <i class="fa fa-times-circle"></i>
                 Possui <strong><?= count($matriculasPendentes); ?></strong> Matriculas Por Renovar.<br/>
                 <?= $this->Html->link('Saiba como Proceder', [
-                    'controller' => 'matriculas',
-                    'action'     => 'renovar_matricula'
+                        'controller' => 'matriculas',
+                        'action'     => 'renovar_matricula',
                 ]) ?>
             </div>
-        <?php
+            <?php
         }
     ?>
 </div>
@@ -26,51 +26,54 @@
     <div class="action-list">
         <div class="col-sm-2">
             <?php echo $this->Html->link('<i class="fa fa-user fa-2x"></i>	Meu Perfil',
-                ['controller' => 'alunos', 'action' => 'perfil', 'estudante' => true],
-                ['escape' => false, 'class' => 'btn btn-icon btn-block']) ?>
+                    ['controller' => 'alunos', 'action' => 'perfil', 'estudante' => true],
+                    ['escape' => false, 'class' => 'btn btn-icon btn-block']) ?>
 
         </div>
         <div class="col-sm-2">
             <?php echo $this->Html->link(
-                '<i class="fa fa-user fa-2x"></i>Matriculas',
-                ['controller'=>'matriculas','action'=>'index'], ['escape' => false, 'class' => 'btn btn-icon btn-block']) ?>
+                    '<i class="fa fa-user fa-2x"></i>Matriculas',
+                    ['controller' => 'matriculas', 'action' => 'index'],
+                    ['escape' => false, 'class' => 'btn btn-icon btn-block']) ?>
 
         </div>
 
         <div class="col-sm-2">
             <?php echo $this->Html->link('<i class="fa fa-user fa-2x"></i>	Inscricoes',
-                ['controller'=>'inscricaos','action'=>'ver_inscricoes_aluno'], ['escape' => false, 'class' => 'btn btn-icon btn-block']) ?>
+                    ['controller' => 'inscricaos', 'action' => 'ver_inscricoes_aluno'],
+                    ['escape' => false, 'class' => 'btn btn-icon btn-block']) ?>
 
         </div>
         <div class="col-sm-1">
             <?php echo $this->Html->link('<i class="fa fa-user fa-2x"></i>	Turmas<span class="badge badge-danger"> Brevemente </span>',
-                '#', ['escape' => false, 'class' => 'btn btn-icon btn-block']) ?>
+                    '#', ['escape' => false, 'class' => 'btn btn-icon btn-block']) ?>
 
         </div>
         <div class="col-sm-1">
             <?php echo $this->Html->link('<i class="fa fa-user fa-2x"></i>	Avaliacoes<span class="badge badge-danger"> Brevemente </span>',
-                '#', ['escape' => false, 'class' => 'btn btn-icon btn-block']) ?>
+                    '#', ['escape' => false, 'class' => 'btn btn-icon btn-block']) ?>
 
         </div>
         <div class="col-sm-1">
             <?php echo $this->Html->link('<i class="fa fa-user fa-2x"></i>	Docentes<span class="badge badge-danger"> Brevemente </span>',
-                '#', ['escape' => false, 'class' => 'btn btn-icon btn-block']) ?>
+                    '#', ['escape' => false, 'class' => 'btn btn-icon btn-block']) ?>
 
         </div>
         <div class="col-sm-1">
             <?php echo $this->Html->link('<i class="fa fa-user fa-2x"></i>	Pagamentos<span class="badge badge-danger"> Brevemente </span>',
-                '#', ['escape' => false, 'class' => 'btn btn-icon btn-block']) ?>
+                    '#', ['escape' => false, 'class' => 'btn btn-icon btn-block']) ?>
 
         </div>
         <div class="col-sm-2">
             <?php echo $this->Html->link(
-                '<i class="fa fa-user fa-2x"></i>Cerimonia de Graduacao',
-                ['controller'=>'cerimonia_graduacaos','action'=>'index'], ['escape' => false, 'class' => 'btn btn-icon btn-block']) ?>
+                    '<i class="fa fa-user fa-2x"></i>Cerimonia de Graduacao',
+                    ['controller' => 'cerimonia_graduacaos', 'action' => 'index'],
+                    ['escape' => false, 'class' => 'btn btn-icon btn-block']) ?>
 
         </div>
         <div class="col-sm-1">
             <?php echo $this->Html->link('<i class="fa fa-user fa-2x"></i>	Relatorios<span class="badge badge-danger"> Brevemente </span>',
-                '#', ['escape' => false, 'class' => 'btn btn-icon btn-block']) ?>
+                    '#', ['escape' => false, 'class' => 'btn btn-icon btn-block']) ?>
 
         </div>
         <?php
@@ -80,10 +83,10 @@
 
             $permissions = ['email', 'public_profile', 'user_location', 'user_birthday']; // Optional permissions
             $loginUrl = $helper->getLoginUrl($this->Html->url([
-                'controller' => 'users',
-                'action'     => 'after_fb_login',
-                'estudante'  => true,
-                'full_base'  => true
+                    'controller' => 'users',
+                    'action'     => 'after_fb_login',
+                    'estudante'  => true,
+                    'full_base'  => true,
             ]), $permissions);
 
 
@@ -183,5 +186,5 @@
                 </script>
             </div>
         </div>
-</div>
+    </div>
 

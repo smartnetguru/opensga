@@ -1,61 +1,61 @@
 <?php
-$this->Html->addCrumb('OpenSGA', '/');
-$this->Html->addCrumb('Página Inicial', '/');
+    $this->Html->addCrumb('OpenSGA', '/');
+    $this->Html->addCrumb('Página Inicial', '/');
 ?>
 <div class='row'>
     <div class="action-list">
         <div class="col-sm-2">
             <?php echo $this->Html->link('<i class="fa fa-group fa-2x"></i>	Estudantes',
-                ['controller' => 'alunos', 'action' => 'index'],
-                ['escape' => false, 'class' => 'btn btn-icon btn-block']) ?>
+                    ['controller' => 'alunos', 'action' => 'index'],
+                    ['escape' => false, 'class' => 'btn btn-icon btn-block']) ?>
         </div>
         <div class="col-sm-2">
             <?php echo $this->Html->link('<i class="fa fa-group fa-2x"></i>	Candidatos',
-                ['controller' => 'candidaturas', 'action' => 'index'], [
-                    'escape' => false,
-                    'class'  => 'btn btn-icon btn-block'
-                ]) ?>
+                    ['controller' => 'candidaturas', 'action' => 'index'], [
+                            'escape' => false,
+                            'class'  => 'btn btn-icon btn-block',
+                    ]) ?>
         </div>
         <div class="col-sm-2">
             <?php echo $this->Html->link('<i class="fa fa-pencil fa-2x"></i>	Matriculas',
-                ['controller' => 'matriculas', 'action' => 'index'],
-                ['escape' => false, 'class' => 'btn btn-icon btn-block']) ?>
+                    ['controller' => 'matriculas', 'action' => 'index'],
+                    ['escape' => false, 'class' => 'btn btn-icon btn-block']) ?>
 
         </div>
         <div class="col-sm-2">
             <?php echo $this->Html->link('<i class="fa fa-pencil fa-2x"></i>	Bolsas de Estudos',
-                ['controller' => 'alunos', 'action' => 'pesquisar_candidato'],
-                ['escape' => false, 'class' => 'btn btn-icon btn-block']) ?>
+                    ['controller' => 'alunos', 'action' => 'pesquisar_candidato'],
+                    ['escape' => false, 'class' => 'btn btn-icon btn-block']) ?>
 
         </div>
         <div class="col-sm-2">
             <?php echo $this->Html->link('<i class="fa fa-gift  fa-2x"></i>Cerimonias de Graduacao',
-                ['controller' => 'cerimonia_graduacaos', 'action' => 'index'],
-                ['escape' => false, 'class' => 'btn btn-icon btn-block']) ?>
+                    ['controller' => 'cerimonia_graduacaos', 'action' => 'index'],
+                    ['escape' => false, 'class' => 'btn btn-icon btn-block']) ?>
         </div>
         <div class="col-sm-2">
             <?php echo $this->Html->link('<i class="fa fa-gift  fa-2x"></i>Cartoes de Estudantes',
-                ['controller' => 'requisicoes_pedidos', 'action' => 'cartao_estudantes', 'plugin' => 'requisicoes'],
-                ['escape' => false, 'class' => 'btn btn-icon btn-block']) ?>
+                    ['controller' => 'requisicoes_pedidos', 'action' => 'cartao_estudantes', 'plugin' => 'requisicoes'],
+                    ['escape' => false, 'class' => 'btn btn-icon btn-block']) ?>
         </div>
         <div class="col-sm-2">
             <?php echo $this->Html->link('<i class="fa fa-gift  fa-2x"></i>Requisicoes',
-                ['controller' => 'requisicoes_pedidos', 'action' => 'index', 'plugin' => 'requisicoes'],
-                ['escape' => false, 'class' => 'btn btn-icon btn-block']) ?>
+                    ['controller' => 'requisicoes_pedidos', 'action' => 'index', 'plugin' => 'requisicoes'],
+                    ['escape' => false, 'class' => 'btn btn-icon btn-block']) ?>
         </div>
         <div class="col-sm-2">
             <?php echo $this->Html->link('<i class="fa fa-group fa-2x"></i>	Alumnis',
-                ['controller' => 'alumni_candidato_alumnis', 'action' => 'index'], [
-                    'escape' => false,
-                    'class'  => 'btn btn-icon btn-block'
-                ]) ?>
+                    ['controller' => 'alumni_candidato_alumnis', 'action' => 'index'], [
+                            'escape' => false,
+                            'class'  => 'btn btn-icon btn-block',
+                    ]) ?>
         </div>
         <div class="col-sm-2">
             <?php echo $this->Html->link('<i class="fa fa-asterisk fa-2x"></i>	Configurações',
-                ['controller' => 'configs', 'action' => 'index'], [
-                    'escape' => false,
-                    'class'  => 'btn btn-icon btn-block'
-                ]) ?>
+                    ['controller' => 'configs', 'action' => 'index'], [
+                            'escape' => false,
+                            'class'  => 'btn btn-icon btn-block',
+                    ]) ?>
         </div>
     </div>
 </div>
@@ -99,7 +99,7 @@ $this->Html->addCrumb('Página Inicial', '/');
                                 <td><?php echo $user['User']['username']; ?>&nbsp;</td>
                                 <td><?php echo $user['Group']['name']; ?>&nbsp;</td>
                                 <td><?php echo $this->Time->format('d/m H:i', $user['User']['ultimo_login'],
-                                        date_default_timezone_get()); ?>&nbsp;</td>
+                                            date_default_timezone_get()); ?>&nbsp;</td>
 
 
                             </tr>
@@ -156,11 +156,11 @@ $this->Html->addCrumb('Página Inicial', '/');
                         <a href="javascript:void(0);"><span><?php echo $facturas_pagas ?></span><?php echo __('Facturas Pagas Este mes') ?>
                         </a></li>
                     <li><a href="javascript:void(0);"><span
-                                style="width: 200px"><?php echo $this->Number->currency($valor_arrecadado[0][0]['valor'],
-                                    'MZN') ?></span><?php echo __('Arrecadados') ?> </a></li>
+                                    style="width: 200px"><?php echo $this->Number->currency($valor_arrecadado[0][0]['valor'],
+                                        'MZN') ?></span><?php echo __('Arrecadados') ?> </a></li>
                     <li><a href="javascript:void(0);"><span
-                                style="width: 200px"><?php echo $this->Number->currency($valor_divida,
-                                    'MZN') ?></span><?php echo __('Em divida') ?> </a></li>
+                                    style="width: 200px"><?php echo $this->Number->currency($valor_divida,
+                                        'MZN') ?></span><?php echo __('Em divida') ?> </a></li>
                 </ul>
             </div>
         </div>

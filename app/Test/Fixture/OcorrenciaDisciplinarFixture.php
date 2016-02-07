@@ -1,23 +1,25 @@
 <?php
-/**
- * OcorrenciaDisciplinarFixture
- *
- */
-class OcorrenciaDisciplinarFixture extends CakeTestFixture {
 
-/**
- * Import
- *
- * @var array
- */
-	public $import = array('table' => 'ocorrencia_disciplinars');
+	/**
+	 * OcorrenciaDisciplinarFixture
+	 *
+	 */
+	class OcorrenciaDisciplinarFixture extends CakeTestFixture
+	{
 
-/**
- * Records
- *
- * @var array
- */
-	public $records = array(
-	);
+		/**
+		 * Import
+		 *
+		 * @var array
+		 */
+		public $import = ['table' => 'ocorrencia_disciplinars'];
 
-}
+		/**
+		 * Records
+		 *
+		 * @var array
+		 */
+		public $records = [
+		];
+
+	}

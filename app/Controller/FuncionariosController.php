@@ -59,7 +59,7 @@
             $this->Funcionario->contain('Entidade');
             $funcionarios = $this->Funcionario->find('all', [
                 'conditions' => ['Entidade.name LIKE' => "%" . $this->request->query['term'] . "%"],
-                'fields'     => ['CONCAT(Funcionario.codigo,"-",Entidade.name) as nome']
+                'fields'     => ['CONCAT(Funcionario.codigo,"-",Entidade.name) as nome'],
             ]);
 
             $funcionarios2 = [];
@@ -122,8 +122,8 @@
                     if (empty($funcao_existe)) {
                         $array_nova_funcao = [
                             'FuncaoProfissional' => [
-                                'name' => $this->request->data['FuncionariosFuncaoProfissional']['nova_funcao_funcionario']
-                            ]
+                                'name' => $this->request->data['FuncionariosFuncaoProfissional']['nova_funcao_funcionario'],
+                            ],
                         ];
                         $this->Funcionario->FuncionariosFuncaoProfissional->FuncaoProfissional->create();
                         $this->Funcionario->FuncionariosFuncaoProfissional->FuncaoProfissional->save($array_nova_funcao);
@@ -143,7 +143,7 @@
                     ['class' => "alert success"]);
                 $this->redirect([
                     'action' => "perfil_funcionario",
-                    $this->request->data['FuncionariosFuncaoProfissional']['funcionario_id']
+                    $this->request->data['FuncionariosFuncaoProfissional']['funcionario_id'],
                 ]);
             }
 
@@ -222,10 +222,10 @@
                 'contain'    => [
                     'Entidade' => [
                         'User' => [
-                            'Group'
-                        ]
+                            'Group',
+                        ],
                     ],
-                    'UnidadeOrganica'
+                    'UnidadeOrganica',
                 ],
             ];
 
@@ -243,28 +243,28 @@
             }
 
 
-
             $funcionario = $this->Funcionario->getFuncionarioForPerfil($funcionarioId);
 
 
             $this->set(compact('funcionario'));
         }
 
-        public function alterar_unidade_organica($funcionarioId){
+        public function alterar_unidade_organica($funcionarioId)
+        {
 
 
-            if($this->request->is('post')){
-                if($this->Funcionario->alteraUnidadeOrganica($this->request->data)===true){
+            if ($this->request->is('post')) {
+                if ($this->Funcionario->alteraUnidadeOrganica($this->request->data) === true) {
                     $this->Flash->success('Unidade Organica Alterada com Sucesso. As permissoes do Funcionario serao actualizadas');
-                    $this->redirect(['action'=>'perfil_funcionario',$funcionarioId]);
-                } else{
+                    $this->redirect(['action' => 'perfil_funcionario', $funcionarioId]);
+                } else {
                     $this->Flash->error('Problemas ao Alterar Unidade Organica. Tente Novamente');
                 }
             }
             $funcionario = $this->Funcionario->getFuncionarioForAction($funcionarioId);
             $unidadeOrganicas = $this->Funcionario->UnidadeOrganica->find('list');
 
-            $this->set(compact('funcionario','unidadeOrganicas'));
+            $this->set(compact('funcionario', 'unidadeOrganicas'));
         }
 
     }

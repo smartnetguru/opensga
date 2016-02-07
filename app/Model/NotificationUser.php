@@ -1,60 +1,62 @@
 <?php
-App::uses('AppModel', 'Model');
-/**
- * NotificationUser Model
- *
- * @property User $User
- * @property Notification $Notification
- * @property EstadoMessage $EstadoMessage
- */
-class NotificationUser extends AppModel {
+	App::uses('AppModel', 'Model');
 
-/**
- * Validation rules
- *
- * @var array
- */
-	public $validate = array(
-		'user_id' => array(
-			'numeric' => array(
-				'rule' => array('numeric'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
-		),
-	);
+	/**
+	 * NotificationUser Model
+	 *
+	 * @property User $User
+	 * @property Notification $Notification
+	 * @property EstadoMessage $EstadoMessage
+	 */
+	class NotificationUser extends AppModel
+	{
 
-	// The Associations below have been created with all possible keys, those that are not needed can be removed
+		/**
+		 * Validation rules
+		 *
+		 * @var array
+		 */
+		public $validate = [
+			'user_id' => [
+				'numeric' => [
+					'rule' => ['numeric'],
+					//'message' => 'Your custom message here',
+					//'allowEmpty' => false,
+					//'required' => false,
+					//'last' => false, // Stop validation after this rule
+					//'on' => 'create', // Limit validation to 'create' or 'update' operations
+				],
+			],
+		];
 
-/**
- * belongsTo associations
- *
- * @var array
- */
-	public $belongsTo = array(
-		'User' => array(
-			'className' => 'User',
-			'foreignKey' => 'user_id',
-			'conditions' => '',
-			'fields' => '',
-			'order' => ''
-		),
-		'Notification' => array(
-			'className' => 'Notification',
-			'foreignKey' => 'notification_id',
-			'conditions' => '',
-			'fields' => '',
-			'order' => ''
-		),
-		'EstadoMessage' => array(
-			'className' => 'EstadoMessage',
-			'foreignKey' => 'estado_message_id',
-			'conditions' => '',
-			'fields' => '',
-			'order' => ''
-		)
-	);
-}
+		// The Associations below have been created with all possible keys, those that are not needed can be removed
+
+		/**
+		 * belongsTo associations
+		 *
+		 * @var array
+		 */
+		public $belongsTo = [
+			'User'          => [
+				'className'  => 'User',
+				'foreignKey' => 'user_id',
+				'conditions' => '',
+				'fields'     => '',
+				'order'      => '',
+			],
+			'Notification'  => [
+				'className'  => 'Notification',
+				'foreignKey' => 'notification_id',
+				'conditions' => '',
+				'fields'     => '',
+				'order'      => '',
+			],
+			'EstadoMessage' => [
+				'className'  => 'EstadoMessage',
+				'foreignKey' => 'estado_message_id',
+				'conditions' => '',
+				'fields'     => '',
+				'order'      => '',
+			],
+		];
+	}

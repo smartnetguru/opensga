@@ -8,42 +8,47 @@
     <div class="action-list">
         <div class="col-sm-1">
             <?php echo $this->Html->link('<i class="fa fa-user fa-2x"></i>Novo Docente',
-                ['controller' => 'docentes', 'action' => 'adicionar_docente'],
-                ['escape' => false, 'class' => 'btn btn-icon btn-block']) ?>
+                    ['controller' => 'docentes', 'action' => 'adicionar_docente'],
+                    ['escape' => false, 'class' => 'btn btn-icon btn-block']) ?>
         </div>
     </div>
 <?php $this->end() ?>
 <?php $this->assign('table-title', __('Docentes Cadastrados')) ?>
 <?php $this->start('filter-form') ?>
 <?php echo $this->Form->create('Docente', [
-    'role'          => 'form',
-    'enctype'       => 'multipart/form-data',
-    'class'         => 'form-horizontal',
-    'inputDefaults' => ['before' => '', 'after' => '']
+        'role'          => 'form',
+        'enctype'       => 'multipart/form-data',
+        'class'         => 'form-horizontal',
+        'inputDefaults' => ['before' => '', 'after' => ''],
 ]); ?>
     <div class="row">
         <div class="form-group">
             <div class="col-md-3">
                 <?php echo $this->Form->input('Docente.unidade_organica_id', [
-                    'label'       => false,
-                    'div'         => false,
-                    'required'    => false,
-                    'class'       => 'form-control',
-                    'placeholder' => 'Unidade Organica'
+                        'label'       => false,
+                        'div'         => false,
+                        'required'    => false,
+                        'class'       => 'form-control',
+                        'placeholder' => 'Unidade Organica',
                 ]); ?>
             </div>
             <div class="col-md-3">
                 <?php echo $this->Form->input('Docente.apelido',
-                    ['label' => false, 'div' => false, 'class' => 'form-control', 'placeholder' => 'Ou Apelido']); ?>
+                        [
+                                'label'       => false,
+                                'div'         => false,
+                                'class'       => 'form-control',
+                                'placeholder' => 'Ou Apelido',
+                        ]); ?>
             </div>
             <div class="col-md-3">
                 <?php echo $this->Form->input('Docente.nomes',
-                    ['label' => false, 'div' => false, 'class' => 'form-control', 'placeholder' => 'Ou nomes']); ?>
+                        ['label' => false, 'div' => false, 'class' => 'form-control', 'placeholder' => 'Ou nomes']); ?>
             </div>
             <div class="col-md-3">
                 <?php echo $this->Form->end([
-                    'label' => __('Pesquisar', true),
-                    'class' => 'btn btn-blue next-step btn-block'
+                        'label' => __('Pesquisar', true),
+                        'class' => 'btn btn-blue next-step btn-block',
                 ]); ?>
             </div>
         </div>
@@ -79,23 +84,31 @@
                     } ?>&nbsp;</td>
             <td>
                 <?php echo $this->Html->link($docente['Entidade']['name'],
-                    ['controller' => 'docentes', 'action' => 'perfil_docente', $docente['Docente']['id']]); ?>
+                        ['controller' => 'docentes', 'action' => 'perfil_docente', $docente['Docente']['id']]); ?>
             </td>
             <td>
                 <?php echo $this->Html->link($docente['UnidadeOrganica']['name'],
-                    ['controller' => 'unidade_organicas', 'action' => 'view', $docente['UnidadeOrganica']['id']]); ?>
+                        [
+                                'controller' => 'unidade_organicas',
+                                'action'     => 'view',
+                                $docente['UnidadeOrganica']['id'],
+                        ]); ?>
             </td>
             <td>
                 <?php echo $this->Html->link($docente['DocenteCategoria']['name'],
-                    ['controller' => 'docente_categorias', 'action' => 'view', $docente['DocenteCategoria']['id']]); ?>
+                        [
+                                'controller' => 'docente_categorias',
+                                'action'     => 'view',
+                                $docente['DocenteCategoria']['id'],
+                        ]); ?>
             </td>
             <td class="actions">
                 <?php echo $this->Html->link(__('Ver', true),
-                    ['action' => 'perfil_docente', $docente['Docente']['id']]); ?>
+                        ['action' => 'perfil_docente', $docente['Docente']['id']]); ?>
                 <?php echo $this->Html->link(__('Editar', true),
-                    ['action' => 'editar_docente', $docente['Docente']['id']]); ?>
+                        ['action' => 'editar_docente', $docente['Docente']['id']]); ?>
                 <?php echo $this->Html->link(__('Delete', true), ['action' => 'delete', $docente['Docente']['id']],
-                    null, sprintf(__('Are you sure you want to delete # %s?', true), $docente['Docente']['id'])); ?>
+                        null, sprintf(__('Are you sure you want to delete # %s?', true), $docente['Docente']['id'])); ?>
             </td>
         </tr>
     <?php endforeach; ?>

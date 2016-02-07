@@ -1,23 +1,25 @@
 <?php
-/**
- * SalaAulaFixture
- *
- */
-class SalaAulaFixture extends CakeTestFixture {
 
-/**
- * Import
- *
- * @var array
- */
-	public $import = array('model' => 'SalaAula');
+	/**
+	 * SalaAulaFixture
+	 *
+	 */
+	class SalaAulaFixture extends CakeTestFixture
+	{
 
-/**
- * Records
- *
- * @var array
- */
-	public $records = array(
-	);
+		/**
+		 * Import
+		 *
+		 * @var array
+		 */
+		public $import = ['model' => 'SalaAula'];
 
-}
+		/**
+		 * Records
+		 *
+		 * @var array
+		 */
+		public $records = [
+		];
+
+	}

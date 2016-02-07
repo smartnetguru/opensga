@@ -1,108 +1,118 @@
 <?php
-App::uses('AppController', 'Controller');
-/**
- * UserLoginHistories Controller
- *
- * @property UserLoginHistorie $UserLoginHistorie
- * @property PaginatorComponent $Paginator
- */
-class UserLoginHistoriesController extends AppController {
+	App::uses('AppController', 'Controller');
 
-/**
- * Components
- *
- * @var array
- */
-	public $components = array('Paginator');
+	/**
+	 * UserLoginHistories Controller
+	 *
+	 * @property UserLoginHistorie $UserLoginHistorie
+	 * @property PaginatorComponent $Paginator
+	 */
+	class UserLoginHistoriesController extends AppController
+	{
 
-/**
- * index method
- *
- * @return void
- */
-	public function index() {
-		$this->UserLoginHistorie->recursive = 0;
-		$this->set('userLoginHistories', $this->Paginator->paginate());
-	}
+		/**
+		 * Components
+		 *
+		 * @var array
+		 */
+		public $components = ['Paginator'];
 
-/**
- * view method
- *
- * @throws NotFoundException
- * @param string $id
- * @return void
- */
-	public function view($id = null) {
-		if (!$this->UserLoginHistorie->exists($id)) {
-			throw new NotFoundException(__('Invalid user login historie'));
+		/**
+		 * index method
+		 *
+		 * @return void
+		 */
+		public function index()
+		{
+			$this->UserLoginHistorie->recursive = 0;
+			$this->set('userLoginHistories', $this->Paginator->paginate());
 		}
-		$options = array('conditions' => array('UserLoginHistorie.' . $this->UserLoginHistorie->primaryKey => $id));
-		$this->set('userLoginHistorie', $this->UserLoginHistorie->find('first', $options));
-	}
 
-/**
- * add method
- *
- * @return void
- */
-	public function add() {
-		if ($this->request->is('post')) {
-			$this->UserLoginHistorie->create();
-			if ($this->UserLoginHistorie->save($this->request->data)) {
-				$this->Flash->success(__('The user login historie has been saved.'));
-				return $this->redirect(array('action' => 'index'));
-			} else {
-				$this->Flash->error(__('The user login historie could not be saved. Please, try again.'));
+		/**
+		 * view method
+		 *
+		 * @throws NotFoundException
+		 * @param string $id
+		 * @return void
+		 */
+		public function view($id = null)
+		{
+			if (!$this->UserLoginHistorie->exists($id)) {
+				throw new NotFoundException(__('Invalid user login historie'));
 			}
+			$options = ['conditions' => ['UserLoginHistorie.' . $this->UserLoginHistorie->primaryKey => $id]];
+			$this->set('userLoginHistorie', $this->UserLoginHistorie->find('first', $options));
 		}
-		$users = $this->UserLoginHistorie->User->find('list');
-		$this->set(compact('users'));
-	}
 
-/**
- * edit method
- *
- * @throws NotFoundException
- * @param string $id
- * @return void
- */
-	public function edit($id = null) {
-		if (!$this->UserLoginHistorie->exists($id)) {
-			throw new NotFoundException(__('Invalid user login historie'));
-		}
-		if ($this->request->is(array('post', 'put'))) {
-			if ($this->UserLoginHistorie->save($this->request->data)) {
-				$this->Flash->success(__('The user login historie has been saved.'));
-				return $this->redirect(array('action' => 'index'));
-			} else {
-				$this->Flash->error(__('The user login historie could not be saved. Please, try again.'));
+		/**
+		 * add method
+		 *
+		 * @return void
+		 */
+		public function add()
+		{
+			if ($this->request->is('post')) {
+				$this->UserLoginHistorie->create();
+				if ($this->UserLoginHistorie->save($this->request->data)) {
+					$this->Flash->success(__('The user login historie has been saved.'));
+
+					return $this->redirect(['action' => 'index']);
+				} else {
+					$this->Flash->error(__('The user login historie could not be saved. Please, try again.'));
+				}
 			}
-		} else {
-			$options = array('conditions' => array('UserLoginHistorie.' . $this->UserLoginHistorie->primaryKey => $id));
-			$this->request->data = $this->UserLoginHistorie->find('first', $options);
+			$users = $this->UserLoginHistorie->User->find('list');
+			$this->set(compact('users'));
 		}
-		$users = $this->UserLoginHistorie->User->find('list');
-		$this->set(compact('users'));
-	}
 
-/**
- * delete method
- *
- * @throws NotFoundException
- * @param string $id
- * @return void
- */
-	public function delete($id = null) {
-		$this->UserLoginHistorie->id = $id;
-		if (!$this->UserLoginHistorie->exists()) {
-			throw new NotFoundException(__('Invalid user login historie'));
+		/**
+		 * edit method
+		 *
+		 * @throws NotFoundException
+		 * @param string $id
+		 * @return void
+		 */
+		public function edit($id = null)
+		{
+			if (!$this->UserLoginHistorie->exists($id)) {
+				throw new NotFoundException(__('Invalid user login historie'));
+			}
+			if ($this->request->is(['post', 'put'])) {
+				if ($this->UserLoginHistorie->save($this->request->data)) {
+					$this->Flash->success(__('The user login historie has been saved.'));
+
+					return $this->redirect(['action' => 'index']);
+				} else {
+					$this->Flash->error(__('The user login historie could not be saved. Please, try again.'));
+				}
+			} else {
+				$options = ['conditions' => ['UserLoginHistorie.' . $this->UserLoginHistorie->primaryKey => $id]];
+				$this->request->data = $this->UserLoginHistorie->find('first', $options);
+			}
+			$users = $this->UserLoginHistorie->User->find('list');
+			$this->set(compact('users'));
 		}
-		$this->request->allowMethod('post', 'delete');
-		if ($this->UserLoginHistorie->delete()) {
-			$this->Flash->success(__('The user login historie has been deleted.'));
-		} else {
-			$this->Flash->error(__('The user login historie could not be deleted. Please, try again.'));
+
+		/**
+		 * delete method
+		 *
+		 * @throws NotFoundException
+		 * @param string $id
+		 * @return void
+		 */
+		public function delete($id = null)
+		{
+			$this->UserLoginHistorie->id = $id;
+			if (!$this->UserLoginHistorie->exists()) {
+				throw new NotFoundException(__('Invalid user login historie'));
+			}
+			$this->request->allowMethod('post', 'delete');
+			if ($this->UserLoginHistorie->delete()) {
+				$this->Flash->success(__('The user login historie has been deleted.'));
+			} else {
+				$this->Flash->error(__('The user login historie could not be deleted. Please, try again.'));
+			}
+
+			return $this->redirect(['action' => 'index']);
 		}
-		return $this->redirect(array('action' => 'index'));
 	}
-}
