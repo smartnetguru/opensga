@@ -288,11 +288,15 @@
 <?php
     echo $this->Html->script('/assets/plugins/jquery-validation/dist/jquery.validate.min', ['block' => 'scriptBottom']);
     echo $this->Html->script('/assets/plugins/jQuery-Smart-Wizard/js/jquery.smartWizard', ['block' => 'scriptBottom']);
+    echo $this->Html->script(array('/assets/plugins/jquery-ui/jquery.ui.menu'), array('block' => 'scriptBottom'));
+    echo $this->Html->script(array('/assets/plugins/jquery-ui/jquery.ui.autocomplete'), array('block' => 'scriptBottom'));
+
 
     echo $this->Html->script('/assets/js/form-matricular-candidato-elements', ['block' => 'scriptBottom'],
             ['block' => 'scriptBottom']);
     echo $this->Html->script('/assets/js/form-matricular-candidato-wizard', ['block' => 'scriptBottom'],
             ['block' => 'scriptBottom']);
+
 ?>
 
 <script>
@@ -311,14 +315,6 @@
         FormWizard.init();
     });
 
-    $("#naturalidade").autocomplete({
-        source: "<?php echo $this->Html->url([
-                'controller' => 'ajax',
-                'action'     => 'get_naturalidades_autocomplete',
-        ]) ?>",
-        minLength: 2,
-        delay: 2
-    });
     $("#bairroMorada").autocomplete({
         source: "<?php echo $this->Html->url(['controller' => 'ajax', 'action' => 'get_bairros_autocomplete']) ?>",
         minLength: 2,
