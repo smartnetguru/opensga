@@ -24,7 +24,16 @@
             } elseif (isset($parametros['userId'])) {
                 $conditions['User.id'] = $parametros['userId'];
             }
+
+        if(isset($parametros['codigoUnidade'])){
+            $this->User->Funcionario->contain([
+                'UnidadeOrganica','User'
+            ]);
+            $users = $this->User->Funcionario->find('all',['conditions'=>['UnidadeOrganica.codigo_interno'=>$parametros['codigoUnidade']]]);
+        } else{
             $users = $this->User->find('all',array('conditions'=>$conditions));
+        }
+
             foreach($users as $user){
 
                  $comando = "acl deny User.{$user['User']['id']} controllers --quiet";
@@ -41,6 +50,7 @@
             $parser = parent::getOptionParser();
             $parser->addOption('userId');
             $parser->addOption('username');
+            $parser->addOption('codigoUnidade');
 
             return $parser;
 
