@@ -142,6 +142,7 @@
          */
         public function estudante_index()
         {
+            $this->redirect(['action'=>'ver_inscricoes_aluno']);
 
         }
 

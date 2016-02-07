@@ -480,6 +480,26 @@
             return false;
         }
 
+        public function isDocente($userId)
+        {
+            $this->Entidade->Docente->contain('Entidade');
+            if ($this->Entidade->Docente->find('first', ['conditions' => ['Entidade.user_id' => $userId]])) {
+                return true;
+            }
+
+            return false;
+        }
+
+        public function isFuncionario($userId)
+        {
+            $this->Entidade->Funcionario->contain('Entidade');
+            if ($this->Entidade->Funcionario->find('first', ['conditions' => ['Entidade.user_id' => $userId]])) {
+                return true;
+            }
+
+            return false;
+        }
+
         public function isFromFaculdade($user_id)
         {
             $this->contain();

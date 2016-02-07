@@ -271,12 +271,10 @@
          */
         public function outputServer($filename = 'export.xlsx')
         {
-            // set layout
-            $this->_View->layout = false;
+
 
             // writer
             $objWriter = PHPExcel_IOFactory::createWriter($this->xls, 'Excel2007');
-            debug(getcwd());
             $objWriter->save($filename);
             // clear memory
             $this->xls->disconnectWorksheets();

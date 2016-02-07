@@ -627,7 +627,47 @@
         public function report_matriculados_curso()
         {
             $anoLectivoAno = Configure::read('OpenSGA.ano_lectivo');
-            debug($anoLectivoAno);
+            $this->Matricula->Curso->contain('UnidadeOrganica');
+            $cursos = $this->Matricula->Curso->find('list', ['order' => ['UnidadeOrganica.name', 'Curso.name']]);
+            $anoLectivo = $this->Matricula->AnoLectivo->findByAno($anoLectivoAno);
+            $matriculas = [];
+            foreach ($cursos as $cursoId => $cursoNome) {
+                $novosIngressos = $this->Matricula->find('count', [
+                    'conditions' => [
+                        'Matricula.curso_id'          => $cursoId,
+                        'Matricula.tipo_matricula_id' => 1,
+                        'Matricula.ano_lectivo_id'    => $anoLectivo['AnoLectivo']['id'],
+                    ],
+                ]);
+
+                $renovacao = $this->Matricula->find('count', [
+                    'conditions' => [
+                        'Matricula.curso_id'          => $cursoId,
+                        'Matricula.tipo_matricula_id' => 2,
+                        'Matricula.ano_lectivo_id'    => $anoLectivo['AnoLectivo']['id'],
+                    ],
+                ]);
+                $reingressos = $this->Matricula->find('count', [
+                    'conditions' => [
+                        'Matricula.curso_id'          => $cursoId,
+                        'Matricula.tipo_matricula_id' => 3,
+                        'Matricula.ano_lectivo_id'    => $anoLectivo['AnoLectivo']['id'],
+                    ],
+                ]);
+
+                if($novosIngressos!=0 || $renovacao!=0 || $reingressos!=0){
+                    $matriculas[] = [
+                        'curso_id'=>$cursoId,
+                        'curso_nome'=>$cursoNome,
+                        'novos_ingressos'=>$novosIngressos,
+                        'renovacao'=>$renovacao,
+                        'reingressos'=>$reingressos
+                    ];
+
+                }
+
+            }
+            $this->set(compact('matriculas'));
         }
 
         /**

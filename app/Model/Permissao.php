@@ -14,6 +14,7 @@
     {
 
 
+        public $useTable = false;
         public function funcionario($userId)
         {
 

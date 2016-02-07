@@ -12,25 +12,20 @@
     $ws = $this->PhpExcel->xls->getActiveSheet();
     $linha_actual = 11;
     foreach ($candidatos as $candidato) {
-        $ws->setCellValue('A' . $linha_actual, $linha_actual - 9);
-        $ws->setCellValue('B' . $linha_actual, $candidato['Candidatura']['numero_estudante']);
-        $ws->setCellValue('C' . $linha_actual, $candidato['Candidatura']['name']);
-        $ws->setCellValue('D' . $linha_actual, $candidato['Genero']['name']);
-        $ws->setCellValue('E' . $linha_actual, $candidato['Candidatura']['nome_faculdade']);
-        $ws->setCellValue('F' . $linha_actual, $candidato['Candidatura']['nome_curso']);
-        $ws->setCellValue('G' . $linha_actual, $candidato['ProvinciaCandidatura']['name']);
+
         $dateFrom = new DateTime($candidato['Candidatura']['data_nascimento']);
         $dateTo = new DateTime('today');
         $idade = $dateFrom->diff($dateTo)->y;
-
+        $ws->setCellValue('A' . $linha_actual, $linha_actual - 10);
+        $ws->setCellValue('B' . $linha_actual, $candidato['Candidatura']['numero_candidato']);
+        $ws->setCellValue('C' . $linha_actual, $candidato['Candidatura']['numero_estudante']);
+        $ws->setCellValue('D' . $linha_actual, $candidato['Candidatura']['apelido']);
+        $ws->setCellValue('E' . $linha_actual, $candidato['Candidatura']['nomes']);
+        $ws->setCellValue('F' . $linha_actual, $candidato['Candidatura']['nome_curso']);
+        $ws->setCellValue('G' . $linha_actual, $candidato['Candidatura']['data_nascimento']);
         $ws->setCellValue('H' . $linha_actual, $idade);
-        $estado_candidatura = $candidato['Candidatura']['estado_candidatura_id'];
-        if ($estado_candidatura == 2) {
-            $estado = 'Candidato';
-        } elseif ($estado_candidatura == 3) {
-            $estado = 'Estudante';
-        }
-        $ws->setCellValue('I' . $linha_actual, $estado);
+        $ws->setCellValue('I' . $linha_actual, $candidato['Genero']['name']);
+        $ws->setCellValue('J' . $linha_actual, $candidato['ProvinciaCandidatura']['name']);
 
         $linha_actual++;
     }
@@ -38,7 +33,7 @@
 
     $ws->getHeaderFooter()->setOddFooter('&L&D  &RPagina &P de &N');
 
-
+/* @todo rever este file */
     /* if($has_foto_entidade){
       $this->PhpExcel->addImage(APP.'Assets'.DS.'Fotos'.DS.'Estudantes'.DS.$aluno['Aluno']['codigo'].'.JPG','N1',5,180,175); //Fotografia
       } else{

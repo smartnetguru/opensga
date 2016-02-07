@@ -88,7 +88,7 @@
     <div class="form-group"></div>
     <div class="form-group">
         <div class="col-sm-3">
-            <?php echo $this->Html->link('Voltar', ['action' => 'index'],
+            <?php echo $this->Html->link('Voltar', ['action' => 'ver_inscricoes_aluno'],
                     ['class' => 'btn btn-light-grey btn-block']) ?>
 
 

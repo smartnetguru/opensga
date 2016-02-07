@@ -11,23 +11,7 @@
         <div class="panel panel-default">
             <div class="panel-heading">
                 <i class="icon-external-link-sign"></i>
-                Matriculados por Ano
-                <div class="panel-tools">
-                    <a href="#" class="btn btn-xs btn-link panel-collapse collapses">
-                    </a>
-                    <a data-toggle="modal" href="#panel-config" class="btn btn-xs btn-link panel-config">
-                        <i class="icon-wrench"></i>
-                    </a>
-                    <a href="#" class="btn btn-xs btn-link panel-refresh">
-                        <i class="icon-refresh"></i>
-                    </a>
-                    <a href="#" class="btn btn-xs btn-link panel-expand">
-                        <i class="icon-resize-full"></i>
-                    </a>
-                    <a href="#" class="btn btn-xs btn-link panel-close">
-                        <i class="icon-remove"></i>
-                    </a>
-                </div>
+                Matriculados por Curso
             </div>
             <div class="panel-body">
                 <div role="grid" class="dataTables_wrapper form-inline" id="tabelaAjax2">
@@ -37,7 +21,8 @@
                         <thead>
 
                         <tr>
-                            <th>Ano Lectivo</th>
+                            <th>#</th>
+                            <th>Curso</th>
                             <th>Novos Ingressos</th>
                             <th>Renovacao de Matricula</th>
                             <th>Reingressos</th>
@@ -45,12 +30,14 @@
 
                         </thead>
                         <tbody>
-                        <?php foreach ($matriculas as $ano => $matricula) { ?>
+                        <?php $i=1;?>
+                        <?php foreach ($matriculas as $matricula) { ?>
                             <tr>
-                                <td><?php echo $ano ?></td>
-                                <?php foreach ($matricula as $m) { ?>
-                                    <td><?php echo $m[0]['total'] ?></td>
-                                <?php } ?>
+                                <td><?= $i++; ?></td>
+                                <td><?php echo $matricula['curso_nome'] ?></td>
+                                <td><?php echo $matricula['novos_ingressos'] ?></td>
+                                <td><?php echo $matricula['renovacao'] ?></td>
+                                <td><?php echo $matricula['reingressos'] ?></td>
                             </tr>
                         <?php } ?>
                         </tbody>

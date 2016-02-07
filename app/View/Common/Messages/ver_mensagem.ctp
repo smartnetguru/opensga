@@ -49,7 +49,7 @@
                         ?>
                         <li class="messages-item <?= $active ?>">
                             <span title="Mark as starred" class="messages-item-star"><i class="fa fa-star"></i></span>
-                            <img alt="" src="assets/images/avatar-1.jpg" class="messages-item-avatar">
+                            <?= $this->Html->image('/img/default_profile_picture.jpg',['class'=>'messages-item-avatar'])?>
                             <span class="messages-item-from"><?= substr($message['Message']['User']['Entidade']['name'],
                                         0, 15) ?></span>
 
