@@ -1478,11 +1478,13 @@
                 $candidato = $this->Candidatura->findByNumeroEstudante($this->request->data['Candidatura']['numero_estudante']);
                 if (!empty($candidato)) {
                     $cursoId = $candidato['Candidatura']['curso_id'];
+                    $this->Candidatura->Curso->contain('CursosTurno');
                     $curso = $this->Candidatura->Curso->findById($cursoId);
                     $unidadeOrganicaUser = $this->Session->read('Auth.User.unidade_organica_id');
                     $unidadeOrganicas = $this->Candidatura->Curso->UnidadeOrganica->getWithChilds($unidadeOrganicaUser);
 
-                    if (!in_array($curso['Curso']['unidade_organica_id'], $unidadeOrganicas)) {
+                    $turnoId = $curso['CursosTurno']['turno_id'];
+                    if (!in_array($curso['Curso']['unidade_organica_id'], $unidadeOrganicas) && $turnoId!=3) {
                         $this->Session->setFlash('Este Candidato nao Pertence a nenhum curso da sua faculdade');
                     } else {
                         $this->redirect(['action' => $actionSeguinte, $candidato['Candidatura']['id']]);
