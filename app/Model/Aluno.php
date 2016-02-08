@@ -1670,19 +1670,29 @@
                 $mudancaArray['MudancaCurso']['forma_mudanca_id'] = 1;
                 $this->contain();
                 $alunoBloquear = $this->findByCodigo($data['Aluno']['numero_estudante_atribuido']);
-                $dataEstado = [
-                    'aluno_id'               => $alunoBloquear['Aluno']['id'],
-                    'estado_anterior'        => $alunoBloquear['Aluno']['estado_aluno_id'],
-                    'estado_actual'          => 10,
-                    'motivo_estado_aluno_id' => 5,
-                    'observacao'             => $data['Aluno']['observacao'],
-                    'data_mudanca'           => $data['Aluno']['data_mudanca'],
-                ];
-                if (!$this->alteraStatus($dataEstado)) {
-                    $datasource->rollback();
+                if(empty($alunoBloquear)){
+                        $candidato = $this->Candidatura->findByNumeroEstudante($data['Aluno']['numero_estudante_atribuido']);
+                    if($candidato){
+                        $this->Candidatura->id = $candidato['Candidatura']['id'];
+                        $this->Candidatura->set('estado_candidatura_id',3);
+                        $this->Candidatura->save();
+                    }
+                } else{
+                    $dataEstado = [
+                        'aluno_id'               => $alunoBloquear['Aluno']['id'],
+                        'estado_anterior'        => $alunoBloquear['Aluno']['estado_aluno_id'],
+                        'estado_actual'          => 10,
+                        'motivo_estado_aluno_id' => 5,
+                        'observacao'             => $data['Aluno']['observacao'],
+                        'data_mudanca'           => $data['Aluno']['data_mudanca'],
+                    ];
+                    if (!$this->alteraStatus($dataEstado)) {
+                        $datasource->rollback();
 
-                    return [false, 'Status'];
+                        return [false, 'Status'];
+                    }
                 }
+
             } else {
                 $mudancaArray['MudancaCurso']['forma_mudanca_id'] = 2;
             }
