@@ -625,26 +625,28 @@
             $unidade_organica_id = $this->Session->read('Auth.User.unidade_organica_id');
 
             $conditions = [];
+            $paginationOptions = [];
             $estadoTurma = $this->request->query('estado_turma');
+            $codigo = $this->request->query('codigo');
+            $name = $this->request->query('name');
+            $anoLectivoAno = $this->request->query('ano');
+            if($codigo){
+                $conditions['Turma.codigo'] = $codigo;
+            }
+            if($name){
+                $conditions['Turma.name LIKE'] = '%' . $name . '%';
+            }
+            if($anoLectivoAno){
+                $conditions['AnoLectivo.ano'] = $anoLectivoAno;
+                $paginationOptions['url']['ano_lectivo'] = $anoLectivoAno;
+            }
             if ($estadoTurma) {
                 $conditions['Turma.estado_turma_id'] = $estadoTurma;
             } else {
                 $conditions['Turma.estado_turma_id'] = 1;
             }
-            $paginationOptions = [];
-            if ($this->request->is('post')) {
 
-                if ($this->request->data['Turma']['codigo'] != '') {
-                    $conditions['Turma.codigo'] = $this->request->data['Turma']['codigo'];
-                }
-                if ($this->request->data['Turma']['name'] != '') {
-                    $conditions['Turma.name LIKE'] = '%' . $this->request->data['Turma']['name'] . '%';
-                }
-                if ($this->request->data['AnoLectivo']['ano'] != '') {
-                    $conditions['AnoLectivo.ano'] = $this->request->data['AnoLectivo']['ano'];
-                    $paginationOptions['url']['ano_lectivo'] = $this->request->data['AnoLectivo']['ano'];
-                }
-            }
+
             if ($this->request->is('ajax')) {
                 if (isset($this->request->params['named']['ano_lectivo'])) {
                     $conditions['AnoLectivo.ano'] = $this->request->params['named']['ano_lectivo'];
@@ -780,11 +782,10 @@
             ]);
             $inscricaos = $this->Turma->Inscricao->find('all',
                 ['conditions' => ['turma_id' => $turma_id, 'Inscricao.estado_inscricao_id' => 1]]);
-            debug($inscricaos);
-            debug($this->Turma->Inscricao->getLog());
-            die();
 
-            $this->set(compact('inscricaos'));
+            $totalAlunos = count($inscricaos);
+            $totalPaginas = intdiv($totalAlunos,35)+1;
+            $this->set(compact('inscricaos','totalPaginas'));
         }
 
         public function faculdade_print_pauta($turmaId)

@@ -18,6 +18,7 @@
         'enctype'       => 'multipart/form-data',
         'class'         => 'form-horizontal',
         'inputDefaults' => ['before' => '', 'after' => ''],
+    'type'=>'get'
 ]); ?>
     <div class="row">
         <div class="form-group">

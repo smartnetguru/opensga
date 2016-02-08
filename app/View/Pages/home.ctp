@@ -57,6 +57,13 @@
                             'class'  => 'btn btn-icon btn-block',
                     ]) ?>
         </div>
+        <div class="col-sm-2">
+            <?php echo $this->Html->link('<i class="fa fa-asterisk fa-2x"></i>	Logs de Erros',
+                    ['controller' => 'logs', 'action' => 'index','plugin'=>'database_logger','admin'=>true], [
+                            'escape' => false,
+                            'class'  => 'btn btn-icon btn-block',
+                    ]) ?>
+        </div>
     </div>
 </div>
 

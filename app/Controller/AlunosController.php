@@ -1840,11 +1840,12 @@
                         ['class' => 'alert alert-success']);
                     $this->set('mudancaSucesso', 1);
                     $this->set('mudancaCursoId', $this->Aluno->MudancaCurso->id);
-                }
+
             } else {
                 $this->Flash->error('Problemas ao Gravar a Mudanca de Curso. Tente novamente mais tarde');
                 $this->set('mudancaSucesso', 0);
             }
+        }
 
             $aluno = $this->Aluno->getAlunoForAction($alunoId);
             $cursos = $this->Aluno->Curso->find('list');
@@ -2114,7 +2115,7 @@
             $this->Aluno->Entidade->Funcionario->contain('Entidade');
             $funcionario = $this->Aluno->Entidade->Funcionario->find('first',
                 ['conditions' => ['Entidade.user_id' => $mudanca['MudancaCurso']['created_by']]]);
-            $mudanca['Funciocario'] = $funcionario['Funcionario'];
+            $mudanca['Funcionario'] = $funcionario['Funcionario'];
             $mudanca['Funcionario']['Entidade'] = $funcionario['Entidade'];
 
             if ($mudanca['CursoNovo']['UnidadeOrganica']['tipo_unidade_organica_id'] > 1) {

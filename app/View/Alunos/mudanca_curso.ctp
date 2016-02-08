@@ -65,7 +65,7 @@
             <?php echo $this->Form->hidden('aluno_id', ['value' => $aluno['Aluno']['id']]); ?>
             <?php echo $this->Form->hidden('curso_antigo', ['value' => $aluno['Aluno']['curso_id']]); ?>
             <?php
-                if ($mudancaSucesso) {
+                if (isset($mudancaSucesso)) {
                     echo $this->Html->link(__('Imprimir Comprovativo'),
                             ['controller' => 'alunos', 'action' => 'print_comprovativo_mudanca_curso', $mudancaCursoId],
                             ['class' => 'btn btn-red btn-block']);
