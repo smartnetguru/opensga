@@ -25,37 +25,37 @@
 
 <?php $this->start('menu-itens') ?>
     <div class="col-sm-2">
-        <?php echo $this->Html->link($this->Html->image('icons/student/edit-student.png') . "<br />Lista de Estudantes",
+        <?php echo $this->Html->link('<i class="fa fa-print  fa-2x"></i>Lista de Estudantes',
                 ['controller' => 'turmas', 'action' => 'print_lista_estudantes', $turma['Turma']['id']],
                 ['escape' => false, 'class' => 'btn btn-icon btn-block']) ?>
 
     </div>
     <div class="col-sm-2">
-        <?php echo $this->Html->link($this->Html->image('icons/packs/crystal/48x48/apps/printer.png') . "<br />Associar Docente",
+        <?php echo $this->Html->link('<i class="fa fa-refresh  fa-2x"></i>Associar Docente',
                 ['controller' => 'turmas', 'action' => 'adicionar_docente', $turma['Turma']['id']],
                 ['escape' => false, 'class' => 'btn btn-icon btn-block']) ?>
 
     </div>
     <div class="col-sm-2">
-        <?php echo $this->Html->link($this->Html->image('icons/packs/crystal/48x48/apps/printer.png') . "<br />Criar Nova Avaliacao",
+        <?php echo $this->Html->link('<i class="fa fa-plus  fa-2x"></i>Criar Avaliacao',
                 ['controller' => 'turmas', 'action' => 'criar_avaliacao', $turma['Turma']['id']],
                 ['escape' => false, 'class' => 'btn btn-icon btn-block']) ?>
 
     </div>
     <div class="col-sm-2">
-        <?php echo $this->Html->link($this->Html->image('icons/packs/crystal/48x48/apps/printer.png') . "<br />Exportar Pauta",
+        <?php echo $this->Html->link('<i class="fa fa-print  fa-2x"></i>Exportar Pauta',
                 ['controller' => 'turmas', 'action' => 'print_pauta', $turma['Turma']['id']],
                 ['escape' => false, 'class' => 'btn btn-icon btn-block']) ?>
 
     </div>
     <div class="col-sm-2">
-        <?php echo $this->Html->link($this->Html->image('icons/packs/crystal/48x48/apps/printer.png') . "<br />Importar Pauta",
+        <?php echo $this->Html->link('<i class="fa fa-refresh  fa-2x"></i>Importar Pauta',
                 ['controller' => 'turmas', 'action' => 'importar_pauta', $turma['Turma']['id']],
                 ['escape' => false, 'class' => 'btn btn-icon btn-block']) ?>
 
     </div>
     <div class="col-sm-2">
-        <?php echo $this->Html->link($this->Html->image('icons/packs/crystal/48x48/apps/printer.png') . "<br />Fechar Turma",
+        <?php echo $this->Html->link('<i class="glyphicon glyphicon-ok  fa-2x"></i>Fechar Turma',
                 ['controller' => 'turmas', 'action' => 'fechar_turma', $turma['Turma']['id']],
                 ['escape' => false, 'class' => 'btn btn-icon btn-block']) ?>
 

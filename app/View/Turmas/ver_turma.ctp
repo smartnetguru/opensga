@@ -45,7 +45,7 @@
     </div>
 <?php endif; ?>
     <div class="col-sm-2">
-        <?php echo $this->Html->link('<i class="fa fa-print  fa-2x"></i>Exportar Docente',
+        <?php echo $this->Html->link('<i class="fa fa-print  fa-2x"></i>Exportar Pauta',
                 ['controller' => 'turmas', 'action' => 'print_pauta', $turma['Turma']['id']],
                 ['escape' => false, 'class' => 'btn btn-icon btn-block']) ?>
 

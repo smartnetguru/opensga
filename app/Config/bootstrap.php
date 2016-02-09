@@ -169,3 +169,5 @@
     require_once APP . 'Config' . DS . 'events.php';
 
     CakePlugin::load('Cend', ['bootstrap' => false, 'routes' => false]);
+
+CakePlugin::load('Artigos', array('bootstrap' => false, 'routes' => false));
