@@ -103,12 +103,21 @@
                     'ProvinciaNascimento',
                     'Curso'
                 ]);
+                $this->Candidatura->Curso->contain([
+                    'CursosTurno',
+                ]);
+                $cursos = $this->Candidatura->Curso->find('list', ['conditions' => ['CursosTurno.turno_id' => 3]]);
+
                 $candidatos = $this->Candidatura->find('all', [
                     'conditions' => [
                         'Candidatura.estado_candidatura_id' => 2,
-                        'provincia_candidatura'             => $this->request->data['Candidatura']['provincia_id'],
+                       // 'provincia_candidatura'             => $this->request->data['Candidatura']['provincia_id'],
+                        'Candidatura.estado_candidatura_id' => 2, 'Curso.id' => array_keys($cursos)
                     ],
                 ]);
+
+
+
 
                 $provincia = $this->Candidatura->ProvinciaNascimento->findById
                 ($this->request->data['Candidatura']['provincia_id']);

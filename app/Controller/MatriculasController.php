@@ -308,6 +308,38 @@
             $this->set(compact('aluno', 'faculdade', 'contactos'));
         }
 
+        public function faculdade_print_boletim_matricula($alunoId)
+        {
+            $this->Matricula->Aluno->contain([
+                'Entidade'        => [
+                    'Genero',
+                    'PaisNascimento',
+                    'EstadoCivil',
+                    'EntidadeIdentificacao' => [
+                        'DocumentoIdentificacao',
+                    ],
+                ],
+                'Curso'           => [
+                    'UnidadeOrganica',
+                ],
+                'AlunoNivelMedio' => [
+                    'EscolaNivelMedio' => [
+                        'Provincia',
+                    ],
+                ],
+            ]);
+            $aluno = $this->Matricula->Aluno->findById($alunoId);
+
+            $faculdade = $this->Matricula->Aluno->Curso->UnidadeOrganica->findById($aluno['Curso']['unidade_organica_id']);
+            if ($faculdade['UnidadeOrganica']['tipo_unidade_organica_id'] != 1) {
+                $faculdade = $this->Matricula->Aluno->Curso->UnidadeOrganica->findById($faculdade['UnidadeOrganica']['parent_id']);
+            }
+
+            $contactos = $this->Matricula->Aluno->processaContacto($alunoId);
+            $this->set(compact('aluno', 'faculdade', 'contactos'));
+            $this->render('print_boletim_matricula');
+        }
+
         public function print_comprovativo_matricula($alunoId)
         {
             $this->Matricula->Aluno->contain([
