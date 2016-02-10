@@ -188,4 +188,34 @@
 			],
 		];
 
+		public function adicionaArtigo($data){
+			$userId =  CakeSession::read('Auth.User.id');
+			$data['Artigo']['user_id']= $userId;
+			$entidade = $this->Entidade->findByUserId($userId);
+			if($entidade){
+				$data['Artigo']['entidade_id'] = $entidade['Entidade']['user_id'];
+			}
+			if($data['Artigo']['resumo']==''){
+				$textoClean = strip_tags($data['Artigo']['conteudo']);
+				$data['Artigo']['resumo'] = substr($textoClean,0,256);
+			} else{
+				$data['Artigo']['resumo'] = strip_tags($data['Artigo']['resumo']);
+			}
+			$data['Artigo']['slug'] = Inflector::slug($data['Artigo']['titulo']);
+			if($numeroSlug = $this->slugExists($data['Artigo']['slug'])){
+				$data['Artigo']['slug'] = $data['Artigo']['slug'].'_'.$numeroSlug;
+			}
+			$this->create();
+			if(!$this->save($data)){
+				debug($this->validationErrors);
+			}else{
+				return $this->id;
+			}
+		}
+
+		public function slugExists($slug){
+			$totalSlug = $this->find('count',['conditions'=>['slug'=>$slug]]);
+			return $totalSlug;
+		}
+
 	}

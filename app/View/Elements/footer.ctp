@@ -35,8 +35,10 @@ echo $this->Html->script(['/assets/plugins/excanvas.min']);
     echo $this->Html->script('/assets/plugins/jquery-validation/dist/jquery.validate.min',
             ['block' => 'scriptBottom']);
     echo $this->Html->script('/assets/plugins/select2/dist/js/select2.min');
+    echo $this->Html->script('/assets/plugins/moment');
     echo $this->Html->script('/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker');
     echo $this->Html->script('/assets/plugins/bootstrap-timepicker/js/bootstrap-timepicker.min');
+    echo $this->Html->script('/assets/plugins/bootstrap-datetimepicker/src/js/bootstrap-datetimepicker');
     echo $this->Html->script('/assets/plugins/bootstrap-daterangepicker/moment.min');
     echo $this->Html->script('/assets/plugins/bootstrap-daterangepicker/daterangepicker');
     echo $this->Html->script('/assets/plugins/jquery.maskedinput/src/jquery.maskedinput');
@@ -83,6 +85,11 @@ echo $this->Html->script(['/assets/plugins/excanvas.min']);
 <?php
     echo $this->Js->writeBuffer();
 ?>
+<script type="text/javascript">
+    $(function () {
+        $('#datetimepicker1').datetimepicker();
+    });
+</script>
 <?php if (Configure::read('environment') == 'prod'): ?>
     <!--Start of Zopim Live Chat Script-->
     <script type="text/javascript">

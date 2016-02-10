@@ -1,5 +1,5 @@
 <?php
-	App::uses('AppController', 'Controller');
+	App::uses('ArtigosAppController', 'Artigos.Controller');
 
 	/**
 	 * Artigos Controller
@@ -7,7 +7,7 @@
 	 * @property Artigo $Artigo
 	 * @property PaginatorComponent $Paginator
 	 */
-	class ArtigosController extends AppController
+	class ArtigosController extends ArtigosAppController
 	{
 
 		/**
@@ -26,6 +26,11 @@
 		{
 			$this->Artigo->recursive = 0;
 			$this->set('artigos', $this->Paginator->paginate());
+			$this->layout = 'guest_users';
+		}
+
+		public function dashboard(){
+
 		}
 
 		/**
@@ -35,13 +40,14 @@
 		 * @param string $id
 		 * @return void
 		 */
-		public function view($id = null)
+		public function ver_artigo($id = null)
 		{
 			if (!$this->Artigo->exists($id)) {
 				throw new NotFoundException(__('Invalid artigo'));
 			}
 			$options = ['conditions' => ['Artigo.' . $this->Artigo->primaryKey => $id]];
 			$this->set('artigo', $this->Artigo->find('first', $options));
+			$this->layout = 'guest_users';
 		}
 
 		/**
@@ -49,11 +55,10 @@
 		 *
 		 * @return void
 		 */
-		public function add()
+		public function adicionar_artigo()
 		{
 			if ($this->request->is('post')) {
-				$this->Artigo->create();
-				if ($this->Artigo->save($this->request->data)) {
+				if ($this->Artigo->adicionaArtigo($this->request->data)) {
 					$this->Flash->success(__('The artigo has been saved.'));
 
 					return $this->redirect(['action' => 'index']);
@@ -75,7 +80,7 @@
 		 * @param string $id
 		 * @return void
 		 */
-		public function edit($id = null)
+		public function editar_artigo($id = null)
 		{
 			if (!$this->Artigo->exists($id)) {
 				throw new NotFoundException(__('Invalid artigo'));
@@ -106,8 +111,9 @@
 		 * @param string $id
 		 * @return void
 		 */
-		public function delete($id = null)
+		public function remover_artigo($id = null)
 		{
+			throw new MethodNotAllowedException('Nao implementado');
 			$this->Artigo->id = $id;
 			if (!$this->Artigo->exists()) {
 				throw new NotFoundException(__('Invalid artigo'));
@@ -120,5 +126,12 @@
 			}
 
 			return $this->redirect(['action' => 'index']);
+		}
+
+		public function beforeFilter()
+		{
+			parent::beforeFilter();
+
+			$this->Auth->allow(['index','ver_artigo']);
 		}
 	}

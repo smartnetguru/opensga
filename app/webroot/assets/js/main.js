@@ -609,6 +609,11 @@ var Main = function () {
             autoclose: true
         });
     };
+    var runDateTimePicker = function () {
+        $('.date-time-picker').datetimepicker({
+            format:"YYYY-MM-DD HH:mm:ss"
+        });
+    };
     //function to initiate bootstrap-timepicker
     var runTimePicker = function () {
         $('.time-picker').timepicker();
@@ -679,6 +684,7 @@ var Main = function () {
             runMaskInput();
             runMaskMoney();
             runDatePicker();
+            runDateTimePicker();
             runTimePicker();
             runDateRangePicker();
             runTagsInput();

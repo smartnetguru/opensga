@@ -14,7 +14,7 @@
         //@formatter:off
         public $uses = ['Funcionario', 'User'];
 
-        public $tasks = array('Permissao'); // found in Console/Command/Task/SoundTask.php
+        public $tasks = array('MainPermission'); // found in Console/Command/Task/SoundTask.php
     public function main() {
 
         $parametros = $this->params;
@@ -40,7 +40,18 @@
                 $this->out($comando);
                 $this->dispatchShell($comando);
                 $this->params['userId'] = $user['User']['id'];
-                $this->Permissao->execute();
+                $this->MainPermission->execute();
+
+                $plugins = CakePlugin::loaded();
+                foreach($plugins as $k=>$pluginName){
+                    $taskName = $pluginName.'.Permissao';
+                    try{
+                        $PermissionTask = $this->Tasks->load($taskName);
+                    $PermissionTask->execute($this->params);
+                    } catch(Exception $e){
+                    }
+
+                }
             }
 
     }

@@ -51,6 +51,13 @@
                     ]) ?>
         </div>
         <div class="col-sm-2">
+            <?php echo $this->Html->link('<i class="fa fa-edit fa-2x"></i>	Artigos',
+                    ['controller' => 'artigos', 'action' => 'dashboard','plugin'=>'artigos'], [
+                            'escape' => false,
+                            'class'  => 'btn btn-icon btn-block',
+                    ]) ?>
+        </div>
+        <div class="col-sm-2">
             <?php echo $this->Html->link('<i class="fa fa-asterisk fa-2x"></i>	Configurações',
                     ['controller' => 'configs', 'action' => 'index'], [
                             'escape' => false,
