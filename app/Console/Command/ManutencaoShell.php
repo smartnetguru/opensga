@@ -361,4 +361,25 @@
         }
 
 
+        public function removeTurmasVazias(){
+            $turmas  = $this->Turma->find('list');
+            $total = count($turmas);
+            foreach($turmas as $turmaId=>$turmaName){
+                $inscricao = $this->Inscricao->find('count',['conditions'=>['Inscricao.turma_id'=>$turmaId]]);
+                if($inscricao==0){
+                    $this->out('Removendo---'.$turmaName);
+                    $this->Turma->id = $turmaId;
+                    $this->Turma->delete($turmaId);
+                } else{
+                    $this->Turma->id  = $turmaId;
+                    $this->Turma->set('total_alunos',$inscricao);
+                    $this->Turma->save();
+                }
+
+                $this->out($total--);
+
+            }
+        }
+
+
     }
