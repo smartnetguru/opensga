@@ -120,19 +120,15 @@
 <div class="navbar navbar-inverse navbar-fixed-top">
     <!-- start: TOP NAVIGATION CONTAINER -->
     <div class="container">
-        <div class="navbar-header">
-            <!-- start: RESPONSIVE MENU TOGGLER -->
-            <button data-target=".navbar-collapse" data-toggle="collapse" class="navbar-toggle" type="button">
-                <span class="clip-list-2"></span>
-            </button>
-            <!-- end: RESPONSIVE MENU TOGGLER -->
-            <!-- start: LOGO -->
-            <?php echo $this->Html->link('SIGA<i class="clip-clip"></i>' . Configure::read('OpenSGA.instituicao.sigla_logo'),
-                    '/',
-                    ['class' => 'navbar-brand', 'escape' => false]) ?>
-            <!-- end: LOGO -->
-        </div>
         <?php if ($this->Session->read('Auth.User.id')) { ?>
+            <div class="navbar-header">
+                <!-- start: RESPONSIVE MENU TOGGLER -->
+                <!-- start: LOGO -->
+                <?php echo $this->Html->link('SIGA<i class="clip-clip"></i>' . Configure::read('OpenSGA.instituicao.sigla_logo'),
+                        '/',
+                        ['class' => 'navbar-brand', 'escape' => false]) ?>
+                <!-- end: LOGO -->
+            </div>
             <div class="navbar-tools">
                 <!-- start: TOP NAVIGATION MENU -->
                 <ul class="nav navbar-right">
@@ -342,7 +338,44 @@
                 </ul>
                 <!-- end: TOP NAVIGATION MENU -->
             </div>
-        <?php } ?>
+        <?php } else{ ?>
+            <div class="row">
+                <div class="col-sm-3">
+                    <div class="navbar-header">
+                        <!-- start: LOGO -->
+                        <?php echo $this->Html->link('SIGA<i class="clip-clip"></i>' . Configure::read('OpenSGA.instituicao.sigla_logo'),
+                                '#',
+                                ['class' => 'navbar-brand', 'escape' => false]) ?>
+                        <!-- end: LOGO -->
+                    </div>
+                </div>
+                <div class="col-sm-9">
+                    <?php echo $this->Form->create('User', ['url' => ['action' => 'login']]); ?>
+                    <div class="row pull-right navbar-brand">
+                        <div class="col-sm-7">
+                            <?php echo $this->Form->input('username', [
+                                    'div'         => false,
+                                    'label'       => false,
+                                    'class'       => 'form-control',
+                                    'placeholder' => 'Nome de Usuario ou Email Institucional',
+                            ]) ?>
+                        </div>
+                        <div class="col-sm-3">
+                            <?php echo $this->Form->input('password', [
+                                    'div'         => false,
+                                    'label'       => false,
+                                    'class'       => 'form-control',
+                                    'placeholder' => 'Senha',
+                            ]) ?>
+                        </div>
+                        <div class="col-sm-2">
+                            <?php echo $this->Form->submit('Entrar', ['class' => 'btn btn-green', 'div' => false]) ?>
+                        </div>
+                    </div>
+                    <?= $this->Form->end(); ?>
+                </div>
+            </div>
+        <?php }?>
     </div>
     <!-- end: TOP NAVIGATION CONTAINER -->
 </div>

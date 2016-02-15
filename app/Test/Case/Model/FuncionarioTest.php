@@ -49,55 +49,38 @@
          */
         public function testCadastraFuncionario()
         {
-            $data = [
-                'Aluno'                 => [
-                    'numero_estudante'       => '',
-                    'nome_emergencia'        => '',
-                    'telemovel_emergencia'   => '',
-                    'parentesco_encarregado' => '',
-                ],
-                'Entidade'              => [
-                    'apelido'              => 'Leonardo',
-                    'nomes'                => 'Elisio',
-                    'genero_id'            => '1',
-                    'data_nascimento'      => '2015-09-01',
-                    'estado_civil'         => '1',
-                    'nome_pai'             => 'Chigalo Sande',
-                    'nome_mae'             => 'Chuma Mafanhe',
-                    'naturalidade'         => 'Chimoio',
-                    'pais_nascimento'      => '152',
-                    'provincia_nascimento' => '8',
-                    'cidade_nascimento'    => '97',
-                ],
-                'Funcionario'           => [
-                    'unidade_organica_id'       => '6',
-                    'tipo_funcionario_id'       => '',
-                    'data_admissao'             => '2015-09-02',
-                    'grau_academico_id'         => '',
-                    'cargo_id'                  => '',
-                    'superior_hierarquico'      => '',
-                    'categoria_funcionario_id'  => '',
-                    'categoria_profissional_id' => '',
-                ],
-                'EntidadeContacto'      => [
-                    (int)11 => '152',
-                    (int)10 => '',
-                    (int)9  => '',
-                    (int)6  => '',
-                    (int)5  => '',
-                    (int)7  => '',
-                    (int)8  => '',
-                    (int)2  => '3464567574',
-                    (int)1  => 'elisio.leonardo444@gmail.com',
-                ],
-                'EntidadeIdentificacao' => [
-                    'documento_identificacao_id' => '',
-                    'numero'                     => '',
-                    'local_emissao'              => '',
-                    'data_emissao'               => '',
-                    'data_validade'              => '',
-                ],
-            ];
+            $data = array(
+                'Funcionario' => array(
+                    'codigo' => '54456',
+                    'genero_id' => '1',
+                    'unidade_organica_id' => '1',
+                    'data_admissao' => '2016-02-23',
+                    'grau_academico_id' => '',
+                    'superior_hierarquico' => ''
+                ),
+                'Entidade' => array(
+                    'apelido' => 'Leonardo',
+                    'nomes' => 'Elisio',
+                    'data_nascimento' => '2016-02-17',
+                    'estado_civil' => '1',
+                    'nome_pai' => 'Chch',
+                    'nome_mae' => 'Hsaha',
+                    'naturalidade' => 'lkjhdlkas',
+                    'pais_nascimento' => '152',
+                    'provincia_nascimento' => '1',
+                    'cidade_nascimento' => '1'
+                ),
+                'EntidadeIdentificacao' => array(
+                    'documento_identificacao_id' => '1',
+                    'numero' => '564456465',
+                    'local_emissao' => 'Maputo',
+                    'data_emissao' => '2016-02-10'
+                ),
+                'EntidadeContacto' => array(
+                    (int) 2 => '4564654',
+                    (int) 1 => 'elisiokdsadhhaj@erlkjl.com'
+                )
+            );
             $resultado = $this->Funcionario->cadastraFuncionario($data);
             $this->assertSame(true, $resultado);
 

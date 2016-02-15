@@ -193,7 +193,7 @@
 			$data['Artigo']['user_id']= $userId;
 			$entidade = $this->Entidade->findByUserId($userId);
 			if($entidade){
-				$data['Artigo']['entidade_id'] = $entidade['Entidade']['user_id'];
+				$data['Artigo']['entidade_id'] = $entidade['Entidade']['id'];
 			}
 			if($data['Artigo']['resumo']==''){
 				$textoClean = strip_tags($data['Artigo']['conteudo']);

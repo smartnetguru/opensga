@@ -4,15 +4,6 @@
     $this->BreadCumbs->addCrumb('Lista de Funcionarios', '/funcionarios/index');
 ?>
 
-<?php $this->start('top-actions') ?>
-    <div class="action-list">
-        <div class="col-sm-1">
-            <?php echo $this->Html->link('<i class="fa fa-user fa-2x"></i>Adicionar Funcionario',
-                    ['controller' => 'funcionarios', 'action' => 'adicionar_funcionario'],
-                    ['escape' => false, 'class' => 'btn btn-icon btn-block']) ?>
-        </div>
-    </div>
-<?php $this->end() ?>
 <?php $this->assign('table-title', __('Lista de Funcionarios')) ?>
 
 <?php $this->start('table-header') ?>

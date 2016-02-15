@@ -123,8 +123,6 @@
                 if ($this->FuncionarioUnidadeOrganica->save($arrayFuncionarioUnidade)) {
                     $dataSource->commit();
                     $message = [
-                        'Option1' => 'Message',
-                        //'Type'=>'cake',
                         'Command' => 'Funcionario',
                         'Action'  => 'processaAlteraUnidadeOrganica',
                         'turmaId' => $this->id,
@@ -149,67 +147,52 @@
         public function cadastraFuncionario($data)
         {
             $dataSource = $this->getDataSource();
-
             $dataSource->begin();
 
             $data['Entidade']['name'] = $data['Entidade']['nomes'] . ' ' . $data['Entidade']['apelido'];
-
             $data['User']['name'] = $data['Entidade']['name'];
-
             $data['User']['username'] = $this->User->geraEmailUem(strtolower($data['Entidade']['apelido']),
                 strtolower($data['Entidade']['nomes']));
-            //$data['User']['codigo'] = $this->geraCodigo();
             $data['User']['password'] = Security::hash('siga12345UEM', 'blowfish');
             $data['User']['group_id'] = 2;
-
-            $this->User->create();
-            if ($this->User->save($data)) {
-                //die(debug($this->User->id));
-                $data['Entidade']['user_id'] = $this->User->id;
-                $data['Entidade']['name'] = $data['Entidade']['nomes'] . " " . $data['Entidade']['apelido'];
-                if (!empty($data['EntidadeContacto'][1])) {
-                    $data['Entidade']['email'] = $data['EntidadeContacto'][1];
-                } else {
-                    $data['Entidade']['email'] = $data['User']['username'];
-                    $data['EntidadeContacto'][1] = $data['User']['username'];
-
-                }
-
-                $this->Entidade->create();
-                if ($this->Entidade->save($data)) {
-                    $data['Funcionario']['user_id'] = $this->User->id;
-                    $data['Funcionario']['entidade_id'] = $this->Entidade->id;
-
-                    $this->create();
-                    if ($this->save($data)) {
-                        $dataSource->commit();
-                        $message = [
-                            'Option1' => 'Message',
-                            //'Type'=>'cake',
-                            'Command' => 'Funcionario',
-                            'Action'  => 'processaCadastroFuncionario',
-                            'turmaId' => $this->id,
-                        ];
-                        CakeRabbit::publish($message);
-
-
-                        return true;
-                    } else {
-                        return [false, $this->validationErrors];
-                    }
-                } else {
-                    $dataSource->rollback();
-
-                    return [false, $this->Entidade->validationErrors];
-                }
-            } else {
+            $this->Entidade->User->create();
+            if (!$this->Entidade->User->save($data)) {
                 $dataSource->rollback();
-
-                return [false, $this->Entidade->User->validationErrors];
+                throw new DataNotSavedException($this->Entidade->User->validationErrors);
             }
-            $dataSource->rollback();
 
-            return false;
+            $data['Entidade']['user_id'] = $this->User->id;
+            $data['Entidade']['name'] = $data['Entidade']['nomes'] . " " . $data['Entidade']['apelido'];
+            if (!empty($data['EntidadeContacto'][1])) {
+                $data['Entidade']['email'] = $data['EntidadeContacto'][1];
+            } else {
+                $data['Entidade']['email'] = $data['User']['username'];
+                $data['EntidadeContacto'][1] = $data['User']['username'];
+
+            }
+
+            $this->Entidade->create();
+            if (!$this->Entidade->save($data)) {
+                $dataSource->rollback();
+                throw new DataNotSavedException($this->Entidade->validationErrors);
+            }
+
+            $data['Funcionario']['user_id'] = $this->User->id;
+            $data['Funcionario']['entidade_id'] = $this->Entidade->id;
+
+            $this->create();
+            if (!$this->save($data)) {
+                $dataSource->rollback();
+                throw new DataNotSavedException($this->validationErrors);
+            }
+            $dataSource->commit();
+            $message = [
+                'Command' => 'Funcionario',
+                'Action'  => 'processaCadastroFuncionario',
+                'turmaId' => $this->id,
+            ];
+            RabbitMQ::publish($message);
+            return true;
         }
 
 

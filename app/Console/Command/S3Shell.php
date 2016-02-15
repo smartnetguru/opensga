@@ -28,5 +28,20 @@
             'SmsNotification',
         ];
 
+        public function test(){
+            $message = [
+
+                //'Type'=>'cake',
+                'Command' => 'S3',
+                'Action'  => 'recebeErro',
+                //'turmaId' => 1,
+            ];
+            RabbitMQ::publish($message);
+        }
+
+        public function recebeErro(){
+            throw new Exception('Erro qualquer');
+    }
+
 
     }

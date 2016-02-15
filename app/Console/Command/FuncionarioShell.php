@@ -353,7 +353,7 @@
             }
 
             //Atribui Permissoes
-            $comando = 'OpenSGAAcl funcionarios ' . $funcionario['Entidade']['User']['id'];
+            $comando = 'OpenSGAAcl --userId ' . $funcionario['Entidade']['User']['id'];
             $this->dispatchShell($comando);
 
             $passwordEmail = 'siga12345UEM';
@@ -366,9 +366,15 @@
             }
             //Activa Email Institucional
             $google = new OpenSGAGoogle();
-            $emailCriado = $google->createUser($funcionario['Entidade']['User']['username'], $firstName,
-                $lastName, $passwordEmail
-            );
+            try{
+
+                $emailCriado = $google->createUser($funcionario['Entidade']['User']['username'], $firstName,
+                    $lastName, $passwordEmail
+                );
+            } catch(Exception $e){
+                debug($e->getMessage());
+                debug($e->getCode());
+            }
 
             //Envia Email e SMS para o Funcionario a Informar
             $emailBody = 'Caro ' . $funcionario['Entidade']['name'] . ', <br /> A sua conta no SIGA foi Criada com sucesso.<br />';
@@ -392,6 +398,9 @@
             } else {
                 $emailTo = [$emailPessoal, $funcionario['Entidade']['User']['username']];
             }
+            debug($emailTo);
+            debug($emailCriado);
+            die();
             $Email = new CakeEmail();
             $Email->config('smtp')
                 ->emailFormat('html')

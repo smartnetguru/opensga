@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "e3f6e227b70ae95a91911b3ce383843a",
-    "content-hash": "e6fd63119d451016d6bfb7e75917a079",
+    "hash": "a7446f836ca3696c6329cc6820d7477a",
+    "content-hash": "6940fcf33b37484232fdb53ba11be288",
     "packages": [
         {
             "name": "alliedhealthmedia/icing",
@@ -174,12 +174,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/backstageel/cakephp-rabbitmq.git",
-                "reference": "65ec8804769d51144ba8b40450ce6d662b111850"
+                "reference": "26f2e0afc4db7b4b65b2f3b88021e73e1f7fd168"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/backstageel/cakephp-rabbitmq/zipball/65ec8804769d51144ba8b40450ce6d662b111850",
-                "reference": "65ec8804769d51144ba8b40450ce6d662b111850",
+                "url": "https://api.github.com/repos/backstageel/cakephp-rabbitmq/zipball/26f2e0afc4db7b4b65b2f3b88021e73e1f7fd168",
+                "reference": "26f2e0afc4db7b4b65b2f3b88021e73e1f7fd168",
                 "shasum": ""
             },
             "require": {
@@ -213,7 +213,7 @@
                 "queues",
                 "rabbimq"
             ],
-            "time": "2016-01-26 12:16:08"
+            "time": "2016-02-11 03:05:28"
         },
         {
             "name": "backstageel/cakephp-reports",
@@ -346,16 +346,16 @@
         },
         {
             "name": "cakephp/cakephp",
-            "version": "2.8.0-RC1",
+            "version": "2.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cakephp/cakephp.git",
-                "reference": "a530414a88a86ac3fe98f71a14814c87afafec3f"
+                "reference": "80f18448b510bcb1376c0b68bc70b98948e2b27a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cakephp/cakephp/zipball/a530414a88a86ac3fe98f71a14814c87afafec3f",
-                "reference": "a530414a88a86ac3fe98f71a14814c87afafec3f",
+                "url": "https://api.github.com/repos/cakephp/cakephp/zipball/80f18448b510bcb1376c0b68bc70b98948e2b27a",
+                "reference": "80f18448b510bcb1376c0b68bc70b98948e2b27a",
                 "shasum": ""
             },
             "require": {
@@ -386,7 +386,7 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2016-01-13 04:49:25"
+            "time": "2016-02-07 01:59:33"
         },
         {
             "name": "composer/installers",
@@ -1878,12 +1878,12 @@
             "version": "v2.5.2",
             "source": {
                 "type": "git",
-                "url": "https://github.com/videlalvaro/php-amqplib.git",
+                "url": "https://github.com/php-amqplib/php-amqplib.git",
                 "reference": "eb8f94d97c8e79900accf77343dbd7eca7f58506"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/videlalvaro/php-amqplib/zipball/eb8f94d97c8e79900accf77343dbd7eca7f58506",
+                "url": "https://api.github.com/repos/php-amqplib/php-amqplib/zipball/eb8f94d97c8e79900accf77343dbd7eca7f58506",
                 "reference": "eb8f94d97c8e79900accf77343dbd7eca7f58506",
                 "shasum": ""
             },
@@ -2191,7 +2191,6 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "cakephp/cakephp": 5,
         "radig/auditable": 0,
         "markstory/acl_extras": 20,
         "cakedc/migrations": 0,

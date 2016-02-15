@@ -2,6 +2,7 @@
 
     App::uses('Model', 'Model');
     App::uses('AuditableConfig', 'Auditable.Lib');
+    App::uses('DataNotSavedException','Lib/Exception');
 
     class AppModel extends Model
     {

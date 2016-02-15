@@ -13,6 +13,7 @@
             $service = Zend_Gdata_Gapps::AUTH_SERVICE_NAME;
             $client = Zend_Gdata_ClientLogin::getHttpClient('elisio.leonardo@uem.ac.mz', 'COLOCAR SENHA AQUI',
                 $service);
+
             $gdata = new Zend_Gdata_Gapps($client, 'uem.ac.mz');
 
             $this->Entidade->contain(['User', 'Aluno']);
@@ -77,7 +78,12 @@
              */
 
             $cred = $this->init();
-            $client = new Google_Client();
+            $config = new Google_Config();
+            $config->setClassConfig('Google_Cache_File', array('directory' => APP.'tmp/cache'));
+            $client = new Google_Client($config);
+
+            $client->setCache(new Google_Cache_File($client));
+
             $client->setApplicationName("This is the name");
             $cred->sub = 'elisio.leonardo@uem.ac.mz';
             $client->setAssertionCredentials($cred);
@@ -114,8 +120,11 @@
                 if ($gse->getCode() == 409) {
                     return [false, ['Email ja foi Criado']];
                 }
-
+                debug($gse->getMessage());
+                debug($gse->getCode());
                 return false;
+            } catch(Exception $e){
+                debug($e->getMessage());
             }
         }
 

@@ -1,6 +1,6 @@
 <?php
 
-    class PermissaoTask extends AppShell
+    class ArtigosPermissaoTask extends AppShell
     {
 
         //@formatter:off
@@ -27,9 +27,6 @@
                 $this->out($comando);
                 $this->dispatchShell($comando);
             }
-            debug($userId);
-            debug('aqui');
-            die();
         }
 
 

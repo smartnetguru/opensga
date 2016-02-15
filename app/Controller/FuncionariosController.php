@@ -21,17 +21,15 @@
 
         function adicionar_funcionario()
         {
-            ini_set('memory_limit', "2048M");
             if (!empty($this->data)) {
-                if ($this->Funcionario->cadastraFuncionario($this->request->data)) {
-                    $this->Session->setFlash('Funcionário registrado com sucesso', 'default',
-                        ['class' => 'alert alert-success']);
-                    $this->redirect(['action' => 'index']);
-                } else {
-
-                    $this->Session->setFlash('Problemas ao registar funcionario. Verifique o formulário e tente de novo',
-                        'default', ['class' => 'alert alert-danger']);
+                try{
+                    $this->Funcionario->cadastraFuncionario($this->request->data);
+                    $this->Flash->sucess('Funcionario Registrado com Sucesso');
+                        $this->redirect(['action' => 'index']);
+                } catch(Exception $e){
+                    $this->Flash->error($e->getMessage());
                 }
+
             }
 
             $grausAcademicos = $this->Funcionario->GrauAcademico->find('list');

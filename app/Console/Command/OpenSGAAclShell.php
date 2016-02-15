@@ -40,14 +40,16 @@
                 $this->out($comando);
                 $this->dispatchShell($comando);
                 $this->params['userId'] = $user['User']['id'];
-                $this->MainPermission->execute();
+               $this->MainPermission->execute();
 
                 $plugins = CakePlugin::loaded();
                 foreach($plugins as $k=>$pluginName){
-                    $taskName = $pluginName.'.Permissao';
+                    $taskName = $pluginName.'.'.$pluginName.'Permissao';
                     try{
                         $PermissionTask = $this->Tasks->load($taskName);
-                    $PermissionTask->execute($this->params);
+                        $PermissionTask->execute($this->params);
+                        $this->Tasks->unload($taskName);
+
                     } catch(Exception $e){
                     }
 

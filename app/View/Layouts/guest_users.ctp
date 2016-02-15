@@ -4,28 +4,25 @@
         <div class="navbar-content">
             <!-- start: SIDEBAR -->
             <div class="main-navigation navbar-collapse collapse">
-                <!-- start: MAIN MENU TOGGLER BUTTON -->
+                <!-- start: MAIN NAVIGATION MENU -->
                 <div class="navigation-toggler">
                     <i class="clip-chevron-left"></i>
                     <i class="clip-chevron-right"></i>
                 </div>
-                <!-- end: MAIN MENU TOGGLER BUTTON -->
-                <!-- start: MAIN NAVIGATION MENU -->
                 <ul class="main-navigation-menu">
-                    <li class="active open">
-                    <li><?php echo $this->Html->link('<i class="clip-home-3"></i>
-                        <span class="title"> Pagina Inicial </span><span class="selected"></span>', '/',
-                                ['escape' => false]) ?></li>
-                    <a href="index.html">
-                    </a>
-                    </li>
-
+                    <li><?php echo $this->Html->link(__('<i class="clip-home-3"></i>Pagina Inicial'),
+                                '/', ['escape' => false]) ?></li>
+                    <li><?php echo $this->Html->link(__('<i class="clip-home-3"></i>Alumnis'),
+                                '/pre_registo_alumnis', ['escape' => false]) ?></li>
+                    <li><?php echo $this->Html->link(__('<i class="clip-home-3"></i>Artigos'),
+                                '/artigos', ['escape' => false]) ?></li>
+                    <li><?php echo $this->Html->link(__('<i class="clip-home-3"></i>Email Institucional'),
+                                '/email_oficial_uem', ['escape' => false]) ?></li>
                 </ul>
                 <!-- end: MAIN NAVIGATION MENU -->
             </div>
             <!-- end: SIDEBAR -->
         </div>
-        <!-- start: PAGE -->
         <div class="main-content">
             <div class="container">
                 <!-- start: PAGE HEADER -->
@@ -55,23 +52,24 @@
                     </div>
                 </div>
                 <!-- end: PAGE HEADER -->
-                <!-- start: PAGE CONTENT -->
-
-
-                <?php
-                    $session_message = $this->Session->read('Message');
-                    if (isset($session_message) and $session_message != null) {
-                        foreach ($session_message as $k => $v) {
-                            echo $this->Session->flash($k);
-                        }
-                    }
-                ?>
-                <?php echo $this->fetch('content'); ?>
-
-                <!-- end: PAGE CONTENT-->
+                <div class="row">
+                    <div class="col-sm-10 col-sm-offset-2">
+                        <?php
+                            $session_message = $this->Session->read('Message');
+                            if (isset($session_message) and $session_message != null) {
+                                foreach ($session_message as $k => $v) {
+                                    echo $this->Session->flash($k);
+                                }
+                            }
+                        ?>
+                    </div>
+                    </div>
+                <div class="row">
+                    <?php echo $this->fetch('content'); ?>
+                </div>
             </div>
         </div>
-        <!-- end: PAGE -->
+
     </div>
     <!-- end: MAIN CONTAINER -->
 <?php echo $this->element('footer'); ?>

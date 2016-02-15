@@ -262,5 +262,103 @@
             }
         }
 
+        public function ajustaInscricaoEconomia()
+        {
+
+
+            $cursos = $this->Curso->findAllByUnidadeOrganicaId(6);
+            $cursoIds = Hash::extract($cursos, '{n}.Curso.id');
+            $this->Inscricao->contain(['Turma' => ['PlanoEstudo']]);
+            $inscricaos = $this->Inscricao->find('all',
+                ['conditions' => ['Turma.ano_lectivo_id' => 32, 'Turma.curso_id' => $cursoIds]]);
+            foreach ($inscricaos as $inscricao) {
+                $disciplinaId = $inscricao['Turma']['disciplina_id'];
+                if ($inscricao['Turma']['PlanoEstudo']['ano_criacao'] != 2012) {
+                    $this->out('Comecando ajuste da Inscricao');
+                    $planoEstudo2012 = $this->Curso->PlanoEstudo->findByCursoIdAndAnoCriacao($inscricao['Turma']['curso_id'],
+                        2012);
+                    if (empty($planoEstudo2012)) {
+                        debug($inscricao);
+                        die(debug('Plano Estudo 2012'));
+                    }
+                    $turmaNova = $this->Inscricao->Turma->findByCursoIdAndDisciplinaIdAndPlanoEstudoId($inscricao['Turma']['curso_id'],
+                        $disciplinaId, $planoEstudo2012['PlanoEstudo']['id']);
+                    if(empty($turmaNova)){
+                        $disciplinaPlanoEstudo = $this->Curso->PlanoEstudo->DisciplinaPlanoEstudo->findByPlanoEstudoIdAndDisciplinaId($planoEstudo2012['PlanoEstudo']['id'],$disciplinaId);
+                        if(empty($disciplinaPlanoEstudo)){
+                            $disciplinaPlanoActual = $this->Curso->PlanoEstudo->DisciplinaPlanoEstudo->findByPlanoEstudoIdAndDisciplinaId($inscricao['Turma']['plano_estudo_id'],$disciplinaId);
+                            if ($inscricao['Turma']['semestre_curricular'] == 1) {
+                                $semestre_sequencial = $inscricao['Turma']['ano_curricular'] * ($inscricao['Turma']['semestre_curricular'] + 1) - 1;
+                            }
+                            if ($inscricao['Turma']['semestre_curricular'] == 2) {
+                                $semestre_sequencial = $inscricao['Turma']['ano_curricular'] * $inscricao['Turma']['semestre_curricular'];
+                            }
+                            $arrayPlanoEstudo = [
+                                'DisciplinaPlanoEstudo' => [
+                                    'plano_estudo_id'     => $planoEstudo2012['PlanoEstudo']['id'],
+                                    'ano_curricular'      => $inscricao['Turma']['ano_curricular'],
+                                    'semestre_curricular' => $inscricao['Turma']['semestre_curricular'],
+                                    'carga_total'         => $disciplinaPlanoActual['DisciplinaPlanoEstudo']['carga_total'],
+                                    'creditos'            => $disciplinaPlanoActual['DisciplinaPlanoEstudo']['creditos'],
+                                    'disciplina_id'       => $disciplinaId,
+                                    'codigo'              => null,
+                                    'ramo_id'             => null,
+                                    'semestre_sequencial' => $semestre_sequencial,
+                                    'estado_objecto_id'=>1
+                                ]
+                            ];
+                            $this->Curso->PlanoEstudo->DisciplinaPlanoEstudo->create();
+                            if(!$this->Curso->PlanoEstudo->DisciplinaPlanoEstudo->save($arrayPlanoEstudo)){
+                                die(debug($this->Curso->PlanoEstudo->DisciplinaPlanoEstudo->validationErrors));
+                            }
+                            $disciplinaPlanoEstudo = $this->Curso->PlanoEstudo->DisciplinaPlanoEstudo->findByPlanoEstudoIdAndDisciplinaId($planoEstudo2012['PlanoEstudo']['id'],$disciplinaId);
+                        }
+                        $disciplina  = $this->Disciplina->findById($disciplinaId);
+                        $arrayTurma = [
+                            'Turma' => [
+                                'ano_lectivo_id'      => $inscricao['Turma']['ano_lectivo_id'],
+                                'plano_estudo_id'     => $planoEstudo2012['PlanoEstudo']['id'],
+                                'disciplina_id'       => $disciplinaId,
+                                'curso_id'            => $inscricao['Turma']['curso_id'],
+                                'estado_turma_id'     => 1,
+                                'codigo'              => rand(10000,100000),
+                                'ano_curricular'      => $inscricao['Turma']['ano_curricular'],
+                                'semestre_curricular' => $inscricao['Turma']['semestre_curricular'],
+                                'name'                => $disciplina['Disciplina']['name'] . " - " . 2016 . " - " . $planoEstudo2012['PlanoEstudo']['name'],
+                                'semestre_lectivo_id' => $inscricao['Turma']['semestre_lectivo_id'],
+                                'unidade_organica_id' => $inscricao['Turma']['unidade_organica_id'],
+                                'ramo_id'=>$inscricao['Turma']['ramo_id']
+                            ]
+                        ];
+                        $this->Inscricao->Turma->create();
+                        if(!$this->Inscricao->Turma->save($arrayTurma)){
+                            die(debug($this->Inscricao->Turma->validationErrors));
+                        }
+                        $turmaNova = $this->Inscricao->Turma->findByCursoIdAndDisciplinaIdAndPlanoEstudoId($inscricao['Turma']['curso_id'],
+                            $disciplinaId, $planoEstudo2012['PlanoEstudo']['id']);
+                    }
+
+                    $inscricaoExiste = $this->Inscricao->findByAlunoIdAndTurmaId($inscricao['Inscricao']['aluno_id'],$turmaNova['Turma']['id']);
+                    if(empty($inscricaoExiste)){
+                        $this->Inscricao->id = $inscricao['Inscricao']['id'];
+                        $this->Inscricao->set('turma_id',$turmaNova['Turma']['id']);
+                        try {
+                            $this->Inscricao->save();
+                        } catch(Exception $e){
+
+                            debug($this->Inscricao->getLog());
+                            debug($this->Inscricao->validationErrors);
+                            debug($inscricao);
+                            debug($e->getMessage());
+                            die();
+                        }
+                        $this->out('Turma Actualizada');
+                    }
+
+                }
+            }
+
+        }
+
 
     }

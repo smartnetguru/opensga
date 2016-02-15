@@ -142,7 +142,7 @@
          */
         public function estudante_index()
         {
-            $this->redirect(['action'=>'ver_inscricoes_aluno']);
+            $this->redirect(['action' => 'ver_inscricoes_aluno']);
 
         }
 
@@ -1186,6 +1186,37 @@
         public function faculdade_relatorio_inscricoes_semestre()
         {
 
+        }
+
+        public function faculdade_relatorio_inscricoes_por_cadeira()
+        {
+
+            $cursos = $this->Inscricao->Turma->Curso->findAllByUnidadeOrganicaId(CakeSession::read('Auth.User.unidade_organica_id'));
+            $cursoIds = Hash::extract($cursos, '{n}.Curso.id');
+
+            $anoLectivo = $this->Inscricao->Turma->AnoLectivo->findByAno(Configure::read('OpenSGA.ano_lectivo'));
+            $semestreLectivo = $this->Inscricao->Turma->SemestreLectivo->findByAnoLectivoIdAndSemestre($anoLectivo['AnoLectivo']['id'],
+                Configure::read('OpenSGA.semestre_lectivo'));
+            $this->Inscricao->contain(['Turma' => ['Disciplina','Curso']]);
+            $inscricaos = $this->Inscricao->find('all',
+                [
+                    'conditions' => [
+                        'Turma.curso_id'            => array_values($cursoIds),
+                        'Turma.ano_lectivo_id'      => $anoLectivo['AnoLectivo']['id'],
+                        'Turma.semestre_lectivo_id' => $semestreLectivo['SemestreLectivo']['id'],
+                    ],
+                    'fields'=>[
+                        //'Curso.name',
+                        //'Disciplina.name',
+                        'Turma.disciplina_id',
+                        'Turma.curso_id',
+                        'count(*) as total'
+
+                    ],'group'=>['Inscricao.turma_id']
+                ]);
+
+            debug($inscricaos);
+            die();
         }
 
         public function faculdade_relatorios()

@@ -47,7 +47,7 @@
     }
   ],
   "require": {
-    "cakephp/cakephp": "2.8.0-RC1",
+    "cakephp/cakephp": "2.8.x",
     "radig/auditable": "@stable",
     "markstory/acl_extras": "@dev",
     "cakedc/migrations": "@stable",

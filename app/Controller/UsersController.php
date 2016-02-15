@@ -621,6 +621,9 @@
                 $this->redirect(['controller' => 'pages', 'action' => 'home']);
             }
             if ($this->request->is('post')) {
+                if(!isset($this->request->data['User'])){
+                    $this->redirect('/');
+                }
                 $username = $this->request->data['User']['username'];
                 if (is_numeric($username)) {
                     $this->User->Entidade->Aluno->contain(['Entidade' => ['User']]);

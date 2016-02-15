@@ -182,7 +182,7 @@
                         }
                     }
                 ?>
-                <div id="siga-content">
+                <div id="siga-content" class="col-sm-12">
                     <?php echo $this->fetch('content'); ?>
                 </div>
                 <!-- end: PAGE CONTENT-->

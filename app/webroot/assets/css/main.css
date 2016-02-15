@@ -1434,7 +1434,7 @@ li.dropdown.current-user .dropdown-menu li a {
     margin-top: 0;
     background-color: #FFFFFF;
     padding: 0;
-    min-height: 600px;
+    min-height: 550px;
 }
 
 .container {
@@ -5765,3 +5765,4 @@ td.column-right {
 #page-sidebar .discussion .messages p {
     font-size: 12px;
 }
+.top-buffer { margin-top:20px; margin-bottom: 60px; }
