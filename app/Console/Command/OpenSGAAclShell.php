@@ -23,6 +23,8 @@
                 $conditions['User.username'] = $parametros['username'];
             } elseif (isset($parametros['userId'])) {
                 $conditions['User.id'] = $parametros['userId'];
+            } elseif(isset($parametros['tipoUsuario'])){
+                $conditions['User.group_id'] = $parametros['tipoUsuario'];
             }
 
         if(isset($parametros['codigoUnidade'])){
@@ -70,10 +72,6 @@
 
         }
 
-        public function usuarios(){
-
-
-        }
 
 
 
