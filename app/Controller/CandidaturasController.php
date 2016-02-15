@@ -72,7 +72,7 @@
 						if (is_array($candidatos)) {
 							$this->Session->setFlash(__('Ficheiro de Renovação Processado com Sucesso'), 'default',
 								['class' => 'alert alert-success']);
-							$this->redirect(['action' => 'index']);
+							//$this->redirect(['action' => 'index']);
 						} else {
 							$this->Session->setFlash(__($candidatos), 'default',
 								['class' => 'alert alert-danger']);

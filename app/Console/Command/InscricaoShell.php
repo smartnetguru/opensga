@@ -18,21 +18,22 @@
          * Inscreve automaticamente estudantes novos ingressos no primeiro ano
          * @todo  Verificar se o anolectivo ja foi criado antes de criar turma
          */
-        public function inscricao_automatica()
+        public function inscricaoAutomatica()
         {
             $anoLectivo = Configure::read('OpenSGA.ano_lectivo');
-            $anoLectivoId = $this->Aluno->Inscricao->Turma->AnoLectivo->findByAno($anoLectivo);
-            $cursos = $this->Aluno->Curso->find('all', ['conditions' => ['Curso.unidade_organica_id' => 1]]);
+            $anoLectivoId = $this->Inscricao->Turma->AnoLectivo->findByAno($anoLectivo);
+            $cursos = $this->Inscricao->Aluno->Curso->find('all', ['conditions' => ['Curso.unidade_organica_id' => 12]]);
             foreach ($cursos as $curso) {
-                $planoEstudo = $this->Aluno->Curso->PlanoEstudo->find('first', [
+                $planoEstudo = $this->Inscricao->Aluno->Curso->PlanoEstudo->find('first', [
                     'conditions' => ['PlanoEstudo.curso_id' => $curso['Curso']['id']],
                     'order'      => 'PlanoEstudo.ano_criacao DESC',
                 ]);
+
                 if (!empty($planoEstudo)) {
-                    $this->Aluno->Curso->PlanoEstudo->DisciplinaPlanoEstudo->contain([
+                    $this->Inscricao->Aluno->Curso->PlanoEstudo->DisciplinaPlanoEstudo->contain([
                         'Disciplina',
                     ]);
-                    $disciplinas = $this->Aluno->Curso->PlanoEstudo->DisciplinaPlanoEstudo->find('all', [
+                    $disciplinas = $this->Inscricao->Aluno->Curso->PlanoEstudo->DisciplinaPlanoEstudo->find('all', [
                         'conditions' => [
                             'DisciplinaPlanoEstudo.plano_estudo_id'     => $planoEstudo['PlanoEstudo']['id'],
                             'DisciplinaPlanoEstudo.ano_curricular'      => 1,
@@ -40,7 +41,7 @@
                         ],
                     ]);
                     foreach ($disciplinas as $disciplina) {
-                        $alunos = $this->Aluno->find('all', [
+                        $alunos = $this->Inscricao->Aluno->find('all', [
                             'conditions' => [
                                 'Aluno.ano_ingresso' => $anoLectivo,
                                 'Aluno.curso_id'     => $curso['Curso']['id'],
@@ -49,7 +50,7 @@
                         if (!empty($alunos)) {
                             foreach ($alunos as $aluno) {
 
-                                $turmaExiste = $this->Aluno->Curso->Turma->find('first', [
+                                $turmaExiste = $this->Inscricao->Aluno->Curso->Turma->find('first', [
                                     'conditions' => [
                                         'Turma.ano_lectivo_id'      => $anoLectivoId['AnoLectivo']['id'],
                                         'Turma.curso_id'            => $curso['Curso']['id'],
@@ -64,7 +65,7 @@
                                 if (empty($turmaExiste)) {
                                     $turma = [];
                                     $turma['ano_lectivo_id'] = $anoLectivoId['AnoLectivo']['id'];
-                                    $turma['an_ocurricular'] = $disciplina['DisciplinaPlanoEstudo']['ano_curricular'];
+                                    $turma['ano_curricular'] = $disciplina['DisciplinaPlanoEstudo']['ano_curricular'];
                                     $turma['semestre_curricular'] = $disciplina['DisciplinaPlanoEstudo']['semestre_curricular'];
                                     $turma['curso_id'] = $curso['Curso']['id'];
                                     $turma['escola_id'] = 1;
@@ -77,13 +78,18 @@
                                     $turma['name'] = $nome;
 
                                     $turmas = ['Turma' => $turma];
-                                    $this->Aluno->Curso->Turma->create();
-                                    $this->Aluno->Curso->Turma->save($turmas);
-                                    $turmaId = $this->Aluno->Curso->Turma->id;
+                                    $this->Inscricao->Aluno->Curso->Turma->create();
+                                    if(!$this->Inscricao->Aluno->Curso->Turma->save($turmas)){
+                                        debug($disciplina);
+                                        debug($turmas);
+                                        debug($this->Inscricao->Aluno->Curso->Turma->validationErrors);
+                                        die();
+                                    }
+                                    $turmaId = $this->Inscricao->Aluno->Curso->Turma->id;
                                 } else {
                                     $turmaId = $turmaExiste['Turma']['id'];
                                 }
-                                $matricula = $this->Aluno->Matricula->findByAlunoIdAndAnoLectivoId($aluno['Aluno']['id'],
+                                $matricula = $this->Inscricao->Aluno->Matricula->findByAlunoIdAndAnoLectivoId($aluno['Aluno']['id'],
                                     $anoLectivoId['AnoLectivo']['id']);
                                 $inscricaoSave = [
                                     'Inscricao' => [
@@ -93,10 +99,12 @@
                                         'matricula_id'        => $matricula['Matricula']['id'],
                                         'data'                => $matricula['Matricula']['data'],
                                         'pagamento_id'        => null,
-                                        'tipo_inscricao_id'   => null,
+                                        'tipo_inscricao_id'   => 1,
+                                        'turma_inscricao_id'=>$turmaId,
+                                        'turma_frequencia_id'=>$turmaId
                                     ],
                                 ];
-                                $inscricaoExiste = $this->Aluno->Inscricao->find('first', [
+                                $inscricaoExiste = $this->Inscricao->Aluno->Inscricao->find('first', [
                                     'conditions' => [
                                         'aluno_id'            => $aluno['Aluno']['id'],
                                         'turma_id'            => $turmaId,
@@ -104,8 +112,11 @@
                                     ],
                                 ]);
                                 if (empty($inscricaoExiste)) {
-                                    $this->Aluno->Inscricao->create();
-                                    $this->Aluno->Inscricao->save($inscricaoSave);
+                                    $this->Inscricao->create();
+                                    if(!$this->Inscricao->save($inscricaoSave)){
+                                        debug($this->Inscricao->validationErrors);
+                                        die();
+                                    }
                                     $this->out('Aluno=' . $aluno['Aluno']['codigo'] . ',   Turma=' . $disciplina['Disciplina']['name'] . ' ----- Inscrito com sucesso');
                                 }
                             }

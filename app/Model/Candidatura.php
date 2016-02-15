@@ -174,11 +174,9 @@
 					break;
 				}
 
+				$numeroCandidato = $worksheet->getCell('G' . $linha_actual)->getCalculatedValue();
 				$numeroEstudante = $worksheet->getCell('A' . $linha_actual)->getCalculatedValue();
-				$candidatoExiste = $this->findByNumeroEstudante($numeroEstudante);
-				if ($candidatoExiste) {
-					return 'O número de Estudante ' . $numeroEstudante . ' Já foi usado por outro candidato. Nenhum Candidato foi importado';
-				} else {
+				$candidatoExiste = $this->findByNumeroCandidato($numeroCandidato);
 					$alunoExiste = $this->Entidade->Aluno->findByCodigo($numeroEstudante);
 					if ($alunoExiste) {
 						return 'O número de Estudante ' . $numeroEstudante . ' pertence a um estudante já matriculado. Nenhum Candidato foi importado';
@@ -186,6 +184,7 @@
 						$arrayCandidato = [
 							'Candidatura' => [
 								'numero_estudante' => $numeroEstudante,
+								'numero_candidato'=>$numeroCandidato
 							],
 						];
 						$nomeCompleto2 = $worksheet->getCell('B' . $linha_actual)
@@ -199,8 +198,7 @@
 							->getCalculatedValue();
 						$arrayCandidato['Candidatura']['tipo_ingresso_id'] = 2;
 						$arrayCandidato['Candidatura']['estado_candidatura_id'] = 2;
-						$cursoNome = $worksheet->getCell('D' . $linha_actual)
-							->getCalculatedValue();
+						$cursoNome = $worksheet->getCell('D' . $linha_actual)->getCalculatedValue();
 						$curso = $this->Curso->findByName($cursoNome);
 						if ($curso) {
 							$arrayCandidato['Candidatura']['curso_id'] = $curso['Curso']['id'];
@@ -211,11 +209,29 @@
 							return 'O Curso ' . $cursoNome . ' ainda não está cadastrado, ou está mal escrito no ficheiro.
                         Nenhum Candidato foi importado';
 						}
+						$viaAdmissao = $worksheet->getCell('E' . $linha_actual)->getCalculatedValue();
+						$alunoViaAdmissao = $this->AlunoViaAdmissao->findByName($viaAdmissao);
+						if(empty($alunoViaAdmissao)){
+							$arrayViaAdmissao =[
+								'AlunoViaAdmissao'=>[
+									'name'=>$viaAdmissao
+								]
+							];
+							$this->AlunoViaAdmissao->create();
+							$this->AlunoViaAdmissao->save($arrayViaAdmissao);
+							$alunoViaAdmissao = $this->AlunoViaAdmissao->findByName($viaAdmissao);
+						}
+						$arrayCandidato['Candidatura']['aluno_via_admissao_id']= $alunoViaAdmissao['AlunoViaAdmissao']['id'];
+
+						if($candidatoExiste){
+							$arrayCandidato['Candidatura']['id'] = $candidatoExiste['Candidatura']['id'];
+						}
+
 						$candidatos[] = $arrayCandidato;
 
 						$linha_actual++;
 					}
-				}
+
 
 			}
 			if ($this->saveAll($candidatos)) {
