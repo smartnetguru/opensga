@@ -342,6 +342,24 @@
 
         }
 
+        public function faculdade_print_lista_docentes(){
+
+            $unidadeOrganicaId = CakeSession::read('Auth.User.unidade_organica_id');
+            $conditions['Docente.unidade_organica_id'] = $unidadeOrganicaId;
+
+            $this->Docente->contain([
+                'Entidade' => [
+                    'User',
+                ],
+                'UnidadeOrganica',
+                'DocenteCategoria',
+            ]);
+
+            $docentes = $this->Docente->find('all',['conditions'=>$conditions]);
+            $this->set(compact('docentes'));
+
+        }
+
         public function relatorios_docentes_por_faculdade()
         {
             $unidadeOrganicas = $this->Docente->DocenteUnidadeOrganica->UnidadeOrganica->find('list',

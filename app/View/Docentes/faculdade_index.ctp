@@ -6,9 +6,14 @@
 
 <?php $this->start('top-actions') ?>
     <div class="action-list">
-        <div class="col-sm-1">
+        <div class="col-sm-2">
             <?php echo $this->Html->link('<i class="fa fa-user fa-2x"></i>Novo Docente',
                     ['controller' => 'docentes', 'action' => 'adicionar_docente'],
+                    ['escape' => false, 'class' => 'btn btn-icon btn-block']) ?>
+        </div>
+        <div class="col-sm-2">
+            <?php echo $this->Html->link('<i class="fa fa-user fa-2x"></i>Imprimir Lista',
+                    ['controller' => 'docentes', 'action' => 'print_lista_docentes'],
                     ['escape' => false, 'class' => 'btn btn-icon btn-block']) ?>
         </div>
     </div>
