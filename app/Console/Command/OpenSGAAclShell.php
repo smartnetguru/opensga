@@ -66,6 +66,7 @@
             $parser->addOption('userId');
             $parser->addOption('username');
             $parser->addOption('codigoUnidade');
+            $parser->addOption('tipoUsuario');
 
             return $parser;
 
