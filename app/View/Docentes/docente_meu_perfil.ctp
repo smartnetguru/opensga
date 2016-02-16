@@ -1,19 +1,4 @@
 ﻿<?php
-    /**
-     * View do Perfil do Aluno
-     *
-     * @copyright     Copyright 2010-2011, INFOmoz (Informática-Moçambique) (http://infomoz.net)
-     * @link          http://infomoz.net/opensga OpenSGA - Sistema de Gestão Académica
-     * @author          Elisio Leonardo (elisio.leonardo@gmail.com)
-     * @package       opensga
-     * @subpackage    opensga.core.estudantes
-     * @version       OpenSGA v 0.5.0
-     * @since         OpenSGA v 0.1.0
-     *
-     */
-?>
-
-<?php
     $this->BreadCumbs->addCrumb(__('Docentes'), '/docentes');
     $this->BreadCumbs->addCrumb($docente['Entidade']['name'], '#');
     $this->BreadCumbs->addCrumb(__('Perfil'), '#');
@@ -98,7 +83,7 @@
                                     <p>
                                         <a class="btn btn-facebook btn-sm btn-squared">
                                             <i class="fa fa-facebook"></i>
-                                        </a>
+                                   {     </a>
                                         <a class="btn btn-twitter btn-sm btn-squared">
                                             <i class="fa fa-twitter"></i>
                                         </a>
@@ -194,46 +179,9 @@
                                             ], ['escape' => false, 'class' => 'btn btn-icon btn-block']) ?>
 
                                 </div>
-                                <div class="col-sm-2">
-                                    <?php echo $this->Html->link($this->Html->image('icons/packs/crystal/48x48/apps/printer.png') . "<br />Atribuir Turmas",
-                                            [
-                                                    'controller' => 'docentes',
-                                                    'action'     => 'atribuir_turmas',
-                                                    $docente['Docente']['id'],
-                                            ], [
-                                                    'target' => 'blank',
-                                                    'escape' => false,
-                                                    'class'  => 'btn btn-icon btn-block',
-                                            ]) ?>
 
-                                </div>
-                                <div class="col-sm-2">
-                                    <?php echo $this->Html->link($this->Html->image('icons/packs/crystal/48x48/apps/printer.png') . "<br />Atribuir Disciplinas",
-                                            [
-                                                    'controller' => 'docentes',
-                                                    'action'     => 'atribuir_disciplinas',
-                                                    $docente['Docente']['id'],
-                                            ], ['escape' => false, 'class' => 'btn btn-icon btn-block']) ?>
 
-                                </div>
-                                <div class="col-sm-2">
-                                    <?php echo $this->Html->link($this->Html->image('icons/packs/crystal/48x48/apps/printer.png') . "<br />Alterar Status",
-                                            [
-                                                    'controller' => 'docentes',
-                                                    'action'     => 'alterar_status',
-                                                    $docente['Docente']['id'],
-                                            ], ['escape' => false, 'class' => 'btn btn-icon btn-block']) ?>
 
-                                </div>
-                                <div class="col-sm-2">
-                                    <?php echo $this->Html->link($this->Html->image('icons/packs/crystal/48x48/apps/printer.png') . "<br />Alterar Nome",
-                                            [
-                                                    'controller' => 'docentes',
-                                                    'action'     => 'alterar_nome',
-                                                    $docente['Docente']['id'],
-                                            ], ['escape' => false, 'class' => 'btn btn-icon btn-block']) ?>
-
-                                </div>
                                 <div class="col-sm-2">
                                     <?php echo $this->Html->link($this->Html->image('icons/packs/crystal/48x48/apps/printer.png') . "<br />Enviar SMS",
                                             [
@@ -271,27 +219,27 @@
                                         <label class="label label-info control-label">
                                             Curso
                                         </label>
-                                        <h4> <?php echo h($aluno['Curso']['name']) ?> </h4>
+                                        <h4> <?php //echo h($aluno['Curso']['name']) ?> </h4>
 
                                     </div>
                                     <div class="form-group">
                                         <label class="label label-info control-label">
                                             Faculdade
                                         </label>
-                                        <p> <?php echo h($aluno['Curso']['UnidadeOrganica']['name']) ?> </p>
+                                        <p> <?php //echo h($aluno['Curso']['UnidadeOrganica']['name']) ?> </p>
 
                                     </div>
                                     <div class="form-group">
                                         <label class="label label-info control-label">
                                             Ano de Ingresso
                                         </label>
-                                        <p> <?php echo h($aluno['Aluno']['ano_ingresso']) ?> </p>
+                                        <p> <?php //echo h($aluno['Aluno']['ano_ingresso']) ?> </p>
                                     </div>
                                     <div class="form-group">
                                         <label class="label label-info control-label">
                                             Curriculum
                                         </label>
-                                        <p> <?php echo h($aluno['Aluno']['PlanoEstudo']['name']) ?> </p>
+                                        <p> <?php //echo h($aluno['Aluno']['PlanoEstudo']['name']) ?> </p>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -299,27 +247,27 @@
                                         <label class="label label-info control-label">
                                             Morada
                                         </label>
-                                        <p> <?php echo h($aluno['Entidade']['Bairro']['name']) ?> </p>
+                                        <p> <?php //echo h($docente['Entidade']['Bairro']['name']) ?> </p>
 
                                     </div>
                                     <div class="form-group">
                                         <label class="label label-info control-label">
                                             Telemovel
                                         </label>
-                                        <p> <?php echo h($aluno['Entidade']['telemovel']) ?> </p>
+                                        <p> <?php echo h($docente['Entidade']['telemovel']) ?> </p>
                                     </div>
                                     <div class="form-group">
                                         <label class="label label-info control-label">
                                             Email Institucional
                                         </label>
-                                        <p> <?php echo h($aluno['Entidade']['email']) ?> </p>
+                                        <p> <?php echo h($docente['Entidade']['email']) ?> </p>
 
                                     </div>
                                     <div class="form-group">
                                         <label class="label label-info control-label">
                                             Email Pessoal
                                         </label>
-                                        <p> <?php echo h($aluno['Entidade']['User']['username']) ?> </p>
+                                        <p> <?php echo h($docente['Entidade']['User']['username']) ?> </p>
 
                                     </div>
                                 </div>
@@ -383,7 +331,7 @@
                     </div>
                 </div>
                 <div class="tab-pane" id="panel_detalhes">
-                    <form id="form" role="form" action="#">
+                    <!--<form id="form" role="form" action="#">
                         <div class="row">
                             <div class="col-md-12">
                                 <h3>Account Info</h3>
@@ -658,7 +606,7 @@
                                 </button>
                             </div>
                         </div>
-                    </form>
+                    </form>-->
                 </div>
                 <div class="tab-pane" id="panel_projects">
                     <table id="projects" class="table table-striped table-bordered table-hover">

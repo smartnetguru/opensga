@@ -185,15 +185,13 @@
             }
 
             if ($this->request->is('post')) {
-                $resultado = $this->Turma->criaAvaliacao($this->request->data);
 
-                if ($resultado[0] === true) {
-                    $this->Session->setFlash('Avaliacao Criada com Sucesso');
+                try{
+                    $this->Turma->criaAvaliacao($this->request->data);
+                    $this->Flash->success('Avaliacao Criada com Sucesso');
                     $this->redirect(['action' => 'ver_turma', $turmaId]);
-                } else {
-
-                    $this->Flash->error($resultado[1]);
-
+                } catch(Exception $e){
+                    $this->Flash->error($e->getMessage());
                 }
             }
             $tipoAvaliacaos = $this->Turma->TurmaTipoAvaliacao->TipoAvaliacao->find('list');

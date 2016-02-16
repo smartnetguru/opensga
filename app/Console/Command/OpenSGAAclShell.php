@@ -27,6 +27,12 @@
                 $conditions['User.group_id'] = $parametros['tipoUsuario'];
             }
 
+        $db = ConnectionManager::getDataSource('default');
+
+$isconnected = $db->isConnected();  //is the connection open?
+$db->close();  //close the connection
+$db->reconnect();  //reconnect to the db
+
         if(isset($parametros['codigoUnidade'])){
             $this->User->Funcionario->contain([
                 'UnidadeOrganica','User'

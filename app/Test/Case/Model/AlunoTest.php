@@ -159,6 +159,7 @@
                 'Matricula'             => [
                     'user_id' => '42646',
                 ],
+                'necessidade_especial'=>[]
             ];
             $resultado = $this->Aluno->cadastraAluno($data);
             $this->assertSame(true, $resultado);
@@ -193,6 +194,7 @@
                 'Matricula'             => [
                     'user_id' => '1',
                 ],
+                'necessidade_especial'=>[]
             ];
             $resultado2 = $this->Aluno->cadastraAluno($data2);
             $this->assertSame(true, $resultado2);

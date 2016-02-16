@@ -71,6 +71,9 @@
         <li><b>D</b> - Nome do Curso<b> (Obrigatório)</b>. O nome do Curso deve estar escrito como na Base de
             Dados
         </li>
+        <li><b>E</b> - Via de Ingresso(Obrigatorio)</li>
+        <li><b>F</b> - Ano de Ingresso(Obrigatorio)</li>
+        <li><b>G</b> - Numero de Candidato(Obrigatorio)</li>
     </ul>
 </div>
 <?php $this->end(); ?>

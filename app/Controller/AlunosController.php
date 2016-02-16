@@ -458,7 +458,7 @@
             $this->set(compact('aluno', 'is_regular', 'classe_estado', 'celular', 'funcionario'));
         }
 
-        public function docente_index($alunoId)
+        public function docente_index()
         {
             $userId = $this->Session->read('Auth.User.id');
 
@@ -467,10 +467,12 @@
                 throw new NotFoundException('Docente Invalido ou tentativa de Fraude');
             }
 
+            $this->Aluno->Inscricao->Turma->DocenteTurma->contain(['Turma']);
             $turmasDocente = $this->Aluno->Inscricao->Turma->DocenteTurma->find('all', [
                 'conditions' => [
                     'DocenteTurma.docente_id'              => $docente['Docente']['id'],
                     'DocenteTurma.estado_docente_turma_id' => 1,
+                    'Turma.estado_turma_id'=>1
                 ],
             ]);
             $turmaIds = Hash::extract($turmasDocente, '{n}.DocenteTurma.turma_id');

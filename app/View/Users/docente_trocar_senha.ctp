@@ -1,4 +1,4 @@
-<div class="container_12">
+<?php $this->extend('/Common/Users/trocar_senha');?><div class="container_12">
     <div class="grid_12">
         <div class="block-border">
             <div class="block-content">

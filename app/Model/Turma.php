@@ -238,6 +238,7 @@
         /**
          * Grava os dados da Avaliacao a Criar
          * Controla o total de Pesos das Avaliacoes da Turma
+         * @todo rever a cena dos pesos
          * @param $data
          */
         public function criaAvaliacao($data)
@@ -250,17 +251,11 @@
             }
             $this->TurmaTipoAvaliacao->create();
             if ($this->TurmaTipoAvaliacao->save($data)) {
-                return [true];
+                return true;
             } else {
-                $erro = implode(',', $this->TurmaTipoAvaliacao->validationErrors);
-                debug($this->TurmaTipoAvaliacao->validationErrors);
-                debug($erro);
-
-                return [false, 'ERRO ao gravar: ' . $erro];
-
+                throw new DataNotSavedException($this->TurmaTipoAvaliacao->validationErrors);
+                return false;
             }
-
-            debug($data);
         }
 
         public function getTurmasSemDocente($anoLectivoId, $semestreLectivoId, $unidadeOrganicaId = null, $type = 'all')

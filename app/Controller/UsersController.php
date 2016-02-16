@@ -240,13 +240,13 @@
             }
 
             if ($this->request->is('post') || $this->request->is('put')) {
-                $senha_antiga = $this->data['User']['senhaantiga'];
-                $senha_nova1 = $this->data['User']['novasenha1'];
-                $senha_nova2 = $this->data['User']['novasenha2'];
+                $senha_antiga = $this->data['User']['senha_antiga'];
+                $senha_nova1 = $this->data['User']['nova_senha'];
+                $senha_nova2 = $this->data['User']['confirmar_nova_senha'];
 
                 $senha_bd = $this->User->findById($this->Session->read('Auth.User.id'));
                 $storedHash = $senha_bd['User']['password'];
-                $newHash = Security::hash($this->request->data['User']['senhaantiga'], 'blowfish', $storedHash);
+                $newHash = Security::hash($senha_antiga, 'blowfish', $storedHash);
                 $correct = $storedHash == $newHash;
                 if ($correct) {
                     if ($senha_nova1 == $senha_nova2) {
@@ -271,6 +271,10 @@
                         ['class' => 'alert error']);
                 }
             }
+
+            $this->User->contain(['Entidade']);
+            $user = $this->User->findById($id);
+            $this->set(compact('user'));
         }
 
         function edit($id = null)
@@ -716,6 +720,12 @@
                     $this->User->actualizaLoginHistory($User['id'], $User['group_id'], date('Y-m-d H:i:s'),
                         $this->request->clientIp());
                     $this->Session->write('Auth.User.Groups', $grupos_combine);
+                    $message = [
+                        'Command'     => 'OpenSGAAcl',
+                        'Action'      => '--username',
+                        'username' => $User['username'],
+                    ];
+                    RabbitMQ::publish($message);
                     if ($User['group_id'] == 1) {
                         $unidade_organicas = $this->User->Funcionario->UnidadeOrganica->find('list');
                         $this->Session->write('Auth.User.unidade_organicas', $unidade_organicas);
