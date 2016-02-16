@@ -1,273 +1,336 @@
-<div class="artigos view">
-    <h2><?php echo __('Artigo'); ?></h2>
-    <dl>
-        <dt><?php echo __('Id'); ?></dt>
-        <dd>
-            <?php echo h($artigo['Artigo']['id']); ?>
-            &nbsp;
-        </dd>
-        <dt><?php echo __('User'); ?></dt>
-        <dd>
-            <?php echo $this->Html->link($artigo['User']['name'],
-                    ['controller' => 'users', 'action' => 'view', $artigo['User']['id']]); ?>
-            &nbsp;
-        </dd>
-        <dt><?php echo __('Entidade'); ?></dt>
-        <dd>
-            <?php echo $this->Html->link($artigo['Entidade']['name'],
-                    ['controller' => 'entidades', 'action' => 'view', $artigo['Entidade']['id']]); ?>
-            &nbsp;
-        </dd>
-        <dt><?php echo __('Data Publicacao'); ?></dt>
-        <dd>
-            <?php echo h($artigo['Artigo']['data_publicacao']); ?>
-            &nbsp;
-        </dd>
-        <dt><?php echo __('Conteudo'); ?></dt>
-        <dd>
-            <?php echo h($artigo['Artigo']['conteudo']); ?>
-            &nbsp;
-        </dd>
-        <dt><?php echo __('Titulo'); ?></dt>
-        <dd>
-            <?php echo h($artigo['Artigo']['titulo']); ?>
-            &nbsp;
-        </dd>
-        <dt><?php echo __('Resumo'); ?></dt>
-        <dd>
-            <?php echo h($artigo['Artigo']['resumo']); ?>
-            &nbsp;
-        </dd>
-        <dt><?php echo __('Estado Objecto'); ?></dt>
-        <dd>
-            <?php echo $this->Html->link($artigo['EstadoObjecto']['name'],
-                    ['controller' => 'estado_objectos', 'action' => 'view', $artigo['EstadoObjecto']['id']]); ?>
-            &nbsp;
-        </dd>
-        <dt><?php echo __('Artigo Estado Artigo'); ?></dt>
-        <dd>
-            <?php echo $this->Html->link($artigo['ArtigoEstadoArtigo']['name'], [
-                    'controller' => 'artigo_estado_artigos',
-                    'action'     => 'view',
-                    $artigo['ArtigoEstadoArtigo']['id'],
-            ]); ?>
-            &nbsp;
-        </dd>
-        <dt><?php echo __('Slug'); ?></dt>
-        <dd>
-            <?php echo h($artigo['Artigo']['slug']); ?>
-            &nbsp;
-        </dd>
-        <dt><?php echo __('Created'); ?></dt>
-        <dd>
-            <?php echo h($artigo['Artigo']['created']); ?>
-            &nbsp;
-        </dd>
-        <dt><?php echo __('Modified'); ?></dt>
-        <dd>
-            <?php echo h($artigo['Artigo']['modified']); ?>
-            &nbsp;
-        </dd>
-        <dt><?php echo __('Created By'); ?></dt>
-        <dd>
-            <?php echo h($artigo['Artigo']['created_by']); ?>
-            &nbsp;
-        </dd>
-        <dt><?php echo __('Modified By'); ?></dt>
-        <dd>
-            <?php echo h($artigo['Artigo']['modified_by']); ?>
-            &nbsp;
-        </dd>
-    </dl>
-</div>
-<div class="actions">
-    <h3><?php echo __('Actions'); ?></h3>
-    <ul>
-        <li><?php echo $this->Html->link(__('Edit Artigo'), ['action' => 'edit', $artigo['Artigo']['id']]); ?> </li>
-        <li><?php echo $this->Form->postLink(__('Delete Artigo'), ['action' => 'delete', $artigo['Artigo']['id']],
-                    ['confirm' => __('Are you sure you want to delete # %s?', $artigo['Artigo']['id'])]); ?> </li>
-        <li><?php echo $this->Html->link(__('List Artigos'), ['action' => 'index']); ?> </li>
-        <li><?php echo $this->Html->link(__('New Artigo'), ['action' => 'add']); ?> </li>
-        <li><?php echo $this->Html->link(__('List Users'), ['controller' => 'users', 'action' => 'index']); ?> </li>
-        <li><?php echo $this->Html->link(__('New User'), ['controller' => 'users', 'action' => 'add']); ?> </li>
-        <li><?php echo $this->Html->link(__('List Entidades'),
-                    ['controller' => 'entidades', 'action' => 'index']); ?> </li>
-        <li><?php echo $this->Html->link(__('New Entidade'), ['controller' => 'entidades', 'action' => 'add']); ?> </li>
-        <li><?php echo $this->Html->link(__('List Estado Objectos'),
-                    ['controller' => 'estado_objectos', 'action' => 'index']); ?> </li>
-        <li><?php echo $this->Html->link(__('New Estado Objecto'),
-                    ['controller' => 'estado_objectos', 'action' => 'add']); ?> </li>
-        <li><?php echo $this->Html->link(__('List Artigo Estado Artigos'),
-                    ['controller' => 'artigo_estado_artigos', 'action' => 'index']); ?> </li>
-        <li><?php echo $this->Html->link(__('New Artigo Estado Artigo'),
-                    ['controller' => 'artigo_estado_artigos', 'action' => 'add']); ?> </li>
-        <li><?php echo $this->Html->link(__('List Artigo Area Academicas'),
-                    ['controller' => 'artigo_area_academicas', 'action' => 'index']); ?> </li>
-        <li><?php echo $this->Html->link(__('New Artigo Area Academica'),
-                    ['controller' => 'artigo_area_academicas', 'action' => 'add']); ?> </li>
-        <li><?php echo $this->Html->link(__('List Artigo Area Pesquisas'),
-                    ['controller' => 'artigo_area_pesquisas', 'action' => 'index']); ?> </li>
-        <li><?php echo $this->Html->link(__('New Artigo Area Pesquisa'),
-                    ['controller' => 'artigo_area_pesquisas', 'action' => 'add']); ?> </li>
-        <li><?php echo $this->Html->link(__('List Artigo Metas'),
-                    ['controller' => 'artigo_metas', 'action' => 'index']); ?> </li>
-        <li><?php echo $this->Html->link(__('New Artigo Meta'),
-                    ['controller' => 'artigo_metas', 'action' => 'add']); ?> </li>
-    </ul>
-</div>
-<div class="related">
-    <h3><?php echo __('Related Artigo Area Academicas'); ?></h3>
-    <?php if (!empty($artigo['ArtigoAreaAcademica'])): ?>
-        <table cellpadding="0" cellspacing="0">
-            <tr>
-                <th><?php echo __('Id'); ?></th>
-                <th><?php echo __('Artigo Id'); ?></th>
-                <th><?php echo __('Area Academica Id'); ?></th>
-                <th><?php echo __('Created'); ?></th>
-                <th><?php echo __('Modified'); ?></th>
-                <th><?php echo __('Created By'); ?></th>
-                <th><?php echo __('Modified By'); ?></th>
-                <th><?php echo __('Estado Objecto Id'); ?></th>
-                <th class="actions"><?php echo __('Actions'); ?></th>
-            </tr>
-            <?php foreach ($artigo['ArtigoAreaAcademica'] as $artigoAreaAcademica): ?>
-                <tr>
-                    <td><?php echo $artigoAreaAcademica['id']; ?></td>
-                    <td><?php echo $artigoAreaAcademica['artigo_id']; ?></td>
-                    <td><?php echo $artigoAreaAcademica['area_academica_id']; ?></td>
-                    <td><?php echo $artigoAreaAcademica['created']; ?></td>
-                    <td><?php echo $artigoAreaAcademica['modified']; ?></td>
-                    <td><?php echo $artigoAreaAcademica['created_by']; ?></td>
-                    <td><?php echo $artigoAreaAcademica['modified_by']; ?></td>
-                    <td><?php echo $artigoAreaAcademica['estado_objecto_id']; ?></td>
-                    <td class="actions">
-                        <?php echo $this->Html->link(__('View'), [
-                                'controller' => 'artigo_area_academicas',
-                                'action'     => 'view',
-                                $artigoAreaAcademica['id'],
-                        ]); ?>
-                        <?php echo $this->Html->link(__('Edit'), [
-                                'controller' => 'artigo_area_academicas',
-                                'action'     => 'edit',
-                                $artigoAreaAcademica['id'],
-                        ]); ?>
-                        <?php echo $this->Form->postLink(__('Delete'), [
-                                'controller' => 'artigo_area_academicas',
-                                'action'     => 'delete',
-                                $artigoAreaAcademica['id'],
-                        ], ['confirm' => __('Are you sure you want to delete # %s?', $artigoAreaAcademica['id'])]); ?>
-                    </td>
-                </tr>
-            <?php endforeach; ?>
-        </table>
-    <?php endif; ?>
+<section class="wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9">
+                <div class="blog-posts post-page">
+                    <article>
+                        <div class="post-image">
+                            <?= $this->Html->image($artigo['Artigo']['imagem_destacada'],
+                                    ['style' => 'max-width: 330px;max-height: 280;']) ?>
+                        </div>
+                        <div class="post-content">
+                            <h2>
+                                <?php echo $this->Html->link(h($artigo['Artigo']['titulo']), '#') ?>
+                            </h2>
+                            <div class="post-meta">
+                                <span><i class="fa fa-calendar"></i><?php echo h($artigo['Artigo']['data_publicacao']); ?> </span>
+											<span><i class="fa fa-user"></i> Por
+                                                <?php echo $this->Html->link($artigo['Entidade']['name'],
+                                                        [
+                                                                'controller' => 'artigos',
+                                                                'action'     => 'ver_autor',
+                                                                $artigo['Entidade']['id'],
+                                                        ]);
+                                                ?> </span>
+											<span><i class="fa fa-tag"></i>
+												<!--<a href="#">
+                                                    Bootstrap
+                                                </a>,
+												<a href="#">
+                                                    Design
+                                                </a>--> </span>
+											<span><i class="fa fa-comments"></i>
+												<a href="#">
+                                                    0 Comentarios
+                                                </a></span>
+                            </div>
+                            <?php echo $artigo['Artigo']['conteudo']; ?>
+                            <div class="post-media post-author">
+                                <h4><i class="fa fa-user"></i>Autor</h4>
+                                <div class="img-thumbnail">
+                                    <?php
 
-    <div class="actions">
-        <ul>
-            <li><?php echo $this->Html->link(__('New Artigo Area Academica'),
-                        ['controller' => 'artigo_area_academicas', 'action' => 'add']); ?> </li>
-        </ul>
-    </div>
-</div>
-<div class="related">
-    <h3><?php echo __('Related Artigo Area Pesquisas'); ?></h3>
-    <?php if (!empty($artigo['ArtigoAreaPesquisa'])): ?>
-        <table cellpadding="0" cellspacing="0">
-            <tr>
-                <th><?php echo __('Id'); ?></th>
-                <th><?php echo __('Artigo Id'); ?></th>
-                <th><?php echo __('Area Pesquisa Id'); ?></th>
-                <th><?php echo __('Created'); ?></th>
-                <th><?php echo __('Modified'); ?></th>
-                <th><?php echo __('Created By'); ?></th>
-                <th><?php echo __('Modified By'); ?></th>
-                <th><?php echo __('Estado Objecto Id'); ?></th>
-                <th class="actions"><?php echo __('Actions'); ?></th>
-            </tr>
-            <?php foreach ($artigo['ArtigoAreaPesquisa'] as $artigoAreaPesquisa): ?>
-                <tr>
-                    <td><?php echo $artigoAreaPesquisa['id']; ?></td>
-                    <td><?php echo $artigoAreaPesquisa['artigo_id']; ?></td>
-                    <td><?php echo $artigoAreaPesquisa['area_pesquisa_id']; ?></td>
-                    <td><?php echo $artigoAreaPesquisa['created']; ?></td>
-                    <td><?php echo $artigoAreaPesquisa['modified']; ?></td>
-                    <td><?php echo $artigoAreaPesquisa['created_by']; ?></td>
-                    <td><?php echo $artigoAreaPesquisa['modified_by']; ?></td>
-                    <td><?php echo $artigoAreaPesquisa['estado_objecto_id']; ?></td>
-                    <td class="actions">
-                        <?php echo $this->Html->link(__('View'), [
-                                'controller' => 'artigo_area_pesquisas',
-                                'action'     => 'view',
-                                $artigoAreaPesquisa['id'],
-                        ]); ?>
-                        <?php echo $this->Html->link(__('Edit'), [
-                                'controller' => 'artigo_area_pesquisas',
-                                'action'     => 'edit',
-                                $artigoAreaPesquisa['id'],
-                        ]); ?>
-                        <?php echo $this->Form->postLink(__('Delete'), [
-                                'controller' => 'artigo_area_pesquisas',
-                                'action'     => 'delete',
-                                $artigoAreaPesquisa['id'],
-                        ], ['confirm' => __('Are you sure you want to delete # %s?', $artigoAreaPesquisa['id'])]); ?>
-                    </td>
-                </tr>
-            <?php endforeach; ?>
-        </table>
-    <?php endif; ?>
+                                            //$file = '/Fotos/Estudantes/' . $aluno['Aluno']['ano_ingresso'] . '/' . $aluno['Aluno']['codigo'] . '.jpg';
+                                            $file = '/Fotos/profile2.png';
+                                            if (!$signedUrl = $this->AmazonS3->getSignedUrl($file)) {
 
-    <div class="actions">
-        <ul>
-            <li><?php echo $this->Html->link(__('New Artigo Area Pesquisa'),
-                        ['controller' => 'artigo_area_pesquisas', 'action' => 'add']); ?> </li>
-        </ul>
-    </div>
-</div>
-<div class="related">
-    <h3><?php echo __('Related Artigo Metas'); ?></h3>
-    <?php if (!empty($artigo['ArtigoMeta'])): ?>
-        <table cellpadding="0" cellspacing="0">
-            <tr>
-                <th><?php echo __('Id'); ?></th>
-                <th><?php echo __('Artigo Id'); ?></th>
-                <th><?php echo __('Meta Key'); ?></th>
-                <th><?php echo __('Meta Value'); ?></th>
-                <th><?php echo __('Estado Objecto Id'); ?></th>
-                <th><?php echo __('Created'); ?></th>
-                <th><?php echo __('Modified'); ?></th>
-                <th><?php echo __('Created By'); ?></th>
-                <th><?php echo __('Modified By'); ?></th>
-                <th class="actions"><?php echo __('Actions'); ?></th>
-            </tr>
-            <?php foreach ($artigo['ArtigoMeta'] as $artigoMeta): ?>
-                <tr>
-                    <td><?php echo $artigoMeta['id']; ?></td>
-                    <td><?php echo $artigoMeta['artigo_id']; ?></td>
-                    <td><?php echo $artigoMeta['meta_key']; ?></td>
-                    <td><?php echo $artigoMeta['meta_value']; ?></td>
-                    <td><?php echo $artigoMeta['estado_objecto_id']; ?></td>
-                    <td><?php echo $artigoMeta['created']; ?></td>
-                    <td><?php echo $artigoMeta['modified']; ?></td>
-                    <td><?php echo $artigoMeta['created_by']; ?></td>
-                    <td><?php echo $artigoMeta['modified_by']; ?></td>
-                    <td class="actions">
-                        <?php echo $this->Html->link(__('View'),
-                                ['controller' => 'artigo_metas', 'action' => 'view', $artigoMeta['id']]); ?>
-                        <?php echo $this->Html->link(__('Edit'),
-                                ['controller' => 'artigo_metas', 'action' => 'edit', $artigoMeta['id']]); ?>
-                        <?php echo $this->Form->postLink(__('Delete'),
-                                ['controller' => 'artigo_metas', 'action' => 'delete', $artigoMeta['id']],
-                                ['confirm' => __('Are you sure you want to delete # %s?', $artigoMeta['id'])]); ?>
-                    </td>
-                </tr>
-            <?php endforeach; ?>
-        </table>
-    <?php endif; ?>
+                                                $file = '/Fotos/profile2.png';
+                                                $signedUrl = $this->AmazonS3->getSignedUrl($file);
+                                            }
+                                            ?>
+                                            <?php echo $this->Html->image($signedUrl,
+                                                ['style' => 'max-width:50px;max-height:50px']); ?>
+                                </div>
+                                <p>
+                                    <strong class="name">
+                                        <?php echo $this->Html->link($artigo['Entidade']['name'],
+                                                [
+                                                        'controller' => 'artigos',
+                                                        'action'     => 'ver_autor',
+                                                        $artigo['Entidade']['id'],
+                                                ]);
+                                        ?>
+                                    </strong>
+                                </p>
+                               <!-- <p>
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae. Sed dui lorem, adipiscing in adipiscing et, interdum nec metus. Mauris ultricies, justo eu convallis placerat, felis enim ornare nisi, vitae mattis nulla ante id dui.
+                                </p>-->
+                            </div>
+                            <!--<div class="post-media post-comments">
+                                <h4><i class="fa fa-comments"></i>Comments (3)</h4>
+                                <div class="media">
+                                    <a class="pull-left" href="#">
+                                        <img class="media-object" alt="" src="assets/images/avatar-2.jpg">
+                                    </a>
+                                    <div class="media-body">
+                                        <h5 class="media-heading">Media heading </h5>
+                                        <span class="pull-right"> <span> <a href="#"><i class="fa fa-reply"></i> Reply</a></span> </span>
+                                        <p>
+                                            Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
+                                        </p>
+                                        <span class="date pull-right">January 12, 2014 at 1:38 pm</span>
+                                        <hr>
+                                        <!-- Nested media object
+                                        <div class="media">
+                                            <a class="pull-left" href="#">
+                                                <img class="media-object" alt="" src="assets/images/avatar-1.jpg">
+                                            </a>
+                                            <div class="media-body">
+                                                <h5 class="media-heading">Media heading </h5>
+                                                <span class="pull-right"> <span> <a href="#"><i class="fa fa-reply"></i> Reply</a></span> </span>
+                                                <p>
+                                                    Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
+                                                </p>
+                                                <span class="date pull-right">January 12, 2014 at 1:38 pm</span>
+                                            </div>
+                                        </div>
+                                        <!--end media-
+                                        <hr>
+                                        <div class="media">
+                                            <a class="pull-left" href="#">
+                                                <img class="media-object" alt="" src="assets/images/avatar-3.jpg">
+                                            </a>
+                                            <div class="media-body">
+                                                <h5 class="media-heading">Media heading </h5>
+                                                <span class="pull-right"> <span> <a href="#"><i class="fa fa-reply"></i> Reply</a></span> </span>
+                                                <p>
+                                                    Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
+                                                </p>
+                                                <span class="date pull-right">January 12, 2014 at 1:38 pm</span>
+                                            </div>
+                                        </div>
+                                        <!--end media
+                                    </div>
+                                </div>
+                                <div class="media">
+                                    <a class="pull-left" href="#">
+                                        <img class="media-object" alt="" src="assets/images/avatar-4.jpg">
+                                    </a>
+                                    <div class="media-body">
+                                        <h5 class="media-heading">Media heading </h5>
+                                        <span class="pull-right"> <span> <a href="#"><i class="fa fa-reply"></i> Reply</a></span> </span>
+                                        <p>
+                                            Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
+                                        </p>
+                                        <span class="date pull-right">January 12, 2014 at 1:38 pm</span>
+                                    </div>
+                                </div>
+                            </div> -->
+                            <!--<div class="post-block post-leave-comment">
+                                <h3>Leave a comment</h3>
+                                <form type="post" action="">
+                                    <div class="row">
+                                        <div class="form-group">
+                                            <div class="col-md-6">
+                                                <label>
+                                                    Your name *
+                                                </label>
+                                                <input type="text" id="name" name="name" class="form-control" maxlength="100" value="">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label>
+                                                    Your email address *
+                                                </label>
+                                                <input type="email" id="email" name="email" class="form-control" maxlength="100" value="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group">
+                                            <div class="col-md-12">
+                                                <label>
+                                                    Comment *
+                                                </label>
+                                                <textarea id="comment" name="comment" class="form-control" rows="10" maxlength="5000"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <input type="submit" data-loading-text="Loading..." class="btn btn-main-color" value="Post Comment">
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>-->
+                        </div>
+                    </article>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <aside class="sidebar">
+                    <form>
+                        <div class="input-group">
+                            <input type="text" id="s" name="s" placeholder="Pesquisar..." class="form-control">
+										<span class="input-group-btn">
+											<button class="btn btn-main-color" type="submit">
+                                                <i class="fa fa-search"></i>
+                                            </button> </span>
+                        </div>
+                    </form>
+                    <hr>
+                    <h4>Categorias</h4>
+                    <ul class="nav nav-list blog-categories">
+                        <li>
+                            <a href="#">
+                                Manual SIGA
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                Notícias
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                Outros
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="tabs">
+                        <ul class="nav nav-tabs">
+                            <li class="active">
+                                <a data-toggle="tab" href="#popularPosts"><i class="fa fa-star"></i> Populares</a>
+                            </li>
+                            <li>
+                                <a data-toggle="tab" href="#recentPosts">
+                                    Recentes
+                                </a>
+                            </li>
+                        </ul>
+                        <!--<div class="tab-content">
+                            <div id="popularPosts" class="tab-pane active">
+                                <ul class="post-list">
+                                    <li>
+                                        <div class="post-image">
+                                            <div class="img-thumbnail">
+                                                <a href="#">
+                                                    <img alt="" src="assets/images/image03_thumb.jpg">
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="post-info">
+                                            <a href="#">
+                                                Nullam Vitae Nibh Un Odiosters
+                                            </a>
+                                            <div class="post-meta">
+                                                Jan 10, 2014
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="post-image">
+                                            <div class="img-thumbnail">
+                                                <a href="#">
+                                                    <img alt="" src="assets/images/image04_thumb.jpg">
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="post-info">
+                                            <a href="#">
+                                                Vitae Nibh Un Odiosters
+                                            </a>
+                                            <div class="post-meta">
+                                                Jan 10, 2014
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="post-image">
+                                            <div class="img-thumbnail">
+                                                <a href="#">
+                                                    <img alt="" src="assets/images/image05_thumb.jpg">
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="post-info">
+                                            <a href="#">
+                                                Odiosters Nullam Vitae
+                                            </a>
+                                            <div class="post-meta">
+                                                Jan 10, 2014
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div id="recentPosts" class="tab-pane">
+                                <ul class="post-list">
+                                    <li>
+                                        <div class="post-image">
+                                            <div class="img-thumbnail">
+                                                <a href="#">
+                                                    <img class="img-responsive" alt="" src="assets/images/image06_thumb.jpg">
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="post-info">
+                                            <a href="#">
+                                                Vitae Nibh Un Odiosters
+                                            </a>
+                                            <div class="post-meta">
+                                                Jan 10, 2014
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="post-image">
+                                            <div class="img-thumbnail">
+                                                <a href="#">
+                                                    <img alt="" src="assets/images/image07_thumb.jpg">
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="post-info">
+                                            <a href="#">
+                                                Odiosters Nullam Vitae
+                                            </a>
+                                            <div class="post-meta">
+                                                Jan 10, 2014
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="post-image">
+                                            <div class="img-thumbnail">
+                                                <a href="#">
+                                                    <img alt="" src="assets/images/image08_thumb.jpg">
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="post-info">
+                                            <a href="#">
+                                                Nullam Vitae Nibh Un Odiosters
+                                            </a>
+                                            <div class="post-meta">
+                                                Jan 10, 2014
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>-->
+                    </div>
+                    <hr>
+                    <h4>Sobre esta Página</h4>
+                    <p>
+                        Esta é uma seccão experimental do SIGA, que pretende fornecer um espaco para que a comunidade
+                        academica da Universidade possa partilhar conhecimentos academicos em varias areas de interesse.
+                        Brevemente teremos mais actualizacoes a respeito.
 
-    <div class="actions">
-        <ul>
-            <li><?php echo $this->Html->link(__('New Artigo Meta'),
-                        ['controller' => 'artigo_metas', 'action' => 'add']); ?> </li>
-        </ul>
+                    </p>
+                </aside>
+            </div>
+        </div>
     </div>
-</div>
+</section>
+

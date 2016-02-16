@@ -17,6 +17,7 @@
                         'type'        => 'text',
 
                 ]);
+                echo $this->Form->label('conteudo','Conteudo do Artigo');
                 echo $this->Form->textarea(
                         'conteudo',
                         [
@@ -32,9 +33,11 @@
                 echo $this->Form->input('data_publicacao', [
                         'type'               => 'text',
                         'class'              => 'form-control date-time-picker',
+                    'label'=>'Data de Publicacao'
                 ]);
                 echo $this->Form->input('estado_objecto_id', ['type' => 'hidden', 'value' => 1]);
-                echo $this->Form->input('artigo_estado_artigo_id');
+                echo $this->Form->input('artigo_estado_artigo_id',['label'=>'Estado do Artigo']);
+                echo $this->Form->input('imagem_destacada',['label'=>'Imagem de Destaque']);
                 echo $this->Form->submit('Publicar', [
                         'div'   => 'form-group pull-right',
                         'class' => 'btn btn-green',

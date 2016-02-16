@@ -25,7 +25,7 @@
 
 <?php $this->start('menu-itens') ?>
     <div class="col-sm-2">
-        <?php echo $this->Html->link('<i class="fa clip-users  fa-2x"></i>Lista de Estudantes',
+        <?php echo $this->Html->link('<i class="fa fa-print  fa-2x"></i>Lista de Estudantes',
                 ['controller' => 'turmas', 'action' => 'print_lista_estudantes', $turma['Turma']['id']],
                 ['escape' => false, 'class' => 'btn btn-icon btn-block']) ?>
 
