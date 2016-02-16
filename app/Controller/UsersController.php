@@ -788,6 +788,7 @@
                     }
                 }
             }
+
             $this->layout = 'login';
         }
 

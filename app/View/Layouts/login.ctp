@@ -188,7 +188,7 @@
                 </div>
                 <div class="col-sm-6 col-sm-offset-1">
                     <h1 class="inlineBlock _3ma _6n _6s _6v"
-                        style="padding: 42px 0 24px; font-size: 28px; line-height: 36px">
+                        style="padding: 0 0 24px; font-size: 28px; line-height: 36px">
                         Acesse o Sistema Integrado de Gestão Académica da Universidade Eduardo
                         Mondlane
                     </h1>
@@ -222,6 +222,13 @@
                                 Universidade</h4>
                         </div>
                     </div>
+                    <?php $artigos = $this->requestAction([
+                            'controller' => 'artigos',
+                            'action'     => 'artigos_recentes',
+                            'plugin'     => 'artigos',
+                            1,
+                    ]);?>
+                    <?= $this->element('Artigos.artigos_recentes', ['artigos'=>$artigos]); ?>
                 </div>
                 <div class="col-sm-4">
                     <div class="_6_ _74">

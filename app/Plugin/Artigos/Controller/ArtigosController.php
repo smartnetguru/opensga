@@ -59,6 +59,18 @@
             $this->layout = 'guest_users';
         }
 
+        public function artigos_recentes($totalArtigos){
+
+            $this->Paginator->settings = [
+                'contain'=>['Entidade'],
+                'order'=>'Artigo.data_publicacao DESC',
+                'limit'=>$totalArtigos
+            ];
+
+            return $this->Paginator->paginate();
+
+        }
+
         /**
          * add method
          *
@@ -141,6 +153,6 @@
         {
             parent::beforeFilter();
 
-            $this->Auth->allow(['index', 'ver_artigo']);
+            $this->Auth->allow(['index', 'ver_artigo','artigos_recentes']);
         }
     }

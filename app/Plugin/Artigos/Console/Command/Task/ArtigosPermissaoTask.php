@@ -55,6 +55,7 @@
                 } else {
 
                     $this->comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Artigos/Artigos/dashboard";
+                    $this->comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Artigos/Artigos/artigos_recentes";
                     $this->comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Artigos/Artigos/adicionar_artigo";
                     $this->comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Artigos/Artigos/editar_artigo";
                     $this->comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Artigos/Artigos/remover_artigo";

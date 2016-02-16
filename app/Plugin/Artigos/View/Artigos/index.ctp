@@ -32,7 +32,10 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="post-meta">
-                                        <span><i class="fa fa-calendar"></i><?php echo h($artigo['Artigo']['data_publicacao']); ?> </span>
+                                        <span>
+                                            <i class="fa fa-calendar"></i>
+                                            <?php echo h($artigo['Artigo']['data_publicacao']); ?>
+                                        </span>
 												<span><i class="fa fa-user"></i> Por
                                                     <?php echo $this->Html->link($artigo['Entidade']['name'],
                                                             [
@@ -48,7 +51,7 @@
                                                     </a>,
                                                     <a href="#">
                                                         Design
-                                                    </a> </span>-->
+                                                    </a>--> </span>
 												<span><i class="fa fa-comments"></i>
 													<a href="#">
                                                         0 comentários
