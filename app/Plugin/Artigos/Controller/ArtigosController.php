@@ -149,10 +149,13 @@
             return $this->redirect(['action' => 'index']);
         }
 
+        public function pesquisa(){
+
+        }
         public function beforeFilter()
         {
             parent::beforeFilter();
 
-            $this->Auth->allow(['index', 'ver_artigo','artigos_recentes']);
+            $this->Auth->allow(['index', 'ver_artigo','artigos_recentes','pesquisa']);
         }
     }

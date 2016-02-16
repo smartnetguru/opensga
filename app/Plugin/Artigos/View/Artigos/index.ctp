@@ -77,9 +77,9 @@
             </div>
             <div class="col-md-3">
                 <aside class="sidebar">
-                    <form>
+                    <?= $this->Form->create('Pesquisa',['url'=>['plugin'=>'artigos','controller'=>'artigos','action'=>'pesquisa'],'type'=>'get'])?>
                         <div class="input-group">
-                            <input type="text" id="s" name="s" placeholder="Pesquisar..." class="form-control">
+                            <input type="text" id="s" name="q" placeholder="Pesquisar..." class="form-control">
 										<span class="input-group-btn">
 											<button class="btn btn-main-color" type="submit">
                                                 <i class="fa fa-search"></i>
