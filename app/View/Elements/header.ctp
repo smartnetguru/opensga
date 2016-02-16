@@ -338,7 +338,7 @@
                 </ul>
                 <!-- end: TOP NAVIGATION MENU -->
             </div>
-        <?php } else{ ?>
+        <?php } else { ?>
             <div class="row">
                 <div class="col-sm-3">
                     <div class="navbar-header">
@@ -350,7 +350,8 @@
                     </div>
                 </div>
                 <div class="col-sm-9">
-                    <?php echo $this->Form->create('User', ['url' => ['action' => 'login']]); ?>
+                    <?php echo $this->Form->create('User',
+                            ['url' => ['controller' => 'users', 'action' => 'login', 'plugin' => false]]); ?>
                     <div class="row pull-right navbar-brand">
                         <div class="col-sm-7">
                             <?php echo $this->Form->input('username', [
@@ -375,7 +376,7 @@
                     <?= $this->Form->end(); ?>
                 </div>
             </div>
-        <?php }?>
+        <?php } ?>
     </div>
     <!-- end: TOP NAVIGATION CONTAINER -->
 </div>
