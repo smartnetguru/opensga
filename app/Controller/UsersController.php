@@ -498,7 +498,7 @@
             $this->layout = "guest_users";
         }
 
-        public function faculdade_alterar_senha_sistema($defaultPassword = '')
+        public function faculdade_alterar_senha_sistema($userId,$defaultPassword = '')
         {
 
             if ($this->request->is('post')) {
@@ -538,8 +538,7 @@
                         ['class' => 'alert alert-success']);
                 }
             }
-            $randomPassword = $this->User->generatePassword();
-            $userId = $this->request->params['named']['user'];
+            $randomPassword = $this->User->geraPassword();
             $this->set(compact('randomPassword', 'defaultPassword', 'userId'));
             $this->render('alterar_senha_sistema');
 

@@ -206,7 +206,9 @@
             }
 
 
-            $this->set('title_for_layout', '');
+            $pageTitle = Inflector::humanize($this->action);
+            $pageTitle .= ' - ' . Inflector::humanize($this->request->param('controller'));
+            $this->set('title_for_layout', $pageTitle);
             $this->set(compact('paginationOptions'));
         }
 
@@ -255,9 +257,7 @@
 
             }
 
-            $pageTitle = Inflector::humanize($this->action);
-            $pageTitle .= ' - ' . Inflector::humanize($this->request->param('controller'));
-            $this->set('title_for_layout', $pageTitle);
+
             $this->set(compact('totalMensagensPendentes', 'totalTarefasPendentes', 'totalNotificacoesPendentes',
                 'headerMessages', 'tarefas',
                 'notificacoes'));

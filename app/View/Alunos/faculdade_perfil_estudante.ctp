@@ -94,12 +94,15 @@
         <div class="col-sm-2">
             <?php echo $this->Html->link('<i class="fa fa-refresh  fa-2x"></i> Alterar Senha do Sistema',
                     [
-                            'controller'        => 'users',
-                            'action'            => 'alterar_senha_sistema',
-                            'user'              => $aluno['Entidade']['User']['id'],
-                            'return_controller' => 'alunos',
-                            'return_action'     => 'perfil_estudante',
-                            'return_id'         => $aluno['Aluno']['id'],
+                            'controller' => 'users',
+                            'action'     => 'alterar_senha_sistema',
+                            $aluno['Entidade']['User']['id'],
+                            $aluno['Aluno']['codigo'],
+                            '?'          => [
+                                    'return_controller' => 'alunos',
+                                    'return_action'     => 'perfil_estudante',
+                                    'return_id'         => $aluno['Aluno']['id'],
+                            ],
                     ], ['escape' => false, 'class' => 'btn btn-icon btn-block']) ?>
         </div>
         <div class="col-sm-2">

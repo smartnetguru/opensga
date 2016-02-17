@@ -30,7 +30,10 @@
             ];
 
             $this->set('artigos', $this->Paginator->paginate());
+            $this->set('title_for_layout','Artigos Academicos');
             $this->layout = 'guest_users';
+
+
         }
 
         public function dashboard()
@@ -55,7 +58,10 @@
                 ['User','Entidade'=>['User'],'EstadoObjecto','ArtigoEstadoArtigo']
             );
             $options = ['conditions' => ['Artigo.' . $this->Artigo->primaryKey => $id]];
-            $this->set('artigo', $this->Artigo->find('first', $options));
+            $artigo = $this->Artigo->find('first', $options);
+            $this->set('artigo', $artigo);
+            $this->set('title_for_layout',$artigo['Artigo']['titulo']);
+
             $this->layout = 'guest_users';
         }
 
