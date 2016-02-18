@@ -382,13 +382,17 @@
         }
 
         public function ajustaMudancaCursoInscricao(){
-            $alunos = $this->Aluno->find('all',['conditions'=>['Aluno.codigo'=>[20150797,20122501,20121204,20111222,20095129,20122447,20111274,20110934,20121325,20121192,20063431057,20063422004,20132711,20140919,20154836,20043412108,20013401001,20092694,20102857,20114553,20152811,20121153,20121104,20133519,20113994,20151878,20110538,20132088,20122218,20113254,20143292,20150780,20152269,20150767,20143319,20143290,20113254,20142269,20132088]]]);
+            $alunos = $this->Aluno->find('all');
+            $total=0;
             foreach($alunos as $aluno){
                 $matricula = $this->Matricula->findByAlunoIdAndAnoLectivoId($aluno['Aluno']['id'],32);
+                if(empty($matricula)){
+                    continue;
+                }
                 $cursoIdAluno = $aluno['Aluno']['curso_id'];
                 $cursoIdMatricula = $matricula['Matricula']['curso_id'];
                 if($cursoIdAluno!=$cursoIdMatricula){
-                    $this->out($cursoIdAluno.'-----------'.$cursoIdMatricula);
+                    $this->out($total++.'----'.$cursoIdAluno.'-----------'.$cursoIdMatricula);
                     $this->Matricula->id = $matricula['Matricula']['id'];
                     $this->Matricula->set('curso_id',$cursoIdAluno);
                     if(!$this->Matricula->save()){
