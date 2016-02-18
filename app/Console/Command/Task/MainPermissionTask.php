@@ -428,6 +428,7 @@
                     if (in_array('DRA_DI', $unidadesOrganicas)) {
                         $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/index";
 
+
                         $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/alterar_status";
                         $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/adicionar_estudante";
                         $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/editar_estudante";
@@ -635,9 +636,7 @@
             $docentes = $this->User->Entidade->Docente->find('all', ['conditions'=>['Entidade.user_id'=>$userId]]);
             $comandos = [];
             foreach ($docentes as $docente) {
-
-
-
+                $comandos[] = "acl grant User.{$docente['Entidade']['User']['id']} controllers/Users/docente_trocar_senha";
                 $comandos[] = "acl grant User.{$docente['Entidade']['User']['id']} controllers/Docentes/docente_meu_perfil";
                 $comandos[] = "acl grant User.{$docente['Entidade']['User']['id']} controllers/Pages/docente_home";
                 $comandos[] = "acl grant User.{$docente['Entidade']['User']['id']} controllers/Users/docente_trocar_senha";
