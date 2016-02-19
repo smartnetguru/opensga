@@ -1,6 +1,7 @@
 <?php
 
     App::uses('CendAppController', 'Cend.Controller');
+    App::uses('OpenSGAExcel','Lib');
 
     class AlunosController extends CendAppController
     {
@@ -125,6 +126,71 @@
             $this->set('siga_page_title', 'Matriculas');
             $this->set('siga_page_overview', 'Formulario de Matricula de Novos Ingressos');
 
+        }
+
+        public function exportar_alunos(){
+            $this->Aluno->Curso->contain([
+                'CursosTurno',
+            ]);
+            $cursos = $this->Aluno->Curso->find('list', ['conditions' => ['CursosTurno.turno_id' => 3]]);
+            if($this->request->is('post')){
+                $anoIngresso = $this->request->data['Aluno']['ano_ingresso'];
+                if($anoIngresso){
+                    $anoLectivo = $this->Aluno->Matricula->AnoLectivo->findById($anoIngresso);
+                    $conditions['Aluno.ano_ingresso']=$anoLectivo['AnoLectivo']['ano'];
+                }
+                $cursoId = $this->request->data['Aluno']['curso_id'];
+                if(!empty($cursoId) && !array_key_exists($cursoId,$cursos)){
+                    throw new BadRequestException('Erro Interno do Sistema');
+                }
+                elseif(!$cursoId){
+                    $cursoId = array_keys($cursos);
+                }
+                $conditions['Aluno.curso_id']=$cursoId;
+
+                $this->Aluno->contain(['Entidade'=>['User'],'Curso']);
+                $alunos = $this->Aluno->find('all',['conditions'=>$conditions]);
+                App::import('Vendor', 'PHPExcel', ['file' => 'PHPExcel.php']);
+                if (!class_exists('PHPExcel')) {
+                    throw new CakeException('Vendor class PHPExcel not found!');
+                }
+
+                $this->Excel = new OpenSGAExcel();
+                $this->Excel->createWorksheet();
+
+
+                $linhaActual=1;
+                $this->Excel->xls->getActiveSheet()->setCellValue('A'.$linhaActual,'Numero de Estudante');
+                $this->Excel->xls->getActiveSheet()->setCellValue('B'.$linhaActual,'Nome Completo');
+                $this->Excel->xls->getActiveSheet()->setCellValue('C'.$linhaActual,'Curso');
+                $this->Excel->xls->getActiveSheet()->setCellValue('D'.$linhaActual,'Email Pessoal');
+                $this->Excel->xls->getActiveSheet()->setCellValue('E'.$linhaActual,'Telemovel');
+                $this->Excel->xls->getActiveSheet()->setCellValue('F'.$linhaActual,'Email Institucional');
+
+                $linhaActual++;
+                foreach($alunos as $aluno){
+
+                    $this->Excel->xls->getActiveSheet()->setCellValue('A'.$linhaActual,$aluno['Aluno']['codigo']);
+                    $this->Excel->xls->getActiveSheet()->setCellValue('B'.$linhaActual,$aluno['Entidade']['name']);
+                    $this->Excel->xls->getActiveSheet()->setCellValue('C'.$linhaActual,$aluno['Curso']['name']);
+                    $this->Excel->xls->getActiveSheet()->setCellValue('D'.$linhaActual,$aluno['Entidade']['email']);
+                    $this->Excel->xls->getActiveSheet()->setCellValue('E'.$linhaActual,$aluno['Entidade']['telemovel']);
+                    $this->Excel->xls->getActiveSheet()->setCellValue('F'.$linhaActual,$aluno['Entidade']['User']['username']);
+
+                    $linhaActual++;
+                }
+                $filename = TMP.'estudantes_matriculados.xlsx';
+                $this->Excel->outputServer($filename);
+                $this->response->file(
+                    $filename,
+                    array('download' => true, 'name' => 'foo')
+                );
+                return $this->response;
+
+            }
+            $anoLectivos = $this->Aluno->Matricula->AnoLectivo->find('list',['order'=>'AnoLectivo.ano DESC']);
+
+            $this->set(compact('anoLectivos','cursos'));
         }
 
         public function beforeFilter()

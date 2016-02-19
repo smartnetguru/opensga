@@ -323,6 +323,7 @@
                                         'controller' => 'users',
                                         'action'     => 'logout',
                                         'plugin'     => false,
+                                    'estudante'=>false,'docente'=>false,'faculdade'=>false
                                 ], ['escape' => false]) ?>
                             </li>
                         </ul>

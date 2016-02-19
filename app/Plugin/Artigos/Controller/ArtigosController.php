@@ -162,6 +162,17 @@
         {
             parent::beforeFilter();
 
-            $this->Auth->allow(['index', 'ver_artigo','artigos_recentes','pesquisa']);
+            $this->Auth->allow(['index', 'ver_artigo','artigos_recentes','pesquisa','ver_autor']);
+        }
+
+        public function ver_autor($entidadeId){
+            $this->Artigo->Entidade->contain(['PaisNascimento','Genero','User']);
+            $entidade = $this->Artigo->Entidade->findById($entidadeId);
+            if(empty($entidade)){
+                throw new NotFoundException('Autor não Encontrado');
+            }
+
+            $this->set(compact('entidade'));
+
         }
     }

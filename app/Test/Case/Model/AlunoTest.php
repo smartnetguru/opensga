@@ -38,6 +38,7 @@
             'app.escola_nivel_medio',
             'app.rua',
             'app.mudanca_curso',
+            'app.entidade_necessidade',
 
         ];
 
@@ -554,7 +555,7 @@
 
 
                 ],
-                'nessecidade_especial'  => [
+                'necessidade_especial'  => [
                     (int)1 => '1',
                     (int)2 => '1',
                     (int)3 => '0',
@@ -581,13 +582,18 @@
          */
         public function testMudaCurso()
         {
-            $data = [
+            $mock = $this->getMock('CakeSession', array('read'));
+            $mock->expects($this->any())->method('read')
+                ->with('Auth.User.id')
+                ->will($this->returnValue(2016));
+
+            $dataMudancaNormal = [
                 'Aluno' => [
                     'numero_estudante_atribuido' => '',
                     'data_mudanca'               => '2016-01-21',
                     'curso_id'                   => '5',
                     'observacao'                 => 'gdrgfdgdf',
-                    'aluno_id'                   => '24',
+                    'aluno_id'                   => '5',
                     'curso_antigo'               => '233',
                     'anexo_url'                  => [
                         'name'     => '',
@@ -599,10 +605,29 @@
                 ],
             ];
 
+            $dataViaExame = array(
+                'Aluno' => array(
+                    'numero_estudante_atribuido' => '20162020',
+                    'data_mudanca' => '2016-02-18',
+                    'curso_id' => '147',
+                    'observacao' => 'Teste de Mudanca de Curso',
+                    'aluno_id' => '6',
+                    'curso_antigo' => '49',
+                    'anexo_url' => array(
+                        'name' => 'foo(2)',
+                        'type' => 'application/octet-stream',
+                        'tmp_name' => '/tmp/phprEo0ir',
+                        'error' => (int) 0,
+                        'size' => (int) 9523
+                    )
+                )
+            );
 
-            $resultado = $this->Aluno->mudaCurso($data);
-            debug($resultado);
-            $this->AssertTrue($resultado[0]);
+            $resultado = $this->Aluno->mudaCurso($dataMudancaNormal);
+            $this->AssertTrue($resultado);
+
+            $resultado2 = $this->Aluno->mudaCurso($dataViaExame);
+            $this->assertTrue($resultado2);
 
 
         }

@@ -29,7 +29,7 @@
 <div class="action-list">
     <div class="row">
         <div class="col-sm-2">
-            <?php echo $this->Html->link($this->Html->image('icons/student/edit-student.png') . '<br />Editar Perfil<span class="badge badge-danger"> Brevemente </span>',
+            <?php echo $this->Html->link('<i class="fa fa-edit  fa-2x"></i>	Boletim de Matricula',
                     ['controller' => 'alunos', 'action' => 'editar_estudante', $aluno['Aluno']['id']],
                     ['escape' => false, 'class' => 'btn btn-icon btn-block']) ?>
         </div>
@@ -44,13 +44,13 @@
                     ['escape' => false, 'class' => 'btn btn-icon btn-block']) ?>
         </div>
         <div class="col-sm-2">
-            <?php echo $this->Html->link($this->Html->image('icons/packs/crystal/48x48/apps/printer.png') . '<br />Ficha Cadastro<span class="badge badge-danger"> Brevemente </span>',
+            <?php echo $this->Html->link('<i class="fa fa-print  fa-2x"></i>	Ficha Cadastro<span class="badge badge-danger"> Brevemente </span>',
                     ['controller' => 'alunos', 'action' => 'ficha_cadastro', $aluno['Aluno']['id']],
                     ['target' => 'blank', 'escape' => false, 'class' => 'btn btn-icon btn-block']) ?>
 
         </div>
         <div class="col-sm-2">
-            <?php echo $this->Html->link($this->Html->image('icons/packs/crystal/48x48/apps/printer.png') . "<br />Renovar Matricula",
+            <?php echo $this->Html->link('<i class="fa fa-refresh  fa-2x"></i>	Renovar Matricula',
                     ['controller' => 'matriculas', 'action' => 'renovar_matricula', $aluno['Aluno']['id']],
                     ['escape' => false, 'class' => 'btn btn-icon btn-block']) ?>
 
@@ -87,7 +87,7 @@
         <?php } ?>
 
         <div class="col-sm-2">
-            <?php echo $this->Html->link($this->Html->image('icons/packs/crystal/48x48/apps/printer.png') . "<br />Enviar SMS",
+            <?php echo $this->Html->link('<i class="fa fa-envelope  fa-2x"></i>	Enviar SMS',
                     ['controller' => 'alunos', 'action' => 'enviar_sms', $aluno['Aluno']['id']],
                     ['escape' => false, 'class' => 'btn btn-icon btn-block']) ?>
         </div>

@@ -668,8 +668,7 @@
                 ]);
                 if (empty($matriculaAnterior)) {
                     $dataSource->rollback();
-
-                    return [false, 'MatriculaAnterior'];
+                    throw new BadRequestException('Matricula Anterior nao Encontrada');
                 }
                 $matriculaExiste = $this->findByAlunoIdAndAnoLectivoId($data['Matricula']['aluno_id'], $v);
                 if ($matriculaExiste) {
@@ -679,20 +678,18 @@
                     $this->set('user_id', $data['Matricula']['user_id']);
                     if (!$this->save()) {
                         $dataSource->rollback();
-
-                        return [false, 'Matricula Renovar'];
+                        throw new DataNotSavedException($this->validationErrors);
                     }
                 } else {
                     $data['Matricula']['ano_lectivo_id'] = $v;
+                    debug($data);
+                    die();
                     $this->create();
                     if (!$this->save($data)) {
                         $dataSource->rollback();
-
-                        return [false, 'Matricula Renovar 2'];;
+                        throw new DataNotSavedException($this->validationErrors);
                     }
                 }
-
-
             }
             $dataSource->commit();
 
@@ -701,7 +698,7 @@
             ]);
             $this->getEventManager()->dispatch($event);
 
-            return [true];
+            return true;
         }
 
         function validaMatricula($check)

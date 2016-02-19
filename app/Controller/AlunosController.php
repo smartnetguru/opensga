@@ -1834,25 +1834,20 @@
             }
 
             if ($this->request->is('post')) {
-
-                $resultado = $this->Aluno->mudaCurso($this->request->data);
-                if ($resultado[0] === true) {
-
-                    $this->Session->setFlash(__('Mudança de Curso efectuada com sucesso'), 'default',
-                        ['class' => 'alert alert-success']);
+                try{
+                    $this->Aluno->mudaCurso($this->request->data);
+                    $this->Flash->success(__('Mudança de Curso efectuada com sucesso'));
                     $this->set('mudancaSucesso', 1);
                     $this->set('mudancaCursoId', $this->Aluno->MudancaCurso->id);
 
-            } else {
-                $this->Flash->error('Problemas ao Gravar a Mudanca de Curso. Tente novamente mais tarde');
-                $this->set('mudancaSucesso', 0);
-            }
+                } catch(DataNotSavedException $e){
+                    $this->Flash->eror($e->getMessage());
+                    $this->set('mudancaSucesso', 0);
+                }
         }
 
             $aluno = $this->Aluno->getAlunoForAction($alunoId);
             $cursos = $this->Aluno->Curso->find('list');
-            //$isRegular = $this->Aluno->isRegular($alunoId);
-
             $this->set(compact('aluno', 'is_regular', 'classe_estado', 'cursos', 'funcionario'));
         }
 

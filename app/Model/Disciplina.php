@@ -67,7 +67,7 @@
             'codigo_antigo' => [
                 'rule'       => 'isUnique',
                 'message'    => 'Ja existe uma disciplina com este Codigo antigo.',
-                'required'   => 'create',
+                'required'   => false,
                 'allowEmpty' => true,
             ],
         ];
@@ -84,15 +84,13 @@
          */
         public function cadastraDisciplina($data)
         {
-
-
             $datasource = $this->getDataSource();
             $datasource->begin();
-
             $this->create();
             if ($this->save($data)) {
                 $disciplinaId = $this->id;
             } else {
+                debug($this->validationErrors);
                 $disciplina = $this->findByName($data['Disciplina']['name']);
                 if (!empty($disciplina)) {
                     $disciplinaId = $disciplina['Disciplina']['id'];

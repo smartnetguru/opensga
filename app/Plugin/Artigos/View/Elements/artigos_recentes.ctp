@@ -3,7 +3,6 @@
     <div class="row recent-posts">
         <?php foreach ($artigos as $artigo): ?>
             <article>
-                <span><i class="fa fa-calendar"></i> <?php echo h($artigo['Artigo']['data_publicacao']); ?> </span>
                 <h4>
                     <?php echo $this->Html->link(h($artigo['Artigo']['titulo']), [
                             'controller' => 'artigos',
@@ -16,16 +15,18 @@
                     <?php echo $artigo['Artigo']['resumo']; ?>
                 </p>
                 <div class="post-meta">
+                    <span><i class="fa fa-calendar"></i> <?php echo h($artigo['Artigo']['data_publicacao']); ?> </span>
                     <span>
                         <i class="fa fa-user"></i>
                         Por
                         <?php echo $this->Html->link($artigo['Entidade']['name'],
-                                                                    [
-                                                                            'controller' => 'artigos',
-                                                                            'action'     => 'ver_autor',
-                                                                            $artigo['Entidade']['id'],
-                                                                    ]);
-                                                            ?>
+                                [
+                                        'plugin'     => 'artigos',
+                                        'controller' => 'artigos',
+                                        'action'     => 'ver_autor',
+                                        $artigo['Entidade']['id'],
+                                ]);
+                        ?>
                                                         </span>
 														<span><i class="fa fa-tag"></i>
                                                             <!--<a href="#">

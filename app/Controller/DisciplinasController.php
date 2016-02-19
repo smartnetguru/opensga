@@ -29,9 +29,7 @@
          */
         public function adicionar_disciplina()
         {
-
             if ($this->request->is('post')) {
-
                 $unidade_organica_id = $this->Session->read('Auth.User.unidade_organica_id');
                 //Primeiro ver se a disciplina existe
                 $disciplina = $this->Disciplina->findByName($this->request->data['Disciplina']['name']);

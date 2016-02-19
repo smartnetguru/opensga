@@ -1656,7 +1656,6 @@
 
             $datasource = $this->getDataSource();
             $datasource->begin();
-
             $mudancaArray = [
                 'MudancaCurso' => [
                     'aluno_id'     => $data['Aluno']['aluno_id'],
@@ -1686,11 +1685,7 @@
                         'observacao'             => $data['Aluno']['observacao'],
                         'data_mudanca'           => $data['Aluno']['data_mudanca'],
                     ];
-                    if (!$this->alteraStatus($dataEstado)) {
-                        $datasource->rollback();
-
-                        return [false, 'Status'];
-                    }
+                    $this->alteraStatus($dataEstado);
                 }
 
             } else {
@@ -1753,10 +1748,8 @@
             $this->set('plano_estudo_id', $planoEstudoId);
             if (!$this->save()) {
                 $datasource->rollback();
-
-                return [false, 'Aluno'];
+                throw new DataNotSavedException($this->validationErrors);
             }
-
             $this->MudancaCurso->create();
             if (!$this->MudancaCurso->save($mudancaArray)) {
                 $datasource->rollback();
@@ -1772,6 +1765,7 @@
             if (!empty($matricula)) {
                 $this->Matricula->id = $matricula['Matricula']['id'];
                 $this->Matricula->set('plano_estudo_id', $planoEstudoId);
+                $this->Matricula->set('curso_id', $data['Aluno']['curso_id']);
                 $this->Matricula->save();
             } else {
                 $dataMatricula = [
@@ -1789,18 +1783,11 @@
                         $anolectivo['AnoLectivo']['id'] => $anolectivo['AnoLectivo']['id'],
                     ],
                 ];
-                $resultadoMatricula = $this->Matricula->renovaMatricula($dataMatricula);
-
-                if (!$resultadoMatricula[0] === true) {
-                    $datasource->rollback();
-
-                    return [false, 'Matricula'];
-                }
+                $this->Matricula->renovaMatricula($dataMatricula);
             }
 
             $datasource->commit();
-
-            return [true];
+            return true;
         }
 
         public function processaContacto($aluno_id)

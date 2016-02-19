@@ -10,4 +10,10 @@ class ArtigosAppController extends AppController {
         $this->layout = 'guest_users';
     }
 
+    public function beforeRender(){
+        parent::beforeRender();
+
+        Configure::write('OpenSGA.instituicao.sigla_logo','UEM (<b style="color:red">Experimental</b>)');
+    }
+
 }
