@@ -682,8 +682,6 @@
                     }
                 } else {
                     $data['Matricula']['ano_lectivo_id'] = $v;
-                    debug($data);
-                    die();
                     $this->create();
                     if (!$this->save($data)) {
                         $dataSource->rollback();

@@ -34,7 +34,7 @@
 				'numero_estudante'           => '20093821',
 				'aluno_via_admissao_id'      => '13',
 				'numero_candidato'           => null,
-				'ano_ingresso'               => '2009',
+				'ano_ingresso'               => '2012',
 				'curso_ingresso_id'          => '40',
 				'created_by'                 => null,
 				'modified_by'                => null,

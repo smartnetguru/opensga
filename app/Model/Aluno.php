@@ -1429,6 +1429,7 @@
                     $data['Aluno']['user_id'] = $this->User->getLastInsertID();
                     $data['Aluno']['entidade_id'] = $this->Entidade->getLastInsertID();
                     $data['Aluno']['data_ingresso'] = date('Y-m-d');
+                    
                     $data['Aluno']['curso_ingresso_id'] = $data['Aluno']['curso_id'];
                     $planoEstudoId = $this->Curso->getPlanoEstudoIdRecente($data['Aluno']['curso_id']);
                     if (!empty($planoEstudoId)) {
@@ -1773,7 +1774,7 @@
                         'aluno_id'          => $data['Aluno']['aluno_id'],
                         'ano_lectivo_id'    => $anolectivo['AnoLectivo']['id'],
                         'data'              => $data['Aluno']['data_mudanca'],
-                        'user_id'           => CakeSession::read('Auth.User.id'),
+                        'user_id'           =>$data['Aluno']['user_id'],
                         'curso_id'          => $data['Aluno']['curso_id'],
                         'tipo_matricula_id' => 2,
 

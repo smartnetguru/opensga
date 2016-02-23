@@ -33,7 +33,7 @@
 			[
 				'id'           => '2',
 				'codigo'       => null,
-				'ano'          => '2009',
+				'ano'          => '2012',
 				'num_semestre' => '2',
 				'data_inicio'  => null,
 				'data_fim'     => null,
@@ -44,7 +44,7 @@
 			[
 				'id'           => '3',
 				'codigo'       => null,
-				'ano'          => '2010',
+				'ano'          => '2013',
 				'num_semestre' => '2',
 				'data_inicio'  => null,
 				'data_fim'     => null,
@@ -55,7 +55,7 @@
 			[
 				'id'           => '4',
 				'codigo'       => null,
-				'ano'          => '1992',
+				'ano'          => '2014',
 				'num_semestre' => '2',
 				'data_inicio'  => null,
 				'data_fim'     => null,
@@ -66,7 +66,7 @@
 			[
 				'id'           => '5',
 				'codigo'       => null,
-				'ano'          => '2012',
+				'ano'          => '2015',
 				'num_semestre' => '2',
 				'data_inicio'  => null,
 				'data_fim'     => null,
@@ -77,68 +77,13 @@
 			[
 				'id'           => '6',
 				'codigo'       => null,
-				'ano'          => '1998',
+				'ano'          => '2016',
 				'num_semestre' => '2',
 				'data_inicio'  => null,
 				'data_fim'     => null,
 				'created'      => '2013-06-10 14:55:30',
 				'modified'     => '2013-06-10 14:55:30',
 			
-			],
-			[
-				'id'           => '7',
-				'codigo'       => null,
-				'ano'          => '2013',
-				'num_semestre' => '2',
-				'data_inicio'  => null,
-				'data_fim'     => null,
-				'created'      => '2013-06-10 14:57:10',
-				'modified'     => '2013-06-10 14:57:10',
-			
-			],
-			[
-				'id'           => '8',
-				'codigo'       => null,
-				'ano'          => '1999',
-				'num_semestre' => '2',
-				'data_inicio'  => null,
-				'data_fim'     => null,
-				'created'      => '2013-06-10 14:57:20',
-				'modified'     => '2013-06-10 14:57:20',
-			
-			],
-			[
-				'id'           => '9',
-				'codigo'       => null,
-				'ano'          => '2003',
-				'num_semestre' => '2',
-				'data_inicio'  => null,
-				'data_fim'     => null,
-				'created'      => '2013-06-10 14:57:32',
-				'modified'     => '2013-06-10 14:57:32',
-			
-			],
-			[
-				'id'           => '10',
-				'codigo'       => null,
-				'ano'          => '2015',
-				'num_semestre' => '2',
-				'data_inicio'  => null,
-				'data_fim'     => null,
-				'created'      => '2013-06-10 14:57:34',
-				'modified'     => '2013-06-10 14:57:34',
-			
-			],
-			[
-				'id'           => '11',
-				'codigo'       => null,
-				'ano'          => '2016',
-				'num_semestre' => '1',
-				'data_inicio'  => null,
-				'data_fim'     => null,
-				'created'      => '2013-06-10 14:57:34',
-				'modified'     => '2013-06-10 14:57:34',
-
 			],
 		];
 

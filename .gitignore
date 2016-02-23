@@ -6,6 +6,7 @@
 /app/tmp
 /app/Reports
 /app/Imports
+/app/webroot/coverage
 /Reports
 /Imports
 /Plugin

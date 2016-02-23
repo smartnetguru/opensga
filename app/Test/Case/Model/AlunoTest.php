@@ -64,6 +64,7 @@
         public function tearDown()
         {
             unset($this->Aluno);
+            CakeSession::delete('Auth.User');
 
             parent::tearDown();
         }
@@ -160,7 +161,7 @@
                 'Matricula'             => [
                     'user_id' => '42646',
                 ],
-                'necessidade_especial'=>[]
+                'necessidade_especial'  => [],
             ];
             $resultado = $this->Aluno->cadastraAluno($data);
             $this->assertSame(true, $resultado);
@@ -195,7 +196,7 @@
                 'Matricula'             => [
                     'user_id' => '1',
                 ],
-                'necessidade_especial'=>[]
+                'necessidade_especial'  => [],
             ];
             $resultado2 = $this->Aluno->cadastraAluno($data2);
             $this->assertSame(true, $resultado2);
@@ -571,6 +572,7 @@
                 ],
             ];
 
+
             $matriculado = $this->Aluno->MatriculaNovoIngresso($data);
             $this->assertTrue($matriculado);
         }
@@ -582,7 +584,7 @@
          */
         public function testMudaCurso()
         {
-            $mock = $this->getMock('CakeSession', array('read'));
+            $mock = $this->getMock('CakeSession', ['read']);
             $mock->expects($this->any())->method('read')
                 ->with('Auth.User.id')
                 ->will($this->returnValue(2016));
@@ -602,26 +604,28 @@
                         'error'    => (int)4,
                         'size'     => (int)0,
                     ],
+                    'user_id'                    => 1,
                 ],
             ];
 
-            $dataViaExame = array(
-                'Aluno' => array(
+            $dataViaExame = [
+                'Aluno' => [
                     'numero_estudante_atribuido' => '20162020',
-                    'data_mudanca' => '2016-02-18',
-                    'curso_id' => '147',
-                    'observacao' => 'Teste de Mudanca de Curso',
-                    'aluno_id' => '6',
-                    'curso_antigo' => '49',
-                    'anexo_url' => array(
-                        'name' => 'foo(2)',
-                        'type' => 'application/octet-stream',
+                    'data_mudanca'               => '2016-02-18',
+                    'curso_id'                   => '147',
+                    'observacao'                 => 'Teste de Mudanca de Curso',
+                    'aluno_id'                   => '6',
+                    'curso_antigo'               => '49',
+                    'anexo_url'                  => [
+                        'name'     => 'foo(2)',
+                        'type'     => 'application/octet-stream',
                         'tmp_name' => '/tmp/phprEo0ir',
-                        'error' => (int) 0,
-                        'size' => (int) 9523
-                    )
-                )
-            );
+                        'error'    => (int)0,
+                        'size'     => (int)9523,
+                    ],
+                    'user_id'=>1
+                ],
+            ];
 
             $resultado = $this->Aluno->mudaCurso($dataMudancaNormal);
             $this->AssertTrue($resultado);

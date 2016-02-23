@@ -270,9 +270,9 @@
                                 ?>
                                 <tr>
                                     <td><?php echo $i++ ?></td>
-                                    <td><?php echo h($inscricao['Matricula']['Aluno']['codigo']) ?></td>
-                                    <td><?php echo h($inscricao['Matricula']['Aluno']['Entidade']['apelido']) ?></td>
-                                    <td><?php echo h($inscricao['Matricula']['Aluno']['Entidade']['nomes']) ?></td>
+                                    <td><?php echo h($inscricao['Aluno']['codigo']) ?></td>
+                                    <td><?php echo h($inscricao['Entidade']['apelido']) ?></td>
+                                    <td><?php echo h($inscricao['Entidade']['nomes']) ?></td>
                                     <td><?php echo h($inscricao['Inscricao']['nota_frequencia']) ?></td>
                                     <td><?php echo h($inscricao['Inscricao']['nota_exame_normal']) ?></td>
                                     <td><?php echo h($inscricao['Inscricao']['nota_exame_recorrencia']) ?></td>

@@ -254,6 +254,7 @@
                 return true;
             } else {
                 throw new DataNotSavedException($this->TurmaTipoAvaliacao->validationErrors);
+
                 return false;
             }
         }
@@ -821,15 +822,117 @@
             return $resultado;
         }
 
-        // Devolve a media da turma
 
-        function getAlunosInscritos($turma_id)
+        /**
+         * @param $turmaId
+         * @return mixed
+         * Devolve todos alunos de uma turma que nao desistiram e nem anularam matricula
+         */
+        function getAllAlunosActivos($turmaId)
         {
-            $query = "select count(*) from t0013inscricaos ti, t0010turmas tt where ti.t0010turma_id = tt.id and ti.t0010turma_id = {$turma_id}";
-            $resultado = $this->query($query);
+            $this->Inscricao->contain([
+                'EstadoInscricao',
+            ]);
 
-            //var_dump($resultado);
-            return $resultado;
+            $joins = [
+                [
+                    'table'      => 'matriculas',
+                    'alias'      => 'Matricula',
+                    'type'       => 'LEFT',
+                    'conditions' => [
+                        'Matricula.id = Inscricao.matricula_id',
+                    ],
+                ],
+                [
+                    'table'      => 'alunos',
+                    'alias'      => 'Aluno',
+                    'type'       => 'LEFT',
+                    'conditions' => [
+                        'Aluno.id = Matricula.aluno_id',
+                    ],
+                ],
+                [
+                    'table'      => 'entidades',
+                    'alias'      => 'Entidade',
+                    'type'       => 'LEFT',
+                    'conditions' => [
+                        'Entidade.id = Aluno.entidade_id',
+                    ],
+                ],
+                [
+                    'table'      => 'turmas',
+                    'alias'      => 'Turma',
+                    'type'       => 'LEFT',
+                    'conditions' => [
+                        'Turma.id = Inscricao.turma_id',
+                    ],
+                ],
+                [
+                    'table'      => 'cursos',
+                    'alias'      => 'Curso',
+                    'type'       => 'LEFT',
+                    'conditions' => [
+                        'Curso.id = Turma.curso_id',
+                    ],
+                ],
+                [
+                    'table'      => 'unidade_organicas',
+                    'alias'      => 'UnidadeOrganica',
+                    'type'       => 'LEFT',
+                    'conditions' => [
+                        'UnidadeOrganica.id = Curso.unidade_organica_id',
+                    ],
+                ],
+                [
+                    'table'      => 'disciplinas',
+                    'alias'      => 'Disciplina',
+                    'type'       => 'LEFT',
+                    'conditions' => [
+                        'Disciplina.id = Turma.disciplina_id',
+                    ],
+                ],
+                [
+                    'table'      => 'ano_lectivos',
+                    'alias'      => 'AnoLectivo',
+                    'type'       => 'LEFT',
+                    'conditions' => [
+                        'AnoLectivo.id = Turma.ano_lectivo_id',
+                    ],
+                ],
+                [
+                    'table'      => 'users',
+                    'alias'      => 'User',
+                    'type'       => 'LEFT',
+                    'conditions' => [
+                        'User.id = Entidade.user_id',
+                    ],
+                ],
+
+            ];
+            $inscricaos = $this->Inscricao->find('all',
+                [
+                    'conditions' => ['turma_id' => $turmaId],
+                    'joins'      => $joins,
+                    'fields'     => [
+                        'Aluno.codigo',
+                        'Entidade.apelido',
+                        'Entidade.nomes',
+                        'User.username',
+                        'Inscricao.nota_frequencia',
+                        'Inscricao.nota_exame_normal',
+                        'Inscricao.nota_exame_recorrencia',
+                        'Inscricao.nota_final',
+                        'UnidadeOrganica.name',
+                        'Disciplina.name',
+                        'AnoLectivo.ano',
+                        'Turma.semestre_curricular',
+                        'Turma.ano_curricular',
+                        'Turma.name'
+                    ],
+                    'order'      => ['Entidade.apelido','Entidade.nomes'],
+                ]);
+
+            return $inscricaos;
         }
 
         // Devolve o nome do docente da turma

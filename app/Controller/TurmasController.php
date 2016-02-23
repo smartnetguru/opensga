@@ -288,26 +288,7 @@
 
         public function docente_print_lista_estudantes($turmaId)
         {
-            $this->Turma->Inscricao->contain([
-                'EstadoInscricao',
-                'Matricula' => [
-                    'Aluno' => [
-                        'Entidade' => [
-                            'User',
-                        ],
-                    ],
-                ],
-                'Turma'     => [
-                    'Curso' => [
-                        'UnidadeOrganica',
-                    ],
-                    'Disciplina',
-                    'Turno',
-                    'AnoLectivo',
-                ],
-            ]);
-            $inscricaos = $this->Turma->Inscricao->find('all',
-                ['conditions' => ['turma_id' => $turmaId, 'Inscricao.estado_inscricao_id' => 1]]);
+            $inscricaos = $this->Turma->getAllAlunosActivos($turmaId);
             $this->set(compact('inscricaos'));
         }
 
@@ -377,25 +358,7 @@
                 $this->redirect(['action' => 'index']);
             }
 
-            $this->Turma->Inscricao->contain([
-                'EstadoInscricao',
-                'Matricula' => [
-                    'Aluno' => [
-                        'Entidade' => [
-                            'User',
-                        ],
-                    ],
-                ],
-                'Turma'     => [
-                    'Curso' => [
-                        'fields' => ['name'],
-                    ],
-                    'Disciplina',
-                    'Turno',
-                    'AnoLectivo',
-                ],
-            ]);
-            $inscricaos = $this->Turma->Inscricao->find('all', ['conditions' => ['turma_id' => $turmaId]]);
+            $inscricaos = $this->Turma->getAllAlunosActivos($turmaId);
 
 
             $this->Turma->TurmaTipoAvaliacao->contain([
@@ -760,26 +723,7 @@
 
         public function faculdade_print_lista_estudantes($turma_id)
         {
-            $this->Turma->Inscricao->contain([
-                'EstadoInscricao',
-                'Matricula' => [
-                    'Aluno' => [
-                        'Entidade' => [
-                            'User',
-                        ],
-                    ],
-                ],
-                'Turma'     => [
-                    'Curso' => [
-                        'UnidadeOrganica',
-                    ],
-                    'Disciplina',
-                    'Turno',
-                    'AnoLectivo',
-                ],
-            ]);
-            $inscricaos = $this->Turma->Inscricao->find('all',
-                ['conditions' => ['turma_id' => $turma_id, 'Inscricao.estado_inscricao_id' => 1]]);
+            $inscricaos = $this->Turma->getAllAlunosActivos($turma_id);
 
             $totalAlunos = count($inscricaos);
             $totalPaginas = intdiv($totalAlunos,35)+1;
@@ -865,25 +809,8 @@
                 $this->redirect(['action' => 'index']);
             }
 
-            $this->Turma->Inscricao->contain([
-                'EstadoInscricao',
-                'Matricula' => [
-                    'Aluno' => [
-                        'Entidade' => [
-                            'User',
-                        ],
-                    ],
-                ],
-                'Turma'     => [
-                    'Curso' => [
-                        'fields' => ['name'],
-                    ],
-                    'Disciplina',
-                    'Turno',
-                    'AnoLectivo',
-                ],
-            ]);
-            $inscricaos = $this->Turma->Inscricao->find('all', ['conditions' => ['turma_id' => $id]]);
+
+            $inscricaos = $this->Turma->getAllAlunosActivos($id);
 
             $this->Turma->TurmaTipoAvaliacao->contain([
                 'TipoAvaliacao',
@@ -1133,8 +1060,7 @@
                 ],
             ]);
 
-            $inscricaos = $this->Turma->Inscricao->find('all',
-                ['conditions' => ['turma_id' => $turma_id, 'Inscricao.estado_inscricao_id' => 1]]);
+            $inscricaos = $this->Turma->getAllAlunosActivos($turma_id);
 
             $this->set(compact('inscricaos'));
         }
@@ -1255,25 +1181,7 @@
             }
 
 
-            $this->Turma->Inscricao->contain([
-                'EstadoInscricao',
-                'Matricula' => [
-                    'Aluno' => [
-                        'Entidade' => [
-                            'User',
-                        ],
-                    ],
-                ],
-                'Turma'     => [
-                    'Curso' => [
-                        'fields' => ['name'],
-                    ],
-                    'Disciplina',
-                    'Turno',
-                    'AnoLectivo',
-                ],
-            ]);
-            $inscricaos = $this->Turma->Inscricao->find('all', ['conditions' => ['turma_id' => $id]]);
+            $inscricaos = $this->Turma->getAllAlunosActivos($id);
 
             $this->Turma->TurmaTipoAvaliacao->contain([
                 'TipoAvaliacao',

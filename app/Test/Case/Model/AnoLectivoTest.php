@@ -66,7 +66,7 @@
 
             $resultado = $this->AnoLectivo->criaAnoLectivo($data);
 
-            $this->assertEquals(12, $resultado);
+            $this->assertEquals(7, $resultado);
 
 
         }

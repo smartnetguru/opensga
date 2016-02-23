@@ -86,10 +86,15 @@
         {
             $datasource = $this->getDataSource();
             $datasource->begin();
-            $this->create();
-            if ($this->save($data)) {
+
+            try{
+                $this->create();
+                $this->save($data);
                 $disciplinaId = $this->id;
-            } else {
+            } catch(Exception $e){
+                debug($e->getCode());
+                debug($e->getMessage());
+                die();
                 debug($this->validationErrors);
                 $disciplina = $this->findByName($data['Disciplina']['name']);
                 if (!empty($disciplina)) {

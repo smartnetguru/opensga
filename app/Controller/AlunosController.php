@@ -1835,11 +1835,11 @@
 
             if ($this->request->is('post')) {
                 try{
+                    $this->request->data['Aluno']['user_id'] = CakeSession::read('Auth.User.id');
                     $this->Aluno->mudaCurso($this->request->data);
                     $this->Flash->success(__('Mudança de Curso efectuada com sucesso'));
                     $this->set('mudancaSucesso', 1);
                     $this->set('mudancaCursoId', $this->Aluno->MudancaCurso->id);
-
                 } catch(DataNotSavedException $e){
                     $this->Flash->eror($e->getMessage());
                     $this->set('mudancaSucesso', 0);
@@ -2000,6 +2000,11 @@
 
             $this->set(compact('aluno', 'inscricoes_activas', 'todas_inscricoes', 'cadeiras_aprovadas', 'pagamentos',
                 'is_bolseiro', 'is_regular', 'classe_estado', 'requisicoes', 'matriculas'));
+        }
+
+
+        public function relatorios_estudantes_com_necessidades_especiais(){
+
         }
 
         public function pesquisa_aluno_action($actionSeguinte, $controller = null, $plugin = null)

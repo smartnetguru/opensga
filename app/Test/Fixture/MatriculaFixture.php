@@ -31,7 +31,7 @@
 				'modified'            => '2014-02-25 08:49:19',
 				'created'             => '2013-06-10 14:52:40',
 				'user_id'             => '1',
-				'ano_lectivo_id'      => '10',
+				'ano_lectivo_id'      => '5',
 				'turno_id'            => '2',
 				'nivel'               => null,
 				'created_by'          => null,
@@ -50,7 +50,7 @@
 				'modified'            => '2014-02-25 08:49:19',
 				'created'             => '2013-06-10 14:52:40',
 				'user_id'             => '1',
-				'ano_lectivo_id'      => '10',
+				'ano_lectivo_id'      => '5',
 				'turno_id'            => '1',
 				'nivel'               => null,
 				'created_by'          => null,
@@ -194,7 +194,7 @@
 			[
 				'id'                  => '10',
 				'codigo'              => '14',
-				'aluno_id'            => '3841',
+				'aluno_id'            => '2',
 				'curso_id'            => '117',
 				'plano_estudo_id'     => null,
 				'data'                => '2013-06-10 14:52:40',
@@ -202,14 +202,14 @@
 				'modified'            => '2014-02-25 08:49:20',
 				'created'             => '2013-06-10 14:52:40',
 				'user_id'             => '1',
-				'ano_lectivo_id'      => '2',
+				'ano_lectivo_id'      => '4',
 				'turno_id'            => '1',
 				'nivel'               => null,
 				'created_by'          => null,
 				'modified_by'         => null,
 				'tipo_matricula_id'   => '2',
 				'regime_lectivo_id'   => null,
-			],
+			]
 		];
 
 	}
