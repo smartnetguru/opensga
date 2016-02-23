@@ -136,7 +136,7 @@
 
         $this->PhpExcel->addImage(WWW_ROOT . 'img' . DS . 'logo_login_' . Configure::read('OpenSGA.instituicao.sigla') . '.png',
             'A' . $linhaImagem, 10, 108, 115); //Logotipo
-        $linhaImagem = $linhaImagem + 44;
+        $linhaImagem = $linhaImagem + 53;
 
         $paginaActual++;
 
