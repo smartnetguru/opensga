@@ -17,28 +17,17 @@
     ?>
 </div>
 <div class="row">
-    <div class="col-sm-6">
+    <div class="col-sm-5">
         <!-- start: SELECT BOX PANEL -->
         <div class="panel panel-default">
             <div class="panel-heading">
-                <i class="fa fa-external-link-square"></i>
-                <?php echo $this->fetch('form-title') ?>
-                <div class="panel-tools">
-                    <a href="#" class="btn btn-xs btn-link panel-collapse collapses">
-                    </a>
-                    <a data-toggle="modal" href="#panel-config" class="btn btn-xs btn-link panel-config">
-                        <i class="fa fa-wrench"></i>
-                    </a>
-                    <a href="#" class="btn btn-xs btn-link panel-refresh">
-                        <i class="fa fa-refresh"></i>
-                    </a>
-                    <a href="#" class="btn btn-xs btn-link panel-expand">
-                        <i class="fa fa-resize-full"></i>
-                    </a>
-                    <a href="#" class="btn btn-xs btn-link panel-close">
-                        <i class="fa fa-times"></i>
-                    </a>
-                </div>
+                <h3 class="panel-title pull-left">
+                    <i class="fa fa-external-link-square"></i>
+                    <?php echo $this->fetch('form-title') ?>
+                </h3>
+                <div class="clearfix"></div>
+
+
             </div>
             <div class="panel-body">
                 <?php echo $this->fetch('form-elements'); ?>
@@ -46,28 +35,19 @@
         </div>
         <!-- end: SELECT BOX PANEL -->
     </div>
-    <div class="col-sm-6">
+    <div class="col-sm-7">
         <!-- start: SELECT BOX PANEL -->
         <div class="panel panel-default">
             <div class="panel-heading">
-                <i class="fa fa-external-link-square"></i>
-                <?php echo $this->fetch('form-title-right') ?>
-                <div class="panel-tools">
-                    <a href="#" class="btn btn-xs btn-link panel-collapse collapses">
-                    </a>
-                    <a data-toggle="modal" href="#panel-config" class="btn btn-xs btn-link panel-config">
-                        <i class="fa fa-wrench"></i>
-                    </a>
-                    <a href="#" class="btn btn-xs btn-link panel-refresh">
-                        <i class="fa fa-refresh"></i>
-                    </a>
-                    <a href="#" class="btn btn-xs btn-link panel-expand">
-                        <i class="fa fa-resize-full"></i>
-                    </a>
-                    <a href="#" class="btn btn-xs btn-link panel-close">
-                        <i class="fa fa-times"></i>
-                    </a>
-                </div>
+                <h3 class="panel-title pull-left">
+                    <i class="fa fa-external-link-square"></i>
+                    <?php echo $this->fetch('form-title-right') ?>
+                </h3>
+
+                <button class="btn btn-default pull-right">Voltar</button>
+                <div class="clearfix"></div>
+
+
             </div>
             <div class="panel-body">
                 <?php echo $this->fetch('right-panel') ?>

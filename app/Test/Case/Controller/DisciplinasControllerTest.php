@@ -21,6 +21,7 @@
             'app.funcionario',
             'app.log',
             'app.log_detail',
+            'app.message',
         ];
 
         /**
@@ -61,7 +62,7 @@
         public function testFaculdadeAdicionarDisciplina()
         {
 
-            $resultado = $this->testAction('/faculdade/disciplinas/adicionar_disciplina', [
+            $this->testAction('/faculdade/disciplinas/adicionar_disciplina', [
                 'data'   => [
                     'Disciplina' => ['name' => 'Nova Disciplina Teste'],
                 ],

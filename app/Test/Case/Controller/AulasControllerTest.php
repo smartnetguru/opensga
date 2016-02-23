@@ -1,10 +1,10 @@
 <?php
-	App::uses('EntidadeNecessidadesController', 'Controller');
+	App::uses('AulasController', 'Controller');
 
 	/**
-	 * EntidadeNecessidadesController Test Case
+	 * AulasController Test Case
 	 */
-	class EntidadeNecessidadesControllerTest extends ControllerTestCase
+	class AulasControllerTest extends ControllerTestCase
 	{
 
 		/**
@@ -13,7 +13,8 @@
 		 * @var array
 		 */
 		public $fixtures = [
-			'app.entidade_necessidade',
+			'app.aula',
+
 		];
 
 		/**

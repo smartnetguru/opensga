@@ -631,11 +631,20 @@
                 $comandos[] = "acl grant User.{$docente['Entidade']['User']['id']} controllers/Users/docente_trocar_senha";
                 $comandos[] = "acl grant User.{$docente['Entidade']['User']['id']} controllers/Users/docente_changeLoginProfile";
 
-                $comandos[] = "acl grant User.{$docente['Entidade']['User']['id']} controllers/Avaliacaos/docente_ver_avaliacao";
-
                 $comandos[] = "acl grant User.{$docente['Entidade']['User']['id']} controllers/Alunos/docente_index";
                 $comandos[] = "acl grant User.{$docente['Entidade']['User']['id']} controllers/Alunos/docente_perfil_estudante";
                 $comandos[] = "acl grant User.{$docente['Entidade']['User']['id']} controllers/Alunos/docente_enviar_sms";
+
+                $comandos[] = "acl grant User.{$docente['Entidade']['User']['id']} controllers/Avaliacaos/docente_ver_avaliacao";
+
+                $comandos[] = "acl grant User.{$docente['Entidade']['User']['id']} controllers/Aulas/docente_index";
+                $comandos[] = "acl grant User.{$docente['Entidade']['User']['id']} controllers/Aulas/docente_ver_aula";
+                $comandos[] = "acl grant User.{$docente['Entidade']['User']['id']} controllers/Aulas/docente_criar_aula";
+                $comandos[] = "acl grant User.{$docente['Entidade']['User']['id']} controllers/Aulas/docente_editar_aula";
+                $comandos[] = "acl grant User.{$docente['Entidade']['User']['id']} controllers/Aulas/docente_marcar_presenca";
+                $comandos[] = "acl grant User.{$docente['Entidade']['User']['id']} controllers/Aulas/docente_cancelar_aula";
+
+
 
 
                 $comandos[] = "acl grant User.{$docente['Entidade']['User']['id']} controllers/Docentes/docente_meu_perfil";

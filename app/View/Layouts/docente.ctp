@@ -1,15 +1,7 @@
-<?php echo $this->element('header'); ?>
-    <!-- start: MAIN CONTAINER -->
-    <div class="main-container">
-        <div class="navbar-content">
-            <!-- start: SIDEBAR -->
-            <div class="main-navigation navbar-collapse collapse">
-                <!-- start: MAIN MENU TOGGLER BUTTON -->
-                <div class="navigation-toggler">
-                    <i class="clip-chevron-left"></i>
-                    <i class="clip-chevron-right"></i>
-                </div>
-                <!-- end: MAIN MENU TOGGLER BUTTON -->
+<?php
+    $this->extend('/Common/Layouts/default');
+?>
+<?php $this->start('main-navigation') ?>
                 <!-- start: MAIN NAVIGATION MENU -->
                 <ul class="main-navigation-menu">
                     <li class="active open">
@@ -112,31 +104,6 @@
                     </li>
                 </ul>
                 <!-- end: MAIN NAVIGATION MENU -->
-            </div>
-            <!-- end: SIDEBAR -->
-        </div>
-        <!-- start: PAGE -->
-        <div class="main-content">
-            <!-- start: PAGE HEADER -->
-            <?php echo $this->element('page_header'); ?>
-            <!-- end: PAGE HEADER -->
-            <!-- start: PAGE CONTENT -->
+<?php $this->end(); ?>
 
-
-            <?php
-                $session_message = $this->Session->read('Message');
-                if (isset($session_message) and $session_message != null) {
-                    foreach ($session_message as $k => $v) {
-                        echo $this->Session->flash($k);
-                    }
-                }
-            ?>
-            <?php echo $this->fetch('content'); ?>
-
-            <!-- end: PAGE CONTENT-->
-
-        </div>
-        <!-- end: PAGE -->
-    </div>
-    <!-- end: MAIN CONTAINER -->
-<?php echo $this->element('footer'); ?>
+<?php echo $this->fetch('content');?>
