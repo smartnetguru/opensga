@@ -4,6 +4,13 @@
     $group_id = $this->Session->read('Auth.User.group_id');
 ?>
 
+<div class="alert alert-success">
+    <button data-dismiss="alert" class="close">
+        &times;
+    </button>
+    <i class="fa fa-check-circle"></i>
+    <strong>Corrigido!</strong> Erro que impedia docentes de imprimir listas no dia 24/02/2016
+</div>
 <div class='row'>
     <div class="action-list">
         <div class="col-sm-2">

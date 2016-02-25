@@ -289,7 +289,10 @@
         public function docente_print_lista_estudantes($turmaId)
         {
             $inscricaos = $this->Turma->getAllAlunosActivos($turmaId);
-            $this->set(compact('inscricaos'));
+
+            $totalAlunos = count($inscricaos);
+            $totalPaginas = intdiv($totalAlunos,35)+1;
+            $this->set(compact('inscricaos','totalPaginas'));
         }
 
         public function docente_print_pauta($turmaId)
