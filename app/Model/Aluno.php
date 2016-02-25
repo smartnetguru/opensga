@@ -1429,7 +1429,7 @@
                     $data['Aluno']['user_id'] = $this->User->getLastInsertID();
                     $data['Aluno']['entidade_id'] = $this->Entidade->getLastInsertID();
                     $data['Aluno']['data_ingresso'] = date('Y-m-d');
-                    
+                    $data['Aluno']['ano_ingresso'] = date('Y');
                     $data['Aluno']['curso_ingresso_id'] = $data['Aluno']['curso_id'];
                     $planoEstudoId = $this->Curso->getPlanoEstudoIdRecente($data['Aluno']['curso_id']);
                     if (!empty($planoEstudoId)) {
