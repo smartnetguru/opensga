@@ -4,5 +4,6 @@
 
     class ApiAppModel extends AppModel
     {
+        public $useTable = false;
 
     }

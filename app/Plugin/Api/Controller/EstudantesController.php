@@ -230,5 +230,15 @@
             //$this->autoRender = false;
         }
 
+        public function autenticacao(){
+
+            if($this->request->is('post')){
+                debug($this->request->data);
+                die();
+            }
+
+            $this->layout = false;
+        }
+
 
     }

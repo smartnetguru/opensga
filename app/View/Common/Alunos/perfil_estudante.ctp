@@ -1,20 +1,4 @@
-﻿<?php
-    /**
-     * View do Perfil do Aluno
-     *
-     * @copyright       Copyright 2010-2011, INFOmoz (Informática-Moçambique) (http://infomoz.net)
-     * @link            http://infomoz.net/opensga OpenSGA - Sistema de Gestão Académica
-     * @author          Elisio Leonardo (elisio.leonardo@gmail.com)
-     * @package         opensga
-     * @subpackage      opensga.core.estudantes
-     * @version         OpenSGA v 0.5.0
-     * @since           OpenSGA v 0.1.0
-     *
-     */
-?>
-
-
-<?php echo $this->fetch('breadcumbs') ?>
+﻿<?php echo $this->fetch('breadcumbs') ?>
 <div class="row">
     <?php
         foreach ($is_regular as $ir) {
@@ -26,7 +10,6 @@
         }
     ?>
 </div>
-
 <div class="row">
     <div class="col-sm-12">
         <div class="tabbable">
@@ -58,7 +41,7 @@
                 </li>
                 <li>
                     <a href="#panel_requisicoes" data-toggle="tab">
-                        Requisicoes<br/><span class="badge badge-danger"> Brevemente </span>
+                        Requisicoes
                     </a>
                 </li>
                 <li>
@@ -433,6 +416,71 @@
                                             ]);
                                         }
                                     ?>
+                                </td>
+                            </tr>
+                            <?php
+                        }
+                        ?>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="tab-pane" id="panel_requisicoes">
+                    <table id="projects" class="table table-striped table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            <th>Ano Lectivo</th>
+                            <th>Curso</th>
+                            <th>Plano de Estudos</th>
+                            <th>Data</th>
+                            <th>Tipo de Matricula</th>
+                            <th>Estado da Matricula</th>
+                            <th>%Aprovacao</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <?php foreach ($aluno['Matricula'] as $matricula) { ?>
+                            <tr>
+                                <td><?php echo h($matricula['AnoLectivo']['ano']) ?></td>
+                                <td><?php echo h($matricula['Curso']['name']) ?></td>
+                                <td><?php
+                                        if (isset($matricula['PlanoEstudo']['name'])) {
+                                            echo h($matricula['PlanoEstudo']['name']);
+                                        } ?>
+                                </td>
+                                <td><?php echo h($matricula['data']) ?></td>
+                                <td><?php echo h($matricula['TipoMatricula']['name']) ?></td>
+                                <td><?php echo h($matricula['EstadoMatricula']['name']) ?></td>
+                                <td><?php echo h('') ?></td>
+                                <td class="center">
+                                    <div class="visible-md visible-lg hidden-sm hidden-xs">
+
+                                        <?= $this->Html->link('<i class="fa fa-print"></i>',
+                                                [
+                                                        'controller' => 'matriculas',
+                                                        'action'     => 'print_comprovativo_renovacao_matricula',
+                                                        $matricula['id'],
+                                                ], [
+                                                        'class'               => 'btn btn-xs btn-green tooltips',
+                                                        'data-placement'      => 'top',
+                                                        'data-original-title' => 'Imprimir',
+                                                        'escape'              => false,
+                                                ]); ?>
+                                        <?php
+                                            echo $this->Form->postLink('<i class="clip clip-file-remove fa fa-white"></i>',
+                                                    [
+                                                            'controller' => 'matriculas',
+                                                            'action'     => 'cancelar_renovacao_matricula',
+                                                            $matricula['id'],
+                                                    ], [
+                                                            'escape'              => false,
+                                                            'class'               => 'btn btn-xs btn-yellow tooltips',
+                                                            'data-placement'      => 'top',
+                                                            'data-original-title' => 'Cancelar Renovacao de Matricula',
+                                                    ],
+                                                    __('Tem Certeza que pretende Cancelar a renovacao desta Matricula?'));
+
+                                        ?>
+                                    </div>
                                 </td>
                             </tr>
                             <?php
