@@ -498,7 +498,7 @@
             $this->layout = "guest_users";
         }
 
-        public function faculdade_alterar_senha_sistema($userId,$defaultPassword = '')
+        public function faculdade_alterar_senha_sistema($userId, $defaultPassword = '')
         {
 
             if ($this->request->is('post')) {
@@ -624,7 +624,7 @@
                 $this->redirect(['controller' => 'pages', 'action' => 'home']);
             }
             if ($this->request->is('post')) {
-                if(!isset($this->request->data['User'])){
+                if (!isset($this->request->data['User'])) {
                     $this->redirect('/');
                 }
                 $username = $this->request->data['User']['username'];
@@ -654,22 +654,16 @@
                                 $this->User->Aro->create();
                                 $this->User->Aro->save($new_aro);
                             }
-                            //Actualizamos o Ultimos Login
-                            $this->User->id = $aluno['Entidade']['User']['id'];
-                            $this->User->set('ultimo_login', date('Y-m-d H:i:s'));
-                            $this->User->set('password', Security::hash($aluno['Aluno']['codigo'], 'blowfish'));
-                            $this->User->save();
+                            $this->User->actualizaUltimoLogin($aluno['Entidade']['User']['id']);
                             $this->User->actualizaLoginHistory($aluno['Entidade']['User']['id'],
                                 $aluno['Entidade']['User']['group_id'], date('Y-m-d H:i:s'),
                                 $this->request->clientIp());
                             $message = [
-                                'Option1'     => 'Message',
-                                //'Type'=>'cake',
-                                'Command'     => 'User',
-                                'Action'      => 'processaLoginEfectuado',
-                                'matriculaId' => $aluno['Entidade']['User']['id'],
+                                'Command'  => 'OpenSGAAcl',
+                                'Action'   => '--username',
+                                'username' => $aluno['Entidade']['User']['username'],
                             ];
-                            // CakeRabbit::publish($message);
+                            CakeRabbit::publish($message);
                             $this->redirect([
                                 'controller' => 'users',
                                 'action'     => 'trocar_senha',
@@ -705,6 +699,7 @@
                         $this->User->Aro->create();
                         $this->User->Aro->save($new_aro);
                     }
+                    
                     // Vamos pegar todos os grupos e colocar na Sessao
                     $this->User->GroupsUser->contain('Group');
                     $grupos = $this->User->GroupsUser->find('all', [
@@ -720,8 +715,8 @@
                         $this->request->clientIp());
                     $this->Session->write('Auth.User.Groups', $grupos_combine);
                     $message = [
-                        'Command'     => 'OpenSGAAcl',
-                        'Action'      => '--username',
+                        'Command'  => 'OpenSGAAcl',
+                        'Action'   => '--username',
                         'username' => $User['username'],
                     ];
                     RabbitMQ::publish($message);

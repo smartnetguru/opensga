@@ -125,6 +125,13 @@
 
         }
 
+        public function actualizaUltimoLogin($userId){
+            //Actualizamos o Ultimos Login
+            $this->id = $userId;
+            $this->set('ultimo_login', date('Y-m-d H:i:s'));
+            $this->save();
+        }
+
         public function alteraPassword($data)
         {
 

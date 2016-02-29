@@ -63,7 +63,7 @@ class AulaTest extends CakeTestCase {
 		try{
 			$this->Aula->criaAula($errorData);
 		} catch(Exception $e){
-			debug($e->getMessage());
+			//debug($e->getMessage());
 		}
 		$resultado = $this->Aula->criaAula($data);
 		$this->assertTrue($resultado);

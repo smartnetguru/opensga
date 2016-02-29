@@ -237,67 +237,23 @@
 		public function registar_requisicao_estudante($alunoId)
 		{
 			if ($this->request->is('post')) {
-
-				$this->RequisicoesPedido->Aluno->contain('Entidade');
-
-
-				$aluno = $this->RequisicoesPedido->Aluno->findById(
-					$this->request->data['RequisicoesPedido']['aluno_id']);
-
-
-				debug($this->request->data);
-
-
-				$this->request->data['RequisicoesPedido']['data_pedido'] = date('Y-m-d H:i:s');
-				$this->request->data['RequisicoesPedido']['entidade_id'] = $entidade['id'];
-				$this->request->data['RequisicoesPedido']['nome_requerente'] = $entidade['name'];
-				//$this->request->data['RequisicoesPedido']['curso_id'] = $aluno['Aluno']['curso_id'];
-				$funcionario = $this->RequisicoesPedido->Funcionario->getByUserId($this->Session->read('Auth.User.id'));
-
-
-				if (!empty($funcionario)) {
-					$this->request->data['RequisicoesPedido']['funcionario_id'] = $funcionario['Funcionario']['id'];
-				} else {
-
+				try{
+					$this->RequisicoesPedido->gravaRequisicao($this->request->data);
+					$this->Flash->success('Requisicao Gravada com Sucesso');
+					$this->redirect(['controller'=>'alunos','action'=>'perfil_estudante',$alunoId,'plugin'=>false]);
+				} catch(DataNotSavedException $e){
+					$this->Flash->error($e->getMessage());
 				}
-				if ($this->request->data['RequisicoesPedido']['novo_tipo_requisicao'] != null) {
-					$tipo_requisicao_existe = $this->RequisicoesPedido->RequisicoesTipoPedido->findByName($this->request->data['RequisicoesPedido']['novo_tipo_requisicao']);
-					if (empty($tipo_requisicao_existe)) {
-						$array_tipo_requisicao = [
-							'RequisicoesTipoPedido' => [
-								"name" => $this->request->data['RequisicoesPedido']['novo_tipo_requisicao'],
-							],
-						];
-						$this->RequisicoesPedido->RequisicoesTipoPedido->create();
-						$this->RequisicoesPedido->RequisicoesTipoPedido->save($array_tipo_requisicao);
-						$this->request->data["RequisicoesPedido"]['requisicoes_tipo_pedido_id'] = $this->RequisicoesPedido->RequisicoesTipoPedido->id;
-					} else {
 
-						$this->request->data["RequisicoesPedido"]['requisicoes_tipo_pedido_id'] = $tipo_requisicao_existe['RequisicoesTipoPedido']['name'];
 
-					}
-				}
-				$this->RequisicoesPedido->create();
-				if ($this->RequisicoesPedido->save($this->request->data)) {
-					$this->RequisicoesPedido->set('numero_pedido', $this->RequisicoesPedido->id);
-					$this->RequisicoesPedido->save();
-
-					$this->Session->setFlash(__('Requisição Registada com Sucesso'), 'default',
-						['class' => 'alert success']);
-					$this->redirect([
-						'plugin'     => false,
-						'controller' => 'alunos',
-						'action'     => 'perfil_estudante',
-						$this->request->data['RequisicoesPedido']['aluno_id'],
-					]);
-				}
 			}
 
+			$funcionario = $this->RequisicoesPedido->Funcionario->getByUserId(CakeSession::read('Auth.User.id'));
 			$aluno = $this->RequisicoesPedido->Aluno->getAlunoForAction($alunoId);
 			$requisicoesTipoPedidos = $this->RequisicoesPedido->RequisicoesTipoPedido->find('list');
 			$requisicoesEstadoPedidos = $this->RequisicoesPedido->RequisicoesEstadoPedido->find('list');
 
-			$this->set(compact('aluno', 'requisicoesTipoPedidos', 'requisicoesEstadoPedidos'));
+			$this->set(compact('aluno', 'requisicoesTipoPedidos', 'requisicoesEstadoPedidos','funcionario'));
 		}
 
 

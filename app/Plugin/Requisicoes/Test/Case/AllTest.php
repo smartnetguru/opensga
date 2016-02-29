@@ -6,10 +6,8 @@
         public static function suite()
         {
             $suite = new CakeTestSuite('All Tests');
-            $suite->addTestFile(TESTS . 'Case' . DS . 'AllModelTest.php');
-            $suite->addTestFile(TESTS . 'Case' . DS . 'AllControllerTest.php');
-
-
+            $suite->addTestFile(dirname(__FILE__)  . DS . 'AllModelTest.php');
+            $suite->addTestFile(dirname(__FILE__)  . DS . 'AllControllerTest.php');
 
             return $suite;
         }

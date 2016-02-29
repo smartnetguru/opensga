@@ -64,7 +64,7 @@ $this->BreadCumbs->addCrumb('Lista de Alunos', '/alunos/index');
 		</td>
 		<td><?php echo h($requisicoesPedido['RequisicoesPedido']['nome_requerente']); ?>&nbsp;</td>
 		<td>
-			<?php echo $this->Html->link($requisicoesPedido['Curso']['name'], array('controller' => 'cursos', 'action' => 'view', $requisicoesPedido['Curso']['id'])); ?>
+			<?php if(isset($requisicoesPedido['Curso']))echo $this->Html->link($requisicoesPedido['Curso']['name'], array('controller' => 'cursos', 'action' => 'view', $requisicoesPedido['Curso']['id'])); ?>
 		</td>
 		<td>
 			<?php echo $this->Html->link($requisicoesPedido['RequisicoesTipoPedido']['name'], array('controller' => 'requisicoes_pedidos', 'action' => 'actualizar_estado_requisicao', $requisicoesPedido['RequisicoesPedido']['id'])); ?>
