@@ -14,6 +14,8 @@ class RequisicoesPedidoTest extends CakeTestCase {
  */
 	public $fixtures = array(
 		'plugin.requisicoes.requisicoes_pedido',
+		'app.aluno',
+		'app.entidade'
 	);
 
 /**
