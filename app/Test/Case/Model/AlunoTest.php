@@ -39,6 +39,7 @@
             'app.rua',
             'app.mudanca_curso',
             'app.entidade_necessidade',
+            'app.opensga_session'
 
         ];
 
