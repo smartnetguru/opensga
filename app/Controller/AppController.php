@@ -59,7 +59,6 @@
             'Time',
             'AmazonS3',
             'NewRelic.NewRelic',
-            'AssetCompress.AssetCompress',
         ];
         public $pdfConfig = ['engine' => 'CakePdf.Tcpdf'];
         public $cacheAction = '1 hour';

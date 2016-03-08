@@ -111,6 +111,53 @@
 
         }
 
+        public function testCadastraDocenteComNuitExistente(){
+            $data = [
+
+                'Entidade'              => [
+                    'apelido'              => 'Leonardo',
+                    'nomes'                => 'Elisio Leonardo',
+                    'genero_id'            => '1',
+                    'data_nascimento'      => '2015-08-04',
+                    'nome_pai'             => 'Elisio',
+                    'nome_mae'             => 'Leonardo',
+                    'naturalidade'         => 'CCCC',
+                    'pais_nascimento'      => '152',
+                    'provincia_nascimento' => '6',
+                    'cidade_nascimento'    => '1',
+                    'name'                 => 'Elisio Leonardo Leonardo',
+                    'nuit'                 => '1234567890',
+                ],
+                'Docente'               => [
+                    'unidade_organica_id'  => '1',
+                    'data_ingresso'        => '2015-08-11',
+                    'docente_categoria_id' => 1,
+                ],
+                'EntidadeContacto'      => [
+                    (int)11 => '152',
+                    (int)10 => '4',
+                    (int)9  => '47',
+                    (int)6  => 'dfgdf',
+                    (int)5  => '',
+                    (int)7  => '',
+                    (int)8  => '',
+                    (int)2  => 'gdfgd',
+                    (int)1  => 'docente.teste.pessoal@gmail.com',
+                ],
+                'EntidadeIdentificacao' => [
+                    'documento_identificacao_id' => '1',
+                    'numero'                     => '54664645',
+                    'local_emissao'              => '',
+                    'data_emissao'               => '',
+                    'data_validade'              => '',
+                ],
+
+            ];
+            $resultado = $this->Docente->cadastraDocente($data);
+            $this->assertTrue($resultado);
+
+    }
+
         /**
          * testListaDocentes method
          *

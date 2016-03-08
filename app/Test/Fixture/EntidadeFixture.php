@@ -60,7 +60,7 @@
 				'nacionalidade'                         => null,
 				'codigo'                                => '',
 				'naturalidade'                          => null,
-				'nuit'                                  => null,
+				'nuit'                                  => 1234567890,
 			],
 			[
 				'id'                                    => '2',

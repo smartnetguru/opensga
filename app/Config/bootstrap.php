@@ -4,7 +4,6 @@
     require ROOT . DS . 'Vendor' . DS . 'autoload.php';
     CakePlugin::load('NewRelic');
     Configure::write('Dispatcher.filters', [
-        'AssetDispatcher',
         'CacheDispatcher',
         'NewRelic.NewRelicFilter',
     ]);
@@ -18,7 +17,6 @@
 
     CakePlugin::load('Search');
     CakePlugin::load('Icing');
-    CakePlugin::load('AssetCompress', ['bootstrap' => true]);
 
     App::import('Log', 'CakeLog');
     CakePlugin::load('DatabaseLogger');

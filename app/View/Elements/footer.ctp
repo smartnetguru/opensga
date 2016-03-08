@@ -19,7 +19,6 @@ echo $this->Html->script(['/assets/plugins/respond.min']);
 echo $this->Html->script(['/assets/plugins/excanvas.min']);
 ?>
 <![endif]-->
-<?= $this->AssetCompress->addScript('jquery-combined'); ?>
 
 <?php
     echo $this->Html->script(['/assets/plugins/jquery-2.0.3.min']);

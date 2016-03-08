@@ -669,12 +669,12 @@
 					$entidade = $this->RequisicoesPedido->Entidade->findById($entidadeID);
 
 
-					$this->set(compact([
+					$this->set(compact(
 						'requisicao',
 						'entidade',
 						'requisicoesTipoPedidos',
-						'requisicoesEstadoPedidos',
-					]));
+						'requisicoesEstadoPedidos'
+					));
 
 				}
 

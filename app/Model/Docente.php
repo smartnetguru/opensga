@@ -12,10 +12,10 @@
      * @version       OpenSGA v 0.5.0
      * @since         OpenSGA v 0.1.0.0
      *
-     * @property Entidade @Entidade
-     * @property Seccao @Seccao
-     * @property DocenteCategoria @DocenteCategoria
-     * @property DocenteUnidadeOrganica @DocenteUnidadeOrganica
+     * @property Entidade $Entidade
+     * @property Seccao $Seccao
+     * @property DocenteCategoria $DocenteCategoria
+     * @property DocenteUnidadeOrganica $DocenteUnidadeOrganica
      */
     class Docente extends AppModel
     {
@@ -107,7 +107,6 @@
         public function cadastraDocente(array $data)
         {
             $dataSource = $this->getDataSource();
-
             $dataSource->begin();
 
             if (!isset($data['Docente']['codigo']) || $data['Docente']['codigo'] == '') {
@@ -115,6 +114,10 @@
                     $data['Entidade']['nomes']);
             }
 
+            $data['Entidade']['email'] = $data['EntidadeContacto'][1];
+            $entidadeExiste = $this->Entidade->verificaEntidadeExiste($data['Entidade']);
+            debug($entidadeExiste);
+            die();
             //Grava os dados do Usuario
             $this->Entidade->User->create();
             $data['User']['username'] = $data['Docente']['codigo'];
@@ -127,7 +130,7 @@
                 //Grava os dados da Entidade
                 $data['Docente']['user_id'] = $this->Entidade->User->getLastInsertID();
                 $data['Entidade']['user_id'] = $this->Entidade->User->getLastInsertID();
-                $data['Entidade']['email'] = $data['EntidadeContacto'][1];
+
                 $this->Entidade->create();
 
                 $this->Entidade->validator()
