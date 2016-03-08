@@ -40,8 +40,7 @@
     {
       "type": "git",
       "url": "https://github.com/backstageel/CakePHP-DatabaseLogger-Plugin.git"
-    },
-
+    }
   ],
   "require": {
     "cakephp/cakephp": "2.8.x",
