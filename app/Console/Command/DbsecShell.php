@@ -26,8 +26,8 @@
         'Entidade',
     ];
 
-    public $folder = 'letras1';
-    public $unidadeOrganicaId = 16;
+    public $folder = 'esnec';
+    public $unidadeOrganicaId = 14;
 
 
 
@@ -434,10 +434,10 @@ if($codigo_disciplina=='MGAP 122'){
             $telefone = trim($worksheet->getCell('I' . $linha_actual)->getCalculatedValue());
             $celular = trim($worksheet->getCell('J' . $linha_actual)->getCalculatedValue());
             $idCurso = trim($worksheet->getCell('K' . $linha_actual)->getCalculatedValue());
-            $nacionalidade = trim($worksheet->getCell('M' . $linha_actual)->getCalculatedValue());
-            $email = trim($worksheet->getCell('N' . $linha_actual)->getCalculatedValue());
+            $nacionalidade = trim($worksheet->getCell('L' . $linha_actual)->getCalculatedValue());
+            $email = trim($worksheet->getCell('M' . $linha_actual)->getCalculatedValue());
             $cellDataRegistro = $worksheet->getCell('O' . $linha_actual);
-            $curriculum = trim($worksheet->getCell('R' . $linha_actual)->getCalculatedValue());
+            $curriculum = trim($worksheet->getCell('P' . $linha_actual)->getCalculatedValue());
             $ramo = trim($worksheet->getCell('S' . $linha_actual)->getCalculatedValue());
             $statusId = trim($worksheet->getCell('T' . $linha_actual)->getCalculatedValue());
 
@@ -592,17 +592,17 @@ if($codigo_disciplina=='MGAP 122'){
             $this->PlanoEstudo->recursive = -1;
             $this->Curso->recursive = -1;
             $idDisciplina = trim($worksheet->getCell('A' . $linha_actual)->getCalculatedValue());
-            $idCcurso = trim($worksheet->getCell('G' . $linha_actual)->getCalculatedValue());
-            $ano = trim($worksheet->getCell('B' . $linha_actual)->getCalculatedValue());
-            $semestre = trim($worksheet->getCell('C' . $linha_actual)->getCalculatedValue());
-            $curriculum = trim($worksheet->getCell('H' . $linha_actual)->getCalculatedValue());
-            $nivel = trim($worksheet->getCell('J' . $linha_actual)->getCalculatedValue());
-            $ramo = trim($worksheet->getCell('I' . $linha_actual)->getCalculatedValue());
-            $idTurma = trim($worksheet->getCell('F' . $linha_actual)->getCalculatedValue());
+            $idCcurso = trim($worksheet->getCell('B' . $linha_actual)->getCalculatedValue());
+            $ano = trim($worksheet->getCell('C' . $linha_actual)->getCalculatedValue());
+            $semestre = trim($worksheet->getCell('D' . $linha_actual)->getCalculatedValue());
+            $curriculum = trim($worksheet->getCell('F' . $linha_actual)->getCalculatedValue());
+            $nivel = trim($worksheet->getCell('N' . $linha_actual)->getCalculatedValue());
+            $ramo = trim($worksheet->getCell('G' . $linha_actual)->getCalculatedValue());
+            $idTurma = trim($worksheet->getCell('E' . $linha_actual)->getCalculatedValue());
 
-            if($ano=='2030'){
+            if($ano=='2207'){
 
-                $ano=2003;
+                $ano=2007;
             }
             if($ano=='9997'){
 
@@ -862,7 +862,7 @@ $idDisciplina = $codigo_disciplina;
             $cellDataInscricao = $worksheet->getCell('C' . $linha_actual);
             $idAnoLectivo = trim($worksheet->getCell('E' . $linha_actual)->getCalculatedValue());
             $idCursoFrequencia = trim($worksheet->getCell('U' . $linha_actual)->getCalculatedValue());
-            $idCurso = trim($worksheet->getCell('N' . $linha_actual)->getCalculatedValue());
+            $idCurso = trim($worksheet->getCell('O' . $linha_actual)->getCalculatedValue());
             $notaFrequencia = trim($worksheet->getCell('F' . $linha_actual)->getCalculatedValue());
             $notaFinal = trim($worksheet->getCell('I' . $linha_actual)->getCalculatedValue());
 

@@ -64,7 +64,6 @@
     "backstageel/cakephp-reports": "dev-master",
     "webtechnick/cakephp-database-logger-plugin": "dev-master",
     "cakedc/search": "^2.5",
-    "alliedhealthmedia/icing": "dev-master",
     "linkorb/jsmin-php": "^1.0",
     "bshaffer/oauth2-server-php": "^1.8"
   },
@@ -83,6 +82,9 @@
     "lib/Cake/Console/cake"
   ],
   "config": {
-    "vendor-dir": "Vendor/"
+    "vendor-dir": "Vendor/",
+    "process-timeout":      600,
+    "preferred-install":    "dist",
+    "github-protocols":     ["https"]
   }
 }
