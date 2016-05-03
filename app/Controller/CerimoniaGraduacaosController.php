@@ -166,7 +166,7 @@
                 $this->request->data['CandidatoGraduacao']['estado_candidatura_id'] = 1;
                 if ($this->CerimoniaGraduacao->CandidatoGraduacao->cadastraCandidatoGraduacao($this->request->data) === true) {
                     $this->Flash->success('Inscricao Realizada com Sucesso. Veja a seguir como fazer o Pagamento');
-                    $this->redirect(['action' => 'pagamento_inscricao']);
+                    $this->redirect(['action' => 'ver_detalhes',6]);
                 } else {
                     $this->Flash->error('Problemas ao registar a Inscricao. Verifique os dados e tente novamente');
                 }

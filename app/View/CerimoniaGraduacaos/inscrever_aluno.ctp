@@ -173,27 +173,6 @@
                                     </div>
                                 </div>
 
-                                <div class="row">
-                                    <div class="col-sm-4">
-                                        <?php echo $this->Form->label('CandidatoGraduacao.regime_estudo_id',
-                                                'Regime de Estudo'); ?>
-                                        <?php echo $this->Form->input('CandidatoGraduacao.regime_estudo_id',
-                                                ['class' => 'form-control', 'id' => 'codigo']); ?>
-                                    </div>
-                                    <div class="col-sm-4">
-                                        <?php echo $this->Form->label('CandidatoGraduacao.regalia_social_id',
-                                                'Regalia Social'); ?>
-                                        <?php echo $this->Form->input('CandidatoGraduacao.regalia_social_id',
-                                                ['class' => 'form-control', 'id' => 'codigo']); ?>
-                                    </div>
-                                    <div class="col-sm-4">
-                                        <?php echo $this->Form->label('CandidatoGraduacao.telemovel', 'Contacto'); ?>
-                                        <?php echo $this->Form->input('CandidatoGraduacao.telemovel',
-                                                ['class' => 'form-control', 'id' => 'codigo', 'type' => 'text']); ?>
-                                    </div>
-
-                                </div>
-
 
                                 <div class="row">
                                     <div class="col-sm-3">
@@ -240,33 +219,15 @@
                                 </div>
                                 <div class="row">
                                     <?php
-                                        echo $this->Form->input('numero_talao',
+                                        echo $this->Form->input('valor_pago',
                                                 [
-                                                        'label'    => [
+                                                        'label' => [
                                                                 'class' => 'control-label',
-                                                                'text'  => 'Numero do Talao',
+                                                                'text'  => 'Telemovel',
                                                         ],
-                                                        'div'      => 'form-group col-sm-4',
-                                                        'class'    => 'form-control',
-                                                        'id'       => 'codigoID',
-                                                        'required' => true,
-                                                        'type'     => 'text',
-
-                                                ]
-                                        );
-                                        echo $this->Form->input('data_pagamento',
-                                                [
-                                                        'label'              => [
-                                                                'class' => 'control-label',
-                                                                'text'  => 'Data de Deposito',
-                                                        ],
-                                                        'div'                => 'form-group col-sm-4',
-                                                        'class'              => 'form-control date-picker',
-                                                        'id'                 => 'codigoID',
-                                                        'type'               => 'text',
-                                                        'data-date-viewmode' => 'years',
-                                                        'data-date-format'   => 'yyyy-mm-dd',
-
+                                                        'div'   => 'form-group col-sm-6',
+                                                        'class' => 'form-control',
+                                                        'id'    => 'codigoID',
 
                                                 ]
                                         );
@@ -276,7 +237,7 @@
                                                                 'class' => 'control-label',
                                                                 'text'  => 'Valor Pago',
                                                         ],
-                                                        'div'   => 'form-group col-sm-4',
+                                                        'div'   => 'form-group col-sm-6',
                                                         'class' => 'form-control',
                                                         'id'    => 'codigoID',
 

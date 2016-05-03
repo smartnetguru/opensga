@@ -180,7 +180,7 @@
 
 
             if (!isset($data['CandidatoGraduacao']['cerimonia_graduacao_id'])) {
-                $data['CandidatoGraduacao']['cerimonia_graduacao_id'] = $this->CerimoniaGraduacao->getProximaCerimoniaId();
+                $data['CandidatoGraduacao']['cerimonia_graduacao_id'] =6;
             }
             if (!isset($data['CandidatoGraduacao']['referencia_pagamento'])) {
                 $data['CandidatoGraduacao']['referencia_pagamento'] = $this->Aluno->FinanceiroPagamento->geraReferenciaPagamentoGraduacao($data['CandidatoGraduacao']['aluno_id']);
@@ -194,15 +194,16 @@
             if ($this->save($data)) {
                 if (isset($data['CandidatoGraduacao']['valor_pago'])) {
                     $this->Aluno->id = $data['CandidatoGraduacao']['aluno_id'];
-                    $entidadeId = $this->Aluno->field('entidade_id');
+                    /*$entidadeId = $this->Aluno->field('entidade_id');
                     $this->Aluno->Entidade->FinanceiroDeposito->depositaValor($entidadeId,
                         $data['CandidatoGraduacao']['numero_talao'], $data['CandidatoGraduacao']['valor_pago'],
                         $data['CandidatoGraduacao']['referencia_pagamento'],
-                        $data['CandidatoGraduacao']['data_pagamento']);
+                        $data['CandidatoGraduacao']['data_pagamento']);*/
                 }
 
                 return true;
             } else {
+                debug($this->validationErrors);
                 return [false, $this->validationErrors];
             }
 
