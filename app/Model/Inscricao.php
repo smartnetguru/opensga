@@ -575,7 +575,7 @@
                 'Turma',
             ]);
             $inscricaos = $this->find('all',
-                ['conditions' => ['Inscricao.aluno_id' => $aluno_id, 'Turma.semestre_lectivo_id' => $semestre_id]]);
+                ['conditions' => ['Inscricao.aluno_id' => $aluno_id,'Inscricao.estado_inscricao_id NOT'=>9 ,'Turma.semestre_lectivo_id' => $semestre_id]]);
 
             return $inscricaos;
         }
