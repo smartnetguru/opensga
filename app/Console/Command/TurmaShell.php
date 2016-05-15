@@ -55,7 +55,7 @@
         {
             $unidadeOrganicaId = $this->args[0];
             $this->Turma->contain('Curso');
-            $turmas = $this->Turma->find('all', ['conditions' => ['Curso.unidade_organica_id' => $unidadeOrganicaId]]);
+            $turmas = $this->Turma->find('all', ['conditions' => []]);
             foreach ($turmas as $turma) {
                 $inscricaos = $this->Turma->Inscricao->find('count',
                     ['conditions' => ['Inscricao.turma_id' => $turma['Turma']['id']]]);

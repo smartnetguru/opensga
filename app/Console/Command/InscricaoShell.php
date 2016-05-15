@@ -22,13 +22,15 @@
         {
             $anoLectivo = Configure::read('OpenSGA.ano_lectivo');
             $anoLectivoId = $this->Inscricao->Turma->AnoLectivo->findByAno($anoLectivo);
-            $cursos = $this->Inscricao->Aluno->Curso->find('all', ['conditions' => ['unidade_organica_id'=>2]]);
+            $cursos = $this->Inscricao->Aluno->Curso->find('all', ['conditions' => []]);
+
 
             foreach ($cursos as $curso) {
                 $planoEstudo = $this->Inscricao->Aluno->Curso->PlanoEstudo->find('first', [
                     'conditions' => ['PlanoEstudo.curso_id' => $curso['Curso']['id']],
                     'order'      => 'PlanoEstudo.ano_criacao DESC',
                 ]);
+
 
                 if (!empty($planoEstudo)) {
                     $this->Inscricao->Aluno->Curso->PlanoEstudo->DisciplinaPlanoEstudo->contain([
@@ -49,8 +51,6 @@
                             ],
                         ]);
                         $this->out($planoEstudo['PlanoEstudo']['name'].'----------'.count($alunos));
-                        continue;
-                        continue;
                         if (!empty($alunos)) {
                             foreach ($alunos as $aluno) {
 
@@ -112,7 +112,6 @@
                                     'conditions' => [
                                         'aluno_id'            => $aluno['Aluno']['id'],
                                         'turma_id'            => $turmaId,
-                                        'estado_inscricao_id' => 1,
                                     ],
                                 ]);
                                 if (empty($inscricaoExiste)) {

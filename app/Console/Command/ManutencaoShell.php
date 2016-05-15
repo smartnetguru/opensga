@@ -446,5 +446,32 @@ class ManutencaoShell extends AppShell
     }
 
 
+    public function ajustaInscricaoMedicina(){
+        $planoEstudo = $this->PlanoEstudo->find('first',['conditions'=>['curso_id'=>40,'ano_criacao'=>2005]]);
+
+        $alunos = $this->Aluno->find('all',['conditions'=>['ano_ingresso'=>2016,'plano_estudo_id'=>199,'curso_id'=>40]]);
+        foreach($alunos as $aluno){
+            $inscricaos = $this->Inscricao->find('all',['conditions'=>['aluno_id'=>$aluno['Aluno']['id']]]);
+            foreach($inscricaos as $inscricao){
+                $this->Inscricao->id = $inscricao['Inscricao']['id'];
+                $this->Inscricao->delete();
+                $this->out($inscricao['Inscricao']['id']);
+            }
+
+            $this->Aluno->id = $aluno['Aluno']['id'];
+            $this->Aluno->set('plano_estudo_id',$planoEstudo['PlanoEstudo']['id']);
+            $this->Aluno->save();
+            $this->out($aluno['Aluno']['codigo']);
+
+            $historico = $this->Aluno->HistoricoCurso->find('first',['conditions'=>['aluno_id'=>$aluno['Aluno']['id'],'ano_ingresso'=>2016]]);
+            if($historico){
+                $this->Aluno->HistoricoCurso->id = $historico['HistoricoCurso']['id'];
+                $this->Aluno->HistoricoCurso->set('plano_estudo_id',$planoEstudo['PlanoEstudo']['id']);
+                $this->Aluno->HistoricoCurso->save();
+            }
+        }
+    }
+
+
 
 }
