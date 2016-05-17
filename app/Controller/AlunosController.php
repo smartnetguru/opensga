@@ -1487,12 +1487,12 @@
 
                     $turnoId = $curso['CursosTurno']['turno_id'];
                     if (!in_array($curso['Curso']['unidade_organica_id'], $unidadeOrganicas) && $turnoId!=3) {
-                        $this->Session->setFlash('Este Candidato nao Pertence a nenhum curso da sua faculdade');
+                        $this->Flash->error('Este Candidato nao Pertence a nenhum curso da sua faculdade');
                     } else {
                         $this->redirect(['action' => $actionSeguinte, $candidato['Candidatura']['id']]);
                     }
                 } else {
-                    $this->Session->setFlash(__('Candidato Invalido'));
+                    $this->Flash->error(__('Número de Candidato Invalido'));
                 }
             }
         }

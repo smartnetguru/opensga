@@ -6,12 +6,12 @@
 
 <?php $this->start('top-actions') ?>
     <div class="action-list">
-        <div class="col-sm-1">
+        <div class="col-sm-2">
             <?php echo $this->Html->link('<i class="fa fa-user fa-2x"></i>Matricular Candidato',
                     ['controller' => 'alunos', 'action' => 'pesquisa_candidatos_action', 'matricular_candidato'],
                     ['escape' => false, 'class' => 'btn btn-icon btn-block']) ?>
         </div>
-        <div class="col-sm-1">
+        <div class="col-sm-2">
             <?php echo $this->Html->link('<br/><i class="fa fa-plus"></i>	Adicionar Estudante <span class="badge badge-danger"> Brevemente </span>',
                     ['controller' => 'alunos', 'action' => 'adicionar_estudante'],
                     ['escape' => false, 'class' => 'btn btn-icon btn-block']) ?>
