@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "6940b0808a10da789850e5ed4d3c0fc1",
-    "content-hash": "ddef000116bc25c164b9aa8058eb3773",
+    "hash": "ab3be16a29ba8db4ae6b813964e8b1c3",
+    "content-hash": "929589ab9e6ce213702a699be622615a",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -482,16 +482,16 @@
         },
         {
             "name": "facebook/php-sdk-v4",
-            "version": "5.1.2",
+            "version": "5.1.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/facebook/facebook-php-sdk-v4.git",
-                "reference": "2c42fb3002953355f12d3c6e8003a9fd5af563d9"
+                "reference": "38fd7187a6704d3ab14ded2f3a534ac4ee6f3481"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/facebook/facebook-php-sdk-v4/zipball/2c42fb3002953355f12d3c6e8003a9fd5af563d9",
-                "reference": "2c42fb3002953355f12d3c6e8003a9fd5af563d9",
+                "url": "https://api.github.com/repos/facebook/facebook-php-sdk-v4/zipball/38fd7187a6704d3ab14ded2f3a534ac4ee6f3481",
+                "reference": "38fd7187a6704d3ab14ded2f3a534ac4ee6f3481",
                 "shasum": ""
             },
             "require": {
@@ -533,65 +533,7 @@
                 "facebook",
                 "sdk"
             ],
-            "time": "2015-11-19 21:07:36"
-        },
-        {
-            "name": "filp/whoops",
-            "version": "1.1.10",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/filp/whoops.git",
-                "reference": "72538eeb70bbfb11964412a3d098d109efd012f7"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/filp/whoops/zipball/72538eeb70bbfb11964412a3d098d109efd012f7",
-                "reference": "72538eeb70bbfb11964412a3d098d109efd012f7",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.0"
-            },
-            "require-dev": {
-                "mockery/mockery": "0.9.*"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.2-dev"
-                }
-            },
-            "autoload": {
-                "psr-0": {
-                    "Whoops": "src/"
-                },
-                "classmap": [
-                    "src/deprecated"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Filipe Dobreira",
-                    "homepage": "https://github.com/filp",
-                    "role": "Developer"
-                }
-            ],
-            "description": "php error handling for cool kids",
-            "homepage": "https://github.com/filp/whoops",
-            "keywords": [
-                "error",
-                "exception",
-                "handling",
-                "library",
-                "silex-provider",
-                "whoops",
-                "zf2"
-            ],
-            "time": "2015-06-29 05:42:04"
+            "time": "2016-05-13 17:28:30"
         },
         {
             "name": "ghunti/highcharts-php",
@@ -962,33 +904,6 @@
                 "cakephp"
             ],
             "time": "2013-10-26 00:34:46"
-        },
-        {
-            "name": "oldskool/whoops-cakephp",
-            "version": "dev-cake2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/oldskool/WhoopsCakephp.git",
-                "reference": "c0c3cd559b6952fb501e0434732a9bbbf9b31253"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/oldskool/WhoopsCakephp/zipball/c0c3cd559b6952fb501e0434732a9bbbf9b31253",
-                "reference": "c0c3cd559b6952fb501e0434732a9bbbf9b31253",
-                "shasum": ""
-            },
-            "require": {
-                "composer/installers": "*",
-                "filp/whoops": "1.*"
-            },
-            "type": "cakephp-plugin",
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "Integrates the Whoops library into CakePHP",
-            "homepage": "https://github.com/oldskool/CakeWhoops",
-            "time": "2016-05-04 12:38:28"
         },
         {
             "name": "phpoffice/phpexcel",
@@ -2028,6 +1943,66 @@
             "time": "2016-04-11 15:01:04"
         },
         {
+            "name": "filp/whoops",
+            "version": "2.1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/filp/whoops.git",
+                "reference": "d13505b240a6f580bc75ba591da30299d6cb0eec"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/filp/whoops/zipball/d13505b240a6f580bc75ba591da30299d6cb0eec",
+                "reference": "d13505b240a6f580bc75ba591da30299d6cb0eec",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.5.9"
+            },
+            "require-dev": {
+                "mockery/mockery": "0.9.*",
+                "phpunit/phpunit": "^4.8 || ^5.0",
+                "symfony/var-dumper": "~3.0"
+            },
+            "suggest": {
+                "symfony/var-dumper": "Pretty print complex values better with var-dumper available",
+                "whoops/soap": "Formats errors as SOAP responses"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Whoops\\": "src/Whoops/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Filipe Dobreira",
+                    "homepage": "https://github.com/filp",
+                    "role": "Developer"
+                }
+            ],
+            "description": "php error handling for cool kids",
+            "homepage": "https://github.com/filp/whoops",
+            "keywords": [
+                "error",
+                "exception",
+                "handling",
+                "library",
+                "whoops",
+                "zf2"
+            ],
+            "time": "2016-04-07 06:16:25"
+        },
+        {
             "name": "nikic/php-parser",
             "version": "v1.3.0",
             "source": {
@@ -2071,6 +2046,26 @@
                 "php"
             ],
             "time": "2015-05-02 15:40:40"
+        },
+        {
+            "name": "oldskool/whoops-cakephp",
+            "version": "dev-cake2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/backstageel/WhoopsCakephp.git",
+                "reference": "a2b829034a56fc36ba2762f0799fa5c1a7923a12"
+            },
+            "require": {
+                "composer/installers": "*",
+                "filp/whoops": "2.*"
+            },
+            "type": "cakephp-plugin",
+            "license": [
+                "MIT"
+            ],
+            "description": "Integrates the Whoops library into CakePHP",
+            "homepage": "https://github.com/oldskool/CakeWhoops",
+            "time": "2016-05-17 09:42:19"
         },
         {
             "name": "pdepend/pdepend",
@@ -3059,13 +3054,13 @@
         "markstory/acl_extras": 20,
         "cakedc/migrations": 0,
         "backstageel/cakephp-rabbitmq": 20,
-        "oldskool/whoops-cakephp": 20,
         "jeremyharris/cakephp-newrelic": 20,
         "leeoniya/dump-r": 20,
         "backstageel/cakephp-reports": 20,
         "webtechnick/cakephp-database-logger-plugin": 20,
         "cakephp/debug_kit": 20,
-        "phpmd/phpmd": 0
+        "phpmd/phpmd": 0,
+        "oldskool/whoops-cakephp": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

@@ -60,4 +60,10 @@
                 ['escape' => false, 'class' => 'btn btn-icon btn-block']) ?>
 
     </div>
+    <div class="col-sm-2">
+        <?php echo $this->Html->link('<i class="glyphicon glyphicon-ok  fa-2x"></i>Migrar Estudantes<span class="badge badge-success"> Novo! </span>',
+                ['controller' => 'turmas', 'action' => 'migrar_estudantes', $turma['Turma']['id']],
+                ['escape' => false, 'class' => 'btn btn-icon btn-block']) ?>
+
+    </div>
 <?php $this->end(); ?>

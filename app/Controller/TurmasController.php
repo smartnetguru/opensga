@@ -847,6 +847,37 @@
         }
 
         /**
+         * Passa todos estudantes da turma actual para uma outra turma a Indicar.
+         * Migra as inscricoes, docentes associados e avaliacoes criadas
+         * @param $turmaId
+         *
+         */
+        public function faculdade_migrar_estudantes($turmaId){
+
+            if($this->request->is('post')){
+                try{
+                    $this->Turma->migraEstudantes($this->request->data);
+                    $this->Flash->success('Turma Migrada com Sucesso');
+                    $this->redirect(['action'=>'ver_turma',$this->request->data['Turma']['turma_id']]);
+                } catch(Exception $e){
+                    $this->Flash->error('Turma Nao Migrada. Motivo:'.$e->getMessage());
+                }
+            }
+            $this->Turma->contain(['Curso','Disciplina','AnoLectivo','SemestreLectivo']);
+            $turma = $this->Turma->findById($turmaId);
+
+            $turmas = $this->Turma->find('list',[
+                'conditions'=>[
+                    'curso_id'=>$turma['Turma']['curso_id'],
+                    'ano_lectivo_id'=>$turma['Turma']['ano_lectivo_id'],
+                    'semestre_lectivo_id'=>$turma['Turma']['semestre_lectivo_id'],
+                ],
+                'order'=>'Turma.name'
+            ]);
+            $this->set(compact('turma','turmaId','turmas'));
+        }
+
+        /**
          * Esta funcao fecha uma determinada turma. Mas so fecha se a turma nao tiver avaliacoes abertas
          * Condicoes para Fecho da Turma:
          *  -Todas Avaliacoes devem ser realizadas e Fechadas

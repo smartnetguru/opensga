@@ -911,7 +911,7 @@
             ];
             $inscricaos = $this->Inscricao->find('all',
                 [
-                    'conditions' => ['turma_id' => $turmaId],
+                    'conditions' => ['turma_id' => $turmaId, 'estado_inscricao_id NOT' => 9],
                     'joins'      => $joins,
                     'fields'     => [
                         'Aluno.codigo',
@@ -927,9 +927,9 @@
                         'AnoLectivo.ano',
                         'Turma.semestre_curricular',
                         'Turma.ano_curricular',
-                        'Turma.name'
+                        'Turma.name',
                     ],
-                    'order'      => ['Entidade.apelido','Entidade.nomes'],
+                    'order'      => ['Entidade.apelido', 'Entidade.nomes'],
                 ]);
 
             return $inscricaos;
@@ -1236,6 +1236,65 @@
 
         }
 
+        /**
+         * Migra Estudantes, Docentes, Avaliacoes, de uma turma para outra
+         * @param $data
+         *
+         * @todo Migrar Avaliacoes tambem
+         */
+        public function migraEstudantes($data)
+        {
+            $inscricaos = $this->Inscricao->find('all',
+                ['conditions' => ['turma_id' => $data['Turma']['turma_antiga_id']]]);
+            foreach ($inscricaos as $inscricao) {
+                $inscricaoExsite = $this->Inscricao->find('first', [
+                    'conditions' => [
+                        'aluno_id' => $inscricao['Inscricao']['aluno_id'],
+                        'turma_id' => $data['Turma']['turma_id'],
+                    ],
+                ]);
+                if (empty($inscricaoExsite)) {
+                    $this->inscricao->id = $inscricao['Inscricao']['id'];
+                    $this->Inscricao->set('turma_id', $data['Turma']['turma_id']);
+                    $this->Inscricao->save();
+                } else {
+                    if ($inscricaoExsite['Inscricao']['estado_inscricao_id'] == 9) {
+                        $this->Inscricao->id = $inscricaoExsite['Inscricao']['id'];
+                        $this->Inscricao->set('estado_inscricao_id', 1);
+                        $this->Inscricao->save();
+                    }
+                }
+
+            }
+
+            $docenteTurmas = $this->DocenteTurma->find('all', [
+                'conditions' => [
+                    'turma_id' => $data['Turma']['turma_antiga_id'],
+                ],
+            ]);
+            foreach ($docenteTurmas as $docenteTurma) {
+
+                $docenteTurmaExiste = $this->DocenteTurma->find('first',[
+                    'conditions'=>[
+                        'docente_id'=>$docenteTurma['DocenteTurma']['docente_id'],
+                        'turma_id'=>$data['Turma']['turma_id']
+                    ]
+                ]);
+                if(empty($docenteTurmaExiste)){
+                    $this->DocenteTurma->id = $docenteTurma['DocenteTurma']['id'];
+                    $this->DocenteTurma->set('turma_id', $data['Turma']['turma_id']);
+                    $this->DocenteTurma->save();
+                }
+
+            }
+
+            $this->id = $data['Turma']['turma_antiga_id'];
+            $this->delete($data['Turma']['turma_antiga_id']);
+            return true;
+
+        }
+
     }
+
 
 ?>

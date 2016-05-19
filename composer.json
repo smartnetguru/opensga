@@ -36,10 +36,14 @@
     "source": "http://infomoz.net",
     "docs": "http://infomoz.net"
   },
-  "repositories": [
+  "repositories": [Provincia
     {
       "type": "git",
       "url": "https://github.com/backstageel/CakePHP-DatabaseLogger-Plugin.git"
+    },
+    {
+      "type": "git",
+      "url": "https://github.com/backstageel/WhoopsCakephp.git"
     }
   ],
   "require": {
@@ -56,7 +60,6 @@
     "ghunti/highcharts-php": "~3.0",
     "google/apiclient": "1.*",
     "trentrichardson/cakephp-scheduler": "1.*",
-    "oldskool/whoops-cakephp": "dev-cake2",
     "jeremyharris/cakephp-newrelic": "dev-master",
     "zackkitzmiller/tiny": "1.2.0",
     "leeoniya/dump-r": "dev-master",
@@ -76,7 +79,8 @@
     "phpmd/phpmd" : "@stable",
     "sebastian/phpcpd": "*",
     "theseer/phpdox":"*",
-    "sebastian/phpdcd": "*"
+    "sebastian/phpdcd": "*",
+    "oldskool/whoops-cakephp": "dev-cake2"
   },
   "bin": [
     "lib/Cake/Console/cake"

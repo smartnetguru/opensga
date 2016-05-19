@@ -166,6 +166,7 @@
                     $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Turmas/faculdade_manutencao_turmas_sem_docente";
                     $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Turmas/faculdade_manutencao_turmas_abertas";
                     $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Turmas/faculdade_manutencao_turmas_sem_estudante";
+                    $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Turmas/faculdade_migrar_estudantes";
 
                     $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/faculdade_index";
                     $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/faculdade_perfil_estudante";

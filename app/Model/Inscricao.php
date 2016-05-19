@@ -880,6 +880,7 @@
                     'turma_id'     => $inscricao_data['Inscricao']['turma_id'],
                     'aluno_id'     => $inscricao_data['Inscricao']['aluno_id'],
                     'matricula_id' => $inscricao_data['Inscricao']['matricula_id'],
+                    'estado_inscricao_id'=>1
                 ],
             ]);
             if (!$turma) {
