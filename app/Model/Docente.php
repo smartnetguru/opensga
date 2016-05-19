@@ -104,6 +104,15 @@
 
         ];
 
+
+        /**
+         * Cadastra novo docente no Sistema
+         * @param array $data
+         * @return bool
+         * @throws Exception
+         *
+         * @todo Se a entidade existe, ver como fazer merge
+         */
         public function cadastraDocente(array $data)
         {
             $dataSource = $this->getDataSource();
@@ -115,9 +124,13 @@
             }
 
             $data['Entidade']['email'] = $data['EntidadeContacto'][1];
+            $data['Entidade']['telemovel'] = $data['EntidadeContacto'][2];
+            $data['Entidade']['documento_identificacao_id'] = $data['EntidadeIdentificacao']['documento_identificacao_id'];
+            $data['Entidade']['documento_identificacao_numero'] = $data['EntidadeIdentificacao']['numero'];
             $entidadeExiste = $this->Entidade->verificaEntidadeExiste($data['Entidade']);
-            debug($entidadeExiste);
-            die();
+            if($entidadeExiste){
+                throw new BadRequestException('Esta Entidade ja esta cadastrada');
+            }
             //Grava os dados do Usuario
             $this->Entidade->User->create();
             $data['User']['username'] = $data['Docente']['codigo'];
@@ -191,7 +204,6 @@
                             );
                         }
 
-                        //CakeResque::enqueue('default', 'DocenteShell', array('enviaEmailCadastro', $this->id));
                         return $dataSource->commit();
                     } else {
                         debug($this->validationErrors);

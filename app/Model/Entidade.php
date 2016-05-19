@@ -81,7 +81,7 @@
                 'emailValid' => [
                     'rule'     => 'email',
                     'required' => false,
-                    'message'  => 'O Campo Email2 de Preenchimento Obrigatório',
+                    'message'  => 'O Campo Email de Preenchimento Obrigatório',
                     // extra keys like on, required, etc. go here...
                 ],
             ],
@@ -523,8 +523,18 @@
             return $this->id;
         }
 
-        public function verificaEntidadeExiste($nuit, $telemovel, $tipoDocumento, $numeroDocumento)
+        /**
+         * Verifica se uma entidade existe
+         *
+         * @param $entidade
+         * @return array|bool|null
+         */
+        public function verificaEntidadeExiste($entidade)
         {
+            $nuit = $entidade['nuit'];
+            $telemovel = $entidade['telemovel'];
+            $tipoDocumento = $entidade['documento_identificacao_id'];
+            $numeroDocumento = $entidade['documento_identificacao_numero'];
             $nuitExiste = $this->findByNuit($nuit);
             if (!empty($nuitExiste)) {
                 return $nuitExiste;
