@@ -36,7 +36,7 @@
     "source": "http://infomoz.net",
     "docs": "http://infomoz.net"
   },
-  "repositories": [Provincia
+  "repositories": [
     {
       "type": "git",
       "url": "https://github.com/backstageel/CakePHP-DatabaseLogger-Plugin.git"

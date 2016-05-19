@@ -46,7 +46,9 @@
                 if($this->CandidatoGraduacao->Aluno->concluirNivel($dataGraduado)){
                     $this->out('Nivel Conluido----'.$candidato['CandidatoGraduacao']['id']);
                 }
-                
+
+                debug($this->CandidatoGraduacao->getLog());
+
             }
         }
     }

@@ -815,9 +815,9 @@
 
                 debug($this->validationErrors);
             }
-            debug($this->getLog());
+            $datasource->commit();
 
-            return $datasource->commit();
+            return true;
         }
 
         // function getAllTurmasCompletas
