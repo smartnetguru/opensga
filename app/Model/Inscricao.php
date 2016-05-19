@@ -715,8 +715,15 @@
             return $this->find('count', ['conditions' => $conditions]);
         }
 
-        //Actualiza a nota e o tipo de frequencia e altera o estado da inscricao
 
+        /**
+         * Inscreve um aluno nas turmas
+         *
+         * @todo Verificar quando esta a reinscrever numa cadeira anulada anteriormente
+         * @param $data
+         * @return bool
+         * @throws Exception
+         */
         public function inscreveAluno($data)
         {
 
@@ -812,7 +819,6 @@
                             'conditions' => [
                                 'aluno_id'            => $aluno['Aluno']['id'],
                                 'turma_id'            => $turmaId,
-                                'estado_inscricao_id' => 1,
                             ],
                         ]);
                         $inscricaoSave = [
@@ -820,7 +826,7 @@
                                 'aluno_id'            => $data['aluno_id'],
                                 'turma_id'            => $turmaId,
                                 'turma_frequencia_id' => $turmaId,
-                                'estado_inscricao_id' => 1,
+                                'estado_inscricao_id' =>9,
                                 'matricula_id'        => $data['matricula_id'],
                                 'data'                => date('Y-m-d'),
                                 'pagamento_id'        => $pagamento_id,
@@ -844,6 +850,13 @@
                                 return false;
                             }
 
+                        } else{
+                            if($inscricaoExiste['Inscricao']['estado_inscricao_id']==9){
+                                $this->id = $inscricaoExiste['Inscricao']['id'];
+                                $this->set('estado_inscricao_id',1);
+                                $this->set('data',date('Y-m-d'));
+                                $this->save();
+                            }
                         }
 
 
