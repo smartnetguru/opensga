@@ -811,7 +811,11 @@
 
             $this->id = $data['aluno_id'];
             $this->set('estado_aluno_id', $data['estado_actual']);
-            $this->save();
+            if(!$this->save()){
+
+                debug($this->validationErrors);
+            }
+            debug($this->getLog());
 
             return $datasource->commit();
         }
