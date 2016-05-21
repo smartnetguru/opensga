@@ -1254,7 +1254,7 @@
                     ],
                 ]);
                 if (empty($inscricaoExsite)) {
-                    $this->inscricao->id = $inscricao['Inscricao']['id'];
+                    $this->Inscricao->id = $inscricao['Inscricao']['id'];
                     $this->Inscricao->set('turma_id', $data['Turma']['turma_id']);
                     $this->Inscricao->save();
                 } else {
