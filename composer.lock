@@ -4,9 +4,107 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "ab3be16a29ba8db4ae6b813964e8b1c3",
-    "content-hash": "929589ab9e6ce213702a699be622615a",
+    "hash": "521a40b1cc35e6d23b96c45a65246f3e",
+    "content-hash": "fbbde4085eac61facf69dbcac67fbbf7",
     "packages": [
+        {
+            "name": "alliedhealthmedia/icing",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/AudiologyHoldings/Icing.git",
+                "reference": "84d43e7ff3dd27051c04af53320dc3f1b12f52c1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/AudiologyHoldings/Icing/zipball/84d43e7ff3dd27051c04af53320dc3f1b12f52c1",
+                "reference": "84d43e7ff3dd27051c04af53320dc3f1b12f52c1",
+                "shasum": ""
+            },
+            "require": {
+                "composer/installers": "*",
+                "php": ">=5.3.0"
+            },
+            "type": "cakephp-plugin",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.x-dev",
+                    "cakephp1.3": "1.3-dev"
+                },
+                "installer-name": "Icing"
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nick Baker",
+                    "homepage": "http://www.webtechnick.com",
+                    "role": "Author"
+                },
+                {
+                    "name": "Alan Blount",
+                    "homepage": "http://www.alliedhealthmedia.com",
+                    "role": "Author"
+                },
+                {
+                    "name": "Matt Reishus",
+                    "homepage": "http://www.alliedhealthmedia.com",
+                    "role": "Author"
+                },
+                {
+                    "name": "Mark Vince",
+                    "homepage": "http://www.alliedhealthmedia.com",
+                    "role": "Author"
+                },
+                {
+                    "name": "Chris Johnson",
+                    "homepage": "http://www.alliedhealthmedia.com",
+                    "role": "Author"
+                },
+                {
+                    "name": "Travis Reddell",
+                    "homepage": "http://www.alliedhealthmedia.com",
+                    "role": "Author"
+                },
+                {
+                    "name": "Becky Lemons",
+                    "homepage": "http://www.alliedhealthmedia.com",
+                    "role": "Author"
+                },
+                {
+                    "name": "Jeff Kolesnikowicz",
+                    "homepage": "http://www.alliedhealthmedia.com",
+                    "role": "Author"
+                },
+                {
+                    "name": "Roger Flynn",
+                    "homepage": "http://www.alliedhealthmedia.com",
+                    "role": "Author"
+                }
+            ],
+            "description": "CakePHP Icing Plugin - Portable Package of Handy Utilities for CakePHP",
+            "homepage": "https://github.com/AudiologyHoldings/Icing",
+            "keywords": [
+                "CKEditor",
+                "appfixture",
+                "apptest",
+                "cache",
+                "cakephp",
+                "csv",
+                "database cache",
+                "do",
+                "file upload",
+                "google calendar",
+                "icing",
+                "shell",
+                "summable",
+                "twitter",
+                "versionable"
+            ],
+            "time": "2016-05-05 17:22:40"
+        },
         {
             "name": "aws/aws-sdk-php",
             "version": "2.8.30",
@@ -76,18 +174,18 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/backstageel/cakephp-rabbitmq.git",
-                "reference": "cbb6a6dc18bfc4eb2ec5582f018b1b09ef26d253"
+                "reference": "a7c0484b813c10b0ef6b50b6b7b6c049db68d149"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/backstageel/cakephp-rabbitmq/zipball/cbb6a6dc18bfc4eb2ec5582f018b1b09ef26d253",
-                "reference": "cbb6a6dc18bfc4eb2ec5582f018b1b09ef26d253",
+                "url": "https://api.github.com/repos/backstageel/cakephp-rabbitmq/zipball/a7c0484b813c10b0ef6b50b6b7b6c049db68d149",
+                "reference": "a7c0484b813c10b0ef6b50b6b7b6c049db68d149",
                 "shasum": ""
             },
             "require": {
                 "composer/installers": "~1.0",
                 "php": ">=5.3.0",
-                "videlalvaro/php-amqplib": "2.5.*"
+                "php-amqplib/php-amqplib": "2.5.*"
             },
             "type": "cakephp-plugin",
             "extra": {
@@ -115,7 +213,7 @@
                 "queues",
                 "rabbimq"
             ],
-            "time": "2016-02-13 00:03:58"
+            "time": "2016-05-17 09:44:44"
         },
         {
             "name": "backstageel/cakephp-reports",
@@ -482,21 +580,20 @@
         },
         {
             "name": "facebook/php-sdk-v4",
-            "version": "5.1.4",
+            "version": "5.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/facebook/facebook-php-sdk-v4.git",
-                "reference": "38fd7187a6704d3ab14ded2f3a534ac4ee6f3481"
+                "reference": "c60fba1fe1de62db1e0776d32fc2fb778189459c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/facebook/facebook-php-sdk-v4/zipball/38fd7187a6704d3ab14ded2f3a534ac4ee6f3481",
-                "reference": "38fd7187a6704d3ab14ded2f3a534ac4ee6f3481",
+                "url": "https://api.github.com/repos/facebook/facebook-php-sdk-v4/zipball/c60fba1fe1de62db1e0776d32fc2fb778189459c",
+                "reference": "c60fba1fe1de62db1e0776d32fc2fb778189459c",
                 "shasum": ""
             },
             "require": {
-                "ext-mbstring": "*",
-                "php": ">=5.4.0"
+                "php": "^5.4|^7.0"
             },
             "require-dev": {
                 "guzzlehttp/guzzle": "~5.0",
@@ -515,7 +612,10 @@
             "autoload": {
                 "psr-4": {
                     "Facebook\\": "src/Facebook/"
-                }
+                },
+                "files": [
+                    "src/Facebook/polyfills.php"
+                ]
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -533,7 +633,7 @@
                 "facebook",
                 "sdk"
             ],
-            "time": "2016-05-13 17:28:30"
+            "time": "2016-05-18 22:04:36"
         },
         {
             "name": "ghunti/highcharts-php",
@@ -904,6 +1004,60 @@
                 "cakephp"
             ],
             "time": "2013-10-26 00:34:46"
+        },
+        {
+            "name": "php-amqplib/php-amqplib",
+            "version": "v2.5.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-amqplib/php-amqplib.git",
+                "reference": "eb8f94d97c8e79900accf77343dbd7eca7f58506"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-amqplib/php-amqplib/zipball/eb8f94d97c8e79900accf77343dbd7eca7f58506",
+                "reference": "eb8f94d97c8e79900accf77343dbd7eca7f58506",
+                "shasum": ""
+            },
+            "require": {
+                "ext-bcmath": "*",
+                "ext-mbstring": "*",
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "3.7.*"
+            },
+            "suggest": {
+                "ext-sockets": "Use AMQPSocketConnection"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.4-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "PhpAmqpLib\\": "PhpAmqpLib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL-2.1"
+            ],
+            "authors": [
+                {
+                    "name": "Alvaro Videla"
+                }
+            ],
+            "description": "This library is a pure PHP implementation of the AMQP protocol. It's been tested against RabbitMQ.",
+            "homepage": "https://github.com/videlalvaro/php-amqplib/",
+            "keywords": [
+                "message",
+                "queue",
+                "rabbitmq"
+            ],
+            "time": "2015-08-11 12:30:09"
         },
         {
             "name": "phpoffice/phpexcel",
@@ -1705,61 +1859,6 @@
             "time": "2015-03-19 00:01:14"
         },
         {
-            "name": "videlalvaro/php-amqplib",
-            "version": "v2.5.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/php-amqplib/php-amqplib.git",
-                "reference": "eb8f94d97c8e79900accf77343dbd7eca7f58506"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/php-amqplib/php-amqplib/zipball/eb8f94d97c8e79900accf77343dbd7eca7f58506",
-                "reference": "eb8f94d97c8e79900accf77343dbd7eca7f58506",
-                "shasum": ""
-            },
-            "require": {
-                "ext-bcmath": "*",
-                "ext-mbstring": "*",
-                "php": ">=5.3.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "3.7.*"
-            },
-            "suggest": {
-                "ext-sockets": "Use AMQPSocketConnection"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.4-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "PhpAmqpLib\\": "PhpAmqpLib/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "LGPL-2.1"
-            ],
-            "authors": [
-                {
-                    "name": "Alvaro Videla"
-                }
-            ],
-            "description": "This library is a pure PHP implementation of the AMQP protocol. It's been tested against RabbitMQ.",
-            "homepage": "https://github.com/videlalvaro/php-amqplib/",
-            "keywords": [
-                "message",
-                "queue",
-                "rabbitmq"
-            ],
-            "abandoned": "php-amqplib/php-amqplib",
-            "time": "2015-08-11 12:30:09"
-        },
-        {
             "name": "webtechnick/cakephp-database-logger-plugin",
             "version": "dev-master",
             "source": {
@@ -1853,16 +1952,16 @@
     "packages-dev": [
         {
             "name": "cakephp/cakephp-codesniffer",
-            "version": "2.0.6",
+            "version": "2.0.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cakephp/cakephp-codesniffer.git",
-                "reference": "1e48e5f778a402f91c7f7adaafe08fbba0761fb7"
+                "reference": "fe95558271dcec53275f728f9b52caf42ae3dcab"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cakephp/cakephp-codesniffer/zipball/1e48e5f778a402f91c7f7adaafe08fbba0761fb7",
-                "reference": "1e48e5f778a402f91c7f7adaafe08fbba0761fb7",
+                "url": "https://api.github.com/repos/cakephp/cakephp-codesniffer/zipball/fe95558271dcec53275f728f9b52caf42ae3dcab",
+                "reference": "fe95558271dcec53275f728f9b52caf42ae3dcab",
                 "shasum": ""
             },
             "require": {
@@ -1888,7 +1987,7 @@
                 "codesniffer",
                 "framework"
             ],
-            "time": "2015-11-29 16:32:42"
+            "time": "2016-04-01 01:23:03"
         },
         {
             "name": "cakephp/debug_kit",
@@ -2811,16 +2910,16 @@
         },
         {
             "name": "symfony/polyfill-mbstring",
-            "version": "v1.1.1",
+            "version": "v1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-mbstring.git",
-                "reference": "1289d16209491b584839022f29257ad859b8532d"
+                "reference": "dff51f72b0706335131b00a7f49606168c582594"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/1289d16209491b584839022f29257ad859b8532d",
-                "reference": "1289d16209491b584839022f29257ad859b8532d",
+                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/dff51f72b0706335131b00a7f49606168c582594",
+                "reference": "dff51f72b0706335131b00a7f49606168c582594",
                 "shasum": ""
             },
             "require": {
@@ -2832,7 +2931,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.1-dev"
+                    "dev-master": "1.2-dev"
                 }
             },
             "autoload": {
@@ -2866,7 +2965,7 @@
                 "portable",
                 "shim"
             ],
-            "time": "2016-01-20 09:13:37"
+            "time": "2016-05-18 14:26:46"
         },
         {
             "name": "theseer/directoryscanner",
@@ -3058,6 +3157,7 @@
         "leeoniya/dump-r": 20,
         "backstageel/cakephp-reports": 20,
         "webtechnick/cakephp-database-logger-plugin": 20,
+        "alliedhealthmedia/icing": 20,
         "cakephp/debug_kit": 20,
         "phpmd/phpmd": 0,
         "oldskool/whoops-cakephp": 20

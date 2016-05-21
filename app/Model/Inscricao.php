@@ -534,8 +534,11 @@
             $aluno = $this->Aluno->findById($alunoId);
             $cadeirasInscritas = $this->getAllCadeirasInscritasByAlunoSemestre($alunoId);
 
+
             $disciplinasFeitas = $this->getAllInscricoesByAlunoAndEstado($alunoId, [4, 5, 6, 13]);
             $inscricaosExcluir = Hash::merge($cadeirasInscritas, $disciplinasFeitas);
+
+            debug($inscricaosExcluir);
 
             $disciplinasExcluir = Hash::extract($inscricaosExcluir, '{n}.Turma.disciplina_id');
             $this->Aluno->PlanoEstudo->DisciplinaPlanoEstudo->contain([
@@ -544,7 +547,7 @@
 
             $disciplinaPlanoEstudo = $this->Aluno->PlanoEstudo->DisciplinaPlanoEstudo->find('all', [
                 'conditions' => [
-                    'plano_estudo_id'   => $aluno['Matricula'][0]['plano_estudo_id'],
+                    'plano_estudo_id'   => $aluno['Aluno']['plano_estudo_id'],
                     'Disciplina.id NOT' => $disciplinasExcluir,
                 ],
                 'order'      => [
@@ -553,6 +556,7 @@
                 ],
 
             ]);
+            debug($disciplinaPlanoEstudo);
 
             return $disciplinaPlanoEstudo;
         }

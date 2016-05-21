@@ -1755,6 +1755,18 @@
                 $datasource->rollback();
                 throw new DataNotSavedException($this->validationErrors);
             }
+
+            $anoLectivo = $this->Matricula->AnoLectivo->findByAno($dataAno->format("Y"));
+            if(!empty($anoLectivo)){
+                $matricula = $this->Matricula->findByAlunoIdAndAnoLectivoId($data['Aluno']['aluno_id'],$anoLectivo['AnoLectivo']['id']);
+                if(!empty($matricula)){
+                    $this->Matricula->id = $matricula['Matricula']['id'];
+                    $this->Matricula->set('plano_estudo_id',$planoEstudoId);
+                    $this->Matricula->save();
+                }
+
+            }
+
             $this->MudancaCurso->create();
             if (!$this->MudancaCurso->save($mudancaArray)) {
                 $datasource->rollback();
