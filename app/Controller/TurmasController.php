@@ -71,43 +71,33 @@
 
         }
 
-        function add()
+        /**
+         * Cria uma nova Turma Vazia
+         * @throws Exception
+         *
+         * @Todo Verificar o security component
+         */
+        function faculdade_criar_turma()
         {
-            //App::Import('Model','Logmv');
-            //$logmv = new Logmv;
-            if (!empty($this->data)) {
 
-                $this->Turma->create();
-
-                $this->data["Turma"]["estado"] = '1';
-
-                if (
-                $this->Turma->save($this->data)
-                ) {
-                    $this->Session->setFlash('** Dados Cadastrados com Sucesso **', 'flashok');
-                    $this->redirect(['action' => 'add_disciplinas', $this->Turma->getLastInsertID()]);
-                } else {
-                    $this->Session->setFlash(sprintf(__('Erro ao gravar dados. Por favor tente de novo.', true),
-                        't0010turma'));
+            if($this->request->is('post')){
+                try{
+                    $this->Turma->criaTurma($this->request->data);
+                    $this->Flash->success('Turma Criada com Sucesso');
+                    $this->redirect(['action'=>'ver_turma',$this->Turma->id]);
+                } catch(Exception $e){
+                    $this->Flash->error('Problemas ao Criar Turma. Motivo:'.$e->getMessage());
                 }
             }
-            $estados = ['1' => 'Activa', '2' => 'Cancelada', '3' => 'Fechada'];
 
-
-            $anosemestrecurr = ['1' => '1', '2' => '2', '3' => '3', '4' => '4'];
-            $anolectivos = $this->Turma->AnoLectivo->find('list');
-            $cursos = $this->Turma->Curso->find('list', ['order' => ['name ASC']]);
-
-            $planoestudos = $this->Turma->PlanoEstudo->find('list');
-
+            $unidadeOrganicaId = $this->Session->read('Auth.User.unidade_organica_id');
+            $cursos = $this->Turma->Curso->find('list',['conditions'=>[
+                'unidade_organica_id'=>$unidadeOrganicaId
+            ]]);
+            $anoLectivos = $this->Turma->AnoLectivo->find('list',['order'=>'AnoLectivo.ano DESC']);
             $turnos = $this->Turma->Turno->find('list');
-            $disciplinas = $this->Turma->Disciplina->find('list');
-            $funcionarios = $this->Turma->Funcionario->find('list');
-            $disciplinas = [];
-            $this->set('disciplinas', $disciplinas);
-            $this->set(compact('anolectivos', 'estados', 'anosemestrecurr', 't0003cursos', 't0005planoestudos',
-                'turnos',
-                't0004disciplinas', 'funcionarios'));
+
+            $this->set(compact('cursos','anoLectivos','semestreLectivos','turnos'));
         }
 
         /**
@@ -1383,6 +1373,8 @@
         public function beforeFilter()
         {
             parent::beforeFilter();
+
+            $this->Security->unlockedActions = array('faculdade_criar_turma');
 
             if ($this->action == 'autocomplete') {
                 $this->Auth->allow();

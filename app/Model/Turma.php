@@ -1294,6 +1294,26 @@
 
         }
 
+        public function criaTurma($data):bool {
+
+            $this->PlanoEstudo->DisciplinaPlanoEstudo->contain(['Disciplina','PlanoEstudo']);
+            $disciplinaPlanoEstudo  = $this->PlanoEstudo->DisciplinaPlanoEstudo->findByPlanoEstudoIdAndDisciplinaId(
+                $data['Turma']['plano_estudo_id'],
+                $data['Turma']['disciplina_id']
+            );
+            $anoLectivo = $this->AnoLectivo->findById($data['Turma']['ano_lectivo_id']);
+            $data['Turma']['ano_curricular'] = $disciplinaPlanoEstudo['DisciplinaPlanoEstudo']['ano_curricular'];
+            $data['Turma']['semestre_curricular'] = $disciplinaPlanoEstudo['DisciplinaPlanoEstudo']['semestre_curricular'];
+            $data['Turma']['estado_turma_id'] = 1;
+            $data['Turma']['name'] = $disciplinaPlanoEstudo['Disciplina']['name'].' - '.$anoLectivo['AnoLectivo']['ano'].' - '.$disciplinaPlanoEstudo['PlanoEstudo']['name'];
+
+            if($this->save($data)){
+                return true;
+            } else{
+                throw new DataNotSavedException($this->validationErrors);
+            }
+        }
+
     }
 
 

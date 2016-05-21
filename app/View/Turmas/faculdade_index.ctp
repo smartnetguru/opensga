@@ -15,7 +15,7 @@
         <div class="col-sm-2">
             <?php
                 if ($estadoTurma['EstadoTurma']['id'] == 1) {
-                    echo $this->Html->link('<br/><i class="fa fa-plus"></i>	Ver Turmas Fechadas',
+                    echo $this->Html->link('<br/><i class="fa fa-search"></i>	Ver Turmas Fechadas',
                             ['controller' => 'turmas', 'action' => 'index', '?' => ['estado_turma' => 2]],
                             ['escape' => false, 'class' => 'btn btn-icon btn-block']);
                 } else {
@@ -27,8 +27,8 @@
 
         </div>
         <div class="col-sm-2">
-            <?php echo $this->Html->link('<br/><i class="fa fa-print"></i>Exportar Alunos <span class="badge badge-danger"> Brevemente </span>',
-                    ['controller' => 'alunos', 'action' => 'exportar_alunos'],
+            <?php echo $this->Html->link('<br/><i class="fa fa-plus"></i>Criar Turma',
+                    ['controller' => 'turmas', 'action' => 'criar_turma'],
                     ['escape' => false, 'class' => 'btn btn-icon btn-block']) ?>
         </div>
     </div>

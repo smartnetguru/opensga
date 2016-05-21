@@ -19,7 +19,10 @@
             'app.docente_disciplina',
             'app.docente_turma',
             'app.docente',
-            'app.turma_tipo_avaliacao'
+            'app.turma_tipo_avaliacao',
+            'app.plano_estudo',
+            'app.disciplina_plano_estudo',
+            'app.disciplina'
 
         ];
         //public $autoFixtures = false;
@@ -74,6 +77,22 @@
         public function testCriarTurmas()
         {
             $this->markTestIncomplete('testCriarTurmas not implemented.');
+        }
+
+        public function testCriarTurma(){
+            $data = array(
+                'Turma' => array(
+                    'curso_id' => '5',
+                    'plano_estudo_id' => '1',
+                    'disciplina_id' => '1',
+                    'ano_lectivo_id' => '5',
+                    'semestre_lectivo_id' => '5',
+                    'turno_id' => '1'
+                )
+            );
+
+            $resultado = $this->Turma->criaTurma($data);
+            $this->assertTrue($resultado);
         }
 
         public function testCriaAvalicao(){
