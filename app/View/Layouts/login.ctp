@@ -83,7 +83,7 @@
     <!-- start: TOP NAVIGATION CONTAINER -->
     <div class="container">
         <div class="row">
-            <div class="col-sm-3">
+            <div class="col-sm-2">
                 <div class="navbar-header">
                     <!-- start: LOGO -->
                     <?php echo $this->Html->link('SIGA<i class="clip-clip"></i>' . Configure::read('OpenSGA.instituicao.sigla_logo'),
@@ -93,10 +93,10 @@
                 </div>
             </div>
             <?php echo $this->Form->create('User', ['url' => ['action' => 'login']]); ?>
-            <div class="col-sm-9">
+            <div class="col-sm-10">
 
                 <div class="row pull-right navbar-brand">
-                    <div class="col-sm-6">
+                    <div class="col-sm-4">
                         <?php echo $this->Form->input('username', [
                                 'div'         => false,
                                 'label'       => false,
@@ -104,7 +104,7 @@
                                 'placeholder' => 'Nome de Usuario ou Email Institucional',
                         ]) ?>
                     </div>
-                    <div class="col-sm-4">
+                    <div class="col-sm-3">
                         <?php echo $this->Form->input('password', [
                                 'div'         => false,
                                 'label'       => false,
@@ -112,9 +112,13 @@
                                 'placeholder' => 'Senha',
                         ]) ?>
                     </div>
-                    <div class="col-sm-2">
+                    <div class="col-sm-1">
                         <?php echo $this->Form->submit('Entrar', ['class' => 'btn btn-green', 'div' => false]) ?>
                     </div>
+                    <div class="col-sm-4">
+                        <a style="margin-left:10px" class="btn btn-default google" href="<?php echo $this->webroot.'googlelogin'; ?>"> <i class="fa fa-google-plus modal-icons"></i> Entrar Usando Email </a>
+                    </div>
+
                 </div>
 
             </div>

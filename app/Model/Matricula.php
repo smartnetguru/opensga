@@ -666,10 +666,10 @@
                         'Matricula.estado_matricula_id' => 1,
                     ],
                 ]);
-                if (empty($matriculaAnterior)) {
+                /*if (empty($matriculaAnterior)) {
                     $dataSource->rollback();
                     throw new BadRequestException('Matricula Anterior nao Encontrada');
-                }
+                }*/
                 $matriculaExiste = $this->findByAlunoIdAndAnoLectivoId($data['Matricula']['aluno_id'], $v);
                 if ($matriculaExiste) {
                     $this->id = $matriculaExiste['Matricula']['id'];

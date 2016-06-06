@@ -37,6 +37,8 @@
     Router::connect('/estudante', ['controller' => 'pages', 'action' => 'home', 'estudante' => true]);
     Router::connect('/opauth-complete/*', ['controller' => 'users', 'action' => 'opauth_complete']);
     Router::connect('/graduacao', ['controller' => 'candidato_graduacaos', 'action' => 'graduacao']);
+    Router::connect('/googlelogin', array('controller' => 'users', 'action' => 'googlelogin'));
+    Router::connect('/googlelogincallback', array('controller' => 'users', 'action' => 'google_login'));
     //Router::connect('/manual', 'http://siga.uem.mz/manual/');
     /**
      * ...and connect the rest of 'Pages' controller's urls.

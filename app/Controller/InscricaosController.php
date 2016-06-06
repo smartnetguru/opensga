@@ -1169,6 +1169,19 @@
                 ],
             ]);
 
+            $this->Inscricao->contain([
+                'Turma'
+            ]);
+            $inscricaoRecente  = $this->Inscricao->find('first', [
+                'conditions' => [
+                    'estado_inscricao_id'       => 1,
+                    'aluno_id'                  => $alunoId,
+                    'Turma.ano_lectivo_id'      => $anoLectivo['AnoLectivo']['id'],
+                    'Turma.semestre_lectivo_id' => Configure::read('OpenSGA.semestre_lectivo_id'),
+                ],
+                'order'=>'Inscricao.data DESC'
+            ]);
+
 
             if (empty($inscricoesActivas)) {
                 $this->Session->setFlash(__('Este estudante nao possui inscricoes para este ano'), 'default',
@@ -1176,9 +1189,12 @@
                 $this->redirect(['action' => 'ver_inscricoes_aluno', 'faculdade' => true, $alunoId]);
             }
 
+            if($inscricaoRecente['Inscricao']['created_by']==null){
+                $inscricaoRecente['Inscricao']['created_by'] = 1;
+            }
             $this->loadModel('Funcionario');
             $this->Funcionario->contain('Entidade');
-            $funcionario = $this->Funcionario->getByUserId($inscricoesActivas[0]['Inscricao']['created_by']);
+            $funcionario = $this->Funcionario->getByUserId($inscricaoRecente['Inscricao']['created_by']);
 
             $this->set(compact('inscricoesActivas', 'aluno', 'anoLectivo', 'funcionario'));
         }

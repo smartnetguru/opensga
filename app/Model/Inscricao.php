@@ -538,7 +538,7 @@
             $disciplinasFeitas = $this->getAllInscricoesByAlunoAndEstado($alunoId, [4, 5, 6, 13]);
             $inscricaosExcluir = Hash::merge($cadeirasInscritas, $disciplinasFeitas);
 
-            debug($inscricaosExcluir);
+
 
             $disciplinasExcluir = Hash::extract($inscricaosExcluir, '{n}.Turma.disciplina_id');
             $this->Aluno->PlanoEstudo->DisciplinaPlanoEstudo->contain([
@@ -556,7 +556,7 @@
                 ],
 
             ]);
-            debug($disciplinaPlanoEstudo);
+
 
             return $disciplinaPlanoEstudo;
         }

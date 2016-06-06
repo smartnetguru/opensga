@@ -44,31 +44,33 @@
             $excel->getStyle('G' . $linha_actual . ':J' . $linha_actual)->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
         }
         $linha_actual++;
-        $this->PhpExcel->xls->getActiveSheet()->setCellValue('A' . $linha_actual, 'UNIVERSIDADE EDUARDO MONDLANE');
+        //$this->PhpExcel->xls->getActiveSheet()->setCellValue('A' . $linha_actual, 'UNIVERSIDADE EDUARDO MONDLANE');
         if ($pagina != 1) {
-            $excel->mergeCells('A' . $linha_actual . ':G' . $linha_actual);
+            //$excel->mergeCells('A' . $linha_actual . ':G' . $linha_actual);
             $excel->getStyle('A' . $linha_actual . ':G' . $linha_actual)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
             $excel->duplicateStyle($this->PhpExcel->xls->getActiveSheet()->getStyle('A' . $linha_uem),
                 'A' . $linha_actual);
             $excel->getStyle('A' . $linha_actual . ':G' . $linha_actual)->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
+            $excel->getRowDimension($linha_actual)->setRowHeight(35);
         }
 
 
-        $linha_actual++;
+
 
         $this->PhpExcel->addImage(WWW_ROOT . 'img' . DS . 'logo_login_' . Configure::read('OpenSGA.instituicao.sigla') . '.png',
             'A' . $linha_actual, 10, 80, 85); //Logotipo
 //$this->PhpExcel->addImage(WWW_ROOT . 'img' . DS . 'logo_login_' . Configure::read('OpenSGA.instituicao.sigla') . '.png', 'A29', 10, 108, 115); //Logotipo
 
         $linha_actual++;
+        $linha_actual++;
 
         $this->PhpExcel->xls->getActiveSheet()->setCellValue('A' . $linha_actual, 'DIRECÇÃO DO REGISTO ACADÉMICO');
         if ($pagina != 1) {
-            $excel->mergeCells('A' . $linha_actual . ':F' . $linha_actual);
-            $excel->getStyle('A' . $linha_actual . ':F' . $linha_actual)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+            $excel->mergeCells('A' . $linha_actual . ':G' . $linha_actual);
+            $excel->getStyle('A' . $linha_actual . ':G' . $linha_actual)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
             $excel->duplicateStyle($this->PhpExcel->xls->getActiveSheet()->getStyle('A' . $linha_dra),
                 'A' . $linha_actual);
-            $excel->getStyle('A' . $linha_actual . ':F' . $linha_actual)->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
+            $excel->getStyle('A' . $linha_actual . ':G' . $linha_actual)->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
         }
 
         $linha_actual++;
@@ -76,7 +78,7 @@
         $linha_actual++;
         $linha_actual++;
         $this->PhpExcel->xls->getActiveSheet()->setCellValue('A' . $linha_actual,
-            'ATRIBUIÇÃO DE BOLSAS DE ESTUDO, ISENÇÃO E REDUÇÃO DE PROPINAS');
+            'RESULTADOS DE CANDIDATURA À BOLSA DE ESTUDOS');
         if ($pagina != 1) {
             $excel->mergeCells('A' . $linha_actual . ':I' . $linha_actual);
             $excel->getStyle('A' . $linha_actual . ':I' . $linha_actual)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
@@ -182,6 +184,8 @@
                 $excel->getStyle('C' . $linha_actual . ':E' . $linha_actual)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
 
                 $excel->getStyle('C' . $linha_actual . ':E' . $linha_actual)->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
+                $excel->getStyle('C' . $linha_actual . ':E' . $linha_actual)->getFont()->setName('Garamond');
+
             }
             $this->PhpExcel->xls->getActiveSheet()->setCellValue('F' . $linha_actual, $bolsa['BolsaTipoBolsa']['name']);
             if ($pagina != 1) {
@@ -189,6 +193,7 @@
                 $excel->getStyle('F' . $linha_actual . ':G' . $linha_actual)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
 
                 $excel->getStyle('F' . $linha_actual . ':G' . $linha_actual)->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
+                $excel->getStyle('F' . $linha_actual . ':G' . $linha_actual)->getFont()->setName('Garamond');
             }
             $this->PhpExcel->xls->getActiveSheet()->setCellValue('H' . $linha_actual,
                 $bolsa['BolsaTemporaria']['doador']);
@@ -196,6 +201,7 @@
 
                 $excel->getStyle('H' . $linha_actual)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
                 $excel->getStyle('H' . $linha_actual)->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
+                $excel->getStyle('H' . $linha_actual)->getFont()->setName('Garamond');
             }
             $this->PhpExcel->xls->getActiveSheet()->setCellValue('I' . $linha_actual,
                 $bolsa['BolsaTemporaria']['alinea']);
@@ -204,6 +210,7 @@
                 $excel->getStyle('I' . $linha_actual)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
 
                 $excel->getStyle('I' . $linha_actual)->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
+                $excel->getStyle('I' . $linha_actual )->getFont()->setName('Garamond');
             }
             $linha_actual++;
             $total++;

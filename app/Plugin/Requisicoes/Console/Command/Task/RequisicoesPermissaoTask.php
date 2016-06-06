@@ -1,6 +1,6 @@
 <?php
 
-    class ArtigosPermissaoTask extends AppShell
+    class RequisicoesPermissaoTask extends AppShell
     {
 
         //@formatter:off

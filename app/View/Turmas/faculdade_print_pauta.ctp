@@ -12,7 +12,8 @@
 
 
 //die(debug($aluno));
-	$this->PhpExcel->loadWorksheetFromS3('/Reports' . DS . 'Turmas' . DS . 'faculdade_print_pauta.xlsx');
+	//$this->PhpExcel->loadWorksheetFromS3('/Reports' . DS . 'Turmas' . DS . 'faculdade_print_pauta.xlsx');
+	$this->PhpExcel->loadWorksheet(APP . 'Reports' . DS . 'Turmas' . DS . 'faculdade_print_pauta.xlsx');
 
 	$this->PhpExcel->xls->setActiveSheetIndexByName('avaliacoes');
 	$this->PhpExcel->xls->getActiveSheet()->setCellValue('A2', $faculdade['UnidadeOrganica']['name']);

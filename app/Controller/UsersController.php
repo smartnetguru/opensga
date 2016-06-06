@@ -140,7 +140,7 @@
 
             parent::beforeFilter();
 
-            $this->Auth->allow(['login', 'logout', 'opauth_complete', 'perfil']);
+            $this->Auth->allow(['login', 'logout', 'opauth_complete', 'perfil','google_login', 'googlelogin']);
             $this->Security->unlockedActions = ['login'];
 
             if ($this->action == 'login' or $this->action == 'logout') {
@@ -621,6 +621,7 @@
         {
             if ($this->Session->read('Auth.User')) {
                 $this->Flash->info('Já está logado');
+
                 $this->redirect(['controller' => 'pages', 'action' => 'home']);
             }
             if ($this->request->is('post')) {
@@ -902,6 +903,178 @@
                     $this->redirect(['controller' => 'pages', 'action' => 'home', 'estudante' => false]);
                 }
             }
+        }
+
+
+
+        /**
+         * This function will makes Oauth Api reqest
+         */
+        public function googlelogin()
+        {
+            $this->autoRender = false;
+            $client = new Google_Client();
+            $client->setAuthConfigFile(Configure::read('OpenSGA.save_path').DS.'client_secret_siga.json');
+            $client->setRedirectUri(GOOGLE_OAUTH_REDIRECT_URI);
+            $client->setScopes(array('https://www.googleapis.com/auth/plus.login','https://www.googleapis.com/auth/userinfo.email', 'https://www.googleapis.com/auth/plus.me'));
+            $client->setApprovalPrompt('auto');
+            $url = $client->createAuthUrl();
+            $this->redirect($url);
+        }
+
+        /**
+         * This function will handle Oauth Api response
+         */
+        public function google_login()
+        {
+            $this->autoRender = false;
+            $client = new Google_Client();
+
+            $client->setAuthConfigFile(Configure::read('OpenSGA.save_path').DS.'client_secret_siga.json');
+            $client->setRedirectUri(GOOGLE_OAUTH_REDIRECT_URI);
+            $client->setScopes(array('https://www.googleapis.com/auth/plus.login','https://www.googleapis.com/auth/userinfo.email', 'https://www.googleapis.com/auth/plus.me'));
+            $client->setApprovalPrompt('auto');
+
+
+
+            $oauth2     = new Google_Service_Oauth2($client);
+            if(isset($_GET['code'])) {
+                $client->authenticate($_GET['code']); // Authenticate
+                $_SESSION['access_token'] = $client->getAccessToken(); // get the access token here
+            }
+
+            if(isset($_SESSION['access_token'])) {
+                $client->setAccessToken($_SESSION['access_token']);
+            }
+
+            if ($client->getAccessToken()) {
+                $_SESSION['access_token'] = $client->getAccessToken();
+                $user         = $oauth2->userinfo->get();
+                try {
+                    if(!empty($user)){
+
+                        $result = $this->User->findByUsername( $user['email'] );
+                        if(!empty( $result )){
+                            if($this->Auth->login($result['User'])){
+                                $password_login = $this->request->data['User']['password'];
+                                $this->Session->write('SGAConfig.ano_lectivo_id', Configure::read('OpenSGA.ano_lectivo_id'));
+                                $this->Session->write('SGAConfig.ano_lectivo', Configure::read('OpenSGA.ano_lectivo'));
+                                $this->Session->write('Config.language', 'por');
+                                $User = $this->Session->read('Auth.User');
+                                if (!in_array($User['estado_objecto_id'], [1, null])) {
+                                    $this->redirect(['action' => 'logout']);
+                                }
+                                $entidade = $this->User->Entidade->findByUserId($User['id']);
+                                $this->Session->write('Auth.User.name', $entidade['Entidade']['name']);
+                                //Temos de Certificar que o Aro existe, principalmente para estudantes importados
+                                $aro = $this->User->Aro->find('first',
+                                    ['conditions' => ['model' => $this->User->alias, 'foreign_key' => $User['id']]]);
+                                if (empty($aro)) {
+                                    $new_aro = [
+                                        'parent_id'   => $User['group_id'],
+                                        'foreign_key' => $User['id'],
+                                        'model'       => $this->User->alias,
+                                    ];
+                                    $this->User->Aro->create();
+                                    $this->User->Aro->save($new_aro);
+                                }
+
+                                // Vamos pegar todos os grupos e colocar na Sessao
+                                $this->User->GroupsUser->contain('Group');
+                                $grupos = $this->User->GroupsUser->find('all', [
+                                    'conditions' => ['user_id' => $User['id']],
+                                    'fields'     => ['GroupsUser.group_id', 'Group.name'],
+                                ]);
+                                $grupos_combine = Hash::combine($grupos, '{n}.Group.id', '{n}.Group.name');
+                                //Actualizamos o Ultimos Login
+                                $this->User->id = $User['id'];
+                                $this->User->set('ultimo_login', date('Y-m-d H:i:s'));
+                                $this->User->save();
+                                $this->User->actualizaLoginHistory($User['id'], $User['group_id'], date('Y-m-d H:i:s'),
+                                    $this->request->clientIp());
+                                $this->Session->write('Auth.User.Groups', $grupos_combine);
+                                $message = [
+                                    'Command'  => 'OpenSGAAcl',
+                                    'Action'   => '--username',
+                                    'username' => $User['username'],
+                                ];
+                                RabbitMQ::publish($message);
+                                if ($User['group_id'] == 1) {
+                                    $unidade_organicas = $this->User->Funcionario->UnidadeOrganica->find('list');
+                                    $this->Session->write('Auth.User.unidade_organicas', $unidade_organicas);
+                                    $this->Session->write('Auth.User.unidade_organica_id', 29);
+                                    //die(var_dump($unidade_organicas));
+                                } elseif ($User['group_id'] == 3) {
+                                    if ($password_login == 'dra02062013') {
+                                        $this->redirect([
+                                            'controller' => 'users',
+                                            'action'     => 'trocar_senha',
+                                            $User['id'],
+                                            'estudante'  => true,
+                                        ]);
+                                    }
+                                    $this->redirect(['controller' => 'pages', 'action' => 'home', 'estudante' => true]);
+                                } elseif ($User['group_id'] == 4) {
+                                    if (in_array($password_login, ['12345', 'siga12345UEM', 'uem1234567dra'])) {
+                                        $this->redirect([
+                                            'controller' => 'users',
+                                            'action'     => 'trocar_senha',
+                                            'docente'    => true,
+                                            $User['id'],
+                                        ]);
+                                    }
+                                    $this->redirect(['controller' => 'pages', 'action' => 'home', 'docente' => true]);
+                                } elseif ($User['group_id'] == 2) {
+                                    $this->User->contain([
+                                        'Funcionario' => [
+                                            'UnidadeOrganica',
+                                        ],
+                                    ]);
+                                    $user_data = $this->User->findById($User['id']);
+                                    $this->Session->write('Auth.User.unidade_organica_id',
+                                        $user_data['Funcionario'][0]['unidade_organica_id']);
+                                    $this->Session->write('Auth.User.unidade_organica',
+                                        $user_data['Funcionario'][0]['UnidadeOrganica']['name']);
+                                    if ($this->User->isFromFaculdade($User['id'])) {
+                                        if (in_array($password_login, ['12345', 'siga12345UEM', 'uem1234567dra'])) {
+                                            $this->redirect([
+                                                'controller' => 'users',
+                                                'action'     => 'trocar_senha',
+                                                $User['id'],
+                                                'faculdade'  => true,
+                                            ]);
+                                        }
+                                        $this->redirect(['controller' => 'pages', 'action' => 'home', 'faculdade' => true]);
+                                    }
+                                }
+                                if (in_array($password_login, ['12345', 'siga12345UEM', 'uem1234567dra'])) {
+                                    $this->redirect(['controller' => 'users', 'action' => 'trocar_senha', $User['id']]);
+                                }
+                                $this->redirect(['controller' => 'pages', 'action' => 'home']);
+                                $this->Session->setFlash('GOOGLE_LOGIN_SUCCESS', 'default', array( 'class' => 'message success'), 'success' );
+                                $this->redirect(['action'=>'after_login']);
+                            }else{
+                                $this->Session->setFlash('GOOGLE_LOGIN_FAILURE', 'default', array( 'class' => 'message error'), 'error' );
+                                $this->redirect(['action'=>'login']);
+                            }
+
+                        }else{
+                            die(debug($user));
+                        }
+
+                    }else{
+                        die(debug($user));
+                        $this->Session->setFlash('GOOGLE_LOGIN_FAILURE', 'default', array( 'class' => 'message error'), 'error' );
+                        $this->redirect(['action'=>'login']);
+                    }
+                }catch (Exception $e) {
+                    die(debug($e));
+                    $this->Session->setFlash('GOOGLE_LOGIN_FAILURE', 'default', array( 'class' => 'message error'), 'error' );
+                    $this->redirect(['action'=>'login']);
+                }
+            }
+
+            exit;
         }
 
 

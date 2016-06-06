@@ -1084,17 +1084,18 @@
                 throw new CakeException('Vendor class PHPExcel not found!');
             }
 
-            $xls = PHPExcel_IOFactory::load(APP . 'Imports' . DS . 'Admitidos' . DS . '2015' . DS . 'admitidos_20150821.xlsx');
+            $xls = PHPExcel_IOFactory::load(APP . 'Imports' . DS . '23.xlsx');
 
             $worksheet = $xls->getActiveSheet();
             //debug($xls->getActiveSheetIndex());
             $linha_actual = 2;
+            $nao_encontrados = [];
             foreach ($worksheet->getRowIterator() as $row) {
                 if ($worksheet->getCell('A' . $linha_actual)->getValue() == '') {
                     break;
                 }
 
-                $nao_encontrados = [];
+
                 $numero_candidato = $worksheet->getCell('A' . $linha_actual)->getCalculatedValue();
                 $array_candidato = [
                     'Candidatura' => [
