@@ -15,7 +15,9 @@
 	//$this->PhpExcel->loadWorksheetFromS3('/Reports' . DS . 'Turmas' . DS . 'faculdade_print_pauta.xlsx');
 	$this->PhpExcel->loadWorksheet(APP . 'Reports' . DS . 'Turmas' . DS . 'faculdade_print_pauta.xlsx');
 
+
 	$this->PhpExcel->xls->setActiveSheetIndexByName('avaliacoes');
+
 	$this->PhpExcel->xls->getActiveSheet()->setCellValue('A2', $faculdade['UnidadeOrganica']['name']);
 	$this->PhpExcel->xls->getActiveSheet()->setCellValue('A3', $inscricaos[0]['Turma']['Curso']['name']);
 	$this->PhpExcel->xls->getActiveSheet()->setCellValue('A4', $inscricaos[0]['Turma']['Disciplina']['name']);

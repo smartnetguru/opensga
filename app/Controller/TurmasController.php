@@ -80,24 +80,26 @@
         function faculdade_criar_turma()
         {
 
-            if($this->request->is('post')){
-                try{
+            if ($this->request->is('post')) {
+                try {
                     $this->Turma->criaTurma($this->request->data);
                     $this->Flash->success('Turma Criada com Sucesso');
-                    $this->redirect(['action'=>'ver_turma',$this->Turma->id]);
-                } catch(Exception $e){
-                    $this->Flash->error('Problemas ao Criar Turma. Motivo:'.$e->getMessage());
+                    $this->redirect(['action' => 'ver_turma', $this->Turma->id]);
+                } catch (Exception $e) {
+                    $this->Flash->error('Problemas ao Criar Turma. Motivo:' . $e->getMessage());
                 }
             }
 
             $unidadeOrganicaId = $this->Session->read('Auth.User.unidade_organica_id');
-            $cursos = $this->Turma->Curso->find('list',['conditions'=>[
-                'unidade_organica_id'=>$unidadeOrganicaId
-            ]]);
-            $anoLectivos = $this->Turma->AnoLectivo->find('list',['order'=>'AnoLectivo.ano DESC']);
+            $cursos = $this->Turma->Curso->find('list', [
+                'conditions' => [
+                    'unidade_organica_id' => $unidadeOrganicaId,
+                ],
+            ]);
+            $anoLectivos = $this->Turma->AnoLectivo->find('list', ['order' => 'AnoLectivo.ano DESC']);
             $turnos = $this->Turma->Turno->find('list');
 
-            $this->set(compact('cursos','anoLectivos','semestreLectivos','turnos'));
+            $this->set(compact('cursos', 'anoLectivos', 'semestreLectivos', 'turnos'));
         }
 
         /**
@@ -176,11 +178,11 @@
 
             if ($this->request->is('post')) {
 
-                try{
+                try {
                     $this->Turma->criaAvaliacao($this->request->data);
                     $this->Flash->success('Avaliacao Criada com Sucesso');
                     $this->redirect(['action' => 'ver_turma', $turmaId]);
-                } catch(Exception $e){
+                } catch (Exception $e) {
                     $this->Flash->error($e->getMessage());
                 }
             }
@@ -281,8 +283,8 @@
             $inscricaos = $this->Turma->getAllAlunosActivos($turmaId);
 
             $totalAlunos = count($inscricaos);
-            $totalPaginas = intdiv($totalAlunos,35)+1;
-            $this->set(compact('inscricaos','totalPaginas'));
+            $totalPaginas = intdiv($totalAlunos, 35) + 1;
+            $this->set(compact('inscricaos', 'totalPaginas'));
         }
 
         public function docente_print_pauta($turmaId)
@@ -584,13 +586,13 @@
             $codigo = $this->request->query('codigo');
             $name = $this->request->query('name');
             $anoLectivoAno = $this->request->query('ano');
-            if($codigo){
+            if ($codigo) {
                 $conditions['Turma.codigo'] = $codigo;
             }
-            if($name){
+            if ($name) {
                 $conditions['Turma.name LIKE'] = '%' . $name . '%';
             }
-            if($anoLectivoAno){
+            if ($anoLectivoAno) {
                 $conditions['AnoLectivo.ano'] = $anoLectivoAno;
                 $paginationOptions['url']['ano_lectivo'] = $anoLectivoAno;
             }
@@ -719,8 +721,8 @@
             $inscricaos = $this->Turma->getAllAlunosActivos($turma_id);
 
             $totalAlunos = count($inscricaos);
-            $totalPaginas = intdiv($totalAlunos,35)+1;
-            $this->set(compact('inscricaos','totalPaginas'));
+            $totalPaginas = intdiv($totalAlunos, 35) + 1;
+            $this->set(compact('inscricaos', 'totalPaginas'));
         }
 
         public function faculdade_print_pauta($turmaId)
@@ -842,29 +844,30 @@
          * @param $turmaId
          *
          */
-        public function faculdade_migrar_estudantes($turmaId){
+        public function faculdade_migrar_estudantes($turmaId)
+        {
 
-            if($this->request->is('post')){
-                try{
+            if ($this->request->is('post')) {
+                try {
                     $this->Turma->migraEstudantes($this->request->data);
                     $this->Flash->success('Turma Migrada com Sucesso');
-                    $this->redirect(['action'=>'ver_turma',$this->request->data['Turma']['turma_id']]);
-                } catch(Exception $e){
-                    $this->Flash->error('Turma Nao Migrada. Motivo:'.$e->getMessage());
+                    $this->redirect(['action' => 'ver_turma', $this->request->data['Turma']['turma_id']]);
+                } catch (Exception $e) {
+                    $this->Flash->error('Turma Nao Migrada. Motivo:' . $e->getMessage());
                 }
             }
-            $this->Turma->contain(['Curso','Disciplina','AnoLectivo','SemestreLectivo']);
+            $this->Turma->contain(['Curso', 'Disciplina', 'AnoLectivo', 'SemestreLectivo']);
             $turma = $this->Turma->findById($turmaId);
 
-            $turmas = $this->Turma->find('list',[
-                'conditions'=>[
-                    'curso_id'=>$turma['Turma']['curso_id'],
-                    'ano_lectivo_id'=>$turma['Turma']['ano_lectivo_id'],
-                    'semestre_lectivo_id'=>$turma['Turma']['semestre_lectivo_id'],
+            $turmas = $this->Turma->find('list', [
+                'conditions' => [
+                    'curso_id'            => $turma['Turma']['curso_id'],
+                    'ano_lectivo_id'      => $turma['Turma']['ano_lectivo_id'],
+                    'semestre_lectivo_id' => $turma['Turma']['semestre_lectivo_id'],
                 ],
-                'order'=>'Turma.name'
+                'order'      => 'Turma.name',
             ]);
-            $this->set(compact('turma','turmaId','turmas'));
+            $this->set(compact('turma', 'turmaId', 'turmas'));
         }
 
         /**
@@ -1031,8 +1034,9 @@
                 'order'      => 'Turma.created DESC',
             ];
 
+            $estadoTurma = $this->Turma->EstadoTurma->findById($conditions['Turma.estado_turma_id']);
             $turmas = $this->paginate('Turma');
-            $this->set(compact('turmas', 'paginationOptions'));
+            $this->set(compact('turmas', 'paginationOptions','estadoTurma'));
         }
 
         public function inscrever_aluno($alunoId, $turmaId)
@@ -1094,8 +1098,6 @@
 
             $this->Turma->id = $turmaId;
             $turma = $this->Turma->read();
-            debug($turma);
-            die();
             $this->Turma->Inscricao->contain([
                 'EstadoInscricao',
                 'Matricula' => [
@@ -1112,8 +1114,6 @@
                     'AnoLectivo',
                 ],
             ]);
-
-
             $inscricaos = $this->Turma->Inscricao->find('all',
                 ['conditions' => ['turma_id' => $turmaId, 'Inscricao.estado_inscricao_id' => 1]]);
             $inscricaos = Hash::sort($inscricaos, '{n}.Matricula.Aluno.Entidade.apelido', 'asc');
@@ -1374,7 +1374,7 @@
         {
             parent::beforeFilter();
 
-            $this->Security->unlockedActions = array('faculdade_criar_turma');
+            $this->Security->unlockedActions = ['faculdade_criar_turma'];
 
             if ($this->action == 'autocomplete') {
                 $this->Auth->allow();

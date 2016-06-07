@@ -77,11 +77,13 @@
                             <?php
                                 echo $this->Form->input('Avaliacao.' . $aluno['Inscricao']['id'] . '.inscricao_id',
                                         ['type' => 'hidden', 'value' => $aluno['Inscricao']['id']]);
+                                echo $this->Form->input('Avaliacao.' . $aluno['Inscricao']['id'] . '.aluno_id',
+                                        ['type' => 'hidden', 'value' => $aluno['Inscricao']['aluno_id']]);
                                 echo $this->Form->input('Avaliacao.' . $aluno['Inscricao']['id'] . '.tipoavaliacao_id',
                                         ['type' => 'hidden', 'value' => $turmaTipoAvaliacao['TipoAvaliacao']['id']]);
                                 echo $this->Form->input('Avaliacao.' . $aluno['Inscricao']['id'] . '.turma_id',
                                         ['type' => 'hidden', 'value' => $aluno['Turma']['id']]);
-                                echo $this->Form->input('Avaliacao.' . $aluno['Inscricao']['id'] . '.TurmaTipoAvaliacao_id',
+                                echo $this->Form->input('Avaliacao.' . $aluno['Inscricao']['id'] . '.turma_tipo_avaliacao_id',
                                         [
                                                 'type'  => 'hidden',
                                                 'value' => $turmaTipoAvaliacao['TurmaTipoAvaliacao']['id'],

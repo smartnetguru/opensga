@@ -176,7 +176,7 @@
 		public function gravaNotas($data)
 		{
 			foreach ($data['Avaliacao'] as $avaliacao) {
-				$avaliacaoExiste = $this->findByInscricaoIdAndTurmaTipoAvaliacaoId($avaliacao['inscricao_id'],
+				$avaliacaoExiste = $this->findByAlunoIdAndTurmaTipoAvaliacaoId($avaliacao['aluno_id'],
 					$avaliacao['turma_tipo_avaliacao_id']);
 				$turmaTipoAvaliacaoId = $avaliacao['turma_tipo_avaliacao_id'];
 				if ($avaliacaoExiste) {

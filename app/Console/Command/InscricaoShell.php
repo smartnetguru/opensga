@@ -27,7 +27,8 @@
 
             foreach ($cursos as $curso) {
                 $planoEstudo = $this->Inscricao->Aluno->Curso->PlanoEstudo->find('first', [
-                    'conditions' => ['PlanoEstudo.curso_id' => $curso['Curso']['id']],
+                    'conditions' => ['PlanoEstudo.curso_id' => $curso['Curso']['id'],
+                    'estado_objecto_id'=>1],
                     'order'      => 'PlanoEstudo.ano_criacao DESC',
                 ]);
 

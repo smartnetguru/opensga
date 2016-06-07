@@ -187,6 +187,68 @@
             ],
         ];
 
+        public function actualizaDadosInscricao($data)
+        {
+            $this->id = $data['Inscricao']['inscricao_id'];
+
+
+            if ($data['Inscricao']['desistiu']) {
+                $data['Inscricao']['estado_inscricao_id'] = 8;
+
+            } elseif ($data['Inscricao']['anulou']) {
+                $data['Inscricao']['estado_inscricao_id'] = 9;
+            } //Se tiver nota final, entao a cadeira terminou
+            elseif (!empty($data['Inscricao']['nota_final'])) {
+                if ($data['Inscricao']['nota_final'] < 10) {
+                    $data['Inscricao']['estado_inscricao_id'] = 10;
+                } else {
+                    $data['Inscricao']['estado_inscricao_id'] = 13;
+                }
+
+            } else {
+                //Ainda ta fazer
+                if (!empty($data['Inscricao']['nota_frequencia'])) {
+                    if ($data['Inscricao']['nota_frequencia'] < 10) {
+                        $data['Inscricao']['estado_inscricao_id'] = 7;
+                    } elseif ($data['Inscricao']['nota_frequencia'] < 14) {
+                        if (!empty($data['Inscricao']['nota_exame_normal'])) {
+                            if ($data['Inscricao']['nota_exame_normal'] < 10) {
+                                if (!empty($data['Inscricao']['nota_exame_recorrencia'])) {
+                                    if ($data['Inscricao']['nota_exame_recorrencia'] < 10) {
+                                        $data['Inscricao']['estado_inscricao_id'] = 12;
+                                    } else {
+                                        $data['Inscricao']['estado_inscricao_id'] = 6;
+                                        $data['Inscricao']['nota_final'] = ($data['Inscricao']['nota_frequencia'] + $data['Inscricao']['nota_exame_recorrencia']) / 2;
+                                    }
+                                } else {
+                                    $data['Inscricao']['estado_inscricao_id'] = 3;
+                                }
+                            } else {
+                                $data['Inscricao']['estado_inscricao_id'] = 5;
+                                $data['Inscricao']['nota_final'] = ($data['Inscricao']['nota_frequencia'] + $data['Inscricao']['nota_exame_normal']) / 2;
+                            }
+                        } else {
+                            $data['Inscricao']['estado_inscricao_id'] = 2;
+                        }
+                    } else {
+                        $data['Inscricao']['estado_inscricao_id'] = 4;
+                        $data['Inscricao']['nota_final'] = $data['Inscricao']['nota_frequencia'];
+                    }
+                }
+
+            }
+
+
+            if ($this->save($data)) {
+                return true;
+            } else {
+
+                return [false, $this->validationErrors];
+            }
+
+
+        }
+
         public function cadastraNotasHistorico($data)
         {
             $dataSource = $this->getDataSource();
@@ -348,68 +410,6 @@
 
         }
 
-        public function actualizaDadosInscricao($data)
-        {
-            $this->id = $data['Inscricao']['inscricao_id'];
-
-
-            if ($data['Inscricao']['desistiu']) {
-                $data['Inscricao']['estado_inscricao_id'] = 8;
-
-            } elseif ($data['Inscricao']['anulou']) {
-                $data['Inscricao']['estado_inscricao_id'] = 9;
-            } //Se tiver nota final, entao a cadeira terminou
-            elseif (!empty($data['Inscricao']['nota_final'])) {
-                if ($data['Inscricao']['nota_final'] < 10) {
-                    $data['Inscricao']['estado_inscricao_id'] = 10;
-                } else {
-                    $data['Inscricao']['estado_inscricao_id'] = 13;
-                }
-
-            } else {
-                //Ainda ta fazer
-                if (!empty($data['Inscricao']['nota_frequencia'])) {
-                    if ($data['Inscricao']['nota_frequencia'] < 10) {
-                        $data['Inscricao']['estado_inscricao_id'] = 7;
-                    } elseif ($data['Inscricao']['nota_frequencia'] < 14) {
-                        if (!empty($data['Inscricao']['nota_exame_normal'])) {
-                            if ($data['Inscricao']['nota_exame_normal'] < 10) {
-                                if (!empty($data['Inscricao']['nota_exame_recorrencia'])) {
-                                    if ($data['Inscricao']['nota_exame_recorrencia'] < 10) {
-                                        $data['Inscricao']['estado_inscricao_id'] = 12;
-                                    } else {
-                                        $data['Inscricao']['estado_inscricao_id'] = 6;
-                                        $data['Inscricao']['nota_final'] = ($data['Inscricao']['nota_frequencia'] + $data['Inscricao']['nota_exame_recorrencia']) / 2;
-                                    }
-                                } else {
-                                    $data['Inscricao']['estado_inscricao_id'] = 3;
-                                }
-                            } else {
-                                $data['Inscricao']['estado_inscricao_id'] = 5;
-                                $data['Inscricao']['nota_final'] = ($data['Inscricao']['nota_frequencia'] + $data['Inscricao']['nota_exame_normal']) / 2;
-                            }
-                        } else {
-                            $data['Inscricao']['estado_inscricao_id'] = 2;
-                        }
-                    } else {
-                        $data['Inscricao']['estado_inscricao_id'] = 4;
-                        $data['Inscricao']['nota_final'] = $data['Inscricao']['nota_frequencia'];
-                    }
-                }
-
-            }
-
-
-            if ($this->save($data)) {
-                return true;
-            } else {
-
-                return [false, $this->validationErrors];
-            }
-
-
-        }
-
         /**
          * Calcula os valores de pagamentos relativos a Inscricao, de acordo com as cadeiras e o tipo de inscricao
          * seleccionados
@@ -484,6 +484,35 @@
 
         }
 
+        /**
+         * Devolve todas as cadeiras inscritas por um aluno num dado Semestre
+         *
+         * @param type $aluno_id
+         * @param type $semestre_id
+         */
+        public function getAllCadeirasInscritasByAlunoSemestre($aluno_id, $semestre_id = null)
+        {
+
+            //Se o semestre nao for mencionado, usamos o semestre actual
+            if ($semestre_id == null) {
+                $semestre_id = Configure::read('OpenSGA.semestre_lectivo_id');
+            }
+
+            $this->contain([
+                'Turma',
+            ]);
+            $inscricaos = $this->find('all',
+                [
+                    'conditions' => [
+                        'Inscricao.aluno_id'                => $aluno_id,
+                        'Inscricao.estado_inscricao_id NOT' => 9,
+                        'Turma.semestre_lectivo_id'         => $semestre_id,
+                    ],
+                ]);
+
+            return $inscricaos;
+        }
+
         public function getAllCadeirasPendentesByAluno($alunoId)
         {
             $aluno = $this->Aluno->findById($alunoId);
@@ -535,9 +564,9 @@
             $cadeirasInscritas = $this->getAllCadeirasInscritasByAlunoSemestre($alunoId);
 
 
-            $disciplinasFeitas = $this->getAllInscricoesByAlunoAndEstado($alunoId, [4, 5, 6, 13]);
+            //$disciplinasFeitas = $this->getAllInscricoesByAlunoAndEstado($alunoId, [4, 5, 6, 13]);
+            $disciplinasFeitas = [];
             $inscricaosExcluir = Hash::merge($cadeirasInscritas, $disciplinasFeitas);
-
 
 
             $disciplinasExcluir = Hash::extract($inscricaosExcluir, '{n}.Turma.disciplina_id');
@@ -559,60 +588,6 @@
 
 
             return $disciplinaPlanoEstudo;
-        }
-
-        /**
-         * Devolve todas as cadeiras inscritas por um aluno num dado Semestre
-         *
-         * @param type $aluno_id
-         * @param type $semestre_id
-         */
-        public function getAllCadeirasInscritasByAlunoSemestre($aluno_id, $semestre_id = null)
-        {
-
-            //Se o semestre nao for mencionado, usamos o semestre actual
-            if ($semestre_id == null) {
-                $semestre_id = Configure::read('OpenSGA.semestre_lectivo_id');
-            }
-
-            $this->contain([
-                'Turma',
-            ]);
-            $inscricaos = $this->find('all',
-                ['conditions' => ['Inscricao.aluno_id' => $aluno_id,'Inscricao.estado_inscricao_id NOT'=>9 ,'Turma.semestre_lectivo_id' => $semestre_id]]);
-
-            return $inscricaos;
-        }
-
-        public function getAllInscricoesByAlunoAndEstado($alunoId, $estadoInscricao = null)
-        {
-            $this->Aluno->Inscricao->contain([
-                    'Turma'     => [
-                        'fields'     => [
-                            'id',
-                            'disciplina_id',
-                            'ano_curricular',
-                            'semestre_curricular',
-                        ],
-                        'Disciplina' => [
-                            'fields' => ['id', 'name'],
-                        ],
-                    ],
-                    'Matricula' => [
-                        'fields'     => ['id', 'ano_lectivo_id'],
-                        'AnoLectivo' => [
-                            'fields' => ['id', 'ano'],
-                        ],
-                    ],
-                ]
-            );
-            $conditions = ['Inscricao.aluno_id' => $alunoId];
-            if ($estadoInscricao != null) {
-                $conditions['Inscricao.estado_inscricao_id'] = $estadoInscricao;
-            }
-            $inscricoes = $this->find('all', ['conditions' => $conditions]);
-
-            return $inscricoes;
         }
 
         public function getAllDisciplinasForInscricaoByCurso($alunoId, $anoLectivoId = null)
@@ -697,6 +672,37 @@
             ]);
 
             return $disciplinaPlanoEstudo;
+        }
+
+        public function getAllInscricoesByAlunoAndEstado($alunoId, $estadoInscricao = null)
+        {
+            $this->Aluno->Inscricao->contain([
+                    'Turma'     => [
+                        'fields'     => [
+                            'id',
+                            'disciplina_id',
+                            'ano_curricular',
+                            'semestre_curricular',
+                        ],
+                        'Disciplina' => [
+                            'fields' => ['id', 'name'],
+                        ],
+                    ],
+                    'Matricula' => [
+                        'fields'     => ['id', 'ano_lectivo_id'],
+                        'AnoLectivo' => [
+                            'fields' => ['id', 'ano'],
+                        ],
+                    ],
+                ]
+            );
+            $conditions = ['Inscricao.aluno_id' => $alunoId];
+            if ($estadoInscricao != null) {
+                $conditions['Inscricao.estado_inscricao_id'] = $estadoInscricao;
+            }
+            $inscricoes = $this->find('all', ['conditions' => $conditions]);
+
+            return $inscricoes;
         }
 
         public function getTotalInscricoesActivas($unidades_organicas = null, $ano_lectivo_id = null)
@@ -821,8 +827,8 @@
                         }
                         $inscricaoExiste = $this->Aluno->Inscricao->find('first', [
                             'conditions' => [
-                                'aluno_id'            => $aluno['Aluno']['id'],
-                                'turma_id'            => $turmaId,
+                                'aluno_id' => $aluno['Aluno']['id'],
+                                'turma_id' => $turmaId,
                             ],
                         ]);
                         $inscricaoSave = [
@@ -830,7 +836,7 @@
                                 'aluno_id'            => $data['aluno_id'],
                                 'turma_id'            => $turmaId,
                                 'turma_frequencia_id' => $turmaId,
-                                'estado_inscricao_id' =>9,
+                                'estado_inscricao_id' => 9,
                                 'matricula_id'        => $data['matricula_id'],
                                 'data'                => date('Y-m-d'),
                                 'pagamento_id'        => $pagamento_id,
@@ -854,11 +860,11 @@
                                 return false;
                             }
 
-                        } else{
-                            if($inscricaoExiste['Inscricao']['estado_inscricao_id']==9){
+                        } else {
+                            if ($inscricaoExiste['Inscricao']['estado_inscricao_id'] == 9) {
                                 $this->id = $inscricaoExiste['Inscricao']['id'];
-                                $this->set('estado_inscricao_id',1);
-                                $this->set('data',date('Y-m-d'));
+                                $this->set('estado_inscricao_id', 1);
+                                $this->set('data', date('Y-m-d'));
                                 $this->save();
                             }
                         }
@@ -884,27 +890,6 @@
 
 
             $dataSource->rollback();
-        }
-
-        /**
-         * Verifica se um aluno pode se inscrever na cadeira em questao
-         */
-        function validaInscricao($inscricao_data)
-        {
-            $this->recursive = -1;
-            $turma = $this->find('first', [
-                'conditions' => [
-                    'turma_id'     => $inscricao_data['Inscricao']['turma_id'],
-                    'aluno_id'     => $inscricao_data['Inscricao']['aluno_id'],
-                    'matricula_id' => $inscricao_data['Inscricao']['matricula_id'],
-                    'estado_inscricao_id'=>1
-                ],
-            ]);
-            if (!$turma) {
-                return true;
-            }
-
-            return false;
         }
 
         /**
@@ -951,6 +936,27 @@
             } else {
                 return [false, $this->validationErrors];
             }
+        }
+
+        /**
+         * Verifica se um aluno pode se inscrever na cadeira em questao
+         */
+        public function validaInscricao($inscricao_data)
+        {
+            $this->recursive = -1;
+            $turma = $this->find('first', [
+                'conditions' => [
+                    'turma_id'            => $inscricao_data['Inscricao']['turma_id'],
+                    'aluno_id'            => $inscricao_data['Inscricao']['aluno_id'],
+                    'matricula_id'        => $inscricao_data['Inscricao']['matricula_id'],
+                    'estado_inscricao_id' => 1,
+                ],
+            ]);
+            if (!$turma) {
+                return true;
+            }
+
+            return false;
         }
 
     }
