@@ -292,6 +292,7 @@
                             <th>Peso</th>
                             <th>Data Marcada</th>
                             <th>Data Realizada</th>
+                            <th>Estado</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -310,6 +311,7 @@
                                     <td><?php echo h($avaliacao['TurmaTipoAvaliacao']['peso']) ?></td>
                                     <td><?php echo h($avaliacao['TurmaTipoAvaliacao']['data_marcada']) ?></td>
                                     <td><?php echo h($avaliacao['TurmaTipoAvaliacao']['data_realizada']) ?></td>
+                                    <td><?php echo h($avaliacao['EstadoTurmaAvaliacao']['name']) ?></td>
                                 </tr>
                             <?php } ?>
                         </tbody>

@@ -956,7 +956,7 @@
                         $result = $this->User->findByUsername( $user['email'] );
                         if(!empty( $result )){
                             if($this->Auth->login($result['User'])){
-                                $password_login = $this->request->data['User']['password'];
+
                                 $this->Session->write('SGAConfig.ano_lectivo_id', Configure::read('OpenSGA.ano_lectivo_id'));
                                 $this->Session->write('SGAConfig.ano_lectivo', Configure::read('OpenSGA.ano_lectivo'));
                                 $this->Session->write('Config.language', 'por');
@@ -1005,24 +1005,10 @@
                                     $this->Session->write('Auth.User.unidade_organica_id', 29);
                                     //die(var_dump($unidade_organicas));
                                 } elseif ($User['group_id'] == 3) {
-                                    if ($password_login == 'dra02062013') {
-                                        $this->redirect([
-                                            'controller' => 'users',
-                                            'action'     => 'trocar_senha',
-                                            $User['id'],
-                                            'estudante'  => true,
-                                        ]);
-                                    }
+
                                     $this->redirect(['controller' => 'pages', 'action' => 'home', 'estudante' => true]);
                                 } elseif ($User['group_id'] == 4) {
-                                    if (in_array($password_login, ['12345', 'siga12345UEM', 'uem1234567dra'])) {
-                                        $this->redirect([
-                                            'controller' => 'users',
-                                            'action'     => 'trocar_senha',
-                                            'docente'    => true,
-                                            $User['id'],
-                                        ]);
-                                    }
+
                                     $this->redirect(['controller' => 'pages', 'action' => 'home', 'docente' => true]);
                                 } elseif ($User['group_id'] == 2) {
                                     $this->User->contain([
@@ -1036,19 +1022,9 @@
                                     $this->Session->write('Auth.User.unidade_organica',
                                         $user_data['Funcionario'][0]['UnidadeOrganica']['name']);
                                     if ($this->User->isFromFaculdade($User['id'])) {
-                                        if (in_array($password_login, ['12345', 'siga12345UEM', 'uem1234567dra'])) {
-                                            $this->redirect([
-                                                'controller' => 'users',
-                                                'action'     => 'trocar_senha',
-                                                $User['id'],
-                                                'faculdade'  => true,
-                                            ]);
-                                        }
+
                                         $this->redirect(['controller' => 'pages', 'action' => 'home', 'faculdade' => true]);
                                     }
-                                }
-                                if (in_array($password_login, ['12345', 'siga12345UEM', 'uem1234567dra'])) {
-                                    $this->redirect(['controller' => 'users', 'action' => 'trocar_senha', $User['id']]);
                                 }
                                 $this->redirect(['controller' => 'pages', 'action' => 'home']);
                                 $this->Session->setFlash('GOOGLE_LOGIN_SUCCESS', 'default', array( 'class' => 'message success'), 'success' );

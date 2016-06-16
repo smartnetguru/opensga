@@ -12,6 +12,11 @@
                     ['escape' => false, 'class' => 'btn btn-icon btn-block']) ?>
         </div>
         <div class="col-sm-2">
+            <?php echo $this->Html->link('<i class="fa fa-print fa-2x"></i>Exportar Cursos',
+                    ['controller' => 'cursos', 'action' => 'print_todos_cursos'],
+                    ['escape' => false, 'class' => 'btn btn-icon btn-block']) ?>
+        </div>
+        <div class="col-sm-2">
             <?php echo $this->Html->link('<i class="fa fa-chain-broken fa-2x"></i>Manutenção',
                     ['controller' => 'cursos', 'action' => 'manutencao'], [
                             'escape' => false,

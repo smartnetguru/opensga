@@ -1,5 +1,5 @@
 <?php
-
+    ini_set('memory_limit', '-1');
     /**
      * OpenSGA - Sistema de Gestão Académica
      *   Copyright (C) 2010-2011  INFOmoz (Informática-Moçambique)
@@ -28,6 +28,7 @@
     /**
      * Bibliotecas incluidas
      */
+    App::uses('OpenSGAAmazonS3', 'Lib');
 
     /**
      * Modelo Turma
@@ -1055,6 +1056,8 @@
          *  -Ter todas as inscricoes num estado nao aberto
          *
          * @param $turmaId
+         *
+         * @return bool
          */
         public function podeSerFechada($turmaId)
         {
@@ -1063,9 +1066,9 @@
             $valorRetorno = true;
             //Pegamos todas as avaliccoes da turma
             $avaliacoes = $this->TurmaTipoAvaliacao->find('count',
-                ['conditions' => ['turma_id' => $turmaId, 'estado_turma_avaliacao_id' => 1]]);
+                ['conditions' => ['turma_id' => $turmaId, 'estado_turma_avaliacao_id' => [1, 2]]]);
             if ($avaliacoes > 0) {
-                $motivoNaoFecho['Avaliaces'] = $avaliacoes;
+                $motivoNaoFecho['Avaliacoes'] = $avaliacoes;
                 $valorRetorno = false;
             } else {
                 $motivoNaoFecho['Avaliacoes'] = 0;
@@ -1097,7 +1100,10 @@
                 throw new CakeException('Vendor class PHPExcel not found!');
             }
 
-            $xls = PHPExcel_IOFactory::load(Configure::read('OpenSGA.save_path') . DS . $pautaURL);
+            $AmazonS3 = new OpenSGAAmazonS3();
+            $tmpPath = '/tmp/phpexcel' . date('His') . '.xlsx';
+            $excelPath = $AmazonS3->getObject($pautaURL, null, $tmpPath);
+            $xls = PHPExcel_IOFactory::load($excelPath);
 
             $ws = $xls->getSheetByName('avaliacoes');
 
@@ -1124,10 +1130,13 @@
                                 'peso'                      => $verificaTeste * 100,
                                 'ordem'                     => $ordemTeste,
                                 'estado_turma_avaliacao_id' => 1,
+                                'data_marcada'              => date('Y-m-d H:i:s'),
                             ],
                         ];
                         $this->TurmaTipoAvaliacao->create();
-                        $this->TurmaTipoAvaliacao->save($arrayNovaAvaliacao);
+                        if (!$this->TurmaTipoAvaliacao->save($arrayNovaAvaliacao)) {
+                            throw new DataNotSavedException($this->TurmaTipoAvaliacao->validationErrors);
+                        }
                         $turmaTipoAvaliacao = $this->TurmaTipoAvaliacao->find('first',
                             ['conditions' => ['turma_id' => $turmaId, 'ordem' => $ordemTeste]]);
                     } else {
@@ -1149,7 +1158,6 @@
                     ];
                 }
             }
-
             $linhaActual = 9;
             foreach ($ws->getRowIterator() as $row) {
                 if ($ws->getCell('A' . $linhaActual)->getValue() == '') {
@@ -1216,6 +1224,16 @@
                 $linhaActual++;
             }
 
+            $this->contain([
+                'AnoLectivo',
+                'Curso',
+                'Disciplina',
+            ]);
+            $turma = $this->findById($turmaId);
+
+            $newPath = 'Pautas/' . $turma['AnoLectivo']['ano'] . '/' . $turma['Curso']['name'] . '/' . $turma['Disciplina']['name'] . '.xlsx';
+            $AmazonS3->moveObject($pautaURL, $newPath);
+
             return true;
         }
 
@@ -1274,13 +1292,13 @@
             ]);
             foreach ($docenteTurmas as $docenteTurma) {
 
-                $docenteTurmaExiste = $this->DocenteTurma->find('first',[
-                    'conditions'=>[
-                        'docente_id'=>$docenteTurma['DocenteTurma']['docente_id'],
-                        'turma_id'=>$data['Turma']['turma_id']
-                    ]
+                $docenteTurmaExiste = $this->DocenteTurma->find('first', [
+                    'conditions' => [
+                        'docente_id' => $docenteTurma['DocenteTurma']['docente_id'],
+                        'turma_id'   => $data['Turma']['turma_id'],
+                    ],
                 ]);
-                if(empty($docenteTurmaExiste)){
+                if (empty($docenteTurmaExiste)) {
                     $this->DocenteTurma->id = $docenteTurma['DocenteTurma']['id'];
                     $this->DocenteTurma->set('turma_id', $data['Turma']['turma_id']);
                     $this->DocenteTurma->save();
@@ -1290,14 +1308,16 @@
 
             $this->id = $data['Turma']['turma_antiga_id'];
             $this->delete($data['Turma']['turma_antiga_id']);
+
             return true;
 
         }
 
-        public function criaTurma($data):bool {
+        public function criaTurma($data):bool
+        {
 
-            $this->PlanoEstudo->DisciplinaPlanoEstudo->contain(['Disciplina','PlanoEstudo']);
-            $disciplinaPlanoEstudo  = $this->PlanoEstudo->DisciplinaPlanoEstudo->findByPlanoEstudoIdAndDisciplinaId(
+            $this->PlanoEstudo->DisciplinaPlanoEstudo->contain(['Disciplina', 'PlanoEstudo']);
+            $disciplinaPlanoEstudo = $this->PlanoEstudo->DisciplinaPlanoEstudo->findByPlanoEstudoIdAndDisciplinaId(
                 $data['Turma']['plano_estudo_id'],
                 $data['Turma']['disciplina_id']
             );
@@ -1305,11 +1325,11 @@
             $data['Turma']['ano_curricular'] = $disciplinaPlanoEstudo['DisciplinaPlanoEstudo']['ano_curricular'];
             $data['Turma']['semestre_curricular'] = $disciplinaPlanoEstudo['DisciplinaPlanoEstudo']['semestre_curricular'];
             $data['Turma']['estado_turma_id'] = 1;
-            $data['Turma']['name'] = $disciplinaPlanoEstudo['Disciplina']['name'].' - '.$anoLectivo['AnoLectivo']['ano'].' - '.$disciplinaPlanoEstudo['PlanoEstudo']['name'];
+            $data['Turma']['name'] = $disciplinaPlanoEstudo['Disciplina']['name'] . ' - ' . $anoLectivo['AnoLectivo']['ano'] . ' - ' . $disciplinaPlanoEstudo['PlanoEstudo']['name'];
 
-            if($this->save($data)){
+            if ($this->save($data)) {
                 return true;
-            } else{
+            } else {
                 throw new DataNotSavedException($this->validationErrors);
             }
         }

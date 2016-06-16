@@ -314,6 +314,14 @@
 
         }
 
+        public function print_todos_cursos(){
+            $this->Curso->contain(['UnidadeOrganica']);
+
+            $cursos = $this->Curso->find('all');
+
+            $this->set(compact('cursos'));
+        }
+
     }
 
 ?>

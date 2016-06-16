@@ -46,6 +46,13 @@
 				'fields'     => '',
 				'order'      => '',
 			],
+			'EstadoTurmaAvaliacao' => [
+				'className'  => 'EstadoTurmaAvaliacao',
+				'foreignKey' => 'estado_turma_avaliacao_id',
+				'conditions' => '',
+				'fields'     => '',
+				'order'      => '',
+			],
 		];
 		var $hasMany = [
 			'Avaliacao' => [
@@ -101,14 +108,14 @@
 				'anoCurricularRule-3' => [
 					'rule'     => 'notBlank',
 					'required' => 'create',
-					'message'  => 'O ano curricular não pode estar vazio',
+					'message'  => 'A Ordem do Teste deve ser indicada',
 				],
 			],
 			'data_marcada'              => [
 				'semestreCurricularRule-3' => [
 					'rule'     => 'notBlank',
 					'required' => 'create',
-					'message'  => 'O semestre curricular não pode estar vazio',
+					'message'  => 'A data Marcada não pode estar vazia',
 				],
 			],
 

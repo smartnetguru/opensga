@@ -193,7 +193,31 @@
 
         public function docente_fechar_turma($turmaId)
         {
+            $this->Turma->id = $turmaId;
+            if (!$this->Turma->exists()) {
+                throw new NotFoundException('Turma Não Existente');
+            }
 
+            $turma = $this->Turma->findById($turmaId);
+            if ($turma['Turma']['estado_turma_id'] != 1) {
+                $this->Flash->warning('Esta Turma ja esta fechada ou foi Cancelada. Nao e possivel fecha-la novamente');
+                $this->redirect(['action' => 'ver_turma', $turmaId]);
+            }
+            if ($this->request->is('post')) {
+                if ($this->Turma->podeSerFechada($turmaId)) {
+                    if ($this->Turma->fecharTurma($turmaId)) {
+                        $this->Flash->success('Turma Fechada com Sucesso. Os Estudantes Serao Notificados');
+                        $this->redirect(['action' => 'ver_turma', $turmaId]);
+                    } else {
+                        $this->Flash->error('Problemas ao fechar Turma. Verifique as Pre-Condicoes');
+                    }
+                }
+            }
+
+
+            $inscricaos = $this->Turma->Inscricao->getAllByTurmaId($turmaId);
+            $podeSerFechada = $this->Turma->podeSerFechada($turmaId);
+            $this->set(compact('inscricaos', 'turma', 'podeSerFechada'));
         }
 
         public function docente_importar_pauta($turmaId)
@@ -216,7 +240,7 @@
                         $this->Upload->create();
                         $this->Upload->save($this->request->data);
 
-                        $processado = $this->Turma->processaPauta($upload_sucesso['urls'][0], $turmaId);
+                        $processado = $this->Turma->processaPauta($upload_sucesso['path'][0], $turmaId);
                         if ($processado) {
                             $this->Session->setFlash(__('Pauta Processada com Sucesso'), 'default',
                                 ['class' => 'alert alert-success']);
@@ -357,7 +381,7 @@
 
 
             $this->Turma->TurmaTipoAvaliacao->contain([
-                'TipoAvaliacao',
+                'TipoAvaliacao','EstadoTurmaAvaliacao'
             ]);
             $turmaTipoAvaliacaos = $this->Turma->TurmaTipoAvaliacao->find('all',
                 ['conditions' => ['turma_id' => $this->data['Turma']['id']]]);
@@ -1036,7 +1060,7 @@
 
             $estadoTurma = $this->Turma->EstadoTurma->findById($conditions['Turma.estado_turma_id']);
             $turmas = $this->paginate('Turma');
-            $this->set(compact('turmas', 'paginationOptions','estadoTurma'));
+            $this->set(compact('turmas', 'paginationOptions', 'estadoTurma'));
         }
 
         public function inscrever_aluno($alunoId, $turmaId)

@@ -71,7 +71,7 @@
             </div>
         <?php } else { ?>
             <div class="col-sm-2">
-                <?php echo $this->Html->link('<i class="fa fa-print  fa-2x"></i>	Alterar Plano de Estudos<span class="badge badge-danger"> Brevemente </span>',
+                <?php echo $this->Html->link('<i class="fa fa-print  fa-2x"></i>	Alterar Plano de Estudos',
                         [
                                 'controller' => 'alunos',
                                 'action'     => 'atribuir_plano_estudo',

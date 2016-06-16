@@ -439,4 +439,8 @@
 
         }
 
+        public function docente_ver_assistentes(){
+
+        }
+
     }

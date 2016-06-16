@@ -290,7 +290,7 @@
                     $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Cursos/index";
                     $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Cursos/manutencao_cursos_sem_encarregado";
                     $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Cursos/manutencao_cursos_sem_turno";
-
+                    $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Cursos/print_todos_cursos";
 
                     $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Funcionarios/index";
                     $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Funcionarios/perfil_funcionario";

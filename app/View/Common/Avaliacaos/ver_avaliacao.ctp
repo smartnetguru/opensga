@@ -66,7 +66,7 @@
                                                 'size'     => 4,
                                                 'type'     => 'text',
                                                 'value'    => $aluno['Matricula']['Aluno']['Avaliacao'][0]['nota'],
-                                                'disabled' => 'disabled',
+                                                'disabled' => $disabled,
                                         ]);
                                     } else {
                                         echo $this->Form->input('Avaliacao.' . $aluno['Inscricao']['id'] . '.nota',
@@ -98,20 +98,30 @@
                             <td colspan="5">
                                 <div class="pull-right">
                                     <?php
-                                        echo $this->Form->submit('GRAVAR', [
-                                                'name'    => 'metodo',
-                                                'value'   => 'gravar',
-                                                'div'     => false,
-                                                'class'   => 'btn btn-default',
-                                                'onClick' => "document.getElementById('metodoEnvio').value='gravar''",
-                                        ]);
-                                        echo $this->Form->submit('PUBLICAR', [
-                                                'name'    => 'metodo',
-                                                'value'   => 'publicar',
-                                                'div'     => false,
-                                                'class'   => 'btn btn-success',
-                                                'onClick' => "document.getElementById('metodoEnvio').value='publicar;alert('e');''",
-                                        ]);
+                                        if(!$disabled){
+                                            echo $this->Form->submit('GRAVAR', [
+                                                    'name'    => 'metodo',
+                                                    'value'   => 'gravar',
+                                                    'div'     => false,
+                                                    'class'   => 'btn btn-default',
+                                                    'onClick' => "document.getElementById('metodoEnvio').value='gravar''",
+                                            ]);
+                                            echo $this->Form->submit('PUBLICAR', [
+                                                    'name'    => 'metodo',
+                                                    'value'   => 'publicar',
+                                                    'div'     => false,
+                                                    'class'   => 'btn btn-success',
+                                                    'onClick' => "document.getElementById('metodoEnvio').value='publicar;alert('e');''",
+                                            ]);
+                                        }
+                                        echo $this->Html->link('Voltar',
+                                                [
+                                                        'controller' => 'turmas',
+                                                        'action'     => 'ver_turma',
+                                                        $turmaTipoAvaliacao['Turma']['id']
+                                                ],
+                                                ['class' => 'btn btn-primary']);
+
                                     ?>
 
                                 </div>

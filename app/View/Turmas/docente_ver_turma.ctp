@@ -49,7 +49,7 @@
 
     </div>
     <div class="col-sm-2">
-        <?php echo $this->Html->link('<i class="fa fa-cloud-upload  fa-2x"></i>Importar Pauta',
+        <?php echo $this->Html->link('<i class="fa fa-cloud-upload  fa-2x"></i>Importar Pauta<span class="badge badge-warning"> Actualizado! </span>',
                 ['controller' => 'turmas', 'action' => 'importar_pauta', $turma['Turma']['id']],
                 ['escape' => false, 'class' => 'btn btn-icon btn-block']) ?>
 
