@@ -23,7 +23,7 @@
                 $this->docentes($userId);
             }
             if($this->User->isAluno($userId)){
-                $this->estudantes();
+                $this->estudantes($userId);
             }
 
         }
@@ -571,46 +571,44 @@
             }
         }
 
-        public function estudantes()
+        public function estudantes($userId)
         {
-            $grupo = $this->User->Group;
-            $grupo->id = 3;
-            $comandos[] = "acl deny Group.3 controllers";
-            $comandos[] = "acl grant Group.3 controllers/Alunos/estudante_perfil";
-            $comandos[] = "acl grant Group.3 controllers/Alunos/estudante_editar_perfil";
-            $comandos[] = "acl grant Group.3 controllers/Alunos/estudante_mostrar_foto";
-            $comandos[] = "acl grant Group.3 controllers/Alunos/estudante_index";
+            $comandos[] = "acl deny User.{$userId} controllers";
+            $comandos[] = "acl grant User.{$userId} controllers/Alunos/estudante_perfil";
+            $comandos[] = "acl grant User.{$userId} controllers/Alunos/estudante_editar_perfil";
+            $comandos[] = "acl grant User.{$userId} controllers/Alunos/estudante_mostrar_foto";
+            $comandos[] = "acl grant User.{$userId} controllers/Alunos/estudante_index";
 
-            $comandos[] = "acl grant Group.3 controllers/CerimoniaGraduacaos/estudante_index";
-            $comandos[] = "acl grant Group.3 controllers/CerimoniaGraduacaos/estudante_inscricao";
-            $comandos[] = "acl grant Group.3 controllers/CerimoniaGraduacaos/estudante_pagamento_inscricao";
-            $comandos[] = "acl grant Group.3 controllers/CerimoniaGraduacaos/estudante_ver_detalhes";
+            $comandos[] = "acl grant User.{$userId} controllers/CerimoniaGraduacaos/estudante_index";
+            $comandos[] = "acl grant User.{$userId} controllers/CerimoniaGraduacaos/estudante_inscricao";
+            $comandos[] = "acl grant User.{$userId} controllers/CerimoniaGraduacaos/estudante_pagamento_inscricao";
+            $comandos[] = "acl grant User.{$userId} controllers/CerimoniaGraduacaos/estudante_ver_detalhes";
 
-            $comandos[] = "acl grant Group.3 controllers/Inscricaos/estudante_ver_inscricoes_aluno";
-            $comandos[] = "acl grant Group.3 controllers/Inscricaos/estudante_index";
-            $comandos[] = "acl grant Group.3 controllers/Inscricaos/estudante_ver_detalhes_inscricao";
-            $comandos[] = "acl grant Group.3 controllers/Inscricaos/estudante_inscrever";
-            $comandos[] = "acl grant Group.3 controllers/Inscricaos/estudante_anular_inscricao";
-            $comandos[] = "acl grant Group.3 controllers/Inscricaos/estudante_adicionar_cadeiras_inscricao";
+            $comandos[] = "acl grant User.{$userId} controllers/Inscricaos/estudante_ver_inscricoes_aluno";
+            $comandos[] = "acl grant User.{$userId} controllers/Inscricaos/estudante_index";
+            $comandos[] = "acl grant User.{$userId} controllers/Inscricaos/estudante_ver_detalhes_inscricao";
+            $comandos[] = "acl grant User.{$userId} controllers/Inscricaos/estudante_inscrever";
+            $comandos[] = "acl grant User.{$userId} controllers/Inscricaos/estudante_anular_inscricao";
+            $comandos[] = "acl grant User.{$userId} controllers/Inscricaos/estudante_adicionar_cadeiras_inscricao";
 
-            $comandos[] = "acl grant Group.3 controllers/Matriculas/estudante_como_renovar";
-            $comandos[] = "acl grant Group.3 controllers/Matriculas/estudante_index";
-            $comandos[] = "acl grant Group.3 controllers/Matriculas/estudante_anular_matricula";
-            $comandos[] = "acl grant Group.3 controllers/Matriculas/estudante_ver_matricula";
-            $comandos[] = "acl grant Group.3 controllers/Matriculas/estudante_renovar_matricula";
+            $comandos[] = "acl grant User.{$userId} controllers/Matriculas/estudante_como_renovar";
+            $comandos[] = "acl grant User.{$userId} controllers/Matriculas/estudante_index";
+            $comandos[] = "acl grant User.{$userId} controllers/Matriculas/estudante_anular_matricula";
+            $comandos[] = "acl grant User.{$userId} controllers/Matriculas/estudante_ver_matricula";
+            $comandos[] = "acl grant User.{$userId} controllers/Matriculas/estudante_renovar_matricula";
 
-            $comandos[] = "acl grant Group.3 controllers/Messages/estudante_index";
-            $comandos[] = "acl grant Group.3 controllers/Messages/estudante_enviar_mensagem";
-            $comandos[] = "acl grant Group.3 controllers/Messages/estudante_ver_mensagem";
+            $comandos[] = "acl grant User.{$userId} controllers/Messages/estudante_index";
+            $comandos[] = "acl grant User.{$userId} controllers/Messages/estudante_enviar_mensagem";
+            $comandos[] = "acl grant User.{$userId} controllers/Messages/estudante_ver_mensagem";
 
-            $comandos[] = "acl grant Group.3 controllers/Turmas/estudante_index";
-            $comandos[] = "acl grant Group.3 controllers/Turmas/estudante_ver_turma";
+            $comandos[] = "acl grant User.{$userId} controllers/Turmas/estudante_index";
+            $comandos[] = "acl grant User.{$userId} controllers/Turmas/estudante_ver_turma";
 
-            $comandos[] = "acl grant Group.3 controllers/users/estudante_mostrar_foto";
-            $comandos[] = "acl grant Group.3 controllers/users/estudante_perfil";
-            $comandos[] = "acl grant Group.3 controllers/users/estudante_trocar_senha";
-            $comandos[] = "acl grant Group.3 controllers/users/estudante_after_fb_login";
-            $comandos[] = "acl grant Group.3 controllers/users/estudante_changeLoginProfile";
+            $comandos[] = "acl grant User.{$userId} controllers/users/estudante_mostrar_foto";
+            $comandos[] = "acl grant User.{$userId} controllers/users/estudante_perfil";
+            $comandos[] = "acl grant User.{$userId} controllers/users/estudante_trocar_senha";
+            $comandos[] = "acl grant User.{$userId} controllers/users/estudante_after_fb_login";
+            $comandos[] = "acl grant User.{$userId} controllers/users/estudante_changeLoginProfile";
 
             foreach ($comandos as $comando) {
                 $this->dispatchShell($comando);
