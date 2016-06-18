@@ -581,7 +581,7 @@
             $this->Aluno->contain('Entidade');
             $alunos = $this->Aluno->find('all',['conditions'=>['Entidade.provincia_nascimento is null']]);
             $total = count($alunos);
-           
+
             foreach($alunos as $aluno){
                 $candidatos = $this->Aluno->CandidatoGraduacao->findAllByAlunoId($aluno['Aluno']['id']);
                 $this->Aluno->Entidade->id = $aluno['Entidade']['id'];
@@ -619,6 +619,7 @@
                 if($aluno['Entidade']['cidade_nascimento']!=null){
 
                     $linha_actual = 2;
+                    $encontrado = false;
                     foreach ($worksheet->getRowIterator() as $row) {
                         $controlador = $worksheet->getCell('A' . $linha_actual)->getCalculatedValue();
                         if ($controlador == '') {
@@ -626,6 +627,7 @@
                         }
 
                         if($controlador==$aluno['Entidade']['cidade_nascimento']){
+                            $encontrado=true;
                             $nomeCidade = $worksheet->getCell('C' . $linha_actual)->getCalculatedValue();
                             $cidadeDB = $this->Aluno->Entidade->CidadeNascimento->find('first',['conditions'=>['name LIKE'=>'%'.$nomeCidade.'%']]);
                             if(!empty($cidadeDB)){
@@ -635,9 +637,15 @@
                                 if(!$this->Aluno->Entidade->save()){
                                     debug($this->Aluno->Entidade->validationErrors);
                                 }
+                            } else{
+                                debug($nomeCidade);
+                                die();
                             }
                         }
                         $linha_actual++;
+                    }
+                    if(!$encontrado){
+                        die(debug($aluno['Entidade']['cidade_nascimento']));
                     }
                 }
                 $this->out($total--);
