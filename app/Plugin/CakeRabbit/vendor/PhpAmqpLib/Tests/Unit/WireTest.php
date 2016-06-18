@@ -18,6 +18,15 @@ class WireTest extends \PHPUnit_Framework_TestCase
         $this->writeAndRead($v, 'write_bit', 'read_bit');
     }
 
+    protected function writeAndRead($v, $write_method, $read_method)
+    {
+        $w = new AMQPWriter();
+        $w->{$write_method}($v);
+
+        $r = new AMQPReader($w->getvalue());
+        $this->assertEquals($v, $r->{$read_method}());
+    }
+
     public function testOctetWriteRead()
     {
         for ($i = 0; $i < 100; $i++) {
@@ -109,14 +118,5 @@ class WireTest extends \PHPUnit_Framework_TestCase
     protected function longlongWriteRead($v)
     {
         $this->writeAndRead($v, 'write_longlong', 'read_longlong');
-    }
-
-    protected function writeAndRead($v, $write_method, $read_method)
-    {
-        $w = new AMQPWriter();
-        $w->{$write_method}($v);
-
-        $r = new AMQPReader($w->getvalue());
-        $this->assertEquals($v, $r->{$read_method}());
     }
 }

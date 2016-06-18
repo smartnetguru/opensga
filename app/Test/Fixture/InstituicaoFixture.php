@@ -1,25 +1,25 @@
 <?php
 
-	/**
-	 * InstituicaoFixture
-	 *
-	 */
-	class InstituicaoFixture extends CakeTestFixture
-	{
+/**
+ * InstituicaoFixture
+ *
+ */
+class InstituicaoFixture extends CakeTestFixture
+{
 
-		/**
-		 * Import
-		 *
-		 * @var array
-		 */
-		public $import = ['model' => 'Instituicao'];
+    /**
+     * Import
+     *
+     * @var array
+     */
+    public $import = ['model' => 'Instituicao'];
 
-		/**
-		 * Records
-		 *
-		 * @var array
-		 */
-		public $records = [
-		];
+    /**
+     * Records
+     *
+     * @var array
+     */
+    public $records = [
+    ];
 
-	}
+}

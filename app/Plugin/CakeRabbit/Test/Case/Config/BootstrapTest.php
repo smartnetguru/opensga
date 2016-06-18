@@ -22,32 +22,33 @@
  * @package      CakeResque
  * @subpackage   CakeResque.Test.Case.Lib
  */
+class BootstrapTest extends CakeTestCase
+{
 
-class BootstrapTest extends CakeTestCase {
+    public function testBootstrapContainsAllMandatorySettings()
+    {
+        $s = Configure::read('CakeResque');
 
-	public function testBootstrapContainsAllMandatorySettings() {
-		$s = Configure::read('CakeResque');
+        $this->assertArrayHasKey('Redis', $s);
+        $this->assertArrayHasKey('Worker', $s);
+        $this->assertArrayHasKey('Resque', $s);
+        $this->assertArrayHasKey('Log', $s);
+        $this->assertArrayHasKey('Scheduler', $s);
 
-		$this->assertArrayHasKey('Redis', $s);
-		$this->assertArrayHasKey('Worker', $s);
-		$this->assertArrayHasKey('Resque', $s);
-		$this->assertArrayHasKey('Log', $s);
-		$this->assertArrayHasKey('Scheduler', $s);
+        $this->assertArrayHasKey('host', $s['Redis']);
+        $this->assertArrayHasKey('port', $s['Redis']);
+        $this->assertArrayHasKey('database', $s['Redis']);
+        $this->assertArrayHasKey('namespace', $s['Redis']);
 
-		$this->assertArrayHasKey('host', $s['Redis']);
-		$this->assertArrayHasKey('port', $s['Redis']);
-		$this->assertArrayHasKey('database', $s['Redis']);
-		$this->assertArrayHasKey('namespace', $s['Redis']);
+        $this->assertArrayHasKey('queue', $s['Worker']);
+        $this->assertArrayHasKey('interval', $s['Worker']);
+        $this->assertArrayHasKey('workers', $s['Worker']);
 
-		$this->assertArrayHasKey('queue', $s['Worker']);
-		$this->assertArrayHasKey('interval', $s['Worker']);
-		$this->assertArrayHasKey('workers', $s['Worker']);
+        $this->assertArrayHasKey('lib', $s['Resque']);
 
-		$this->assertArrayHasKey('lib', $s['Resque']);
+        $this->assertArrayHasKey('handler', $s['Log']);
+        $this->assertArrayHasKey('target', $s['Log']);
 
-		$this->assertArrayHasKey('handler', $s['Log']);
-		$this->assertArrayHasKey('target', $s['Log']);
-
-		$this->assertArrayHasKey('enabled', $s['Scheduler']);
-	}
+        $this->assertArrayHasKey('enabled', $s['Scheduler']);
+    }
 }

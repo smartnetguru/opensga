@@ -1,25 +1,25 @@
 <?php
 
-	/**
-	 * PlanoEstudoTipoPagamentoFixture
-	 *
-	 */
-	class PlanoEstudoTipoPagamentoFixture extends CakeTestFixture
-	{
+/**
+ * PlanoEstudoTipoPagamentoFixture
+ *
+ */
+class PlanoEstudoTipoPagamentoFixture extends CakeTestFixture
+{
 
-		/**
-		 * Import
-		 *
-		 * @var array
-		 */
-		public $import = ['model' => 'PlanoEstudoTipoPagamento'];
+    /**
+     * Import
+     *
+     * @var array
+     */
+    public $import = ['model' => 'PlanoEstudoTipoPagamento'];
 
-		/**
-		 * Records
-		 *
-		 * @var array
-		 */
-		public $records = [
-		];
+    /**
+     * Records
+     *
+     * @var array
+     */
+    public $records = [
+    ];
 
-	}
+}

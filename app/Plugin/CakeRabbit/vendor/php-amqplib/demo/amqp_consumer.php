@@ -44,12 +44,12 @@ function process_message($msg)
     echo "\n--------\n";
 
     $msg->delivery_info['channel']->
-        basic_ack($msg->delivery_info['delivery_tag']);
+    basic_ack($msg->delivery_info['delivery_tag']);
 
     // Send a message with the string "quit" to cancel the consumer.
     if ($msg->body === 'quit') {
         $msg->delivery_info['channel']->
-            basic_cancel($msg->delivery_info['consumer_tag']);
+        basic_cancel($msg->delivery_info['consumer_tag']);
     }
 }
 
@@ -70,6 +70,7 @@ function shutdown($ch, $conn)
     $ch->close();
     $conn->close();
 }
+
 register_shutdown_function('shutdown', $ch, $conn);
 
 // Loop as long as the channel has callbacks registered

@@ -1,25 +1,25 @@
 <?php
 
-	/**
-	 * FuncionariosFuncaoProfissionalFixture
-	 *
-	 */
-	class FuncionariosFuncaoProfissionalFixture extends CakeTestFixture
-	{
+/**
+ * FuncionariosFuncaoProfissionalFixture
+ *
+ */
+class FuncionariosFuncaoProfissionalFixture extends CakeTestFixture
+{
 
-		/**
-		 * Import
-		 *
-		 * @var array
-		 */
-		public $import = ['table' => 'funcionarios_funcao_profissionals'];
+    /**
+     * Import
+     *
+     * @var array
+     */
+    public $import = ['table' => 'funcionarios_funcao_profissionals'];
 
-		/**
-		 * Records
-		 *
-		 * @var array
-		 */
-		public $records = [
-		];
+    /**
+     * Records
+     *
+     * @var array
+     */
+    public $records = [
+    ];
 
-	}
+}

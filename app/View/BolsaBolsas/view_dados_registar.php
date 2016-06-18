@@ -193,8 +193,8 @@
         <label class="col-sm-6 control-label" for="form-field-13">
         </label>
         <?php echo $this->Form->end([
-                'label' => __('GRAVAR', true),
-                'class' => 'btn btn-info btn-squared btn-lg button',
+            'label' => __('GRAVAR', true),
+            'class' => 'btn btn-info btn-squared btn-lg button',
         ]); ?>
 
     </div>

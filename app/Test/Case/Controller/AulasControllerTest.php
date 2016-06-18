@@ -1,70 +1,70 @@
 <?php
-	App::uses('AulasController', 'Controller');
+App::uses('AulasController', 'Controller');
 
-	/**
-	 * AulasController Test Case
-	 */
-	class AulasControllerTest extends ControllerTestCase
-	{
+/**
+ * AulasController Test Case
+ */
+class AulasControllerTest extends ControllerTestCase
+{
 
-		/**
-		 * Fixtures
-		 *
-		 * @var array
-		 */
-		public $fixtures = [
-			'app.aula',
+    /**
+     * Fixtures
+     *
+     * @var array
+     */
+    public $fixtures = [
+        'app.aula',
 
-		];
+    ];
 
-		/**
-		 * testIndex method
-		 *
-		 * @return void
-		 */
-		public function testIndex()
-		{
-			$this->markTestIncomplete('testIndex not implemented.');
-		}
+    /**
+     * testIndex method
+     *
+     * @return void
+     */
+    public function testIndex()
+    {
+        $this->markTestIncomplete('testIndex not implemented.');
+    }
 
-		/**
-		 * testView method
-		 *
-		 * @return void
-		 */
-		public function testView()
-		{
-			$this->markTestIncomplete('testView not implemented.');
-		}
+    /**
+     * testView method
+     *
+     * @return void
+     */
+    public function testView()
+    {
+        $this->markTestIncomplete('testView not implemented.');
+    }
 
-		/**
-		 * testAdd method
-		 *
-		 * @return void
-		 */
-		public function testAdd()
-		{
-			$this->markTestIncomplete('testAdd not implemented.');
-		}
+    /**
+     * testAdd method
+     *
+     * @return void
+     */
+    public function testAdd()
+    {
+        $this->markTestIncomplete('testAdd not implemented.');
+    }
 
-		/**
-		 * testEdit method
-		 *
-		 * @return void
-		 */
-		public function testEdit()
-		{
-			$this->markTestIncomplete('testEdit not implemented.');
-		}
+    /**
+     * testEdit method
+     *
+     * @return void
+     */
+    public function testEdit()
+    {
+        $this->markTestIncomplete('testEdit not implemented.');
+    }
 
-		/**
-		 * testDelete method
-		 *
-		 * @return void
-		 */
-		public function testDelete()
-		{
-			$this->markTestIncomplete('testDelete not implemented.');
-		}
+    /**
+     * testDelete method
+     *
+     * @return void
+     */
+    public function testDelete()
+    {
+        $this->markTestIncomplete('testDelete not implemented.');
+    }
 
-	}
+}

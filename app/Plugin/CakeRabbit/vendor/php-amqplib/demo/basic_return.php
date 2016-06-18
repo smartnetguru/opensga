@@ -1,9 +1,9 @@
 <?php
 
-require_once __DIR__.'/../vendor/autoload.php';
+require_once __DIR__ . '/../vendor/autoload.php';
 
-use PhpAmqpLib\Message\AMQPMessage;
 use PhpAmqpLib\Connection\AMQPConnection;
+use PhpAmqpLib\Message\AMQPMessage;
 
 $connection = new AMQPConnection('localhost', 5672, 'guest', 'guest');
 $channel = $connection->channel();
@@ -21,8 +21,13 @@ echo " done.\n";
 
 $wait = true;
 
-$return_listener = function ($reply_code, $reply_text,
-    $exchange, $routing_key, $msg) use ($wait) {
+$return_listener = function (
+    $reply_code,
+    $reply_text,
+    $exchange,
+    $routing_key,
+    $msg
+) use ($wait) {
     $GLOBALS['wait'] = false;
 
     echo "return: ",
@@ -39,7 +44,7 @@ echo " [x] Sent mandatory ... ";
 $channel->basic_publish($msg,
     'hidden_exchange',
     'rkey',
-    true );
+    true);
 echo " done.\n";
 
 while ($wait) {

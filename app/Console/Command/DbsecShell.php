@@ -1,10 +1,10 @@
 <?php
 
-    ini_set('memory_limit', "3096M");
-    App::uses('AuditableConfig', 'Auditable.Lib');
+ini_set('memory_limit', "3096M");
+App::uses('AuditableConfig', 'Auditable.Lib');
 
-    class DbsecShell extends AppShell
-    {
+class DbsecShell extends AppShell
+{
 //@formatter:off
     public $uses = [
         'HistoricoCurso',
@@ -30,7 +30,6 @@
     public $unidadeOrganicaId = 14;
 
 
-
     public function verifica_cursos()
     {
         App::import('Vendor', 'PHPExcel', ['file' => 'PHPExcel.php']);
@@ -49,11 +48,11 @@
                 $curso_id = $curso_id->getPlainText();
             }
 
-            if($curso_id=='3663'){
-                $curso_id=3661;
+            if ($curso_id == '3663') {
+                $curso_id = 3661;
             }
-            if($curso_id==3664){
-                $curso_id=3662;
+            if ($curso_id == 3664) {
+                $curso_id = 3662;
             }
 
             $this->out('Verificando o curso----' . $curso_id);
@@ -78,11 +77,11 @@
 
                     $curso_array = [
                         'Curso' => [
-                            'name'                => $worksheet->getCell('B' . $linha_actual)->getCalculatedValue(),
-                            'grau_academico_id'   => $worksheet->getCell('F' . $linha_actual)->getCalculatedValue(),
-                            'tipo_curso_id'       => $worksheet->getCell('F' . $linha_actual)->getCalculatedValue(),
+                            'name' => $worksheet->getCell('B' . $linha_actual)->getCalculatedValue(),
+                            'grau_academico_id' => $worksheet->getCell('F' . $linha_actual)->getCalculatedValue(),
+                            'tipo_curso_id' => $worksheet->getCell('F' . $linha_actual)->getCalculatedValue(),
                             'unidade_organica_id' => $faculdade['UnidadeOrganica']['id'],
-                            'codigo'              => $curso_id
+                            'codigo' => $curso_id
                         ]
                     ];
 
@@ -125,22 +124,22 @@
                     $this->out("Ja existe Disciplina com Este nome");
                     $disciplinaId = $nome_existe['Disciplina']['id'];
                     $this->Disciplina->id = $nome_existe['Disciplina']['id'];
-                    $this->Disciplina->set('codigo_antigo',$codigo_disciplina);
-                    $this->Disciplina->set('id',$nome_existe['Disciplina']['id']);
-                    $this->Disciplina->set('name',$nome_disciplina);
-                    $this->Disciplina->set('codigo',null);
-                    if($nome_disciplina=='Português III'){
+                    $this->Disciplina->set('codigo_antigo', $codigo_disciplina);
+                    $this->Disciplina->set('id', $nome_existe['Disciplina']['id']);
+                    $this->Disciplina->set('name', $nome_disciplina);
+                    $this->Disciplina->set('codigo', null);
+                    if ($nome_disciplina == 'Português III') {
                         debug($nome_existe);
-                            debug($this->Disciplina->data);
+                        debug($this->Disciplina->data);
                         //die(debug('1'));
                     }
-                    if(!$this->Disciplina->save()){
-                        if($nome_disciplina=='Arqueologia Marítima'){
+                    if (!$this->Disciplina->save()) {
+                        if ($nome_disciplina == 'Arqueologia Marítima') {
                             debug($nome_existe);
                             debug($this->Disciplina->data);
                             debug($this->Disciplina->validationErrors);
-                        die(debug('Leo'));
-                    }
+                            die(debug('Leo'));
+                        }
                     }
 
                 } else {
@@ -148,17 +147,17 @@
                     if (empty($codigo_existe)) {
                         $array_disciplina = [
                             'Disciplina' => [
-                                'name'          => $nome_disciplina,
+                                'name' => $nome_disciplina,
                                 'codigo_antigo' => $codigo_disciplina,
-                                'codigo'=>null
+                                'codigo' => null
                             ]
                         ];
 
                         $this->Disciplina->create();
-                        if(!$this->Disciplina->save($array_disciplina)){
+                        if (!$this->Disciplina->save($array_disciplina)) {
 
-                      debug($this->Disciplina->validationErrors);
-                    debug($array_disciplina);
+                            debug($this->Disciplina->validationErrors);
+                            debug($array_disciplina);
 
 
                         }
@@ -168,7 +167,7 @@
                     } else {
                         $array_disciplina = [
                             'Disciplina' => [
-                                'name'          => $nome_disciplina,
+                                'name' => $nome_disciplina,
                                 'codigo_antigo' => $codigo_disciplina
                             ]
                         ];
@@ -186,9 +185,9 @@
                     $unidadeOrganicaId);
                 if (empty($disciplinaUnidadeExiste)) {
                     $arrayDisciplinaUnidade = [
-                        'disciplina_id'       => $disciplinaId,
+                        'disciplina_id' => $disciplinaId,
                         'unidade_organica_id' => $unidadeOrganicaId,
-                        'estado_objecto_id'   => 1
+                        'estado_objecto_id' => 1
                     ];
                     $this->Disciplina->DisciplinaUnidadeOrganica->create();
                     $this->Disciplina->DisciplinaUnidadeOrganica->save($arrayDisciplinaUnidade);
@@ -215,12 +214,12 @@
         $worksheet = $xls->getActiveSheet();
         foreach ($worksheet->getRowIterator() as $ow) {
             $curso_codigo = $worksheet->getCell('B' . $linha_actual)->getCalculatedValue();
-            if($curso_codigo=='3663'){
-                $curso_codigo=3661;
+            if ($curso_codigo == '3663') {
+                $curso_codigo = 3661;
 
             }
-            if($curso_codigo==3664){
-                $curso_codigo=3662;
+            if ($curso_codigo == 3664) {
+                $curso_codigo = 3662;
             }
 
             $curso = $this->Curso->findByCodigo($curso_codigo);
@@ -230,7 +229,7 @@
 
             $plano_estudo_existe = $this->PlanoEstudo->find('first', [
                 'conditions' => [
-                    'curso_id'    => $curso['Curso']['id'],
+                    'curso_id' => $curso['Curso']['id'],
                     'ano_criacao' => $worksheet->getCell('J' . $linha_actual)->getCalculatedValue()
                 ]
             ]);
@@ -239,13 +238,13 @@
                 $this->PlanoEstudo->create();
                 $array_plano_estudo = [
                     'PlanoEstudo' => [
-                        'name'          => $curso['Curso']['name'] . " - " . $worksheet->getCell('J' . $linha_actual)->getCalculatedValue(),
-                        'curso_id'      => $curso['Curso']['id'],
-                        'ano_criacao'   => $worksheet->getCell('J' . $linha_actual)->getCalculatedValue(),
-                        'codigo'        => $curso['Curso']['codigo'] . "-" . $worksheet->getCell('J' . $linha_actual)->getCalculatedValue(),
-                        'duracao'       => 4,
+                        'name' => $curso['Curso']['name'] . " - " . $worksheet->getCell('J' . $linha_actual)->getCalculatedValue(),
+                        'curso_id' => $curso['Curso']['id'],
+                        'ano_criacao' => $worksheet->getCell('J' . $linha_actual)->getCalculatedValue(),
+                        'codigo' => $curso['Curso']['codigo'] . "-" . $worksheet->getCell('J' . $linha_actual)->getCalculatedValue(),
+                        'duracao' => 4,
                         'semestres_ano' => 2,
-                        'estado_objecto_id'=>1
+                        'estado_objecto_id' => 1
                     ]
                 ];
 
@@ -263,66 +262,66 @@
 
             $codigo_disciplina = $worksheet->getCell('A' . $linha_actual)->getCalculatedValue();
 
-           if($codigo_disciplina=='D C II'){
-                $codigo_disciplina='DO II';
+            if ($codigo_disciplina == 'D C II') {
+                $codigo_disciplina = 'DO II';
             }
 
-            if($codigo_disciplina=='D C III'){
-                $codigo_disciplina='DO III';
+            if ($codigo_disciplina == 'D C III') {
+                $codigo_disciplina = 'DO III';
             }
 
-            if($codigo_disciplina=='D C IV'){
-                $codigo_disciplina='DO IV';
+            if ($codigo_disciplina == 'D C IV') {
+                $codigo_disciplina = 'DO IV';
             }
 
-            if($codigo_disciplina=='EBE-24'){
-                $codigo_disciplina='EFE-24';
+            if ($codigo_disciplina == 'EBE-24') {
+                $codigo_disciplina = 'EFE-24';
             }
 
-            if($codigo_disciplina=='EBE-29'){
-                $codigo_disciplina='EFE-29';
+            if ($codigo_disciplina == 'EBE-29') {
+                $codigo_disciplina = 'EFE-29';
             }
 
-            if($codigo_disciplina=='EPO-11'){
-                $codigo_disciplina='PORT III';
+            if ($codigo_disciplina == 'EPO-11') {
+                $codigo_disciplina = 'PORT III';
             }
 
-            if($codigo_disciplina=='EPO-19'){
-                $codigo_disciplina='PORT V';
+            if ($codigo_disciplina == 'EPO-19') {
+                $codigo_disciplina = 'PORT V';
             }
 
-            if($codigo_disciplina=='IES'){
-                $codigo_disciplina='ISO';
+            if ($codigo_disciplina == 'IES') {
+                $codigo_disciplina = 'ISO';
             }
-            if($codigo_disciplina=='IG'){
-                $codigo_disciplina='ING';
+            if ($codigo_disciplina == 'IG') {
+                $codigo_disciplina = 'ING';
             }
-            if($codigo_disciplina=='LLF II'){
-                $codigo_disciplina='LLF-II';
+            if ($codigo_disciplina == 'LLF II') {
+                $codigo_disciplina = 'LLF-II';
             }
-            if($codigo_disciplina=='MO8'){
-                $codigo_disciplina='PGP';
+            if ($codigo_disciplina == 'MO8') {
+                $codigo_disciplina = 'PGP';
             }
-            if($codigo_disciplina=='LOA'){
-                $codigo_disciplina='LOAS';
+            if ($codigo_disciplina == 'LOA') {
+                $codigo_disciplina = 'LOAS';
             }
-if($codigo_disciplina=='MGAP 122'){
-                $codigo_disciplina='OG';
+            if ($codigo_disciplina == 'MGAP 122') {
+                $codigo_disciplina = 'OG';
             }
-            if($codigo_disciplina=='GEA'){
-                $codigo_disciplina='GEG';
+            if ($codigo_disciplina == 'GEA') {
+                $codigo_disciplina = 'GEG';
             }
-            if($codigo_disciplina=='HA'){
-                $codigo_disciplina='HIA';
+            if ($codigo_disciplina == 'HA') {
+                $codigo_disciplina = 'HIA';
             }
-            if($codigo_disciplina=='HIP'){
-                $codigo_disciplina='HIPI';
+            if ($codigo_disciplina == 'HIP') {
+                $codigo_disciplina = 'HIPI';
             }
 
             $creditos = $worksheet->getCell('M' . $linha_actual)->getCalculatedValue();
 
-            if($creditos==''){
-                $creditos=0;
+            if ($creditos == '') {
+                $creditos = 0;
             }
 
 
@@ -347,49 +346,49 @@ if($codigo_disciplina=='MGAP 122'){
             }
             $array_plano_ano = [
                 'DisciplinaPlanoEstudo' => [
-                    'plano_estudo_id'     => $plano_estudo_id,
-                    'ano_curricular'      => $worksheet->getCell('D' . $linha_actual)->getCalculatedValue(),
+                    'plano_estudo_id' => $plano_estudo_id,
+                    'ano_curricular' => $worksheet->getCell('D' . $linha_actual)->getCalculatedValue(),
                     'semestre_curricular' => $worksheet->getCell('G' . $linha_actual)->getCalculatedValue(),
-                    'carga_total'         => $worksheet->getCell('E' . $linha_actual)->getCalculatedValue(),
-                    'creditos'            => $creditos,
-                    'disciplina_id'       => $disciplina['Disciplina']['id'],
-                    'codigo'              => $disciplina['Disciplina']['codigo'] . "-" . $curso['Curso']['codigo'] . "-" . $worksheet->getCell('J' . $linha_actual)->getCalculatedValue(),
-                    'ramo_id'             => $ramo_id,
+                    'carga_total' => $worksheet->getCell('E' . $linha_actual)->getCalculatedValue(),
+                    'creditos' => $creditos,
+                    'disciplina_id' => $disciplina['Disciplina']['id'],
+                    'codigo' => $disciplina['Disciplina']['codigo'] . "-" . $curso['Curso']['codigo'] . "-" . $worksheet->getCell('J' . $linha_actual)->getCalculatedValue(),
+                    'ramo_id' => $ramo_id,
                     'semestre_sequencial' => $semestre_sequencial,
-                    'estado_objecto_id'=>1
+                    'estado_objecto_id' => 1
                 ]
             ];
 
 
             $plano_ano_existe = $this->DisciplinaPlanoEstudo->find('first', [
                 'conditions' => [
-                    'plano_estudo_id'     => $plano_estudo_id,
-                    'disciplina_id'       => $disciplina['Disciplina']['id'],
-                    'ano_curricular'      => $worksheet->getCell('D' . $linha_actual)->getCalculatedValue(),
+                    'plano_estudo_id' => $plano_estudo_id,
+                    'disciplina_id' => $disciplina['Disciplina']['id'],
+                    'ano_curricular' => $worksheet->getCell('D' . $linha_actual)->getCalculatedValue(),
                     'semestre_curricular' => $worksheet->getCell('G' . $linha_actual)->getCalculatedValue(),
                 ]
             ]);
             if (empty($plano_ano_existe)) {
                 $this->DisciplinaPlanoEstudo->create();
-                if($this->DisciplinaPlanoEstudo->save($array_plano_ano)){
+                if ($this->DisciplinaPlanoEstudo->save($array_plano_ano)) {
                     $this->out('Plano Ano Criado---------------' . $this->DisciplinaPlanoEstudo->id);
-                } else{
+                } else {
                     $plano_ano_existe2 = $this->DisciplinaPlanoEstudo->find('first', [
                         'conditions' => [
-                            'plano_estudo_id'     => $plano_estudo_id,
-                            'disciplina_id'       => $disciplina['Disciplina']['id'],
+                            'plano_estudo_id' => $plano_estudo_id,
+                            'disciplina_id' => $disciplina['Disciplina']['id'],
                         ]
                     ]);
-                    if($plano_ano_existe2){
+                    if ($plano_ano_existe2) {
                         $this->DisciplinaPlanoEstudo->id = $plano_ano_existe2['DisciplinaPlanoEstudo']['id'];
-                        if($this->DisciplinaPlanoEstudo->save($array_plano_ano)){
-                            $this->out('Plano Ano Actualizado--------------------------'.$plano_ano_existe2['DisciplinaPlanoEstudo']['id']);
-                        } else{
+                        if ($this->DisciplinaPlanoEstudo->save($array_plano_ano)) {
+                            $this->out('Plano Ano Actualizado--------------------------' . $plano_ano_existe2['DisciplinaPlanoEstudo']['id']);
+                        } else {
                             debug($array_plano_ano);
                             debug($plano_ano_existe2);
                             //debug($this->DisciplinaPlanoEstudo->getLog());
                             debug($this->DisciplinaPlanoEstudo->validationErrors);
-                           // die();
+                            // die();
                         }
 
                     }
@@ -397,7 +396,7 @@ if($codigo_disciplina=='MGAP 122'){
                 }
 
             } else {
-                $this->out("Plano existia--------------".$linha_actual."-----------------------".$disciplina['Disciplina']['name']);
+                $this->out("Plano existia--------------" . $linha_actual . "-----------------------" . $disciplina['Disciplina']['name']);
 
                 //die(debug($array_plano_ano));
             }
@@ -447,8 +446,8 @@ if($codigo_disciplina=='MGAP 122'){
                 $generoId = 2;
             }
 
-            if($anoIngresso==3000){
-                $anoIngresso= 2000;
+            if ($anoIngresso == 3000) {
+                $anoIngresso = 2000;
             }
 
             $InvDateRegistro = $cellDataRegistro->getValue();
@@ -481,7 +480,7 @@ if($codigo_disciplina=='MGAP 122'){
             if (empty($estudante_sga)) {
                 $this->out('<error>Aluno Nao encontrado</error>');
                 $nao_existem++;
-                if ($apelido == '' && $nomes == '' ) {
+                if ($apelido == '' && $nomes == '') {
 
                 } else {
                     $curso = $this->Aluno->Curso->findByCodigo($idCurso);
@@ -490,33 +489,33 @@ if($codigo_disciplina=='MGAP 122'){
                         $cursoInvalido++;
                     } else {
                         $data = [
-                            'Aluno'                 => [
-                                'numero_estudante'           => $codigo,
-                                'curso_id'                   => $curso['Curso']['id'],
-                                'ano_ingresso'               => $anoIngresso,
-                                'data_matricula'             => $dataRegistro,
+                            'Aluno' => [
+                                'numero_estudante' => $codigo,
+                                'curso_id' => $curso['Curso']['id'],
+                                'ano_ingresso' => $anoIngresso,
+                                'data_matricula' => $dataRegistro,
                                 'certificado_nivel_anterior' => '1',
-                                'recenseamento_militar'      => '1',
-                                'codigo'                     => $codigo,
-                                'estado_aluno_id'            => 14
+                                'recenseamento_militar' => '1',
+                                'codigo' => $codigo,
+                                'estado_aluno_id' => 14
                             ],
-                            'Entidade'              => [
-                                'apelido'         => $apelido,
-                                'nomes'           => $nomes,
-                                'genero_id'       => $generoId,
+                            'Entidade' => [
+                                'apelido' => $apelido,
+                                'nomes' => $nomes,
+                                'genero_id' => $generoId,
                                 'data_nascimento' => $dataNascimento,
                             ],
-                            'Curso'                 => [
+                            'Curso' => [
                                 'unidade_organica_id' => $curso['Curso']['unidade_organica_id']
                             ],
-                            'EntidadeContacto'      => [
+                            'EntidadeContacto' => [
                                 '2' => $celular
                             ],
                             'EntidadeIdentificacao' => [
                                 'documento_identificacao_id' => '1',
-                                'numero'                     => $bi,
+                                'numero' => $bi,
                             ],
-                            'Matricula'             => [
+                            'Matricula' => [
                                 'user_id' => '1'
                             ]
                         ];
@@ -540,7 +539,7 @@ if($codigo_disciplina=='MGAP 122'){
                 $this->PlanoEstudo->contain();
                 $plano_estudo = $this->PlanoEstudo->find('first', [
                     'conditions' => [
-                        'curso_id'    => $estudante_sga['Aluno']['curso_id'],
+                        'curso_id' => $estudante_sga['Aluno']['curso_id'],
                         'ano_criacao' => $curriculum
                     ]
                 ]);
@@ -600,25 +599,24 @@ if($codigo_disciplina=='MGAP 122'){
             $ramo = trim($worksheet->getCell('G' . $linha_actual)->getCalculatedValue());
             $idTurma = trim($worksheet->getCell('E' . $linha_actual)->getCalculatedValue());
 
-            if($ano=='2207'){
+            if ($ano == '2207') {
 
-                $ano=2007;
+                $ano = 2007;
             }
-            if($ano=='9997'){
+            if ($ano == '9997') {
 
-                $ano=1997;
+                $ano = 1997;
             }
             if ($idCcurso == '') {
-                $this->out('@@@@@@@'.$linha_actual);
+                $this->out('@@@@@@@' . $linha_actual);
                 break;
             }
 
 
-
-            if($idCcurso==20111){
+            if ($idCcurso == 20111) {
                 $idCcurso = 2011111;
             }
-            if($idCcurso==0){
+            if ($idCcurso == 0) {
                 $idCcurso = 2011111;
             }
             $curso = $this->Curso->findByCodigo($idCcurso);
@@ -627,26 +625,26 @@ if($codigo_disciplina=='MGAP 122'){
             if (!empty($curso)) {
                 $plano_estudo = $this->PlanoEstudo->find('first', [
                     'conditions' => [
-                        'curso_id'    => $curso['Curso']['id'],
+                        'curso_id' => $curso['Curso']['id'],
                         'ano_criacao' => $curriculum
                     ]
                 ]);
 
                 $anolectivo = $this->AnoLectivo->findByAno($ano);
-                if(empty($anolectivo)){
-                    if($ano<2015){
+                if (empty($anolectivo)) {
+                    if ($ano < 2015) {
                         $arrayAnoLectivo = [
-                            'AnoLectivo'=>[
-                                'ano'=>$ano,
-                                'num_semestre'=>2,
-                                'codigo'=>$ano
+                            'AnoLectivo' => [
+                                'ano' => $ano,
+                                'num_semestre' => 2,
+                                'codigo' => $ano
                             ]
                         ];
                         $this->AnoLectivo->create();
-                        if($this->AnoLectivo->save($arrayAnoLectivo)){
+                        if ($this->AnoLectivo->save($arrayAnoLectivo)) {
                             $anolectivo = $this->AnoLectivo->findByAno($ano);
 
-                        } else{
+                        } else {
                             debug($this->AnoLectivo->validationErrors);
                             die();
                         }
@@ -655,67 +653,67 @@ if($codigo_disciplina=='MGAP 122'){
                     }
                 }
 
-$codigo_disciplina = $idDisciplina;
+                $codigo_disciplina = $idDisciplina;
 
-                if($codigo_disciplina=='D C II'){
-                $codigo_disciplina='DO II';
-            }
+                if ($codigo_disciplina == 'D C II') {
+                    $codigo_disciplina = 'DO II';
+                }
 
-            if($codigo_disciplina=='D C III'){
-                $codigo_disciplina='DO III';
-            }
+                if ($codigo_disciplina == 'D C III') {
+                    $codigo_disciplina = 'DO III';
+                }
 
-            if($codigo_disciplina=='D C IV'){
-                $codigo_disciplina='DO IV';
-            }
+                if ($codigo_disciplina == 'D C IV') {
+                    $codigo_disciplina = 'DO IV';
+                }
 
-            if($codigo_disciplina=='EBE-24'){
-                $codigo_disciplina='EFE-24';
-            }
+                if ($codigo_disciplina == 'EBE-24') {
+                    $codigo_disciplina = 'EFE-24';
+                }
 
-            if($codigo_disciplina=='EBE-29'){
-                $codigo_disciplina='EFE-29';
-            }
+                if ($codigo_disciplina == 'EBE-29') {
+                    $codigo_disciplina = 'EFE-29';
+                }
 
-            if($codigo_disciplina=='EPO-11'){
-                $codigo_disciplina='PORT III';
-            }
+                if ($codigo_disciplina == 'EPO-11') {
+                    $codigo_disciplina = 'PORT III';
+                }
 
-            if($codigo_disciplina=='EPO-19'){
-                $codigo_disciplina='PORT V';
-            }
+                if ($codigo_disciplina == 'EPO-19') {
+                    $codigo_disciplina = 'PORT V';
+                }
 
-            if($codigo_disciplina=='IES'){
-                $codigo_disciplina='ISO';
-            }
-            if($codigo_disciplina=='IG'){
-                $codigo_disciplina='ING';
-            }
-            if($codigo_disciplina=='LLF II'){
-                $codigo_disciplina='LLF-II';
-            }
-            if($codigo_disciplina=='MO8'){
-                $codigo_disciplina='PGP';
-            }
-            if($codigo_disciplina=='LOA'){
-                $codigo_disciplina='LOAS';
-            }
-if($codigo_disciplina=='MGAP 122'){
-                $codigo_disciplina='OG';
-            }
-            if($codigo_disciplina=='GEA'){
-                $codigo_disciplina='GEG';
-            }
+                if ($codigo_disciplina == 'IES') {
+                    $codigo_disciplina = 'ISO';
+                }
+                if ($codigo_disciplina == 'IG') {
+                    $codigo_disciplina = 'ING';
+                }
+                if ($codigo_disciplina == 'LLF II') {
+                    $codigo_disciplina = 'LLF-II';
+                }
+                if ($codigo_disciplina == 'MO8') {
+                    $codigo_disciplina = 'PGP';
+                }
+                if ($codigo_disciplina == 'LOA') {
+                    $codigo_disciplina = 'LOAS';
+                }
+                if ($codigo_disciplina == 'MGAP 122') {
+                    $codigo_disciplina = 'OG';
+                }
+                if ($codigo_disciplina == 'GEA') {
+                    $codigo_disciplina = 'GEG';
+                }
 
-            if($codigo_disciplina=='HIP'){
-                $codigo_disciplina='HIPI';
-            }
+                if ($codigo_disciplina == 'HIP') {
+                    $codigo_disciplina = 'HIPI';
+                }
 
-$idDisciplina = $codigo_disciplina;
+                $idDisciplina = $codigo_disciplina;
                 $disciplina = $this->Disciplina->findByCodigoAntigo($idDisciplina);
 
                 if (empty($disciplina)) {
-                    if($idDisciplina==null){
+                    if ($idDisciplina == null) {
                         $linha_actual++;
 
                         continue;
@@ -726,16 +724,16 @@ $idDisciplina = $codigo_disciplina;
                     $semestre_lectivo = $this->SemestreLectivo->find('first', [
                         'conditions' => [
                             'ano_lectivo_id' => $anolectivo['AnoLectivo']['id'],
-                            'semestre'       => $semestre
+                            'semestre' => $semestre
                         ]
                     ]);
                     if (empty($semestre_lectivo)) {
                         $array_semestre = [
                             'SemestreLectivo' => [
-                                'codigo'         => $anolectivo['AnoLectivo']['ano'] . "-" . trim($worksheet->getCell('E' . $linha_actual)->getCalculatedValue()),
+                                'codigo' => $anolectivo['AnoLectivo']['ano'] . "-" . trim($worksheet->getCell('E' . $linha_actual)->getCalculatedValue()),
                                 'ano_lectivo_id' => $anolectivo['AnoLectivo']['id'],
-                                'semestre'       => $semestre,
-                                'semestre_id'    => $semestre,
+                                'semestre' => $semestre,
+                                'semestre_id' => $semestre,
                             ]
                         ];
                         $this->SemestreLectivo->create();
@@ -743,7 +741,7 @@ $idDisciplina = $codigo_disciplina;
                         $semestre_lectivo = $this->SemestreLectivo->find('first', [
                             'conditions' => [
                                 'ano_lectivo_id' => $anolectivo['AnoLectivo']['id'],
-                                'semestre'       => $semestre
+                                'semestre' => $semestre
                             ]
                         ]);
                     }
@@ -753,55 +751,55 @@ $idDisciplina = $codigo_disciplina;
 
                     if (!empty($disciplinaPlanoEstudo)) {
 
-                        if($nivel==''){
-                            $nivel= $disciplinaPlanoEstudo['DisciplinaPlanoEstudo']['ano_curricular'];
+                        if ($nivel == '') {
+                            $nivel = $disciplinaPlanoEstudo['DisciplinaPlanoEstudo']['ano_curricular'];
                         }
                         $array_turma = [
                             'Turma' => [
-                                'ano_lectivo_id'      => $anolectivo['AnoLectivo']['id'],
-                                'plano_estudo_id'     => $plano_estudo['PlanoEstudo']['id'],
-                                'disciplina_id'       => $disciplina['Disciplina']['id'],
-                                'curso_id'            => $plano_estudo['PlanoEstudo']['curso_id'],
-                                'estado_turma_id'     => 1,
-                                'codigo'              => trim($worksheet->getCell('E' . $linha_actual)->getCalculatedValue()),
-                                'ano_curricular'      => $nivel,
+                                'ano_lectivo_id' => $anolectivo['AnoLectivo']['id'],
+                                'plano_estudo_id' => $plano_estudo['PlanoEstudo']['id'],
+                                'disciplina_id' => $disciplina['Disciplina']['id'],
+                                'curso_id' => $plano_estudo['PlanoEstudo']['curso_id'],
+                                'estado_turma_id' => 1,
+                                'codigo' => trim($worksheet->getCell('E' . $linha_actual)->getCalculatedValue()),
+                                'ano_curricular' => $nivel,
                                 'semestre_curricular' => $semestre,
-                                'name'                => $disciplina['Disciplina']['name'] . " - " . $ano . " - " . $plano_estudo['PlanoEstudo']['name'],
+                                'name' => $disciplina['Disciplina']['name'] . " - " . $ano . " - " . $plano_estudo['PlanoEstudo']['name'],
                                 'semestre_lectivo_id' => $semestre_lectivo['SemestreLectivo']['id'],
                                 'unidade_organica_id' => $curso['Curso']['unidade_organica_id'],
-                                'ramo_id'=>$ramo
+                                'ramo_id' => $ramo
                             ]
                         ];
                     } else {
-                        if($nivel==''){
-                            $nivel= 0;
+                        if ($nivel == '') {
+                            $nivel = 0;
                         }
                         $array_turma = [
                             'Turma' => [
-                                'ano_lectivo_id'      => $anolectivo['AnoLectivo']['id'],
-                                'plano_estudo_id'     => $plano_estudo['PlanoEstudo']['id'],
-                                'disciplina_id'       => $disciplina['Disciplina']['id'],
-                                'curso_id'            => $plano_estudo['PlanoEstudo']['curso_id'],
-                                'estado_turma_id'     => 1,
-                                'codigo'              => trim($worksheet->getCell('E' . $linha_actual)->getCalculatedValue()),
-                                'ano_curricular'      => $nivel,
+                                'ano_lectivo_id' => $anolectivo['AnoLectivo']['id'],
+                                'plano_estudo_id' => $plano_estudo['PlanoEstudo']['id'],
+                                'disciplina_id' => $disciplina['Disciplina']['id'],
+                                'curso_id' => $plano_estudo['PlanoEstudo']['curso_id'],
+                                'estado_turma_id' => 1,
+                                'codigo' => trim($worksheet->getCell('E' . $linha_actual)->getCalculatedValue()),
+                                'ano_curricular' => $nivel,
                                 'semestre_curricular' => $semestre,
-                                'name'                => $disciplina['Disciplina']['name'] . " - " . $ano . " - " . $plano_estudo['PlanoEstudo']['name'],
+                                'name' => $disciplina['Disciplina']['name'] . " - " . $ano . " - " . $plano_estudo['PlanoEstudo']['name'],
                                 'semestre_lectivo_id' => $semestre_lectivo['SemestreLectivo']['id'],
                                 'unidade_organica_id' => $curso['Curso']['unidade_organica_id'],
-                                'ramo_id'=>$ramo
+                                'ramo_id' => $ramo
                             ]
                         ];
                     }
                     $turma_existe = $this->Turma->find('first', [
                         'conditions' => array(
-                            'disciplina_id'       => $disciplina['Disciplina']['id'],
-                            'plano_estudo_id'     => $plano_estudo['PlanoEstudo']['id'],
-                            'ano_lectivo_id'      => $anolectivo['AnoLectivo']['id'],
-                            'curso_id'            => $plano_estudo['PlanoEstudo']['curso_id'],
-                            'ano_curricular'      => $nivel,
+                            'disciplina_id' => $disciplina['Disciplina']['id'],
+                            'plano_estudo_id' => $plano_estudo['PlanoEstudo']['id'],
+                            'ano_lectivo_id' => $anolectivo['AnoLectivo']['id'],
+                            'curso_id' => $plano_estudo['PlanoEstudo']['curso_id'],
+                            'ano_curricular' => $nivel,
                             'semestre_curricular' => $semestre,
-                            'ramo_id'=>$ramo
+                            'ramo_id' => $ramo
                         )
                     ]);
                     if (empty($turma_existe)) {
@@ -824,10 +822,10 @@ $idDisciplina = $codigo_disciplina;
 
 
                 }
-                $this->out(trim($worksheet->getCell('F' . $linha_actual)->getCalculatedValue())."------------------------------------------------------------------------" . $linha_actual);
+                $this->out(trim($worksheet->getCell('F' . $linha_actual)->getCalculatedValue()) . "------------------------------------------------------------------------" . $linha_actual);
                 $linha_actual++;
 
-            } else{
+            } else {
                 debug($idCcurso);
                 debug('Curso');
                 $linha_actual++;
@@ -876,7 +874,7 @@ $idDisciplina = $codigo_disciplina;
 
             $aluno = $this->Aluno->findByCodigo($codigo);
 
-            if(!empty($aluno)){
+            if (!empty($aluno)) {
                 $InvDateRegistro = $cellDataInscricao->getValue();
                 if (PHPExcel_Shared_Date::isDateTime($cellDataInscricao)) {
                     $dataInscricao = date('Y-m-d', PHPExcel_Shared_Date::ExcelToPHP($InvDateRegistro));
@@ -886,107 +884,108 @@ $idDisciplina = $codigo_disciplina;
                     }
                 }
 
-$codigo_disciplina = $idDisciplina;
+                $codigo_disciplina = $idDisciplina;
 
-                if($codigo_disciplina=='D C II'){
-                $codigo_disciplina='DO II';
-            }
+                if ($codigo_disciplina == 'D C II') {
+                    $codigo_disciplina = 'DO II';
+                }
 
-            if($codigo_disciplina=='D C III'){
-                $codigo_disciplina='DO III';
-            }
+                if ($codigo_disciplina == 'D C III') {
+                    $codigo_disciplina = 'DO III';
+                }
 
-            if($codigo_disciplina=='D C IV'){
-                $codigo_disciplina='DO IV';
-            }
+                if ($codigo_disciplina == 'D C IV') {
+                    $codigo_disciplina = 'DO IV';
+                }
 
-            if($codigo_disciplina=='EBE-24'){
-                $codigo_disciplina='EFE-24';
-            }
+                if ($codigo_disciplina == 'EBE-24') {
+                    $codigo_disciplina = 'EFE-24';
+                }
 
-            if($codigo_disciplina=='EBE-29'){
-                $codigo_disciplina='EFE-29';
-            }
+                if ($codigo_disciplina == 'EBE-29') {
+                    $codigo_disciplina = 'EFE-29';
+                }
 
-            if($codigo_disciplina=='EPO-11'){
-                $codigo_disciplina='PORT III';
-            }
+                if ($codigo_disciplina == 'EPO-11') {
+                    $codigo_disciplina = 'PORT III';
+                }
 
-            if($codigo_disciplina=='EPO-19'){
-                $codigo_disciplina='PORT V';
-            }
+                if ($codigo_disciplina == 'EPO-19') {
+                    $codigo_disciplina = 'PORT V';
+                }
 
-            if($codigo_disciplina=='IES'){
-                $codigo_disciplina='ISO';
-            }
-            if($codigo_disciplina=='IG'){
-                $codigo_disciplina='ING';
-            }
-            if($codigo_disciplina=='LLF II'){
-                $codigo_disciplina='LLF-II';
-            }
-            if($codigo_disciplina=='MO8'){
-                $codigo_disciplina='PGP';
-            }
-            if($codigo_disciplina=='LOA'){
-                $codigo_disciplina='LOAS';
-            }
-if($codigo_disciplina=='MGAP 122'){
-                $codigo_disciplina='OG';
-            }
-            if($codigo_disciplina=='GEA'){
-                $codigo_disciplina='GEG';
-            }
+                if ($codigo_disciplina == 'IES') {
+                    $codigo_disciplina = 'ISO';
+                }
+                if ($codigo_disciplina == 'IG') {
+                    $codigo_disciplina = 'ING';
+                }
+                if ($codigo_disciplina == 'LLF II') {
+                    $codigo_disciplina = 'LLF-II';
+                }
+                if ($codigo_disciplina == 'MO8') {
+                    $codigo_disciplina = 'PGP';
+                }
+                if ($codigo_disciplina == 'LOA') {
+                    $codigo_disciplina = 'LOAS';
+                }
+                if ($codigo_disciplina == 'MGAP 122') {
+                    $codigo_disciplina = 'OG';
+                }
+                if ($codigo_disciplina == 'GEA') {
+                    $codigo_disciplina = 'GEG';
+                }
 
-            if($codigo_disciplina=='HIP'){
-                $codigo_disciplina='HIPI';
-            }
+                if ($codigo_disciplina == 'HIP') {
+                    $codigo_disciplina = 'HIPI';
+                }
 
-$idDisciplina = $codigo_disciplina;
+                $idDisciplina = $codigo_disciplina;
 
                 $disciplina = $this->Disciplina->findByCodigoAntigo($idDisciplina);
 
                 if (empty($disciplina)) {
                     die(debug($idDisciplina));
                 }
-                if($idAnoLectivo=='2207'){
+                if ($idAnoLectivo == '2207') {
 
-                    $idAnoLectivo=2007;
+                    $idAnoLectivo = 2007;
                 }
-                if($idAnoLectivo=='9997'){
+                if ($idAnoLectivo == '9997') {
 
-                    $idAnoLectivo=1997;
+                    $idAnoLectivo = 1997;
                 }
 
-                if($idCurso==1421){
-                    $idCurso=1211;
+                if ($idCurso == 1421) {
+                    $idCurso = 1211;
                 }
 
                 $this->Turma->recursive = -1;
                 $curso = $this->Curso->findByCodigo($idCurso);
                 if (!in_array($idCurso, [2012, 2013, 2014, 2015])) {
-                    $this->out('Curso Encontrado-------------------'.$curso['Curso']['name']);
+                    $this->out('Curso Encontrado-------------------' . $curso['Curso']['name']);
 
-                    $turma = $this->Turma->find('first',array('conditions'=>array('codigo'=>$idTurma,'curso_id'=>$curso['Curso']['id'])));
+                    $turma = $this->Turma->find('first',
+                        array('conditions' => array('codigo' => $idTurma, 'curso_id' => $curso['Curso']['id'])));
 
 
                     $anolectivo = $this->AnoLectivo->findByAno($idAnoLectivo);
                     $matricula = $this->Matricula->find('first', [
                         'conditions' => [
-                            'aluno_id'       => $aluno['Aluno']['id'],
+                            'aluno_id' => $aluno['Aluno']['id'],
                             'ano_lectivo_id' => $anolectivo['AnoLectivo']['id']
                         ]
                     ]);
                     if (empty($matricula)) {
                         $nova_matricula = [
                             'Matricula' => [
-                                'aluno_id'            => $aluno['Aluno']['id'],
-                                'curso_id'            => $aluno['Aluno']['curso_id'],
-                                'plano_estudo_id'     => $aluno['Aluno']['plano_estudo_id'],
-                                'data'                => $dataInscricao,
+                                'aluno_id' => $aluno['Aluno']['id'],
+                                'curso_id' => $aluno['Aluno']['curso_id'],
+                                'plano_estudo_id' => $aluno['Aluno']['plano_estudo_id'],
+                                'data' => $dataInscricao,
                                 'estado_matricula_id' => 1,
-                                'user_id'             => 1,
-                                'ano_lectivo_id'      => $anolectivo['AnoLectivo']['id'],
+                                'user_id' => 1,
+                                'ano_lectivo_id' => $anolectivo['AnoLectivo']['id'],
                             ]
                         ];
                         if ($aluno['Aluno']['ano_ingresso'] == $idAnoLectivo) {
@@ -999,7 +998,7 @@ $idDisciplina = $codigo_disciplina;
                         $this->Matricula->save($nova_matricula);
                         $matricula = $this->Matricula->find('first', [
                             'conditions' => [
-                                'aluno_id'       => $aluno['Aluno']['id'],
+                                'aluno_id' => $aluno['Aluno']['id'],
                                 'ano_lectivo_id' => $anolectivo['AnoLectivo']['id']
                             ]
                         ]);
@@ -1009,8 +1008,8 @@ $idDisciplina = $codigo_disciplina;
                     $curso_frequencia = $this->Curso->findByCodigo($idCursoFrequencia);
                     $turma_frequencia = $this->Turma->find('first', [
                         'conditions' => [
-                            'curso_id'       => $curso_frequencia['Curso']['id'],
-                            'disciplina_id'  => $disciplina['Disciplina']['id'],
+                            'curso_id' => $curso_frequencia['Curso']['id'],
+                            'disciplina_id' => $disciplina['Disciplina']['id'],
                             'ano_lectivo_id' => $anolectivo['AnoLectivo']['id']
                         ]
                     ]);
@@ -1018,27 +1017,33 @@ $idDisciplina = $codigo_disciplina;
                     if (empty($turma)) {
                         $turma = $this->Turma->find('first', [
                             'conditions' => [
-                                'curso_id'       => $curso['Curso']['id'],
-                                'disciplina_id'  => $disciplina['Disciplina']['id'],
+                                'curso_id' => $curso['Curso']['id'],
+                                'disciplina_id' => $disciplina['Disciplina']['id'],
                                 'ano_lectivo_id' => $anolectivo['AnoLectivo']['id']
                             ]
                         ]);
                     }
-                    if(empty($turma)){
+                    if (empty($turma)) {
                         $planoEstudo = $this->Turma->PlanoEstudo->findById($aluno['Aluno']['plano_estudo_id']);
-                        $disciplinaPlanoEstudo = $this->Turma->Disciplina->DisciplinaPlanoEstudo->find('first',array('conditions'=>array('plano_estudo_id'=>$planoEstudo['PlanoEstudo']['id'],'disciplina_id'=>$disciplina['Disciplina']['id'])));
-                        $semestreLectivo = $this->Turma->SemestreLectivo->findByAnoLectivoIdAndSemestre($anolectivo['AnoLectivo']['id'],$disciplinaPlanoEstudo['DisciplinaPlanoEstudo']['semestre_curricular']);
+                        $disciplinaPlanoEstudo = $this->Turma->Disciplina->DisciplinaPlanoEstudo->find('first', array(
+                            'conditions' => array(
+                                'plano_estudo_id' => $planoEstudo['PlanoEstudo']['id'],
+                                'disciplina_id' => $disciplina['Disciplina']['id']
+                            )
+                        ));
+                        $semestreLectivo = $this->Turma->SemestreLectivo->findByAnoLectivoIdAndSemestre($anolectivo['AnoLectivo']['id'],
+                            $disciplinaPlanoEstudo['DisciplinaPlanoEstudo']['semestre_curricular']);
                         $array_turma = [
                             'Turma' => [
-                                'ano_lectivo_id'      => $anolectivo['AnoLectivo']['id'],
-                                'plano_estudo_id'     => $planoEstudo['PlanoEstudo']['id'],
-                                'disciplina_id'       => $disciplina['Disciplina']['id'],
-                                'curso_id'            => $planoEstudo['PlanoEstudo']['curso_id'],
-                                'estado_turma_id'     => 1,
-                                'codigo'              => $idTurma,
-                                'ano_curricular'      => $disciplinaPlanoEstudo['DisciplinaPlanoEstudo']['ano_curricular'],
+                                'ano_lectivo_id' => $anolectivo['AnoLectivo']['id'],
+                                'plano_estudo_id' => $planoEstudo['PlanoEstudo']['id'],
+                                'disciplina_id' => $disciplina['Disciplina']['id'],
+                                'curso_id' => $planoEstudo['PlanoEstudo']['curso_id'],
+                                'estado_turma_id' => 1,
+                                'codigo' => $idTurma,
+                                'ano_curricular' => $disciplinaPlanoEstudo['DisciplinaPlanoEstudo']['ano_curricular'],
                                 'semestre_curricular' => $disciplinaPlanoEstudo['DisciplinaPlanoEstudo']['semestre_curricular'],
-                                'name'                => $disciplina['Disciplina']['name'] . " - " . $anolectivo['AnoLectivo']['ano'] . " - " . $planoEstudo['PlanoEstudo']['name'],
+                                'name' => $disciplina['Disciplina']['name'] . " - " . $anolectivo['AnoLectivo']['ano'] . " - " . $planoEstudo['PlanoEstudo']['name'],
                                 'semestre_lectivo_id' => $semestreLectivo['SemestreLectivo']['id'],
                             ]
                         ];
@@ -1047,25 +1052,25 @@ $idDisciplina = $codigo_disciplina;
                         $this->Turma->save($array_turma);
                         $turma = $this->Turma->findById($this->Turma->id);
                     }
-                    if(empty($turma_frequencia)){
+                    if (empty($turma_frequencia)) {
                         $turma_frequencia = $turma;
                     }
 
                     $array_inscricao = [
                         'Inscricao' => [
-                            'aluno_id'               => $aluno['Aluno']['id'],
-                            'turma_id'               => $turma['Turma']['id'],
-                            'estadoinscricao_id'     => 1,
-                            'nota_frequencia'        => $notaFrequencia,
-                            'nota_final'             => $notaFinal,
-                            'data'                   => $dataInscricao,
-                            'matricula_id'           => $matricula['Matricula']['id'],
-                            'tipo_inscricao_id'      => $tipoInscricaoId,
-                            'nota_exame_normal'      => $notaExameNormal,
+                            'aluno_id' => $aluno['Aluno']['id'],
+                            'turma_id' => $turma['Turma']['id'],
+                            'estadoinscricao_id' => 1,
+                            'nota_frequencia' => $notaFrequencia,
+                            'nota_final' => $notaFinal,
+                            'data' => $dataInscricao,
+                            'matricula_id' => $matricula['Matricula']['id'],
+                            'tipo_inscricao_id' => $tipoInscricaoId,
+                            'nota_exame_normal' => $notaExameNormal,
                             'nota_exame_recorrencia' => $notaExameRecorrencia,
-                            'estado_inscricao'       => $estadoInscricao,
-                            'turma_frequencia_id'    => $turma_frequencia['Turma']['id'],
-                            'turma_inscricao_id'               => $turma['Turma']['id'],
+                            'estado_inscricao' => $estadoInscricao,
+                            'turma_frequencia_id' => $turma_frequencia['Turma']['id'],
+                            'turma_inscricao_id' => $turma['Turma']['id'],
                         ]
                     ];
 
@@ -1085,9 +1090,9 @@ $idDisciplina = $codigo_disciplina;
                     if (empty($inscricao_existe)) {
                         //  debug($array_inscricao);
                         $this->Inscricao->create();
-                        if($this->Inscricao->save($array_inscricao)){
-                            $this->out("Inscricao Criada----------".$idAnoLectivo."----------------- " . $this->Inscricao->id);
-                        } else{
+                        if ($this->Inscricao->save($array_inscricao)) {
+                            $this->out("Inscricao Criada----------" . $idAnoLectivo . "----------------- " . $this->Inscricao->id);
+                        } else {
                             debug($array_inscricao);
                             debug($this->Inscricao->validationErrors);
 
@@ -1096,13 +1101,12 @@ $idDisciplina = $codigo_disciplina;
                     } else {
                         $array_inscricao['Inscricao']['id'] = $inscricao_existe['Inscricao']['id'];
                         $this->Inscricao->save($array_inscricao);
-                        $this->out($inscricao_existe['Inscricao']['id'] . 'Inscricao Actualizada--------------'.$idAnoLectivo.'-------------------' . $this->Inscricao->id);
+                        $this->out($inscricao_existe['Inscricao']['id'] . 'Inscricao Actualizada--------------' . $idAnoLectivo . '-------------------' . $this->Inscricao->id);
                     }
 
 
-
-                } else{
-                    $this->out('Curso de Orientacao Encontrado------------------'.$idCurso);
+                } else {
+                    $this->out('Curso de Orientacao Encontrado------------------' . $idCurso);
                 }
             }
 
@@ -1134,10 +1138,10 @@ $idDisciplina = $codigo_disciplina;
                 //Primeiro criar um user
                 $user_array = [
                     'User' => [
-                        'username'          => $email_pessoa,
-                        'password'          => Security::hash('dra02062013', 'blowfish'),
-                        'codigocartao'      => $estudante['DbsecEstudante']['est_num'],
-                        'group_id'          => 3,
+                        'username' => $email_pessoa,
+                        'password' => Security::hash('dra02062013', 'blowfish'),
+                        'codigocartao' => $estudante['DbsecEstudante']['est_num'],
+                        'group_id' => 3,
                         'estado_objecto_id' => $estudante['DbsecEstudante']['status_id']
                     ]
                 ];
@@ -1146,12 +1150,12 @@ $idDisciplina = $codigo_disciplina;
                 if ($this->User->save($user_array)) {
                     $pessoa_array = [
                         'Entidade' => [
-                            'apelido'         => $estudante['DbsecEstudante']['apelido'],
-                            'nomes'           => $estudante['DbsecEstudante']['nomes'],
-                            'name'            => $estudante['DbsecEstudante']['nomes'] . ' ' . $estudante['DbsecEstudante']['apelido'],
-                            'created'         => $estudante['DbsecEstudante']['data_registo'],
+                            'apelido' => $estudante['DbsecEstudante']['apelido'],
+                            'nomes' => $estudante['DbsecEstudante']['nomes'],
+                            'name' => $estudante['DbsecEstudante']['nomes'] . ' ' . $estudante['DbsecEstudante']['apelido'],
+                            'created' => $estudante['DbsecEstudante']['data_registo'],
                             'data_nascimento' => $estudante['DbsecEstudante']['data_nascimento'],
-                            'user_id'         => $this->User->id,
+                            'user_id' => $this->User->id,
                         ]
                     ];
                     $this->Entidade->create();
@@ -1159,22 +1163,22 @@ $idDisciplina = $codigo_disciplina;
                         $curso = $this->Curso->findByCodigo($estudante['DbsecEstudante']['id_curso']);
                         $planoestudo = $this->PlanoEstudo->find('first', [
                             'conditions' => [
-                                'curso_id'    => $curso['Curso']['id'],
+                                'curso_id' => $curso['Curso']['id'],
                                 'ano_criacao' => $estudante['DbsecEstudante']['ano_ingresso']
                             ]
                         ]);
                         $aluno_array = [
                             'Aluno' => [
-                                'entidade_id'       => $this->Entidade->id,
-                                'codigo'            => $estudante['DbsecEstudante']['est_num'],
-                                'user_id'           => $this->User->id,
-                                'curso_id'          => $curso['Curso']['id'],
+                                'entidade_id' => $this->Entidade->id,
+                                'codigo' => $estudante['DbsecEstudante']['est_num'],
+                                'user_id' => $this->User->id,
+                                'curso_id' => $curso['Curso']['id'],
                                 'estadoentidade_id' => $estudante['DbsecEstudante']['status_id'],
-                                'numero_estudante'  => $estudante['DbsecEstudante']['est_num'],
-                                'plano_estudo_id'   => $planoestudo['PlanoEstudo']['id'],
-                                'ano_ingresso'      => $estudante['DbsecEstudante']['ano_ingresso'],
-                                'created'           => $estudante['DbsecEstudante']['data_registo'],
-                                'estado_aluno_id'   => $estudante['DbsecEstudante']['status_id']
+                                'numero_estudante' => $estudante['DbsecEstudante']['est_num'],
+                                'plano_estudo_id' => $planoestudo['PlanoEstudo']['id'],
+                                'ano_ingresso' => $estudante['DbsecEstudante']['ano_ingresso'],
+                                'created' => $estudante['DbsecEstudante']['data_registo'],
+                                'estado_aluno_id' => $estudante['DbsecEstudante']['status_id']
                             ]
                         ];
 
@@ -1264,92 +1268,92 @@ $idDisciplina = $codigo_disciplina;
     public function normalize_str($str)
     {
         $invalid = [
-            'Š'         => 'S',
-            'š'         => 's',
-            'Đ'         => 'Dj',
-            'đ'         => 'dj',
-            'Ž'         => 'Z',
-            'ž'         => 'z',
-            'Č'         => 'C',
-            'č'         => 'c',
-            'Ć'         => 'C',
-            'ć'         => 'c',
-            'À'         => 'A',
-            'Á'         => 'A',
-            'Â'         => 'A',
-            'Ã'         => 'A',
-            'Ä'         => 'A',
-            'Å'         => 'A',
-            'Æ'         => 'A',
-            'Ç'         => 'C',
-            'È'         => 'E',
-            'É'         => 'E',
-            'Ê'         => 'E',
-            'Ë'         => 'E',
-            'Ì'         => 'I',
-            'Í'         => 'I',
-            'Î'         => 'I',
-            'Ï'         => 'I',
-            'Ñ'         => 'N',
-            'Ò'         => 'O',
-            'Ó'         => 'O',
-            'Ô'         => 'O',
-            'Õ'         => 'O',
-            'Ö'         => 'O',
-            'Ø'         => 'O',
-            'Ù'         => 'U',
-            'Ú'         => 'U',
-            'Û'         => 'U',
-            'Ü'         => 'U',
-            'Ý'         => 'Y',
-            'Þ'         => 'B',
-            'ß'         => 'Ss',
-            'à'         => 'a',
-            'á'         => 'a',
-            'â'         => 'a',
-            'ã'         => 'a',
-            'ä'         => 'a',
-            'å'         => 'a',
-            'æ'         => 'a',
-            'ç'         => 'c',
-            'è'         => 'e',
-            'é'         => 'e',
-            'ê'         => 'e',
-            'ë'         => 'e',
-            'ì'         => 'i',
-            'í'         => 'i',
-            'î'         => 'i',
-            'ï'         => 'i',
-            'ð'         => 'o',
-            'ñ'         => 'n',
-            'ò'         => 'o',
-            'ó'         => 'o',
-            'ô'         => 'o',
-            'õ'         => 'o',
-            'ö'         => 'o',
-            'ø'         => 'o',
-            'ù'         => 'u',
-            'ú'         => 'u',
-            'û'         => 'u',
-            'ý'         => 'y',
-            'ý'         => 'y',
-            'þ'         => 'b',
-            'ÿ'         => 'y',
-            'Ŕ'         => 'R',
-            'ŕ'         => 'r',
-            "`"         => "'",
-            "´"         => "'",
-            "„"         => ",",
-            "`"         => "'",
-            "´"         => "'",
-            "“"         => "\"",
-            "”"         => "\"",
-            "´"         => "'",
+            'Š' => 'S',
+            'š' => 's',
+            'Đ' => 'Dj',
+            'đ' => 'dj',
+            'Ž' => 'Z',
+            'ž' => 'z',
+            'Č' => 'C',
+            'č' => 'c',
+            'Ć' => 'C',
+            'ć' => 'c',
+            'À' => 'A',
+            'Á' => 'A',
+            'Â' => 'A',
+            'Ã' => 'A',
+            'Ä' => 'A',
+            'Å' => 'A',
+            'Æ' => 'A',
+            'Ç' => 'C',
+            'È' => 'E',
+            'É' => 'E',
+            'Ê' => 'E',
+            'Ë' => 'E',
+            'Ì' => 'I',
+            'Í' => 'I',
+            'Î' => 'I',
+            'Ï' => 'I',
+            'Ñ' => 'N',
+            'Ò' => 'O',
+            'Ó' => 'O',
+            'Ô' => 'O',
+            'Õ' => 'O',
+            'Ö' => 'O',
+            'Ø' => 'O',
+            'Ù' => 'U',
+            'Ú' => 'U',
+            'Û' => 'U',
+            'Ü' => 'U',
+            'Ý' => 'Y',
+            'Þ' => 'B',
+            'ß' => 'Ss',
+            'à' => 'a',
+            'á' => 'a',
+            'â' => 'a',
+            'ã' => 'a',
+            'ä' => 'a',
+            'å' => 'a',
+            'æ' => 'a',
+            'ç' => 'c',
+            'è' => 'e',
+            'é' => 'e',
+            'ê' => 'e',
+            'ë' => 'e',
+            'ì' => 'i',
+            'í' => 'i',
+            'î' => 'i',
+            'ï' => 'i',
+            'ð' => 'o',
+            'ñ' => 'n',
+            'ò' => 'o',
+            'ó' => 'o',
+            'ô' => 'o',
+            'õ' => 'o',
+            'ö' => 'o',
+            'ø' => 'o',
+            'ù' => 'u',
+            'ú' => 'u',
+            'û' => 'u',
+            'ý' => 'y',
+            'ý' => 'y',
+            'þ' => 'b',
+            'ÿ' => 'y',
+            'Ŕ' => 'R',
+            'ŕ' => 'r',
+            "`" => "'",
+            "´" => "'",
+            "„" => ",",
+            "`" => "'",
+            "´" => "'",
+            "“" => "\"",
+            "”" => "\"",
+            "´" => "'",
             "&acirc;€™" => "'",
-            "{"         => "",
-            "~"         => "",
-            "–"         => "-",
-            "’"         => "'"
+            "{" => "",
+            "~" => "",
+            "–" => "-",
+            "’" => "'"
         ];
 
         $str = str_replace(array_keys($invalid), array_values($invalid), $str);
@@ -1466,12 +1470,12 @@ $idDisciplina = $codigo_disciplina;
 
             $array_user = [
                 'User' => [
-                    'username'             => $email,
-                    'password'             => Security::hash('docentedra1', 'blowfish'),
-                    'group_id'             => 4,
+                    'username' => $email,
+                    'password' => Security::hash('docentedra1', 'blowfish'),
+                    'group_id' => 4,
                     'verificar_permissoes' => 0,
-                    'estado_email'         => 0,
-                    'estado_objecto_id'    => 1
+                    'estado_email' => 0,
+                    'estado_objecto_id' => 1
                 ]
             ];
 
@@ -1481,8 +1485,8 @@ $idDisciplina = $codigo_disciplina;
             $this->User->save($array_user);
             $array_groups = [
                 'GroupsUser' => [
-                    'user_id'           => $this->User->id,
-                    'group_id'          => 4,
+                    'user_id' => $this->User->id,
+                    'group_id' => 4,
                     'estado_objecto_id' => 1
                 ]
             ];
@@ -1491,10 +1495,10 @@ $idDisciplina = $codigo_disciplina;
 
             $array_entidade = [
                 'Entidade' => [
-                    'user_id'   => $this->User->id,
-                    'name'      => $nome_completo,
-                    'apelido'   => $apelido,
-                    'nomes'     => $nomes,
+                    'user_id' => $this->User->id,
+                    'name' => $nome_completo,
+                    'apelido' => $apelido,
+                    'nomes' => $nomes,
                     'genero_id' => $genero,
                 ]
             ];
@@ -1502,8 +1506,8 @@ $idDisciplina = $codigo_disciplina;
             $this->Entidade->save($array_entidade);
 
             $array_funcionario = [
-                'user_id'             => $this->User->id,
-                'entidade_id'         => $this->Entidade->id,
+                'user_id' => $this->User->id,
+                'entidade_id' => $this->Entidade->id,
                 'unidade_organica_id' => 28,
                 ''
             ];
@@ -1516,12 +1520,12 @@ $idDisciplina = $codigo_disciplina;
 
             $array_docente = [
                 'Docente' => [
-                    'entidade_id'               => $this->Entidade->id,
+                    'entidade_id' => $this->Entidade->id,
                     'categoria_profissional_id' => $cp,
-                    'categoria_academica_id'    => $ca,
-                    'unidade_organica_id'       => 28,
-                    'regime_trabalho_id'        => $regime,
-                    'funcionario_id'            => $this->Entidade->Funcionario->id
+                    'categoria_academica_id' => $ca,
+                    'unidade_organica_id' => 28,
+                    'regime_trabalho_id' => $regime,
+                    'funcionario_id' => $this->Entidade->Funcionario->id
                 ]
             ];
             $this->Entidade->Docente->create();

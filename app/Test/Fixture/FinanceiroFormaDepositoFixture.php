@@ -1,25 +1,25 @@
 <?php
 
-	/**
-	 * FinanceiroFormaDepositoFixture
-	 *
-	 */
-	class FinanceiroFormaDepositoFixture extends CakeTestFixture
-	{
+/**
+ * FinanceiroFormaDepositoFixture
+ *
+ */
+class FinanceiroFormaDepositoFixture extends CakeTestFixture
+{
 
-		/**
-		 * Import
-		 *
-		 * @var array
-		 */
-		public $import = ['model' => 'FinanceiroFormaDeposito'];
+    /**
+     * Import
+     *
+     * @var array
+     */
+    public $import = ['model' => 'FinanceiroFormaDeposito'];
 
-		/**
-		 * Records
-		 *
-		 * @var array
-		 */
-		public $records = [
-		];
+    /**
+     * Records
+     *
+     * @var array
+     */
+    public $records = [
+    ];
 
-	}
+}

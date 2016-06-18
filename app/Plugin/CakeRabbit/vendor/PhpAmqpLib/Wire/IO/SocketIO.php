@@ -37,7 +37,7 @@ class SocketIO extends AbstractIO
             $buf = socket_read($this->sock, $n - $read);
         }
 
-        if (strlen($res)!=$n) {
+        if (strlen($res) != $n) {
             throw new AMQPIOException("Error reading data. Received " .
                 strlen($res) . " instead of expected $n bytes");
         }
@@ -77,8 +77,8 @@ class SocketIO extends AbstractIO
 
     public function select($sec, $usec)
     {
-        $read   = array($this->sock);
-        $write  = null;
+        $read = array($this->sock);
+        $write = null;
         $except = null;
         return socket_select($read, $write, $except, $sec, $usec);
     }

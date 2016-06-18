@@ -1,25 +1,25 @@
 <?php
 
-	/**
-	 * SadeParametroFixture
-	 *
-	 */
-	class SadeParametroFixture extends CakeTestFixture
-	{
+/**
+ * SadeParametroFixture
+ *
+ */
+class SadeParametroFixture extends CakeTestFixture
+{
 
-		/**
-		 * Import
-		 *
-		 * @var array
-		 */
-		public $import = ['model' => 'SadeParametro'];
+    /**
+     * Import
+     *
+     * @var array
+     */
+    public $import = ['model' => 'SadeParametro'];
 
-		/**
-		 * Records
-		 *
-		 * @var array
-		 */
-		public $records = [
-		];
+    /**
+     * Records
+     *
+     * @var array
+     */
+    public $records = [
+    ];
 
-	}
+}

@@ -1,25 +1,25 @@
 <?php
 
-	/**
-	 * TipoNivelMedioFixture
-	 *
-	 */
-	class TipoNivelMedioFixture extends CakeTestFixture
-	{
+/**
+ * TipoNivelMedioFixture
+ *
+ */
+class TipoNivelMedioFixture extends CakeTestFixture
+{
 
-		/**
-		 * Import
-		 *
-		 * @var array
-		 */
-		public $import = ['model' => 'TipoNivelMedio'];
+    /**
+     * Import
+     *
+     * @var array
+     */
+    public $import = ['model' => 'TipoNivelMedio'];
 
-		/**
-		 * Records
-		 *
-		 * @var array
-		 */
-		public $records = [
-		];
+    /**
+     * Records
+     *
+     * @var array
+     */
+    public $records = [
+    ];
 
-	}
+}

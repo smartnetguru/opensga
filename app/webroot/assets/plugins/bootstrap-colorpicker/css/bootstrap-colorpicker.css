@@ -11,6 +11,7 @@
     cursor: crosshair;
     float: left;
 }
+
 .colorpicker-saturation i {
     display: block;
     height: 5px;
@@ -24,6 +25,7 @@
     left: 0;
     margin: -4px 0 0 -4px;
 }
+
 .colorpicker-saturation i b {
     display: block;
     height: 5px;
@@ -33,6 +35,7 @@
     -moz-border-radius: 5px;
     border-radius: 5px;
 }
+
 .colorpicker-hue,
 .colorpicker-alpha {
     width: 15px;
@@ -42,6 +45,7 @@
     margin-left: 4px;
     margin-bottom: 4px;
 }
+
 .colorpicker-hue i,
 .colorpicker-alpha i {
     display: block;
@@ -54,11 +58,16 @@
     width: 100%;
     margin-top: -1px;
 }
-.colorpicker-hue { background-image: url(../img/bootstrap-colorpicker/hue.png) }
+
+.colorpicker-hue {
+    background-image: url(../img/bootstrap-colorpicker/hue.png)
+}
+
 .colorpicker-alpha {
     background-image: url(../img/bootstrap-colorpicker/alpha.png);
     display: none;
 }
+
 .colorpicker {
     *zoom: 1;
     top: 0;
@@ -70,12 +79,17 @@
     -moz-border-radius: 4px;
     border-radius: 4px;
 }
+
 .colorpicker:before,
 .colorpicker:after {
     display: table;
     content: "";
 }
-.colorpicker:after { clear: both }
+
+.colorpicker:after {
+    clear: both
+}
+
 .colorpicker:before {
     content: '';
     display: inline-block;
@@ -87,6 +101,7 @@
     top: -7px;
     left: 6px;
 }
+
 .colorpicker:after {
     content: '';
     display: inline-block;
@@ -97,9 +112,19 @@
     top: -6px;
     left: 7px;
 }
-.colorpicker div { position: relative }
-.colorpicker.alpha { min-width: 140px }
-.colorpicker.alpha .colorpicker-alpha { display: block }
+
+.colorpicker div {
+    position: relative
+}
+
+.colorpicker.alpha {
+    min-width: 140px
+}
+
+.colorpicker.alpha .colorpicker-alpha {
+    display: block
+}
+
 .colorpicker-color {
     height: 10px;
     margin-top: 5px;
@@ -107,9 +132,13 @@
     background-image: url(../img/bootstrap-colorpicker/alpha.png);
     background-position: 0 100%;
 }
-.colorpicker-color div { height: 10px }
+
+.colorpicker-color div {
+    height: 10px
+}
+
 .colorpicker-component .add-on i,
-.colorpicker-component .input-group-addon i{
+.colorpicker-component .input-group-addon i {
     display: block;
     cursor: pointer;
     width: 16px;

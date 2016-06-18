@@ -1,25 +1,25 @@
 <?php
 
-	/**
-	 * MonthFixture
-	 *
-	 */
-	class MonthFixture extends CakeTestFixture
-	{
+/**
+ * MonthFixture
+ *
+ */
+class MonthFixture extends CakeTestFixture
+{
 
-		/**
-		 * Import
-		 *
-		 * @var array
-		 */
-		public $import = ['model' => 'Month'];
+    /**
+     * Import
+     *
+     * @var array
+     */
+    public $import = ['model' => 'Month'];
 
-		/**
-		 * Records
-		 *
-		 * @var array
-		 */
-		public $records = [
-		];
+    /**
+     * Records
+     *
+     * @var array
+     */
+    public $records = [
+    ];
 
-	}
+}

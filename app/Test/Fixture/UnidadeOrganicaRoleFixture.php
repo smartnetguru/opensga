@@ -1,25 +1,25 @@
 <?php
 
-	/**
-	 * UnidadeOrganicaRoleFixture
-	 *
-	 */
-	class UnidadeOrganicaRoleFixture extends CakeTestFixture
-	{
+/**
+ * UnidadeOrganicaRoleFixture
+ *
+ */
+class UnidadeOrganicaRoleFixture extends CakeTestFixture
+{
 
-		/**
-		 * Import
-		 *
-		 * @var array
-		 */
-		public $import = ['model' => 'UnidadeOrganicaRole'];
+    /**
+     * Import
+     *
+     * @var array
+     */
+    public $import = ['model' => 'UnidadeOrganicaRole'];
 
-		/**
-		 * Records
-		 *
-		 * @var array
-		 */
-		public $records = [
-		];
+    /**
+     * Records
+     *
+     * @var array
+     */
+    public $records = [
+    ];
 
-	}
+}

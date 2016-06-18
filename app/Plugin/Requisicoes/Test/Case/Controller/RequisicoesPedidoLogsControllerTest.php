@@ -5,56 +5,62 @@ App::uses('RequisicoesPedidoLogsController', 'Requisicoes.Controller');
  * RequisicoesPedidoLogsController Test Case
  *
  */
-class RequisicoesPedidoLogsControllerTest extends ControllerTestCase {
+class RequisicoesPedidoLogsControllerTest extends ControllerTestCase
+{
 
-/**
- * Fixtures
- *
- * @var array
- */
-	public $fixtures = array(
-		'plugin.requisicoes.requisicoes_pedido_log',
-		'plugin.requisicoes.requisicoes_pedido',
-	);
+    /**
+     * Fixtures
+     *
+     * @var array
+     */
+    public $fixtures = array(
+        'plugin.requisicoes.requisicoes_pedido_log',
+        'plugin.requisicoes.requisicoes_pedido',
+    );
 
-/**
- * testIndex method
- *
- * @return void
- */
-	public function testIndex() {
-	}
+    /**
+     * testIndex method
+     *
+     * @return void
+     */
+    public function testIndex()
+    {
+    }
 
-/**
- * testView method
- *
- * @return void
- */
-	public function testView() {
-	}
+    /**
+     * testView method
+     *
+     * @return void
+     */
+    public function testView()
+    {
+    }
 
-/**
- * testAdd method
- *
- * @return void
- */
-	public function testAdd() {
-	}
+    /**
+     * testAdd method
+     *
+     * @return void
+     */
+    public function testAdd()
+    {
+    }
 
-/**
- * testEdit method
- *
- * @return void
- */
-	public function testEdit() {
-	}
+    /**
+     * testEdit method
+     *
+     * @return void
+     */
+    public function testEdit()
+    {
+    }
 
-/**
- * testDelete method
- *
- * @return void
- */
-	public function testDelete() {
-	}
+    /**
+     * testDelete method
+     *
+     * @return void
+     */
+    public function testDelete()
+    {
+    }
 
 }

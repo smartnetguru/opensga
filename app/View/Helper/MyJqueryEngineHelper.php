@@ -1,11 +1,11 @@
 <?php
 
-    App::import('Helper', 'JqueryEngine');
+App::import('Helper', 'JqueryEngine');
 
-    class MyJqueryEngineHelper extends JqueryEngineHelper
-    {
-        //var $jQueryObject = 'jQuery';
+class MyJqueryEngineHelper extends JqueryEngineHelper
+{
+    //var $jQueryObject = 'jQuery';
 
-    }
+}
 
 ?>

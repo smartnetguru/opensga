@@ -611,7 +611,7 @@ var Main = function () {
     };
     var runDateTimePicker = function () {
         $('.date-time-picker').datetimepicker({
-            format:"YYYY-MM-DD HH:mm:ss"
+            format: "YYYY-MM-DD HH:mm:ss"
         });
     };
     //function to initiate bootstrap-timepicker

@@ -1,25 +1,25 @@
 <?php
 
-	/**
-	 * EpocaAvaliacaoFixture
-	 *
-	 */
-	class EpocaAvaliacaoFixture extends CakeTestFixture
-	{
+/**
+ * EpocaAvaliacaoFixture
+ *
+ */
+class EpocaAvaliacaoFixture extends CakeTestFixture
+{
 
-		/**
-		 * Import
-		 *
-		 * @var array
-		 */
-		public $import = ['model' => 'EpocaAvaliacao'];
+    /**
+     * Import
+     *
+     * @var array
+     */
+    public $import = ['model' => 'EpocaAvaliacao'];
 
-		/**
-		 * Records
-		 *
-		 * @var array
-		 */
-		public $records = [
-		];
+    /**
+     * Records
+     *
+     * @var array
+     */
+    public $records = [
+    ];
 
-	}
+}

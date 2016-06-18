@@ -1,25 +1,25 @@
 <?php
 
-	/**
-	 * FeriadoFixture
-	 *
-	 */
-	class FeriadoFixture extends CakeTestFixture
-	{
+/**
+ * FeriadoFixture
+ *
+ */
+class FeriadoFixture extends CakeTestFixture
+{
 
-		/**
-		 * Import
-		 *
-		 * @var array
-		 */
-		public $import = ['model' => 'Feriado'];
+    /**
+     * Import
+     *
+     * @var array
+     */
+    public $import = ['model' => 'Feriado'];
 
-		/**
-		 * Records
-		 *
-		 * @var array
-		 */
-		public $records = [
-		];
+    /**
+     * Records
+     *
+     * @var array
+     */
+    public $records = [
+    ];
 
-	}
+}

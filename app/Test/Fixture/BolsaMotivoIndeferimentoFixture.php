@@ -1,25 +1,25 @@
 <?php
 
-	/**
-	 * BolsaMotivoIndeferimentoFixture
-	 *
-	 */
-	class BolsaMotivoIndeferimentoFixture extends CakeTestFixture
-	{
+/**
+ * BolsaMotivoIndeferimentoFixture
+ *
+ */
+class BolsaMotivoIndeferimentoFixture extends CakeTestFixture
+{
 
-		/**
-		 * Import
-		 *
-		 * @var array
-		 */
-		public $import = ['model' => 'BolsaMotivoIndeferimento'];
+    /**
+     * Import
+     *
+     * @var array
+     */
+    public $import = ['model' => 'BolsaMotivoIndeferimento'];
 
-		/**
-		 * Records
-		 *
-		 * @var array
-		 */
-		public $records = [
-		];
+    /**
+     * Records
+     *
+     * @var array
+     */
+    public $records = [
+    ];
 
-	}
+}

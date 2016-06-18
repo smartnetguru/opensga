@@ -1,10 +1,10 @@
 <?php
-    App::uses('AppModel', 'Model');
+App::uses('AppModel', 'Model');
 
-    /**
-     * SadeNivelAvaliador Model
-     *
-     */
-    class SadeNivelAvaliador extends AppModel
-    {
-    }
+/**
+ * SadeNivelAvaliador Model
+ *
+ */
+class SadeNivelAvaliador extends AppModel
+{
+}

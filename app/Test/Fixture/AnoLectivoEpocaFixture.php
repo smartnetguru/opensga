@@ -1,25 +1,25 @@
 <?php
 
-	/**
-	 * AnoLectivoEpocaFixture
-	 *
-	 */
-	class AnoLectivoEpocaFixture extends CakeTestFixture
-	{
+/**
+ * AnoLectivoEpocaFixture
+ *
+ */
+class AnoLectivoEpocaFixture extends CakeTestFixture
+{
 
-		/**
-		 * Import
-		 *
-		 * @var array
-		 */
-		public $import = ['table' => 'ano_lectivo_epocas'];
+    /**
+     * Import
+     *
+     * @var array
+     */
+    public $import = ['table' => 'ano_lectivo_epocas'];
 
-		/**
-		 * Records
-		 *
-		 * @var array
-		 */
-		public $records = [
-		];
+    /**
+     * Records
+     *
+     * @var array
+     */
+    public $records = [
+    ];
 
-	}
+}

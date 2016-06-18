@@ -1,25 +1,25 @@
 <?php
 
-	/**
-	 * CursosEscolaFixture
-	 *
-	 */
-	class CursosEscolaFixture extends CakeTestFixture
-	{
+/**
+ * CursosEscolaFixture
+ *
+ */
+class CursosEscolaFixture extends CakeTestFixture
+{
 
-		/**
-		 * Import
-		 *
-		 * @var array
-		 */
-		public $import = ['model' => 'CursosEscola'];
+    /**
+     * Import
+     *
+     * @var array
+     */
+    public $import = ['model' => 'CursosEscola'];
 
-		/**
-		 * Records
-		 *
-		 * @var array
-		 */
-		public $records = [
-		];
+    /**
+     * Records
+     *
+     * @var array
+     */
+    public $records = [
+    ];
 
-	}
+}

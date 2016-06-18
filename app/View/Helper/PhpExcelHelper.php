@@ -1,322 +1,322 @@
 <?php
-    App::uses('AppHelper', 'Helper');
-    App::import('Helper', 'AppHelper');
+App::uses('AppHelper', 'Helper');
+App::import('Helper', 'AppHelper');
+
+/**
+ * Helper for working with PHPExcel class.
+ * PHPExcel has to be in the vendors directory.
+ */
+class PhpExcelHelper extends AppHelper
+{
+    /**
+     * Instance of PHPExcel class
+     * @var object
+     */
+    public $xls;
+    var $helpers = ['AmazonS3'];
+    /**
+     * Pointer to actual row
+     * @var int
+     */
+    protected $row = 1;
+    /**
+     * Internal table params
+     * @var array
+     */
+    protected $tableParams;
 
     /**
-     * Helper for working with PHPExcel class.
-     * PHPExcel has to be in the vendors directory.
+     * Constructor
      */
-    class PhpExcelHelper extends AppHelper
+    public function __construct(View $view, $settings = [])
     {
-        /**
-         * Instance of PHPExcel class
-         * @var object
-         */
-        public $xls;
-        var $helpers = ['AmazonS3'];
-        /**
-         * Pointer to actual row
-         * @var int
-         */
-        protected $row = 1;
-        /**
-         * Internal table params
-         * @var array
-         */
-        protected $tableParams;
+        parent::__construct($view, $settings);
+    }
 
-        /**
-         * Constructor
-         */
-        public function __construct(View $view, $settings = [])
-        {
-            parent::__construct($view, $settings);
+    /**
+     * Create new worksheet
+     */
+    public function createWorksheet()
+    {
+        $this->loadEssentials();
+        $this->xls = new PHPExcel();
+    }
+
+    /**
+     * Load vendor classes
+     */
+    protected function loadEssentials()
+    {
+        // load vendor class
+        App::import('Vendor', 'PHPExcel', ['file' => 'PHPExcel.php']);
+        if (!class_exists('PHPExcel')) {
+            throw new CakeException('Vendor class PHPExcel not found!');
+        }
+        $locale = 'pt_br';
+        $validLocale = PHPExcel_Settings::setLocale($locale);
+        if (!$validLocale) {
+            echo 'Unable to set locale to ' . $locale . " - reverting to en_us<br />\n";
         }
 
-        /**
-         * Create new worksheet
-         */
-        public function createWorksheet()
-        {
-            $this->loadEssentials();
-            $this->xls = new PHPExcel();
+    }
+
+    /**
+     * Create new worksheet from existing file
+     */
+    public function loadWorksheet($path)
+    {
+        $this->loadEssentials();
+        $this->xls = PHPExcel_IOFactory::load($path);
+    }
+
+    public function loadWorksheetFromS3($path)
+    {
+        $this->loadEssentials();
+        $tmpPath = '/tmp/phpexcel' . date('His') . '.xlsx';
+        $excelPath = $this->AmazonS3->getObject($path, null, $tmpPath);
+
+        $this->xls = PHPExcel_IOFactory::load($excelPath);
+
+        return $this->xls;
+
+    }
+
+    /**
+     * Set row pointer
+     */
+    public function setRow($to)
+    {
+        $this->row = (int)$to;
+    }
+
+    /**
+     * Set default font
+     */
+    public function setDefaultFont($name, $size)
+    {
+        $this->xls->getDefaultStyle()->getFont()->setName($name);
+        $this->xls->getDefaultStyle()->getFont()->setSize($size);
+    }
+
+    /**
+     * Start table
+     * inserts table header and sets table params
+     * Possible keys for data:
+     *    label    -    table heading
+     *    width    -    "auto" or units
+     *    filter    -    true to set excel filter for column
+     *    wrap    -    true to wrap text in column
+     * Possible keys for params:
+     *    offset    -    column offset (numeric or text)
+     *    font    -    font name
+     *    size    -    font size
+     *    bold    -    true for bold text
+     *    italic    -    true for italic text
+     *
+     */
+    public function addTableHeader($data, $params = [])
+    {
+        // offset
+        if (array_key_exists('offset', $params)) {
+            $offset = is_numeric($params['offset']) ? (int)$params['offset'] : PHPExcel_Cell::columnIndexFromString($params['offset']);
+        }
+        // font name
+        if (array_key_exists('font', $params)) {
+            $this->xls->getActiveSheet()->getStyle($this->row)->getFont()->setName($params['font_name']);
+        }
+        // font size
+        if (array_key_exists('size', $params)) {
+            $this->xls->getActiveSheet()->getStyle($this->row)->getFont()->setSize($params['font_size']);
+        }
+        // bold
+        if (array_key_exists('bold', $params)) {
+            $this->xls->getActiveSheet()->getStyle($this->row)->getFont()->setBold($params['bold']);
+        }
+        // italic
+        if (array_key_exists('italic', $params)) {
+            $this->xls->getActiveSheet()->getStyle($this->row)->getFont()->setItalic($params['italic']);
         }
 
-        /**
-         * Load vendor classes
-         */
-        protected function loadEssentials()
-        {
-            // load vendor class
-            App::import('Vendor', 'PHPExcel', ['file' => 'PHPExcel.php']);
-            if (!class_exists('PHPExcel')) {
-                throw new CakeException('Vendor class PHPExcel not found!');
-            }
-            $locale = 'pt_br';
-            $validLocale = PHPExcel_Settings::setLocale($locale);
-            if (!$validLocale) {
-                echo 'Unable to set locale to ' . $locale . " - reverting to en_us<br />\n";
-            }
+        // set internal params that need to be processed after data are inserted
+        $this->tableParams = [
+            'header_row' => $this->row,
+            'offset' => $offset,
+            'row_count' => 0,
+            'auto_width' => [],
+            'filter' => [],
+            'wrap' => [],
+        ];
 
-        }
-
-        /**
-         * Create new worksheet from existing file
-         */
-        public function loadWorksheet($path)
-        {
-            $this->loadEssentials();
-            $this->xls = PHPExcel_IOFactory::load($path);
-        }
-
-        public function loadWorksheetFromS3($path)
-        {
-            $this->loadEssentials();
-            $tmpPath = '/tmp/phpexcel' . date('His') . '.xlsx';
-            $excelPath = $this->AmazonS3->getObject($path, null, $tmpPath);
-
-            $this->xls = PHPExcel_IOFactory::load($excelPath);
-
-            return $this->xls;
-
-        }
-
-        /**
-         * Set row pointer
-         */
-        public function setRow($to)
-        {
-            $this->row = (int)$to;
-        }
-
-        /**
-         * Set default font
-         */
-        public function setDefaultFont($name, $size)
-        {
-            $this->xls->getDefaultStyle()->getFont()->setName($name);
-            $this->xls->getDefaultStyle()->getFont()->setSize($size);
-        }
-
-        /**
-         * Start table
-         * inserts table header and sets table params
-         * Possible keys for data:
-         *    label    -    table heading
-         *    width    -    "auto" or units
-         *    filter    -    true to set excel filter for column
-         *    wrap    -    true to wrap text in column
-         * Possible keys for params:
-         *    offset    -    column offset (numeric or text)
-         *    font    -    font name
-         *    size    -    font size
-         *    bold    -    true for bold text
-         *    italic    -    true for italic text
-         *
-         */
-        public function addTableHeader($data, $params = [])
-        {
-            // offset
-            if (array_key_exists('offset', $params)) {
-                $offset = is_numeric($params['offset']) ? (int)$params['offset'] : PHPExcel_Cell::columnIndexFromString($params['offset']);
-            }
-            // font name
-            if (array_key_exists('font', $params)) {
-                $this->xls->getActiveSheet()->getStyle($this->row)->getFont()->setName($params['font_name']);
-            }
-            // font size
-            if (array_key_exists('size', $params)) {
-                $this->xls->getActiveSheet()->getStyle($this->row)->getFont()->setSize($params['font_size']);
-            }
-            // bold
-            if (array_key_exists('bold', $params)) {
-                $this->xls->getActiveSheet()->getStyle($this->row)->getFont()->setBold($params['bold']);
-            }
-            // italic
-            if (array_key_exists('italic', $params)) {
-                $this->xls->getActiveSheet()->getStyle($this->row)->getFont()->setItalic($params['italic']);
-            }
-
-            // set internal params that need to be processed after data are inserted
-            $this->tableParams = [
-                'header_row' => $this->row,
-                'offset'     => $offset,
-                'row_count'  => 0,
-                'auto_width' => [],
-                'filter'     => [],
-                'wrap'       => [],
-            ];
-
-            foreach ($data as $d) {
-                // set label
-                $this->xls->getActiveSheet()->setCellValueByColumnAndRow($offset, $this->row, $d['label']);
-                // set width
-                if (array_key_exists('width', $d)) {
-                    if ($d['width'] == 'auto') {
-                        $this->tableParams['auto_width'][] = $offset;
-                    } else {
-                        $this->xls->getActiveSheet()->getColumnDimensionByColumn($offset)->setWidth((float)$d['width']);
-                    }
+        foreach ($data as $d) {
+            // set label
+            $this->xls->getActiveSheet()->setCellValueByColumnAndRow($offset, $this->row, $d['label']);
+            // set width
+            if (array_key_exists('width', $d)) {
+                if ($d['width'] == 'auto') {
+                    $this->tableParams['auto_width'][] = $offset;
+                } else {
+                    $this->xls->getActiveSheet()->getColumnDimensionByColumn($offset)->setWidth((float)$d['width']);
                 }
-                // filter
-                if (array_key_exists('filter', $d) && $d['filter']) {
-                    $this->tableParams['filter'][] = $offset;
-                }
-                // wrap
-                if (array_key_exists('wrap', $d) && $d['wrap']) {
-                    $this->tableParams['wrap'][] = $offset;
-                }
-
-                $offset++;
             }
-            $this->row++;
-        }
-
-        /**
-         * Write array of data to actual row
-         */
-        public function addTableRow($data)
-        {
-            $offset = $this->tableParams['offset'];
-
-            foreach ($data as $d) {
-                $this->xls->getActiveSheet()->setCellValueByColumnAndRow($offset++, $this->row, $d);
-            }
-            $this->row++;
-            $this->tableParams['row_count']++;
-        }
-
-        /**
-         * End table
-         * sets params and styles that required data to be inserted
-         */
-        public function addTableFooter()
-        {
-            // auto width
-            foreach ($this->tableParams['auto_width'] as $col) {
-                $this->xls->getActiveSheet()->getColumnDimensionByColumn($col)->setAutoSize(true);
-            }
-            // filter (has to be set for whole range)
-            if (count($this->tableParams['filter'])) {
-                $this->xls->getActiveSheet()->setAutoFilter(PHPExcel_Cell::stringFromColumnIndex($this->tableParams['filter'][0]) . ($this->tableParams['header_row']) . ':' . PHPExcel_Cell::stringFromColumnIndex($this->tableParams['filter'][count($this->tableParams['filter']) - 1]) . ($this->tableParams['header_row'] + $this->tableParams['row_count']));
+            // filter
+            if (array_key_exists('filter', $d) && $d['filter']) {
+                $this->tableParams['filter'][] = $offset;
             }
             // wrap
-            foreach ($this->tableParams['wrap'] as $col) {
-                $this->xls->getActiveSheet()->getStyle(PHPExcel_Cell::stringFromColumnIndex($col) . ($this->tableParams['header_row'] + 1) . ':' . PHPExcel_Cell::stringFromColumnIndex($col) . ($this->tableParams['header_row'] + $this->tableParams['row_count']))->getAlignment()->setWrapText(true);
-            }
-        }
-
-        /**
-         * Write array of data to actual row starting from column defined by offset
-         * Offset can be textual or numeric representation
-         */
-        public function addData($data, $offset = 0)
-        {
-            // solve textual representation
-            if (!is_numeric($offset)) {
-                $offset = PHPExcel_Cell::columnIndexFromString($offset);
+            if (array_key_exists('wrap', $d) && $d['wrap']) {
+                $this->tableParams['wrap'][] = $offset;
             }
 
-            foreach ($data as $d) {
-                $this->xls->getActiveSheet()->setCellValueByColumnAndRow($offset++, $this->row, $d);
-            }
-            $this->row++;
+            $offset++;
         }
+        $this->row++;
+    }
 
-        public function addWorksheetMeta(
-            $author,
-            $subject = "",
-            $title = "",
-            $description = "",
-            $category = "Relatório"
-        ) {
-            $this->xls->getProperties()->setCreator($author);
-            $this->xls->getProperties()->setLastModifiedBy($author);
-            $this->xls->getProperties()->setTitle($title);
-            $this->xls->getProperties()->setSubject($subject);
-            $this->xls->getProperties()->setDescription($description);
-            $this->xls->getProperties()->setKeywords("OpenSGA,SIGA");
-            $this->xls->getProperties()->setCategory($category);
-            $this->xls->getActiveSheet()->getHeaderFooter()->setOddFooter('&L&D &T &C' . $this->xls->getProperties()->getTitle() . ' - ' . $this->xls->getProperties()->getSubject() . ' - ' . $this->xls->getProperties()->getDescription() . '&RPage &P of &N');
+    /**
+     * Write array of data to actual row
+     */
+    public function addTableRow($data)
+    {
+        $offset = $this->tableParams['offset'];
+
+        foreach ($data as $d) {
+            $this->xls->getActiveSheet()->setCellValueByColumnAndRow($offset++, $this->row, $d);
         }
+        $this->row++;
+        $this->tableParams['row_count']++;
+    }
 
-        public function addImage(
-            $path,
-            $coordinates,
-            $offsetX,
-            $width,
-            $height,
-            $direction = 45,
-            $rotation = 0,
-            $name = 'OpenSGA',
-            $description = ''
-        ) {
-            $objDrawing = new PHPExcel_Worksheet_Drawing();
-            $objDrawing->setName($name);
-            $objDrawing->setDescription($description);
-            $objDrawing->setPath($path);
-            $objDrawing->setCoordinates($coordinates);
-            $objDrawing->setResizeProportional(true);
-            $objDrawing->setWidthAndHeight($width, $height);
-            $objDrawing->setOffsetX($offsetX);
-            $objDrawing->setRotation($rotation);
-            $objDrawing->getShadow()->setVisible(true);
-            $objDrawing->getShadow()->setDirection($direction);
-
-            $objDrawing->setWorksheet($this->xls->getActiveSheet());
+    /**
+     * End table
+     * sets params and styles that required data to be inserted
+     */
+    public function addTableFooter()
+    {
+        // auto width
+        foreach ($this->tableParams['auto_width'] as $col) {
+            $this->xls->getActiveSheet()->getColumnDimensionByColumn($col)->setAutoSize(true);
         }
-
-        /**
-         * Output file to browser
-         */
-        public function outputServer($filename = 'export.xlsx')
-        {
-            // set layout
-            $this->_View->layout = false;
-
-            // writer
-            $objWriter = PHPExcel_IOFactory::createWriter($this->xls, 'Excel2007');
-            debug(getcwd());
-            $objWriter->save($filename);
-            // clear memory
-            $this->xls->disconnectWorksheets();
+        // filter (has to be set for whole range)
+        if (count($this->tableParams['filter'])) {
+            $this->xls->getActiveSheet()->setAutoFilter(PHPExcel_Cell::stringFromColumnIndex($this->tableParams['filter'][0]) . ($this->tableParams['header_row']) . ':' . PHPExcel_Cell::stringFromColumnIndex($this->tableParams['filter'][count($this->tableParams['filter']) - 1]) . ($this->tableParams['header_row'] + $this->tableParams['row_count']));
         }
-
-        public function output($filename = 'export.xlsx')
-        {
-            // set layout
-            $this->_View->layout = '';
-            // headers
-            ob_end_clean();
-            header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-            header('Content-Disposition: attachment;filename="' . $filename . '"');
-            header('Cache-Control: max-age=0');
-            // writer
-            $objWriter = PHPExcel_IOFactory::createWriter($this->xls, 'Excel2007');
-
-            $objWriter->save('php://output');
-
-            // clear memory
-            $this->xls->disconnectWorksheets();
-        }
-
-        public function outputPDF($filename = 'export.pdf')
-        {
-            // set layout
-            $this->_View->layout = '';
-            header('Content-Type: application/pdf');
-            header('Content-Disposition: attachment;filename="membership.pdf"');
-            header('Cache-Control: max-age=0');
-
-            $objWriter = PHPExcel_IOFactory::createWriter($objPHPexcel, 'PDF');
-            $objWriter->setPreCalculateFormulas(false);
-            $objWriter->save('php://output');
-
-            $this->xls->disconnectWorksheets();
-        }
-
-        public function formataNotas($nota)
-        {
-            //if()
+        // wrap
+        foreach ($this->tableParams['wrap'] as $col) {
+            $this->xls->getActiveSheet()->getStyle(PHPExcel_Cell::stringFromColumnIndex($col) . ($this->tableParams['header_row'] + 1) . ':' . PHPExcel_Cell::stringFromColumnIndex($col) . ($this->tableParams['header_row'] + $this->tableParams['row_count']))->getAlignment()->setWrapText(true);
         }
     }
+
+    /**
+     * Write array of data to actual row starting from column defined by offset
+     * Offset can be textual or numeric representation
+     */
+    public function addData($data, $offset = 0)
+    {
+        // solve textual representation
+        if (!is_numeric($offset)) {
+            $offset = PHPExcel_Cell::columnIndexFromString($offset);
+        }
+
+        foreach ($data as $d) {
+            $this->xls->getActiveSheet()->setCellValueByColumnAndRow($offset++, $this->row, $d);
+        }
+        $this->row++;
+    }
+
+    public function addWorksheetMeta(
+        $author,
+        $subject = "",
+        $title = "",
+        $description = "",
+        $category = "Relatório"
+    ) {
+        $this->xls->getProperties()->setCreator($author);
+        $this->xls->getProperties()->setLastModifiedBy($author);
+        $this->xls->getProperties()->setTitle($title);
+        $this->xls->getProperties()->setSubject($subject);
+        $this->xls->getProperties()->setDescription($description);
+        $this->xls->getProperties()->setKeywords("OpenSGA,SIGA");
+        $this->xls->getProperties()->setCategory($category);
+        $this->xls->getActiveSheet()->getHeaderFooter()->setOddFooter('&L&D &T &C' . $this->xls->getProperties()->getTitle() . ' - ' . $this->xls->getProperties()->getSubject() . ' - ' . $this->xls->getProperties()->getDescription() . '&RPage &P of &N');
+    }
+
+    public function addImage(
+        $path,
+        $coordinates,
+        $offsetX,
+        $width,
+        $height,
+        $direction = 45,
+        $rotation = 0,
+        $name = 'OpenSGA',
+        $description = ''
+    ) {
+        $objDrawing = new PHPExcel_Worksheet_Drawing();
+        $objDrawing->setName($name);
+        $objDrawing->setDescription($description);
+        $objDrawing->setPath($path);
+        $objDrawing->setCoordinates($coordinates);
+        $objDrawing->setResizeProportional(true);
+        $objDrawing->setWidthAndHeight($width, $height);
+        $objDrawing->setOffsetX($offsetX);
+        $objDrawing->setRotation($rotation);
+        $objDrawing->getShadow()->setVisible(true);
+        $objDrawing->getShadow()->setDirection($direction);
+
+        $objDrawing->setWorksheet($this->xls->getActiveSheet());
+    }
+
+    /**
+     * Output file to browser
+     */
+    public function outputServer($filename = 'export.xlsx')
+    {
+        // set layout
+        $this->_View->layout = false;
+
+        // writer
+        $objWriter = PHPExcel_IOFactory::createWriter($this->xls, 'Excel2007');
+        debug(getcwd());
+        $objWriter->save($filename);
+        // clear memory
+        $this->xls->disconnectWorksheets();
+    }
+
+    public function output($filename = 'export.xlsx')
+    {
+        // set layout
+        $this->_View->layout = '';
+        // headers
+        ob_end_clean();
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment;filename="' . $filename . '"');
+        header('Cache-Control: max-age=0');
+        // writer
+        $objWriter = PHPExcel_IOFactory::createWriter($this->xls, 'Excel2007');
+
+        $objWriter->save('php://output');
+
+        // clear memory
+        $this->xls->disconnectWorksheets();
+    }
+
+    public function outputPDF($filename = 'export.pdf')
+    {
+        // set layout
+        $this->_View->layout = '';
+        header('Content-Type: application/pdf');
+        header('Content-Disposition: attachment;filename="membership.pdf"');
+        header('Cache-Control: max-age=0');
+
+        $objWriter = PHPExcel_IOFactory::createWriter($objPHPexcel, 'PDF');
+        $objWriter->setPreCalculateFormulas(false);
+        $objWriter->save('php://output');
+
+        $this->xls->disconnectWorksheets();
+    }
+
+    public function formataNotas($nota)
+    {
+        //if()
+    }
+}

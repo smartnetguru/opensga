@@ -1,8 +1,8 @@
 <?php
 
-    App::uses('AppModel', 'Model');
+App::uses('AppModel', 'Model');
 
-    class CeaAppModel extends AppModel
-    {
+class CeaAppModel extends AppModel
+{
 
-    }
+}

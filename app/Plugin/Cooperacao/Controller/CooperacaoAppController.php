@@ -1,16 +1,16 @@
 <?php
 
-    App::uses('AppController', 'Controller');
+App::uses('AppController', 'Controller');
 
-    class CooperacaoAppController extends AppController
+class CooperacaoAppController extends AppController
+{
+
+
+    public function beforeFilter()
     {
+        parent::beforeFilter();
 
-
-        public function beforeFilter()
-        {
-            parent::beforeFilter();
-
-            $this->layout = 'default';
-        }
-
+        $this->layout = 'default';
     }
+
+}

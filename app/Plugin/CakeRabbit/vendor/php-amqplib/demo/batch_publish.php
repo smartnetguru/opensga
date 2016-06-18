@@ -41,13 +41,13 @@ $msg = new AMQPMessage($msg_body);
 
 $time = microtime(true);
 
-$max = isset($argv[1]) ? (int) $argv[1] : 1;
-$batch = isset($argv[2]) ? (int) $argv[2] : 2;
+$max = isset($argv[1]) ? (int)$argv[1] : 1;
+$batch = isset($argv[2]) ? (int)$argv[2] : 2;
 
 // Publishes $max messages using $msg_body as the content.
 for ($i = 0; $i < $max; $i++) {
     $ch->batch_basic_publish($msg, $exchange);
-    
+
     if ($i % $batch == 0) {
         $ch->publish_batch();
     }

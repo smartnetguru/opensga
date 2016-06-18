@@ -30,9 +30,9 @@
  * You can specify multiple configurations for production, development and testing.
  *
  * transport => The name of a supported transport; valid options are as follows:
- * 		Mail 		- Send using PHP mail function
- * 		Smtp		- Send using SMTP
- * 		Debug		- Do not send the email, just return the result
+ *        Mail        - Send using PHP mail function
+ *        Smtp        - Send using SMTP
+ *        Debug        - Do not send the email, just return the result
  *
  * You can add custom transports (or override existing transports) by adding the
  * appropriate file to app/Network/Email.  Transports should be named 'YourTransport.php',
@@ -42,54 +42,55 @@
  * The origin email. See CakeEmail::from() about the valid values
  *
  */
-class EmailConfig {
+class EmailConfig
+{
 
-	public $default = array(
-		'transport' => 'Mail',
-		'from' => 'elisio.leonardo@gmail.com',
-		'charset' => 'utf-8',
-		'headerCharset' => 'utf-8',
-	);
-	public $smtp = array(
-		'transport' => 'Smtp',
-		'from' => array('naoresponder@uem.ac.mz' => 'SIGA-UEM'),
-		'host' => 'ssl://email-smtp.us-east-1.amazonaws.com',
-		'port' => 465,
-		'timeout' => 10,
-		'username' => SMTP_USERNAME,
-		'password' => SMTP_PASSWORD,
-		'client' => null,
-		'log' => false
-	);
-	public $fast = array(
-		'from' => 'you@localhost',
-		'sender' => null,
-		'to' => null,
-		'cc' => null,
-		'bcc' => null,
-		'replyTo' => null,
-		'readReceipt' => null,
-		'returnPath' => null,
-		'messageId' => true,
-		'subject' => null,
-		'message' => null,
-		'headers' => null,
-		'viewRender' => null,
-		'template' => false,
-		'layout' => false,
-		'viewVars' => null,
-		'attachments' => null,
-		'emailFormat' => null,
-		'transport' => 'Smtp',
-		'host' => 'localhost',
-		'port' => 25,
-		'timeout' => 30,
-		'username' => 'user',
-		'password' => 'secret',
-		'client' => null,
-		'log' => true,
-			//'charset' => 'utf-8',
-			//'headerCharset' => 'utf-8',
-	);
+    public $default = array(
+        'transport' => 'Mail',
+        'from' => 'elisio.leonardo@gmail.com',
+        'charset' => 'utf-8',
+        'headerCharset' => 'utf-8',
+    );
+    public $smtp = array(
+        'transport' => 'Smtp',
+        'from' => array('naoresponder@uem.ac.mz' => 'SIGA-UEM'),
+        'host' => 'ssl://email-smtp.us-east-1.amazonaws.com',
+        'port' => 465,
+        'timeout' => 10,
+        'username' => SMTP_USERNAME,
+        'password' => SMTP_PASSWORD,
+        'client' => null,
+        'log' => false
+    );
+    public $fast = array(
+        'from' => 'you@localhost',
+        'sender' => null,
+        'to' => null,
+        'cc' => null,
+        'bcc' => null,
+        'replyTo' => null,
+        'readReceipt' => null,
+        'returnPath' => null,
+        'messageId' => true,
+        'subject' => null,
+        'message' => null,
+        'headers' => null,
+        'viewRender' => null,
+        'template' => false,
+        'layout' => false,
+        'viewVars' => null,
+        'attachments' => null,
+        'emailFormat' => null,
+        'transport' => 'Smtp',
+        'host' => 'localhost',
+        'port' => 25,
+        'timeout' => 30,
+        'username' => 'user',
+        'password' => 'secret',
+        'client' => null,
+        'log' => true,
+        //'charset' => 'utf-8',
+        //'headerCharset' => 'utf-8',
+    );
 
 }

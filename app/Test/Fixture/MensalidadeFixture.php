@@ -1,25 +1,25 @@
 <?php
 
-	/**
-	 * MensalidadeFixture
-	 *
-	 */
-	class MensalidadeFixture extends CakeTestFixture
-	{
+/**
+ * MensalidadeFixture
+ *
+ */
+class MensalidadeFixture extends CakeTestFixture
+{
 
-		/**
-		 * Import
-		 *
-		 * @var array
-		 */
-		public $import = ['model' => 'Mensalidade'];
+    /**
+     * Import
+     *
+     * @var array
+     */
+    public $import = ['model' => 'Mensalidade'];
 
-		/**
-		 * Records
-		 *
-		 * @var array
-		 */
-		public $records = [
-		];
+    /**
+     * Records
+     *
+     * @var array
+     */
+    public $records = [
+    ];
 
-	}
+}

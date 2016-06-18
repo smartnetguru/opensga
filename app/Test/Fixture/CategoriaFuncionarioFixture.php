@@ -1,25 +1,25 @@
 <?php
 
-	/**
-	 * CategoriaFuncionarioFixture
-	 *
-	 */
-	class CategoriaFuncionarioFixture extends CakeTestFixture
-	{
+/**
+ * CategoriaFuncionarioFixture
+ *
+ */
+class CategoriaFuncionarioFixture extends CakeTestFixture
+{
 
-		/**
-		 * Import
-		 *
-		 * @var array
-		 */
-		public $import = ['table' => 'categoria_funcionarios'];
+    /**
+     * Import
+     *
+     * @var array
+     */
+    public $import = ['table' => 'categoria_funcionarios'];
 
-		/**
-		 * Records
-		 *
-		 * @var array
-		 */
-		public $records = [
-		];
+    /**
+     * Records
+     *
+     * @var array
+     */
+    public $records = [
+    ];
 
-	}
+}

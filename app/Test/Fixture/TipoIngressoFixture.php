@@ -1,25 +1,25 @@
 <?php
 
-	/**
-	 * TipoIngressoFixture
-	 *
-	 */
-	class TipoIngressoFixture extends CakeTestFixture
-	{
+/**
+ * TipoIngressoFixture
+ *
+ */
+class TipoIngressoFixture extends CakeTestFixture
+{
 
-		/**
-		 * Import
-		 *
-		 * @var array
-		 */
-		public $import = ['table' => 'tipo_ingressos'];
+    /**
+     * Import
+     *
+     * @var array
+     */
+    public $import = ['table' => 'tipo_ingressos'];
 
-		/**
-		 * Records
-		 *
-		 * @var array
-		 */
-		public $records = [
-		];
+    /**
+     * Records
+     *
+     * @var array
+     */
+    public $records = [
+    ];
 
-	}
+}

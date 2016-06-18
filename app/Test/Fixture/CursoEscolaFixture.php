@@ -1,24 +1,24 @@
 <?php
 
-	/**
-	 * CursoEscola Fixture
-	 */
-	class CursoEscolaFixture extends CakeTestFixture
-	{
+/**
+ * CursoEscola Fixture
+ */
+class CursoEscolaFixture extends CakeTestFixture
+{
 
-		/**
-		 * Import
-		 *
-		 * @var array
-		 */
-		public $import = ['model' => 'CursoEscola'];
+    /**
+     * Import
+     *
+     * @var array
+     */
+    public $import = ['model' => 'CursoEscola'];
 
-		/**
-		 * Records
-		 *
-		 * @var array
-		 */
-		public $records = [
-		];
+    /**
+     * Records
+     *
+     * @var array
+     */
+    public $records = [
+    ];
 
-	}
+}

@@ -19,7 +19,8 @@ class ComposerAutoloaderInit9d4f15f4dd6f5078a695d2521f0e2bd7
             return self::$loader;
         }
 
-        spl_autoload_register(array('ComposerAutoloaderInit9d4f15f4dd6f5078a695d2521f0e2bd7', 'loadClassLoader'), true, true);
+        spl_autoload_register(array('ComposerAutoloaderInit9d4f15f4dd6f5078a695d2521f0e2bd7', 'loadClassLoader'), true,
+            true);
         self::$loader = $loader = new \Composer\Autoload\ClassLoader();
         spl_autoload_unregister(array('ComposerAutoloaderInit9d4f15f4dd6f5078a695d2521f0e2bd7', 'loadClassLoader'));
 

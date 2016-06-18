@@ -1,127 +1,127 @@
 <?php
 
-	/**
-	 * Controller de Configurações do OpenSGA
-	 *
-	 * @copyright     Copyright 2010-2011, INFOmoz (Inform�tica-Mo�ambique) (http://infomoz.net)
-	 ** @link          http://opensga.com OpenSGA  - Sistema de Gestão Académica
-	 * @author          Elisio Leonardo (elisio.leonardo@gmail.com)
-	 * @package       opensga
-	 * @subpackage    opensga.core.config
-	 * @since         OpenSGA v 0.1.0
-	 *
-	 */
-	class ConfigsController extends AppController
-	{
+/**
+ * Controller de Configurações do OpenSGA
+ *
+ * @copyright     Copyright 2010-2011, INFOmoz (Inform�tica-Mo�ambique) (http://infomoz.net)
+ ** @link          http://opensga.com OpenSGA  - Sistema de Gestão Académica
+ * @author          Elisio Leonardo (elisio.leonardo@gmail.com)
+ * @package       opensga
+ * @subpackage    opensga.core.config
+ * @since         OpenSGA v 0.1.0
+ *
+ */
+class ConfigsController extends AppController
+{
 
-		var $name = 'Configs';
+    var $name = 'Configs';
 
-		function index()
-		{
-			$this->Config->recursive = 0;
-			$this->set('configs', $this->paginate());
-		}
+    function index()
+    {
+        $this->Config->recursive = 0;
+        $this->set('configs', $this->paginate());
+    }
 
-		function view($id = null)
-		{
-			if (!$id) {
-				$this->Session->setFlash(sprintf(__('ID Inválido', true), 'user'), 'flasherror');
-				$this->redirect(['action' => 'index']);
-			}
-			$this->set('config', $this->Config->read(null, $id));
-		}
+    function view($id = null)
+    {
+        if (!$id) {
+            $this->Session->setFlash(sprintf(__('ID Inválido', true), 'user'), 'flasherror');
+            $this->redirect(['action' => 'index']);
+        }
+        $this->set('config', $this->Config->read(null, $id));
+    }
 
-		function adicionar_configuracao()
-		{
-			if (!empty($this->data)) {
-				$this->Config->create();
-				if ($this->Config->save($this->data)) {
-					$this->Session->setFlash(sprintf(__('Dados Gravados com Sucesso', true), 'user'), 'flashok');
-					$this->redirect(['action' => 'index']);
-				} else {
-					$this->Session->setFlash(sprintf(__('Dados não gravados. Por favor, tente de novo', true), 'user'),
-						'flasherror');
-				}
-			}
-		}
+    function adicionar_configuracao()
+    {
+        if (!empty($this->data)) {
+            $this->Config->create();
+            if ($this->Config->save($this->data)) {
+                $this->Session->setFlash(sprintf(__('Dados Gravados com Sucesso', true), 'user'), 'flashok');
+                $this->redirect(['action' => 'index']);
+            } else {
+                $this->Session->setFlash(sprintf(__('Dados não gravados. Por favor, tente de novo', true), 'user'),
+                    'flasherror');
+            }
+        }
+    }
 
-		function editar_configuracao($id = null)
-		{
-			$this->Config->id = $id;
+    function editar_configuracao($id = null)
+    {
+        $this->Config->id = $id;
 
-			if (!$this->Config->exists()) {
-				$this->Session->setFlash(sprintf(__('%s Invalida'), 'Configuraçao'), 'default',
-					['class' => 'alert error']);
-				$this->redirect(['action' => 'index']);
-			}
-			if (!empty($this->data)) {
-				if ($this->Config->save($this->data)) {
-					$this->Session->setFlash(sprintf(__('Dados gravados com sucesso', true), 'user'), 'default',
-						['class' => 'alert success']);
-					$this->redirect(['action' => 'index']);
-				} else {
-					$this->Session->setFlash(sprintf(__('Dados não gravados. Por favor, tente de novo', true), 'user'),
-						'default', ['class' => 'alert error']);
-				}
-			}
-			if (empty($this->data)) {
-				$this->data = $this->Config->read(null, $id);
-			}
-		}
+        if (!$this->Config->exists()) {
+            $this->Session->setFlash(sprintf(__('%s Invalida'), 'Configuraçao'), 'default',
+                ['class' => 'alert error']);
+            $this->redirect(['action' => 'index']);
+        }
+        if (!empty($this->data)) {
+            if ($this->Config->save($this->data)) {
+                $this->Session->setFlash(sprintf(__('Dados gravados com sucesso', true), 'user'), 'default',
+                    ['class' => 'alert success']);
+                $this->redirect(['action' => 'index']);
+            } else {
+                $this->Session->setFlash(sprintf(__('Dados não gravados. Por favor, tente de novo', true), 'user'),
+                    'default', ['class' => 'alert error']);
+            }
+        }
+        if (empty($this->data)) {
+            $this->data = $this->Config->read(null, $id);
+        }
+    }
 
-		function delete($id = null)
-		{
-			if (!$id) {
-				$this->Session->setFlash(sprintf(__('ID Inválido', true), 'user'), 'flasherror');
-				$this->redirect(['action' => 'index']);
-			}
-			if ($this->Config->delete($id)) {
-				$this->Session->setFlash(sprintf(__('Dados removidos com sucesso', true), 'user'), 'flashok');
-				$this->redirect(['action' => 'index']);
-			}
-			$this->Session->setFlash(sprintf(__('Dados não removidos.Por favor, tente de novo', true), 'user'),
-				'flasherror');
-			$this->redirect(['action' => 'index']);
-		}
+    function delete($id = null)
+    {
+        if (!$id) {
+            $this->Session->setFlash(sprintf(__('ID Inválido', true), 'user'), 'flasherror');
+            $this->redirect(['action' => 'index']);
+        }
+        if ($this->Config->delete($id)) {
+            $this->Session->setFlash(sprintf(__('Dados removidos com sucesso', true), 'user'), 'flashok');
+            $this->redirect(['action' => 'index']);
+        }
+        $this->Session->setFlash(sprintf(__('Dados não removidos.Por favor, tente de novo', true), 'user'),
+            'flasherror');
+        $this->redirect(['action' => 'index']);
+    }
 
-		function language($language_id)
-		{
-			if ($language_id == 1) {
-				$this->Session->write('Config.language', 'por');
-			} else {
-				$this->Session->write('Config.language', 'eng');
-			}
-			Configure::write('Config.language', $this->Session->read('Config.language'));
-			$this->Session->setFlash(__('O idioma do sistema foi alterado com sucesso'), 'default',
-				['class' => 'alert info']);
-			$this->redirect($this->referer());
-		}
+    function language($language_id)
+    {
+        if ($language_id == 1) {
+            $this->Session->write('Config.language', 'por');
+        } else {
+            $this->Session->write('Config.language', 'eng');
+        }
+        Configure::write('Config.language', $this->Session->read('Config.language'));
+        $this->Session->setFlash(__('O idioma do sistema foi alterado com sucesso'), 'default',
+            ['class' => 'alert info']);
+        $this->redirect($this->referer());
+    }
 
-		public function geral()
-		{
-			$configs = $this->Config->find('all');
-			$this->set(compact('configs'));
-		}
+    public function geral()
+    {
+        $configs = $this->Config->find('all');
+        $this->set(compact('configs'));
+    }
 
-		public function faculdade_manutencao()
-		{
+    public function faculdade_manutencao()
+    {
 
-		}
+    }
 
-		public function manutencao()
-		{
+    public function manutencao()
+    {
 
-		}
+    }
 
-		public function docente_manutencao()
-		{
+    public function docente_manutencao()
+    {
 
-		}
+    }
 
-		public function estudante_manutencao()
-		{
+    public function estudante_manutencao()
+    {
 
-		}
-	}
+    }
+}
 
 

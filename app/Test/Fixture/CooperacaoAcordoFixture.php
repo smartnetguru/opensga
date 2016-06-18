@@ -1,25 +1,25 @@
 <?php
 
-	/**
-	 * CooperacaoAcordoFixture
-	 *
-	 */
-	class CooperacaoAcordoFixture extends CakeTestFixture
-	{
+/**
+ * CooperacaoAcordoFixture
+ *
+ */
+class CooperacaoAcordoFixture extends CakeTestFixture
+{
 
-		/**
-		 * Import
-		 *
-		 * @var array
-		 */
-		public $import = ['table' => 'cooperacao_acordos'];
+    /**
+     * Import
+     *
+     * @var array
+     */
+    public $import = ['table' => 'cooperacao_acordos'];
 
-		/**
-		 * Records
-		 *
-		 * @var array
-		 */
-		public $records = [
-		];
+    /**
+     * Records
+     *
+     * @var array
+     */
+    public $records = [
+    ];
 
-	}
+}

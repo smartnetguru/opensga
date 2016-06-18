@@ -14,7 +14,7 @@ class MiscHelper
         if (is_string($a)) {
             return $a;
         } else {
-            return sprintf("%d,%d",$a[0] ,$a[1]);
+            return sprintf("%d,%d", $a[0], $a[1]);
         }
     }
 
@@ -36,19 +36,19 @@ class MiscHelper
      * @author      Aidan Lister <aidan@php.net>
      * @author      Peter Waller <iridum@php.net>
      * @link        http://aidanlister.com/repos/v/function.hexdump.php
-     * @param string $data       The string to be dumped
-     * @param bool   $htmloutput Set to false for non-HTML output
-     * @param bool   $uppercase  Set to true for uppercase hex
-     * @param bool   $return     Set to true to return the dump
+     * @param string $data The string to be dumped
+     * @param bool $htmloutput Set to false for non-HTML output
+     * @param bool $uppercase Set to true for uppercase hex
+     * @param bool $return Set to true to return the dump
      */
     public static function hexdump($data, $htmloutput = true, $uppercase = false, $return = false)
     {
         // Init
-        $hexi   = '';
-        $ascii  = '';
-        $dump   = ($htmloutput === true) ? '<pre>' : '';
+        $hexi = '';
+        $ascii = '';
+        $dump = ($htmloutput === true) ? '<pre>' : '';
         $offset = 0;
-        $len    = strlen($data);
+        $len = strlen($data);
 
         // Upper or lower case hexidecimal
         $x = ($uppercase === false) ? 'x' : 'X';
@@ -61,15 +61,15 @@ class MiscHelper
             // Replace non-viewable bytes with '.'
             if (ord($data[$i]) >= 32) {
                 $ascii .= ($htmloutput === true) ?
-                                htmlentities($data[$i]) :
-                                $data[$i];
+                    htmlentities($data[$i]) :
+                    $data[$i];
             } else {
                 $ascii .= '.';
             }
 
             // Add extra column spacing
             if ($j === 7) {
-                $hexi  .= ' ';
+                $hexi .= ' ';
                 $ascii .= ' ';
             }
 
@@ -79,9 +79,9 @@ class MiscHelper
                 $dump .= sprintf("%04$x  %-49s  %s", $offset, $hexi, $ascii);
 
                 // Reset vars
-                $hexi   = $ascii = '';
+                $hexi = $ascii = '';
                 $offset += 16;
-                $j      = 0;
+                $j = 0;
 
                 // Add newline
                 if ($i !== $len - 1) {
@@ -92,8 +92,8 @@ class MiscHelper
 
         // Finish dump
         $dump .= $htmloutput === true ?
-                    '</pre>' :
-                    '';
+            '</pre>' :
+            '';
         $dump .= "\n";
 
         // Output method

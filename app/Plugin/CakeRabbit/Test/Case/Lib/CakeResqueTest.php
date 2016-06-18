@@ -12,7 +12,7 @@
  * @copyright     Copyright 2012, Wan Qi Chen <kami@kamisama.me>
  * @link          http://cakeresque.kamisama.me
  * @package       CakeResque
- * @subpackage	 CakeResque.Test.Case.Lib
+ * @subpackage     CakeResque.Test.Case.Lib
  * @since         1.2.0
  * @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
  **/
@@ -20,250 +20,265 @@
 /**
  * CakeResqueTest class
  *
- * @package 		CakeResque
- * @subpackage	CakeResque.Test.Case.Lib
+ * @package        CakeResque
+ * @subpackage    CakeResque.Test.Case.Lib
  */
+class CakeResqueTest extends CakeTestCase
+{
+
+    public function setUp()
+    {
+        CakeResque::$resqueClass = $this->Resque = $this->getMockClass('Resque', array('enqueue'));
+        CakeResque::$resqueSchedulerClass = $this->ResqueScheduler = $this->getMockClass('ResqueScheduler\ResqueScheduler',
+            array('enqueueIn', 'enqueueAt'));
 
-class CakeResqueTest extends CakeTestCase {
+        $this->fixture = array(
+            'queue' => 'default',
+            'class' => 'TestShell',
+            'args' => array('main', 'arg1'),
+            'track' => false
+        );
 
-	public function setUp() {
-		CakeResque::$resqueClass = $this->Resque = $this->getMockClass('Resque', array('enqueue'));
-		CakeResque::$resqueSchedulerClass = $this->ResqueScheduler = $this->getMockClass('ResqueScheduler\ResqueScheduler', array('enqueueIn', 'enqueueAt'));
+        parent::setUp();
+    }
 
-		$this->fixture = array(
-				'queue' => 'default',
-				'class' => 'TestShell',
-				'args' => array('main', 'arg1'),
-				'track' => false
-			);
+    public function tearDown()
+    {
+        CakeResque::$logs = array();
+        parent::tearDown();
+    }
 
-		parent::setUp();
-	}
+    public function testEnqueueWithSuccess()
+    {
+        $id = md5(time());
 
-	public function tearDown() {
-		CakeResque::$logs = array();
-		parent::tearDown();
-	}
+        $Resque = $this->Resque;
+        $Resque::staticExpects($this->any())
+            ->method('enqueue')
+            ->will($this->returnValue($id));
 
-	public function testEnqueueWithSuccess() {
-		$id = md5(time());
+        extract($this->fixture);
 
-		$Resque = $this->Resque;
-		$Resque::staticExpects($this->any())
-			->method('enqueue')
-			->will($this->returnValue($id));
+        $response = CakeResque::enqueue($queue, $class, $args, $track);
 
-		extract($this->fixture);
+        $this->assertEqual($id, $response);
+        $this->_testLogs(CakeResque::$logs[$queue][0], $id);
+    }
 
-		$response = CakeResque::enqueue($queue, $class, $args, $track);
+    protected function _testLogs($log, $id)
+    {
+        extract($this->fixture);
 
-		$this->assertEqual($id, $response);
-		$this->_testLogs(CakeResque::$logs[$queue][0], $id);
-	}
+        if (!is_array($args)) {
+            $args = array($args);
+        }
 
-	public function testEnqueueWithSuccessWithoutTrackingArgument() {
-		$id = md5(time());
+        $this->assertEqual($queue, $log['queue']);
+        $this->assertEqual($class, $log['class']);
+        $this->assertEqual(array_shift($args), $log['method']);
+        $this->assertEqual($args, $log['args']);
+        $this->assertEqual($id, $log['jobId']);
+    }
 
-		$Resque = $this->Resque;
-		$Resque::staticExpects($this->any())
-			->method('enqueue')
-			->will($this->returnValue($id));
+    public function testEnqueueWithSuccessWithoutTrackingArgument()
+    {
+        $id = md5(time());
 
-		unset($this->fixture['track']);
+        $Resque = $this->Resque;
+        $Resque::staticExpects($this->any())
+            ->method('enqueue')
+            ->will($this->returnValue($id));
 
-		extract($this->fixture);
+        unset($this->fixture['track']);
 
-		$response = CakeResque::enqueue($queue, $class, $args);
+        extract($this->fixture);
 
-		$this->assertEqual($id, $response);
-		$this->_testLogs(CakeResque::$logs[$queue][0], $id);
-	}
+        $response = CakeResque::enqueue($queue, $class, $args);
 
-	public function testEnqueueWithSuccessWithStringArgsValue() {
-		$id = md5(time());
+        $this->assertEqual($id, $response);
+        $this->_testLogs(CakeResque::$logs[$queue][0], $id);
+    }
 
-		$Resque = $this->Resque;
-		$Resque::staticExpects($this->any())
-			->method('enqueue')
-			->will($this->returnValue($id));
+    public function testEnqueueWithSuccessWithStringArgsValue()
+    {
+        $id = md5(time());
 
-		$this->fixture['args'] = 'main';
-		extract($this->fixture);
+        $Resque = $this->Resque;
+        $Resque::staticExpects($this->any())
+            ->method('enqueue')
+            ->will($this->returnValue($id));
 
-		$response = CakeResque::enqueue($queue, $class, $args, $track);
+        $this->fixture['args'] = 'main';
+        extract($this->fixture);
 
-		$this->assertEqual($id, $response);
-		$this->_testLogs(CakeResque::$logs[$queue][0], $id);
-	}
+        $response = CakeResque::enqueue($queue, $class, $args, $track);
 
-	public function testEnqueuAtWithSuccessWithDateTime() {
-		$id = md5(time());
+        $this->assertEqual($id, $response);
+        $this->_testLogs(CakeResque::$logs[$queue][0], $id);
+    }
 
-		$ResqueScheduler = $this->ResqueScheduler;
-		$ResqueScheduler::staticExpects($this->any())
-			->method('enqueueAt')
-			->will($this->returnValue($id));
+    public function testEnqueuAtWithSuccessWithDateTime()
+    {
+        $id = md5(time());
 
-		$this->fixture['at'] = new DateTime('now');
+        $ResqueScheduler = $this->ResqueScheduler;
+        $ResqueScheduler::staticExpects($this->any())
+            ->method('enqueueAt')
+            ->will($this->returnValue($id));
 
-		extract($this->fixture);
+        $this->fixture['at'] = new DateTime('now');
 
-		Configure::write('CakeResque.Scheduler.enabled', true);
-		$response = CakeResque::enqueueAt($at, $queue, $class, $args);
+        extract($this->fixture);
 
-		$this->assertEqual($id, $response);
-		$this->_testLogs(CakeResque::$logs[$queue][0], $id);
-		$this->assertEqual($at->getTimeStamp(), CakeResque::$logs[$queue][0]['time']);
-	}
+        Configure::write('CakeResque.Scheduler.enabled', true);
+        $response = CakeResque::enqueueAt($at, $queue, $class, $args);
 
-	public function testEnqueuAtWithSuccessWithTimestamp() {
-		$id = md5(time());
+        $this->assertEqual($id, $response);
+        $this->_testLogs(CakeResque::$logs[$queue][0], $id);
+        $this->assertEqual($at->getTimeStamp(), CakeResque::$logs[$queue][0]['time']);
+    }
 
-		$ResqueScheduler = $this->ResqueScheduler;
-		$ResqueScheduler::staticExpects($this->any())
-			->method('enqueueAt')
-			->will($this->returnValue($id));
+    public function testEnqueuAtWithSuccessWithTimestamp()
+    {
+        $id = md5(time());
 
-		$this->fixture['at'] = time();
+        $ResqueScheduler = $this->ResqueScheduler;
+        $ResqueScheduler::staticExpects($this->any())
+            ->method('enqueueAt')
+            ->will($this->returnValue($id));
 
-		extract($this->fixture);
+        $this->fixture['at'] = time();
 
-		Configure::write('CakeResque.Scheduler.enabled', true);
-		$response = CakeResque::enqueueAt($at, $queue, $class, $args);
+        extract($this->fixture);
 
-		$this->assertEqual($id, $response);
-		$this->_testLogs(CakeResque::$logs[$queue][0], $id);
-		$this->assertEqual($at, CakeResque::$logs[$queue][0]['time']);
-	}
+        Configure::write('CakeResque.Scheduler.enabled', true);
+        $response = CakeResque::enqueueAt($at, $queue, $class, $args);
 
-	public function testEnqueuAtWithSuccessWithStringArgsValue() {
-		$id = md5(time());
+        $this->assertEqual($id, $response);
+        $this->_testLogs(CakeResque::$logs[$queue][0], $id);
+        $this->assertEqual($at, CakeResque::$logs[$queue][0]['time']);
+    }
 
-		$ResqueScheduler = $this->ResqueScheduler;
-		$ResqueScheduler::staticExpects($this->any())
-			->method('enqueueAt')
-			->will($this->returnValue($id));
+    public function testEnqueuAtWithSuccessWithStringArgsValue()
+    {
+        $id = md5(time());
 
-		$this->fixture['at'] = new DateTime('now');
+        $ResqueScheduler = $this->ResqueScheduler;
+        $ResqueScheduler::staticExpects($this->any())
+            ->method('enqueueAt')
+            ->will($this->returnValue($id));
 
-		$this->fixture['args'] = 'main';
-		extract($this->fixture);
+        $this->fixture['at'] = new DateTime('now');
 
-		Configure::write('CakeResque.Scheduler.enabled', true);
-		$response = CakeResque::enqueueAt($at, $queue, $class, $args);
+        $this->fixture['args'] = 'main';
+        extract($this->fixture);
 
-		$this->assertEqual($id, $response);
-		$this->_testLogs(CakeResque::$logs[$queue][0], $id);
-		$this->assertEqual($at->getTimeStamp(), CakeResque::$logs[$queue][0]['time']);
-	}
+        Configure::write('CakeResque.Scheduler.enabled', true);
+        $response = CakeResque::enqueueAt($at, $queue, $class, $args);
 
-	public function testEnqueueInWithSuccess() {
-		$id = md5(time());
+        $this->assertEqual($id, $response);
+        $this->_testLogs(CakeResque::$logs[$queue][0], $id);
+        $this->assertEqual($at->getTimeStamp(), CakeResque::$logs[$queue][0]['time']);
+    }
 
-		$ResqueScheduler = $this->ResqueScheduler;
-		$ResqueScheduler::staticExpects($this->any())
-			->method('enqueueIn')
-			->will($this->returnValue($id));
+    public function testEnqueueInWithSuccess()
+    {
+        $id = md5(time());
 
-		$this->fixture['in'] = 10;
+        $ResqueScheduler = $this->ResqueScheduler;
+        $ResqueScheduler::staticExpects($this->any())
+            ->method('enqueueIn')
+            ->will($this->returnValue($id));
 
-		extract($this->fixture);
+        $this->fixture['in'] = 10;
 
-		Configure::write('CakeResque.Scheduler.enabled', true);
-		$response = CakeResque::enqueueIn($in, $queue, $class, $args);
+        extract($this->fixture);
 
-		$this->assertEqual($id, $response);
-		$this->_testLogs(CakeResque::$logs[$queue][0], $id);
-		$this->assertEqual(time() + $in, CakeResque::$logs[$queue][0]['time']);
-	}
+        Configure::write('CakeResque.Scheduler.enabled', true);
+        $response = CakeResque::enqueueIn($in, $queue, $class, $args);
 
-	public function testEnqueueInWithSuccessWithArgsStringValue() {
-		$id = md5(time());
+        $this->assertEqual($id, $response);
+        $this->_testLogs(CakeResque::$logs[$queue][0], $id);
+        $this->assertEqual(time() + $in, CakeResque::$logs[$queue][0]['time']);
+    }
 
-		$time = time();
+    public function testEnqueueInWithSuccessWithArgsStringValue()
+    {
+        $id = md5(time());
 
-		$ResqueScheduler = $this->ResqueScheduler;
-		$ResqueScheduler::staticExpects($this->any())
-			->method('enqueueIn')
-			->will($this->returnValue($id));
+        $time = time();
 
-		$this->fixture['in'] = 10;
+        $ResqueScheduler = $this->ResqueScheduler;
+        $ResqueScheduler::staticExpects($this->any())
+            ->method('enqueueIn')
+            ->will($this->returnValue($id));
 
-		$this->fixture['args'] = 'main';
-		extract($this->fixture);
+        $this->fixture['in'] = 10;
 
-		Configure::write('CakeResque.Scheduler.enabled', true);
-		$response = CakeResque::enqueueIn($in, $queue, $class, $args);
+        $this->fixture['args'] = 'main';
+        extract($this->fixture);
 
-		$this->assertEqual($id, $response);
-		$this->_testLogs(CakeResque::$logs[$queue][0], $id);
-		$this->assertEqual($time + $in, CakeResque::$logs[$queue][0]['time']);
-	}
+        Configure::write('CakeResque.Scheduler.enabled', true);
+        $response = CakeResque::enqueueIn($in, $queue, $class, $args);
 
-	public function testEnqueueInReturnFalseWhenDisabled() {
-		$id = md5(time());
+        $this->assertEqual($id, $response);
+        $this->_testLogs(CakeResque::$logs[$queue][0], $id);
+        $this->assertEqual($time + $in, CakeResque::$logs[$queue][0]['time']);
+    }
 
-		$ResqueScheduler = $this->ResqueScheduler;
-		$ResqueScheduler::staticExpects($this->any())
-			->method('enqueueIn')
-			->will($this->returnValue($id));
+    public function testEnqueueInReturnFalseWhenDisabled()
+    {
+        $id = md5(time());
 
-		$this->fixture['in'] = 10;
+        $ResqueScheduler = $this->ResqueScheduler;
+        $ResqueScheduler::staticExpects($this->any())
+            ->method('enqueueIn')
+            ->will($this->returnValue($id));
 
-		extract($this->fixture);
+        $this->fixture['in'] = 10;
 
-		Configure::write('CakeResque.Scheduler.enabled', false);
-		$this->assertFalse(CakeResque::enqueueIn($in, $queue, $class, $args));
-		$this->assertEmpty(CakeResque::$logs);
-	}
+        extract($this->fixture);
 
-	public function testEnqueueAtReturnFalseWhenDisabled() {
-		$id = md5(time());
+        Configure::write('CakeResque.Scheduler.enabled', false);
+        $this->assertFalse(CakeResque::enqueueIn($in, $queue, $class, $args));
+        $this->assertEmpty(CakeResque::$logs);
+    }
 
-		$ResqueScheduler = $this->ResqueScheduler;
-		$ResqueScheduler::staticExpects($this->any())
-			->method('enqueueAt')
-			->will($this->returnValue($id));
+    public function testEnqueueAtReturnFalseWhenDisabled()
+    {
+        $id = md5(time());
 
-		$this->fixture['at'] = time();
+        $ResqueScheduler = $this->ResqueScheduler;
+        $ResqueScheduler::staticExpects($this->any())
+            ->method('enqueueAt')
+            ->will($this->returnValue($id));
 
-		extract($this->fixture);
+        $this->fixture['at'] = time();
 
-		Configure::write('CakeResque.Scheduler.enabled', false);
-		$this->assertFalse(CakeResque::enqueueAt($at, $queue, $class, $args));
-		$this->assertEmpty(CakeResque::$logs);
-	}
+        extract($this->fixture);
 
-	public function testEnqueueAreLogged() {
-		$Resque = $this->Resque;
-		$Resque::staticExpects($this->any())
-			->method('enqueue')
-			->will($this->returnValue(''));
+        Configure::write('CakeResque.Scheduler.enabled', false);
+        $this->assertFalse(CakeResque::enqueueAt($at, $queue, $class, $args));
+        $this->assertEmpty(CakeResque::$logs);
+    }
 
-		extract($this->fixture);
+    public function testEnqueueAreLogged()
+    {
+        $Resque = $this->Resque;
+        $Resque::staticExpects($this->any())
+            ->method('enqueue')
+            ->will($this->returnValue(''));
 
-		CakeResque::enqueue('one', $class, $args, $track);
-		CakeResque::enqueue('one', $class, $args, $track);
-		CakeResque::enqueue('two', $class, $args, $track);
-		CakeResque::enqueue('three', $class, $args, $track);
+        extract($this->fixture);
 
-		$this->assertCount(3, CakeResque::$logs);
-		$this->assertCount(2, CakeResque::$logs['one']);
-		$this->assertCount(1, CakeResque::$logs['two']);
-		$this->assertCount(1, CakeResque::$logs['three']);
-	}
+        CakeResque::enqueue('one', $class, $args, $track);
+        CakeResque::enqueue('one', $class, $args, $track);
+        CakeResque::enqueue('two', $class, $args, $track);
+        CakeResque::enqueue('three', $class, $args, $track);
 
-	protected function _testLogs($log, $id) {
-		extract($this->fixture);
-
-		if (!is_array($args)) {
-			$args = array($args);
-		}
-
-		$this->assertEqual($queue, $log['queue']);
-		$this->assertEqual($class, $log['class']);
-		$this->assertEqual(array_shift($args), $log['method']);
-		$this->assertEqual($args, $log['args']);
-		$this->assertEqual($id, $log['jobId']);
-	}
+        $this->assertCount(3, CakeResque::$logs);
+        $this->assertCount(2, CakeResque::$logs['one']);
+        $this->assertCount(1, CakeResque::$logs['two']);
+        $this->assertCount(1, CakeResque::$logs['three']);
+    }
 }

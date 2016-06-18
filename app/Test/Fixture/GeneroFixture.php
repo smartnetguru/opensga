@@ -1,33 +1,33 @@
 <?php
 
-	/**
-	 * GeneroFixture
-	 *
-	 */
-	class GeneroFixture extends CakeTestFixture
-	{
+/**
+ * GeneroFixture
+ *
+ */
+class GeneroFixture extends CakeTestFixture
+{
 
-		/**
-		 * Import
-		 *
-		 * @var array
-		 */
-		public $import = ['model' => 'Genero'];
+    /**
+     * Import
+     *
+     * @var array
+     */
+    public $import = ['model' => 'Genero'];
 
-		/**
-		 * Records
-		 *
-		 * @var array
-		 */
-		public $records = [
-			[
-				'id'   => '1',
-				'name' => 'Masculino',
-			],
-			[
-				'id'   => '2',
-				'name' => 'Feminino',
-			],
-		];
+    /**
+     * Records
+     *
+     * @var array
+     */
+    public $records = [
+        [
+            'id' => '1',
+            'name' => 'Masculino',
+        ],
+        [
+            'id' => '2',
+            'name' => 'Feminino',
+        ],
+    ];
 
-	}
+}

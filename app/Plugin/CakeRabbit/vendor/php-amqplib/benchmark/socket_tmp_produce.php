@@ -8,7 +8,6 @@ use PhpAmqpLib\Message\AMQPMessage;
 $conn = new AMQPSocketConnection(HOST, PORT, USER, PASS, VHOST);
 
 
-
 $msg_body = <<<EOT
 abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
 abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
@@ -25,7 +24,7 @@ EOT;
 
 $time = microtime(true);
 
-$max = isset($argv[1]) ? (int) $argv[1] : 1;
+$max = isset($argv[1]) ? (int)$argv[1] : 1;
 
 // Publishes $max messages using $msg_body as the content.
 for ($i = 0; $i < $max; $i++) {

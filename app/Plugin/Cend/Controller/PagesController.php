@@ -1,14 +1,14 @@
 <?php
 
-    App::uses('CendAppController', 'Cend.Controller');
+App::uses('CendAppController', 'Cend.Controller');
 
-    class PagesController extends CendAppController
+class PagesController extends CendAppController
+{
+
+    public $uses = ['Page'];
+
+    public function home()
     {
 
-        public $uses = ['Page'];
-
-        public function home()
-        {
-
-        }
     }
+}

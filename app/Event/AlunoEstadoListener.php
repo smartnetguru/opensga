@@ -1,20 +1,20 @@
 <?php
-    App::uses('CakeEventListener', 'Event');
+App::uses('CakeEventListener', 'Event');
 
-    class AlunoEstadoListener implements CakeEventListener
+class AlunoEstadoListener implements CakeEventListener
+{
+
+    public function implementedEvents()
     {
-
-        public function implementedEvents()
-        {
-            return [
-                //'Model.Aluno.afterMatriculaNovoIngresso' => 'configuraEstadoNovoAluno'
-            ];
-        }
-
-        public function configuraEstadoNovoAluno($event)
-        {
-            debug($event->data);
-            die();
-        }
+        return [
+            //'Model.Aluno.afterMatriculaNovoIngresso' => 'configuraEstadoNovoAluno'
+        ];
     }
+
+    public function configuraEstadoNovoAluno($event)
+    {
+        debug($event->data);
+        die();
+    }
+}
 

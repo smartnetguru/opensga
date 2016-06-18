@@ -1,10 +1,10 @@
 <?php
-    App::uses('AppModel', 'Model');
+App::uses('AppModel', 'Model');
 
-    /**
-     * TipoInstituicao Model
-     *
-     */
-    class TipoInstituicao extends AppModel
-    {
-    }
+/**
+ * TipoInstituicao Model
+ *
+ */
+class TipoInstituicao extends AppModel
+{
+}

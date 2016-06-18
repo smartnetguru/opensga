@@ -1,25 +1,25 @@
 <?php
 
-	/**
-	 * BolsaFonteBolsaFixture
-	 *
-	 */
-	class BolsaFonteBolsaFixture extends CakeTestFixture
-	{
+/**
+ * BolsaFonteBolsaFixture
+ *
+ */
+class BolsaFonteBolsaFixture extends CakeTestFixture
+{
 
-		/**
-		 * Import
-		 *
-		 * @var array
-		 */
-		public $import = ['model' => 'BolsaFonteBolsa'];
+    /**
+     * Import
+     *
+     * @var array
+     */
+    public $import = ['model' => 'BolsaFonteBolsa'];
 
-		/**
-		 * Records
-		 *
-		 * @var array
-		 */
-		public $records = [
-		];
+    /**
+     * Records
+     *
+     * @var array
+     */
+    public $records = [
+    ];
 
-	}
+}

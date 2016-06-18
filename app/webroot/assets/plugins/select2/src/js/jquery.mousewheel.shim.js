@@ -1,6 +1,6 @@
 define([
-  'jquery'
+    'jquery'
 ], function ($) {
-  // Used to shim jQuery.mousewheel for non-full builds.
-  return $;
+    // Used to shim jQuery.mousewheel for non-full builds.
+    return $;
 });

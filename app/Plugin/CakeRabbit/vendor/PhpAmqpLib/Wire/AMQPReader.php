@@ -2,10 +2,10 @@
 
 namespace PhpAmqpLib\Wire;
 
+use PhpAmqpLib\Exception\AMQPOutOfBoundsException;
+use PhpAmqpLib\Exception\AMQPRuntimeException;
 use PhpAmqpLib\Exception\AMQPTimeoutException;
 use PhpAmqpLib\Wire\AMQPDecimal;
-use PhpAmqpLib\Exception\AMQPRuntimeException;
-use PhpAmqpLib\Exception\AMQPOutOfBoundsException;
 use PhpAmqpLib\Wire\IO\AbstractIO;
 
 
@@ -20,7 +20,7 @@ class AMQPReader
     const OCTET = 1;
     const SHORTSTR = 1;
     const SHORT = 2;
-    const LONG  = 4;
+    const LONG = 4;
     const SIGNED_LONG = 4;
     const READ_PHP_INT = 4; // use READ_ to avoid possible clashes with PHP
     const LONGLONG = 8;
@@ -36,9 +36,9 @@ class AMQPReader
     protected $io = null;
 
     /**
-     * @param string     $str
+     * @param string $str
      * @param AbstractIO $io
-     * @param int        $timeout
+     * @param int $timeout
      */
     public function __construct($str, AbstractIO $io = null, $timeout = 0)
     {
@@ -49,9 +49,9 @@ class AMQPReader
         $this->bitcount = $this->bits = 0;
         $this->timeout = $timeout;
 
-        $this->is64bits = ((int) 4294967296) != 0 ? true : false;
+        $this->is64bits = ((int)4294967296) != 0 ? true : false;
     }
-    
+
     /**
      * Used to not need to create a new AMQPReader instance every time.
      * when we can just pass a string and reset the object state.
@@ -71,7 +71,7 @@ class AMQPReader
      */
     public function close()
     {
-        if($this->io) {
+        if ($this->io) {
             $this->io->close();
         }
     }
@@ -133,8 +133,8 @@ class AMQPReader
                     $this->str_length);
             }
 
-            $res = substr($this->str,0,$n);
-            $this->str = substr($this->str,$n);
+            $res = substr($this->str, 0, $n);
+            $this->str = substr($this->str, $n);
             $this->str_length -= $n;
             $this->offset += $n;
         }
@@ -165,7 +165,7 @@ class AMQPReader
     public function read_octet()
     {
         $this->bitcount = $this->bits = 0;
-        list(,$res) = unpack('C', $this->rawread(1));
+        list(, $res) = unpack('C', $this->rawread(1));
 
         return $res;
     }
@@ -176,7 +176,7 @@ class AMQPReader
     public function read_short()
     {
         $this->bitcount = $this->bits = 0;
-        list(,$res) = unpack('n', $this->rawread(2));
+        list(, $res) = unpack('n', $this->rawread(2));
 
         return $res;
     }
@@ -194,11 +194,11 @@ class AMQPReader
      */
     public function read_php_int()
     {
-        list(,$res) = unpack('N', $this->rawread(4));
+        list(, $res) = unpack('N', $this->rawread(4));
         if ($this->is64bits) {
-            $sres = sprintf ( "%u", $res );
+            $sres = sprintf("%u", $res);
 
-            return (int) $sres;
+            return (int)$sres;
         } else {
             return $res;
         }
@@ -212,8 +212,8 @@ class AMQPReader
     public function read_long()
     {
         $this->bitcount = $this->bits = 0;
-        list(,$res) = unpack('N', $this->rawread(4));
-        $sres = sprintf ( "%u", $res );
+        list(, $res) = unpack('N', $this->rawread(4));
+        $sres = sprintf("%u", $res);
 
         return $sres;
     }
@@ -226,7 +226,7 @@ class AMQPReader
         $this->bitcount = $this->bits = 0;
         // In PHP unpack('N') always return signed value,
         // on both 32 and 64 bit systems!
-        list(,$res) = unpack('N', $this->rawread(4));
+        list(, $res) = unpack('N', $this->rawread(4));
 
         return $res;
     }
@@ -246,10 +246,10 @@ class AMQPReader
         $lo = unpack('N', $this->rawread(4));
 
         // workaround signed/unsigned braindamage in php
-        $hi = sprintf ( "%u", $hi[1] );
-        $lo = sprintf ( "%u", $lo[1] );
+        $hi = sprintf("%u", $hi[1]);
+        $lo = sprintf("%u", $lo[1]);
 
-        return bcadd(bcmul($hi, "4294967296" ), $lo);
+        return bcadd(bcmul($hi, "4294967296"), $lo);
     }
 
     /**
@@ -259,7 +259,7 @@ class AMQPReader
     public function read_shortstr()
     {
         $this->bitcount = $this->bits = 0;
-        list(,$slen) = unpack('C', $this->rawread(1));
+        list(, $slen) = unpack('C', $this->rawread(1));
 
         return $this->rawread($slen);
     }
@@ -299,7 +299,7 @@ class AMQPReader
         $this->bitcount = $this->bits = 0;
         $tlen = $this->read_php_int();
 
-        if ($tlen<0) {
+        if ($tlen < 0) {
             throw new AMQPOutOfBoundsException("Table is longer than supported");
         }
 
@@ -309,7 +309,7 @@ class AMQPReader
             $name = $table_data->read_shortstr();
             $ftype = $table_data->rawread(1);
             $val = $table_data->read_value($ftype);
-            $result[$name] = array($ftype,$val);
+            $result[$name] = array($ftype, $val);
         }
 
         return $result;
@@ -349,7 +349,7 @@ class AMQPReader
     {
         $this->bitcount = $this->bits = 0;
 
-        $val = NULL;
+        $val = null;
         switch ($fieldType) {
             case 'S': // Long string
                 $val = $this->read_longstr();

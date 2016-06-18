@@ -1,25 +1,25 @@
 <?php
 
-	/**
-	 * PresencaAulaFixture
-	 *
-	 */
-	class PresencaAulaFixture extends CakeTestFixture
-	{
+/**
+ * PresencaAulaFixture
+ *
+ */
+class PresencaAulaFixture extends CakeTestFixture
+{
 
-		/**
-		 * Import
-		 *
-		 * @var array
-		 */
-		public $import = ['table' => 'presenca_aulas'];
+    /**
+     * Import
+     *
+     * @var array
+     */
+    public $import = ['table' => 'presenca_aulas'];
 
-		/**
-		 * Records
-		 *
-		 * @var array
-		 */
-		public $records = [
-		];
+    /**
+     * Records
+     *
+     * @var array
+     */
+    public $records = [
+    ];
 
-	}
+}

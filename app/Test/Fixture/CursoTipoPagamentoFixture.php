@@ -1,25 +1,25 @@
 <?php
 
-	/**
-	 * CursoTipoPagamentoFixture
-	 *
-	 */
-	class CursoTipoPagamentoFixture extends CakeTestFixture
-	{
+/**
+ * CursoTipoPagamentoFixture
+ *
+ */
+class CursoTipoPagamentoFixture extends CakeTestFixture
+{
 
-		/**
-		 * Import
-		 *
-		 * @var array
-		 */
-		public $import = ['table' => 'curso_tipo_pagamentos'];
+    /**
+     * Import
+     *
+     * @var array
+     */
+    public $import = ['table' => 'curso_tipo_pagamentos'];
 
-		/**
-		 * Records
-		 *
-		 * @var array
-		 */
-		public $records = [
-		];
+    /**
+     * Records
+     *
+     * @var array
+     */
+    public $records = [
+    ];
 
-	}
+}

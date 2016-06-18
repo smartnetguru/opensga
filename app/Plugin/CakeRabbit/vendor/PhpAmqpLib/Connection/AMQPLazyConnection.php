@@ -24,11 +24,11 @@ class AMQPLazyConnection extends AMQPConnection
         $port,
         $user,
         $password,
-        $vhost="/",
-        $insist=false,
-        $login_method="AMQPLAIN",
-        $login_response=null,
-        $locale="en_US",
+        $vhost = "/",
+        $insist = false,
+        $login_method = "AMQPLAIN",
+        $login_response = null,
+        $locale = "en_US",
         $connection_timeout = 3,
         $read_write_timeout = 3,
         $context = null
@@ -61,26 +61,6 @@ class AMQPLazyConnection extends AMQPConnection
     }
 
     /**
-     * @inheritdoc
-     */
-    public function channel($channel_id = null)
-    {
-        $this->initLazyConnection();
-
-        return parent::channel($channel_id);
-    }
-
-    /**
-     * @return null|\PhpAmqpLib\Wire\IO\AbstractIO
-     */
-    protected function getIO()
-    {
-        $this->initLazyConnection();
-
-        return $this->io;
-    }
-
-    /**
      * Initialize the lazy connection if not initialized yet
      */
     private function initLazyConnection()
@@ -101,6 +81,26 @@ class AMQPLazyConnection extends AMQPConnection
                 $this->context
             );
         }
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function channel($channel_id = null)
+    {
+        $this->initLazyConnection();
+
+        return parent::channel($channel_id);
+    }
+
+    /**
+     * @return null|\PhpAmqpLib\Wire\IO\AbstractIO
+     */
+    protected function getIO()
+    {
+        $this->initLazyConnection();
+
+        return $this->io;
     }
 
 }

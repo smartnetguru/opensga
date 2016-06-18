@@ -1,7 +1,7 @@
 <?php
 
-    class FinanceiroAppModel extends AppModel
-    {
+class FinanceiroAppModel extends AppModel
+{
 
-    }
+}
 

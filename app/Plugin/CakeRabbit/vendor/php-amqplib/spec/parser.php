@@ -17,7 +17,8 @@ $spec = file_get_contents(__DIR__ . "/" . $argv[1]);
 
 $json_spec = json_decode($spec, true);
 
-function to_camel_case($amqp_method) {
+function to_camel_case($amqp_method)
+{
     $words = explode('-', $amqp_method);
     $ret = array();
     foreach ($words as $w) {
@@ -26,23 +27,28 @@ function to_camel_case($amqp_method) {
     return implode('', $ret);
 }
 
-function method_name($amqp_class, $amqp_method) {
+function method_name($amqp_class, $amqp_method)
+{
     return $amqp_class . to_camel_case($amqp_method);
 }
 
-function to_snake_case($arg) {
+function to_snake_case($arg)
+{
     return str_replace('-', '_', $arg);
 }
 
-function argument_default_val($arg) {
+function argument_default_val($arg)
+{
     return isset($arg['default-value']) ? " = " . default_value_to_string($arg['default-value']) : "";
 }
 
-function default_value_to_string($value) {
+function default_value_to_string($value)
+{
     return var_export($value, true);
 }
 
-function add_method_arguments($arguments) {
+function add_method_arguments($arguments)
+{
     $ret = array();
     foreach ($arguments as $arg) {
         $ret[] = '$' . to_snake_case($arg['name']) . argument_default_val($arg);
@@ -50,7 +56,8 @@ function add_method_arguments($arguments) {
     return implode(", ", $ret);
 }
 
-function domain_to_type($domains, $domain) {
+function domain_to_type($domains, $domain)
+{
     foreach ($domains as $d) {
         if ($d[0] == $domain) {
             return $d[1];
@@ -59,7 +66,8 @@ function domain_to_type($domains, $domain) {
     throw new \Exception("Invalid domain: " . $domain);
 }
 
-function argument_type($domains, $arg) {
+function argument_type($domains, $arg)
+{
     return isset($arg['type']) ? $arg['type'] : domain_to_type($domains, $arg['domain']);
 }
 
@@ -67,7 +75,8 @@ class ArgumentWriter
 {
     protected $bit_args = array();
 
-    public function call_write_argument($domains, $arg) {
+    public function call_write_argument($domains, $arg)
+    {
         $a_type = argument_type($domains, $arg);
         if ($a_type == 'bit') {
             $this->bit_args[] = '$' . to_snake_case($arg['name']);
@@ -78,7 +87,7 @@ class ArgumentWriter
             return $ret;
         }
     }
-    
+
     public function write_bits()
     {
         if (!empty($this->bit_args)) {
@@ -91,11 +100,13 @@ class ArgumentWriter
     }
 }
 
-function call_read_argument($domains, $arg) {
+function call_read_argument($domains, $arg)
+{
     return "\$args->read_" . argument_type($domains, $arg) . "();\n";
 }
 
-function protocol_version($json_spec) {
+function protocol_version($json_spec)
+{
     if (isset($json_spec['revision'])) {
         return $json_spec['major-version'] . $json_spec['minor-version'] . $json_spec['revision'];
     } else {
@@ -103,11 +114,13 @@ function protocol_version($json_spec) {
     }
 }
 
-function protocol_header($json_spec) {
+function protocol_header($json_spec)
+{
     if (isset($json_spec['revision'])) {
-        return sprintf("AMQP\x%02x\x%02x\x%02x\x%02x", 0, $json_spec['major-version'], $json_spec['minor-version'], $json_spec['revision']);
+        return sprintf("AMQP\x%02x\x%02x\x%02x\x%02x", 0, $json_spec['major-version'], $json_spec['minor-version'],
+            $json_spec['revision']);
     } else {
-        return sprintf("AMQP\x%02x\x%02x\x%02x\x%02x", 1, 1, $json_spec['major-version'],$json_spec['minor-version']);
+        return sprintf("AMQP\x%02x\x%02x\x%02x\x%02x", 1, 1, $json_spec['major-version'], $json_spec['minor-version']);
     }
 }
 
@@ -150,17 +163,19 @@ $out .= "}\n";
 
 file_put_contents(__DIR__ . '/../PhpAmqpLib/Helper/Protocol/Protocol' . protocol_version($json_spec) . '.php', $out);
 
-function frame_types($json_spec) {
+function frame_types($json_spec)
+{
     $ret = array();
     foreach ($json_spec['constants'] as $c) {
         if (substr($c['name'], 0, 5) == "FRAME") {
-            $ret[$c['value']] =  $c['name'];
+            $ret[$c['value']] = $c['name'];
         }
     }
     return var_export($ret, true);
 }
 
-function content_methods($json_spec) {
+function content_methods($json_spec)
+{
     $ret = array();
     foreach ($json_spec['classes'] as $c) {
         foreach ($c['methods'] as $m) {
@@ -172,7 +187,8 @@ function content_methods($json_spec) {
     return var_export($ret, true);
 }
 
-function close_methods($json_spec) {
+function close_methods($json_spec)
+{
     $ret = array();
     foreach ($json_spec['classes'] as $c) {
         foreach ($c['methods'] as $m) {
@@ -184,7 +200,8 @@ function close_methods($json_spec) {
     return var_export($ret, true);
 }
 
-function global_method_names($json_spec) {
+function global_method_names($json_spec)
+{
     $ret = array();
     foreach ($json_spec['classes'] as $c) {
         foreach ($c['methods'] as $m) {
@@ -209,10 +226,11 @@ $out .= "}\n";
 
 file_put_contents(__DIR__ . '/../PhpAmqpLib/Wire/Constants' . protocol_version($json_spec) . '.php', $out);
 
-function method_waits($json_spec) {
-    $ret  = array();
+function method_waits($json_spec)
+{
+    $ret = array();
     foreach ($json_spec['classes'] as $c) {
-        foreach($c['methods'] as $m) {
+        foreach ($c['methods'] as $m) {
             $ret[$c['name'] . '.' . to_snake_case($m['name'])] = $c['id'] . "," . $m['id'];
         }
     }
@@ -232,17 +250,18 @@ $out .= "}\n";
 
 file_put_contents(__DIR__ . '/../PhpAmqpLib/Helper/Protocol/Wait' . protocol_version($json_spec) . '.php', $out);
 
-function method_map($json_spec) {
-    $ret  = array();
-    
+function method_map($json_spec)
+{
+    $ret = array();
+
     $special_map = array(
         '60,30' => 'basic_cancel_from_server',
         '60,80' => 'basic_ack_from_server',
         '60,120' => 'basic_nack_from_server'
     );
-    
+
     foreach ($json_spec['classes'] as $c) {
-        foreach($c['methods'] as $m) {
+        foreach ($c['methods'] as $m) {
             if (isset($special_map[$c['id'] . ',' . $m['id']]) && protocol_version($json_spec) == '091') {
                 $ret[$c['id'] . "," . $m['id']] = $special_map[$c['id'] . ',' . $m['id']];
             } else {

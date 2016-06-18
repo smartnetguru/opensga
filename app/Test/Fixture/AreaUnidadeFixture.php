@@ -1,25 +1,25 @@
 <?php
 
-	/**
-	 * AreaUnidadeFixture
-	 *
-	 */
-	class AreaUnidadeFixture extends CakeTestFixture
-	{
+/**
+ * AreaUnidadeFixture
+ *
+ */
+class AreaUnidadeFixture extends CakeTestFixture
+{
 
-		/**
-		 * Import
-		 *
-		 * @var array
-		 */
-		public $import = ['model' => 'AreaUnidade'];
+    /**
+     * Import
+     *
+     * @var array
+     */
+    public $import = ['model' => 'AreaUnidade'];
 
-		/**
-		 * Records
-		 *
-		 * @var array
-		 */
-		public $records = [
-		];
+    /**
+     * Records
+     *
+     * @var array
+     */
+    public $records = [
+    ];
 
-	}
+}

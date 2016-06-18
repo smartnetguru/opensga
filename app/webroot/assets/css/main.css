@@ -5765,7 +5765,11 @@ td.column-right {
 #page-sidebar .discussion .messages p {
     font-size: 12px;
 }
-.top-buffer { margin-top:20px; margin-bottom: 60px; }
+
+.top-buffer {
+    margin-top: 20px;
+    margin-bottom: 60px;
+}
 
 /* ---------------------------------------------------------------------- */
 /*	Blog Elements
@@ -5775,6 +5779,7 @@ td.column-right {
     margin: 0 5px 8px 0;
     overflow: hidden;
 }
+
 .blog-photo-stream img {
     border: 2px solid #9CA5AE;
     padding: 2px;
@@ -5789,11 +5794,13 @@ td.column-right {
     position: relative;
     top: -1px;
 }
+
 .blog-posts article {
     border-bottom: 1px solid #DDDDDD;
     margin-bottom: 50px;
     padding-bottom: 10px;
 }
+
 .blog-posts article .flexslider {
     margin-bottom: 25px;
     background: #FFFFFF;
@@ -5802,62 +5809,75 @@ td.column-right {
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
     position: relative;
 }
+
 article .post-meta {
     margin-bottom: 7px;
 }
+
 article .post-meta > span {
     display: inline-block;
     padding-right: 10px;
 }
+
 .post-page .post-meta, .recent-posts .post-meta {
     border-bottom: 1px solid #EEEEEE;
     border-top: 1px solid #EEEEEE;
     margin: 20px 0;
     padding: 10px 0;
 }
+
 div.post-media {
     border-top: 1px solid #EEEEEE;
     margin: 15px 0 0 0;
     padding: 20px 0 15px 0;
 }
+
 div.post-author div.img-thumbnail {
     display: inline-block;
     float: left;
     margin-right: 20px;
 }
+
 div.post-media p {
     line-height: 20px;
     margin: 0;
     padding: 0;
 }
+
 div.post-media h4 i {
     margin-right: 5px;
 }
+
 div.post-comments img.media-object {
     height: 60px;
     position: relative;
     top: 2px;
     width: 60px;
 }
+
 ul.blog-categories {
     margin-bottom: 35px;
 }
+
 ul.blog-categories > li a {
     border-bottom: 1px solid #EDEDDE;
     padding: 8px 20px;
     transition: all 0.3s ease 0s;
 }
+
 ul.post-list {
     list-style: none;
     margin: 0;
     padding: 0;
 }
+
 ul.post-list li {
     border-bottom: 1px dotted #E2E2E2;
     padding: 15px 0;
     display: block;
     min-height: 90px;
 }
+
 ul.post-list .post-image {
     margin-right: 10px;
     float: left;

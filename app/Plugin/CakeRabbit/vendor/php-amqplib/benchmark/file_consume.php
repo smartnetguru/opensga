@@ -30,7 +30,8 @@ class Consumer
         }
 
         if ($msg->body == 'quit') {
-            echo sprintf("Pid: %s, Count: %s, Time: %.4f\n", getmypid(), $this->msgCount, microtime(true) -  $this->startTime);
+            echo sprintf("Pid: %s, Count: %s, Time: %.4f\n", getmypid(), $this->msgCount,
+                microtime(true) - $this->startTime);
             die;
         }
         $this->msgCount++;
@@ -44,6 +45,7 @@ function shutdown($ch, $conn)
     $ch->close();
     $conn->close();
 }
+
 register_shutdown_function('shutdown', $ch, $conn);
 
 while (count($ch->callbacks)) {

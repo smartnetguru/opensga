@@ -1,25 +1,25 @@
 <?php
 
-	/**
-	 * FinanceiroBancoFixture
-	 *
-	 */
-	class FinanceiroBancoFixture extends CakeTestFixture
-	{
+/**
+ * FinanceiroBancoFixture
+ *
+ */
+class FinanceiroBancoFixture extends CakeTestFixture
+{
 
-		/**
-		 * Import
-		 *
-		 * @var array
-		 */
-		public $import = ['model' => 'FinanceiroBanco'];
+    /**
+     * Import
+     *
+     * @var array
+     */
+    public $import = ['model' => 'FinanceiroBanco'];
 
-		/**
-		 * Records
-		 *
-		 * @var array
-		 */
-		public $records = [
-		];
+    /**
+     * Records
+     *
+     * @var array
+     */
+    public $records = [
+    ];
 
-	}
+}

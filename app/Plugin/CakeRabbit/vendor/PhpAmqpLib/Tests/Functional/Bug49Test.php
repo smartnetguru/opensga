@@ -3,8 +3,8 @@
 namespace PhpAmqpLib\Tests\Functional;
 
 use PhpAmqpLib\Connection\AMQPConnection;
-use PhpAmqpLib\Message\AMQPMessage;
 use PhpAmqpLib\Exception\AMQPProtocolException;
+use PhpAmqpLib\Message\AMQPMessage;
 
 class Bug49Test extends \PHPUnit_Framework_TestCase
 {
@@ -33,7 +33,8 @@ class Bug49Test extends \PHPUnit_Framework_TestCase
         }
     }
 
-    public function tearDown() {
+    public function tearDown()
+    {
         $this->ch2->close();
         $this->conn->close();
     }

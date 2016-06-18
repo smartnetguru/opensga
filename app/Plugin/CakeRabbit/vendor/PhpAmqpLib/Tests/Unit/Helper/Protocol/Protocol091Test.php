@@ -55,7 +55,8 @@ class Protocol091Test extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $args->getvalue());
 
         $expected = "\x04/foo\x00";
-        list($class_id, $method_id, $args) = $this->protocol091->accessRequest("/foo", false, false, false, false, false);
+        list($class_id, $method_id, $args) = $this->protocol091->accessRequest("/foo", false, false, false, false,
+            false);
         $this->assertEquals($expected, $args->getvalue());
     }
 
@@ -68,7 +69,7 @@ class Protocol091Test extends \PHPUnit_Framework_TestCase
             false, false,
             array()
         );
-       $this->assertEquals($expected, $args->getvalue());
+        $this->assertEquals($expected, $args->getvalue());
     }
 
     public function testExchangeDelete()
@@ -115,7 +116,7 @@ class Protocol091Test extends \PHPUnit_Framework_TestCase
             false, false,
             array()
         );
-       $this->assertEquals($expected, $args->getvalue());
+        $this->assertEquals($expected, $args->getvalue());
     }
 
     public function testQueueDelete()
@@ -149,7 +150,8 @@ class Protocol091Test extends \PHPUnit_Framework_TestCase
     public function testBasicConsume()
     {
         $expected = "\x00\x00\x03foo\x03bar\x00\x00\x00\x00\x00";
-        list($class_id, $method_id, $args) = $this->protocol091->basicConsume(0, 'foo', 'bar', false, false, false, false);
+        list($class_id, $method_id, $args) = $this->protocol091->basicConsume(0, 'foo', 'bar', false, false, false,
+            false);
         $this->assertEquals($expected, $args->getvalue());
     }
 

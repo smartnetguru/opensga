@@ -2,6 +2,7 @@
 
 App::uses('AppModel', 'Model');
 
-class ArtigosAppModel extends AppModel {
+class ArtigosAppModel extends AppModel
+{
 
 }

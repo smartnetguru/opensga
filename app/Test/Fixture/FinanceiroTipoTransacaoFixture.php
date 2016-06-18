@@ -1,25 +1,25 @@
 <?php
 
-	/**
-	 * FinanceiroTipoTransacaoFixture
-	 *
-	 */
-	class FinanceiroTipoTransacaoFixture extends CakeTestFixture
-	{
+/**
+ * FinanceiroTipoTransacaoFixture
+ *
+ */
+class FinanceiroTipoTransacaoFixture extends CakeTestFixture
+{
 
-		/**
-		 * Import
-		 *
-		 * @var array
-		 */
-		public $import = ['model' => 'FinanceiroTipoTransacao'];
+    /**
+     * Import
+     *
+     * @var array
+     */
+    public $import = ['model' => 'FinanceiroTipoTransacao'];
 
-		/**
-		 * Records
-		 *
-		 * @var array
-		 */
-		public $records = [
-		];
+    /**
+     * Records
+     *
+     * @var array
+     */
+    public $records = [
+    ];
 
-	}
+}

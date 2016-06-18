@@ -11,25 +11,26 @@ use PhpAmqpLib\Wire\AMQPWriter;
  */
 abstract class GenericContent
 {
+    protected static $PROPERTIES = array(
+        "dummy" => "shortstr"
+    );
     public $delivery_info = array();
     private $properties = array();
     private $serialized_properties = null;
 
-    protected static $PROPERTIES = array(
-        "dummy" => "shortstr"
-    );
-
-    public function __construct($props, $prop_types=null)
+    public function __construct($props, $prop_types = null)
     {
-        if($prop_types)
+        if ($prop_types) {
             $this->prop_types = $prop_types;
-        else
+        } else {
             $this->prop_types = self::$PROPERTIES;
+        }
         $d = array();
-        if ($props)
+        if ($props) {
             $d = array_intersect_key($props, $this->prop_types);
-        else
+        } else {
             $d = array();
+        }
         $this->properties = $d;
     }
 
@@ -48,32 +49,36 @@ abstract class GenericContent
      */
     public function get($name)
     {
-        if(isset($this->properties[$name])) {
+        if (isset($this->properties[$name])) {
             return $this->properties[$name];
         }
-        if(isset($this->delivery_info[$name])) {
+        if (isset($this->delivery_info[$name])) {
             return $this->delivery_info[$name];
         }
 
         throw new \OutOfBoundsException("No '$name' property");
     }
+
     /**
      * just return the $this::properties array.
      */
     public function get_properties()
     {
-   		return $this->properties;
+        return $this->properties;
     }
+
     /**
      * allows to set the property after creation of the object
      */
     public function set($name, $value)
     {
-        if(array_key_exists($name, $this->prop_types))
+        if (array_key_exists($name, $this->prop_types)) {
             $this->properties[$name] = $value;
-        else
+        } else {
             throw new \OutOfBoundsException("No '$name' property");
+        }
     }
+
     /**
      * Given the raw bytes containing the property-flags and
      * property-list from a content-frame-header, parse and insert
@@ -90,8 +95,9 @@ abstract class GenericContent
         while (true) {
             $flag_bits = $r->read_short();
             $flags[] = $flag_bits;
-            if(($flag_bits & 1) == 0)
+            if (($flag_bits & 1) == 0) {
                 break;
+            }
         }
 
         $shift = 0;
@@ -105,7 +111,7 @@ abstract class GenericContent
                 $shift = 15;
             }
             if ($flag_bits & (1 << $shift)) {
-                $d[$key] = $r->{'read_'.$proptype}();
+                $d[$key] = $r->{'read_' . $proptype}();
             }
 
             $shift -= 1;
@@ -144,7 +150,7 @@ abstract class GenericContent
 
                     $flag_bits |= (1 << $shift);
                     if ($proptype != "bit") {
-                        $raw_bytes->{'write_'.$proptype}($val);
+                        $raw_bytes->{'write_' . $proptype}($val);
                     }
 
                 }
@@ -158,7 +164,7 @@ abstract class GenericContent
             }
 
             $result->write($raw_bytes->getvalue());
-            
+
             $this->serialized_properties = $result->getvalue();
 
             return $this->serialized_properties;

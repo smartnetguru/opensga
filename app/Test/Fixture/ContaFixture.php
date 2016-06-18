@@ -1,25 +1,25 @@
 <?php
 
-	/**
-	 * ContaFixture
-	 *
-	 */
-	class ContaFixture extends CakeTestFixture
-	{
+/**
+ * ContaFixture
+ *
+ */
+class ContaFixture extends CakeTestFixture
+{
 
-		/**
-		 * Import
-		 *
-		 * @var array
-		 */
-		public $import = ['model' => 'Conta'];
+    /**
+     * Import
+     *
+     * @var array
+     */
+    public $import = ['model' => 'Conta'];
 
-		/**
-		 * Records
-		 *
-		 * @var array
-		 */
-		public $records = [
-		];
+    /**
+     * Records
+     *
+     * @var array
+     */
+    public $records = [
+    ];
 
-	}
+}

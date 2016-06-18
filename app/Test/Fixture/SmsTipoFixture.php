@@ -1,25 +1,25 @@
 <?php
 
-	/**
-	 * SmsTipoFixture
-	 *
-	 */
-	class SmsTipoFixture extends CakeTestFixture
-	{
+/**
+ * SmsTipoFixture
+ *
+ */
+class SmsTipoFixture extends CakeTestFixture
+{
 
-		/**
-		 * Import
-		 *
-		 * @var array
-		 */
-		public $import = ['table' => 'sms_tipos'];
+    /**
+     * Import
+     *
+     * @var array
+     */
+    public $import = ['table' => 'sms_tipos'];
 
-		/**
-		 * Records
-		 *
-		 * @var array
-		 */
-		public $records = [
-		];
+    /**
+     * Records
+     *
+     * @var array
+     */
+    public $records = [
+    ];
 
-	}
+}

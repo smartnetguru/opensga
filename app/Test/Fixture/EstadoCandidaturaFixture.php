@@ -1,25 +1,25 @@
 <?php
 
-	/**
-	 * EstadoCandidaturaFixture
-	 *
-	 */
-	class EstadoCandidaturaFixture extends CakeTestFixture
-	{
+/**
+ * EstadoCandidaturaFixture
+ *
+ */
+class EstadoCandidaturaFixture extends CakeTestFixture
+{
 
-		/**
-		 * Import
-		 *
-		 * @var array
-		 */
-		public $import = ['model' => 'EstadoCandidatura'];
+    /**
+     * Import
+     *
+     * @var array
+     */
+    public $import = ['model' => 'EstadoCandidatura'];
 
-		/**
-		 * Records
-		 *
-		 * @var array
-		 */
-		public $records = [
-		];
+    /**
+     * Records
+     *
+     * @var array
+     */
+    public $records = [
+    ];
 
-	}
+}

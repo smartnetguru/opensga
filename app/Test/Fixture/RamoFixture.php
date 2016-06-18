@@ -1,25 +1,25 @@
 <?php
 
-	/**
-	 * RamoFixture
-	 *
-	 */
-	class RamoFixture extends CakeTestFixture
-	{
+/**
+ * RamoFixture
+ *
+ */
+class RamoFixture extends CakeTestFixture
+{
 
-		/**
-		 * Import
-		 *
-		 * @var array
-		 */
-		public $import = ['model' => 'Ramo'];
+    /**
+     * Import
+     *
+     * @var array
+     */
+    public $import = ['model' => 'Ramo'];
 
-		/**
-		 * Records
-		 *
-		 * @var array
-		 */
-		public $records = [
-		];
+    /**
+     * Records
+     *
+     * @var array
+     */
+    public $records = [
+    ];
 
-	}
+}

@@ -1,25 +1,25 @@
 <?php
 
-	/**
-	 * AlumniFixture
-	 *
-	 */
-	class AlumniAlumniFixture extends CakeTestFixture
-	{
+/**
+ * AlumniFixture
+ *
+ */
+class AlumniAlumniFixture extends CakeTestFixture
+{
 
-		/**
-		 * Import
-		 *
-		 * @var array
-		 */
-		public $import = ['model' => 'AlumniAlumni'];
+    /**
+     * Import
+     *
+     * @var array
+     */
+    public $import = ['model' => 'AlumniAlumni'];
 
-		/**
-		 * Records
-		 *
-		 * @var array
-		 */
-		public $records = [
-		];
+    /**
+     * Records
+     *
+     * @var array
+     */
+    public $records = [
+    ];
 
-	}
+}

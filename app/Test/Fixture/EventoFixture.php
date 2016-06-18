@@ -1,25 +1,25 @@
 <?php
 
-	/**
-	 * EventoFixture
-	 *
-	 */
-	class EventoFixture extends CakeTestFixture
-	{
+/**
+ * EventoFixture
+ *
+ */
+class EventoFixture extends CakeTestFixture
+{
 
-		/**
-		 * Import
-		 *
-		 * @var array
-		 */
-		public $import = ['table' => 'eventos'];
+    /**
+     * Import
+     *
+     * @var array
+     */
+    public $import = ['table' => 'eventos'];
 
-		/**
-		 * Records
-		 *
-		 * @var array
-		 */
-		public $records = [
-		];
+    /**
+     * Records
+     *
+     * @var array
+     */
+    public $records = [
+    ];
 
-	}
+}

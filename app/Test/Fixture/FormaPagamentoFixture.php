@@ -1,25 +1,25 @@
 <?php
 
-	/**
-	 * FormaPagamentoFixture
-	 *
-	 */
-	class FormaPagamentoFixture extends CakeTestFixture
-	{
+/**
+ * FormaPagamentoFixture
+ *
+ */
+class FormaPagamentoFixture extends CakeTestFixture
+{
 
-		/**
-		 * Import
-		 *
-		 * @var array
-		 */
-		public $import = ['table' => 'forma_pagamentos'];
+    /**
+     * Import
+     *
+     * @var array
+     */
+    public $import = ['table' => 'forma_pagamentos'];
 
-		/**
-		 * Records
-		 *
-		 * @var array
-		 */
-		public $records = [
-		];
+    /**
+     * Records
+     *
+     * @var array
+     */
+    public $records = [
+    ];
 
-	}
+}

@@ -16,7 +16,7 @@ abstract class AbstractPublishConsumeTest extends \PHPUnit_Framework_TestCase
         $this->ch = $this->conn->channel();
 
         $this->ch->exchange_declare($this->exchange_name, 'direct', false, false, false);
-        list($this->queue_name,,) = $this->ch->queue_declare();
+        list($this->queue_name, ,) = $this->ch->queue_declare();
         $this->ch->queue_bind($this->queue_name, $this->exchange_name, $this->queue_name);
     }
 

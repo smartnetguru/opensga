@@ -1,25 +1,25 @@
 <?php
 
-	/**
-	 * MovimentoentidadeFixture
-	 *
-	 */
-	class MovimentoentidadeFixture extends CakeTestFixture
-	{
+/**
+ * MovimentoentidadeFixture
+ *
+ */
+class MovimentoentidadeFixture extends CakeTestFixture
+{
 
-		/**
-		 * Import
-		 *
-		 * @var array
-		 */
-		public $import = ['model' => 'Movimentoentidade'];
+    /**
+     * Import
+     *
+     * @var array
+     */
+    public $import = ['model' => 'Movimentoentidade'];
 
-		/**
-		 * Records
-		 *
-		 * @var array
-		 */
-		public $records = [
-		];
+    /**
+     * Records
+     *
+     * @var array
+     */
+    public $records = [
+    ];
 
-	}
+}

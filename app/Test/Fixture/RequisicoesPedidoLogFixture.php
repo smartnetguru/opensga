@@ -1,25 +1,25 @@
 <?php
 
-	/**
-	 * RequisicoesPedidoLogFixture
-	 *
-	 */
-	class RequisicoesPedidoLogFixture extends CakeTestFixture
-	{
+/**
+ * RequisicoesPedidoLogFixture
+ *
+ */
+class RequisicoesPedidoLogFixture extends CakeTestFixture
+{
 
-		/**
-		 * Import
-		 *
-		 * @var array
-		 */
-		public $import = ['table' => 'requisicoes_pedido_logs'];
+    /**
+     * Import
+     *
+     * @var array
+     */
+    public $import = ['table' => 'requisicoes_pedido_logs'];
 
-		/**
-		 * Records
-		 *
-		 * @var array
-		 */
-		public $records = [
-		];
+    /**
+     * Records
+     *
+     * @var array
+     */
+    public $records = [
+    ];
 
-	}
+}

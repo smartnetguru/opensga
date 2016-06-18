@@ -7,16 +7,16 @@ class SubQueryBehaviorTest extends CakeTestCase
 
     protected $_SubQueryArticle = null;
 
-    public function setUp()
-    {
-        parent::setUp();
-        $this->_SubQueryArticle = ClassRegistry::init('SubQueryArticle');
-    }
-
     public static function setUpBeforeClass()
     {
         parent::setUpBeforeClass();
         App::build(array('Model' => dirname(__FILE__) . DS . '..' . DS . '..' . DS . '..' . DS . 'files' . DS . 'Model' . DS));
+    }
+
+    public function setUp()
+    {
+        parent::setUp();
+        $this->_SubQueryArticle = ClassRegistry::init('SubQueryArticle');
     }
 
     public function testInsideModelMethods()

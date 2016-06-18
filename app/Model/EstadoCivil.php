@@ -1,11 +1,11 @@
 <?php
-    App::uses('AppModel', 'Model');
+App::uses('AppModel', 'Model');
 
-    /**
-     * EstadoCivil Model
-     *
-     */
-    class EstadoCivil extends AppModel
-    {
+/**
+ * EstadoCivil Model
+ *
+ */
+class EstadoCivil extends AppModel
+{
 
-    }
+}

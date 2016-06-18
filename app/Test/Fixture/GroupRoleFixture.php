@@ -1,25 +1,25 @@
 <?php
 
-	/**
-	 * GroupRoleFixture
-	 *
-	 */
-	class GroupRoleFixture extends CakeTestFixture
-	{
+/**
+ * GroupRoleFixture
+ *
+ */
+class GroupRoleFixture extends CakeTestFixture
+{
 
-		/**
-		 * Import
-		 *
-		 * @var array
-		 */
-		public $import = ['model' => 'GroupRole'];
+    /**
+     * Import
+     *
+     * @var array
+     */
+    public $import = ['model' => 'GroupRole'];
 
-		/**
-		 * Records
-		 *
-		 * @var array
-		 */
-		public $records = [
-		];
+    /**
+     * Records
+     *
+     * @var array
+     */
+    public $records = [
+    ];
 
-	}
+}

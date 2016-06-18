@@ -1,9 +1,9 @@
 <?php
 
-    App::uses('AppModel', 'Model');
+App::uses('AppModel', 'Model');
 
-    class ApiAppModel extends AppModel
-    {
-        public $useTable = false;
+class ApiAppModel extends AppModel
+{
+    public $useTable = false;
 
-    }
+}

@@ -1,25 +1,25 @@
 <?php
 
-	/**
-	 * BancoFixture
-	 *
-	 */
-	class BancoFixture extends CakeTestFixture
-	{
+/**
+ * BancoFixture
+ *
+ */
+class BancoFixture extends CakeTestFixture
+{
 
-		/**
-		 * Import
-		 *
-		 * @var array
-		 */
-		public $import = ['model' => 'Banco'];
+    /**
+     * Import
+     *
+     * @var array
+     */
+    public $import = ['model' => 'Banco'];
 
-		/**
-		 * Records
-		 *
-		 * @var array
-		 */
-		public $records = [
-		];
+    /**
+     * Records
+     *
+     * @var array
+     */
+    public $records = [
+    ];
 
-	}
+}
