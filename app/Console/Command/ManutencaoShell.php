@@ -577,5 +577,72 @@
 
         }
 
+        public function actualiza_provincias_graduacao(){
+            $this->Aluno->contain('Entidade');
+            $alunos = $this->Aluno->find('all',['conditions'=>['Entidade.provincia_nascimento is null']]);
+            $total = count($alunos);
+           
+            foreach($alunos as $aluno){
+                $candidatos = $this->Aluno->CandidatoGraduacao->findAllByAlunoId($aluno['Aluno']['id']);
+                $this->Aluno->Entidade->id = $aluno['Entidade']['id'];
+                if(!empty($candidatos)){
+                    foreach($candidatos as $candidato ){
+                        if($candidato['CandidatoGraduacao']['provincia_nascimento']){
+                            $this->Aluno->Entidade->set('provincia_nascimento',$candidato['CandidatoGraduacao']['provincia_nascimento']);
+                            if(!$this->Aluno->Entidade->save()){
+                                debug($this->Aluno->Entidade->validationErrors);
+                                die();
+                            }
+                            break;
+                        }
+                    }
+                }
+
+                $this->out($total--);
+            }
+        }
+
+        public function actualiza_provincias_cidade(){
+            $this->Aluno->contain('Entidade');
+            $alunos = $this->Aluno->find('all',['conditions'=>['Entidade.provincia_nascimento is null']]);
+            $total = count($alunos);
+            App::import('Vendor', 'PHPExcel', ['file' => 'PHPExcel.php']);
+            if (!class_exists('PHPExcel')) {
+                throw new CakeException('Vendor class PHPExcel not found!');
+            }
+
+            $xls = PHPExcel_IOFactory::load(APP . 'Imports' . DS . 'distrito.xlsx');
+            $worksheet = $xls->getActiveSheet();
+
+
+            foreach($alunos as $aluno){
+                if($aluno['Entidade']['cidade_nascimento']!=null){
+
+                    $linha_actual = 2;
+                    foreach ($worksheet->getRowIterator() as $row) {
+                        $controlador = $worksheet->getCell('A' . $linha_actual)->getCalculatedValue();
+                        if ($controlador == '') {
+                            break;
+                        }
+
+                        if($controlador==$aluno['Entidade']['cidade_nascimento']){
+                            $nomeCidade = $worksheet->getCell('C' . $linha_actual)->getCalculatedValue();
+                            $cidadeDB = $this->Aluno->Entidade->CidadeNascimento->find('first',['conditions'=>['name LIKE'=>'%'.$nomeCidade.'%']]);
+                            if(!empty($cidadeDB)){
+                               $this->Aluno->Entidade->id = $aluno['Entidade']['id'];
+                                $this->Aluno->Entidade->set('provincia_nascimento',$cidadeDB['CidadeNascimento']['provincia_id']);
+                                $this->Aluno->Entidade->set('cidade_nascimento',$cidadeDB['CidadeNascimento']['id']);
+                                if(!$this->Aluno->Entidade->save()){
+                                    debug($this->Aluno->Entidade->validationErrors);
+                                }
+                            }
+                        }
+                        $linha_actual++;
+                    }
+                }
+                $this->out($total--);
+            }
+        }
+
 
     }
