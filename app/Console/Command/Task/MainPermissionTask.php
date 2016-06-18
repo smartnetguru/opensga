@@ -601,6 +601,8 @@
             $comandos[] = "acl grant User.{$userId} controllers/Messages/estudante_enviar_mensagem";
             $comandos[] = "acl grant User.{$userId} controllers/Messages/estudante_ver_mensagem";
 
+            $comandos[] = "acl grant User.{$userId} controllers/Pages/estudante_home";
+
             $comandos[] = "acl grant User.{$userId} controllers/Turmas/estudante_index";
             $comandos[] = "acl grant User.{$userId} controllers/Turmas/estudante_ver_turma";
 
