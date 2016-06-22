@@ -43,9 +43,10 @@
                 <?php echo $this->Form->input('Turma.curso_id', [
                         'label'       => false,
                         'div'         => false,
-                        'class'       => 'form-control',
+                        'class'       => 'form-control search-select',
                         'placeholder' => 'Ou Curso',
                         'required'    => false,
+                    'empty'=>'---Seleccione---'
                 ]); ?>
             </div>
             <div class="col-md-3">

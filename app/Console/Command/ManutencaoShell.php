@@ -500,7 +500,7 @@ class ManutencaoShell extends AppShell
 
     public function testa_pauta()
     {
-        $this->Turma->processaPauta('/home/backstageel/Downloads/pauta.xlsx', 62355);
+        $this->Turma->processaPauta('/home/backstageel/Downloads/pauta.xlsx', 64310);
     }
 
 

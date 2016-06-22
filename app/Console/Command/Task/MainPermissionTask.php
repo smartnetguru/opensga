@@ -177,6 +177,7 @@ class MainPermissionTask extends AppShell
                 $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/faculdade_perfil_estudante";
                 $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Alunos/faculdade_pesquisa_aluno_action";
 
+                $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Users/faculdade_changeLoginProfile";
                 $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Users/faculdade_mostrar_foto";
                 $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Users/faculdade_alterar_senha_sistema";
             } else {
@@ -273,6 +274,8 @@ class MainPermissionTask extends AppShell
                     $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/PlanoEstudos/faculdade_adicionar_precedencias";
 
 
+                    $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Turmas/adicionar_estudante";
+                    $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Turmas/importar_notas_historico";
                     $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Turmas/criar_avaliacao";
                     $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Turmas/fechar_turma";
                     $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Turmas/importar_pauta";
@@ -393,6 +396,7 @@ class MainPermissionTask extends AppShell
                     $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Inscricaos/cadastro_notas_historico";
                     $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Inscricaos/index";
 
+                    $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Turmas/criar_turma";
                     $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Turmas/relatorios";
                     $comandos[] = "acl grant User.{$funcionario['User']['id']} controllers/Turmas/relatorios_turmas_abertas";
 

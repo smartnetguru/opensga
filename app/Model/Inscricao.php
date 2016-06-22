@@ -17,6 +17,11 @@
  * @property FinanceiroTransacao $FinanceiroTransacao
  * @property Turma $Turma
  * @property EstadoInscricao $EstadoInscricao
+ * @property TipoInscricao $TipoInscricao
+ * @property EpocaAvaliacao $EpocaAvalicao
+ * @property Avaliacao $Avaliacao
+ * @property Matricula $Matricula
+ *
  *
  */
 class Inscricao extends AppModel
@@ -105,7 +110,7 @@ class Inscricao extends AppModel
                 'rule' => 'notBlank',
                 'required' => 'Create',
                 'on' => 'create',
-                'message' => 'A turma onde o estudante escreveu deve ser Definida',
+                'message' => 'O estudante deve ter a matricula renovada',
             ],
         ],
         'epoca_avaliacao_id',
@@ -831,6 +836,10 @@ class Inscricao extends AppModel
                             'turma_id' => $turmaId,
                         ],
                     ]);
+                    if(!$data['matricula_id']){
+                        $matricula = $this->Aluno->Matricula->findByAlunoIdAndAnoLectivoId($data['aluno_id'],$anoLectivo['AnoLectivo']['id']);
+                        $data['matricula_id'] = $matricula['Matricula']['id'];
+                    }
                     $inscricaoSave = [
                         'Inscricao' => [
                             'aluno_id' => $data['aluno_id'],

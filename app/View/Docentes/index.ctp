@@ -30,6 +30,7 @@
                         'required'    => false,
                         'class'       => 'form-control',
                         'placeholder' => 'Unidade Organica',
+                    'empty'=>'---Seleccione---'
                 ]); ?>
             </div>
             <div class="col-md-3">

@@ -60,176 +60,176 @@ class Turma extends AppModel
     //The Associations below have been created with all possible keys, those that are not needed can be removed
 
     public $belongsTo = [
-        'AnoLectivo' => [
-            'className' => 'AnoLectivo',
+        'AnoLectivo'      => [
+            'className'  => 'AnoLectivo',
             'foreignKey' => 'ano_lectivo_id',
             'conditions' => '',
-            'fields' => '',
-            'order' => '',
+            'fields'     => '',
+            'order'      => '',
         ],
         'SemestreLectivo' => [
-            'className' => 'SemestreLectivo',
+            'className'  => 'SemestreLectivo',
             'foreignKey' => 'semestre_lectivo_id',
             'conditions' => '',
-            'fields' => '',
-            'order' => '',
+            'fields'     => '',
+            'order'      => '',
         ],
-        'Curso' => [
-            'className' => 'Curso',
+        'Curso'           => [
+            'className'  => 'Curso',
             'foreignKey' => 'curso_id',
             'conditions' => '',
-            'fields' => '',
-            'order' => '',
+            'fields'     => '',
+            'order'      => '',
         ],
-        'PlanoEstudo' => [
-            'className' => 'PlanoEstudo',
+        'PlanoEstudo'     => [
+            'className'  => 'PlanoEstudo',
             'foreignKey' => 'plano_estudo_id',
             'conditions' => '',
-            'fields' => '',
-            'order' => '',
+            'fields'     => '',
+            'order'      => '',
         ],
-        'Turno' => [
-            'className' => 'Turno',
+        'Turno'           => [
+            'className'  => 'Turno',
             'foreignKey' => 'turno_id',
             'conditions' => '',
-            'fields' => '',
-            'order' => '',
+            'fields'     => '',
+            'order'      => '',
         ],
-        'Disciplina' => [
-            'className' => 'Disciplina',
+        'Disciplina'      => [
+            'className'  => 'Disciplina',
             'foreignKey' => 'disciplina_id',
             'conditions' => '',
-            'fields' => '',
-            'order' => '',
+            'fields'     => '',
+            'order'      => '',
         ],
-        'AnoLectivo' => [
-            'className' => 'AnoLectivo',
+        'AnoLectivo'      => [
+            'className'  => 'AnoLectivo',
             'foreignKey' => 'ano_lectivo_id',
             'conditions' => '',
-            'fields' => '',
-            'order' => '',
+            'fields'     => '',
+            'order'      => '',
         ],
-        'PlanoEstudo' => [
-            'className' => 'PlanoEstudo',
+        'PlanoEstudo'     => [
+            'className'  => 'PlanoEstudo',
             'foreignKey' => 'plano_estudo_id',
             'conditions' => '',
-            'fields' => '',
-            'order' => '',
+            'fields'     => '',
+            'order'      => '',
         ],
-        'EstadoTurma' => [
-            'className' => 'EstadoTurma',
+        'EstadoTurma'     => [
+            'className'  => 'EstadoTurma',
             'foreignKey' => 'estado_turma_id',
             'conditions' => '',
-            'fields' => '',
-            'order' => '',
+            'fields'     => '',
+            'order'      => '',
         ],
     ];
     public $virtualFields = [
 
     ];
     public $hasMany = [
-        'Inscricao' => [
-            'className' => 'Inscricao',
-            'foreignKey' => 'turma_id',
-            'dependent' => false,
-            'conditions' => '',
-            'fields' => '',
-            'order' => '',
-            'limit' => '',
-            'offset' => '',
-            'exclusive' => '',
-            'finderQuery' => '',
+        'Inscricao'          => [
+            'className'    => 'Inscricao',
+            'foreignKey'   => 'turma_id',
+            'dependent'    => false,
+            'conditions'   => '',
+            'fields'       => '',
+            'order'        => '',
+            'limit'        => '',
+            'offset'       => '',
+            'exclusive'    => '',
+            'finderQuery'  => '',
             'counterQuery' => '',
         ],
-        'Avaliacao' => [
-            'className' => 'Avaliacao',
-            'foreignKey' => 'turma_id',
-            'dependent' => false,
-            'conditions' => '',
-            'fields' => '',
-            'order' => '',
-            'limit' => '',
-            'offset' => '',
-            'exclusive' => '',
-            'finderQuery' => '',
+        'Avaliacao'          => [
+            'className'    => 'Avaliacao',
+            'foreignKey'   => 'turma_id',
+            'dependent'    => false,
+            'conditions'   => '',
+            'fields'       => '',
+            'order'        => '',
+            'limit'        => '',
+            'offset'       => '',
+            'exclusive'    => '',
+            'finderQuery'  => '',
             'counterQuery' => '',
         ],
         'TurmaTipoAvaliacao' => [
-            'className' => 'TurmaTipoAvaliacao',
-            'foreignKey' => 'turma_id',
-            'dependent' => false,
-            'conditions' => '',
-            'fields' => '',
-            'order' => '',
-            'limit' => '',
-            'offset' => '',
-            'exclusive' => '',
-            'finderQuery' => '',
+            'className'    => 'TurmaTipoAvaliacao',
+            'foreignKey'   => 'turma_id',
+            'dependent'    => false,
+            'conditions'   => '',
+            'fields'       => '',
+            'order'        => '',
+            'limit'        => '',
+            'offset'       => '',
+            'exclusive'    => '',
+            'finderQuery'  => '',
             'counterQuery' => '',
         ],
-        'DocenteTurma' => [
-            'className' => 'DocenteTurma',
-            'foreignKey' => 'turma_id',
-            'dependent' => false,
-            'conditions' => '',
-            'fields' => '',
-            'order' => '',
-            'limit' => '',
-            'offset' => '',
-            'exclusive' => '',
-            'finderQuery' => '',
+        'DocenteTurma'       => [
+            'className'    => 'DocenteTurma',
+            'foreignKey'   => 'turma_id',
+            'dependent'    => false,
+            'conditions'   => '',
+            'fields'       => '',
+            'order'        => '',
+            'limit'        => '',
+            'offset'       => '',
+            'exclusive'    => '',
+            'finderQuery'  => '',
             'counterQuery' => '',
         ],
     ];
 
     public $validate = [
-        'curso_id' => [
+        'curso_id'            => [
             'cursoRule-3' => [
-                'rule' => 'notBlank',
+                'rule'     => 'notBlank',
                 'required' => 'create',
-                'message' => 'O curso não pode estar vazio',
+                'message'  => 'O curso não pode estar vazio',
             ],
         ],
-        'ano_lectivo_id' => [
+        'ano_lectivo_id'      => [
             'anoLectivoRule-3' => [
-                'rule' => 'notBlank',
+                'rule'     => 'notBlank',
                 'required' => 'create',
-                'message' => 'O ano lectivo não pode estar vazio',
+                'message'  => 'O ano lectivo não pode estar vazio',
             ],
         ],
-        'plano_estudo_id' => [
+        'plano_estudo_id'     => [
             'planoEstudoRule-3' => [
-                'rule' => 'notBlank',
+                'rule'     => 'notBlank',
                 'required' => 'create',
-                'message' => 'O plano de estudos não pode estar vazio',
+                'message'  => 'O plano de estudos não pode estar vazio',
             ],
         ],
-        'disciplina_id' => [
+        'disciplina_id'       => [
             'disciplinaRule-3' => [
-                'rule' => 'notBlank',
+                'rule'     => 'notBlank',
                 'required' => 'create',
-                'message' => 'A disciplina não pode estar vazia',
+                'message'  => 'A disciplina não pode estar vazia',
             ],
         ],
-        'ano_curricular' => [
+        'ano_curricular'      => [
             'anoCurricularRule-3' => [
-                'rule' => 'notBlank',
+                'rule'     => 'notBlank',
                 'required' => 'create',
-                'message' => 'O ano curricular não pode estar vazio',
+                'message'  => 'O ano curricular não pode estar vazio',
             ],
         ],
         'semestre_curricular' => [
             'semestreCurricularRule-3' => [
-                'rule' => 'notBlank',
+                'rule'     => 'notBlank',
                 'required' => 'create',
-                'message' => 'O semestre curricular não pode estar vazio',
+                'message'  => 'O semestre curricular não pode estar vazio',
             ],
         ],
         'semestre_lectivo_id' => [
             'semestreLectivoRule-3' => [
-                'rule' => 'notBlank',
+                'rule'     => 'notBlank',
                 'required' => 'create',
-                'message' => 'O Semestre Lectivo não pode estar vazio',
+                'message'  => 'O Semestre Lectivo não pode estar vazio',
             ],
         ],
 
@@ -266,17 +266,17 @@ class Turma extends AppModel
 
         $options['joins'] = [
             [
-                'table' => 'docente_turmas',
-                'alias' => 'DocenteTurma',
-                'type' => 'left',
+                'table'      => 'docente_turmas',
+                'alias'      => 'DocenteTurma',
+                'type'       => 'left',
                 'conditions' => [
                     'Turma.id = DocenteTurma.turma_id',
                 ],
             ],
             [
-                'table' => 'cursos',
-                'alias' => 'Curso',
-                'type' => 'left',
+                'table'      => 'cursos',
+                'alias'      => 'Curso',
+                'type'       => 'left',
                 'conditions' => [
                     'Curso.id = Turma.curso_id',
                 ],
@@ -286,8 +286,8 @@ class Turma extends AppModel
 
         $options['fields'] = '*';
         $options['conditions'] = [
-            'DocenteTurma.docente_id' => null,
-            'Turma.ano_lectivo_id' => $anoLectivoId,
+            'DocenteTurma.docente_id'   => null,
+            'Turma.ano_lectivo_id'      => $anoLectivoId,
             'Turma.semestre_lectivo_id' => $semestreLectivoId,
         ];
         if (isset($unidadeOrganicaId)) {
@@ -325,7 +325,7 @@ class Turma extends AppModel
             'Option1' => 'Message',
             //'Type'=>'cake',
             'Command' => 'Turma',
-            'Action' => 'processaTurmaActualizada',
+            'Action'  => 'processaTurmaActualizada',
             'turmaId' => $data['Turma']['turma_id'],
         ];
         CakeRabbit::publish($message);
@@ -351,18 +351,18 @@ class Turma extends AppModel
         $turma = $this->findById($data['DocenteTurma']['turma_id']);
         $docenteDisciplinaExiste = $this->DocenteTurma->Docente->DocenteDisciplina->find('first', [
             'conditions' => [
-                'docente_id' => $data['DocenteTurma']['docente_id'],
-                'disciplina_id' => $turma['Turma']['disciplina_id'],
+                'docente_id'        => $data['DocenteTurma']['docente_id'],
+                'disciplina_id'     => $turma['Turma']['disciplina_id'],
                 'estado_objecto_id' => 1,
             ],
         ]);
         if (!$docenteDisciplinaExiste) {
             $arrayDocenteDisciplina = [
                 'DocenteDisciplina' => [
-                    'docente_id' => $data['DocenteTurma']['docente_id'],
-                    'disciplina_id' => $turma['Turma']['disciplina_id'],
+                    'docente_id'        => $data['DocenteTurma']['docente_id'],
+                    'disciplina_id'     => $turma['Turma']['disciplina_id'],
                     'estado_objecto_id' => 1,
-                    'data_inicio' => date('Y-m-d'),
+                    'data_inicio'       => date('Y-m-d'),
                 ],
             ];
             $this->DocenteTurma->Docente->DocenteDisciplina->create();
@@ -421,14 +421,14 @@ class Turma extends AppModel
 
                 //Primeiro precisamos ver se a turma nao esta criada ainda
                 $turma_existe = $this->find('first', [
-                    'recursive' => -1,
+                    'recursive'  => -1,
                     'conditions' => [
-                        'ano_lectivo_id' => $ano_lectivo_id,
-                        'plano_estudo_id' => $plano_estudo_id,
-                        'disciplina_id' => $disciplina['d']['id'],
-                        'ano_curricular' => $turma['ano_curricular'],
+                        'ano_lectivo_id'      => $ano_lectivo_id,
+                        'plano_estudo_id'     => $plano_estudo_id,
+                        'disciplina_id'       => $disciplina['d']['id'],
+                        'ano_curricular'      => $turma['ano_curricular'],
                         'semestre_curricular' => $turma['semestre_curricular'],
-                        'turno_id' => $turma['turno_id'],
+                        'turno_id'            => $turma['turno_id'],
                         'semestre_lectivo_id' => $semestre_id,
                     ],
                 ]);
@@ -457,7 +457,7 @@ class Turma extends AppModel
         $turmas = $this->find('all',
             [
                 'conditions' => ['Turma.semestre_lectivo_id' => $semestre, 'Turma.estado_turma_id' => 1],
-                'limit' => 100,
+                'limit'      => 100,
             ]);
 
 
@@ -499,7 +499,7 @@ class Turma extends AppModel
                 'Option1' => 'Message',
                 //'Type'=>'cake',
                 'Command' => 'Turma',
-                'Action' => 'processarTurmaFechada',
+                'Action'  => 'processarTurmaFechada',
                 'turmaId' => $turmaId,
             ];
             CakeRabbit::publish($message);
@@ -518,8 +518,8 @@ class Turma extends AppModel
         $turma = $this->read();
         $todasTurmas = $this->find('list', [
             'conditions' => [
-                'Turma.curso_id' => $turma['Turma']['curso_id'],
-                'Turma.disciplina_id' => $turma['Turma']['disciplina_id'],
+                'Turma.curso_id'       => $turma['Turma']['curso_id'],
+                'Turma.disciplina_id'  => $turma['Turma']['disciplina_id'],
                 'Turma.ano_lectivo_id' => $turma['Turma']['ano_lectivo_id'],
             ],
         ]);
@@ -533,7 +533,7 @@ class Turma extends AppModel
                     ],
                 ],
             ],
-            'Turma' => [
+            'Turma'     => [
                 'Curso' => [
                     'fields' => ['name'],
                 ],
@@ -624,9 +624,9 @@ class Turma extends AppModel
         return $this->DocenteTurma->find('all',
             [
                 'conditions' => [
-                    'turma_id' => $turmaId,
+                    'turma_id'                => $turmaId,
                     'estado_docente_turma_id' => 1,
-                    'tipo_docente_turma_id' => 2,
+                    'tipo_docente_turma_id'   => 2,
                 ],
             ]);
     }
@@ -664,7 +664,7 @@ class Turma extends AppModel
         $conditions = [
             'Turma.plano_estudo_id' => $matricula['Matricula']['plano_estudo_id'],
             'Turma.estado_turma_id' => 1,
-            'Turma.ano_lectivo_id' => $anoLectivoId,
+            'Turma.ano_lectivo_id'  => $anoLectivoId,
         ];
 
         $this->contain([
@@ -674,7 +674,7 @@ class Turma extends AppModel
 
         $turmas = $this->find('all', [
             'conditions' => $conditions,
-            'fields' => [
+            'fields'     => [
                 'Turma.id',
                 'Disciplina.name',
                 'Disciplina.id',
@@ -682,7 +682,7 @@ class Turma extends AppModel
                 'Turma.semestre_curricular',
                 'PlanoEstudo.name',
             ],
-            'order' => ['Turma.ano_curricular', 'Turma.semestre_curricular'],
+            'order'      => ['Turma.ano_curricular', 'Turma.semestre_curricular'],
         ]);
 
         return $turmas;
@@ -699,7 +699,7 @@ class Turma extends AppModel
         $conditions = [
             'Turma.plano_estudo_id' => $matricula['Matricula']['plano_estudo_id'],
             'Turma.estado_turma_id' => 1,
-            'Turma.ano_lectivo_id' => Configure::read('OpenSGA.ano_lectivo_id'),
+            'Turma.ano_lectivo_id'  => Configure::read('OpenSGA.ano_lectivo_id'),
         ];
 
         $this->contain([
@@ -708,7 +708,7 @@ class Turma extends AppModel
         ]);
         $turmas = $this->find('all', [
             'conditions' => $conditions,
-            'fields' => [
+            'fields'     => [
                 'Turma.id',
                 'Disciplina.name',
                 'Disciplina.id',
@@ -716,14 +716,14 @@ class Turma extends AppModel
                 'Turma.semestre_curricular',
                 'PlanoEstudo.name',
             ],
-            'order' => ['Turma.ano_curricular', 'Turma.semestre_curricular'],
+            'order'      => ['Turma.ano_curricular', 'Turma.semestre_curricular'],
         ]);
 
         $turmaIds = Hash::extract($turmas, '{n}.Disciplina.id');
         $conditions2 = [
-            'Turma.curso_id' => $matricula['Matricula']['curso_id'],
-            'Turma.estado_turma_id' => 1,
-            'Turma.ano_lectivo_id' => Configure::read('OpenSGA.ano_lectivo_id'),
+            'Turma.curso_id'          => $matricula['Matricula']['curso_id'],
+            'Turma.estado_turma_id'   => 1,
+            'Turma.ano_lectivo_id'    => Configure::read('OpenSGA.ano_lectivo_id'),
             'Turma.disciplina_id NOT' => $turmaIds,
         ];
 
@@ -733,7 +733,7 @@ class Turma extends AppModel
         ]);
         $turmas2 = $this->find('all', [
             'conditions' => $conditions2,
-            'fields' => [
+            'fields'     => [
                 'Turma.id',
                 'Disciplina.name',
                 'Disciplina.id',
@@ -741,7 +741,7 @@ class Turma extends AppModel
                 'Turma.semestre_curricular',
                 'PlanoEstudo.name',
             ],
-            'order' => ['Turma.ano_curricular', 'Turma.semestre_curricular'],
+            'order'      => ['Turma.ano_curricular', 'Turma.semestre_curricular'],
         ]);
 
 
@@ -770,7 +770,7 @@ class Turma extends AppModel
             'conditions' => [
                 'PlanoEstudo.curso_id' => $aluno['Aluno']['curso_id'],
             ],
-            'order' => 'PlanoEstudo.ano_criacao DESC',
+            'order'      => 'PlanoEstudo.ano_criacao DESC',
 
         ]);
 
@@ -785,7 +785,7 @@ class Turma extends AppModel
         $this->recursive = 0;
         $turmas = $this->find('all', [
             'conditions' => ['plano_estudo_id' => $plano, 'estado' => 1],
-            'fields' => ['Turma.id', 'Disciplina.name'],
+            'fields'     => ['Turma.id', 'Disciplina.name'],
         ]);
 
 
@@ -837,73 +837,73 @@ class Turma extends AppModel
 
         $joins = [
             [
-                'table' => 'matriculas',
-                'alias' => 'Matricula',
-                'type' => 'LEFT',
+                'table'      => 'matriculas',
+                'alias'      => 'Matricula',
+                'type'       => 'LEFT',
                 'conditions' => [
                     'Matricula.id = Inscricao.matricula_id',
                 ],
             ],
             [
-                'table' => 'alunos',
-                'alias' => 'Aluno',
-                'type' => 'LEFT',
+                'table'      => 'alunos',
+                'alias'      => 'Aluno',
+                'type'       => 'LEFT',
                 'conditions' => [
                     'Aluno.id = Matricula.aluno_id',
                 ],
             ],
             [
-                'table' => 'entidades',
-                'alias' => 'Entidade',
-                'type' => 'LEFT',
+                'table'      => 'entidades',
+                'alias'      => 'Entidade',
+                'type'       => 'LEFT',
                 'conditions' => [
                     'Entidade.id = Aluno.entidade_id',
                 ],
             ],
             [
-                'table' => 'turmas',
-                'alias' => 'Turma',
-                'type' => 'LEFT',
+                'table'      => 'turmas',
+                'alias'      => 'Turma',
+                'type'       => 'LEFT',
                 'conditions' => [
                     'Turma.id = Inscricao.turma_id',
                 ],
             ],
             [
-                'table' => 'cursos',
-                'alias' => 'Curso',
-                'type' => 'LEFT',
+                'table'      => 'cursos',
+                'alias'      => 'Curso',
+                'type'       => 'LEFT',
                 'conditions' => [
                     'Curso.id = Turma.curso_id',
                 ],
             ],
             [
-                'table' => 'unidade_organicas',
-                'alias' => 'UnidadeOrganica',
-                'type' => 'LEFT',
+                'table'      => 'unidade_organicas',
+                'alias'      => 'UnidadeOrganica',
+                'type'       => 'LEFT',
                 'conditions' => [
                     'UnidadeOrganica.id = Curso.unidade_organica_id',
                 ],
             ],
             [
-                'table' => 'disciplinas',
-                'alias' => 'Disciplina',
-                'type' => 'LEFT',
+                'table'      => 'disciplinas',
+                'alias'      => 'Disciplina',
+                'type'       => 'LEFT',
                 'conditions' => [
                     'Disciplina.id = Turma.disciplina_id',
                 ],
             ],
             [
-                'table' => 'ano_lectivos',
-                'alias' => 'AnoLectivo',
-                'type' => 'LEFT',
+                'table'      => 'ano_lectivos',
+                'alias'      => 'AnoLectivo',
+                'type'       => 'LEFT',
                 'conditions' => [
                     'AnoLectivo.id = Turma.ano_lectivo_id',
                 ],
             ],
             [
-                'table' => 'users',
-                'alias' => 'User',
-                'type' => 'LEFT',
+                'table'      => 'users',
+                'alias'      => 'User',
+                'type'       => 'LEFT',
                 'conditions' => [
                     'User.id = Entidade.user_id',
                 ],
@@ -913,8 +913,8 @@ class Turma extends AppModel
         $inscricaos = $this->Inscricao->find('all',
             [
                 'conditions' => ['turma_id' => $turmaId, 'estado_inscricao_id NOT' => 9],
-                'joins' => $joins,
-                'fields' => [
+                'joins'      => $joins,
+                'fields'     => [
                     'Aluno.codigo',
                     'Entidade.apelido',
                     'Entidade.nomes',
@@ -930,7 +930,7 @@ class Turma extends AppModel
                     'Turma.ano_curricular',
                     'Turma.name',
                 ],
-                'order' => ['Entidade.apelido', 'Entidade.nomes'],
+                'order'      => ['Entidade.apelido', 'Entidade.nomes'],
             ]);
 
         return $inscricaos;
@@ -988,9 +988,9 @@ class Turma extends AppModel
         return $this->DocenteTurma->find('first',
             [
                 'conditions' => [
-                    'turma_id' => $turmaId,
+                    'turma_id'                => $turmaId,
                     'estado_docente_turma_id' => 1,
-                    'tipo_docente_turma_id' => 1,
+                    'tipo_docente_turma_id'   => 1,
                 ],
             ]);
     }
@@ -1075,7 +1075,7 @@ class Turma extends AppModel
         }
         $inscricaos = $this->Inscricao->find('count', [
             'conditions' => [
-                'turma_id' => $turmaId,
+                'turma_id'            => $turmaId,
                 'estado_inscricao_id' => $this->Inscricao->estadoInscricoesAbertas,
             ],
         ]);
@@ -1092,6 +1092,52 @@ class Turma extends AppModel
         }
     }
 
+    public function adicionaEstudante($data)
+    {
+        $turma = $this->findById($data['Inscricao']['turma_id']);
+        if (empty($turma)) {
+            throw new BadRequestException('Turma Não Encontrada');
+        }
+        $aluno = $this->Inscricao->Aluno->findByCodigo($data['Inscricao']['numero_estudante']);
+        if (empty($aluno)) {
+            throw new BadRequestException('Aluno Não Encontrado');
+        }
+        $matricula = $this->Inscricao->Aluno->Matricula->findByAlunoIdAndAnoLectivoId($aluno['Aluno']['id'],
+            $turma['Turma']['ano_lectivo_id']);
+        if (empty($matricula)) {
+            $arrayMatricula = [
+                'AnoLectivo' => [
+                    $turma['Turma']['ano_lectivo_id'] => $turma['Turma']['ano_lectivo_id'],
+                ],
+                'Matricula'  => [
+                    'aluno_id'            => $aluno['Aluno']['id'],
+                    'curso_id'            => $aluno['Aluno']['curso_id'],
+                    'plano_estudo_id'     => $aluno['Aluno']['plano_estudo_id'],
+                    'data'                => date('Y-m-d H:i:s'),
+                    'estado_matricula_id' => 1,
+                    'user_id'             => CakeSession::read('Auth.User.id'),
+                    'tipo_matricula_id'   => 2,
+                ],
+            ];
+            if(!$this->Inscricao->Aluno->Matricula->renovaMatricula($arrayMatricula)){
+                throw new DataNotSavedException($this->Inscricao->Aluno->Matricula->validationErrors);
+            }
+            $matricula = $this->Inscricao->Aluno->Matricula->findByAlunoIdAndAnoLectivoId($aluno['Aluno']['id'],
+                $turma['Turma']['ano_lectivo_id']);
+        }
+        $data['Inscricao']['aluno_id'] = $aluno['Aluno']['id'];
+        $data['Inscricao']['estado_inscricao_id'] = 1;
+        $data['Inscricao']['data'] = date('Y-m-d H:i:s');
+        $data['Inscricao']['matricula_id'] = $matricula['Matricula']['id'];
+        $data['Inscricao']['turma_inscricao_id'] = $data['Inscricao']['turma_id'];
+        $data['Inscricao']['turma_frequencia_id'] = $data['Inscricao']['turma_id'];
+        $this->Inscricao->create();
+        if(!$this->Inscricao->save($data)){
+            throw new DataNotSavedException($this->Inscricao->validationErrors);
+        }
+        return true;
+    }
+
     public function processaPauta($pautaURL, $turmaId)
     {
         AuditableConfig::$Logger = ClassRegistry::init('Auditable.Logger');
@@ -1100,9 +1146,11 @@ class Turma extends AppModel
             throw new CakeException('Vendor class PHPExcel not found!');
         }
 
+
         $AmazonS3 = new OpenSGAAmazonS3();
         $tmpPath = '/tmp/phpexcel' . date('His') . '.xlsx';
         $excelPath = $AmazonS3->getObject($pautaURL, null, $tmpPath);
+
         $xls = PHPExcel_IOFactory::load($excelPath);
 
         $ws = $xls->getSheetByName('avaliacoes');
@@ -1125,12 +1173,12 @@ class Turma extends AppModel
                 if (empty($turmaTipoAvaliacao)) {
                     $arrayNovaAvaliacao = [
                         'TurmaTipoAvaliacao' => [
-                            'turma_id' => $turmaId,
-                            'tipo_avaliacao_id' => 1,
-                            'peso' => $verificaTeste * 100,
-                            'ordem' => $ordemTeste,
+                            'turma_id'                  => $turmaId,
+                            'tipo_avaliacao_id'         => 1,
+                            'peso'                      => $verificaTeste * 100,
+                            'ordem'                     => $ordemTeste,
                             'estado_turma_avaliacao_id' => 1,
-                            'data_marcada' => date('Y-m-d H:i:s'),
+                            'data_marcada'              => date('Y-m-d H:i:s'),
                         ],
                     ];
                     $this->TurmaTipoAvaliacao->create();
@@ -1148,13 +1196,13 @@ class Turma extends AppModel
                     }
                 }
                 $mapaTestes[] = [
-                    'letra' => $v,
-                    'peso' => $verificaTeste * 100,
-                    'ordem' => $ordemTeste,
+                    'letra'                   => $v,
+                    'peso'                    => $verificaTeste * 100,
+                    'ordem'                   => $ordemTeste,
                     'turma_tipo_avaliacao_id' => $turmaTipoAvaliacao['TurmaTipoAvaliacao']['id'],
-                    'tipo_avaliacao_id' => $turmaTipoAvaliacao['TurmaTipoAvaliacao']['tipo_avaliacao_id'],
-                    'data_marcada' => $turmaTipoAvaliacao['TurmaTipoAvaliacao']['data_marcada'],
-                    'data_realizada' => $turmaTipoAvaliacao['TurmaTipoAvaliacao']['data_realizada'],
+                    'tipo_avaliacao_id'       => $turmaTipoAvaliacao['TurmaTipoAvaliacao']['tipo_avaliacao_id'],
+                    'data_marcada'            => $turmaTipoAvaliacao['TurmaTipoAvaliacao']['data_marcada'],
+                    'data_realizada'          => $turmaTipoAvaliacao['TurmaTipoAvaliacao']['data_realizada'],
                 ];
             }
         }
@@ -1171,27 +1219,31 @@ class Turma extends AppModel
                     $avaliacaoExiste = $this->TurmaTipoAvaliacao->Avaliacao->find('first', [
                         'conditions' => [
                             'turma_tipo_avaliacao_id' => $mapaTeste['turma_tipo_avaliacao_id'],
-                            'aluno_id' => $aluno['Aluno']['id'],
-                            'estado_avaliacao_id' => 1,
+                            'aluno_id'                => $aluno['Aluno']['id'],
+                            'estado_avaliacao_id'     => 1,
                         ],
                     ]);
                     if (!$avaliacaoExiste) {
                         $arrayNovaAvaliacao = [
                             'Avaliacao' => [
                                 'turma_tipo_avaliacao_id' => $mapaTeste['turma_tipo_avaliacao_id'],
-                                'nota' => $nota,
-                                'data_avaliacao' => $mapaTeste['data_realizada'],
-                                'aluno_id' => $aluno['Aluno']['id'],
-                                'estado_avaliacao_id' => 1,
+                                'nota'                    => $nota,
+                                'data_avaliacao'          => $mapaTeste['data_realizada'],
+                                'aluno_id'                => $aluno['Aluno']['id'],
+                                'estado_avaliacao_id'     => 1,
                             ],
                         ];
                         $this->TurmaTipoAvaliacao->Avaliacao->create();
-                        $this->TurmaTipoAvaliacao->Avaliacao->save($arrayNovaAvaliacao);
+                        if (!$this->TurmaTipoAvaliacao->Avaliacao->save($arrayNovaAvaliacao)) {
+                            throw  new DataNotSavedException($this->TurmaTipoAvaliacao->Avaliacao->validationErrors);
+                        }
                     } else {
                         $this->TurmaTipoAvaliacao->Avaliacao->id = $avaliacaoExiste['Avaliacao']['id'];
                         $this->TurmaTipoAvaliacao->Avaliacao->set('nota', $nota);
                         $this->TurmaTipoAvaliacao->Avaliacao->set('data_avaliacao', $mapaTeste['data_realizada']);
-                        $this->TurmaTipoAvaliacao->Avaliacao->save();
+                        if (!$this->TurmaTipoAvaliacao->Avaliacao->save()) {
+                            throw new DataNotSavedException($this->TurmaTipoAvaliacao->Avaliacao->validationErrors);
+                        }
                     }
                 }
                 $mediaFrequencia = $ws->getCell('P' . $linhaActual)->getCalculatedValue();
@@ -1201,23 +1253,26 @@ class Turma extends AppModel
                     $this->Inscricao->set('nota_frequencia', $mediaFrequencia);
 
                     $notaExameNormal = $xls->getSheetByName('pauta')->getCell('G' . $linhaActual)->getCalculatedValue();
-                    if ($notaExameNormal) {
+                    if (is_numeric($notaExameNormal)) {
                         $this->Inscricao->set('nota_exame_normal', $notaExameNormal);
                     }
                     $notaExameRecorrencia = $xls->getSheetByName('pauta')->getCell('H' . $linhaActual)->getCalculatedValue();
-                    if ($notaExameRecorrencia) {
+                    if (is_numeric($notaExameRecorrencia)) {
                         $this->Inscricao->set('nota_exame_normal', $notaExameRecorrencia);
                     }
                     $notaExameEspecial = $xls->getSheetByName('pauta')->getCell('I' . $linhaActual)->getCalculatedValue();
-                    if ($notaExameEspecial) {
+                    if (is_numeric($notaExameEspecial)) {
                         $this->Inscricao->set('nota_exame_especial', $notaExameEspecial);
                     }
                     $notaFinal = $xls->getSheetByName('pauta')->getCell('J' . $linhaActual)->getCalculatedValue();
-                    if ($notaFinal) {
+                    if (is_numeric($notaFinal)) {
                         $this->Inscricao->set('nota_final', $notaFinal);
                     }
 
-                    $this->Inscricao->save();
+                    if (!$this->Inscricao->save()) {
+                        throw new DataNotSavedException($this->Inscricao->validationErrors);
+                    }
+
                 }
             }
 
@@ -1242,10 +1297,10 @@ class Turma extends AppModel
 
         $inscricoesActivas = $this->Inscricao->find('list', [
             'conditions' => [
-                'aluno_id' => $alunoId,
+                'aluno_id'            => $alunoId,
                 'estado_inscricao_id' => $this->Inscricao->estadoInscricoesAbertas,
             ],
-            'fields' => 'turma_id',
+            'fields'     => 'turma_id',
         ]);
         $this->contain(['Disciplina']);
         $turmas = $this->find('all', ['conditions' => ['Turma.id' => array_values($inscricoesActivas)]]);
@@ -1295,7 +1350,7 @@ class Turma extends AppModel
             $docenteTurmaExiste = $this->DocenteTurma->find('first', [
                 'conditions' => [
                     'docente_id' => $docenteTurma['DocenteTurma']['docente_id'],
-                    'turma_id' => $data['Turma']['turma_id'],
+                    'turma_id'   => $data['Turma']['turma_id'],
                 ],
             ]);
             if (empty($docenteTurmaExiste)) {

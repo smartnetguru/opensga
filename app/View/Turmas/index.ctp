@@ -27,6 +27,11 @@
 
         </div>
         <div class="col-sm-2">
+            <?php echo $this->Html->link('<br/><i class="fa fa-plus"></i>Criar Turma',
+                ['controller' => 'turmas', 'action' => 'criar_turma'],
+                ['escape' => false, 'class' => 'btn btn-icon btn-block']) ?>
+        </div>
+        <div class="col-sm-2">
             <?php echo $this->Html->link('<br/><i class="fa fa-print"></i>Exportar Alunos <span class="badge badge-danger"> Brevemente </span>',
                     ['controller' => 'alunos', 'action' => 'exportar_alunos'],
                     ['escape' => false, 'class' => 'btn btn-icon btn-block']) ?>

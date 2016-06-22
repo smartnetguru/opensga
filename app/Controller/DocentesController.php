@@ -214,12 +214,11 @@ class DocentesController extends AppController
     /**
      * @fixme este Index ta maluco :(
      */
-    function index()
+    public function index()
     {
         $conditions = [];
-        !d($this->request->data);
         if ($this->request->is('post')) {
-            if (isset($this->request->data['Docente']['unidade_organica_id'])) {
+            if ($this->request->data['Docente']['unidade_organica_id']) {
                 $unidadeOrganicaId = $this->request->data['Docente']['unidade_organica_id'];
                 $conditions['Docente.unidade_organica_id'] = $unidadeOrganicaId;
 

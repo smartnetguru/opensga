@@ -63,5 +63,17 @@
                 ['escape' => false, 'class' => 'btn btn-icon btn-block']) ?>
 
     </div>
+    <div class="col-sm-2">
+        <?php echo $this->Html->link('<i class="glyphicon glyphicon-ok  fa-2x"></i>Adicionar Estudante',
+            ['controller' => 'turmas', 'action' => 'adicionar_estudante', $turma['Turma']['id']],
+            ['escape' => false, 'class' => 'btn btn-icon btn-block']) ?>
+
+    </div>
+    <div class="col-sm-2">
+        <?php echo $this->Html->link('<i class="glyphicon glyphicon-ok  fa-2x"></i>Importar Notas do Historico',
+            ['controller' => 'turmas', 'action' => 'importar_notas_historico', $turma['Turma']['id']],
+            ['escape' => false, 'class' => 'btn btn-icon btn-block']) ?>
+
+    </div>
 <?php endif; ?>
 <?php $this->end(); ?>

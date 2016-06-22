@@ -77,7 +77,36 @@ class TurmasController extends AppController
      *
      * @Todo Verificar o security component
      */
-    function faculdade_criar_turma()
+    public function criar_turma()
+    {
+
+        if ($this->request->is('post')) {
+            try {
+                $this->Turma->criaTurma($this->request->data);
+                $this->Flash->success('Turma Criada com Sucesso');
+                $this->redirect(['action' => 'ver_turma', $this->Turma->id]);
+            } catch (Exception $e) {
+                $this->Flash->error('Problemas ao Criar Turma. Motivo:' . $e->getMessage());
+            }
+        }
+
+        $cursos = $this->Turma->Curso->find('list', [
+            'conditions' => [
+            ],
+        ]);
+        $anoLectivos = $this->Turma->AnoLectivo->find('list', ['order' => 'AnoLectivo.ano DESC']);
+        $turnos = $this->Turma->Turno->find('list');
+
+        $this->set(compact('cursos', 'anoLectivos', 'semestreLectivos', 'turnos'));
+    }
+
+    /**
+     * Cria uma nova Turma Vazia
+     * @throws Exception
+     *
+     * @Todo Verificar o security component
+     */
+    public function faculdade_criar_turma()
     {
 
         if ($this->request->is('post')) {
@@ -244,7 +273,7 @@ class TurmasController extends AppController
                     if ($processado) {
                         $this->Session->setFlash(__('Pauta Processada com Sucesso'), 'default',
                             ['class' => 'alert alert-success']);
-                        $this->redirect(['action' => 'ver_turma', $turmaId]);
+                        //$this->redirect(['action' => 'ver_turma', $turmaId]);
                     }
                 }
             } else {
@@ -1023,18 +1052,28 @@ class TurmasController extends AppController
 
         $conditions = [];
         $paginationOptions = [];
-        if ($this->request->is('post')) {
-
-            if ($this->request->data['Turma']['codigo'] != '') {
-                $conditions['Turma.codigo'] = $this->request->data['Turma']['codigo'];
-            }
-            if ($this->request->data['Turma']['name'] != '') {
-                $conditions['Turma.name LIKE'] = '%' . $this->request->data['Turma']['name'] . '%';
-            }
-            if ($this->request->data['AnoLectivo']['ano'] != '') {
-                $conditions['AnoLectivo.ano'] = $this->request->data['AnoLectivo']['ano'];
-                $paginationOptions['url']['ano_lectivo'] = $this->request->data['AnoLectivo']['ano'];
-            }
+        $estadoTurma = $this->request->query('estado_turma');
+        $codigo = $this->request->query('codigo');
+        $name = $this->request->query('name');
+        $anoLectivoAno = $this->request->query('ano');
+        $cursoId = $this->request->query('curso_id');
+        if ($codigo) {
+            $conditions['Turma.codigo'] = $codigo;
+        }
+        if ($name) {
+            $conditions['Turma.name LIKE'] = '%' . $name . '%';
+        }
+        if ($cursoId) {
+            $conditions['Turma.curso_id'] = $cursoId;
+        }
+        if ($anoLectivoAno) {
+            $conditions['AnoLectivo.ano'] = $anoLectivoAno;
+            $paginationOptions['url']['ano_lectivo'] = $anoLectivoAno;
+        }
+        if ($estadoTurma) {
+            $conditions['Turma.estado_turma_id'] = $estadoTurma;
+        } else {
+            $conditions['Turma.estado_turma_id'] = 1;
         }
         if ($this->request->is('ajax')) {
             if (isset($this->request->params['named']['ano_lectivo'])) {
@@ -1059,9 +1098,10 @@ class TurmasController extends AppController
             'order' => 'Turma.created DESC',
         ];
 
+        $cursos = $this->Turma->Curso->find('list');
         $estadoTurma = $this->Turma->EstadoTurma->findById($conditions['Turma.estado_turma_id']);
         $turmas = $this->paginate('Turma');
-        $this->set(compact('turmas', 'paginationOptions', 'estadoTurma'));
+        $this->set(compact('turmas', 'paginationOptions', 'estadoTurma','cursos'));
     }
 
     public function inscrever_aluno($alunoId, $turmaId)
@@ -1399,34 +1439,34 @@ class TurmasController extends AppController
     {
         parent::beforeFilter();
 
-        $this->Security->unlockedActions = ['faculdade_criar_turma'];
+        $this->Security->unlockedActions = ['faculdade_criar_turma','criar_turma'];
 
-        if ($this->action == 'autocomplete') {
-            $this->Auth->allow();
-        }
+    /* if($this->action == 'criar_turma') {
+        $this->Security->csrfUseOnce = false; // We will use CSRF token for more than one time
+    }*/
+
     }
 
-    public function autocomplete()
-    {
-        $termo = $this->request->query('q');
-        $page = $this->request->query('page');
+    public function adicionar_estudante($turmaId){
 
-        if (is_array($termo)) {
-            $termo = $termo['term'];
+        if($this->request->is('post')){
+            try{
+                $this->Turma->adicionaEstudante($this->request->data);
+                $this->Flash->success('Estudante Adicionardo Com Sucesso');
+                $this->redirect(['action'=>'ver_turma',$turmaId]);
+            } catch (Exception $e){
+                $this->Flash->error('Estudante não Adicionado. Motivo: '.$e->getMessage());
+            }
         }
 
-        $turmas = $this->Turma->find('all',
-            ['conditions' => ['name LIKE' => '%' . $termo . '%'], 'limit' => '20', 'fields' => ['id', 'name']]);
+        $this->Turma->contain(['Curso','Disciplina','AnoLectivo','SemestreLectivo']);
+        $turma = $this->Turma->findById($turmaId);
+        $tipoInscricaos = $this->Turma->Inscricao->TipoInscricao->find('list');
 
-        $resultado = Hash::extract($turmas, '{n}.Turma');
+        $this->set(compact('turma','turmaId','tipoInscricaos'));
+    }
 
-        $this->autoRender = false;
-
-
-        $json = json_encode($resultado);
-
-        echo $json;
-
+    public function importar_notas_historico(){
 
     }
 

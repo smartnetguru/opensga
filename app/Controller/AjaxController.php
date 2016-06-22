@@ -285,6 +285,23 @@ class AjaxController extends AppController
         echo json_encode($codigos);
     }
 
+    public function get_plano_estudos_by_curso()
+    {
+        foreach ($this->request->data as $k => $v) {
+
+            $cursoId = reset($v);
+        }
+        $this->loadModel('PlanoEstudo');
+        $object = $this->PlanoEstudo->find('list', [
+            'conditions' => [
+                'curso_id' => $cursoId,
+                'OR' => ['estado_objecto_id is null', 'estado_objecto_id' => 1],
+            ],
+        ]);
+        $this->set(compact('object'));
+        $this->render('ajax_view');
+    }
+
     public function faculdade_get_plano_estudos_by_curso()
     {
         foreach ($this->request->data as $k => $v) {
@@ -322,7 +339,47 @@ class AjaxController extends AppController
         $this->render('ajax_view');
     }
 
+    public function get_disciplinas_by_plano_estudo()
+    {
+        foreach ($this->request->data as $k => $v) {
+
+            $planoEstudoId = reset($v);
+        }
+        $this->loadModel('DisciplinaPlanoEstudo');
+        $this->DisciplinaPlanoEstudo->contain(['Disciplina']);
+
+        $disciplinaPlanoEstudos = $this->DisciplinaPlanoEstudo->find('list', [
+            'conditions' => [
+                'plano_estudo_id' => $planoEstudoId,
+                //'OR'       => ['estado_objecto_id is null', 'estado_objecto_id' => 1],
+            ],
+            'fields' => ['Disciplina.id', 'Disciplina.name']
+        ]);
+        $this->set('object', $disciplinaPlanoEstudos);
+
+        $this->render('ajax_view');
+    }
+
     public function faculdade_get_semestre_lectivos_by_ano_lectivo()
+    {
+        foreach ($this->request->data as $k => $v) {
+
+            $dataId = reset($v);
+        }
+        $this->loadModel('SemestreLectivo');
+        $object = $this->SemestreLectivo->find('list', [
+            'conditions' => [
+                'ano_lectivo_id' => $dataId,
+                //'OR'       => ['estado_objecto_id is null', 'estado_objecto_id' => 1],
+            ],
+            'fields' => ['id', 'semestre']
+        ]);
+        $this->set(compact('object'));
+
+        $this->render('ajax_view');
+    }
+
+    public function get_semestre_lectivos_by_ano_lectivo()
     {
         foreach ($this->request->data as $k => $v) {
 

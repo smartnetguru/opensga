@@ -892,6 +892,18 @@ class UsersController extends AppController
             if ($resultado[0] == true) {
                 $this->redirect(['controller' => 'pages', 'action' => 'home', 'docente' => false]);
             }
+
+        }
+
+    }
+
+    public function faculdade_changeLoginProfile()
+    {
+        if ($this->request->is('post')) {
+            $resultado = $this->User->changeLoginProfile($this->request->data);
+            if ($resultado[0] == true) {
+                $this->redirect(['controller' => 'pages', 'action' => 'home', 'docente' => false]);
+            }
         }
     }
 

@@ -646,6 +646,7 @@ class Matricula extends AppModel
      */
     public function renovaMatricula($data)
     {
+        
         $dataSource = $this->getDataSource();
         $dataSource->begin();
 
