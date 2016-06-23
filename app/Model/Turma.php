@@ -328,7 +328,7 @@ class Turma extends AppModel
             'Action'  => 'processaTurmaActualizada',
             'turmaId' => $data['Turma']['turma_id'],
         ];
-        CakeRabbit::publish($message);
+        RabbitMQ::publish($message);
 
         return true;
 
@@ -502,7 +502,7 @@ class Turma extends AppModel
                 'Action'  => 'processarTurmaFechada',
                 'turmaId' => $turmaId,
             ];
-            CakeRabbit::publish($message);
+            RabbitMQ::publish($message);
 
             return true;
         } else {

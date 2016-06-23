@@ -105,14 +105,14 @@ ul.dropdown-username-menu {
     width: 160px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.7);
 
-    background: url("../img/misc/shine-effect.png") repeat-x scroll 0 0 rgba(33, 40, 44, 0.7);
+    background: url("../../img/misc/shine-effect.png") repeat-x scroll 0 0 rgba(33, 40, 44, 0.7);
     border: 1px solid #25333c;
     border-radius: 5px 5px 5px 5px;
     padding: 4px;
 }
 
 ul.dropdown-username-menu li {
-    background: url("../img/misc/dropdown/dropdown-username-menu-bg.png") repeat-x scroll top left #ebebeb;
+    background: url("../../img/misc/dropdown-username-menu-bg.png") repeat-x scroll top left #ebebeb;
     min-height: 25px;
     border-top: 1px solid #848b93;
     line-height: 25px;
@@ -120,7 +120,7 @@ ul.dropdown-username-menu li {
 }
 
 ul.dropdown-username-menu li:hover {
-    background: url("../img/misc/dropdown/dropdown-username-menu-bg-hover.png") repeat-x scroll top left #b2b7bb;
+    background: url("../../img/misc/dropdown-username-menu-bg-hover.png") repeat-x scroll top left #b2b7bb;
 }
 
 ul.dropdown-username-menu li a {
@@ -152,7 +152,7 @@ ul.dropdown-username-menu li a:hover {
 }
 
 #breadcrumbs li:hover {
-    background: url("../img/misc/breadcrumb/bc-shine.png") no-repeat scroll bottom center transparent;
+    background: url("../../img/misc/breadcrumb/bc-shine.png") no-repeat scroll bottom center transparent;
 }
 
 #breadcrumbs li.no-hover {
@@ -161,7 +161,7 @@ ul.dropdown-username-menu li a:hover {
 
 #breadcrumbs a {
     height: 40px;
-    background: url("../img/misc/breadcrumb/bc-seperator.png") no-repeat scroll top right transparent;
+    background: url("../../img/misc/breadcrumb/bc-seperator.png") no-repeat scroll top right transparent;
     padding-right: 20px;
     text-decoration: none;
     display: block;
@@ -311,7 +311,7 @@ ul.shortcut-list li:hover a {
 .slider-content .title {
     padding: 5px 0;
     text-indent: 10px;
-    background: url("../img/misc/contact-list/contactlist-bg.png") repeat-x scroll top left #d9d9d9;
+    background: url("../../img/misc/contact-list/contactlist-bg.png") repeat-x scroll top left #d9d9d9;
     border-top: 1px solid #bbbbbb;
     border-bottom: 1px solid #bbbbbb;
     color: #585858;
@@ -322,7 +322,7 @@ ul.shortcut-list li:hover a {
 }
 
 .slider-content .selected .title {
-    background: url("../img/misc/contact-list/contactlist-selected-bg.png") repeat-x scroll top left #d9d9d9;
+    background: url("../../img/misc/contact-list/contactlist-selected-bg.png") repeat-x scroll top left #d9d9d9;
     color: #fff;
     border-top: 1px solid #2d4259;
     border-bottom: 1px solid #2d4259;
@@ -333,7 +333,7 @@ ul.shortcut-list li:hover a {
     right: 0;
     top: 0;
     margin-top: 2px;
-    background: url("../img/misc/contact-list/contactlist-nav-bg.png") repeat-x scroll top left #e1e1e1;
+    background: url("../../img/misc/contact-list/contactlist-nav-bg.png") repeat-x scroll top left #e1e1e1;
     min-height: 150px;
     border-left: 1px solid #bbbbbb;
 }
@@ -371,7 +371,7 @@ ul.shortcut-list li:hover a {
 
 .slider .slide-up, .slider .slide-down {
     height: 20px;
-    background: url("../img/misc/contact-list/contactlist-bg.png") repeat-x scroll top left #d9d9d9;
+    background: url("../../img/misc/contact-list/contactlist-bg.png") repeat-x scroll top left #d9d9d9;
     text-align: center;
     cursor: pointer;
     float: right;

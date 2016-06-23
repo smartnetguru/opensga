@@ -358,10 +358,12 @@ class Inscricao extends AppModel
         $this->id = $data['Inscricao']['inscricao_id'];
 
 
-        if ($data['Inscricao']['desistiu']) {
+        if (isset($data['Inscricao']['desistiu'])) {
+            if($data['Inscricao']['desistiu'])
             $data['Inscricao']['estado_inscricao_id'] = 8;
 
-        } elseif ($data['Inscricao']['anulou']) {
+        } elseif (isset($data['Inscricao']['anulou'])) {
+            if($data['Inscricao']['anulou'])
             $data['Inscricao']['estado_inscricao_id'] = 9;
         } //Se tiver nota final, entao a cadeira terminou
         elseif (!empty($data['Inscricao']['nota_final'])) {
@@ -845,7 +847,7 @@ class Inscricao extends AppModel
                             'aluno_id' => $data['aluno_id'],
                             'turma_id' => $turmaId,
                             'turma_frequencia_id' => $turmaId,
-                            'estado_inscricao_id' => 9,
+                            'estado_inscricao_id' => 1,
                             'matricula_id' => $data['matricula_id'],
                             'data' => date('Y-m-d'),
                             'pagamento_id' => $pagamento_id,

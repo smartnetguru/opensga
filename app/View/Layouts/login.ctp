@@ -324,6 +324,8 @@
 
             </div>
 
+
+
             <div class="new-account">
                 <?php
                     $session_message = $this->Session->read('Message');
@@ -336,6 +338,9 @@
             </div>
         </fieldset>
         </form>
+        <div class="col-xs-12">
+            <a style="width:100%" class="btn btn-default google" href="<?php echo $this->webroot.'googlelogin'; ?>"> <i class="fa fa-google-plus modal-icons"></i> Entrar Usando Email Institucional</a>
+        </div>
     </div>
     <!-- end: LOGIN BOX -->
 
