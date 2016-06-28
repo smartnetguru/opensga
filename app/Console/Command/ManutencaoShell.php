@@ -658,4 +658,27 @@ class ManutencaoShell extends AppShell
     }
 
 
+    public function actualizaCurriculosLetras(){
+        $this->Aluno->contain('Curso');
+        $alunos = $this->Aluno->find('all',['conditions'=>[
+            'Aluno.plano_estudo_id is null',
+            'Aluno.ano_ingresso'=>[2012,2013,2014,2015,2016],
+            'Curso.unidade_organica_id'=>16
+        ]]);
+        $count = count($alunos);
+        foreach($alunos as $aluno){
+            $planoEstudo = $this->Aluno->PlanoEstudo->findByCursoIdAndAnoCriacao($aluno['Aluno']['curso_id'],2009);
+            if(!empty($planoEstudo)){
+                $this->Aluno->id  = $aluno['Aluno']['id'];
+                $this->Aluno->set('plano_estudo_id',$planoEstudo['PlanoEstudo']['id']);
+                if(!$this->Aluno->save()){
+                    throw new DataNotSavedException($this->Aluno->validationErrors);
+                }
+                $this->out($count--);
+            }
+
+
+        }
+
+    }
 }

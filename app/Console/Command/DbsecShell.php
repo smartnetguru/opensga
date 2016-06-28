@@ -26,7 +26,7 @@
         'Entidade',
     ];
 
-    public $folder = 'letras2';
+    public $folder = 'letras1';
     public $unidadeOrganicaId = 16;
 
 
@@ -319,7 +319,7 @@ if($codigo_disciplina=='MGAP 122'){
                 $codigo_disciplina='HIPI';
             }
 
-            $creditos = $worksheet->getCell('M' . $linha_actual)->getCalculatedValue();
+            $creditos = $worksheet->getCell('N' . $linha_actual)->getCalculatedValue();
 
             if($creditos==''){
                 $creditos=0;
@@ -546,7 +546,7 @@ if($codigo_disciplina=='MGAP 122'){
                 ]);
                 if (!empty($plano_estudo)) {
                     $planoEstudoAluno = $estudante_sga['Aluno']['plano_estudo_id'];
-                    if(empty($planoEstudoAluno)){
+                    if($planoEstudoAluno==null){
                         $this->Aluno->id = $estudante_sga['Aluno']['id'];
                         $this->Aluno->set('plano_estudo_id', $plano_estudo['PlanoEstudo']['id']);
                         $this->Aluno->save();
@@ -596,13 +596,13 @@ if($codigo_disciplina=='MGAP 122'){
             $this->PlanoEstudo->recursive = -1;
             $this->Curso->recursive = -1;
             $idDisciplina = trim($worksheet->getCell('A' . $linha_actual)->getCalculatedValue());
-            $idCcurso = trim($worksheet->getCell('G' . $linha_actual)->getCalculatedValue());
+            $idCcurso = trim($worksheet->getCell('H' . $linha_actual)->getCalculatedValue());
             $ano = trim($worksheet->getCell('B' . $linha_actual)->getCalculatedValue());
             $semestre = trim($worksheet->getCell('C' . $linha_actual)->getCalculatedValue());
-            $curriculum = trim($worksheet->getCell('H' . $linha_actual)->getCalculatedValue());
-            $nivel = trim($worksheet->getCell('J' . $linha_actual)->getCalculatedValue());
-            $ramo = trim($worksheet->getCell('I' . $linha_actual)->getCalculatedValue());
-            $idTurma = trim($worksheet->getCell('F' . $linha_actual)->getCalculatedValue());
+            $curriculum = trim($worksheet->getCell('I' . $linha_actual)->getCalculatedValue());
+            $nivel = trim($worksheet->getCell('K' . $linha_actual)->getCalculatedValue());
+            $ramo = trim($worksheet->getCell('J' . $linha_actual)->getCalculatedValue());
+            $idTurma = trim($worksheet->getCell('G' . $linha_actual)->getCalculatedValue());
 
             if($ano=='2030'){
 
@@ -625,6 +625,13 @@ if($codigo_disciplina=='MGAP 122'){
             if($idCcurso==0){
                 $idCcurso = 2011111;
             }
+            if($idCcurso=='3663'){
+                $idCcurso=3661;
+            }
+            if($idCcurso==3664){
+                $idCcurso=3662;
+            }
+
             $curso = $this->Curso->findByCodigo($idCcurso);
 
 
@@ -661,6 +668,10 @@ if($codigo_disciplina=='MGAP 122'){
 
 $codigo_disciplina = $idDisciplina;
 
+                if($codigo_disciplina=='ARA'){
+                    $linha_actual++;
+                    continue;
+                }
                 if($codigo_disciplina=='D C II'){
                 $codigo_disciplina='DO II';
             }
@@ -714,6 +725,36 @@ if($codigo_disciplina=='MGAP 122'){
             if($codigo_disciplina=='HIP'){
                 $codigo_disciplina='HIPI';
             }
+                if($codigo_disciplina=='FS'){
+                    $codigo_disciplina='MO5';
+                }
+                if($codigo_disciplina=='HA'){
+                    $codigo_disciplina='HIA';
+                }
+                if($codigo_disciplina=='MGAP 123'){
+                    $codigo_disciplina='RFP';
+                }
+                if($codigo_disciplina=='PSC II'){
+                    $codigo_disciplina='PSICO II';
+                }
+                if($codigo_disciplina=='RL'){
+                    $codigo_disciplina='RLS';
+                }
+                if($codigo_disciplina=='SCL II'){
+                    $codigo_disciplina='SOL II';
+                }
+                if($codigo_disciplina=='SP II'){
+                    $codigo_disciplina='SPES';
+                }
+                if($codigo_disciplina=='SPA'){
+                    $codigo_disciplina='SPAP';
+                }
+                if($codigo_disciplina=='TE'){
+                    $codigo_disciplina='TLD';
+                }
+
+
+
 
 $idDisciplina = $codigo_disciplina;
                 $disciplina = $this->Disciplina->findByCodigoAntigo($idDisciplina);
@@ -736,7 +777,7 @@ $idDisciplina = $codigo_disciplina;
                     if (empty($semestre_lectivo)) {
                         $array_semestre = [
                             'SemestreLectivo' => [
-                                'codigo'         => $anolectivo['AnoLectivo']['ano'] . "-" . trim($worksheet->getCell('E' . $linha_actual)->getCalculatedValue()),
+                                'codigo'         => $anolectivo['AnoLectivo']['ano'] . "-" . trim($worksheet->getCell('G' . $linha_actual)->getCalculatedValue()),
                                 'ano_lectivo_id' => $anolectivo['AnoLectivo']['id'],
                                 'semestre'       => $semestre,
                                 'semestre_id'    => $semestre,
@@ -816,7 +857,7 @@ $idDisciplina = $codigo_disciplina;
                         } else {
                             debug($array_turma);
                             debug($this->Turma->validationErrors);
-                            die();
+
                         }
 
 
@@ -892,6 +933,97 @@ $idDisciplina = $codigo_disciplina;
 
 
 
+                $codigo_disciplina = $idDisciplina;
+
+                if($codigo_disciplina=='ARA'){
+                    $linha_actual++;
+                    continue;
+                }
+                if($codigo_disciplina=='D C II'){
+                    $codigo_disciplina='DO II';
+                }
+
+                if($codigo_disciplina=='D C III'){
+                    $codigo_disciplina='DO III';
+                }
+
+                if($codigo_disciplina=='D C IV'){
+                    $codigo_disciplina='DO IV';
+                }
+
+                if($codigo_disciplina=='EBE-24'){
+                    $codigo_disciplina='EFE-24';
+                }
+
+                if($codigo_disciplina=='EBE-29'){
+                    $codigo_disciplina='EFE-29';
+                }
+
+                if($codigo_disciplina=='EPO-11'){
+                    $codigo_disciplina='PORT III';
+                }
+
+                if($codigo_disciplina=='EPO-19'){
+                    $codigo_disciplina='PORT V';
+                }
+
+                if($codigo_disciplina=='IES'){
+                    $codigo_disciplina='ISO';
+                }
+                if($codigo_disciplina=='IG'){
+                    $codigo_disciplina='ING';
+                }
+                if($codigo_disciplina=='LLF II'){
+                    $codigo_disciplina='LLF-II';
+                }
+                if($codigo_disciplina=='MO8'){
+                    $codigo_disciplina='PGP';
+                }
+                if($codigo_disciplina=='LOA'){
+                    $codigo_disciplina='LOAS';
+                }
+                if($codigo_disciplina=='MGAP 122'){
+                    $codigo_disciplina='OG';
+                }
+                if($codigo_disciplina=='GEA'){
+                    $codigo_disciplina='GEG';
+                }
+
+                if($codigo_disciplina=='HIP'){
+                    $codigo_disciplina='HIPI';
+                }
+                if($codigo_disciplina=='FS'){
+                    $codigo_disciplina='MO5';
+                }
+                if($codigo_disciplina=='HA'){
+                    $codigo_disciplina='HIA';
+                }
+                if($codigo_disciplina=='MGAP 123'){
+                    $codigo_disciplina='RFP';
+                }
+                if($codigo_disciplina=='PSC II'){
+                    $codigo_disciplina='PSICO II';
+                }
+                if($codigo_disciplina=='RL'){
+                    $codigo_disciplina='RLS';
+                }
+                if($codigo_disciplina=='SCL II'){
+                    $codigo_disciplina='SOL II';
+                }
+                if($codigo_disciplina=='SP II'){
+                    $codigo_disciplina='SPES';
+                }
+                if($codigo_disciplina=='SPA'){
+                    $codigo_disciplina='SPAP';
+                }
+                if($codigo_disciplina=='TE'){
+                    $codigo_disciplina='TLD';
+                }
+
+
+
+
+                $idDisciplina = $codigo_disciplina;
                 $disciplina = $this->Disciplina->findByCodigoAntigo($idDisciplina);
 
                 if (empty($disciplina)) {
@@ -906,8 +1038,11 @@ $idDisciplina = $codigo_disciplina;
                     $idAnoLectivo=1997;
                 }
 
-                if($idCurso==1421){
-                    $idCurso=1211;
+                if($idCurso=='3663'){
+                    $idCurso=3661;
+                }
+                if($idCurso==3664){
+                    $idCurso=3662;
                 }
 
                 $this->Turma->recursive = -1;
@@ -974,6 +1109,9 @@ $idDisciplina = $codigo_disciplina;
                     }
                     if(empty($turma)){
                         $planoEstudo = $this->Turma->PlanoEstudo->findById($aluno['Aluno']['plano_estudo_id']);
+                        if(empty($planoEstudo)){
+                            $planoEstudo = $this->Turma->PlanoEstudo->findByCursoIdAndAnoCriacao($curso['Curso']['id'],$anoCurriculum);
+                        }
                         $disciplinaPlanoEstudo = $this->Turma->Disciplina->DisciplinaPlanoEstudo->find('first',array('conditions'=>array('plano_estudo_id'=>$planoEstudo['PlanoEstudo']['id'],'disciplina_id'=>$disciplina['Disciplina']['id'])));
                         $semestreLectivo = $this->Turma->SemestreLectivo->findByAnoLectivoIdAndSemestre($anolectivo['AnoLectivo']['id'],$disciplinaPlanoEstudo['DisciplinaPlanoEstudo']['semestre_curricular']);
                         $array_turma = [
