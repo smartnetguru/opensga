@@ -5,7 +5,7 @@
                 <ul class="main-navigation-menu">
                     <li><?php echo $this->Html->link(__('<i class="clip-home-3"></i>Pagina Inicial'),
                                 '/', ['escape' => false]) ?></li>
-                    <li><?php echo $this->Html->link(__('<i class="clip-home-3"></i>Alumnis'),
+                    <li><?php echo $this->Html->link(__('<i class="clip-home-3"></i>Alumni'),
                                 '/pre_registo_alumnis', ['escape' => false]) ?></li>
                     <li><?php echo $this->Html->link(__('<i class="clip-home-3"></i>Artigos'),
                                 '/artigos', ['escape' => false]) ?></li>

@@ -139,7 +139,7 @@
             <ul class="main-navigation-menu">
                 <li><?php echo $this->Html->link(__('<i class="clip-home-3"></i>Pagina Inicial'),
                             '/', ['escape' => false]) ?></li>
-                <li><?php echo $this->Html->link(__('<i class="clip-home-3"></i>Alumnis'),
+                <li><?php echo $this->Html->link(__('<i class="clip-home-3"></i>Alumni'),
                             '/pre_registo_alumnis', ['escape' => false]) ?></li>
                 <li><?php echo $this->Html->link(__('<i class="clip-home-3"></i>Artigos'),
                             '/artigos', ['escape' => false]) ?></li>
@@ -193,7 +193,7 @@
                 <div class="col-sm-6 col-sm-offset-1">
                     <h1 class="inlineBlock _3ma _6n _6s _6v"
                         style="padding: 0 0 24px; font-size: 28px; line-height: 36px">
-                        Acesse o Sistema Integrado de Gestão Académica da Universidade Eduardo
+                        Sistema Integrado de Gestão Académica da Universidade Eduardo
                         Mondlane
                     </h1>
 
@@ -245,22 +245,19 @@
                                 <div class="_58mf">
                                     <h3>Estudantes</h3>
 
-                                    <p>Para acessar o Sistema use o Seu email institucional. Caso esteja
-                                        a
-                                        acessar pela primeira vez, a sua senha inicial será o seu número
-                                        de
+                                    <p>Para aceder o Sistema use o seu email institucional. Caso esteja
+                                        a aceder pela primeira vez, a sua senha inicial será o seu número de
                                         estudante</p>
 
                                     <h3>Docentes</h3>
 
-                                    <p>Os seus dados de acesso serão fornecidos pelo Registo Académico
-                                        da
-                                        sua Unidade Orgânica</p>
+                                    <p>Os seus dados de acesso serão fornecidos pelos de serviços registo académico
+                                        da unidade orgânica</p>
 
                                     <h3>Funcionários</h3>
 
                                     <p>Os seus dados de acesso serão fornecidos pela Direcção de Registo
-                                        Acadêmico</p>
+                                        Académico</p>
                                 </div>
                             </div>
                         </div>
@@ -283,7 +280,7 @@
     </div>
     <!-- start: LOGIN BOX -->
     <div class="box-login">
-        <h3>Aceda Ao Sistema Integrado de Gestão Academica da UEM</h3>
+        <h3>Sistema Integrado de Gestão Académica da UEM</h3>
         <p>
             Por favor introduza seus dados para se autenticar
         </p>

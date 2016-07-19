@@ -1506,7 +1506,6 @@ class InscricaosController extends AppController
         $cadeirasPendentes = $this->Inscricao->getAllCadeirasPendentesByAluno($aluno_id);
         $isRegular = $this->Inscricao->Aluno->isRegular($aluno_id);
 
-
         if (count($isRegular) == 1 && $isRegular[0]['regular'] == true) {
             if ($isRegular[0]['estado'] == 1) {
                 $classeEstado = "alert alert-info";

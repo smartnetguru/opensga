@@ -18,9 +18,9 @@
         ('OpenSGA.desenvolvedor')),
                 'http://infomoz.net/en/infomoz/sobre-elisio-leonardo/',
                 ['title' => 'Sistemas de Gestão para Educação', 'target' => '_blank']) ?></strong>
-    <a href='http://demo.opensga.org:8080/job/opensga'>
+  <!--  <a href='http://demo.opensga.org:8080/job/opensga'>
         <img src='http://demo.opensga.org:8080/buildStatus/icon?job=opensga'>
-    </a>
+    </a>-->
 
 </p>
 

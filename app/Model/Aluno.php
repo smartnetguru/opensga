@@ -1077,10 +1077,15 @@ class Aluno extends AppModel
         ]);
 
         $irregularidades = [];
-        if ($aluno['Aluno']['estado_aluno_id'] == 1) {
+        if (in_array($aluno['Aluno']['estado_aluno_id'],[1,14])) {
             $renovacoes = $this->Matricula->getStatusRenovacao($aluno_id);
             if (empty($renovacoes)) {
-                $irregularidades[] = ["estado" => 1, "mensagem" => 'Estudante Regular', "regular" => true];
+                if($aluno['Aluno']['estado_aluno_id']==1){
+                    $irregularidades[] = ["estado" => 1, "mensagem" => 'Estudante Regular', "regular" => true];
+                }elseif($aluno['Aluno']['estado_aluno_id']==14){
+                    $irregularidades[] = ["estado" => 1, "mensagem" => 'Estudante Matriculado pela Faculdade', "regular" => true];
+                }
+
             } else {
                 $string_retorno = __("Não renovou matricula nos seguintes anos: ");
                 foreach ($renovacoes as $renovacao) {

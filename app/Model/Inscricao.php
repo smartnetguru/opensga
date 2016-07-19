@@ -156,7 +156,7 @@ class Inscricao extends AppModel
         ],
         'EpocaAvaliacao' => [
             'className' => 'EpocaAvaliacao',
-            'foreignKey' => 'EpocaAvaliacao_id',
+            'foreignKey' => 'epoca_avaliacao_id',
             'conditions' => '',
             'fields' => '',
             'order' => '',

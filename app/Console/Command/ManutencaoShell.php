@@ -681,4 +681,15 @@ class ManutencaoShell extends AppShell
         }
 
     }
+
+    public function ajustaCurriculosMedicina(){
+        $planoEstudo = $this->Aluno->PlanoEstudo->findByCursoIdAndAnoCriacao(40,2010);
+
+        $turmas = $this->Turma->findAllByPlanoEstudoId($planoEstudo['PlanoEstudo']['id']);
+        debug(count($turmas));
+        foreach($turmas as $turma){
+            $this->Turma->Inscricao->deleteAll(['Turma.id'=>$turma['Turma']['id']]);
+            $this->Turma->delete($turma['Turma']['id']);
+        }
+    }
 }

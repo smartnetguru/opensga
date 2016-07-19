@@ -1439,7 +1439,7 @@ class TurmasController extends AppController
     {
         parent::beforeFilter();
 
-        $this->Security->unlockedActions = ['faculdade_criar_turma','criar_turma'];
+        $this->Security->unlockedActions = ['faculdade_criar_turma','criar_turma','actualizar_notas'];
 
     /* if($this->action == 'criar_turma') {
         $this->Security->csrfUseOnce = false; // We will use CSRF token for more than one time

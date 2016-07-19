@@ -536,7 +536,6 @@ if($codigo_disciplina=='MGAP 122'){
                 }
 
             } else {
-                $curriculum = $curriculum;
                 $this->PlanoEstudo->contain();
                 $plano_estudo = $this->PlanoEstudo->find('first', [
                     'conditions' => [
