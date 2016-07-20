@@ -415,16 +415,19 @@ class ManutencaoShell extends AppShell
             ['conditions' => ['name LIKE' => '%Licenciatura%', 'unidade_organica_id' => 6]]);
 
         foreach ($cursos as $curso) {
-            $this->Aluno->contain('Curso');
+            $this->Aluno->contain(['Curso','PlanoEstudo']);
             $alunos = $this->Aluno->find('all',
-                ['conditions' => ['curso_id' => $curso['Curso']['id'], 'estado_aluno_id' => [1, 11, 14]]]);
+                ['conditions' => ['PlanoEstudo.ano_criacao NOT'=>2012,'Aluno.curso_id' => $curso['Curso']['id'], 'estado_aluno_id' => [1, 11, 14]]]);
+            $this->out('Total de Alunos -----'.count($alunos));
             foreach ($alunos as $aluno) {
+                $this->out('Ajustando aluno----'.$aluno['Aluno']['codigo']);
                 $planoEstudoId = $aluno['Aluno']['plano_estudo_id'];
                 $planoEstudo = $this->PlanoEstudo->findById($planoEstudoId);
                 if (empty($planoEstudo)) {
                     $planoEstudo = $this->PlanoEstudo->findByCursoId($aluno['Aluno']['curso_id']);
                     if (!empty($planoEstudo)) {
                         debug($planoEstudo);
+                        $this->out('morrendo');
                         die();
                     }
 
@@ -436,7 +439,9 @@ class ManutencaoShell extends AppShell
                             $this->out('Alterando---' . $aluno['Aluno']['codigo']);
                             $this->Aluno->id = $aluno['Aluno']['id'];
                             $this->Aluno->set('plano_estudo_id', $planoEstudo2012['PlanoEstudo']['id']);
-                            $this->Aluno->save();
+                            if(!$this->Aluno->save()){
+                                print_r($this->Aluno->validationErrors);
+                            }
 
                             //Actualiza tambem o historico
                             $historico = $this->Aluno->HistoricoCurso->findByAlunoIdAndCursoId($aluno['Aluno']['id'],
@@ -445,9 +450,17 @@ class ManutencaoShell extends AppShell
                                 $this->Aluno->HistoricoCurso->id = $historico['HistoricoCurso']['id'];
                                 $this->Aluno->HistoricoCurso->set('plano_estudo_id',
                                     $planoEstudo2012['PlanoEstudo']['id']);
-                                $this->Aluno->HistoricoCurso->save();
+                                if(!$this->Aluno->HistoricoCurso->save()){
+                                    print_r($this->Aluno->HistoricoCurso->validationErrors);
+                                }
                             }
+                        } else{
+                            $this->out('Plano 2012 vazio');
+                            debug($planoEstudo);
+
                         }
+                    } else{
+                        $this->out('Aluno Ja no Plano');
                     }
                 }
             }
